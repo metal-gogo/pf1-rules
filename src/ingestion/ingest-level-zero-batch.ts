@@ -24,7 +24,9 @@ import {
 
 const userAgent = "PF1RulesPrivateResearch/0.1 (local archival experiment)";
 const requestIntervalMs = 1_000;
-const parserVersion = "0.1.0";
+const parserVersion = "0.1.5";
+const refreshCanonical = process.env.PF1_REFRESH_CANONICAL === "1";
+const reviewedCanonicalIds = new Set(["spell.light"]);
 const manifestPath = path.join(projectRoot, "data", "ingestion", "level-0-spells.json");
 const registryPath = path.join(projectRoot, "data", "entities", "level-zero-bulk-entities.json");
 const legacyIndexUrl = "https://legacy.aonprd.com/indices/spelllists.html";
@@ -110,6 +112,22 @@ function writeGeneratedJson(filename: string, value: unknown, allowUpdate = fals
 }
 
 
+function writeObservationJson(filename: string, record: ValidatedJson): void {
+  if (!fs.existsSync(filename)) {
+    writeGeneratedJson(filename, record);
+    return;
+  }
+  const existing = loadJson(filename);
+  if (
+    existing.observation_id !== record.observation_id ||
+    existing.retrieval?.content_sha256 !== record.retrieval?.content_sha256 ||
+    existing.parser?.version !== record.parser?.version
+  ) {
+    throw new Error(`Existing observation identity does not match the current immutable snapshot: ${filename}`);
+  }
+}
+
+
 async function capture(url: string, rawPath: string): Promise<CapturedArtifact> {
   const metadataPath = `${rawPath}.meta.json`;
   if (fs.existsSync(rawPath) && fs.existsSync(metadataPath)) {
@@ -151,7 +169,8 @@ function observation(
   parsed: ParsedSpellPage,
   observationDirectory: string,
 ): { record: ValidatedJson; input: ParsedObservationInput } {
-  const observationId = `${siteId}:${spellId}:${captureResult.content_sha256.slice(0, 8)}`;
+  const observationVersionHash = sha256(`${captureResult.content_sha256}:${parserVersion}`);
+  const observationId = `${siteId}:${spellId}:${captureResult.content_sha256.slice(0, 8)}${observationVersionHash.slice(0, 8)}`;
   const sourceDetails = {
     aon: {
       license_url: "https://www.aonprd.com/Licenses.aspx",
@@ -187,7 +206,7 @@ function observation(
       response_content_type: captureResult.response_content_type,
     },
     parser: {
-      name: `${siteId}-bounded-level-zero-adapter`,
+      name: `${siteId}-bounded-spell-adapter`,
       version: parserVersion,
       parsed_at: new Date().toISOString(),
     },
@@ -350,6 +369,93 @@ function setIssue(spell: ValidatedJson, kind: "schema" | "source", code: string,
 }
 
 
+function titleCaseSpellName(value: string): string {
+  return value.replace(/\b\p{L}/gu, (letter) => letter.toLocaleUpperCase("en-US"));
+}
+
+
+function refreshDiscoveredDependencies(manifest: ValidatedJson, canonicalIds: Set<string>): void {
+  const catalogIds = new Set(manifest.spells.map((spell: ValidatedJson) => spell.spell_id));
+  const dependencies = new Map<string, ValidatedJson>(
+    (manifest.discovered_dependencies ?? []).map((dependency: ValidatedJson) => [dependency.spell_id, dependency]),
+  );
+  const add = (
+    spellId: string,
+    name: string,
+    sourceUrl: string | null,
+    reason: "rules_inheritance" | "linked_spell",
+    evidence: ValidatedJson,
+  ) => {
+    if (catalogIds.has(spellId)) return;
+    const existing = dependencies.get(spellId);
+    const resolvedUrl = sourceUrl ?? `https://www.aonprd.com/SpellDisplay.aspx?ItemName=${encodeURIComponent(name)}`;
+    if (!existing) {
+      dependencies.set(spellId, {
+        spell_id: spellId,
+        name,
+        source_url: resolvedUrl,
+        reason,
+        status: canonicalIds.has(spellId) ? "ingested" : "pending",
+        discovered_from: [evidence],
+      });
+      return;
+    }
+    if (reason === "rules_inheritance") existing.reason = reason;
+    if (canonicalIds.has(spellId)) {
+      existing.status = "ingested";
+      delete existing.issue;
+    }
+    if (!existing.discovered_from.some((item: ValidatedJson) => JSON.stringify(item) === JSON.stringify(evidence))) {
+      existing.discovered_from.push(evidence);
+    }
+  };
+
+  for (const filename of jsonFilesUnder(path.join(projectRoot, "data", "observations"))) {
+    const record = loadJson(filename);
+    if (record.source?.site_id !== "aon" || record.entity_type !== "spell") continue;
+    const ownerSpellId = String(record.observation_id).split(":")[1];
+    if (!ownerSpellId || !catalogIds.has(ownerSpellId)) continue;
+    const rawLinks = record.spell_raw?.links_raw ?? [];
+    for (const link of rawLinks) {
+      if (link.target_entity_type_hint !== "spell" || !link.target_entity_id_hint) continue;
+      add(link.target_entity_id_hint, link.anchor_text_raw, link.href_resolved, "linked_spell", {
+        owner_spell_id: ownerSpellId,
+        observation_id: record.observation_id,
+        source_field: link.source_field,
+        anchor_text_raw: link.anchor_text_raw,
+        source_href: link.href_resolved,
+      });
+    }
+    const description = record.spell_raw?.description_raw ?? "";
+    const inheritanceMatch = /^(?:this spell (?:functions|works) (?:as|like)|as)\s+(?:the\s+)?([a-z][a-z' -]+?)(?:,|\.| except| but)/i.exec(description);
+    if (inheritanceMatch?.[1]) {
+      const parentName = titleCaseSpellName(inheritanceMatch[1].trim());
+      const parentId = `spell.${slug(parentName)}`;
+      const linkedParent = rawLinks.find((link: ValidatedJson) => link.target_entity_id_hint === parentId);
+      add(parentId, parentName, linkedParent?.href_resolved ?? null, "rules_inheritance", {
+        owner_spell_id: ownerSpellId,
+        observation_id: record.observation_id,
+        source_field: "spell_raw.description_raw",
+        anchor_text_raw: inheritanceMatch[0],
+        source_href: linkedParent?.href_resolved ?? null,
+      });
+    }
+  }
+  manifest.discovered_dependencies = [...dependencies.values()].sort((left, right) =>
+    left.spell_id.localeCompare(right.spell_id),
+  );
+}
+
+
+function jsonFilesUnder(directory: string): string[] {
+  if (!fs.existsSync(directory)) return [];
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const filename = path.join(directory, entry.name);
+    return entry.isDirectory() ? jsonFilesUnder(filename) : entry.name.endsWith(".json") ? [filename] : [];
+  });
+}
+
+
 async function ingestSpell(
   spell: ValidatedJson,
   legacyIndex: CapturedArtifact,
@@ -357,9 +463,10 @@ async function ingestSpell(
   availableCanonicalIds: Set<string>,
   bulkEntities: Map<string, GeneratedEntity>,
   baseEntityIds: Set<string>,
+  artifactScope = "level-zero",
 ): Promise<"ingested" | "issue"> {
   const spellSlug = spell.spell_id.replace(/^spell\./, "");
-  const rawDirectory = path.join(projectRoot, "data", "raw", "level-zero", spellSlug);
+  const rawDirectory = path.join(projectRoot, "data", "raw", artifactScope, spellSlug);
   const observationDirectory = path.join(projectRoot, "data", "observations", spellSlug);
   const inputs: ParsedObservationInput[] = [];
   try {
@@ -369,38 +476,39 @@ async function ingestSpell(
       throw new NormalizationIssue("source", "aon-name-mismatch", `Expected ${spell.name}, parsed ${aonParsed.nameRaw}.`);
     }
     const aonObservation = observation("aon", spell.spell_id, aonCapture, aonParsed, observationDirectory);
-    writeGeneratedJson(path.join(observationDirectory, "aon.json"), aonObservation.record);
+    writeObservationJson(path.join(observationDirectory, `aon-${parserVersion}.json`), aonObservation.record);
     inputs.push(aonObservation.input);
 
     const legacyEntry = legacyEntries.get(spell.name.toLocaleLowerCase("en-US"));
     if (legacyEntry) {
       const legacyCapture = await capture(legacyEntry.href, path.join(rawDirectory, "legacy_aon.html"));
-      const legacyParsed = parseLegacySpell(legacyCapture.body, legacyCapture.url, legacyEntry);
+      const legacyParsed = parseLegacySpell(legacyCapture.body, legacyEntry.href, legacyEntry);
       const legacyObservation = observation("legacy_aon", spell.spell_id, legacyCapture, legacyParsed, observationDirectory);
-      writeGeneratedJson(path.join(observationDirectory, "legacy_aon.json"), legacyObservation.record);
+      writeObservationJson(path.join(observationDirectory, `legacy_aon-${parserVersion}.json`), legacyObservation.record);
       inputs.push(legacyObservation.input);
     } else {
       writeGeneratedJson(
-        path.join(projectRoot, "data", "coverage", `level-zero-${spellSlug}-legacy.json`),
+        path.join(projectRoot, "data", "coverage", `${artifactScope}-${spellSlug}-legacy.json`),
         coverageCheck(spell, legacyIndex),
       );
     }
 
     const d20Capture = await capture(d20Url(spell.name), path.join(rawDirectory, "d20pfsrd.html"));
     const d20Parsed = parseD20pfsrdSpell(d20Capture.body, d20Capture.url);
-    if (d20Parsed.nameRaw.toLocaleLowerCase("en-US") !== spell.name.toLocaleLowerCase("en-US")) {
+    if (slug(d20Parsed.nameRaw) !== slug(spell.name)) {
       throw new NormalizationIssue("source", "d20-name-mismatch", `Expected ${spell.name}, parsed ${d20Parsed.nameRaw}.`);
     }
     const d20Observation = observation("d20pfsrd", spell.spell_id, d20Capture, d20Parsed, observationDirectory);
-    writeGeneratedJson(path.join(observationDirectory, "d20pfsrd.json"), d20Observation.record);
+    writeObservationJson(path.join(observationDirectory, `d20pfsrd-${parserVersion}.json`), d20Observation.record);
     inputs.push(d20Observation.input);
 
     const bundle = generateCanonicalBundle(spell.spell_id, inputs, availableCanonicalIds);
     for (const entity of bundle.entities) {
       if (!baseEntityIds.has(entity.entity_id)) mergeEntity(bulkEntities, entity);
     }
-    writeGeneratedJson(path.join(projectRoot, "data", "canonical", `${spellSlug}.json`), bundle.canonical);
-    writeGeneratedJson(path.join(projectRoot, "data", "decisions", `${spellSlug}.json`), bundle.decision);
+    writeGeneratedJson(path.join(projectRoot, "data", "canonical", `${spellSlug}.json`), bundle.canonical, refreshCanonical);
+    writeGeneratedJson(path.join(projectRoot, "data", "decisions", `${spellSlug}.json`), bundle.decision, refreshCanonical);
+    delete spell.issue;
     availableCanonicalIds.add(spell.spell_id);
     return "ingested";
   } catch (error) {
@@ -446,7 +554,10 @@ export async function ingestLevelZeroBatch(batchNumber: number) {
   const report = { batch: batchNumber, ingested: [] as string[], issues: [] as string[], skipped: [] as string[] };
   for (const spell of selected) {
     const canonicalPath = path.join(projectRoot, "data", "canonical", `${spell.spell_id.replace(/^spell\./, "")}.json`);
-    if (fs.existsSync(canonicalPath) || spell.issue) {
+    if (
+      (fs.existsSync(canonicalPath) && (!refreshCanonical || reviewedCanonicalIds.has(spell.spell_id))) ||
+      spell.issue?.kind === "scope"
+    ) {
       report.skipped.push(spell.name);
       continue;
     }
@@ -467,13 +578,86 @@ export async function ingestLevelZeroBatch(batchNumber: number) {
       entities: [...bulkEntities.values()].sort((left, right) => left.entity_id.localeCompare(right.entity_id)),
     }, true);
   }
+  refreshDiscoveredDependencies(manifest, availableCanonicalIds);
+  writeGeneratedJson(manifestPath, manifest, true);
   validatePackage();
   return report;
 }
 
 
-const batchNumber = Number(process.argv[2]);
-ingestLevelZeroBatch(batchNumber)
+export async function ingestDiscoveredDependencies() {
+  await assertRobotsAllows("https://www.aonprd.com", "/SpellDisplay.aspx");
+  await assertRobotsAllows("https://legacy.aonprd.com", "/indices/spelllists.html");
+  await assertRobotsAllows("https://www.d20pfsrd.com", "/magic/all-spells/");
+  const legacyIndex = await capture(
+    legacyIndexUrl,
+    path.join(projectRoot, "data", "raw", "level-zero", "legacy-spell-index.html"),
+  );
+  const legacyEntries = parseLegacyIndex(legacyIndex.body, legacyIndex.url);
+  const manifest = loadJson(manifestPath);
+  const baseEntityIds = registeredIdsExcludingBulk();
+  const bulkEntities = new Map<string, GeneratedEntity>();
+  if (fs.existsSync(registryPath)) {
+    for (const entity of loadJson(registryPath).entities) bulkEntities.set(entity.entity_id, entity);
+  }
+  const availableCanonicalIds = new Set(
+    directJsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) => loadJson(filename).spell_id),
+  );
+  const report = { ingested: [] as string[], issues: [] as string[], skipped: [] as string[] };
+  for (const dependency of manifest.discovered_dependencies ?? []) {
+    if (availableCanonicalIds.has(dependency.spell_id) && !refreshCanonical) {
+      dependency.status = "ingested";
+      delete dependency.issue;
+      report.skipped.push(dependency.name);
+      continue;
+    }
+    const candidate: ValidatedJson = {
+      spell_id: dependency.spell_id,
+      name: dependency.name,
+      source_url: dependency.source_url,
+    };
+    const result = await ingestSpell(
+      candidate,
+      legacyIndex,
+      legacyEntries,
+      availableCanonicalIds,
+      bulkEntities,
+      baseEntityIds,
+      "dependencies",
+    );
+    dependency.status = result === "ingested" ? "ingested" : "issue";
+    if (candidate.issue) dependency.issue = candidate.issue;
+    else delete dependency.issue;
+    report[result === "ingested" ? "ingested" : "issues"].push(dependency.name);
+    writeGeneratedJson(manifestPath, manifest, true);
+    writeGeneratedJson(registryPath, {
+      $schema: "../../schemas/entity-registry.schema.json",
+      schema_version: "0.1.0",
+      registry_id: "level-zero-bulk-entities-v0.1",
+      entities: [...bulkEntities.values()].sort((left, right) => left.entity_id.localeCompare(right.entity_id)),
+    }, true);
+  }
+  refreshDiscoveredDependencies(manifest, availableCanonicalIds);
+  writeGeneratedJson(manifestPath, manifest, true);
+  validatePackage();
+  return report;
+}
+
+
+async function ingestAllLevelZeroBatches() {
+  const reports = [];
+  for (let batch = 1; batch <= 6; batch += 1) reports.push(await ingestLevelZeroBatch(batch));
+  return reports;
+}
+
+
+const command = process.argv[2];
+const run = command === "dependencies"
+  ? ingestDiscoveredDependencies()
+  : command === "all"
+    ? ingestAllLevelZeroBatches()
+    : ingestLevelZeroBatch(Number(command));
+run
   .then((report) => process.stdout.write(`${JSON.stringify(report, null, 2)}\n`))
   .catch((error: unknown) => {
     const message = error instanceof Error ? error.stack ?? error.message : String(error);

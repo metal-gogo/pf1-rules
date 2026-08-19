@@ -110,7 +110,8 @@ function verifyArtifact(record: ValidatedJson, recordPath: string, idField: stri
         `${record.retrieval.content_sha256}, got ${actualHash}`,
     );
   }
-  if (!String(record[idField]).endsWith(`:${actualHash.slice(0, 8)}`)) {
+  const idHash = String(record[idField]).split(":").at(-1) ?? "";
+  if (!idHash.startsWith(actualHash.slice(0, 8))) {
     throw new Error(`${idField} lacks the artifact hash prefix in ${recordPath}`);
   }
 }
@@ -248,6 +249,11 @@ export function validatePackage(): PackageStatistics {
     schemasDirectory,
     "source-spell-observation.schema.json",
   );
+  const entityObservationValidator = compileSchema(
+    ajv,
+    schemasDirectory,
+    "source-entity-observation.schema.json",
+  );
   const coverageValidator = compileSchema(
     ajv,
     schemasDirectory,
@@ -300,13 +306,14 @@ export function validatePackage(): PackageStatistics {
       ingestionSpellIds.add(spell.spell_id);
       ingestionQueueItems += 1;
     }
+    ingestionQueueItems += (record.discovered_dependencies ?? []).length;
   }
 
   const observationPaths = jsonFiles(path.join(projectRoot, "data", "observations"));
   const observations = new Map<string, ValidatedJson>();
   for (const filename of observationPaths) {
     const record = loadJson(filename);
-    assertValid(observationValidator, record, filename);
+    assertValid(record.entity_type === "spell" ? observationValidator : entityObservationValidator, record, filename);
     verifyArtifact(record, filename, "observation_id");
     observations.set(record.observation_id, record);
   }
@@ -333,7 +340,8 @@ export function validatePackage(): PackageStatistics {
   }
 
   for (const [observationId, observation] of observations) {
-    for (const link of observation.spell_raw.links_raw ?? []) {
+    const raw = observation.spell_raw ?? observation.entity_raw;
+    for (const link of raw.links_raw ?? []) {
       const targetId = link.target_entity_id_hint;
       if (targetId && !registeredIds.has(targetId)) {
         throw new Error(`${observationId} links to unregistered entity ${targetId}`);

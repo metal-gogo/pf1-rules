@@ -162,7 +162,7 @@ function sourceFieldForLink(
   if (descriptionHtml.includes(href) || descriptionHtml.includes(`>${anchor}<`)) {
     return "spell_raw.description_raw";
   }
-  if (/paizo|amazon|source/i.test(href)) return "spell_raw.source_book_raw";
+  if (/^https?:\/\/(?:www\.)?paizo\.com\//i.test(href)) return "spell_raw.source_book_raw";
   return "spell_raw.description_raw";
 }
 
@@ -187,16 +187,23 @@ function classifyLink(
     return { roleHint: "spell_list", targetEntityTypeHint: "spell_list", targetEntityIdHint: `spell-list.${slug(anchor)}` };
   }
   if (sourceField === "spell_raw.source_book_raw") {
-    return { roleHint: "publication", targetEntityTypeHint: "publication", targetEntityIdHint: `publication.${slug(anchor.replace(/\s+pg\.?\s+\d+.*$/i, ""))}` };
+    const book = anchor
+      .replace(/\s+pg\.?\s+\d+.*$/i, "")
+      .replace(/^PRPG\s+/i, "Pathfinder RPG ")
+      .replace(/^Pathfinder Roleplaying Game:?\s*/i, "Pathfinder RPG ");
+    return { roleHint: "publication", targetEntityTypeHint: "publication", targetEntityIdHint: `publication.${slug(book)}` };
   }
   if (/SpellDisplay\.aspx|\/magic\/all-spells\/|\/spells\/[^/]+\.html/i.test(href)) {
     return { roleHint: "cross_reference", targetEntityTypeHint: "spell", targetEntityIdHint: `spell.${slug(anchor)}` };
   }
-  if (/standard-actions|combat#|actions-in-combat/i.test(href) || /\baction\b/i.test(anchor)) {
-    return { roleHint: "definition", targetEntityTypeHint: "action", targetEntityIdHint: `action.${slug(anchor)}` };
-  }
   if (/condition|glossary\.html#(?:dying|disabled|blinded|dazed|dazzled|fatigued|stunned)/i.test(href)) {
     return { roleHint: "definition", targetEntityTypeHint: "condition", targetEntityIdHint: `condition.${slug(anchor)}` };
+  }
+  if (
+    /\b(?:standard|move|full-round|free|swift|immediate) actions?\b/i.test(anchor) ||
+    /#(?:TOC-)?(?:Standard|Move|Full-Round|Free|Swift|Immediate)-Actions?$/i.test(href)
+  ) {
+    return { roleHint: "definition", targetEntityTypeHint: "action", targetEntityIdHint: `action.${slug(anchor)}` };
   }
   return { roleHint: "definition", targetEntityTypeHint: "rule", targetEntityIdHint: `rule.${slug(anchor)}` };
 }
@@ -292,10 +299,19 @@ function finalizeParsed(
 
 export function parseAonSpell(html: string, sourceUrl: string): ParsedSpellPage {
   const $ = cheerio.load(html);
-  const bounded = $("#MainContent_DataListTypes_LabelName_0").first();
-  if (bounded.length !== 1) throw new Error("AoN bounded spell entry was not found");
-  const boundedHtml = bounded.html() ?? "";
-  const nameRaw = cleanText(bounded.find("h1.title").first().text()).replace(/^\s+/, "");
+  const requestedName = new URL(sourceUrl).searchParams.get("ItemName")?.trim() ?? "";
+  const title = $("#MainContent_DataListTypes h1.title").filter((_index, element) =>
+    cleanText($(element).text()).toLocaleLowerCase("en-US") === requestedName.toLocaleLowerCase("en-US"),
+  ).first();
+  if (title.length !== 1) throw new Error(`AoN bounded spell entry ${requestedName} was not found`);
+  const siblingNodes = title.parent().contents().toArray();
+  const startIndex = siblingNodes.indexOf(title.get(0)!);
+  const endIndex = siblingNodes.findIndex((node, index) => index > startIndex && $(node).is("h1.title"));
+  const boundedHtml = siblingNodes
+    .slice(startIndex, endIndex < 0 ? undefined : endIndex)
+    .map((node) => $.html(node))
+    .join("");
+  const nameRaw = cleanText(title.text());
   const sourceNoticeRaw = fieldValue(boundedHtml, "Source");
   const schoolRaw = fieldValue(boundedHtml, "School");
   const descriptionHtml = sectionAfterHeading(boundedHtml, "Description");
@@ -335,8 +351,12 @@ export function parseLegacySpell(
 ): ParsedSpellPage {
   const $ = cheerio.load(html);
   const fragment = new URL(sourceUrl).hash.slice(1);
-  const title = $(".stat-block-title").filter((_index, element) => $(element).attr("id") === fragment).first();
-  if (title.length !== 1) throw new Error(`Legacy bounded spell entry #${fragment} was not found`);
+  const title = fragment
+    ? $(".stat-block-title").filter((_index, element) => $(element).attr("id") === fragment).first()
+    : $(".stat-block-title").filter((_index, element) => cleanText($(element).text()) === indexEntry.name).first();
+  if (title.length !== 1) {
+    throw new Error(`Legacy bounded spell entry ${fragment ? `#${fragment}` : indexEntry.name} was not found`);
+  }
   const nodes = [$.html(title)];
   let sibling = title.next();
   while (sibling.length && !sibling.hasClass("stat-block-title") && !sibling.hasClass("footer")) {

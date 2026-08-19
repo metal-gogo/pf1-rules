@@ -51,22 +51,25 @@ describe("ingested spell catalog", () => {
     const summary = await ingestionQueueSummary(prisma);
     expect(summary.total).toBe(53);
     expect(summary.byStatus).toEqual({
-      pending: 50,
+      ingested: 44,
+      schema_issue: 1,
       scope_issue: 2,
-      ingested: 1,
+      source_issue: 6,
     });
     expect(summary.batches).toHaveLength(6);
   });
 
   it("derives ingested status and preserves explicit scope issues", async () => {
     const ingested = await listIngestionQueue(prisma, { status: "ingested" });
-    expect(ingested.map((item) => item.entityId)).toEqual(["spell.light"]);
+    expect(ingested).toHaveLength(44);
+    expect(ingested.map((item) => item.entityId)).toContain("spell.light");
 
     const issues = await listIngestionQueue(prisma, { issuesOnly: true });
-    expect(issues.map((item) => item.entityId)).toEqual([
+    expect(issues).toHaveLength(9);
+    expect(issues.filter((item) => item.status === "scope_issue").map((item) => item.entityId)).toEqual([
       "spell.enhanced-diplomacy",
       "spell.sign-of-the-dawnflower",
     ]);
-    expect(issues.every((item) => item.status === "scope_issue")).toBe(true);
+    expect(issues.every((item) => item.status.endsWith("_issue"))).toBe(true);
   });
 });

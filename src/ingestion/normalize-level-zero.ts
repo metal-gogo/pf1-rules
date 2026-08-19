@@ -278,9 +278,19 @@ function parseSpellResistance(raw: string | null) {
 
 
 function publicationId(book: string): string {
-  if (/core rulebook/i.test(book)) return "publication.pathfinder-rpg-core-rulebook";
-  if (/advanced player'?s guide/i.test(book)) return "publication.pathfinder-rpg-advanced-players-guide";
-  return `publication.${slug(book)}`;
+  const normalized = book.replaceAll("’", "'");
+  if (/core rulebook/i.test(normalized)) return "publication.pathfinder-rpg-core-rulebook";
+  if (/advanced player'?s guide/i.test(normalized)) return "publication.pathfinder-rpg-advanced-players-guide";
+  return `publication.${slug(normalized.replace(/^PRPG\s+/i, "Pathfinder RPG ").replace(/^Pathfinder Roleplaying Game:?\s*/i, "Pathfinder RPG "))}`;
+}
+
+
+function publicationComparable(book: string): string {
+  return slug(book
+    .replaceAll("’", "'")
+    .replace(/^Pathfinder (?:RPG|Roleplaying Game|Player Companion|Campaign Setting|Chronicles|Companion):?\s*/i, "")
+    .replace(/^PRPG\s+/i, "")
+    .replace(/\s+pg\.?\s+\d+.*$/i, ""));
 }
 
 
@@ -395,6 +405,19 @@ export function generateCanonicalBundle(
       source_href: null,
     }, "resolved");
     for (const [index, link] of observation.parsed.links.entries()) {
+      const targetType = entityType(link);
+      const targetName = targetType === "publication"
+        ? link.anchorTextRaw.replace(/\s+pg\.?\s+\d+.*$/i, "")
+        : link.anchorTextRaw;
+      if (targetType === "publication" && /^(?:source|book|product|here)$/i.test(targetName.trim())) continue;
+      const sameAsBaselinePublication = targetType === "publication" &&
+        publicationComparable(targetName) === publicationComparable(book);
+      const targetId = sameAsBaselinePublication
+        ? publicationId(book)
+        : targetType === "publication"
+          ? publicationId(targetName)
+        : link.targetEntityIdHint;
+      const canonicalTargetName = sameAsBaselinePublication ? book : targetName;
       const evidence = {
         observation_id: observation.observationId,
         source_field: `spell_raw.links_raw[${index}]`,
@@ -402,7 +425,7 @@ export function generateCanonicalBundle(
         anchor_text_raw: link.anchorTextRaw,
         source_href: link.hrefResolved,
       };
-      addEntity(link.targetEntityIdHint, entityType(link), link.anchorTextRaw, {
+      addEntity(targetId, targetType, canonicalTargetName, {
         observation_id: observation.observationId,
         source_field: `spell_raw.links_raw[${index}]`,
         anchor_text_raw: link.anchorTextRaw,
@@ -410,9 +433,9 @@ export function generateCanonicalBundle(
       });
       addRelationship(
         relationshipTypeForLink(link),
-        entityType(link),
-        link.targetEntityIdHint,
-        link.anchorTextRaw,
+        targetType,
+        targetId,
+        canonicalTargetName,
         evidence,
       );
     }
@@ -515,7 +538,7 @@ export function generateCanonicalBundle(
       decision: "normalized",
       note: "AoN baseline selected under provenance-first-v0; comparison observations remain attached.",
     })),
-    normalization: { status: "validated", normalizer_version: "0.1.0-level-zero-bulk", warnings },
+    normalization: { status: "validated", normalizer_version: "0.1.1-level-zero-bulk", warnings },
   };
 
   const observationIds = observations.map((item) => item.observationId);

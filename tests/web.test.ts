@@ -51,6 +51,16 @@ describe("local rules browser", () => {
     expect(html).toContain("#mythic");
   });
 
+  it("renders sourced definitions for resolved non-spell entities", async () => {
+    const response = await fetch(`${baseUrl}/entities/action.immediate-action`);
+    const html = await response.text();
+    expect(response.status).toBe(200);
+    expect(html).toContain("<dt>Status</dt><dd>resolved</dd>");
+    expect(html).toContain("<h2>Definition</h2>");
+    expect(html).toContain("can be performed at any time");
+    expect(html).toContain("legacy_aon");
+  });
+
   it("returns an accessible not-found page", async () => {
     const response = await fetch(`${baseUrl}/spells/does-not-exist`);
     const html = await response.text();

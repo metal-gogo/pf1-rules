@@ -91,7 +91,13 @@ async function insertObservations(tx: Prisma.TransactionClient): Promise<number>
   let count = 0;
   for (const filename of jsonFiles(path.join(projectRoot, "data", "observations"), true)) {
     const record = loadJson(filename);
-    const raw = record.spell_raw;
+    const raw = record.spell_raw ?? {
+      name_raw: record.entity_raw.name_raw,
+      description_raw: record.entity_raw.definition_raw,
+      source_book_raw: record.entity_raw.source_book_raw,
+      links_raw: record.entity_raw.links_raw,
+      sections_raw: record.entity_raw.sections_raw,
+    };
     await tx.sourceObservation.create({
       data: {
         id: record.observation_id,
@@ -588,6 +594,28 @@ async function insertIngestionQueue(tx: Prisma.TransactionClient): Promise<numbe
           status,
           priority: spell.priority,
           attempts: 0,
+          issueKind: issue?.kind ?? null,
+          lastError: issue ? `${issue.code}: ${issue.message}` : null,
+          updatedAt: new Date(manifest.generated_at),
+        },
+      });
+      count += 1;
+    }
+    for (const dependency of manifest.discovered_dependencies ?? []) {
+      const issue = dependency.issue as ValidatedJson | undefined;
+      await tx.ingestionQueueItem.create({
+        data: {
+          entityId: dependency.spell_id,
+          entityName: dependency.name,
+          siteId: manifest.source.site_id,
+          sourceUrl: dependency.source_url,
+          catalogId: `${manifest.manifest_id}.discovered-dependencies`,
+          catalogLevel: -1,
+          batchNumber: 0,
+          catalogMemberships: dependency.discovered_from,
+          status: dependency.status,
+          priority: dependency.reason === "rules_inheritance" ? 25 : 50,
+          attempts: dependency.status === "pending" ? 0 : 1,
           issueKind: issue?.kind ?? null,
           lastError: issue ? `${issue.code}: ${issue.message}` : null,
           updatedAt: new Date(manifest.generated_at),

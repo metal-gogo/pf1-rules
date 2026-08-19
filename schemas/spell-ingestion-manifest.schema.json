@@ -4,7 +4,7 @@
   "title": "Spell ingestion manifest",
   "type": "object",
   "additionalProperties": false,
-  "required": ["$schema", "schema_version", "manifest_id", "generated_at", "level", "batch_size", "source", "parser", "catalog_pages", "spells"],
+  "required": ["$schema", "schema_version", "manifest_id", "generated_at", "level", "batch_size", "source", "parser", "catalog_pages", "discovered_dependencies", "spells"],
   "properties": {
     "$schema": { "type": "string" },
     "schema_version": { "const": "0.1.0" },
@@ -37,12 +37,46 @@
       "minItems": 1,
       "items": { "$ref": "#/$defs/catalogPage" }
     },
+    "discovered_dependencies": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/discoveredDependency" }
+    },
     "spells": {
       "type": "array",
       "items": { "$ref": "#/$defs/spell" }
     }
   },
   "$defs": {
+    "dependencyEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owner_spell_id", "observation_id", "source_field", "anchor_text_raw", "source_href"],
+      "properties": {
+        "owner_spell_id": { "type": "string", "pattern": "^spell\\.[a-z0-9][a-z0-9-]*$" },
+        "observation_id": { "type": "string", "minLength": 1 },
+        "source_field": { "type": "string", "minLength": 1 },
+        "anchor_text_raw": { "type": ["string", "null"] },
+        "source_href": { "type": ["string", "null"], "format": "uri" }
+      }
+    },
+    "discoveredDependency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["spell_id", "name", "source_url", "reason", "status", "discovered_from"],
+      "properties": {
+        "spell_id": { "type": "string", "pattern": "^spell\\.[a-z0-9][a-z0-9-]*$" },
+        "name": { "type": "string", "minLength": 1 },
+        "source_url": { "type": "string", "format": "uri" },
+        "reason": { "enum": ["rules_inheritance", "linked_spell"] },
+        "status": { "enum": ["pending", "ingested", "issue"] },
+        "discovered_from": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/dependencyEvidence" }
+        },
+        "issue": { "$ref": "#/$defs/issue" }
+      }
+    },
     "catalogPage": {
       "type": "object",
       "additionalProperties": false,

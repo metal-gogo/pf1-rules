@@ -288,7 +288,7 @@ model SourceObservation {
   recordProvenance     RecordProvenance[]
   baselineForDecisions CanonicalDecision[]
 
-  @@unique([siteId, entityId, contentSha256])
+  @@unique([siteId, entityId, contentSha256, parserName, parserVersion])
   @@index([entityId, siteId])
   @@index([contentSha256])
   @@map("source_observations")
@@ -335,7 +335,7 @@ model SourceReference {
 model SourceSection {
   observationId String            @map("observation_id")
   sectionIndex  Int               @map("section_index")
-  headingRaw    String            @map("heading_raw")
+  headingRaw    String?           @map("heading_raw")
   bodyRaw       String            @map("body_raw")
   observation   SourceObservation @relation(fields: [observationId], references: [id], onDelete: Cascade)
 
