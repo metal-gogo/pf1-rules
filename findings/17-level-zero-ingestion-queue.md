@@ -1,5 +1,9 @@
 # Level-0 ingestion queue
 
+> Historical setup note: the queue described here has now been processed. See
+> [the bulk ingestion result](18-level-zero-bulk-ingestion.md) for current
+> statuses and totals.
+
 ## Outcome
 
 The level-0 ingestion phase now has a complete, reproducible work inventory before bulk canonicalization begins.
