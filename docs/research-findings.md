@@ -15,6 +15,8 @@
 - [Wish](../findings/14-wish-ingestion.md)
 - [Miracle](../findings/15-miracle-ingestion.md)
 - [Level-0 ingestion queue](../findings/17-level-zero-ingestion-queue.md)
+- [Level-0 bulk ingestion](../findings/18-level-zero-bulk-ingestion.md)
+- [Level-1 bulk ingestion](../findings/19-level-one-bulk-ingestion.md)
 
 ## Cross-cutting decisions
 
