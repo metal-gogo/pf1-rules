@@ -5,7 +5,6 @@ import path from "node:path";
 import { projectRoot } from "../config.js";
 
 
-const parserName = "aon-level-zero-class-catalog";
 const parserVersion = "0.1.0";
 const userAgent = "PF1RulesPrivateResearch/0.1 (local archival experiment)";
 const requestIntervalMs = 1_000;
@@ -31,7 +30,7 @@ interface CatalogEntry {
 interface CatalogMembership {
   spell_list_id: string;
   list_name: string;
-  level: 0;
+  level: number;
   catalog_source_url: string;
   summary_raw: string;
   flags: string[];
@@ -97,8 +96,18 @@ function spellUrl(name: string): string {
 }
 
 
-function parseLevelZeroEntries(html: string, sourceUrl: string): CatalogEntry[] {
-  const heading = /<h2\s+class="title">\s*0-Level\s*<\/h2>/i.exec(html);
+function levelHeading(level: number): string {
+  if (level === 0) return "0-Level";
+  const suffix = level === 1 ? "st" : level === 2 ? "nd" : level === 3 ? "rd" : "th";
+  return `${level}${suffix}-Level`;
+}
+
+
+function parseLevelEntries(html: string, sourceUrl: string, level: number): CatalogEntry[] {
+  const heading = new RegExp(
+    `<h2\\s+class="title">\\s*${levelHeading(level)}\\s*<\\/h2>`,
+    "i",
+  ).exec(html);
   if (!heading || heading.index === undefined) return [];
   const remaining = html.slice(heading.index + heading[0].length);
   const nextHeading = /<h2\s+class="title">/i.exec(remaining);
@@ -109,7 +118,7 @@ function parseLevelZeroEntries(html: string, sourceUrl: string): CatalogEntry[] 
     if (!hrefMatch?.[1]) continue;
     const href = decodeHtml(hrefMatch[1]);
     const name = new URL(href, sourceUrl).searchParams.get("ItemName");
-    if (!name) throw new Error(`Level-0 entry has no ItemName on ${sourceUrl}: ${href}`);
+    if (!name) throw new Error(`Level-${level} entry has no ItemName on ${sourceUrl}: ${href}`);
     const flags = [...segment.matchAll(/<sup>([FMRTY])<\/sup>/gi)]
       .map((match) => match[1]?.toLocaleUpperCase("en-US"))
       .filter((flag): flag is string => Boolean(flag));
@@ -125,7 +134,7 @@ function parseLevelZeroEntries(html: string, sourceUrl: string): CatalogEntry[] 
     });
   }
   if (new Set(entries.map((entry) => entry.name)).size !== entries.length) {
-    throw new Error(`Duplicate level-0 entries found on ${sourceUrl}`);
+    throw new Error(`Duplicate level-${level} entries found on ${sourceUrl}`);
   }
   return entries;
 }
@@ -195,12 +204,15 @@ async function assertCatalogAllowedByRobots(): Promise<void> {
 }
 
 
-export async function captureLevelZeroCatalog(): Promise<Record<string, unknown>> {
+export async function captureSpellLevelCatalog(level: number): Promise<Record<string, unknown>> {
+  if (!Number.isInteger(level) || level < 0 || level > 9) {
+    throw new Error("Spell level must be an integer from 0 through 9.");
+  }
   const generatedAt = new Date().toISOString();
   const captureId = generatedAt.replaceAll(/[-:.]/g, "");
   const rawDirectory = path.join(projectRoot, "data", "raw", "catalogs", captureId);
   const manifestDirectory = path.join(projectRoot, "data", "ingestion");
-  const manifestPath = path.join(manifestDirectory, "level-0-spells.json");
+  const manifestPath = path.join(manifestDirectory, `level-${level}-spells.json`);
   if (fs.existsSync(manifestPath)) {
     throw new Error(`Refusing to overwrite ${manifestPath}; archive it before a new capture.`);
   }
@@ -218,7 +230,7 @@ export async function captureLevelZeroCatalog(): Promise<Record<string, unknown>
     const response = await fetchText(sourceUrl);
     const rawPath = path.join(rawDirectory, `${slug(className)}.html`);
     fs.writeFileSync(rawPath, response.body, { encoding: "utf8", flag: "wx" });
-    const entries = parseLevelZeroEntries(response.body, sourceUrl);
+    const entries = parseLevelEntries(response.body, sourceUrl, level);
     const spellListId = `spell-list.${slug(className)}`;
     catalogPages.push({
       spell_list_id: spellListId,
@@ -229,14 +241,14 @@ export async function captureLevelZeroCatalog(): Promise<Record<string, unknown>
       content_sha256: sha256(response.body),
       raw_artifact_path: path.relative(manifestDirectory, rawPath).replaceAll("\\", "/"),
       response_content_type: response.contentType,
-      level_zero_entry_count: entries.length,
+      level_entry_count: entries.length,
     });
     for (const entry of entries) {
       const memberships = membershipsByName.get(entry.name) ?? [];
       memberships.push({
         spell_list_id: spellListId,
         list_name: className,
-        level: 0,
+        level,
         catalog_source_url: sourceUrl,
         summary_raw: entry.summaryRaw,
         flags: entry.flags,
@@ -281,9 +293,9 @@ export async function captureLevelZeroCatalog(): Promise<Record<string, unknown>
   const manifest = {
     $schema: "../../schemas/spell-ingestion-manifest.schema.json",
     schema_version: "0.1.0",
-    manifest_id: `aon-level-0-${generatedAt.slice(0, 10)}`,
+    manifest_id: `aon-level-${level}-${generatedAt.slice(0, 10)}`,
     generated_at: generatedAt,
-    level: 0,
+    level,
     batch_size: batchSize,
     source: {
       site_id: "aon",
@@ -291,8 +303,9 @@ export async function captureLevelZeroCatalog(): Promise<Record<string, unknown>
       license_url: "https://www.aonprd.com/Licenses.aspx",
       first_party_status: "confirmed",
     },
-    parser: { name: parserName, version: parserVersion },
+    parser: { name: `aon-level-${level}-class-catalog`, version: parserVersion },
     catalog_pages: catalogPages,
+    discovered_dependencies: [],
     spells,
   };
   fs.writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, {
@@ -309,8 +322,13 @@ export async function captureLevelZeroCatalog(): Promise<Record<string, unknown>
 }
 
 
+export function captureLevelZeroCatalog(): Promise<Record<string, unknown>> {
+  return captureSpellLevelCatalog(0);
+}
+
+
 if (import.meta.url === `file://${process.argv[1]}`) {
-  captureLevelZeroCatalog()
+  captureSpellLevelCatalog(Number(process.argv[2] ?? "0"))
     .then((result) => process.stdout.write(`${JSON.stringify(result, null, 2)}\n`))
     .catch((error: unknown) => {
       const message = error instanceof Error ? error.stack ?? error.message : String(error);

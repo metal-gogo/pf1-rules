@@ -27,10 +27,22 @@ const requestIntervalMs = 1_000;
 const parserVersion = "0.1.5";
 const refreshCanonical = process.env.PF1_REFRESH_CANONICAL === "1";
 const reviewedCanonicalIds = new Set(["spell.light"]);
-const manifestPath = path.join(projectRoot, "data", "ingestion", "level-0-spells.json");
-const registryPath = path.join(projectRoot, "data", "entities", "level-zero-bulk-entities.json");
 const legacyIndexUrl = "https://legacy.aonprd.com/indices/spelllists.html";
 let lastRequestAt = 0;
+
+
+function levelPaths(level: number) {
+  if (!Number.isInteger(level) || level < 0 || level > 9) {
+    throw new Error("Spell level must be an integer from 0 through 9.");
+  }
+  const levelName = level === 0 ? "level-zero" : `level-${level}`;
+  return {
+    manifestPath: path.join(projectRoot, "data", "ingestion", `level-${level}-spells.json`),
+    registryPath: path.join(projectRoot, "data", "entities", `${levelName}-bulk-entities.json`),
+    artifactScope: levelName,
+    registryId: `${levelName}-bulk-entities-v0.1`,
+  };
+}
 
 interface CaptureMetadata {
   url: string;
@@ -313,7 +325,7 @@ function directJsonFiles(directory: string): string[] {
 }
 
 
-function registeredIdsExcludingBulk(): Set<string> {
+function registeredIdsExcludingBulk(registryPath: string): Set<string> {
   const ids = new Set<string>();
   for (const filename of directJsonFiles(path.join(projectRoot, "data", "entities"))) {
     if (path.resolve(filename) === path.resolve(registryPath)) continue;
@@ -463,7 +475,7 @@ async function ingestSpell(
   availableCanonicalIds: Set<string>,
   bulkEntities: Map<string, GeneratedEntity>,
   baseEntityIds: Set<string>,
-  artifactScope = "level-zero",
+  artifactScope: string,
 ): Promise<"ingested" | "issue"> {
   const spellSlug = spell.spell_id.replace(/^spell\./, "");
   const rawDirectory = path.join(projectRoot, "data", "raw", artifactScope, spellSlug);
@@ -528,22 +540,23 @@ async function ingestSpell(
 }
 
 
-export async function ingestLevelZeroBatch(batchNumber: number) {
+export async function ingestSpellLevelBatch(level: number, batchNumber: number) {
   if (!Number.isInteger(batchNumber) || batchNumber < 1) throw new Error("Batch number must be a positive integer.");
+  const { artifactScope, manifestPath, registryId, registryPath } = levelPaths(level);
   await assertRobotsAllows("https://www.aonprd.com", "/SpellDisplay.aspx");
   await assertRobotsAllows("https://legacy.aonprd.com", "/indices/spelllists.html");
   await assertRobotsAllows("https://www.d20pfsrd.com", "/magic/all-spells/");
 
   const legacyIndex = await capture(
     legacyIndexUrl,
-    path.join(projectRoot, "data", "raw", "level-zero", "legacy-spell-index.html"),
+    path.join(projectRoot, "data", "raw", artifactScope, "legacy-spell-index.html"),
   );
   const legacyEntries = parseLegacyIndex(legacyIndex.body, legacyIndex.url);
   const manifest = loadJson(manifestPath);
   const selected = manifest.spells.filter((spell: ValidatedJson) => spell.batch === batchNumber);
-  if (selected.length === 0) throw new Error(`No level-0 ingestion batch ${batchNumber} exists.`);
+  if (selected.length === 0) throw new Error(`No level-${level} ingestion batch ${batchNumber} exists.`);
 
-  const baseEntityIds = registeredIdsExcludingBulk();
+  const baseEntityIds = registeredIdsExcludingBulk(registryPath);
   const bulkEntities = new Map<string, GeneratedEntity>();
   if (fs.existsSync(registryPath)) {
     for (const entity of loadJson(registryPath).entities) bulkEntities.set(entity.entity_id, entity);
@@ -568,13 +581,14 @@ export async function ingestLevelZeroBatch(batchNumber: number) {
       availableCanonicalIds,
       bulkEntities,
       baseEntityIds,
+      artifactScope,
     );
     report[result === "ingested" ? "ingested" : "issues"].push(spell.name);
     writeGeneratedJson(manifestPath, manifest, true);
     writeGeneratedJson(registryPath, {
       $schema: "../../schemas/entity-registry.schema.json",
       schema_version: "0.1.0",
-      registry_id: "level-zero-bulk-entities-v0.1",
+      registry_id: registryId,
       entities: [...bulkEntities.values()].sort((left, right) => left.entity_id.localeCompare(right.entity_id)),
     }, true);
   }
@@ -586,6 +600,7 @@ export async function ingestLevelZeroBatch(batchNumber: number) {
 
 
 export async function ingestDiscoveredDependencies() {
+  const { manifestPath, registryId, registryPath } = levelPaths(0);
   await assertRobotsAllows("https://www.aonprd.com", "/SpellDisplay.aspx");
   await assertRobotsAllows("https://legacy.aonprd.com", "/indices/spelllists.html");
   await assertRobotsAllows("https://www.d20pfsrd.com", "/magic/all-spells/");
@@ -595,7 +610,7 @@ export async function ingestDiscoveredDependencies() {
   );
   const legacyEntries = parseLegacyIndex(legacyIndex.body, legacyIndex.url);
   const manifest = loadJson(manifestPath);
-  const baseEntityIds = registeredIdsExcludingBulk();
+  const baseEntityIds = registeredIdsExcludingBulk(registryPath);
   const bulkEntities = new Map<string, GeneratedEntity>();
   if (fs.existsSync(registryPath)) {
     for (const entity of loadJson(registryPath).entities) bulkEntities.set(entity.entity_id, entity);
@@ -633,7 +648,7 @@ export async function ingestDiscoveredDependencies() {
     writeGeneratedJson(registryPath, {
       $schema: "../../schemas/entity-registry.schema.json",
       schema_version: "0.1.0",
-      registry_id: "level-zero-bulk-entities-v0.1",
+      registry_id: registryId,
       entities: [...bulkEntities.values()].sort((left, right) => left.entity_id.localeCompare(right.entity_id)),
     }, true);
   }
@@ -644,19 +659,30 @@ export async function ingestDiscoveredDependencies() {
 }
 
 
-async function ingestAllLevelZeroBatches() {
+export function ingestLevelZeroBatch(batchNumber: number) {
+  return ingestSpellLevelBatch(0, batchNumber);
+}
+
+
+async function ingestAllSpellLevelBatches(level: number) {
+  const { manifestPath } = levelPaths(level);
+  const manifest = loadJson(manifestPath);
+  const batchCount = Math.max(0, ...manifest.spells.map((spell: ValidatedJson) => Number(spell.batch)));
   const reports = [];
-  for (let batch = 1; batch <= 6; batch += 1) reports.push(await ingestLevelZeroBatch(batch));
+  for (let batch = 1; batch <= batchCount; batch += 1) {
+    reports.push(await ingestSpellLevelBatch(level, batch));
+  }
   return reports;
 }
 
 
 const command = process.argv[2];
+const level = Number(process.argv[3] ?? "0");
 const run = command === "dependencies"
   ? ingestDiscoveredDependencies()
   : command === "all"
-    ? ingestAllLevelZeroBatches()
-    : ingestLevelZeroBatch(Number(command));
+    ? ingestAllSpellLevelBatches(level)
+    : ingestSpellLevelBatch(level, Number(command));
 run
   .then((report) => process.stdout.write(`${JSON.stringify(report, null, 2)}\n`))
   .catch((error: unknown) => {

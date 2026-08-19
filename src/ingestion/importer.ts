@@ -566,9 +566,8 @@ async function insertDecisions(tx: Prisma.TransactionClient): Promise<number> {
 
 
 async function insertIngestionQueue(tx: Prisma.TransactionClient): Promise<number> {
-  const canonicalLevelZeroIds = new Set(
+  const canonicalSpellIds = new Set(
     canonicalRecords()
-      .filter((record) => record.levels.some((level: ValidatedJson) => level.level === 0))
       .map((record) => record.spell_id),
   );
   let count = 0;
@@ -576,7 +575,7 @@ async function insertIngestionQueue(tx: Prisma.TransactionClient): Promise<numbe
     const manifest = loadJson(filename);
     for (const spell of manifest.spells) {
       const issue = spell.issue as ValidatedJson | undefined;
-      const status = canonicalLevelZeroIds.has(spell.spell_id)
+      const status = canonicalSpellIds.has(spell.spell_id)
         ? "ingested"
         : issue
           ? `${issue.kind}_issue`

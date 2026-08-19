@@ -496,7 +496,7 @@ model IngestionQueueItem {
   lastError          String?  @map("last_error")
   updatedAt          DateTime @map("updated_at")
 
-  @@unique([entityName, siteId])
+  @@unique([entityName, siteId, catalogId])
   @@index([catalogId, catalogLevel, batchNumber, priority])
   @@index([status, priority, entityName])
   @@map("ingestion_queue")

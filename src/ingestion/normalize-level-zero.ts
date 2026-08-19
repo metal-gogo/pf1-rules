@@ -418,6 +418,12 @@ export function generateCanonicalBundle(
           ? publicationId(targetName)
         : link.targetEntityIdHint;
       const canonicalTargetName = sameAsBaselinePublication ? book : targetName;
+      const entityEvidence = {
+        observation_id: observation.observationId,
+        source_field: `spell_raw.links_raw[${index}]`,
+        anchor_text_raw: link.anchorTextRaw,
+        source_href: link.hrefResolved,
+      };
       const evidence = {
         observation_id: observation.observationId,
         source_field: `spell_raw.links_raw[${index}]`,
@@ -425,12 +431,10 @@ export function generateCanonicalBundle(
         anchor_text_raw: link.anchorTextRaw,
         source_href: link.hrefResolved,
       };
-      addEntity(targetId, targetType, canonicalTargetName, {
-        observation_id: observation.observationId,
-        source_field: `spell_raw.links_raw[${index}]`,
-        anchor_text_raw: link.anchorTextRaw,
-        source_href: link.hrefResolved,
-      });
+      if (link.targetEntityIdHint !== targetId) {
+        addEntity(link.targetEntityIdHint, targetType, targetName, entityEvidence);
+      }
+      addEntity(targetId, targetType, canonicalTargetName, entityEvidence);
       addRelationship(
         relationshipTypeForLink(link),
         targetType,

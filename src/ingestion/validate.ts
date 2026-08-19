@@ -157,7 +157,7 @@ function verifyIngestionManifest(record: ValidatedJson, recordPath: string): voi
       throw new Error(`Duplicate catalog page ${page.spell_list_id} in ${recordPath}`);
     }
     pageIds.add(page.spell_list_id);
-    expectedMembershipCounts.set(page.spell_list_id, page.level_zero_entry_count);
+    expectedMembershipCounts.set(page.spell_list_id, page.level_entry_count);
     const artifactPath = path.resolve(path.dirname(recordPath), page.raw_artifact_path);
     const actualHash = crypto
       .createHash("sha256")
@@ -299,13 +299,8 @@ export function validatePackage(): PackageStatistics {
     const record = loadJson(filename);
     assertValid(ingestionManifestValidator, record, filename);
     verifyIngestionManifest(record, filename);
-    for (const spell of record.spells) {
-      if (ingestionSpellIds.has(spell.spell_id)) {
-        throw new Error(`Spell occurs in multiple ingestion manifests: ${spell.spell_id}`);
-      }
-      ingestionSpellIds.add(spell.spell_id);
-      ingestionQueueItems += 1;
-    }
+    for (const spell of record.spells) ingestionSpellIds.add(spell.spell_id);
+    ingestionQueueItems += record.spells.length;
     ingestionQueueItems += (record.discovered_dependencies ?? []).length;
   }
 
