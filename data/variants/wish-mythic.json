@@ -1,0 +1,56 @@
+{
+  "$schema": "../../schemas/mythic-spell-variant.schema.json",
+  "schema_version": "0.1.0",
+  "mythic_spell_variant_id": "mythic-spell-variant.wish",
+  "ruleset": "Pathfinder First Edition",
+  "name": "Mythic Wish",
+  "base_spell": {
+    "spell_id": "spell.wish",
+    "relationship": "mythic_version_of",
+    "rules_combination": "inherits_unless_replaced",
+    "evidence": [
+      {"observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.sections_raw[1].heading_raw", "evidence_kind": "plain_text", "anchor_text_raw": "Mythic Wish", "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Wish"},
+      {"observation_id": "legacy_aon:spell.wish:4db13eb1", "source_field": "spell_raw.links_raw[0]", "evidence_kind": "hyperlink", "anchor_text_raw": "wish", "source_href": "https://legacy.aonprd.com/coreRulebook/spells/wish.html#wish"}
+    ]
+  },
+  "rules_text": {
+    "raw": "When using mythic wish to duplicate another spell, you can duplicate a mythic spell you know (if you’re a spontaneous caster) or have prepared (if you’re a caster who prepares spells). If you don’t know or haven’t prepared the mythic spell, you can expend a second use of mythic power to duplicate the mythic version of the desired spell.\n\nYou can also produce any one of the following effects that modify or replace effects listed in the non-mythic wish spell description:\n\nIf you use mythic wish to remove injuries and afflictions, you can expend a number of uses of mythic power to remove that number of additional afflictions from all affected creatures.\nIf you use mythic wish to revive the dead, you can expend a second use of mythic power to negate the target’s permanent negative level from the resurrection.\nAlter fate. By expending a second use of mythic power, you can cast mythic wish as an immediate action before a 1d20 roll is attempted and choose what number you want to come up on the die.\n\nAugmented: If you expend two uses of mythic power, you can cast a silent, stilled mythic wish, even if you’re helpless or couldn’t otherwise take actions (but not unconscious).",
+    "search_text": "Mythic Wish can duplicate known or prepared mythic spells, or spend a second use of mythic power for an unknown or unprepared mythic version. Additional mythic-power uses can remove additional afflictions; a second use can negate Resurrection's permanent negative level or cast before a d20 roll as an immediate action and choose its result. Its unnumbered Augmented option costs two uses and permits a silent, stilled casting while helpless or otherwise unable to act, but not unconscious."
+  },
+  "augmentations": [
+    {
+      "augmentation_id": "mythic-spell-variant.wish.augmentation-silent-stilled",
+      "name": "Augmented",
+      "minimum_tier": null,
+      "total_mythic_power_uses": 2,
+      "raw": "If you expend two uses of mythic power, you can cast a silent, stilled mythic wish, even if you’re helpless or couldn’t otherwise take actions (but not unconscious).",
+      "relationships": [
+        {"relationship_id": "mythic-spell-variant.wish:uses_definition:condition.helpless", "type": "uses_definition", "target": {"entity_type": "condition", "entity_id": "condition.helpless", "name": "Helpless"}, "status": "accepted", "evidence": [{"observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.mythic_text_raw", "evidence_kind": "plain_text", "anchor_text_raw": "helpless", "source_href": null}], "note": "The augmentation can be used while Helpless."},
+        {"relationship_id": "mythic-spell-variant.wish:uses_definition:condition.unconscious", "type": "uses_definition", "target": {"entity_type": "condition", "entity_id": "condition.unconscious", "name": "Unconscious"}, "status": "accepted", "evidence": [{"observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.mythic_text_raw", "evidence_kind": "plain_text", "anchor_text_raw": "not unconscious", "source_href": null}], "note": "Unconscious is an explicit exclusion."},
+        {"relationship_id": "mythic-spell-variant.wish:references:feat.silent-spell", "type": "references", "target": {"entity_type": "feat", "entity_id": "feat.silent-spell", "name": "Silent Spell"}, "status": "pending_review", "evidence": [{"observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.mythic_text_raw", "evidence_kind": "plain_text", "anchor_text_raw": "silent", "source_href": null}], "note": "The adjective likely invokes the Silent Spell effect, but the source does not hyperlink or capitalize the feat name."},
+        {"relationship_id": "mythic-spell-variant.wish:references:feat.still-spell", "type": "references", "target": {"entity_type": "feat", "entity_id": "feat.still-spell", "name": "Still Spell"}, "status": "pending_review", "evidence": [{"observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.mythic_text_raw", "evidence_kind": "plain_text", "anchor_text_raw": "stilled", "source_href": null}], "note": "The adjective likely invokes the Still Spell effect, but the source does not hyperlink or capitalize the feat name."}
+      ]
+    }
+  ],
+  "publication": {"publisher": "Paizo", "book": "Mythic Adventures", "page": 112, "first_party_status": "confirmed"},
+  "relationships": [
+    {"relationship_id": "mythic-spell-variant.wish:published_in:publication.mythic-adventures", "type": "published_in", "target": {"entity_type": "publication", "entity_id": "publication.mythic-adventures", "name": "Mythic Adventures"}, "status": "accepted", "evidence": [{"observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.links_raw[2]", "evidence_kind": "hyperlink", "anchor_text_raw": "Mythic Adventures pg. 112", "source_href": "http://paizo.com/products/btpy8ywe?Pathfinder-Roleplaying-Game-Mythic-Adventures"}], "note": null},
+    {"relationship_id": "mythic-spell-variant.wish:references:spell.resurrection", "type": "references", "target": {"entity_type": "spell", "entity_id": "spell.resurrection", "name": "Resurrection"}, "status": "accepted", "evidence": [{"observation_id": "legacy_aon:spell.wish:4db13eb1", "source_field": "spell_raw.links_raw[2]", "evidence_kind": "hyperlink", "anchor_text_raw": "resurrection", "source_href": "https://legacy.aonprd.com/coreRulebook/spells/resurrection.html#resurrection"}], "note": "A second use can negate the permanent negative level from the duplicated Resurrection."},
+    {"relationship_id": "mythic-spell-variant.wish:uses_action:action.immediate-action", "type": "uses_action", "target": {"entity_type": "action", "entity_id": "action.immediate-action", "name": "Immediate Action"}, "status": "accepted", "evidence": [{"observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.mythic_text_raw", "evidence_kind": "plain_text", "anchor_text_raw": "immediate action", "source_href": null}], "note": "Only the Alter Fate option changes casting to an immediate action."},
+    {"relationship_id": "mythic-spell-variant.wish:uses_definition:rule.afflictions", "type": "uses_definition", "target": {"entity_type": "rule", "entity_id": "rule.afflictions", "name": "Afflictions"}, "status": "accepted", "evidence": [{"observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.mythic_text_raw", "evidence_kind": "plain_text", "anchor_text_raw": "afflictions", "source_href": null}], "note": "Additional mythic-power uses can remove additional afflictions from all affected creatures."},
+    {"relationship_id": "mythic-spell-variant.wish:uses_definition:rule.permanent-negative-level", "type": "uses_definition", "target": {"entity_type": "rule", "entity_id": "rule.permanent-negative-level", "name": "Permanent Negative Level"}, "status": "accepted", "evidence": [{"observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.mythic_text_raw", "evidence_kind": "plain_text", "anchor_text_raw": "permanent negative level", "source_href": null}], "note": "A second use can negate this Resurrection consequence."}
+  ],
+  "provenance": [
+    {"field_path": "/rules_text/raw", "observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.mythic_text_raw", "decision": "copied", "note": "AoN selected by provenance and page attribution; the separate Legacy mythic page independently agrees."},
+    {"field_path": "/augmentations/0", "observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.mythic_text_raw", "decision": "normalized", "note": "The explicitly labeled, unnumbered Augmented paragraph costs two total uses and has no minimum tier stated."},
+    {"field_path": "/publication", "observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.supplemental_sources_raw[0]", "decision": "normalized", "note": "AoN explicitly attributes Mythic Wish to Mythic Adventures page 112."}
+  ],
+  "normalization": {
+    "status": "validated",
+    "normalizer_version": "manual-0.1.0",
+    "warnings": [
+      {"code": "MYTHIC_OPTION_MODEL_DEFERRED", "field_path": "/rules_text", "message": "The several second-use choices remain in lossless rules text because they are options within the mythic spell, not paragraphs labeled Augmented."},
+      {"code": "METAMAGIC_RELATIONSHIPS_PENDING", "field_path": "/augmentations/0/relationships", "message": "Silent and stilled are retained as pending feat relationships until the terminology is verified against the metamagic rules."}
+    ]
+  }
+}

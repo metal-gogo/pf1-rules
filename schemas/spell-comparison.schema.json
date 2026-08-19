@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/pf1/schemas/spell-comparison.schema.json",
+  "title": "PF1 Spell Source Comparison",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "comparison_id", "spell_id", "observation_ids", "field_comparisons", "overall_status"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "schema_version": {"const": "0.1.0"},
+    "comparison_id": {"type": "string", "pattern": "^comparison:spell\\.[a-z0-9-]+:[a-zA-Z0-9._-]+$"},
+    "spell_id": {"type": "string", "pattern": "^spell\\.[a-z0-9-]+$"},
+    "observation_ids": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": {"type": "string"}
+    },
+    "field_comparisons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["field", "classification", "values", "resolution"],
+        "properties": {
+          "field": {"type": "string", "minLength": 1},
+          "classification": {
+            "enum": [
+              "exact_match",
+              "formatting_only",
+              "semantically_equivalent",
+              "scope_expansion",
+              "missing_in_source",
+              "material_conflict",
+              "parse_failure",
+              "not_applicable",
+              "needs_review"
+            ]
+          },
+          "values": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["observation_id", "raw_value"],
+              "properties": {
+                "observation_id": {"type": "string"},
+                "raw_value": {}
+              }
+            }
+          },
+          "resolution": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["status", "selected_observation_id", "note"],
+            "properties": {
+              "status": {"enum": ["unresolved", "not_required", "accepted", "rejected", "deferred"]},
+              "selected_observation_id": {"type": ["string", "null"]},
+              "note": {"type": ["string", "null"]}
+            }
+          }
+        }
+      }
+    },
+    "overall_status": {"enum": ["equivalent", "compatible_with_expansions", "conflict", "incomplete", "needs_review"]},
+    "review_notes": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  }
+}

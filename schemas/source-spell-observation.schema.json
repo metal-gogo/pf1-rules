@@ -1,0 +1,216 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/pf1/schemas/source-spell-observation.schema.json",
+  "title": "PF1 Source Spell Observation",
+  "description": "An immutable observation of one spell page from one source at one retrieval time.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "observation_id",
+    "entity_type",
+    "source",
+    "retrieval",
+    "parser",
+    "page",
+    "spell_raw",
+    "warnings"
+  ],
+  "properties": {
+    "$schema": {"type": "string"},
+    "schema_version": {"const": "0.1.0"},
+    "observation_id": {
+      "type": "string",
+      "pattern": "^(aon|legacy_aon|d20pfsrd):spell\\.[a-z0-9-]+:[a-f0-9]{8,64}$"
+    },
+    "entity_type": {"const": "spell"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["site_id", "url"],
+      "properties": {
+        "site_id": {"enum": ["aon", "legacy_aon", "d20pfsrd"]},
+        "url": {"type": "string", "format": "uri"},
+        "license_url": {"type": ["string", "null"], "format": "uri"},
+        "declared_publisher": {"type": ["string", "null"]},
+        "first_party_status": {"enum": ["confirmed", "suspected", "third_party", "unknown"]}
+      }
+    },
+    "retrieval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["retrieved_at", "http_status", "content_sha256", "raw_artifact_path"],
+      "properties": {
+        "retrieved_at": {"type": "string", "format": "date-time"},
+        "http_status": {"type": "integer", "minimum": 100, "maximum": 599},
+        "content_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "raw_artifact_path": {"type": "string", "minLength": 1},
+        "response_content_type": {"type": ["string", "null"]}
+      }
+    },
+    "parser": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "parsed_at"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "version": {"type": "string", "minLength": 1},
+        "parsed_at": {"type": "string", "format": "date-time"}
+      }
+    },
+    "page": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title_raw"],
+      "properties": {
+        "title_raw": {"type": ["string", "null"]},
+        "breadcrumbs_raw": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "license_notice_raw": {"type": ["string", "null"]},
+        "source_notice_raw": {"type": ["string", "null"]}
+      }
+    },
+    "spell_raw": {"$ref": "#/$defs/rawSpell"},
+    "warnings": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/warning"}
+    },
+    "site_extensions": {
+      "type": "object",
+      "description": "Lossless site-specific values that do not yet belong in the shared contract."
+    }
+  },
+  "$defs": {
+    "nullableString": {"type": ["string", "null"]},
+    "deliveryFieldRaw": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label_raw", "value_raw", "kinds"],
+      "properties": {
+        "label_raw": {"type": "string", "minLength": 1},
+        "value_raw": {"$ref": "#/$defs/nullableString"},
+        "kinds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"enum": ["target", "effect", "area", "unknown"]}
+        }
+      }
+    },
+    "rawSpell": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name_raw", "description_raw"],
+      "properties": {
+        "name_raw": {"type": ["string", "null"]},
+        "alternate_names_raw": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "school_raw": {"$ref": "#/$defs/nullableString"},
+        "subschool_raw": {"$ref": "#/$defs/nullableString"},
+        "descriptors_raw": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "levels_raw": {"$ref": "#/$defs/nullableString"},
+        "domains_raw": {"$ref": "#/$defs/nullableString"},
+        "casting_time_raw": {"$ref": "#/$defs/nullableString"},
+        "components_raw": {"$ref": "#/$defs/nullableString"},
+        "range_raw": {"$ref": "#/$defs/nullableString"},
+        "delivery_fields_raw": {
+          "type": "array",
+          "description": "Literal Target, Targets, Effect, Area, or combined delivery fields. A combined source label remains one entry and may map to multiple normalized kinds.",
+          "items": {"$ref": "#/$defs/deliveryFieldRaw"}
+        },
+        "duration_raw": {"$ref": "#/$defs/nullableString"},
+        "saving_throw_raw": {"$ref": "#/$defs/nullableString"},
+        "spell_resistance_raw": {"$ref": "#/$defs/nullableString"},
+        "description_raw": {"type": ["string", "null"]},
+        "links_raw": {
+          "type": "array",
+          "description": "Every literal hyperlink found within the bounded spell entry, including classification, spell-list, definition, source, and cross-reference links.",
+          "items": {"$ref": "#/$defs/rawLink"}
+        },
+        "references_raw": {
+          "type": "array",
+          "description": "Rules references found inside the spell content. Hyperlinks are preserved exactly; plain-text references may also be recorded.",
+          "items": {"$ref": "#/$defs/rawReference"}
+        },
+        "mythic_text_raw": {"$ref": "#/$defs/nullableString"},
+        "source_book_raw": {"$ref": "#/$defs/nullableString"},
+        "source_page_raw": {"$ref": "#/$defs/nullableString"},
+        "supplemental_sources_raw": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["section_raw", "book_raw", "page_raw", "href_raw"],
+            "properties": {
+              "section_raw": {"type": "string", "minLength": 1},
+              "book_raw": {"type": ["string", "null"]},
+              "page_raw": {"type": ["string", "null"]},
+              "href_raw": {"type": ["string", "null"]}
+            }
+          }
+        },
+        "pfs_status_raw": {"$ref": "#/$defs/nullableString"},
+        "sections_raw": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["heading_raw", "body_raw"],
+            "properties": {
+              "heading_raw": {"type": ["string", "null"]},
+              "body_raw": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "rawLink": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["anchor_text_raw", "href_raw", "href_resolved", "source_field", "context_raw", "role_hint", "target_entity_type_hint", "target_entity_id_hint"],
+      "properties": {
+        "anchor_text_raw": {"type": "string", "minLength": 1},
+        "href_raw": {"type": "string", "minLength": 1},
+        "href_resolved": {"type": "string", "format": "uri"},
+        "source_field": {"type": "string", "minLength": 1},
+        "context_raw": {"type": "string", "minLength": 1},
+        "role_hint": {"enum": ["classification", "spell_list", "definition", "publication", "cross_reference", "unknown"]},
+        "target_entity_type_hint": {"enum": ["spell", "spell_family", "rule", "condition", "feat", "class_feature", "monster", "item", "magic_school", "subschool", "descriptor", "spell_list", "action", "publication", "unknown"]},
+        "target_entity_id_hint": {"type": ["string", "null"]}
+      }
+    },
+    "rawReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["anchor_text_raw", "href_raw", "evidence_kind", "source_field", "context_raw", "target_entity_type", "target_name_hint", "relationship_hint"],
+      "properties": {
+        "anchor_text_raw": {"type": "string", "minLength": 1},
+        "href_raw": {"type": ["string", "null"]},
+        "evidence_kind": {"enum": ["hyperlink", "plain_text"]},
+        "source_field": {"type": "string", "minLength": 1},
+        "context_raw": {"type": "string", "minLength": 1},
+        "target_entity_type": {"enum": ["spell", "spell_family", "rule", "condition", "feat", "class_feature", "monster", "item", "magic_school", "subschool", "descriptor", "spell_list", "action", "publication", "unknown"]},
+        "target_name_hint": {"type": ["string", "null"]},
+        "relationship_hint": {"enum": ["references", "functions_like", "mass_variant_of", "counterpart_of", "member_of_family", "counteracts", "dispels", "modifies", "requires", "unknown"]}
+      }
+    },
+    "warning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "severity", "message"],
+      "properties": {
+        "code": {"type": "string", "pattern": "^[A-Z0-9_]+$"},
+        "severity": {"enum": ["info", "warning", "error"]},
+        "field": {"type": ["string", "null"]},
+        "message": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

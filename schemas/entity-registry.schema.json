@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/pf1/schemas/entity-registry.schema.json",
+  "title": "PF1 Canonical Entity Registry",
+  "description": "A registry of resolved entities and name/ID placeholders discovered while importing links and structured fields.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "registry_id", "entities"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "schema_version": {"const": "0.1.0"},
+    "registry_id": {"type": "string", "pattern": "^[a-z0-9._-]+$"},
+    "entities": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/entity"}
+    }
+  },
+  "$defs": {
+    "entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entity_id", "entity_type", "name", "status", "aliases", "evidence", "notes"],
+      "properties": {
+        "entity_id": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*\\.[a-z0-9][a-z0-9.-]*$"},
+        "entity_type": {"enum": ["spell", "mythic_spell_variant", "spell_family", "rule", "condition", "feat", "class_feature", "monster", "item", "magic_school", "subschool", "descriptor", "spell_list", "action", "publication", "visual_aid", "unknown"]},
+        "name": {"type": "string", "minLength": 1},
+        "status": {"enum": ["stub", "resolved"]},
+        "aliases": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["observation_id", "source_field", "anchor_text_raw", "source_href"],
+            "properties": {
+              "observation_id": {"type": "string"},
+              "source_field": {"type": "string"},
+              "anchor_text_raw": {"type": ["string", "null"]},
+              "source_href": {"type": ["string", "null"]}
+            }
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
+      }
+    }
+  }
+}

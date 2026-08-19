@@ -1,0 +1,103 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/pf1/schemas/canonical-decision.schema.json",
+  "title": "PF1 Canonicalization Decision",
+  "description": "An auditable decision connecting preserved source observations to a canonical entity.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "decision_id",
+    "entity_id",
+    "canonical_record_path",
+    "observation_ids",
+    "policy_id",
+    "baseline_observation_id",
+    "status",
+    "field_decisions",
+    "relationship_decisions",
+    "unresolved_questions"
+  ],
+  "properties": {
+    "$schema": {"type": "string"},
+    "schema_version": {"const": "0.1.0"},
+    "decision_id": {"type": "string", "pattern": "^canonical-decision:(spell|mythic-spell-variant)\\.[a-z0-9.-]+:[a-zA-Z0-9._-]+$"},
+    "entity_id": {"type": "string", "pattern": "^(spell|mythic-spell-variant)\\.[a-z0-9.-]+$"},
+    "canonical_record_path": {"type": "string", "minLength": 1},
+    "observation_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string"}
+    },
+    "policy_id": {"type": "string", "pattern": "^[a-z0-9._-]+$"},
+    "baseline_observation_id": {
+      "type": "string",
+      "description": "The highest-provenance observation selected as the default source for the canonical entity."
+    },
+    "status": {"enum": ["draft", "needs_review", "accepted", "superseded"]},
+    "field_decisions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/fieldDecision"}
+    },
+    "relationship_decisions": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/relationshipDecision"}
+    },
+    "unresolved_questions": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    }
+  },
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observation_id", "source_field"],
+      "properties": {
+        "observation_id": {"type": "string"},
+        "source_field": {"type": "string", "minLength": 1}
+      }
+    },
+    "fieldDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_path", "decision", "selected_evidence", "considered_observation_ids", "rationale"],
+      "properties": {
+        "canonical_path": {"type": "string", "pattern": "^/"},
+        "decision": {"enum": ["select_source", "combine", "normalize", "derived", "leave_unresolved"]},
+        "selected_evidence": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence"}
+        },
+        "considered_observation_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string"}
+        },
+        "rationale": {"type": "string", "minLength": 1}
+      }
+    },
+    "relationshipDecision": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relationship_id", "decision", "evidence", "considered_observation_ids", "rationale"],
+      "properties": {
+        "relationship_id": {"type": "string"},
+        "decision": {"enum": ["accept", "reject", "defer"]},
+        "evidence": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/evidence"}
+        },
+        "considered_observation_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"type": "string"}
+        },
+        "rationale": {"type": "string", "minLength": 1}
+      }
+    }
+  }
+}

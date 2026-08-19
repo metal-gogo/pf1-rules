@@ -1,0 +1,17 @@
+{
+  "$schema": "../../schemas/mythic-spell-variant.schema.json", "schema_version": "0.1.0",
+  "mythic_spell_variant_id": "mythic-spell-variant.inflict-light-wounds", "ruleset": "Pathfinder First Edition", "name": "Mythic Inflict Light Wounds",
+  "base_spell": {"spell_id": "spell.inflict-light-wounds", "relationship": "mythic_version_of", "rules_combination": "inherits_unless_replaced", "evidence": [{"observation_id": "aon:spell.inflict-light-wounds:20d7e4da", "source_field": "spell_raw.sections_raw[1].heading_raw", "evidence_kind": "plain_text", "anchor_text_raw": "Mythic Inflict Light Wounds", "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Inflict%20Light%20Wounds"}]},
+  "rules_text": {"raw": "The damage dealt increases to 2d8 points of damage + 2 points per caster level (maximum +10). A living target is sickened for 1 round per caster level (maximum 5 rounds) if it fails its saving throw.", "search_text": "Mythic Inflict Light Wounds deals 2d8 plus 2 per caster level, maximum +10. A living target that fails its save is sickened for 1 round per caster level, maximum 5 rounds."},
+  "augmentations": [],
+  "publication": {"publisher": "Paizo", "book": "Mythic Adventures", "page": 99, "first_party_status": "confirmed"},
+  "relationships": [
+    {"relationship_id": "mythic-spell-variant.inflict-light-wounds:published_in:publication.mythic-adventures", "type": "published_in", "target": {"entity_type": "publication", "entity_id": "publication.mythic-adventures", "name": "Mythic Adventures"}, "status": "accepted", "evidence": [{"observation_id": "aon:spell.inflict-light-wounds:20d7e4da", "source_field": "spell_raw.links_raw[2]", "evidence_kind": "hyperlink", "anchor_text_raw": "Mythic Adventures pg. 99", "source_href": "http://paizo.com/products/btpy8ywe?Pathfinder-Roleplaying-Game-Mythic-Adventures"}], "note": "Publication belongs to the mythic variant."},
+    {"relationship_id": "mythic-spell-variant.inflict-light-wounds:uses_definition:condition.sickened", "type": "uses_definition", "target": {"entity_type": "condition", "entity_id": "condition.sickened", "name": "Sickened"}, "status": "accepted", "evidence": [{"observation_id": "aon:spell.inflict-light-wounds:20d7e4da", "source_field": "spell_raw.mythic_text_raw", "evidence_kind": "plain_text", "anchor_text_raw": "sickened", "source_href": null}], "note": "The condition belongs only to the mythic variant and only applies to a living target that fails its save."}
+  ],
+  "provenance": [
+    {"field_path": "/rules_text/raw", "observation_id": "aon:spell.inflict-light-wounds:20d7e4da", "source_field": "spell_raw.mythic_text_raw", "decision": "copied", "note": "AoN is the only bounded source observation containing the mythic text."},
+    {"field_path": "/publication", "observation_id": "aon:spell.inflict-light-wounds:20d7e4da", "source_field": "spell_raw.supplemental_sources_raw[0]", "decision": "normalized", "note": "AoN supplies Mythic Adventures page 99."}
+  ],
+  "normalization": {"status": "validated", "normalizer_version": "manual-0.1.0", "warnings": [{"code": "MYTHIC_EFFECT_MODEL_DEFERRED", "field_path": "/rules_text", "message": "Damage and the failed-save condition rider remain in rules text until a reusable conditional effect model is designed."}]}
+}

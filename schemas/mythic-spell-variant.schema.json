@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/pf1/schemas/mythic-spell-variant.schema.json",
+  "title": "PF1 Mythic Spell Variant",
+  "description": "A separately identifiable mythic version of a canonical spell. Other variant kinds will be added only when a concrete source is modeled.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "mythic_spell_variant_id",
+    "ruleset",
+    "name",
+    "base_spell",
+    "rules_text",
+    "augmentations",
+    "publication",
+    "relationships",
+    "provenance",
+    "normalization"
+  ],
+  "properties": {
+    "$schema": {"type": "string"},
+    "schema_version": {"const": "0.1.0"},
+    "mythic_spell_variant_id": {"type": "string", "pattern": "^mythic-spell-variant\\.[a-z0-9-]+$"},
+    "ruleset": {"const": "Pathfinder First Edition"},
+    "name": {"type": "string", "minLength": 1},
+    "base_spell": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["spell_id", "relationship", "rules_combination", "evidence"],
+      "properties": {
+        "spell_id": {"type": "string", "pattern": "^spell\\.[a-z0-9-]+$"},
+        "relationship": {"const": "mythic_version_of"},
+        "rules_combination": {"const": "inherits_unless_replaced"},
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/evidence"}
+        }
+      }
+    },
+    "rules_text": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["raw", "search_text"],
+      "properties": {
+        "raw": {"type": "string", "minLength": 1},
+        "search_text": {"type": "string", "minLength": 1}
+      }
+    },
+    "augmentations": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/augmentation"}
+    },
+    "publication": {"$ref": "#/$defs/publication"},
+    "relationships": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/relationship"}
+    },
+    "provenance": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/provenance"}
+    },
+    "normalization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "normalizer_version", "warnings"],
+      "properties": {
+        "status": {"enum": ["draft", "validated", "needs_review", "rejected"]},
+        "normalizer_version": {"type": "string", "minLength": 1},
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["code", "message"],
+            "properties": {
+              "code": {"type": "string", "pattern": "^[A-Z0-9_]+$"},
+              "field_path": {"type": ["string", "null"]},
+              "message": {"type": "string", "minLength": 1}
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observation_id", "source_field", "evidence_kind", "anchor_text_raw", "source_href"],
+      "properties": {
+        "observation_id": {"type": "string", "minLength": 1},
+        "source_field": {"type": "string", "minLength": 1},
+        "evidence_kind": {"enum": ["hyperlink", "plain_text", "manual_verification"]},
+        "anchor_text_raw": {"type": ["string", "null"]},
+        "source_href": {"type": ["string", "null"]}
+      }
+    },
+    "publication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["publisher", "book", "page", "first_party_status"],
+      "properties": {
+        "publisher": {"type": ["string", "null"]},
+        "book": {"type": ["string", "null"]},
+        "page": {"type": ["integer", "null"], "minimum": 1},
+        "first_party_status": {"enum": ["confirmed", "suspected", "third_party", "unknown"]}
+      }
+    },
+    "augmentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["augmentation_id", "name", "minimum_tier", "total_mythic_power_uses", "raw", "relationships"],
+      "properties": {
+        "augmentation_id": {"type": "string", "pattern": "^mythic-spell-variant\\.[a-z0-9-]+\\.augmentation-[a-z0-9-]+$"},
+        "name": {"type": "string", "minLength": 1},
+        "minimum_tier": {"type": ["integer", "null"], "minimum": 1, "maximum": 10},
+        "total_mythic_power_uses": {"type": ["integer", "null"], "minimum": 1},
+        "raw": {"type": "string", "minLength": 1},
+        "relationships": {"type": "array", "items": {"$ref": "#/$defs/relationship"}}
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relationship_id", "type", "target", "status", "evidence", "note"],
+      "properties": {
+        "relationship_id": {"type": "string", "pattern": "^[a-z0-9.-]+:[a-z_]+:[a-z0-9.-]+$"},
+        "type": {"enum": ["published_in", "uses_action", "uses_definition", "counterpart_of", "modifies", "requires", "references", "unknown"]},
+        "target": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["entity_type", "entity_id", "name"],
+          "properties": {
+            "entity_type": {"enum": ["spell", "mythic_spell_variant", "rule", "condition", "feat", "class_feature", "action", "publication", "unknown"]},
+            "entity_id": {"type": ["string", "null"]},
+            "name": {"type": "string", "minLength": 1}
+          }
+        },
+        "status": {"enum": ["accepted", "pending_review", "rejected"]},
+        "evidence": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/evidence"}},
+        "note": {"type": ["string", "null"]}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field_path", "observation_id", "source_field", "decision"],
+      "properties": {
+        "field_path": {"type": "string", "pattern": "^/"},
+        "observation_id": {"type": "string", "minLength": 1},
+        "source_field": {"type": "string", "minLength": 1},
+        "decision": {"enum": ["copied", "normalized", "combined", "manually_resolved"]},
+        "note": {"type": ["string", "null"]}
+      }
+    }
+  }
+}

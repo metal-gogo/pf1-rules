@@ -1,0 +1,52 @@
+{
+  "$schema": "../../schemas/canonical-decision.schema.json",
+  "schema_version": "0.1.0",
+  "decision_id": "canonical-decision:spell.inflict-light-wounds:v0.1",
+  "entity_id": "spell.inflict-light-wounds",
+  "canonical_record_path": "../canonical/inflict-light-wounds.json",
+  "observation_ids": ["aon:spell.inflict-light-wounds:20d7e4da", "legacy_aon:spell.inflict-light-wounds:37f4039e", "d20pfsrd:spell.inflict-light-wounds:88508280"],
+  "policy_id": "provenance-first-v0",
+  "baseline_observation_id": "aon:spell.inflict-light-wounds:20d7e4da",
+  "status": "accepted",
+  "field_decisions": [
+    {
+      "canonical_path": "/levels", "decision": "select_source",
+      "selected_evidence": [{"observation_id": "aon:spell.inflict-light-wounds:20d7e4da", "source_field": "spell_raw.levels_raw"}],
+      "considered_observation_ids": ["aon:spell.inflict-light-wounds:20d7e4da", "legacy_aon:spell.inflict-light-wounds:37f4039e", "d20pfsrd:spell.inflict-light-wounds:88508280"],
+      "rationale": "AoN provides the broad compiled first-party class list; Legacy intentionally contains only the Core cleric entry and d20PFSRD lists a subset."
+    },
+    {
+      "canonical_path": "/effect", "decision": "normalize",
+      "selected_evidence": [{"observation_id": "aon:spell.inflict-light-wounds:20d7e4da", "source_field": "spell_raw.delivery_fields_raw[0].value_raw"}, {"observation_id": "legacy_aon:spell.inflict-light-wounds:37f4039e", "source_field": "spell_raw.saving_throw_raw"}],
+      "considered_observation_ids": ["aon:spell.inflict-light-wounds:20d7e4da", "legacy_aon:spell.inflict-light-wounds:37f4039e", "d20pfsrd:spell.inflict-light-wounds:88508280"],
+      "rationale": "All three agree on touch, one creature, instantaneous duration, Will half, and spell resistance. Conditional living-versus-undead behavior remains in text."
+    },
+    {
+      "canonical_path": "/description/raw", "decision": "select_source",
+      "selected_evidence": [{"observation_id": "aon:spell.inflict-light-wounds:20d7e4da", "source_field": "spell_raw.description_raw"}],
+      "considered_observation_ids": ["aon:spell.inflict-light-wounds:20d7e4da", "legacy_aon:spell.inflict-light-wounds:37f4039e", "d20pfsrd:spell.inflict-light-wounds:88508280"],
+      "rationale": "The substantive wording agrees; AoN is selected by provenance."
+    }
+  ],
+  "relationship_decisions": [
+    {
+      "relationship_id": "spell.inflict-light-wounds:counterpart_of:spell.cure-light-wounds", "decision": "accept",
+      "evidence": [{"observation_id": "aon:spell.inflict-light-wounds:20d7e4da", "source_field": "spell_raw.description_raw"}],
+      "considered_observation_ids": ["aon:spell.inflict-light-wounds:20d7e4da", "legacy_aon:spell.inflict-light-wounds:37f4039e", "d20pfsrd:spell.inflict-light-wounds:88508280"],
+      "rationale": "The paired rank and inverse positive-versus-negative energy behavior support comparison without implying inheritance."
+    },
+    {
+      "relationship_id": "spell.inflict-light-wounds:member_of_family:spell-family.inflict-wounds", "decision": "accept",
+      "evidence": [{"observation_id": "aon:spell.inflict-light-wounds:20d7e4da", "source_field": "spell_raw.name_raw"}],
+      "considered_observation_ids": ["aon:spell.inflict-light-wounds:20d7e4da", "legacy_aon:spell.inflict-light-wounds:37f4039e", "d20pfsrd:spell.inflict-light-wounds:88508280"],
+      "rationale": "The base entry anchors family navigation and future inheritance resolution."
+    },
+    {
+      "relationship_id": "spell.inflict-light-wounds:has_mythic_variant:mythic-spell-variant.inflict-light-wounds", "decision": "accept",
+      "evidence": [{"observation_id": "aon:spell.inflict-light-wounds:20d7e4da", "source_field": "spell_raw.sections_raw[1].heading_raw"}],
+      "considered_observation_ids": ["aon:spell.inflict-light-wounds:20d7e4da", "legacy_aon:spell.inflict-light-wounds:37f4039e", "d20pfsrd:spell.inflict-light-wounds:88508280"],
+      "rationale": "The explicitly named mythic subsection is now a separately identified spell variant. Sickened and Mythic Adventures belong to that variant rather than the base spell."
+    }
+  ],
+  "unresolved_questions": ["What reusable conditional effect shape should encode damage to living creatures and healing undead?", "Should mythic condition riders later become structured effect branches?"]
+}

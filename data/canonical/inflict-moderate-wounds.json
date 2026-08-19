@@ -1,0 +1,402 @@
+{
+  "$schema": "../../schemas/canonical-spell.schema.json",
+  "schema_version": "0.1.0",
+  "spell_id": "spell.inflict-moderate-wounds",
+  "ruleset": "Pathfinder First Edition",
+  "name": "Inflict Moderate Wounds",
+  "aliases": [],
+  "classification": {
+    "school": "necromancy",
+    "subschool": null,
+    "descriptors": [],
+    "raw": "necromancy"
+  },
+  "levels": [
+    {
+      "spell_list_id": "spell-list.antipaladin",
+      "list_kind": "class",
+      "list_name": "antipaladin",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "antipaladin 3"
+    },
+    {
+      "spell_list_id": "spell-list.cleric",
+      "list_kind": "class",
+      "list_name": "cleric",
+      "level": 2,
+      "scope": "core",
+      "raw": "cleric 2"
+    },
+    {
+      "spell_list_id": "spell-list.inquisitor",
+      "list_kind": "class",
+      "list_name": "inquisitor",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "inquisitor 2"
+    },
+    {
+      "spell_list_id": "spell-list.occultist",
+      "list_kind": "class",
+      "list_name": "occultist",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "occultist 2"
+    },
+    {
+      "spell_list_id": "spell-list.oracle",
+      "list_kind": "class",
+      "list_name": "oracle",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "oracle 2"
+    },
+    {
+      "spell_list_id": "spell-list.shaman",
+      "list_kind": "class",
+      "list_name": "shaman",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "shaman 2"
+    },
+    {
+      "spell_list_id": "spell-list.spiritualist",
+      "list_kind": "class",
+      "list_name": "spiritualist",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "spiritualist 2"
+    },
+    {
+      "spell_list_id": "spell-list.warpriest",
+      "list_kind": "class",
+      "list_name": "warpriest",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "warpriest 2"
+    },
+    {
+      "spell_list_id": "spell-list.witch",
+      "list_kind": "class",
+      "list_name": "witch",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "witch 2"
+    }
+  ],
+  "casting": {
+    "time": {
+      "kind": "action",
+      "amount": 1,
+      "unit": "standard_action",
+      "raw": "1 standard action"
+    },
+    "components": [
+      {
+        "type": "verbal",
+        "details": null,
+        "cost_gp": null,
+        "raw": "V"
+      },
+      {
+        "type": "somatic",
+        "details": null,
+        "cost_gp": null,
+        "raw": "S"
+      }
+    ],
+    "components_raw": "V, S",
+    "conditional_components": []
+  },
+  "effect": {
+    "range": {
+      "category": "touch",
+      "formula": null,
+      "raw": "touch"
+    },
+    "targeting": {
+      "mode": "single",
+      "subject_kind": "creature",
+      "selection": "selected",
+      "count": {
+        "kind": "fixed",
+        "fixed": 1,
+        "formula": null,
+        "raw": "creature"
+      },
+      "separation": null,
+      "raw": "creature touched"
+    },
+    "area": null,
+    "duration": {
+      "kind": "instantaneous",
+      "formula": null,
+      "dismissible": false,
+      "concentration": false,
+      "raw": "instantaneous"
+    },
+    "saving_throw": {
+      "types": [
+        "will"
+      ],
+      "outcome": "half",
+      "harmless": false,
+      "object": false,
+      "conditional": true,
+      "raw": "Will half"
+    },
+    "spell_resistance": {
+      "applies": true,
+      "harmless": false,
+      "object": false,
+      "conditional": true,
+      "raw": "yes"
+    },
+    "delivery": {
+      "resolution": "fixed",
+      "entries": [
+        {
+          "label_raw": "Target",
+          "value_raw": "creature touched",
+          "kinds": [
+            "target"
+          ]
+        }
+      ]
+    }
+  },
+  "description": {
+    "raw": "This spell functions like inflict light wounds, except that you deal 2d8 points of damage + 1 point per caster level (maximum +10).",
+    "search_text": "Inflict Moderate Wounds functions like Inflict Light Wounds. By touch, it deals a living creature 2d8 damage plus 1 per caster level, maximum +10, with a Will save for half and spell resistance. It cures an undead creature by the same amount instead of harming it.",
+    "sections": [
+      {
+        "heading": "Description",
+        "body": "This spell functions like inflict light wounds, except that you deal 2d8 points of damage + 1 point per caster level (maximum +10)."
+      }
+    ]
+  },
+  "publication": {
+    "publisher": "Paizo",
+    "book": "Pathfinder RPG Core Rulebook",
+    "page": 300,
+    "first_party_status": "confirmed",
+    "pfs_status": "legal",
+    "supplemental": []
+  },
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.inflict-light-wounds",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell functions like inflict light wounds, except that you deal 2d8 points of damage + 1 point per caster level (maximum +10)."
+      },
+      "inherited_paths": [
+        "/casting",
+        "/effect"
+      ],
+      "overrides": [
+        {
+          "aspect": "damage or healing amount",
+          "source_field": "spell_raw.description_raw",
+          "raw": "2d8 points of damage + 1 point per caster level (maximum +10)"
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the touch, target, living-creature damage, undead healing, save, spell-resistance, and timing rules. AoN repeats the stat block and corroborates the resolved structured fields."
+    }
+  ],
+  "relationships": [
+    {
+      "relationship_id": "spell.inflict-moderate-wounds:has_school:magic-school.necromancy",
+      "type": "has_school",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.necromancy",
+        "name": "Necromancy"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "necromancy",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=8"
+        }
+      ],
+      "note": "AoN supplies the direct school link."
+    },
+    {
+      "relationship_id": "spell.inflict-moderate-wounds:published_in:publication.pathfinder-rpg-core-rulebook",
+      "type": "published_in",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.pathfinder-rpg-core-rulebook",
+        "name": "Pathfinder RPG Core Rulebook"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "PRPG Core Rulebook pg. 300",
+          "source_href": "http://paizo.com/pathfinderRPG/v5748btpy88yj"
+        }
+      ],
+      "note": "AoN supplies page 300."
+    },
+    {
+      "relationship_id": "spell.inflict-moderate-wounds:has_mythic_variant:mythic-spell-variant.inflict-moderate-wounds",
+      "type": "has_mythic_variant",
+      "target": {
+        "entity_type": "mythic_spell_variant",
+        "entity_id": "mythic-spell-variant.inflict-moderate-wounds",
+        "name": "Mythic Inflict Moderate Wounds"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
+          "source_field": "spell_raw.sections_raw[1].heading_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Mythic Inflict Moderate Wounds",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Inflict%20Moderate%20Wounds"
+        }
+      ],
+      "note": "The mythic rules, publication, and Sickened relationship are owned by the linked spell-variant entity."
+    },
+    {
+      "relationship_id": "spell.inflict-moderate-wounds:functions_like:spell.inflict-light-wounds",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.inflict-light-wounds",
+        "name": "Inflict Light Wounds"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.inflict-moderate-wounds:24842631",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inflict light wounds",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/inflictLightWounds.html#inflict-light-wounds"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.inflict-moderate-wounds:2e286116",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inflict light wounds",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/i/inflict-light-wounds"
+        }
+      ],
+      "note": "This relationship carries rules inheritance, not just navigation."
+    },
+    {
+      "relationship_id": "spell.inflict-moderate-wounds:counterpart_of:spell.cure-moderate-wounds",
+      "type": "counterpart_of",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.cure-moderate-wounds",
+        "name": "Cure Moderate Wounds"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "deal 2d8 points of damage + 1 point per caster level (maximum +10)",
+          "source_href": null
+        },
+        {
+          "observation_id": "aon:spell.cure-moderate-wounds:4e2b087b",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "cures 2d8 points of damage + 1 point per caster level (maximum +10)",
+          "source_href": null
+        }
+      ],
+      "note": "The pair mirrors negative-versus-positive energy behavior; neither inherits from the other."
+    },
+    {
+      "relationship_id": "spell.inflict-moderate-wounds:member_of_family:spell-family.inflict-wounds",
+      "type": "member_of_family",
+      "target": {
+        "entity_type": "spell_family",
+        "entity_id": "spell-family.inflict-wounds",
+        "name": "Inflict Wounds Spell Family"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
+          "source_field": "spell_raw.name_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Inflict Moderate Wounds",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Inflict%20Moderate%20Wounds"
+        }
+      ],
+      "note": "Family membership supports discovery; inheritance is recorded separately."
+    }
+  ],
+  "provenance": [
+    {
+      "field_path": "/levels",
+      "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
+      "source_field": "spell_raw.levels_raw",
+      "raw_value_sha256": null,
+      "decision": "normalized",
+      "note": "AoN's compiled first-party list includes nine classes; Legacy is the Core baseline and d20PFSRD lists a subset."
+    },
+    {
+      "field_path": "/casting",
+      "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
+      "source_field": "spell_raw.casting_time_raw",
+      "raw_value_sha256": null,
+      "decision": "normalized",
+      "note": "AoN explicitly repeats the inherited casting data."
+    },
+    {
+      "field_path": "/effect",
+      "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
+      "source_field": "spell_raw.delivery_fields_raw[0].value_raw",
+      "raw_value_sha256": null,
+      "decision": "normalized",
+      "note": "Resolved from Inflict Light Wounds and independently corroborated by AoN's explicit fields."
+    },
+    {
+      "field_path": "/description/raw",
+      "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": null,
+      "decision": "copied",
+      "note": "The compact functions-like wording remains the canonical raw text."
+    }
+  ],
+  "normalization": {
+    "status": "validated",
+    "normalizer_version": "manual-0.1.0",
+    "warnings": [
+      {
+        "code": "INHERITED_RULES_RESOLVED",
+        "field_path": "/rules_inheritance/0",
+        "message": "The query-facing fields resolve Inflict Light Wounds, while the canonical raw description remains the source's compact functions-like wording."
+      },
+      {
+        "code": "DAMAGE_HEALING_MODEL_DEFERRED",
+        "field_path": "/description",
+        "message": "Living-versus-undead damage and healing remain in resolved prose until a reusable conditional effect model is designed."
+      },
+      {
+        "code": "SAVE_SR_BRANCHES_PRESERVED_RAW",
+        "field_path": "/effect",
+        "message": "The flat save and spell-resistance objects identify the mechanics but do not yet encode all creature-type branches."
+      }
+    ]
+  }
+}

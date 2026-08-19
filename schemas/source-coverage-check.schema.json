@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/pf1/schemas/source-coverage-check.schema.json",
+  "title": "PF1 Source Coverage Check",
+  "description": "A reproducible positive or negative lookup against a captured source index. This records source coverage, not spell rules.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "coverage_check_id", "entity_id", "source", "retrieval", "check", "result"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "schema_version": {"const": "0.1.0"},
+    "coverage_check_id": {"type": "string", "pattern": "^coverage:(aon|legacy_aon|d20pfsrd):spell\\.[a-z0-9-]+:[a-f0-9]{8,64}$"},
+    "entity_id": {"type": "string", "pattern": "^spell\\.[a-z0-9-]+$"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["site_id", "url"],
+      "properties": {
+        "site_id": {"enum": ["aon", "legacy_aon", "d20pfsrd"]},
+        "url": {"type": "string", "format": "uri"}
+      }
+    },
+    "retrieval": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["retrieved_at", "http_status", "content_sha256", "raw_artifact_path", "response_content_type"],
+      "properties": {
+        "retrieved_at": {"type": "string", "format": "date-time"},
+        "http_status": {"type": "integer", "minimum": 100, "maximum": 599},
+        "content_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "raw_artifact_path": {"type": "string", "minLength": 1},
+        "response_content_type": {"type": ["string", "null"]}
+      }
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "query", "case_sensitive", "scope_raw"],
+      "properties": {
+        "method": {"const": "exact_text_search"},
+        "query": {"type": "string", "minLength": 1},
+        "case_sensitive": {"type": "boolean"},
+        "scope_raw": {"type": "string", "minLength": 1}
+      }
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "match_count", "note"],
+      "properties": {
+        "status": {"enum": ["found", "not_found", "error"]},
+        "match_count": {"type": ["integer", "null"], "minimum": 0},
+        "note": {"type": "string", "minLength": 1}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"result": {"type": "object", "properties": {"status": {"const": "not_found"}}}}},
+      "then": {"properties": {"result": {"type": "object", "properties": {"match_count": {"const": 0}}}}}
+    }
+  ]
+}

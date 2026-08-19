@@ -1,0 +1,43 @@
+{
+  "$schema": "../../schemas/mythic-spell-variant.schema.json",
+  "schema_version": "0.1.0",
+  "mythic_spell_variant_id": "mythic-spell-variant.fireball",
+  "ruleset": "Pathfinder First Edition",
+  "name": "Mythic Fireball",
+  "base_spell": {
+    "spell_id": "spell.fireball",
+    "relationship": "mythic_version_of",
+    "rules_combination": "inherits_unless_replaced",
+    "evidence": [
+      {"observation_id": "aon:spell.fireball:9cc0a874", "source_field": "spell_raw.sections_raw[1].heading_raw", "evidence_kind": "plain_text", "anchor_text_raw": "Mythic Fireball", "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Fireball"},
+      {"observation_id": "d20pfsrd:spell.fireball:d1e3b4fe", "source_field": "spell_raw.sections_raw[1].heading_raw", "evidence_kind": "plain_text", "anchor_text_raw": "Mythic Fireball", "source_href": "https://www.d20pfsrd.com/magic/all-spells/f/fireball/"}
+    ]
+  },
+  "rules_text": {
+    "raw": "The damage dealt increases to 1d10 points of fire damage per caster level (maximum 10d10). Any creature that fails its Reflex saving throw catches on fire (Core Rulebook 444), taking 2d6 points of fire damage each round until the fire is extinguished. Attempts to extinguish this fire use the spell’s save DC.\n\nAugmented (6th): If you expend two uses of mythic power, the maximum damage increases to 20d10, the area increases to a 40-foot radius spread, and any fire damage dealt by the spell bypasses fire resistance and fire immunity.",
+    "search_text": "Mythic Fireball changes the damage dice to d10s, maximum 10d10, and creatures that fail the Reflex save catch fire. Its 6th-tier augmented form costs two uses of mythic power, raises the maximum to 20d10, expands the spread to a 40-foot radius, and bypasses fire resistance and immunity."
+  },
+  "augmentations": [
+    {
+      "augmentation_id": "mythic-spell-variant.fireball.augmentation-6th",
+      "name": "Augmented (6th)",
+      "minimum_tier": 6,
+      "total_mythic_power_uses": 2,
+      "raw": "If you expend two uses of mythic power, the maximum damage increases to 20d10, the area increases to a 40-foot radius spread, and any fire damage dealt by the spell bypasses fire resistance and fire immunity.",
+      "relationships": [
+        {"relationship_id": "mythic-spell-variant.fireball.augmentation-6th:uses_definition:rule.energy-resistance", "type": "uses_definition", "target": {"entity_type": "rule", "entity_id": "rule.energy-resistance", "name": "Energy Resistance"}, "status": "accepted", "evidence": [{"observation_id": "d20pfsrd:spell.fireball:d1e3b4fe", "source_field": "spell_raw.links_raw[12]", "evidence_kind": "hyperlink", "anchor_text_raw": "resistance", "source_href": "https://www.d20pfsrd.com/gamemastering/special-abilities/#TOC-Energy-Resistance"}, {"observation_id": "aon:spell.fireball:9cc0a874", "source_field": "spell_raw.mythic_text_raw", "evidence_kind": "plain_text", "anchor_text_raw": "fire resistance", "source_href": null}], "note": "This rule reference belongs only to the 6th-tier augmented mythic effect."},
+        {"relationship_id": "mythic-spell-variant.fireball.augmentation-6th:uses_definition:rule.energy-immunity", "type": "uses_definition", "target": {"entity_type": "rule", "entity_id": "rule.energy-immunity", "name": "Energy Immunity"}, "status": "accepted", "evidence": [{"observation_id": "d20pfsrd:spell.fireball:d1e3b4fe", "source_field": "spell_raw.links_raw[13]", "evidence_kind": "hyperlink", "anchor_text_raw": "immunity", "source_href": "https://www.d20pfsrd.com/gamemastering/special-abilities/#TOC-Energy-Immunity-and-Vulnerability"}, {"observation_id": "aon:spell.fireball:9cc0a874", "source_field": "spell_raw.mythic_text_raw", "evidence_kind": "plain_text", "anchor_text_raw": "fire immunity", "source_href": null}], "note": "This rule reference belongs only to the 6th-tier augmented mythic effect."}
+      ]
+    }
+  ],
+  "publication": {"publisher": "Paizo", "book": "Mythic Adventures", "page": 94, "first_party_status": "confirmed"},
+  "relationships": [
+    {"relationship_id": "mythic-spell-variant.fireball:published_in:publication.mythic-adventures", "type": "published_in", "target": {"entity_type": "publication", "entity_id": "publication.mythic-adventures", "name": "Mythic Adventures"}, "status": "accepted", "evidence": [{"observation_id": "aon:spell.fireball:9cc0a874", "source_field": "spell_raw.links_raw[3]", "evidence_kind": "hyperlink", "anchor_text_raw": "Mythic Adventures pg. 94", "source_href": "http://paizo.com/products/btpy8ywe?Pathfinder-Roleplaying-Game-Mythic-Adventures"}], "note": "Publication belongs to the mythic variant rather than the Core base spell."}
+  ],
+  "provenance": [
+    {"field_path": "/rules_text/raw", "observation_id": "aon:spell.fireball:9cc0a874", "source_field": "spell_raw.mythic_text_raw", "decision": "copied", "note": "AoN selected by provenance; d20PFSRD independently agrees on the effect."},
+    {"field_path": "/augmentations/0", "observation_id": "aon:spell.fireball:9cc0a874", "source_field": "spell_raw.mythic_text_raw", "decision": "normalized", "note": "Augmented (6th) is separated from the base mythic effect without changing its raw wording."},
+    {"field_path": "/publication", "observation_id": "aon:spell.fireball:9cc0a874", "source_field": "spell_raw.supplemental_sources_raw[0]", "decision": "normalized", "note": "AoN attributes the variant to Mythic Adventures page 94."}
+  ],
+  "normalization": {"status": "validated", "normalizer_version": "manual-0.1.0", "warnings": [{"code": "MYTHIC_EFFECT_MODEL_DEFERRED", "field_path": "/rules_text", "message": "Damage, failed-save ignition, and area changes remain in rules text until reusable conditional effect and modification models are designed."}]}
+}

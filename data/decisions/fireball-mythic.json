@@ -1,0 +1,15 @@
+{
+  "$schema": "../../schemas/canonical-decision.schema.json", "schema_version": "0.1.0",
+  "decision_id": "canonical-decision:mythic-spell-variant.fireball:v0.1", "entity_id": "mythic-spell-variant.fireball", "canonical_record_path": "../variants/fireball-mythic.json",
+  "observation_ids": ["aon:spell.fireball:9cc0a874", "legacy_aon:spell.fireball:27064c30", "d20pfsrd:spell.fireball:d1e3b4fe"], "policy_id": "provenance-first-v0", "baseline_observation_id": "aon:spell.fireball:9cc0a874", "status": "accepted",
+  "field_decisions": [
+    {"canonical_path": "/rules_text/raw", "decision": "select_source", "selected_evidence": [{"observation_id": "aon:spell.fireball:9cc0a874", "source_field": "spell_raw.mythic_text_raw"}], "considered_observation_ids": ["aon:spell.fireball:9cc0a874", "legacy_aon:spell.fireball:27064c30", "d20pfsrd:spell.fireball:d1e3b4fe"], "rationale": "Legacy has no mythic section. AoN and d20PFSRD agree, but AoN has stronger provenance, identifies Mythic Adventures page 94, and retains the Core Rulebook 444 cross-reference."},
+    {"canonical_path": "/augmentations/0", "decision": "normalize", "selected_evidence": [{"observation_id": "aon:spell.fireball:9cc0a874", "source_field": "spell_raw.mythic_text_raw"}], "considered_observation_ids": ["aon:spell.fireball:9cc0a874", "legacy_aon:spell.fireball:27064c30", "d20pfsrd:spell.fireball:d1e3b4fe"], "rationale": "The explicitly labeled Augmented (6th) paragraph is retained within the mythic variant and normalized with minimum tier 6 and total cost of two mythic-power uses."},
+    {"canonical_path": "/publication", "decision": "normalize", "selected_evidence": [{"observation_id": "aon:spell.fireball:9cc0a874", "source_field": "spell_raw.supplemental_sources_raw[0]"}], "considered_observation_ids": ["aon:spell.fireball:9cc0a874", "legacy_aon:spell.fireball:27064c30", "d20pfsrd:spell.fireball:d1e3b4fe"], "rationale": "Mythic Adventures page 94 belongs to the variant rather than the Core base spell."}
+  ],
+  "relationship_decisions": [
+    {"relationship_id": "mythic-spell-variant.fireball:mythic_version_of:spell.fireball", "decision": "accept", "evidence": [{"observation_id": "aon:spell.fireball:9cc0a874", "source_field": "spell_raw.sections_raw[1].heading_raw"}], "considered_observation_ids": ["aon:spell.fireball:9cc0a874", "legacy_aon:spell.fireball:27064c30", "d20pfsrd:spell.fireball:d1e3b4fe"], "rationale": "The named Mythic Fireball subsection modifies Fireball and inherits its unchanged rules."},
+    {"relationship_id": "mythic-spell-variant.fireball:published_in:publication.mythic-adventures", "decision": "accept", "evidence": [{"observation_id": "aon:spell.fireball:9cc0a874", "source_field": "spell_raw.links_raw[3]"}], "considered_observation_ids": ["aon:spell.fireball:9cc0a874", "legacy_aon:spell.fireball:27064c30", "d20pfsrd:spell.fireball:d1e3b4fe"], "rationale": "AoN explicitly attributes the mythic subsection to Mythic Adventures page 94."}
+  ],
+  "unresolved_questions": ["What reusable structured modification model should represent the changed damage, failed-save ignition, and augmented area?"]
+}

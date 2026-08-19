@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/pf1/schemas/test-spell-set.schema.json",
+  "title": "PF1 Test Spell Set",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["test_set_version", "ruleset", "selection_scope", "smoke_test_ids", "spells"],
+  "properties": {
+    "$schema": {"type": "string"},
+    "test_set_version": {"type": "string"},
+    "ruleset": {"const": "Pathfinder First Edition"},
+    "selection_scope": {"type": "string", "minLength": 1},
+    "smoke_test_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^spell\\.[a-z0-9-]+$"}
+    },
+    "spells": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "name", "features_under_test"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^spell\\.[a-z0-9-]+$"},
+          "name": {"type": "string", "minLength": 1},
+          "features_under_test": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {"type": "string", "minLength": 1}
+          }
+        }
+      }
+    }
+  }
+}

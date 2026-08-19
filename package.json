@@ -1,0 +1,48 @@
+{
+  "name": "pf1-rules",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local, provenance-aware Pathfinder First Edition rules database",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "web": "tsx src/web/server.ts",
+    "web:dev": "tsx watch src/web/server.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "validate": "tsx src/cli.ts validate",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:deploy": "prisma migrate deploy",
+    "db:import": "tsx src/cli.ts import",
+    "db:setup": "prisma generate && prisma migrate deploy && tsx src/cli.ts import",
+    "db:rebuild": "prisma migrate reset --force && tsx src/cli.ts import",
+    "db:check": "tsx src/cli.ts check",
+    "db:stats": "tsx src/cli.ts stats",
+    "db:studio": "prisma studio",
+    "catalog:level-0": "tsx src/ingestion/level-zero-catalog.ts",
+    "ingest:level-0": "tsx src/ingestion/ingest-level-zero-batch.ts",
+    "verify": "pnpm validate && pnpm typecheck && pnpm db:check && pnpm test"
+  },
+  "dependencies": {
+    "@prisma/adapter-better-sqlite3": "7.9.1",
+    "@prisma/adapter-neon": "7.9.1",
+    "@prisma/client": "7.9.1",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "cheerio": "^1.2.0",
+    "dotenv": "17.4.2"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "7.6.13",
+    "@types/node": "24.13.3",
+    "prisma": "7.9.1",
+    "tsx": "4.23.12",
+    "typescript": "7.0.2",
+    "vitest": "3.2.7"
+  },
+  "packageManager": "pnpm@11.22.0"
+}

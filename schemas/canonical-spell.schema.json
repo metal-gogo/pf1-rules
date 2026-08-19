@@ -1,0 +1,449 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.invalid/pf1/schemas/canonical-spell.schema.json",
+  "title": "PF1 Canonical Spell",
+  "description": "A normalized spell record for deterministic filters, search, and later evidence-grounded LLM use.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "spell_id",
+    "ruleset",
+    "name",
+    "aliases",
+    "classification",
+    "levels",
+    "casting",
+    "effect",
+    "description",
+    "publication",
+    "rules_inheritance",
+    "relationships",
+    "provenance",
+    "normalization"
+  ],
+  "properties": {
+    "$schema": {"type": "string"},
+    "schema_version": {"const": "0.1.0"},
+    "spell_id": {"type": "string", "pattern": "^spell\\.[a-z0-9-]+$"},
+    "ruleset": {"const": "Pathfinder First Edition"},
+    "name": {"type": "string", "minLength": 1},
+    "aliases": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["school", "subschool", "descriptors"],
+      "properties": {
+        "school": {"type": ["string", "null"]},
+        "subschool": {"type": ["string", "null"]},
+        "descriptors": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string"}
+        },
+        "raw": {"type": ["string", "null"]}
+      }
+    },
+    "levels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["spell_list_id", "list_kind", "list_name", "level", "scope", "raw"],
+        "properties": {
+          "spell_list_id": {"type": "string", "pattern": "^spell-list\\.[a-z0-9.-]+$"},
+          "list_kind": {"enum": ["class", "formulae", "domain", "elemental_school", "bloodline", "mystery", "other"]},
+          "list_name": {"type": "string", "minLength": 1},
+          "level": {"type": "integer", "minimum": 0, "maximum": 9},
+          "scope": {"enum": ["core", "later_first_party", "third_party", "unknown"]},
+          "raw": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "casting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["time", "components", "conditional_components"],
+      "properties": {
+        "time": {"$ref": "#/$defs/castingTime"},
+        "components": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/component"}
+        },
+        "conditional_components": {
+          "type": "array",
+          "description": "Components required only when a stated casting choice or outcome applies.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["component", "condition_raw", "condition_search_text"],
+            "properties": {
+              "component": {"$ref": "#/$defs/component"},
+              "condition_raw": {"type": "string", "minLength": 1},
+              "condition_search_text": {"type": "string", "minLength": 1}
+            }
+          }
+        },
+        "components_raw": {"type": ["string", "null"]}
+      }
+    },
+    "effect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["range", "delivery", "targeting", "area", "duration", "saving_throw", "spell_resistance"],
+      "properties": {
+        "range": {"$ref": "#/$defs/range"},
+        "delivery": {
+          "type": "object",
+          "description": "Preserves the chosen source header structure while recording how its Target, Effect, and Area alternatives are resolved.",
+          "additionalProperties": false,
+          "required": ["resolution", "entries"],
+          "properties": {
+            "resolution": {"enum": ["fixed", "determined_by_selected_effect", "see_text", "none", "unknown"]},
+            "entries": {
+              "type": "array",
+              "items": {"$ref": "#/$defs/deliveryField"}
+            }
+          }
+        },
+        "targeting": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "#/$defs/targeting"}
+          ]
+        },
+        "area": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "#/$defs/area"}
+          ]
+        },
+        "duration": {"$ref": "#/$defs/duration"},
+        "saving_throw": {"$ref": "#/$defs/savingThrow"},
+        "spell_resistance": {"$ref": "#/$defs/spellResistance"}
+      }
+    },
+    "description": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["raw", "search_text"],
+      "properties": {
+        "raw": {"type": "string"},
+        "search_text": {"type": "string"},
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["heading", "body"],
+            "properties": {
+              "heading": {"type": ["string", "null"]},
+              "body": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "publication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["publisher", "book", "page", "first_party_status"],
+      "properties": {
+        "publisher": {"type": ["string", "null"]},
+        "book": {"type": ["string", "null"]},
+        "page": {"type": ["integer", "null"], "minimum": 1},
+        "first_party_status": {"enum": ["confirmed", "suspected", "third_party", "unknown"]},
+        "pfs_status": {"enum": ["legal", "limited", "not_legal", "unknown", "not_applicable"]}
+        ,
+        "supplemental": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["section", "publisher", "book", "page"],
+            "properties": {
+              "section": {"type": "string", "minLength": 1},
+              "publisher": {"type": ["string", "null"]},
+              "book": {"type": ["string", "null"]},
+              "page": {"type": ["integer", "null"], "minimum": 1}
+            }
+          }
+        }
+      }
+    },
+    "rules_inheritance": {
+      "type": "array",
+      "description": "Explicit canonical dependency chains for spells whose rules say they function like another spell. Empty for self-contained spells.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["from_spell_id", "relationship", "basis", "inherited_paths", "overrides", "resolution_status", "note"],
+        "properties": {
+          "from_spell_id": {"type": "string", "pattern": "^spell\\.[a-z0-9-]+$"},
+          "relationship": {"const": "functions_like"},
+          "basis": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["observation_id", "source_field", "raw"],
+            "properties": {
+              "observation_id": {"type": "string"},
+              "source_field": {"type": "string", "minLength": 1},
+              "raw": {"type": "string", "minLength": 1}
+            }
+          },
+          "inherited_paths": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^/"}},
+          "overrides": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["aspect", "source_field", "raw"],
+              "properties": {
+                "aspect": {"type": "string", "minLength": 1},
+                "source_field": {"type": "string", "minLength": 1},
+                "raw": {"type": "string", "minLength": 1}
+              }
+            }
+          },
+          "resolution_status": {"enum": ["resolved", "pending", "cycle_detected", "missing_parent"]},
+          "note": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "description": "Canonical semantic edges to other rules entities. These power local navigation independently of source URLs.",
+      "items": {"$ref": "#/$defs/relationship"}
+    },
+    "provenance": {
+      "type": "array",
+      "description": "Field-level evidence. field_path uses a JSON Pointer into this canonical record.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["field_path", "observation_id", "source_field", "decision"],
+        "properties": {
+          "field_path": {"type": "string", "pattern": "^/"},
+          "observation_id": {"type": "string"},
+          "source_field": {"type": "string"},
+          "raw_value_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+          "decision": {"enum": ["copied", "normalized", "combined", "manually_resolved"]},
+          "note": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "normalization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "normalizer_version", "warnings"],
+      "properties": {
+        "status": {"enum": ["draft", "validated", "needs_review", "rejected"]},
+        "normalizer_version": {"type": "string", "minLength": 1},
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["code", "message"],
+            "properties": {
+              "code": {"type": "string", "pattern": "^[A-Z0-9_]+$"},
+              "field_path": {"type": ["string", "null"]},
+              "message": {"type": "string", "minLength": 1}
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "castingTime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "amount", "unit", "raw"],
+      "properties": {
+        "kind": {"enum": ["action", "timed", "special", "unknown"]},
+        "amount": {"type": ["number", "null"], "minimum": 0},
+        "unit": {"enum": ["free_action", "immediate_action", "swift_action", "standard_action", "full_round_action", "round", "minute", "hour", "special", "unknown"]},
+        "raw": {"type": ["string", "null"]}
+      }
+    },
+    "component": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "details", "cost_gp", "raw"],
+      "properties": {
+        "type": {"enum": ["verbal", "somatic", "material", "focus", "divine_focus", "other"]},
+        "details": {"type": ["string", "null"]},
+        "cost_gp": {"type": ["number", "null"], "minimum": 0},
+        "raw": {"type": ["string", "null"]}
+      }
+    },
+    "deliveryField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label_raw", "value_raw", "kinds"],
+      "properties": {
+        "label_raw": {"type": "string", "minLength": 1},
+        "value_raw": {"type": ["string", "null"]},
+        "kinds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"enum": ["target", "effect", "area", "unknown"]}
+        }
+      }
+    },
+    "range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["category", "formula", "raw"],
+      "properties": {
+        "category": {"enum": ["personal", "touch", "close", "medium", "long", "unlimited", "distance", "special", "unknown"]},
+        "formula": {"type": ["string", "null"]},
+        "raw": {"type": ["string", "null"]}
+      }
+    },
+    "area": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["propagation", "geometry", "geometry_basis", "dimensions", "shapeable", "raw"],
+      "properties": {
+        "propagation": {"enum": ["burst", "emanation", "spread", "none", "other", "unknown"]},
+        "geometry": {"enum": ["sphere", "cone", "cylinder", "line", "cube", "wall", "custom", "other", "unknown"]},
+        "geometry_basis": {"enum": ["explicit", "derived_from_rules", "unknown"]},
+        "dimensions": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["radius_ft", "length_ft", "width_ft", "height_ft"],
+          "properties": {
+            "radius_ft": {"type": ["number", "null"], "minimum": 0},
+            "length_ft": {"type": ["number", "null"], "minimum": 0},
+            "width_ft": {"type": ["number", "null"], "minimum": 0},
+            "height_ft": {"type": ["number", "null"], "minimum": 0}
+          }
+        },
+        "shapeable": {"type": ["boolean", "null"]},
+        "raw": {"type": "string", "minLength": 1}
+      }
+    },
+    "targeting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "subject_kind", "selection", "count", "separation", "raw"],
+      "properties": {
+        "mode": {"enum": ["single", "multiple", "self", "other", "unknown"]},
+        "subject_kind": {"enum": ["creature", "object", "creature_or_object", "willing_creature", "other", "unknown"]},
+        "selection": {"enum": ["selected", "all_matching", "self", "other", "unknown"]},
+        "count": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "fixed", "formula", "raw"],
+          "properties": {
+            "kind": {"enum": ["fixed", "per_level", "formula", "unlimited", "other", "unknown"]},
+            "fixed": {"type": ["integer", "null"], "minimum": 0},
+            "formula": {"type": ["string", "null"]},
+            "raw": {"type": ["string", "null"]}
+          }
+        },
+        "separation": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["relation", "maximum_ft", "raw"],
+              "properties": {
+                "relation": {"enum": ["pairwise", "from_origin", "from_primary_target", "other", "unknown"]},
+                "maximum_ft": {"type": ["number", "null"], "minimum": 0},
+                "raw": {"type": "string", "minLength": 1}
+              }
+            }
+          ]
+        },
+        "raw": {"type": "string", "minLength": 1}
+      }
+    },
+    "duration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "formula", "dismissible", "concentration", "raw"],
+      "properties": {
+        "kind": {"enum": ["instantaneous", "timed", "permanent", "concentration", "discharge", "special", "unknown"]},
+        "formula": {"type": ["string", "null"]},
+        "dismissible": {"type": ["boolean", "null"]},
+        "concentration": {"type": ["boolean", "null"]},
+        "raw": {"type": ["string", "null"]}
+      }
+    },
+    "savingThrow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["types", "outcome", "harmless", "object", "conditional", "raw"],
+      "properties": {
+        "types": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"enum": ["fortitude", "reflex", "will", "none", "other", "unknown"]}
+        },
+        "outcome": {"type": ["string", "null"]},
+        "harmless": {"type": ["boolean", "null"]},
+        "object": {"type": ["boolean", "null"]},
+        "conditional": {"type": ["boolean", "null"]},
+        "raw": {"type": ["string", "null"]}
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relationship_id", "type", "target", "status", "evidence", "note"],
+      "properties": {
+        "relationship_id": {"type": "string", "pattern": "^[a-z0-9.-]+:[a-z_]+:[a-z0-9.-]+$"},
+        "type": {"enum": ["references", "functions_like", "mass_variant_of", "counterpart_of", "member_of_family", "has_mythic_variant", "counteracts", "dispels", "modifies", "requires", "has_school", "has_subschool", "has_descriptor", "published_in", "uses_action", "uses_definition", "appears_on_spell_list", "illustrated_by", "clarified_by", "unknown"]},
+        "target": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["entity_type", "entity_id", "name"],
+          "properties": {
+            "entity_type": {"enum": ["spell", "mythic_spell_variant", "spell_family", "rule", "condition", "feat", "class_feature", "monster", "item", "magic_school", "subschool", "descriptor", "spell_list", "action", "publication", "visual_aid", "unknown"]},
+            "entity_id": {"type": ["string", "null"]},
+            "name": {"type": "string", "minLength": 1}
+          }
+        },
+        "status": {"enum": ["accepted", "pending_review", "rejected"]},
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["observation_id", "source_field", "evidence_kind", "anchor_text_raw", "source_href"],
+            "properties": {
+              "observation_id": {"type": "string"},
+              "source_field": {"type": "string"},
+              "evidence_kind": {"enum": ["hyperlink", "plain_text", "manual_verification"]},
+              "anchor_text_raw": {"type": ["string", "null"]},
+              "source_href": {"type": ["string", "null"]}
+            }
+          }
+        },
+        "note": {"type": ["string", "null"]}
+      }
+    },
+    "spellResistance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["applies", "harmless", "object", "conditional", "raw"],
+      "properties": {
+        "applies": {"type": ["boolean", "null"]},
+        "harmless": {"type": ["boolean", "null"]},
+        "object": {"type": ["boolean", "null"]},
+        "conditional": {"type": ["boolean", "null"]},
+        "raw": {"type": ["string", "null"]}
+      }
+    }
+  }
+}

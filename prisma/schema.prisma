@@ -1,0 +1,503 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+// Local phase: SQLite. At the Neon transition this becomes `postgresql`, and
+// a new PostgreSQL migration baseline is generated from the same data model.
+datasource db {
+  provider = "sqlite"
+}
+
+model Entity {
+  id         String @id @map("entity_id")
+  type       String @map("entity_type")
+  name       String
+  status     String
+  aliases    Json
+  notes      Json
+  registryId String @map("registry_id")
+
+  canonicalSpell      CanonicalSpell?     @relation("CanonicalSpellEntity")
+  mythicSpellVariant  MythicSpellVariant? @relation("MythicVariantEntity")
+  spellLevels         SpellLevel[]
+  observations        SourceObservation[]
+  evidence            EntityEvidence[]
+  coverageChecks      CoverageCheck[]
+  canonicalDecisions  CanonicalDecision[]
+  targetLinks         SourceLink[]        @relation("SourceLinkTarget")
+  targetRelationships RuleRelationship[]  @relation("RelationshipTarget")
+
+  @@index([type, name])
+  @@map("entities")
+}
+
+model CanonicalSpell {
+  spellId             String  @id @map("spell_id")
+  ruleset             String
+  name                String
+  school              String
+  subschool           String?
+  classificationRaw   String? @map("classification_raw")
+  castingTimeKind     String  @map("casting_time_kind")
+  castingTimeAmount   Float?  @map("casting_time_amount")
+  castingTimeUnit     String  @map("casting_time_unit")
+  castingTimeRaw      String? @map("casting_time_raw")
+  componentsRaw       String? @map("components_raw")
+  rangeCategory       String  @map("range_category")
+  rangeFormula        String? @map("range_formula")
+  rangeRaw            String? @map("range_raw")
+  deliveryResolution  String  @map("delivery_resolution")
+  targeting           Json?
+  area                Json?
+  durationKind        String  @map("duration_kind")
+  durationFormula     String? @map("duration_formula")
+  durationRaw         String? @map("duration_raw")
+  savingThrow         Json    @map("saving_throw")
+  spellResistance     Json    @map("spell_resistance")
+  descriptionRaw      String  @map("description_raw")
+  searchText          String  @map("search_text")
+  publisher           String
+  publicationBook     String  @map("publication_book")
+  publicationPage     Int?    @map("publication_page")
+  firstPartyStatus    String  @map("first_party_status")
+  pfsStatus           String  @map("pfs_status")
+  normalizationStatus String  @map("normalization_status")
+  payload             Json
+
+  entity              Entity                    @relation("CanonicalSpellEntity", fields: [spellId], references: [id])
+  aliases             SpellAlias[]
+  descriptors         SpellDescriptor[]
+  levels              SpellLevel[]
+  components          SpellComponent[]
+  deliveryFields      SpellDeliveryField[]
+  descriptionSections SpellDescriptionSection[]
+  inheritance         SpellInheritance[]        @relation("InheritedSpell")
+  inheritedBy         SpellInheritance[]        @relation("SourceSpell")
+  mythicVariant       MythicSpellVariant?
+
+  @@index([school, name])
+  @@index([publicationBook, publicationPage])
+  @@map("canonical_spells")
+}
+
+model SpellAlias {
+  spellId String         @map("spell_id")
+  alias   String
+  spell   CanonicalSpell @relation(fields: [spellId], references: [spellId], onDelete: Cascade)
+
+  @@id([spellId, alias])
+  @@map("spell_aliases")
+}
+
+model SpellDescriptor {
+  spellId    String         @map("spell_id")
+  descriptor String
+  spell      CanonicalSpell @relation(fields: [spellId], references: [spellId], onDelete: Cascade)
+
+  @@id([spellId, descriptor])
+  @@index([descriptor, spellId])
+  @@map("spell_descriptors")
+}
+
+model SpellLevel {
+  spellId     String  @map("spell_id")
+  spellListId String  @map("spell_list_id")
+  listKind    String  @map("list_kind")
+  listName    String  @map("list_name")
+  spellLevel  Int     @map("spell_level")
+  scope       String
+  raw         String?
+
+  spell     CanonicalSpell @relation(fields: [spellId], references: [spellId], onDelete: Cascade)
+  spellList Entity         @relation(fields: [spellListId], references: [id])
+
+  @@id([spellId, spellListId])
+  @@index([spellListId, spellLevel, spellId])
+  @@index([listKind, spellLevel, spellId])
+  @@map("spell_levels")
+}
+
+model SpellComponent {
+  spellId             String         @map("spell_id")
+  componentScope      String         @map("component_scope")
+  componentIndex      Int            @map("component_index")
+  componentType       String         @map("component_type")
+  details             String?
+  costGp              Float?         @map("cost_gp")
+  raw                 String?
+  conditionRaw        String?        @map("condition_raw")
+  conditionSearchText String?        @map("condition_search_text")
+  spell               CanonicalSpell @relation(fields: [spellId], references: [spellId], onDelete: Cascade)
+
+  @@id([spellId, componentScope, componentIndex])
+  @@index([componentType, costGp, componentScope])
+  @@map("spell_components")
+}
+
+model SpellDeliveryField {
+  spellId    String         @map("spell_id")
+  fieldIndex Int            @map("field_index")
+  labelRaw   String         @map("label_raw")
+  valueRaw   String?        @map("value_raw")
+  kinds      Json
+  spell      CanonicalSpell @relation(fields: [spellId], references: [spellId], onDelete: Cascade)
+
+  @@id([spellId, fieldIndex])
+  @@map("spell_delivery_fields")
+}
+
+model SpellDescriptionSection {
+  spellId      String         @map("spell_id")
+  sectionIndex Int            @map("section_index")
+  heading      String
+  body         String
+  spell        CanonicalSpell @relation(fields: [spellId], references: [spellId], onDelete: Cascade)
+
+  @@id([spellId, sectionIndex])
+  @@map("spell_description_sections")
+}
+
+model SpellInheritance {
+  spellId          String  @map("spell_id")
+  inheritanceIndex Int     @map("inheritance_index")
+  fromSpellId      String  @map("from_spell_id")
+  relationship     String
+  basis            Json
+  inheritedPaths   Json    @map("inherited_paths")
+  overrides        Json
+  resolutionStatus String  @map("resolution_status")
+  note             String?
+
+  spell     CanonicalSpell @relation("InheritedSpell", fields: [spellId], references: [spellId], onDelete: Cascade)
+  fromSpell CanonicalSpell @relation("SourceSpell", fields: [fromSpellId], references: [spellId])
+
+  @@id([spellId, inheritanceIndex])
+  @@map("spell_inheritance")
+}
+
+model MythicSpellVariant {
+  id                  String @id @map("mythic_spell_variant_id")
+  baseSpellId         String @unique @map("base_spell_id")
+  ruleset             String
+  name                String
+  rulesCombination    String @map("rules_combination")
+  rulesRaw            String @map("rules_raw")
+  searchText          String @map("search_text")
+  publisher           String
+  publicationBook     String @map("publication_book")
+  publicationPage     Int?   @map("publication_page")
+  firstPartyStatus    String @map("first_party_status")
+  normalizationStatus String @map("normalization_status")
+  payload             Json
+
+  entity        Entity               @relation("MythicVariantEntity", fields: [id], references: [id])
+  baseSpell     CanonicalSpell       @relation(fields: [baseSpellId], references: [spellId])
+  augmentations MythicAugmentation[]
+
+  @@map("mythic_spell_variants")
+}
+
+model MythicAugmentation {
+  id                   String             @id @map("augmentation_id")
+  mythicSpellVariantId String             @map("mythic_spell_variant_id")
+  augmentationIndex    Int                @map("augmentation_index")
+  name                 String
+  minimumTier          Int?               @map("minimum_tier")
+  totalMythicPowerUses Int?               @map("total_mythic_power_uses")
+  raw                  String
+  mythicSpellVariant   MythicSpellVariant @relation(fields: [mythicSpellVariantId], references: [id], onDelete: Cascade)
+
+  @@unique([mythicSpellVariantId, augmentationIndex])
+  @@map("mythic_augmentations")
+}
+
+model RuleRelationship {
+  id               String  @id @map("relationship_id")
+  ownerEntityId    String  @map("owner_entity_id")
+  ownerKind        String  @map("owner_kind")
+  relationshipType String  @map("relationship_type")
+  targetEntityType String  @map("target_entity_type")
+  targetEntityId   String? @map("target_entity_id")
+  targetName       String  @map("target_name")
+  status           String
+  note             String?
+
+  target   Entity?                @relation("RelationshipTarget", fields: [targetEntityId], references: [id])
+  evidence RelationshipEvidence[]
+
+  @@index([ownerEntityId, relationshipType])
+  @@index([targetEntityId, relationshipType])
+  @@map("relationships")
+}
+
+model RelationshipEvidence {
+  relationshipId String  @map("relationship_id")
+  evidenceIndex  Int     @map("evidence_index")
+  observationId  String  @map("observation_id")
+  sourceField    String  @map("source_field")
+  evidenceKind   String  @map("evidence_kind")
+  anchorTextRaw  String? @map("anchor_text_raw")
+  sourceHref     String? @map("source_href")
+
+  relationship RuleRelationship  @relation(fields: [relationshipId], references: [id], onDelete: Cascade)
+  observation  SourceObservation @relation(fields: [observationId], references: [id])
+
+  @@id([relationshipId, evidenceIndex])
+  @@map("relationship_evidence")
+}
+
+model SourceObservation {
+  id                 String   @id @map("observation_id")
+  entityId           String   @map("entity_id")
+  entityType         String   @map("entity_type")
+  siteId             String   @map("site_id")
+  sourceUrl          String   @map("source_url")
+  firstPartyStatus   String?  @map("first_party_status")
+  retrievedAt        DateTime @map("retrieved_at")
+  httpStatus         Int      @map("http_status")
+  contentSha256      String   @map("content_sha256")
+  rawArtifactPath    String   @map("raw_artifact_path")
+  parserName         String   @map("parser_name")
+  parserVersion      String   @map("parser_version")
+  pageTitleRaw       String?  @map("page_title_raw")
+  nameRaw            String   @map("name_raw")
+  schoolRaw          String?  @map("school_raw")
+  levelsRaw          String?  @map("levels_raw")
+  domainsRaw         String?  @map("domains_raw")
+  castingTimeRaw     String?  @map("casting_time_raw")
+  componentsRaw      String?  @map("components_raw")
+  rangeRaw           String?  @map("range_raw")
+  durationRaw        String?  @map("duration_raw")
+  savingThrowRaw     String?  @map("saving_throw_raw")
+  spellResistanceRaw String?  @map("spell_resistance_raw")
+  descriptionRaw     String   @map("description_raw")
+  mythicTextRaw      String?  @map("mythic_text_raw")
+  sourceBookRaw      String?  @map("source_book_raw")
+  sourcePageRaw      String?  @map("source_page_raw")
+  pfsStatusRaw       String?  @map("pfs_status_raw")
+  payload            Json
+
+  entity               Entity                 @relation(fields: [entityId], references: [id])
+  links                SourceLink[]
+  references           SourceReference[]
+  sections             SourceSection[]
+  deliveryFields       SourceDeliveryField[]
+  entityEvidence       EntityEvidence[]
+  relationshipEvidence RelationshipEvidence[]
+  recordProvenance     RecordProvenance[]
+  baselineForDecisions CanonicalDecision[]
+
+  @@unique([siteId, entityId, contentSha256])
+  @@index([entityId, siteId])
+  @@index([contentSha256])
+  @@map("source_observations")
+}
+
+model SourceLink {
+  observationId        String  @map("observation_id")
+  occurrenceIndex      Int     @map("occurrence_index")
+  anchorTextRaw        String  @map("anchor_text_raw")
+  hrefRaw              String? @map("href_raw")
+  hrefResolved         String? @map("href_resolved")
+  sourceField          String  @map("source_field")
+  contextRaw           String? @map("context_raw")
+  roleHint             String? @map("role_hint")
+  targetEntityTypeHint String? @map("target_entity_type_hint")
+  targetEntityIdHint   String? @map("target_entity_id_hint")
+
+  observation SourceObservation @relation(fields: [observationId], references: [id], onDelete: Cascade)
+  target      Entity?           @relation("SourceLinkTarget", fields: [targetEntityIdHint], references: [id])
+
+  @@id([observationId, occurrenceIndex])
+  @@index([targetEntityIdHint])
+  @@index([hrefResolved])
+  @@map("source_links")
+}
+
+model SourceReference {
+  observationId    String            @map("observation_id")
+  occurrenceIndex  Int               @map("occurrence_index")
+  anchorTextRaw    String            @map("anchor_text_raw")
+  hrefRaw          String?           @map("href_raw")
+  evidenceKind     String            @map("evidence_kind")
+  sourceField      String            @map("source_field")
+  contextRaw       String?           @map("context_raw")
+  targetEntityType String?           @map("target_entity_type")
+  targetNameHint   String?           @map("target_name_hint")
+  relationshipHint String?           @map("relationship_hint")
+  observation      SourceObservation @relation(fields: [observationId], references: [id], onDelete: Cascade)
+
+  @@id([observationId, occurrenceIndex])
+  @@map("source_references")
+}
+
+model SourceSection {
+  observationId String            @map("observation_id")
+  sectionIndex  Int               @map("section_index")
+  headingRaw    String            @map("heading_raw")
+  bodyRaw       String            @map("body_raw")
+  observation   SourceObservation @relation(fields: [observationId], references: [id], onDelete: Cascade)
+
+  @@id([observationId, sectionIndex])
+  @@map("source_sections")
+}
+
+model SourceDeliveryField {
+  observationId String            @map("observation_id")
+  fieldIndex    Int               @map("field_index")
+  labelRaw      String            @map("label_raw")
+  valueRaw      String?           @map("value_raw")
+  kinds         Json
+  observation   SourceObservation @relation(fields: [observationId], references: [id], onDelete: Cascade)
+
+  @@id([observationId, fieldIndex])
+  @@map("source_delivery_fields")
+}
+
+model EntityEvidence {
+  entityId      String  @map("entity_id")
+  evidenceIndex Int     @map("evidence_index")
+  observationId String  @map("observation_id")
+  sourceField   String  @map("source_field")
+  anchorTextRaw String? @map("anchor_text_raw")
+  sourceHref    String? @map("source_href")
+
+  entity      Entity            @relation(fields: [entityId], references: [id], onDelete: Cascade)
+  observation SourceObservation @relation(fields: [observationId], references: [id])
+
+  @@id([entityId, evidenceIndex])
+  @@map("entity_evidence")
+}
+
+model CoverageCheck {
+  id              String   @id @map("coverage_check_id")
+  entityId        String   @map("entity_id")
+  siteId          String   @map("site_id")
+  sourceUrl       String   @map("source_url")
+  retrievedAt     DateTime @map("retrieved_at")
+  contentSha256   String   @map("content_sha256")
+  rawArtifactPath String   @map("raw_artifact_path")
+  method          String
+  query           String
+  caseSensitive   Boolean  @map("case_sensitive")
+  scopeRaw        String   @map("scope_raw")
+  resultStatus    String   @map("result_status")
+  matchCount      Int      @map("match_count")
+  note            String?
+  payload         Json
+  entity          Entity   @relation(fields: [entityId], references: [id])
+
+  @@index([entityId, siteId])
+  @@map("coverage_checks")
+}
+
+model RecordProvenance {
+  ownerEntityId   String            @map("owner_entity_id")
+  provenanceIndex Int               @map("provenance_index")
+  fieldPath       String            @map("field_path")
+  observationId   String            @map("observation_id")
+  sourceField     String            @map("source_field")
+  rawValueSha256  String?           @map("raw_value_sha256")
+  decision        String
+  note            String?
+  observation     SourceObservation @relation(fields: [observationId], references: [id])
+
+  @@id([ownerEntityId, provenanceIndex])
+  @@index([observationId])
+  @@map("record_provenance")
+}
+
+model NormalizationWarning {
+  ownerEntityId String  @map("owner_entity_id")
+  warningIndex  Int     @map("warning_index")
+  code          String
+  fieldPath     String? @map("field_path")
+  message       String
+
+  @@id([ownerEntityId, warningIndex])
+  @@index([code, ownerEntityId])
+  @@map("normalization_warnings")
+}
+
+model ImportRun {
+  id              Int       @id @default(autoincrement()) @map("import_run_id")
+  startedAt       DateTime  @map("started_at")
+  completedAt     DateTime? @map("completed_at")
+  status          String
+  packageRoot     String    @map("package_root")
+  importerVersion String    @map("importer_version")
+  statistics      Json?
+  errorMessage    String?   @map("error_message")
+
+  @@map("import_runs")
+}
+
+model CanonicalDecision {
+  id                    String @id @map("decision_id")
+  entityId              String @map("entity_id")
+  canonicalRecordPath   String @map("canonical_record_path")
+  policyId              String @map("policy_id")
+  baselineObservationId String @map("baseline_observation_id")
+  status                String
+  unresolvedQuestions   Json   @map("unresolved_questions")
+  payload               Json
+
+  entity              Entity                     @relation(fields: [entityId], references: [id])
+  baselineObservation SourceObservation          @relation(fields: [baselineObservationId], references: [id])
+  fieldItems          DecisionFieldItem[]
+  relationshipItems   DecisionRelationshipItem[]
+
+  @@map("canonical_decisions")
+}
+
+model DecisionFieldItem {
+  decisionId               String            @map("decision_id")
+  itemIndex                Int               @map("item_index")
+  canonicalPath            String            @map("canonical_path")
+  decision                 String
+  rationale                String
+  selectedEvidence         Json              @map("selected_evidence")
+  consideredObservationIds Json              @map("considered_observation_ids")
+  canonicalDecision        CanonicalDecision @relation(fields: [decisionId], references: [id], onDelete: Cascade)
+
+  @@id([decisionId, itemIndex])
+  @@map("decision_field_items")
+}
+
+model DecisionRelationshipItem {
+  decisionId               String            @map("decision_id")
+  itemIndex                Int               @map("item_index")
+  relationshipId           String            @map("relationship_id")
+  decision                 String
+  rationale                String
+  evidence                 Json
+  consideredObservationIds Json              @map("considered_observation_ids")
+  canonicalDecision        CanonicalDecision @relation(fields: [decisionId], references: [id], onDelete: Cascade)
+
+  @@id([decisionId, itemIndex])
+  @@map("decision_relationship_items")
+}
+
+model IngestionQueueItem {
+  id                 Int      @id @default(autoincrement()) @map("queue_id")
+  entityId           String?  @map("entity_id")
+  entityName         String   @map("entity_name")
+  siteId             String   @map("site_id")
+  sourceUrl          String?  @map("source_url")
+  catalogId          String   @map("catalog_id")
+  catalogLevel       Int      @map("catalog_level")
+  batchNumber        Int      @map("batch_number")
+  catalogMemberships Json     @map("catalog_memberships")
+  status             String
+  priority           Int      @default(100)
+  attempts           Int      @default(0)
+  issueKind          String?  @map("issue_kind")
+  lastError          String?  @map("last_error")
+  updatedAt          DateTime @map("updated_at")
+
+  @@unique([entityName, siteId])
+  @@index([catalogId, catalogLevel, batchNumber, priority])
+  @@index([status, priority, entityName])
+  @@map("ingestion_queue")
+}

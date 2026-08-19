@@ -1,0 +1,148 @@
+{
+  "$schema": "../../schemas/canonical-decision.schema.json",
+  "schema_version": "0.1.0",
+  "decision_id": "canonical-decision:spell.light:v0.1",
+  "entity_id": "spell.light",
+  "canonical_record_path": "../canonical/light.json",
+  "observation_ids": [
+    "aon:spell.light:647bc632",
+    "legacy_aon:spell.light:60c4a5ff",
+    "d20pfsrd:spell.light:19012c89"
+  ],
+  "policy_id": "provenance-first-v0",
+  "baseline_observation_id": "aon:spell.light:647bc632",
+  "status": "accepted",
+  "field_decisions": [
+    {
+      "canonical_path": "/publication/page",
+      "decision": "select_source",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.light:647bc632",
+          "source_field": "spell_raw.source_page_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.light:647bc632",
+        "legacy_aon:spell.light:60c4a5ff",
+        "d20pfsrd:spell.light:19012c89"
+      ],
+      "rationale": "AoN is the only inspected source that explicitly supplies the printed page number."
+    },
+    {
+      "canonical_path": "/levels",
+      "decision": "select_source",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.light:647bc632",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.light:647bc632",
+        "legacy_aon:spell.light:60c4a5ff",
+        "d20pfsrd:spell.light:19012c89"
+      ],
+      "rationale": "AoN has the strongest entity-level provenance and supplies the broad compiled first-party spell-list record. Individual later-list publication origins can be enriched separately without excluding the accepted list entries."
+    },
+    {
+      "canonical_path": "/description/raw",
+      "decision": "select_source",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.light:647bc632",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.light:647bc632",
+        "legacy_aon:spell.light:60c4a5ff",
+        "d20pfsrd:spell.light:19012c89"
+      ],
+      "rationale": "Under provenance-first-v0, AoN wording is canonical by default. The Legacy PRD and d20PFSRD variant remains preserved and can be selected later through an explicit case-by-case override if it is judged materially preferable."
+    }
+  ],
+  "relationship_decisions": [
+    {
+      "relationship_id": "spell.light:has_school:magic-school.evocation",
+      "decision": "accept",
+      "evidence": [
+        {"observation_id": "aon:spell.light:647bc632", "source_field": "spell_raw.links_raw[1]"},
+        {"observation_id": "d20pfsrd:spell.light:19012c89", "source_field": "spell_raw.links_raw[0]"}
+      ],
+      "considered_observation_ids": ["aon:spell.light:647bc632", "legacy_aon:spell.light:60c4a5ff", "d20pfsrd:spell.light:19012c89"],
+      "rationale": "All three stat blocks classify Light as evocation, and two sources supply direct definition links."
+    },
+    {
+      "relationship_id": "spell.light:has_descriptor:descriptor.light",
+      "decision": "accept",
+      "evidence": [
+        {"observation_id": "aon:spell.light:647bc632", "source_field": "spell_raw.links_raw[2]"},
+        {"observation_id": "legacy_aon:spell.light:60c4a5ff", "source_field": "spell_raw.descriptors_raw[0]"},
+        {"observation_id": "d20pfsrd:spell.light:19012c89", "source_field": "spell_raw.descriptors_raw[0]"}
+      ],
+      "considered_observation_ids": ["aon:spell.light:647bc632", "legacy_aon:spell.light:60c4a5ff", "d20pfsrd:spell.light:19012c89"],
+      "rationale": "All sources agree on the light descriptor; AoN also supplies a definition link."
+    },
+    {
+      "relationship_id": "spell.light:published_in:publication.pathfinder-rpg-core-rulebook",
+      "decision": "accept",
+      "evidence": [
+        {"observation_id": "aon:spell.light:647bc632", "source_field": "spell_raw.links_raw[0]"},
+        {"observation_id": "legacy_aon:spell.light:60c4a5ff", "source_field": "page.source_notice_raw"},
+        {"observation_id": "d20pfsrd:spell.light:19012c89", "source_field": "spell_raw.links_raw[14]"}
+      ],
+      "considered_observation_ids": ["aon:spell.light:647bc632", "legacy_aon:spell.light:60c4a5ff", "d20pfsrd:spell.light:19012c89"],
+      "rationale": "All sources identify the Core Rulebook; AoN additionally supplies page 304."
+    },
+    {
+      "relationship_id": "spell.light:uses_action:action.standard-action",
+      "decision": "accept",
+      "evidence": [
+        {"observation_id": "aon:spell.light:647bc632", "source_field": "spell_raw.casting_time_raw"},
+        {"observation_id": "legacy_aon:spell.light:60c4a5ff", "source_field": "spell_raw.casting_time_raw"},
+        {"observation_id": "d20pfsrd:spell.light:19012c89", "source_field": "spell_raw.links_raw[12]"}
+      ],
+      "considered_observation_ids": ["aon:spell.light:647bc632", "legacy_aon:spell.light:60c4a5ff", "d20pfsrd:spell.light:19012c89"],
+      "rationale": "All sources agree on the casting time; d20PFSRD supplies a direct action-definition link."
+    },
+    {
+      "relationship_id": "spell.light:uses_definition:rule.spell-resistance",
+      "decision": "accept",
+      "evidence": [
+        {"observation_id": "aon:spell.light:647bc632", "source_field": "spell_raw.spell_resistance_raw"},
+        {"observation_id": "legacy_aon:spell.light:60c4a5ff", "source_field": "spell_raw.links_raw[0]"},
+        {"observation_id": "d20pfsrd:spell.light:19012c89", "source_field": "spell_raw.spell_resistance_raw"}
+      ],
+      "considered_observation_ids": ["aon:spell.light:647bc632", "legacy_aon:spell.light:60c4a5ff", "d20pfsrd:spell.light:19012c89"],
+      "rationale": "Spell Resistance is a structured field in every source; the Legacy PRD provides its glossary link."
+    },
+    {
+      "relationship_id": "spell.light:references:spell.permanency",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.light:647bc632",
+          "source_field": "spell_raw.references_raw[0]"
+        },
+        {
+          "observation_id": "legacy_aon:spell.light:60c4a5ff",
+          "source_field": "spell_raw.references_raw[0]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.light:19012c89",
+          "source_field": "spell_raw.references_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.light:647bc632",
+        "legacy_aon:spell.light:60c4a5ff",
+        "d20pfsrd:spell.light:19012c89"
+      ],
+      "rationale": "All three descriptions explicitly reference Permanency; two sources also provide direct hyperlinks. The canonical product should expose this as an offline semantic link to spell.permanency."
+    }
+  ],
+  "unresolved_questions": [
+    "Which later first-party publications grant each additional spell-list entry shown by AoN and d20PFSRD?"
+  ]
+}

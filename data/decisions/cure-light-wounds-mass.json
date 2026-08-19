@@ -1,0 +1,55 @@
+{
+  "$schema": "../../schemas/canonical-decision.schema.json",
+  "schema_version": "0.1.0",
+  "decision_id": "canonical-decision:spell.cure-light-wounds-mass:v0.1",
+  "entity_id": "spell.cure-light-wounds-mass",
+  "canonical_record_path": "../canonical/cure-light-wounds-mass.json",
+  "observation_ids": ["aon:spell.cure-light-wounds-mass:77b86185", "legacy_aon:spell.cure-light-wounds-mass:4d4fc230", "d20pfsrd:spell.cure-light-wounds-mass:d23904b8"],
+  "policy_id": "provenance-first-v0",
+  "baseline_observation_id": "aon:spell.cure-light-wounds-mass:77b86185",
+  "status": "accepted",
+  "field_decisions": [
+    {
+      "canonical_path": "/name", "decision": "select_source",
+      "selected_evidence": [{"observation_id": "aon:spell.cure-light-wounds-mass:77b86185", "source_field": "spell_raw.name_raw"}],
+      "considered_observation_ids": ["aon:spell.cure-light-wounds-mass:77b86185", "legacy_aon:spell.cure-light-wounds-mass:4d4fc230", "d20pfsrd:spell.cure-light-wounds-mass:d23904b8"],
+      "rationale": "Cure Light Wounds, Mass is an independently castable AoN catalog entity. Sharing a page with Cure Light Wounds elsewhere does not merge their canonical identities. Mass Cure Light Wounds is stored as a search alias."
+    },
+    {
+      "canonical_path": "/effect/targeting", "decision": "normalize",
+      "selected_evidence": [{"observation_id": "aon:spell.cure-light-wounds-mass:77b86185", "source_field": "spell_raw.delivery_fields_raw[0].value_raw"}],
+      "considered_observation_ids": ["aon:spell.cure-light-wounds-mass:77b86185", "legacy_aon:spell.cure-light-wounds-mass:4d4fc230", "d20pfsrd:spell.cure-light-wounds-mass:d23904b8"],
+      "rationale": "All sources agree: selected multiple targets, one creature per level, with a pairwise maximum separation of 30 feet."
+    },
+    {
+      "canonical_path": "/effect/area", "decision": "derived",
+      "selected_evidence": [{"observation_id": "aon:spell.cure-light-wounds-mass:77b86185", "source_field": "spell_raw.delivery_fields_raw[0].label_raw"}],
+      "considered_observation_ids": ["aon:spell.cure-light-wounds-mass:77b86185", "legacy_aon:spell.cure-light-wounds-mass:4d4fc230", "d20pfsrd:spell.cure-light-wounds-mass:d23904b8"],
+      "rationale": "Area is null because the stat block uses Target. The later prose phrase 'in its area' is preserved but does not convert the spell into an area effect."
+    }
+  ],
+  "relationship_decisions": [
+    {
+      "relationship_id": "spell.cure-light-wounds-mass:mass_variant_of:spell.cure-light-wounds", "decision": "accept",
+      "evidence": [
+        {"observation_id": "aon:spell.cure-light-wounds-mass:77b86185", "source_field": "spell_raw.name_raw"},
+        {"observation_id": "legacy_aon:spell.cure-light-wounds-mass:4d4fc230", "source_field": "page.breadcrumbs_raw"}
+      ],
+      "considered_observation_ids": ["aon:spell.cure-light-wounds-mass:77b86185", "legacy_aon:spell.cure-light-wounds-mass:4d4fc230", "d20pfsrd:spell.cure-light-wounds-mass:d23904b8"],
+      "rationale": "The relation supports related-spell navigation. It is deliberately non-inheriting because this mass spell contains a complete stat block and description."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds-mass:member_of_family:spell-family.cure-wounds", "decision": "accept",
+      "evidence": [
+        {"observation_id": "aon:spell.cure-light-wounds-mass:77b86185", "source_field": "spell_raw.references_raw[0]"},
+        {"observation_id": "d20pfsrd:spell.cure-light-wounds-mass:d23904b8", "source_field": "spell_raw.references_raw[0]"}
+      ],
+      "considered_observation_ids": ["aon:spell.cure-light-wounds-mass:77b86185", "legacy_aon:spell.cure-light-wounds-mass:4d4fc230", "d20pfsrd:spell.cure-light-wounds-mass:d23904b8"],
+      "rationale": "The descriptions explicitly say 'other cure spells.' Family membership is navigation metadata, not a rule dependency."
+    }
+  ],
+  "unresolved_questions": [
+    "How should conditional healing of living targets versus damage to undead be normalized after testing the cure and inflict families?",
+    "Should a future UI label the semantic relation as 'Mass version' while separately indicating that no rules inheritance is required?"
+  ]
+}
