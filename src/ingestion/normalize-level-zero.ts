@@ -412,7 +412,16 @@ export function generateCanonicalBundle(
       const targetName = targetType === "publication"
         ? link.anchorTextRaw.replace(/\s+pg\.?\s+\d+.*$/i, "")
         : link.anchorTextRaw;
-      if (targetType === "publication" && /^(?:source|book|product|here)$/i.test(targetName.trim())) continue;
+      const entityEvidence = {
+        observation_id: observation.observationId,
+        source_field: `spell_raw.links_raw[${index}]`,
+        anchor_text_raw: link.anchorTextRaw,
+        source_href: link.hrefResolved,
+      };
+      if (targetType === "publication" && /^(?:source|book|product|here)$/i.test(targetName.trim())) {
+        addEntity(link.targetEntityIdHint, targetType, targetName, entityEvidence);
+        continue;
+      }
       const sameAsBaselinePublication = targetType === "publication" &&
         publicationComparable(targetName) === publicationComparable(book);
       const targetId = sameAsBaselinePublication
@@ -421,12 +430,6 @@ export function generateCanonicalBundle(
           ? publicationId(targetName)
         : link.targetEntityIdHint;
       const canonicalTargetName = sameAsBaselinePublication ? book : targetName;
-      const entityEvidence = {
-        observation_id: observation.observationId,
-        source_field: `spell_raw.links_raw[${index}]`,
-        anchor_text_raw: link.anchorTextRaw,
-        source_href: link.hrefResolved,
-      };
       const evidence = {
         observation_id: observation.observationId,
         source_field: `spell_raw.links_raw[${index}]`,
