@@ -112,6 +112,13 @@ async function assertRobotsAllows(origin: string, targetPath: string): Promise<v
 }
 
 
+async function assertIngestionSourcesAllowed(): Promise<void> {
+  await assertRobotsAllows("https://www.aonprd.com", "/SpellDisplay.aspx");
+  await assertRobotsAllows("https://legacy.aonprd.com", "/indices/spelllists.html");
+  await assertRobotsAllows("https://www.d20pfsrd.com", "/magic/all-spells/");
+}
+
+
 function writeGeneratedJson(filename: string, value: unknown, allowUpdate = false): void {
   const content = `${JSON.stringify(value, null, 2)}\n`;
   fs.mkdirSync(path.dirname(filename), { recursive: true });
@@ -280,6 +287,7 @@ function observation(
 function coverageCheck(
   spell: ValidatedJson,
   legacyIndex: CapturedArtifact,
+  artifactScope: string,
 ): ValidatedJson {
   const query = `>${spell.name}</a>`;
   const lowerContent = legacyIndex.body.toLocaleLowerCase("en-US");
@@ -294,7 +302,7 @@ function coverageCheck(
   return {
     $schema: "../../schemas/source-coverage-check.schema.json",
     schema_version: "0.1.0",
-    coverage_check_id: `coverage:legacy_aon:${spell.spell_id}:${legacyIndex.content_sha256.slice(0, 8)}`,
+    coverage_check_id: `coverage:legacy_aon:${artifactScope}:${spell.spell_id}:${legacyIndex.content_sha256.slice(0, 8)}`,
     entity_id: spell.spell_id,
     source: { site_id: "legacy_aon", url: legacyIndex.url },
     retrieval: {
@@ -501,7 +509,7 @@ async function ingestSpell(
     } else {
       writeGeneratedJson(
         path.join(projectRoot, "data", "coverage", `${artifactScope}-${spellSlug}-legacy.json`),
-        coverageCheck(spell, legacyIndex),
+        coverageCheck(spell, legacyIndex, artifactScope),
       );
     }
 
@@ -540,12 +548,14 @@ async function ingestSpell(
 }
 
 
-export async function ingestSpellLevelBatch(level: number, batchNumber: number) {
+export async function ingestSpellLevelBatch(
+  level: number,
+  batchNumber: number,
+  assertSourcePolicy = true,
+) {
   if (!Number.isInteger(batchNumber) || batchNumber < 1) throw new Error("Batch number must be a positive integer.");
   const { artifactScope, manifestPath, registryId, registryPath } = levelPaths(level);
-  await assertRobotsAllows("https://www.aonprd.com", "/SpellDisplay.aspx");
-  await assertRobotsAllows("https://legacy.aonprd.com", "/indices/spelllists.html");
-  await assertRobotsAllows("https://www.d20pfsrd.com", "/magic/all-spells/");
+  if (assertSourcePolicy) await assertIngestionSourcesAllowed();
 
   const legacyIndex = await capture(
     legacyIndexUrl,
@@ -601,9 +611,7 @@ export async function ingestSpellLevelBatch(level: number, batchNumber: number) 
 
 export async function ingestDiscoveredDependencies() {
   const { manifestPath, registryId, registryPath } = levelPaths(0);
-  await assertRobotsAllows("https://www.aonprd.com", "/SpellDisplay.aspx");
-  await assertRobotsAllows("https://legacy.aonprd.com", "/indices/spelllists.html");
-  await assertRobotsAllows("https://www.d20pfsrd.com", "/magic/all-spells/");
+  await assertIngestionSourcesAllowed();
   const legacyIndex = await capture(
     legacyIndexUrl,
     path.join(projectRoot, "data", "raw", "level-zero", "legacy-spell-index.html"),
@@ -669,8 +677,9 @@ async function ingestAllSpellLevelBatches(level: number) {
   const manifest = loadJson(manifestPath);
   const batchCount = Math.max(0, ...manifest.spells.map((spell: ValidatedJson) => Number(spell.batch)));
   const reports = [];
+  await assertIngestionSourcesAllowed();
   for (let batch = 1; batch <= batchCount; batch += 1) {
-    reports.push(await ingestSpellLevelBatch(level, batch));
+    reports.push(await ingestSpellLevelBatch(level, batch, false));
   }
   return reports;
 }

@@ -310,14 +310,22 @@ export function validatePackage(): PackageStatistics {
     const record = loadJson(filename);
     assertValid(record.entity_type === "spell" ? observationValidator : entityObservationValidator, record, filename);
     verifyArtifact(record, filename, "observation_id");
+    if (observations.has(record.observation_id)) {
+      throw new Error(`Duplicate observation ID: ${record.observation_id}`);
+    }
     observations.set(record.observation_id, record);
   }
 
   const coveragePaths = directJsonFiles(path.join(projectRoot, "data", "coverage"));
+  const coverageIds = new Set<string>();
   for (const filename of coveragePaths) {
     const record = loadJson(filename);
     assertValid(coverageValidator, record, filename);
     verifyArtifact(record, filename, "coverage_check_id");
+    if (coverageIds.has(record.coverage_check_id)) {
+      throw new Error(`Duplicate coverage-check ID: ${record.coverage_check_id}`);
+    }
+    coverageIds.add(record.coverage_check_id);
     verifyCoverage(record, filename);
   }
 

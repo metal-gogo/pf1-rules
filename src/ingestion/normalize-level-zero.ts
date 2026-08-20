@@ -355,7 +355,10 @@ export function generateCanonicalBundle(
   const areaField = delivery.find((field) => field.kinds.includes("area"));
   const book = parsed.sourceBookRaw;
   if (!book) throw new NormalizationIssue("source", "missing-publication", "AoN did not expose a publication book.");
-  const page = parsed.sourcePageRaw ? Number.parseInt(parsed.sourcePageRaw, 10) : null;
+  const parsedPage = parsed.sourcePageRaw ? Number.parseInt(parsed.sourcePageRaw, 10) : null;
+  const page = parsedPage !== null && Number.isInteger(parsedPage) && parsedPage >= 1
+    ? parsedPage
+    : null;
 
   const relationshipMap = new Map<string, any>();
   const entityMap = new Map<string, GeneratedEntity>();
@@ -481,6 +484,13 @@ export function generateCanonicalBundle(
   addRelationship("uses_definition", "rule", "rule.spell-resistance", "Spell Resistance", baselineEvidence("spell_raw.spell_resistance_raw", parsed.spellResistanceRaw));
 
   const warnings: Array<{ code: string; field_path: string | null; message: string }> = [];
+  if (parsed.sourcePageRaw && page === null) {
+    warnings.push({
+      code: "INVALID_PUBLICATION_PAGE",
+      field_path: "/publication/page",
+      message: `AoN publication page ${JSON.stringify(parsed.sourcePageRaw)} is not a positive integer; the raw value remains in the observation and the canonical page is unknown.`,
+    });
+  }
   const comparisonFields: Array<[keyof ParsedSpellPage, string]> = [
     ["schoolRaw", "/classification"], ["levelsRaw", "/levels"], ["castingTimeRaw", "/casting/time"],
     ["componentsRaw", "/casting/components_raw"], ["rangeRaw", "/effect/range"],
