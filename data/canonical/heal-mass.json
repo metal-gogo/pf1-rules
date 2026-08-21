@@ -1,0 +1,611 @@
+{
+  "$schema": "../../schemas/canonical-spell.schema.json",
+  "schema_version": "0.1.0",
+  "spell_id": "spell.heal-mass",
+  "ruleset": "Pathfinder First Edition",
+  "name": "Heal, Mass",
+  "aliases": [],
+  "classification": {
+    "school": "conjuration",
+    "subschool": "healing",
+    "descriptors": [],
+    "raw": "conjuration (healing)"
+  },
+  "levels": [
+    {
+      "spell_list_id": "spell-list.cleric",
+      "list_kind": "class",
+      "list_name": "cleric",
+      "level": 9,
+      "scope": "core",
+      "raw": "cleric 9"
+    },
+    {
+      "spell_list_id": "spell-list.oracle",
+      "list_kind": "class",
+      "list_name": "oracle",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "oracle 9"
+    },
+    {
+      "spell_list_id": "spell-list.shaman",
+      "list_kind": "class",
+      "list_name": "shaman",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "shaman 9"
+    }
+  ],
+  "casting": {
+    "time": {
+      "kind": "action",
+      "amount": 1,
+      "unit": "standard_action",
+      "raw": "1 standard action"
+    },
+    "components": [
+      {
+        "type": "verbal",
+        "details": null,
+        "cost_gp": null,
+        "raw": "V"
+      },
+      {
+        "type": "somatic",
+        "details": null,
+        "cost_gp": null,
+        "raw": "S"
+      }
+    ],
+    "components_raw": "V, S",
+    "conditional_components": []
+  },
+  "effect": {
+    "range": {
+      "category": "close",
+      "formula": "close (25 ft. + 5 ft./2 levels)",
+      "raw": "close (25 ft. + 5 ft./2 levels)"
+    },
+    "delivery": {
+      "resolution": "fixed",
+      "entries": [
+        {
+          "label_raw": "Targets",
+          "value_raw": "one or more creatures, no two of which can be more than 30 ft. apart",
+          "kinds": [
+            "target"
+          ]
+        }
+      ]
+    },
+    "targeting": {
+      "mode": "multiple",
+      "subject_kind": "creature",
+      "selection": "selected",
+      "count": {
+        "kind": "other",
+        "fixed": null,
+        "formula": null,
+        "raw": "one or more creatures, no two of which can be more than 30 ft. apart"
+      },
+      "separation": null,
+      "raw": "one or more creatures, no two of which can be more than 30 ft. apart"
+    },
+    "area": null,
+    "duration": {
+      "kind": "instantaneous",
+      "formula": null,
+      "dismissible": null,
+      "concentration": null,
+      "raw": "instantaneous"
+    },
+    "saving_throw": {
+      "types": [
+        "will"
+      ],
+      "outcome": "Will negates (harmless)",
+      "harmless": true,
+      "object": null,
+      "conditional": null,
+      "raw": "Will negates (harmless)"
+    },
+    "spell_resistance": {
+      "applies": true,
+      "harmless": true,
+      "object": null,
+      "conditional": null,
+      "raw": "yes (harmless)"
+    }
+  },
+  "description": {
+    "raw": "This spell functions like heal, except as noted above. The maximum number of hit points restored to each creature is 250.",
+    "search_text": "\"this spell functions like heal, except as noted above. the maximum number of hit points restored to each creature is 250.\"",
+    "sections": []
+  },
+  "publication": {
+    "publisher": "Paizo",
+    "book": "PRPG Core Rulebook",
+    "page": 294,
+    "first_party_status": "confirmed",
+    "pfs_status": "legal",
+    "supplemental": []
+  },
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.heal",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.heal-mass:87a43380d4ca200c",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell functions like heal, except as noted above. The maximum number of hit points restored to each creature is 250."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/range",
+          "value": {
+            "category": "close",
+            "formula": "close (25 ft. + 5 ft./2 levels)",
+            "raw": "close (25 ft. + 5 ft./2 levels)"
+          },
+          "source_field": "spell_raw.range_raw",
+          "raw": "close (25 ft. + 5 ft./2 levels)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Targets",
+                "value_raw": "one or more creatures, no two of which can be more than 30 ft. apart",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Targets\",\"value_raw\":\"one or more creatures, no two of which can be more than 30 ft. apart\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "multiple",
+            "subject_kind": "creature",
+            "selection": "selected",
+            "count": {
+              "kind": "other",
+              "fixed": null,
+              "formula": null,
+              "raw": "one or more creatures, no two of which can be more than 30 ft. apart"
+            },
+            "separation": null,
+            "raw": "one or more creatures, no two of which can be more than 30 ft. apart"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Targets\",\"value_raw\":\"one or more creatures, no two of which can be more than 30 ft. apart\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions like heal, except as noted above. The maximum number of hit points restored to each creature is 250.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions like heal, except as noted above. The maximum number of hit points restored to each creature is 250.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
+  "relationships": [
+    {
+      "relationship_id": "spell.heal-mass:appears_on_spell_list:spell-list.cleric",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.cleric",
+        "name": "cleric Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.heal-mass:87a43380d4ca200c",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 9",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.heal-mass:appears_on_spell_list:spell-list.cleric-oracle",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.cleric-oracle",
+        "name": "cleric/oracle"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.heal-mass:bb28a4c32471d6f9",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric/oracle",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.heal-mass:appears_on_spell_list:spell-list.life",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.life",
+        "name": "life"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.heal-mass:bb28a4c32471d6f9",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "life",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/oracle/mysteries/paizo-oracle-mysteries/life/"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.heal-mass:appears_on_spell_list:spell-list.oracle",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.oracle",
+        "name": "oracle Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.heal-mass:87a43380d4ca200c",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "oracle 9",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.heal-mass:appears_on_spell_list:spell-list.shaman",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.shaman",
+        "name": "shaman"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.heal-mass:bb28a4c32471d6f9",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "shaman",
+          "source_href": "https://www.d20pfsrd.com/classes/hybrid-classes/shaman"
+        },
+        {
+          "observation_id": "aon:spell.heal-mass:87a43380d4ca200c",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "shaman 9",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.heal-mass:functions_like:spell.heal",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.heal",
+        "name": "Heal"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.heal-mass:87a43380d4ca200c",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "This spell functions like heal, except as noted above. The maximum number of hit points restored to each creature is 250.",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.heal-mass:has_school:magic-school.conjuration",
+      "type": "has_school",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.conjuration",
+        "name": "conjuration"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.heal-mass:87a43380d4ca200c",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "conjuration",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=2"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.heal-mass:bb28a4c32471d6f9",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "conjuration",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Conjuration"
+        },
+        {
+          "observation_id": "aon:spell.heal-mass:87a43380d4ca200c",
+          "source_field": "spell_raw.school_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "conjuration",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.heal-mass:has_subschool:subschool.healing",
+      "type": "has_subschool",
+      "target": {
+        "entity_type": "subschool",
+        "entity_id": "subschool.healing",
+        "name": "healing"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.heal-mass:87a43380d4ca200c",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "healing",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=17"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.heal-mass:bb28a4c32471d6f9",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "healing",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/healing-domain"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.heal-mass:published_in:publication.pathfinder-rpg-core-rulebook",
+      "type": "published_in",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.pathfinder-rpg-core-rulebook",
+        "name": "PRPG Core Rulebook"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.heal-mass:87a43380d4ca200c",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "PRPG Core Rulebook pg. 294",
+          "source_href": "http://paizo.com/pathfinderRPG/v5748btpy88yj"
+        },
+        {
+          "observation_id": "aon:spell.heal-mass:87a43380d4ca200c",
+          "source_field": "spell_raw.source_book_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "PRPG Core Rulebook pg. 294",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.heal-mass:references:spell.heal",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.heal",
+        "name": "heal"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.heal-mass:a9ed947172dbd4f4",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "heal",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/heal.html#heal"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.heal-mass:uses_action:action.standard-action",
+      "type": "uses_action",
+      "target": {
+        "entity_type": "action",
+        "entity_id": "action.standard-action",
+        "name": "1 standard action"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.heal-mass:87a43380d4ca200c",
+          "source_field": "spell_raw.casting_time_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1 standard action",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.heal-mass:uses_definition:rule.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.heal-mass:87a43380d4ca200c",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes (harmless)",
+          "source_href": null
+        }
+      ],
+      "note": null
+    }
+  ],
+  "provenance": [
+    {
+      "field_path": "/classification",
+      "observation_id": "aon:spell.heal-mass:87a43380d4ca200c",
+      "source_field": "spell_raw.school_raw",
+      "raw_value_sha256": "661a806ec58919bcb5984db9a2132e4795d2d0dbd213857f20f76d68c040a1b5",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels",
+      "observation_id": "aon:spell.heal-mass:87a43380d4ca200c",
+      "source_field": "spell_raw.levels_raw",
+      "raw_value_sha256": "d60f941099ffd2af53c735bf20d8fdae51c9d2acc8925d104073756f7ebe0ce4",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/casting",
+      "observation_id": "aon:spell.heal-mass:87a43380d4ca200c",
+      "source_field": "spell_raw.components_raw",
+      "raw_value_sha256": "0ebcffcf26580553bf0204796c5b0127a132e9efad783df958b08b240c9ee4d2",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/effect",
+      "observation_id": "aon:spell.heal-mass:87a43380d4ca200c",
+      "source_field": "spell_raw.delivery_fields_raw",
+      "raw_value_sha256": "146a8bffaf807d61b267210f4f4c327afa17d49b2574e885cc8e6a6d6db651a2",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description",
+      "observation_id": "aon:spell.heal-mass:87a43380d4ca200c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "4341341d11bdae451eafd2748dfaa1036f615e7098c75c427e63e47870c27c90",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/publication",
+      "observation_id": "aon:spell.heal-mass:87a43380d4ca200c",
+      "source_field": "spell_raw.source_book_raw",
+      "raw_value_sha256": "f6f167791a30ef6cf1fd10f22254e035156b6a25268c2734ab8ae9e69e08789a",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    }
+  ],
+  "normalization": {
+    "status": "validated",
+    "normalizer_version": "0.1.2-explicit-inheritance",
+    "warnings": [
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/time",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/time",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/components_raw",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/components_raw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/duration",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/duration",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/saving_throw",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/saving_throw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/spell_resistance",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/spell_resistance",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      }
+    ]
+  }
+}
