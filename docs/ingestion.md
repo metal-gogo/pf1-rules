@@ -21,6 +21,8 @@ pnpm catalog:level-5
 pnpm ingest:level-5:all
 pnpm catalog:level-6
 pnpm ingest:level-6:all
+pnpm catalog:level-7
+pnpm ingest:level-7:all
 pnpm ingest:dependencies
 pnpm ingest:linked-entities
 pnpm db:stats
@@ -39,6 +41,7 @@ pnpm verify
 - [Level-4 bulk ingestion result](../findings/22-level-four-bulk-ingestion.md)
 - [Level-5 bulk ingestion result](../findings/23-level-five-bulk-ingestion.md)
 - [Level-6 bulk ingestion result](../findings/24-level-six-bulk-ingestion.md)
+- [Level-7 bulk ingestion result](../findings/25-level-seven-bulk-ingestion.md)
 - [Source adapter contract](../findings/adapter-contract-v0.md)
 - [Source links and canonical decisions](../findings/02-source-links-and-canonical-decisions.md)
 - [Entry-link inventory](../findings/03-all-entry-links.md)

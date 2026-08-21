@@ -22,6 +22,7 @@
 - [Level-4 bulk ingestion](../findings/22-level-four-bulk-ingestion.md)
 - [Level-5 bulk ingestion](../findings/23-level-five-bulk-ingestion.md)
 - [Level-6 bulk ingestion](../findings/24-level-six-bulk-ingestion.md)
+- [Level-7 bulk ingestion](../findings/25-level-seven-bulk-ingestion.md)
 
 ## Cross-cutting decisions
 
