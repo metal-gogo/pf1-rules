@@ -23,8 +23,307 @@ dd { margin-block-end: .65rem; }
 .skip-link:focus { left: 1rem; top: 1rem; background: Canvas; padding: .5rem; z-index: 1; }
 .muted { color: GrayText; }
 .notice { border: 1px solid; padding: .75rem; }
+.class-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem; list-style: none; padding: 0; }
+.class-grid li { border: 1px solid; padding: 1rem; }
+.class-grid a { display: block; font-size: 1.15rem; font-weight: 700; }
+.class-grid p { margin-block: .25rem 0; }
+.sticky-spell-controls { background: Canvas; max-height: calc(100vh - 1rem); overflow-y: auto; padding-block: .5rem; position: sticky; top: 0; z-index: 2; }
+.sticky-spell-controls h1 { margin-block: 0 .5rem; }
+.spell-filters { border: 1px solid; margin-block: 0 1rem; }
+.spell-filters h2 { font-size: 1.1rem; margin: 0; }
+.filter-accordion-toggle { align-items: center; background: transparent; border: 0; cursor: pointer; display: flex; font-weight: 700; justify-content: space-between; padding: .75rem 1rem; text-align: left; width: 100%; }
+.accordion-icon { display: inline-block; font-size: 1.2rem; transform: rotate(-90deg); transition: transform 120ms ease-out; }
+.filter-accordion-toggle[aria-expanded="true"] .accordion-icon { transform: rotate(0); }
+.filter-panel { border-block-start: 1px solid; padding: 1rem; }
+.filter-grid { display: flex; flex-direction: column; gap: .75rem; }
+.filter-search { align-content: start; display: grid; gap: .25rem; }
+.filter-search input { box-sizing: border-box; height: 2.3rem; width: 100%; }
+.filter-group { border: 0; margin: 0; min-width: 0; padding: 0; }
+.filter-group legend { float: left; font-weight: 700; margin-inline-end: .5rem; padding: .2rem 0; }
+.filter-tags { clear: both; display: flex; flex-wrap: wrap; gap: .3rem; padding-block-start: .35rem; }
+.filter-checkbox { clip: rect(0 0 0 0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
+.filter-tag { border: 1px solid; border-radius: 999px; cursor: pointer; padding: .2rem .55rem; }
+.filter-checkbox:checked + .filter-tag { background: Highlight; color: HighlightText; }
+.tag-check { display: none; }
+.filter-checkbox:checked + .filter-tag .tag-check { display: inline; }
+.filter-checkbox:focus-visible + .filter-tag { outline: 3px solid Highlight; outline-offset: 2px; }
+.filter-mode { display: inline-flex; margin-block-end: .15rem; }
+.mode-option { background: transparent; border: 1px solid; cursor: pointer; font-size: .85rem; margin-inline-start: -1px; padding: .25rem .55rem; }
+.mode-option:first-child { border-radius: .35rem 0 0 .35rem; margin-inline-start: 0; }
+.mode-option:last-child { border-radius: 0 .35rem .35rem 0; }
+.mode-option[aria-pressed="true"] { background: Highlight; color: HighlightText; font-weight: 700; position: relative; }
+.mode-check { display: none; }
+.mode-option[aria-pressed="true"] .mode-check { display: inline; }
+.mode-option:focus-visible { outline: 3px solid Highlight; outline-offset: 2px; z-index: 1; }
+.filter-show-all[aria-pressed="true"] { background: Highlight; color: HighlightText; }
+.filter-show-all[aria-pressed="true"] .tag-check { display: inline; }
+.filter-footer { display: flex; justify-content: flex-end; margin-block-start: .75rem; }
+.spell-level { margin-block: 2.5rem; }
+.spell-level h2 { align-items: baseline; display: flex; flex-wrap: wrap; gap: .35rem; }
+.heading-count { font-size: .85em; font-weight: 400; }
+.table-scroll { overflow-x: auto; }
+.spell-table { min-width: 48rem; }
+.spell-table th:nth-child(2) { width: 18%; }
+.spell-table th:nth-child(3) { width: 14%; }
+.row-number { font-variant-numeric: tabular-nums; text-align: right; width: 2.5rem; }
+.component-list { white-space: nowrap; }
+.component-list a { font-weight: 700; }
+.component-reference section { scroll-margin-top: 1rem; }
+mark { background: Mark; color: MarkText; }
+[hidden] { display: none !important; }
+@media (max-width: 38rem) {
+  .sticky-spell-controls { max-height: calc(100vh - .5rem); }
+  .filter-footer { align-items: flex-start; flex-direction: column; }
+}
 code { overflow-wrap: anywhere; }
 `;
+
+const classSpellsScript = `
+(() => {
+  const browser = document.querySelector("[data-spell-browser]");
+  if (!browser) return;
+
+  const rows = [...browser.querySelectorAll("tbody tr[data-school]")];
+  const search = browser.querySelector("#spell-filter-search");
+  const status = browser.querySelector("#spell-filter-status");
+  const reset = browser.querySelector("[data-filter-reset]");
+  const accordion = browser.querySelector("[data-filter-accordion]");
+  const filterPanel = browser.querySelector("#spell-filter-panel");
+  const filters = ["school", "level", "components"];
+  const parameters = {
+    school: { values: "school", mode: "schoolMode" },
+    level: { values: "level", mode: "levelMode" },
+    components: { values: "component", mode: "componentMode" },
+  };
+
+  function selectedValues(filter) {
+    return [...browser.querySelectorAll('.filter-checkbox[data-filter="' + filter + '"]:checked')]
+      .map((checkbox) => checkbox.dataset.value);
+  }
+
+  function modeControl(filter) {
+    return browser.querySelector('[data-filter-mode="' + filter + '"]');
+  }
+
+  function setMode(filter, mode) {
+    const control = modeControl(filter);
+    control.dataset.mode = mode;
+    for (const option of control.querySelectorAll("[data-mode-choice]")) {
+      option.setAttribute("aria-pressed", String(option.dataset.modeChoice === mode));
+    }
+  }
+
+  function setAccordion(expanded) {
+    accordion.setAttribute("aria-expanded", String(expanded));
+    filterPanel.hidden = !expanded;
+  }
+
+  function updateShowAll(filter) {
+    const showAll = browser.querySelector('[data-show-all="' + filter + '"]');
+    showAll.setAttribute("aria-pressed", String(selectedValues(filter).length === 0));
+  }
+
+  function matchesFilter(row, filter, state) {
+    const selected = state.selected;
+    if (selected.length === 0) return true;
+    const rowValues = filter === "components"
+      ? (row.dataset.components || "").split(" ").filter(Boolean)
+      : [row.dataset[filter]];
+    const matchesAny = selected.some((value) => rowValues.includes(value));
+    return state.mode === "exclude" ? !matchesAny : matchesAny;
+  }
+
+  function highlightMatches(element, query) {
+    const originalText = element.dataset.originalText || element.textContent;
+    element.dataset.originalText = originalText;
+    element.replaceChildren();
+    if (!query) {
+      element.textContent = originalText;
+      return;
+    }
+
+    const searchableText = originalText.toLocaleLowerCase();
+    let position = 0;
+    let match = searchableText.indexOf(query);
+    while (match !== -1) {
+      element.append(document.createTextNode(originalText.slice(position, match)));
+      const mark = document.createElement("mark");
+      mark.textContent = originalText.slice(match, match + query.length);
+      element.append(mark);
+      position = match + query.length;
+      match = searchableText.indexOf(query, position);
+    }
+    element.append(document.createTextNode(originalText.slice(position)));
+  }
+
+  function updateUrl(filterStates, query) {
+    const url = new URL(window.location.href);
+    url.searchParams.delete("q");
+    if (query) url.searchParams.set("q", search.value.trim());
+
+    for (const filter of filters) {
+      const parameter = parameters[filter];
+      url.searchParams.delete(parameter.values);
+      url.searchParams.delete(parameter.mode);
+      for (const value of filterStates[filter].selected) url.searchParams.append(parameter.values, value);
+      const defaultMode = modeControl(filter).dataset.defaultMode;
+      if (filterStates[filter].mode !== defaultMode) {
+        url.searchParams.set(parameter.mode, filterStates[filter].mode);
+      }
+    }
+
+    window.history.replaceState(null, "", url);
+  }
+
+  function applyFilters({ syncUrl = true } = {}) {
+    const query = search.value.trim().toLocaleLowerCase();
+    const filterStates = Object.fromEntries(filters.map((filter) => [filter, {
+      selected: selectedValues(filter),
+      mode: modeControl(filter).dataset.mode,
+    }]));
+    let totalShown = 0;
+
+    for (const section of browser.querySelectorAll(".spell-level")) {
+      let levelShown = 0;
+      for (const row of section.querySelectorAll("tbody tr[data-school]")) {
+        const matchesTags = filters.every((filter) => matchesFilter(row, filter, filterStates[filter]));
+        const matchesSearch = !query || row.dataset.search.includes(query);
+        const shown = matchesTags && matchesSearch;
+        row.hidden = !shown;
+        if (shown) {
+          levelShown += 1;
+          row.querySelector(".row-number").textContent = String(levelShown);
+        }
+        highlightMatches(row.querySelector(".spell-name"), query);
+        highlightMatches(row.querySelector(".spell-summary"), query);
+      }
+      section.hidden = levelShown === 0;
+      const count = section.querySelector(".level-count");
+      count.textContent = "(" + levelShown + " of " + count.dataset.total + " spells shown)";
+      totalShown += levelShown;
+    }
+
+    status.textContent = "(" + totalShown + " of " + rows.length + " spells shown)";
+    for (const filter of filters) updateShowAll(filter);
+    if (syncUrl) updateUrl(filterStates, query);
+  }
+
+  function hydrateFromUrl() {
+    const searchParameters = new URL(window.location.href).searchParams;
+    search.value = searchParameters.get("q") || "";
+    let hasActiveFilters = Boolean(search.value);
+
+    for (const filter of filters) {
+      const parameter = parameters[filter];
+      const requestedValues = new Set(searchParameters.getAll(parameter.values));
+      for (const checkbox of browser.querySelectorAll('.filter-checkbox[data-filter="' + filter + '"]')) {
+        checkbox.checked = requestedValues.has(checkbox.dataset.value);
+        if (checkbox.checked) hasActiveFilters = true;
+      }
+
+      const control = modeControl(filter);
+      const requestedMode = searchParameters.get(parameter.mode);
+      const mode = requestedMode === "include" || requestedMode === "exclude"
+        ? requestedMode
+        : control.dataset.defaultMode;
+      setMode(filter, mode);
+      if (mode !== control.dataset.defaultMode) hasActiveFilters = true;
+    }
+
+    setAccordion(hasActiveFilters);
+  }
+
+  for (const checkbox of browser.querySelectorAll(".filter-checkbox")) {
+    checkbox.addEventListener("change", () => applyFilters());
+  }
+
+  for (const option of browser.querySelectorAll("[data-mode-choice]")) {
+    option.addEventListener("click", () => {
+      setMode(option.closest("[data-filter-mode]").dataset.filterMode, option.dataset.modeChoice);
+      applyFilters();
+    });
+  }
+
+  for (const showAll of browser.querySelectorAll("[data-show-all]")) {
+    showAll.addEventListener("click", () => {
+      for (const checkbox of browser.querySelectorAll('.filter-checkbox[data-filter="' + showAll.dataset.showAll + '"]')) {
+        checkbox.checked = false;
+      }
+      applyFilters();
+    });
+  }
+
+  accordion.addEventListener("click", () => setAccordion(accordion.getAttribute("aria-expanded") !== "true"));
+  search.addEventListener("input", () => applyFilters());
+  reset.addEventListener("click", () => {
+    search.value = "";
+    for (const checkbox of browser.querySelectorAll(".filter-checkbox")) checkbox.checked = false;
+    for (const filter of filters) {
+      const control = modeControl(filter);
+      setMode(filter, control.dataset.defaultMode);
+    }
+    applyFilters();
+  });
+
+  hydrateFromUrl();
+  applyFilters({ syncUrl: false });
+})();
+`;
+
+const spellComponentMetadata = {
+  verbal: { abbreviation: "V", name: "Verbal", anchor: "verbal" },
+  somatic: { abbreviation: "S", name: "Somatic", anchor: "somatic" },
+  material: { abbreviation: "M", name: "Material", anchor: "material" },
+  focus: { abbreviation: "F", name: "Focus", anchor: "focus" },
+  divine_focus: { abbreviation: "DF", name: "Divine focus", anchor: "divine-focus" },
+  other: { abbreviation: "Other", name: "Other or special", anchor: "other" },
+} as const;
+
+type SpellComponentType = keyof typeof spellComponentMetadata;
+
+function spellComponentTypes(components: Array<{ componentType: string; raw: string | null }>): SpellComponentType[] {
+  const types = new Set<SpellComponentType>();
+  for (const component of components) {
+    if (component.componentType in spellComponentMetadata && component.componentType !== "other") {
+      types.add(component.componentType as SpellComponentType);
+      continue;
+    }
+    const raw = component.raw?.toUpperCase() ?? "";
+    const parsedTypes: SpellComponentType[] = [];
+    if (/\bDF\b/.test(raw)) parsedTypes.push("divine_focus");
+    if (/\bV\b/.test(raw)) parsedTypes.push("verbal");
+    if (/\bS\b/.test(raw)) parsedTypes.push("somatic");
+    if (/\bM\b/.test(raw)) parsedTypes.push("material");
+    if (/\bF\b/.test(raw)) parsedTypes.push("focus");
+    if (parsedTypes.length === 0) parsedTypes.push("other");
+    for (const type of parsedTypes) types.add(type);
+  }
+  return (Object.keys(spellComponentMetadata) as SpellComponentType[]).filter((type) => types.has(type));
+}
+
+function componentLinks(types: SpellComponentType[]): string {
+  const links = types.map((type) => {
+    const metadata = spellComponentMetadata[type];
+    return `<a href="/spell-components#${metadata.anchor}" title="${escapeHtml(metadata.name)} component">${metadata.abbreviation}</a>`;
+  });
+  return `<span class="component-list" aria-label="Components">[${links.join(", ")}]</span>`;
+}
+
+function summarizeDescription(value: string, maximumLength = 240): string {
+  const normalized = value.replace(/\s+/g, " ").trim();
+  if (normalized.length <= maximumLength) return normalized;
+  const sentences = normalized.match(/[^.!?]+(?:[.!?]+|$)/g) ?? [normalized];
+  let summary = "";
+  for (const sentence of sentences) {
+    const candidate = `${summary}${summary ? " " : ""}${sentence.trim()}`;
+    if (candidate.length > maximumLength) break;
+    summary = candidate;
+  }
+  if (summary.length >= 80) return summary;
+  const clipped = normalized.slice(0, maximumLength - 1);
+  const lastSpace = clipped.lastIndexOf(" ");
+  return `${clipped.slice(0, lastSpace > 0 ? lastSpace : clipped.length).trimEnd()}…`;
+}
 
 function escapeHtml(value: unknown): string {
   return String(value ?? "")
@@ -55,6 +354,12 @@ function listHref(id: string): string {
   return `/lists/${encodeURIComponent(id)}`;
 }
 
+function classHref(id: string): string {
+  const prefix = "spell-list.";
+  const slug = id.startsWith(prefix) ? id.slice(prefix.length) : id;
+  return `/classes/${encodeURIComponent(slug)}`;
+}
+
 function humanize(value: string): string {
   return value.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
@@ -83,7 +388,8 @@ function page(title: string, content: string): string {
     <a href="/">PF1 Rules</a>
     <nav aria-label="Primary navigation">
       <ul>
-        <li><a href="/spells">Spells</a></li>
+        <li><a href="/spells">Classes</a></li>
+        <li><a href="/spells/all">All spells</a></li>
         <li><a href="/entities">Entities</a></li>
         <li><a href="/search">Search</a></li>
       </ul>
@@ -109,6 +415,7 @@ function sendHtml(response: ServerResponse, status: number, body: string): void 
   response.writeHead(status, {
     "content-type": "text/html; charset=utf-8",
     "content-length": Buffer.byteLength(body),
+    "cache-control": "no-store",
   });
   response.end(body);
 }
@@ -117,6 +424,7 @@ function sendText(response: ServerResponse, status: number, body: string, conten
   response.writeHead(status, {
     "content-type": contentType,
     "content-length": Buffer.byteLength(body),
+    "cache-control": "no-store",
   });
   response.end(body);
 }
@@ -149,11 +457,68 @@ async function homePage(prisma: PrismaClient): Promise<string> {
     <section aria-labelledby="start-browsing">
       <h2 id="start-browsing">Start browsing</h2>
       <ul>${spells.map((spell) => `<li><a href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a> <span class="muted">(${escapeHtml(spell.school)})</span></li>`).join("")}</ul>
-      <p><a href="/spells">View all spells</a></p>
+      <p><a href="/spells">Browse spells by class</a> or <a href="/spells/all">view all spells alphabetically</a>.</p>
     </section>`);
 }
 
-async function spellsPage(prisma: PrismaClient): Promise<string> {
+async function classesPage(prisma: PrismaClient): Promise<string> {
+  const classNameGroups = await prisma.spellLevel.groupBy({
+    by: ["spellListId", "listName"],
+    where: { listKind: "class" },
+    _count: { _all: true },
+    _min: { spellLevel: true },
+    _max: { spellLevel: true },
+    orderBy: { listName: "asc" },
+  });
+  const classesById = new Map<string, {
+    spellListId: string;
+    listName: string;
+    nameCount: number;
+    spellCount: number;
+    minimumLevel: number;
+    maximumLevel: number;
+  }>();
+  for (const group of classNameGroups) {
+    const existing = classesById.get(group.spellListId);
+    const groupCount = group._count._all;
+    const minimumLevel = group._min.spellLevel ?? 0;
+    const maximumLevel = group._max.spellLevel ?? minimumLevel;
+    if (!existing) {
+      classesById.set(group.spellListId, {
+        spellListId: group.spellListId,
+        listName: group.listName,
+        nameCount: groupCount,
+        spellCount: groupCount,
+        minimumLevel,
+        maximumLevel,
+      });
+      continue;
+    }
+    existing.spellCount += groupCount;
+    existing.minimumLevel = Math.min(existing.minimumLevel, minimumLevel);
+    existing.maximumLevel = Math.max(existing.maximumLevel, maximumLevel);
+    if (groupCount > existing.nameCount) {
+      existing.listName = group.listName;
+      existing.nameCount = groupCount;
+    }
+  }
+  const classes = [...classesById.values()].sort((left, right) => left.listName.localeCompare(right.listName));
+
+  return page("Spells by class", `<h1>Spells by class</h1>
+    <p>Choose a class to browse its ${classes.reduce((total, item) => total + item.spellCount, 0)} ingested spell-list entries, organized by spell level.</p>
+    ${classes.length ? `<ul class="class-grid">${classes.map((item) => {
+      const minimum = item.minimumLevel;
+      const maximum = item.maximumLevel;
+      const levelRange = minimum === maximum ? `level ${minimum}` : `levels ${minimum}–${maximum}`;
+      return `<li>
+        <a href="${href(classHref(item.spellListId))}">${escapeHtml(humanize(item.listName))}</a>
+        <p>${item.spellCount} ${item.spellCount === 1 ? "spell" : "spells"} <span class="muted">· ${levelRange}</span></p>
+      </li>`;
+    }).join("")}</ul>` : "<p>No class spell lists have been ingested yet.</p>"}
+    <p><a href="/spells/all">View the alphabetical spell catalog</a></p>`);
+}
+
+async function allSpellsPage(prisma: PrismaClient): Promise<string> {
   const spells = await prisma.canonicalSpell.findMany({
     select: {
       spellId: true,
@@ -164,7 +529,8 @@ async function spellsPage(prisma: PrismaClient): Promise<string> {
     },
     orderBy: { name: "asc" },
   });
-  return page("Spells", `<h1>Spells</h1>
+  return page("All spells", `<nav aria-label="Breadcrumb"><ol><li><a href="/spells">Classes</a></li><li aria-current="page">All spells</li></ol></nav>
+    <h1>All spells</h1>
     <p>${spells.length} canonical spell records.</p>
     <table>
       <caption>Canonical spells in alphabetical order</caption>
@@ -175,6 +541,136 @@ async function spellsPage(prisma: PrismaClient): Promise<string> {
         <td>${escapeHtml(spell.publicationBook)}${spell.publicationPage === null ? "" : `, page ${spell.publicationPage}`}</td>
       </tr>`).join("")}</tbody>
     </table>`);
+}
+
+function spellComponentsPage(): string {
+  return page("Spell components", `<nav aria-label="Breadcrumb"><ol><li><a href="/spells">Classes</a></li><li aria-current="page">Spell components</li></ol></nav>
+    <article class="component-reference">
+      <h1>Spell components</h1>
+      <p>Component abbreviations describe what a caster must provide while casting a spell. The component links in class spell tables lead to the matching section below.</p>
+      <nav aria-label="Component types"><ul>
+        <li><a href="#verbal">V — Verbal</a></li>
+        <li><a href="#somatic">S — Somatic</a></li>
+        <li><a href="#material">M — Material</a></li>
+        <li><a href="#focus">F — Focus</a></li>
+        <li><a href="#divine-focus">DF — Divine focus</a></li>
+        <li><a href="#other">Other or special</a></li>
+      </ul></nav>
+      <section id="verbal"><h2>V — Verbal</h2><p>The caster must speak the spell's words in a strong voice. A caster who cannot speak clearly, such as one affected by magical silence, cannot supply this component.</p></section>
+      <section id="somatic"><h2>S — Somatic</h2><p>The caster must make measured, precise gestures and needs the free use of at least one hand to supply this component.</p></section>
+      <section id="material"><h2>M — Material</h2><p>A physical substance or object used up during casting. Most material components have negligible cost, but the spell record identifies components with a specific price.</p></section>
+      <section id="focus"><h2>F — Focus</h2><p>A prop required to cast the spell. Unlike a material component, a focus is not consumed during casting and can normally be used again.</p></section>
+      <section id="divine-focus"><h2>DF — Divine focus</h2><p>An object of religious significance, such as a holy symbol, used as a focus for a divine spell. It is not consumed during casting.</p></section>
+      <section id="other"><h2>Other or special</h2><p>Some records contain alternatives, unusual focus types, or source-specific component notation that does not fit one standard category. Check the spell's detail page for its exact recorded wording.</p></section>
+    </article>`);
+}
+
+async function classSpellsPage(prisma: PrismaClient, classSlug: string): Promise<string | null> {
+  const listId = `spell-list.${classSlug}`;
+  const [entity, entries] = await Promise.all([
+    prisma.entity.findUnique({
+      where: { id: listId },
+      select: { id: true, name: true, type: true },
+    }),
+    prisma.spellLevel.findMany({
+      where: { spellListId: listId, listKind: "class" },
+      select: {
+        spellLevel: true,
+        listName: true,
+        scope: true,
+        spell: {
+          select: {
+            spellId: true,
+            name: true,
+            school: true,
+            subschool: true,
+            descriptionRaw: true,
+            components: { select: { componentType: true, raw: true } },
+          },
+        },
+      },
+      orderBy: [{ spellLevel: "asc" }, { spell: { name: "asc" } }],
+    }),
+  ]);
+  if (!entity || entity.type !== "spell_list" || entries.length === 0) return null;
+
+  const className = humanize(entries[0]?.listName ?? entity.name.replace(/ spell list$/i, ""));
+  const entriesByLevel = new Map<number, typeof entries>();
+  for (const entry of entries) {
+    const levelEntries = entriesByLevel.get(entry.spellLevel) ?? [];
+    levelEntries.push(entry);
+    entriesByLevel.set(entry.spellLevel, levelEntries);
+  }
+  const levels = [...entriesByLevel.keys()];
+  const schools = [...new Set(entries.map((entry) => entry.spell.school))].sort((left, right) => left.localeCompare(right));
+  const spellDisplay = new Map(entries.map((entry) => {
+    const components = spellComponentTypes(entry.spell.components);
+    return [entry.spell.spellId, {
+      components,
+      summary: summarizeDescription(entry.spell.descriptionRaw),
+    }] as const;
+  }));
+  const availableComponents = (Object.keys(spellComponentMetadata) as SpellComponentType[])
+    .filter((type) => [...spellDisplay.values()].some((spell) => spell.components.includes(type)));
+  const filterModeControl = (filter: string, label: string, defaultMode: "include" | "exclude") => `<div role="group" class="filter-mode" data-filter-mode="${filter}" data-mode="${defaultMode}" data-default-mode="${defaultMode}" aria-label="${escapeHtml(label)} filter mode">
+    <button type="button" class="mode-option" data-mode-choice="include" aria-pressed="${defaultMode === "include"}"><span class="mode-check" aria-hidden="true">✓ </span>Include selected</button>
+    <button type="button" class="mode-option" data-mode-choice="exclude" aria-pressed="${defaultMode === "exclude"}"><span class="mode-check" aria-hidden="true">✓ </span>Exclude selected</button>
+  </div>`;
+  const filterShowAll = (filter: string) => `<button type="button" class="filter-tag filter-show-all" data-show-all="${filter}" aria-pressed="true"><span class="tag-check" aria-hidden="true">✓ </span>Show all</button>`;
+  const filterCheckbox = (filter: string, value: string, label: string, title?: string) => {
+    const id = `filter-${filter}-${value.replace(/[^a-z0-9]+/gi, "-").toLocaleLowerCase()}`;
+    return `<input class="filter-checkbox" id="${escapeHtml(id)}" type="checkbox" data-filter="${filter}" data-value="${escapeHtml(value)}"><label class="filter-tag" for="${escapeHtml(id)}"${title ? ` title="${escapeHtml(title)}"` : ""}><span class="tag-check" aria-hidden="true">✓ </span>${escapeHtml(label)}</label>`;
+  };
+  const schoolTags = schools.map((school) => filterCheckbox("school", school, humanize(school))).join("");
+  const levelTags = levels.map((level) => filterCheckbox("level", String(level), String(level))).join("");
+  const componentTags = availableComponents.map((type) => {
+    const metadata = spellComponentMetadata[type];
+    return filterCheckbox("components", type, metadata.abbreviation, `${metadata.name} component`);
+  }).join("");
+  const levelTables = levels.map((level) => {
+    const levelEntries = entriesByLevel.get(level) ?? [];
+    return `<section class="spell-level" aria-labelledby="level-${level}">
+      <h2 id="level-${level}">Level ${level} ${escapeHtml(className)} Spells <span class="heading-count level-count" data-total="${levelEntries.length}">(${levelEntries.length} of ${levelEntries.length} spells shown)</span></h2>
+      <div class="table-scroll" role="region" aria-label="${escapeHtml(className)} level ${level} spells" tabindex="0">
+        <table class="spell-table" aria-label="${escapeHtml(className)} level ${level} spells">
+          <thead><tr><th class="row-number" scope="col" aria-label="Row number">#</th><th scope="col">Name</th><th scope="col">School</th><th scope="col">Description</th></tr></thead>
+          <tbody>${levelEntries.map((entry, index) => {
+            const spell = entry.spell;
+            const school = `${humanize(spell.school)}${spell.subschool ? ` (${humanize(spell.subschool)})` : ""}`;
+            const display = spellDisplay.get(spell.spellId) ?? { components: [], summary: "" };
+            const searchText = `${spell.name} ${display.summary}`.toLocaleLowerCase();
+            return `<tr data-school="${escapeHtml(spell.school)}" data-level="${level}" data-components="${escapeHtml(display.components.join(" "))}" data-search="${escapeHtml(searchText)}">
+              <td class="row-number">${index + 1}</td>
+              <th scope="row"><a class="spell-name" href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a></th>
+              <td>${escapeHtml(school)}</td>
+              <td>${componentLinks(display.components)} <span class="spell-summary">${escapeHtml(display.summary)}</span></td>
+            </tr>`;
+          }).join("")}</tbody>
+        </table>
+      </div>
+    </section>`;
+  }).join("");
+
+  return page(`${className} spells`, `<nav aria-label="Breadcrumb"><ol><li><a href="/spells">Classes</a></li><li aria-current="page">${escapeHtml(className)}</li></ol></nav>
+    <div data-spell-browser>
+      <div class="sticky-spell-controls">
+        <h1>${escapeHtml(className)} spells</h1>
+        <section class="spell-filters" aria-labelledby="spell-filters-heading">
+          <h2 id="spell-filters-heading"><button type="button" class="filter-accordion-toggle" data-filter-accordion aria-expanded="false" aria-controls="spell-filter-panel"><span>Filter Spells <span id="spell-filter-status" class="heading-count" aria-live="polite">(${entries.length} of ${entries.length} spells shown)</span></span><span class="accordion-icon" aria-hidden="true">▾</span></button></h2>
+          <div id="spell-filter-panel" class="filter-panel" hidden>
+            <div class="filter-grid">
+              <label class="filter-search" for="spell-filter-search"><strong>Search spell</strong><input id="spell-filter-search" type="search" placeholder="Name or description" autocomplete="off"></label>
+              <fieldset class="filter-group"><legend>Schools</legend>${filterModeControl("school", "Schools", "include")}<div class="filter-tags">${filterShowAll("school")}${schoolTags}</div></fieldset>
+              <fieldset class="filter-group"><legend>Levels</legend>${filterModeControl("level", "Levels", "include")}<div class="filter-tags">${filterShowAll("level")}${levelTags}</div></fieldset>
+              <fieldset class="filter-group"><legend>Components</legend>${filterModeControl("components", "Components", "exclude")}<div class="filter-tags">${filterShowAll("components")}${componentTags}</div></fieldset>
+            </div>
+            <div class="filter-footer"><button type="button" data-filter-reset>Reset filters</button></div>
+          </div>
+        </section>
+      </div>
+      <div id="spell-level-tables">${levelTables}</div>
+    </div>
+    <script src="/class-spells.js" defer></script>`);
 }
 
 async function spellPage(prisma: PrismaClient, spellId: string): Promise<string | null> {
@@ -210,7 +706,7 @@ async function spellPage(prisma: PrismaClient, spellId: string): Promise<string 
     ${component.conditionRaw ? `<span>— ${escapeHtml(component.conditionRaw)}</span>` : ""}
   </li>`).join("");
   const levelRows = spell.levels.map((level) => `<li>
-    <a href="${href(listHref(level.spellListId))}">${escapeHtml(level.listName)}</a> ${level.spellLevel}
+    <a href="${href(level.listKind === "class" ? classHref(level.spellListId) : listHref(level.spellListId))}">${escapeHtml(humanize(level.listName))}</a> ${level.spellLevel}
     <span class="muted">(${escapeHtml(humanize(level.scope))})</span>
   </li>`).join("");
   const deliveryRows = spell.deliveryFields.map((field) => `<dt>${escapeHtml(field.labelRaw)}</dt><dd>${escapeHtml(field.valueRaw ?? "Not recorded")}</dd>`).join("");
@@ -228,7 +724,7 @@ async function spellPage(prisma: PrismaClient, spellId: string): Promise<string 
     return `<li><a href="${href(ownerUrl)}">${escapeHtml(owner?.name ?? relationship.ownerEntityId)}</a> — ${escapeHtml(humanize(relationship.relationshipType))}</li>`;
   }).join("");
 
-  return page(spell.name, `<nav aria-label="Breadcrumb"><ol><li><a href="/spells">Spells</a></li><li aria-current="page">${escapeHtml(spell.name)}</li></ol></nav>
+  return page(spell.name, `<nav aria-label="Breadcrumb"><ol><li><a href="/spells/all">All spells</a></li><li aria-current="page">${escapeHtml(spell.name)}</li></ol></nav>
     <article>
       <h1>${escapeHtml(spell.name)}</h1>
       <p><code>${escapeHtml(spell.spellId)}</code></p>
@@ -408,10 +904,17 @@ export function createRequestHandler(prisma: PrismaClient) {
         sendText(response, 200, stylesheet, "text/css; charset=utf-8");
         return;
       }
+      if (url.pathname === "/class-spells.js") {
+        sendText(response, 200, classSpellsScript, "text/javascript; charset=utf-8");
+        return;
+      }
       if (url.pathname === "/") result = await homePage(prisma);
-      else if (url.pathname === "/spells") result = await spellsPage(prisma);
+      else if (url.pathname === "/spells") result = await classesPage(prisma);
+      else if (url.pathname === "/spells/all") result = await allSpellsPage(prisma);
+      else if (url.pathname === "/spell-components") result = spellComponentsPage();
       else if (url.pathname === "/entities") result = await entitiesPage(prisma, url);
       else if (url.pathname === "/search") result = await searchPage(prisma, url);
+      else if (url.pathname.startsWith("/classes/")) result = await classSpellsPage(prisma, decodeURIComponent(url.pathname.slice(9)));
       else if (url.pathname.startsWith("/spells/")) result = await spellPage(prisma, decodeURIComponent(url.pathname.slice(8)));
       else if (url.pathname.startsWith("/entities/")) result = await entityPage(prisma, decodeURIComponent(url.pathname.slice(10)));
       else if (url.pathname.startsWith("/lists/")) result = await spellListPage(prisma, decodeURIComponent(url.pathname.slice(7)));

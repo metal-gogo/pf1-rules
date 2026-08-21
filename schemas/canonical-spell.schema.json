@@ -195,23 +195,48 @@
               "raw": {"type": "string", "minLength": 1}
             }
           },
-          "inherited_paths": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^/"}},
+          "inherited_paths": {
+            "type": "array",
+            "description": "Non-overlapping canonical JSON Pointer roots copied from the resolved parent before overrides are applied.",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^/(?:casting|effect|description)(?:/.*)?$"
+            }
+          },
           "overrides": {
             "type": "array",
             "items": {
               "type": "object",
               "additionalProperties": false,
-              "required": ["aspect", "source_field", "raw"],
+              "required": ["path", "value", "source_field", "raw"],
               "properties": {
-                "aspect": {"type": "string", "minLength": 1},
+                "path": {
+                  "type": "string",
+                  "description": "Canonical JSON Pointer replaced after inherited parent paths are copied.",
+                  "pattern": "^/(?:casting|effect|description)(?:/.*)?$"
+                },
+                "value": {
+                  "description": "Typed canonical value applied at path. The exact source wording remains in raw."
+                },
                 "source_field": {"type": "string", "minLength": 1},
-                "raw": {"type": "string", "minLength": 1}
+                "raw": {"type": "string", "minLength": 1},
+                "note": {"type": ["string", "null"]}
               }
             }
           },
           "resolution_status": {"enum": ["resolved", "pending", "cycle_detected", "missing_parent"]},
           "note": {"type": "string", "minLength": 1}
-        }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {"resolution_status": {"const": "resolved"}},
+              "required": ["resolution_status"]
+            },
+            "then": {"properties": {"inherited_paths": {"type": "array", "minItems": 1}}}
+          }
+        ]
       }
     },
     "relationships": {

@@ -32,12 +32,95 @@ describe("local rules browser", () => {
     expect(html).toContain("Database summary");
   });
 
+  it("uses class spell lists as the primary spell directory", async () => {
+    const response = await fetch(`${baseUrl}/spells`);
+    const html = await response.text();
+    expect(response.status).toBe(200);
+    expect(html).toContain("<h1>Spells by class</h1>");
+    expect(html.match(/href="\/classes\/cleric"/g)).toHaveLength(1);
+    expect(html).toContain('/classes/wizard');
+    expect(html).toContain('/spells/all');
+  });
+
+  it("groups a class's spells into detailed tables by level", async () => {
+    const response = await fetch(`${baseUrl}/classes/cleric`);
+    const html = await response.text();
+    expect(response.status).toBe(200);
+    expect(html).toContain("<h1>Cleric spells</h1>");
+    expect(html).toContain('<h2 id="level-0">Level 0 Cleric Spells');
+    expect(html).toContain('<h2 id="level-9">Level 9 Cleric Spells');
+    expect(html).toContain('class="heading-count level-count"');
+    expect(html).toContain('spells shown)</span></h2>');
+    expect(html).toContain('<th scope="col">Name</th><th scope="col">School</th><th scope="col">Description</th>');
+    expect(html).toContain('<th class="row-number" scope="col" aria-label="Row number">#</th>');
+    expect(html).toContain('<td class="row-number">1</td>');
+    expect(html).toContain('class="sticky-spell-controls"');
+    expect(html).toContain('class="spell-filters"');
+    expect(html).toContain('data-filter-accordion aria-expanded="false"');
+    expect(html).toContain('id="spell-filter-panel" class="filter-panel" hidden');
+    expect(html).toContain('Filter Spells <span id="spell-filter-status"');
+    expect(html).toContain('<strong>Search spell</strong>');
+    expect(html).toContain('data-filter-mode="components" data-mode="exclude"');
+    expect(html).toContain('role="group" class="filter-mode"');
+    expect(html).toContain('data-mode-choice="include" aria-pressed="true"');
+    expect(html).toContain('data-mode-choice="exclude" aria-pressed="true"');
+    expect(html).toContain('data-show-all="school" aria-pressed="true"');
+    expect(html).toContain('data-show-all="level" aria-pressed="true"');
+    expect(html).toContain('data-show-all="components" aria-pressed="true"');
+    expect(html).toContain('type="checkbox" data-filter="school"');
+    expect(html).toContain('type="checkbox" data-filter="level"');
+    expect(html).toContain('type="checkbox" data-filter="components"');
+    expect(html).not.toContain('<caption>Cleric level');
+    expect(html).not.toContain('ingested spells across');
+    expect(html).toContain('/spell-components#verbal');
+    expect(html).toContain('<script src="/class-spells.js" defer></script>');
+    expect(html).toContain('/spells/spell.light');
+    expect(html).toContain('/spells/spell.miracle');
+  });
+
+  it("serves the interactive class filters", async () => {
+    const response = await fetch(`${baseUrl}/class-spells.js`);
+    const script = await response.text();
+    expect(response.status).toBe(200);
+    expect(response.headers.get("content-type")).toContain("text/javascript");
+    expect(response.headers.get("cache-control")).toBe("no-store");
+    expect(script).toContain('const filters = ["school", "level", "components"]');
+    expect(script).toContain('state.mode === "exclude" ? !matchesAny : matchesAny');
+    expect(script).toContain("const filterStates = Object.fromEntries");
+    expect(script).toContain('.filter-checkbox[data-filter="');
+    expect(script).toContain('option.setAttribute("aria-pressed"');
+    expect(script).toContain('document.createElement("mark")');
+    expect(script).toContain('window.history.replaceState');
+    expect(script).toContain('searchParameters.getAll(parameter.values)');
+    expect(script).toContain('setAccordion(hasActiveFilters)');
+  });
+
+  it("explains each linked spell component on one reference page", async () => {
+    const response = await fetch(`${baseUrl}/spell-components`);
+    const html = await response.text();
+    expect(response.status).toBe(200);
+    expect(html).toContain("<h1>Spell components</h1>");
+    expect(html).toContain('<section id="verbal">');
+    expect(html).toContain('<section id="somatic">');
+    expect(html).toContain('<section id="material">');
+    expect(html).toContain('<section id="focus">');
+    expect(html).toContain('<section id="divine-focus">');
+  });
+
+  it("keeps the alphabetical spell catalog available", async () => {
+    const response = await fetch(`${baseUrl}/spells/all`);
+    const html = await response.text();
+    expect(response.status).toBe(200);
+    expect(html).toContain("<h1>All spells</h1>");
+    expect(html).toContain('/spells/spell.light');
+  });
+
   it("renders a spell with local relationship and source links", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.light`);
     const html = await response.text();
     expect(response.status).toBe(200);
     expect(html).toContain("<h1>Light</h1>");
-    expect(html).toContain("/lists/spell-list.cleric");
+    expect(html).toContain("/classes/cleric");
     expect(html).toContain("/entities/spell.permanency");
     expect(html).toContain("/sources/");
   });

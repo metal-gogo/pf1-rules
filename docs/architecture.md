@@ -21,4 +21,19 @@ Source conflicts are recorded for review rather than merged automatically. Raw
 snapshots and versioned JSON records keep the database reproducible without a
 runtime dependency on a rules website.
 
+## Spell inheritance
+
+Spells that explicitly function like another spell use an executable patch
+model. Each inheritance edge names non-overlapping canonical JSON Pointer roots
+to copy from its parent. Every child difference inside those roots is an
+override with a JSON Pointer, typed canonical value, exact source wording, and
+source field. Resolution is recursive, so lesser/greater, mass, and communal
+chains share one mechanism.
+
+Canonical child records remain fully materialized. Package validation resolves
+each completed chain and compares the result with the stored child, rejecting
+missing overrides, stale parent status, invalid pointers, overlapping parents,
+and cycles. `spell-resolved <name-or-id>` exposes the materialized record,
+lineage, and applied-path trace through the CLI.
+
 Return to the [project index](index.md).

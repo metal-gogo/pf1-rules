@@ -27,6 +27,7 @@ model Entity {
   canonicalDecisions  CanonicalDecision[]
   targetLinks         SourceLink[]        @relation("SourceLinkTarget")
   targetRelationships RuleRelationship[]  @relation("RelationshipTarget")
+  inheritedBy         SpellInheritance[]  @relation("InheritanceSourceEntity")
 
   @@index([type, name])
   @@map("entities")
@@ -73,7 +74,6 @@ model CanonicalSpell {
   deliveryFields      SpellDeliveryField[]
   descriptionSections SpellDescriptionSection[]
   inheritance         SpellInheritance[]        @relation("InheritedSpell")
-  inheritedBy         SpellInheritance[]        @relation("SourceSpell")
   mythicVariant       MythicSpellVariant?
 
   @@index([school, name])
@@ -170,7 +170,7 @@ model SpellInheritance {
   note             String?
 
   spell     CanonicalSpell @relation("InheritedSpell", fields: [spellId], references: [spellId], onDelete: Cascade)
-  fromSpell CanonicalSpell @relation("SourceSpell", fields: [fromSpellId], references: [spellId])
+  fromSpell Entity         @relation("InheritanceSourceEntity", fields: [fromSpellId], references: [id])
 
   @@id([spellId, inheritanceIndex])
   @@map("spell_inheritance")

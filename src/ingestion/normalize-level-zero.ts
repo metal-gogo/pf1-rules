@@ -1,5 +1,7 @@
 import crypto from "node:crypto";
 
+import type { ValidatedJson } from "../domain/json.js";
+import { readJsonPointer } from "../domain/spell-inheritance.js";
 import type { ParsedLink, ParsedSpellPage, SiteId } from "./spell-page-parser.js";
 import { slug } from "./spell-page-parser.js";
 
@@ -318,26 +320,211 @@ function entityType(link: ParsedLink): string {
 }
 
 
+export type AvailableCanonicalSpells = ReadonlyMap<string, ValidatedJson> | ReadonlySet<string>;
+
+interface InheritanceReference {
+  parentId: string;
+  parentName: string;
+  basisRaw: string;
+}
+
+const inheritedCanonicalPaths = [
+  ["/casting/time", "spell_raw.casting_time_raw"],
+  ["/casting/components", "spell_raw.components_raw"],
+  ["/casting/conditional_components", "spell_raw.description_raw"],
+  ["/casting/components_raw", "spell_raw.components_raw"],
+  ["/effect/range", "spell_raw.range_raw"],
+  ["/effect/delivery", "spell_raw.delivery_fields_raw"],
+  ["/effect/targeting", "spell_raw.delivery_fields_raw"],
+  ["/effect/area", "spell_raw.delivery_fields_raw"],
+  ["/effect/duration", "spell_raw.duration_raw"],
+  ["/effect/saving_throw", "spell_raw.saving_throw_raw"],
+  ["/effect/spell_resistance", "spell_raw.spell_resistance_raw"],
+  ["/description/raw", "spell_raw.description_raw"],
+] as const;
+
+
+function canonicalRecord(
+  available: AvailableCanonicalSpells,
+  spellId: string,
+): ValidatedJson | null {
+  return available instanceof Map ? available.get(spellId) ?? null : null;
+}
+
+
+function hasCanonicalSpell(available: AvailableCanonicalSpells, spellId: string): boolean {
+  return available.has(spellId);
+}
+
+
+function normalizedName(value: string): string {
+  return value
+    .replaceAll("’", "'")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLocaleLowerCase("en-US");
+}
+
+
+function comparableSpellName(value: string): string {
+  return normalizedName(value).replace(/\bthe\b/g, "").replace(/\s+/g, " ").trim();
+}
+
+
+function startsWithSpellName(value: string, name: string): boolean {
+  if (!value.startsWith(name)) return false;
+  const next = value[name.length];
+  return next === undefined || /[,.():;\s]/.test(next);
+}
+
+
+function equivalentSpellNames(name: string): Set<string> {
+  const names = new Set([name]);
+  const leadingVariant = /^(mass|greater|lesser) (.+)$/.exec(name);
+  if (leadingVariant?.[1] && leadingVariant[2]) {
+    names.add(`${leadingVariant[2]}, ${leadingVariant[1]}`);
+  }
+  const trailingVariant = /^(.+), (mass|greater|lesser)$/.exec(name);
+  if (trailingVariant?.[1] && trailingVariant[2]) {
+    names.add(`${trailingVariant[2]} ${trailingVariant[1]}`);
+  }
+  return names;
+}
+
+
+export function detectSpellInheritance(
+  parsed: ParsedSpellPage,
+  available: AvailableCanonicalSpells,
+): InheritanceReference | null {
+  const marker = /^(?:this spell (?:functions|works) (?:as|like)(?: per)?|as(?: per)?)\s+(?:the\s+)?/i.exec(
+    parsed.descriptionRaw,
+  );
+  if (!marker) return null;
+  const remainder = normalizedName(parsed.descriptionRaw.slice(marker[0].length));
+  if (/^(?:part of|part of the|a way to|a result of)/.test(remainder)) return null;
+  const comparableRemainder = comparableSpellName(remainder.replace(/^(?:a|an)\s+/, ""));
+
+  const linkedCandidates = parsed.links
+    .filter((link) =>
+      link.targetEntityTypeHint === "spell" &&
+      link.sourceField === "spell_raw.description_raw" &&
+      startsWithSpellName(comparableRemainder, comparableSpellName(link.anchorTextRaw)),
+    )
+    .sort((left, right) => right.anchorTextRaw.length - left.anchorTextRaw.length);
+  const linked = linkedCandidates[0];
+  if (linked) {
+    const linkedName = normalizedName(linked.anchorTextRaw);
+    const linkedNames = equivalentSpellNames(linkedName);
+    const matchingRecord = available instanceof Map
+      ? [...available.values()].find((record) => linkedNames.has(normalizedName(record.name)))
+      : undefined;
+    return {
+      parentId: matchingRecord?.spell_id ?? linked.targetEntityIdHint,
+      parentName: matchingRecord?.name ?? linked.anchorTextRaw,
+      basisRaw: parsed.descriptionRaw,
+    };
+  }
+
+  if (available instanceof Map) {
+    const namedCandidates = [...available.values()]
+      .filter((record) => startsWithSpellName(comparableRemainder, comparableSpellName(record.name)))
+      .sort((left, right) => String(right.name).length - String(left.name).length);
+    const named = namedCandidates[0];
+    if (named) {
+      return { parentId: named.spell_id, parentName: named.name, basisRaw: parsed.descriptionRaw };
+    }
+  }
+
+  const fallbackName = remainder
+    .split(/,|\.|\bexcept\b|\bbut\b|\bas noted\b|\bsave that\b/i, 1)[0]
+    ?.trim();
+  if (!fallbackName || fallbackName.split(/\s+/).length > 7) return null;
+  return {
+    parentId: `spell.${slug(fallbackName)}`,
+    parentName: fallbackName.replace(/\b\p{L}/gu, (letter) => letter.toLocaleUpperCase("en-US")),
+    basisRaw: parsed.descriptionRaw,
+  };
+}
+
+
+function rawOverrideEvidence(parsed: ParsedSpellPage, sourceField: string, value: unknown): string {
+  const rawByField: Record<string, unknown> = {
+    "spell_raw.casting_time_raw": parsed.castingTimeRaw,
+    "spell_raw.components_raw": parsed.componentsRaw,
+    "spell_raw.range_raw": parsed.rangeRaw,
+    "spell_raw.delivery_fields_raw": parsed.deliveryFieldsRaw,
+    "spell_raw.duration_raw": parsed.durationRaw,
+    "spell_raw.saving_throw_raw": parsed.savingThrowRaw,
+    "spell_raw.spell_resistance_raw": parsed.spellResistanceRaw,
+    "spell_raw.description_raw": parsed.descriptionRaw,
+  };
+  const raw = rawByField[sourceField] ?? value;
+  return typeof raw === "string" ? raw : JSON.stringify(raw);
+}
+
+
+function inheritanceRule(
+  reference: InheritanceReference,
+  child: ValidatedJson,
+  baseline: ParsedObservationInput,
+  available: AvailableCanonicalSpells,
+) {
+  const parent = canonicalRecord(available, reference.parentId);
+  if (!parent) {
+    return {
+      from_spell_id: reference.parentId,
+      relationship: "functions_like",
+      basis: {
+        observation_id: baseline.observationId,
+        source_field: "spell_raw.description_raw",
+        raw: reference.basisRaw,
+      },
+      inherited_paths: [],
+      overrides: [],
+      resolution_status: "missing_parent",
+      note: `The functions-like dependency is explicit, but ${reference.parentId} is not canonical yet. The child's printed stat block remains materialized.`,
+    };
+  }
+
+  const overrides = inheritedCanonicalPaths.flatMap(([pointer, sourceField]) => {
+    const parentValue = readJsonPointer(parent, pointer, reference.parentId);
+    const childValue = readJsonPointer(child, pointer, String(child.spell_id));
+    if (JSON.stringify(parentValue) === JSON.stringify(childValue)) return [];
+    return [{
+      path: pointer,
+      value: childValue,
+      source_field: sourceField,
+      raw: rawOverrideEvidence(baseline.parsed, sourceField, childValue),
+      note: "The child canonical value differs from the resolved parent and is therefore applied explicitly.",
+    }];
+  });
+  return {
+    from_spell_id: reference.parentId,
+    relationship: "functions_like",
+    basis: {
+      observation_id: baseline.observationId,
+      source_field: "spell_raw.description_raw",
+      raw: reference.basisRaw,
+    },
+    inherited_paths: inheritedCanonicalPaths.map(([pointer]) => pointer),
+    overrides,
+    resolution_status: "resolved",
+    note: "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override.",
+  };
+}
+
+
 export function generateCanonicalBundle(
   spellId: string,
   observations: ParsedObservationInput[],
-  availableCanonicalIds: Set<string>,
+  availableCanonicalSpells: AvailableCanonicalSpells,
 ) {
   const baseline = observations.find((item) => item.siteId === "aon");
   if (!baseline) throw new NormalizationIssue("source", "missing-aon-observation", "AoN baseline observation is missing.");
   if (baseline.parsed.warnings.some((warning) => warning.severity === "error")) {
     throw new NormalizationIssue("source", "aon-parser-error", baseline.parsed.warnings.map((warning) => warning.message).join(" "));
   }
-  const inheritanceMatch = /^(?:this spell (?:functions|works) (?:as|like)|as)\s+(?:the\s+)?([a-z][a-z' -]+?)(?:,|\.| except| but)/i.exec(
-    baseline.parsed.descriptionRaw,
-  );
-  if (inheritanceMatch?.[1]) {
-    const parentId = `spell.${slug(inheritanceMatch[1])}`;
-    const reason = availableCanonicalIds.has(parentId)
-      ? "Generic ingestion cannot safely determine inherited paths and overrides."
-      : `The required parent ${parentId} has no canonical record.`;
-    throw new NormalizationIssue("schema", "inheritance-requires-manual-resolution", `${reason} Raw basis: ${inheritanceMatch[0]}`);
-  }
+  const inheritanceReference = detectSpellInheritance(baseline.parsed, availableCanonicalSpells);
 
   const parsed = baseline.parsed;
   const normalizedClassification = classification(parsed.schoolRaw);
@@ -456,6 +643,31 @@ export function generateCanonicalBundle(
     anchor_text_raw: anchor,
     source_href: null,
   });
+  if (inheritanceReference) {
+    const inheritanceEvidence = baselineEvidence(
+      "spell_raw.description_raw",
+      inheritanceReference.basisRaw,
+    );
+    addEntity(
+      inheritanceReference.parentId,
+      "spell",
+      inheritanceReference.parentName,
+      {
+        observation_id: baseline.observationId,
+        source_field: "spell_raw.description_raw",
+        anchor_text_raw: inheritanceReference.parentName,
+        source_href: null,
+      },
+      hasCanonicalSpell(availableCanonicalSpells, inheritanceReference.parentId) ? "resolved" : "stub",
+    );
+    addRelationship(
+      "functions_like",
+      "spell",
+      inheritanceReference.parentId,
+      inheritanceReference.parentName,
+      inheritanceEvidence,
+    );
+  }
   const schoolId = `magic-school.${slug(normalizedClassification.school)}`;
   addEntity(schoolId, "magic_school", normalizedClassification.school, {
     observation_id: baseline.observationId,
@@ -492,6 +704,13 @@ export function generateCanonicalBundle(
       message: `AoN publication page ${JSON.stringify(parsed.sourcePageRaw)} is not a positive integer; the raw value remains in the observation and the canonical page is unknown.`,
     });
   }
+  if (inheritanceReference && !canonicalRecord(availableCanonicalSpells, inheritanceReference.parentId)) {
+    warnings.push({
+      code: "UNRESOLVED_INHERITANCE",
+      field_path: "/rules_inheritance/0",
+      message: `The explicit parent ${inheritanceReference.parentId} is not canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized.`,
+    });
+  }
   const comparisonFields: Array<[keyof ParsedSpellPage, string]> = [
     ["schoolRaw", "/classification"], ["levelsRaw", "/levels"], ["castingTimeRaw", "/casting/time"],
     ["componentsRaw", "/casting/components_raw"], ["rangeRaw", "/effect/range"],
@@ -508,7 +727,7 @@ export function generateCanonicalBundle(
   }
 
   const relationships = [...relationshipMap.values()].sort((left, right) => left.relationship_id.localeCompare(right.relationship_id));
-  const canonical = {
+  const canonical: ValidatedJson = {
     $schema: "../../schemas/canonical-spell.schema.json",
     schema_version: "0.1.0",
     spell_id: spellId,
@@ -553,8 +772,22 @@ export function generateCanonicalBundle(
       decision: "normalized",
       note: "AoN baseline selected under provenance-first-v0; comparison observations remain attached.",
     })),
-    normalization: { status: "validated", normalizer_version: "0.1.1-level-zero-bulk", warnings },
+    normalization: {
+      status: inheritanceReference && !canonicalRecord(availableCanonicalSpells, inheritanceReference.parentId)
+        ? "needs_review"
+        : "validated",
+      normalizer_version: "0.1.2-explicit-inheritance",
+      warnings,
+    },
   };
+  if (inheritanceReference) {
+    canonical.rules_inheritance = [inheritanceRule(
+      inheritanceReference,
+      canonical,
+      baseline,
+      availableCanonicalSpells,
+    )];
+  }
 
   const observationIds = observations.map((item) => item.observationId);
   const fieldDecisions = [

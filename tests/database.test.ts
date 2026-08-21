@@ -4,6 +4,7 @@ import { createLocalPrisma } from "../src/db/client.js";
 import { checkDatabase } from "../src/ingestion/importer.js";
 import {
   findSpell,
+  findResolvedSpell,
   ingestionQueueSummary,
   listIngestionQueue,
   searchRules,
@@ -47,25 +48,37 @@ describe("ingested spell catalog", () => {
     expect(clericNine.map((entry) => entry.spell.spellId)).toContain("spell.miracle");
   });
 
+  it("materializes inherited spell rules with an auditable trace", async () => {
+    const cureModerate = await findResolvedSpell(prisma, "Cure Moderate Wounds");
+
+    expect(cureModerate?.record.spell_id).toBe("spell.cure-moderate-wounds");
+    expect(cureModerate?.lineage).toEqual(["spell.cure-light-wounds"]);
+    expect(cureModerate?.applied).toContainEqual(expect.objectContaining({
+      fromSpellId: "spell.cure-light-wounds",
+      inheritedPaths: ["/casting", "/effect", "/description/raw"],
+      overridePaths: ["/description/raw"],
+    }));
+    expect((cureModerate?.record.description as { raw: string }).raw).toContain("2d8 points");
+  });
+
   it("tracks the complete level-0 ingestion catalog", async () => {
     const summary = await ingestionQueueSummary(prisma);
     expect(summary.total).toBe(53);
     expect(summary.byStatus).toEqual({
-      ingested: 44,
+      ingested: 50,
       schema_issue: 1,
       scope_issue: 2,
-      source_issue: 6,
     });
     expect(summary.batches).toHaveLength(6);
   });
 
   it("derives ingested status and preserves explicit scope issues", async () => {
     const ingested = await listIngestionQueue(prisma, { status: "ingested" });
-    expect(ingested).toHaveLength(44);
+    expect(ingested).toHaveLength(50);
     expect(ingested.map((item) => item.entityId)).toContain("spell.light");
 
     const issues = await listIngestionQueue(prisma, { issuesOnly: true });
-    expect(issues).toHaveLength(9);
+    expect(issues).toHaveLength(3);
     expect(issues.filter((item) => item.status === "scope_issue").map((item) => item.entityId)).toEqual([
       "spell.enhanced-diplomacy",
       "spell.sign-of-the-dawnflower",

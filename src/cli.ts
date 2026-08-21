@@ -7,6 +7,7 @@ import {
 import { validatePackage } from "./ingestion/validate.js";
 import {
   findSpell,
+  findResolvedSpell,
   ingestionQueueSummary,
   listIngestionQueue,
   searchRules,
@@ -43,6 +44,12 @@ async function main(): Promise<void> {
         const query = args.join(" ");
         if (!query) throw new Error("Usage: pnpm tsx src/cli.ts spell <name-or-id>");
         print(await findSpell(prisma, query));
+        break;
+      }
+      case "spell-resolved": {
+        const query = args.join(" ");
+        if (!query) throw new Error("Usage: pnpm tsx src/cli.ts spell-resolved <name-or-id>");
+        print(await findResolvedSpell(prisma, query));
         break;
       }
       case "search": {
@@ -91,6 +98,7 @@ async function main(): Promise<void> {
             "check",
             "stats",
             "spell <name-or-id>",
+            "spell-resolved <name-or-id>",
             "search <text>",
             "list <spell-list-id> [level]",
             "ingestion stats",

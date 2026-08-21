@@ -10,6 +10,10 @@ import addFormatsModule from "ajv-formats";
 
 import { projectRoot } from "../config.js";
 import type { ValidatedJson } from "../domain/json.js";
+import {
+  validateSpellInheritance,
+  type InheritableSpell,
+} from "../domain/spell-inheritance.js";
 
 
 interface JsonSchemaValidator {
@@ -377,6 +381,11 @@ export function validatePackage(): PackageStatistics {
     }
     for (const inheritance of record.rules_inheritance) {
       referenced.add(inheritance.from_spell_id);
+      if (!observations.has(inheritance.basis.observation_id)) {
+        throw new Error(
+          `${record.spell_id} inheritance uses unknown observation ${inheritance.basis.observation_id}`,
+        );
+      }
     }
     for (const entityId of referenced) {
       if (!registeredIds.has(entityId)) {
@@ -384,6 +393,7 @@ export function validatePackage(): PackageStatistics {
       }
     }
   }
+  validateSpellInheritance(canonicalById.values() as Iterable<InheritableSpell>);
 
   const variantPaths = directJsonFiles(path.join(projectRoot, "data", "variants"));
   const variantsById = new Map<string, ValidatedJson>();

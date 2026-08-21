@@ -1,4 +1,8 @@
 import type { PrismaClient } from "../generated/prisma/client.js";
+import {
+  resolveSpellInheritance,
+  type InheritableSpell,
+} from "../domain/spell-inheritance.js";
 
 
 export async function findSpell(prisma: PrismaClient, nameOrId: string) {
@@ -17,6 +21,35 @@ export async function findSpell(prisma: PrismaClient, nameOrId: string) {
       mythicVariant: { include: { augmentations: true } },
     },
   });
+}
+
+
+export async function findResolvedSpell(prisma: PrismaClient, nameOrId: string) {
+  const target = await prisma.canonicalSpell.findFirst({
+    where: {
+      OR: [{ spellId: nameOrId }, { name: { equals: nameOrId } }],
+    },
+    select: { spellId: true },
+  });
+  if (!target) return null;
+
+  const records = new Map<string, InheritableSpell>();
+  const pending = [target.spellId];
+  while (pending.length > 0) {
+    const spellId = pending.pop();
+    if (!spellId || records.has(spellId)) continue;
+    const row = await prisma.canonicalSpell.findUnique({
+      where: { spellId },
+      select: { payload: true },
+    });
+    if (!row) continue;
+    const record = row.payload as unknown as InheritableSpell;
+    records.set(spellId, record);
+    for (const inheritance of record.rules_inheritance) {
+      if (!records.has(inheritance.from_spell_id)) pending.push(inheritance.from_spell_id);
+    }
+  }
+  return resolveSpellInheritance(records.values(), target.spellId);
 }
 
 

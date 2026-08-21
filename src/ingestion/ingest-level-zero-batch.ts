@@ -601,7 +601,7 @@ async function ingestSpell(
   spell: ValidatedJson,
   legacyIndex: CapturedArtifact,
   legacyEntries: ReturnType<typeof parseLegacyIndex>,
-  availableCanonicalIds: Set<string>,
+  availableCanonicalSpells: Map<string, ValidatedJson>,
   bulkEntities: Map<string, GeneratedEntity>,
   baseEntityIds: Set<string>,
   artifactScope: string,
@@ -652,14 +652,14 @@ async function ingestSpell(
       inputs.push(d20Observation.input);
     }
 
-    const bundle = generateCanonicalBundle(spell.spell_id, inputs, availableCanonicalIds);
+    const bundle = generateCanonicalBundle(spell.spell_id, inputs, availableCanonicalSpells);
     for (const entity of bundle.entities) {
       if (!baseEntityIds.has(entity.entity_id)) mergeEntity(bulkEntities, entity);
     }
     writeGeneratedJson(path.join(projectRoot, "data", "canonical", `${spellSlug}.json`), bundle.canonical, refreshCanonical);
     writeGeneratedJson(path.join(projectRoot, "data", "decisions", `${spellSlug}.json`), bundle.decision, refreshCanonical);
     delete spell.issue;
-    availableCanonicalIds.add(spell.spell_id);
+    availableCanonicalSpells.set(spell.spell_id, bundle.canonical);
     return "ingested";
   } catch (error) {
     for (const input of inputs) {
@@ -705,8 +705,11 @@ export async function ingestSpellLevelBatch(
   if (fs.existsSync(registryPath)) {
     for (const entity of loadJson(registryPath).entities) bulkEntities.set(entity.entity_id, entity);
   }
-  const availableCanonicalIds = new Set(
-    directJsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) => loadJson(filename).spell_id),
+  const availableCanonicalSpells = new Map(
+    directJsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) => {
+      const record = loadJson(filename);
+      return [record.spell_id, record] as const;
+    }),
   );
   const report = { batch: batchNumber, ingested: [] as string[], issues: [] as string[], skipped: [] as string[] };
   for (const spell of selected) {
@@ -721,7 +724,7 @@ export async function ingestSpellLevelBatch(
       spell,
       legacyIndex,
       legacyEntries,
-      availableCanonicalIds,
+      availableCanonicalSpells,
       bulkEntities,
       baseEntityIds,
       artifactScope,
@@ -736,7 +739,7 @@ export async function ingestSpellLevelBatch(
     }, true);
   }
   if (finalize) {
-    refreshDiscoveredDependencies(manifest, availableCanonicalIds);
+    refreshDiscoveredDependencies(manifest, new Set(availableCanonicalSpells.keys()));
     writeGeneratedJson(manifestPath, manifest, true);
     validatePackage();
   } else {
@@ -806,12 +809,15 @@ export async function ingestDiscoveredDependencies() {
   if (fs.existsSync(registryPath)) {
     for (const entity of loadJson(registryPath).entities) bulkEntities.set(entity.entity_id, entity);
   }
-  const availableCanonicalIds = new Set(
-    directJsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) => loadJson(filename).spell_id),
+  const availableCanonicalSpells = new Map(
+    directJsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) => {
+      const record = loadJson(filename);
+      return [record.spell_id, record] as const;
+    }),
   );
   const report = { ingested: [] as string[], issues: [] as string[], skipped: [] as string[] };
   for (const dependency of manifest.discovered_dependencies ?? []) {
-    if (availableCanonicalIds.has(dependency.spell_id) && !refreshCanonical) {
+    if (availableCanonicalSpells.has(dependency.spell_id) && !refreshCanonical) {
       dependency.status = "ingested";
       delete dependency.issue;
       report.skipped.push(dependency.name);
@@ -826,7 +832,7 @@ export async function ingestDiscoveredDependencies() {
       candidate,
       legacyIndex,
       legacyEntries,
-      availableCanonicalIds,
+      availableCanonicalSpells,
       bulkEntities,
       baseEntityIds,
       "dependencies",
@@ -843,7 +849,7 @@ export async function ingestDiscoveredDependencies() {
       entities: [...bulkEntities.values()].sort((left, right) => left.entity_id.localeCompare(right.entity_id)),
     }, true);
   }
-  refreshDiscoveredDependencies(manifest, availableCanonicalIds);
+  refreshDiscoveredDependencies(manifest, new Set(availableCanonicalSpells.keys()));
   writeGeneratedJson(manifestPath, manifest, true);
   validatePackage();
   return report;
