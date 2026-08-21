@@ -8,6 +8,7 @@ import {
   spellListQualificationsLabel,
   type SpellListQualification,
 } from "../src/domain/spell-lists.js";
+import { parseLevels } from "../src/ingestion/normalize-level-zero.js";
 
 
 interface JsonSchemaValidator {
@@ -84,5 +85,109 @@ describe("qualified spell-list entries", () => {
       "must worship the associated deity; Publication: Occult Mysteries (PZO9436)",
     );
     expect(spellListQualificationsLabel([])).toBeNull();
+  });
+
+  it("applies a trailing deity qualification to the whole class group", () => {
+    const levels = parseLevels(
+      "cleric 1, oracle 1, wizard 1 (Rovagug)",
+      "Inner Sea Gods",
+    );
+
+    expect(levels).toHaveLength(3);
+    expect(levels.map((level) => level.spell_list_id)).toEqual([
+      "spell-list.cleric",
+      "spell-list.oracle",
+      "spell-list.wizard",
+    ]);
+    expect(levels.every((level) => level.qualifications[0]?.kind === "deity")).toBe(true);
+    expect(levels[0]?.qualifications[0]).toEqual({
+      kind: "deity",
+      deity: { entity_id: "deity.rovagug", name: "Rovagug" },
+      raw: "Rovagug",
+    });
+  });
+
+  it("keeps publication scope attached to its mystery alternative", () => {
+    const levels = parseLevels(
+      "bard 3; Mystery juju(PAP39/PZO9039) 1, juju(PZO9436) 1",
+      "Occult Mysteries",
+    );
+
+    expect(levels).toHaveLength(3);
+    expect(levels.slice(1).map((level) => ({
+      list: level.spell_list_id,
+      level: level.level,
+      qualifications: level.qualifications,
+    }))).toEqual([
+      {
+        list: "spell-list.oracle",
+        level: 1,
+        qualifications: [
+          {
+            kind: "mystery",
+            mystery: { entity_id: "mystery.juju", name: "juju" },
+            raw: "Mystery juju",
+          },
+          {
+            kind: "publication",
+            publication_scope: {
+              entity_id: null,
+              name: null,
+              product_code: "PAP39/PZO9039",
+            },
+            raw: "PAP39/PZO9039",
+          },
+        ],
+      },
+      {
+        list: "spell-list.oracle",
+        level: 1,
+        qualifications: [
+          {
+            kind: "mystery",
+            mystery: { entity_id: "mystery.juju", name: "juju" },
+            raw: "Mystery juju",
+          },
+          {
+            kind: "publication",
+            publication_scope: {
+              entity_id: null,
+              name: null,
+              product_code: "PZO9436",
+            },
+            raw: "PZO9436",
+          },
+        ],
+      },
+    ]);
+  });
+
+  it("normalizes explicit archetype and generic conditional restrictions", () => {
+    expect(parseLevels("Archetype sanctified slayer (inquisitor) 2", "Advanced Class Guide"))
+      .toContainEqual(expect.objectContaining({
+        spell_list_id: "spell-list.inquisitor",
+        level: 2,
+        qualifications: [{
+          kind: "archetype",
+          archetype: {
+            entity_id: "archetype.sanctified-slayer",
+            name: "sanctified slayer",
+          },
+          raw: "Archetype sanctified slayer",
+        }],
+      }));
+    expect(parseLevels(
+      "cleric/oracle 7 (must worship the associated deity)",
+      "Book of the Damned",
+    )).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        spell_list_id: "spell-list.cleric",
+        qualifications: [expect.objectContaining({ kind: "conditional" })],
+      }),
+      expect.objectContaining({
+        spell_list_id: "spell-list.oracle",
+        qualifications: [expect.objectContaining({ kind: "conditional" })],
+      }),
+    ]));
   });
 });

@@ -56,6 +56,12 @@ array ordinal as membership identity, while `spell_list_qualifications` stores
 each qualification's kind and complete JSON payload. This keeps kinds queryable
 without flattening or discarding their nested domain fields.
 
+Normalization treats a trailing parenthetical after a comma-separated class
+group as a restriction on every entry in that group. Known deity names become
+deity qualifications; explicit archetypes and generic conditions retain their
+own typed payloads. `Mystery` sections normalize onto the Oracle spell list, and
+each mystery alternative keeps its own optional publication product-code scope.
+
 ## Derived representations
 
 Human-facing HTML and any future LLM-facing Markdown are replaceable read

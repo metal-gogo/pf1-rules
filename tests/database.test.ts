@@ -48,6 +48,30 @@ describe("ingested spell catalog", () => {
     expect(clericNine.map((entry) => entry.spell.spellId)).toContain("spell.miracle");
   });
 
+  it("persists mystery access on the base class list without flattening it", async () => {
+    const fireball = await findSpell(prisma, "Fireball");
+    const flameMystery = fireball?.levels.find((level) =>
+      level.spellListId === "spell-list.oracle" &&
+      level.qualifications.some((qualification) => qualification.kind === "mystery")
+    );
+
+    expect(flameMystery).toEqual(expect.objectContaining({
+      listKind: "class",
+      listName: "oracle",
+      spellLevel: 3,
+    }));
+    expect(flameMystery?.qualifications).toContainEqual(expect.objectContaining({
+      kind: "mystery",
+      payload: {
+        kind: "mystery",
+        mystery: { entity_id: "mystery.flame", name: "flame" },
+        raw: "Mystery flame",
+      },
+    }));
+    expect(fireball?.levels.map((level) => level.spellListId))
+      .not.toContain("spell-list.flame-mystery");
+  });
+
   it("preserves catalog summaries and selects a sourced canonical description", async () => {
     const light = await prisma.canonicalSpell.findUnique({
       where: { spellId: "spell.light" },

@@ -87,6 +87,20 @@ describe("local rules browser", () => {
     expect(html).toContain('/spells/spell.miracle');
   });
 
+  it("labels qualified class access without exposing a synthetic spell list", async () => {
+    const classResponse = await fetch(`${baseUrl}/classes/oracle`);
+    const classHtml = await classResponse.text();
+    expect(classResponse.status).toBe(200);
+    expect(classHtml).toContain("Fireball");
+    expect(classHtml).toContain("Mystery: flame");
+
+    const spellResponse = await fetch(`${baseUrl}/spells/spell.fireball`);
+    const spellHtml = await spellResponse.text();
+    expect(spellResponse.status).toBe(200);
+    expect(spellHtml).toContain("Oracle</a> 3 — Mystery: flame");
+    expect(spellHtml).not.toContain("Flame Mystery Bonus Spell List");
+  });
+
   it("serves the interactive class filters", async () => {
     const response = await fetch(`${baseUrl}/class-spells.js`);
     const script = await response.text();

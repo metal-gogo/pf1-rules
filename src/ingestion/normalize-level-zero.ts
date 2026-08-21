@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 
 import type { ValidatedJson } from "../domain/json.js";
+import type { SpellListQualification } from "../domain/spell-lists.js";
 import { readJsonPointer } from "../domain/spell-inheritance.js";
 import type { ParsedLink, ParsedSpellPage, SiteId } from "./spell-page-parser.js";
 import { slug } from "./spell-page-parser.js";
@@ -57,26 +58,172 @@ function classification(raw: string | null) {
 }
 
 
-function parseLevels(raw: string | null, publicationBook: string | null) {
+const knownDeityNames = new Set([
+  "abadar", "angradd", "asmodeus", "besmara", "bolka", "calistria",
+  "cayden cailean", "desna", "dranngvit", "erastil", "folgrit", "geryon",
+  "gorum", "gozreh", "groetus", "grundinnar", "hadregash", "hastur",
+  "iomedae", "irori", "kols", "magrim", "mephistopheles", "milani",
+  "nethys", "norgorber", "pharasma", "ragathiel", "rovagug", "sarenrae",
+  "shelyn", "torag", "trudd", "xhamen-dor", "ydersius", "zon-kuthon",
+  "zursvaater", "zyphus",
+]);
+
+
+function splitTopLevel(raw: string, separator: string): string[] {
+  const values: string[] = [];
+  let depth = 0;
+  let current = "";
+  for (const character of raw) {
+    if (character === "(") depth += 1;
+    if (character === ")") depth -= 1;
+    if (character === separator && depth === 0) {
+      if (current.trim()) values.push(current.trim());
+      current = "";
+    } else {
+      current += character;
+    }
+  }
+  if (current.trim()) values.push(current.trim());
+  return values;
+}
+
+
+function publicationQualification(raw: string): SpellListQualification {
+  return {
+    kind: "publication",
+    publication_scope: { entity_id: null, name: null, product_code: raw },
+    raw,
+  };
+}
+
+
+function parentheticalQualifications(raw: string): SpellListQualification[] {
+  const normalized = raw.trim();
+  if (/^(?:PAP|PZO)[A-Z0-9/-]*$/i.test(normalized)) {
+    return [publicationQualification(normalized)];
+  }
+  const archetype = /^(.*?)(?:\s+archetype)$/i.exec(normalized)?.[1]?.trim();
+  if (archetype) {
+    return [{
+      kind: "archetype",
+      archetype: { entity_id: `archetype.${slug(archetype)}`, name: archetype },
+      raw: normalized,
+    }];
+  }
+  const explicitDeity = /^(?:deity:\s*|worship(?:per|er)s?\s+of\s+)(.+)$/i.exec(normalized)?.[1]?.trim();
+  const deityName = explicitDeity ?? (knownDeityNames.has(normalized.toLocaleLowerCase("en-US")) ? normalized : null);
+  if (deityName) {
+    return [{
+      kind: "deity",
+      deity: { entity_id: `deity.${slug(deityName)}`, name: deityName },
+      raw: normalized,
+    }];
+  }
+  return [{
+    kind: "conditional",
+    condition: {
+      raw: normalized,
+      search_text: normalized.toLocaleLowerCase("en-US").replace(/\s+/g, " "),
+    },
+    raw: normalized,
+  }];
+}
+
+
+function mysteryEntry(raw: string) {
+  const match = /^(.*?)\s+([0-9])$/.exec(raw.trim());
+  if (!match?.[1] || match[2] === undefined) {
+    throw new NormalizationIssue("schema", "unparsed-spell-level", `Cannot normalize mystery entry: ${raw}`);
+  }
+  const scopedName = match[1].trim();
+  const publicationMatch = /^(.*?)\(([^()]*(?:PAP|PZO)[^()]*)\)$/.exec(scopedName);
+  const mysteryName = (publicationMatch?.[1] ?? scopedName).trim();
+  const qualifications: SpellListQualification[] = [{
+    kind: "mystery",
+    mystery: { entity_id: `mystery.${slug(mysteryName)}`, name: mysteryName },
+    raw: `Mystery ${mysteryName}`,
+  }];
+  if (publicationMatch?.[2]) {
+    qualifications.push(publicationQualification(publicationMatch[2].trim()));
+  }
+  return {
+    spell_list_id: "spell-list.oracle",
+    list_kind: "class",
+    list_name: "oracle",
+    level: Number(match[2]),
+    scope: "later_first_party",
+    raw: `Mystery ${raw.trim()}`,
+    qualifications,
+  };
+}
+
+
+function archetypeEntry(raw: string) {
+  const match = /^(.*?)\s+\(([^()]+)\)\s+([0-9])$/.exec(raw.trim());
+  if (!match?.[1] || !match[2] || match[3] === undefined) {
+    throw new NormalizationIssue("schema", "unparsed-spell-level", `Cannot normalize archetype entry: ${raw}`);
+  }
+  const archetypeName = match[1].trim();
+  const listName = match[2].trim().toLocaleLowerCase("en-US");
+  return {
+    spell_list_id: `spell-list.${slug(listName)}`,
+    list_kind: "class",
+    list_name: listName,
+    level: Number(match[3]),
+    scope: "later_first_party",
+    raw: `Archetype ${raw.trim()}`,
+    qualifications: [{
+      kind: "archetype",
+      archetype: { entity_id: `archetype.${slug(archetypeName)}`, name: archetypeName },
+      raw: `Archetype ${archetypeName}`,
+    }] satisfies SpellListQualification[],
+  };
+}
+
+
+export function parseLevels(raw: string | null, publicationBook: string | null) {
   if (!raw) throw new NormalizationIssue("source", "missing-levels", "AoN did not expose spell levels.");
   const coreBook = /core rulebook/i.test(publicationBook ?? "");
   const coreLists = new Set(["bard", "cleric", "druid", "paladin", "ranger", "sorcerer", "wizard"]);
-  return raw.split(",").map((entry) => {
-    const trimmed = entry.trim();
-    const match = /^(.*?)\s+([0-9])$/.exec(trimmed);
-    if (!match?.[1] || match[2] === undefined) {
-      throw new NormalizationIssue("schema", "unparsed-spell-level", `Cannot normalize spell-list entry: ${trimmed}`);
+  const normalizedSections = raw.replace(/,\s+Mystery\s+/gi, "; Mystery ");
+  return splitTopLevel(normalizedSections, ";").flatMap((section) => {
+    if (/^Mystery\s+/i.test(section)) {
+      return splitTopLevel(section.replace(/^Mystery\s+/i, ""), ",")
+        .map(mysteryEntry);
     }
-    const listName = match[1].trim().toLocaleLowerCase("en-US");
-    return {
-      spell_list_id: `spell-list.${slug(listName)}`,
-      list_kind: "class",
-      list_name: listName,
-      level: Number(match[2]),
-      scope: coreBook && coreLists.has(listName) ? "core" : "later_first_party",
-      raw: trimmed,
-      qualifications: [],
-    };
+    if (/^Archetype\s+/i.test(section)) {
+      return [archetypeEntry(section.replace(/^Archetype\s+/i, ""))];
+    }
+
+    const groupQualification = /\s+\(([^()]*)\)$/.exec(section);
+    const unqualifiedSection = groupQualification
+      ? section.slice(0, groupQualification.index).trim()
+      : section;
+    const qualifications = groupQualification
+      ? parentheticalQualifications(groupQualification[1] ?? "")
+      : [];
+    return splitTopLevel(unqualifiedSection, ",").flatMap((entry) => {
+      const trimmed = entry.trim();
+      const match = /^(.*?)\s+([0-9])$/.exec(trimmed);
+      if (!match?.[1] || match[2] === undefined) {
+        throw new NormalizationIssue("schema", "unparsed-spell-level", `Cannot normalize spell-list entry: ${trimmed}`);
+      }
+      return match[1].split("/").map((combinedListName) => {
+        const listName = combinedListName.trim().toLocaleLowerCase("en-US");
+        const entryRaw = groupQualification
+          ? `${trimmed} (${groupQualification[1]})`
+          : trimmed;
+        return {
+          spell_list_id: `spell-list.${slug(listName)}`,
+          list_kind: "class",
+          list_name: listName,
+          level: Number(match[2]),
+          scope: coreBook && coreLists.has(listName) ? "core" : "later_first_party",
+          raw: entryRaw,
+          qualifications,
+        };
+      });
+    });
   });
 }
 
@@ -702,6 +849,24 @@ export function generateCanonicalBundle(
   for (const level of levels) {
     addEntity(level.spell_list_id, "spell_list", `${level.list_name} Spell List`, { observation_id: baseline.observationId, source_field: "spell_raw.levels_raw", anchor_text_raw: level.raw, source_href: null });
     addRelationship("appears_on_spell_list", "spell_list", level.spell_list_id, `${level.list_name} Spell List`, baselineEvidence("spell_raw.levels_raw", level.raw));
+    for (const qualification of level.qualifications) {
+      const qualifiedEntity = qualification.kind === "deity"
+        ? qualification.deity
+        : qualification.kind === "mystery"
+          ? qualification.mystery
+          : qualification.kind === "archetype"
+            ? qualification.archetype
+            : qualification.kind === "publication"
+              ? qualification.publication_scope
+              : null;
+      if (!qualifiedEntity?.entity_id || !qualifiedEntity.name) continue;
+      addEntity(qualifiedEntity.entity_id, qualification.kind, qualifiedEntity.name, {
+        observation_id: baseline.observationId,
+        source_field: "spell_raw.levels_raw",
+        anchor_text_raw: qualification.raw,
+        source_href: null,
+      });
+    }
   }
   const pubId = publicationId(book);
   addEntity(pubId, "publication", book, { observation_id: baseline.observationId, source_field: "spell_raw.source_book_raw", anchor_text_raw: parsed.sourceNoticeRaw, source_href: null });
@@ -794,7 +959,7 @@ export function generateCanonicalBundle(
       status: inheritanceReference && !canResolveCanonicalSpell(availableCanonicalSpells, inheritanceReference.parentId)
         ? "needs_review"
         : "validated",
-      normalizer_version: "0.1.2-explicit-inheritance",
+      normalizer_version: "0.1.3-qualified-spell-lists",
       warnings,
     },
   };
