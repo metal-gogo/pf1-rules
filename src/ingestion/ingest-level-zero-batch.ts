@@ -403,9 +403,15 @@ function d20CoverageCheck(
   searchCapture: CapturedArtifact,
   artifactScope: string,
 ): ValidatedJson {
-  const exactResults = d20SearchResultUrls(searchCapture.body, searchCapture.url).filter((url) =>
-    slug(url.split("/").filter(Boolean).at(-1) ?? "") === slug(spell.name),
-  );
+  const query = d20CandidateUrls(spell.name)[0]!;
+  const content = searchCapture.body.toLocaleLowerCase("en-US");
+  const normalizedQuery = query.toLocaleLowerCase("en-US");
+  let matchCount = 0;
+  let offset = 0;
+  while ((offset = content.indexOf(normalizedQuery, offset)) >= 0) {
+    matchCount += 1;
+    offset += normalizedQuery.length;
+  }
   return {
     $schema: "../../schemas/source-coverage-check.schema.json",
     schema_version: "0.1.0",
@@ -421,14 +427,16 @@ function d20CoverageCheck(
     },
     check: {
       method: "exact_text_search",
-      query: spell.name,
+      query,
       case_sensitive: false,
-      scope_raw: "Captured d20PFSRD site-search results plus deterministic exact, grouped-name, and numbered-name article candidates",
+      scope_raw: "Captured d20PFSRD site-search results; exact deterministic spell-article URL after grouped-name, numbered-name, and search candidates failed bounded-heading validation",
     },
     result: {
-      status: "not_found",
-      match_count: 0,
-      note: `${spell.name} had no exact bounded spell heading in the checked d20PFSRD candidates. This is a coverage result, not an empty observation.${exactResults.length > 0 ? " Exact-slug search links were rejected because their articles did not contain the requested heading." : ""}`,
+      status: matchCount === 0 ? "not_found" : "found",
+      match_count: matchCount,
+      note: matchCount === 0
+        ? `${spell.name} had no exact spell-article URL in the captured search results, and no checked alias or result article contained its bounded heading. This is negative coverage, not an empty observation.`
+        : `${spell.name} had an exact spell-article URL in search results, but that article did not contain the requested bounded heading. No d20PFSRD observation was accepted.`,
     },
   };
 }
@@ -493,6 +501,12 @@ function entitiesFromObservation(spellId: string, input: ParsedObservationInput)
 
 function setIssue(spell: ValidatedJson, kind: "schema" | "source", code: string, message: string): void {
   spell.issue = { kind, code: slug(code), message };
+}
+
+
+function isD20ResolutionIssue(spell: ValidatedJson): boolean {
+  if (spell.issue?.code === "d20-name-mismatch") return true;
+  return /HTTP \d+ while retrieving https:\/\/www\.d20pfsrd\.com\//i.test(spell.issue?.message ?? "");
 }
 
 
@@ -668,6 +682,8 @@ export async function ingestSpellLevelBatch(
   level: number,
   batchNumber: number,
   assertSourcePolicy = true,
+  retryD20Only = false,
+  finalize = true,
 ) {
   if (!Number.isInteger(batchNumber) || batchNumber < 1) throw new Error("Batch number must be a positive integer.");
   const { artifactScope, manifestPath, registryId, registryPath } = levelPaths(level);
@@ -679,7 +695,9 @@ export async function ingestSpellLevelBatch(
   );
   const legacyEntries = parseLegacyIndex(legacyIndex.body, legacyIndex.url);
   const manifest = loadJson(manifestPath);
-  const selected = manifest.spells.filter((spell: ValidatedJson) => spell.batch === batchNumber);
+  const selected = manifest.spells.filter((spell: ValidatedJson) =>
+    spell.batch === batchNumber && (!retryD20Only || isD20ResolutionIssue(spell)),
+  );
   if (selected.length === 0) throw new Error(`No level-${level} ingestion batch ${batchNumber} exists.`);
 
   const baseEntityIds = registeredIdsExcludingBulk(registryPath);
@@ -693,10 +711,9 @@ export async function ingestSpellLevelBatch(
   const report = { batch: batchNumber, ingested: [] as string[], issues: [] as string[], skipped: [] as string[] };
   for (const spell of selected) {
     const canonicalPath = path.join(projectRoot, "data", "canonical", `${spell.spell_id.replace(/^spell\./, "")}.json`);
-    if (
-      (fs.existsSync(canonicalPath) && (!refreshCanonical || reviewedCanonicalIds.has(spell.spell_id))) ||
-      spell.issue?.kind === "scope"
-    ) {
+    const canonicalExists = fs.existsSync(canonicalPath) && (!refreshCanonical || reviewedCanonicalIds.has(spell.spell_id));
+    if (canonicalExists || spell.issue?.kind === "scope") {
+      if (retryD20Only && canonicalExists && isD20ResolutionIssue(spell)) delete spell.issue;
       report.skipped.push(spell.name);
       continue;
     }
@@ -718,10 +735,60 @@ export async function ingestSpellLevelBatch(
       entities: [...bulkEntities.values()].sort((left, right) => left.entity_id.localeCompare(right.entity_id)),
     }, true);
   }
-  refreshDiscoveredDependencies(manifest, availableCanonicalIds);
-  writeGeneratedJson(manifestPath, manifest, true);
-  validatePackage();
+  if (finalize) {
+    refreshDiscoveredDependencies(manifest, availableCanonicalIds);
+    writeGeneratedJson(manifestPath, manifest, true);
+    validatePackage();
+  } else {
+    writeGeneratedJson(manifestPath, manifest, true);
+  }
   return report;
+}
+
+
+export async function retryD20SourceFailures(requestedLevel?: number) {
+  const levels = requestedLevel === undefined ? Array.from({ length: 10 }, (_value, level) => level) : [requestedLevel];
+  if (levels.some((level) => !Number.isInteger(level) || level < 0 || level > 9)) {
+    throw new Error("Retry level must be an integer from 0 through 9, or omitted for all levels.");
+  }
+  await assertIngestionSourcesAllowed();
+  const summary = {
+    batches: 0,
+    ingested: 0,
+    issues: 0,
+    skipped: 0,
+    levels: [] as Array<{ level: number; batches: number; ingested: number; issues: number; skipped: number }>,
+  };
+  for (const level of levels) {
+    const { manifestPath } = levelPaths(level);
+    const manifest = loadJson(manifestPath);
+    const affectedBatches = [...new Set<number>(
+      manifest.spells.filter(isD20ResolutionIssue).map((spell: ValidatedJson) => Number(spell.batch)),
+    )].sort((left, right) => left - right);
+    const levelSummary = { level, batches: affectedBatches.length, ingested: 0, issues: 0, skipped: 0 };
+    for (const batch of affectedBatches) {
+      const report = await ingestSpellLevelBatch(level, batch, false, true, false);
+      levelSummary.ingested += report.ingested.length;
+      levelSummary.issues += report.issues.length;
+      levelSummary.skipped += report.skipped.length;
+      process.stderr.write(
+        `Retried level ${level} batch ${batch}: ${report.ingested.length} ingested, ${report.issues.length} issues, ${report.skipped.length} skipped.\n`,
+      );
+    }
+    const refreshedManifest = loadJson(manifestPath);
+    const canonicalIds = new Set(
+      directJsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) => loadJson(filename).spell_id),
+    );
+    refreshDiscoveredDependencies(refreshedManifest, canonicalIds);
+    writeGeneratedJson(manifestPath, refreshedManifest, true);
+    summary.batches += levelSummary.batches;
+    summary.ingested += levelSummary.ingested;
+    summary.issues += levelSummary.issues;
+    summary.skipped += levelSummary.skipped;
+    summary.levels.push(levelSummary);
+  }
+  validatePackage();
+  return summary;
 }
 
 
@@ -815,7 +882,9 @@ const command = process.argv[2];
 const level = Number(process.argv[3] ?? "0");
 const startBatch = Number(process.argv[4] ?? "1");
 const endBatch = process.argv[5] === undefined ? undefined : Number(process.argv[5]);
-const run = command === "dependencies"
+const run = command === "retry-d20"
+  ? retryD20SourceFailures(process.argv[3] === undefined || process.argv[3] === "all" ? undefined : level)
+  : command === "dependencies"
   ? ingestDiscoveredDependencies()
   : command === "all"
     ? ingestAllSpellLevelBatches(level, startBatch, endBatch)
