@@ -16,6 +16,7 @@ that support each decision.
 - [Schema cleanliness audit](../findings/09-schema-cleanliness-audit.md)
 - [Schema evolution notes](../findings/11-schema-evolution-after-four-spells.md)
 - [Prisma and SQLite foundation](../findings/16-prisma-sqlite-foundation.md)
+- [Native Markdown read model for LLM use](../findings/29-native-markdown-read-model.md)
 
 Source conflicts are recorded for review rather than merged automatically. Raw
 snapshots and versioned JSON records keep the database reproducible without a
@@ -35,5 +36,13 @@ each completed chain and compares the result with the stored child, rejecting
 missing overrides, stale parent status, invalid pointers, overlapping parents,
 and cycles. `spell-resolved <name-or-id>` exposes the materialized record,
 lineage, and applied-path trace through the CLI.
+
+## Derived representations
+
+Human-facing HTML and any future LLM-facing Markdown are replaceable read
+models. They are rendered from canonical/query data and may include provenance,
+but they do not replace canonical JSON, source observations, or captured source
+artifacts. The [native Markdown design note](../findings/29-native-markdown-read-model.md)
+records a possible future route and content-negotiation contract.
 
 Return to the [project index](index.md).

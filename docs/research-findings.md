@@ -35,6 +35,8 @@
 - [Schema cleanliness audit](../findings/09-schema-cleanliness-audit.md)
 - [Schema evolution](../findings/11-schema-evolution-after-four-spells.md)
 - [Prisma and SQLite foundation](../findings/16-prisma-sqlite-foundation.md)
+- [`markdown.new` normalization evaluation](../findings/28-markdown-new-evaluation.md)
+- [Native Markdown read model for LLM use](../findings/29-native-markdown-read-model.md)
 
 Browse the complete [findings directory](../findings/) for the chronological
 decision record.
