@@ -672,13 +672,23 @@ export function ingestLevelZeroBatch(batchNumber: number) {
 }
 
 
-async function ingestAllSpellLevelBatches(level: number) {
+async function ingestAllSpellLevelBatches(level: number, startBatch = 1, endBatch?: number) {
+  if (!Number.isInteger(startBatch) || startBatch < 1) {
+    throw new Error("Start batch must be a positive integer.");
+  }
   const { manifestPath } = levelPaths(level);
   const manifest = loadJson(manifestPath);
   const batchCount = Math.max(0, ...manifest.spells.map((spell: ValidatedJson) => Number(spell.batch)));
+  if (startBatch > batchCount) {
+    throw new Error(`No level-${level} ingestion batch ${startBatch} exists.`);
+  }
+  const finalBatch = endBatch ?? batchCount;
+  if (!Number.isInteger(finalBatch) || finalBatch < startBatch || finalBatch > batchCount) {
+    throw new Error(`End batch must be an integer from ${startBatch} through ${batchCount}.`);
+  }
   const reports = [];
   await assertIngestionSourcesAllowed();
-  for (let batch = 1; batch <= batchCount; batch += 1) {
+  for (let batch = startBatch; batch <= finalBatch; batch += 1) {
     reports.push(await ingestSpellLevelBatch(level, batch, false));
   }
   return reports;
@@ -687,10 +697,12 @@ async function ingestAllSpellLevelBatches(level: number) {
 
 const command = process.argv[2];
 const level = Number(process.argv[3] ?? "0");
+const startBatch = Number(process.argv[4] ?? "1");
+const endBatch = process.argv[5] === undefined ? undefined : Number(process.argv[5]);
 const run = command === "dependencies"
   ? ingestDiscoveredDependencies()
   : command === "all"
-    ? ingestAllSpellLevelBatches(level)
+    ? ingestAllSpellLevelBatches(level, startBatch, endBatch)
     : ingestSpellLevelBatch(level, Number(command));
 run
   .then((report) => process.stdout.write(`${JSON.stringify(report, null, 2)}\n`))
