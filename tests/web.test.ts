@@ -51,9 +51,8 @@ describe("local rules browser", () => {
     expect(html).toContain('<h2 id="level-9">Level 9 Cleric Spells');
     expect(html).toContain('class="heading-count level-count"');
     expect(html).toContain('spells shown)</span></h2>');
-    expect(html).toContain('<th scope="col">Name</th><th scope="col">School</th><th scope="col">Description</th>');
-    expect(html).toContain('<th class="row-number" scope="col" aria-label="Row number">#</th>');
-    expect(html).toContain('<td class="row-number">1</td>');
+    expect(html).toContain('<th class="key-column" scope="col">Name</th><th class="school-column" scope="col">School</th><th class="components-column" scope="col"><a href="/spell-components">Components</a></th><th scope="col">Summary</th>');
+    expect(html).not.toContain('class="row-number"');
     expect(html).toContain('class="sticky-spell-controls"');
     expect(html).toContain('class="spell-filters"');
     expect(html).toContain('data-filter-accordion aria-expanded="false"');
@@ -72,9 +71,12 @@ describe("local rules browser", () => {
     expect(html).toContain('type="checkbox" data-filter="components"');
     expect(html).not.toContain("Reset filters");
     expect(html).not.toContain("data-filter-reset");
-    expect(html).not.toContain('<caption>Cleric level');
+    expect(html).toContain('<caption class="visually-hidden">Level 0 Cleric spells</caption>');
     expect(html).not.toContain('ingested spells across');
-    expect(html).toContain('/spell-components#verbal');
+    expect(html).toContain('<abbr title="Verbal component">V</abbr>');
+    expect(html).not.toContain('/spell-components#verbal');
+    expect(html).toContain('class="table-scroll spell-table-region"');
+    expect(html).toContain('Scroll horizontally to see every column.');
     expect(html).toContain('<script src="/class-spells.js" defer></script>');
     expect(html).toContain('/spells/spell.light');
     expect(html).toContain('/spells/spell.miracle');
@@ -122,7 +124,7 @@ describe("local rules browser", () => {
     expect(html).toContain('name="sort"');
     expect(html).toContain('aria-label="Filter spells by initial letter"');
     expect(html).toContain('letter=A');
-    expect(html).toContain('class="alphabetical-table"');
+    expect(html).toContain('class="data-table alphabetical-table"');
     expect(html).toContain('class="key-column"');
     const tableBody = html.match(/<tbody>(.*?)<\/tbody>/s)?.[1] ?? "";
     expect(tableBody.match(/<tr>/g)).toHaveLength(50);

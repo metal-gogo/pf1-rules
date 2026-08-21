@@ -7,7 +7,7 @@ import { findSpell, searchRules, spellsForList } from "../query/spells.js";
 
 
 const stylesheet = `
-:root { color-scheme: light dark; font-family: system-ui, sans-serif; line-height: 1.5; }
+:root { --table-divider: color-mix(in srgb, CanvasText 24%, Canvas); --table-highlight: color-mix(in srgb, Highlight 10%, Canvas); color-scheme: light dark; font-family: system-ui, sans-serif; line-height: 1.5; }
 body { margin: 0; }
 header, main, footer { margin-inline: auto; max-width: 72rem; padding: 1rem; }
 nav ul { display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; padding: 0; }
@@ -16,7 +16,11 @@ form { display: flex; flex-wrap: wrap; gap: .5rem; margin-block: 1rem; }
 input, select, button { font: inherit; padding: .4rem; }
 label { font-weight: 600; }
 table { border-collapse: collapse; width: 100%; }
-th, td { border-block-end: 1px solid; padding: .4rem; text-align: left; vertical-align: top; }
+th, td { border-block-end: 1px solid var(--table-divider); padding: .55rem; text-align: left; vertical-align: top; }
+.data-table tbody tr:hover > *, .data-table tbody tr:focus-within > * { background: var(--table-highlight); }
+.data-table thead th { background: Canvas; position: sticky; top: 0; z-index: 1; }
+.data-table .key-column { background: Canvas; left: 0; position: sticky; z-index: 1; }
+.data-table thead .key-column { z-index: 2; }
 .catalog-filters { align-items: end; border: 1px solid; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); padding: 1rem; }
 .catalog-filter { display: grid; gap: .25rem; min-width: 0; }
 .catalog-filter input, .catalog-filter select { box-sizing: border-box; max-width: 100%; min-height: 2.5rem; width: 100%; }
@@ -30,13 +34,11 @@ th, td { border-block-end: 1px solid; padding: .4rem; text-align: left; vertical
 .pagination { align-items: center; display: flex; gap: 1rem; justify-content: center; margin-block: 1rem; }
 .table-scroll:focus-visible { outline: 3px solid Highlight; outline-offset: 2px; }
 .alphabetical-table { min-width: 42rem; }
-.alphabetical-table thead th { background: Canvas; position: sticky; top: 0; z-index: 1; }
-.alphabetical-table .key-column { background: Canvas; left: 0; position: sticky; z-index: 1; }
-.alphabetical-table thead .key-column { z-index: 2; }
 dt { font-weight: 700; }
 dd { margin-block-end: .65rem; }
 .skip-link { position: absolute; left: -10000px; }
 .skip-link:focus { left: 1rem; top: 1rem; background: Canvas; padding: .5rem; z-index: 1; }
+.visually-hidden { clip: rect(0 0 0 0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
 .muted { color: GrayText; }
 .notice { border: 1px solid; padding: .75rem; }
 .class-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem; list-style: none; padding: 0; }
@@ -76,18 +78,21 @@ dd { margin-block-end: .65rem; }
 .spell-level { margin-block: 2.5rem; }
 .spell-level h2 { align-items: baseline; display: flex; flex-wrap: wrap; gap: .35rem; }
 .heading-count { font-size: .85em; font-weight: 400; }
-.table-scroll { overflow-x: auto; }
-.spell-table { min-width: 48rem; }
-.spell-table th:nth-child(2) { width: 18%; }
-.spell-table th:nth-child(3) { width: 14%; }
-.row-number { font-variant-numeric: tabular-nums; text-align: right; width: 2.5rem; }
+.table-scroll { overflow: auto; position: relative; }
+.spell-table-region { max-block-size: 70vh; }
+.spell-table { min-width: 46rem; }
+.spell-table .key-column { width: 22%; }
+.spell-table .school-column { width: 16%; }
+.spell-table .components-column { width: 7rem; }
+.table-scroll-hint { display: none; }
 .component-list { white-space: nowrap; }
-.component-list a { font-weight: 700; }
+.component-list abbr { text-decoration-thickness: 1px; text-underline-offset: .12em; }
 .component-reference section { scroll-margin-top: 1rem; }
 mark { background: Mark; color: MarkText; }
 [hidden] { display: none !important; }
 @media (max-width: 38rem) {
   .sticky-spell-controls { max-height: calc(100vh - .5rem); }
+  .table-scroll-hint { display: block; font-size: .9rem; margin-block: 0 .4rem; }
 }
 code { overflow-wrap: anywhere; }
 `;
@@ -203,10 +208,7 @@ const classSpellsScript = `
         const matchesSearch = !query || row.dataset.search.includes(query);
         const shown = matchesTags && matchesSearch;
         row.hidden = !shown;
-        if (shown) {
-          levelShown += 1;
-          row.querySelector(".row-number").textContent = String(levelShown);
-        }
+        if (shown) levelShown += 1;
         highlightMatches(row.querySelector(".spell-name"), query);
         highlightMatches(row.querySelector(".spell-summary"), query);
       }
@@ -305,12 +307,12 @@ function spellComponentTypes(components: Array<{ componentType: string; raw: str
   return (Object.keys(spellComponentMetadata) as SpellComponentType[]).filter((type) => types.has(type));
 }
 
-function componentLinks(types: SpellComponentType[]): string {
-  const links = types.map((type) => {
+function componentAbbreviations(types: SpellComponentType[]): string {
+  const abbreviations = types.map((type) => {
     const metadata = spellComponentMetadata[type];
-    return `<a href="/spell-components#${metadata.anchor}" title="${escapeHtml(metadata.name)} component">${metadata.abbreviation}</a>`;
+    return `<abbr title="${escapeHtml(metadata.name)} component">${metadata.abbreviation}</abbr>`;
   });
-  return `<span class="component-list" aria-label="Components">[${links.join(", ")}]</span>`;
+  return `<span class="component-list" aria-label="Components">${abbreviations.join(", ") || "None"}</span>`;
 }
 
 function summarizeDescription(value: string, maximumLength = 240): string {
@@ -598,8 +600,8 @@ async function alphabeticalSpellsPage(prisma: PrismaClient, url: URL): Promise<s
     <div class="catalog-results"><h2 id="alphabetical-results-heading">Results</h2><p>${firstResult}–${lastResult} of ${total} spells</p></div>
     ${pagination}
     <div class="table-scroll" role="region" aria-labelledby="alphabetical-results-heading" tabindex="0">
-    <table class="alphabetical-table">
-      <caption>Filtered canonical spells</caption>
+    <table class="data-table alphabetical-table">
+      <caption class="visually-hidden">Filtered canonical spells</caption>
       <thead><tr><th class="key-column" scope="col">Name</th><th scope="col">School</th><th scope="col">Publication</th></tr></thead>
       <tbody>${spells.map((spell) => `<tr>
         <th class="key-column" scope="row"><a href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a></th>
@@ -675,7 +677,7 @@ async function classSpellsPage(prisma: PrismaClient, classSlug: string): Promise
     const components = spellComponentTypes(entry.spell.components);
     return [entry.spell.spellId, {
       components,
-      summary: summarizeDescription(entry.spell.descriptionRaw),
+      summary: summarizeDescription(entry.spell.descriptionRaw, 160),
     }] as const;
   }));
   const availableComponents = (Object.keys(spellComponentMetadata) as SpellComponentType[])
@@ -699,19 +701,21 @@ async function classSpellsPage(prisma: PrismaClient, classSlug: string): Promise
     const levelEntries = entriesByLevel.get(level) ?? [];
     return `<section class="spell-level" aria-labelledby="level-${level}">
       <h2 id="level-${level}">Level ${level} ${escapeHtml(className)} Spells <span class="heading-count level-count" data-total="${levelEntries.length}">(${levelEntries.length} of ${levelEntries.length} spells shown)</span></h2>
-      <div class="table-scroll" role="region" aria-label="${escapeHtml(className)} level ${level} spells" tabindex="0">
-        <table class="spell-table" aria-label="${escapeHtml(className)} level ${level} spells">
-          <thead><tr><th class="row-number" scope="col" aria-label="Row number">#</th><th scope="col">Name</th><th scope="col">School</th><th scope="col">Description</th></tr></thead>
-          <tbody>${levelEntries.map((entry, index) => {
+      <p class="table-scroll-hint muted">Scroll horizontally to see every column.</p>
+      <div class="table-scroll spell-table-region" role="region" aria-labelledby="level-${level}" tabindex="0">
+        <table class="data-table spell-table">
+          <caption class="visually-hidden">Level ${level} ${escapeHtml(className)} spells</caption>
+          <thead><tr><th class="key-column" scope="col">Name</th><th class="school-column" scope="col">School</th><th class="components-column" scope="col"><a href="/spell-components">Components</a></th><th scope="col">Summary</th></tr></thead>
+          <tbody>${levelEntries.map((entry) => {
             const spell = entry.spell;
             const school = `${humanize(spell.school)}${spell.subschool ? ` (${humanize(spell.subschool)})` : ""}`;
             const display = spellDisplay.get(spell.spellId) ?? { components: [], summary: "" };
             const searchText = `${spell.name} ${display.summary}`.toLocaleLowerCase();
             return `<tr data-school="${escapeHtml(spell.school)}" data-level="${level}" data-components="${escapeHtml(display.components.join(" "))}" data-search="${escapeHtml(searchText)}">
-              <td class="row-number">${index + 1}</td>
-              <th scope="row"><a class="spell-name" href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a></th>
-              <td>${escapeHtml(school)}</td>
-              <td>${componentLinks(display.components)} <span class="spell-summary">${escapeHtml(display.summary)}</span></td>
+              <th class="key-column" scope="row"><a class="spell-name" href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a></th>
+              <td class="school-column">${escapeHtml(school)}</td>
+              <td class="components-column">${componentAbbreviations(display.components)}</td>
+              <td><span class="spell-summary">${escapeHtml(display.summary)}</span></td>
             </tr>`;
           }).join("")}</tbody>
         </table>
