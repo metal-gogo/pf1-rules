@@ -1,0 +1,889 @@
+{
+  "$schema": "../../schemas/canonical-spell.schema.json",
+  "schema_version": "0.1.0",
+  "spell_id": "spell.charm-animal",
+  "ruleset": "Pathfinder First Edition",
+  "name": "Charm Animal",
+  "aliases": [],
+  "classification": {
+    "school": "enchantment",
+    "subschool": "charm",
+    "descriptors": [
+      "mind-affecting"
+    ],
+    "raw": "enchantment (charm) [mind-affecting]"
+  },
+  "levels": [
+    {
+      "spell_list_id": "spell-list.druid",
+      "list_kind": "class",
+      "list_name": "druid",
+      "level": 1,
+      "scope": "core",
+      "raw": "druid 1"
+    },
+    {
+      "spell_list_id": "spell-list.hunter",
+      "list_kind": "class",
+      "list_name": "hunter",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "hunter 1"
+    },
+    {
+      "spell_list_id": "spell-list.psychic",
+      "list_kind": "class",
+      "list_name": "psychic",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "psychic 1"
+    },
+    {
+      "spell_list_id": "spell-list.ranger",
+      "list_kind": "class",
+      "list_name": "ranger",
+      "level": 1,
+      "scope": "core",
+      "raw": "ranger 1"
+    },
+    {
+      "spell_list_id": "spell-list.shaman",
+      "list_kind": "class",
+      "list_name": "shaman",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "shaman 1"
+    }
+  ],
+  "casting": {
+    "time": {
+      "kind": "action",
+      "amount": 1,
+      "unit": "standard_action",
+      "raw": "1 standard action"
+    },
+    "components": [
+      {
+        "type": "verbal",
+        "details": null,
+        "cost_gp": null,
+        "raw": "V"
+      },
+      {
+        "type": "somatic",
+        "details": null,
+        "cost_gp": null,
+        "raw": "S"
+      }
+    ],
+    "components_raw": "V, S",
+    "conditional_components": []
+  },
+  "effect": {
+    "range": {
+      "category": "close",
+      "formula": "close (25 ft. + 5 ft./2 levels)",
+      "raw": "close (25 ft. + 5 ft./2 levels)"
+    },
+    "delivery": {
+      "resolution": "fixed",
+      "entries": [
+        {
+          "label_raw": "Target",
+          "value_raw": "one animal",
+          "kinds": [
+            "target"
+          ]
+        }
+      ]
+    },
+    "targeting": {
+      "mode": "single",
+      "subject_kind": "other",
+      "selection": "selected",
+      "count": {
+        "kind": "fixed",
+        "fixed": 1,
+        "formula": null,
+        "raw": "one animal"
+      },
+      "separation": null,
+      "raw": "one animal"
+    },
+    "area": null,
+    "duration": {
+      "kind": "timed",
+      "formula": "1 hour/level",
+      "dismissible": null,
+      "concentration": null,
+      "raw": "1 hour/level"
+    },
+    "saving_throw": {
+      "types": [
+        "will"
+      ],
+      "outcome": "Will negates",
+      "harmless": null,
+      "object": null,
+      "conditional": null,
+      "raw": "Will negates"
+    },
+    "spell_resistance": {
+      "applies": true,
+      "harmless": null,
+      "object": null,
+      "conditional": null,
+      "raw": "yes"
+    }
+  },
+  "description": {
+    "raw": "This spell functions like charm person, except that it affects a creature of the animal type.",
+    "search_text": "\"this spell functions like charm person, except that it affects a creature of the animal type.\"",
+    "sections": []
+  },
+  "publication": {
+    "publisher": "Paizo",
+    "book": "PRPG Core Rulebook",
+    "page": 254,
+    "first_party_status": "confirmed",
+    "pfs_status": "legal",
+    "supplemental": []
+  },
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.charm-person",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell functions like charm person, except that it affects a creature of the animal type."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "one animal",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one animal\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "single",
+            "subject_kind": "other",
+            "selection": "selected",
+            "count": {
+              "kind": "fixed",
+              "fixed": 1,
+              "formula": null,
+              "raw": "one animal"
+            },
+            "separation": null,
+            "raw": "one animal"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one animal\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions like charm person, except that it affects a creature of the animal type.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions like charm person, except that it affects a creature of the animal type.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
+  "relationships": [
+    {
+      "relationship_id": "spell.charm-animal:appears_on_spell_list:spell-list.druid",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.druid",
+        "name": "druid"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "druid",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-druid/"
+        },
+        {
+          "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "druid 1",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:appears_on_spell_list:spell-list.hunter",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.hunter",
+        "name": "hunter Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "hunter 1",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:appears_on_spell_list:spell-list.nature",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.nature",
+        "name": "nature"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "nature",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/oracle/mysteries/paizo-oracle-mysteries/nature/"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:appears_on_spell_list:spell-list.psychic",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.psychic",
+        "name": "psychic"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "psychic",
+          "source_href": "https://www.d20pfsrd.com/classes/occult-classes/psychic/"
+        },
+        {
+          "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "psychic 1",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:appears_on_spell_list:spell-list.ranger",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.ranger",
+        "name": "ranger"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "ranger",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/ranger"
+        },
+        {
+          "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "ranger 1",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:appears_on_spell_list:spell-list.shaman",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.shaman",
+        "name": "shaman"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "shaman",
+          "source_href": "https://www.d20pfsrd.com/classes/hybrid-classes/shaman"
+        },
+        {
+          "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "shaman 1",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:functions_like:spell.charm-person",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.charm-person",
+        "name": "Charm Person"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "This spell functions like charm person, except that it affects a creature of the animal type.",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:has_descriptor:descriptor.mind-affecting",
+      "type": "has_descriptor",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.mind-affecting",
+        "name": "mind-affecting"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "mind-affecting",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=46"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "mind-affecting",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Magic-Descriptor-Mind-Affecting"
+        },
+        {
+          "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+          "source_field": "spell_raw.descriptors_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "mind-affecting",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:has_school:magic-school.enchantment",
+      "type": "has_school",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.enchantment",
+        "name": "enchantment"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "enchantment",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=4"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "enchantment",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Enchantment"
+        },
+        {
+          "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+          "source_field": "spell_raw.school_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "enchantment",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:has_subschool:subschool.charm",
+      "type": "has_subschool",
+      "target": {
+        "entity_type": "subschool",
+        "entity_id": "subschool.charm",
+        "name": "charm"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "charm",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=11"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:published_in:publication.pathfinder-rpg-core-rulebook",
+      "type": "published_in",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.pathfinder-rpg-core-rulebook",
+        "name": "PRPG Core Rulebook"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "PRPG Core Rulebook pg. 254",
+          "source_href": "http://paizo.com/pathfinderRPG/v5748btpy88yj"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[19]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Pathfinder Roleplaying Game Core Rulebook",
+          "source_href": "http://www.amazon.com/gp/product/1601251505/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1601251505&linkCode=as2&tag=httpwwwd20pfs-20"
+        },
+        {
+          "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+          "source_field": "spell_raw.source_book_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "PRPG Core Rulebook pg. 254",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:references:spell.charm-monster",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.charm-monster",
+        "name": "charm monster"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[13]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "charm monster",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/charm-monster/"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:references:spell.charm-person",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.charm-person",
+        "name": "charm person"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[8]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "charm person",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/charm-person/"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[12]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "charm person",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/charm-person/"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:uses_action:action.standard-action",
+      "type": "uses_action",
+      "target": {
+        "entity_type": "action",
+        "entity_id": "action.standard-action",
+        "name": "1 standard action"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+          "source_field": "spell_raw.casting_time_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1 standard action",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:uses_definition:rule.animal",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.animal",
+        "name": "animal"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "animal",
+          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/animals"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:uses_definition:rule.animal-type",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.animal-type",
+        "name": "animal type"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[9]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "animal type",
+          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/animals"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:uses_definition:rule.charisma",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.charisma",
+        "name": "Charisma"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[11]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Charisma",
+          "source_href": "https://www.d20pfsrd.com/basics-ability-scores/ability-scores#TOC-Charisma-Cha-"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[14]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Charisma",
+          "source_href": "https://www.d20pfsrd.com/basics-ability-scores/ability-scores#TOC-Charisma-Cha-"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:uses_definition:rule.diplomacy",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.diplomacy",
+        "name": "Diplomacy"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[10]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Diplomacy",
+          "source_href": "https://www.d20pfsrd.com/skills/diplomacy"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:uses_definition:rule.orc",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.orc",
+        "name": "orc"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[15]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "orc",
+          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/humanoids/orcs/orc"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[16]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "orc",
+          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/humanoids/orcs/orc"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:uses_definition:rule.skeletons",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.skeletons",
+        "name": "skeletons"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[17]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "skeletons",
+          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/undead/skeleton-medium"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:uses_definition:rule.source",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.source",
+        "name": "Source"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.charm-animal:56c93ff07f8e8bfa",
+          "source_field": "spell_raw.links_raw[18]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Source",
+          "source_href": "http://paizo.com/paizo/blog/v5748dyo5ldw0?The-FAQ-That-Time-Forgot"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.charm-animal:uses_definition:rule.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes",
+          "source_href": null
+        }
+      ],
+      "note": null
+    }
+  ],
+  "provenance": [
+    {
+      "field_path": "/classification",
+      "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+      "source_field": "spell_raw.school_raw",
+      "raw_value_sha256": "8a9bf47410686417fba51e7daf560e85b165ab026f288efe39dfce981fa22667",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels",
+      "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+      "source_field": "spell_raw.levels_raw",
+      "raw_value_sha256": "5cdf10c0ed566be17ad5281befecffc831f73462cbe760c4b1f52b8590abef58",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/casting",
+      "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+      "source_field": "spell_raw.components_raw",
+      "raw_value_sha256": "0ebcffcf26580553bf0204796c5b0127a132e9efad783df958b08b240c9ee4d2",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/effect",
+      "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+      "source_field": "spell_raw.delivery_fields_raw",
+      "raw_value_sha256": "43fdb96d79d1e227be019af6d229e1c1ddc23b5b8995a3af8d11c2a28d8e8c08",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description",
+      "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "8475183e4525874ffe5166d3f272de28bee166f23282e613ca82776034c8f0ec",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/publication",
+      "observation_id": "aon:spell.charm-animal:f2f83073b4f3219d",
+      "source_field": "spell_raw.source_book_raw",
+      "raw_value_sha256": "286de66233b83da3165850a74559077f6a6531752e32f1945f4702398bc1ad39",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    }
+  ],
+  "normalization": {
+    "status": "validated",
+    "normalizer_version": "0.1.2-explicit-inheritance",
+    "warnings": [
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/time",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/time",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/components_raw",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/components_raw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/range",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/range",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/duration",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/duration",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/saving_throw",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/saving_throw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/spell_resistance",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/spell_resistance",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/description/raw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      }
+    ]
+  }
+}
