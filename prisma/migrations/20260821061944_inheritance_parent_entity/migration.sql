@@ -19,5 +19,6 @@ CREATE TABLE "new_spell_inheritance" (
 INSERT INTO "new_spell_inheritance" ("basis", "from_spell_id", "inheritance_index", "inherited_paths", "note", "overrides", "relationship", "resolution_status", "spell_id") SELECT "basis", "from_spell_id", "inheritance_index", "inherited_paths", "note", "overrides", "relationship", "resolution_status", "spell_id" FROM "spell_inheritance";
 DROP TABLE "spell_inheritance";
 ALTER TABLE "new_spell_inheritance" RENAME TO "spell_inheritance";
+CREATE INDEX "spell_inheritance_from_spell_id_idx" ON "spell_inheritance"("from_spell_id");
 PRAGMA foreign_keys=ON;
 PRAGMA defer_foreign_keys=OFF;
