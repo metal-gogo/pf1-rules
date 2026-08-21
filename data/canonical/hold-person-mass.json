@@ -1,0 +1,639 @@
+{
+  "$schema": "../../schemas/canonical-spell.schema.json",
+  "schema_version": "0.1.0",
+  "spell_id": "spell.hold-person-mass",
+  "ruleset": "Pathfinder First Edition",
+  "name": "Hold Person, Mass",
+  "aliases": [],
+  "classification": {
+    "school": "enchantment",
+    "subschool": "compulsion",
+    "descriptors": [
+      "mind-affecting"
+    ],
+    "raw": "enchantment (compulsion) [mind-affecting]"
+  },
+  "levels": [
+    {
+      "spell_list_id": "spell-list.arcanist",
+      "list_kind": "class",
+      "list_name": "arcanist",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "arcanist 7"
+    },
+    {
+      "spell_list_id": "spell-list.mesmerist",
+      "list_kind": "class",
+      "list_name": "mesmerist",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "mesmerist 6"
+    },
+    {
+      "spell_list_id": "spell-list.psychic",
+      "list_kind": "class",
+      "list_name": "psychic",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "psychic 7"
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer",
+      "list_kind": "class",
+      "list_name": "sorcerer",
+      "level": 7,
+      "scope": "core",
+      "raw": "sorcerer 7"
+    },
+    {
+      "spell_list_id": "spell-list.witch",
+      "list_kind": "class",
+      "list_name": "witch",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "witch 7"
+    },
+    {
+      "spell_list_id": "spell-list.wizard",
+      "list_kind": "class",
+      "list_name": "wizard",
+      "level": 7,
+      "scope": "core",
+      "raw": "wizard 7"
+    }
+  ],
+  "casting": {
+    "time": {
+      "kind": "action",
+      "amount": 1,
+      "unit": "standard_action",
+      "raw": "1 standard action"
+    },
+    "components": [
+      {
+        "type": "verbal",
+        "details": null,
+        "cost_gp": null,
+        "raw": "V"
+      },
+      {
+        "type": "somatic",
+        "details": null,
+        "cost_gp": null,
+        "raw": "S"
+      },
+      {
+        "type": "focus",
+        "details": "a small, straight piece of iron",
+        "cost_gp": null,
+        "raw": "F"
+      },
+      {
+        "type": "divine_focus",
+        "details": null,
+        "cost_gp": null,
+        "raw": "DF"
+      }
+    ],
+    "components_raw": "V, S, F/DF (a small, straight piece of iron)",
+    "conditional_components": []
+  },
+  "effect": {
+    "range": {
+      "category": "medium",
+      "formula": "medium (100 ft. + 10 ft./level)",
+      "raw": "medium (100 ft. + 10 ft./level)"
+    },
+    "delivery": {
+      "resolution": "fixed",
+      "entries": [
+        {
+          "label_raw": "Targets",
+          "value_raw": "one or more humanoid creatures, no two of which can be more than 30 ft. apart",
+          "kinds": [
+            "target"
+          ]
+        }
+      ]
+    },
+    "targeting": {
+      "mode": "multiple",
+      "subject_kind": "creature",
+      "selection": "selected",
+      "count": {
+        "kind": "other",
+        "fixed": null,
+        "formula": null,
+        "raw": "one or more humanoid creatures, no two of which can be more than 30 ft. apart"
+      },
+      "separation": null,
+      "raw": "one or more humanoid creatures, no two of which can be more than 30 ft. apart"
+    },
+    "area": null,
+    "duration": {
+      "kind": "special",
+      "formula": "1 round/level (D); see text",
+      "dismissible": true,
+      "concentration": null,
+      "raw": "1 round/level (D); see text"
+    },
+    "saving_throw": {
+      "types": [
+        "will"
+      ],
+      "outcome": "Will negates; see text",
+      "harmless": null,
+      "object": null,
+      "conditional": true,
+      "raw": "Will negates; see text"
+    },
+    "spell_resistance": {
+      "applies": true,
+      "harmless": null,
+      "object": null,
+      "conditional": null,
+      "raw": "yes"
+    }
+  },
+  "description": {
+    "raw": "This spell functions like hold person, except as noted above.",
+    "search_text": "\"this spell functions like hold person, except as noted above.\"",
+    "sections": []
+  },
+  "publication": {
+    "publisher": "Paizo",
+    "book": "PRPG Core Rulebook",
+    "page": 296,
+    "first_party_status": "confirmed",
+    "pfs_status": "legal",
+    "supplemental": []
+  },
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.hold-person",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell functions like hold person, except as noted above."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Targets",
+                "value_raw": "one or more humanoid creatures, no two of which can be more than 30 ft. apart",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Targets\",\"value_raw\":\"one or more humanoid creatures, no two of which can be more than 30 ft. apart\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "multiple",
+            "subject_kind": "creature",
+            "selection": "selected",
+            "count": {
+              "kind": "other",
+              "fixed": null,
+              "formula": null,
+              "raw": "one or more humanoid creatures, no two of which can be more than 30 ft. apart"
+            },
+            "separation": null,
+            "raw": "one or more humanoid creatures, no two of which can be more than 30 ft. apart"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Targets\",\"value_raw\":\"one or more humanoid creatures, no two of which can be more than 30 ft. apart\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions like hold person, except as noted above.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions like hold person, except as noted above.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
+  "relationships": [
+    {
+      "relationship_id": "spell.hold-person-mass:appears_on_spell_list:spell-list.arcanist",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.arcanist",
+        "name": "arcanist Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "arcanist 7",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hold-person-mass:appears_on_spell_list:spell-list.mesmerist",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.mesmerist",
+        "name": "mesmerist Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "mesmerist 6",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hold-person-mass:appears_on_spell_list:spell-list.psychic",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.psychic",
+        "name": "psychic Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "psychic 7",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hold-person-mass:appears_on_spell_list:spell-list.sorcerer",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer",
+        "name": "sorcerer Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "sorcerer 7",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hold-person-mass:appears_on_spell_list:spell-list.witch",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.witch",
+        "name": "witch Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "witch 7",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hold-person-mass:appears_on_spell_list:spell-list.wizard",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.wizard",
+        "name": "wizard Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "wizard 7",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hold-person-mass:functions_like:spell.hold-person",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.hold-person",
+        "name": "Hold Person"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "This spell functions like hold person, except as noted above.",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hold-person-mass:has_descriptor:descriptor.mind-affecting",
+      "type": "has_descriptor",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.mind-affecting",
+        "name": "mind-affecting"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "mind-affecting",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=46"
+        },
+        {
+          "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+          "source_field": "spell_raw.descriptors_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "mind-affecting",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hold-person-mass:has_school:magic-school.enchantment",
+      "type": "has_school",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.enchantment",
+        "name": "enchantment"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "enchantment",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=4"
+        },
+        {
+          "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+          "source_field": "spell_raw.school_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "enchantment",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hold-person-mass:has_subschool:subschool.compulsion",
+      "type": "has_subschool",
+      "target": {
+        "entity_type": "subschool",
+        "entity_id": "subschool.compulsion",
+        "name": "compulsion"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "compulsion",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=12"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hold-person-mass:published_in:publication.pathfinder-rpg-core-rulebook",
+      "type": "published_in",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.pathfinder-rpg-core-rulebook",
+        "name": "PRPG Core Rulebook"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "PRPG Core Rulebook pg. 296",
+          "source_href": "http://paizo.com/pathfinderRPG/v5748btpy88yj"
+        },
+        {
+          "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+          "source_field": "spell_raw.source_book_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "PRPG Core Rulebook pg. 296",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hold-person-mass:references:spell.hold-person",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.hold-person",
+        "name": "hold person"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.hold-person-mass:e971b5b6a4277252",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "hold person",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/holdPerson.html#hold-person"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hold-person-mass:uses_action:action.standard-action",
+      "type": "uses_action",
+      "target": {
+        "entity_type": "action",
+        "entity_id": "action.standard-action",
+        "name": "1 standard action"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+          "source_field": "spell_raw.casting_time_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1 standard action",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hold-person-mass:uses_definition:rule.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes",
+          "source_href": null
+        }
+      ],
+      "note": null
+    }
+  ],
+  "provenance": [
+    {
+      "field_path": "/classification",
+      "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+      "source_field": "spell_raw.school_raw",
+      "raw_value_sha256": "caefcce93e68a8d34929b6f0cd61e83f71760a00b746e8ddc52dcf32dfa7f33f",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels",
+      "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+      "source_field": "spell_raw.levels_raw",
+      "raw_value_sha256": "d460ecfaa8de4da69e409f34f495d4b811d6582ce39cd9947aeef3fd67613888",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/casting",
+      "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+      "source_field": "spell_raw.components_raw",
+      "raw_value_sha256": "2e44058a78fe5d6591de47ddf3fe2c49f256c385e1634e5c666771a7e9d58b07",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/effect",
+      "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+      "source_field": "spell_raw.delivery_fields_raw",
+      "raw_value_sha256": "fcf1bf5156fc23e30f1ac60570d901590cfc8044bfed865b15a2c9d64333274d",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description",
+      "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "08795cafbd3ca8a7cef129977c55cce3efc3821fa2b0ce996a8b653de8d5964e",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/publication",
+      "observation_id": "aon:spell.hold-person-mass:295fc54029ead443",
+      "source_field": "spell_raw.source_book_raw",
+      "raw_value_sha256": "9cb54691e109fdbe8022bc8e240263c7eaaf067365982d98797fb39cc16e8f2a",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    }
+  ],
+  "normalization": {
+    "status": "validated",
+    "normalizer_version": "0.1.2-explicit-inheritance",
+    "warnings": [
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/time",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/components_raw",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/range",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/duration",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/saving_throw",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/spell_resistance",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      }
+    ]
+  }
+}

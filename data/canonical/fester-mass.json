@@ -1,0 +1,525 @@
+{
+  "$schema": "../../schemas/canonical-spell.schema.json",
+  "schema_version": "0.1.0",
+  "spell_id": "spell.fester-mass",
+  "ruleset": "Pathfinder First Edition",
+  "name": "Fester, Mass",
+  "aliases": [],
+  "classification": {
+    "school": "necromancy",
+    "subschool": null,
+    "descriptors": [],
+    "raw": "necromancy"
+  },
+  "levels": [
+    {
+      "spell_list_id": "spell-list.inquisitor",
+      "list_kind": "class",
+      "list_name": "inquisitor",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "inquisitor 6"
+    },
+    {
+      "spell_list_id": "spell-list.witch",
+      "list_kind": "class",
+      "list_name": "witch",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "witch 6"
+    }
+  ],
+  "casting": {
+    "time": {
+      "kind": "action",
+      "amount": 1,
+      "unit": "standard_action",
+      "raw": "1 standard action"
+    },
+    "components": [
+      {
+        "type": "verbal",
+        "details": null,
+        "cost_gp": null,
+        "raw": "V"
+      },
+      {
+        "type": "somatic",
+        "details": null,
+        "cost_gp": null,
+        "raw": "S"
+      },
+      {
+        "type": "material",
+        "details": "rotted meat",
+        "cost_gp": null,
+        "raw": "M (rotted meat)"
+      }
+    ],
+    "components_raw": "V, S, M (rotted meat)",
+    "conditional_components": []
+  },
+  "effect": {
+    "range": {
+      "category": "close",
+      "formula": "close (25 ft. + 5 ft./2 levels)",
+      "raw": "close (25 ft. + 5 ft./2 levels)"
+    },
+    "delivery": {
+      "resolution": "fixed",
+      "entries": [
+        {
+          "label_raw": "Target",
+          "value_raw": "one creature/level, no two of which can be more than 30 ft. apart",
+          "kinds": [
+            "target"
+          ]
+        }
+      ]
+    },
+    "targeting": {
+      "mode": "multiple",
+      "subject_kind": "creature",
+      "selection": "selected",
+      "count": {
+        "kind": "per_level",
+        "fixed": null,
+        "formula": "one creature/level, no two of which can be more than 30 ft. apart",
+        "raw": "one creature/level, no two of which can be more than 30 ft. apart"
+      },
+      "separation": null,
+      "raw": "one creature/level, no two of which can be more than 30 ft. apart"
+    },
+    "area": null,
+    "duration": {
+      "kind": "special",
+      "formula": "1 round/level or 1 round; see text",
+      "dismissible": null,
+      "concentration": null,
+      "raw": "1 round/level or 1 round; see text"
+    },
+    "saving_throw": {
+      "types": [
+        "fortitude"
+      ],
+      "outcome": "Fortitude partial",
+      "harmless": null,
+      "object": null,
+      "conditional": true,
+      "raw": "Fortitude partial"
+    },
+    "spell_resistance": {
+      "applies": true,
+      "harmless": null,
+      "object": null,
+      "conditional": null,
+      "raw": "yes"
+    }
+  },
+  "description": {
+    "raw": "This spell functions as fester, except that it affects multiple foes.",
+    "search_text": "\"this spell functions as fester, except that it affects multiple foes.\"",
+    "sections": []
+  },
+  "publication": {
+    "publisher": "Paizo",
+    "book": "Advanced Player's Guide",
+    "page": 221,
+    "first_party_status": "confirmed",
+    "pfs_status": "legal",
+    "supplemental": []
+  },
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.fester",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.fester-mass:5e33811d91e2701a",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell functions as fester, except that it affects multiple foes."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "one creature/level, no two of which can be more than 30 ft. apart",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one creature/level, no two of which can be more than 30 ft. apart\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "multiple",
+            "subject_kind": "creature",
+            "selection": "selected",
+            "count": {
+              "kind": "per_level",
+              "fixed": null,
+              "formula": "one creature/level, no two of which can be more than 30 ft. apart",
+              "raw": "one creature/level, no two of which can be more than 30 ft. apart"
+            },
+            "separation": null,
+            "raw": "one creature/level, no two of which can be more than 30 ft. apart"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one creature/level, no two of which can be more than 30 ft. apart\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as fester, except that it affects multiple foes.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as fester, except that it affects multiple foes.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
+  "relationships": [
+    {
+      "relationship_id": "spell.fester-mass:appears_on_spell_list:spell-list.inquisitor",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.inquisitor",
+        "name": "inquisitor"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.fester-mass:7938248f4b743a1e",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.fester-mass:5e33811d91e2701a",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 6",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.fester-mass:appears_on_spell_list:spell-list.witch",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.witch",
+        "name": "witch"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.fester-mass:7938248f4b743a1e",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "witch",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/witch"
+        },
+        {
+          "observation_id": "aon:spell.fester-mass:5e33811d91e2701a",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "witch 6",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.fester-mass:functions_like:spell.fester",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.fester",
+        "name": "Fester"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.fester-mass:5e33811d91e2701a",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "This spell functions as fester, except that it affects multiple foes.",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.fester-mass:has_school:magic-school.necromancy",
+      "type": "has_school",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.necromancy",
+        "name": "necromancy"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.fester-mass:5e33811d91e2701a",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "necromancy",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=7"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.fester-mass:7938248f4b743a1e",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "necromancy",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Necromancy"
+        },
+        {
+          "observation_id": "aon:spell.fester-mass:5e33811d91e2701a",
+          "source_field": "spell_raw.school_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "necromancy",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.fester-mass:published_in:publication.pathfinder-rpg-advanced-players-guide",
+      "type": "published_in",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.pathfinder-rpg-advanced-players-guide",
+        "name": "Advanced Player's Guide"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.fester-mass:5e33811d91e2701a",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Advanced Player's Guide pg. 221",
+          "source_href": "http://paizo.com/pathfinderRPG/v5748btpy8fo1"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.fester-mass:7938248f4b743a1e",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Advanced Player’s Guide",
+          "source_href": "http://amzn.to/2qNIotB"
+        },
+        {
+          "observation_id": "aon:spell.fester-mass:5e33811d91e2701a",
+          "source_field": "spell_raw.source_book_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Advanced Player's Guide pg. 221",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.fester-mass:references:spell.fester",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.fester",
+        "name": "fester"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.fester-mass:c40f5e1bd73161d5",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "fester",
+          "source_href": "https://legacy.aonprd.com/advancedPlayersGuide/spells/fester.html#fester"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.fester-mass:uses_action:action.standard-action",
+      "type": "uses_action",
+      "target": {
+        "entity_type": "action",
+        "entity_id": "action.standard-action",
+        "name": "1 standard action"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.fester-mass:5e33811d91e2701a",
+          "source_field": "spell_raw.casting_time_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1 standard action",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.fester-mass:uses_definition:rule.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.fester-mass:5e33811d91e2701a",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes",
+          "source_href": null
+        }
+      ],
+      "note": null
+    }
+  ],
+  "provenance": [
+    {
+      "field_path": "/classification",
+      "observation_id": "aon:spell.fester-mass:5e33811d91e2701a",
+      "source_field": "spell_raw.school_raw",
+      "raw_value_sha256": "8d942cb7c5c083aa741962f5da3efd22622fdc96fdb0187c60a1cb326d953610",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels",
+      "observation_id": "aon:spell.fester-mass:5e33811d91e2701a",
+      "source_field": "spell_raw.levels_raw",
+      "raw_value_sha256": "7622ccf0358ec426493d367dad681bb767f287217563e854d93ca2a543a58e3c",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/casting",
+      "observation_id": "aon:spell.fester-mass:5e33811d91e2701a",
+      "source_field": "spell_raw.components_raw",
+      "raw_value_sha256": "aeda00c7be4d0eea620c67651be46fd35726af160a20b9b6feb211f3153e58a7",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/effect",
+      "observation_id": "aon:spell.fester-mass:5e33811d91e2701a",
+      "source_field": "spell_raw.delivery_fields_raw",
+      "raw_value_sha256": "d562e487dbadaddc34ee431a62c4496108e0fc64abf0d7525a77ba96be9d0824",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description",
+      "observation_id": "aon:spell.fester-mass:5e33811d91e2701a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "631252bc18edf13a61d694d9401971d91d9798f6e12a871df40b6878669900b1",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/publication",
+      "observation_id": "aon:spell.fester-mass:5e33811d91e2701a",
+      "source_field": "spell_raw.source_book_raw",
+      "raw_value_sha256": "2bc60368c7ac611bffd9e029666d67a60425475e817f673487ae8d5baeb3a058",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    }
+  ],
+  "normalization": {
+    "status": "validated",
+    "normalizer_version": "0.1.2-explicit-inheritance",
+    "warnings": [
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/time",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/time",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/components_raw",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/components_raw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/range",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/range",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/duration",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/duration",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/saving_throw",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/saving_throw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/spell_resistance",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/spell_resistance",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      }
+    ]
+  }
+}
