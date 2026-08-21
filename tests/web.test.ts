@@ -110,12 +110,40 @@ describe("local rules browser", () => {
     expect(html).toContain('<section id="divine-focus">');
   });
 
-  it("keeps the alphabetical spell catalog available", async () => {
+  it("renders a bounded alphabetical spell catalog with filters", async () => {
     const response = await fetch(`${baseUrl}/spells/alphabetical`);
     const html = await response.text();
     expect(response.status).toBe(200);
     expect(html).toContain("<h1>Alphabetical spells</h1>");
+    expect(html).toContain('form class="catalog-filters" action="/spells/alphabetical" method="get"');
+    expect(html).toContain('name="q" type="search"');
+    expect(html).toContain('name="school"');
+    expect(html).toContain('name="publication"');
+    expect(html).toContain('name="sort"');
+    expect(html).toContain('aria-label="Filter spells by initial letter"');
+    expect(html).toContain('letter=A');
+    expect(html).toContain('class="alphabetical-table"');
+    expect(html).toContain('class="key-column"');
+    const tableBody = html.match(/<tbody>(.*?)<\/tbody>/s)?.[1] ?? "";
+    expect(tableBody.match(/<tr>/g)).toHaveLength(50);
+    expect(html).toContain("Page 1 of");
+  });
+
+  it("filters the alphabetical catalog by name, letter, and school", async () => {
+    const response = await fetch(`${baseUrl}/spells/alphabetical?q=light&letter=L&school=evocation&sort=school`);
+    const html = await response.text();
+    expect(response.status).toBe(200);
     expect(html).toContain('/spells/spell.light');
+    expect(html).not.toContain('/spells/spell.abeyance');
+    expect(html).toContain('value="L"');
+    expect(html).toContain('value="evocation" selected');
+    expect(html).toContain('value="school" selected');
+    expect(html).toContain('href="/spells/alphabetical">Clear filters</a>');
+  });
+
+  it("does not retain the previous all-spells route", async () => {
+    const response = await fetch(`${baseUrl}/spells/all`);
+    expect(response.status).toBe(404);
   });
 
   it("renders a spell with local relationship and source links", async () => {

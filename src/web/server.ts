@@ -17,6 +17,22 @@ input, select, button { font: inherit; padding: .4rem; }
 label { font-weight: 600; }
 table { border-collapse: collapse; width: 100%; }
 th, td { border-block-end: 1px solid; padding: .4rem; text-align: left; vertical-align: top; }
+.catalog-filters { align-items: end; border: 1px solid; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); padding: 1rem; }
+.catalog-filter { display: grid; gap: .25rem; min-width: 0; }
+.catalog-filter input, .catalog-filter select { box-sizing: border-box; max-width: 100%; min-height: 2.5rem; width: 100%; }
+.letter-filter { margin-block: 1rem; }
+.letter-filter ul { display: flex; flex-wrap: wrap; gap: .25rem; list-style: none; padding: 0; }
+.letter-filter a { align-items: center; border: 1px solid; display: inline-flex; justify-content: center; min-block-size: 2.5rem; min-inline-size: 2.5rem; padding-inline: .25rem; }
+.letter-filter a[aria-current="true"] { background: Highlight; color: HighlightText; font-weight: 700; text-decoration: none; }
+.catalog-actions { align-items: center; display: flex; gap: .75rem; }
+.catalog-results { align-items: baseline; display: flex; flex-wrap: wrap; gap: .5rem; justify-content: space-between; }
+.catalog-results h2 { margin-block-end: 0; }
+.pagination { align-items: center; display: flex; gap: 1rem; justify-content: center; margin-block: 1rem; }
+.table-scroll:focus-visible { outline: 3px solid Highlight; outline-offset: 2px; }
+.alphabetical-table { min-width: 42rem; }
+.alphabetical-table thead th { background: Canvas; position: sticky; top: 0; z-index: 1; }
+.alphabetical-table .key-column { background: Canvas; left: 0; position: sticky; z-index: 1; }
+.alphabetical-table thead .key-column { z-index: 2; }
 dt { font-weight: 700; }
 dd { margin-block-end: .65rem; }
 .skip-link { position: absolute; left: -10000px; }
@@ -348,6 +364,17 @@ function classHref(id: string): string {
   return `/classes/${encodeURIComponent(slug)}`;
 }
 
+function alphabeticalHref(url: URL, changes: Record<string, string | null>): string {
+  const parameters = new URLSearchParams(url.searchParams);
+  for (const [name, value] of Object.entries(changes)) {
+    parameters.delete(name);
+    if (value) parameters.set(name, value);
+  }
+  if (!("page" in changes)) parameters.delete("page");
+  const query = parameters.toString();
+  return `/spells/alphabetical${query ? `?${query}` : ""}`;
+}
+
 function humanize(value: string): string {
   return value.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
@@ -506,8 +533,36 @@ async function classesPage(prisma: PrismaClient): Promise<string> {
     <p><a href="/spells/alphabetical">View the alphabetical spell catalog</a></p>`);
 }
 
-async function alphabeticalSpellsPage(prisma: PrismaClient): Promise<string> {
+async function alphabeticalSpellsPage(prisma: PrismaClient, url: URL): Promise<string> {
+  const query = url.searchParams.get("q")?.trim() ?? "";
+  const requestedLetter = url.searchParams.get("letter")?.trim().toLocaleUpperCase() ?? "";
+  const letter = /^[A-Z]$/.test(requestedLetter) ? requestedLetter : "";
+  const school = url.searchParams.get("school")?.trim() ?? "";
+  const publication = url.searchParams.get("publication")?.trim() ?? "";
+  const requestedSort = url.searchParams.get("sort") ?? "name";
+  const sort = requestedSort === "school" || requestedSort === "publication" ? requestedSort : "name";
+  const requestedPage = Number.parseInt(url.searchParams.get("page") ?? "1", 10);
+  const pageSize = 50;
+  const where = {
+    ...(query ? { name: { contains: query } } : {}),
+    ...(letter ? { name: { startsWith: letter } } : {}),
+    ...(school ? { school } : {}),
+    ...(publication ? { publicationBook: publication } : {}),
+  };
+  const orderBy = sort === "school"
+    ? [{ school: "asc" as const }, { name: "asc" as const }]
+    : sort === "publication"
+      ? [{ publicationBook: "asc" as const }, { publicationPage: "asc" as const }, { name: "asc" as const }]
+      : [{ name: "asc" as const }];
+  const [total, schoolGroups, publicationGroups] = await Promise.all([
+    prisma.canonicalSpell.count({ where }),
+    prisma.canonicalSpell.groupBy({ by: ["school"], _count: { _all: true }, orderBy: { school: "asc" } }),
+    prisma.canonicalSpell.groupBy({ by: ["publicationBook"], _count: { _all: true }, orderBy: { publicationBook: "asc" } }),
+  ]);
+  const pageCount = Math.max(1, Math.ceil(total / pageSize));
+  const currentPage = Number.isFinite(requestedPage) ? Math.min(Math.max(requestedPage, 1), pageCount) : 1;
   const spells = await prisma.canonicalSpell.findMany({
+    where,
     select: {
       spellId: true,
       name: true,
@@ -515,20 +570,45 @@ async function alphabeticalSpellsPage(prisma: PrismaClient): Promise<string> {
       publicationBook: true,
       publicationPage: true,
     },
-    orderBy: { name: "asc" },
+    orderBy,
+    skip: (currentPage - 1) * pageSize,
+    take: pageSize,
   });
+  const firstResult = total === 0 ? 0 : (currentPage - 1) * pageSize + 1;
+  const lastResult = Math.min(currentPage * pageSize, total);
+  const hasFilters = Boolean(query || letter || school || publication || sort !== "name");
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  const pagination = pageCount > 1 ? `<nav class="pagination" aria-label="Catalog pages">
+    ${currentPage > 1 ? `<a rel="prev" href="${href(alphabeticalHref(url, { page: String(currentPage - 1) }))}">Previous</a>` : "<span>Previous</span>"}
+    <span>Page ${currentPage} of ${pageCount}</span>
+    ${currentPage < pageCount ? `<a rel="next" href="${href(alphabeticalHref(url, { page: String(currentPage + 1) }))}">Next</a>` : "<span>Next</span>"}
+  </nav>` : "";
   return page("Alphabetical spells", `<nav aria-label="Breadcrumb"><ol><li><a href="/spells">Classes</a></li><li aria-current="page">Alphabetical spells</li></ol></nav>
     <h1>Alphabetical spells</h1>
-    <p>${spells.length} canonical spell records.</p>
-    <table>
-      <caption>Canonical spells in alphabetical order</caption>
-      <thead><tr><th scope="col">Name</th><th scope="col">School</th><th scope="col">Publication</th></tr></thead>
+    <p>Search and browse ${schoolGroups.reduce((sum, group) => sum + group._count._all, 0)} canonical spell records.</p>
+    <form class="catalog-filters" action="/spells/alphabetical" method="get">
+      <label class="catalog-filter" for="alphabetical-q"><span>Spell name</span><input id="alphabetical-q" name="q" type="search" value="${escapeHtml(query)}" autocomplete="off"></label>
+      <label class="catalog-filter" for="alphabetical-school"><span>School</span><select id="alphabetical-school" name="school"><option value="">All schools</option>${schoolGroups.map((group) => `<option value="${escapeHtml(group.school)}"${group.school === school ? " selected" : ""}>${escapeHtml(humanize(group.school))} (${group._count._all})</option>`).join("")}</select></label>
+      <label class="catalog-filter" for="alphabetical-publication"><span>Publication</span><select id="alphabetical-publication" name="publication"><option value="">All publications</option>${publicationGroups.map((group) => `<option value="${escapeHtml(group.publicationBook)}"${group.publicationBook === publication ? " selected" : ""}>${escapeHtml(group.publicationBook)} (${group._count._all})</option>`).join("")}</select></label>
+      <label class="catalog-filter" for="alphabetical-sort"><span>Sort by</span><select id="alphabetical-sort" name="sort"><option value="name"${sort === "name" ? " selected" : ""}>Name</option><option value="school"${sort === "school" ? " selected" : ""}>School</option><option value="publication"${sort === "publication" ? " selected" : ""}>Publication</option></select></label>
+      ${letter ? `<input type="hidden" name="letter" value="${letter}">` : ""}
+      <div class="catalog-actions"><button type="submit">Apply filters</button>${hasFilters ? `<a href="/spells/alphabetical">Clear filters</a>` : ""}</div>
+    </form>
+    <nav class="letter-filter" aria-label="Filter spells by initial letter"><ul><li><a href="${href(alphabeticalHref(url, { letter: null }))}"${letter ? "" : ' aria-current="true"'}>All</a></li>${letters.map((item) => `<li><a href="${href(alphabeticalHref(url, { letter: item }))}"${letter === item ? ' aria-current="true"' : ""}>${item}</a></li>`).join("")}</ul></nav>
+    <div class="catalog-results"><h2 id="alphabetical-results-heading">Results</h2><p>${firstResult}–${lastResult} of ${total} spells</p></div>
+    ${pagination}
+    <div class="table-scroll" role="region" aria-labelledby="alphabetical-results-heading" tabindex="0">
+    <table class="alphabetical-table">
+      <caption>Filtered canonical spells</caption>
+      <thead><tr><th class="key-column" scope="col">Name</th><th scope="col">School</th><th scope="col">Publication</th></tr></thead>
       <tbody>${spells.map((spell) => `<tr>
-        <th scope="row"><a href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a></th>
+        <th class="key-column" scope="row"><a href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a></th>
         <td>${escapeHtml(humanize(spell.school))}</td>
         <td>${escapeHtml(spell.publicationBook)}${spell.publicationPage === null ? "" : `, page ${spell.publicationPage}`}</td>
       </tr>`).join("")}</tbody>
-    </table>`);
+    </table>
+    </div>
+    ${pagination}`);
 }
 
 function spellComponentsPage(): string {
@@ -897,7 +977,7 @@ export function createRequestHandler(prisma: PrismaClient) {
       }
       if (url.pathname === "/") result = await homePage(prisma);
       else if (url.pathname === "/spells") result = await classesPage(prisma);
-      else if (url.pathname === "/spells/alphabetical") result = await alphabeticalSpellsPage(prisma);
+      else if (url.pathname === "/spells/alphabetical") result = await alphabeticalSpellsPage(prisma, url);
       else if (url.pathname === "/spell-components") result = spellComponentsPage();
       else if (url.pathname === "/entities") result = await entitiesPage(prisma, url);
       else if (url.pathname === "/search") result = await searchPage(prisma, url);
