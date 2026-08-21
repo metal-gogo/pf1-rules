@@ -1,0 +1,705 @@
+{
+  "$schema": "../../schemas/canonical-spell.schema.json",
+  "schema_version": "0.1.0",
+  "spell_id": "spell.magic-boulder",
+  "ruleset": "Pathfinder First Edition",
+  "name": "Magic Boulder",
+  "aliases": [],
+  "classification": {
+    "school": "transmutation",
+    "subschool": null,
+    "descriptors": [
+      "earth"
+    ],
+    "raw": "transmutation [earth]"
+  },
+  "levels": [
+    {
+      "spell_list_id": "spell-list.cleric",
+      "list_kind": "class",
+      "list_name": "cleric",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "cleric 2"
+    },
+    {
+      "spell_list_id": "spell-list.druid",
+      "list_kind": "class",
+      "list_name": "druid",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "druid 2"
+    },
+    {
+      "spell_list_id": "spell-list.hunter",
+      "list_kind": "class",
+      "list_name": "hunter",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "hunter 2"
+    },
+    {
+      "spell_list_id": "spell-list.oracle",
+      "list_kind": "class",
+      "list_name": "oracle",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "oracle 2"
+    },
+    {
+      "spell_list_id": "spell-list.warpriest",
+      "list_kind": "class",
+      "list_name": "warpriest",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "warpriest 2"
+    }
+  ],
+  "casting": {
+    "time": {
+      "kind": "action",
+      "amount": 1,
+      "unit": "standard_action",
+      "raw": "1 standard action"
+    },
+    "components": [
+      {
+        "type": "verbal",
+        "details": null,
+        "cost_gp": null,
+        "raw": "V"
+      },
+      {
+        "type": "somatic",
+        "details": null,
+        "cost_gp": null,
+        "raw": "S"
+      },
+      {
+        "type": "divine_focus",
+        "details": null,
+        "cost_gp": null,
+        "raw": "DF"
+      }
+    ],
+    "components_raw": "V, S, DF",
+    "conditional_components": []
+  },
+  "effect": {
+    "range": {
+      "category": "touch",
+      "formula": null,
+      "raw": "touch"
+    },
+    "delivery": {
+      "resolution": "fixed",
+      "entries": [
+        {
+          "label_raw": "Targets",
+          "value_raw": "up to three boulders touched",
+          "kinds": [
+            "target"
+          ]
+        }
+      ]
+    },
+    "targeting": {
+      "mode": "single",
+      "subject_kind": "other",
+      "selection": "selected",
+      "count": {
+        "kind": "fixed",
+        "fixed": 1,
+        "formula": null,
+        "raw": "up to three boulders touched"
+      },
+      "separation": null,
+      "raw": "up to three boulders touched"
+    },
+    "area": null,
+    "duration": {
+      "kind": "discharge",
+      "formula": "30 minutes or until discharged",
+      "dismissible": null,
+      "concentration": null,
+      "raw": "30 minutes or until discharged"
+    },
+    "saving_throw": {
+      "types": [
+        "will"
+      ],
+      "outcome": "Will negates (harmless, object)",
+      "harmless": true,
+      "object": true,
+      "conditional": null,
+      "raw": "Will negates (harmless, object)"
+    },
+    "spell_resistance": {
+      "applies": true,
+      "harmless": true,
+      "object": true,
+      "conditional": null,
+      "raw": "yes (harmless, object)"
+    }
+  },
+  "description": {
+    "raw": "This spell works like magic stone, except you transmute as many as three boulders (rocks up to two size categories smaller than yourself) to use with the rock throwing ability or as siege engine ammunition. The boulder’s damage increases by one step, and the boulder gains a +1 enhancement bonus on attack and damage rolls.",
+    "search_text": "\"this spell works like magic stone, except you transmute as many as three boulders (rocks up to two size categories smaller than yourself) to use with the rock throwing ability or as siege engine ammunition. the boulder’s damage increases by one step, and the boulder gains a +1 enhancement bonus on attack and damage rolls.\"",
+    "sections": []
+  },
+  "publication": {
+    "publisher": "Paizo",
+    "book": "Monster Codex",
+    "page": 69,
+    "first_party_status": "confirmed",
+    "pfs_status": "not_legal",
+    "supplemental": []
+  },
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.magic-stone",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell works like magic stone, except you transmute as many as three boulders (rocks up to two size categories smaller than yourself) to use with the rock throwing ability or as siege engine ammunition. The boulder’s damage increases by one step, and the boulder gains a +1 enhancement bonus on attack and damage rolls."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Targets",
+                "value_raw": "up to three boulders touched",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Targets\",\"value_raw\":\"up to three boulders touched\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "single",
+            "subject_kind": "other",
+            "selection": "selected",
+            "count": {
+              "kind": "fixed",
+              "fixed": 1,
+              "formula": null,
+              "raw": "up to three boulders touched"
+            },
+            "separation": null,
+            "raw": "up to three boulders touched"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Targets\",\"value_raw\":\"up to three boulders touched\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell works like magic stone, except you transmute as many as three boulders (rocks up to two size categories smaller than yourself) to use with the rock throwing ability or as siege engine ammunition. The boulder’s damage increases by one step, and the boulder gains a +1 enhancement bonus on attack and damage rolls.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell works like magic stone, except you transmute as many as three boulders (rocks up to two size categories smaller than yourself) to use with the rock throwing ability or as siege engine ammunition. The boulder’s damage increases by one step, and the boulder gains a +1 enhancement bonus on attack and damage rolls.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
+  "relationships": [
+    {
+      "relationship_id": "spell.magic-boulder:appears_on_spell_list:spell-list.cleric",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.cleric",
+        "name": "cleric"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.magic-boulder:76aade412a353a41",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.magic-boulder:appears_on_spell_list:spell-list.druid",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.druid",
+        "name": "druid"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.magic-boulder:76aade412a353a41",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "druid",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/druid"
+        },
+        {
+          "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "druid 2",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.magic-boulder:appears_on_spell_list:spell-list.hunter",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.hunter",
+        "name": "hunter Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "hunter 2",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.magic-boulder:appears_on_spell_list:spell-list.oracle",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.oracle",
+        "name": "oracle Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "oracle 2",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.magic-boulder:appears_on_spell_list:spell-list.warpriest",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.warpriest",
+        "name": "warpriest Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "warpriest 2",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.magic-boulder:functions_like:spell.magic-stone",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.magic-stone",
+        "name": "Magic Stone"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "This spell works like magic stone, except you transmute as many as three boulders (rocks up to two size categories smaller than yourself) to use with the rock throwing ability or as siege engine ammunition. The boulder’s damage increases by one step, and the boulder gains a +1 enhancement bonus on attack and damage rolls.",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.magic-boulder:has_descriptor:descriptor.earth",
+      "type": "has_descriptor",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.earth",
+        "name": "earth"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "earth",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=34"
+        },
+        {
+          "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+          "source_field": "spell_raw.descriptors_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "earth",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.magic-boulder:has_school:magic-school.transmutation",
+      "type": "has_school",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.transmutation",
+        "name": "transmutation"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "transmutation",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=8"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.magic-boulder:76aade412a353a41",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "transmutation",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Transmutation"
+        },
+        {
+          "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+          "source_field": "spell_raw.school_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "transmutation",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.magic-boulder:published_in:publication.monster-codex",
+      "type": "published_in",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.monster-codex",
+        "name": "Monster Codex"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Monster Codex pg. 69",
+          "source_href": "http://paizo.com/products/btpy9926?Pathfinder-Roleplaying-Game-Monster-Codex"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.magic-boulder:76aade412a353a41",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Pathfinder Roleplaying Game Monster Codex",
+          "source_href": "http://www.amazon.com/gp/product/1601256868/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1601256868&amp;linkCode=as2&amp;tag=httpwwwd20pfs-20&amp;linkId=AS2DENHF4GXHQTXE"
+        },
+        {
+          "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+          "source_field": "spell_raw.source_book_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Monster Codex pg. 69",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.magic-boulder:references:spell.magic-stone",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.magic-stone",
+        "name": "magic stone"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.magic-boulder:44244f1749023e3d",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "magic stone",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/magicStone.html#magic-stone"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.magic-boulder:76aade412a353a41",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "magic stone",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/m/magic-stone"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.magic-boulder:uses_action:action.standard-action",
+      "type": "uses_action",
+      "target": {
+        "entity_type": "action",
+        "entity_id": "action.standard-action",
+        "name": "1 standard action"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+          "source_field": "spell_raw.casting_time_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1 standard action",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.magic-boulder:uses_definition:rule.enhancement-bonus",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.enhancement-bonus",
+        "name": "enhancement bonus"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.magic-boulder:76aade412a353a41",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "enhancement bonus",
+          "source_href": "https://www.d20pfsrd.com/basics-ability-scores/glossary#TOC-Enhancement-Bonus"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.magic-boulder:uses_definition:rule.rock-throwing",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.rock-throwing",
+        "name": "rock throwing"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.magic-boulder:76aade412a353a41",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "rock throwing",
+          "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/universal-monster-rules#TOC-Rock-Throwing-Ex-"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.magic-boulder:uses_definition:rule.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes (harmless, object)",
+          "source_href": null
+        }
+      ],
+      "note": null
+    }
+  ],
+  "provenance": [
+    {
+      "field_path": "/classification",
+      "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+      "source_field": "spell_raw.school_raw",
+      "raw_value_sha256": "589ea472f2f3eae5a870fd44c752dc96fc1a3220b0be519994941b1daf8069ad",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels",
+      "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+      "source_field": "spell_raw.levels_raw",
+      "raw_value_sha256": "1813d5939ec3bf028e3be6c638187877fe4e7a4f4090a85a5b2e30b4cea8cffa",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/casting",
+      "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+      "source_field": "spell_raw.components_raw",
+      "raw_value_sha256": "5de38fe056a1e71e729a0919b0073734c5562593e2e473adb2ace9ee61e8779e",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/effect",
+      "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+      "source_field": "spell_raw.delivery_fields_raw",
+      "raw_value_sha256": "d60ad79174462434381131193a36756977180359f1b47f89de2354ad63f7ce71",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description",
+      "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d270c2578c62037642938fef099349eda57cba12237f2e2349382403ac8f1a76",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/publication",
+      "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+      "source_field": "spell_raw.source_book_raw",
+      "raw_value_sha256": "f09c27225b10d274fa08fc2f089043b16344b7eface958caf45a6f2ca32a9b97",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    }
+  ],
+  "normalization": {
+    "status": "validated",
+    "normalizer_version": "0.1.2-explicit-inheritance",
+    "warnings": [
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/classification",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/time",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/time",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/components_raw",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/components_raw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/range",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/range",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/duration",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/duration",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/saving_throw",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/saving_throw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/spell_resistance",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/spell_resistance",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/description/raw",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      }
+    ]
+  }
+}
