@@ -42,6 +42,20 @@ backlog from local cached observations, then reconciles child records after all
 new parent records are available. The [rollout finding](../findings/30-spell-inheritance-rollout.md)
 records the completed migration and remaining source-quality issues.
 
+## Qualified spell-list access
+
+A canonical `levels` item represents one access path onto a base spell list.
+Its optional `qualifications` array preserves deity, mystery, archetype,
+free-form conditional, and publication restrictions as ordered discriminated
+objects. Qualifications on one item are conjunctive. Alternative access paths,
+including a different qualified level on the same list, are separate `levels`
+items rather than synthetic spell-list IDs.
+
+The relational read model mirrors that shape: `spell_levels` uses the canonical
+array ordinal as membership identity, while `spell_list_qualifications` stores
+each qualification's kind and complete JSON payload. This keeps kinds queryable
+without flattening or discarding their nested domain fields.
+
 ## Derived representations
 
 Human-facing HTML and any future LLM-facing Markdown are replaceable read

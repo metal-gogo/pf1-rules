@@ -75,6 +75,7 @@ function parseLevels(raw: string | null, publicationBook: string | null) {
       level: Number(match[2]),
       scope: coreBook && coreLists.has(listName) ? "core" : "later_first_party",
       raw: trimmed,
+      qualifications: [],
     };
   });
 }

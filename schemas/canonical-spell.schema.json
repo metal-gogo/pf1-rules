@@ -60,7 +60,13 @@
           "list_name": {"type": "string", "minLength": 1},
           "level": {"type": "integer", "minimum": 0, "maximum": 9},
           "scope": {"enum": ["core", "later_first_party", "third_party", "unknown"]},
-          "raw": {"type": "string", "minLength": 1}
+          "raw": {"type": "string", "minLength": 1},
+          "qualifications": {
+            "type": "array",
+            "description": "Ordered, conjunctive access restrictions on this exact spell-list entry. Alternative access paths are separate level entries.",
+            "uniqueItems": true,
+            "items": {"$ref": "#/$defs/spellListQualification"}
+          }
         }
       }
     },
@@ -285,6 +291,94 @@
     }
   },
   "$defs": {
+    "qualifiedEntity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entity_id", "name"],
+      "properties": {
+        "entity_id": {
+          "type": ["string", "null"],
+          "pattern": "^[a-z][a-z0-9_-]*\\.[a-z0-9][a-z0-9.-]*$"
+        },
+        "name": {"type": "string", "minLength": 1}
+      }
+    },
+    "publicationScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entity_id", "name", "product_code"],
+      "properties": {
+        "entity_id": {
+          "type": ["string", "null"],
+          "pattern": "^publication\\.[a-z0-9][a-z0-9.-]*$"
+        },
+        "name": {"type": ["string", "null"], "minLength": 1},
+        "product_code": {"type": ["string", "null"], "minLength": 1}
+      }
+    },
+    "spellListQualification": {
+      "description": "A typed restriction preserved independently from the base spell list and spell level.",
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "deity", "raw"],
+          "properties": {
+            "kind": {"const": "deity"},
+            "deity": {"$ref": "#/$defs/qualifiedEntity"},
+            "raw": {"type": "string", "minLength": 1}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "mystery", "raw"],
+          "properties": {
+            "kind": {"const": "mystery"},
+            "mystery": {"$ref": "#/$defs/qualifiedEntity"},
+            "raw": {"type": "string", "minLength": 1}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "archetype", "raw"],
+          "properties": {
+            "kind": {"const": "archetype"},
+            "archetype": {"$ref": "#/$defs/qualifiedEntity"},
+            "raw": {"type": "string", "minLength": 1}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "condition", "raw"],
+          "properties": {
+            "kind": {"const": "conditional"},
+            "condition": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["raw", "search_text"],
+              "properties": {
+                "raw": {"type": "string", "minLength": 1},
+                "search_text": {"type": "string", "minLength": 1}
+              }
+            },
+            "raw": {"type": "string", "minLength": 1}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "publication_scope", "raw"],
+          "properties": {
+            "kind": {"const": "publication"},
+            "publication_scope": {"$ref": "#/$defs/publicationScope"},
+            "raw": {"type": "string", "minLength": 1}
+          }
+        }
+      ]
+    },
     "castingTime": {
       "type": "object",
       "additionalProperties": false,
@@ -433,7 +527,7 @@
           "additionalProperties": false,
           "required": ["entity_type", "entity_id", "name"],
           "properties": {
-            "entity_type": {"enum": ["spell", "mythic_spell_variant", "spell_family", "rule", "condition", "feat", "class_feature", "monster", "item", "magic_school", "subschool", "descriptor", "spell_list", "action", "publication", "visual_aid", "unknown"]},
+            "entity_type": {"enum": ["spell", "mythic_spell_variant", "spell_family", "rule", "condition", "feat", "class_feature", "deity", "mystery", "archetype", "monster", "item", "magic_school", "subschool", "descriptor", "spell_list", "action", "publication", "visual_aid", "unknown"]},
             "entity_id": {"type": ["string", "null"]},
             "name": {"type": "string", "minLength": 1}
           }

@@ -2,6 +2,10 @@ import { createServer, type IncomingMessage, type ServerResponse } from "node:ht
 import { pathToFileURL } from "node:url";
 
 import { createLocalPrisma } from "../db/client.js";
+import {
+  spellListQualificationsLabel,
+  type SpellListQualification,
+} from "../domain/spell-lists.js";
 import type { PrismaClient } from "../generated/prisma/client.js";
 import { findSpell, searchRules, spellsForList } from "../query/spells.js";
 
@@ -696,9 +700,20 @@ function spellComponentsPage(): string {
     </article>`);
 }
 
+
+function qualificationLabel(
+  qualifications: readonly { payload: unknown }[],
+): string | null {
+  return spellListQualificationsLabel(
+    qualifications.map(
+      (qualification) => qualification.payload as SpellListQualification,
+    ),
+  );
+}
+
 async function classSpellsPage(prisma: PrismaClient, classSlug: string): Promise<string | null> {
   const listId = `spell-list.${classSlug}`;
-  const [entity, entries] = await Promise.all([
+  const [entity, entries, qualifications] = await Promise.all([
     prisma.entity.findUnique({
       where: { id: listId },
       select: { id: true, name: true, type: true },
@@ -706,6 +721,7 @@ async function classSpellsPage(prisma: PrismaClient, classSlug: string): Promise
     prisma.spellLevel.findMany({
       where: { spellListId: listId, listKind: "class" },
       select: {
+        levelIndex: true,
         spellLevel: true,
         listName: true,
         scope: true,
@@ -716,16 +732,33 @@ async function classSpellsPage(prisma: PrismaClient, classSlug: string): Promise
             school: true,
             subschool: true,
             descriptionRaw: true,
+            shortDescription: true,
             components: { select: { componentType: true, raw: true } },
           },
         },
       },
       orderBy: [{ spellLevel: "asc" }, { spell: { name: "asc" } }],
     }),
+    prisma.spellListQualification.findMany({
+      where: { spellLevel: { spellListId: listId, listKind: "class" } },
+      select: { spellId: true, levelIndex: true, payload: true },
+      orderBy: [
+        { spellId: "asc" },
+        { levelIndex: "asc" },
+        { qualificationIndex: "asc" },
+      ],
+    }),
   ]);
   if (!entity || entity.type !== "spell_list" || entries.length === 0) return null;
 
   const className = humanize(entries[0]?.listName ?? entity.name.replace(/ spell list$/i, ""));
+  const qualificationsByEntry = new Map<string, { payload: unknown }[]>();
+  for (const qualification of qualifications) {
+    const key = `${qualification.spellId}:${qualification.levelIndex}`;
+    const entryQualifications = qualificationsByEntry.get(key) ?? [];
+    entryQualifications.push(qualification);
+    qualificationsByEntry.set(key, entryQualifications);
+  }
   const entriesByLevel = new Map<number, typeof entries>();
   for (const entry of entries) {
     const levelEntries = entriesByLevel.get(entry.spellLevel) ?? [];
@@ -738,7 +771,7 @@ async function classSpellsPage(prisma: PrismaClient, classSlug: string): Promise
     const components = spellComponentTypes(entry.spell.components);
     return [entry.spell.spellId, {
       components,
-      summary: summarizeDescription(entry.spell.descriptionRaw, 160),
+      summary: entry.spell.shortDescription ?? summarizeDescription(entry.spell.descriptionRaw, 160),
     }] as const;
   }));
   const availableComponents = (Object.keys(spellComponentMetadata) as SpellComponentType[])
@@ -772,9 +805,12 @@ async function classSpellsPage(prisma: PrismaClient, classSlug: string): Promise
             const spell = entry.spell;
             const school = `${humanize(spell.school)}${spell.subschool ? ` (${humanize(spell.subschool)})` : ""}`;
             const display = spellDisplay.get(spell.spellId) ?? { components: [], summary: "" };
-            const searchText = `${spell.name} ${display.summary}`.toLocaleLowerCase();
+            const qualifiedAccess = qualificationLabel(
+              qualificationsByEntry.get(`${spell.spellId}:${entry.levelIndex}`) ?? [],
+            );
+            const searchText = `${spell.name} ${display.summary} ${qualifiedAccess ?? ""}`.toLocaleLowerCase();
             return `<tr data-school="${escapeHtml(spell.school)}" data-level="${level}" data-components="${escapeHtml(display.components.join(" "))}" data-search="${escapeHtml(searchText)}">
-              <th class="key-column" scope="row"><a class="spell-name" href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a></th>
+              <th class="key-column" scope="row"><a class="spell-name" href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a>${qualifiedAccess ? ` <span class="muted">(${escapeHtml(qualifiedAccess)})</span>` : ""}</th>
               <td class="school-column">${escapeHtml(school)}</td>
               <td class="components-column">${componentAbbreviations(display.components)}</td>
               <td><span class="spell-summary">${escapeHtml(display.summary)}</span></td>
@@ -846,10 +882,13 @@ async function spellPage(prisma: PrismaClient, spellId: string): Promise<string 
     ${escapeHtml(component.raw ?? humanize(component.componentType))}
     ${component.conditionRaw ? `<span>— ${escapeHtml(component.conditionRaw)}</span>` : ""}
   </li>`).join("");
-  const levelRows = spell.levels.map((level) => `<li>
-    <a href="${href(level.listKind === "class" ? classHref(level.spellListId) : listHref(level.spellListId))}">${escapeHtml(humanize(level.listName))}</a> ${level.spellLevel}
-    <span class="muted">(${escapeHtml(humanize(level.scope))})</span>
-  </li>`).join("");
+  const levelRows = spell.levels.map((level) => {
+    const qualifiedAccess = qualificationLabel(level.qualifications);
+    return `<li>
+      <a href="${href(level.listKind === "class" ? classHref(level.spellListId) : listHref(level.spellListId))}">${escapeHtml(humanize(level.listName))}</a> ${level.spellLevel}${qualifiedAccess ? ` — ${escapeHtml(qualifiedAccess)}` : ""}
+      <span class="muted">(${escapeHtml(humanize(level.scope))})</span>
+    </li>`;
+  }).join("");
   const deliveryRows = spell.deliveryFields.map((field) => `<dt>${escapeHtml(field.labelRaw)}</dt><dd>${escapeHtml(field.valueRaw ?? "Not recorded")}</dd>`).join("");
   const description = spell.descriptionSections.length > 0
     ? spell.descriptionSections.map((section) => `<section><h2>${escapeHtml(section.heading)}</h2>${paragraphs(section.body)}</section>`).join("")

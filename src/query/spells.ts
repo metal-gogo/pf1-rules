@@ -13,7 +13,10 @@ export async function findSpell(prisma: PrismaClient, nameOrId: string) {
     include: {
       aliases: true,
       descriptors: true,
-      levels: { orderBy: [{ spellLevel: "asc" }, { listName: "asc" }] },
+      levels: {
+        include: { qualifications: { orderBy: { qualificationIndex: "asc" } } },
+        orderBy: [{ spellLevel: "asc" }, { listName: "asc" }, { levelIndex: "asc" }],
+      },
       components: { orderBy: [{ componentScope: "asc" }, { componentIndex: "asc" }] },
       deliveryFields: { orderBy: { fieldIndex: "asc" } },
       descriptionSections: { orderBy: { sectionIndex: "asc" } },
@@ -89,14 +92,36 @@ export async function spellsForList(
   spellListId: string,
   spellLevel?: number,
 ) {
-  return prisma.spellLevel.findMany({
-    where: {
-      spellListId,
-      ...(spellLevel === undefined ? {} : { spellLevel }),
-    },
-    include: { spell: true },
-    orderBy: [{ spellLevel: "asc" }, { spell: { name: "asc" } }],
-  });
+  const where = {
+    spellListId,
+    ...(spellLevel === undefined ? {} : { spellLevel }),
+  };
+  const [entries, qualifications] = await Promise.all([
+    prisma.spellLevel.findMany({
+      where,
+      include: { spell: true },
+      orderBy: [{ spellLevel: "asc" }, { spell: { name: "asc" } }, { levelIndex: "asc" }],
+    }),
+    prisma.spellListQualification.findMany({
+      where: { spellLevel: where },
+      orderBy: [
+        { spellId: "asc" },
+        { levelIndex: "asc" },
+        { qualificationIndex: "asc" },
+      ],
+    }),
+  ]);
+  const byEntry = new Map<string, typeof qualifications>();
+  for (const qualification of qualifications) {
+    const key = `${qualification.spellId}:${qualification.levelIndex}`;
+    const entryQualifications = byEntry.get(key) ?? [];
+    entryQualifications.push(qualification);
+    byEntry.set(key, entryQualifications);
+  }
+  return entries.map((entry) => ({
+    ...entry,
+    qualifications: byEntry.get(`${entry.spellId}:${entry.levelIndex}`) ?? [],
+  }));
 }
 
 

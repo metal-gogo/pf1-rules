@@ -34,47 +34,50 @@ model Entity {
 }
 
 model CanonicalSpell {
-  spellId             String  @id @map("spell_id")
-  ruleset             String
-  name                String
-  school              String
-  subschool           String?
-  classificationRaw   String? @map("classification_raw")
-  castingTimeKind     String  @map("casting_time_kind")
-  castingTimeAmount   Float?  @map("casting_time_amount")
-  castingTimeUnit     String  @map("casting_time_unit")
-  castingTimeRaw      String? @map("casting_time_raw")
-  componentsRaw       String? @map("components_raw")
-  rangeCategory       String  @map("range_category")
-  rangeFormula        String? @map("range_formula")
-  rangeRaw            String? @map("range_raw")
-  deliveryResolution  String  @map("delivery_resolution")
-  targeting           Json?
-  area                Json?
-  durationKind        String  @map("duration_kind")
-  durationFormula     String? @map("duration_formula")
-  durationRaw         String? @map("duration_raw")
-  savingThrow         Json    @map("saving_throw")
-  spellResistance     Json    @map("spell_resistance")
-  descriptionRaw      String  @map("description_raw")
-  searchText          String  @map("search_text")
-  publisher           String
-  publicationBook     String  @map("publication_book")
-  publicationPage     Int?    @map("publication_page")
-  firstPartyStatus    String  @map("first_party_status")
-  pfsStatus           String  @map("pfs_status")
-  normalizationStatus String  @map("normalization_status")
-  payload             Json
+  spellId                  String  @id @map("spell_id")
+  ruleset                  String
+  name                     String
+  school                   String
+  subschool                String?
+  classificationRaw        String? @map("classification_raw")
+  castingTimeKind          String  @map("casting_time_kind")
+  castingTimeAmount        Float?  @map("casting_time_amount")
+  castingTimeUnit          String  @map("casting_time_unit")
+  castingTimeRaw           String? @map("casting_time_raw")
+  componentsRaw            String? @map("components_raw")
+  rangeCategory            String  @map("range_category")
+  rangeFormula             String? @map("range_formula")
+  rangeRaw                 String? @map("range_raw")
+  deliveryResolution       String  @map("delivery_resolution")
+  targeting                Json?
+  area                     Json?
+  durationKind             String  @map("duration_kind")
+  durationFormula          String? @map("duration_formula")
+  durationRaw              String? @map("duration_raw")
+  savingThrow              Json    @map("saving_throw")
+  spellResistance          Json    @map("spell_resistance")
+  descriptionRaw           String  @map("description_raw")
+  shortDescription         String? @map("short_description")
+  shortDescriptionSourceId Int?    @unique @map("short_description_source_id")
+  searchText               String  @map("search_text")
+  publisher                String
+  publicationBook          String  @map("publication_book")
+  publicationPage          Int?    @map("publication_page")
+  firstPartyStatus         String  @map("first_party_status")
+  pfsStatus                String  @map("pfs_status")
+  normalizationStatus      String  @map("normalization_status")
+  payload                  Json
 
-  entity              Entity                    @relation("CanonicalSpellEntity", fields: [spellId], references: [id])
-  aliases             SpellAlias[]
-  descriptors         SpellDescriptor[]
-  levels              SpellLevel[]
-  components          SpellComponent[]
-  deliveryFields      SpellDeliveryField[]
-  descriptionSections SpellDescriptionSection[]
-  inheritance         SpellInheritance[]        @relation("InheritedSpell")
-  mythicVariant       MythicSpellVariant?
+  entity                 Entity                    @relation("CanonicalSpellEntity", fields: [spellId], references: [id])
+  aliases                SpellAlias[]
+  descriptors            SpellDescriptor[]
+  levels                 SpellLevel[]
+  components             SpellComponent[]
+  deliveryFields         SpellDeliveryField[]
+  descriptionSections    SpellDescriptionSection[]
+  shortDescriptionSource SpellSummaryObservation?  @relation("CanonicalShortDescription", fields: [shortDescriptionSourceId], references: [id])
+  inheritance            SpellInheritance[]        @relation("InheritedSpell")
+  mythicVariant          MythicSpellVariant?
 
   @@index([school, name])
   @@index([publicationBook, publicationPage])
@@ -101,21 +104,63 @@ model SpellDescriptor {
 }
 
 model SpellLevel {
-  spellId     String  @map("spell_id")
-  spellListId String  @map("spell_list_id")
-  listKind    String  @map("list_kind")
-  listName    String  @map("list_name")
-  spellLevel  Int     @map("spell_level")
+  spellId     String @map("spell_id")
+  levelIndex  Int    @map("level_index")
+  spellListId String @map("spell_list_id")
+  listKind    String @map("list_kind")
+  listName    String @map("list_name")
+  spellLevel  Int    @map("spell_level")
   scope       String
   raw         String?
 
-  spell     CanonicalSpell @relation(fields: [spellId], references: [spellId], onDelete: Cascade)
-  spellList Entity         @relation(fields: [spellListId], references: [id])
+  spell          CanonicalSpell           @relation(fields: [spellId], references: [spellId], onDelete: Cascade)
+  spellList      Entity                   @relation(fields: [spellListId], references: [id])
+  qualifications SpellListQualification[]
 
-  @@id([spellId, spellListId])
+  @@id([spellId, levelIndex])
+  @@index([spellId, spellListId])
   @@index([spellListId, spellLevel, spellId])
   @@index([listKind, spellLevel, spellId])
   @@map("spell_levels")
+}
+
+model SpellListQualification {
+  spellId            String @map("spell_id")
+  levelIndex         Int    @map("level_index")
+  qualificationIndex Int    @map("qualification_index")
+  kind               String
+  payload            Json
+
+  spellLevel SpellLevel @relation(fields: [spellId, levelIndex], references: [spellId, levelIndex], onDelete: Cascade)
+
+  @@id([spellId, levelIndex, qualificationIndex])
+  @@index([kind, spellId])
+  @@map("spell_list_qualifications")
+}
+
+model SpellSummaryObservation {
+  id              Int      @id @default(autoincrement()) @map("summary_observation_id")
+  catalogId       String   @map("catalog_id")
+  spellId         String   @map("spell_id")
+  spellName       String   @map("spell_name")
+  spellListId     String   @map("spell_list_id")
+  spellListName   String   @map("spell_list_name")
+  spellLevel      Int      @map("spell_level")
+  siteId          String   @map("site_id")
+  summaryRaw      String   @map("summary_raw")
+  sourceUrl       String   @map("source_url")
+  retrievedAt     DateTime @map("retrieved_at")
+  contentSha256   String   @map("content_sha256")
+  rawArtifactPath String   @map("raw_artifact_path")
+  parserName      String   @map("parser_name")
+  parserVersion   String   @map("parser_version")
+
+  selectedBy CanonicalSpell? @relation("CanonicalShortDescription")
+
+  @@unique([catalogId, spellId, spellListId])
+  @@index([spellId, siteId])
+  @@index([spellListId, spellLevel])
+  @@map("spell_summary_observations")
 }
 
 model SpellComponent {

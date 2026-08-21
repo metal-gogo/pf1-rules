@@ -374,6 +374,15 @@ export function validatePackage(): PackageStatistics {
       );
     }
     const referenced = new Set<string>(record.levels.map((level: any) => level.spell_list_id));
+    for (const level of record.levels) {
+      for (const qualification of level.qualifications ?? []) {
+        const qualifiedEntityId = qualification.deity?.entity_id
+          ?? qualification.mystery?.entity_id
+          ?? qualification.archetype?.entity_id
+          ?? qualification.publication_scope?.entity_id;
+        if (qualifiedEntityId) referenced.add(qualifiedEntityId);
+      }
+    }
     for (const relationship of record.relationships) {
       if (relationship.target.entity_id) {
         referenced.add(relationship.target.entity_id);

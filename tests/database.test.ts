@@ -70,6 +70,11 @@ describe("ingested spell catalog", () => {
     });
     expect(clericSummary?.summaryRaw).toBe("Object shines like a torch.");
     expect(clericSummary?.contentSha256).toMatch(/^[a-f0-9]{64}$/);
+
+    const unresolvedSummary = await prisma.spellSummaryObservation.findFirst({
+      where: { spellId: "spell.enhanced-diplomacy" },
+    });
+    expect(unresolvedSummary?.spellName).toBe("Enhanced Diplomacy");
   });
 
   it("materializes inherited spell rules with an auditable trace", async () => {

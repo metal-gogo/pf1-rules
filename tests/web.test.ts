@@ -80,6 +80,8 @@ describe("local rules browser", () => {
     expect(html).not.toContain('/spell-components#verbal');
     expect(html).toContain('class="table-scroll spell-table-region"');
     expect(html).toContain('Scroll horizontally to see every column.');
+    expect(html).toContain("Object shines like a torch.");
+    expect(html).not.toContain("This spell causes a touched object to glow like a torch");
     expect(html).toContain('<script src="/class-spells.js" defer></script>');
     expect(html).toContain('/spells/spell.light');
     expect(html).toContain('/spells/spell.miracle');

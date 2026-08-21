@@ -8,11 +8,35 @@ import { observationEntityId, type ValidatedJson } from "../domain/json.js";
 import { validatePackage, type PackageStatistics } from "./validate.js";
 
 
-const importerVersion = "0.2.0-prisma";
+const importerVersion = "0.3.0-prisma";
 
 export interface ImportStatistics extends PackageStatistics {
   entityEvidence: number;
+  spellListQualifications: number;
+  spellSummaryObservations: number;
   searchableRecords: number;
+}
+
+interface CatalogSummaryRecord {
+  catalogId: string;
+  spellId: string;
+  spellName: string;
+  spellListId: string;
+  spellListName: string;
+  spellLevel: number;
+  siteId: string;
+  summaryRaw: string;
+  sourceUrl: string;
+  retrievedAt: Date;
+  contentSha256: string;
+  rawArtifactPath: string;
+  parserName: string;
+  parserVersion: string;
+}
+
+interface SelectedShortDescription {
+  sourceId: number;
+  summaryRaw: string;
 }
 
 
@@ -30,6 +54,46 @@ function jsonFiles(directory: string, recursive = false): string[] {
     })
     .filter((filename) => filename.endsWith(".json"))
     .sort();
+}
+
+
+function catalogSummaryRecords(): CatalogSummaryRecord[] {
+  const records: CatalogSummaryRecord[] = [];
+  for (const filename of jsonFiles(path.join(projectRoot, "data", "ingestion"))) {
+    const manifest = loadJson(filename);
+    const pagesByListId = new Map<string, ValidatedJson>(
+      manifest.catalog_pages.map((page: ValidatedJson) => [page.spell_list_id, page]),
+    );
+    for (const spell of manifest.spells) {
+      for (const membership of spell.catalog_memberships) {
+        const summaryRaw = membership.summary_raw.trim();
+        if (!summaryRaw) continue;
+        const page = pagesByListId.get(membership.spell_list_id);
+        if (!page) {
+          throw new Error(
+            `Catalog page metadata is missing for ${membership.spell_list_id} in ${manifest.manifest_id}`,
+          );
+        }
+        records.push({
+          catalogId: manifest.manifest_id,
+          spellId: spell.spell_id,
+          spellName: spell.name,
+          spellListId: membership.spell_list_id,
+          spellListName: membership.list_name,
+          spellLevel: membership.level,
+          siteId: manifest.source.site_id,
+          summaryRaw,
+          sourceUrl: membership.catalog_source_url,
+          retrievedAt: new Date(page.retrieved_at),
+          contentSha256: page.content_sha256,
+          rawArtifactPath: page.raw_artifact_path,
+          parserName: manifest.parser.name,
+          parserVersion: manifest.parser.version,
+        });
+      }
+    }
+  }
+  return records;
 }
 
 
@@ -51,6 +115,7 @@ async function clearImportedData(tx: Prisma.TransactionClient): Promise<void> {
   await tx.spellDescriptor.deleteMany();
   await tx.spellAlias.deleteMany();
   await tx.canonicalSpell.deleteMany();
+  await tx.spellSummaryObservation.deleteMany();
   await tx.entityEvidence.deleteMany();
   await tx.coverageCheck.deleteMany();
   await tx.sourceDeliveryField.deleteMany();
@@ -61,6 +126,53 @@ async function clearImportedData(tx: Prisma.TransactionClient): Promise<void> {
   await tx.ingestionQueueItem.deleteMany();
   await tx.entity.deleteMany();
   await tx.importRun.deleteMany();
+}
+
+
+async function insertSpellSummaryObservations(
+  tx: Prisma.TransactionClient,
+): Promise<{ count: number; selected: Map<string, SelectedShortDescription> }> {
+  const records = catalogSummaryRecords();
+  await tx.spellSummaryObservation.createMany({ data: records });
+  const observations = await tx.spellSummaryObservation.findMany({
+    select: { id: true, spellId: true, spellListId: true, siteId: true, summaryRaw: true },
+  });
+  const observationsBySpell = new Map<string, typeof observations>();
+  for (const observation of observations) {
+    const spellObservations = observationsBySpell.get(observation.spellId) ?? [];
+    spellObservations.push(observation);
+    observationsBySpell.set(observation.spellId, spellObservations);
+  }
+
+  const selected = new Map<string, SelectedShortDescription>();
+  for (const [spellId, spellObservations] of observationsBySpell) {
+    const preferredSite = spellObservations.some((observation) => observation.siteId === "aon")
+      ? "aon"
+      : [...new Set(spellObservations.map((observation) => observation.siteId))].sort()[0];
+    const preferredObservations = spellObservations.filter(
+      (observation) => observation.siteId === preferredSite,
+    );
+    const bySummary = new Map<string, typeof preferredObservations>();
+    for (const observation of preferredObservations) {
+      const matching = bySummary.get(observation.summaryRaw) ?? [];
+      matching.push(observation);
+      bySummary.set(observation.summaryRaw, matching);
+    }
+    const winningGroup = [...bySummary.values()].sort((left, right) => {
+      const frequencyDifference = right.length - left.length;
+      if (frequencyDifference !== 0) return frequencyDifference;
+      const leftSource = [...left].sort((a, b) => a.spellListId.localeCompare(b.spellListId))[0]!;
+      const rightSource = [...right].sort((a, b) => a.spellListId.localeCompare(b.spellListId))[0]!;
+      return leftSource.spellListId.localeCompare(rightSource.spellListId)
+        || leftSource.summaryRaw.localeCompare(rightSource.summaryRaw);
+    })[0]!;
+    const source = [...winningGroup].sort((left, right) =>
+      left.spellListId.localeCompare(right.spellListId)
+      || left.id - right.id,
+    )[0]!;
+    selected.set(spellId, { sourceId: source.id, summaryRaw: source.summaryRaw });
+  }
+  return { count: observations.length, selected };
 }
 
 
@@ -316,12 +428,17 @@ function canonicalRecords(): ValidatedJson[] {
 }
 
 
-async function insertCanonicalSpells(tx: Prisma.TransactionClient): Promise<number> {
+async function insertCanonicalSpells(
+  tx: Prisma.TransactionClient,
+  shortDescriptions: Map<string, SelectedShortDescription>,
+): Promise<{ count: number; qualificationCount: number }> {
   const records = canonicalRecords();
+  let qualificationCount = 0;
   for (const record of records) {
     const casting = record.casting;
     const effect = record.effect;
     const publication = record.publication;
+    const shortDescription = shortDescriptions.get(record.spell_id);
     await tx.canonicalSpell.create({
       data: {
         spellId: record.spell_id,
@@ -347,6 +464,8 @@ async function insertCanonicalSpells(tx: Prisma.TransactionClient): Promise<numb
         savingThrow: effect.saving_throw,
         spellResistance: effect.spell_resistance,
         descriptionRaw: record.description.raw,
+        shortDescription: shortDescription?.summaryRaw ?? null,
+        shortDescriptionSourceId: shortDescription?.sourceId ?? null,
         searchText: record.description.search_text,
         publisher: publication.publisher,
         publicationBook: publication.book,
@@ -366,10 +485,11 @@ async function insertCanonicalSpells(tx: Prisma.TransactionClient): Promise<numb
     for (const descriptor of record.classification.descriptors) {
       await tx.spellDescriptor.create({ data: { spellId: record.spell_id, descriptor } });
     }
-    for (const level of record.levels) {
+    for (const [levelIndex, level] of record.levels.entries()) {
       await tx.spellLevel.create({
         data: {
           spellId: record.spell_id,
+          levelIndex,
           spellListId: level.spell_list_id,
           listKind: level.list_kind,
           listName: level.list_name,
@@ -378,6 +498,20 @@ async function insertCanonicalSpells(tx: Prisma.TransactionClient): Promise<numb
           raw: level.raw ?? null,
         },
       });
+      for (const [qualificationIndex, qualification] of (
+        level.qualifications ?? []
+      ).entries()) {
+        await tx.spellListQualification.create({
+          data: {
+            spellId: record.spell_id,
+            levelIndex,
+            qualificationIndex,
+            kind: qualification.kind,
+            payload: qualification,
+          },
+        });
+        qualificationCount += 1;
+      }
     }
     for (const [index, component] of record.casting.components.entries()) {
       await tx.spellComponent.create({
@@ -449,7 +583,7 @@ async function insertCanonicalSpells(tx: Prisma.TransactionClient): Promise<numb
     }
     await insertProvenanceAndWarnings(tx, record.spell_id, record);
   }
-  return records.length;
+  return { count: records.length, qualificationCount };
 }
 
 
@@ -641,24 +775,27 @@ export async function importPackage(prisma: PrismaClient): Promise<ImportStatist
         },
       });
       const linkedEntities = await insertEntities(tx);
+      const spellSummaries = await insertSpellSummaryObservations(tx);
       const observations = await insertObservations(tx);
       const entityEvidence = await insertEntityEvidence(tx);
       const coverageChecks = await insertCoverage(tx);
-      const canonicalSpells = await insertCanonicalSpells(tx);
+      const canonicalSpellResult = await insertCanonicalSpells(tx, spellSummaries.selected);
       const mythicSpellVariants = await insertVariants(tx);
       const decisions = await insertDecisions(tx);
       const ingestionQueueItems = await insertIngestionQueue(tx);
       const result: ImportStatistics = {
         ...packageStats,
         linkedEntities,
+        spellSummaryObservations: spellSummaries.count,
         observations,
         entityEvidence,
         coverageChecks,
-        canonicalSpells,
+        canonicalSpells: canonicalSpellResult.count,
+        spellListQualifications: canonicalSpellResult.qualificationCount,
         mythicSpellVariants,
         decisions,
         ingestionQueueItems,
-        searchableRecords: canonicalSpells + mythicSpellVariants,
+        searchableRecords: canonicalSpellResult.count + mythicSpellVariants,
       };
       await tx.importRun.update({
         where: { id: run.id },
@@ -693,6 +830,29 @@ export async function checkDatabase(prisma: PrismaClient): Promise<void> {
   if (spells > spellEntities) {
     throw new Error(`There are ${spells} canonical spells but only ${spellEntities} spell entities`);
   }
+  const invalidShortDescriptions = await prisma.$queryRawUnsafe<unknown[]>(`
+    SELECT canonical_spells.spell_id
+    FROM canonical_spells
+    JOIN spell_summary_observations
+      ON spell_summary_observations.summary_observation_id = canonical_spells.short_description_source_id
+    WHERE spell_summary_observations.spell_id <> canonical_spells.spell_id
+      OR spell_summary_observations.summary_raw <> canonical_spells.short_description
+  `);
+  if (invalidShortDescriptions.length > 0) {
+    throw new Error(
+      `Canonical short-description provenance is inconsistent: ${JSON.stringify(invalidShortDescriptions.slice(0, 10))}`,
+    );
+  }
+  const invalidQualificationKinds = await prisma.$queryRawUnsafe<unknown[]>(`
+    SELECT spell_id, level_index, qualification_index
+    FROM spell_list_qualifications
+    WHERE kind <> json_extract(payload, '$.kind')
+  `);
+  if (invalidQualificationKinds.length > 0) {
+    throw new Error(
+      `Spell-list qualification kinds disagree with their payloads: ${JSON.stringify(invalidQualificationKinds.slice(0, 10))}`,
+    );
+  }
 }
 
 
@@ -705,6 +865,8 @@ export async function databaseStatistics(prisma: PrismaClient): Promise<Record<s
     relationships,
     decisions,
     warnings,
+    spellListQualifications,
+    spellSummaryObservations,
     ingestionQueueItems,
     ingestionIssues,
   ] =
@@ -716,6 +878,8 @@ export async function databaseStatistics(prisma: PrismaClient): Promise<Record<s
       prisma.ruleRelationship.count(),
       prisma.canonicalDecision.count(),
       prisma.normalizationWarning.count(),
+      prisma.spellListQualification.count(),
+      prisma.spellSummaryObservation.count(),
       prisma.ingestionQueueItem.count(),
       prisma.ingestionQueueItem.count({ where: { issueKind: { not: null } } }),
     ]);
@@ -727,6 +891,8 @@ export async function databaseStatistics(prisma: PrismaClient): Promise<Record<s
     relationships,
     decisions,
     warnings,
+    spellListQualifications,
+    spellSummaryObservations,
     ingestionQueueItems,
     ingestionIssues,
   };

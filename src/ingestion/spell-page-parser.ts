@@ -10,7 +10,7 @@ export interface ParsedLink {
   sourceField: string;
   contextRaw: string;
   roleHint: "classification" | "spell_list" | "definition" | "publication" | "cross_reference" | "unknown";
-  targetEntityTypeHint: "spell" | "rule" | "condition" | "magic_school" | "subschool" | "descriptor" | "spell_list" | "action" | "publication" | "unknown";
+  targetEntityTypeHint: "spell" | "rule" | "condition" | "deity" | "mystery" | "archetype" | "magic_school" | "subschool" | "descriptor" | "spell_list" | "action" | "publication" | "unknown";
   targetEntityIdHint: string;
 }
 
