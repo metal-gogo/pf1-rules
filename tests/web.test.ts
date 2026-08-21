@@ -39,7 +39,7 @@ describe("local rules browser", () => {
     expect(html).toContain("<h1>Spells by class</h1>");
     expect(html.match(/href="\/classes\/cleric"/g)).toHaveLength(1);
     expect(html).toContain('/classes/wizard');
-    expect(html).toContain('/spells/all');
+    expect(html).toContain('/spells/alphabetical');
   });
 
   it("groups a class's spells into detailed tables by level", async () => {
@@ -111,10 +111,10 @@ describe("local rules browser", () => {
   });
 
   it("keeps the alphabetical spell catalog available", async () => {
-    const response = await fetch(`${baseUrl}/spells/all`);
+    const response = await fetch(`${baseUrl}/spells/alphabetical`);
     const html = await response.text();
     expect(response.status).toBe(200);
-    expect(html).toContain("<h1>All spells</h1>");
+    expect(html).toContain("<h1>Alphabetical spells</h1>");
     expect(html).toContain('/spells/spell.light');
   });
 

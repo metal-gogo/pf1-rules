@@ -377,7 +377,7 @@ function page(title: string, content: string): string {
     <nav aria-label="Primary navigation">
       <ul>
         <li><a href="/spells">Classes</a></li>
-        <li><a href="/spells/all">All spells</a></li>
+        <li><a href="/spells/alphabetical">Alphabetical</a></li>
         <li><a href="/entities">Entities</a></li>
         <li><a href="/search">Search</a></li>
       </ul>
@@ -445,7 +445,7 @@ async function homePage(prisma: PrismaClient): Promise<string> {
     <section aria-labelledby="start-browsing">
       <h2 id="start-browsing">Start browsing</h2>
       <ul>${spells.map((spell) => `<li><a href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a> <span class="muted">(${escapeHtml(spell.school)})</span></li>`).join("")}</ul>
-      <p><a href="/spells">Browse spells by class</a> or <a href="/spells/all">view all spells alphabetically</a>.</p>
+      <p><a href="/spells">Browse spells by class</a> or <a href="/spells/alphabetical">view all spells alphabetically</a>.</p>
     </section>`);
 }
 
@@ -503,10 +503,10 @@ async function classesPage(prisma: PrismaClient): Promise<string> {
         <p>${item.spellCount} ${item.spellCount === 1 ? "spell" : "spells"} <span class="muted">· ${levelRange}</span></p>
       </li>`;
     }).join("")}</ul>` : "<p>No class spell lists have been ingested yet.</p>"}
-    <p><a href="/spells/all">View the alphabetical spell catalog</a></p>`);
+    <p><a href="/spells/alphabetical">View the alphabetical spell catalog</a></p>`);
 }
 
-async function allSpellsPage(prisma: PrismaClient): Promise<string> {
+async function alphabeticalSpellsPage(prisma: PrismaClient): Promise<string> {
   const spells = await prisma.canonicalSpell.findMany({
     select: {
       spellId: true,
@@ -517,8 +517,8 @@ async function allSpellsPage(prisma: PrismaClient): Promise<string> {
     },
     orderBy: { name: "asc" },
   });
-  return page("All spells", `<nav aria-label="Breadcrumb"><ol><li><a href="/spells">Classes</a></li><li aria-current="page">All spells</li></ol></nav>
-    <h1>All spells</h1>
+  return page("Alphabetical spells", `<nav aria-label="Breadcrumb"><ol><li><a href="/spells">Classes</a></li><li aria-current="page">Alphabetical spells</li></ol></nav>
+    <h1>Alphabetical spells</h1>
     <p>${spells.length} canonical spell records.</p>
     <table>
       <caption>Canonical spells in alphabetical order</caption>
@@ -711,7 +711,7 @@ async function spellPage(prisma: PrismaClient, spellId: string): Promise<string 
     return `<li><a href="${href(ownerUrl)}">${escapeHtml(owner?.name ?? relationship.ownerEntityId)}</a> — ${escapeHtml(humanize(relationship.relationshipType))}</li>`;
   }).join("");
 
-  return page(spell.name, `<nav aria-label="Breadcrumb"><ol><li><a href="/spells/all">All spells</a></li><li aria-current="page">${escapeHtml(spell.name)}</li></ol></nav>
+  return page(spell.name, `<nav aria-label="Breadcrumb"><ol><li><a href="/spells/alphabetical">Alphabetical spells</a></li><li aria-current="page">${escapeHtml(spell.name)}</li></ol></nav>
     <article>
       <h1>${escapeHtml(spell.name)}</h1>
       <p><code>${escapeHtml(spell.spellId)}</code></p>
@@ -897,7 +897,7 @@ export function createRequestHandler(prisma: PrismaClient) {
       }
       if (url.pathname === "/") result = await homePage(prisma);
       else if (url.pathname === "/spells") result = await classesPage(prisma);
-      else if (url.pathname === "/spells/all") result = await allSpellsPage(prisma);
+      else if (url.pathname === "/spells/alphabetical") result = await alphabeticalSpellsPage(prisma);
       else if (url.pathname === "/spell-components") result = spellComponentsPage();
       else if (url.pathname === "/entities") result = await entitiesPage(prisma, url);
       else if (url.pathname === "/search") result = await searchPage(prisma, url);
