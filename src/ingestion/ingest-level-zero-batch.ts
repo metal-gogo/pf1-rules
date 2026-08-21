@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { projectRoot } from "../config.js";
-import type { ValidatedJson } from "../domain/json.js";
+import { observationEntityId, type ValidatedJson } from "../domain/json.js";
 import { validatePackage } from "./validate.js";
 import {
   type GeneratedEntity,
@@ -200,9 +200,11 @@ function writeCapture(rawPath: string, url: string, response: Response, body: st
 async function resolveD20Spell(
   spellName: string,
   rawDirectory: string,
+  offlineOnly = false,
 ): Promise<{ captureResult: CapturedArtifact; parsed: ParsedSpellPage } | { coverageCapture: CapturedArtifact }> {
   const primaryRawPath = path.join(rawDirectory, "d20pfsrd.html");
   const fallbackRawPath = path.join(rawDirectory, "d20pfsrd-resolved.html");
+  let cachedCoverage: CapturedArtifact | null = null;
   for (const cachedPath of [primaryRawPath, fallbackRawPath]) {
     if (!fs.existsSync(cachedPath) && !fs.existsSync(`${cachedPath}.meta.json`)) continue;
     const cached = await capture(d20CandidateUrls(spellName)[0]!, cachedPath);
@@ -211,9 +213,18 @@ async function resolveD20Spell(
       return { captureResult: cached, parsed };
     } catch {
       // The old deterministic capture can be a valid grouped page for another entry.
+      cachedCoverage ??= cached;
     }
   }
   const resolvedRawPath = fs.existsSync(primaryRawPath) ? fallbackRawPath : primaryRawPath;
+  const searchRawPath = path.join(rawDirectory, "d20pfsrd-search.html");
+  if (offlineOnly) {
+    if (fs.existsSync(searchRawPath) && fs.existsSync(`${searchRawPath}.meta.json`)) {
+      return { coverageCapture: await capture(d20SearchUrl(spellName), searchRawPath) };
+    }
+    if (cachedCoverage) return { coverageCapture: cachedCoverage };
+    throw new Error(`No cached d20PFSRD capture or coverage artifact for ${spellName}.`);
+  }
 
   const attempted = new Set<string>();
   const tryCandidates = async (urls: string[]) => {
@@ -241,7 +252,7 @@ async function resolveD20Spell(
 
   const searchCapture = await capture(
     d20SearchUrl(spellName),
-    path.join(rawDirectory, "d20pfsrd-search.html"),
+    searchRawPath,
   );
   const searched = await tryCandidates(d20SearchResultUrls(searchCapture.body, searchCapture.url));
   return searched ?? { coverageCapture: searchCapture };
@@ -613,6 +624,8 @@ async function ingestSpell(
   bulkEntities: Map<string, GeneratedEntity>,
   baseEntityIds: Set<string>,
   artifactScope: string,
+  offlineOnly = false,
+  allowCanonicalUpdate = false,
 ): Promise<"ingested" | "issue"> {
   const spellSlug = spell.spell_id.replace(/^spell\./, "");
   const rawDirectory = path.join(projectRoot, "data", "raw", artifactScope, spellSlug);
@@ -642,7 +655,7 @@ async function ingestSpell(
       );
     }
 
-    const d20Resolution = await resolveD20Spell(spell.name, rawDirectory);
+    const d20Resolution = await resolveD20Spell(spell.name, rawDirectory, offlineOnly);
     if ("coverageCapture" in d20Resolution) {
       writeGeneratedJson(
         path.join(projectRoot, "data", "coverage", `${artifactScope}-${spellSlug}-d20pfsrd.json`),
@@ -664,8 +677,16 @@ async function ingestSpell(
     for (const entity of bundle.entities) {
       if (!baseEntityIds.has(entity.entity_id)) mergeEntity(bulkEntities, entity);
     }
-    writeGeneratedJson(path.join(projectRoot, "data", "canonical", `${spellSlug}.json`), bundle.canonical, refreshCanonical);
-    writeGeneratedJson(path.join(projectRoot, "data", "decisions", `${spellSlug}.json`), bundle.decision, refreshCanonical);
+    writeGeneratedJson(
+      path.join(projectRoot, "data", "canonical", `${spellSlug}.json`),
+      bundle.canonical,
+      refreshCanonical || allowCanonicalUpdate,
+    );
+    writeGeneratedJson(
+      path.join(projectRoot, "data", "decisions", `${spellSlug}.json`),
+      bundle.decision,
+      refreshCanonical || allowCanonicalUpdate,
+    );
     delete spell.issue;
     availableCanonicalSpells.set(spell.spell_id, bundle.canonical);
     return "ingested";
@@ -692,6 +713,10 @@ export async function ingestSpellLevelBatch(
   assertSourcePolicy = true,
   retryD20Only = false,
   finalize = true,
+  offlineOnly = false,
+  onlyIssueCode?: string,
+  onlySpellIds?: ReadonlySet<string>,
+  refreshSelected = false,
 ) {
   if (!Number.isInteger(batchNumber) || batchNumber < 1) throw new Error("Batch number must be a positive integer.");
   const { artifactScope, manifestPath, registryId, registryPath } = levelPaths(level);
@@ -704,7 +729,10 @@ export async function ingestSpellLevelBatch(
   const legacyEntries = parseLegacyIndex(legacyIndex.body, legacyIndex.url);
   const manifest = loadJson(manifestPath);
   const selected = manifest.spells.filter((spell: ValidatedJson) =>
-    spell.batch === batchNumber && (!retryD20Only || isD20ResolutionIssue(spell)),
+    spell.batch === batchNumber &&
+    (!retryD20Only || isD20ResolutionIssue(spell)) &&
+    (!onlyIssueCode || spell.issue?.code === onlyIssueCode) &&
+    (!onlySpellIds || onlySpellIds.has(spell.spell_id)),
   );
   if (selected.length === 0) throw new Error(`No level-${level} ingestion batch ${batchNumber} exists.`);
 
@@ -722,9 +750,12 @@ export async function ingestSpellLevelBatch(
   const report = { batch: batchNumber, ingested: [] as string[], issues: [] as string[], skipped: [] as string[] };
   for (const spell of selected) {
     const canonicalPath = path.join(projectRoot, "data", "canonical", `${spell.spell_id.replace(/^spell\./, "")}.json`);
-    const canonicalExists = fs.existsSync(canonicalPath) && (!refreshCanonical || reviewedCanonicalIds.has(spell.spell_id));
+    const canonicalExists = fs.existsSync(canonicalPath) &&
+      !refreshSelected &&
+      (!refreshCanonical || reviewedCanonicalIds.has(spell.spell_id));
     if (canonicalExists || spell.issue?.kind === "scope") {
       if (retryD20Only && canonicalExists && isD20ResolutionIssue(spell)) delete spell.issue;
+      if (canonicalExists && onlyIssueCode && spell.issue?.code === onlyIssueCode) delete spell.issue;
       report.skipped.push(spell.name);
       continue;
     }
@@ -736,6 +767,8 @@ export async function ingestSpellLevelBatch(
       bulkEntities,
       baseEntityIds,
       artifactScope,
+      offlineOnly,
+      refreshSelected,
     );
     report[result === "ingested" ? "ingested" : "issues"].push(spell.name);
     writeGeneratedJson(manifestPath, manifest, true);
@@ -754,6 +787,117 @@ export async function ingestSpellLevelBatch(
     writeGeneratedJson(manifestPath, manifest, true);
   }
   return report;
+}
+
+
+export async function rolloutSpellInheritance() {
+  const inheritanceCandidates = new Set<string>();
+  const legacyInheritancePattern = /^(?:this spell (?:functions|works) (?:as|like)|as)\s+(?:the\s+)?([a-z][a-z' -]+?)(?:,|\.| except| but)/i;
+  for (const filename of jsonFilesUnder(path.join(projectRoot, "data", "observations"))) {
+    const observation = loadJson(filename);
+    if (observation.source?.site_id !== "aon") continue;
+    if (legacyInheritancePattern.test(observation.spell_raw?.description_raw ?? "")) {
+      inheritanceCandidates.add(observationEntityId(observation.observation_id));
+    }
+  }
+  const summary = {
+    batches: 0,
+    ingested: 0,
+    issues: 0,
+    skipped: 0,
+    reconciled: 0,
+    levels: [] as Array<{ level: number; batches: number; ingested: number; issues: number; skipped: number }>,
+  };
+  for (let level = 0; level <= 9; level += 1) {
+    const { manifestPath } = levelPaths(level);
+    const manifest = loadJson(manifestPath);
+    const affectedBatches = [...new Set<number>(
+      manifest.spells
+        .filter((spell: ValidatedJson) => inheritanceCandidates.has(spell.spell_id))
+        .map((spell: ValidatedJson) => Number(spell.batch)),
+    )].sort((left, right) => left - right);
+    const levelSummary = { level, batches: affectedBatches.length, ingested: 0, issues: 0, skipped: 0 };
+    for (const batch of affectedBatches) {
+      const report = await ingestSpellLevelBatch(
+        level,
+        batch,
+        false,
+        false,
+        false,
+        true,
+        undefined,
+        inheritanceCandidates,
+      );
+      levelSummary.ingested += report.ingested.length;
+      levelSummary.issues += report.issues.length;
+      levelSummary.skipped += report.skipped.length;
+      process.stderr.write(
+        `Rolled out inheritance for level ${level} batch ${batch}: ` +
+        `${report.ingested.length} ingested, ${report.issues.length} issues, ` +
+        `${report.skipped.length} already canonical.\n`,
+      );
+    }
+    const refreshedManifest = loadJson(manifestPath);
+    const canonicalSpells = new Map(
+      directJsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) => {
+        const record = loadJson(filename);
+        return [record.spell_id, record] as const;
+      }),
+    );
+    refreshDiscoveredDependencies(refreshedManifest, canonicalSpells);
+    writeGeneratedJson(manifestPath, refreshedManifest, true);
+    summary.batches += levelSummary.batches;
+    summary.ingested += levelSummary.ingested;
+    summary.issues += levelSummary.issues;
+    summary.skipped += levelSummary.skipped;
+    summary.levels.push(levelSummary);
+  }
+
+  const canonicalFiles = directJsonFiles(path.join(projectRoot, "data", "canonical"));
+  const reconcileIds = new Set(
+    canonicalFiles
+      .map(loadJson)
+      .filter((record) =>
+        record.normalization?.normalizer_version === "0.1.2-explicit-inheritance" &&
+        record.rules_inheritance?.length > 0,
+      )
+      .map((record) => record.spell_id),
+  );
+  const assigned = new Set<string>();
+  for (let level = 0; level <= 9; level += 1) {
+    const { manifestPath } = levelPaths(level);
+    const manifest = loadJson(manifestPath);
+    const byBatch = new Map<number, Set<string>>();
+    for (const spell of manifest.spells) {
+      if (!reconcileIds.has(spell.spell_id) || assigned.has(spell.spell_id)) continue;
+      const batch = Number(spell.batch);
+      const ids = byBatch.get(batch) ?? new Set<string>();
+      ids.add(spell.spell_id);
+      byBatch.set(batch, ids);
+      assigned.add(spell.spell_id);
+    }
+    for (const [batch, ids] of [...byBatch].sort(([left], [right]) => left - right)) {
+      const report = await ingestSpellLevelBatch(
+        level,
+        batch,
+        false,
+        false,
+        false,
+        true,
+        undefined,
+        ids,
+        true,
+      );
+      summary.reconciled += report.ingested.length;
+      summary.issues += report.issues.length;
+      process.stderr.write(
+        `Reconciled ${report.ingested.length} inheritance records from level ${level} batch ${batch}` +
+        `${report.issues.length ? ` (${report.issues.length} issues)` : ""}.\n`,
+      );
+    }
+  }
+  validatePackage();
+  return summary;
 }
 
 
@@ -903,6 +1047,8 @@ const run = command === "retry-d20"
   ? retryD20SourceFailures(process.argv[3] === undefined || process.argv[3] === "all" ? undefined : level)
   : command === "dependencies"
   ? ingestDiscoveredDependencies()
+  : command === "rollout-inheritance"
+  ? rolloutSpellInheritance()
   : command === "all"
     ? ingestAllSpellLevelBatches(level, startBatch, endBatch)
     : ingestSpellLevelBatch(level, Number(command));

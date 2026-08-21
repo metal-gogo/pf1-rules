@@ -357,6 +357,20 @@ function hasCanonicalSpell(available: AvailableCanonicalSpells, spellId: string)
 }
 
 
+function canResolveCanonicalSpell(
+  available: AvailableCanonicalSpells,
+  spellId: string,
+  active = new Set<string>(),
+): boolean {
+  const record = canonicalRecord(available, spellId);
+  if (!record || active.has(spellId)) return false;
+  const nextActive = new Set(active).add(spellId);
+  return record.rules_inheritance.every((inheritance: ValidatedJson) =>
+    canResolveCanonicalSpell(available, inheritance.from_spell_id, nextActive),
+  );
+}
+
+
 function normalizedName(value: string): string {
   return value
     .replaceAll("’", "'")
@@ -498,6 +512,7 @@ function inheritanceRule(
       note: "The child canonical value differs from the resolved parent and is therefore applied explicitly.",
     }];
   });
+  const parentResolvable = canResolveCanonicalSpell(available, reference.parentId);
   return {
     from_spell_id: reference.parentId,
     relationship: "functions_like",
@@ -508,8 +523,10 @@ function inheritanceRule(
     },
     inherited_paths: inheritedCanonicalPaths.map(([pointer]) => pointer),
     overrides,
-    resolution_status: "resolved",
-    note: "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override.",
+    resolution_status: parentResolvable ? "resolved" : "pending",
+    note: parentResolvable
+      ? "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+      : "The direct parent is canonical, but an ancestor remains unresolved; inherited paths and child overrides are preserved pending full-chain resolution.",
   };
 }
 
@@ -704,11 +721,11 @@ export function generateCanonicalBundle(
       message: `AoN publication page ${JSON.stringify(parsed.sourcePageRaw)} is not a positive integer; the raw value remains in the observation and the canonical page is unknown.`,
     });
   }
-  if (inheritanceReference && !canonicalRecord(availableCanonicalSpells, inheritanceReference.parentId)) {
+  if (inheritanceReference && !canResolveCanonicalSpell(availableCanonicalSpells, inheritanceReference.parentId)) {
     warnings.push({
       code: "UNRESOLVED_INHERITANCE",
       field_path: "/rules_inheritance/0",
-      message: `The explicit parent ${inheritanceReference.parentId} is not canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized.`,
+      message: `The explicit parent chain through ${inheritanceReference.parentId} is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized.`,
     });
   }
   const comparisonFields: Array<[keyof ParsedSpellPage, string]> = [
@@ -773,7 +790,7 @@ export function generateCanonicalBundle(
       note: "AoN baseline selected under provenance-first-v0; comparison observations remain attached.",
     })),
     normalization: {
-      status: inheritanceReference && !canonicalRecord(availableCanonicalSpells, inheritanceReference.parentId)
+      status: inheritanceReference && !canResolveCanonicalSpell(availableCanonicalSpells, inheritanceReference.parentId)
         ? "needs_review"
         : "validated",
       normalizer_version: "0.1.2-explicit-inheritance",
