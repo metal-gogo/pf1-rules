@@ -57,7 +57,6 @@ dd { margin-block-end: .65rem; }
 .mode-option:focus-visible { outline: 3px solid Highlight; outline-offset: 2px; z-index: 1; }
 .filter-show-all[aria-pressed="true"] { background: Highlight; color: HighlightText; }
 .filter-show-all[aria-pressed="true"] .tag-check { display: inline; }
-.filter-footer { display: flex; justify-content: flex-end; margin-block-start: .75rem; }
 .spell-level { margin-block: 2.5rem; }
 .spell-level h2 { align-items: baseline; display: flex; flex-wrap: wrap; gap: .35rem; }
 .heading-count { font-size: .85em; font-weight: 400; }
@@ -73,7 +72,6 @@ mark { background: Mark; color: MarkText; }
 [hidden] { display: none !important; }
 @media (max-width: 38rem) {
   .sticky-spell-controls { max-height: calc(100vh - .5rem); }
-  .filter-footer { align-items: flex-start; flex-direction: column; }
 }
 code { overflow-wrap: anywhere; }
 `;
@@ -86,7 +84,6 @@ const classSpellsScript = `
   const rows = [...browser.querySelectorAll("tbody tr[data-school]")];
   const search = browser.querySelector("#spell-filter-search");
   const status = browser.querySelector("#spell-filter-status");
-  const reset = browser.querySelector("[data-filter-reset]");
   const accordion = browser.querySelector("[data-filter-accordion]");
   const filterPanel = browser.querySelector("#spell-filter-panel");
   const filters = ["school", "level", "components"];
@@ -255,15 +252,6 @@ const classSpellsScript = `
 
   accordion.addEventListener("click", () => setAccordion(accordion.getAttribute("aria-expanded") !== "true"));
   search.addEventListener("input", () => applyFilters());
-  reset.addEventListener("click", () => {
-    search.value = "";
-    for (const checkbox of browser.querySelectorAll(".filter-checkbox")) checkbox.checked = false;
-    for (const filter of filters) {
-      const control = modeControl(filter);
-      setMode(filter, control.dataset.defaultMode);
-    }
-    applyFilters();
-  });
 
   hydrateFromUrl();
   applyFilters({ syncUrl: false });
@@ -664,7 +652,6 @@ async function classSpellsPage(prisma: PrismaClient, classSlug: string): Promise
               <fieldset class="filter-group"><legend>Levels</legend>${filterModeControl("level", "Levels", "include")}<div class="filter-tags">${filterShowAll("level")}${levelTags}</div></fieldset>
               <fieldset class="filter-group"><legend>Components</legend>${filterModeControl("components", "Components", "exclude")}<div class="filter-tags">${filterShowAll("components")}${componentTags}</div></fieldset>
             </div>
-            <div class="filter-footer"><button type="button" data-filter-reset>Reset filters</button></div>
           </div>
         </section>
       </div>

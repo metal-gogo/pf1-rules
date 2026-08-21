@@ -70,6 +70,8 @@ describe("local rules browser", () => {
     expect(html).toContain('type="checkbox" data-filter="school"');
     expect(html).toContain('type="checkbox" data-filter="level"');
     expect(html).toContain('type="checkbox" data-filter="components"');
+    expect(html).not.toContain("Reset filters");
+    expect(html).not.toContain("data-filter-reset");
     expect(html).not.toContain('<caption>Cleric level');
     expect(html).not.toContain('ingested spells across');
     expect(html).toContain('/spell-components#verbal');
@@ -93,6 +95,7 @@ describe("local rules browser", () => {
     expect(script).toContain('window.history.replaceState');
     expect(script).toContain('searchParameters.getAll(parameter.values)');
     expect(script).toContain('setAccordion(hasActiveFilters)');
+    expect(script).not.toContain("data-filter-reset");
   });
 
   it("explains each linked spell component on one reference page", async () => {
