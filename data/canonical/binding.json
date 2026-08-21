@@ -1,0 +1,960 @@
+{
+  "$schema": "../../schemas/canonical-spell.schema.json",
+  "schema_version": "0.1.0",
+  "spell_id": "spell.binding",
+  "ruleset": "Pathfinder First Edition",
+  "name": "Binding",
+  "aliases": [],
+  "classification": {
+    "school": "enchantment",
+    "subschool": "compulsion",
+    "descriptors": [
+      "mind-affecting"
+    ],
+    "raw": "enchantment (compulsion) [mind-affecting]"
+  },
+  "levels": [
+    {
+      "spell_list_id": "spell-list.arcanist",
+      "list_kind": "class",
+      "list_name": "arcanist",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "arcanist 8"
+    },
+    {
+      "spell_list_id": "spell-list.psychic",
+      "list_kind": "class",
+      "list_name": "psychic",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "psychic 8"
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer",
+      "list_kind": "class",
+      "list_name": "sorcerer",
+      "level": 8,
+      "scope": "core",
+      "raw": "sorcerer 8"
+    },
+    {
+      "spell_list_id": "spell-list.summoner",
+      "list_kind": "class",
+      "list_name": "summoner",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "summoner 6"
+    },
+    {
+      "spell_list_id": "spell-list.wizard",
+      "list_kind": "class",
+      "list_name": "wizard",
+      "level": 8,
+      "scope": "core",
+      "raw": "wizard 8"
+    }
+  ],
+  "casting": {
+    "time": {
+      "kind": "timed",
+      "amount": 1,
+      "unit": "minute",
+      "raw": "1 minute"
+    },
+    "components": [
+      {
+        "type": "verbal",
+        "details": null,
+        "cost_gp": null,
+        "raw": "V"
+      },
+      {
+        "type": "somatic",
+        "details": null,
+        "cost_gp": null,
+        "raw": "S"
+      },
+      {
+        "type": "material",
+        "details": "opals worth 500 gp per HD of the target creature, plus other components as specified below",
+        "cost_gp": 500,
+        "raw": "M (opals worth 500 gp per HD of the target creature, plus other components as specified below)"
+      }
+    ],
+    "components_raw": "V, S, M (opals worth 500 gp per HD of the target creature, plus other components as specified below)",
+    "conditional_components": []
+  },
+  "effect": {
+    "range": {
+      "category": "close",
+      "formula": "close (25 ft. + 5 ft./2 levels)",
+      "raw": "close (25 ft. + 5 ft./2 levels)"
+    },
+    "delivery": {
+      "resolution": "fixed",
+      "entries": [
+        {
+          "label_raw": "Target",
+          "value_raw": "one living creature",
+          "kinds": [
+            "target"
+          ]
+        }
+      ]
+    },
+    "targeting": {
+      "mode": "single",
+      "subject_kind": "creature",
+      "selection": "selected",
+      "count": {
+        "kind": "fixed",
+        "fixed": 1,
+        "formula": null,
+        "raw": "one living creature"
+      },
+      "separation": null,
+      "raw": "one living creature"
+    },
+    "area": null,
+    "duration": {
+      "kind": "special",
+      "formula": "see text (D)",
+      "dismissible": true,
+      "concentration": null,
+      "raw": "see text (D)"
+    },
+    "saving_throw": {
+      "types": [
+        "will"
+      ],
+      "outcome": "Will negates; see text",
+      "harmless": null,
+      "object": null,
+      "conditional": true,
+      "raw": "Will negates; see text"
+    },
+    "spell_resistance": {
+      "applies": true,
+      "harmless": null,
+      "object": null,
+      "conditional": null,
+      "raw": "yes"
+    }
+  },
+  "description": {
+    "raw": "A binding spell creates a magical restraint to hold a creature. The target gets an initial saving throw only if its Hit Dice equal at least half your caster level.\n\nYou may have as many as six assistants help you with the spell. For each assistant who casts suggestion, your caster level for this casting of binding increases by 1. For each assistant who casts dominate animal, dominate person, or dominate monster, your caster level for this casting of binding increases by a number equal to a third of that assistant's level, provided that the spell's target is appropriate for a binding spell. Since the assistants' spells are cast simply to improve your caster level for the purpose of the binding spell, saving throws and spell resistance against the assistants' spells are irrelevant. Your caster level determines whether the target gets an initial Will saving throw and how long the binding lasts. All binding spells are dismissible.\n\nRegardless of the version of binding you cast, you can specify triggering conditions that end the spell and release the creature whenever they occur. These triggers can be as simple or elaborate as you desire, but the condition must be reasonable and have a likelihood of coming to pass. The conditions can be based on a creature's name, identity, or alignment, but otherwise must be based on observable actions or qualities. Intangibles such as level, class, Hit Dice, or hit points don't qualify. Once the spell is cast, its triggering conditions cannot be changed. Setting a release condition increases the save DC (assuming a saving throw is allowed) by 2.\n\nIf you cast any of the first three versions of binding (those with limited durations), you may cast additional binding spells to prolong the effect, overlapping the durations. If you do so, the target gets a saving throw at the end of the first spell's duration, even if your caster level was high enough to disallow an initial saving throw. If the creature's save succeeds, all binding spells it has received are broken.\n\nThe binding spell has six versions. Choose one of the following versions when you cast the spell.\n\nChaining: The subject is confined by restraints that generate an antipathy spell affecting all creatures who approach the subject, except you. The duration is 1 year per caster level. The subject of this form of binding is confined to the spot it occupied when it received the spell. Casting this version requires a chain that is long enough to wrap around the creature three times.\n\nSlumber: This version causes the subject to become comatose for as long as 1 year per caster level. The subject does not need to eat or drink while slumbering, nor does it age. This form of binding is slightly easier to resist. Reduce the spell's save DC by 1. Casting this version requires a jar of sand or rose petals. This is a sleep effect.\n\nBound Slumber: This combination of chaining and slumber lasts for as long as 1 month per caster level. Reduce the save DC by 2. Casting this version requires both a long chain and a jar of sand or rose petals. This is a sleep effect.\n\nHedged Prison: The subject is transported to or otherwise brought within a confined area from which it cannot wander by any means. This effect is permanent. Reduce the save DC by 3. Casting this version requires a tiny golden cage worth 100 gp that is consumed when the spell is cast.\n\nMetamorphosis: The subject assumes gaseous form, except for its head or face. It is held harmless in a jar or other container, which may be transparent if you so choose. The creature remains aware of its surroundings and can speak, but it cannot leave the container, attack, or use any of its powers or abilities. The binding is permanent. The subject does not need to breathe, eat, or drink while metamorphosed, nor does it age. Reduce the save DC by 4.\n\nMinimus Containment: The subject is shrunk to a height of 1 inch or less and held within some gem, jar, or similar object. The binding is permanent. The subject does not need to breathe, eat, or drink while contained, nor does it age. Reduce the save DC by 4.\n\nYou can't dispel a binding spell with dispel magic or a similar effect, though an antimagic field or mage's disjunction affects it normally. A bound extraplanar creature cannot be sent back to its home plane by dismissal, banishment, or a similar effect.",
+    "search_text": "\"a binding spell creates a magical restraint to hold a creature. the target gets an initial saving throw only if its hit dice equal at least half your caster level.\\n\\nyou may have as many as six assistants help you with the spell. for each assistant who casts suggestion, your caster level for this casting of binding increases by 1. for each assistant who casts dominate animal, dominate person, or dominate monster, your caster level for this casting of binding increases by a number equal to a third of that assistant's level, provided that the spell's target is appropriate for a binding spell. since the assistants' spells are cast simply to improve your caster level for the purpose of the binding spell, saving throws and spell resistance against the assistants' spells are irrelevant. your caster level determines whether the target gets an initial will saving throw and how long the binding lasts. all binding spells are dismissible.\\n\\nregardless of the version of binding you cast, you can specify triggering conditions that end the spell and release the creature whenever they occur. these triggers can be as simple or elaborate as you desire, but the condition must be reasonable and have a likelihood of coming to pass. the conditions can be based on a creature's name, identity, or alignment, but otherwise must be based on observable actions or qualities. intangibles such as level, class, hit dice, or hit points don't qualify. once the spell is cast, its triggering conditions cannot be changed. setting a release condition increases the save dc (assuming a saving throw is allowed) by 2.\\n\\nif you cast any of the first three versions of binding (those with limited durations), you may cast additional binding spells to prolong the effect, overlapping the durations. if you do so, the target gets a saving throw at the end of the first spell's duration, even if your caster level was high enough to disallow an initial saving throw. if the creature's save succeeds, all binding spells it has received are broken.\\n\\nthe binding spell has six versions. choose one of the following versions when you cast the spell.\\n\\nchaining: the subject is confined by restraints that generate an antipathy spell affecting all creatures who approach the subject, except you. the duration is 1 year per caster level. the subject of this form of binding is confined to the spot it occupied when it received the spell. casting this version requires a chain that is long enough to wrap around the creature three times.\\n\\nslumber: this version causes the subject to become comatose for as long as 1 year per caster level. the subject does not need to eat or drink while slumbering, nor does it age. this form of binding is slightly easier to resist. reduce the spell's save dc by 1. casting this version requires a jar of sand or rose petals. this is a sleep effect.\\n\\nbound slumber: this combination of chaining and slumber lasts for as long as 1 month per caster level. reduce the save dc by 2. casting this version requires both a long chain and a jar of sand or rose petals. this is a sleep effect.\\n\\nhedged prison: the subject is transported to or otherwise brought within a confined area from which it cannot wander by any means. this effect is permanent. reduce the save dc by 3. casting this version requires a tiny golden cage worth 100 gp that is consumed when the spell is cast.\\n\\nmetamorphosis: the subject assumes gaseous form, except for its head or face. it is held harmless in a jar or other container, which may be transparent if you so choose. the creature remains aware of its surroundings and can speak, but it cannot leave the container, attack, or use any of its powers or abilities. the binding is permanent. the subject does not need to breathe, eat, or drink while metamorphosed, nor does it age. reduce the save dc by 4.\\n\\nminimus containment: the subject is shrunk to a height of 1 inch or less and held within some gem, jar, or similar object. the binding is permanent. the subject does not need to breathe, eat, or drink while contained, nor does it age. reduce the save dc by 4.\\n\\nyou can't dispel a binding spell with dispel magic or a similar effect, though an antimagic field or mage's disjunction affects it normally. a bound extraplanar creature cannot be sent back to its home plane by dismissal, banishment, or a similar effect.\"",
+    "sections": []
+  },
+  "publication": {
+    "publisher": "Paizo",
+    "book": "PRPG Core Rulebook",
+    "page": 248,
+    "first_party_status": "confirmed",
+    "pfs_status": "legal",
+    "supplemental": []
+  },
+  "rules_inheritance": [],
+  "relationships": [
+    {
+      "relationship_id": "spell.binding:appears_on_spell_list:spell-list.arcanist",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.arcanist",
+        "name": "arcanist Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.binding:d4b266ea8b122684",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "arcanist 8",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:appears_on_spell_list:spell-list.psychic",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.psychic",
+        "name": "psychic Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.binding:d4b266ea8b122684",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "psychic 8",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:appears_on_spell_list:spell-list.sorcerer",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer",
+        "name": "sorcerer Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.binding:d4b266ea8b122684",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "sorcerer 8",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:appears_on_spell_list:spell-list.sorcerer-wizard",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-wizard",
+        "name": "sorcerer/wizard"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "sorcerer/wizard",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-sorcerer-and-wizard/"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:appears_on_spell_list:spell-list.summoner",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.summoner",
+        "name": "summoner"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "summoner",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/summoner"
+        },
+        {
+          "observation_id": "aon:spell.binding:d4b266ea8b122684",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "summoner 6",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:appears_on_spell_list:spell-list.wizard",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.wizard",
+        "name": "wizard Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.binding:d4b266ea8b122684",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "wizard 8",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:has_descriptor:descriptor.mind-affecting",
+      "type": "has_descriptor",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.mind-affecting",
+        "name": "mind-affecting"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.binding:d4b266ea8b122684",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "mind-affecting",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=46"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "mind-affecting",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Magic-Descriptor-Mind-Affecting"
+        },
+        {
+          "observation_id": "aon:spell.binding:d4b266ea8b122684",
+          "source_field": "spell_raw.descriptors_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "mind-affecting",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:has_school:magic-school.enchantment",
+      "type": "has_school",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.enchantment",
+        "name": "enchantment"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.binding:d4b266ea8b122684",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "enchantment",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=4"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "enchantment",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Enchantment"
+        },
+        {
+          "observation_id": "aon:spell.binding:d4b266ea8b122684",
+          "source_field": "spell_raw.school_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "enchantment",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:has_subschool:subschool.compulsion",
+      "type": "has_subschool",
+      "target": {
+        "entity_type": "subschool",
+        "entity_id": "subschool.compulsion",
+        "name": "compulsion"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.binding:d4b266ea8b122684",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "compulsion",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=12"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:published_in:publication.pathfinder-rpg-core-rulebook",
+      "type": "published_in",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.pathfinder-rpg-core-rulebook",
+        "name": "PRPG Core Rulebook"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.binding:d4b266ea8b122684",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "PRPG Core Rulebook pg. 248",
+          "source_href": "http://paizo.com/pathfinderRPG/v5748btpy88yj"
+        },
+        {
+          "observation_id": "aon:spell.binding:d4b266ea8b122684",
+          "source_field": "spell_raw.source_book_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "PRPG Core Rulebook pg. 248",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:references:spell.antimagic-field",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.antimagic-field",
+        "name": "antimagic field"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.binding:24f51aea2e02ec5a",
+          "source_field": "spell_raw.links_raw[13]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "antimagic field",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/antimagicField.html#antimagic-field"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[19]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "antimagic field",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/a/antimagic-field"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:references:spell.antipathy",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.antipathy",
+        "name": "antipathy"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.binding:24f51aea2e02ec5a",
+          "source_field": "spell_raw.links_raw[8]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "antipathy",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/antipathy.html#antipathy"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[15]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "antipathy",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/a/antipathy"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:references:spell.banishment",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.banishment",
+        "name": "banishment"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[22]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "banishment",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/b/banishment"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:references:spell.dismissal",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.dismissal",
+        "name": "dismissal"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.binding:24f51aea2e02ec5a",
+          "source_field": "spell_raw.links_raw[15]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dismissal",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/dismissal.html#dismissal"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[21]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dismissal",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/dismissal"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:references:spell.dispel-magic",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.dispel-magic",
+        "name": "dispel magic"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.binding:24f51aea2e02ec5a",
+          "source_field": "spell_raw.links_raw[12]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dispel magic",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/dispelMagic.html#dispel-magic"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[18]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dispel magic",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/dispel-magic"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:references:spell.dominate-animal",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.dominate-animal",
+        "name": "dominate animal"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.binding:24f51aea2e02ec5a",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dominate animal",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/dominateAnimal.html#dominate-animal"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[10]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dominate animal",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/dominate-animal"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:references:spell.dominate-monster",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.dominate-monster",
+        "name": "dominate monster"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.binding:24f51aea2e02ec5a",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dominate monster",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/dominateMonster.html#dominate-monster"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[12]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dominate monster",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/dominate-monster"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:references:spell.dominate-person",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.dominate-person",
+        "name": "dominate person"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.binding:24f51aea2e02ec5a",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dominate person",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/dominatePerson.html#dominate-person"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[11]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dominate person",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/dominate-person"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:references:spell.gaseous-form",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.gaseous-form",
+        "name": "gaseous form"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.binding:24f51aea2e02ec5a",
+          "source_field": "spell_raw.links_raw[11]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "gaseous form",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/gaseousForm.html#gaseous-form"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:references:spell.mages-disjunction",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.mages-disjunction",
+        "name": "mage's disjunction"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.binding:24f51aea2e02ec5a",
+          "source_field": "spell_raw.links_raw[14]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "mage's disjunction",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/mageSDisjunction.html#mage-s-disjunction"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[20]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "mage’s disjunction",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/m/mage-s-disjunction"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:references:spell.sleep",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.sleep",
+        "name": "sleep"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.binding:24f51aea2e02ec5a",
+          "source_field": "spell_raw.links_raw[9]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "sleep",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/sleep.html#sleep"
+        },
+        {
+          "observation_id": "legacy_aon:spell.binding:24f51aea2e02ec5a",
+          "source_field": "spell_raw.links_raw[10]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "sleep",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/sleep.html#sleep"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[16]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "sleep",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/b/s/sleep"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[17]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "sleep",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/b/s/sleep"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:references:spell.suggestion",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.suggestion",
+        "name": "suggestion"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.binding:24f51aea2e02ec5a",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "suggestion",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/suggestion.html#suggestion"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[9]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "suggestion",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/suggestion"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:uses_definition:rule.law",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.law",
+        "name": "Law"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Law",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/law-domain"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:uses_definition:rule.magic",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.magic",
+        "name": "Magic"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Magic",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/magic-domain/"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:uses_definition:rule.rites",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.rites",
+        "name": "rites"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "rites",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/law-domain/rites"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:uses_definition:rule.slavery",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.slavery",
+        "name": "slavery"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "slavery",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/law-domain/slavery"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:uses_definition:rule.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.binding:24f51aea2e02ec5a",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Spell Resistance",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/glossary.html#spell-resistance"
+        },
+        {
+          "observation_id": "legacy_aon:spell.binding:24f51aea2e02ec5a",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "spell resistance",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/glossary.html#spell-resistance"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[13]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "spell resistance",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/special-abilities#TOC-Spell-Resistance"
+        },
+        {
+          "observation_id": "aon:spell.binding:d4b266ea8b122684",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.binding:uses_definition:rule.will",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.will",
+        "name": "Will"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.binding:24f51aea2e02ec5a",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Will",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/combat.html#will"
+        },
+        {
+          "observation_id": "legacy_aon:spell.binding:24f51aea2e02ec5a",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Will",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/combat.html#will"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[8]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Will",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.binding:e479a54a4408fbf9",
+          "source_field": "spell_raw.links_raw[14]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Will",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
+        }
+      ],
+      "note": null
+    }
+  ],
+  "provenance": [
+    {
+      "field_path": "/classification",
+      "observation_id": "aon:spell.binding:d4b266ea8b122684",
+      "source_field": "spell_raw.school_raw",
+      "raw_value_sha256": "caefcce93e68a8d34929b6f0cd61e83f71760a00b746e8ddc52dcf32dfa7f33f",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels",
+      "observation_id": "aon:spell.binding:d4b266ea8b122684",
+      "source_field": "spell_raw.levels_raw",
+      "raw_value_sha256": "7b020f9dbaa474b3ebf83740b1025c7e8b3043b568362b9273ea1017e0a2ce57",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/casting",
+      "observation_id": "aon:spell.binding:d4b266ea8b122684",
+      "source_field": "spell_raw.components_raw",
+      "raw_value_sha256": "c8a1be2fa328c67a64e03f7563ca63b150c2d122be419a0e1d120e30f1c24b94",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/effect",
+      "observation_id": "aon:spell.binding:d4b266ea8b122684",
+      "source_field": "spell_raw.delivery_fields_raw",
+      "raw_value_sha256": "691e39a52ee0ff516f3ef64c0911c0dd590f99166b12ad77b0807864950c3e77",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description",
+      "observation_id": "aon:spell.binding:d4b266ea8b122684",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "33837f42e3aa4c54ec509d7c428f33ffb2e558534a8145ad2e65d91af4087a99",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/publication",
+      "observation_id": "aon:spell.binding:d4b266ea8b122684",
+      "source_field": "spell_raw.source_book_raw",
+      "raw_value_sha256": "c391209ed44ad01f3670e40d94f825149dc2550e7a0afafd7967d1fbc0f96c73",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    }
+  ],
+  "normalization": {
+    "status": "validated",
+    "normalizer_version": "0.1.1-level-zero-bulk",
+    "warnings": [
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/description/raw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      }
+    ]
+  }
+}
