@@ -1,0 +1,588 @@
+{
+  "$schema": "../../schemas/canonical-spell.schema.json",
+  "schema_version": "0.1.0",
+  "spell_id": "spell.hide-from-undead-greater",
+  "ruleset": "Pathfinder First Edition",
+  "name": "Hide from Undead, Greater",
+  "aliases": [],
+  "classification": {
+    "school": "abjuration",
+    "subschool": null,
+    "descriptors": [],
+    "raw": "abjuration"
+  },
+  "levels": [
+    {
+      "spell_list_id": "spell-list.cleric",
+      "list_kind": "class",
+      "list_name": "cleric",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "cleric 3"
+    },
+    {
+      "spell_list_id": "spell-list.inquisitor",
+      "list_kind": "class",
+      "list_name": "inquisitor",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "inquisitor 3"
+    },
+    {
+      "spell_list_id": "spell-list.oracle",
+      "list_kind": "class",
+      "list_name": "oracle",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "oracle 3"
+    },
+    {
+      "spell_list_id": "spell-list.warpriest",
+      "list_kind": "class",
+      "list_name": "warpriest",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "warpriest 3"
+    }
+  ],
+  "casting": {
+    "time": {
+      "kind": "action",
+      "amount": 1,
+      "unit": "standard_action",
+      "raw": "1 standard action"
+    },
+    "components": [
+      {
+        "type": "verbal",
+        "details": null,
+        "cost_gp": null,
+        "raw": "V"
+      },
+      {
+        "type": "somatic",
+        "details": null,
+        "cost_gp": null,
+        "raw": "S"
+      },
+      {
+        "type": "divine_focus",
+        "details": null,
+        "cost_gp": null,
+        "raw": "DF"
+      }
+    ],
+    "components_raw": "V, S, DF",
+    "conditional_components": []
+  },
+  "effect": {
+    "range": {
+      "category": "touch",
+      "formula": null,
+      "raw": "touch"
+    },
+    "delivery": {
+      "resolution": "fixed",
+      "entries": [
+        {
+          "label_raw": "Targets",
+          "value_raw": "one touched creature/level",
+          "kinds": [
+            "target"
+          ]
+        }
+      ]
+    },
+    "targeting": {
+      "mode": "multiple",
+      "subject_kind": "creature",
+      "selection": "selected",
+      "count": {
+        "kind": "per_level",
+        "fixed": null,
+        "formula": "one touched creature/level",
+        "raw": "one touched creature/level"
+      },
+      "separation": null,
+      "raw": "one touched creature/level"
+    },
+    "area": null,
+    "duration": {
+      "kind": "timed",
+      "formula": "10 minutes/level (D)",
+      "dismissible": true,
+      "concentration": null,
+      "raw": "10 minutes/level (D)"
+    },
+    "saving_throw": {
+      "types": [
+        "will"
+      ],
+      "outcome": "Will negates (harmles); see text",
+      "harmless": null,
+      "object": null,
+      "conditional": true,
+      "raw": "Will negates (harmles); see text"
+    },
+    "spell_resistance": {
+      "applies": true,
+      "harmless": null,
+      "object": null,
+      "conditional": null,
+      "raw": "yes"
+    }
+  },
+  "description": {
+    "raw": "This spell functions as hide from undead, except the spell does not immediately end if a warded creature attempts to turn or command undead, channels positive energy, touches an undead creature, or attacks any creature. Instead, when the warded creature takes one of these actions, an intelligent undead creature can attempt another Will saving throw to negate the effects of the spell.",
+    "search_text": "\"this spell functions as hide from undead, except the spell does not immediately end if a warded creature attempts to turn or command undead, channels positive energy, touches an undead creature, or attacks any creature. instead, when the warded creature takes one of these actions, an intelligent undead creature can attempt another will saving throw to negate the effects of the spell.\"",
+    "sections": []
+  },
+  "publication": {
+    "publisher": "Paizo",
+    "book": "People of the Wastes",
+    "page": 29,
+    "first_party_status": "confirmed",
+    "pfs_status": "not_legal",
+    "supplemental": []
+  },
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.hide-from-undead",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.hide-from-undead-greater:f5f642ea4d2e6390",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell functions as hide from undead, except the spell does not immediately end if a warded creature attempts to turn or command undead, channels positive energy, touches an undead creature, or attacks any creature. Instead, when the warded creature takes one of these actions, an intelligent undead creature can attempt another Will saving throw to negate the effects of the spell."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "timed",
+            "formula": "10 minutes/level (D)",
+            "dismissible": true,
+            "concentration": null,
+            "raw": "10 minutes/level (D)"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "10 minutes/level (D)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/saving_throw",
+          "value": {
+            "types": [
+              "will"
+            ],
+            "outcome": "Will negates (harmles); see text",
+            "harmless": null,
+            "object": null,
+            "conditional": true,
+            "raw": "Will negates (harmles); see text"
+          },
+          "source_field": "spell_raw.saving_throw_raw",
+          "raw": "Will negates (harmles); see text",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as hide from undead, except the spell does not immediately end if a warded creature attempts to turn or command undead, channels positive energy, touches an undead creature, or attacks any creature. Instead, when the warded creature takes one of these actions, an intelligent undead creature can attempt another Will saving throw to negate the effects of the spell.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as hide from undead, except the spell does not immediately end if a warded creature attempts to turn or command undead, channels positive energy, touches an undead creature, or attacks any creature. Instead, when the warded creature takes one of these actions, an intelligent undead creature can attempt another Will saving throw to negate the effects of the spell.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
+  "relationships": [
+    {
+      "relationship_id": "spell.hide-from-undead-greater:appears_on_spell_list:spell-list.cleric",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.cleric",
+        "name": "cleric"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.hide-from-undead-greater:6b837a80a039a093",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.hide-from-undead-greater:f5f642ea4d2e6390",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hide-from-undead-greater:appears_on_spell_list:spell-list.inquisitor",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.inquisitor",
+        "name": "inquisitor"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.hide-from-undead-greater:6b837a80a039a093",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.hide-from-undead-greater:f5f642ea4d2e6390",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 3",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hide-from-undead-greater:appears_on_spell_list:spell-list.oracle",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.oracle",
+        "name": "oracle Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hide-from-undead-greater:f5f642ea4d2e6390",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "oracle 3",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hide-from-undead-greater:appears_on_spell_list:spell-list.warpriest",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.warpriest",
+        "name": "warpriest Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hide-from-undead-greater:f5f642ea4d2e6390",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "warpriest 3",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hide-from-undead-greater:functions_like:spell.hide-from-undead",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.hide-from-undead",
+        "name": "Hide from Undead"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hide-from-undead-greater:f5f642ea4d2e6390",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "This spell functions as hide from undead, except the spell does not immediately end if a warded creature attempts to turn or command undead, channels positive energy, touches an undead creature, or attacks any creature. Instead, when the warded creature takes one of these actions, an intelligent undead creature can attempt another Will saving throw to negate the effects of the spell.",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hide-from-undead-greater:has_school:magic-school.abjuration",
+      "type": "has_school",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.abjuration",
+        "name": "abjuration"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hide-from-undead-greater:f5f642ea4d2e6390",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "abjuration",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=1"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.hide-from-undead-greater:6b837a80a039a093",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "abjuration",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Abjuration"
+        },
+        {
+          "observation_id": "aon:spell.hide-from-undead-greater:f5f642ea4d2e6390",
+          "source_field": "spell_raw.school_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "abjuration",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hide-from-undead-greater:published_in:publication.people-of-the-wastes",
+      "type": "published_in",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.people-of-the-wastes",
+        "name": "People of the Wastes"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hide-from-undead-greater:f5f642ea4d2e6390",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "People of the Wastes pg. 29",
+          "source_href": "http://paizo.com/products/btpy9sk7?Pathfinder-Player-Companion-People-of-the-Wastes"
+        },
+        {
+          "observation_id": "aon:spell.hide-from-undead-greater:f5f642ea4d2e6390",
+          "source_field": "spell_raw.source_book_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "People of the Wastes pg. 29",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hide-from-undead-greater:uses_action:action.standard-action",
+      "type": "uses_action",
+      "target": {
+        "entity_type": "action",
+        "entity_id": "action.standard-action",
+        "name": "1 standard action"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hide-from-undead-greater:f5f642ea4d2e6390",
+          "source_field": "spell_raw.casting_time_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1 standard action",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hide-from-undead-greater:uses_definition:rule.pzo9486",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.pzo9486",
+        "name": "PZO9486"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.hide-from-undead-greater:6b837a80a039a093",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "PZO9486",
+          "source_href": "http://amzn.to/2Be3p98"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hide-from-undead-greater:uses_definition:rule.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.hide-from-undead-greater:f5f642ea4d2e6390",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hide-from-undead-greater:uses_definition:rule.undead",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.undead",
+        "name": "undead"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.hide-from-undead-greater:6b837a80a039a093",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "undead",
+          "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/creature-types#TOC-Undead"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.hide-from-undead-greater:6b837a80a039a093",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "undead",
+          "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/creature-types#TOC-Undead"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.hide-from-undead-greater:uses_definition:rule.will",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.will",
+        "name": "Will"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.hide-from-undead-greater:6b837a80a039a093",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Will",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
+        }
+      ],
+      "note": null
+    }
+  ],
+  "provenance": [
+    {
+      "field_path": "/classification",
+      "observation_id": "aon:spell.hide-from-undead-greater:f5f642ea4d2e6390",
+      "source_field": "spell_raw.school_raw",
+      "raw_value_sha256": "a65e3506d4b6dcece45c44f41070bbac1558c3927180f5c9e649312d8d446f51",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels",
+      "observation_id": "aon:spell.hide-from-undead-greater:f5f642ea4d2e6390",
+      "source_field": "spell_raw.levels_raw",
+      "raw_value_sha256": "ab15d61dc72a5e2cb925f80d82aab556fceab83b8c43142b59852182507abcf5",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/casting",
+      "observation_id": "aon:spell.hide-from-undead-greater:f5f642ea4d2e6390",
+      "source_field": "spell_raw.components_raw",
+      "raw_value_sha256": "5de38fe056a1e71e729a0919b0073734c5562593e2e473adb2ace9ee61e8779e",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/effect",
+      "observation_id": "aon:spell.hide-from-undead-greater:f5f642ea4d2e6390",
+      "source_field": "spell_raw.delivery_fields_raw",
+      "raw_value_sha256": "84c9baf3c628a0f47abefa7dc482eb85b93ad9614409d8a30bcc8a8fc5c206c0",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description",
+      "observation_id": "aon:spell.hide-from-undead-greater:f5f642ea4d2e6390",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f985a3056bdb7609ec5ce01a583b82c6cfd0db114732cd3d073569e6fe1e08ff",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/publication",
+      "observation_id": "aon:spell.hide-from-undead-greater:f5f642ea4d2e6390",
+      "source_field": "spell_raw.source_book_raw",
+      "raw_value_sha256": "522595091fbae9195f1560143a1b2eee5594ac390af5de7246ffe92a35adcca5",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    }
+  ],
+  "normalization": {
+    "status": "validated",
+    "normalizer_version": "0.1.2-explicit-inheritance",
+    "warnings": [
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/time",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/components_raw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/range",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/duration",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/saving_throw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/spell_resistance",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      }
+    ]
+  }
+}

@@ -1,0 +1,571 @@
+{
+  "$schema": "../../schemas/canonical-spell.schema.json",
+  "schema_version": "0.1.0",
+  "spell_id": "spell.restore-eidolon",
+  "ruleset": "Pathfinder First Edition",
+  "name": "Restore Eidolon",
+  "aliases": [],
+  "classification": {
+    "school": "conjuration",
+    "subschool": "healing",
+    "descriptors": [],
+    "raw": "conjuration (healing)"
+  },
+  "levels": [
+    {
+      "spell_list_id": "spell-list.summoner",
+      "list_kind": "class",
+      "list_name": "summoner",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "summoner 3"
+    },
+    {
+      "spell_list_id": "spell-list.summoner-unchained",
+      "list_kind": "class",
+      "list_name": "summoner (unchained)",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "summoner (unchained) 3"
+    }
+  ],
+  "casting": {
+    "time": {
+      "kind": "timed",
+      "amount": 1,
+      "unit": "minute",
+      "raw": "1 minute"
+    },
+    "components": [
+      {
+        "type": "verbal",
+        "details": null,
+        "cost_gp": null,
+        "raw": "V"
+      },
+      {
+        "type": "somatic",
+        "details": null,
+        "cost_gp": null,
+        "raw": "S"
+      },
+      {
+        "type": "material",
+        "details": "diamond dust worth 100 gp or 1,000 gp, see text",
+        "cost_gp": 100,
+        "raw": "M (diamond dust worth 100 gp or 1,000 gp, see text)"
+      }
+    ],
+    "components_raw": "V, S, M (diamond dust worth 100 gp or 1,000 gp, see text)",
+    "conditional_components": []
+  },
+  "effect": {
+    "range": {
+      "category": "touch",
+      "formula": null,
+      "raw": "touch"
+    },
+    "delivery": {
+      "resolution": "fixed",
+      "entries": [
+        {
+          "label_raw": "Target",
+          "value_raw": "eidolon touched",
+          "kinds": [
+            "target"
+          ]
+        }
+      ]
+    },
+    "targeting": {
+      "mode": "single",
+      "subject_kind": "other",
+      "selection": "selected",
+      "count": {
+        "kind": "fixed",
+        "fixed": 1,
+        "formula": null,
+        "raw": "eidolon touched"
+      },
+      "separation": null,
+      "raw": "eidolon touched"
+    },
+    "area": null,
+    "duration": {
+      "kind": "instantaneous",
+      "formula": null,
+      "dismissible": null,
+      "concentration": null,
+      "raw": "instantaneous"
+    },
+    "saving_throw": {
+      "types": [
+        "will"
+      ],
+      "outcome": "Will negates (harmless)",
+      "harmless": true,
+      "object": null,
+      "conditional": null,
+      "raw": "Will negates (harmless)"
+    },
+    "spell_resistance": {
+      "applies": true,
+      "harmless": true,
+      "object": null,
+      "conditional": null,
+      "raw": "yes (harmless)"
+    }
+  },
+  "description": {
+    "raw": "This spell functions as restoration, except it only affects an eidolon.",
+    "search_text": "\"this spell functions as restoration, except it only affects an eidolon.\"",
+    "sections": []
+  },
+  "publication": {
+    "publisher": "Paizo",
+    "book": "Ultimate Magic",
+    "page": 235,
+    "first_party_status": "confirmed",
+    "pfs_status": "legal",
+    "supplemental": []
+  },
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.restoration",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.restore-eidolon:d96eda5b39da0eeb",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell functions as restoration, except it only affects an eidolon."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/time",
+          "value": {
+            "kind": "timed",
+            "amount": 1,
+            "unit": "minute",
+            "raw": "1 minute"
+          },
+          "source_field": "spell_raw.casting_time_raw",
+          "raw": "1 minute",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "eidolon touched",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"eidolon touched\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "single",
+            "subject_kind": "other",
+            "selection": "selected",
+            "count": {
+              "kind": "fixed",
+              "fixed": 1,
+              "formula": null,
+              "raw": "eidolon touched"
+            },
+            "separation": null,
+            "raw": "eidolon touched"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"eidolon touched\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as restoration, except it only affects an eidolon.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as restoration, except it only affects an eidolon.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "pending",
+      "note": "The direct parent is canonical, but an ancestor remains unresolved; inherited paths and child overrides are preserved pending full-chain resolution."
+    }
+  ],
+  "relationships": [
+    {
+      "relationship_id": "spell.restore-eidolon:appears_on_spell_list:spell-list.summoner",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.summoner",
+        "name": "summoner Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.restore-eidolon:d96eda5b39da0eeb",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "summoner 3",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.restore-eidolon:appears_on_spell_list:spell-list.summoner-unchained",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.summoner-unchained",
+        "name": "summoner (unchained) Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.restore-eidolon:d96eda5b39da0eeb",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "summoner (unchained) 3",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.restore-eidolon:appears_on_spell_list:spell-list.summoner-unchained-summoner",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.summoner-unchained-summoner",
+        "name": "summoner/unchained summoner"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.restore-eidolon:364d62a953a15a62",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "summoner/unchained summoner",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-summoner/"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.restore-eidolon:364d62a953a15a62",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "summoner/unchained summoner",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-summoner/"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.restore-eidolon:functions_like:spell.restoration",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.restoration",
+        "name": "Restoration"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.restore-eidolon:d96eda5b39da0eeb",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "This spell functions as restoration, except it only affects an eidolon.",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.restore-eidolon:has_school:magic-school.conjuration",
+      "type": "has_school",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.conjuration",
+        "name": "conjuration"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.restore-eidolon:d96eda5b39da0eeb",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "conjuration",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=2"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.restore-eidolon:364d62a953a15a62",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "conjuration",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Conjuration"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.restore-eidolon:364d62a953a15a62",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "conjuration",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Conjuration"
+        },
+        {
+          "observation_id": "aon:spell.restore-eidolon:d96eda5b39da0eeb",
+          "source_field": "spell_raw.school_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "conjuration",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.restore-eidolon:has_subschool:subschool.healing",
+      "type": "has_subschool",
+      "target": {
+        "entity_type": "subschool",
+        "entity_id": "subschool.healing",
+        "name": "healing"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.restore-eidolon:d96eda5b39da0eeb",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "healing",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=17"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.restore-eidolon:published_in:publication.ultimate-magic",
+      "type": "published_in",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.ultimate-magic",
+        "name": "Ultimate Magic"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.restore-eidolon:d96eda5b39da0eeb",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Ultimate Magic pg. 235",
+          "source_href": "http://paizo.com/pathfinderRPG/v5748btpy8k8r"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.restore-eidolon:364d62a953a15a62",
+          "source_field": "spell_raw.links_raw[8]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Pathfinder Roleplaying Game: Ultimate Magic",
+          "source_href": "http://www.amazon.com/gp/product/1601252994/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1601252994&linkCode=as2&tag=httpwwwd20pfs-20"
+        },
+        {
+          "observation_id": "aon:spell.restore-eidolon:d96eda5b39da0eeb",
+          "source_field": "spell_raw.source_book_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Ultimate Magic pg. 235",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.restore-eidolon:references:spell.lesser-restoration",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.lesser-restoration",
+        "name": "lesser restoration"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.restore-eidolon:364d62a953a15a62",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "lesser restoration",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/r/restoration"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.restore-eidolon:references:spell.restoration",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.restoration",
+        "name": "restoration"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.restore-eidolon:ef76e85de13e01f3",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "restoration",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/restoration.html#restoration"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.restore-eidolon:364d62a953a15a62",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "restoration",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/r/restoration"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.restore-eidolon:uses_definition:rule.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.restore-eidolon:d96eda5b39da0eeb",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes (harmless)",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.restore-eidolon:uses_definition:rule.will",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.will",
+        "name": "Will"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.restore-eidolon:364d62a953a15a62",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Will",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.restore-eidolon:364d62a953a15a62",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Will",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
+        }
+      ],
+      "note": null
+    }
+  ],
+  "provenance": [
+    {
+      "field_path": "/classification",
+      "observation_id": "aon:spell.restore-eidolon:d96eda5b39da0eeb",
+      "source_field": "spell_raw.school_raw",
+      "raw_value_sha256": "661a806ec58919bcb5984db9a2132e4795d2d0dbd213857f20f76d68c040a1b5",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels",
+      "observation_id": "aon:spell.restore-eidolon:d96eda5b39da0eeb",
+      "source_field": "spell_raw.levels_raw",
+      "raw_value_sha256": "0f62daaea3e122adf5517672d5dca5435c75c21be945ead828ce77d1e6e2ddd6",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/casting",
+      "observation_id": "aon:spell.restore-eidolon:d96eda5b39da0eeb",
+      "source_field": "spell_raw.components_raw",
+      "raw_value_sha256": "ccf0e9492c58d33d05a3bf9ffcb2b7c630cc9b7438c9f8ed7682eb44a43d76a7",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/effect",
+      "observation_id": "aon:spell.restore-eidolon:d96eda5b39da0eeb",
+      "source_field": "spell_raw.delivery_fields_raw",
+      "raw_value_sha256": "4d77bc49506f3c32a883e4c2789c70758ef601afd28fe4fdcd32ea37b05eba17",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description",
+      "observation_id": "aon:spell.restore-eidolon:d96eda5b39da0eeb",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "00e341cbbfa790083c286c889dae210ccec7aaf206598757a5a0dfcf9fce1197",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/publication",
+      "observation_id": "aon:spell.restore-eidolon:d96eda5b39da0eeb",
+      "source_field": "spell_raw.source_book_raw",
+      "raw_value_sha256": "33b0b822f9c8218d34fdf9b768f621b67d0a798a3b172d959228acdd4754b610",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    }
+  ],
+  "normalization": {
+    "status": "needs_review",
+    "normalizer_version": "0.1.2-explicit-inheritance",
+    "warnings": [
+      {
+        "code": "UNRESOLVED_INHERITANCE",
+        "field_path": "/rules_inheritance/0",
+        "message": "The explicit parent chain through spell.restoration is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/description/raw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      }
+    ]
+  }
+}

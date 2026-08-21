@@ -1,0 +1,618 @@
+{
+  "$schema": "../../schemas/canonical-spell.schema.json",
+  "schema_version": "0.1.0",
+  "spell_id": "spell.align-weapon-communal",
+  "ruleset": "Pathfinder First Edition",
+  "name": "Align Weapon, Communal",
+  "aliases": [],
+  "classification": {
+    "school": "transmutation",
+    "subschool": null,
+    "descriptors": [
+      "see text"
+    ],
+    "raw": "transmutation [see text]"
+  },
+  "levels": [
+    {
+      "spell_list_id": "spell-list.cleric",
+      "list_kind": "class",
+      "list_name": "cleric",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "cleric 3"
+    },
+    {
+      "spell_list_id": "spell-list.inquisitor",
+      "list_kind": "class",
+      "list_name": "inquisitor",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "inquisitor 3"
+    },
+    {
+      "spell_list_id": "spell-list.oracle",
+      "list_kind": "class",
+      "list_name": "oracle",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "oracle 3"
+    },
+    {
+      "spell_list_id": "spell-list.warpriest",
+      "list_kind": "class",
+      "list_name": "warpriest",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "warpriest 3"
+    }
+  ],
+  "casting": {
+    "time": {
+      "kind": "action",
+      "amount": 1,
+      "unit": "standard_action",
+      "raw": "1 standard action"
+    },
+    "components": [
+      {
+        "type": "verbal",
+        "details": null,
+        "cost_gp": null,
+        "raw": "V"
+      },
+      {
+        "type": "somatic",
+        "details": null,
+        "cost_gp": null,
+        "raw": "S"
+      },
+      {
+        "type": "divine_focus",
+        "details": null,
+        "cost_gp": null,
+        "raw": "DF"
+      }
+    ],
+    "components_raw": "V, S, DF",
+    "conditional_components": []
+  },
+  "effect": {
+    "range": {
+      "category": "touch",
+      "formula": null,
+      "raw": "touch"
+    },
+    "delivery": {
+      "resolution": "fixed",
+      "entries": [
+        {
+          "label_raw": "Target",
+          "value_raw": "weapons or projectiles touched",
+          "kinds": [
+            "target"
+          ]
+        }
+      ]
+    },
+    "targeting": {
+      "mode": "single",
+      "subject_kind": "other",
+      "selection": "selected",
+      "count": {
+        "kind": "fixed",
+        "fixed": 1,
+        "formula": null,
+        "raw": "weapons or projectiles touched"
+      },
+      "separation": null,
+      "raw": "weapons or projectiles touched"
+    },
+    "area": null,
+    "duration": {
+      "kind": "timed",
+      "formula": "1 minute/level",
+      "dismissible": null,
+      "concentration": null,
+      "raw": "1 minute/level"
+    },
+    "saving_throw": {
+      "types": [
+        "will"
+      ],
+      "outcome": "Will negates (harmless, object)",
+      "harmless": true,
+      "object": true,
+      "conditional": null,
+      "raw": "Will negates (harmless, object)"
+    },
+    "spell_resistance": {
+      "applies": true,
+      "harmless": true,
+      "object": true,
+      "conditional": null,
+      "raw": "yes (harmless, object)"
+    }
+  },
+  "description": {
+    "raw": "This spell functions as align weapon, except you divide the duration in 1-minute increments between any number of touched weapons. Every group of up to 50 projectiles (which must be together at the time of casting) counts as one weapon for the purpose of dividing the spell’s duration.",
+    "search_text": "\"this spell functions as align weapon, except you divide the duration in 1-minute increments between any number of touched weapons. every group of up to 50 projectiles (which must be together at the time of casting) counts as one weapon for the purpose of dividing the spell’s duration.\"",
+    "sections": []
+  },
+  "publication": {
+    "publisher": "Paizo",
+    "book": "Advanced Class Guide",
+    "page": 173,
+    "first_party_status": "confirmed",
+    "pfs_status": "legal",
+    "supplemental": []
+  },
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.align-weapon",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.align-weapon-communal:54c360b04cc2c608",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell functions as align weapon, except you divide the duration in 1-minute increments between any number of touched weapons. Every group of up to 50 projectiles (which must be together at the time of casting) counts as one weapon for the purpose of dividing the spell’s duration."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "weapons or projectiles touched",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"weapons or projectiles touched\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "single",
+            "subject_kind": "other",
+            "selection": "selected",
+            "count": {
+              "kind": "fixed",
+              "fixed": 1,
+              "formula": null,
+              "raw": "weapons or projectiles touched"
+            },
+            "separation": null,
+            "raw": "weapons or projectiles touched"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"weapons or projectiles touched\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "timed",
+            "formula": "1 minute/level",
+            "dismissible": null,
+            "concentration": null,
+            "raw": "1 minute/level"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "1 minute/level",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as align weapon, except you divide the duration in 1-minute increments between any number of touched weapons. Every group of up to 50 projectiles (which must be together at the time of casting) counts as one weapon for the purpose of dividing the spell’s duration.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as align weapon, except you divide the duration in 1-minute increments between any number of touched weapons. Every group of up to 50 projectiles (which must be together at the time of casting) counts as one weapon for the purpose of dividing the spell’s duration.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
+  "relationships": [
+    {
+      "relationship_id": "spell.align-weapon-communal:appears_on_spell_list:spell-list.cleric",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.cleric",
+        "name": "cleric"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.align-weapon-communal:393c233287aa2e8f",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.align-weapon-communal:54c360b04cc2c608",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.align-weapon-communal:appears_on_spell_list:spell-list.inquisitor",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.inquisitor",
+        "name": "inquisitor"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.align-weapon-communal:393c233287aa2e8f",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.align-weapon-communal:54c360b04cc2c608",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 3",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.align-weapon-communal:appears_on_spell_list:spell-list.oracle",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.oracle",
+        "name": "oracle Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.align-weapon-communal:54c360b04cc2c608",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "oracle 3",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.align-weapon-communal:appears_on_spell_list:spell-list.warpriest",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.warpriest",
+        "name": "warpriest Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.align-weapon-communal:54c360b04cc2c608",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "warpriest 3",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.align-weapon-communal:functions_like:spell.align-weapon",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.align-weapon",
+        "name": "Align Weapon"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.align-weapon-communal:54c360b04cc2c608",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "This spell functions as align weapon, except you divide the duration in 1-minute increments between any number of touched weapons. Every group of up to 50 projectiles (which must be together at the time of casting) counts as one weapon for the purpose of dividing the spell’s duration.",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.align-weapon-communal:has_descriptor:descriptor.see-text",
+      "type": "has_descriptor",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.see-text",
+        "name": "see text"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.align-weapon-communal:54c360b04cc2c608",
+          "source_field": "spell_raw.descriptors_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "see text",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.align-weapon-communal:has_school:magic-school.transmutation",
+      "type": "has_school",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.transmutation",
+        "name": "transmutation"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.align-weapon-communal:54c360b04cc2c608",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "transmutation",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=8"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.align-weapon-communal:393c233287aa2e8f",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "transmutation",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Transmutation"
+        },
+        {
+          "observation_id": "aon:spell.align-weapon-communal:54c360b04cc2c608",
+          "source_field": "spell_raw.school_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "transmutation",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.align-weapon-communal:published_in:publication.advanced-class-guide",
+      "type": "published_in",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.advanced-class-guide",
+        "name": "Advanced Class Guide"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.align-weapon-communal:54c360b04cc2c608",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Advanced Class Guide pg. 173",
+          "source_href": "http://paizo.com/products/btpy978v?Pathfinder-Roleplaying-Game-Advanced-Class-Guide"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.align-weapon-communal:393c233287aa2e8f",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Pathfinder Roleplaying Game: Advanced Class Guide",
+          "source_href": "http://www.amazon.com/gp/product/160125671X/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=160125671X&linkCode=as2&tag=httpwwwd20pfs-20&linkId=HSOKQ6X2XAS2GTU6"
+        },
+        {
+          "observation_id": "aon:spell.align-weapon-communal:54c360b04cc2c608",
+          "source_field": "spell_raw.source_book_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Advanced Class Guide pg. 173",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.align-weapon-communal:published_in:publication.will",
+      "type": "published_in",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.will",
+        "name": "Will"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.align-weapon-communal:393c233287aa2e8f",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Will",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.align-weapon-communal:references:spell.align-weapon",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.align-weapon",
+        "name": "align weapon"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.align-weapon-communal:ce90c2b38799e14e",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "align weapon",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/alignWeapon.html#align-weapon"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.align-weapon-communal:uses_action:action.standard-action",
+      "type": "uses_action",
+      "target": {
+        "entity_type": "action",
+        "entity_id": "action.standard-action",
+        "name": "standard action"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.align-weapon-communal:393c233287aa2e8f",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "standard action",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Standard-Actions"
+        },
+        {
+          "observation_id": "aon:spell.align-weapon-communal:54c360b04cc2c608",
+          "source_field": "spell_raw.casting_time_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1 standard action",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.align-weapon-communal:uses_definition:rule.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.align-weapon-communal:54c360b04cc2c608",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes (harmless, object)",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.align-weapon-communal:uses_definition:rule.touch",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.touch",
+        "name": "touch"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.align-weapon-communal:393c233287aa2e8f",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "touch",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Touch-Attacks"
+        }
+      ],
+      "note": null
+    }
+  ],
+  "provenance": [
+    {
+      "field_path": "/classification",
+      "observation_id": "aon:spell.align-weapon-communal:54c360b04cc2c608",
+      "source_field": "spell_raw.school_raw",
+      "raw_value_sha256": "4a54564c0300b5593334a02dbf005896d7906d3a17df07eb293272114a3b5de7",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels",
+      "observation_id": "aon:spell.align-weapon-communal:54c360b04cc2c608",
+      "source_field": "spell_raw.levels_raw",
+      "raw_value_sha256": "ab15d61dc72a5e2cb925f80d82aab556fceab83b8c43142b59852182507abcf5",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/casting",
+      "observation_id": "aon:spell.align-weapon-communal:54c360b04cc2c608",
+      "source_field": "spell_raw.components_raw",
+      "raw_value_sha256": "5de38fe056a1e71e729a0919b0073734c5562593e2e473adb2ace9ee61e8779e",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/effect",
+      "observation_id": "aon:spell.align-weapon-communal:54c360b04cc2c608",
+      "source_field": "spell_raw.delivery_fields_raw",
+      "raw_value_sha256": "9718a07c6bcfb4cb53f26c0084b54ffd7e6f698760fb2bae04cd9e570c5305ca",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description",
+      "observation_id": "aon:spell.align-weapon-communal:54c360b04cc2c608",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "143d3b89dd1c451ca565a307ee75a6489f94dfe263cc43ef571f13d19713319c",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/publication",
+      "observation_id": "aon:spell.align-weapon-communal:54c360b04cc2c608",
+      "source_field": "spell_raw.source_book_raw",
+      "raw_value_sha256": "ca351ded24158a4e82c0207643fca95212e7d5b256b561e0b91268a4e4413552",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    }
+  ],
+  "normalization": {
+    "status": "validated",
+    "normalizer_version": "0.1.2-explicit-inheritance",
+    "warnings": [
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/description/raw",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      }
+    ]
+  }
+}

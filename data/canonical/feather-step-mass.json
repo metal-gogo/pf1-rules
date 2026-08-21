@@ -1,0 +1,655 @@
+{
+  "$schema": "../../schemas/canonical-spell.schema.json",
+  "schema_version": "0.1.0",
+  "spell_id": "spell.feather-step-mass",
+  "ruleset": "Pathfinder First Edition",
+  "name": "Feather Step, Mass",
+  "aliases": [],
+  "classification": {
+    "school": "transmutation",
+    "subschool": null,
+    "descriptors": [],
+    "raw": "transmutation"
+  },
+  "levels": [
+    {
+      "spell_list_id": "spell-list.bard",
+      "list_kind": "class",
+      "list_name": "bard",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "bard 3"
+    },
+    {
+      "spell_list_id": "spell-list.druid",
+      "list_kind": "class",
+      "list_name": "druid",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "druid 3"
+    },
+    {
+      "spell_list_id": "spell-list.hunter",
+      "list_kind": "class",
+      "list_name": "hunter",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "hunter 3"
+    },
+    {
+      "spell_list_id": "spell-list.psychic",
+      "list_kind": "class",
+      "list_name": "psychic",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "psychic 3"
+    },
+    {
+      "spell_list_id": "spell-list.ranger",
+      "list_kind": "class",
+      "list_name": "ranger",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "ranger 3"
+    },
+    {
+      "spell_list_id": "spell-list.skald",
+      "list_kind": "class",
+      "list_name": "skald",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "skald 3"
+    }
+  ],
+  "casting": {
+    "time": {
+      "kind": "action",
+      "amount": 1,
+      "unit": "standard_action",
+      "raw": "1 standard action"
+    },
+    "components": [
+      {
+        "type": "verbal",
+        "details": null,
+        "cost_gp": null,
+        "raw": "V"
+      },
+      {
+        "type": "somatic",
+        "details": null,
+        "cost_gp": null,
+        "raw": "S"
+      }
+    ],
+    "components_raw": "V, S",
+    "conditional_components": []
+  },
+  "effect": {
+    "range": {
+      "category": "close",
+      "formula": "close (25 ft. + 5 ft./2 levels)",
+      "raw": "close (25 ft. + 5 ft./2 levels)"
+    },
+    "delivery": {
+      "resolution": "fixed",
+      "entries": [
+        {
+          "label_raw": "Target",
+          "value_raw": "one creature/level, no two of which can be more than 30 ft. apart",
+          "kinds": [
+            "target"
+          ]
+        }
+      ]
+    },
+    "targeting": {
+      "mode": "multiple",
+      "subject_kind": "creature",
+      "selection": "selected",
+      "count": {
+        "kind": "per_level",
+        "fixed": null,
+        "formula": "one creature/level, no two of which can be more than 30 ft. apart",
+        "raw": "one creature/level, no two of which can be more than 30 ft. apart"
+      },
+      "separation": null,
+      "raw": "one creature/level, no two of which can be more than 30 ft. apart"
+    },
+    "area": null,
+    "duration": {
+      "kind": "timed",
+      "formula": "10 minutes/level",
+      "dismissible": null,
+      "concentration": null,
+      "raw": "10 minutes/level"
+    },
+    "saving_throw": {
+      "types": [
+        "fortitude"
+      ],
+      "outcome": "Fortitude negates (harmless)",
+      "harmless": true,
+      "object": null,
+      "conditional": true,
+      "raw": "Fortitude negates (harmless)"
+    },
+    "spell_resistance": {
+      "applies": true,
+      "harmless": null,
+      "object": null,
+      "conditional": null,
+      "raw": "yes"
+    }
+  },
+  "description": {
+    "raw": "As feather step, except this spell affects multiple creatures.",
+    "search_text": "\"as feather step, except this spell affects multiple creatures.\"",
+    "sections": []
+  },
+  "publication": {
+    "publisher": "Paizo",
+    "book": "Advanced Player's Guide",
+    "page": 221,
+    "first_party_status": "confirmed",
+    "pfs_status": "legal",
+    "supplemental": []
+  },
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.feather-step",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+        "source_field": "spell_raw.description_raw",
+        "raw": "As feather step, except this spell affects multiple creatures."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "one creature/level, no two of which can be more than 30 ft. apart",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one creature/level, no two of which can be more than 30 ft. apart\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "multiple",
+            "subject_kind": "creature",
+            "selection": "selected",
+            "count": {
+              "kind": "per_level",
+              "fixed": null,
+              "formula": "one creature/level, no two of which can be more than 30 ft. apart",
+              "raw": "one creature/level, no two of which can be more than 30 ft. apart"
+            },
+            "separation": null,
+            "raw": "one creature/level, no two of which can be more than 30 ft. apart"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one creature/level, no two of which can be more than 30 ft. apart\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "As feather step, except this spell affects multiple creatures.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "As feather step, except this spell affects multiple creatures.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
+  "relationships": [
+    {
+      "relationship_id": "spell.feather-step-mass:appears_on_spell_list:spell-list.bard",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.bard",
+        "name": "bard"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.feather-step-mass:82e8efa12ea359cf",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "bard",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-bard/"
+        },
+        {
+          "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "bard 3",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.feather-step-mass:appears_on_spell_list:spell-list.druid",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.druid",
+        "name": "druid"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.feather-step-mass:82e8efa12ea359cf",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "druid",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/druid"
+        },
+        {
+          "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "druid 3",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.feather-step-mass:appears_on_spell_list:spell-list.hunter",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.hunter",
+        "name": "hunter Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "hunter 3",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.feather-step-mass:appears_on_spell_list:spell-list.psychic",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.psychic",
+        "name": "psychic"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.feather-step-mass:82e8efa12ea359cf",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "psychic",
+          "source_href": "https://www.d20pfsrd.com/classes/occult-classes/psychic/"
+        },
+        {
+          "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "psychic 3",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.feather-step-mass:appears_on_spell_list:spell-list.ranger",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.ranger",
+        "name": "ranger"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.feather-step-mass:82e8efa12ea359cf",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "ranger",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/ranger"
+        },
+        {
+          "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "ranger 3",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.feather-step-mass:appears_on_spell_list:spell-list.skald",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.skald",
+        "name": "skald Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "skald 3",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.feather-step-mass:functions_like:spell.feather-step",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.feather-step",
+        "name": "Feather Step"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "As feather step, except this spell affects multiple creatures.",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.feather-step-mass:has_school:magic-school.transmutation",
+      "type": "has_school",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.transmutation",
+        "name": "transmutation"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "transmutation",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=8"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.feather-step-mass:82e8efa12ea359cf",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "transmutation",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Transmutation"
+        },
+        {
+          "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+          "source_field": "spell_raw.school_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "transmutation",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.feather-step-mass:published_in:publication.pathfinder-rpg-advanced-players-guide",
+      "type": "published_in",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.pathfinder-rpg-advanced-players-guide",
+        "name": "Advanced Player's Guide"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Advanced Player's Guide pg. 221",
+          "source_href": "http://paizo.com/pathfinderRPG/v5748btpy8fo1"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.feather-step-mass:82e8efa12ea359cf",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Advanced Player’s Guide",
+          "source_href": "http://www.amazon.com/gp/product/1601252463/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1601252463&linkCode=as2&tag=httpwwwd20pfs-20"
+        },
+        {
+          "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+          "source_field": "spell_raw.source_book_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Advanced Player's Guide pg. 221",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.feather-step-mass:references:spell.feather-step",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.feather-step",
+        "name": "feather step"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.feather-step-mass:6632d54d7f91ac0e",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "feather step",
+          "source_href": "https://legacy.aonprd.com/advancedPlayersGuide/spells/featherStep.html#feather-step"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.feather-step-mass:uses_action:action.standard-action",
+      "type": "uses_action",
+      "target": {
+        "entity_type": "action",
+        "entity_id": "action.standard-action",
+        "name": "1 standard action"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+          "source_field": "spell_raw.casting_time_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1 standard action",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.feather-step-mass:uses_definition:rule.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes",
+          "source_href": null
+        }
+      ],
+      "note": null
+    }
+  ],
+  "provenance": [
+    {
+      "field_path": "/classification",
+      "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+      "source_field": "spell_raw.school_raw",
+      "raw_value_sha256": "ba950478483217aec50f08f19dc4984124e600ccc4c5cfdcff96b4f54279a7ca",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels",
+      "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+      "source_field": "spell_raw.levels_raw",
+      "raw_value_sha256": "2820825c6b8389adfb908dc9d920e90c36a381d6496840d20ce57fd880500a37",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/casting",
+      "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+      "source_field": "spell_raw.components_raw",
+      "raw_value_sha256": "0ebcffcf26580553bf0204796c5b0127a132e9efad783df958b08b240c9ee4d2",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/effect",
+      "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+      "source_field": "spell_raw.delivery_fields_raw",
+      "raw_value_sha256": "d562e487dbadaddc34ee431a62c4496108e0fc64abf0d7525a77ba96be9d0824",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description",
+      "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "5b1962499a9e7f4ba22e03e14ff087bb83b5db0bad712b038af3668b4553177e",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/publication",
+      "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+      "source_field": "spell_raw.source_book_raw",
+      "raw_value_sha256": "2bc60368c7ac611bffd9e029666d67a60425475e817f673487ae8d5baeb3a058",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    }
+  ],
+  "normalization": {
+    "status": "validated",
+    "normalizer_version": "0.1.2-explicit-inheritance",
+    "warnings": [
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/time",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/time",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/components_raw",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/components_raw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/range",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/range",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/duration",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/duration",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/saving_throw",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/saving_throw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/spell_resistance",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/spell_resistance",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      }
+    ]
+  }
+}
