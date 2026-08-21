@@ -1,0 +1,595 @@
+{
+  "$schema": "../../schemas/canonical-spell.schema.json",
+  "schema_version": "0.1.0",
+  "spell_id": "spell.debilitating-pain-mass",
+  "ruleset": "Pathfinder First Edition",
+  "name": "Debilitating Pain, Mass",
+  "aliases": [],
+  "classification": {
+    "school": "enchantment",
+    "subschool": "compulsion",
+    "descriptors": [
+      "mind-affecting",
+      "pain"
+    ],
+    "raw": "enchantment (compulsion) [mind-affecting, pain]"
+  },
+  "levels": [
+    {
+      "spell_list_id": "spell-list.psychic",
+      "list_kind": "class",
+      "list_name": "psychic",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "psychic 5"
+    },
+    {
+      "spell_list_id": "spell-list.witch",
+      "list_kind": "class",
+      "list_name": "witch",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "witch 5"
+    }
+  ],
+  "casting": {
+    "time": {
+      "kind": "action",
+      "amount": 1,
+      "unit": "standard_action",
+      "raw": "1 standard action"
+    },
+    "components": [
+      {
+        "type": "verbal",
+        "details": null,
+        "cost_gp": null,
+        "raw": "V"
+      },
+      {
+        "type": "somatic",
+        "details": null,
+        "cost_gp": null,
+        "raw": "S"
+      },
+      {
+        "type": "material",
+        "details": null,
+        "cost_gp": null,
+        "raw": "M"
+      }
+    ],
+    "components_raw": "V, S, M",
+    "conditional_components": []
+  },
+  "effect": {
+    "range": {
+      "category": "close",
+      "formula": "close (25 ft. + 5 ft./2 levels)",
+      "raw": "close (25 ft. + 5 ft./2 levels)"
+    },
+    "delivery": {
+      "resolution": "fixed",
+      "entries": [
+        {
+          "label_raw": "Target",
+          "value_raw": "one creature/4 levels",
+          "kinds": [
+            "target"
+          ]
+        }
+      ]
+    },
+    "targeting": {
+      "mode": "single",
+      "subject_kind": "creature",
+      "selection": "selected",
+      "count": {
+        "kind": "fixed",
+        "fixed": 1,
+        "formula": null,
+        "raw": "one creature/4 levels"
+      },
+      "separation": null,
+      "raw": "one creature/4 levels"
+    },
+    "area": null,
+    "duration": {
+      "kind": "timed",
+      "formula": "1 round/3 levels",
+      "dismissible": null,
+      "concentration": null,
+      "raw": "1 round/3 levels"
+    },
+    "saving_throw": {
+      "types": [
+        "will"
+      ],
+      "outcome": "Will parital (see text)",
+      "harmless": null,
+      "object": null,
+      "conditional": true,
+      "raw": "Will parital (see text)"
+    },
+    "spell_resistance": {
+      "applies": true,
+      "harmless": null,
+      "object": null,
+      "conditional": null,
+      "raw": "yes"
+    }
+  },
+  "description": {
+    "raw": "This spell functions as per debilitating pain, except you can target one creature for every 4 caster levels you have.",
+    "search_text": "\"this spell functions as per debilitating pain, except you can target one creature for every 4 caster levels you have.\"",
+    "sections": []
+  },
+  "publication": {
+    "publisher": "Paizo",
+    "book": "Psychic Anthology",
+    "page": 10,
+    "first_party_status": "confirmed",
+    "pfs_status": "not_legal",
+    "supplemental": []
+  },
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.debilitating-pain",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell functions as per debilitating pain, except you can target one creature for every 4 caster levels you have."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "one creature/4 levels",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one creature/4 levels\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "single",
+            "subject_kind": "creature",
+            "selection": "selected",
+            "count": {
+              "kind": "fixed",
+              "fixed": 1,
+              "formula": null,
+              "raw": "one creature/4 levels"
+            },
+            "separation": null,
+            "raw": "one creature/4 levels"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one creature/4 levels\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/saving_throw",
+          "value": {
+            "types": [
+              "will"
+            ],
+            "outcome": "Will parital (see text)",
+            "harmless": null,
+            "object": null,
+            "conditional": true,
+            "raw": "Will parital (see text)"
+          },
+          "source_field": "spell_raw.saving_throw_raw",
+          "raw": "Will parital (see text)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as per debilitating pain, except you can target one creature for every 4 caster levels you have.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as per debilitating pain, except you can target one creature for every 4 caster levels you have.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
+  "relationships": [
+    {
+      "relationship_id": "spell.debilitating-pain-mass:appears_on_spell_list:spell-list.psychic",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.psychic",
+        "name": "psychic Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "psychic 5",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.debilitating-pain-mass:appears_on_spell_list:spell-list.witch",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.witch",
+        "name": "witch"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.debilitating-pain-mass:98e207efed5a5de4",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "witch",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/witch"
+        },
+        {
+          "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "witch 5",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.debilitating-pain-mass:functions_like:spell.debilitating-pain",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.debilitating-pain",
+        "name": "Debilitating Pain"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "This spell functions as per debilitating pain, except you can target one creature for every 4 caster levels you have.",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.debilitating-pain-mass:has_descriptor:descriptor.mind-affecting",
+      "type": "has_descriptor",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.mind-affecting",
+        "name": "mind-affecting"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "mind-affecting",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=46"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.debilitating-pain-mass:98e207efed5a5de4",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "mind-affecting",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Magic-Descriptor-Mind-Affecting"
+        },
+        {
+          "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+          "source_field": "spell_raw.descriptors_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "mind-affecting",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.debilitating-pain-mass:has_descriptor:descriptor.pain",
+      "type": "has_descriptor",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.pain",
+        "name": "pain"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "pain",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=47"
+        },
+        {
+          "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+          "source_field": "spell_raw.descriptors_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "pain",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.debilitating-pain-mass:has_school:magic-school.enchantment",
+      "type": "has_school",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.enchantment",
+        "name": "enchantment"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "enchantment",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=4"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.debilitating-pain-mass:98e207efed5a5de4",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "enchantment",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Enchantment"
+        },
+        {
+          "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+          "source_field": "spell_raw.school_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "enchantment",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.debilitating-pain-mass:has_subschool:subschool.compulsion",
+      "type": "has_subschool",
+      "target": {
+        "entity_type": "subschool",
+        "entity_id": "subschool.compulsion",
+        "name": "compulsion"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "compulsion",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=12"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.debilitating-pain-mass:98e207efed5a5de4",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "compulsion",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Enchantment-Compulsion"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.debilitating-pain-mass:published_in:publication.psychic-anthology",
+      "type": "published_in",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.psychic-anthology",
+        "name": "Psychic Anthology"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Psychic Anthology pg. 10",
+          "source_href": "http://paizo.com/products/btpy9qhr?Pathfinder-Player-Companion-Psychic-Anthology"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.debilitating-pain-mass:98e207efed5a5de4",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Pathfinder Player Companion: Psychic Anthology",
+          "source_href": "http://amzn.to/2mWBGlF"
+        },
+        {
+          "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+          "source_field": "spell_raw.source_book_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Psychic Anthology pg. 10",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.debilitating-pain-mass:uses_action:action.standard-action",
+      "type": "uses_action",
+      "target": {
+        "entity_type": "action",
+        "entity_id": "action.standard-action",
+        "name": "1 standard action"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+          "source_field": "spell_raw.casting_time_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1 standard action",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.debilitating-pain-mass:uses_definition:rule.psychic",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.psychic",
+        "name": "psychic"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.debilitating-pain-mass:98e207efed5a5de4",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "psychic",
+          "source_href": "https://www.d20pfsrd.com/alternative-rule-systems/occult-adventures/psychic-magic/#Psychic_Spells"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.debilitating-pain-mass:uses_definition:rule.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes",
+          "source_href": null
+        }
+      ],
+      "note": null
+    }
+  ],
+  "provenance": [
+    {
+      "field_path": "/classification",
+      "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+      "source_field": "spell_raw.school_raw",
+      "raw_value_sha256": "16f0442e27f73bb2ec74609af6b2190335f1c082623b841fad7470d27570fb23",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels",
+      "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+      "source_field": "spell_raw.levels_raw",
+      "raw_value_sha256": "19c5d0cf717f62fc93d361e36cfaedb0d55de284292321e12a6a31443a6d2764",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/casting",
+      "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+      "source_field": "spell_raw.components_raw",
+      "raw_value_sha256": "c07374019c2dbb601db18a9f63ca314a597d7f551c502ef64c2b929daf71b569",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/effect",
+      "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+      "source_field": "spell_raw.delivery_fields_raw",
+      "raw_value_sha256": "9a8a882946d137cd06f71adc70685cf09589c7ed05ef01acc618f105f89cbdc2",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description",
+      "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "cda6a2b7a3bb091b1888fd647caa660797673018ad11b107962dd1704a43cafa",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/publication",
+      "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+      "source_field": "spell_raw.source_book_raw",
+      "raw_value_sha256": "29e232124b0f388504fa1538a3cd43323eba3f74e4ed58fc7b653e9dc79c4969",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    }
+  ],
+  "normalization": {
+    "status": "validated",
+    "normalizer_version": "0.1.2-explicit-inheritance",
+    "warnings": [
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/time",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/components_raw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/range",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/duration",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/saving_throw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/spell_resistance",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      }
+    ]
+  }
+}

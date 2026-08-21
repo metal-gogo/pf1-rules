@@ -1,0 +1,594 @@
+{
+  "$schema": "../../schemas/canonical-spell.schema.json",
+  "schema_version": "0.1.0",
+  "spell_id": "spell.repair-undead-mass",
+  "ruleset": "Pathfinder First Edition",
+  "name": "Repair Undead, Mass",
+  "aliases": [],
+  "classification": {
+    "school": "necromancy",
+    "subschool": null,
+    "descriptors": [],
+    "raw": "necromancy"
+  },
+  "levels": [
+    {
+      "spell_list_id": "spell-list.arcanist",
+      "list_kind": "class",
+      "list_name": "arcanist",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "arcanist 5"
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer",
+      "list_kind": "class",
+      "list_name": "sorcerer",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "sorcerer 5"
+    },
+    {
+      "spell_list_id": "spell-list.spiritualist",
+      "list_kind": "class",
+      "list_name": "spiritualist",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "spiritualist 5"
+    },
+    {
+      "spell_list_id": "spell-list.wizard",
+      "list_kind": "class",
+      "list_name": "wizard",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "wizard 5"
+    }
+  ],
+  "casting": {
+    "time": {
+      "kind": "action",
+      "amount": 1,
+      "unit": "standard_action",
+      "raw": "1 standard action"
+    },
+    "components": [
+      {
+        "type": "verbal",
+        "details": null,
+        "cost_gp": null,
+        "raw": "V"
+      },
+      {
+        "type": "somatic",
+        "details": null,
+        "cost_gp": null,
+        "raw": "S"
+      }
+    ],
+    "components_raw": "V, S",
+    "conditional_components": []
+  },
+  "effect": {
+    "range": {
+      "category": "close",
+      "formula": "close (25 ft. + 5 ft./2 levels)",
+      "raw": "close (25 ft. + 5 ft./2 levels)"
+    },
+    "delivery": {
+      "resolution": "fixed",
+      "entries": [
+        {
+          "label_raw": "Targets",
+          "value_raw": "one undead creature/level, no two of which can be more than 30 ft. apart",
+          "kinds": [
+            "target"
+          ]
+        }
+      ]
+    },
+    "targeting": {
+      "mode": "multiple",
+      "subject_kind": "creature",
+      "selection": "selected",
+      "count": {
+        "kind": "per_level",
+        "fixed": null,
+        "formula": "one undead creature/level, no two of which can be more than 30 ft. apart",
+        "raw": "one undead creature/level, no two of which can be more than 30 ft. apart"
+      },
+      "separation": null,
+      "raw": "one undead creature/level, no two of which can be more than 30 ft. apart"
+    },
+    "area": null,
+    "duration": {
+      "kind": "instantaneous",
+      "formula": null,
+      "dismissible": null,
+      "concentration": null,
+      "raw": "instantaneous"
+    },
+    "saving_throw": {
+      "types": [
+        "will"
+      ],
+      "outcome": "Will half (harmless)",
+      "harmless": true,
+      "object": null,
+      "conditional": null,
+      "raw": "Will half (harmless)"
+    },
+    "spell_resistance": {
+      "applies": true,
+      "harmless": true,
+      "object": null,
+      "conditional": null,
+      "raw": "yes (harmless)"
+    }
+  },
+  "description": {
+    "raw": "This spell functions as repair undead, except as noted above, and it cures 1d8 points of damage + 1 point per caster level (maximum +20) on each selected creature.",
+    "search_text": "\"this spell functions as repair undead, except as noted above, and it cures 1d8 points of damage + 1 point per caster level (maximum +20) on each selected creature.\"",
+    "sections": []
+  },
+  "publication": {
+    "publisher": "Paizo",
+    "book": "Advanced Class Guide",
+    "page": 191,
+    "first_party_status": "confirmed",
+    "pfs_status": "legal",
+    "supplemental": []
+  },
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.repair-undead",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.repair-undead-mass:4ad2141b29418c7e",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell functions as repair undead, except as noted above, and it cures 1d8 points of damage + 1 point per caster level (maximum +20) on each selected creature."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/range",
+          "value": {
+            "category": "close",
+            "formula": "close (25 ft. + 5 ft./2 levels)",
+            "raw": "close (25 ft. + 5 ft./2 levels)"
+          },
+          "source_field": "spell_raw.range_raw",
+          "raw": "close (25 ft. + 5 ft./2 levels)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Targets",
+                "value_raw": "one undead creature/level, no two of which can be more than 30 ft. apart",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Targets\",\"value_raw\":\"one undead creature/level, no two of which can be more than 30 ft. apart\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "multiple",
+            "subject_kind": "creature",
+            "selection": "selected",
+            "count": {
+              "kind": "per_level",
+              "fixed": null,
+              "formula": "one undead creature/level, no two of which can be more than 30 ft. apart",
+              "raw": "one undead creature/level, no two of which can be more than 30 ft. apart"
+            },
+            "separation": null,
+            "raw": "one undead creature/level, no two of which can be more than 30 ft. apart"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Targets\",\"value_raw\":\"one undead creature/level, no two of which can be more than 30 ft. apart\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as repair undead, except as noted above, and it cures 1d8 points of damage + 1 point per caster level (maximum +20) on each selected creature.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as repair undead, except as noted above, and it cures 1d8 points of damage + 1 point per caster level (maximum +20) on each selected creature.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
+  "relationships": [
+    {
+      "relationship_id": "spell.repair-undead-mass:appears_on_spell_list:spell-list.arcanist",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.arcanist",
+        "name": "arcanist Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.repair-undead-mass:4ad2141b29418c7e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "arcanist 5",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.repair-undead-mass:appears_on_spell_list:spell-list.sorcerer",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer",
+        "name": "sorcerer Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.repair-undead-mass:4ad2141b29418c7e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "sorcerer 5",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.repair-undead-mass:appears_on_spell_list:spell-list.sorcerer-wizard",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-wizard",
+        "name": "sorcerer/wizard"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.repair-undead-mass:b56bfebd67dda6c9",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "sorcerer/wizard",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-sorcerer-and-wizard/"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.repair-undead-mass:appears_on_spell_list:spell-list.spiritualist",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.spiritualist",
+        "name": "spiritualist Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.repair-undead-mass:4ad2141b29418c7e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "spiritualist 5",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.repair-undead-mass:appears_on_spell_list:spell-list.wizard",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.wizard",
+        "name": "wizard Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.repair-undead-mass:4ad2141b29418c7e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "wizard 5",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.repair-undead-mass:functions_like:spell.repair-undead",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.repair-undead",
+        "name": "Repair Undead"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.repair-undead-mass:4ad2141b29418c7e",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "This spell functions as repair undead, except as noted above, and it cures 1d8 points of damage + 1 point per caster level (maximum +20) on each selected creature.",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.repair-undead-mass:has_school:magic-school.necromancy",
+      "type": "has_school",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.necromancy",
+        "name": "necromancy"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.repair-undead-mass:4ad2141b29418c7e",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "necromancy",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=7"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.repair-undead-mass:b56bfebd67dda6c9",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "necromancy",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Necromancy"
+        },
+        {
+          "observation_id": "aon:spell.repair-undead-mass:4ad2141b29418c7e",
+          "source_field": "spell_raw.school_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "necromancy",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.repair-undead-mass:published_in:publication.advanced-class-guide",
+      "type": "published_in",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.advanced-class-guide",
+        "name": "Advanced Class Guide"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.repair-undead-mass:4ad2141b29418c7e",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Advanced Class Guide pg. 191",
+          "source_href": "http://paizo.com/products/btpy978v?Pathfinder-Roleplaying-Game-Advanced-Class-Guide"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.repair-undead-mass:b56bfebd67dda6c9",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Pathfinder Roleplaying Game: Advanced Class Guide",
+          "source_href": "http://www.amazon.com/gp/product/160125671X/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=160125671X&linkCode=as2&tag=httpwwwd20pfs-20&linkId=HSOKQ6X2XAS2GTU6"
+        },
+        {
+          "observation_id": "aon:spell.repair-undead-mass:4ad2141b29418c7e",
+          "source_field": "spell_raw.source_book_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Advanced Class Guide pg. 191",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.repair-undead-mass:published_in:publication.will",
+      "type": "published_in",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.will",
+        "name": "Will"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.repair-undead-mass:b56bfebd67dda6c9",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Will",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.repair-undead-mass:uses_action:action.standard-action",
+      "type": "uses_action",
+      "target": {
+        "entity_type": "action",
+        "entity_id": "action.standard-action",
+        "name": "standard action"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.repair-undead-mass:b56bfebd67dda6c9",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "standard action",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Standard-Actions"
+        },
+        {
+          "observation_id": "aon:spell.repair-undead-mass:4ad2141b29418c7e",
+          "source_field": "spell_raw.casting_time_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1 standard action",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.repair-undead-mass:uses_definition:rule.caster-level",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.caster-level",
+        "name": "caster level"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.repair-undead-mass:b56bfebd67dda6c9",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "caster level",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Caster-Level"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.repair-undead-mass:uses_definition:rule.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.repair-undead-mass:4ad2141b29418c7e",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes (harmless)",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.repair-undead-mass:uses_definition:rule.undead",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.undead",
+        "name": "undead"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.repair-undead-mass:b56bfebd67dda6c9",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "undead",
+          "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/creature-types#TOC-Undead"
+        }
+      ],
+      "note": null
+    }
+  ],
+  "provenance": [
+    {
+      "field_path": "/classification",
+      "observation_id": "aon:spell.repair-undead-mass:4ad2141b29418c7e",
+      "source_field": "spell_raw.school_raw",
+      "raw_value_sha256": "8d942cb7c5c083aa741962f5da3efd22622fdc96fdb0187c60a1cb326d953610",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels",
+      "observation_id": "aon:spell.repair-undead-mass:4ad2141b29418c7e",
+      "source_field": "spell_raw.levels_raw",
+      "raw_value_sha256": "cea282de9c3d6e448a4e1d1efc7aee792df0f0ac14d29227a86f7b4116bd3576",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/casting",
+      "observation_id": "aon:spell.repair-undead-mass:4ad2141b29418c7e",
+      "source_field": "spell_raw.components_raw",
+      "raw_value_sha256": "0ebcffcf26580553bf0204796c5b0127a132e9efad783df958b08b240c9ee4d2",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/effect",
+      "observation_id": "aon:spell.repair-undead-mass:4ad2141b29418c7e",
+      "source_field": "spell_raw.delivery_fields_raw",
+      "raw_value_sha256": "daa96e939374375c13b50b2da9794f0d073e65c82436ebf8dfb4bbeec52191c1",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description",
+      "observation_id": "aon:spell.repair-undead-mass:4ad2141b29418c7e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "df0c2172308e92c04195561fff6071ba165ac403541d84678d34e094201158ce",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/publication",
+      "observation_id": "aon:spell.repair-undead-mass:4ad2141b29418c7e",
+      "source_field": "spell_raw.source_book_raw",
+      "raw_value_sha256": "bb9ecde8995cfd35578a222439fdc0fb81cf3ab006347179d7d45d38d0fa748f",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    }
+  ],
+  "normalization": {
+    "status": "validated",
+    "normalizer_version": "0.1.2-explicit-inheritance",
+    "warnings": [
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/description/raw",
+        "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      }
+    ]
+  }
+}
