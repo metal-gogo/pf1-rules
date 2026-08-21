@@ -48,6 +48,7 @@ pnpm verify
 - [Level-7 bulk ingestion result](../findings/25-level-seven-bulk-ingestion.md)
 - [Level-8 bulk ingestion result](../findings/26-level-eight-bulk-ingestion.md)
 - [Level-9 bulk ingestion result](../findings/27-level-nine-bulk-ingestion.md)
+- [`markdown.new` normalization evaluation](../findings/28-markdown-new-evaluation.md)
 - [Source adapter contract](../findings/adapter-contract-v0.md)
 - [Source links and canonical decisions](../findings/02-source-links-and-canonical-decisions.md)
 - [Entry-link inventory](../findings/03-all-entry-links.md)

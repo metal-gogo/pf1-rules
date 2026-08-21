@@ -7,6 +7,7 @@ import type { ValidatedJson } from "../domain/json.js";
 import { validatePackage } from "./validate.js";
 import {
   type GeneratedEntity,
+  detectSpellInheritance,
   generateCanonicalBundle,
   NormalizationIssue,
   type ParsedObservationInput,
@@ -510,12 +511,11 @@ function isD20ResolutionIssue(spell: ValidatedJson): boolean {
 }
 
 
-function titleCaseSpellName(value: string): string {
-  return value.replace(/\b\p{L}/gu, (letter) => letter.toLocaleUpperCase("en-US"));
-}
-
-
-function refreshDiscoveredDependencies(manifest: ValidatedJson, canonicalIds: Set<string>): void {
+function refreshDiscoveredDependencies(
+  manifest: ValidatedJson,
+  canonicalSpells: Map<string, ValidatedJson>,
+): void {
+  const canonicalIds = new Set(canonicalSpells.keys());
   const catalogIds = new Set(manifest.spells.map((spell: ValidatedJson) => spell.spell_id));
   const dependencies = new Map<string, ValidatedJson>(
     (manifest.discovered_dependencies ?? []).map((dependency: ValidatedJson) => [dependency.spell_id, dependency]),
@@ -567,17 +567,25 @@ function refreshDiscoveredDependencies(manifest: ValidatedJson, canonicalIds: Se
         source_href: link.href_resolved,
       });
     }
-    const description = record.spell_raw?.description_raw ?? "";
-    const inheritanceMatch = /^(?:this spell (?:functions|works) (?:as|like)|as)\s+(?:the\s+)?([a-z][a-z' -]+?)(?:,|\.| except| but)/i.exec(description);
-    if (inheritanceMatch?.[1]) {
-      const parentName = titleCaseSpellName(inheritanceMatch[1].trim());
-      const parentId = `spell.${slug(parentName)}`;
-      const linkedParent = rawLinks.find((link: ValidatedJson) => link.target_entity_id_hint === parentId);
-      add(parentId, parentName, linkedParent?.href_resolved ?? null, "rules_inheritance", {
+    const inheritance = detectSpellInheritance({
+      descriptionRaw: record.spell_raw?.description_raw ?? "",
+      links: rawLinks.map((link: ValidatedJson) => ({
+        anchorTextRaw: link.anchor_text_raw,
+        sourceField: link.source_field,
+        targetEntityTypeHint: link.target_entity_type_hint,
+        targetEntityIdHint: link.target_entity_id_hint,
+      })),
+    } as ParsedSpellPage, canonicalSpells);
+    if (inheritance) {
+      const linkedParent = rawLinks.find((link: ValidatedJson) =>
+        link.target_entity_id_hint === inheritance.parentId ||
+        link.anchor_text_raw.toLocaleLowerCase("en-US") === inheritance.parentName.toLocaleLowerCase("en-US"),
+      );
+      add(inheritance.parentId, inheritance.parentName, linkedParent?.href_resolved ?? null, "rules_inheritance", {
         owner_spell_id: ownerSpellId,
         observation_id: record.observation_id,
         source_field: "spell_raw.description_raw",
-        anchor_text_raw: inheritanceMatch[0],
+        anchor_text_raw: inheritance.basisRaw,
         source_href: linkedParent?.href_resolved ?? null,
       });
     }
@@ -739,7 +747,7 @@ export async function ingestSpellLevelBatch(
     }, true);
   }
   if (finalize) {
-    refreshDiscoveredDependencies(manifest, new Set(availableCanonicalSpells.keys()));
+    refreshDiscoveredDependencies(manifest, availableCanonicalSpells);
     writeGeneratedJson(manifestPath, manifest, true);
     validatePackage();
   } else {
@@ -779,10 +787,13 @@ export async function retryD20SourceFailures(requestedLevel?: number) {
       );
     }
     const refreshedManifest = loadJson(manifestPath);
-    const canonicalIds = new Set(
-      directJsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) => loadJson(filename).spell_id),
+    const canonicalSpells = new Map(
+      directJsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) => {
+        const record = loadJson(filename);
+        return [record.spell_id, record] as const;
+      }),
     );
-    refreshDiscoveredDependencies(refreshedManifest, canonicalIds);
+    refreshDiscoveredDependencies(refreshedManifest, canonicalSpells);
     writeGeneratedJson(manifestPath, refreshedManifest, true);
     summary.batches += levelSummary.batches;
     summary.ingested += levelSummary.ingested;
@@ -849,7 +860,7 @@ export async function ingestDiscoveredDependencies() {
       entities: [...bulkEntities.values()].sort((left, right) => left.entity_id.localeCompare(right.entity_id)),
     }, true);
   }
-  refreshDiscoveredDependencies(manifest, new Set(availableCanonicalSpells.keys()));
+  refreshDiscoveredDependencies(manifest, availableCanonicalSpells);
   writeGeneratedJson(manifestPath, manifest, true);
   validatePackage();
   return report;
