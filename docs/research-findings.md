@@ -37,6 +37,7 @@
 - [Prisma and SQLite foundation](../findings/16-prisma-sqlite-foundation.md)
 - [`markdown.new` normalization evaluation](../findings/28-markdown-new-evaluation.md)
 - [Native Markdown read model for LLM use](../findings/29-native-markdown-read-model.md)
+- [Spell inheritance rollout](../findings/30-spell-inheritance-rollout.md)
 
 Browse the complete [findings directory](../findings/) for the chronological
 decision record.

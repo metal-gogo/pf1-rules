@@ -37,6 +37,11 @@ missing overrides, stale parent status, invalid pointers, overlapping parents,
 and cycles. `spell-resolved <name-or-id>` exposes the materialized record,
 lineage, and applied-path trace through the CLI.
 
+`pnpm ingest:rollout-inheritance` repeatably reprocesses the legacy inheritance
+backlog from local cached observations, then reconciles child records after all
+new parent records are available. The [rollout finding](../findings/30-spell-inheritance-rollout.md)
+records the completed migration and remaining source-quality issues.
+
 ## Derived representations
 
 Human-facing HTML and any future LLM-facing Markdown are replaceable read

@@ -48,6 +48,30 @@ describe("ingested spell catalog", () => {
     expect(clericNine.map((entry) => entry.spell.spellId)).toContain("spell.miracle");
   });
 
+  it("preserves catalog summaries and selects a sourced canonical description", async () => {
+    const light = await prisma.canonicalSpell.findUnique({
+      where: { spellId: "spell.light" },
+      include: { shortDescriptionSource: true },
+    });
+
+    expect(light?.shortDescription).toBe("Object shines like a torch.");
+    expect(light?.shortDescriptionSource).toEqual(expect.objectContaining({
+      spellId: "spell.light",
+      spellListId: "spell-list.adept",
+      spellLevel: 0,
+      siteId: "aon",
+      summaryRaw: "Object shines like a torch.",
+      sourceUrl: "https://www.aonprd.com/Spells.aspx?Class=Adept",
+      parserName: "aon-level-zero-class-catalog",
+    }));
+
+    const clericSummary = await prisma.spellSummaryObservation.findFirst({
+      where: { spellId: "spell.light", spellListId: "spell-list.cleric" },
+    });
+    expect(clericSummary?.summaryRaw).toBe("Object shines like a torch.");
+    expect(clericSummary?.contentSha256).toMatch(/^[a-f0-9]{64}$/);
+  });
+
   it("materializes inherited spell rules with an auditable trace", async () => {
     const cureModerate = await findResolvedSpell(prisma, "Cure Moderate Wounds");
 
@@ -65,8 +89,7 @@ describe("ingested spell catalog", () => {
     const summary = await ingestionQueueSummary(prisma);
     expect(summary.total).toBe(53);
     expect(summary.byStatus).toEqual({
-      ingested: 50,
-      schema_issue: 1,
+      ingested: 51,
       scope_issue: 2,
     });
     expect(summary.batches).toHaveLength(6);
@@ -74,11 +97,11 @@ describe("ingested spell catalog", () => {
 
   it("derives ingested status and preserves explicit scope issues", async () => {
     const ingested = await listIngestionQueue(prisma, { status: "ingested" });
-    expect(ingested).toHaveLength(50);
+    expect(ingested).toHaveLength(51);
     expect(ingested.map((item) => item.entityId)).toContain("spell.light");
 
     const issues = await listIngestionQueue(prisma, { issuesOnly: true });
-    expect(issues).toHaveLength(3);
+    expect(issues).toHaveLength(2);
     expect(issues.filter((item) => item.status === "scope_issue").map((item) => item.entityId)).toEqual([
       "spell.enhanced-diplomacy",
       "spell.sign-of-the-dawnflower",
