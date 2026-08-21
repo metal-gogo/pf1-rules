@@ -20,11 +20,16 @@ import {
   type SiteId,
   slug,
 } from "./spell-page-parser.js";
+import {
+  d20CandidateUrls,
+  d20SearchResultUrls,
+  d20SearchUrl,
+} from "./d20-source-resolver.js";
 
 
 const userAgent = "PF1RulesPrivateResearch/0.1 (local archival experiment)";
 const requestIntervalMs = 1_000;
-const parserVersion = "0.1.5";
+const parserVersion = "0.1.6";
 const refreshCanonical = process.env.PF1_REFRESH_CANONICAL === "1";
 const reviewedCanonicalIds = new Set(["spell.light"]);
 const legacyIndexUrl = "https://legacy.aonprd.com/indices/spelllists.html";
@@ -116,6 +121,7 @@ async function assertIngestionSourcesAllowed(): Promise<void> {
   await assertRobotsAllows("https://www.aonprd.com", "/SpellDisplay.aspx");
   await assertRobotsAllows("https://legacy.aonprd.com", "/indices/spelllists.html");
   await assertRobotsAllows("https://www.d20pfsrd.com", "/magic/all-spells/");
+  await assertRobotsAllows("https://www.d20pfsrd.com", "/?s=spell");
 }
 
 
@@ -175,9 +181,69 @@ async function capture(url: string, rawPath: string): Promise<CapturedArtifact> 
 }
 
 
-function d20Url(name: string): string {
-  const spellSlug = slug(name);
-  return `https://www.d20pfsrd.com/magic/all-spells/${spellSlug[0]}/${spellSlug}/`;
+function writeCapture(rawPath: string, url: string, response: Response, body: string): CapturedArtifact {
+  const metadata: CaptureMetadata = {
+    url: response.url || url,
+    retrieved_at: new Date().toISOString(),
+    http_status: response.status,
+    content_sha256: sha256(body),
+    response_content_type: response.headers.get("content-type"),
+  };
+  fs.mkdirSync(path.dirname(rawPath), { recursive: true });
+  fs.writeFileSync(rawPath, body, { encoding: "utf8", flag: "wx" });
+  writeGeneratedJson(`${rawPath}.meta.json`, metadata);
+  return { ...metadata, body, rawPath };
+}
+
+
+async function resolveD20Spell(
+  spellName: string,
+  rawDirectory: string,
+): Promise<{ captureResult: CapturedArtifact; parsed: ParsedSpellPage } | { coverageCapture: CapturedArtifact }> {
+  const primaryRawPath = path.join(rawDirectory, "d20pfsrd.html");
+  const fallbackRawPath = path.join(rawDirectory, "d20pfsrd-resolved.html");
+  for (const cachedPath of [primaryRawPath, fallbackRawPath]) {
+    if (!fs.existsSync(cachedPath) && !fs.existsSync(`${cachedPath}.meta.json`)) continue;
+    const cached = await capture(d20CandidateUrls(spellName)[0]!, cachedPath);
+    try {
+      const parsed = parseD20pfsrdSpell(cached.body, cached.url, spellName);
+      return { captureResult: cached, parsed };
+    } catch {
+      // The old deterministic capture can be a valid grouped page for another entry.
+    }
+  }
+  const resolvedRawPath = fs.existsSync(primaryRawPath) ? fallbackRawPath : primaryRawPath;
+
+  const attempted = new Set<string>();
+  const tryCandidates = async (urls: string[]) => {
+    for (const url of urls) {
+      if (attempted.has(url)) continue;
+      attempted.add(url);
+      const response = await throttledFetch(url);
+      const body = await response.text();
+      if (!response.ok) continue;
+      let parsed: ParsedSpellPage;
+      try {
+        parsed = parseD20pfsrdSpell(body, response.url || url, spellName);
+      } catch {
+        continue;
+      }
+      if (slug(parsed.nameRaw) !== slug(spellName)) continue;
+      const captureResult = writeCapture(resolvedRawPath, url, response, body);
+      return { captureResult, parsed };
+    }
+    return null;
+  };
+
+  const aliased = await tryCandidates(d20CandidateUrls(spellName));
+  if (aliased) return aliased;
+
+  const searchCapture = await capture(
+    d20SearchUrl(spellName),
+    path.join(rawDirectory, "d20pfsrd-search.html"),
+  );
+  const searched = await tryCandidates(d20SearchResultUrls(searchCapture.body, searchCapture.url));
+  return searched ?? { coverageCapture: searchCapture };
 }
 
 
@@ -284,7 +350,12 @@ function observation(
 }
 
 
-function coverageCheck(
+function coverageScope(artifactScope: string): string {
+  return /^(?:level-zero|level-[0-9])$/.test(artifactScope) ? `${artifactScope}:` : "";
+}
+
+
+function legacyCoverageCheck(
   spell: ValidatedJson,
   legacyIndex: CapturedArtifact,
   artifactScope: string,
@@ -302,7 +373,7 @@ function coverageCheck(
   return {
     $schema: "../../schemas/source-coverage-check.schema.json",
     schema_version: "0.1.0",
-    coverage_check_id: `coverage:legacy_aon:${artifactScope}:${spell.spell_id}:${legacyIndex.content_sha256.slice(0, 8)}`,
+    coverage_check_id: `coverage:legacy_aon:${coverageScope(artifactScope)}${spell.spell_id}:${legacyIndex.content_sha256.slice(0, 8)}`,
     entity_id: spell.spell_id,
     source: { site_id: "legacy_aon", url: legacyIndex.url },
     retrieval: {
@@ -322,6 +393,42 @@ function coverageCheck(
       status: "not_found",
       match_count: 0,
       note: `${spell.name} has no exact spell-name anchor in the captured Legacy index. This is a coverage result, not an empty observation.`,
+    },
+  };
+}
+
+
+function d20CoverageCheck(
+  spell: ValidatedJson,
+  searchCapture: CapturedArtifact,
+  artifactScope: string,
+): ValidatedJson {
+  const exactResults = d20SearchResultUrls(searchCapture.body, searchCapture.url).filter((url) =>
+    slug(url.split("/").filter(Boolean).at(-1) ?? "") === slug(spell.name),
+  );
+  return {
+    $schema: "../../schemas/source-coverage-check.schema.json",
+    schema_version: "0.1.0",
+    coverage_check_id: `coverage:d20pfsrd:${coverageScope(artifactScope)}${spell.spell_id}:${searchCapture.content_sha256.slice(0, 8)}`,
+    entity_id: spell.spell_id,
+    source: { site_id: "d20pfsrd", url: searchCapture.url },
+    retrieval: {
+      retrieved_at: searchCapture.retrieved_at,
+      http_status: searchCapture.http_status,
+      content_sha256: searchCapture.content_sha256,
+      raw_artifact_path: path.relative(path.join(projectRoot, "data", "coverage"), searchCapture.rawPath).replaceAll("\\", "/"),
+      response_content_type: searchCapture.response_content_type,
+    },
+    check: {
+      method: "exact_text_search",
+      query: spell.name,
+      case_sensitive: false,
+      scope_raw: "Captured d20PFSRD site-search results plus deterministic exact, grouped-name, and numbered-name article candidates",
+    },
+    result: {
+      status: "not_found",
+      match_count: 0,
+      note: `${spell.name} had no exact bounded spell heading in the checked d20PFSRD candidates. This is a coverage result, not an empty observation.${exactResults.length > 0 ? " Exact-slug search links were rejected because their articles did not contain the requested heading." : ""}`,
     },
   };
 }
@@ -509,18 +616,27 @@ async function ingestSpell(
     } else {
       writeGeneratedJson(
         path.join(projectRoot, "data", "coverage", `${artifactScope}-${spellSlug}-legacy.json`),
-        coverageCheck(spell, legacyIndex, artifactScope),
+        legacyCoverageCheck(spell, legacyIndex, artifactScope),
       );
     }
 
-    const d20Capture = await capture(d20Url(spell.name), path.join(rawDirectory, "d20pfsrd.html"));
-    const d20Parsed = parseD20pfsrdSpell(d20Capture.body, d20Capture.url);
-    if (slug(d20Parsed.nameRaw) !== slug(spell.name)) {
-      throw new NormalizationIssue("source", "d20-name-mismatch", `Expected ${spell.name}, parsed ${d20Parsed.nameRaw}.`);
+    const d20Resolution = await resolveD20Spell(spell.name, rawDirectory);
+    if ("coverageCapture" in d20Resolution) {
+      writeGeneratedJson(
+        path.join(projectRoot, "data", "coverage", `${artifactScope}-${spellSlug}-d20pfsrd.json`),
+        d20CoverageCheck(spell, d20Resolution.coverageCapture, artifactScope),
+      );
+    } else {
+      const d20Observation = observation(
+        "d20pfsrd",
+        spell.spell_id,
+        d20Resolution.captureResult,
+        d20Resolution.parsed,
+        observationDirectory,
+      );
+      writeObservationJson(path.join(observationDirectory, `d20pfsrd-${parserVersion}.json`), d20Observation.record);
+      inputs.push(d20Observation.input);
     }
-    const d20Observation = observation("d20pfsrd", spell.spell_id, d20Capture, d20Parsed, observationDirectory);
-    writeObservationJson(path.join(observationDirectory, `d20pfsrd-${parserVersion}.json`), d20Observation.record);
-    inputs.push(d20Observation.input);
 
     const bundle = generateCanonicalBundle(spell.spell_id, inputs, availableCanonicalIds);
     for (const entity of bundle.entities) {

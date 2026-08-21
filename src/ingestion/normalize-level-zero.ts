@@ -325,8 +325,6 @@ export function generateCanonicalBundle(
 ) {
   const baseline = observations.find((item) => item.siteId === "aon");
   if (!baseline) throw new NormalizationIssue("source", "missing-aon-observation", "AoN baseline observation is missing.");
-  const d20 = observations.find((item) => item.siteId === "d20pfsrd");
-  if (!d20) throw new NormalizationIssue("source", "missing-d20pfsrd-observation", "d20PFSRD comparison observation is missing.");
   if (baseline.parsed.warnings.some((warning) => warning.severity === "error")) {
     throw new NormalizationIssue("source", "aon-parser-error", baseline.parsed.warnings.map((warning) => warning.message).join(" "));
   }
