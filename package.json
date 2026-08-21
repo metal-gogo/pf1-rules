@@ -13,6 +13,7 @@
     "web:dev": "tsx watch src/web/server.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
+    "test:e2e": "playwright test",
     "validate": "tsx src/cli.ts validate",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
@@ -58,7 +59,7 @@
     "ingest:rollout-inheritance": "tsx src/ingestion/ingest-level-zero-batch.ts rollout-inheritance",
     "ingest:linked-entities": "tsx src/ingestion/ingest-linked-entities.ts",
     "evaluate:markdown-new": "tsx src/experiments/markdown-new-evaluation.ts",
-    "verify": "pnpm validate && pnpm typecheck && pnpm db:check && pnpm test"
+    "verify": "pnpm validate && pnpm typecheck && pnpm db:check && pnpm test && pnpm test:e2e"
   },
   "dependencies": {
     "@prisma/adapter-better-sqlite3": "7.9.1",
@@ -70,6 +71,8 @@
     "dotenv": "17.4.2"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.62.1",
     "@types/better-sqlite3": "7.6.13",
     "@types/node": "24.13.3",
     "prisma": "7.9.1",

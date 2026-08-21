@@ -11,6 +11,7 @@ mise trust
 mise install
 corepack enable
 pnpm install
+pnpm exec playwright install chromium
 pnpm db:setup
 pnpm verify
 ```
@@ -20,7 +21,7 @@ pnpm verify
 - Run `pnpm web`, then open `http://127.0.0.1:3000`, to use the [local rules browser](../src/web/server.ts).
 - Run `pnpm tsx src/cli.ts --help` to discover operations provided by the [command-line interface](../src/cli.ts).
 - Run `pnpm db:studio` to inspect the local database with Prisma Studio.
-- Run `pnpm verify` to validate records, type-check the project, check the database, and run the [test suite](../tests/).
+- Run `pnpm verify` to validate records, type-check the project, check the database, and run the unit and browser [test suites](../tests/).
 
 ## Project configuration
 

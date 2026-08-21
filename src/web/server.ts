@@ -641,7 +641,7 @@ async function alphabeticalSpellsPage(prisma: PrismaClient, url: URL): Promise<s
   const lastResult = Math.min(currentPage * pageSize, total);
   const hasFilters = Boolean(query || letter || school || publication || sort !== "name");
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  const pagination = pageCount > 1 ? `<nav class="pagination" aria-label="Catalog pages">
+  const pagination = (position: "before" | "after") => pageCount > 1 ? `<nav class="pagination" aria-label="Catalog pages ${position} results">
     ${currentPage > 1 ? `<a rel="prev" href="${href(alphabeticalHref(url, { page: String(currentPage - 1) }))}">Previous</a>` : "<span>Previous</span>"}
     <span>Page ${currentPage} of ${pageCount}</span>
     ${currentPage < pageCount ? `<a rel="next" href="${href(alphabeticalHref(url, { page: String(currentPage + 1) }))}">Next</a>` : "<span>Next</span>"}
@@ -659,7 +659,7 @@ async function alphabeticalSpellsPage(prisma: PrismaClient, url: URL): Promise<s
     </form>
     <nav class="letter-filter" aria-label="Filter spells by initial letter"><ul><li><a href="${href(alphabeticalHref(url, { letter: null }))}"${letter ? "" : ' aria-current="true"'}>All</a></li>${letters.map((item) => `<li><a href="${href(alphabeticalHref(url, { letter: item }))}"${letter === item ? ' aria-current="true"' : ""}>${item}</a></li>`).join("")}</ul></nav>
     <div class="catalog-results"><h2 id="alphabetical-results-heading">Results</h2><p>${firstResult}–${lastResult} of ${total} spells</p></div>
-    ${pagination}
+    ${pagination("before")}
     <div class="table-scroll" role="region" aria-labelledby="alphabetical-results-heading" tabindex="0">
     <table class="data-table alphabetical-table">
       <caption class="visually-hidden">Filtered canonical spells</caption>
@@ -671,7 +671,7 @@ async function alphabeticalSpellsPage(prisma: PrismaClient, url: URL): Promise<s
       </tr>`).join("")}</tbody>
     </table>
     </div>
-    ${pagination}`);
+    ${pagination("after")}`);
 }
 
 function spellComponentsPage(): string {
