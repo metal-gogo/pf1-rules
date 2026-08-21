@@ -56,10 +56,12 @@ describe("local rules browser", () => {
     expect(html).toContain('class="sticky-spell-controls"');
     expect(html).toContain('class="spell-filters"');
     expect(html).toContain('data-filter-accordion aria-expanded="false"');
-    expect(html).toContain('id="spell-filter-panel" class="filter-panel" hidden');
-    expect(html).toContain('Filter Spells <span id="spell-filter-status"');
-    expect(html).toContain('<strong>Search spell</strong>');
+    expect(html).toContain('<dialog id="spell-filter-panel" class="filter-panel"');
+    expect(html).toContain('<span>More filters</span>');
+    expect(html).toContain('<strong>Search spells</strong>');
+    expect(html).toContain('spells shown. No filters active.</p>');
     expect(html).toContain('data-filter-mode="components" data-mode="exclude"');
+    expect(html).toContain('<details class="filter-mode-disclosure"><summary>Match mode</summary>');
     expect(html).toContain('role="group" class="filter-mode"');
     expect(html).toContain('data-mode-choice="include" aria-pressed="true"');
     expect(html).toContain('data-mode-choice="exclude" aria-pressed="true"');
@@ -69,8 +71,9 @@ describe("local rules browser", () => {
     expect(html).toContain('type="checkbox" data-filter="school"');
     expect(html).toContain('type="checkbox" data-filter="level"');
     expect(html).toContain('type="checkbox" data-filter="components"');
-    expect(html).not.toContain("Reset filters");
-    expect(html).not.toContain("data-filter-reset");
+    expect(html).toContain('data-filter-reset data-filter-reset-compact hidden');
+    expect(html).toContain('data-filter-reset>Clear all filters</button>');
+    expect(html).toContain('data-filter-close>Done</button>');
     expect(html).toContain('<caption class="visually-hidden">Level 0 Cleric spells</caption>');
     expect(html).not.toContain('ingested spells across');
     expect(html).toContain('<abbr title="Verbal component">V</abbr>');
@@ -96,8 +99,12 @@ describe("local rules browser", () => {
     expect(script).toContain('document.createElement("mark")');
     expect(script).toContain('window.history.replaceState');
     expect(script).toContain('searchParameters.getAll(parameter.values)');
-    expect(script).toContain('setAccordion(hasActiveFilters)');
-    expect(script).not.toContain("data-filter-reset");
+    expect(script).toContain('filterPanel.showModal()');
+    expect(script).toContain('filterPanel.addEventListener("close"');
+    expect(script).toContain('function resetFilters()');
+    expect(script).toContain('requestAnimationFrame(() => applyFilters())');
+    expect(script).toContain('compactReset.hidden = activeFilters.length === 0');
+    expect(script).not.toContain('setAccordion(hasActiveFilters)');
   });
 
   it("explains each linked spell component on one reference page", async () => {

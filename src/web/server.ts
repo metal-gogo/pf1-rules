@@ -45,17 +45,21 @@ dd { margin-block-end: .65rem; }
 .class-grid li { border: 1px solid; padding: 1rem; }
 .class-grid a { display: block; font-size: 1.15rem; font-weight: 700; }
 .class-grid p { margin-block: .25rem 0; }
-.sticky-spell-controls { background: Canvas; max-height: calc(100vh - 1rem); overflow-y: auto; padding-block: .5rem; position: sticky; top: 0; z-index: 2; }
-.sticky-spell-controls h1 { margin-block: 0 .5rem; }
-.spell-filters { border: 1px solid; margin-block: 0 1rem; }
-.spell-filters h2 { font-size: 1.1rem; margin: 0; }
-.filter-accordion-toggle { align-items: center; background: transparent; border: 0; cursor: pointer; display: flex; font-weight: 700; justify-content: space-between; padding: .75rem 1rem; text-align: left; width: 100%; }
+.sticky-spell-controls { background: Canvas; padding-block: .5rem; position: sticky; top: 0; z-index: 2; }
+.spell-filters { border: 1px solid; margin-block: 0 1rem; padding: .75rem; }
+.spell-filter-bar { align-items: end; display: grid; gap: .5rem; grid-template-columns: minmax(12rem, 1fr) auto auto; }
+.filter-accordion-toggle { align-items: center; background: transparent; border: 1px solid; cursor: pointer; display: flex; font-weight: 700; gap: .5rem; justify-content: space-between; min-height: 2.5rem; padding: .4rem .75rem; text-align: left; }
 .accordion-icon { display: inline-block; font-size: 1.2rem; transform: rotate(-90deg); transition: transform 120ms ease-out; }
 .filter-accordion-toggle[aria-expanded="true"] .accordion-icon { transform: rotate(0); }
-.filter-panel { border-block-start: 1px solid; padding: 1rem; }
+.filter-panel { background: Canvas; border: 1px solid; color: CanvasText; max-height: calc(100vh - 2rem); max-width: min(42rem, calc(100vw - 2rem)); padding: 0; width: 100%; }
+.filter-panel::backdrop { background: color-mix(in srgb, CanvasText 40%, transparent); }
+.filter-dialog-header { align-items: center; border-block-end: 1px solid var(--table-divider); display: flex; justify-content: space-between; padding: .75rem 1rem; }
+.filter-dialog-header h2 { font-size: 1.2rem; margin: 0; }
+.filter-dialog-body { max-height: calc(100vh - 11rem); overflow-y: auto; padding: 1rem; }
 .filter-grid { display: flex; flex-direction: column; gap: .75rem; }
 .filter-search { align-content: start; display: grid; gap: .25rem; }
-.filter-search input { box-sizing: border-box; height: 2.3rem; width: 100%; }
+.filter-search input { box-sizing: border-box; min-height: 2.5rem; width: 100%; }
+.filter-status { margin-block: .65rem 0; }
 .filter-group { border: 0; margin: 0; min-width: 0; padding: 0; }
 .filter-group legend { float: left; font-weight: 700; margin-inline-end: .5rem; padding: .2rem 0; }
 .filter-tags { clear: both; display: flex; flex-wrap: wrap; gap: .3rem; padding-block-start: .35rem; }
@@ -66,6 +70,8 @@ dd { margin-block-end: .65rem; }
 .filter-checkbox:checked + .filter-tag .tag-check { display: inline; }
 .filter-checkbox:focus-visible + .filter-tag { outline: 3px solid Highlight; outline-offset: 2px; }
 .filter-mode { display: inline-flex; margin-block-end: .15rem; }
+.filter-mode-disclosure { clear: both; font-size: .9rem; margin-block: .25rem; }
+.filter-mode-disclosure summary { cursor: pointer; }
 .mode-option { background: transparent; border: 1px solid; cursor: pointer; font-size: .85rem; margin-inline-start: -1px; padding: .25rem .55rem; }
 .mode-option:first-child { border-radius: .35rem 0 0 .35rem; margin-inline-start: 0; }
 .mode-option:last-child { border-radius: 0 .35rem .35rem 0; }
@@ -75,6 +81,7 @@ dd { margin-block-end: .65rem; }
 .mode-option:focus-visible { outline: 3px solid Highlight; outline-offset: 2px; z-index: 1; }
 .filter-show-all[aria-pressed="true"] { background: Highlight; color: HighlightText; }
 .filter-show-all[aria-pressed="true"] .tag-check { display: inline; }
+.filter-dialog-actions { align-items: center; border-block-start: 1px solid var(--table-divider); display: flex; gap: .75rem; justify-content: flex-end; padding: .75rem 1rem; }
 .spell-level { margin-block: 2.5rem; }
 .spell-level h2 { align-items: baseline; display: flex; flex-wrap: wrap; gap: .35rem; }
 .heading-count { font-size: .85em; font-weight: 400; }
@@ -91,7 +98,10 @@ dd { margin-block-end: .65rem; }
 mark { background: Mark; color: MarkText; }
 [hidden] { display: none !important; }
 @media (max-width: 38rem) {
-  .sticky-spell-controls { max-height: calc(100vh - .5rem); }
+  .spell-filter-bar { grid-template-columns: 1fr auto; }
+  .filter-search { grid-column: 1 / -1; }
+  .filter-panel { height: calc(100vh - 1rem); max-height: calc(100vh - 1rem); max-width: calc(100vw - 1rem); }
+  .filter-dialog-body { max-height: calc(100vh - 10rem); }
   .table-scroll-hint { display: block; font-size: .9rem; margin-block: 0 .4rem; }
 }
 code { overflow-wrap: anywhere; }
@@ -107,6 +117,7 @@ const classSpellsScript = `
   const status = browser.querySelector("#spell-filter-status");
   const accordion = browser.querySelector("[data-filter-accordion]");
   const filterPanel = browser.querySelector("#spell-filter-panel");
+  const compactReset = browser.querySelector("[data-filter-reset-compact]");
   const filters = ["school", "level", "components"];
   const parameters = {
     school: { values: "school", mode: "schoolMode" },
@@ -131,9 +142,14 @@ const classSpellsScript = `
     }
   }
 
-  function setAccordion(expanded) {
+  function setAccordion(expanded, { focusPanel = false } = {}) {
     accordion.setAttribute("aria-expanded", String(expanded));
-    filterPanel.hidden = !expanded;
+    if (expanded && !filterPanel.open) {
+      filterPanel.showModal();
+      if (focusPanel) filterPanel.querySelector("[data-filter-close]").focus();
+    } else if (!expanded && filterPanel.open) {
+      filterPanel.close();
+    }
   }
 
   function updateShowAll(filter) {
@@ -152,6 +168,8 @@ const classSpellsScript = `
   }
 
   function highlightMatches(element, query) {
+    if (element.dataset.highlightQuery === query) return;
+    element.dataset.highlightQuery = query;
     const originalText = element.dataset.originalText || element.textContent;
     element.dataset.originalText = originalText;
     element.replaceChildren();
@@ -218,7 +236,21 @@ const classSpellsScript = `
       totalShown += levelShown;
     }
 
-    status.textContent = "(" + totalShown + " of " + rows.length + " spells shown)";
+    const activeFilters = [];
+    if (query) activeFilters.push('Search “' + search.value.trim() + '”');
+    for (const filter of filters) {
+      const state = filterStates[filter];
+      if (state.selected.length === 0) continue;
+      const labels = state.selected.map((value) => {
+        const checkbox = browser.querySelector('.filter-checkbox[data-filter="' + filter + '"][data-value="' + CSS.escape(value) + '"]');
+        return checkbox?.dataset.label || value;
+      });
+      const groupName = filter === "school" ? "schools" : filter === "level" ? "levels" : "components";
+      activeFilters.push((state.mode === "exclude" ? "Exclude " : "Include ") + groupName + ": " + labels.join(", "));
+    }
+    status.textContent = totalShown + " of " + rows.length + " spells shown. "
+      + (activeFilters.length ? "Active filters: " + activeFilters.join("; ") + "." : "No filters active.");
+    compactReset.hidden = activeFilters.length === 0;
     for (const filter of filters) updateShowAll(filter);
     if (syncUrl) updateUrl(filterStates, query);
   }
@@ -242,10 +274,27 @@ const classSpellsScript = `
         ? requestedMode
         : control.dataset.defaultMode;
       setMode(filter, mode);
-      if (mode !== control.dataset.defaultMode) hasActiveFilters = true;
+      if (mode !== control.dataset.defaultMode) {
+        hasActiveFilters = true;
+        control.closest("details").open = true;
+      }
     }
 
-    setAccordion(hasActiveFilters);
+    compactReset.hidden = !hasActiveFilters;
+    setAccordion(false);
+  }
+
+  function resetFilters() {
+    search.value = "";
+    for (const checkbox of browser.querySelectorAll(".filter-checkbox")) checkbox.checked = false;
+    for (const filter of filters) {
+      const control = modeControl(filter);
+      setMode(filter, control.dataset.defaultMode);
+      control.closest("details").open = false;
+    }
+    applyFilters();
+    if (filterPanel.open) filterPanel.querySelector("[data-filter-close]").focus();
+    else search.focus();
   }
 
   for (const checkbox of browser.querySelectorAll(".filter-checkbox")) {
@@ -268,8 +317,20 @@ const classSpellsScript = `
     });
   }
 
-  accordion.addEventListener("click", () => setAccordion(accordion.getAttribute("aria-expanded") !== "true"));
-  search.addEventListener("input", () => applyFilters());
+  accordion.addEventListener("click", () => setAccordion(true, { focusPanel: true }));
+  for (const close of filterPanel.querySelectorAll("[data-filter-close]")) {
+    close.addEventListener("click", () => setAccordion(false));
+  }
+  filterPanel.addEventListener("close", () => {
+    accordion.setAttribute("aria-expanded", "false");
+    accordion.focus();
+  });
+  for (const reset of browser.querySelectorAll("[data-filter-reset]")) reset.addEventListener("click", resetFilters);
+  let searchFrame;
+  search.addEventListener("input", () => {
+    cancelAnimationFrame(searchFrame);
+    searchFrame = requestAnimationFrame(() => applyFilters());
+  });
 
   hydrateFromUrl();
   applyFilters({ syncUrl: false });
@@ -686,10 +747,11 @@ async function classSpellsPage(prisma: PrismaClient, classSlug: string): Promise
     <button type="button" class="mode-option" data-mode-choice="include" aria-pressed="${defaultMode === "include"}"><span class="mode-check" aria-hidden="true">✓ </span>Include selected</button>
     <button type="button" class="mode-option" data-mode-choice="exclude" aria-pressed="${defaultMode === "exclude"}"><span class="mode-check" aria-hidden="true">✓ </span>Exclude selected</button>
   </div>`;
+  const filterModeDisclosure = (filter: string, label: string, defaultMode: "include" | "exclude") => `<details class="filter-mode-disclosure"><summary>Match mode</summary>${filterModeControl(filter, label, defaultMode)}</details>`;
   const filterShowAll = (filter: string) => `<button type="button" class="filter-tag filter-show-all" data-show-all="${filter}" aria-pressed="true"><span class="tag-check" aria-hidden="true">✓ </span>Show all</button>`;
   const filterCheckbox = (filter: string, value: string, label: string, title?: string) => {
     const id = `filter-${filter}-${value.replace(/[^a-z0-9]+/gi, "-").toLocaleLowerCase()}`;
-    return `<input class="filter-checkbox" id="${escapeHtml(id)}" type="checkbox" data-filter="${filter}" data-value="${escapeHtml(value)}"><label class="filter-tag" for="${escapeHtml(id)}"${title ? ` title="${escapeHtml(title)}"` : ""}><span class="tag-check" aria-hidden="true">✓ </span>${escapeHtml(label)}</label>`;
+    return `<input class="filter-checkbox" id="${escapeHtml(id)}" type="checkbox" data-filter="${filter}" data-value="${escapeHtml(value)}" data-label="${escapeHtml(label)}"><label class="filter-tag" for="${escapeHtml(id)}"${title ? ` title="${escapeHtml(title)}"` : ""}><span class="tag-check" aria-hidden="true">✓ </span>${escapeHtml(label)}</label>`;
   };
   const schoolTags = schools.map((school) => filterCheckbox("school", school, humanize(school))).join("");
   const levelTags = levels.map((level) => filterCheckbox("level", String(level), String(level))).join("");
@@ -725,18 +787,26 @@ async function classSpellsPage(prisma: PrismaClient, classSlug: string): Promise
 
   return page(`${className} spells`, `<nav aria-label="Breadcrumb"><ol><li><a href="/spells">Classes</a></li><li aria-current="page">${escapeHtml(className)}</li></ol></nav>
     <div data-spell-browser>
+      <h1>${escapeHtml(className)} spells</h1>
       <div class="sticky-spell-controls">
-        <h1>${escapeHtml(className)} spells</h1>
         <section class="spell-filters" aria-labelledby="spell-filters-heading">
-          <h2 id="spell-filters-heading"><button type="button" class="filter-accordion-toggle" data-filter-accordion aria-expanded="false" aria-controls="spell-filter-panel"><span>Filter Spells <span id="spell-filter-status" class="heading-count" aria-live="polite">(${entries.length} of ${entries.length} spells shown)</span></span><span class="accordion-icon" aria-hidden="true">▾</span></button></h2>
-          <div id="spell-filter-panel" class="filter-panel" hidden>
-            <div class="filter-grid">
-              <label class="filter-search" for="spell-filter-search"><strong>Search spell</strong><input id="spell-filter-search" type="search" placeholder="Name or description" autocomplete="off"></label>
-              <fieldset class="filter-group"><legend>Schools</legend>${filterModeControl("school", "Schools", "include")}<div class="filter-tags">${filterShowAll("school")}${schoolTags}</div></fieldset>
-              <fieldset class="filter-group"><legend>Levels</legend>${filterModeControl("level", "Levels", "include")}<div class="filter-tags">${filterShowAll("level")}${levelTags}</div></fieldset>
-              <fieldset class="filter-group"><legend>Components</legend>${filterModeControl("components", "Components", "exclude")}<div class="filter-tags">${filterShowAll("components")}${componentTags}</div></fieldset>
-            </div>
+          <h2 id="spell-filters-heading" class="visually-hidden">Find spells</h2>
+          <div class="spell-filter-bar">
+            <label class="filter-search" for="spell-filter-search"><strong>Search spells</strong><input id="spell-filter-search" type="search" placeholder="Name or description" autocomplete="off"></label>
+            <button type="button" class="filter-accordion-toggle" data-filter-accordion aria-expanded="false" aria-controls="spell-filter-panel"><span>More filters</span><span class="accordion-icon" aria-hidden="true">▾</span></button>
+            <button type="button" data-filter-reset data-filter-reset-compact hidden>Clear all</button>
           </div>
+          <p id="spell-filter-status" class="filter-status heading-count" aria-live="polite">${entries.length} of ${entries.length} spells shown. No filters active.</p>
+          <dialog id="spell-filter-panel" class="filter-panel" aria-labelledby="filter-dialog-heading">
+            <div class="filter-dialog-header"><h2 id="filter-dialog-heading">Filter spells</h2><button type="button" data-filter-close aria-label="Close filters">Close</button></div>
+            <div class="filter-dialog-body"><div class="filter-grid">
+              <fieldset class="filter-group"><legend>Schools</legend>${filterModeDisclosure("school", "Schools", "include")}<div class="filter-tags">${filterShowAll("school")}${schoolTags}</div></fieldset>
+              <fieldset class="filter-group"><legend>Levels</legend>${filterModeDisclosure("level", "Levels", "include")}<div class="filter-tags">${filterShowAll("level")}${levelTags}</div></fieldset>
+              <fieldset class="filter-group"><legend>Components</legend>${filterModeDisclosure("components", "Components", "exclude")}<div class="filter-tags">${filterShowAll("components")}${componentTags}</div></fieldset>
+            </div>
+            </div>
+            <div class="filter-dialog-actions"><button type="button" data-filter-reset>Clear all filters</button><button type="button" data-filter-close>Done</button></div>
+          </dialog>
         </section>
       </div>
       <div id="spell-level-tables">${levelTables}</div>
