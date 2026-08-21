@@ -20,7 +20,8 @@
       "list_name": "arcanist",
       "level": 2,
       "scope": "later_first_party",
-      "raw": "arcanist 2"
+      "raw": "arcanist 2",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.cleric",
@@ -28,7 +29,8 @@
       "list_name": "cleric",
       "level": 2,
       "scope": "later_first_party",
-      "raw": "cleric 2"
+      "raw": "cleric 2",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.oracle",
@@ -36,7 +38,8 @@
       "list_name": "oracle",
       "level": 2,
       "scope": "later_first_party",
-      "raw": "oracle 2"
+      "raw": "oracle 2",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.sorcerer",
@@ -44,7 +47,8 @@
       "list_name": "sorcerer",
       "level": 2,
       "scope": "later_first_party",
-      "raw": "sorcerer 2"
+      "raw": "sorcerer 2",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.summoner",
@@ -52,7 +56,8 @@
       "list_name": "summoner",
       "level": 2,
       "scope": "later_first_party",
-      "raw": "summoner 2"
+      "raw": "summoner 2",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.summoner-unchained",
@@ -60,7 +65,8 @@
       "list_name": "summoner (unchained)",
       "level": 2,
       "scope": "later_first_party",
-      "raw": "summoner (unchained) 2"
+      "raw": "summoner (unchained) 2",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.warpriest",
@@ -68,7 +74,8 @@
       "list_name": "warpriest",
       "level": 2,
       "scope": "later_first_party",
-      "raw": "warpriest 2"
+      "raw": "warpriest 2",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.witch",
@@ -76,7 +83,8 @@
       "list_name": "witch",
       "level": 2,
       "scope": "later_first_party",
-      "raw": "witch 2"
+      "raw": "witch 2",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.wizard",
@@ -84,7 +92,8 @@
       "list_name": "wizard",
       "level": 2,
       "scope": "later_first_party",
-      "raw": "wizard 2"
+      "raw": "wizard 2",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -177,17 +186,71 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.summon-monster",
+      "from_spell_id": "spell.summon-monster-1",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.summon-cacodaemon:d18fb4d132be59dd",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions like summon monster, except it summons a single cacodaemon."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.summon-monster is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "focus",
+              "details": "a silver hook",
+              "cost_gp": null,
+              "raw": "F (a silver hook)"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, F (a silver hook)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, F (a silver hook)",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, F (a silver hook)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions like summon monster, except it summons a single cacodaemon.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions like summon monster, except it summons a single cacodaemon.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -441,12 +504,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.summon-cacodaemon:functions_like:spell.summon-monster",
+      "relationship_id": "spell.summon-cacodaemon:functions_like:spell.summon-monster-1",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.summon-monster",
-        "name": "Summon Monster"
+        "entity_id": "spell.summon-monster-1",
+        "name": "Summon Monster 1"
       },
       "status": "accepted",
       "evidence": [
@@ -741,14 +804,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.summon-monster is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",

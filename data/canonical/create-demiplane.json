@@ -18,7 +18,8 @@
       "list_name": "arcanist",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "arcanist 8"
+      "raw": "arcanist 8",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.cleric",
@@ -26,7 +27,8 @@
       "list_name": "cleric",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "cleric 8"
+      "raw": "cleric 8",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.occultist",
@@ -34,7 +36,8 @@
       "list_name": "occultist",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "occultist 6"
+      "raw": "occultist 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.oracle",
@@ -42,7 +45,8 @@
       "list_name": "oracle",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "oracle 8"
+      "raw": "oracle 8",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.psychic",
@@ -50,7 +54,8 @@
       "list_name": "psychic",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "psychic 8"
+      "raw": "psychic 8",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.sorcerer",
@@ -58,7 +63,8 @@
       "list_name": "sorcerer",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "sorcerer 8"
+      "raw": "sorcerer 8",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.summoner",
@@ -66,7 +72,8 @@
       "list_name": "summoner",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "summoner 6"
+      "raw": "summoner 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.witch",
@@ -74,7 +81,8 @@
       "list_name": "witch",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "witch 8"
+      "raw": "witch 8",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.wizard",
@@ -82,7 +90,8 @@
       "list_name": "wizard",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "wizard 8"
+      "raw": "wizard 8",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -175,17 +184,81 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.create-lesser-demiplane",
+      "from_spell_id": "spell.create-demiplane-lesser",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.create-demiplane:5b555a9c85524d09",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions as create lesser demiplane, except the area is larger and you can add more features to the plane. You can use this spell to expand a demiplane you created with create lesser demiplane (you do not need to create an entirely new plane using this spell), in which case it has a duration of 1 day/level. Alternatively, when cast within your demiplane, you may add (or remove) one of the following features to your demiplane with each casting of the spell, in which case it has an instantaneous duration.\n\nAlignment: Your plane gains the (mildly) chaos-, good-, evil-, law-, or neutral-aligned alignment trait (see Alignment Traits). You cannot give your demiplane an alignment trait for an alignment you do not have.\n\nBountiful: Your demiplane gains a thriving natural ecology, with streams, ponds, waterfalls, and plants. The demiplane provides enough plant-based food (nuts, grains, fruit, fungi, and so on) to support one Medium creature for every 10-foot cube of the demiplane. The demiplane does not have any animals unless you transport them there, but the ecology can sustain itself for as long as the demiplane exists without requiring watering, gardening, pollination, and so on, and dead organic material decays and returns to the soil in the normal manner. If your demiplane has ambient light, these plants are normal, familiar surface plants; if it is a realm of twilight or darkness, these plants are fungi and other plants adapted to near-darkness or underground locations.\n\nElemental: Your plane gains the air-, earth-, fire-, or water-elemental dominant trait (see Elemental and Energy Traits).\n\nGravity: By default a demiplane’s gravity is normal and oriented in one direction, like what most creatures are used to on the Material Plane. By selecting this feature, the plane’s gravity is heavy, light, none, objectively directional, or subjectively directional (see Gravity).\n\nSeasonal: The demiplane has a seasonal cycle and a light cycle, usually similar to those of a land on the Material Plane, but customizable as you see fit (for example, your demiplane could always be winter, day and night could alternate every 4 hours, and so on).\n\nShape: By default, the demiplane has a fixed shape and borders. By selecting this feature, you may make your plane self-contained so it loops upon itself when a creature reaches one edge (see Shape and Size). You may designate areas or locations on the edges of your plane where this occurs (such as a pair of secret doors or a path in the woods) or apply it to the entire plane.\n\nStructure: Your demiplane has a specific, linked physical structure, such as a giant tree, floating castle, labyrinth, mountain, and so on. (This option exists so you can pick a theme for your plane without having to worry about the small details of determining what spells you need for every hill, hole, wall, floor, and corner).\n\nYou can make this spell permanent with the permanency spell, at a cost of 20,000 gp. If you have cast create demiplane multiple times to enlarge the demiplane, each casting’s area requires its own permanency spell."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.create-lesser-demiplane is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/time",
+          "value": {
+            "kind": "timed",
+            "amount": 4,
+            "unit": "hour",
+            "raw": "4 hours"
+          },
+          "source_field": "spell_raw.casting_time_raw",
+          "raw": "4 hours",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Effect",
+                "value_raw": "extradimensional demiplane, up to 10 10-ft. cubes/level (S)",
+                "kinds": [
+                  "effect"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Effect\",\"value_raw\":\"extradimensional demiplane, up to 10 10-ft. cubes/level (S)\",\"kinds\":[\"effect\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "instantaneous",
+            "formula": null,
+            "dismissible": null,
+            "concentration": null,
+            "raw": "1 day/level or instantaneous (see text)"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "1 day/level or instantaneous (see text)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as create lesser demiplane, except the area is larger and you can add more features to the plane. You can use this spell to expand a demiplane you created with create lesser demiplane (you do not need to create an entirely new plane using this spell), in which case it has a duration of 1 day/level. Alternatively, when cast within your demiplane, you may add (or remove) one of the following features to your demiplane with each casting of the spell, in which case it has an instantaneous duration.\n\nAlignment: Your plane gains the (mildly) chaos-, good-, evil-, law-, or neutral-aligned alignment trait (see Alignment Traits). You cannot give your demiplane an alignment trait for an alignment you do not have.\n\nBountiful: Your demiplane gains a thriving natural ecology, with streams, ponds, waterfalls, and plants. The demiplane provides enough plant-based food (nuts, grains, fruit, fungi, and so on) to support one Medium creature for every 10-foot cube of the demiplane. The demiplane does not have any animals unless you transport them there, but the ecology can sustain itself for as long as the demiplane exists without requiring watering, gardening, pollination, and so on, and dead organic material decays and returns to the soil in the normal manner. If your demiplane has ambient light, these plants are normal, familiar surface plants; if it is a realm of twilight or darkness, these plants are fungi and other plants adapted to near-darkness or underground locations.\n\nElemental: Your plane gains the air-, earth-, fire-, or water-elemental dominant trait (see Elemental and Energy Traits).\n\nGravity: By default a demiplane’s gravity is normal and oriented in one direction, like what most creatures are used to on the Material Plane. By selecting this feature, the plane’s gravity is heavy, light, none, objectively directional, or subjectively directional (see Gravity).\n\nSeasonal: The demiplane has a seasonal cycle and a light cycle, usually similar to those of a land on the Material Plane, but customizable as you see fit (for example, your demiplane could always be winter, day and night could alternate every 4 hours, and so on).\n\nShape: By default, the demiplane has a fixed shape and borders. By selecting this feature, you may make your plane self-contained so it loops upon itself when a creature reaches one edge (see Shape and Size). You may designate areas or locations on the edges of your plane where this occurs (such as a pair of secret doors or a path in the woods) or apply it to the entire plane.\n\nStructure: Your demiplane has a specific, linked physical structure, such as a giant tree, floating castle, labyrinth, mountain, and so on. (This option exists so you can pick a theme for your plane without having to worry about the small details of determining what spells you need for every hill, hole, wall, floor, and corner).\n\nYou can make this spell permanent with the permanency spell, at a cost of 20,000 gp. If you have cast create demiplane multiple times to enlarge the demiplane, each casting’s area requires its own permanency spell.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as create lesser demiplane, except the area is larger and you can add more features to the plane. You can use this spell to expand a demiplane you created with create lesser demiplane (you do not need to create an entirely new plane using this spell), in which case it has a duration of 1 day/level. Alternatively, when cast within your demiplane, you may add (or remove) one of the following features to your demiplane with each casting of the spell, in which case it has an instantaneous duration.\n\nAlignment: Your plane gains the (mildly) chaos-, good-, evil-, law-, or neutral-aligned alignment trait (see Alignment Traits). You cannot give your demiplane an alignment trait for an alignment you do not have.\n\nBountiful: Your demiplane gains a thriving natural ecology, with streams, ponds, waterfalls, and plants. The demiplane provides enough plant-based food (nuts, grains, fruit, fungi, and so on) to support one Medium creature for every 10-foot cube of the demiplane. The demiplane does not have any animals unless you transport them there, but the ecology can sustain itself for as long as the demiplane exists without requiring watering, gardening, pollination, and so on, and dead organic material decays and returns to the soil in the normal manner. If your demiplane has ambient light, these plants are normal, familiar surface plants; if it is a realm of twilight or darkness, these plants are fungi and other plants adapted to near-darkness or underground locations.\n\nElemental: Your plane gains the air-, earth-, fire-, or water-elemental dominant trait (see Elemental and Energy Traits).\n\nGravity: By default a demiplane’s gravity is normal and oriented in one direction, like what most creatures are used to on the Material Plane. By selecting this feature, the plane’s gravity is heavy, light, none, objectively directional, or subjectively directional (see Gravity).\n\nSeasonal: The demiplane has a seasonal cycle and a light cycle, usually similar to those of a land on the Material Plane, but customizable as you see fit (for example, your demiplane could always be winter, day and night could alternate every 4 hours, and so on).\n\nShape: By default, the demiplane has a fixed shape and borders. By selecting this feature, you may make your plane self-contained so it loops upon itself when a creature reaches one edge (see Shape and Size). You may designate areas or locations on the edges of your plane where this occurs (such as a pair of secret doors or a path in the woods) or apply it to the entire plane.\n\nStructure: Your demiplane has a specific, linked physical structure, such as a giant tree, floating castle, labyrinth, mountain, and so on. (This option exists so you can pick a theme for your plane without having to worry about the small details of determining what spells you need for every hill, hole, wall, floor, and corner).\n\nYou can make this spell permanent with the permanency spell, at a cost of 20,000 gp. If you have cast create demiplane multiple times to enlarge the demiplane, each casting’s area requires its own permanency spell.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -493,12 +566,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.create-demiplane:functions_like:spell.create-lesser-demiplane",
+      "relationship_id": "spell.create-demiplane:functions_like:spell.create-demiplane-lesser",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.create-lesser-demiplane",
-        "name": "Create Lesser Demiplane"
+        "entity_id": "spell.create-demiplane-lesser",
+        "name": "Create Demiplane, Lesser"
       },
       "status": "accepted",
       "evidence": [
@@ -1478,14 +1551,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.create-lesser-demiplane is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",

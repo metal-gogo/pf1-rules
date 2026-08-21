@@ -18,7 +18,8 @@
       "list_name": "arcanist",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "arcanist 5"
+      "raw": "arcanist 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.cleric",
@@ -26,7 +27,8 @@
       "list_name": "cleric",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "cleric 5"
+      "raw": "cleric 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.oracle",
@@ -34,7 +36,8 @@
       "list_name": "oracle",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "oracle 5"
+      "raw": "oracle 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.sorcerer",
@@ -42,7 +45,8 @@
       "list_name": "sorcerer",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "sorcerer 5"
+      "raw": "sorcerer 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.summoner",
@@ -50,7 +54,8 @@
       "list_name": "summoner",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "summoner 4"
+      "raw": "summoner 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.summoner-unchained",
@@ -58,7 +63,8 @@
       "list_name": "summoner (unchained)",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "summoner (unchained) 4"
+      "raw": "summoner (unchained) 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.warpriest",
@@ -66,7 +72,8 @@
       "list_name": "warpriest",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "warpriest 5"
+      "raw": "warpriest 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.witch",
@@ -74,7 +81,8 @@
       "list_name": "witch",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "witch 5"
+      "raw": "witch 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.wizard",
@@ -82,7 +90,8 @@
       "list_name": "wizard",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "wizard 5"
+      "raw": "wizard 5",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -181,17 +190,95 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.summon-monster",
+      "from_spell_id": "spell.summon-monster-1",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.summon-lesser-psychopomp:57df714524ee0b52",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions like summon monster, except that it summons 1d3 esobok psychopomps or 1d4+1 nosoi psychopomps. Esobok psychopomps are detailed on page 84. Nosoi psychopomps are detailed on page 220 of Pathfinder RPG Bestiary 4."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.summon-monster is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "focus",
+              "details": "a crocodile skull funerary mask",
+              "cost_gp": null,
+              "raw": "F"
+            },
+            {
+              "type": "divine_focus",
+              "details": null,
+              "cost_gp": null,
+              "raw": "DF"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, F/DF (a crocodile skull funerary mask)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, F/DF (a crocodile skull funerary mask)",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, F/DF (a crocodile skull funerary mask)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Effect",
+                "value_raw": "one or more summoned psychopomps (see text)",
+                "kinds": [
+                  "effect"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Effect\",\"value_raw\":\"one or more summoned psychopomps (see text)\",\"kinds\":[\"effect\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions like summon monster, except that it summons 1d3 esobok psychopomps or 1d4+1 nosoi psychopomps. Esobok psychopomps are detailed on page 84. Nosoi psychopomps are detailed on page 220 of Pathfinder RPG Bestiary 4.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions like summon monster, except that it summons 1d3 esobok psychopomps or 1d4+1 nosoi psychopomps. Esobok psychopomps are detailed on page 84. Nosoi psychopomps are detailed on page 220 of Pathfinder RPG Bestiary 4.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -430,12 +517,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.summon-lesser-psychopomp:functions_like:spell.summon-monster",
+      "relationship_id": "spell.summon-lesser-psychopomp:functions_like:spell.summon-monster-1",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.summon-monster",
-        "name": "Summon Monster"
+        "entity_id": "spell.summon-monster-1",
+        "name": "Summon Monster 1"
       },
       "status": "accepted",
       "evidence": [
@@ -709,14 +796,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.summon-monster is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",

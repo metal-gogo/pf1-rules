@@ -18,7 +18,8 @@
       "list_name": "druid",
       "level": 9,
       "scope": "core",
-      "raw": "druid 9"
+      "raw": "druid 9",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.shaman",
@@ -26,7 +27,8 @@
       "list_name": "shaman",
       "level": 9,
       "scope": "later_first_party",
-      "raw": "shaman 9"
+      "raw": "shaman 9",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -119,17 +121,38 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.summon-natures-ally-i",
+      "from_spell_id": "spell.summon-natures-ally-1",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.summon-natures-ally-9:b6c6a95ff5907dc2",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions like summon nature's ally I, except that you can summon one 9th-level creature, 1d3 8th-level creatures of the same kind, or 1d4+1 lower-level creatures of the same kind."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.summon-natures-ally-i is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/description/raw",
+          "value": "This spell functions like summon nature's ally I, except that you can summon one 9th-level creature, 1d3 8th-level creatures of the same kind, or 1d4+1 lower-level creatures of the same kind.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions like summon nature's ally I, except that you can summon one 9th-level creature, 1d3 8th-level creatures of the same kind, or 1d4+1 lower-level creatures of the same kind.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -174,12 +197,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.summon-natures-ally-9:functions_like:spell.summon-natures-ally-i",
+      "relationship_id": "spell.summon-natures-ally-9:functions_like:spell.summon-natures-ally-1",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.summon-natures-ally-i",
-        "name": "Summon Nature'S Ally I"
+        "entity_id": "spell.summon-natures-ally-1",
+        "name": "Summon Nature's Ally 1"
       },
       "status": "accepted",
       "evidence": [
@@ -339,14 +362,8 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
-    "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.summon-natures-ally-i is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      }
-    ]
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
+    "warnings": []
   }
 }

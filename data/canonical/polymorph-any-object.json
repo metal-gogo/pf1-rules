@@ -18,7 +18,8 @@
       "list_name": "arcanist",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "arcanist 8"
+      "raw": "arcanist 8",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.sorcerer",
@@ -26,7 +27,8 @@
       "list_name": "sorcerer",
       "level": 8,
       "scope": "core",
-      "raw": "sorcerer 8"
+      "raw": "sorcerer 8",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.wizard",
@@ -34,7 +36,8 @@
       "list_name": "wizard",
       "level": 8,
       "scope": "core",
-      "raw": "wizard 8"
+      "raw": "wizard 8",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -145,17 +148,167 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.greater-polymorph",
+      "from_spell_id": "spell.polymorph-greater",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.polymorph-any-object:dd00f3eda326eb34",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions like greater polymorph, except that it changes one object or creature into another. You can use this spell to transform all manner of objects and creatures into new forms—you aren't limited to transforming a living creature into another living form. The duration of the spell depends on how radical a change is made from the original state to its transmuted state. The duration is determined by using the following guidelines.\n\nChanged Subject Is...Increase to Duration Factor*Same kingdom (animal, vegetable, mineral)+5Same class (mammals, fungi, metals, etc.)+2Same size+2Related (twig is to tree, wolf fur is to wolf, etc.)+2Same or lower Intelligence+2*Add all that apply. Look up the total on the next table.\nDuration FactorDurationExample020 minutesPebble to human21 hourMarionette to human43 hoursHuman to marionette512 hoursLizard to manticore62 daysSheep to wool coat71 weekShrew to manticore9+PermanentManticore to shrew\nIf the target of the spell does not have physical ability scores (Strength, Dexterity, or Constitution), this spell grants a base score of 10 to each missing ability score. If the target of the spell does not have mental ability scores (Intelligence, Wisdom, or Charisma), this spell grants a score of 5 to such scores. Damage taken by the new form can result in the injury or death of the polymorphed creature. In general, damage occurs when the new form is changed through physical force. A nonmagical object cannot be made into a magic item with this spell. Magic items aren't affected by this spell.\n\nThis spell cannot create material of great intrinsic value, such as copper, silver, gems, silk, gold, platinum, mithral, or adamantine. It also cannot reproduce the special properties of cold iron in order to overcome the damage reduction of certain creatures.\n\nThis spell can also be used to duplicate the effects of baleful polymorph, greater polymorph, flesh to stone, stone to flesh, transmute mud to rock, transmute metal to wood, or transmute rock to mud."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.greater-polymorph is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "material",
+              "details": "mercury, gum arabic, and smoke",
+              "cost_gp": null,
+              "raw": "M"
+            },
+            {
+              "type": "divine_focus",
+              "details": null,
+              "cost_gp": null,
+              "raw": "DF"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M/DF (mercury, gum arabic, and smoke)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, M/DF (mercury, gum arabic, and smoke)",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M/DF (mercury, gum arabic, and smoke)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/range",
+          "value": {
+            "category": "close",
+            "formula": "close (25 ft. + 5 ft./2 levels)",
+            "raw": "close (25 ft. + 5 ft./2 levels)"
+          },
+          "source_field": "spell_raw.range_raw",
+          "raw": "close (25 ft. + 5 ft./2 levels)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "one creature, or one nonmagical object of up to 100 cu. ft./level",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one creature, or one nonmagical object of up to 100 cu. ft./level\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "multiple",
+            "subject_kind": "creature",
+            "selection": "selected",
+            "count": {
+              "kind": "per_level",
+              "fixed": null,
+              "formula": "one creature, or one nonmagical object of up to 100 cu. ft./level",
+              "raw": "one creature, or one nonmagical object of up to 100 cu. ft./level"
+            },
+            "separation": null,
+            "raw": "one creature, or one nonmagical object of up to 100 cu. ft./level"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one creature, or one nonmagical object of up to 100 cu. ft./level\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "special",
+            "formula": "see text",
+            "dismissible": null,
+            "concentration": null,
+            "raw": "see text"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "see text",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/saving_throw",
+          "value": {
+            "types": [
+              "fortitude"
+            ],
+            "outcome": "Fortitude negates (object); see text",
+            "harmless": null,
+            "object": true,
+            "conditional": true,
+            "raw": "Fortitude negates (object); see text"
+          },
+          "source_field": "spell_raw.saving_throw_raw",
+          "raw": "Fortitude negates (object); see text",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/spell_resistance",
+          "value": {
+            "applies": true,
+            "harmless": null,
+            "object": true,
+            "conditional": null,
+            "raw": "yes (object)"
+          },
+          "source_field": "spell_raw.spell_resistance_raw",
+          "raw": "yes (object)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions like greater polymorph, except that it changes one object or creature into another. You can use this spell to transform all manner of objects and creatures into new forms—you aren't limited to transforming a living creature into another living form. The duration of the spell depends on how radical a change is made from the original state to its transmuted state. The duration is determined by using the following guidelines.\n\nChanged Subject Is...Increase to Duration Factor*Same kingdom (animal, vegetable, mineral)+5Same class (mammals, fungi, metals, etc.)+2Same size+2Related (twig is to tree, wolf fur is to wolf, etc.)+2Same or lower Intelligence+2*Add all that apply. Look up the total on the next table.\nDuration FactorDurationExample020 minutesPebble to human21 hourMarionette to human43 hoursHuman to marionette512 hoursLizard to manticore62 daysSheep to wool coat71 weekShrew to manticore9+PermanentManticore to shrew\nIf the target of the spell does not have physical ability scores (Strength, Dexterity, or Constitution), this spell grants a base score of 10 to each missing ability score. If the target of the spell does not have mental ability scores (Intelligence, Wisdom, or Charisma), this spell grants a score of 5 to such scores. Damage taken by the new form can result in the injury or death of the polymorphed creature. In general, damage occurs when the new form is changed through physical force. A nonmagical object cannot be made into a magic item with this spell. Magic items aren't affected by this spell.\n\nThis spell cannot create material of great intrinsic value, such as copper, silver, gems, silk, gold, platinum, mithral, or adamantine. It also cannot reproduce the special properties of cold iron in order to overcome the damage reduction of certain creatures.\n\nThis spell can also be used to duplicate the effects of baleful polymorph, greater polymorph, flesh to stone, stone to flesh, transmute mud to rock, transmute metal to wood, or transmute rock to mud.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions like greater polymorph, except that it changes one object or creature into another. You can use this spell to transform all manner of objects and creatures into new forms—you aren't limited to transforming a living creature into another living form. The duration of the spell depends on how radical a change is made from the original state to its transmuted state. The duration is determined by using the following guidelines.\n\nChanged Subject Is...Increase to Duration Factor*Same kingdom (animal, vegetable, mineral)+5Same class (mammals, fungi, metals, etc.)+2Same size+2Related (twig is to tree, wolf fur is to wolf, etc.)+2Same or lower Intelligence+2*Add all that apply. Look up the total on the next table.\nDuration FactorDurationExample020 minutesPebble to human21 hourMarionette to human43 hoursHuman to marionette512 hoursLizard to manticore62 daysSheep to wool coat71 weekShrew to manticore9+PermanentManticore to shrew\nIf the target of the spell does not have physical ability scores (Strength, Dexterity, or Constitution), this spell grants a base score of 10 to each missing ability score. If the target of the spell does not have mental ability scores (Intelligence, Wisdom, or Charisma), this spell grants a score of 5 to such scores. Damage taken by the new form can result in the injury or death of the polymorphed creature. In general, damage occurs when the new form is changed through physical force. A nonmagical object cannot be made into a magic item with this spell. Magic items aren't affected by this spell.\n\nThis spell cannot create material of great intrinsic value, such as copper, silver, gems, silk, gold, platinum, mithral, or adamantine. It also cannot reproduce the special properties of cold iron in order to overcome the damage reduction of certain creatures.\n\nThis spell can also be used to duplicate the effects of baleful polymorph, greater polymorph, flesh to stone, stone to flesh, transmute mud to rock, transmute metal to wood, or transmute rock to mud.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -240,12 +393,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.polymorph-any-object:functions_like:spell.greater-polymorph",
+      "relationship_id": "spell.polymorph-any-object:functions_like:spell.polymorph-greater",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.greater-polymorph",
-        "name": "Greater Polymorph"
+        "entity_id": "spell.polymorph-greater",
+        "name": "Polymorph, Greater"
       },
       "status": "accepted",
       "evidence": [
@@ -856,14 +1009,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.greater-polymorph is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",

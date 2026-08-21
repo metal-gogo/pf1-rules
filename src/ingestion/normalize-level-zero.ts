@@ -528,6 +528,101 @@ function normalizedName(value: string): string {
 }
 
 
+const sourceSuffixPattern = /([a-z0-9])(?:ACG|APG|ARG|DTT|HA|HOPF|ISWG|MC|OA|PPC|RTT|UC|UI|UM|UW)\b/gi;
+const romanNumerals: Readonly<Record<string, string>> = {
+  i: "1",
+  ii: "2",
+  iii: "3",
+  iv: "4",
+  v: "5",
+  vi: "6",
+  vii: "7",
+  viii: "8",
+  ix: "9",
+};
+
+
+function undecoratedSpellReference(value: string): string {
+  return value
+    .replaceAll("’", "'")
+    .replace(sourceSuffixPattern, "$1")
+    .replace(/\(see below\)/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/^per\s+/i, "")
+    .replace(/^(?:a|an|the)\s+/i, "")
+    .replace(/\s+spell$/i, "")
+    .trim();
+}
+
+
+function spellReferenceKey(value: string): string {
+  const words = undecoratedSpellReference(value)
+    .toLocaleLowerCase("en-US")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+  const finalWord = words.at(-1);
+  const numericFinalWord = finalWord ? romanNumerals[finalWord] : undefined;
+  if (numericFinalWord) words[words.length - 1] = numericFinalWord;
+  return words.sort().join(" ");
+}
+
+
+const semanticSpellAliasEntries: ReadonlyArray<readonly [string, string]> = [
+  ["a targeted dispel magic spell", "spell.dispel-magic"],
+  ["ally across time as noted above with two", "spell.ally-across-time"],
+  ["aroden's defending sword", "spell.last-azlantis-defending-sword"],
+  ["energy shot", "spell.energy-siege-shot"],
+  ["magic siege weapon", "spell.magic-siege-engine"],
+  ["planar travel function of gate", "spell.gate"],
+  ["spell completion option of trap the soul", "spell.trap-the-soul"],
+  ["spell glyph version of glyph of warding", "spell.glyph-of-warding"],
+  ["summon monster", "spell.summon-monster-1"],
+];
+const semanticSpellAliases = new Map<string, string>(
+  semanticSpellAliasEntries.map(([alias, spellId]) => [spellReferenceKey(alias), spellId]),
+);
+
+
+export function resolveCanonicalSpellReference(
+  value: string,
+  available: AvailableCanonicalSpells,
+  spellIdHint?: string,
+): ValidatedJson | null {
+  if (!(available instanceof Map)) return null;
+  if (spellIdHint) {
+    const hinted = available.get(spellIdHint);
+    if (hinted) return hinted;
+  }
+  const key = spellReferenceKey(value);
+  const semanticId = semanticSpellAliases.get(key);
+  if (semanticId) return available.get(semanticId) ?? null;
+  const matches = [...available.values()].filter((record) =>
+    [record.name, ...(record.aliases ?? [])].some((name) => spellReferenceKey(String(name)) === key),
+  );
+  return matches.length === 1 ? matches[0]! : null;
+}
+
+
+export function normalizeUnresolvedSpellReference(value: string): { spellId: string; name: string } | null {
+  const undecorated = undecoratedSpellReference(value);
+  if (!undecorated) return null;
+  const leadingModifier = /^(mass|greater|lesser)\s+(.+)$/i.exec(undecorated);
+  const canonicalName = leadingModifier?.[1] && leadingModifier[2]
+    ? `${leadingModifier[2]}, ${leadingModifier[1]}`
+    : undecorated;
+  const name = canonicalName.replace(/\b\p{L}[\p{L}']*/gu, (word) => {
+    const lower = word.toLocaleLowerCase("en-US");
+    return romanNumerals[lower]
+      ? lower.toLocaleUpperCase("en-US")
+      : `${word[0]?.toLocaleUpperCase("en-US") ?? ""}${word.slice(1).toLocaleLowerCase("en-US")}`;
+  });
+  return { spellId: `spell.${slug(canonicalName)}`, name };
+}
+
+
 function comparableSpellName(value: string): string {
   return normalizedName(value).replace(/\bthe\b/g, "").replace(/\s+/g, " ").trim();
 }
@@ -540,30 +635,16 @@ function startsWithSpellName(value: string, name: string): boolean {
 }
 
 
-function equivalentSpellNames(name: string): Set<string> {
-  const names = new Set([name]);
-  const leadingVariant = /^(mass|greater|lesser) (.+)$/.exec(name);
-  if (leadingVariant?.[1] && leadingVariant[2]) {
-    names.add(`${leadingVariant[2]}, ${leadingVariant[1]}`);
-  }
-  const trailingVariant = /^(.+), (mass|greater|lesser)$/.exec(name);
-  if (trailingVariant?.[1] && trailingVariant[2]) {
-    names.add(`${trailingVariant[2]} ${trailingVariant[1]}`);
-  }
-  return names;
-}
-
-
 export function detectSpellInheritance(
   parsed: ParsedSpellPage,
   available: AvailableCanonicalSpells,
 ): InheritanceReference | null {
-  const marker = /^(?:this spell (?:functions|works) (?:as|like)(?: per)?|as(?: per)?)\s+(?:the\s+)?/i.exec(
-    parsed.descriptionRaw,
-  );
+  const functionalMarker = /^this spell (?:functions|works) (?:as|like)(?: per)?\s+(?:the\s+)?/i.exec(parsed.descriptionRaw);
+  const bareMarker = functionalMarker ? null : /^as(?: per)?\s+(?:the\s+)?/i.exec(parsed.descriptionRaw);
+  const marker = functionalMarker ?? bareMarker;
   if (!marker) return null;
   const remainder = normalizedName(parsed.descriptionRaw.slice(marker[0].length));
-  if (/^(?:part of|part of the|a way to|a result of)/.test(remainder)) return null;
+  if (/^(?:part of|part of the|a way to|a result of|long as|any scholar|you ingest)/.test(remainder)) return null;
   const comparableRemainder = comparableSpellName(remainder.replace(/^(?:a|an)\s+/, ""));
 
   const linkedCandidates = parsed.links
@@ -575,11 +656,11 @@ export function detectSpellInheritance(
     .sort((left, right) => right.anchorTextRaw.length - left.anchorTextRaw.length);
   const linked = linkedCandidates[0];
   if (linked) {
-    const linkedName = normalizedName(linked.anchorTextRaw);
-    const linkedNames = equivalentSpellNames(linkedName);
-    const matchingRecord = available instanceof Map
-      ? [...available.values()].find((record) => linkedNames.has(normalizedName(record.name)))
-      : undefined;
+    const matchingRecord = resolveCanonicalSpellReference(
+      linked.anchorTextRaw,
+      available,
+      linked.targetEntityIdHint,
+    );
     return {
       parentId: matchingRecord?.spell_id ?? linked.targetEntityIdHint,
       parentName: matchingRecord?.name ?? linked.anchorTextRaw,
@@ -601,9 +682,16 @@ export function detectSpellInheritance(
     .split(/,|\.|\bexcept\b|\bbut\b|\bas noted\b|\bsave that\b/i, 1)[0]
     ?.trim();
   if (!fallbackName || fallbackName.split(/\s+/).length > 7) return null;
+  const matchingRecord = resolveCanonicalSpellReference(fallbackName, available);
+  if (matchingRecord) {
+    return { parentId: matchingRecord.spell_id, parentName: matchingRecord.name, basisRaw: parsed.descriptionRaw };
+  }
+  if (!functionalMarker) return null;
+  const unresolved = normalizeUnresolvedSpellReference(fallbackName);
+  if (!unresolved) return null;
   return {
-    parentId: `spell.${slug(fallbackName)}`,
-    parentName: fallbackName.replace(/\b\p{L}/gu, (letter) => letter.toLocaleUpperCase("en-US")),
+    parentId: unresolved.spellId,
+    parentName: unresolved.name,
     basisRaw: parsed.descriptionRaw,
   };
 }
@@ -959,7 +1047,7 @@ export function generateCanonicalBundle(
       status: inheritanceReference && !canResolveCanonicalSpell(availableCanonicalSpells, inheritanceReference.parentId)
         ? "needs_review"
         : "validated",
-      normalizer_version: "0.1.3-qualified-spell-lists",
+      normalizer_version: "0.1.4-dependency-aliases",
       warnings,
     },
   };

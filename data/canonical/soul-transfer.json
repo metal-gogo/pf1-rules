@@ -18,7 +18,8 @@
       "list_name": "arcanist",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "arcanist 7"
+      "raw": "arcanist 7",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.cleric",
@@ -26,7 +27,8 @@
       "list_name": "cleric",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "cleric 7"
+      "raw": "cleric 7",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.oracle",
@@ -34,7 +36,8 @@
       "list_name": "oracle",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "oracle 7"
+      "raw": "oracle 7",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.psychic",
@@ -42,7 +45,8 @@
       "list_name": "psychic",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "psychic 7"
+      "raw": "psychic 7",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.shaman",
@@ -50,7 +54,8 @@
       "list_name": "shaman",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "shaman 7"
+      "raw": "shaman 7",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.sorcerer",
@@ -58,7 +63,8 @@
       "list_name": "sorcerer",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "sorcerer 7"
+      "raw": "sorcerer 7",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.spiritualist",
@@ -66,7 +72,8 @@
       "list_name": "spiritualist",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "spiritualist 6"
+      "raw": "spiritualist 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.witch",
@@ -74,7 +81,8 @@
       "list_name": "witch",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "witch 7"
+      "raw": "witch 7",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.wizard",
@@ -82,7 +90,8 @@
       "list_name": "wizard",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "wizard 7"
+      "raw": "wizard 7",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -187,17 +196,162 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.spell-completion-option-of-trap-the-soul",
+      "from_spell_id": "spell.trap-the-soul",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.soul-transfer:76a174aa1e021039",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions like the spell completion option of trap the soul, except it works only on bodiless souls (such as incorporeal undead or a soul trapped in a gem) and creatures whose substance is a physical incarnation of a soul (such as a petitioner). It does not work on creatures formed from souls or planar material (such as most outsiders). Soul transfer is mainly used to transfer souls from one receptacle to another, but it can also be used to capture vulnerable souls that aren’t bound to mortal flesh (such as incorporeal creatures and petitioners). When used to capture a petitioner, the petitioner’s physical body vanishes, reappearing only when its soul is released from the receptacle."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.spell-completion-option-of-trap-the-soul is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/time",
+          "value": {
+            "kind": "action",
+            "amount": 1,
+            "unit": "standard_action",
+            "raw": "1 standard action"
+          },
+          "source_field": "spell_raw.casting_time_raw",
+          "raw": "1 standard action",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "material",
+              "details": "a gem worth 1,000 gp per HD of the targeted creature or soul",
+              "cost_gp": 1000,
+              "raw": "M (a gem worth 1,000 gp per HD of the targeted creature or soul)"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (a gem worth 1,000 gp per HD of the targeted creature or soul)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, M (a gem worth 1,000 gp per HD of the targeted creature or soul)",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (a gem worth 1,000 gp per HD of the targeted creature or soul)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "one petitioner, incorporeal soul, or similar creature",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one petitioner, incorporeal soul, or similar creature\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "single",
+            "subject_kind": "creature",
+            "selection": "selected",
+            "count": {
+              "kind": "fixed",
+              "fixed": 1,
+              "formula": null,
+              "raw": "one petitioner, incorporeal soul, or similar creature"
+            },
+            "separation": null,
+            "raw": "one petitioner, incorporeal soul, or similar creature"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one petitioner, incorporeal soul, or similar creature\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "permanent",
+            "formula": null,
+            "dismissible": null,
+            "concentration": null,
+            "raw": "permanent see text"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "permanent see text",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/saving_throw",
+          "value": {
+            "types": [
+              "will"
+            ],
+            "outcome": "Will negates",
+            "harmless": null,
+            "object": null,
+            "conditional": null,
+            "raw": "Will negates"
+          },
+          "source_field": "spell_raw.saving_throw_raw",
+          "raw": "Will negates",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/spell_resistance",
+          "value": {
+            "applies": true,
+            "harmless": null,
+            "object": null,
+            "conditional": true,
+            "raw": "yes (see text)"
+          },
+          "source_field": "spell_raw.spell_resistance_raw",
+          "raw": "yes (see text)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions like the spell completion option of trap the soul, except it works only on bodiless souls (such as incorporeal undead or a soul trapped in a gem) and creatures whose substance is a physical incarnation of a soul (such as a petitioner). It does not work on creatures formed from souls or planar material (such as most outsiders). Soul transfer is mainly used to transfer souls from one receptacle to another, but it can also be used to capture vulnerable souls that aren’t bound to mortal flesh (such as incorporeal creatures and petitioners). When used to capture a petitioner, the petitioner’s physical body vanishes, reappearing only when its soul is released from the receptacle.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions like the spell completion option of trap the soul, except it works only on bodiless souls (such as incorporeal undead or a soul trapped in a gem) and creatures whose substance is a physical incarnation of a soul (such as a petitioner). It does not work on creatures formed from souls or planar material (such as most outsiders). Soul transfer is mainly used to transfer souls from one receptacle to another, but it can also be used to capture vulnerable souls that aren’t bound to mortal flesh (such as incorporeal creatures and petitioners). When used to capture a petitioner, the petitioner’s physical body vanishes, reappearing only when its soul is released from the receptacle.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -437,12 +591,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.soul-transfer:functions_like:spell.spell-completion-option-of-trap-the-soul",
+      "relationship_id": "spell.soul-transfer:functions_like:spell.trap-the-soul",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.spell-completion-option-of-trap-the-soul",
-        "name": "Spell Completion Option Of Trap The Soul"
+        "entity_id": "spell.trap-the-soul",
+        "name": "Trap the Soul"
       },
       "status": "accepted",
       "evidence": [
@@ -865,14 +1019,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.spell-completion-option-of-trap-the-soul is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",

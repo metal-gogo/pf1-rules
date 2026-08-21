@@ -7,7 +7,11 @@ import {
   type InheritableSpell,
   type SpellInheritanceRule,
 } from "../src/domain/spell-inheritance.js";
-import { detectSpellInheritance } from "../src/ingestion/normalize-level-zero.js";
+import {
+  detectSpellInheritance,
+  normalizeUnresolvedSpellReference,
+  resolveCanonicalSpellReference,
+} from "../src/ingestion/normalize-level-zero.js";
 import type { ParsedSpellPage } from "../src/ingestion/spell-page-parser.js";
 
 
@@ -173,5 +177,55 @@ describe("spell inheritance", () => {
       parsedDescription("As part of casting this spell, you select one target."),
       new Map(),
     )).toBeNull();
+  });
+
+  it("resolves source suffixes, Roman numerals, and semantic spell aliases", () => {
+    const createPit = spell("spell.create-pit", { value: 1 });
+    createPit.name = "Create Pit";
+    const summonMonster = spell("spell.summon-monster-1", { value: 1 });
+    summonMonster.name = "Summon Monster 1";
+    const dispelMagic = spell("spell.dispel-magic", { value: 1 });
+    dispelMagic.name = "Dispel Magic";
+    const available = new Map([
+      [createPit.spell_id, createPit],
+      [summonMonster.spell_id, summonMonster],
+      [dispelMagic.spell_id, dispelMagic],
+    ]);
+
+    expect(detectSpellInheritance(
+      parsedDescription("This spell functions as per create pitAPG, except the pit moves."),
+      available,
+    )?.parentId).toBe(createPit.spell_id);
+    expect(detectSpellInheritance(
+      parsedDescription("This spell functions like summon monster I, except as noted."),
+      available,
+    )?.parentId).toBe(summonMonster.spell_id);
+    expect(detectSpellInheritance(
+      parsedDescription("This spell functions like summon monster, except it summons one creature."),
+      available,
+    )?.parentId).toBe(summonMonster.spell_id);
+    expect(resolveCanonicalSpellReference("a targeted dispel magic spell", available)?.spell_id)
+      .toBe(dispelMagic.spell_id);
+  });
+
+  it("normalizes unresolved captured spell references without preserving source decorations", () => {
+    expect(normalizeUnresolvedSpellReference("Ancestral RegressionARG")).toEqual({
+      spellId: "spell.ancestral-regression",
+      name: "Ancestral Regression",
+    });
+    expect(normalizeUnresolvedSpellReference("Lesser Spellcrash")).toEqual({
+      spellId: "spell.spellcrash-lesser",
+      name: "Spellcrash, Lesser",
+    });
+  });
+
+  it("rejects ordinary bare-as prose instead of creating dependencies", () => {
+    for (const description of [
+      "As any scholar of Desnan lore or astrologer can tell you, the stars move.",
+      "As long as the target is smaller than you are, the spell works.",
+      "As you ingest this extract, choose one formula.",
+    ]) {
+      expect(detectSpellInheritance(parsedDescription(description), new Map())).toBeNull();
+    }
   });
 });

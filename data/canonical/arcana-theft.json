@@ -18,7 +18,8 @@
       "list_name": "magus",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "magus 4"
+      "raw": "magus 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.psychic",
@@ -26,7 +27,8 @@
       "list_name": "psychic",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "psychic 5"
+      "raw": "psychic 5",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -125,17 +127,99 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.a-targeted-dispel-magic-spell",
+      "from_spell_id": "spell.dispel-magic",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.arcana-theft:6a67cdcc6d36180a",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions as a targeted dispel magic spell, except it only affects creatures and it requires a melee touch attack. If the melee touch attack is successful and the spell successfully dispels one spell affecting the target, that spell is instead transferred to you, treating you as the original target. You do not receive a new saving throw or spell resistance check against this spell and must accept its affects even if they are not beneficial. This does not alter the spell’s duration; for example, if the spell only has 4 rounds of duration remaining when it is stolen, it only affects you for 4 rounds. If the spell or effect has a duration of permanent, its duration continues for 1 hour per caster level of the original caster, after which it ends. The stolen spell does not revert to the original target."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.a-targeted-dispel-magic-spell is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/range",
+          "value": {
+            "category": "touch",
+            "formula": null,
+            "raw": "touch"
+          },
+          "source_field": "spell_raw.range_raw",
+          "raw": "touch",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "creature touched",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"creature touched\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "single",
+            "subject_kind": "creature",
+            "selection": "selected",
+            "count": {
+              "kind": "fixed",
+              "fixed": 1,
+              "formula": null,
+              "raw": "creature touched"
+            },
+            "separation": null,
+            "raw": "creature touched"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"creature touched\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/spell_resistance",
+          "value": {
+            "applies": true,
+            "harmless": null,
+            "object": null,
+            "conditional": null,
+            "raw": "yes"
+          },
+          "source_field": "spell_raw.spell_resistance_raw",
+          "raw": "yes",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as a targeted dispel magic spell, except it only affects creatures and it requires a melee touch attack. If the melee touch attack is successful and the spell successfully dispels one spell affecting the target, that spell is instead transferred to you, treating you as the original target. You do not receive a new saving throw or spell resistance check against this spell and must accept its affects even if they are not beneficial. This does not alter the spell’s duration; for example, if the spell only has 4 rounds of duration remaining when it is stolen, it only affects you for 4 rounds. If the spell or effect has a duration of permanent, its duration continues for 1 hour per caster level of the original caster, after which it ends. The stolen spell does not revert to the original target.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as a targeted dispel magic spell, except it only affects creatures and it requires a melee touch attack. If the melee touch attack is successful and the spell successfully dispels one spell affecting the target, that spell is instead transferred to you, treating you as the original target. You do not receive a new saving throw or spell resistance check against this spell and must accept its affects even if they are not beneficial. This does not alter the spell’s duration; for example, if the spell only has 4 rounds of duration remaining when it is stolen, it only affects you for 4 rounds. If the spell or effect has a duration of permanent, its duration continues for 1 hour per caster level of the original caster, after which it ends. The stolen spell does not revert to the original target.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -187,12 +271,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.arcana-theft:functions_like:spell.a-targeted-dispel-magic-spell",
+      "relationship_id": "spell.arcana-theft:functions_like:spell.dispel-magic",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.a-targeted-dispel-magic-spell",
-        "name": "A Targeted Dispel Magic Spell"
+        "entity_id": "spell.dispel-magic",
+        "name": "Dispel Magic"
       },
       "status": "accepted",
       "evidence": [
@@ -467,14 +551,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.a-targeted-dispel-magic-spell is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",

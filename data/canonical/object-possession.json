@@ -18,7 +18,8 @@
       "list_name": "arcanist",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "arcanist 5"
+      "raw": "arcanist 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.medium",
@@ -26,7 +27,8 @@
       "list_name": "medium",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "medium 4"
+      "raw": "medium 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.mesmerist",
@@ -34,7 +36,8 @@
       "list_name": "mesmerist",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "mesmerist 5"
+      "raw": "mesmerist 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.occultist",
@@ -42,7 +45,8 @@
       "list_name": "occultist",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "occultist 4"
+      "raw": "occultist 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.psychic",
@@ -50,7 +54,8 @@
       "list_name": "psychic",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "psychic 5"
+      "raw": "psychic 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.sorcerer",
@@ -58,7 +63,8 @@
       "list_name": "sorcerer",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "sorcerer 5"
+      "raw": "sorcerer 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.spiritualist",
@@ -66,7 +72,8 @@
       "list_name": "spiritualist",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "spiritualist 5"
+      "raw": "spiritualist 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.witch",
@@ -74,7 +81,8 @@
       "list_name": "witch",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "witch 5"
+      "raw": "witch 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.wizard",
@@ -82,7 +90,8 @@
       "list_name": "wizard",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "wizard 5"
+      "raw": "wizard 5",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -181,17 +190,99 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.lesser-object-possession",
+      "from_spell_id": "spell.object-possession-lesser",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.object-possession:c44e7361000b755a",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions as lesser object possession, except as noted above. The possessed animated object has a number of Construction Points appropriate for its size (up to 3 CP for Large objects).\n\nYou can return your consciousness to your body as a standard action. On your next turn, you can attempt to possess a different object as a standard action instead of ending the spell."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.lesser-object-possession is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/range",
+          "value": {
+            "category": "close",
+            "formula": "close (25 ft. + 5 ft./2 levels)",
+            "raw": "close (25 ft. + 5 ft./2 levels)"
+          },
+          "source_field": "spell_raw.range_raw",
+          "raw": "close (25 ft. + 5 ft./2 levels)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "unattended Large or smaller object (minimum Tiny)",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"unattended Large or smaller object (minimum Tiny)\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "single",
+            "subject_kind": "object",
+            "selection": "selected",
+            "count": {
+              "kind": "fixed",
+              "fixed": 1,
+              "formula": null,
+              "raw": "unattended Large or smaller object (minimum Tiny)"
+            },
+            "separation": null,
+            "raw": "unattended Large or smaller object (minimum Tiny)"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"unattended Large or smaller object (minimum Tiny)\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "timed",
+            "formula": "10 minutes/level (D)",
+            "dismissible": true,
+            "concentration": null,
+            "raw": "10 minutes/level (D)"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "10 minutes/level (D)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as lesser object possession, except as noted above. The possessed animated object has a number of Construction Points appropriate for its size (up to 3 CP for Large objects).\n\nYou can return your consciousness to your body as a standard action. On your next turn, you can attempt to possess a different object as a standard action instead of ending the spell.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as lesser object possession, except as noted above. The possessed animated object has a number of Construction Points appropriate for its size (up to 3 CP for Large objects).\n\nYou can return your consciousness to your body as a standard action. On your next turn, you can attempt to possess a different object as a standard action instead of ending the spell.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -431,12 +522,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.object-possession:functions_like:spell.lesser-object-possession",
+      "relationship_id": "spell.object-possession:functions_like:spell.object-possession-lesser",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.lesser-object-possession",
-        "name": "Lesser Object Possession"
+        "entity_id": "spell.object-possession-lesser",
+        "name": "Object Possession, Lesser"
       },
       "status": "accepted",
       "evidence": [
@@ -664,14 +755,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.lesser-object-possession is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",

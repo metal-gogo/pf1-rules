@@ -18,7 +18,8 @@
       "list_name": "shaman",
       "level": 3,
       "scope": "later_first_party",
-      "raw": "shaman 3"
+      "raw": "shaman 3",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.witch",
@@ -26,7 +27,8 @@
       "list_name": "witch",
       "level": 3,
       "scope": "later_first_party",
-      "raw": "witch 3"
+      "raw": "witch 3",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -131,17 +133,88 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.spell-glyph-version-of-glyph-of-warding",
+      "from_spell_id": "spell.glyph-of-warding",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.hex-glyph:b00df299f9cb7609",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions like the spell glyph version of glyph of warding, except you can store a hex you know (but not a major hex or a grand hex) instead of a spell. If the hex has a target, it targets the intruder. If the hex has an area or an amorphous effect, the area or effect is centered on the intruder. The triggered hex uses this spell’s caster level and DC.\n\nRead magic allows its caster to identify a hex glyph with a successful DC 13 Knowledge (arcana) check. Identifying the glyph does not discharge it and indicates that it stores a hex, but does not indicate the effect of that hex."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.spell-glyph-version-of-glyph-of-warding is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "or Area object touched or up to 5 sq. ft./level",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"or Area object touched or up to 5 sq. ft./level\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "single",
+            "subject_kind": "object",
+            "selection": "selected",
+            "count": {
+              "kind": "fixed",
+              "fixed": 1,
+              "formula": null,
+              "raw": "or Area object touched or up to 5 sq. ft./level"
+            },
+            "separation": null,
+            "raw": "or Area object touched or up to 5 sq. ft./level"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"or Area object touched or up to 5 sq. ft./level\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/spell_resistance",
+          "value": {
+            "applies": false,
+            "harmless": null,
+            "object": true,
+            "conditional": true,
+            "raw": "no (object) and yes (see text)"
+          },
+          "source_field": "spell_raw.spell_resistance_raw",
+          "raw": "no (object) and yes (see text)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions like the spell glyph version of glyph of warding, except you can store a hex you know (but not a major hex or a grand hex) instead of a spell. If the hex has a target, it targets the intruder. If the hex has an area or an amorphous effect, the area or effect is centered on the intruder. The triggered hex uses this spell’s caster level and DC.\n\nRead magic allows its caster to identify a hex glyph with a successful DC 13 Knowledge (arcana) check. Identifying the glyph does not discharge it and indicates that it stores a hex, but does not indicate the effect of that hex.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions like the spell glyph version of glyph of warding, except you can store a hex you know (but not a major hex or a grand hex) instead of a spell. If the hex has a target, it targets the intruder. If the hex has an area or an amorphous effect, the area or effect is centered on the intruder. The triggered hex uses this spell’s caster level and DC.\n\nRead magic allows its caster to identify a hex glyph with a successful DC 13 Knowledge (arcana) check. Identifying the glyph does not discharge it and indicates that it stores a hex, but does not indicate the effect of that hex.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -200,12 +273,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.hex-glyph:functions_like:spell.spell-glyph-version-of-glyph-of-warding",
+      "relationship_id": "spell.hex-glyph:functions_like:spell.glyph-of-warding",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.spell-glyph-version-of-glyph-of-warding",
-        "name": "Spell Glyph Version Of Glyph Of Warding"
+        "entity_id": "spell.glyph-of-warding",
+        "name": "Glyph of Warding"
       },
       "status": "accepted",
       "evidence": [
@@ -459,14 +532,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.spell-glyph-version-of-glyph-of-warding is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/casting/time",

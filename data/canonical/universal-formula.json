@@ -18,7 +18,8 @@
       "list_name": "alchemist",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "alchemist 4"
+      "raw": "alchemist 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.investigator",
@@ -26,7 +27,8 @@
       "list_name": "investigator",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "investigator 4"
+      "raw": "investigator 4",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -129,21 +131,7 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [
-    {
-      "from_spell_id": "spell.you-ingest-this-extract",
-      "relationship": "functions_like",
-      "basis": {
-        "observation_id": "aon:spell.universal-formula:529722686293810b",
-        "source_field": "spell_raw.description_raw",
-        "raw": "As you ingest this extract, it transforms into the appropriate extract for any formula you know of 3rd level or lower and takes effect immediately. If the chosen formula has an expensive material component, it must be provided along with the component for this formula. You may not create an infused extract with this formula."
-      },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.you-ingest-this-extract is not canonical yet. The child's printed stat block remains materialized."
-    }
-  ],
+  "rules_inheritance": [],
   "relationships": [
     {
       "relationship_id": "spell.universal-formula:appears_on_spell_list:spell-list.alchemist",
@@ -187,26 +175,6 @@
           "source_field": "spell_raw.levels_raw",
           "evidence_kind": "plain_text",
           "anchor_text_raw": "investigator 4",
-          "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.universal-formula:functions_like:spell.you-ingest-this-extract",
-      "type": "functions_like",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.you-ingest-this-extract",
-        "name": "You Ingest This Extract"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.universal-formula:529722686293810b",
-          "source_field": "spell_raw.description_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "As you ingest this extract, it transforms into the appropriate extract for any formula you know of 3rd level or lower and takes effect immediately. If the chosen formula has an expensive material component, it must be provided along with the component for this formula. You may not create an infused extract with this formula.",
           "source_href": null
         }
       ],
@@ -379,14 +347,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.you-ingest-this-extract is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",

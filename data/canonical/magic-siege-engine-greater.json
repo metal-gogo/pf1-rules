@@ -18,7 +18,8 @@
       "list_name": "antipaladin",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "antipaladin 4"
+      "raw": "antipaladin 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.arcanist",
@@ -26,7 +27,8 @@
       "list_name": "arcanist",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "arcanist 4"
+      "raw": "arcanist 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.cleric",
@@ -34,7 +36,8 @@
       "list_name": "cleric",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "cleric 5"
+      "raw": "cleric 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.inquisitor",
@@ -42,7 +45,8 @@
       "list_name": "inquisitor",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "inquisitor 4"
+      "raw": "inquisitor 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.occultist",
@@ -50,7 +54,8 @@
       "list_name": "occultist",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "occultist 4"
+      "raw": "occultist 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.oracle",
@@ -58,7 +63,8 @@
       "list_name": "oracle",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "oracle 5"
+      "raw": "oracle 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.paladin",
@@ -66,7 +72,8 @@
       "list_name": "paladin",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "paladin 4"
+      "raw": "paladin 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.redmantisassassin",
@@ -74,7 +81,8 @@
       "list_name": "redmantisassassin",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "redmantisassassin 4"
+      "raw": "redmantisassassin 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.sorcerer",
@@ -82,7 +90,8 @@
       "list_name": "sorcerer",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "sorcerer 4"
+      "raw": "sorcerer 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.warpriest",
@@ -90,7 +99,8 @@
       "list_name": "warpriest",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "warpriest 5"
+      "raw": "warpriest 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.wizard",
@@ -98,7 +108,8 @@
       "list_name": "wizard",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "wizard 4"
+      "raw": "wizard 4",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -209,17 +220,101 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.magic-siege-weapon",
+      "from_spell_id": "spell.magic-siege-engine",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.magic-siege-engine-greater:756e15ad1001955f",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions like magic siege weapon, except it gives an indirect fire siege weapon an enhancement bonus on targeting and damage rolls of +1 per four caster levels (maximum +5). If used on a direct-fire siege weapon, this spell functions as greater magic weapon."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.magic-siege-weapon is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "material",
+              "details": "black powder",
+              "cost_gp": null,
+              "raw": "M"
+            },
+            {
+              "type": "divine_focus",
+              "details": null,
+              "cost_gp": null,
+              "raw": "DF"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M/DF (black powder)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, M/DF (black powder)",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M/DF (black powder)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/range",
+          "value": {
+            "category": "close",
+            "formula": "close (25 ft. + 5 ft./2 levels)",
+            "raw": "close (25 ft. + 5 ft./2 levels)"
+          },
+          "source_field": "spell_raw.range_raw",
+          "raw": "close (25 ft. + 5 ft./2 levels)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "timed",
+            "formula": "1 hour/level",
+            "dismissible": null,
+            "concentration": null,
+            "raw": "1 hour/level"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "1 hour/level",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions like magic siege weapon, except it gives an indirect fire siege weapon an enhancement bonus on targeting and damage rolls of +1 per four caster levels (maximum +5). If used on a direct-fire siege weapon, this spell functions as greater magic weapon.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions like magic siege weapon, except it gives an indirect fire siege weapon an enhancement bonus on targeting and damage rolls of +1 per four caster levels (maximum +5). If used on a direct-fire siege weapon, this spell functions as greater magic weapon.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -492,12 +587,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.magic-siege-engine-greater:functions_like:spell.magic-siege-weapon",
+      "relationship_id": "spell.magic-siege-engine-greater:functions_like:spell.magic-siege-engine",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.magic-siege-weapon",
-        "name": "Magic Siege Weapon"
+        "entity_id": "spell.magic-siege-engine",
+        "name": "Magic Siege Engine"
       },
       "status": "accepted",
       "evidence": [
@@ -771,14 +866,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.magic-siege-weapon is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",

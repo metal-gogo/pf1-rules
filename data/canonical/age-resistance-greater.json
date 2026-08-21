@@ -18,7 +18,8 @@
       "list_name": "alchemist",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "alchemist 5"
+      "raw": "alchemist 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.arcanist",
@@ -26,7 +27,8 @@
       "list_name": "arcanist",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "arcanist 7"
+      "raw": "arcanist 7",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.druid",
@@ -34,7 +36,8 @@
       "list_name": "druid",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "druid 7"
+      "raw": "druid 7",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.investigator",
@@ -42,7 +45,8 @@
       "list_name": "investigator",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "investigator 5"
+      "raw": "investigator 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.occultist",
@@ -50,7 +54,8 @@
       "list_name": "occultist",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "occultist 5"
+      "raw": "occultist 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.psychic",
@@ -58,7 +63,8 @@
       "list_name": "psychic",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "psychic 7"
+      "raw": "psychic 7",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.sorcerer",
@@ -66,7 +72,8 @@
       "list_name": "sorcerer",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "sorcerer 7"
+      "raw": "sorcerer 7",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.witch",
@@ -74,7 +81,8 @@
       "list_name": "witch",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "witch 7"
+      "raw": "witch 7",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.wizard",
@@ -82,7 +90,8 @@
       "list_name": "wizard",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "wizard 7"
+      "raw": "wizard 7",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -181,17 +190,38 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.lesser-age-resistance",
+      "from_spell_id": "spell.age-resistance-lesser",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.age-resistance-greater:6f909b9ec70e46a3",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions as lesser age resistance, except you ignore all Strength, Dexterity, and Constitution penalties gained from middle age, old age, and venerable age."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.lesser-age-resistance is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as lesser age resistance, except you ignore all Strength, Dexterity, and Constitution penalties gained from middle age, old age, and venerable age.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as lesser age resistance, except you ignore all Strength, Dexterity, and Constitution penalties gained from middle age, old age, and venerable age.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -437,12 +467,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.age-resistance-greater:functions_like:spell.lesser-age-resistance",
+      "relationship_id": "spell.age-resistance-greater:functions_like:spell.age-resistance-lesser",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.lesser-age-resistance",
-        "name": "Lesser Age Resistance"
+        "entity_id": "spell.age-resistance-lesser",
+        "name": "Age Resistance, Lesser"
       },
       "status": "accepted",
       "evidence": [
@@ -696,14 +726,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.lesser-age-resistance is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",

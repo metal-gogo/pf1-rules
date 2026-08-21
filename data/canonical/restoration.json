@@ -18,7 +18,8 @@
       "list_name": "adept",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "adept 4"
+      "raw": "adept 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.alchemist",
@@ -26,7 +27,8 @@
       "list_name": "alchemist",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "alchemist 4"
+      "raw": "alchemist 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.cleric",
@@ -34,7 +36,8 @@
       "list_name": "cleric",
       "level": 4,
       "scope": "core",
-      "raw": "cleric 4"
+      "raw": "cleric 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.inquisitor",
@@ -42,7 +45,8 @@
       "list_name": "inquisitor",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "inquisitor 4"
+      "raw": "inquisitor 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.investigator",
@@ -50,7 +54,8 @@
       "list_name": "investigator",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "investigator 4"
+      "raw": "investigator 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.mesmerist",
@@ -58,7 +63,8 @@
       "list_name": "mesmerist",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "mesmerist 4"
+      "raw": "mesmerist 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.oracle",
@@ -66,7 +72,8 @@
       "list_name": "oracle",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "oracle 4"
+      "raw": "oracle 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.paladin",
@@ -74,7 +81,8 @@
       "list_name": "paladin",
       "level": 4,
       "scope": "core",
-      "raw": "paladin 4"
+      "raw": "paladin 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.shaman",
@@ -82,7 +90,8 @@
       "list_name": "shaman",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "shaman 4"
+      "raw": "shaman 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.spiritualist",
@@ -90,7 +99,8 @@
       "list_name": "spiritualist",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "spiritualist 4"
+      "raw": "spiritualist 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.warpriest",
@@ -98,7 +108,8 @@
       "list_name": "warpriest",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "warpriest 4"
+      "raw": "warpriest 4",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -203,17 +214,71 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.lesser-restoration",
+      "from_spell_id": "spell.restoration-lesser",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.restoration:5bdcd96ac926234e",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions like lesser restoration, except that it also dispels temporary negative levels or one permanent negative level. If this spell is used to dispel a permanent negative level, it has a material component of diamond dust worth 1,000 gp. This spell cannot be used to dispel more than one permanent negative level possessed by a target in a 1-week period.\n\nRestoration cures all temporary ability damage, and it restores all points permanently drained from a single ability score (your choice if more than one is drained). It also eliminates any fatigue or exhaustion suffered by the target."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.lesser-restoration is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "material",
+              "details": "diamond dust worth 100 gp or 1,000 gp, see text",
+              "cost_gp": 100,
+              "raw": "M (diamond dust worth 100 gp or 1,000 gp, see text)"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (diamond dust worth 100 gp or 1,000 gp, see text)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, M (diamond dust worth 100 gp or 1,000 gp, see text)",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (diamond dust worth 100 gp or 1,000 gp, see text)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions like lesser restoration, except that it also dispels temporary negative levels or one permanent negative level. If this spell is used to dispel a permanent negative level, it has a material component of diamond dust worth 1,000 gp. This spell cannot be used to dispel more than one permanent negative level possessed by a target in a 1-week period.\n\nRestoration cures all temporary ability damage, and it restores all points permanently drained from a single ability score (your choice if more than one is drained). It also eliminates any fatigue or exhaustion suffered by the target.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions like lesser restoration, except that it also dispels temporary negative levels or one permanent negative level. If this spell is used to dispel a permanent negative level, it has a material component of diamond dust worth 1,000 gp. This spell cannot be used to dispel more than one permanent negative level possessed by a target in a 1-week period.\n\nRestoration cures all temporary ability damage, and it restores all points permanently drained from a single ability score (your choice if more than one is drained). It also eliminates any fatigue or exhaustion suffered by the target.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -569,12 +634,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.restoration:functions_like:spell.lesser-restoration",
+      "relationship_id": "spell.restoration:functions_like:spell.restoration-lesser",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.lesser-restoration",
-        "name": "Lesser Restoration"
+        "entity_id": "spell.restoration-lesser",
+        "name": "Restoration, Lesser"
       },
       "status": "accepted",
       "evidence": [
@@ -1180,14 +1245,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.lesser-restoration is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",

@@ -18,7 +18,8 @@
       "list_name": "bard",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "bard 4"
+      "raw": "bard 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.druid",
@@ -26,7 +27,8 @@
       "list_name": "druid",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "druid 5"
+      "raw": "druid 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.hunter",
@@ -34,7 +36,8 @@
       "list_name": "hunter",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "hunter 4"
+      "raw": "hunter 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.medium",
@@ -42,7 +45,8 @@
       "list_name": "medium",
       "level": 3,
       "scope": "later_first_party",
-      "raw": "medium 3"
+      "raw": "medium 3",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.ranger",
@@ -50,7 +54,8 @@
       "list_name": "ranger",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "ranger 4"
+      "raw": "ranger 4",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.shaman",
@@ -58,7 +63,8 @@
       "list_name": "shaman",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "shaman 5"
+      "raw": "shaman 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.skald",
@@ -66,7 +72,8 @@
       "list_name": "skald",
       "level": 4,
       "scope": "later_first_party",
-      "raw": "skald 4"
+      "raw": "skald 4",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -165,17 +172,56 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.lesser-planar-ally",
+      "from_spell_id": "spell.planar-ally-lesser",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.entice-fey-lesser:1182a9186e192110",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions as lesser planar ally, except that you entice a fey of 6 HD or fewer to lend you its aid with an offering of music or something else it finds appealing. Like lesser planar ally, this spell is unpredictable, and the fey who answers the calling is up to the whims of nature and the fey, not your own choice. You must succeed at a Knowledge (nature) check or Perform check (DC = 20 + target’s HD) in addition to the spell’s material component to entice the fey into appearing, after which you can negotiate for the service and your payment. The maximum HD of fey that you can call with that casting is equal to the result of your check – 20. For example, if your check result is a 24, the maximum HD for the called fey is 4. A high result doesn’t allow you to break the HD maximum for the spell, and a result of 20 or less means you can’t call a fey at all. If the fey doesn’t like the sound of your offer, it can simply choose to refuse, in which case you don’t expend any of the material components for the spell, either the offerings or the payment."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.lesser-planar-ally is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Effect",
+                "value_raw": "one called fey, with 6 Hit Dice or fewer",
+                "kinds": [
+                  "effect"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Effect\",\"value_raw\":\"one called fey, with 6 Hit Dice or fewer\",\"kinds\":[\"effect\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as lesser planar ally, except that you entice a fey of 6 HD or fewer to lend you its aid with an offering of music or something else it finds appealing. Like lesser planar ally, this spell is unpredictable, and the fey who answers the calling is up to the whims of nature and the fey, not your own choice. You must succeed at a Knowledge (nature) check or Perform check (DC = 20 + target’s HD) in addition to the spell’s material component to entice the fey into appearing, after which you can negotiate for the service and your payment. The maximum HD of fey that you can call with that casting is equal to the result of your check – 20. For example, if your check result is a 24, the maximum HD for the called fey is 4. A high result doesn’t allow you to break the HD maximum for the spell, and a result of 20 or less means you can’t call a fey at all. If the fey doesn’t like the sound of your offer, it can simply choose to refuse, in which case you don’t expend any of the material components for the spell, either the offerings or the payment.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as lesser planar ally, except that you entice a fey of 6 HD or fewer to lend you its aid with an offering of music or something else it finds appealing. Like lesser planar ally, this spell is unpredictable, and the fey who answers the calling is up to the whims of nature and the fey, not your own choice. You must succeed at a Knowledge (nature) check or Perform check (DC = 20 + target’s HD) in addition to the spell’s material component to entice the fey into appearing, after which you can negotiate for the service and your payment. The maximum HD of fey that you can call with that casting is equal to the result of your check – 20. For example, if your check result is a 24, the maximum HD for the called fey is 4. A high result doesn’t allow you to break the HD maximum for the spell, and a result of 20 or less means you can’t call a fey at all. If the fey doesn’t like the sound of your offer, it can simply choose to refuse, in which case you don’t expend any of the material components for the spell, either the offerings or the payment.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -424,12 +470,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.entice-fey-lesser:functions_like:spell.lesser-planar-ally",
+      "relationship_id": "spell.entice-fey-lesser:functions_like:spell.planar-ally-lesser",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.lesser-planar-ally",
-        "name": "Lesser Planar Ally"
+        "entity_id": "spell.planar-ally-lesser",
+        "name": "Planar Ally, Lesser"
       },
       "status": "accepted",
       "evidence": [
@@ -945,14 +991,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.lesser-planar-ally is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",

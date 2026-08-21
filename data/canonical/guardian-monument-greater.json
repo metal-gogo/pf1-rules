@@ -18,7 +18,8 @@
       "list_name": "arcanist",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "arcanist 5"
+      "raw": "arcanist 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.bard",
@@ -26,7 +27,8 @@
       "list_name": "bard",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "bard 5"
+      "raw": "bard 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.inquisitor",
@@ -34,7 +36,8 @@
       "list_name": "inquisitor",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "inquisitor 5"
+      "raw": "inquisitor 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.occultist",
@@ -42,7 +45,8 @@
       "list_name": "occultist",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "occultist 5"
+      "raw": "occultist 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.psychic",
@@ -50,7 +54,8 @@
       "list_name": "psychic",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "psychic 5"
+      "raw": "psychic 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.skald",
@@ -58,7 +63,8 @@
       "list_name": "skald",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "skald 5"
+      "raw": "skald 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.sorcerer",
@@ -66,7 +72,8 @@
       "list_name": "sorcerer",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "sorcerer 5"
+      "raw": "sorcerer 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.witch",
@@ -74,7 +81,8 @@
       "list_name": "witch",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "witch 5"
+      "raw": "witch 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.wizard",
@@ -82,7 +90,8 @@
       "list_name": "wizard",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "wizard 5"
+      "raw": "wizard 5",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -187,17 +196,38 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.lesser-guardian-monument",
+      "from_spell_id": "spell.guardian-monument-lesser",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.guardian-monument-greater:3b0525d79f5c896e",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions as lesser guardian monument, except it grants DR 4/magic."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.lesser-guardian-monument is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as lesser guardian monument, except it grants DR 4/magic.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as lesser guardian monument, except it grants DR 4/magic.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -437,12 +467,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.guardian-monument-greater:functions_like:spell.lesser-guardian-monument",
+      "relationship_id": "spell.guardian-monument-greater:functions_like:spell.guardian-monument-lesser",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.lesser-guardian-monument",
-        "name": "Lesser Guardian Monument"
+        "entity_id": "spell.guardian-monument-lesser",
+        "name": "Guardian Monument, Lesser"
       },
       "status": "accepted",
       "evidence": [
@@ -616,14 +646,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.lesser-guardian-monument is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",

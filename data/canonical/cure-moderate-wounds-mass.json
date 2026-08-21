@@ -18,7 +18,8 @@
       "list_name": "bard",
       "level": 6,
       "scope": "core",
-      "raw": "bard 6"
+      "raw": "bard 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.cleric",
@@ -26,7 +27,8 @@
       "list_name": "cleric",
       "level": 6,
       "scope": "core",
-      "raw": "cleric 6"
+      "raw": "cleric 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.druid",
@@ -34,7 +36,8 @@
       "list_name": "druid",
       "level": 7,
       "scope": "core",
-      "raw": "druid 7"
+      "raw": "druid 7",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.inquisitor",
@@ -42,7 +45,8 @@
       "list_name": "inquisitor",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "inquisitor 6"
+      "raw": "inquisitor 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.occultist",
@@ -50,7 +54,8 @@
       "list_name": "occultist",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "occultist 6"
+      "raw": "occultist 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.oracle",
@@ -58,7 +63,8 @@
       "list_name": "oracle",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "oracle 6"
+      "raw": "oracle 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.shaman",
@@ -66,7 +72,8 @@
       "list_name": "shaman",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "shaman 6"
+      "raw": "shaman 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.skald",
@@ -74,7 +81,8 @@
       "list_name": "skald",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "skald 6"
+      "raw": "skald 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.warpriest",
@@ -82,7 +90,8 @@
       "list_name": "warpriest",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "warpriest 6"
+      "raw": "warpriest 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.witch",
@@ -90,7 +99,8 @@
       "list_name": "witch",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "witch 7"
+      "raw": "witch 7",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -189,17 +199,128 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.mass-cure-light-wounds",
+      "from_spell_id": "spell.cure-light-wounds-mass",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.cure-moderate-wounds-mass:09b148d5660be0ef",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions like mass cure light wounds, except that it cures 2d8 points of damage + 1 point per caster level (maximum +30)."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.mass-cure-light-wounds is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/range",
+          "value": {
+            "category": "close",
+            "formula": "close (25 ft. + 5 ft./2 levels)",
+            "raw": "close (25 ft. + 5 ft./2 levels)"
+          },
+          "source_field": "spell_raw.range_raw",
+          "raw": "close (25 ft. + 5 ft./2 levels)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "one creature/level, no two of which can be more than 30 ft. apart",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one creature/level, no two of which can be more than 30 ft. apart\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "multiple",
+            "subject_kind": "creature",
+            "selection": "selected",
+            "count": {
+              "kind": "per_level",
+              "fixed": null,
+              "formula": "one creature/level, no two of which can be more than 30 ft. apart",
+              "raw": "one creature/level, no two of which can be more than 30 ft. apart"
+            },
+            "separation": null,
+            "raw": "one creature/level, no two of which can be more than 30 ft. apart"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one creature/level, no two of which can be more than 30 ft. apart\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "instantaneous",
+            "formula": null,
+            "dismissible": null,
+            "concentration": null,
+            "raw": "instantaneous"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "instantaneous",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/saving_throw",
+          "value": {
+            "types": [
+              "will"
+            ],
+            "outcome": "Will half (harmless) or Will half; see text",
+            "harmless": true,
+            "object": null,
+            "conditional": true,
+            "raw": "Will half (harmless) or Will half; see text"
+          },
+          "source_field": "spell_raw.saving_throw_raw",
+          "raw": "Will half (harmless) or Will half; see text",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/spell_resistance",
+          "value": {
+            "applies": true,
+            "harmless": true,
+            "object": null,
+            "conditional": true,
+            "raw": "yes (harmless) or yes; see text"
+          },
+          "source_field": "spell_raw.spell_resistance_raw",
+          "raw": "yes (harmless) or yes; see text",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions like mass cure light wounds, except that it cures 2d8 points of damage + 1 point per caster level (maximum +30).",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions like mass cure light wounds, except that it cures 2d8 points of damage + 1 point per caster level (maximum +30).",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -459,12 +580,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.cure-moderate-wounds-mass:functions_like:spell.mass-cure-light-wounds",
+      "relationship_id": "spell.cure-moderate-wounds-mass:functions_like:spell.cure-light-wounds-mass",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.mass-cure-light-wounds",
-        "name": "Mass Cure Light Wounds"
+        "entity_id": "spell.cure-light-wounds-mass",
+        "name": "Cure Light Wounds, Mass"
       },
       "status": "accepted",
       "evidence": [
@@ -691,14 +812,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.mass-cure-light-wounds is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",

@@ -18,7 +18,8 @@
       "list_name": "arcanist",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "arcanist 8"
+      "raw": "arcanist 8",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.bard",
@@ -26,7 +27,8 @@
       "list_name": "bard",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "bard 6"
+      "raw": "bard 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.cleric",
@@ -34,7 +36,8 @@
       "list_name": "cleric",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "cleric 8"
+      "raw": "cleric 8",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.druid",
@@ -42,7 +45,8 @@
       "list_name": "druid",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "druid 8"
+      "raw": "druid 8",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.oracle",
@@ -50,7 +54,8 @@
       "list_name": "oracle",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "oracle 8"
+      "raw": "oracle 8",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.skald",
@@ -58,7 +63,8 @@
       "list_name": "skald",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "skald 6"
+      "raw": "skald 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.sorcerer",
@@ -66,7 +72,8 @@
       "list_name": "sorcerer",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "sorcerer 8"
+      "raw": "sorcerer 8",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.summoner",
@@ -74,7 +81,8 @@
       "list_name": "summoner",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "summoner 6"
+      "raw": "summoner 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.summoner-unchained",
@@ -82,7 +90,8 @@
       "list_name": "summoner (unchained)",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "summoner (unchained) 6"
+      "raw": "summoner (unchained) 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.witch",
@@ -90,7 +99,8 @@
       "list_name": "witch",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "witch 8"
+      "raw": "witch 8",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.wizard",
@@ -98,7 +108,8 @@
       "list_name": "wizard",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "wizard 8"
+      "raw": "wizard 8",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -177,17 +188,99 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.planar-travel-function-of-gate",
+      "from_spell_id": "spell.gate",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.fey-gate:aaf7719308d469d9",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions as the planar travel function of gate, except it can be used to travel only between points on the Material Plane and the First World, and it comes with additional dangers.\n\nThis spell forms a circular portal between 5 and 20 feet in diameter (your choice) oriented in the direction you desire when it comes into being (typically vertical and facing you). The portal is full of gray fog that blocks line of sight. Anyone or anything that moves through the portal to enter the First World is shunted instantly to a random point on that plane (the same point for everything traveling via a particular casting). At the end of the spell’s duration, the caster can attempt a DC 30 Spellcraft check. On a success, the portal remains open for 1d4+1 days. Creatures exiting the First World through a fey gate always arrive at the location the spell was cast.\n\nWhile the spell always deposits travelers on solid ground in the First World, it conveys no protections against whatever creatures or environmental hazards may be present there."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.planar-travel-function-of-gate is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/range",
+          "value": {
+            "category": "close",
+            "formula": "close (25 ft. + 5 ft./2 levels)",
+            "raw": "close (25 ft. + 5 ft./2 levels)"
+          },
+          "source_field": "spell_raw.range_raw",
+          "raw": "close (25 ft. + 5 ft./2 levels)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "none",
+            "entries": []
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "special",
+            "formula": "1 round/level; see text",
+            "dismissible": null,
+            "concentration": null,
+            "raw": "1 round/level; see text"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "1 round/level; see text",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as the planar travel function of gate, except it can be used to travel only between points on the Material Plane and the First World, and it comes with additional dangers.\n\nThis spell forms a circular portal between 5 and 20 feet in diameter (your choice) oriented in the direction you desire when it comes into being (typically vertical and facing you). The portal is full of gray fog that blocks line of sight. Anyone or anything that moves through the portal to enter the First World is shunted instantly to a random point on that plane (the same point for everything traveling via a particular casting). At the end of the spell’s duration, the caster can attempt a DC 30 Spellcraft check. On a success, the portal remains open for 1d4+1 days. Creatures exiting the First World through a fey gate always arrive at the location the spell was cast.\n\nWhile the spell always deposits travelers on solid ground in the First World, it conveys no protections against whatever creatures or environmental hazards may be present there.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as the planar travel function of gate, except it can be used to travel only between points on the Material Plane and the First World, and it comes with additional dangers.\n\nThis spell forms a circular portal between 5 and 20 feet in diameter (your choice) oriented in the direction you desire when it comes into being (typically vertical and facing you). The portal is full of gray fog that blocks line of sight. Anyone or anything that moves through the portal to enter the First World is shunted instantly to a random point on that plane (the same point for everything traveling via a particular casting). At the end of the spell’s duration, the caster can attempt a DC 30 Spellcraft check. On a success, the portal remains open for 1d4+1 days. Creatures exiting the First World through a fey gate always arrive at the location the spell was cast.\n\nWhile the spell always deposits travelers on solid ground in the First World, it conveys no protections against whatever creatures or environmental hazards may be present there.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -467,12 +560,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.fey-gate:functions_like:spell.planar-travel-function-of-gate",
+      "relationship_id": "spell.fey-gate:functions_like:spell.gate",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.planar-travel-function-of-gate",
-        "name": "Planar Travel Function Of Gate"
+        "entity_id": "spell.gate",
+        "name": "Gate"
       },
       "status": "accepted",
       "evidence": [
@@ -760,14 +853,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.planar-travel-function-of-gate is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",

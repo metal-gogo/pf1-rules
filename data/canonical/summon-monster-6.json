@@ -20,7 +20,8 @@
       "list_name": "arcanist",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "arcanist 6"
+      "raw": "arcanist 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.bard",
@@ -28,7 +29,8 @@
       "list_name": "bard",
       "level": 6,
       "scope": "core",
-      "raw": "bard 6"
+      "raw": "bard 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.cleric",
@@ -36,7 +38,8 @@
       "list_name": "cleric",
       "level": 6,
       "scope": "core",
-      "raw": "cleric 6"
+      "raw": "cleric 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.oracle",
@@ -44,7 +47,8 @@
       "list_name": "oracle",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "oracle 6"
+      "raw": "oracle 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.psychic",
@@ -52,7 +56,8 @@
       "list_name": "psychic",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "psychic 6"
+      "raw": "psychic 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.skald",
@@ -60,7 +65,8 @@
       "list_name": "skald",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "skald 6"
+      "raw": "skald 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.sorcerer",
@@ -68,7 +74,8 @@
       "list_name": "sorcerer",
       "level": 6,
       "scope": "core",
-      "raw": "sorcerer 6"
+      "raw": "sorcerer 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.spiritualist",
@@ -76,7 +83,8 @@
       "list_name": "spiritualist",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "spiritualist 6"
+      "raw": "spiritualist 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.summoner-unchained",
@@ -84,7 +92,8 @@
       "list_name": "summoner (unchained)",
       "level": 5,
       "scope": "later_first_party",
-      "raw": "summoner (unchained) 5"
+      "raw": "summoner (unchained) 5",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.warpriest",
@@ -92,7 +101,8 @@
       "list_name": "warpriest",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "warpriest 6"
+      "raw": "warpriest 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.witch",
@@ -100,7 +110,8 @@
       "list_name": "witch",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "witch 6"
+      "raw": "witch 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.wizard",
@@ -108,7 +119,8 @@
       "list_name": "wizard",
       "level": 6,
       "scope": "core",
-      "raw": "wizard 6"
+      "raw": "wizard 6",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -207,17 +219,38 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.summon-monster-i",
+      "from_spell_id": "spell.summon-monster-1",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.summon-monster-6:655bfc5b3826ec9e",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions like summon monster I, except you can summon one creature from the 6th-level list, 1d3 creatures of the same kind from the 5th-level list, or 1d4+1 creatures of the same kind from a lower-level list."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.summon-monster-i is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/description/raw",
+          "value": "This spell functions like summon monster I, except you can summon one creature from the 6th-level list, 1d3 creatures of the same kind from the 5th-level list, or 1d4+1 creatures of the same kind from a lower-level list.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions like summon monster I, except you can summon one creature from the 6th-level list, 1d3 creatures of the same kind from the 5th-level list, or 1d4+1 creatures of the same kind from a lower-level list.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -462,12 +495,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.summon-monster-6:functions_like:spell.summon-monster-i",
+      "relationship_id": "spell.summon-monster-6:functions_like:spell.summon-monster-1",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.summon-monster-i",
-        "name": "Summon Monster I"
+        "entity_id": "spell.summon-monster-1",
+        "name": "Summon Monster 1"
       },
       "status": "accepted",
       "evidence": [
@@ -647,14 +680,8 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
-    "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.summon-monster-i is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      }
-    ]
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
+    "warnings": []
   }
 }

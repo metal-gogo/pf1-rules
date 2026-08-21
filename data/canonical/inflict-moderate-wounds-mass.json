@@ -18,7 +18,8 @@
       "list_name": "cleric",
       "level": 6,
       "scope": "core",
-      "raw": "cleric 6"
+      "raw": "cleric 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.inquisitor",
@@ -26,7 +27,8 @@
       "list_name": "inquisitor",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "inquisitor 6"
+      "raw": "inquisitor 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.occultist",
@@ -34,7 +36,8 @@
       "list_name": "occultist",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "occultist 6"
+      "raw": "occultist 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.oracle",
@@ -42,7 +45,8 @@
       "list_name": "oracle",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "oracle 6"
+      "raw": "oracle 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.shaman",
@@ -50,7 +54,8 @@
       "list_name": "shaman",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "shaman 6"
+      "raw": "shaman 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.warpriest",
@@ -58,7 +63,8 @@
       "list_name": "warpriest",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "warpriest 6"
+      "raw": "warpriest 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.witch",
@@ -66,7 +72,8 @@
       "list_name": "witch",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "witch 7"
+      "raw": "witch 7",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -165,17 +172,38 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.mass-inflict-light-wounds",
+      "from_spell_id": "spell.inflict-light-wounds-mass",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.inflict-moderate-wounds-mass:f31fe81c00e2d124",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions like mass inflict light wounds, except that it deals 2d8 points of damage + 1 point per caster level (maximum +30)."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.mass-inflict-light-wounds is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/description/raw",
+          "value": "This spell functions like mass inflict light wounds, except that it deals 2d8 points of damage + 1 point per caster level (maximum +30).",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions like mass inflict light wounds, except that it deals 2d8 points of damage + 1 point per caster level (maximum +30).",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -361,12 +389,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.inflict-moderate-wounds-mass:functions_like:spell.mass-inflict-light-wounds",
+      "relationship_id": "spell.inflict-moderate-wounds-mass:functions_like:spell.inflict-light-wounds-mass",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.mass-inflict-light-wounds",
-        "name": "Mass Inflict Light Wounds"
+        "entity_id": "spell.inflict-light-wounds-mass",
+        "name": "Inflict Light Wounds, Mass"
       },
       "status": "accepted",
       "evidence": [
@@ -553,14 +581,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.mass-inflict-light-wounds is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",

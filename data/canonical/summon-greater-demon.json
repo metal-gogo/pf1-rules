@@ -21,7 +21,8 @@
       "list_name": "arcanist",
       "level": 9,
       "scope": "later_first_party",
-      "raw": "arcanist 9"
+      "raw": "arcanist 9",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.cleric",
@@ -29,7 +30,8 @@
       "list_name": "cleric",
       "level": 9,
       "scope": "later_first_party",
-      "raw": "cleric 9"
+      "raw": "cleric 9",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.oracle",
@@ -37,7 +39,8 @@
       "list_name": "oracle",
       "level": 9,
       "scope": "later_first_party",
-      "raw": "oracle 9"
+      "raw": "oracle 9",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.sorcerer",
@@ -45,7 +48,8 @@
       "list_name": "sorcerer",
       "level": 9,
       "scope": "later_first_party",
-      "raw": "sorcerer 9"
+      "raw": "sorcerer 9",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.witch",
@@ -53,7 +57,8 @@
       "list_name": "witch",
       "level": 9,
       "scope": "later_first_party",
-      "raw": "witch 9"
+      "raw": "witch 9",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.wizard",
@@ -61,7 +66,8 @@
       "list_name": "wizard",
       "level": 9,
       "scope": "later_first_party",
-      "raw": "wizard 9"
+      "raw": "wizard 9",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -160,17 +166,38 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.summon-monster",
+      "from_spell_id": "spell.summon-monster-1",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.summon-greater-demon:a1b41526846a3684",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions like summon monster, except it allows you to summon a single coloxus (Pathfinder RPG Bestiary 3 72), an omox demon (Pathfinder RPG Bestiary 2 79), or 1d3 kalavakus demons (Bestiary 2 78)."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.summon-monster is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/description/raw",
+          "value": "This spell functions like summon monster, except it allows you to summon a single coloxus (Pathfinder RPG Bestiary 3 72), an omox demon (Pathfinder RPG Bestiary 2 79), or 1d3 kalavakus demons (Bestiary 2 78).",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions like summon monster, except it allows you to summon a single coloxus (Pathfinder RPG Bestiary 3 72), an omox demon (Pathfinder RPG Bestiary 2 79), or 1d3 kalavakus demons (Bestiary 2 78).",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -295,12 +322,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.summon-greater-demon:functions_like:spell.summon-monster",
+      "relationship_id": "spell.summon-greater-demon:functions_like:spell.summon-monster-1",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.summon-monster",
-        "name": "Summon Monster"
+        "entity_id": "spell.summon-monster-1",
+        "name": "Summon Monster 1"
       },
       "status": "accepted",
       "evidence": [
@@ -514,14 +541,8 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
-    "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.summon-monster is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      }
-    ]
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
+    "warnings": []
   }
 }

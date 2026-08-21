@@ -18,7 +18,8 @@
       "list_name": "druid",
       "level": 9,
       "scope": "later_first_party",
-      "raw": "druid 9"
+      "raw": "druid 9",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.shaman",
@@ -26,7 +27,8 @@
       "list_name": "shaman",
       "level": 9,
       "scope": "later_first_party",
-      "raw": "shaman 9"
+      "raw": "shaman 9",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -125,17 +127,108 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.lesser-entice-fey",
+      "from_spell_id": "spell.entice-fey-lesser",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.entice-fey-greater:96c3b65fcabd2591",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions as lesser entice fey, except the spell’s whimsical calling can produce a single fey of 18 Hit Dice or less, or up to three fey of the same kind whose Hit Dice total no more than 18."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.lesser-entice-fey is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "material",
+              "details": "offerings worh 2,500 gp plus payment",
+              "cost_gp": 2500,
+              "raw": "M (offerings worh 2,500 gp plus payment)"
+            },
+            {
+              "type": "divine_focus",
+              "details": null,
+              "cost_gp": null,
+              "raw": "DF"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (offerings worh 2,500 gp plus payment), DF",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, M (offerings worh 2,500 gp plus payment), DF",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (offerings worh 2,500 gp plus payment), DF",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Effect",
+                "value_raw": "up to three called fey, totaling no more than 18 Hit Dice, no two of which can appear more than 30 ft. apart",
+                "kinds": [
+                  "effect"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Effect\",\"value_raw\":\"up to three called fey, totaling no more than 18 Hit Dice, no two of which can appear more than 30 ft. apart\",\"kinds\":[\"effect\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "unknown",
+            "formula": null,
+            "dismissible": null,
+            "concentration": null,
+            "raw": "instananeous"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "instananeous",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as lesser entice fey, except the spell’s whimsical calling can produce a single fey of 18 Hit Dice or less, or up to three fey of the same kind whose Hit Dice total no more than 18.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as lesser entice fey, except the spell’s whimsical calling can produce a single fey of 18 Hit Dice or less, or up to three fey of the same kind whose Hit Dice total no more than 18.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -214,12 +307,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.entice-fey-greater:functions_like:spell.lesser-entice-fey",
+      "relationship_id": "spell.entice-fey-greater:functions_like:spell.entice-fey-lesser",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.lesser-entice-fey",
-        "name": "Lesser Entice Fey"
+        "entity_id": "spell.entice-fey-lesser",
+        "name": "Entice Fey, Lesser"
       },
       "status": "accepted",
       "evidence": [
@@ -468,14 +561,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.lesser-entice-fey is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",

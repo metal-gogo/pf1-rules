@@ -20,7 +20,8 @@
       "list_name": "arcanist",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "arcanist 8"
+      "raw": "arcanist 8",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.cleric",
@@ -28,7 +29,8 @@
       "list_name": "cleric",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "cleric 8"
+      "raw": "cleric 8",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.oracle",
@@ -36,7 +38,8 @@
       "list_name": "oracle",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "oracle 8"
+      "raw": "oracle 8",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.sorcerer",
@@ -44,7 +47,8 @@
       "list_name": "sorcerer",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "sorcerer 8"
+      "raw": "sorcerer 8",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.summoner",
@@ -52,7 +56,8 @@
       "list_name": "summoner",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "summoner 6"
+      "raw": "summoner 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.summoner-unchained",
@@ -60,7 +65,8 @@
       "list_name": "summoner (unchained)",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "summoner (unchained) 6"
+      "raw": "summoner (unchained) 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.witch",
@@ -68,7 +74,8 @@
       "list_name": "witch",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "witch 8"
+      "raw": "witch 8",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.wizard",
@@ -76,7 +83,8 @@
       "list_name": "wizard",
       "level": 8,
       "scope": "later_first_party",
-      "raw": "wizard 8"
+      "raw": "wizard 8",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -169,17 +177,71 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.summon-monster",
+      "from_spell_id": "spell.summon-monster-1",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.summon-meladaemon:ed8e665b92450016",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions like summon monster, except it summons a single meladaemon."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.summon-monster is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "focus",
+              "details": "an empty wooden bowl",
+              "cost_gp": null,
+              "raw": "F (an empty wooden bowl)"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, F (an empty wooden bowl)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, F (an empty wooden bowl)",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, F (an empty wooden bowl)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions like summon monster, except it summons a single meladaemon.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions like summon monster, except it summons a single meladaemon.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -385,12 +447,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.summon-meladaemon:functions_like:spell.summon-monster",
+      "relationship_id": "spell.summon-meladaemon:functions_like:spell.summon-monster-1",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.summon-monster",
-        "name": "Summon Monster"
+        "entity_id": "spell.summon-monster-1",
+        "name": "Summon Monster 1"
       },
       "status": "accepted",
       "evidence": [
@@ -651,14 +713,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.summon-monster is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",

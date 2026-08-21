@@ -36,6 +36,12 @@ pnpm verify
 
 ## Implementation and design notes
 
+`pnpm ingest:dependencies` reconciles dependency references across every spell-level
+manifest. It resolves canonical names and known aliases, ingests missing parents from
+existing raw captures without downloading new sources, regenerates children that had
+missing parents, and rebuilds the dependency queues from current observation evidence.
+The command is idempotent; a completed run reports no pending dependencies.
+
 - [Ingestion implementation](../src/ingestion/)
 - [Level-0 ingestion queue](../findings/17-level-zero-ingestion-queue.md)
 - [Level-0 bulk ingestion result](../findings/18-level-zero-bulk-ingestion.md)

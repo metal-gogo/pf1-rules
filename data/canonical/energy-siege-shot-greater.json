@@ -20,7 +20,8 @@
       "list_name": "arcanist",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "arcanist 6"
+      "raw": "arcanist 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.occultist",
@@ -28,7 +29,8 @@
       "list_name": "occultist",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "occultist 6"
+      "raw": "occultist 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.sorcerer",
@@ -36,7 +38,8 @@
       "list_name": "sorcerer",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "sorcerer 6"
+      "raw": "sorcerer 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.summoner",
@@ -44,7 +47,8 @@
       "list_name": "summoner",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "summoner 6"
+      "raw": "summoner 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.wizard",
@@ -52,7 +56,8 @@
       "list_name": "wizard",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "wizard 6"
+      "raw": "wizard 6",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -157,17 +162,75 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.energy-shot",
+      "from_spell_id": "spell.energy-siege-shot",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.energy-siege-shot-greater:0c35289318d834a0",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions like energy shot, except it can target siege engines of any size, not just Large siege engines."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.energy-shot is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "one siege engine of any size",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one siege engine of any size\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "single",
+            "subject_kind": "other",
+            "selection": "selected",
+            "count": {
+              "kind": "fixed",
+              "fixed": 1,
+              "formula": null,
+              "raw": "one siege engine of any size"
+            },
+            "separation": null,
+            "raw": "one siege engine of any size"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one siege engine of any size\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions like energy shot, except it can target siege engines of any size, not just Large siege engines.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions like energy shot, except it can target siege engines of any size, not just Large siege engines.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -299,12 +362,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.energy-siege-shot-greater:functions_like:spell.energy-shot",
+      "relationship_id": "spell.energy-siege-shot-greater:functions_like:spell.energy-siege-shot",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.energy-shot",
-        "name": "Energy Shot"
+        "entity_id": "spell.energy-siege-shot",
+        "name": "Energy Siege Shot"
       },
       "status": "accepted",
       "evidence": [
@@ -518,14 +581,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.energy-shot is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",

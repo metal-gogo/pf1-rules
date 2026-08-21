@@ -9,8 +9,10 @@ import {
   type GeneratedEntity,
   detectSpellInheritance,
   generateCanonicalBundle,
+  normalizeUnresolvedSpellReference,
   NormalizationIssue,
   type ParsedObservationInput,
+  resolveCanonicalSpellReference,
 } from "./normalize-level-zero.js";
 import {
   parseAonSpell,
@@ -528,9 +530,7 @@ function refreshDiscoveredDependencies(
 ): void {
   const canonicalIds = new Set(canonicalSpells.keys());
   const catalogIds = new Set(manifest.spells.map((spell: ValidatedJson) => spell.spell_id));
-  const dependencies = new Map<string, ValidatedJson>(
-    (manifest.discovered_dependencies ?? []).map((dependency: ValidatedJson) => [dependency.spell_id, dependency]),
-  );
+  const dependencies = new Map<string, ValidatedJson>();
   const add = (
     spellId: string,
     name: string,
@@ -538,22 +538,26 @@ function refreshDiscoveredDependencies(
     reason: "rules_inheritance" | "linked_spell",
     evidence: ValidatedJson,
   ) => {
-    if (catalogIds.has(spellId)) return;
-    const existing = dependencies.get(spellId);
-    const resolvedUrl = sourceUrl ?? `https://www.aonprd.com/SpellDisplay.aspx?ItemName=${encodeURIComponent(name)}`;
+    const canonical = resolveCanonicalSpellReference(name, canonicalSpells, spellId);
+    const unresolved = canonical ? null : normalizeUnresolvedSpellReference(name);
+    const resolvedSpellId = canonical?.spell_id ?? unresolved?.spellId ?? spellId;
+    const resolvedName = canonical?.name ?? unresolved?.name ?? name;
+    if (catalogIds.has(resolvedSpellId)) return;
+    const existing = dependencies.get(resolvedSpellId);
+    const resolvedUrl = sourceUrl ?? `https://www.aonprd.com/SpellDisplay.aspx?ItemName=${encodeURIComponent(resolvedName)}`;
     if (!existing) {
-      dependencies.set(spellId, {
-        spell_id: spellId,
-        name,
+      dependencies.set(resolvedSpellId, {
+        spell_id: resolvedSpellId,
+        name: resolvedName,
         source_url: resolvedUrl,
         reason,
-        status: canonicalIds.has(spellId) ? "ingested" : "pending",
+        status: canonicalIds.has(resolvedSpellId) ? "ingested" : "pending",
         discovered_from: [evidence],
       });
       return;
     }
     if (reason === "rules_inheritance") existing.reason = reason;
-    if (canonicalIds.has(spellId)) {
+    if (canonicalIds.has(resolvedSpellId)) {
       existing.status = "ingested";
       delete existing.issue;
     }
@@ -642,35 +646,49 @@ async function ingestSpell(
     inputs.push(aonObservation.input);
 
     const legacyEntry = legacyEntries.get(spell.name.toLocaleLowerCase("en-US"));
-    if (legacyEntry) {
-      const legacyCapture = await capture(legacyEntry.href, path.join(rawDirectory, "legacy_aon.html"));
-      const legacyParsed = parseLegacySpell(legacyCapture.body, legacyEntry.href, legacyEntry);
-      const legacyObservation = observation("legacy_aon", spell.spell_id, legacyCapture, legacyParsed, observationDirectory);
-      writeObservationJson(path.join(observationDirectory, `legacy_aon-${parserVersion}.json`), legacyObservation.record);
-      inputs.push(legacyObservation.input);
-    } else {
+    const legacyRawPath = path.join(rawDirectory, "legacy_aon.html");
+    const hasCachedLegacy = fs.existsSync(legacyRawPath) && fs.existsSync(`${legacyRawPath}.meta.json`);
+    let acceptedLegacy = false;
+    if (legacyEntry && (!offlineOnly || hasCachedLegacy)) {
+      try {
+        const legacyCapture = await capture(legacyEntry.href, legacyRawPath);
+        const legacyParsed = parseLegacySpell(legacyCapture.body, legacyEntry.href, legacyEntry);
+        const legacyObservation = observation("legacy_aon", spell.spell_id, legacyCapture, legacyParsed, observationDirectory);
+        writeObservationJson(path.join(observationDirectory, `legacy_aon-${parserVersion}.json`), legacyObservation.record);
+        inputs.push(legacyObservation.input);
+        acceptedLegacy = true;
+      } catch (error) {
+        if (!offlineOnly) throw error;
+        // AoN remains the canonical baseline when a grouped legacy page lacks the expected bounded entry.
+      }
+    }
+    if (!acceptedLegacy && !legacyEntry) {
       writeGeneratedJson(
         path.join(projectRoot, "data", "coverage", `${artifactScope}-${spellSlug}-legacy.json`),
         legacyCoverageCheck(spell, legacyIndex, artifactScope),
       );
     }
 
-    const d20Resolution = await resolveD20Spell(spell.name, rawDirectory, offlineOnly);
-    if ("coverageCapture" in d20Resolution) {
-      writeGeneratedJson(
-        path.join(projectRoot, "data", "coverage", `${artifactScope}-${spellSlug}-d20pfsrd.json`),
-        d20CoverageCheck(spell, d20Resolution.coverageCapture, artifactScope),
-      );
-    } else {
-      const d20Observation = observation(
-        "d20pfsrd",
-        spell.spell_id,
-        d20Resolution.captureResult,
-        d20Resolution.parsed,
-        observationDirectory,
-      );
-      writeObservationJson(path.join(observationDirectory, `d20pfsrd-${parserVersion}.json`), d20Observation.record);
-      inputs.push(d20Observation.input);
+    try {
+      const d20Resolution = await resolveD20Spell(spell.name, rawDirectory, offlineOnly);
+      if ("coverageCapture" in d20Resolution) {
+        writeGeneratedJson(
+          path.join(projectRoot, "data", "coverage", `${artifactScope}-${spellSlug}-d20pfsrd.json`),
+          d20CoverageCheck(spell, d20Resolution.coverageCapture, artifactScope),
+        );
+      } else {
+        const d20Observation = observation(
+          "d20pfsrd",
+          spell.spell_id,
+          d20Resolution.captureResult,
+          d20Resolution.parsed,
+          observationDirectory,
+        );
+        writeObservationJson(path.join(observationDirectory, `d20pfsrd-${parserVersion}.json`), d20Observation.record);
+        inputs.push(d20Observation.input);
+      }
+    } catch (error) {
+      if (!offlineOnly) throw error;
     }
 
     const bundle = generateCanonicalBundle(spell.spell_id, inputs, availableCanonicalSpells);
@@ -951,61 +969,147 @@ export async function retryD20SourceFailures(requestedLevel?: number) {
 
 
 export async function ingestDiscoveredDependencies() {
-  const { manifestPath, registryId, registryPath } = levelPaths(0);
-  await assertIngestionSourcesAllowed();
-  const legacyIndex = await capture(
-    legacyIndexUrl,
-    path.join(projectRoot, "data", "raw", "level-zero", "legacy-spell-index.html"),
-  );
-  const legacyEntries = parseLegacyIndex(legacyIndex.body, legacyIndex.url);
-  const manifest = loadJson(manifestPath);
-  const baseEntityIds = registeredIdsExcludingBulk(registryPath);
-  const bulkEntities = new Map<string, GeneratedEntity>();
-  if (fs.existsSync(registryPath)) {
-    for (const entity of loadJson(registryPath).entities) bulkEntities.set(entity.entity_id, entity);
-  }
-  const availableCanonicalSpells = new Map(
+  let availableCanonicalSpells = new Map(
     directJsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) => {
       const record = loadJson(filename);
       return [record.spell_id, record] as const;
     }),
   );
-  const report = { ingested: [] as string[], issues: [] as string[], skipped: [] as string[] };
-  for (const dependency of manifest.discovered_dependencies ?? []) {
-    if (availableCanonicalSpells.has(dependency.spell_id) && !refreshCanonical) {
-      dependency.status = "ingested";
-      delete dependency.issue;
-      report.skipped.push(dependency.name);
+
+  const manifests = Array.from({ length: 10 }, (_, level) => {
+    const paths = levelPaths(level);
+    return { level, paths, manifest: loadJson(paths.manifestPath) };
+  });
+  const requestedIds = new Set<string>();
+  for (const { manifest } of manifests) {
+    for (const dependency of manifest.discovered_dependencies ?? []) {
+      if (dependency.status !== "pending") continue;
+      const canonical = resolveCanonicalSpellReference(
+        dependency.name,
+        availableCanonicalSpells,
+        dependency.spell_id,
+      );
+      if (canonical) continue;
+      const unresolved = normalizeUnresolvedSpellReference(dependency.name);
+      requestedIds.add(unresolved?.spellId ?? dependency.spell_id);
+    }
+  }
+
+  const catalogCandidates = new Map<string, Array<{ level: number; spell: ValidatedJson }>>();
+  for (const { level, manifest } of manifests) {
+    for (const spell of manifest.spells) {
+      const candidates = catalogCandidates.get(spell.spell_id) ?? [];
+      candidates.push({ level, spell });
+      catalogCandidates.set(spell.spell_id, candidates);
+    }
+  }
+
+  const report = {
+    ingested: [] as string[],
+    reconciled: [] as string[],
+    issues: [] as string[],
+    skipped: [] as string[],
+    pending: [] as string[],
+  };
+  for (const spellId of [...requestedIds].sort()) {
+    if (availableCanonicalSpells.has(spellId)) {
+      report.skipped.push(spellId);
       continue;
     }
-    const candidate: ValidatedJson = {
-      spell_id: dependency.spell_id,
-      name: dependency.name,
-      source_url: dependency.source_url,
-    };
-    const result = await ingestSpell(
-      candidate,
-      legacyIndex,
-      legacyEntries,
-      availableCanonicalSpells,
-      bulkEntities,
-      baseEntityIds,
-      "dependencies",
+    const candidates = catalogCandidates.get(spellId) ?? [];
+    const candidate = candidates.find(({ level }) => {
+      const { artifactScope } = levelPaths(level);
+      const rawDirectory = path.join(projectRoot, "data", "raw", artifactScope, spellId.replace(/^spell\./, ""));
+      return fs.existsSync(path.join(rawDirectory, "aon.html")) &&
+        fs.existsSync(path.join(rawDirectory, "aon.html.meta.json"));
+    });
+    if (!candidate) {
+      report.pending.push(spellId);
+      continue;
+    }
+    const batchReport = await ingestSpellLevelBatch(
+      candidate.level,
+      Number(candidate.spell.batch),
+      false,
+      false,
+      false,
+      true,
+      undefined,
+      new Set([spellId]),
+      true,
     );
-    dependency.status = result === "ingested" ? "ingested" : "issue";
-    if (candidate.issue) dependency.issue = candidate.issue;
-    else delete dependency.issue;
-    report[result === "ingested" ? "ingested" : "issues"].push(dependency.name);
-    writeGeneratedJson(manifestPath, manifest, true);
-    writeGeneratedJson(registryPath, {
-      $schema: "../../schemas/entity-registry.schema.json",
-      schema_version: "0.1.0",
-      registry_id: registryId,
-      entities: [...bulkEntities.values()].sort((left, right) => left.entity_id.localeCompare(right.entity_id)),
-    }, true);
+    report.ingested.push(...batchReport.ingested);
+    report.issues.push(...batchReport.issues);
+    report.skipped.push(...batchReport.skipped);
   }
-  refreshDiscoveredDependencies(manifest, availableCanonicalSpells);
-  writeGeneratedJson(manifestPath, manifest, true);
+
+  availableCanonicalSpells = new Map(
+    directJsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) => {
+      const record = loadJson(filename);
+      return [record.spell_id, record] as const;
+    }),
+  );
+  const ingestedDependencyIds = new Set(
+    [...requestedIds].filter((spellId) => availableCanonicalSpells.has(spellId)),
+  );
+  const reconciliationGroups = new Map<string, { level: number; batch: number; spellIds: Set<string> }>();
+  for (const record of availableCanonicalSpells.values()) {
+    if (!(record.rules_inheritance ?? []).some((rule: ValidatedJson) => rule.resolution_status === "missing_parent")) {
+      continue;
+    }
+    const candidates = catalogCandidates.get(record.spell_id) ?? [];
+    const candidate = candidates.find(({ level }) => {
+      const { artifactScope } = levelPaths(level);
+      const rawDirectory = path.join(projectRoot, "data", "raw", artifactScope, record.spell_id.replace(/^spell\./, ""));
+      return fs.existsSync(path.join(rawDirectory, "aon.html")) &&
+        fs.existsSync(path.join(rawDirectory, "aon.html.meta.json"));
+    });
+    if (!candidate) continue;
+    const batch = Number(candidate.spell.batch);
+    const key = `${candidate.level}:${batch}`;
+    const group = reconciliationGroups.get(key) ?? { level: candidate.level, batch, spellIds: new Set<string>() };
+    group.spellIds.add(record.spell_id);
+    reconciliationGroups.set(key, group);
+  }
+  for (const group of [...reconciliationGroups.values()].sort((left, right) =>
+    left.level - right.level || left.batch - right.batch
+  )) {
+    const batchReport = await ingestSpellLevelBatch(
+      group.level,
+      group.batch,
+      false,
+      false,
+      false,
+      true,
+      undefined,
+      group.spellIds,
+      true,
+    );
+    report.reconciled.push(...batchReport.ingested);
+    report.issues.push(...batchReport.issues);
+  }
+
+  availableCanonicalSpells = new Map(
+    directJsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) => {
+      const record = loadJson(filename);
+      return [record.spell_id, record] as const;
+    }),
+  );
+  report.pending = [];
+  for (const { paths } of manifests) {
+    const manifest = loadJson(paths.manifestPath);
+    for (const spell of manifest.spells) {
+      if (ingestedDependencyIds.has(spell.spell_id)) delete spell.issue;
+    }
+    refreshDiscoveredDependencies(manifest, availableCanonicalSpells);
+    writeGeneratedJson(paths.manifestPath, manifest, true);
+    for (const dependency of manifest.discovered_dependencies ?? []) {
+      if (dependency.status === "pending" && !report.pending.includes(dependency.spell_id)) {
+        report.pending.push(dependency.spell_id);
+      }
+    }
+  }
+  report.pending.sort();
   validatePackage();
   return report;
 }

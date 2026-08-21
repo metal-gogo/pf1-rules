@@ -21,7 +21,8 @@
       "list_name": "mesmerist",
       "level": 3,
       "scope": "later_first_party",
-      "raw": "mesmerist 3"
+      "raw": "mesmerist 3",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.psychic",
@@ -29,7 +30,8 @@
       "list_name": "psychic",
       "level": 3,
       "scope": "later_first_party",
-      "raw": "psychic 3"
+      "raw": "psychic 3",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -128,17 +130,80 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.telempathic-projectionoa",
+      "from_spell_id": "spell.telempathic-projection",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.implanted-projection:31a937cfd49a31be",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions as telempathic projectionOA, except its mood-altering effects remain dormant in the target’s mind. Upon casting this spell, the caster designates a command word or phrase, of which the target retains no memory. The next creature to speak the command word or phrase to the target triggers the implanted telempathic projection, treating the speaker as the original spellcaster."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.telempathic-projectionoa is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "timed",
+            "formula": "1 day/level",
+            "dismissible": null,
+            "concentration": null,
+            "raw": "1 day/level"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "1 day/level",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/saving_throw",
+          "value": {
+            "types": [
+              "will"
+            ],
+            "outcome": "Will negates",
+            "harmless": null,
+            "object": null,
+            "conditional": null,
+            "raw": "Will negates"
+          },
+          "source_field": "spell_raw.saving_throw_raw",
+          "raw": "Will negates",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/spell_resistance",
+          "value": {
+            "applies": true,
+            "harmless": null,
+            "object": null,
+            "conditional": null,
+            "raw": "Yes"
+          },
+          "source_field": "spell_raw.spell_resistance_raw",
+          "raw": "Yes",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as telempathic projectionOA, except its mood-altering effects remain dormant in the target’s mind. Upon casting this spell, the caster designates a command word or phrase, of which the target retains no memory. The next creature to speak the command word or phrase to the target triggers the implanted telempathic projection, treating the speaker as the original spellcaster.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as telempathic projectionOA, except its mood-altering effects remain dormant in the target’s mind. Upon casting this spell, the caster designates a command word or phrase, of which the target retains no memory. The next creature to speak the command word or phrase to the target triggers the implanted telempathic projection, treating the speaker as the original spellcaster.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -197,12 +262,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.implanted-projection:functions_like:spell.telempathic-projectionoa",
+      "relationship_id": "spell.implanted-projection:functions_like:spell.telempathic-projection",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.telempathic-projectionoa",
-        "name": "Telempathic Projectionoa"
+        "entity_id": "spell.telempathic-projection",
+        "name": "Telempathic Projection"
       },
       "status": "accepted",
       "evidence": [
@@ -511,14 +576,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.telempathic-projectionoa is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",

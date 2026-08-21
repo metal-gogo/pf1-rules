@@ -21,7 +21,8 @@
       "list_name": "arcanist",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "arcanist 7"
+      "raw": "arcanist 7",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.bard",
@@ -29,7 +30,8 @@
       "list_name": "bard",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "bard 6"
+      "raw": "bard 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.psychic",
@@ -37,7 +39,8 @@
       "list_name": "psychic",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "psychic 7"
+      "raw": "psychic 7",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.skald",
@@ -45,7 +48,8 @@
       "list_name": "skald",
       "level": 6,
       "scope": "later_first_party",
-      "raw": "skald 6"
+      "raw": "skald 6",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.sorcerer",
@@ -53,7 +57,8 @@
       "list_name": "sorcerer",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "sorcerer 7"
+      "raw": "sorcerer 7",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.witch",
@@ -61,7 +66,8 @@
       "list_name": "witch",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "witch 7"
+      "raw": "witch 7",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.wizard",
@@ -69,7 +75,8 @@
       "list_name": "wizard",
       "level": 7,
       "scope": "later_first_party",
-      "raw": "wizard 7"
+      "raw": "wizard 7",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -168,17 +175,51 @@
   },
   "rules_inheritance": [
     {
-      "from_spell_id": "spell.greater-heroism",
+      "from_spell_id": "spell.heroism-greater",
       "relationship": "functions_like",
       "basis": {
         "observation_id": "aon:spell.hollow-heroism-greater:914635085cf42922",
         "source_field": "spell_raw.description_raw",
         "raw": "This spell functions as greater heroism, except that you can reverse the spell by issuing a special command as a standard action if you are within medium range (100 feet + 10 feet per caster level) of the target. The target loses the bonuses and instead takes a –4 penalty on attack rolls, saving throws, and skill checks until the spell’s duration ends (no save), increasing to a –8 penalty against fear effects. Additionally, she takes damage equal to your caster level when you reverse the spell.\n\nAttempts to identify greater hollow heroism with a skill check incorrectly identify it as greater heroism."
       },
-      "inherited_paths": [],
-      "overrides": [],
-      "resolution_status": "missing_parent",
-      "note": "The functions-like dependency is explicit, but spell.greater-heroism is not canonical yet. The child's printed stat block remains materialized."
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "timed",
+            "formula": "1 minute/level (D)",
+            "dismissible": true,
+            "concentration": null,
+            "raw": "1 minute/level (D)"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "1 minute/level (D)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as greater heroism, except that you can reverse the spell by issuing a special command as a standard action if you are within medium range (100 feet + 10 feet per caster level) of the target. The target loses the bonuses and instead takes a –4 penalty on attack rolls, saving throws, and skill checks until the spell’s duration ends (no save), increasing to a –8 penalty against fear effects. Additionally, she takes damage equal to your caster level when you reverse the spell.\n\nAttempts to identify greater hollow heroism with a skill check incorrectly identify it as greater heroism.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as greater heroism, except that you can reverse the spell by issuing a special command as a standard action if you are within medium range (100 feet + 10 feet per caster level) of the target. The target loses the bonuses and instead takes a –4 penalty on attack rolls, saving throws, and skill checks until the spell’s duration ends (no save), increasing to a –8 penalty against fear effects. Additionally, she takes damage equal to your caster level when you reverse the spell.\n\nAttempts to identify greater hollow heroism with a skill check incorrectly identify it as greater heroism.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
     }
   ],
   "relationships": [
@@ -364,12 +405,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.hollow-heroism-greater:functions_like:spell.greater-heroism",
+      "relationship_id": "spell.hollow-heroism-greater:functions_like:spell.heroism-greater",
       "type": "functions_like",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.greater-heroism",
-        "name": "Greater Heroism"
+        "entity_id": "spell.heroism-greater",
+        "name": "Heroism, Greater"
       },
       "status": "accepted",
       "evidence": [
@@ -759,14 +800,9 @@
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
-      {
-        "code": "UNRESOLVED_INHERITANCE",
-        "field_path": "/rules_inheritance/0",
-        "message": "The explicit parent chain through spell.greater-heroism is not fully canonical yet; the printed child record is preserved but the inheritance chain cannot be materialized."
-      },
       {
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
