@@ -28,18 +28,43 @@ describe("local rules browser", () => {
     const html = await response.text();
     expect(response.status).toBe(200);
     expect(html).toContain('<nav aria-label="Primary navigation">');
+    expect(html).toContain('<a href="/spells">Spell lists</a>');
     expect(html).toContain('<main id="content">');
     expect(html).toContain("Database summary");
   });
 
-  it("uses class spell lists as the primary spell directory", async () => {
+  it("lists every ingested spell-list source kind", async () => {
     const response = await fetch(`${baseUrl}/spells`);
     const html = await response.text();
     expect(response.status).toBe(200);
-    expect(html).toContain("<h1>Spells by class</h1>");
+    expect(html).toContain("<h1>Spell lists by source</h1>");
+    expect(html).toContain('<nav class="spell-list-kinds" aria-label="Spell list kinds">');
+    for (const heading of [
+      "Classes",
+      "Domains",
+      "Subdomains",
+      "Bloodlines",
+      "Mysteries",
+      "Patrons",
+      "Spirits",
+      "Elemental schools",
+      "Feats",
+      "Formulae",
+    ]) {
+      expect(html).toContain(`<h2>${heading} `);
+    }
     expect(html.match(/href="\/classes\/cleric"/g)).toHaveLength(1);
     expect(html).toContain('/classes/wizard');
     expect(html).not.toContain('/classes/sahir-afiyun');
+    expect(html).toContain('/lists/spell-list.air-domain');
+    expect(html).toContain('/lists/spell-list.cloud-subdomain');
+    expect(html).toContain('/lists/spell-list.sorcerer-arcane-bloodline');
+    expect(html).toContain('/lists/spell-list.flame-mystery');
+    expect(html).toContain('/lists/spell-list.water-patron');
+    expect(html).toContain('/lists/spell-list.flame-spirit');
+    expect(html).toContain('/lists/spell-list.fire-elemental-school');
+    expect(html).toContain('/lists/spell-list.sahir-afiyun');
+    expect(html).toContain('/lists/spell-list.alchemist');
     expect(html).toContain('/spells/alphabetical');
   });
 

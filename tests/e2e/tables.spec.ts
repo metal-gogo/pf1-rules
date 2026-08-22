@@ -26,6 +26,28 @@ test("alphabetical catalog contains overflow and bounds its result set", async (
   await expect(page.getByRole("link", { name: "L", exact: true })).toHaveAttribute("aria-current", "true");
 });
 
+test("spell-list directory exposes every source kind without page overflow", async ({ page }) => {
+  await page.goto("/spells");
+
+  await expect(page.getByRole("heading", { level: 1, name: "Spell lists by source" })).toBeVisible();
+  const kinds = page.getByRole("navigation", { name: "Spell list kinds" });
+  for (const name of [
+    "Classes",
+    "Domains",
+    "Subdomains",
+    "Bloodlines",
+    "Mysteries",
+    "Patrons",
+    "Spirits",
+    "Elemental schools",
+    "Feats",
+    "Formulae",
+  ]) {
+    await expect(kinds.getByRole("link", { name: new RegExp(`^${name} \\(`) })).toBeVisible();
+  }
+  await expectNoPageOverflow(page);
+});
+
 test("class tables retain context and use four focused columns", async ({ page }) => {
   await page.goto("/classes/cleric");
 

@@ -47,10 +47,12 @@ dd { margin-block-end: .65rem; }
 .visually-hidden { clip: rect(0 0 0 0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
 .muted { color: GrayText; }
 .notice { border: 1px solid; padding: .75rem; }
-.class-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem; list-style: none; padding: 0; }
-.class-grid li { border: 1px solid; padding: 1rem; }
-.class-grid a { display: block; font-size: 1.15rem; font-weight: 700; }
-.class-grid p { margin-block: .25rem 0; }
+.spell-list-kinds ul { display: flex; flex-wrap: wrap; gap: .35rem 1rem; }
+.spell-list-section { margin-block: 2.5rem; }
+.spell-list-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 1rem; list-style: none; padding: 0; }
+.spell-list-grid li { border: 1px solid; padding: 1rem; }
+.spell-list-grid a { display: block; font-size: 1.15rem; font-weight: 700; }
+.spell-list-grid p { margin-block: .25rem 0; }
 .sticky-spell-controls { background: Canvas; padding-block: .5rem; position: sticky; top: 0; z-index: 2; }
 .spell-filters { border: 1px solid; margin-block: 0 1rem; padding: .75rem; }
 .spell-filter-bar { align-items: end; display: grid; gap: .5rem; grid-template-columns: minmax(12rem, 1fr) auto auto; }
@@ -478,7 +480,7 @@ function page(title: string, content: string): string {
     <a href="/">PF1 Rules</a>
     <nav aria-label="Primary navigation">
       <ul>
-        <li><a href="/spells">Classes</a></li>
+        <li><a href="/spells">Spell lists</a></li>
         <li><a href="/spells/alphabetical">Alphabetical</a></li>
         <li><a href="/entities">Entities</a></li>
         <li><a href="/search">Search</a></li>
@@ -547,20 +549,47 @@ async function homePage(prisma: PrismaClient): Promise<string> {
     <section aria-labelledby="start-browsing">
       <h2 id="start-browsing">Start browsing</h2>
       <ul>${spells.map((spell) => `<li><a href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a> <span class="muted">(${escapeHtml(spell.school)})</span></li>`).join("")}</ul>
-      <p><a href="/spells">Browse spells by class</a> or <a href="/spells/alphabetical">view all spells alphabetically</a>.</p>
+      <p><a href="/spells">Browse spells by spell list</a> or <a href="/spells/alphabetical">view all spells alphabetically</a>.</p>
     </section>`);
 }
 
-async function classesPage(prisma: PrismaClient): Promise<string> {
-  const classNameGroups = await prisma.spellLevel.groupBy({
-    by: ["spellListId", "listName"],
-    where: { listKind: "class" },
+const spellListKindTitles: Record<string, string> = {
+  class: "Classes",
+  domain: "Domains",
+  subdomain: "Subdomains",
+  bloodline: "Bloodlines",
+  mystery: "Mysteries",
+  patron: "Patrons",
+  spirit: "Spirits",
+  elemental_school: "Elemental schools",
+  feat: "Feats",
+  formulae: "Formulae",
+};
+
+const spellListKindOrder = Object.keys(spellListKindTitles);
+
+function spellListKindTitle(kind: string): string {
+  return spellListKindTitles[kind] ?? humanize(kind);
+}
+
+function spellListKindAnchor(kind: string): string {
+  return kind.replaceAll("_", "-");
+}
+
+function spellListDirectoryHref(listKind: string, listId: string): string {
+  return listKind === "class" ? classHref(listId) : listHref(listId);
+}
+
+async function spellListsPage(prisma: PrismaClient): Promise<string> {
+  const nameGroups = await prisma.spellLevel.groupBy({
+    by: ["listKind", "spellListId", "listName"],
     _count: { _all: true },
     _min: { spellLevel: true },
     _max: { spellLevel: true },
-    orderBy: { listName: "asc" },
+    orderBy: [{ listKind: "asc" }, { listName: "asc" }],
   });
-  const classesById = new Map<string, {
+  const listsByKindAndId = new Map<string, {
+    listKind: string;
     spellListId: string;
     listName: string;
     nameCount: number;
@@ -568,13 +597,15 @@ async function classesPage(prisma: PrismaClient): Promise<string> {
     minimumLevel: number;
     maximumLevel: number;
   }>();
-  for (const group of classNameGroups) {
-    const existing = classesById.get(group.spellListId);
+  for (const group of nameGroups) {
+    const key = `${group.listKind}:${group.spellListId}`;
+    const existing = listsByKindAndId.get(key);
     const groupCount = group._count._all;
     const minimumLevel = group._min.spellLevel ?? 0;
     const maximumLevel = group._max.spellLevel ?? minimumLevel;
     if (!existing) {
-      classesById.set(group.spellListId, {
+      listsByKindAndId.set(key, {
+        listKind: group.listKind,
         spellListId: group.spellListId,
         listName: group.listName,
         nameCount: groupCount,
@@ -592,19 +623,44 @@ async function classesPage(prisma: PrismaClient): Promise<string> {
       existing.nameCount = groupCount;
     }
   }
-  const classes = [...classesById.values()].sort((left, right) => left.listName.localeCompare(right.listName));
+  const groups = new Map<string, Array<(typeof listsByKindAndId extends Map<string, infer Value> ? Value : never)>>();
+  for (const list of listsByKindAndId.values()) {
+    const lists = groups.get(list.listKind) ?? [];
+    lists.push(list);
+    groups.set(list.listKind, lists);
+  }
+  const orderedGroups = [...groups].sort(([left], [right]) => {
+    const leftIndex = spellListKindOrder.indexOf(left);
+    const rightIndex = spellListKindOrder.indexOf(right);
+    if (leftIndex === -1 && rightIndex === -1) return left.localeCompare(right);
+    if (leftIndex === -1) return 1;
+    if (rightIndex === -1) return -1;
+    return leftIndex - rightIndex;
+  });
+  for (const [, lists] of orderedGroups) {
+    lists.sort((left, right) => left.listName.localeCompare(right.listName));
+  }
+  const totalLists = orderedGroups.reduce((total, [, lists]) => total + lists.length, 0);
+  const totalEntries = orderedGroups.reduce(
+    (total, [, lists]) => total + lists.reduce((subtotal, list) => subtotal + list.spellCount, 0),
+    0,
+  );
 
-  return page("Spells by class", `<h1>Spells by class</h1>
-    <p>Choose a class to browse its ${classes.reduce((total, item) => total + item.spellCount, 0)} ingested spell-list entries, organized by spell level.</p>
-    ${classes.length ? `<ul class="class-grid">${classes.map((item) => {
-      const minimum = item.minimumLevel;
-      const maximum = item.maximumLevel;
-      const levelRange = minimum === maximum ? `level ${minimum}` : `levels ${minimum}–${maximum}`;
-      return `<li>
-        <a href="${href(classHref(item.spellListId))}">${escapeHtml(humanize(item.listName))}</a>
-        <p>${item.spellCount} ${item.spellCount === 1 ? "spell" : "spells"} <span class="muted">· ${levelRange}</span></p>
-      </li>`;
-    }).join("")}</ul>` : "<p>No class spell lists have been ingested yet.</p>"}
+  return page("Spell lists by source", `<h1>Spell lists by source</h1>
+    <p>Choose from ${totalLists} spell lists containing ${totalEntries} ingested entries. Sources include classes, domains, bloodlines, and every other list kind currently recorded in the database.</p>
+    ${orderedGroups.length ? `<nav class="spell-list-kinds" aria-label="Spell list kinds"><ul>${orderedGroups.map(([kind, lists]) => `<li><a href="#${href(spellListKindAnchor(kind))}">${escapeHtml(spellListKindTitle(kind))} (${lists.length})</a></li>`).join("")}</ul></nav>
+    ${orderedGroups.map(([kind, lists]) => `<section class="spell-list-section" id="${href(spellListKindAnchor(kind))}">
+      <h2>${escapeHtml(spellListKindTitle(kind))} <span class="heading-count">(${lists.length} ${lists.length === 1 ? "list" : "lists"})</span></h2>
+      <ul class="spell-list-grid">${lists.map((item) => {
+        const minimum = item.minimumLevel;
+        const maximum = item.maximumLevel;
+        const levelRange = minimum === maximum ? `level ${minimum}` : `levels ${minimum}–${maximum}`;
+        return `<li>
+          <a href="${href(spellListDirectoryHref(item.listKind, item.spellListId))}">${escapeHtml(humanize(item.listName))}</a>
+          <p>${item.spellCount} ${item.spellCount === 1 ? "spell" : "spells"} <span class="muted">· ${levelRange}</span></p>
+        </li>`;
+      }).join("")}</ul>
+    </section>`).join("")}` : "<p>No spell lists have been ingested yet.</p>"}
     <p><a href="/spells/alphabetical">View the alphabetical spell catalog</a></p>`);
 }
 
@@ -659,7 +715,7 @@ async function alphabeticalSpellsPage(prisma: PrismaClient, url: URL): Promise<s
     <span>Page ${currentPage} of ${pageCount}</span>
     ${currentPage < pageCount ? `<a rel="next" href="${href(alphabeticalHref(url, { page: String(currentPage + 1) }))}">Next</a>` : "<span>Next</span>"}
   </nav>` : "";
-  return page("Alphabetical spells", `<nav aria-label="Breadcrumb"><ol><li><a href="/spells">Classes</a></li><li aria-current="page">Alphabetical spells</li></ol></nav>
+  return page("Alphabetical spells", `<nav aria-label="Breadcrumb"><ol><li><a href="/spells">Spell lists</a></li><li aria-current="page">Alphabetical spells</li></ol></nav>
     <h1>Alphabetical spells</h1>
     <p>Search and browse ${schoolGroups.reduce((sum, group) => sum + group._count._all, 0)} canonical spell records.</p>
     <form class="catalog-filters" action="/spells/alphabetical" method="get">
@@ -688,7 +744,7 @@ async function alphabeticalSpellsPage(prisma: PrismaClient, url: URL): Promise<s
 }
 
 function spellComponentsPage(): string {
-  return page("Spell components", `<nav aria-label="Breadcrumb"><ol><li><a href="/spells">Classes</a></li><li aria-current="page">Spell components</li></ol></nav>
+  return page("Spell components", `<nav aria-label="Breadcrumb"><ol><li><a href="/spells">Spell lists</a></li><li aria-current="page">Spell components</li></ol></nav>
     <article class="component-reference">
       <h1>Spell components</h1>
       <p>Component abbreviations describe what a caster must provide while casting a spell. The component links in class spell tables lead to the matching section below.</p>
@@ -832,7 +888,7 @@ async function classSpellsPage(prisma: PrismaClient, classSlug: string): Promise
     </section>`;
   }).join("");
 
-  return page(`${className} spells`, `<nav aria-label="Breadcrumb"><ol><li><a href="/spells">Classes</a></li><li aria-current="page">${escapeHtml(className)}</li></ol></nav>
+  return page(`${className} spells`, `<nav aria-label="Breadcrumb"><ol><li><a href="/spells">Spell lists</a></li><li aria-current="page">${escapeHtml(className)}</li></ol></nav>
     <div data-spell-browser>
       <h1>${escapeHtml(className)} spells</h1>
       <div class="sticky-spell-controls">
@@ -1023,7 +1079,7 @@ async function spellListPage(prisma: PrismaClient, listId: string): Promise<stri
     select: { id: true, name: true, type: true },
   });
   const ownerById = new Map(owners.map((owner) => [owner.id, owner]));
-  return page(entity.name, `<nav aria-label="Breadcrumb"><ol><li><a href="/entities?type=spell_list">Spell lists</a></li><li aria-current="page">${escapeHtml(entity.name)}</li></ol></nav>
+  return page(entity.name, `<nav aria-label="Breadcrumb"><ol><li><a href="/spells">Spell lists</a></li><li aria-current="page">${escapeHtml(entity.name)}</li></ol></nav>
     <h1>${escapeHtml(entity.name)}</h1>
     <p><code>${escapeHtml(entity.id)}</code></p>
     ${ownerRelationships.length ? `<section><h2>Access owners</h2><ul>${ownerRelationships.map((relationship) => { const owner = ownerById.get(relationship.ownerEntityId); return `<li><a href="${href(relatedEntityHref(owner?.type ?? "unknown", relationship.ownerEntityId))}">${escapeHtml(owner?.name ?? relationship.ownerEntityId)}</a> — ${escapeHtml(humanize(relationship.relationshipType))}</li>`; }).join("")}</ul></section>` : ""}
@@ -1114,7 +1170,7 @@ export function createRequestHandler(prisma: PrismaClient) {
         return;
       }
       if (url.pathname === "/") result = await homePage(prisma);
-      else if (url.pathname === "/spells") result = await classesPage(prisma);
+      else if (url.pathname === "/spells") result = await spellListsPage(prisma);
       else if (url.pathname === "/spells/alphabetical") result = await alphabeticalSpellsPage(prisma, url);
       else if (url.pathname === "/spell-components") result = spellComponentsPage();
       else if (url.pathname === "/entities") result = await entitiesPage(prisma, url);
