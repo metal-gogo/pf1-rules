@@ -414,6 +414,31 @@ type ReviewedCatalogMembership = {
 
 
 const reviewedCatalogMemberships = new Map<string, ReviewedCatalogMembership[]>([
+  ["spell.adroit-retrieval", [
+    { spellListId: "spell-list.occultist", level: 3 },
+  ]],
+  ["spell.air-of-authority", [
+    { spellListId: "spell-list.medium", level: 3 },
+    { spellListId: "spell-list.mesmerist", level: 3 },
+    { spellListId: "spell-list.psychic", level: 5 },
+  ]],
+  ["spell.authenticating-gaze", [
+    { spellListId: "spell-list.occultist", level: 1 },
+  ]],
+  ["spell.champions-bout", [
+    { spellListId: "spell-list.mesmerist", level: 3 },
+  ]],
+  ["spell.compel-tongue", [
+    { spellListId: "spell-list.medium", level: 2 },
+    { spellListId: "spell-list.mesmerist", level: 2 },
+  ]],
+  ["spell.compel-tongue-mass", [
+    { spellListId: "spell-list.medium", level: 4 },
+    { spellListId: "spell-list.mesmerist", level: 4 },
+  ]],
+  ["spell.contact-high", [
+    { spellListId: "spell-list.mesmerist", level: 3 },
+  ]],
   ["spell.covetous-aura", [
     { spellListId: "spell-list.bard", level: 5 },
   ]],
@@ -424,8 +449,18 @@ const reviewedCatalogMemberships = new Map<string, ReviewedCatalogMembership[]>(
   ["spell.deceitful-veneer", [
     { spellListId: "spell-list.witch", level: 5 },
   ]],
+  ["spell.curse-of-keeping", [
+    { spellListId: "spell-list.mesmerist", level: 2 },
+  ]],
+  ["spell.damnation-of-memory", [
+    { spellListId: "spell-list.mesmerist", level: 6 },
+    { spellListId: "spell-list.psychic", level: 9 },
+  ]],
   ["spell.ether-step", [
     { spellListId: "spell-list.summoner", level: 5 },
+  ]],
+  ["spell.evaluators-lens", [
+    { spellListId: "spell-list.occultist", level: 3 },
   ]],
   ["spell.expeditious-excavation", [
     { spellListId: "spell-list.bloodrager", level: 1 },
@@ -433,17 +468,57 @@ const reviewedCatalogMemberships = new Map<string, ReviewedCatalogMembership[]>(
   ["spell.greensight", [
     { spellListId: "spell-list.ranger", level: 2 },
   ]],
+  ["spell.fleeting-memory", [
+    { spellListId: "spell-list.mesmerist", level: 2 },
+    { spellListId: "spell-list.occultist", level: 3 },
+    { spellListId: "spell-list.psychic", level: 3 },
+  ]],
+  ["spell.fleeting-memory-mass", [
+    { spellListId: "spell-list.mesmerist", level: 5 },
+    { spellListId: "spell-list.occultist", level: 6 },
+    { spellListId: "spell-list.psychic", level: 7 },
+  ]],
+  ["spell.glimpse-the-hidden", [
+    { spellListId: "spell-list.witch", level: 3 },
+  ]],
   ["spell.healing-leak", [
     { spellListId: "spell-list.sorcerer", level: 3 },
   ]],
   ["spell.impenetrable-veil", [
     { spellListId: "spell-list.witch", level: 9 },
   ]],
+  ["spell.identifiers-eye", [
+    { spellListId: "spell-list.witch", level: 2 },
+  ]],
+  ["spell.imbue-with-addiction", [
+    { spellListId: "spell-list.mesmerist", level: 3 },
+  ]],
+  ["spell.incendiary-runes", [
+    { spellListId: "spell-list.occultist", level: 1 },
+  ]],
   ["spell.massacre", [
     { spellListId: "spell-list.shaman", level: 9 },
   ]],
+  ["spell.martial-telekinesis", [
+    { spellListId: "spell-list.occultist", level: 4 },
+    { spellListId: "spell-list.psychic", level: 3 },
+    { spellListId: "spell-list.spiritualist", level: 4 },
+  ]],
+  ["spell.night-blindness", [
+    { spellListId: "spell-list.mesmerist", level: 1 },
+    { spellListId: "spell-list.psychic", level: 1 },
+    { spellListId: "spell-list.spiritualist", level: 2 },
+  ]],
+  ["spell.overlook", [
+    { spellListId: "spell-list.mesmerist", level: 3 },
+    { spellListId: "spell-list.psychic", level: 4 },
+  ]],
   ["spell.pack-empathy", [
     { spellListId: "spell-list.witch", level: 3 },
+  ]],
+  ["spell.peerless-integrity", [
+    { spellListId: "spell-list.mesmerist", level: 2 },
+    { spellListId: "spell-list.psychic", level: 2 },
   ]],
   ["spell.pocketful-of-vipers", [
     { spellListId: "spell-list.ranger", level: 3 },
@@ -453,6 +528,15 @@ const reviewedCatalogMemberships = new Map<string, ReviewedCatalogMembership[]>(
   ]],
   ["spell.shackle", [
     { spellListId: "spell-list.summoner", level: 2 },
+  ]],
+  ["spell.suppressing-stone", [
+    { spellListId: "spell-list.occultist", level: 3 },
+  ]],
+  ["spell.unspoken-name", [
+    { spellListId: "spell-list.witch", level: 3 },
+  ]],
+  ["spell.venomous-promise", [
+    { spellListId: "spell-list.mesmerist", level: 3 },
   ]],
 ]);
 
@@ -945,7 +1029,10 @@ export function generateCanonicalBundle(
   spellId: string,
   observations: ParsedObservationInput[],
   availableCanonicalSpells: AvailableCanonicalSpells,
-  options: { legacy35Material?: boolean } = {},
+  options: {
+    legacy35Material?: boolean;
+    allowMissingPrintedLevels?: boolean;
+  } = {},
 ) {
   const baseline = observations.find((item) => item.siteId === "aon");
   if (!baseline) throw new NormalizationIssue("source", "missing-aon-observation", "AoN baseline observation is missing.");
@@ -956,7 +1043,8 @@ export function generateCanonicalBundle(
   const missingPrintedRange = baseline.parsed.rangeRaw === null || baseline.parsed.rangeRaw.trim() === "";
   const blockingParserWarnings = baseline.parsed.warnings.filter((warning) =>
     warning.severity === "error" &&
-    !((rangeOverride || missingPrintedRange) && warning.field === "range_raw")
+    !((rangeOverride || missingPrintedRange) && warning.field === "range_raw") &&
+    !(options.allowMissingPrintedLevels && warning.field === "levels_raw")
   );
   if (blockingParserWarnings.length > 0) {
     throw new NormalizationIssue("source", "aon-parser-error", blockingParserWarnings.map((warning) => warning.message).join(" "));
@@ -965,10 +1053,14 @@ export function generateCanonicalBundle(
 
   const parsed = baseline.parsed;
   const normalizedClassification = classification(parsed.schoolRaw);
-  const levels = parseLevels(parsed.levelsRaw, parsed.sourceBookRaw).map((level) => ({
-    ...level,
-    ...(options.legacy35Material ? { scope: "legacy_3_5" } : {}),
-  }));
+  const levels = parsed.levelsRaw
+    ? parseLevels(parsed.levelsRaw, parsed.sourceBookRaw).map((level) => ({
+        ...level,
+        ...(options.legacy35Material ? { scope: "legacy_3_5" } : {}),
+      }))
+    : options.allowMissingPrintedLevels
+      ? []
+      : parseLevels(parsed.levelsRaw, parsed.sourceBookRaw);
   const reviewedCatalogLevels = catalogMemberships.map((membership) => {
     if (!d20Observation) {
       throw new NormalizationIssue(
@@ -1221,6 +1313,15 @@ export function generateCanonicalBundle(
       message: legacy35CanonicalizationRationale,
     });
   }
+  if (options.allowMissingPrintedLevels && !parsed.levelsRaw) {
+    warnings.push({
+      code: "MISSING_PRINTED_LEVELS",
+      field_path: "/levels",
+      message:
+        "AoN does not print a Level value. The canonical spell identity is retained with an " +
+        "empty level list; no class, domain, or numeric level was inferred.",
+    });
+  }
   if (rangeOverride) {
     warnings.push({
       code: "REVIEWED_RANGE_OVERRIDE",
@@ -1333,12 +1434,16 @@ export function generateCanonicalBundle(
       note: "AoN baseline selected under provenance-first-v0; comparison observations remain attached.",
     })),
     normalization: {
-      status: missingPrintedRange && !rangeOverride
+      status: options.allowMissingPrintedLevels && !parsed.levelsRaw
+        ? "needs_review"
+        : missingPrintedRange && !rangeOverride
         ? "needs_review"
         : inheritanceReference && !canResolveCanonicalSpell(availableCanonicalSpells, inheritanceReference.parentId)
         ? "needs_review"
         : "validated",
-      normalizer_version: reviewedCatalogLevels.length > 0 || reviewedAonLevelSelection
+      normalizer_version: options.allowMissingPrintedLevels && !parsed.levelsRaw
+        ? "0.1.6-missing-printed-levels"
+        : reviewedCatalogLevels.length > 0 || reviewedAonLevelSelection
         ? "0.1.5-reviewed-catalog-memberships"
         : "0.1.4-dependency-aliases",
       warnings,

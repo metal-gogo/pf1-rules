@@ -636,6 +636,7 @@ async function ingestSpell(
   legacy35Material: boolean,
   offlineOnly = false,
   allowCanonicalUpdate = false,
+  allowMissingPrintedLevels = false,
 ): Promise<"ingested" | "issue"> {
   const spellSlug = spell.spell_id.replace(/^spell\./, "");
   const rawDirectory = path.join(projectRoot, "data", "raw", artifactScope, spellSlug);
@@ -701,7 +702,7 @@ async function ingestSpell(
       spell.spell_id,
       inputs,
       availableCanonicalSpells,
-      { legacy35Material },
+      { legacy35Material, allowMissingPrintedLevels },
     );
     for (const entity of bundle.entities) {
       if (!baseEntityIds.has(entity.entity_id)) mergeEntity(bulkEntities, entity);
@@ -733,6 +734,99 @@ async function ingestSpell(
     }
     return "issue";
   }
+}
+
+
+const allSpellsCompletenessIdentities = [
+  { spellId: "spell.armor-of-darkness", name: "Armor of Darkness", legacy35Material: true },
+  { spellId: "spell.bolt-of-glory", name: "Bolt of Glory", legacy35Material: true },
+  { spellId: "spell.bolts-of-bedevilment", name: "Bolts of Bedevilment", legacy35Material: true },
+  { spellId: "spell.crown-of-glory", name: "Crown of Glory", legacy35Material: true },
+  { spellId: "spell.fey-blight", name: "Fey Blight", legacy35Material: false },
+  { spellId: "spell.fey-boon", name: "Fey Boon", legacy35Material: false },
+] as const;
+
+
+export async function ingestAllSpellsCompletenessIdentities() {
+  await assertIngestionSourcesAllowed();
+  const artifactScope = "all-spells-completeness";
+  const registryPath = path.join(
+    projectRoot,
+    "data",
+    "entities",
+    "all-spells-completeness-entities.json",
+  );
+  const registryId = "all-spells-completeness-entities-v0.1";
+  const legacyIndex = await capture(
+    legacyIndexUrl,
+    path.join(projectRoot, "data", "raw", artifactScope, "legacy-spell-index.html"),
+  );
+  const legacyEntries = parseLegacyIndex(legacyIndex.body, legacyIndex.url);
+  const baseEntityIds = registeredIdsExcludingBulk(registryPath);
+  const bulkEntities = new Map<string, GeneratedEntity>();
+  if (fs.existsSync(registryPath)) {
+    for (const entity of loadJson(registryPath).entities) {
+      bulkEntities.set(entity.entity_id, entity);
+    }
+  }
+  const availableCanonicalSpells = new Map(
+    directJsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) => {
+      const record = loadJson(filename);
+      return [record.spell_id, record] as const;
+    }),
+  );
+  const report = {
+    ingested: [] as string[],
+    issues: [] as Array<{ name: string; issue: ValidatedJson | null }>,
+    skipped: [] as string[],
+  };
+
+  for (const entry of allSpellsCompletenessIdentities) {
+    const canonicalPath = path.join(
+      projectRoot,
+      "data",
+      "canonical",
+      `${entry.spellId.replace(/^spell\./, "")}.json`,
+    );
+    if (fs.existsSync(canonicalPath)) {
+      report.skipped.push(entry.name);
+      continue;
+    }
+    const spell: ValidatedJson = {
+      spell_id: entry.spellId,
+      name: entry.name,
+      source_url: `https://www.aonprd.com/SpellDisplay.aspx?ItemName=${encodeURIComponent(entry.name)}`,
+    };
+    const result = await ingestSpell(
+      spell,
+      legacyIndex,
+      legacyEntries,
+      availableCanonicalSpells,
+      bulkEntities,
+      baseEntityIds,
+      artifactScope,
+      entry.legacy35Material,
+      false,
+      false,
+      true,
+    );
+    if (result === "ingested") {
+      report.ingested.push(entry.name);
+    } else {
+      report.issues.push({ name: entry.name, issue: spell.issue ?? null });
+    }
+    writeGeneratedJson(registryPath, {
+      $schema: "../../schemas/entity-registry.schema.json",
+      schema_version: "0.1.0",
+      registry_id: registryId,
+      entities: [...bulkEntities.values()].sort((left, right) =>
+        left.entity_id.localeCompare(right.entity_id),
+      ),
+    }, true);
+  }
+
+  validatePackage();
+  return report;
 }
 
 
@@ -1627,6 +1721,8 @@ const run = command === "retry-d20"
   ? ingestLegacy35ScopeEntries()
   : command === "reconcile-red-mantis"
   ? reconcileRedMantisCatalogMemberships()
+  : command === "all-spells-completeness"
+  ? ingestAllSpellsCompletenessIdentities()
   : command === "dependencies"
   ? ingestDiscoveredDependencies()
   : command === "rollout-inheritance"
