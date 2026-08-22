@@ -895,7 +895,7 @@ async function spellPage(prisma: PrismaClient, spellId: string): Promise<string 
   const levelRows = spell.levels.map((level) => {
     const qualifiedAccess = qualificationLabel(level.qualifications);
     return `<li>
-      <a href="${href(level.listKind === "class" ? classHref(level.spellListId) : listHref(level.spellListId))}">${escapeHtml(humanize(level.listName))}</a> ${level.spellLevel}${qualifiedAccess ? ` — ${escapeHtml(qualifiedAccess)}` : ""}
+      <a href="${href(level.listKind === "class" ? classHref(level.spellListId) : listHref(level.spellListId))}">${escapeHtml(humanize(level.listName))}</a> ${level.spellLevel}${qualifiedAccess ? ` — ${escapeHtml(qualifiedAccess)}` : ""}${level.accessBasis === "derived" ? ' <span class="muted">(derived access)</span>' : ""}
       <span class="muted">(${escapeHtml(humanize(level.scope))})</span>
     </li>`;
   }).join("");

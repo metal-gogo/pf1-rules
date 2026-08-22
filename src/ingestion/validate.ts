@@ -386,6 +386,30 @@ export function validatePackage(): PackageStatistics {
       throw new Error(`${record.spell_id} has no entity registry entry`);
     }
     canonicalById.set(record.spell_id, record);
+    for (const level of record.levels) {
+      const accessBasis = level.access_basis ?? "printed";
+      if (accessBasis === "derived" && !level.derivation) {
+        throw new Error(`${record.spell_id} has derived access without derivation metadata`);
+      }
+      if (accessBasis !== "derived" && level.derivation) {
+        throw new Error(`${record.spell_id} has derivation metadata on ${accessBasis} access`);
+      }
+      if (level.derivation) {
+        if (!registeredIds.has(level.derivation.rule_owner_entity_id)) {
+          throw new Error(
+            `${record.spell_id} derives access from unregistered rule owner ` +
+              `${level.derivation.rule_owner_entity_id}`,
+          );
+        }
+        for (const source of level.derivation.source_memberships) {
+          if (!registeredIds.has(source.spell_list_id)) {
+            throw new Error(
+              `${record.spell_id} derives access from unregistered list ${source.spell_list_id}`,
+            );
+          }
+        }
+      }
+    }
     if (
       record.levels.some((level: any) => level.level === 0) &&
       !ingestionSpellIds.has(record.spell_id)

@@ -113,6 +113,8 @@ model SpellLevel {
   spellLevel  Int    @map("spell_level")
   scope       String
   raw         String?
+  accessBasis String @default("printed") @map("access_basis")
+  derivation  Json?
 
   spell          CanonicalSpell           @relation(fields: [spellId], references: [spellId], onDelete: Cascade)
   spellList      Entity                   @relation(fields: [spellListId], references: [id])

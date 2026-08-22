@@ -512,6 +512,8 @@ async function insertCanonicalSpells(
           spellLevel: level.level,
           scope: level.scope,
           raw: level.raw ?? null,
+          accessBasis: level.access_basis ?? "printed",
+          derivation: level.derivation ?? Prisma.DbNull,
         },
       });
       for (const [qualificationIndex, qualification] of (
