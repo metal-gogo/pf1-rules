@@ -6,11 +6,23 @@ Policy ID: `provenance-first-v0`
 
 Choose the source observation with the strongest provenance as the baseline for the complete canonical entity. Preserve its rules wording rather than assembling an invisible mixture of text from several sites.
 
-For the current three-source experiment, the default preference is:
+For spell identities, fields, and class catalogs, use this reviewed workflow:
 
-1. AoN when it identifies the entity as first-party and supplies publication provenance.
-2. Legacy PRD as the stable Core/OGL baseline or when AoN lacks the record.
-3. d20PFSRD as secondary evidence or when the other sources lack the record, subject to first-party verification.
+1. Use AoN when it clearly transcribes the applicable publication.
+2. Use Foundry PF1 and d20PFSRD as candidate and catalog evidence. Agreement
+   strengthens a candidate but does not turn either source into printed evidence.
+3. When Foundry PF1 and d20PFSRD disagree, recommend the Foundry PF1 version
+   and request an explicit reviewed decision before changing canonical data.
+4. When those sources are insufficient, record an explicit reviewed canonical
+   override or inspect the printed Paizo publication and official errata.
+
+This is a decision workflow rather than a claim that a reviewed override changes
+what a publication printed. A reviewed override must remain labeled, and later
+printed evidence must be preserved and presented for a superseding decision if it
+conflicts with the override.
+
+Legacy PRD remains a stable Core/OGL comparison source. It does not control later
+class catalogs that it does not cover.
 
 This order is a current working policy, not an irreversible system rule.
 
@@ -38,6 +50,18 @@ Every override must record:
 - the rationale for the decision.
 
 The original source observations are never changed.
+
+## Class membership and level conflicts
+
+Class membership uses a reviewed union policy: a class printed by a secondary
+catalog may be added without removing classes printed by another source. Class
+union does not imply level union. When AoN and the secondary catalogs assign the
+same class different levels, keep the applicable AoN transcription unless a
+reviewed decision selects another level.
+
+Do not add two unqualified levels for the same class merely to preserve a source
+disagreement. Preserve the competing raw claims in their observations and record
+the chosen canonical level in the decision record.
 
 ## Wording differences
 

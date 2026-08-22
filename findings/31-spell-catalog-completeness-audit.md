@@ -13,6 +13,12 @@ then reconciled as compact-label normalization failures, leaving zero AoN
 catalog membership gaps. See
 [Legacy first-party 3.5 spell ingestion](33-legacy-35-scope-ingestion.md).
 
+Post-audit catalog update: all 25 d20PFSRD-only candidate memberships are now
+resolved under the reviewed AoN/Foundry PF1/d20PFSRD authority workflow. Fourteen
+genuinely additional class memberships were added; eleven competing-level claims
+were resolved without adding duplicate levels. See
+[Reviewed secondary-catalog membership decisions](35-reviewed-catalog-membership-decisions.md).
+
 ## Outcome
 
 [C] The validated local database now has **3,024 canonical spells**. The audit compared **21,602 captured AoN class/level memberships** across all 30 project class lists and spell levels 0 through 9 with the canonical `spell_levels` table. The database has 21,595 nonblank summary observations because Contact Nalfeshnee has seven memberships with blank catalog summaries; those seven memberships are still validated and canonical.
@@ -29,7 +35,7 @@ catalog membership gaps. See
 | Normalization failure | 0 | 0 | [C] No action. Keep replay validation in place. |
 | Deliberate scope exclusion | 23 | 0 | [C] Resolved after explicit scope approval. Canonical records and memberships carry legacy 3.5 markers and remain distinguishable from Pathfinder-native material. |
 | AoN catalog mismatch | 273 | 0 | [C] Resolved as a normalization failure after replaying the spell-page evidence. The approved policy allows catalog precedence, but none of these 273 rows needed a catalog-only override. Keep catalog summaries separate from the spell-page raw level text. |
-| d20PFSRD catalog mismatch | 20 | 20 | [P] Preserve as source disagreement. Verify against the cited Paizo publication or approve a secondary-source precedence rule before modifying canonical levels. |
+| d20PFSRD catalog mismatch | 20 | 0 | [C] Resolved under the reviewed authority workflow: add genuine class-union memberships, keep applicable AoN levels when the same class conflicts, and retain explicit reviewed exceptions. |
 
 ## Current AoN gap count matrix
 
@@ -197,9 +203,11 @@ The cells show remaining membership gaps by class and level. Zero means the loca
 - **Red Mantis Assassin 3 (73):** Adjustable Disguise; Ancestral Regression; Anchored Step; Anthropomorphic Animal; Ape Walk; Arcane Reinforcement; Beast Shape I; Blast Barrier; Blink; Blood Scent; Blood Sentinel; Blot; Burrow; Cauterizing Weapon; Countless Eyes; Darkvision, Communal; Dazzling Blade, Mass; Devolution; Disable Construct; Displacement; Display Aversion; Dream; Enter Image; Erode Defenses; Eruptive Pustules; Excruciating Deformation; Fearsome Duplicate; Fins to Feet; Fire Trail; Flame Arrow; Flash Fire; Fly; Fractions of Heal and Harm; Gaseous Form; Haste; Heart of the Metal; Hostile Levitation; Illusory Poison; Illusory Script; Improve Trap; Invisibility Sphere; Keen Edge; Loathsome Veil; Magic Weapon, Greater; Major Image; Minor Dream; Monstrous Extremities; Monstrous Physique I; Paragon Surge; Polymorph Familiar; Prehensile Pilfer; Pup Shape; Raging Rubble; Resinous Skin; Restore Mythic Power; Rune of Durability; Secret Page; Serren's Armor Lock; Share Glory; Shifting Sand; Shrink Item; Slow; Spider Climb, Communal; Steal Years; Stolen Light; Strangling Hair; Touch Injection; Twine Double; Undead Anatomy I; Versatile Weapon; Vision of Hell; Wall of Nausea; Water Breathing.
 - **Red Mantis Assassin 4 (50):** Absorbing Inhalation; Abyssal Vermin; Adjustable Polymorph; Age Resistance, Lesser; Animal Aspect, Greater; Baphomet's Blessing; Beast Shape II; Calcific Touch; Cloud Shape; Create Holds; Curse of Burning Sleep; Darkvision, Greater; Earth Glide; Elemental Body I; Enlarge Person, Mass; Eyes of the Void; Film of Filth; Firefall; Hallucinatory Terrain; Hellmouth Lash; Illusory Wall; Imbue with Flight; Invisibility, Greater; Magic Siege Engine, Greater; Make Whole, Greater; Malfunction; Miasmatic Form; Minor Phantom Object; Mirror Transport; Monstrous Physique II; Obsidian Flow; Phantasmal Killer; Rainbow Pattern; Reduce Person, Mass; Renovation; Resilient Reservoir; Ride The Waves; Scorching Ash Form; Shadow Barbs; Shadow Conjuration; Shadow Dragon Aspect; Shadow Step; Shadowy Haven; Share Shape; Shocking Image; Simulacrum, Lesser; Stone Shape; Symbol of Slowing; Vermin Shape I; Wandering Star Motes.
 
-## d20PFSRD-only printed memberships
+## Resolved d20PFSRD-only printed memberships
 
-[P] The d20PFSRD class catalog and its spell detail page both print these memberships, while AoN and the local canonical record do not. They are source disagreements, not safe automatic additions.
+[C] The list below is the original candidate set. It is retained as historical
+audit evidence; none of these memberships is still pending. Finding 35 records
+which memberships were added and which conflicting levels were rejected.
 
 - **Bard 5 (1):** Covetous Aura.
 - **Bloodrager 1 (1):** Expeditious Excavation.

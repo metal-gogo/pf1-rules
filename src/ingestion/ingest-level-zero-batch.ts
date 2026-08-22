@@ -1193,6 +1193,33 @@ export async function ingestLegacy35ScopeEntries() {
 
 
 export async function retryReviewedCanonicalOverrides() {
+  const reconciledSpellIds = new Set<string>();
+  const replayLevelBySpellId = new Map<string, number>();
+  for (const spellId of reviewedCanonicalOverrideSpellIds) {
+    const observationDirectory = path.join(
+      projectRoot,
+      "data",
+      "observations",
+      spellId.replace(/^spell\./, ""),
+    );
+    const aonObservations = directJsonFiles(observationDirectory)
+      .map(loadJson)
+      .filter((observation) => observation.source?.site_id === "aon")
+      .sort((left, right) => String(left.parser?.version).localeCompare(
+        String(right.parser?.version),
+        "en-US",
+        { numeric: true },
+      ));
+    const rawArtifactPath = String(aonObservations.at(-1)?.retrieval?.raw_artifact_path ?? "");
+    const levelMatch = /\/raw\/level-(zero|[0-9])\//.exec(rawArtifactPath);
+    if (!levelMatch?.[1]) {
+      throw new Error(`${spellId} lacks a level-scoped immutable AoN observation.`);
+    }
+    replayLevelBySpellId.set(
+      spellId,
+      levelMatch[1] === "zero" ? 0 : Number(levelMatch[1]),
+    );
+  }
   const summary = {
     batches: 0,
     ingested: 0,
@@ -1205,11 +1232,30 @@ export async function retryReviewedCanonicalOverrides() {
     const manifest = loadJson(manifestPath);
     const affectedBatches = [...new Set<number>(
       manifest.spells
-        .filter((spell: ValidatedJson) => reviewedCanonicalOverrideSpellIds.has(spell.spell_id))
+        .filter((spell: ValidatedJson) =>
+          reviewedCanonicalOverrideSpellIds.has(spell.spell_id) &&
+          replayLevelBySpellId.get(spell.spell_id) === level &&
+          !reconciledSpellIds.has(spell.spell_id)
+        )
         .map((spell: ValidatedJson) => Number(spell.batch)),
     )].sort((left, right) => left - right);
     const levelSummary = { level, batches: affectedBatches.length, ingested: 0, issues: 0, skipped: 0 };
     for (const batch of affectedBatches) {
+      const selected = manifest.spells.filter((spell: ValidatedJson) =>
+        Number(spell.batch) === batch &&
+        reviewedCanonicalOverrideSpellIds.has(spell.spell_id) &&
+        replayLevelBySpellId.get(spell.spell_id) === level &&
+        !reconciledSpellIds.has(spell.spell_id)
+      );
+      const selectedIds = new Set<string>(
+        selected.map((spell: ValidatedJson) => String(spell.spell_id)),
+      );
+      const selectedIdsByName = new Map<string, string>(
+        selected.map((spell: ValidatedJson) => [
+          String(spell.name),
+          String(spell.spell_id),
+        ] as const),
+      );
       const report = await ingestSpellLevelBatch(
         level,
         batch,
@@ -1218,9 +1264,13 @@ export async function retryReviewedCanonicalOverrides() {
         false,
         true,
         undefined,
-        reviewedCanonicalOverrideSpellIds,
+        selectedIds,
         true,
       );
+      for (const name of report.ingested) {
+        const spellId = selectedIdsByName.get(name);
+        if (spellId) reconciledSpellIds.add(spellId);
+      }
       levelSummary.ingested += report.ingested.length;
       levelSummary.issues += report.issues.length;
       levelSummary.skipped += report.skipped.length;
@@ -1230,6 +1280,21 @@ export async function retryReviewedCanonicalOverrides() {
     summary.issues += levelSummary.issues;
     summary.skipped += levelSummary.skipped;
     summary.levels.push(levelSummary);
+  }
+  const unreconciled = [...reviewedCanonicalOverrideSpellIds]
+    .filter((spellId) => !reconciledSpellIds.has(spellId));
+  if (unreconciled.length > 0) {
+    throw new Error(
+      `Could not replay reviewed canonical decisions for: ${unreconciled.join(", ")}`,
+    );
+  }
+  for (let level = 0; level <= 9; level += 1) {
+    const { manifestPath } = levelPaths(level);
+    const manifest = loadJson(manifestPath);
+    for (const spell of manifest.spells) {
+      if (reconciledSpellIds.has(spell.spell_id)) delete spell.issue;
+    }
+    writeGeneratedJson(manifestPath, manifest, true);
   }
   validatePackage();
   return summary;

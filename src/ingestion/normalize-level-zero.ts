@@ -5,7 +5,10 @@ import type { SpellListQualification } from "../domain/spell-lists.js";
 import { readJsonPointer } from "../domain/spell-inheritance.js";
 import type { ParsedLink, ParsedSpellPage, SiteId } from "./spell-page-parser.js";
 import { slug } from "./spell-page-parser.js";
-import { legacy35CanonicalizationRationale } from "./scope-policy.js";
+import {
+  legacy35CanonicalizationRationale,
+  secondaryCatalogMembershipUnionRationale,
+} from "./scope-policy.js";
 
 
 export interface ParsedObservationInput {
@@ -402,7 +405,81 @@ const reviewedRangeOverrides = new Map<string, ReviewedRangeOverride>([
     rationale: "Reviewed project decision: the printed Range field is blank and the printed Area is a 40-ft.-radius burst centered on you. Use personal as the canonical range while preserving the missing source value.",
   }],
 ]);
-export const reviewedCanonicalOverrideSpellIds = new Set(reviewedRangeOverrides.keys());
+
+
+type ReviewedCatalogMembership = {
+  spellListId: string;
+  level: number;
+};
+
+
+const reviewedCatalogMemberships = new Map<string, ReviewedCatalogMembership[]>([
+  ["spell.covetous-aura", [
+    { spellListId: "spell-list.bard", level: 5 },
+  ]],
+  ["spell.death-pact", [
+    { spellListId: "spell-list.mesmerist", level: 5 },
+    { spellListId: "spell-list.psychic", level: 6 },
+  ]],
+  ["spell.deceitful-veneer", [
+    { spellListId: "spell-list.witch", level: 5 },
+  ]],
+  ["spell.ether-step", [
+    { spellListId: "spell-list.summoner", level: 5 },
+  ]],
+  ["spell.expeditious-excavation", [
+    { spellListId: "spell-list.bloodrager", level: 1 },
+  ]],
+  ["spell.greensight", [
+    { spellListId: "spell-list.ranger", level: 2 },
+  ]],
+  ["spell.healing-leak", [
+    { spellListId: "spell-list.sorcerer", level: 3 },
+  ]],
+  ["spell.impenetrable-veil", [
+    { spellListId: "spell-list.witch", level: 9 },
+  ]],
+  ["spell.massacre", [
+    { spellListId: "spell-list.shaman", level: 9 },
+  ]],
+  ["spell.pack-empathy", [
+    { spellListId: "spell-list.witch", level: 3 },
+  ]],
+  ["spell.pocketful-of-vipers", [
+    { spellListId: "spell-list.ranger", level: 3 },
+  ]],
+  ["spell.see-beyond", [
+    { spellListId: "spell-list.sorcerer", level: 3 },
+  ]],
+  ["spell.shackle", [
+    { spellListId: "spell-list.summoner", level: 2 },
+  ]],
+]);
+
+
+const reviewedAonLevelSelections = new Map<string, string>([
+  ["spell.alpha-instinct",
+    "AoN cites Ultimate Wilderness page 227 and prints mesmerist 2. Keep that level instead of the d20PFSRD and Foundry PF1 level-3 candidate."],
+  ["spell.horrific-doubles",
+    "AoN cites Horror Adventures page 120 and prints mesmerist 3 and psychic 3. Keep those levels instead of the d20PFSRD and Foundry PF1 level-4 candidates."],
+  ["spell.improve-trap",
+    "Reviewed project decision: keep the AoN Inquisitor 3 membership and reject the d20PFSRD Inquisitor 2 candidate."],
+  ["spell.positive-pulse-greater",
+    "AoN cites Planar Adventures page 43 and prints paladin 4 and summoner 4. Keep those levels instead of the d20PFSRD and Foundry PF1 level-3 candidates."],
+  ["spell.soothing-word",
+    "AoN identifies GameMastery Condition Cards and prints ranger 2. Keep that level instead of the d20PFSRD and Foundry PF1 level-3 candidate."],
+  ["spell.vinetrap",
+    "Reviewed project decision: keep the AoN Cleric 8, Druid 8, and Oracle 8 memberships and reject the d20PFSRD level-5 candidates."],
+  ["spell.wither-limb",
+    "AoN cites Horror Adventures page 131 and prints spiritualist 6. Keep that level instead of the d20PFSRD and Foundry PF1 level-5 candidate."],
+]);
+
+
+export const reviewedCanonicalOverrideSpellIds = new Set([
+  ...reviewedRangeOverrides.keys(),
+  ...reviewedCatalogMemberships.keys(),
+  ...reviewedAonLevelSelections.keys(),
+]);
 
 
 function parseTargeting(raw: string | null) {
@@ -873,6 +950,9 @@ export function generateCanonicalBundle(
   const baseline = observations.find((item) => item.siteId === "aon");
   if (!baseline) throw new NormalizationIssue("source", "missing-aon-observation", "AoN baseline observation is missing.");
   const rangeOverride = reviewedRangeOverrides.get(spellId);
+  const catalogMemberships = reviewedCatalogMemberships.get(spellId) ?? [];
+  const reviewedAonLevelSelection = reviewedAonLevelSelections.get(spellId);
+  const d20Observation = observations.find((item) => item.siteId === "d20pfsrd");
   const missingPrintedRange = baseline.parsed.rangeRaw === null || baseline.parsed.rangeRaw.trim() === "";
   const blockingParserWarnings = baseline.parsed.warnings.filter((warning) =>
     warning.severity === "error" &&
@@ -889,6 +969,38 @@ export function generateCanonicalBundle(
     ...level,
     ...(options.legacy35Material ? { scope: "legacy_3_5" } : {}),
   }));
+  const reviewedCatalogLevels = catalogMemberships.map((membership) => {
+    if (!d20Observation) {
+      throw new NormalizationIssue(
+        "source",
+        "missing-reviewed-catalog-evidence",
+        `${spellId} lacks the preserved d20PFSRD observation required by its reviewed catalog membership.`,
+      );
+    }
+    const d20Levels = parseLevels(
+      d20Observation.parsed.levelsRaw,
+      d20Observation.parsed.sourceBookRaw,
+    );
+    const selected = d20Levels.find((level) =>
+      level.spell_list_id === membership.spellListId && level.level === membership.level
+    );
+    if (!selected) {
+      throw new NormalizationIssue(
+        "source",
+        "missing-reviewed-catalog-evidence",
+        `${spellId} d20PFSRD observation does not print ${membership.spellListId} ${membership.level}.`,
+      );
+    }
+    if (levels.some((level) => level.spell_list_id === membership.spellListId)) {
+      throw new NormalizationIssue(
+        "schema",
+        "reviewed-catalog-level-conflict",
+        `${spellId} already has an AoN level for ${membership.spellListId}; use an explicit level-selection decision instead of adding a duplicate class level.`,
+      );
+    }
+    levels.push(selected);
+    return selected;
+  });
   const castingTime = parseCastingTime(parsed.castingTimeRaw);
   const components = parseComponents(parsed.componentsRaw);
   const delivery = parsed.deliveryFieldsRaw.map((field) => ({
@@ -1042,8 +1154,35 @@ export function generateCanonicalBundle(
     addRelationship("has_descriptor", "descriptor", id, descriptor, baselineEvidence("spell_raw.descriptors_raw", descriptor));
   }
   for (const level of levels) {
-    addEntity(level.spell_list_id, "spell_list", `${level.list_name} Spell List`, { observation_id: baseline.observationId, source_field: "spell_raw.levels_raw", anchor_text_raw: level.raw, source_href: null });
-    addRelationship("appears_on_spell_list", "spell_list", level.spell_list_id, `${level.list_name} Spell List`, baselineEvidence("spell_raw.levels_raw", level.raw));
+    const reviewedCatalogLevel = reviewedCatalogLevels.find((entry) => entry === level);
+    const levelEvidence = reviewedCatalogLevel && d20Observation
+      ? {
+          observation_id: d20Observation.observationId,
+          source_field: "spell_raw.levels_raw",
+          evidence_kind: "plain_text",
+          anchor_text_raw: level.raw,
+          source_href: null,
+        }
+      : baselineEvidence("spell_raw.levels_raw", level.raw);
+    addEntity(level.spell_list_id, "spell_list", `${level.list_name} Spell List`, {
+      observation_id: levelEvidence.observation_id,
+      source_field: levelEvidence.source_field,
+      anchor_text_raw: levelEvidence.anchor_text_raw,
+      source_href: levelEvidence.source_href,
+    });
+    addRelationship(
+      "appears_on_spell_list",
+      "spell_list",
+      level.spell_list_id,
+      `${level.list_name} Spell List`,
+      levelEvidence,
+    );
+    if (reviewedCatalogLevel) {
+      const relationship = relationshipMap.get(
+        `${spellId}:appears_on_spell_list:${level.spell_list_id}`,
+      );
+      if (relationship) relationship.note = secondaryCatalogMembershipUnionRationale;
+    }
     for (const qualification of level.qualifications) {
       const qualifiedEntity = qualification.kind === "deity"
         ? qualification.deity
@@ -1097,6 +1236,20 @@ export function generateCanonicalBundle(
         "raw value; no range was inferred and no canonical override was applied.",
     });
   }
+  if (reviewedCatalogLevels.length > 0) {
+    warnings.push({
+      code: "REVIEWED_CATALOG_MEMBERSHIP_UNION",
+      field_path: "/levels",
+      message: secondaryCatalogMembershipUnionRationale,
+    });
+  }
+  if (reviewedAonLevelSelection) {
+    warnings.push({
+      code: "REVIEWED_AON_LEVEL_SELECTION",
+      field_path: "/levels",
+      message: reviewedAonLevelSelection,
+    });
+  }
   if (parsed.sourcePageRaw && page === null) {
     warnings.push({
       code: "INVALID_PUBLICATION_PAGE",
@@ -1121,6 +1274,10 @@ export function generateCanonicalBundle(
     const baselineValue = cleanComparable(parsed[field]);
     for (const observation of observations.filter((item) => item !== baseline)) {
       if (cleanComparable(observation.parsed[field]) !== baselineValue) {
+        if (
+          path === "/levels" &&
+          (reviewedCatalogLevels.length > 0 || reviewedAonLevelSelection)
+        ) continue;
         warnings.push({ code: "SOURCE_VARIATION", field_path: path, message: `${observation.siteId} differs from the AoN baseline; both raw observations remain preserved.` });
       }
     }
@@ -1181,7 +1338,9 @@ export function generateCanonicalBundle(
         : inheritanceReference && !canResolveCanonicalSpell(availableCanonicalSpells, inheritanceReference.parentId)
         ? "needs_review"
         : "validated",
-      normalizer_version: "0.1.4-dependency-aliases",
+      normalizer_version: reviewedCatalogLevels.length > 0 || reviewedAonLevelSelection
+        ? "0.1.5-reviewed-catalog-memberships"
+        : "0.1.4-dependency-aliases",
       warnings,
     },
   };
@@ -1207,6 +1366,18 @@ export function generateCanonicalBundle(
       note: "The source field is blank; the canonical range remains unknown and no override was inferred.",
     });
   }
+  if (reviewedCatalogLevels.length > 0 && d20Observation) {
+    for (const reviewedLevel of reviewedCatalogLevels) {
+      canonical.provenance.push({
+        field_path: `/levels/${levels.indexOf(reviewedLevel)}`,
+        observation_id: d20Observation.observationId,
+        source_field: "spell_raw.levels_raw",
+        raw_value_sha256: hash(d20Observation.parsed.levelsRaw),
+        decision: "manually_resolved",
+        note: secondaryCatalogMembershipUnionRationale,
+      });
+    }
+  }
   if (inheritanceReference) {
     canonical.rules_inheritance = [inheritanceRule(
       inheritanceReference,
@@ -1228,6 +1399,17 @@ export function generateCanonicalBundle(
     considered_observation_ids: observationIds,
     rationale: "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning.",
   }));
+  const levelsDecision = fieldDecisions.find((item) => item.canonical_path === "/levels");
+  if (levelsDecision && reviewedCatalogLevels.length > 0 && d20Observation) {
+    levelsDecision.decision = "combine";
+    levelsDecision.selected_evidence.push({
+      observation_id: d20Observation.observationId,
+      source_field: "spell_raw.levels_raw",
+    });
+    levelsDecision.rationale = secondaryCatalogMembershipUnionRationale;
+  } else if (levelsDecision && reviewedAonLevelSelection) {
+    levelsDecision.rationale = reviewedAonLevelSelection;
+  }
   if (rangeOverride) {
     fieldDecisions.push({
       canonical_path: "/effect/range",
@@ -1263,12 +1445,14 @@ export function generateCanonicalBundle(
       decision: "accept",
       evidence: relationship.evidence.map((evidence: any) => ({ observation_id: evidence.observation_id, source_field: evidence.source_field })),
       considered_observation_ids: observationIds,
-      rationale: "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence.",
+      rationale: relationship.note ?? "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence.",
     })),
     unresolved_questions: warnings
       .filter((warning) =>
         warning.code !== "REVIEWED_RANGE_OVERRIDE" &&
-        warning.code !== "LEGACY_3_5_MATERIAL"
+        warning.code !== "LEGACY_3_5_MATERIAL" &&
+        warning.code !== "REVIEWED_CATALOG_MEMBERSHIP_UNION" &&
+        warning.code !== "REVIEWED_AON_LEVEL_SELECTION"
       )
       .map((warning) => warning.message),
   };

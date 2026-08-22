@@ -150,6 +150,87 @@ describe("ingested spell catalog", () => {
     }
   });
 
+  it("adds reviewed secondary-catalog class memberships with explicit provenance", async () => {
+    const expectedMemberships = [
+      ["spell.covetous-aura", "spell-list.bard", 5],
+      ["spell.death-pact", "spell-list.mesmerist", 5],
+      ["spell.death-pact", "spell-list.psychic", 6],
+      ["spell.deceitful-veneer", "spell-list.witch", 5],
+      ["spell.ether-step", "spell-list.summoner", 5],
+      ["spell.expeditious-excavation", "spell-list.bloodrager", 1],
+      ["spell.greensight", "spell-list.ranger", 2],
+      ["spell.healing-leak", "spell-list.sorcerer", 3],
+      ["spell.impenetrable-veil", "spell-list.witch", 9],
+      ["spell.massacre", "spell-list.shaman", 9],
+      ["spell.pack-empathy", "spell-list.witch", 3],
+      ["spell.pocketful-of-vipers", "spell-list.ranger", 3],
+      ["spell.see-beyond", "spell-list.sorcerer", 3],
+      ["spell.shackle", "spell-list.summoner", 2],
+    ] as const;
+
+    for (const [spellId, spellListId, spellLevel] of expectedMemberships) {
+      const [level, spell] = await Promise.all([
+        prisma.spellLevel.findFirst({
+          where: { spellId, spellListId, spellLevel },
+        }),
+        prisma.canonicalSpell.findUnique({ where: { spellId } }),
+      ]);
+      const payload = spell?.payload as {
+        normalization?: { warnings?: Array<{ code?: string }> };
+        provenance?: Array<{
+          field_path?: string;
+          observation_id?: string;
+          decision?: string;
+        }>;
+      } | undefined;
+
+      expect(level).not.toBeNull();
+      expect(payload?.normalization?.warnings).toContainEqual(expect.objectContaining({
+        code: "REVIEWED_CATALOG_MEMBERSHIP_UNION",
+      }));
+      expect(payload?.provenance).toContainEqual(expect.objectContaining({
+        field_path: expect.stringMatching(/^\/levels\/\d+$/),
+        observation_id: expect.stringMatching(/^d20pfsrd:/),
+        decision: "manually_resolved",
+      }));
+    }
+  });
+
+  it("keeps reviewed AoN levels instead of adding conflicting catalog levels", async () => {
+    const expectedLevels = [
+      ["spell.alpha-instinct", "spell-list.mesmerist", [2]],
+      ["spell.horrific-doubles", "spell-list.mesmerist", [3]],
+      ["spell.horrific-doubles", "spell-list.psychic", [3]],
+      ["spell.improve-trap", "spell-list.inquisitor", [3]],
+      ["spell.positive-pulse-greater", "spell-list.paladin", [4]],
+      ["spell.positive-pulse-greater", "spell-list.summoner", [4]],
+      ["spell.soothing-word", "spell-list.ranger", [2]],
+      ["spell.vinetrap", "spell-list.cleric", [8]],
+      ["spell.vinetrap", "spell-list.druid", [8]],
+      ["spell.vinetrap", "spell-list.oracle", [8]],
+      ["spell.wither-limb", "spell-list.spiritualist", [6]],
+    ] as const;
+
+    for (const [spellId, spellListId, spellLevels] of expectedLevels) {
+      const [levels, spell] = await Promise.all([
+        prisma.spellLevel.findMany({
+          where: { spellId, spellListId },
+          orderBy: { spellLevel: "asc" },
+          select: { spellLevel: true },
+        }),
+        prisma.canonicalSpell.findUnique({ where: { spellId } }),
+      ]);
+      const payload = spell?.payload as {
+        normalization?: { warnings?: Array<{ code?: string }> };
+      } | undefined;
+
+      expect(levels.map((level) => level.spellLevel)).toEqual(spellLevels);
+      expect(payload?.normalization?.warnings).toContainEqual(expect.objectContaining({
+        code: "REVIEWED_AON_LEVEL_SELECTION",
+      }));
+    }
+  });
+
   it("keeps Wish's mandatory diamond component", async () => {
     const wish = await findSpell(prisma, "Wish");
     expect(wish?.components).toContainEqual(
