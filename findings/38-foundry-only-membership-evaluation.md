@@ -10,7 +10,7 @@ Machine-readable result: [`data/reports/foundry-membership-audit.json`](../data/
 
 [C] The audit maps all 3,028 Foundry spell records to local canonical identities. There are no missing identities.
 
-[C] Foundry contains 19,484 class-membership assertions. After the owner and inherited-list reconciliation, 64 Foundry assertions name a class that is absent locally, and 24 more propose a different level for a class that is already present locally.
+[C] Foundry contains 19,484 class-membership assertions. After the owner, inherited-list, and reviewed-override reconciliation, 63 Foundry assertions name a class that is absent locally, and 24 more propose a different level for a class that is already present locally.
 
 | Category | Rows | Status | Safest action |
 | --- | ---: | --- | --- |
@@ -19,7 +19,7 @@ Machine-readable result: [`data/reports/foundry-membership-audit.json`](../data/
 | Other Unchained Summoner candidates | 34 | Pending | Inspect the cited publication; otherwise ask for an explicit reviewed override. |
 | Hostile Juxtaposition, Greater | 1 | Pending probable rejection | Keep absent unless print or an explicit reviewed override establishes Unchained Summoner 6. |
 | Probable Foundry catalog errors | 6 | Pending rejection decision | Record a rejection; do not ingest the rows. |
-| Independent publication-review rows | 23 | Pending | Check print or official errata, then ingest as printed or record an explicit override. |
+| Independent publication-review rows | 22 | Pending | Check print or official errata, then ingest as printed or record an explicit override. |
 
 [C] The seven resolved handbook rows are Alter Summoned Monster 2, Final Sacrifice 2, Gird Ally 2, Master's Escape 3, Instant Restoration 4, Master's Mutation 5, and Summon Laborers 6. The base-Summoner printed rows remain intact. The Unchained rows are marked `derived` and cite [Paizo's compatibility statement](https://paizo.com/blog/i-can-call-spirits-from-the-vasty-deep).
 
@@ -89,7 +89,7 @@ The first 34 rows are compatibility candidates. Hostile Juxtaposition, Greater i
 
 Safest action: reject these six rows unless the cited printed pages prove otherwise. Rejection changes no spell value; it records why the candidate was not ingested.
 
-## Independent publication review — 23 rows across 17 spells
+## Independent publication review — 22 rows across 16 spells
 
 | Spell | Foundry-only claims | Foundry source | Links |
 | --- | --- | --- | --- |
@@ -107,11 +107,10 @@ Safest action: reject these six rows unless the cited printed pages prove otherw
 | Shadowfade | Magus 1 | PZO9479 p. 9 | [AoN](https://www.aonprd.com/SpellDisplay.aspx?ItemName=Shadowfade); [Foundry](https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/illusion/shadowfade.5w68w4yw2oivz7b3.yaml) |
 | Shield Speech, Greater | Skald 4 | PZO9405 p. 25 | [AoN](https://www.aonprd.com/SpellDisplay.aspx?ItemName=Shield%20Speech%2C%20Greater); [Foundry](https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/abjuration/shield-speech-greater.7y0xvorQBvCtjoYn.yaml) |
 | Stabilize Pressure | Paladin 2 | PZO92102 p. 61 | [AoN](https://www.aonprd.com/SpellDisplay.aspx?ItemName=Stabilize%20Pressure); [Foundry](https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/abjuration/stabilize-pressure.u46fk0bmnnkarvcm.yaml) |
-| Temporal Regression | Sorcerer 8 | PZO9480 p. 31 | [AoN](https://www.aonprd.com/SpellDisplay.aspx?ItemName=Temporal%20Regression); [Foundry](https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/conjuration/temporal-regression.eomy5i7x2ml5wzp8.yaml) |
 | Vermin Shape II | Bloodrager 4 | PZO1117 p. 246; PZO9226 p. 297; PZO9225 p. 49 | [AoN](https://www.aonprd.com/SpellDisplay.aspx?ItemName=Vermin%20Shape%20II); [Foundry](https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/transmutation/vermin-shape-ii.j8fufy7sr3bty5du.yaml) |
 | Waters of Lamashtu | Shaman 3 | PZO1139 p. 186; PZO9005 p. 71; PZO9202 p. 25; PZO9226 p. 297 | [AoN](https://www.aonprd.com/SpellDisplay.aspx?ItemName=Waters%20of%20Lamashtu); [Foundry](https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/conjuration/waters-of-lamashtu.yzxabopbmjm1uyw5.yaml) |
 
-[P] Review PZO9280 first because it accounts for 12 of these 23 rows, then PZO92102 and PZO9479. A page image or exact printed list can distinguish an AoN transcription omission from a Foundry catalog expansion.
+[P] Review PZO9280 first because it accounts for 12 of these 22 rows, then PZO92102 and PZO9479. A page image or exact printed list can distinguish an AoN transcription omission from a Foundry catalog expansion.
 
 ## Competing levels — 24 rows
 

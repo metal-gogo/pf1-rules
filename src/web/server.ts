@@ -877,7 +877,7 @@ async function classSpellsPage(prisma: PrismaClient, classSlug: string): Promise
             );
             const searchText = `${spell.name} ${display.summary} ${qualifiedAccess ?? ""}`.toLocaleLowerCase();
             return `<tr data-school="${escapeHtml(spell.school)}" data-level="${level}" data-components="${escapeHtml(display.components.join(" "))}" data-search="${escapeHtml(searchText)}">
-              <th class="key-column" scope="row"><a class="spell-name" href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a>${spell.legacy35Material ? ' <span class="legacy-badge">Legacy 3.5</span>' : ""}${entry.accessBasis === "derived" ? ' <span class="muted">(derived access)</span>' : ""}${qualifiedAccess ? ` <span class="muted">(${escapeHtml(qualifiedAccess)})</span>` : ""}</th>
+              <th class="key-column" scope="row"><a class="spell-name" href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a>${spell.legacy35Material ? ' <span class="legacy-badge">Legacy 3.5</span>' : ""}${entry.accessBasis === "derived" ? ' <span class="muted">(derived access)</span>' : entry.accessBasis === "reviewed_override" ? ' <span class="muted">(reviewed override)</span>' : ""}${qualifiedAccess ? ` <span class="muted">(${escapeHtml(qualifiedAccess)})</span>` : ""}</th>
               <td class="school-column">${escapeHtml(school)}</td>
               <td class="components-column">${componentAbbreviations(display.components)}</td>
               <td><span class="spell-summary">${escapeHtml(display.summary)}</span></td>
@@ -952,7 +952,7 @@ async function spellPage(prisma: PrismaClient, spellId: string): Promise<string 
   const levelRows = spell.levels.map((level) => {
     const qualifiedAccess = qualificationLabel(level.qualifications);
     return `<li>
-      <a href="${href(level.listKind === "class" ? classHref(level.spellListId) : listHref(level.spellListId))}">${escapeHtml(humanize(level.listName))}</a> ${level.spellLevel}${qualifiedAccess ? ` — ${escapeHtml(qualifiedAccess)}` : ""}${level.accessBasis === "derived" ? ' <span class="muted">(derived access)</span>' : ""}
+      <a href="${href(level.listKind === "class" ? classHref(level.spellListId) : listHref(level.spellListId))}">${escapeHtml(humanize(level.listName))}</a> ${level.spellLevel}${qualifiedAccess ? ` — ${escapeHtml(qualifiedAccess)}` : ""}${level.accessBasis === "derived" ? ' <span class="muted">(derived access)</span>' : level.accessBasis === "reviewed_override" ? ' <span class="muted">(reviewed override)</span>' : ""}
       <span class="muted">(${escapeHtml(humanize(level.scope))})</span>
     </li>`;
   }).join("");

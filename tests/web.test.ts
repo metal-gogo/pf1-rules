@@ -155,6 +155,20 @@ describe("local rules browser", () => {
     expect(spellHtml).toContain("(derived access)");
   });
 
+  it("labels reviewed spell-list overrides separately from printed access", async () => {
+    const classResponse = await fetch(`${baseUrl}/classes/sorcerer`);
+    const classHtml = await classResponse.text();
+    expect(classResponse.status).toBe(200);
+    expect(classHtml).toContain("Temporal Regression");
+    expect(classHtml).toContain("(reviewed override)");
+
+    const spellResponse = await fetch(`${baseUrl}/spells/spell.borrow-fortune`);
+    const spellHtml = await spellResponse.text();
+    expect(spellResponse.status).toBe(200);
+    expect(spellHtml).toContain("Cleric</a> 3");
+    expect(spellHtml).toContain("(reviewed override)");
+  });
+
   it("routes mystery access through the mystery owner and spell list", async () => {
     const classResponse = await fetch(`${baseUrl}/classes/oracle`);
     const classHtml = await classResponse.text();

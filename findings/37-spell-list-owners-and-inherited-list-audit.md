@@ -19,11 +19,11 @@ Derived access is labeled `access_basis: derived`. It does not replace or masque
 | List | Canonical memberships | Result |
 | --- | ---: | --- |
 | Adept | 76 | Owned by an explicit NPC-class entity. |
-| Cleric | 1,133 | Printed memberships. |
+| Cleric | 1,139 | Printed memberships plus 6 reviewed Oracle-to-Cleric overrides. |
 | Inquisitor | 656 | Printed memberships. |
 | Omdura | 1,238 | Derived from its Cleric/Inquisitor rule. |
 | Oracle | 1,141 | General Cleric-derived access plus explicit Oracle rows; mystery access is separate. |
-| Sorcerer | 1,887 | Printed memberships; intentionally not forced to equal Wizard. |
+| Sorcerer | 1,897 | Printed memberships plus 10 reviewed Wizard-to-Sorcerer overrides. |
 | Wizard | 1,897 | Printed memberships. |
 | Arcanist | 1,897 | Effective Sorcerer/Wizard access, with derived rows labeled. |
 | Alchemist | 408 | Printed formula-list memberships. |
@@ -55,6 +55,12 @@ Derived access is labeled `access_basis: derived`. It does not replace or masque
 - Warpriest: 6 derived rows.
 - Hunter: 7 derived rows.
 - Summoner (Unchained): 7 *Monster Summoner's Handbook* rows derived from Paizo's explicit compatibility statement.
+
+## Reviewed list overrides
+
+[C] Ten Wizard-only identities were added to Sorcerer at the Wizard level by explicit project decision. Six Oracle-only identities were added to Cleric at the Oracle level. These 16 rows use `access_basis: reviewed_override`; they are not labeled as printed or derived values.
+
+[C] Oracle's Burden 2 and Oracle's Vessel 4 remain Oracle-only. Their rejected Cleric candidate relationships are recorded in the canonical decision files.
 
 ## Safety invariants
 

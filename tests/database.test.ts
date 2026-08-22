@@ -126,6 +126,60 @@ describe("ingested spell catalog", () => {
     })).toEqual(expect.objectContaining({ spellLevel: 6, accessBasis: "derived" }));
   });
 
+  it("preserves reviewed class-list overrides and explicit exclusions", async () => {
+    const [sorcererOverrides, clericOverrides] = await Promise.all([
+      prisma.spellLevel.findMany({
+        where: { spellListId: "spell-list.sorcerer", accessBasis: "reviewed_override" },
+        select: { spellId: true, spellLevel: true },
+        orderBy: { spellId: "asc" },
+      }),
+      prisma.spellLevel.findMany({
+        where: { spellListId: "spell-list.cleric", accessBasis: "reviewed_override" },
+        select: { spellId: true, spellLevel: true },
+        orderBy: { spellId: "asc" },
+      }),
+    ]);
+
+    expect(sorcererOverrides).toEqual([
+      { spellId: "spell.blood-transcription", spellLevel: 2 },
+      { spellId: "spell.deceitful-veneer", spellLevel: 5 },
+      { spellId: "spell.firewalkers-meditation", spellLevel: 4 },
+      { spellId: "spell.mages-lucubration", spellLevel: 6 },
+      { spellId: "spell.mnemonic-enhancer", spellLevel: 4 },
+      { spellId: "spell.rite-of-centered-mind", spellLevel: 1 },
+      { spellId: "spell.spirit-bonds", spellLevel: 3 },
+      { spellId: "spell.temporal-regression", spellLevel: 8 },
+      { spellId: "spell.visualization-of-the-body", spellLevel: 2 },
+      { spellId: "spell.visualization-of-the-mind", spellLevel: 2 },
+    ]);
+    expect(clericOverrides).toEqual([
+      { spellId: "spell.borrow-fortune", spellLevel: 3 },
+      { spellId: "spell.divine-vessel", spellLevel: 8 },
+      { spellId: "spell.embrace-destiny", spellLevel: 1 },
+      { spellId: "spell.find-fault", spellLevel: 3 },
+      { spellId: "spell.foretell-failure", spellLevel: 4 },
+      { spellId: "spell.jungle-mind", spellLevel: 5 },
+    ]);
+
+    for (const spellId of ["spell.oracles-burden", "spell.oracles-vessel"]) {
+      expect(await prisma.spellLevel.count({
+        where: { spellId, spellListId: "spell-list.cleric" },
+      })).toBe(0);
+      expect(await prisma.ruleRelationship.count({
+        where: {
+          id: `${spellId}:appears_on_spell_list:spell-list.cleric`,
+          status: "accepted",
+        },
+      })).toBe(0);
+      expect(await prisma.decisionRelationshipItem.findFirst({
+        where: {
+          relationshipId: `${spellId}:appears_on_spell_list:spell-list.cleric`,
+          decision: "reject",
+        },
+      })).not.toBeNull();
+    }
+  });
+
   it("registers NPC classes and the Adept spell-list owner", async () => {
     const [npcClasses, relationship] = await Promise.all([
       prisma.entity.findMany({
