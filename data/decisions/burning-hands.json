@@ -15,7 +15,11 @@
     "aon:bloodline.sorcerer.elemental:1dbba602",
     "aon:bloodline.sorcerer.orc:aff6783d",
     "aon:bloodline.bloodrager.elemental:fe0ce74b",
-    "aon:bloodline.bloodrager.phoenix:3b4be128"
+    "aon:bloodline.bloodrager.phoenix:3b4be128",
+    "aon:domain.fire:d018a253",
+    "aon:subdomain.arson:d018a253",
+    "aon:subdomain.ash:d018a253",
+    "aon:subdomain.smoke:d018a253"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.burning-hands:f33a88e37637c46d",
@@ -228,6 +232,62 @@
         "aon:bloodline.bloodrager.phoenix:3b4be128"
       ],
       "rationale": "AoN clearly transcribes the owning bloodrager bloodline's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/17",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.fire:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.fire:d018a253"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/18",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.arson:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.arson:d018a253"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/19",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.ash:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.ash:d018a253"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/20",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.smoke:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.smoke:d018a253"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
     }
   ],
   "relationship_decisions": [
@@ -746,6 +806,62 @@
         "aon:bloodline.bloodrager.phoenix:3b4be128"
       ],
       "rationale": "AoN prints the spell on the owning bloodrager bloodline page; it is modeled as bloodline access rather than general Bloodrager access."
+    },
+    {
+      "relationship_id": "spell.burning-hands:appears_on_spell_list:spell-list.fire-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.fire:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.fire:d018a253"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.burning-hands:appears_on_spell_list:spell-list.arson-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.arson:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.arson:d018a253"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.burning-hands:appears_on_spell_list:spell-list.ash-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.ash:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.ash:d018a253"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.burning-hands:appears_on_spell_list:spell-list.smoke-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.smoke:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.smoke:d018a253"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

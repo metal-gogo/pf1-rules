@@ -9,7 +9,13 @@
     "legacy_aon:spell.dispel-magic:a6f54dc4f2c20e19",
     "d20pfsrd:spell.dispel-magic:e44f5a1c18c3100b",
     "aon:mystery.spellscar:37f882ea",
-    "aon:bloodline.sorcerer.arcane:b8a87a92"
+    "aon:bloodline.sorcerer.arcane:b8a87a92",
+    "aon:domain.magic:44b410b9",
+    "aon:subdomain.entropy:365598bf",
+    "aon:subdomain.alchemy:44b410b9",
+    "aon:subdomain.arcane:44b410b9",
+    "aon:subdomain.divine:44b410b9",
+    "aon:subdomain.rites:44b410b9"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.dispel-magic:8d426367069d02b6",
@@ -161,6 +167,90 @@
         "aon:bloodline.sorcerer.arcane:b8a87a92"
       ],
       "rationale": "AoN clearly transcribes the owning sorcerer bloodline's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/26",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.magic:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.magic:44b410b9"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/27",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.entropy:365598bf",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.entropy:365598bf"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/28",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.alchemy:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.alchemy:44b410b9"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/29",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.arcane:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.arcane:44b410b9"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/30",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.divine:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.divine:44b410b9"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/31",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.rites:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.rites:44b410b9"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
     }
   ],
   "relationship_decisions": [
@@ -1130,6 +1220,90 @@
         "aon:bloodline.sorcerer.arcane:b8a87a92"
       ],
       "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
+    },
+    {
+      "relationship_id": "spell.dispel-magic:appears_on_spell_list:spell-list.magic-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.magic:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.magic:44b410b9"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.dispel-magic:appears_on_spell_list:spell-list.entropy-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.entropy:365598bf",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.entropy:365598bf"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.dispel-magic:appears_on_spell_list:spell-list.alchemy-subdomain-from-magic",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.alchemy:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.alchemy:44b410b9"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.dispel-magic:appears_on_spell_list:spell-list.arcane-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.arcane:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.arcane:44b410b9"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.dispel-magic:appears_on_spell_list:spell-list.divine-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.divine:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.divine:44b410b9"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.dispel-magic:appears_on_spell_list:spell-list.rites-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.rites:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.rites:44b410b9"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

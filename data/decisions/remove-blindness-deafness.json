@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.remove-blindness-deafness:81ab73baf3ca3bb8",
     "legacy_aon:spell.remove-blindness-deafness:4d2b3ad583e16699",
-    "d20pfsrd:spell.remove-blindness-deafness:50170d4f228c76f2"
+    "d20pfsrd:spell.remove-blindness-deafness:50170d4f228c76f2",
+    "aon:subdomain.purity:32d16f22"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.remove-blindness-deafness:81ab73baf3ca3bb8",
@@ -122,6 +123,20 @@
         "aon:spell.remove-blindness-deafness:81ab73baf3ca3bb8"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/11",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.purity:32d16f22",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.purity:32d16f22"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -518,6 +533,20 @@
         "aon:spell.remove-blindness-deafness:81ab73baf3ca3bb8"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.remove-blindness-deafness:appears_on_spell_list:spell-list.purity-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.purity:32d16f22",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.purity:32d16f22"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

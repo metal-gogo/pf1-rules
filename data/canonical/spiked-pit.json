@@ -51,6 +51,16 @@
       "level": 3,
       "scope": "later_first_party",
       "raw": "wizard 3"
+    },
+    {
+      "spell_list_id": "spell-list.caves-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Caves Subdomain",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "3rd—spiked pit",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -586,6 +596,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.spiked-pit:appears_on_spell_list:spell-list.caves-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.caves-subdomain",
+        "name": "Caves Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.caves:08dd1152",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "3rd—spiked pit",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Earth"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -636,6 +666,14 @@
       "raw_value_sha256": "08c2ba7c6f58d81a4a038f1559d403b2794fad2afcb246a13ca7b77d51143200",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:subdomain.caves:08dd1152",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "a54504bb542f4f06e60dd924ee85717a4b1aa6e565de71e3b7ec6180d7b41fc3",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -686,6 +724,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Caves Subdomain grants Spiked Pit as a level 3 printed spell; this is not general Cleric class access."
       }
     ]
   }

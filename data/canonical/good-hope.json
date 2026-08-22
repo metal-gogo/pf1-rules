@@ -30,6 +30,16 @@
       "level": 3,
       "scope": "later_first_party",
       "raw": "skald 3"
+    },
+    {
+      "spell_list_id": "spell-list.revelry-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Revelry Subdomain",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "3rd—good hope",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -484,6 +494,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.good-hope:appears_on_spell_list:spell-list.revelry-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.revelry-subdomain",
+        "name": "Revelry Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.revelry:365598bf",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "3rd—good hope",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Chaos"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -534,6 +564,14 @@
       "raw_value_sha256": "594b50b6b247937501a7c3390e07a7dea0f1f58f91ee14d9b458859a1e9cea1c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/2",
+      "observation_id": "aon:subdomain.revelry:365598bf",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "12f999429e4900c361795be5966afc176e40dbf4c87872e37b31deb69e95213d",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -559,6 +597,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/2",
+        "message": "Revelry Subdomain grants Good Hope as a level 3 printed spell; this is not general Cleric class access."
       }
     ]
   }

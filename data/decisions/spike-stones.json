@@ -9,7 +9,10 @@
     "legacy_aon:spell.spike-stones:248625d8903ef3db",
     "d20pfsrd:spell.spike-stones:820f2784a810a946",
     "aon:patron.mountain:15d234b1",
-    "aon:bloodline.sorcerer.deep-earth:6a3059cd"
+    "aon:bloodline.sorcerer.deep-earth:6a3059cd",
+    "aon:domain.earth:08dd1152",
+    "aon:subdomain.caves:08dd1152",
+    "aon:subdomain.metal:08dd1152"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.spike-stones:508451a34eaf79c9",
@@ -138,6 +141,48 @@
         "aon:bloodline.sorcerer.deep-earth:6a3059cd"
       ],
       "rationale": "AoN clearly transcribes the owning sorcerer bloodline's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/5",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.earth:08dd1152",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.earth:08dd1152"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/6",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.caves:08dd1152",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.caves:08dd1152"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/7",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.metal:08dd1152",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.metal:08dd1152"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
     }
   ],
   "relationship_decisions": [
@@ -408,6 +453,48 @@
         "aon:bloodline.sorcerer.deep-earth:6a3059cd"
       ],
       "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
+    },
+    {
+      "relationship_id": "spell.spike-stones:appears_on_spell_list:spell-list.earth-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.earth:08dd1152",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.earth:08dd1152"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.spike-stones:appears_on_spell_list:spell-list.caves-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.caves:08dd1152",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.caves:08dd1152"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.spike-stones:appears_on_spell_list:spell-list.metal-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.metal:08dd1152",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.metal:08dd1152"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

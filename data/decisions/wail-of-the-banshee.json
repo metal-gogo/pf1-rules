@@ -13,7 +13,14 @@
     "aon:patron.autumn:15d234b1",
     "aon:spirit.bones:ea72c994",
     "aon:bloodline.sorcerer.ghoul:c0c80f39",
-    "aon:bloodline.sorcerer.maestro:b6a0dd0c"
+    "aon:bloodline.sorcerer.maestro:b6a0dd0c",
+    "aon:domain.repose:8db954e0",
+    "aon:subdomain.ancestors:8db954e0",
+    "aon:subdomain.psychopomp-repose:8db954e0",
+    "aon:domain.death:941bc1dd",
+    "aon:subdomain.plague:941bc1dd",
+    "aon:subdomain.psychopomp-death:941bc1dd",
+    "aon:subdomain.shadow:941bc1dd"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.wail-of-the-banshee:c6de26d271e75069",
@@ -198,6 +205,104 @@
         "aon:bloodline.sorcerer.maestro:b6a0dd0c"
       ],
       "rationale": "AoN clearly transcribes the owning sorcerer bloodline's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/12",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.repose:8db954e0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.repose:8db954e0"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/13",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.ancestors:8db954e0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.ancestors:8db954e0"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/14",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.psychopomp-repose:8db954e0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.psychopomp-repose:8db954e0"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/15",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.death:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.death:941bc1dd"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/16",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.plague:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.plague:941bc1dd"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/17",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.psychopomp-death:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.psychopomp-death:941bc1dd"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/18",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.shadow:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.shadow:941bc1dd"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
     }
   ],
   "relationship_decisions": [
@@ -616,6 +721,104 @@
         "aon:bloodline.sorcerer.maestro:b6a0dd0c"
       ],
       "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
+    },
+    {
+      "relationship_id": "spell.wail-of-the-banshee:appears_on_spell_list:spell-list.repose-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.repose:8db954e0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.repose:8db954e0"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.wail-of-the-banshee:appears_on_spell_list:spell-list.ancestors-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.ancestors:8db954e0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.ancestors:8db954e0"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.wail-of-the-banshee:appears_on_spell_list:spell-list.psychopomp-repose-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.psychopomp-repose:8db954e0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.psychopomp-repose:8db954e0"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.wail-of-the-banshee:appears_on_spell_list:spell-list.death-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.death:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.death:941bc1dd"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.wail-of-the-banshee:appears_on_spell_list:spell-list.plague-subdomain-from-death",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.plague:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.plague:941bc1dd"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.wail-of-the-banshee:appears_on_spell_list:spell-list.psychopomp-death-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.psychopomp-death:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.psychopomp-death:941bc1dd"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.wail-of-the-banshee:appears_on_spell_list:spell-list.shadow-subdomain-from-death",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.shadow:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.shadow:941bc1dd"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

@@ -238,6 +238,16 @@
       "raw": "fear (16th)",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.fear-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Fear Subdomain",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "4th—fear",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1389,6 +1399,26 @@
         }
       ],
       "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
+    },
+    {
+      "relationship_id": "spell.fear:appears_on_spell_list:spell-list.fear-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.fear-subdomain",
+        "name": "Fear Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.fear:442be5b2",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th—fear",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Evil"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -1503,6 +1533,14 @@
       "raw_value_sha256": "2dae571796cbadf82e096b1a930f0a4317925a3909204d49bb62157500975cdc",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/24",
+      "observation_id": "aon:subdomain.fear:442be5b2",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "3f2c36d30a47bc8533fd4c73d0cce8b6ff4e332b991dc33bf6165ded48cd24a4",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1568,6 +1606,11 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/23",
         "message": "Bloodrager Kyton Bloodline grants Fear as a level 4 spell; this is not general Bloodrager class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/24",
+        "message": "Fear Subdomain grants Fear as a level 4 printed spell; this is not general Cleric class access."
       }
     ]
   }

@@ -51,6 +51,62 @@
       "level": 7,
       "scope": "later_first_party",
       "raw": "witch 7"
+    },
+    {
+      "spell_list_id": "spell-list.healing-domain",
+      "list_kind": "domain",
+      "list_name": "Healing Domain",
+      "level": 7,
+      "scope": "core",
+      "raw": "7th—regenerate",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.medicine-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Medicine Subdomain",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "Inherited from Healing Domain: 7th—regenerate",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.medicine",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.healing-domain",
+            "level": 7
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Healing",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.restoration-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Restoration Subdomain",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "Inherited from Healing Domain: 7th—regenerate",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.restoration",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.healing-domain",
+            "level": 7
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Healing",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -517,6 +573,66 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.regenerate:appears_on_spell_list:spell-list.healing-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.healing-domain",
+        "name": "Healing Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.healing:c5987ad2",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "7th—regenerate",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Healing"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.regenerate:appears_on_spell_list:spell-list.medicine-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.medicine-subdomain",
+        "name": "Medicine Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.medicine:c5987ad2",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Healing Domain: 7th—regenerate",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Healing"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.regenerate:appears_on_spell_list:spell-list.restoration-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.restoration-subdomain",
+        "name": "Restoration Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.restoration:c5987ad2",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Healing Domain: 7th—regenerate",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Healing"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -567,6 +683,30 @@
       "raw_value_sha256": "62f569a27ee842b277def0b70ceb007bbfdbc477450e561290ea7549b5607f6f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:domain.healing:c5987ad2",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "4a724896298fae52aa24611ced0c5b00e9e06419cf62ce2acbc54d58e28a1975",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:subdomain.medicine:c5987ad2",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "b238d867f8c32ee3253c493cea1278fe3d892a5c2dcee011ac761a60a5c289e1",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:subdomain.restoration:c5987ad2",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "b238d867f8c32ee3253c493cea1278fe3d892a5c2dcee011ac761a60a5c289e1",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
     }
   ],
   "normalization": {
@@ -592,6 +732,21 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Healing Domain grants Regenerate as a level 7 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Medicine Subdomain grants Regenerate as a level 7 derived spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Restoration Subdomain grants Regenerate as a level 7 derived spell; this is not general Cleric class access."
       }
     ]
   }

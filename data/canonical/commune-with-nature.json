@@ -51,6 +51,16 @@
       "level": 5,
       "scope": "later_first_party",
       "raw": "shaman 5"
+    },
+    {
+      "spell_list_id": "spell-list.leshy-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Leshy Subdomain",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "5th—commune with nature",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -350,6 +360,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.commune-with-nature:appears_on_spell_list:spell-list.leshy-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.leshy-subdomain",
+        "name": "Leshy Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.leshy:f56ad9d0",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "5th—commune with nature",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Plant"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -400,6 +430,14 @@
       "raw_value_sha256": "cb38aecfa508c431296a3af173a604ea1799ee0c4445a716c51467a1473c2eb5",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:subdomain.leshy:f56ad9d0",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "27c0de20a810f60c3067d559560d2d45c73b3fc9bdce23ce4d84e5dee6f76754",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -420,6 +458,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Leshy Subdomain grants Commune with Nature as a level 5 printed spell; this is not general Cleric class access."
       }
     ]
   }

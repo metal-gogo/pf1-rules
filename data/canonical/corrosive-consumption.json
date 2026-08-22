@@ -45,6 +45,26 @@
       "level": 5,
       "scope": "later_first_party",
       "raw": "wizard 5"
+    },
+    {
+      "spell_list_id": "spell-list.demodand-subdomain-from-chaos",
+      "list_kind": "subdomain",
+      "list_name": "Demodand Subdomain (Chaos Domain)",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "6th—corrosive consumption",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.demodand-subdomain-from-evil",
+      "list_kind": "subdomain",
+      "list_name": "Demodand Subdomain (Evil Domain)",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "6th—corrosive consumption",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -532,6 +552,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.corrosive-consumption:appears_on_spell_list:spell-list.demodand-subdomain-from-chaos",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.demodand-subdomain-from-chaos",
+        "name": "Demodand Subdomain Spells (Chaos Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.demodand:365598bf",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th—corrosive consumption",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Chaos"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.corrosive-consumption:appears_on_spell_list:spell-list.demodand-subdomain-from-evil",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.demodand-subdomain-from-evil",
+        "name": "Demodand Subdomain Spells (Evil Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.demodand:442be5b2",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th—corrosive consumption",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Evil"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -582,6 +642,22 @@
       "raw_value_sha256": "07c0ff8e3b863b5bbc45e909ee50040615d2e641ea6aaca609a29893da0c6f80",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:subdomain.demodand:365598bf",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "c798d3306adf1ef10b6129338ee5274d822ab6a4b496ba6fd577979b66af66aa",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:subdomain.demodand:442be5b2",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "c798d3306adf1ef10b6129338ee5274d822ab6a4b496ba6fd577979b66af66aa",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -597,6 +673,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Demodand Subdomain grants Corrosive Consumption as a level 6 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Demodand Subdomain grants Corrosive Consumption as a level 6 printed spell; this is not general Cleric class access."
       }
     ]
   }

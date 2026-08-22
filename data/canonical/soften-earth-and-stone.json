@@ -29,6 +29,39 @@
       "level": 2,
       "scope": "later_first_party",
       "raw": "hunter 2"
+    },
+    {
+      "spell_list_id": "spell-list.earth-domain",
+      "list_kind": "domain",
+      "list_name": "Earth Domain",
+      "level": 2,
+      "scope": "core",
+      "raw": "2nd—soften earth and stone",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.petrification-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Petrification Subdomain",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "Inherited from Earth Domain: 2nd—soften earth and stone",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.petrification",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.earth-domain",
+            "level": 2
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Earth",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -422,6 +455,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.soften-earth-and-stone:appears_on_spell_list:spell-list.earth-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.earth-domain",
+        "name": "Earth Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.earth:08dd1152",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd—soften earth and stone",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Earth"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.soften-earth-and-stone:appears_on_spell_list:spell-list.petrification-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.petrification-subdomain",
+        "name": "Petrification Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.petrification:08dd1152",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Earth Domain: 2nd—soften earth and stone",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Earth"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -472,6 +545,22 @@
       "raw_value_sha256": "9b85905e6ae7a64357ec23ee0749ead4b53b1b85864f2c2e55ef25579c57577b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/2",
+      "observation_id": "aon:domain.earth:08dd1152",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "648cf3cc76d164aef024bc58fe6635d08c52a53da5e43f6495e06bb2a59b593d",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/3",
+      "observation_id": "aon:subdomain.petrification:08dd1152",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "1163a72a87dc3fc0f6c3cfa202f3dced763f5832c54b4516ee3711acc12a711a",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
     }
   ],
   "normalization": {
@@ -492,6 +581,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/2",
+        "message": "Earth Domain grants Soften Earth and Stone as a level 2 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/3",
+        "message": "Petrification Subdomain grants Soften Earth and Stone as a level 2 derived spell; this is not general Cleric class access."
       }
     ]
   }

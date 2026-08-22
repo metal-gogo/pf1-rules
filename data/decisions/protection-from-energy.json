@@ -13,7 +13,12 @@
     "aon:bloodline.sorcerer.destined:68dfa6a8",
     "aon:bloodline.sorcerer.elemental:1dbba602",
     "aon:bloodline.bloodrager.destined:6fd60b2c",
-    "aon:bloodline.bloodrager.elemental:fe0ce74b"
+    "aon:bloodline.bloodrager.elemental:fe0ce74b",
+    "aon:domain.luck:05c8839f",
+    "aon:domain.protection:32d16f22",
+    "aon:subdomain.defense:32d16f22",
+    "aon:subdomain.fortifications:32d16f22",
+    "aon:subdomain.solitude:32d16f22"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.protection-from-energy:ea070e1a0ca3544a",
@@ -221,6 +226,76 @@
         "aon:bloodline.bloodrager.elemental:fe0ce74b"
       ],
       "rationale": "AoN clearly transcribes the owning bloodrager bloodline's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/26",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.luck:05c8839f",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.luck:05c8839f"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/27",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.protection:32d16f22",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.protection:32d16f22"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/28",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.defense:32d16f22",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.defense:32d16f22"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/29",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.fortifications:32d16f22",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.fortifications:32d16f22"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/30",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.solitude:32d16f22",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.solitude:32d16f22"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
     }
   ],
   "relationship_decisions": [
@@ -1074,6 +1149,76 @@
         "aon:bloodline.bloodrager.elemental:fe0ce74b"
       ],
       "rationale": "AoN prints the spell on the owning bloodrager bloodline page; it is modeled as bloodline access rather than general Bloodrager access."
+    },
+    {
+      "relationship_id": "spell.protection-from-energy:appears_on_spell_list:spell-list.luck-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.luck:05c8839f",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.luck:05c8839f"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.protection-from-energy:appears_on_spell_list:spell-list.protection-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.protection:32d16f22",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.protection:32d16f22"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.protection-from-energy:appears_on_spell_list:spell-list.defense-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.defense:32d16f22",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.defense:32d16f22"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.protection-from-energy:appears_on_spell_list:spell-list.fortifications-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.fortifications:32d16f22",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.fortifications:32d16f22"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.protection-from-energy:appears_on_spell_list:spell-list.solitude-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.solitude:32d16f22",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.solitude:32d16f22"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

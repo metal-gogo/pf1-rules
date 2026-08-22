@@ -49,6 +49,54 @@ const reviewedOwnerSpellIds = new Map<string, string[]>([
   ["summon monster vii (reptiles only)", ["spell.summon-monster-7"]],
   ["shield of dawn", ["spell.shield-of-the-dawnflower"]],
   ["call lightning storm (dealing fire damage, damage increased outdoors at night)", ["spell.call-lightning-storm"]],
+  ["summon monster ix (evil spell only)", ["spell.summon-monster-9"]],
+  ["summon monster ix (law spell only)", ["spell.summon-monster-9"]],
+  ["summon monster ix (chaos spell only)", ["spell.summon-monster-9"]],
+  ["summon monster ix (good spell only)", ["spell.summon-monster-9"]],
+  ["align weapon (law only)", ["spell.align-weapon"]],
+  ["align weapon (chaos only)", ["spell.align-weapon"]],
+  ["align weapon (evil only)", ["spell.align-weapon"]],
+  ["align weapon (good only)", ["spell.align-weapon"]],
+  ["align weapon (chaos or evil only)", ["spell.align-weapon"]],
+  ["blindness/deafness (only to cause blindness)", ["spell.blindness-deafness"]],
+  ["elemental body iv (earth only)", ["spell.elemental-body-iv"]],
+  ["elemental body iv (air only)", ["spell.elemental-body-iv"]],
+  ["elemental body iv (fire only)", ["spell.elemental-body-iv"]],
+  ["elemental swarm (earth spell only)", ["spell.elemental-swarm"]],
+  ["elemental swarm (water spell only)", ["spell.elemental-swarm"]],
+  ["elemental swarm (fire spell only)", ["spell.elemental-swarm"]],
+  ["elemental swarm (air spell only)", ["spell.elemental-swarm"]],
+  ["summon monster v (summons 1d3 shadows)", ["spell.summon-monster-5"]],
+  ["shapechange.*only reptiles", ["spell.shapechange"]],
+  ["summon nature's ally iv (animals only)", ["spell.summon-natures-ally-4"]],
+  ["summon nature’s ally iv (animals only)", ["spell.summon-natures-ally-4"]],
+  ["summon nature's ally viii (animals only)", ["spell.summon-natures-ally-8"]],
+  ["summon nature’s ally viii (animals only)", ["spell.summon-natures-ally-8"]],
+  ["beast shape iii (animals only)", ["spell.beast-shape-iii"]],
+  ["beast shape i (animals only)", ["spell.beast-shape-i"]],
+  ["creeping doom (takes the form of diminutive-sized reptiles)", ["spell.creeping-doom"]],
+  ["planar ally (azata only)", ["spell.planar-ally"]],
+  ["planar ally (psychopomps only)", ["spell.planar-ally"]],
+  ["planar ally (archon only)", ["spell.planar-ally"]],
+  ["planar ally (agathions only)", ["spell.planar-ally"]],
+  ["planar binding (demons only)", ["spell.planar-binding"]],
+  ["planar binding (devils only)", ["spell.planar-binding"]],
+  ["planar binding (proteans only)", ["spell.planar-binding"]],
+  ["planar binding (daemons only)", ["spell.planar-binding"]],
+  ["planar binding (aeons only)", ["spell.planar-binding"]],
+  ["planar binding (inevitables only)", ["spell.planar-binding"]],
+  ["paragon surge (pathfinder rpg advanced race guide 48; always matches your actual race)", ["spell.paragon-surge"]],
+  ["flame blade (deals electricity damage and gains the electricity descriptor instead of fire)", ["spell.flame-blade"]],
+  ["summon nature’s ally viii (1d3 goliath stag beetles; pathfinder rpg bestiary 2 44)", ["spell.summon-natures-ally-8"]],
+  ["protection from chaos/evil/good/law", [
+    "spell.protection-from-chaos",
+    "spell.protection-from-evil",
+    "spell.protection-from-good",
+    "spell.protection-from-law",
+  ]],
+  ["antilife shield", ["spell.antilife-shell"]],
+  ["summon nature’s ally iv (deinonychus or pteranodon only)", ["spell.summon-natures-ally-4"]],
+  ["summon nature’s ally vii (brachiosaurus or tyrannosaurus only)", ["spell.summon-natures-ally-7"]],
 ]);
 
 interface Capture {
@@ -64,22 +112,28 @@ interface OwnerSpell {
   spellName: string;
   spellLevel: number;
   raw: string;
+  accessBasis?: "printed" | "derived";
+  derivation?: ValidatedJson;
 }
 
 interface OwnerRecord {
   entityId: string;
-  entityType: "mystery" | "patron" | "spirit" | "bloodline";
+  entityType: "domain" | "subdomain" | "mystery" | "patron" | "spirit" | "bloodline";
   listId: string;
-  listKind: "mystery" | "patron" | "spirit" | "bloodline";
+  listKind: "domain" | "subdomain" | "mystery" | "patron" | "spirit" | "bloodline";
   name: string;
   listName: string;
+  membershipName?: string;
   legacyListId?: string;
-  className: "Oracle" | "Witch" | "Shaman" | "Sorcerer" | "Bloodrager";
+  className: "Cleric" | "Oracle" | "Witch" | "Shaman" | "Sorcerer" | "Bloodrager";
   definitionType: string;
   sectionHeading: string;
   sourceUrl: string;
   sourceBook: string | null;
+  scope?: "core" | "later_first_party";
   definitionRaw: string;
+  sectionBodyRaw?: string;
+  parentList?: { entityId: string; listId: string; name: string; raw: string };
   spells: OwnerSpell[];
   capture: Capture;
   rawPath: string;
@@ -158,7 +212,7 @@ async function assertAonAllowsOwners(): Promise<void> {
   if (!response.ok) throw new Error(`Cannot verify AoN robots policy: HTTP ${response.status}`);
   const body = await response.text();
   const disallowed = body.split(/\r?\n/).some((line) =>
-    /^\s*disallow\s*:\s*\/(?:OracleMysteries|MysteryDisplay|WitchPatrons|ShamanSpirits|ShamanSpiritDisplay|SorcererBloodlines|BloodlineDisplay|BloodragerBloodlines|BloodragerBloodlineDisplay)\.aspx/i.test(line),
+    /^\s*disallow\s*:\s*\/(?:OracleMysteries|MysteryDisplay|WitchPatrons|ShamanSpirits|ShamanSpiritDisplay|SorcererBloodlines|BloodlineDisplay|BloodragerBloodlines|BloodragerBloodlineDisplay|ClericDomains|DomainDisplay)\.aspx/i.test(line),
   );
   if (disallowed) throw new Error("AoN robots.txt disallows spell-list owner capture.");
 }
@@ -198,6 +252,19 @@ function bloodlineLinks(
   const doc = cheerio.load(html);
   const values = new Map<string, { name: string; url: string }>();
   doc(`a[href*="${displayPage}?ItemName="]`).each((_index, element) => {
+    const name = cleanText(doc(element).text());
+    const href = doc(element).attr("href");
+    if (!name || !href) return;
+    values.set(slug(name), { name, url: new URL(href, baseUrl).toString() });
+  });
+  return [...values.values()].sort((left, right) => left.name.localeCompare(right.name));
+}
+
+
+function domainLinks(html: string, baseUrl: string): Array<{ name: string; url: string }> {
+  const doc = cheerio.load(html);
+  const values = new Map<string, { name: string; url: string }>();
+  doc('a[href*="DomainDisplay.aspx?ItemName="]').each((_index, element) => {
     const name = cleanText(doc(element).text());
     const href = doc(element).attr("href");
     if (!name || !href) return;
@@ -420,6 +487,115 @@ function parseBloodline(
 }
 
 
+interface ParsedSubdomain {
+  baseName: string;
+  name: string;
+  associatedDomains: string[];
+  associationRaw: string;
+  sourceBook: string | null;
+  definitionRaw: string;
+  replacements: OwnerSpell[];
+  capture: Capture;
+  rawPath: string;
+}
+
+
+function parseNumberedDashSpells(raw: string, context: string): OwnerSpell[] {
+  const spells: OwnerSpell[] = [];
+  const entryPattern = /(\d+)(?:st|nd|rd|th)\s*[—-]\s*(.+?)(?=,\s*\d+(?:st|nd|rd|th)\s*[—-]|\.\s*$)/gi;
+  for (const match of raw.matchAll(entryPattern)) {
+    const spellLevel = Number(match[1]);
+    if (spellLevel < 1 || spellLevel > 9) {
+      throw new Error(`${context} has unexpected spell level ${spellLevel}.`);
+    }
+    spells.push({ spellName: cleanText(match[2]!), spellLevel, raw: cleanText(match[0]!) });
+  }
+  return spells;
+}
+
+
+function parseDomainPage(capture: Capture, rawPath: string): {
+  base: OwnerRecord;
+  subdomains: ParsedSubdomain[];
+} {
+  const doc = cheerio.load(capture.body);
+  const output = doc('span[id^="MainContent_DataListTypes_LabelName_"]').first();
+  if (output.length !== 1) throw new Error(`AoN domain detail block missing at ${capture.url}`);
+  const html = output.html();
+  if (!html) throw new Error(`AoN domain detail HTML missing at ${capture.url}`);
+  const segments = html.split(/(?=<h2\s+class="title"|<h1\s+class="title">Variant Domain Powers)/i);
+  const baseDoc = cheerio.load(`<div>${segments[0] ?? ""}</div>`);
+  const baseHeading = cleanText(baseDoc("h1.title").first().text());
+  const baseName = baseHeading.replace(/^PFS (?:Legal|Limited|Restricted)\s+/i, "").trim();
+  const normalizedBase = baseDoc("div").first().clone();
+  normalizedBase.find("sup").remove();
+  const baseDefinitionRaw = cleanText(normalizedBase.text());
+  const baseSpellMatch = /Domain Spells:\s*(.*?\.)(?:\s|$)/i.exec(baseDefinitionRaw)
+    ?? /Domain Spells:\s*(.*?)\s*$/i.exec(baseDefinitionRaw);
+  if (!baseSpellMatch?.[1]) throw new Error(`${baseName} lacks a Domain Spells section.`);
+  const baseSpells = parseNumberedDashSpells(baseSpellMatch[1], `${baseName} Domain`);
+  if (baseSpells.length !== 9) {
+    throw new Error(`${baseName} parsed ${baseSpells.length} domain spells instead of 9: ${baseSpellMatch[1]}`);
+  }
+  const baseSourceBook = cleanText(baseDoc('a[href*="paizo.com"]').first().text()) || null;
+  const baseSlug = slug(baseName);
+  const base: OwnerRecord = {
+    entityId: `domain.${baseSlug}`,
+    entityType: "domain",
+    listId: `spell-list.${baseSlug}-domain`,
+    listKind: "domain",
+    name: `${baseName} Domain`,
+    listName: `${baseName} Domain Spells`,
+    className: "Cleric",
+    definitionType: "Cleric/Inquisitor Domain",
+    sectionHeading: "Domain Spells",
+    sourceUrl: capture.url,
+    sourceBook: baseSourceBook,
+    scope: /Core Rulebook/i.test(baseSourceBook ?? "") ? "core" : "later_first_party",
+    definitionRaw: baseDefinitionRaw,
+    spells: baseSpells,
+    capture,
+    rawPath,
+  };
+
+  const subdomains: ParsedSubdomain[] = [];
+  for (const segment of segments.slice(1)) {
+    const subDoc = cheerio.load(`<div>${segment}</div>`);
+    const heading = cleanText(subDoc("h2.title").first().text());
+    if (!/\s+Subdomain$/i.test(heading)) continue;
+    const name = heading
+      .replace(/^PFS (?:Legal|Limited|Restricted)\s+/i, "")
+      .replace(/\s+Subdomain$/i, "")
+      .trim();
+    if (!name) continue;
+    const normalized = subDoc("div").first().clone();
+    normalized.find("sup").remove();
+    const definitionRaw = cleanText(normalized.text());
+    const associationMatch = /Associated Domain\(s\):\s*(.*?)\s*Associated Deities:/i.exec(definitionRaw);
+    if (!associationMatch?.[1]) throw new Error(`${name} lacks Associated Domain(s) on ${capture.url}.`);
+    const associatedDomains = associationMatch[1].split(",").map(cleanText).filter(Boolean);
+    const replacementMatch = /Replacement Domain Spells:\s*(.*?\.)(?:\s|$)/i.exec(definitionRaw)
+      ?? /Replacement Domain Spells:\s*(.*?)\s*$/i.exec(definitionRaw);
+    const replacements = replacementMatch?.[1]
+      ? parseNumberedDashSpells(replacementMatch[1], `${name} Subdomain`)
+      : [];
+    const sourceBook = cleanText(subDoc('a[href*="paizo.com"]').first().text()) || null;
+    subdomains.push({
+      baseName,
+      name,
+      associatedDomains,
+      associationRaw: `Associated Domain(s): ${associationMatch[1]}`,
+      sourceBook,
+      definitionRaw,
+      replacements,
+      capture,
+      rawPath,
+    });
+  }
+  return { base, subdomains };
+}
+
+
 function sourceObservation(owner: OwnerRecord): ValidatedJson {
   const observationId = `aon:${owner.entityId}:${owner.capture.content_sha256.slice(0, 8)}`;
   const observationDirectory = path.join(projectRoot, "data", "observations", "entities", owner.entityId);
@@ -461,7 +637,7 @@ function sourceObservation(owner: OwnerRecord): ValidatedJson {
       links_raw: [],
       sections_raw: [{
         heading_raw: owner.sectionHeading,
-        body_raw: owner.spells.map((spell) => spell.raw).join(", "),
+        body_raw: owner.sectionBodyRaw ?? owner.spells.map((spell) => spell.raw).join(", "),
       }],
     },
     warnings: [],
@@ -505,14 +681,38 @@ function upsertOwnerEntities(
     }],
     note: `This ${owner.definitionType.toLocaleLowerCase("en-US")} owns the listed spell access; it is not a class spell list.`,
   };
+  const parentRelationship = owner.parentList ? {
+    relationship_id: `${owner.entityId}:inherits_spell_list:${owner.parentList.listId}`,
+    type: "inherits_spell_list",
+    target: { entity_type: "spell_list", entity_id: owner.parentList.listId, name: owner.parentList.name },
+    status: "accepted",
+    evidence: [{
+      observation_id: observationId,
+      source_field: "entity_raw.definition_raw",
+      evidence_kind: "plain_text",
+      anchor_text_raw: owner.parentList.raw,
+      source_href: owner.sourceUrl,
+    }],
+    note: "The subdomain inherits its associated domain spell list except at explicitly replaced levels.",
+  } : null;
   const existingOwner = findEntityLocation(registries, owner.entityId);
   if (existingOwner) {
     existingOwner.entity.entity_type = owner.entityType;
     existingOwner.entity.name = owner.name;
     existingOwner.entity.status = "resolved";
-    existingOwner.entity.evidence = evidence;
+    existingOwner.entity.evidence = [
+      ...(existingOwner.entity.evidence ?? []).filter((item: ValidatedJson) => item.observation_id !== observationId),
+      ...evidence,
+    ];
     existingOwner.entity.notes = ["Definition and complete granted-spell list captured from Archives of Nethys."];
-    existingOwner.entity.relationships = [relationship];
+    const relationships = [...(existingOwner.entity.relationships ?? [])];
+    const relationshipCandidates = parentRelationship ? [relationship, parentRelationship] : [relationship];
+    for (const candidate of relationshipCandidates) {
+      const index = relationships.findIndex((item: ValidatedJson) => item.relationship_id === candidate.relationship_id);
+      if (index >= 0) relationships[index] = candidate;
+      else relationships.push(candidate);
+    }
+    existingOwner.entity.relationships = relationships;
   } else {
     ownerRegistry.record.entities.push({
       entity_id: owner.entityId,
@@ -522,7 +722,7 @@ function upsertOwnerEntities(
       aliases: [],
       evidence,
       notes: ["Definition and complete granted-spell list captured from Archives of Nethys."],
-      relationships: [relationship],
+      relationships: [relationship, parentRelationship].filter(Boolean),
     });
   }
 
@@ -554,7 +754,15 @@ function addOwnerSpellMembership(
   decision: ValidatedJson,
 ): "added" | "reclassified" | "existing" {
   const existing = canonical.levels.find((level: ValidatedJson) => level.spell_list_id === owner.listId);
-  if (existing) return "existing";
+  const accessBasis = ownerSpell.accessBasis ?? "printed";
+  const exactExisting = existing &&
+    existing.list_kind === owner.listKind &&
+    existing.list_name === (owner.membershipName ?? owner.name) &&
+    existing.level === ownerSpell.spellLevel &&
+    existing.raw === ownerSpell.raw &&
+    existing.access_basis === accessBasis &&
+    JSON.stringify(existing.derivation ?? null) === JSON.stringify(ownerSpell.derivation ?? null);
+  if (exactExisting) return "existing";
   const qualifiedClass = canonical.levels.find((level: ValidatedJson) =>
     level.spell_list_id === `spell-list.${owner.className.toLocaleLowerCase("en-US")}` &&
     (level.qualifications ?? []).some((qualification: ValidatedJson) =>
@@ -564,7 +772,7 @@ function addOwnerSpellMembership(
   const legacyMembership = owner.legacyListId
     ? canonical.levels.find((level: ValidatedJson) => level.spell_list_id === owner.legacyListId)
     : null;
-  const replaceableMembership = qualifiedClass ?? legacyMembership;
+  const replaceableMembership = existing ?? qualifiedClass ?? legacyMembership;
   const levelIndex = replaceableMembership
     ? canonical.levels.indexOf(replaceableMembership)
     : canonical.levels.length;
@@ -575,11 +783,12 @@ function addOwnerSpellMembership(
   const level = {
     spell_list_id: owner.listId,
     list_kind: owner.listKind,
-    list_name: owner.name,
+    list_name: owner.membershipName ?? owner.name,
     level: ownerSpell.spellLevel,
-    scope: "later_first_party",
+    scope: owner.scope ?? "later_first_party",
     raw: ownerSpell.raw,
-    access_basis: "printed",
+    access_basis: accessBasis,
+    ...(ownerSpell.derivation ? { derivation: ownerSpell.derivation } : {}),
     qualifications: [],
   };
   if (replaceableMembership) canonical.levels[levelIndex] = level;
@@ -612,12 +821,14 @@ function addOwnerSpellMembership(
     source_field: "entity_raw.sections_raw[0]",
     raw_value_sha256: sha256(ownerSpell.raw),
     decision: "normalized",
-    note: "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level.",
+    note: accessBasis === "derived"
+      ? "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+      : "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level.",
   });
   canonical.normalization.warnings.push({
     code: "OWNER_GRANTED_SPELL_ACCESS",
     field_path: `/levels/${levelIndex}`,
-    message: `${owner.name} grants ${canonical.name} as a level ${ownerSpell.spellLevel} spell; this is not general ${owner.className} class access.`,
+    message: `${owner.name} grants ${canonical.name} as a level ${ownerSpell.spellLevel} ${accessBasis} spell; this is not general ${owner.className} class access.`,
   });
 
   if (!decision.observation_ids.includes(observationId)) decision.observation_ids.push(observationId);
@@ -626,7 +837,9 @@ function addOwnerSpellMembership(
     decision: "normalize",
     selected_evidence: [{ observation_id: observationId, source_field: "entity_raw.sections_raw[0]" }],
     considered_observation_ids: [observationId],
-    rationale: `AoN clearly transcribes the owning ${owner.definitionType.toLocaleLowerCase("en-US")}'s printed spell entry. The gained class level is normalized to spell level.`,
+    rationale: accessBasis === "derived"
+      ? `The owning ${owner.definitionType.toLocaleLowerCase("en-US")} prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived.`
+      : `AoN clearly transcribes the owning ${owner.definitionType.toLocaleLowerCase("en-US")}'s printed spell entry. The gained class level is normalized to spell level.`,
   });
   const oldDecision = oldRelationshipId
     ? decision.relationship_decisions.find((candidate: ValidatedJson) => candidate.relationship_id === oldRelationshipId)
@@ -636,7 +849,9 @@ function addOwnerSpellMembership(
     decision: "accept",
     evidence: [{ observation_id: observationId, source_field: "entity_raw.sections_raw[0]" }],
     considered_observation_ids: [observationId],
-    rationale: `AoN prints the spell on the owning ${owner.definitionType.toLocaleLowerCase("en-US")} page; it is modeled as ${owner.listKind} access rather than general ${owner.className} access.`,
+    rationale: accessBasis === "derived"
+      ? `The owning ${owner.definitionType.toLocaleLowerCase("en-US")} replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived.`
+      : `AoN prints the spell on the owning ${owner.definitionType.toLocaleLowerCase("en-US")} page; it is modeled as ${owner.listKind} access rather than general ${owner.className} access.`,
   };
   if (oldDecision) Object.assign(oldDecision, relationshipDecision);
   else decision.relationship_decisions.push(relationshipDecision);
@@ -660,7 +875,8 @@ function ingestOwnerRecords(
   const unresolved: Array<{ owner: string; spell: string; level: number }> = [];
   const normalizedReferences: Array<{ owner: string; printed: string; canonical: string }> = [];
   const report = {
-    owners: 0,
+    owners: new Set(owners.map((owner) => owner.entityId)).size,
+    spellLists: owners.length,
     rows: 0,
     added: 0,
     reclassified: 0,
@@ -668,16 +884,22 @@ function ingestOwnerRecords(
     normalizedReferences,
     unresolved,
   };
+  const ownerRecordCounts = new Map<string, number>();
+  for (const owner of owners) {
+    ownerRecordCounts.set(owner.entityId, (ownerRecordCounts.get(owner.entityId) ?? 0) + 1);
+  }
 
   for (const owner of owners) {
     const observation = sourceObservation(owner);
     const observationId = observation.observation_id;
+    const observationFilename = (ownerRecordCounts.get(owner.entityId) ?? 0) > 1
+      ? `aon-${parserVersion}-${owner.capture.content_sha256.slice(0, 8)}.json`
+      : `aon-${parserVersion}.json`;
     writeJson(
-      path.join(projectRoot, "data", "observations", "entities", owner.entityId, `aon-${parserVersion}.json`),
+      path.join(projectRoot, "data", "observations", "entities", owner.entityId, observationFilename),
       observation,
     );
     upsertOwnerEntities(owner, observationId, registries);
-    report.owners += 1;
     for (const ownerSpell of owner.spells) {
       const referenceKey = ownerSpell.spellName.toLocaleLowerCase("en-US");
       const reviewedName = reviewedOwnerSpellNames.get(referenceKey);
@@ -730,7 +952,8 @@ function ingestOwnerRecords(
     generated_at: catalog.retrieved_at,
     source_catalog_url: catalog.url,
     source_catalog_sha256: catalog.content_sha256,
-    owner_count: owners.length,
+    owner_count: new Set(owners.map((owner) => owner.entityId)).size,
+    spell_list_count: owners.length,
     canonical_rows: canonicalRows.length,
     rows_by_list: rowsByList,
     normalized_references: normalizedReferences,
@@ -841,6 +1064,140 @@ export const ingestSorcererBloodlineSpellLists = () => ingestBloodlineSpellLists
 export const ingestBloodragerBloodlineSpellLists = () => ingestBloodlineSpellLists("Bloodrager");
 
 
+export async function ingestDomainSpellLists() {
+  await assertAonAllowsOwners();
+  const catalogRawPath = path.join(
+    projectRoot,
+    "data",
+    "raw",
+    "catalogs",
+    "spell-list-owners",
+    "domains-aon.html",
+  );
+  const catalog = await fetchPage("https://www.aonprd.com/ClericDomains.aspx", catalogRawPath);
+  const links = domainLinks(catalog.body, catalog.url);
+  if (links.length !== 35) throw new Error(`Expected 35 AoN domains, found ${links.length}.`);
+  const parsedPages: Array<ReturnType<typeof parseDomainPage>> = [];
+  for (const link of links) {
+    const ownerSlug = slug(link.name);
+    const rawPath = path.join(projectRoot, "data", "raw", "entities", `domain.${ownerSlug}`, "aon.html");
+    parsedPages.push(parseDomainPage(await fetchPage(link.url, rawPath), rawPath));
+  }
+  const bases = parsedPages.map((page) => page.base);
+  const baseByName = new Map(bases.map((base) => [
+    base.name.replace(/\s+Domain$/i, "").toLocaleLowerCase("en-US"),
+    base,
+  ]));
+  const subdomainLists = new Map<string, OwnerRecord>();
+  for (const specification of parsedPages.flatMap((page) => page.subdomains)) {
+    for (const associatedName of specification.associatedDomains) {
+      if (specification.baseName.toLocaleLowerCase("en-US") !== associatedName.toLocaleLowerCase("en-US")) {
+        continue;
+      }
+      const parent = baseByName.get(associatedName.toLocaleLowerCase("en-US"));
+      if (!parent) {
+        throw new Error(`${specification.name} references unknown associated domain ${associatedName}.`);
+      }
+      const replacementByLevel = new Map<number, OwnerSpell>();
+      for (const replacement of specification.replacements) {
+        if (replacementByLevel.has(replacement.spellLevel)) {
+          throw new Error(`${specification.name} has multiple replacements at level ${replacement.spellLevel}.`);
+        }
+        replacementByLevel.set(replacement.spellLevel, replacement);
+      }
+      const parentSlug = slug(associatedName);
+      const subdomainSlug = slug(specification.name);
+      const multipleParents = specification.associatedDomains.length > 1;
+      const listId = multipleParents
+        ? `spell-list.${subdomainSlug}-subdomain-from-${parentSlug}`
+        : `spell-list.${subdomainSlug}-subdomain`;
+      const spells = parent.spells.map((parentSpell) => {
+        const replacement = replacementByLevel.get(parentSpell.spellLevel);
+        if (replacement) return replacement;
+        return {
+          spellName: parentSpell.spellName,
+          spellLevel: parentSpell.spellLevel,
+          raw: `Inherited from ${parent.name}: ${parentSpell.raw}`,
+          accessBasis: "derived" as const,
+          derivation: {
+            rule_owner_entity_id: `subdomain.${subdomainSlug}`,
+            rule_scope: /Core Rulebook/i.test(specification.sourceBook ?? "") ? "core" : "later_first_party",
+            source_memberships: [{ spell_list_id: parent.listId, level: parentSpell.spellLevel }],
+            level_policy: "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+            source_url: specification.capture.url,
+            note: "This effective subdomain membership is derived from the printed replacement rule and the associated domain list.",
+          },
+        };
+      });
+      if (spells.length !== 9 || new Set(spells.map((spell) => spell.spellLevel)).size !== 9) {
+        throw new Error(`${specification.name} from ${associatedName} did not produce one effective spell at each level.`);
+      }
+      const entityId = `subdomain.${subdomainSlug}`;
+      const owner: OwnerRecord = {
+        entityId,
+        entityType: "subdomain",
+        listId,
+        listKind: "subdomain",
+        name: `${specification.name} Subdomain`,
+        listName: multipleParents
+          ? `${specification.name} Subdomain Spells (${associatedName} Domain)`
+          : `${specification.name} Subdomain Spells`,
+        membershipName: multipleParents
+          ? `${specification.name} Subdomain (${associatedName} Domain)`
+          : `${specification.name} Subdomain`,
+        className: "Cleric",
+        definitionType: "Cleric/Inquisitor Subdomain",
+        sectionHeading: specification.replacements.length > 0
+          ? "Replacement Domain Spells"
+          : "Associated Domain(s)",
+        sectionBodyRaw: specification.replacements.length > 0
+          ? specification.replacements.map((spell) => spell.raw).join(", ")
+          : specification.associationRaw,
+        parentList: {
+          entityId: parent.entityId,
+          listId: parent.listId,
+          name: parent.listName,
+          raw: specification.associationRaw,
+        },
+        sourceUrl: specification.capture.url,
+        sourceBook: specification.sourceBook,
+        scope: /Core Rulebook/i.test(specification.sourceBook ?? "") ? "core" : "later_first_party",
+        definitionRaw: specification.definitionRaw,
+        spells,
+        capture: specification.capture,
+        rawPath: specification.rawPath,
+      };
+      const key = `${entityId}:${listId}`;
+      const existing = subdomainLists.get(key);
+      if (existing && JSON.stringify(existing.spells) !== JSON.stringify(owner.spells)) {
+        throw new Error(`Conflicting duplicate subdomain definition for ${key}.`);
+      }
+      subdomainLists.set(key, owner);
+    }
+  }
+  const missingAssociatedLists = parsedPages.flatMap((page) => page.subdomains).flatMap((specification) =>
+    specification.associatedDomains.flatMap((associatedName) => {
+      const listId = specification.associatedDomains.length > 1
+        ? `spell-list.${slug(specification.name)}-subdomain-from-${slug(associatedName)}`
+        : `spell-list.${slug(specification.name)}-subdomain`;
+      return subdomainLists.has(`subdomain.${slug(specification.name)}:${listId}`)
+        ? []
+        : [`${specification.name} from ${associatedName}`];
+    }),
+  );
+  if (missingAssociatedLists.length > 0) {
+    throw new Error(`Subdomain pages are missing associated-parent definitions: ${[...new Set(missingAssociatedLists)].join(", ")}`);
+  }
+  const uniqueSubdomains = new Set([...subdomainLists.values()].map((owner) => owner.entityId));
+  if (uniqueSubdomains.size !== 136 || subdomainLists.size !== 150) {
+    throw new Error(`Expected 136 subdomains and 150 effective subdomain lists; found ${uniqueSubdomains.size} and ${subdomainLists.size}.`);
+  }
+  const report = ingestOwnerRecords("domain", catalog, [...bases, ...subdomainLists.values()]);
+  if (report.rows !== 1668) throw new Error(`Expected 1,668 domain/subdomain memberships, found ${report.rows}.`);
+  return report;
+}
+
+
 const command = process.argv[2];
 const operation = command === "mysteries"
   ? ingestMysterySpellLists
@@ -852,6 +1209,8 @@ const operation = command === "mysteries"
       ? ingestSorcererBloodlineSpellLists
     : command === "bloodrager-bloodlines"
       ? ingestBloodragerBloodlineSpellLists
+    : command === "domains"
+      ? ingestDomainSpellLists
     : null;
 if (!operation) throw new Error(`Unknown owner-list command: ${command ?? "<missing>"}`);
 operation()

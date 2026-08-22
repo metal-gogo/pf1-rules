@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.chain-of-perdition:f3a4fc4604b9e816",
     "legacy_aon:spell.chain-of-perdition:085a92b5ad662d2f",
-    "d20pfsrd:spell.chain-of-perdition:75fd9e3b4c5fa204"
+    "d20pfsrd:spell.chain-of-perdition:75fd9e3b4c5fa204",
+    "aon:subdomain.psychopomp-death:941bc1dd",
+    "aon:subdomain.psychopomp-repose:8db954e0"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.chain-of-perdition:f3a4fc4604b9e816",
@@ -131,6 +133,34 @@
         "aon:spell.chain-of-perdition:f3a4fc4604b9e816"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/9",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.psychopomp-death:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.psychopomp-death:941bc1dd"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/10",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.psychopomp-repose:8db954e0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.psychopomp-repose:8db954e0"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -928,6 +958,34 @@
         "aon:spell.chain-of-perdition:f3a4fc4604b9e816"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.chain-of-perdition:appears_on_spell_list:spell-list.psychopomp-death-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.psychopomp-death:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.psychopomp-death:941bc1dd"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.chain-of-perdition:appears_on_spell_list:spell-list.psychopomp-repose-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.psychopomp-repose:8db954e0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.psychopomp-repose:8db954e0"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

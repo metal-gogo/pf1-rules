@@ -27,6 +27,26 @@
       "level": 5,
       "scope": "later_first_party",
       "raw": "investigator 5"
+    },
+    {
+      "spell_list_id": "spell-list.alchemy-subdomain-from-artifice",
+      "list_kind": "subdomain",
+      "list_name": "Alchemy Subdomain (Artifice Domain)",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "6th—delayed consumptionAPG",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.alchemy-subdomain-from-magic",
+      "list_kind": "subdomain",
+      "list_name": "Alchemy Subdomain (Magic Domain)",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "6th—delayed consumptionAPG",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -307,6 +327,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.delayed-consumption:appears_on_spell_list:spell-list.alchemy-subdomain-from-artifice",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.alchemy-subdomain-from-artifice",
+        "name": "Alchemy Subdomain Spells (Artifice Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.alchemy:494f5640",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th—delayed consumptionAPG",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Artifice"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.delayed-consumption:appears_on_spell_list:spell-list.alchemy-subdomain-from-magic",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.alchemy-subdomain-from-magic",
+        "name": "Alchemy Subdomain Spells (Magic Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.alchemy:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th—delayed consumptionAPG",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Magic"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -357,6 +417,22 @@
       "raw_value_sha256": "eaa410e2032f65a0121abf771b0126b948010608c852801b5c7de6ee73b94831",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/2",
+      "observation_id": "aon:subdomain.alchemy:494f5640",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "e6563922c72f3e06264207279b7c86ebeafbc38b1b473a191b22e697a7366c93",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/3",
+      "observation_id": "aon:subdomain.alchemy:44b410b9",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "e6563922c72f3e06264207279b7c86ebeafbc38b1b473a191b22e697a7366c93",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -382,6 +458,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/2",
+        "message": "Alchemy Subdomain grants Delayed Consumption as a level 6 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/3",
+        "message": "Alchemy Subdomain grants Delayed Consumption as a level 6 printed spell; this is not general Cleric class access."
       }
     ]
   }

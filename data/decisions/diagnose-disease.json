@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.diagnose-disease:89688775e6bd4de5",
     "legacy_aon:spell.diagnose-disease:4deb4e7aa090abe8",
-    "d20pfsrd:spell.diagnose-disease:287dbd639c6e9be8"
+    "d20pfsrd:spell.diagnose-disease:287dbd639c6e9be8",
+    "aon:subdomain.medicine:c5987ad2"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.diagnose-disease:89688775e6bd4de5",
@@ -122,6 +123,20 @@
         "aon:spell.diagnose-disease:89688775e6bd4de5"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/12",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.medicine:c5987ad2",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.medicine:c5987ad2"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -514,6 +529,20 @@
         "aon:spell.diagnose-disease:89688775e6bd4de5"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.diagnose-disease:appears_on_spell_list:spell-list.medicine-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.medicine:c5987ad2",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.medicine:c5987ad2"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

@@ -73,6 +73,39 @@
       "raw": "power word stun (17th)",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.war-domain",
+      "list_kind": "domain",
+      "list_name": "War Domain",
+      "level": 8,
+      "scope": "core",
+      "raw": "8th—power word stun",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.blood-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Blood Subdomain",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "Inherited from War Domain: 8th—power word stun",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.blood",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.war-domain",
+            "level": 8
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=War",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -580,6 +613,46 @@
         }
       ],
       "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.power-word-stun:appears_on_spell_list:spell-list.war-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.war-domain",
+        "name": "War Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.war:a29bc5fb",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "8th—power word stun",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=War"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.power-word-stun:appears_on_spell_list:spell-list.blood-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.blood-subdomain",
+        "name": "Blood Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.blood:a29bc5fb",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from War Domain: 8th—power word stun",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=War"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -646,6 +719,22 @@
       "raw_value_sha256": "91f5a4f66f62c980d845a023b1ef4a423519411c0e721c715cc3c9b97de29ad2",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:domain.war:a29bc5fb",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "05768aff3c10a09285d7733672c845ea3843320c27186bd74f3fc2f172c87529",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:subdomain.blood:a29bc5fb",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "3494ee5b8b97fa67334b8688b0d58963c90774261afac8bc32bc2cd4f273c505",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
     }
   ],
   "normalization": {
@@ -681,6 +770,16 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/6",
         "message": "Sorcerer Infernal Bloodline grants Power Word Stun as a level 8 spell; this is not general Sorcerer class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "War Domain grants Power Word Stun as a level 8 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Blood Subdomain grants Power Word Stun as a level 8 derived spell; this is not general Cleric class access."
       }
     ]
   }

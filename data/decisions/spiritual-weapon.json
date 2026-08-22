@@ -9,7 +9,9 @@
     "legacy_aon:spell.spiritual-weapon:01e05516e255e0ac",
     "d20pfsrd:spell.spiritual-weapon:6f2f80eea87d4cbe",
     "aon:mystery.ancestor:a7be2624",
-    "aon:spirit.ancestors:401f4d88"
+    "aon:spirit.ancestors:401f4d88",
+    "aon:domain.war:a29bc5fb",
+    "aon:subdomain.blood:a29bc5fb"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.spiritual-weapon:acac2d9479e43fac",
@@ -157,6 +159,34 @@
         "aon:spirit.ancestors:401f4d88"
       ],
       "rationale": "AoN clearly transcribes the owning shaman spirit's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/10",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.war:a29bc5fb",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.war:a29bc5fb"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/11",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.blood:a29bc5fb",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.blood:a29bc5fb"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
     }
   ],
   "relationship_decisions": [
@@ -718,6 +748,34 @@
         "aon:spirit.ancestors:401f4d88"
       ],
       "rationale": "AoN prints the spell on the owning shaman spirit page; it is modeled as spirit access rather than general Shaman access."
+    },
+    {
+      "relationship_id": "spell.spiritual-weapon:appears_on_spell_list:spell-list.war-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.war:a29bc5fb",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.war:a29bc5fb"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.spiritual-weapon:appears_on_spell_list:spell-list.blood-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.blood:a29bc5fb",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.blood:a29bc5fb"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

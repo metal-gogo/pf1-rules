@@ -37,6 +37,16 @@
       "level": 6,
       "scope": "later_first_party",
       "raw": "skald 6"
+    },
+    {
+      "spell_list_id": "spell-list.leadership-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Leadership Subdomain",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "6th—brilliant inspiration",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -397,6 +407,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.brilliant-inspiration:appears_on_spell_list:spell-list.leadership-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.leadership-subdomain",
+        "name": "Leadership Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.leadership:5c759126",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th—brilliant inspiration",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Nobility"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -447,6 +477,14 @@
       "raw_value_sha256": "91adb215cb4d68f80227033eff8f52cc932fa966104d441f68209a6ce3108106",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/3",
+      "observation_id": "aon:subdomain.leadership:5c759126",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "bbcaceb4374a56caae47413b2cc45c41731c67b55d82e6852d9400465147eeac",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -472,6 +510,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/3",
+        "message": "Leadership Subdomain grants Brilliant Inspiration as a level 6 printed spell; this is not general Cleric class access."
       }
     ]
   }

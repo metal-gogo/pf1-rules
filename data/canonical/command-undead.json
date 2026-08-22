@@ -55,6 +55,16 @@
       "raw": "4th — command undead",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.inevitable-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Inevitable Subdomain",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "3rd—command undead",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -494,6 +504,26 @@
         }
       ],
       "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.command-undead:appears_on_spell_list:spell-list.inevitable-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.inevitable-subdomain",
+        "name": "Inevitable Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.inevitable:e26007d3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "3rd—command undead",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Law"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -560,6 +590,14 @@
       "raw_value_sha256": "c1abc5611e66a488e4e4e16bdf70acfdc54ecb0d1e743f1c6bd93a38cfc7d028",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:subdomain.inevitable:e26007d3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "49fb1b337215cc04338948dfa8dd9ce83ecff658ffc455e0c96a441a5f47d3b5",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -605,6 +643,11 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/4",
         "message": "Plague Patron grants Command Undead as a level 2 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Inevitable Subdomain grants Command Undead as a level 3 printed spell; this is not general Cleric class access."
       }
     ]
   }

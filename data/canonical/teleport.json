@@ -109,6 +109,62 @@
       "raw": "10th — teleport",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.travel-domain",
+      "list_kind": "domain",
+      "list_name": "Travel Domain",
+      "level": 5,
+      "scope": "core",
+      "raw": "5th—teleport",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.exploration-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Exploration Subdomain",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "Inherited from Travel Domain: 5th—teleport",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.exploration",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.travel-domain",
+            "level": 5
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Travel",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.portal-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Portal Subdomain",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "Inherited from Travel Domain: 5th—teleport",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.portal",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.travel-domain",
+            "level": 5
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Travel",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -874,6 +930,66 @@
         }
       ],
       "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.teleport:appears_on_spell_list:spell-list.travel-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.travel-domain",
+        "name": "Travel Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.travel:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "5th—teleport",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Travel"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.teleport:appears_on_spell_list:spell-list.exploration-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.exploration-subdomain",
+        "name": "Exploration Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.exploration:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Travel Domain: 5th—teleport",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Travel"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.teleport:appears_on_spell_list:spell-list.portal-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.portal-subdomain",
+        "name": "Portal Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.portal:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Travel Domain: 5th—teleport",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Travel"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -932,6 +1048,30 @@
       "raw_value_sha256": "86b3845fa60c2de4d5e2a79c4fae72abdcef7eee0987bf64c7329b5cc9c5bdad",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/12",
+      "observation_id": "aon:domain.travel:4a91e51b",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "31dfdaee724f0001a65c7b3ec5d4441436e7adc9bfefd84b2d67ff8f3b806170",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/13",
+      "observation_id": "aon:subdomain.exploration:4a91e51b",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "4528166e53028ab847352abacbb708c6082baa26b48fd8ec91fe097649178e4d",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/levels/14",
+      "observation_id": "aon:subdomain.portal:4a91e51b",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "4528166e53028ab847352abacbb708c6082baa26b48fd8ec91fe097649178e4d",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
     }
   ],
   "normalization": {
@@ -962,6 +1102,21 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/11",
         "message": "Time Patron grants Teleport as a level 5 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/12",
+        "message": "Travel Domain grants Teleport as a level 5 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/13",
+        "message": "Exploration Subdomain grants Teleport as a level 5 derived spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/14",
+        "message": "Portal Subdomain grants Teleport as a level 5 derived spell; this is not general Cleric class access."
       }
     ]
   }

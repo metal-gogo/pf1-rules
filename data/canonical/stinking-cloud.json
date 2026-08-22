@@ -77,6 +77,16 @@
       "level": 3,
       "scope": "core",
       "raw": "wizard 3"
+    },
+    {
+      "spell_list_id": "spell-list.smoke-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Smoke Subdomain",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "3rd—stinking cloud",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -746,6 +756,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.stinking-cloud:appears_on_spell_list:spell-list.smoke-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.smoke-subdomain",
+        "name": "Smoke Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.smoke:d018a253",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "3rd—stinking cloud",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Fire"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -796,6 +826,14 @@
       "raw_value_sha256": "652300b9d3df78b1695e79bffae58ca8b04e1feb4fc1198d88d324341a287b67",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:subdomain.smoke:d018a253",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "78659c6d10d25b84f23f2c992020cd4b6a62411374c62608f8f29b0981e69554",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -826,6 +864,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Smoke Subdomain grants Stinking Cloud as a level 3 printed spell; this is not general Cleric class access."
       }
     ]
   }

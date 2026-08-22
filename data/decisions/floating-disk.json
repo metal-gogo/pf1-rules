@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.floating-disk:15a1b58575988278",
     "legacy_aon:spell.floating-disk:0f6449882476ad0a",
-    "d20pfsrd:spell.floating-disk:53084bbbae51416b"
+    "d20pfsrd:spell.floating-disk:53084bbbae51416b",
+    "aon:subdomain.trade:4a91e51b"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.floating-disk:15a1b58575988278",
@@ -108,6 +109,20 @@
         "d20pfsrd:spell.floating-disk:53084bbbae51416b"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/6",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.trade:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.trade:4a91e51b"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -834,6 +849,20 @@
         "d20pfsrd:spell.floating-disk:53084bbbae51416b"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.floating-disk:appears_on_spell_list:spell-list.trade-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.trade:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.trade:4a91e51b"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

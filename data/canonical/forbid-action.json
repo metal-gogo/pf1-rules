@@ -97,6 +97,26 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.legislation-subdomain-from-law",
+      "list_kind": "subdomain",
+      "list_name": "Legislation Subdomain (Law Domain)",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "1st—forbid action",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.legislation-subdomain-from-rune",
+      "list_kind": "subdomain",
+      "list_name": "Legislation Subdomain (Rune Domain)",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "1st—forbid action",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -741,6 +761,46 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.forbid-action:appears_on_spell_list:spell-list.legislation-subdomain-from-law",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.legislation-subdomain-from-law",
+        "name": "Legislation Subdomain Spells (Law Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.legislation:e26007d3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—forbid action",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Law"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.forbid-action:appears_on_spell_list:spell-list.legislation-subdomain-from-rune",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.legislation-subdomain-from-rune",
+        "name": "Legislation Subdomain Spells (Rune Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.legislation:f92547ee",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—forbid action",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Rune"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -791,6 +851,22 @@
       "raw_value_sha256": "229cdc53c06398ac5d75b500eece98913f6652f77afac0c2f6f7aa26f446e3aa",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:subdomain.legislation:e26007d3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "be8011144f34a0f9f549e7d4cf7bdd06c55b965db3a0f00dce38d306fd59606b",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/9",
+      "observation_id": "aon:subdomain.legislation:f92547ee",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "be8011144f34a0f9f549e7d4cf7bdd06c55b965db3a0f00dce38d306fd59606b",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -841,6 +917,16 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/7",
         "message": "Omdura 1 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Legislation Subdomain grants Forbid Action as a level 1 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Legislation Subdomain grants Forbid Action as a level 1 printed spell; this is not general Cleric class access."
       }
     ]
   }

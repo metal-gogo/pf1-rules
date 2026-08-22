@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.stinking-cloud:f025cee55a9743da",
     "legacy_aon:spell.stinking-cloud:c8fc98c118a091e7",
-    "d20pfsrd:spell.stinking-cloud:c9045b80f04536b1"
+    "d20pfsrd:spell.stinking-cloud:c9045b80f04536b1",
+    "aon:subdomain.smoke:d018a253"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.stinking-cloud:f025cee55a9743da",
@@ -108,6 +109,20 @@
         "d20pfsrd:spell.stinking-cloud:c9045b80f04536b1"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/8",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.smoke:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.smoke:d018a253"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -550,6 +565,20 @@
         "d20pfsrd:spell.stinking-cloud:c9045b80f04536b1"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.stinking-cloud:appears_on_spell_list:spell-list.smoke-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.smoke:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.smoke:d018a253"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

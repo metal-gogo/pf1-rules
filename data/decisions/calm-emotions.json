@@ -9,7 +9,9 @@
     "legacy_aon:spell.calm-emotions:d6dfe489c967750b",
     "d20pfsrd:spell.calm-emotions:7f6a4a90f727faeb",
     "aon:patron.enchantment:15d234b1",
-    "aon:patron.peace:15d234b1"
+    "aon:patron.peace:15d234b1",
+    "aon:domain.charm:fd537e7d",
+    "aon:subdomain.family:c83a2eb7"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.calm-emotions:06ab1226216925f2",
@@ -157,6 +159,34 @@
         "aon:patron.peace:15d234b1"
       ],
       "rationale": "AoN clearly transcribes the owning witch patron's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/14",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.charm:fd537e7d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.charm:fd537e7d"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/15",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.family:c83a2eb7",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.family:c83a2eb7"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -706,6 +736,34 @@
         "aon:patron.peace:15d234b1"
       ],
       "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
+    },
+    {
+      "relationship_id": "spell.calm-emotions:appears_on_spell_list:spell-list.charm-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.charm:fd537e7d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.charm:fd537e7d"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.calm-emotions:appears_on_spell_list:spell-list.family-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.family:c83a2eb7",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.family:c83a2eb7"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

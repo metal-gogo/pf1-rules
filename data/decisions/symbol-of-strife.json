@@ -6,7 +6,8 @@
   "canonical_record_path": "../canonical/symbol-of-strife.json",
   "observation_ids": [
     "aon:spell.symbol-of-strife:3df843dc4b515176",
-    "aon:patron.decadence:15d234b1"
+    "aon:patron.decadence:15d234b1",
+    "aon:subdomain.riot:365598bf"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.symbol-of-strife:3df843dc4b515176",
@@ -109,6 +110,20 @@
         "aon:patron.decadence:15d234b1"
       ],
       "rationale": "AoN clearly transcribes the owning witch patron's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/8",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.riot:365598bf",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.riot:365598bf"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -319,6 +334,20 @@
         "aon:patron.decadence:15d234b1"
       ],
       "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
+    },
+    {
+      "relationship_id": "spell.symbol-of-strife:appears_on_spell_list:spell-list.riot-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.riot:365598bf",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.riot:365598bf"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": []

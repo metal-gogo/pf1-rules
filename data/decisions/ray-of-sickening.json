@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.ray-of-sickening:d0eba654d4b9f7a5",
     "legacy_aon:spell.ray-of-sickening:9d4ff0dbbd6e2a71",
-    "d20pfsrd:spell.ray-of-sickening:15bae63d30a167ef"
+    "d20pfsrd:spell.ray-of-sickening:15bae63d30a167ef",
+    "aon:subdomain.plague:941bc1dd",
+    "aon:subdomain.plague:442be5b2"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.ray-of-sickening:d0eba654d4b9f7a5",
@@ -122,6 +124,34 @@
         "aon:spell.ray-of-sickening:d0eba654d4b9f7a5"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/15",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.plague:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.plague:941bc1dd"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/16",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.plague:442be5b2",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.plague:442be5b2"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -570,6 +600,34 @@
         "aon:spell.ray-of-sickening:d0eba654d4b9f7a5"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.ray-of-sickening:appears_on_spell_list:spell-list.plague-subdomain-from-death",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.plague:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.plague:941bc1dd"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.ray-of-sickening:appears_on_spell_list:spell-list.plague-subdomain-from-evil",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.plague:442be5b2",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.plague:442be5b2"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

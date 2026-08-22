@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.inflict-serious-wounds-mass:a514be5908125cdc",
     "legacy_aon:spell.inflict-serious-wounds-mass:9f3b9ccf530e210b",
-    "d20pfsrd:spell.inflict-serious-wounds-mass:49726931f24a67e7"
+    "d20pfsrd:spell.inflict-serious-wounds-mass:49726931f24a67e7",
+    "aon:subdomain.blood:a29bc5fb"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.inflict-serious-wounds-mass:a514be5908125cdc",
@@ -108,6 +109,20 @@
         "d20pfsrd:spell.inflict-serious-wounds-mass:49726931f24a67e7"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/4",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.blood:a29bc5fb",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.blood:a29bc5fb"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -322,6 +337,20 @@
         "d20pfsrd:spell.inflict-serious-wounds-mass:49726931f24a67e7"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.inflict-serious-wounds-mass:appears_on_spell_list:spell-list.blood-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.blood:a29bc5fb",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.blood:a29bc5fb"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

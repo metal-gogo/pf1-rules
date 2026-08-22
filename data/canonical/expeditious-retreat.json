@@ -178,6 +178,36 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.azata-subdomain-from-chaos",
+      "list_kind": "subdomain",
+      "list_name": "Azata Subdomain (Chaos Domain)",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "1st—expeditious retreat",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.azata-subdomain-from-good",
+      "list_kind": "subdomain",
+      "list_name": "Azata Subdomain (Good Domain)",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "1st—expeditious retreat",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.exploration-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Exploration Subdomain",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "1st—expeditious retreat",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1099,6 +1129,66 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.expeditious-retreat:appears_on_spell_list:spell-list.azata-subdomain-from-chaos",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.azata-subdomain-from-chaos",
+        "name": "Azata Subdomain Spells (Chaos Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.azata:365598bf",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—expeditious retreat",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Chaos"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.expeditious-retreat:appears_on_spell_list:spell-list.azata-subdomain-from-good",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.azata-subdomain-from-good",
+        "name": "Azata Subdomain Spells (Good Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.azata:1cfea879",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—expeditious retreat",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Good"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.expeditious-retreat:appears_on_spell_list:spell-list.exploration-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.exploration-subdomain",
+        "name": "Exploration Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.exploration:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—expeditious retreat",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Travel"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -1149,6 +1239,30 @@
       "raw_value_sha256": "1995575fd8985423d92d90f4b387f99ccb3e0e06aa195dd914a6304882ade5cf",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/19",
+      "observation_id": "aon:subdomain.azata:365598bf",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "823941bc8c255d14e90aceaade75c4c3bbbea036e092a9b2114bf0ad37d458ef",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/20",
+      "observation_id": "aon:subdomain.azata:1cfea879",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "823941bc8c255d14e90aceaade75c4c3bbbea036e092a9b2114bf0ad37d458ef",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/21",
+      "observation_id": "aon:subdomain.exploration:4a91e51b",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "823941bc8c255d14e90aceaade75c4c3bbbea036e092a9b2114bf0ad37d458ef",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1179,6 +1293,21 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/18",
         "message": "Omdura 1 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/19",
+        "message": "Azata Subdomain grants Expeditious Retreat as a level 1 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/20",
+        "message": "Azata Subdomain grants Expeditious Retreat as a level 1 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/21",
+        "message": "Exploration Subdomain grants Expeditious Retreat as a level 1 printed spell; this is not general Cleric class access."
       }
     ]
   }

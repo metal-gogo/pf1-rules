@@ -64,6 +64,16 @@
       "level": 3,
       "scope": "later_first_party",
       "raw": "wizard 3"
+    },
+    {
+      "spell_list_id": "spell-list.dragon-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Dragon Subdomain",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "3rd—draconic reservoir",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1022,6 +1032,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.draconic-reservoir:appears_on_spell_list:spell-list.dragon-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.dragon-subdomain",
+        "name": "Dragon Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.dragon:8171f4dc",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "3rd—draconic reservoir",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Scalykind"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -1072,6 +1102,14 @@
       "raw_value_sha256": "4c53f249c3bf57261447b94ee3c02fe1ae44a2f93fe9ce100647c9036d60e68e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:subdomain.dragon:8171f4dc",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "b1411045ee807e41023eda8e3f77efba0ae13fbcafe01ab8f085b8c403699baf",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1097,6 +1135,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Dragon Subdomain grants Draconic Reservoir as a level 3 printed spell; this is not general Cleric class access."
       }
     ]
   }

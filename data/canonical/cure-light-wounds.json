@@ -151,10 +151,12 @@
     {
       "spell_list_id": "spell-list.healing-domain",
       "list_kind": "domain",
-      "list_name": "healing domain",
+      "list_name": "Healing Domain",
       "level": 1,
       "scope": "core",
-      "raw": "Domain healing 1"
+      "raw": "1st—cure light wounds",
+      "access_basis": "printed",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.omdura",
@@ -201,6 +203,52 @@
       "scope": "later_first_party",
       "raw": "cure light wounds (3rd)",
       "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.restoration-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Restoration Subdomain",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "Inherited from Healing Domain: 1st—cure light wounds",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.restoration",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.healing-domain",
+            "level": 1
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Healing",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.resurrection-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Resurrection Subdomain",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "Inherited from Healing Domain: 1st—cure light wounds",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.resurrection",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.healing-domain",
+            "level": 1
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Healing",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
       "qualifications": []
     }
   ],
@@ -606,6 +654,66 @@
         }
       ],
       "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds:appears_on_spell_list:spell-list.healing-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.healing-domain",
+        "name": "Healing Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.healing:c5987ad2",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—cure light wounds",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Healing"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds:appears_on_spell_list:spell-list.restoration-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.restoration-subdomain",
+        "name": "Restoration Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.restoration:c5987ad2",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Healing Domain: 1st—cure light wounds",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Healing"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds:appears_on_spell_list:spell-list.resurrection-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.resurrection-subdomain",
+        "name": "Resurrection Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.resurrection:c5987ad2",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Healing Domain: 1st—cure light wounds",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Healing"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -656,6 +764,30 @@
       "raw_value_sha256": "c77ede894b5c113f60fc2cd72ff077addcacc64fffb0109629c053105c1fc2c1",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/17",
+      "observation_id": "aon:domain.healing:c5987ad2",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "93edea20f9838ce3d77389a932f1c3a0d0224c431485e26cd33a18cd105019ee",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/21",
+      "observation_id": "aon:subdomain.restoration:c5987ad2",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "7e8dd480715cbd8042b5b1898077d429e79640e26469b78991dd5ae43431700d",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/levels/22",
+      "observation_id": "aon:subdomain.resurrection:c5987ad2",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "7e8dd480715cbd8042b5b1898077d429e79640e26469b78991dd5ae43431700d",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
     }
   ],
   "normalization": {
@@ -691,6 +823,21 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/20",
         "message": "Sorcerer Unicorn Bloodline grants Cure Light Wounds as a level 1 spell; this is not general Sorcerer class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/17",
+        "message": "Healing Domain grants Cure Light Wounds as a level 1 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/21",
+        "message": "Restoration Subdomain grants Cure Light Wounds as a level 1 derived spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/22",
+        "message": "Resurrection Subdomain grants Cure Light Wounds as a level 1 derived spell; this is not general Cleric class access."
       }
     ]
   }

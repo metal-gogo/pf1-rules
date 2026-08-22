@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.locate-creature:b4cb23cdb53827f7",
     "legacy_aon:spell.locate-creature:a28d0f104c552f69",
-    "d20pfsrd:spell.locate-creature:d5a468d081103666"
+    "d20pfsrd:spell.locate-creature:d5a468d081103666",
+    "aon:subdomain.exploration:4a91e51b"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.locate-creature:b4cb23cdb53827f7",
@@ -108,6 +109,20 @@
         "d20pfsrd:spell.locate-creature:d5a468d081103666"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/13",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.exploration:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.exploration:4a91e51b"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -550,6 +565,20 @@
         "d20pfsrd:spell.locate-creature:d5a468d081103666"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.locate-creature:appears_on_spell_list:spell-list.exploration-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.exploration:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.exploration:4a91e51b"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

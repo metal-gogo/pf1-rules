@@ -53,6 +53,26 @@
       "level": 8,
       "scope": "core",
       "raw": "wizard 8"
+    },
+    {
+      "spell_list_id": "spell-list.slavery-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Slavery Subdomain",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "8th—binding",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.rites-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Rites Subdomain",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "8th—binding",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -884,6 +904,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.binding:appears_on_spell_list:spell-list.slavery-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.slavery-subdomain",
+        "name": "Slavery Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.slavery:e26007d3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "8th—binding",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Law"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.binding:appears_on_spell_list:spell-list.rites-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.rites-subdomain",
+        "name": "Rites Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.rites:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "8th—binding",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Magic"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -934,6 +994,22 @@
       "raw_value_sha256": "c391209ed44ad01f3670e40d94f825149dc2550e7a0afafd7967d1fbc0f96c73",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:subdomain.slavery:e26007d3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "39180cd2e281687fd99279b01ebd88874d1d5a9a4cc916d5a41e3e69fc19c12c",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:subdomain.rites:44b410b9",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "39180cd2e281687fd99279b01ebd88874d1d5a9a4cc916d5a41e3e69fc19c12c",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -954,6 +1030,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Slavery Subdomain grants Binding as a level 8 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Rites Subdomain grants Binding as a level 8 printed spell; this is not general Cleric class access."
       }
     ]
   }

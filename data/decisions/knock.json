@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.knock:5624e0c19c23ce3c",
     "legacy_aon:spell.knock:58623c24ad692374",
-    "d20pfsrd:spell.knock:4f27fe9f1107a9dd"
+    "d20pfsrd:spell.knock:4f27fe9f1107a9dd",
+    "aon:subdomain.portal:4a91e51b"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.knock:5624e0c19c23ce3c",
@@ -131,6 +132,20 @@
         "aon:spell.knock:5624e0c19c23ce3c"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/10",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.portal:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.portal:4a91e51b"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -584,6 +599,20 @@
         "aon:spell.knock:5624e0c19c23ce3c"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.knock:appears_on_spell_list:spell-list.portal-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.portal:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.portal:4a91e51b"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

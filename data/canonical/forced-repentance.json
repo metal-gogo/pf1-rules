@@ -53,6 +53,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.redemption-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Redemption Subdomain",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "4th—forced repentance",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -534,6 +544,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.forced-repentance:appears_on_spell_list:spell-list.redemption-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.redemption-subdomain",
+        "name": "Redemption Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.redemption:1cfea879",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th—forced repentance",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Good"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -584,6 +614,14 @@
       "raw_value_sha256": "bba216b13284169fbc00794a2fa650567e0c22593a0ef1387a599119a8d61702",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/3",
+      "observation_id": "aon:subdomain.redemption:1cfea879",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "b8aa4a8c7343290a34951bc816b31d7b11621c0a80eb93bf7175a50b54276e3b",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -599,6 +637,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/2",
         "message": "Omdura 4 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/3",
+        "message": "Redemption Subdomain grants Forced Repentance as a level 4 printed spell; this is not general Cleric class access."
       }
     ]
   }

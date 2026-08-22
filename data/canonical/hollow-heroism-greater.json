@@ -77,6 +77,26 @@
       "scope": "later_first_party",
       "raw": "wizard 7",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.hubris-subdomain-from-glory",
+      "list_kind": "subdomain",
+      "list_name": "Hubris Subdomain (Glory Domain)",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "7th—greater hollow heroism",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.hubris-subdomain-from-nobility",
+      "list_kind": "subdomain",
+      "list_name": "Hubris Subdomain (Nobility Domain)",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "7th—greater hollow heroism",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -747,6 +767,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.hollow-heroism-greater:appears_on_spell_list:spell-list.hubris-subdomain-from-glory",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.hubris-subdomain-from-glory",
+        "name": "Hubris Subdomain Spells (Glory Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.hubris:e2950469",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "7th—greater hollow heroism",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Glory"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.hollow-heroism-greater:appears_on_spell_list:spell-list.hubris-subdomain-from-nobility",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.hubris-subdomain-from-nobility",
+        "name": "Hubris Subdomain Spells (Nobility Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.hubris:5c759126",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "7th—greater hollow heroism",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Nobility"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -797,6 +857,22 @@
       "raw_value_sha256": "129e45bc72e88c51bb2298d70a2c5e80f5243670563745b631a2fdb5ab449ba0",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:subdomain.hubris:e2950469",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "b20a24a8d2d68206eca65cf366e1c196b29645ed2c47593ce33267155f138d4b",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:subdomain.hubris:5c759126",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "b20a24a8d2d68206eca65cf366e1c196b29645ed2c47593ce33267155f138d4b",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -812,6 +888,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Hubris Subdomain grants Hollow Heroism, Greater as a level 7 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Hubris Subdomain grants Hollow Heroism, Greater as a level 7 printed spell; this is not general Cleric class access."
       }
     ]
   }

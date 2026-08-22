@@ -53,6 +53,16 @@
       "raw": "mage's magnificent mansion (16th)",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.industry-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Industry Subdomain",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "7th—mage’s magnificent mansion",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -506,6 +516,26 @@
         }
       ],
       "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.mages-magnificent-mansion:appears_on_spell_list:spell-list.industry-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.industry-subdomain",
+        "name": "Industry Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.industry:494f5640",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "7th—mage’s magnificent mansion",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Artifice"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -564,6 +594,14 @@
       "raw_value_sha256": "30e4a7aa21820370bf063e64e64878ad5b3d9bf16f9d1d26241e18a7701554d0",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:subdomain.industry:494f5640",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "f129e1ef69d3af5bb49b0435d90c488a794080e24c3222d23fddd62eb8945be7",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -589,6 +627,11 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/4",
         "message": "Streets Mystery grants Mage's Magnificent Mansion as a level 8 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Industry Subdomain grants Mage's Magnificent Mansion as a level 7 printed spell; this is not general Cleric class access."
       }
     ]
   }

@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.produce-flame:89724e25f37348f2",
     "legacy_aon:spell.produce-flame:3dc7cce21e47c7d8",
-    "d20pfsrd:spell.produce-flame:6eaa6cf1028b1fca"
+    "d20pfsrd:spell.produce-flame:6eaa6cf1028b1fca",
+    "aon:domain.fire:d018a253",
+    "aon:subdomain.ash:d018a253"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.produce-flame:89724e25f37348f2",
@@ -108,6 +110,34 @@
         "d20pfsrd:spell.produce-flame:6eaa6cf1028b1fca"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/3",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.fire:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.fire:d018a253"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/4",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.ash:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.ash:d018a253"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
     }
   ],
   "relationship_decisions": [
@@ -274,6 +304,34 @@
         "d20pfsrd:spell.produce-flame:6eaa6cf1028b1fca"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.produce-flame:appears_on_spell_list:spell-list.fire-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.fire:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.fire:d018a253"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.produce-flame:appears_on_spell_list:spell-list.ash-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.ash:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.ash:d018a253"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

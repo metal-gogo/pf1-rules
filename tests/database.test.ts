@@ -510,6 +510,47 @@ describe("ingested spell catalog", () => {
     expect(bloodragerArcane).toEqual(expect.objectContaining({ spellLevel: 4, accessBasis: "printed" }));
   });
 
+  it("models domain owners and derives effective subdomain lists", async () => {
+    const [domains, subdomains, domainRows, subdomainRows, cloudInherited, cloudReplacement, purityRows] =
+      await Promise.all([
+        prisma.entity.count({ where: { type: "domain", status: "resolved" } }),
+        prisma.entity.count({ where: { type: "subdomain", status: "resolved" } }),
+        prisma.spellLevel.findMany({ where: { listKind: "domain" } }),
+        prisma.spellLevel.findMany({ where: { listKind: "subdomain" } }),
+        prisma.spellLevel.findFirst({
+          where: { spellId: "spell.wind-wall", spellListId: "spell-list.cloud-subdomain" },
+        }),
+        prisma.spellLevel.findFirst({
+          where: { spellId: "spell.solid-fog", spellListId: "spell-list.cloud-subdomain" },
+        }),
+        prisma.spellLevel.findMany({ where: { spellListId: "spell-list.purity-subdomain" } }),
+      ]);
+
+    expect(domains).toBe(35);
+    expect(subdomains).toBe(136);
+    expect(domainRows).toHaveLength(315);
+    expect(subdomainRows).toHaveLength(1353);
+    expect(new Set(subdomainRows.map((row) => row.spellListId)).size).toBe(150);
+    expect(cloudInherited).toEqual(expect.objectContaining({
+      spellLevel: 2,
+      accessBasis: "derived",
+      raw: "Inherited from Air Domain: 2nd—wind wall",
+    }));
+    expect(cloudInherited?.derivation).toEqual(expect.objectContaining({
+      rule_owner_entity_id: "subdomain.cloud",
+      source_memberships: [{ spell_list_id: "spell-list.air-domain", level: 2 }],
+    }));
+    expect(cloudReplacement).toEqual(expect.objectContaining({
+      spellLevel: 4,
+      accessBasis: "printed",
+      raw: "4th—solid fog",
+    }));
+    expect(purityRows).toHaveLength(12);
+    expect(await prisma.ruleRelationship.findUnique({
+      where: { id: "subdomain.cloud:inherits_spell_list:spell-list.air-domain" },
+    })).toEqual(expect.objectContaining({ relationshipType: "inherits_spell_list" }));
+  });
+
   it("preserves catalog summaries and selects a sourced canonical description", async () => {
     const light = await prisma.canonicalSpell.findUnique({
       where: { spellId: "spell.light" },

@@ -7,7 +7,10 @@
   "observation_ids": [
     "aon:spell.hold-animal:3c652cc7b2a40094",
     "legacy_aon:spell.hold-animal:07e2680bc0e3e0f6",
-    "d20pfsrd:spell.hold-animal:53769ee4ab7bd597"
+    "d20pfsrd:spell.hold-animal:53769ee4ab7bd597",
+    "aon:domain.animal:a6829b5b",
+    "aon:subdomain.fur:a6829b5b",
+    "aon:subdomain.insect:a6829b5b"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.hold-animal:3c652cc7b2a40094",
@@ -108,6 +111,48 @@
         "d20pfsrd:spell.hold-animal:53769ee4ab7bd597"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/5",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.animal:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.animal:a6829b5b"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/6",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.fur:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.fur:a6829b5b"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/7",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.insect:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.insect:a6829b5b"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
     }
   ],
   "relationship_decisions": [
@@ -378,6 +423,48 @@
         "d20pfsrd:spell.hold-animal:53769ee4ab7bd597"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.hold-animal:appears_on_spell_list:spell-list.animal-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.animal:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.animal:a6829b5b"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.hold-animal:appears_on_spell_list:spell-list.fur-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.fur:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.fur:a6829b5b"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.hold-animal:appears_on_spell_list:spell-list.insect-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.insect:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.insect:a6829b5b"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

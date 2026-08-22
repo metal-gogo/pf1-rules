@@ -99,6 +99,26 @@
       "raw": "energy drain (19th)",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.loss-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Loss Subdomain",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "9th—energy drain",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.undead-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Undead Subdomain",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "9th—energy drain",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -853,6 +873,46 @@
         }
       ],
       "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.energy-drain:appears_on_spell_list:spell-list.loss-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.loss-subdomain",
+        "name": "Loss Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.loss:e69c13cf",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "9th—energy drain",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Darkness"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.energy-drain:appears_on_spell_list:spell-list.undead-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.undead-subdomain",
+        "name": "Undead Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.undead:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "9th—energy drain",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Death"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -935,6 +995,22 @@
       "raw_value_sha256": "b2b10f3c6edf3ce3598f6b3722a96eba8aedcec0c1240ffc81e1220ed7fd9cbf",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/10",
+      "observation_id": "aon:subdomain.loss:e69c13cf",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "3c3f2ed29b316686ad59bcfb754e7cf6519db51102cc749e4d773edced5c3500",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/11",
+      "observation_id": "aon:subdomain.undead:941bc1dd",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "3c3f2ed29b316686ad59bcfb754e7cf6519db51102cc749e4d773edced5c3500",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1025,6 +1101,16 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/9",
         "message": "Sorcerer Undead Bloodline grants Energy Drain as a level 9 spell; this is not general Sorcerer class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/10",
+        "message": "Loss Subdomain grants Energy Drain as a level 9 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/11",
+        "message": "Undead Subdomain grants Energy Drain as a level 9 printed spell; this is not general Cleric class access."
       }
     ]
   }

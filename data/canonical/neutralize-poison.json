@@ -196,6 +196,16 @@
       "raw": "neutralize poison (9th)",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.restoration-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Restoration Subdomain",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "4th—neutralize poison",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1222,6 +1232,26 @@
         }
       ],
       "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.neutralize-poison:appears_on_spell_list:spell-list.restoration-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.restoration-subdomain",
+        "name": "Restoration Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.restoration:c5987ad2",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th—neutralize poison",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Healing"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -1296,6 +1326,14 @@
       "raw_value_sha256": "a1aaff5d3be95a7f61ed81f87e68066e2affdc0ba3e606c7c6c9205308bb263f",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/20",
+      "observation_id": "aon:subdomain.restoration:c5987ad2",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "9991ffc880ff6cffc47e2668596668d5509cc8b6171dd960a75632815dc68d65",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1341,6 +1379,11 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/19",
         "message": "Sorcerer Unicorn Bloodline grants Neutralize Poison as a level 4 spell; this is not general Sorcerer class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/20",
+        "message": "Restoration Subdomain grants Neutralize Poison as a level 4 printed spell; this is not general Cleric class access."
       }
     ]
   }

@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.instrument-of-agony:34d0b50f3c2d54d5",
     "legacy_aon:spell.instrument-of-agony:bf10f65776e1519d",
-    "d20pfsrd:spell.instrument-of-agony:547ecde6898ab141"
+    "d20pfsrd:spell.instrument-of-agony:547ecde6898ab141",
+    "aon:subdomain.kyton:442be5b2",
+    "aon:subdomain.kyton:e26007d3"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.instrument-of-agony:34d0b50f3c2d54d5",
@@ -131,6 +133,34 @@
         "aon:spell.instrument-of-agony:34d0b50f3c2d54d5"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/5",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.kyton:442be5b2",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.kyton:442be5b2"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/6",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.kyton:e26007d3",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.kyton:e26007d3"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -456,6 +486,34 @@
         "aon:spell.instrument-of-agony:34d0b50f3c2d54d5"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.instrument-of-agony:appears_on_spell_list:spell-list.kyton-subdomain-from-evil",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.kyton:442be5b2",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.kyton:442be5b2"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.instrument-of-agony:appears_on_spell_list:spell-list.kyton-subdomain-from-law",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.kyton:e26007d3",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.kyton:e26007d3"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

@@ -7,7 +7,11 @@
   "observation_ids": [
     "aon:spell.magic-circle-against-law:77bbf6a1e8364e05",
     "legacy_aon:spell.magic-circle-against-law:19a140561cbe8094",
-    "d20pfsrd:spell.magic-circle-against-law:51adc918e073ea35"
+    "d20pfsrd:spell.magic-circle-against-law:51adc918e073ea35",
+    "aon:domain.chaos:365598bf",
+    "aon:subdomain.demodand:365598bf",
+    "aon:subdomain.riot:365598bf",
+    "aon:subdomain.whimsy:365598bf"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.magic-circle-against-law:77bbf6a1e8364e05",
@@ -127,6 +131,62 @@
         "d20pfsrd:spell.magic-circle-against-law:51adc918e073ea35"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/15",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.chaos:365598bf",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.chaos:365598bf"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/16",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.demodand:365598bf",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.demodand:365598bf"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/17",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.riot:365598bf",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.riot:365598bf"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/18",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.whimsy:365598bf",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.whimsy:365598bf"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
     }
   ],
   "relationship_decisions": [
@@ -636,6 +696,62 @@
         "d20pfsrd:spell.magic-circle-against-law:51adc918e073ea35"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.magic-circle-against-law:appears_on_spell_list:spell-list.chaos-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.chaos:365598bf",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.chaos:365598bf"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.magic-circle-against-law:appears_on_spell_list:spell-list.demodand-subdomain-from-chaos",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.demodand:365598bf",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.demodand:365598bf"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.magic-circle-against-law:appears_on_spell_list:spell-list.riot-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.riot:365598bf",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.riot:365598bf"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.magic-circle-against-law:appears_on_spell_list:spell-list.whimsy-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.whimsy:365598bf",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.whimsy:365598bf"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

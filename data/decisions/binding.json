@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.binding:d4b266ea8b122684",
     "legacy_aon:spell.binding:24f51aea2e02ec5a",
-    "d20pfsrd:spell.binding:e479a54a4408fbf9"
+    "d20pfsrd:spell.binding:e479a54a4408fbf9",
+    "aon:subdomain.slavery:e26007d3",
+    "aon:subdomain.rites:44b410b9"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.binding:d4b266ea8b122684",
@@ -108,6 +110,34 @@
         "d20pfsrd:spell.binding:e479a54a4408fbf9"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/5",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.slavery:e26007d3",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.slavery:e26007d3"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/6",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.rites:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.rites:44b410b9"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -654,6 +684,34 @@
         "d20pfsrd:spell.binding:e479a54a4408fbf9"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.binding:appears_on_spell_list:spell-list.slavery-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.slavery:e26007d3",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.slavery:e26007d3"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.binding:appears_on_spell_list:spell-list.rites-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.rites:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.rites:44b410b9"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.zone-of-silence:ba49276f7d4585c5",
     "legacy_aon:spell.zone-of-silence:f5099e1ba366fa4a",
-    "d20pfsrd:spell.zone-of-silence:f50f2dad9f2471dd"
+    "d20pfsrd:spell.zone-of-silence:f50f2dad9f2471dd",
+    "aon:subdomain.espionage:e162f0e8",
+    "aon:subdomain.espionage:85657314"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.zone-of-silence:ba49276f7d4585c5",
@@ -108,6 +110,34 @@
         "d20pfsrd:spell.zone-of-silence:f50f2dad9f2471dd"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/3",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.espionage:e162f0e8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.espionage:e162f0e8"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/4",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.espionage:85657314",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.espionage:85657314"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -258,6 +288,34 @@
         "d20pfsrd:spell.zone-of-silence:f50f2dad9f2471dd"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.zone-of-silence:appears_on_spell_list:spell-list.espionage-subdomain-from-knowledge",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.espionage:e162f0e8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.espionage:e162f0e8"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.zone-of-silence:appears_on_spell_list:spell-list.espionage-subdomain-from-trickery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.espionage:85657314",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.espionage:85657314"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

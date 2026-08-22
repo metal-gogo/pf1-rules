@@ -15,7 +15,11 @@
     "aon:bloodline.sorcerer.boreal:39bb43b5",
     "aon:bloodline.sorcerer.efreeti:15e6ed3f",
     "aon:bloodline.bloodrager.aberrant:bf9e7f15",
-    "aon:bloodline.bloodrager.shapechanger:de9027db"
+    "aon:bloodline.bloodrager.shapechanger:de9027db",
+    "aon:domain.strength:1d268b38",
+    "aon:subdomain.growth:f56ad9d0",
+    "aon:subdomain.ferocity:1d268b38",
+    "aon:subdomain.self-realization:1d268b38"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.enlarge-person:07905ea89161735d",
@@ -228,6 +232,62 @@
         "aon:bloodline.bloodrager.shapechanger:de9027db"
       ],
       "rationale": "AoN clearly transcribes the owning bloodrager bloodline's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/22",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.strength:1d268b38",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.strength:1d268b38"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/23",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.growth:f56ad9d0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.growth:f56ad9d0"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/24",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.ferocity:1d268b38",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.ferocity:1d268b38"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/25",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.self-realization:1d268b38",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.self-realization:1d268b38"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
     }
   ],
   "relationship_decisions": [
@@ -1266,6 +1326,62 @@
         "aon:bloodline.bloodrager.shapechanger:de9027db"
       ],
       "rationale": "AoN prints the spell on the owning bloodrager bloodline page; it is modeled as bloodline access rather than general Bloodrager access."
+    },
+    {
+      "relationship_id": "spell.enlarge-person:appears_on_spell_list:spell-list.strength-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.strength:1d268b38",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.strength:1d268b38"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.enlarge-person:appears_on_spell_list:spell-list.growth-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.growth:f56ad9d0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.growth:f56ad9d0"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.enlarge-person:appears_on_spell_list:spell-list.ferocity-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.ferocity:1d268b38",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.ferocity:1d268b38"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.enlarge-person:appears_on_spell_list:spell-list.self-realization-subdomain-from-strength",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.self-realization:1d268b38",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.self-realization:1d268b38"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

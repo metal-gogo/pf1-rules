@@ -8,7 +8,9 @@
     "aon:spell.cure-moderate-wounds:4e2b087b",
     "legacy_aon:spell.cure-moderate-wounds:d2e06126",
     "d20pfsrd:spell.cure-moderate-wounds:18b9086f",
-    "aon:bloodline.sorcerer.unicorn:71ed1006"
+    "aon:bloodline.sorcerer.unicorn:71ed1006",
+    "aon:domain.healing:c5987ad2",
+    "aon:subdomain.resurrection:c5987ad2"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.cure-moderate-wounds:4e2b087b",
@@ -106,6 +108,34 @@
         "aon:bloodline.sorcerer.unicorn:71ed1006"
       ],
       "rationale": "AoN clearly transcribes the owning sorcerer bloodline's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/17",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.healing:c5987ad2",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.healing:c5987ad2"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/20",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.resurrection:c5987ad2",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.resurrection:c5987ad2"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
     }
   ],
   "relationship_decisions": [
@@ -193,6 +223,34 @@
         "aon:bloodline.sorcerer.unicorn:71ed1006"
       ],
       "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
+    },
+    {
+      "relationship_id": "spell.cure-moderate-wounds:appears_on_spell_list:spell-list.healing-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.healing:c5987ad2",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.healing:c5987ad2"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.cure-moderate-wounds:appears_on_spell_list:spell-list.resurrection-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.resurrection:c5987ad2",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.resurrection:c5987ad2"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

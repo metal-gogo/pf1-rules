@@ -163,6 +163,62 @@
       "raw": "identify (3rd)",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.magic-domain",
+      "list_kind": "domain",
+      "list_name": "Magic Domain",
+      "level": 1,
+      "scope": "core",
+      "raw": "1st—identify",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.alchemy-subdomain-from-magic",
+      "list_kind": "subdomain",
+      "list_name": "Alchemy Subdomain (Magic Domain)",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "Inherited from Magic Domain: 1st—identify",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.alchemy",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.magic-domain",
+            "level": 1
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Magic",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.divine-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Divine Subdomain",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "Inherited from Magic Domain: 1st—identify",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.divine",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.magic-domain",
+            "level": 1
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Magic",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1024,6 +1080,66 @@
         }
       ],
       "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.identify:appears_on_spell_list:spell-list.magic-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.magic-domain",
+        "name": "Magic Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.magic:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—identify",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Magic"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.identify:appears_on_spell_list:spell-list.alchemy-subdomain-from-magic",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.alchemy-subdomain-from-magic",
+        "name": "Alchemy Subdomain Spells (Magic Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.alchemy:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Magic Domain: 1st—identify",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Magic"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.identify:appears_on_spell_list:spell-list.divine-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.divine-subdomain",
+        "name": "Divine Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.divine:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Magic Domain: 1st—identify",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Magic"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -1106,6 +1222,30 @@
       "raw_value_sha256": "71e93c2bf75bc16af2968e30b47909f59457423b76bc75f36cdd685128cb783e",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/18",
+      "observation_id": "aon:domain.magic:44b410b9",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "bb9124c41c5bd673a813d63f491488b016854597a89544b11d2d7e5d521f2c03",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/19",
+      "observation_id": "aon:subdomain.alchemy:44b410b9",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "9835d5a22ac4a6e8b3822bbd15e6338915d83f240b1fb4b98c4bf5678f2c359a",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/levels/20",
+      "observation_id": "aon:subdomain.divine:44b410b9",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "9835d5a22ac4a6e8b3822bbd15e6338915d83f240b1fb4b98c4bf5678f2c359a",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
     }
   ],
   "normalization": {
@@ -1166,6 +1306,21 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/17",
         "message": "Sorcerer Vestige Bloodline grants Identify as a level 1 spell; this is not general Sorcerer class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/18",
+        "message": "Magic Domain grants Identify as a level 1 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/19",
+        "message": "Alchemy Subdomain grants Identify as a level 1 derived spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/20",
+        "message": "Divine Subdomain grants Identify as a level 1 derived spell; this is not general Cleric class access."
       }
     ]
   }

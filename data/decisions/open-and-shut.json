@@ -6,7 +6,8 @@
   "canonical_record_path": "../canonical/open-and-shut.json",
   "observation_ids": [
     "aon:spell.open-and-shut:6158f8cb3046e736",
-    "d20pfsrd:spell.open-and-shut:cb0c269e62c0ff4a"
+    "d20pfsrd:spell.open-and-shut:cb0c269e62c0ff4a",
+    "aon:subdomain.portal:4a91e51b"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.open-and-shut:6158f8cb3046e736",
@@ -120,6 +121,20 @@
         "aon:spell.open-and-shut:6158f8cb3046e736"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/8",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.portal:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.portal:4a91e51b"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -440,6 +455,20 @@
         "aon:spell.open-and-shut:6158f8cb3046e736"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.open-and-shut:appears_on_spell_list:spell-list.portal-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.portal:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.portal:4a91e51b"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

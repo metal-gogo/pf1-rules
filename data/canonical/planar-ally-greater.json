@@ -49,6 +49,16 @@
       "scope": "later_first_party",
       "raw": "shaman 8",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.tactics-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Tactics Subdomain",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "8th—planar ally (greater)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -560,6 +570,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.planar-ally-greater:appears_on_spell_list:spell-list.tactics-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.tactics-subdomain",
+        "name": "Tactics Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.tactics:a29bc5fb",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "8th—planar ally (greater)",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=War"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -610,6 +640,14 @@
       "raw_value_sha256": "26bb11f869713ab86c0c9bd12c44f3b241139b52075c7927a995c7adc85deae5",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:subdomain.tactics:a29bc5fb",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "472a3bcdc1f04bc5677ce974f4ebced27bc1191d568c06df8cc973b36ef79636",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -685,6 +723,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/effect/spell_resistance",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Tactics Subdomain grants Planar Ally, Greater as a level 8 printed spell; this is not general Cleric class access."
       }
     ]
   }

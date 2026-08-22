@@ -8,7 +8,9 @@
     "aon:spell.dominate-animal:78e908bcabde13a3",
     "legacy_aon:spell.dominate-animal:9cded9b5d8380594",
     "d20pfsrd:spell.dominate-animal:22ec21d007b477e9",
-    "aon:patron.animals:15d234b1"
+    "aon:patron.animals:15d234b1",
+    "aon:domain.animal:a6829b5b",
+    "aon:subdomain.insect:a6829b5b"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.dominate-animal:78e908bcabde13a3",
@@ -123,6 +125,34 @@
         "aon:patron.animals:15d234b1"
       ],
       "rationale": "AoN clearly transcribes the owning witch patron's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/6",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.animal:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.animal:a6829b5b"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/7",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.insect:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.insect:a6829b5b"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
     }
   ],
   "relationship_decisions": [
@@ -367,6 +397,34 @@
         "aon:patron.animals:15d234b1"
       ],
       "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
+    },
+    {
+      "relationship_id": "spell.dominate-animal:appears_on_spell_list:spell-list.animal-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.animal:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.animal:a6829b5b"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.dominate-animal:appears_on_spell_list:spell-list.insect-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.insect:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.insect:a6829b5b"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

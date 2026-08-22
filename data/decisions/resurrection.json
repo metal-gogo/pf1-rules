@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.resurrection:934565938834c8ba",
     "legacy_aon:spell.resurrection:75fe1d750abaadd6",
-    "d20pfsrd:spell.resurrection:fecc3e042e8ef594"
+    "d20pfsrd:spell.resurrection:fecc3e042e8ef594",
+    "aon:subdomain.resurrection:c5987ad2",
+    "aon:subdomain.divine:44b410b9"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.resurrection:934565938834c8ba",
@@ -108,6 +110,34 @@
         "d20pfsrd:spell.resurrection:fecc3e042e8ef594"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/4",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.resurrection:c5987ad2",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.resurrection:c5987ad2"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/5",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.divine:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.divine:44b410b9"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -454,6 +484,34 @@
         "d20pfsrd:spell.resurrection:fecc3e042e8ef594"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.resurrection:appears_on_spell_list:spell-list.resurrection-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.resurrection:c5987ad2",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.resurrection:c5987ad2"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.resurrection:appears_on_spell_list:spell-list.divine-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.divine:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.divine:44b410b9"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

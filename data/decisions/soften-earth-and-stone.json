@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.soften-earth-and-stone:82fccb5756cff896",
     "legacy_aon:spell.soften-earth-and-stone:614b051518d88c81",
-    "d20pfsrd:spell.soften-earth-and-stone:634aad8bb9d5e988"
+    "d20pfsrd:spell.soften-earth-and-stone:634aad8bb9d5e988",
+    "aon:domain.earth:08dd1152",
+    "aon:subdomain.petrification:08dd1152"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.soften-earth-and-stone:82fccb5756cff896",
@@ -108,6 +110,34 @@
         "d20pfsrd:spell.soften-earth-and-stone:634aad8bb9d5e988"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/2",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.earth:08dd1152",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.earth:08dd1152"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/3",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.petrification:08dd1152",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.petrification:08dd1152"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
     }
   ],
   "relationship_decisions": [
@@ -326,6 +356,34 @@
         "d20pfsrd:spell.soften-earth-and-stone:634aad8bb9d5e988"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.soften-earth-and-stone:appears_on_spell_list:spell-list.earth-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.earth:08dd1152",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.earth:08dd1152"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.soften-earth-and-stone:appears_on_spell_list:spell-list.petrification-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.petrification:08dd1152",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.petrification:08dd1152"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

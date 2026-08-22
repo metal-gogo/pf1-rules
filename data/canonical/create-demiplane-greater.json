@@ -74,6 +74,16 @@
       "scope": "later_first_party",
       "raw": "wizard 9",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.solitude-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Solitude Subdomain",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "9th—greater create demiplane",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -848,6 +858,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.create-demiplane-greater:appears_on_spell_list:spell-list.solitude-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.solitude-subdomain",
+        "name": "Solitude Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.solitude:32d16f22",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "9th—greater create demiplane",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Protection"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -898,6 +928,14 @@
       "raw_value_sha256": "ea2ce5df9837067bcd6b00ac9ebad1e3a998747e803df139fde06e7fb4929070",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:subdomain.solitude:32d16f22",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "9d1d3b3001f75ca6eddd35bd27ab3e1e5d4ce0be545b07a700ef4da9dc71fa08",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -963,6 +1001,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Solitude Subdomain grants Create Demiplane, Greater as a level 9 printed spell; this is not general Cleric class access."
       }
     ]
   }

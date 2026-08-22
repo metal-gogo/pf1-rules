@@ -107,6 +107,62 @@
       "level": 2,
       "scope": "core",
       "raw": "wizard 2"
+    },
+    {
+      "spell_list_id": "spell-list.magic-domain",
+      "list_kind": "domain",
+      "list_name": "Magic Domain",
+      "level": 2,
+      "scope": "core",
+      "raw": "2nd—magic mouth",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.arcane-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Arcane Subdomain",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "Inherited from Magic Domain: 2nd—magic mouth",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.arcane",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.magic-domain",
+            "level": 2
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Magic",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.rites-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Rites Subdomain",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "Inherited from Magic Domain: 2nd—magic mouth",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.rites",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.magic-domain",
+            "level": 2
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Magic",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -822,6 +878,66 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.magic-mouth:appears_on_spell_list:spell-list.magic-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.magic-domain",
+        "name": "Magic Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.magic:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd—magic mouth",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Magic"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.magic-mouth:appears_on_spell_list:spell-list.arcane-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.arcane-subdomain",
+        "name": "Arcane Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.arcane:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Magic Domain: 2nd—magic mouth",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Magic"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.magic-mouth:appears_on_spell_list:spell-list.rites-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.rites-subdomain",
+        "name": "Rites Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.rites:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Magic Domain: 2nd—magic mouth",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Magic"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -872,6 +988,30 @@
       "raw_value_sha256": "77089587874093bea63e76ca7ab667a73d55ed23c094f8528b700074b825571b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/12",
+      "observation_id": "aon:domain.magic:44b410b9",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "287341c247c3fc845096ff2c401af7f7bb8dce049440e20cc8a19f8c4d7230b9",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/13",
+      "observation_id": "aon:subdomain.arcane:44b410b9",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "abfc1b745fef1a799eac8815fd7a1c496415802a7eec2981700a76ccfb74cc3d",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/levels/14",
+      "observation_id": "aon:subdomain.rites:44b410b9",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "abfc1b745fef1a799eac8815fd7a1c496415802a7eec2981700a76ccfb74cc3d",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
     }
   ],
   "normalization": {
@@ -887,6 +1027,21 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/12",
+        "message": "Magic Domain grants Magic Mouth as a level 2 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/13",
+        "message": "Arcane Subdomain grants Magic Mouth as a level 2 derived spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/14",
+        "message": "Rites Subdomain grants Magic Mouth as a level 2 derived spell; this is not general Cleric class access."
       }
     ]
   }

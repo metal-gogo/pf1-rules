@@ -104,6 +104,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.honor-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Honor Subdomain",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "2nd—zone of truth",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -686,6 +696,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.zone-of-truth:appears_on_spell_list:spell-list.honor-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.honor-subdomain",
+        "name": "Honor Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.honor:e2950469",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd—zone of truth",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Glory"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -736,6 +766,14 @@
       "raw_value_sha256": "ec13be07f9828ef24e176634e5d237972fe89df9fd1beea73517196ee19420c4",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/9",
+      "observation_id": "aon:subdomain.honor:e2950469",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "a31980b4ab10d4fbd7e67a2451f54a3e3ef8c2977496aef2314a26c87dbda273",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -761,6 +799,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/8",
         "message": "Omdura 2 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Honor Subdomain grants Zone of Truth as a level 2 printed spell; this is not general Cleric class access."
       }
     ]
   }

@@ -43,6 +43,16 @@
       "level": 2,
       "scope": "later_first_party",
       "raw": "shaman 2"
+    },
+    {
+      "spell_list_id": "spell-list.leshy-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Leshy Subdomain",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "1st—tree shape",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -449,6 +459,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.tree-shape:appears_on_spell_list:spell-list.leshy-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.leshy-subdomain",
+        "name": "Leshy Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.leshy:f56ad9d0",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—tree shape",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Plant"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -499,6 +529,14 @@
       "raw_value_sha256": "98eda23f2666d18d2a8b80d66e1071e5d82159469c73b9a4e3110bebbc0a0b49",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:subdomain.leshy:f56ad9d0",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "8e366579bd409ed1d2216264225bfb331d4ea960c958afe230a35eeafab103ce",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -514,6 +552,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Leshy Subdomain grants Tree Shape as a level 1 printed spell; this is not general Cleric class access."
       }
     ]
   }

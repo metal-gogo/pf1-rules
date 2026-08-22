@@ -96,6 +96,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.rites-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Rites Subdomain",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "1st—sanctify corpse",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -623,6 +633,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.sanctify-corpse:appears_on_spell_list:spell-list.rites-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.rites-subdomain",
+        "name": "Rites Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.rites:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—sanctify corpse",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Magic"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -673,6 +703,14 @@
       "raw_value_sha256": "21f65defdb3bc638296f01cee53883088c569043c683081e4d87d5b5958bedc2",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:subdomain.rites:44b410b9",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "e6ee8ef890faf20421d80b7e37a3be739748944f941ff09162e68cd91fb9ccdd",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -693,6 +731,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/7",
         "message": "Omdura 1 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Rites Subdomain grants Sanctify Corpse as a level 1 printed spell; this is not general Cleric class access."
       }
     ]
   }

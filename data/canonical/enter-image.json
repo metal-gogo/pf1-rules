@@ -138,6 +138,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.aristocracy-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Aristocracy Subdomain",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "3rd—enter image",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -833,6 +843,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.enter-image:appears_on_spell_list:spell-list.aristocracy-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.aristocracy-subdomain",
+        "name": "Aristocracy Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.aristocracy:5c759126",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "3rd—enter image",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Nobility"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -883,6 +913,14 @@
       "raw_value_sha256": "b62bf828549e35d0b5d934267a693855aa54d94dae188b303f0b65d75a58d3cb",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/14",
+      "observation_id": "aon:subdomain.aristocracy:5c759126",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "365551f957e761f1d7670c9fcf2c597d995f5f05deac15cccbfd2b7964951d7c",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -913,6 +951,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/13",
         "message": "Omdura 3 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/14",
+        "message": "Aristocracy Subdomain grants Enter Image as a level 3 printed spell; this is not general Cleric class access."
       }
     ]
   }

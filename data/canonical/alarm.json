@@ -158,6 +158,26 @@
       "raw": "alarm (3rd)",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.home-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Home Subdomain",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "1st—alarm",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.ambush-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Ambush Subdomain",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "1st—alarm",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -912,6 +932,46 @@
         }
       ],
       "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.alarm:appears_on_spell_list:spell-list.home-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.home-subdomain",
+        "name": "Home Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.home:c83a2eb7",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—alarm",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Community"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.alarm:appears_on_spell_list:spell-list.ambush-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.ambush-subdomain",
+        "name": "Ambush Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.ambush:85657314",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—alarm",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Trickery"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -978,6 +1038,22 @@
       "raw_value_sha256": "cddf4449c00b333521342d40dfe9cf92419826b109374bd5de80ea2abd6ddbaa",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/16",
+      "observation_id": "aon:subdomain.home:c83a2eb7",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "aab7707f181ae2a0094394f9b40a353875ed8244e22739c8e8c452b17de53ec9",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/17",
+      "observation_id": "aon:subdomain.ambush:85657314",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "aab7707f181ae2a0094394f9b40a353875ed8244e22739c8e8c452b17de53ec9",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1023,6 +1099,16 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/15",
         "message": "Sorcerer Kobold Sorcerer Bloodline grants Alarm as a level 1 spell; this is not general Sorcerer class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/16",
+        "message": "Home Subdomain grants Alarm as a level 1 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/17",
+        "message": "Ambush Subdomain grants Alarm as a level 1 printed spell; this is not general Cleric class access."
       }
     ]
   }

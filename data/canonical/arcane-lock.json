@@ -43,6 +43,16 @@
       "level": 2,
       "scope": "core",
       "raw": "wizard 2"
+    },
+    {
+      "spell_list_id": "spell-list.wards-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Wards Subdomain",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "1st—arcane lock",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -469,6 +479,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.arcane-lock:appears_on_spell_list:spell-list.wards-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.wards-subdomain",
+        "name": "Wards Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.wards:f92547ee",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—arcane lock",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Rune"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -519,6 +549,14 @@
       "raw_value_sha256": "5e56f3fb191aab3611b7ab50440b4a80e8713fc2a169382dc3fc633af8caaad7",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:subdomain.wards:f92547ee",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "988d9e54d7fb66553e44abf3bddc358d7378b892c3b41655133963c6d9ae97bc",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -534,6 +572,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Wards Subdomain grants Arcane Lock as a level 1 printed spell; this is not general Cleric class access."
       }
     ]
   }

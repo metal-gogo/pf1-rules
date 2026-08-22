@@ -103,6 +103,39 @@
       "raw": "discern location (17th)",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.knowledge-domain",
+      "list_kind": "domain",
+      "list_name": "Knowledge Domain",
+      "level": 8,
+      "scope": "core",
+      "raw": "8th—discern location",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.aeon-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Aeon Subdomain",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "Inherited from Knowledge Domain: 8th—discern location",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.aeon",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.knowledge-domain",
+            "level": 8
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Knowledge",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -622,6 +655,46 @@
         }
       ],
       "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.discern-location:appears_on_spell_list:spell-list.knowledge-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.knowledge-domain",
+        "name": "Knowledge Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.knowledge:e162f0e8",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "8th—discern location",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Knowledge"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.discern-location:appears_on_spell_list:spell-list.aeon-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.aeon-subdomain",
+        "name": "Aeon Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.aeon:e162f0e8",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Knowledge Domain: 8th—discern location",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Knowledge"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -688,6 +761,22 @@
       "raw_value_sha256": "1ad6b3b30805ad7e5d8c9832d61eaca539f3e4b6ff81cbaace0424372a7cda4b",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/11",
+      "observation_id": "aon:domain.knowledge:e162f0e8",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "841664946ee8b7e1a1d7a5eb5843bc62b33f97329c672364bad2bc3a3ae8fa6e",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/12",
+      "observation_id": "aon:subdomain.aeon:e162f0e8",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "2c1456f04b9b4111d75929b638725d35278431937bde1550a9ca74d9a5ab1c2b",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
     }
   ],
   "normalization": {
@@ -718,6 +807,16 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/10",
         "message": "Sorcerer Vestige Bloodline grants Discern Location as a level 8 spell; this is not general Sorcerer class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/11",
+        "message": "Knowledge Domain grants Discern Location as a level 8 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/12",
+        "message": "Aeon Subdomain grants Discern Location as a level 8 derived spell; this is not general Cleric class access."
       }
     ]
   }

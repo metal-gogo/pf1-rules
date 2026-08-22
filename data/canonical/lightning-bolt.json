@@ -117,6 +117,16 @@
       "raw": "lightning bolt (13th)",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.lightning-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Lightning Subdomain",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "3rd— lightning bolt",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -730,6 +740,26 @@
         }
       ],
       "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
+    },
+    {
+      "relationship_id": "spell.lightning-bolt:appears_on_spell_list:spell-list.lightning-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.lightning-subdomain",
+        "name": "Lightning Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.lightning:9a2cdfb3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "3rd— lightning bolt",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Air"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -812,6 +842,14 @@
       "raw_value_sha256": "08853bf71e28fbb2dc328365888c16c29752fdb68e686885ff8193b0ee3c9468",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/12",
+      "observation_id": "aon:subdomain.lightning:9a2cdfb3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "1e6d393af77865c5dcdb51b698e191427d3fb648420a7171bd83b59cccd25249",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -857,6 +895,11 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/11",
         "message": "Bloodrager Naga Bloodline grants Lightning Bolt as a level 3 spell; this is not general Bloodrager class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/12",
+        "message": "Lightning Subdomain grants Lightning Bolt as a level 3 printed spell; this is not general Cleric class access."
       }
     ]
   }

@@ -102,6 +102,16 @@
       "raw": "12th — wind walk",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.wind-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Wind Subdomain",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "6th—wind walk",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -662,6 +672,26 @@
         }
       ],
       "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.wind-walk:appears_on_spell_list:spell-list.wind-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.wind-subdomain",
+        "name": "Wind Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.wind:9a2cdfb3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th—wind walk",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Air"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -720,6 +750,14 @@
       "raw_value_sha256": "7f3c0ec746ebc85a17caf46a3a91e9e7cf36d494e5747fe91955308184028e30",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/9",
+      "observation_id": "aon:subdomain.wind:9a2cdfb3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "7fb5eaa8bc7235fdcdfce8e6169387a0424ddaea3d5cb7951cf6eca6a71ee4b2",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -750,6 +788,11 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/8",
         "message": "Storms Patron grants Wind Walk as a level 6 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Wind Subdomain grants Wind Walk as a level 6 printed spell; this is not general Cleric class access."
       }
     ]
   }

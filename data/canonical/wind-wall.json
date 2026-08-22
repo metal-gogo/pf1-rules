@@ -174,6 +174,62 @@
       "raw": "6th — wind wall",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.air-domain",
+      "list_kind": "domain",
+      "list_name": "Air Domain",
+      "level": 2,
+      "scope": "core",
+      "raw": "2nd—wind wall",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.cloud-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Cloud Subdomain",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "Inherited from Air Domain: 2nd—wind wall",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.cloud",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.air-domain",
+            "level": 2
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Air",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.wind-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Wind Subdomain",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "Inherited from Air Domain: 2nd—wind wall",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.wind",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.air-domain",
+            "level": 2
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Air",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1003,6 +1059,66 @@
         }
       ],
       "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.wind-wall:appears_on_spell_list:spell-list.air-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.air-domain",
+        "name": "Air Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.air:9a2cdfb3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd—wind wall",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Air"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.wind-wall:appears_on_spell_list:spell-list.cloud-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.cloud-subdomain",
+        "name": "Cloud Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.cloud:9a2cdfb3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Air Domain: 2nd—wind wall",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Air"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.wind-wall:appears_on_spell_list:spell-list.wind-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.wind-subdomain",
+        "name": "Wind Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.wind:9a2cdfb3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Air Domain: 2nd—wind wall",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Air"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -1061,6 +1177,30 @@
       "raw_value_sha256": "f5347a0c666bbc8e6aedd2055597f0c53b7c9a2022d6a1c636ce3dedcdbba4ae",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/18",
+      "observation_id": "aon:domain.air:9a2cdfb3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "6bb7f2398eb509de2a43f1ede257d0e6ce8b43fc4fc66e706dca578e49144737",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/19",
+      "observation_id": "aon:subdomain.cloud:9a2cdfb3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "69ea41ca9b2c0e1ae979498c7e1a5726131594b2b95b89c21dab4490a2c83941",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/levels/20",
+      "observation_id": "aon:subdomain.wind:9a2cdfb3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "69ea41ca9b2c0e1ae979498c7e1a5726131594b2b95b89c21dab4490a2c83941",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
     }
   ],
   "normalization": {
@@ -1086,6 +1226,21 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/17",
         "message": "Peace Patron grants Wind Wall as a level 3 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/18",
+        "message": "Air Domain grants Wind Wall as a level 2 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/19",
+        "message": "Cloud Subdomain grants Wind Wall as a level 2 derived spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/20",
+        "message": "Wind Subdomain grants Wind Wall as a level 2 derived spell; this is not general Cleric class access."
       }
     ]
   }

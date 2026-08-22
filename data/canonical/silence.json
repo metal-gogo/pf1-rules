@@ -120,6 +120,16 @@
       "raw": "4th — silence",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.solitude-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Solitude Subdomain",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "2nd—silence",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -736,6 +746,26 @@
         }
       ],
       "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.silence:appears_on_spell_list:spell-list.solitude-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.solitude-subdomain",
+        "name": "Solitude Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.solitude:32d16f22",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd—silence",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Protection"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -794,6 +824,14 @@
       "raw_value_sha256": "61f30632efa726c84fdfd6668977106b52711ef18cf3e924831311f5be75ec94",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/11",
+      "observation_id": "aon:subdomain.solitude:32d16f22",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "1af622c2aa819100e3c26829587725a6c295b0c032eb821d1ab9e482a477cf77",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -839,6 +877,11 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/10",
         "message": "Time Patron grants Silence as a level 2 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/11",
+        "message": "Solitude Subdomain grants Silence as a level 2 printed spell; this is not general Cleric class access."
       }
     ]
   }

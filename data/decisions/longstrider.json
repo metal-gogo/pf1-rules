@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.longstrider:d82fd4b0735cf8fa",
     "legacy_aon:spell.longstrider:4ff812093592901a",
-    "d20pfsrd:spell.longstrider:70962f1c605d284a"
+    "d20pfsrd:spell.longstrider:70962f1c605d284a",
+    "aon:domain.travel:4a91e51b"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.longstrider:d82fd4b0735cf8fa",
@@ -108,6 +109,20 @@
         "d20pfsrd:spell.longstrider:70962f1c605d284a"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/3",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.travel:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.travel:4a91e51b"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -334,6 +349,20 @@
         "d20pfsrd:spell.longstrider:70962f1c605d284a"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.longstrider:appears_on_spell_list:spell-list.travel-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.travel:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.travel:4a91e51b"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

@@ -8,7 +8,9 @@
     "aon:spell.sleet-storm:fc1daf1ec02daa8c",
     "legacy_aon:spell.sleet-storm:7ecb8d2b5ac79e4d",
     "d20pfsrd:spell.sleet-storm:e345b19c8c16a614",
-    "aon:mystery.winter:877fc031"
+    "aon:mystery.winter:877fc031",
+    "aon:domain.weather:a10f8682",
+    "aon:subdomain.storms:a10f8682"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.sleet-storm:fc1daf1ec02daa8c",
@@ -123,6 +125,34 @@
         "aon:mystery.winter:877fc031"
       ],
       "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/10",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.weather:a10f8682",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.weather:a10f8682"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/11",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.storms:a10f8682",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.storms:a10f8682"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
     }
   ],
   "relationship_decisions": [
@@ -527,6 +557,34 @@
         "aon:mystery.winter:877fc031"
       ],
       "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
+    },
+    {
+      "relationship_id": "spell.sleet-storm:appears_on_spell_list:spell-list.weather-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.weather:a10f8682",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.weather:a10f8682"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.sleet-storm:appears_on_spell_list:spell-list.storms-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.storms:a10f8682",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.storms:a10f8682"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

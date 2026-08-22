@@ -11,7 +11,11 @@
     "aon:mystery.dragon:6998e6da",
     "aon:mystery.intrigue:e6f78c01",
     "aon:bloodline.sorcerer.arcane:b8a87a92",
-    "aon:bloodline.sorcerer.solar:c55558cb"
+    "aon:bloodline.sorcerer.solar:c55558cb",
+    "aon:domain.knowledge:e162f0e8",
+    "aon:subdomain.education:e162f0e8",
+    "aon:subdomain.espionage:e162f0e8",
+    "aon:subdomain.memory:e162f0e8"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.true-seeing:cb9e1434ab700a95",
@@ -187,6 +191,62 @@
         "aon:bloodline.sorcerer.solar:c55558cb"
       ],
       "rationale": "AoN clearly transcribes the owning sorcerer bloodline's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/26",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.knowledge:e162f0e8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.knowledge:e162f0e8"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/27",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.education:e162f0e8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.education:e162f0e8"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/28",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.espionage:e162f0e8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.espionage:e162f0e8"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/29",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.memory:e162f0e8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.memory:e162f0e8"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
     }
   ],
   "relationship_decisions": [
@@ -984,6 +1044,62 @@
         "aon:bloodline.sorcerer.solar:c55558cb"
       ],
       "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
+    },
+    {
+      "relationship_id": "spell.true-seeing:appears_on_spell_list:spell-list.knowledge-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.knowledge:e162f0e8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.knowledge:e162f0e8"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.true-seeing:appears_on_spell_list:spell-list.education-subdomain-from-knowledge",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.education:e162f0e8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.education:e162f0e8"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.true-seeing:appears_on_spell_list:spell-list.espionage-subdomain-from-knowledge",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.espionage:e162f0e8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.espionage:e162f0e8"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.true-seeing:appears_on_spell_list:spell-list.memory-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.memory:e162f0e8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.memory:e162f0e8"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

@@ -100,6 +100,62 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.air-domain",
+      "list_kind": "domain",
+      "list_name": "Air Domain",
+      "level": 4,
+      "scope": "core",
+      "raw": "4th—air walk",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.lightning-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Lightning Subdomain",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "Inherited from Air Domain: 4th—air walk",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.lightning",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.air-domain",
+            "level": 4
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Air",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.wind-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Wind Subdomain",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "Inherited from Air Domain: 4th—air walk",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.wind",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.air-domain",
+            "level": 4
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Air",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -675,6 +731,66 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.air-walk:appears_on_spell_list:spell-list.air-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.air-domain",
+        "name": "Air Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.air:9a2cdfb3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th—air walk",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Air"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.air-walk:appears_on_spell_list:spell-list.lightning-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.lightning-subdomain",
+        "name": "Lightning Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.lightning:9a2cdfb3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Air Domain: 4th—air walk",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Air"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.air-walk:appears_on_spell_list:spell-list.wind-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.wind-subdomain",
+        "name": "Wind Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.wind:9a2cdfb3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Air Domain: 4th—air walk",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Air"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -725,6 +841,30 @@
       "raw_value_sha256": "0227d9cdf9219a22025bffab058a9b2bd5df510835b65ff970710279c16f87b1",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/9",
+      "observation_id": "aon:domain.air:9a2cdfb3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "f2b5c481d63236f3a6e09415037586159c15e819b9a2a4bc9daca89a232e2cca",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/10",
+      "observation_id": "aon:subdomain.lightning:9a2cdfb3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "570cd597a5340d6de819e2dad802da68a63cfff02901d54ef5d9098213ddb358",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/levels/11",
+      "observation_id": "aon:subdomain.wind:9a2cdfb3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "570cd597a5340d6de819e2dad802da68a63cfff02901d54ef5d9098213ddb358",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
     }
   ],
   "normalization": {
@@ -750,6 +890,21 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/8",
         "message": "Omdura 4 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Air Domain grants Air Walk as a level 4 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/10",
+        "message": "Lightning Subdomain grants Air Walk as a level 4 derived spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/11",
+        "message": "Wind Subdomain grants Air Walk as a level 4 derived spell; this is not general Cleric class access."
       }
     ]
   }

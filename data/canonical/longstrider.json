@@ -35,6 +35,16 @@
       "level": 1,
       "scope": "core",
       "raw": "ranger 1"
+    },
+    {
+      "spell_list_id": "spell-list.travel-domain",
+      "list_kind": "domain",
+      "list_name": "Travel Domain",
+      "level": 1,
+      "scope": "core",
+      "raw": "1st—longstrider",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -442,6 +452,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.longstrider:appears_on_spell_list:spell-list.travel-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.travel-domain",
+        "name": "Travel Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.travel:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—longstrider",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Travel"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -492,6 +522,14 @@
       "raw_value_sha256": "28563e745c8d109897bb8fb85f4dbc796dc504ba92e70483087f2d14c68d0a31",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/3",
+      "observation_id": "aon:domain.travel:4a91e51b",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "4abd06d8a9217a9e26a8d9d0b5db9ad4aea147c94d44ef819690b45adb4ad296",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -512,6 +550,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/3",
+        "message": "Travel Domain grants Longstrider as a level 1 printed spell; this is not general Cleric class access."
       }
     ]
   }

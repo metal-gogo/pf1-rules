@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.hold-portal:59016f43385cf731",
     "legacy_aon:spell.hold-portal:d089e691df1926d3",
-    "d20pfsrd:spell.hold-portal:07240de61aa4c695"
+    "d20pfsrd:spell.hold-portal:07240de61aa4c695",
+    "aon:subdomain.fortifications:32d16f22"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.hold-portal:59016f43385cf731",
@@ -108,6 +109,20 @@
         "d20pfsrd:spell.hold-portal:07240de61aa4c695"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/5",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.fortifications:32d16f22",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.fortifications:32d16f22"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -354,6 +369,20 @@
         "d20pfsrd:spell.hold-portal:07240de61aa4c695"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.hold-portal:appears_on_spell_list:spell-list.fortifications-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.fortifications:32d16f22",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.fortifications:32d16f22"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

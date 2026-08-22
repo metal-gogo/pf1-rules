@@ -19,6 +19,16 @@
       "level": 4,
       "scope": "later_first_party",
       "raw": "paladin 4"
+    },
+    {
+      "spell_list_id": "spell-list.martyr-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Martyr Subdomain",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "6th—sacrificial oath",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -324,6 +334,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.sacrificial-oath:appears_on_spell_list:spell-list.martyr-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.martyr-subdomain",
+        "name": "Martyr Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.martyr:5c759126",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th—sacrificial oath",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Nobility"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -374,6 +404,14 @@
       "raw_value_sha256": "8f4194cb785ec136aba626a6867398cc9f9ea0fe03906bb0f5f976a984b1d4e4",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/1",
+      "observation_id": "aon:subdomain.martyr:5c759126",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "709876dda43e889a1b0eac16e301f26430f887a4926641db8f62439d30b1ba8e",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -384,6 +422,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/1",
+        "message": "Martyr Subdomain grants Sacrificial Oath as a level 6 printed spell; this is not general Cleric class access."
       }
     ]
   }

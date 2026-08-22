@@ -145,6 +145,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.cannibalism-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Cannibalism Subdomain",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "2nd— enemy’s heart",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -839,6 +849,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.enemys-heart:appears_on_spell_list:spell-list.cannibalism-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.cannibalism-subdomain",
+        "name": "Cannibalism Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.cannibalism:442be5b2",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd— enemy’s heart",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Evil"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -889,6 +919,14 @@
       "raw_value_sha256": "b0fa122b6b5c9efe2d5dc739fcd73695ba1adcf201509b75d0c6e3bb78ea8256",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:subdomain.cannibalism:442be5b2",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "894084d318bd8b19bf2e48267527d09715e29b32680ed997f404a01f36ece46d",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -919,6 +957,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/6",
         "message": "Omdura 2 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Cannibalism Subdomain grants Enemy's Heart as a level 2 printed spell; this is not general Cleric class access."
       }
     ]
   }

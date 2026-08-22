@@ -7,7 +7,11 @@
   "observation_ids": [
     "aon:spell.bless-weapon:c6dc76032621f5e3",
     "legacy_aon:spell.bless-weapon:d21d9f303f940206",
-    "d20pfsrd:spell.bless-weapon:870b910b413b6e5c"
+    "d20pfsrd:spell.bless-weapon:870b910b413b6e5c",
+    "aon:domain.glory:e2950469",
+    "aon:subdomain.chivalry:e2950469",
+    "aon:subdomain.heroism:e2950469",
+    "aon:subdomain.hubris:e2950469"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.bless-weapon:c6dc76032621f5e3",
@@ -108,6 +112,62 @@
         "d20pfsrd:spell.bless-weapon:870b910b413b6e5c"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/1",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.glory:e2950469",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.glory:e2950469"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/2",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.chivalry:e2950469",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.chivalry:e2950469"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/3",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.heroism:e2950469",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.heroism:e2950469"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/4",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.hubris:e2950469",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.hubris:e2950469"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
     }
   ],
   "relationship_decisions": [
@@ -322,6 +382,62 @@
         "d20pfsrd:spell.bless-weapon:870b910b413b6e5c"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.bless-weapon:appears_on_spell_list:spell-list.glory-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.glory:e2950469",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.glory:e2950469"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.bless-weapon:appears_on_spell_list:spell-list.chivalry-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.chivalry:e2950469",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.chivalry:e2950469"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.bless-weapon:appears_on_spell_list:spell-list.heroism-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.heroism:e2950469",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.heroism:e2950469"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.bless-weapon:appears_on_spell_list:spell-list.hubris-subdomain-from-glory",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.hubris:e2950469",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.hubris:e2950469"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

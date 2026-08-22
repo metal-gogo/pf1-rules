@@ -9,7 +9,10 @@
     "legacy_aon:spell.undeath-to-death:b2b60b16e8dfc8fc",
     "d20pfsrd:spell.undeath-to-death:96e64578319bb094",
     "aon:mystery.reaper:50aab3ff",
-    "aon:bloodline.sorcerer.undead:67c5fd9c"
+    "aon:bloodline.sorcerer.undead:67c5fd9c",
+    "aon:domain.glory:e2950469",
+    "aon:domain.repose:8db954e0",
+    "aon:subdomain.hubris:e2950469"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.undeath-to-death:daf294086d0e94a6",
@@ -157,6 +160,48 @@
         "aon:bloodline.sorcerer.undead:67c5fd9c"
       ],
       "rationale": "AoN clearly transcribes the owning sorcerer bloodline's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/11",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.glory:e2950469",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.glory:e2950469"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/12",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.repose:8db954e0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.repose:8db954e0"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/13",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.hubris:e2950469",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.hubris:e2950469"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
     }
   ],
   "relationship_decisions": [
@@ -550,6 +595,48 @@
         "aon:bloodline.sorcerer.undead:67c5fd9c"
       ],
       "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
+    },
+    {
+      "relationship_id": "spell.undeath-to-death:appears_on_spell_list:spell-list.glory-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.glory:e2950469",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.glory:e2950469"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.undeath-to-death:appears_on_spell_list:spell-list.repose-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.repose:8db954e0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.repose:8db954e0"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.undeath-to-death:appears_on_spell_list:spell-list.hubris-subdomain-from-glory",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.hubris:e2950469",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.hubris:e2950469"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

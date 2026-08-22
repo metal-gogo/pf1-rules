@@ -81,6 +81,39 @@
       "raw": "reverse gravity (15th)",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.void-domain",
+      "list_kind": "domain",
+      "list_name": "Void Domain",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "7th—reverse gravity",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.isolation-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Isolation Subdomain",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "Inherited from Void Domain: 7th—reverse gravity",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.isolation",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.void-domain",
+            "level": 7
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Void",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -599,6 +632,46 @@
         }
       ],
       "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.reverse-gravity:appears_on_spell_list:spell-list.void-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.void-domain",
+        "name": "Void Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.void:8d2b8555",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "7th—reverse gravity",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Void"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.reverse-gravity:appears_on_spell_list:spell-list.isolation-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.isolation-subdomain",
+        "name": "Isolation Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.isolation:8d2b8555",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Void Domain: 7th—reverse gravity",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Void"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -673,6 +746,22 @@
       "raw_value_sha256": "6aaec0cd1f19d9ffe85ada0d85542600895f0159b45d339c34498d1f215a00e3",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:domain.void:8d2b8555",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "6ff5c9ceec95502cc4da9a11a06c85e099e04e68f066eb9177b07f02da735ee7",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/9",
+      "observation_id": "aon:subdomain.isolation:8d2b8555",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "bcbc32a3ea3ccf86441e95d4c25244a426c3dee1a0a02572749f5aaab4538b26",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
     }
   ],
   "normalization": {
@@ -733,6 +822,16 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/7",
         "message": "Sorcerer Starsoul Bloodline grants Reverse Gravity as a level 7 spell; this is not general Sorcerer class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Void Domain grants Reverse Gravity as a level 7 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Isolation Subdomain grants Reverse Gravity as a level 7 derived spell; this is not general Cleric class access."
       }
     ]
   }

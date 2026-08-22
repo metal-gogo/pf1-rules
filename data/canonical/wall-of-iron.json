@@ -87,6 +87,49 @@
       "raw": "wall of iron (13th)",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.artifice-domain",
+      "list_kind": "domain",
+      "list_name": "Artifice Domain",
+      "level": 7,
+      "scope": "core",
+      "raw": "7th—wall of iron",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.alchemy-subdomain-from-artifice",
+      "list_kind": "subdomain",
+      "list_name": "Alchemy Subdomain (Artifice Domain)",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "Inherited from Artifice Domain: 7th—wall of iron",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.alchemy",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.artifice-domain",
+            "level": 7
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Artifice",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.metal-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Metal Subdomain",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "6th—wall of iron",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -709,6 +752,66 @@
         }
       ],
       "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.wall-of-iron:appears_on_spell_list:spell-list.artifice-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.artifice-domain",
+        "name": "Artifice Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.artifice:494f5640",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "7th—wall of iron",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Artifice"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.wall-of-iron:appears_on_spell_list:spell-list.alchemy-subdomain-from-artifice",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.alchemy-subdomain-from-artifice",
+        "name": "Alchemy Subdomain Spells (Artifice Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.alchemy:494f5640",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Artifice Domain: 7th—wall of iron",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Artifice"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.wall-of-iron:appears_on_spell_list:spell-list.metal-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.metal-subdomain",
+        "name": "Metal Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.metal:08dd1152",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th—wall of iron",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Earth"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -775,6 +878,30 @@
       "raw_value_sha256": "25f421ec137b39d7915de3529d56d477c56a67e1e306beb6c0484b1df6162456",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/9",
+      "observation_id": "aon:domain.artifice:494f5640",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "e84fd62351addcb0026e603bfb8a5cacefa838f2cbc3e30875a793bda6acae7f",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/10",
+      "observation_id": "aon:subdomain.alchemy:494f5640",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "85be09679c2c33fd204deaec5ca99b3801a5fb5e64a11074a59a428de838e185",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/levels/11",
+      "observation_id": "aon:subdomain.metal:08dd1152",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "7cdd5003b1c295c87b22849edc347210e34eb79d51627b37ddbbc89e02acdfda",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -810,6 +937,21 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/8",
         "message": "Sorcerer Shaitan Bloodline grants Wall of Iron as a level 6 spell; this is not general Sorcerer class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Artifice Domain grants Wall of Iron as a level 7 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/10",
+        "message": "Alchemy Subdomain grants Wall of Iron as a level 7 derived spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/11",
+        "message": "Metal Subdomain grants Wall of Iron as a level 6 printed spell; this is not general Cleric class access."
       }
     ]
   }

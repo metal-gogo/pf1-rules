@@ -53,6 +53,26 @@
       "level": 2,
       "scope": "later_first_party",
       "raw": "witch 2"
+    },
+    {
+      "spell_list_id": "spell-list.espionage-subdomain-from-knowledge",
+      "list_kind": "subdomain",
+      "list_name": "Espionage Subdomain (Knowledge Domain)",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "2nd—anonymous interaction",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.espionage-subdomain-from-trickery",
+      "list_kind": "subdomain",
+      "list_name": "Espionage Subdomain (Trickery Domain)",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "2nd—anonymous interaction",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -487,6 +507,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.anonymous-interaction:appears_on_spell_list:spell-list.espionage-subdomain-from-knowledge",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.espionage-subdomain-from-knowledge",
+        "name": "Espionage Subdomain Spells (Knowledge Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.espionage:e162f0e8",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd—anonymous interaction",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Knowledge"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.anonymous-interaction:appears_on_spell_list:spell-list.espionage-subdomain-from-trickery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.espionage-subdomain-from-trickery",
+        "name": "Espionage Subdomain Spells (Trickery Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.espionage:85657314",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd—anonymous interaction",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Trickery"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -537,6 +597,22 @@
       "raw_value_sha256": "5dc5144a9811f715818120fe5c9007c5e03689284235f8279ea31439757f4476",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:subdomain.espionage:e162f0e8",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "f23fd50b7a7b08d0bd0fa93d18f5b3364c6017b2889122a9cdab519bc51b91d7",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:subdomain.espionage:85657314",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "f23fd50b7a7b08d0bd0fa93d18f5b3364c6017b2889122a9cdab519bc51b91d7",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -562,6 +638,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Espionage Subdomain grants Anonymous Interaction as a level 2 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Espionage Subdomain grants Anonymous Interaction as a level 2 printed spell; this is not general Cleric class access."
       }
     ]
   }

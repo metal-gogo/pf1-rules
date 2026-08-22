@@ -90,6 +90,16 @@
       "raw": "pain strike (10th)",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.torture-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Torture Subdomain",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "2nd—pain strike",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -752,6 +762,26 @@
         }
       ],
       "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
+    },
+    {
+      "relationship_id": "spell.pain-strike:appears_on_spell_list:spell-list.torture-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.torture-subdomain",
+        "name": "Torture Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.torture:c0620711",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd—pain strike",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Destruction"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -818,6 +848,14 @@
       "raw_value_sha256": "e5f5b7224205f874539fc59bb4446afaeda34bd01b1e00d80e53f004760fceb7",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/9",
+      "observation_id": "aon:subdomain.torture:c0620711",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "6360b06a1c7a02ffc7b2789031c87ab4435054b3e37cfc538558889ba39ef2bf",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -858,6 +896,11 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/8",
         "message": "Bloodrager Kyton Bloodline grants Pain Strike as a level 2 spell; this is not general Bloodrager class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Torture Subdomain grants Pain Strike as a level 2 printed spell; this is not general Cleric class access."
       }
     ]
   }

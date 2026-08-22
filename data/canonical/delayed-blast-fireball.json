@@ -57,6 +57,16 @@
       "raw": "delayed blast fireball (15th)",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.arson-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Arson Subdomain",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "7th—delayed blast fireball",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -589,6 +599,26 @@
         }
       ],
       "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.delayed-blast-fireball:appears_on_spell_list:spell-list.arson-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.arson-subdomain",
+        "name": "Arson Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.arson:d018a253",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "7th—delayed blast fireball",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Fire"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -655,6 +685,14 @@
       "raw_value_sha256": "7d83ac227e816d5dcff42d5c1c8011e5113bd63a602f4d8ed3d54e2b5fefe3e5",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:subdomain.arson:d018a253",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "3174a66fc30c8aca92056bf4d245653cc9a0a73b6d81bff9c1e18f288c89de28",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -730,6 +768,11 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/4",
         "message": "Sorcerer Orc Bloodline grants Delayed Blast Fireball as a level 7 spell; this is not general Sorcerer class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Arson Subdomain grants Delayed Blast Fireball as a level 7 printed spell; this is not general Cleric class access."
       }
     ]
   }

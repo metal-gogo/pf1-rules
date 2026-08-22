@@ -67,6 +67,16 @@
       "level": 1,
       "scope": "later_first_party",
       "raw": "wizard 1"
+    },
+    {
+      "spell_list_id": "spell-list.industry-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Industry Subdomain",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "1st—crafter’s fortune",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -559,6 +569,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.crafters-fortune:appears_on_spell_list:spell-list.industry-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.industry-subdomain",
+        "name": "Industry Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.industry:494f5640",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—crafter’s fortune",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Artifice"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -609,6 +639,14 @@
       "raw_value_sha256": "18ec40a5dc8e817b98654f434ce4d01fb18c96a7d6a1025350e831a13ab484ba",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:subdomain.industry:494f5640",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "128d98770f1c08636ce9e960d8a3a881529cc258dc7354b7eadaf5e3e0d29ba1",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -629,6 +667,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/casting/components_raw",
         "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Industry Subdomain grants Crafter's Fortune as a level 1 printed spell; this is not general Cleric class access."
       }
     ]
   }

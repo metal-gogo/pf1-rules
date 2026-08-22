@@ -101,6 +101,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.sahkil-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Sahkil Subdomain",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "4th—they know",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -755,6 +765,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.they-know:appears_on_spell_list:spell-list.sahkil-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sahkil-subdomain",
+        "name": "Sahkil Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.sahkil:442be5b2",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th—they know",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Evil"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -805,6 +835,14 @@
       "raw_value_sha256": "c81e5bf62df9e112d1c8c82e4e5a5e6c6dea3f5dae91ea87811efc11ac3b4558",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/9",
+      "observation_id": "aon:subdomain.sahkil:442be5b2",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "4ae390e14e164dfdc3095bb101a251bc9283fd9ae299695cc78583c337dea555",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -830,6 +868,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/8",
         "message": "Omdura 3 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Sahkil Subdomain grants They Know as a level 4 printed spell; this is not general Cleric class access."
       }
     ]
   }

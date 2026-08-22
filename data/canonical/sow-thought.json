@@ -157,6 +157,16 @@
           "raw": "changeling"
         }
       ]
+    },
+    {
+      "spell_list_id": "spell-list.innuendo-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Innuendo Subdomain",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "1st—sow thought",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -691,6 +701,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.sow-thought:appears_on_spell_list:spell-list.innuendo-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.innuendo-subdomain",
+        "name": "Innuendo Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.innuendo:85657314",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—sow thought",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Trickery"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -741,6 +771,14 @@
       "raw_value_sha256": "8c6483fa64966ae30b14884d55695100ac6e3bac802c338f2b2346027f11d2a7",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:subdomain.innuendo:85657314",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "0ed9d68b96d7203735df3c6dab4d865d56feb4e902b20e561d7f5a8219ac8031",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -771,6 +809,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Innuendo Subdomain grants Sow Thought as a level 1 printed spell; this is not general Cleric class access."
       }
     ]
   }

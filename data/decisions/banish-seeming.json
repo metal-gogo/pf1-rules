@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.banish-seeming:71179b6f1e0a6f7d",
     "legacy_aon:spell.banish-seeming:6bc7e31977033dc5",
-    "d20pfsrd:spell.banish-seeming:1938bd37c3d22540"
+    "d20pfsrd:spell.banish-seeming:1938bd37c3d22540",
+    "aon:subdomain.revelation:2eb389bf"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.banish-seeming:71179b6f1e0a6f7d",
@@ -127,6 +128,20 @@
         "aon:spell.banish-seeming:71179b6f1e0a6f7d"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/4",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.revelation:2eb389bf",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.revelation:2eb389bf"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -428,6 +443,20 @@
         "aon:spell.banish-seeming:71179b6f1e0a6f7d"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.banish-seeming:appears_on_spell_list:spell-list.revelation-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.revelation:2eb389bf",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.revelation:2eb389bf"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

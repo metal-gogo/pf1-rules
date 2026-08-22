@@ -11,7 +11,11 @@
     "aon:mystery.apocalypse:4cebc0bb",
     "aon:mystery.flame:f6116050",
     "aon:patron.vengeance:15d234b1",
-    "aon:spirit.flame:835c53d2"
+    "aon:spirit.flame:835c53d2",
+    "aon:domain.fire:d018a253",
+    "aon:subdomain.arson:d018a253",
+    "aon:subdomain.ash:d018a253",
+    "aon:subdomain.smoke:d018a253"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.incendiary-cloud:cb83d64c2b3ade98",
@@ -168,6 +172,62 @@
         "aon:spirit.flame:835c53d2"
       ],
       "rationale": "AoN clearly transcribes the owning shaman spirit's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/8",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.fire:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.fire:d018a253"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/9",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.arson:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.arson:d018a253"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/10",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.ash:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.ash:d018a253"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/11",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.smoke:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.smoke:d018a253"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
     }
   ],
   "relationship_decisions": [
@@ -546,6 +606,62 @@
         "aon:spirit.flame:835c53d2"
       ],
       "rationale": "AoN prints the spell on the owning shaman spirit page; it is modeled as spirit access rather than general Shaman access."
+    },
+    {
+      "relationship_id": "spell.incendiary-cloud:appears_on_spell_list:spell-list.fire-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.fire:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.fire:d018a253"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.incendiary-cloud:appears_on_spell_list:spell-list.arson-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.arson:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.arson:d018a253"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.incendiary-cloud:appears_on_spell_list:spell-list.ash-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.ash:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.ash:d018a253"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.incendiary-cloud:appears_on_spell_list:spell-list.smoke-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.smoke:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.smoke:d018a253"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

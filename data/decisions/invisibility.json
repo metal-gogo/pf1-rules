@@ -17,7 +17,11 @@
     "aon:bloodline.sorcerer.oni:726ad2e8",
     "aon:bloodline.sorcerer.rakshasa:b723b3cb",
     "aon:bloodline.bloodrager.arcane:2754477e",
-    "aon:bloodline.bloodrager.naga:d741af6a"
+    "aon:bloodline.bloodrager.naga:d741af6a",
+    "aon:domain.trickery:85657314",
+    "aon:subdomain.ambush:85657314",
+    "aon:subdomain.innuendo:85657314",
+    "aon:subdomain.thievery:85657314"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.invisibility:dc4d2b2050a242a9",
@@ -281,6 +285,62 @@
         "aon:bloodline.bloodrager.naga:d741af6a"
       ],
       "rationale": "AoN clearly transcribes the owning bloodrager bloodline's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/30",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.trickery:85657314",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.trickery:85657314"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/31",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.ambush:85657314",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.ambush:85657314"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/32",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.innuendo:85657314",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.innuendo:85657314"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/33",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.thievery:85657314",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.thievery:85657314"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
     }
   ],
   "relationship_decisions": [
@@ -1362,6 +1422,62 @@
         "aon:bloodline.bloodrager.naga:d741af6a"
       ],
       "rationale": "AoN prints the spell on the owning bloodrager bloodline page; it is modeled as bloodline access rather than general Bloodrager access."
+    },
+    {
+      "relationship_id": "spell.invisibility:appears_on_spell_list:spell-list.trickery-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.trickery:85657314",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.trickery:85657314"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.invisibility:appears_on_spell_list:spell-list.ambush-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.ambush:85657314",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.ambush:85657314"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.invisibility:appears_on_spell_list:spell-list.innuendo-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.innuendo:85657314",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.innuendo:85657314"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.invisibility:appears_on_spell_list:spell-list.thievery-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.thievery:85657314",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.thievery:85657314"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

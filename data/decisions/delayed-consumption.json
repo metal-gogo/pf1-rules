@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.delayed-consumption:6a2cd4cf96782ee3",
     "legacy_aon:spell.delayed-consumption:f6a5d8ecd18324e7",
-    "d20pfsrd:spell.delayed-consumption:cbd451c0addb0b47"
+    "d20pfsrd:spell.delayed-consumption:cbd451c0addb0b47",
+    "aon:subdomain.alchemy:494f5640",
+    "aon:subdomain.alchemy:44b410b9"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.delayed-consumption:6a2cd4cf96782ee3",
@@ -108,6 +110,34 @@
         "d20pfsrd:spell.delayed-consumption:cbd451c0addb0b47"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/2",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.alchemy:494f5640",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.alchemy:494f5640"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/3",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.alchemy:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.alchemy:44b410b9"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -250,6 +280,34 @@
         "d20pfsrd:spell.delayed-consumption:cbd451c0addb0b47"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.delayed-consumption:appears_on_spell_list:spell-list.alchemy-subdomain-from-artifice",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.alchemy:494f5640",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.alchemy:494f5640"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.delayed-consumption:appears_on_spell_list:spell-list.alchemy-subdomain-from-magic",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.alchemy:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.alchemy:44b410b9"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

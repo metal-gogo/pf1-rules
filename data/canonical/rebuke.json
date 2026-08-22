@@ -44,6 +44,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.judgment-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Judgment Subdomain",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "4th—rebuke",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -504,6 +514,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.rebuke:appears_on_spell_list:spell-list.judgment-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.judgment-subdomain",
+        "name": "Judgment Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.judgment:e26007d3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th—rebuke",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Law"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -554,6 +584,14 @@
       "raw_value_sha256": "4f659a54c1259006b2790936a8103395761d4aebaa8348caf517519e83e60f04",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/2",
+      "observation_id": "aon:subdomain.judgment:e26007d3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "0905867cb71b21fa176948f9b1982820c94ccadd727d5fde516d3c490ba0314a",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -569,6 +607,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/1",
         "message": "Omdura 4 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/2",
+        "message": "Judgment Subdomain grants Rebuke as a level 4 printed spell; this is not general Cleric class access."
       }
     ]
   }

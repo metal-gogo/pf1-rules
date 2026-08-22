@@ -141,6 +141,26 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.hubris-subdomain-from-glory",
+      "list_kind": "subdomain",
+      "list_name": "Hubris Subdomain (Glory Domain)",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "4th—hollow heroism",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.hubris-subdomain-from-nobility",
+      "list_kind": "subdomain",
+      "list_name": "Hubris Subdomain (Nobility Domain)",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "4th—hollow heroism",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1111,6 +1131,46 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.hollow-heroism:appears_on_spell_list:spell-list.hubris-subdomain-from-glory",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.hubris-subdomain-from-glory",
+        "name": "Hubris Subdomain Spells (Glory Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.hubris:e2950469",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th—hollow heroism",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Glory"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.hollow-heroism:appears_on_spell_list:spell-list.hubris-subdomain-from-nobility",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.hubris-subdomain-from-nobility",
+        "name": "Hubris Subdomain Spells (Nobility Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.hubris:5c759126",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th—hollow heroism",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Nobility"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -1161,6 +1221,22 @@
       "raw_value_sha256": "129e45bc72e88c51bb2298d70a2c5e80f5243670563745b631a2fdb5ab449ba0",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/14",
+      "observation_id": "aon:subdomain.hubris:e2950469",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "95102c4b4ff3c8dedc55b7f4f4a7a1ae9c511547bd6d1539e7fcab18fd67a767",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/15",
+      "observation_id": "aon:subdomain.hubris:5c759126",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "95102c4b4ff3c8dedc55b7f4f4a7a1ae9c511547bd6d1539e7fcab18fd67a767",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1181,6 +1257,16 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/13",
         "message": "Omdura 4 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/14",
+        "message": "Hubris Subdomain grants Hollow Heroism as a level 4 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/15",
+        "message": "Hubris Subdomain grants Hollow Heroism as a level 4 printed spell; this is not general Cleric class access."
       }
     ]
   }

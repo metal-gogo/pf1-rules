@@ -196,6 +196,22 @@ describe("local rules browser", () => {
     expect(bloodragerHtml).toContain("/lists/spell-list.bloodrager-arcane-bloodline");
   });
 
+  it("routes domain and subdomain access through owner pages", async () => {
+    const spellResponse = await fetch(`${baseUrl}/spells/spell.wind-wall`);
+    const spellHtml = await spellResponse.text();
+    expect(spellResponse.status).toBe(200);
+    expect(spellHtml).toContain("Air Domain</a> 2");
+    expect(spellHtml).toContain("Cloud Subdomain</a> 2");
+    expect(spellHtml).toContain("(derived access)");
+
+    const ownerResponse = await fetch(`${baseUrl}/entities/subdomain.cloud`);
+    const ownerHtml = await ownerResponse.text();
+    expect(ownerResponse.status).toBe(200);
+    expect(ownerHtml).toContain("<h1>Cloud Subdomain</h1>");
+    expect(ownerHtml).toContain("/lists/spell-list.cloud-subdomain");
+    expect(ownerHtml).toContain("Air Domain Spells");
+  });
+
   it("serves the interactive class filters", async () => {
     const response = await fetch(`${baseUrl}/class-spells.js`);
     const script = await response.text();

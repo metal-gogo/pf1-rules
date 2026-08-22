@@ -106,6 +106,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.portal-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Portal Subdomain",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "2nd—knock",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -812,6 +822,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.knock:appears_on_spell_list:spell-list.portal-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.portal-subdomain",
+        "name": "Portal Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.portal:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd—knock",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Travel"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -862,6 +892,14 @@
       "raw_value_sha256": "e9030d72f06d9a7dba5b5f41f734a562c440dce14517b4dee6e2ca5b84834691",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/10",
+      "observation_id": "aon:subdomain.portal:4a91e51b",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "6ddbfb7135008b3aa4f68e718e28fe11aebcb96b4fe0d71bc3d5df5298f45586",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -892,6 +930,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/9",
         "message": "Omdura 2 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/10",
+        "message": "Portal Subdomain grants Knock as a level 2 printed spell; this is not general Cleric class access."
       }
     ]
   }

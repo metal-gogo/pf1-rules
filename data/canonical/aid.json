@@ -130,6 +130,59 @@
       "raw": "4th — aid",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.luck-domain",
+      "list_kind": "domain",
+      "list_name": "Luck Domain",
+      "level": 2,
+      "scope": "core",
+      "raw": "2nd—aid",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.legend-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Legend Subdomain",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "2nd—aid",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.curse-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Curse Subdomain",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "Inherited from Luck Domain: 2nd—aid",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.curse",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.luck-domain",
+            "level": 2
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Luck",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.tactics-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Tactics Subdomain",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "2nd—aid",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -784,6 +837,86 @@
         }
       ],
       "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.aid:appears_on_spell_list:spell-list.luck-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.luck-domain",
+        "name": "Luck Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.luck:05c8839f",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd—aid",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Luck"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.aid:appears_on_spell_list:spell-list.legend-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.legend-subdomain",
+        "name": "Legend Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.legend:e2950469",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd—aid",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Glory"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.aid:appears_on_spell_list:spell-list.curse-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.curse-subdomain",
+        "name": "Curse Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.curse:05c8839f",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Luck Domain: 2nd—aid",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Luck"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.aid:appears_on_spell_list:spell-list.tactics-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.tactics-subdomain",
+        "name": "Tactics Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.tactics:a29bc5fb",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd—aid",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=War"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -842,6 +975,38 @@
       "raw_value_sha256": "613da8dc69951dfe05ee99fc0edeea6af035e994103114ad990a57b1a259d339",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/12",
+      "observation_id": "aon:domain.luck:05c8839f",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "14423779efa0a4664e2661a3959c7697c8cdea558e5668faaa4aba0bf18f0946",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/13",
+      "observation_id": "aon:subdomain.legend:e2950469",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "14423779efa0a4664e2661a3959c7697c8cdea558e5668faaa4aba0bf18f0946",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/14",
+      "observation_id": "aon:subdomain.curse:05c8839f",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "b6a489510eabc4e121852c5de8c6448ec3f4224975e28ff89e38ce4a8182c0cf",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/levels/15",
+      "observation_id": "aon:subdomain.tactics:a29bc5fb",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "14423779efa0a4664e2661a3959c7697c8cdea558e5668faaa4aba0bf18f0946",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -872,6 +1037,26 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/11",
         "message": "Ancestors Patron grants Aid as a level 2 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/12",
+        "message": "Luck Domain grants Aid as a level 2 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/13",
+        "message": "Legend Subdomain grants Aid as a level 2 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/14",
+        "message": "Curse Subdomain grants Aid as a level 2 derived spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/15",
+        "message": "Tactics Subdomain grants Aid as a level 2 printed spell; this is not general Cleric class access."
       }
     ]
   }

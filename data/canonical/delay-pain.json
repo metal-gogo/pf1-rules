@@ -144,6 +144,26 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.kyton-subdomain-from-evil",
+      "list_kind": "subdomain",
+      "list_name": "Kyton Subdomain (Evil Domain)",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "1st—delay pain",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.kyton-subdomain-from-law",
+      "list_kind": "subdomain",
+      "list_name": "Kyton Subdomain (Law Domain)",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "1st—delay pain",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -926,6 +946,46 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.delay-pain:appears_on_spell_list:spell-list.kyton-subdomain-from-evil",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.kyton-subdomain-from-evil",
+        "name": "Kyton Subdomain Spells (Evil Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.kyton:442be5b2",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—delay pain",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Evil"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.delay-pain:appears_on_spell_list:spell-list.kyton-subdomain-from-law",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.kyton-subdomain-from-law",
+        "name": "Kyton Subdomain Spells (Law Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.kyton:e26007d3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—delay pain",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Law"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -976,6 +1036,22 @@
       "raw_value_sha256": "893bea029d18df057e836e10b4b94d8cfaa35de6cd1d2a7ce6bcdcfd5092ec01",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/14",
+      "observation_id": "aon:subdomain.kyton:442be5b2",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "599042b8aa4ed12507792f0cd78def5af9a1b30140c01be4383d46e62fcd66d4",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/15",
+      "observation_id": "aon:subdomain.kyton:e26007d3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "599042b8aa4ed12507792f0cd78def5af9a1b30140c01be4383d46e62fcd66d4",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1001,6 +1077,16 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/13",
         "message": "Omdura 2 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/14",
+        "message": "Kyton Subdomain grants Delay Pain as a level 1 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/15",
+        "message": "Kyton Subdomain grants Delay Pain as a level 1 printed spell; this is not general Cleric class access."
       }
     ]
   }

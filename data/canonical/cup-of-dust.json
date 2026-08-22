@@ -61,6 +61,16 @@
       "level": 3,
       "scope": "later_first_party",
       "raw": "witch 3"
+    },
+    {
+      "spell_list_id": "spell-list.thirst-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Thirst Subdomain",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "3rd—cup of dust",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -796,6 +806,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.cup-of-dust:appears_on_spell_list:spell-list.thirst-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.thirst-subdomain",
+        "name": "Thirst Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.thirst:2eb389bf",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "3rd—cup of dust",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Sun"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -846,6 +876,14 @@
       "raw_value_sha256": "85d79c1dd8c8e994b47b9801e9e9f4c4a1d8115376a8ee2b59acf8f8a6f49ece",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:subdomain.thirst:2eb389bf",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "4353e9978918a01f6403641cbdb07fafb34174016bec7217985d52d33d9bfce8",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -881,6 +919,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Thirst Subdomain grants Cup of Dust as a level 3 printed spell; this is not general Cleric class access."
       }
     ]
   }

@@ -8,7 +8,11 @@
     "aon:spell.antilife-shell:0f0f479094a32ee2",
     "legacy_aon:spell.antilife-shell:9f56ad55b56f03b9",
     "d20pfsrd:spell.antilife-shell:917e931c65642aa2",
-    "aon:patron.animals:15d234b1"
+    "aon:patron.animals:15d234b1",
+    "aon:domain.animal:a6829b5b",
+    "aon:subdomain.fur:a6829b5b",
+    "aon:subdomain.insect:a6829b5b",
+    "aon:subdomain.souls:8db954e0"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.antilife-shell:0f0f479094a32ee2",
@@ -137,6 +141,62 @@
         "aon:patron.animals:15d234b1"
       ],
       "rationale": "AoN clearly transcribes the owning witch patron's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/9",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:domain.animal:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.animal:a6829b5b"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor domain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/10",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.fur:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.fur:a6829b5b"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/11",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.insect:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.insect:a6829b5b"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/12",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:subdomain.souls:8db954e0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.souls:8db954e0"
+      ],
+      "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -639,6 +699,62 @@
         "aon:patron.animals:15d234b1"
       ],
       "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
+    },
+    {
+      "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.animal-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.animal:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.animal:a6829b5b"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
+    },
+    {
+      "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.fur-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.fur:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.fur:a6829b5b"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.insect-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.insect:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.insect:a6829b5b"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.souls-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.souls:8db954e0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.souls:8db954e0"
+      ],
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

@@ -182,6 +182,62 @@
       "raw": "magic circle against evil (7th)",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.good-domain",
+      "list_kind": "domain",
+      "list_name": "Good Domain",
+      "level": 3,
+      "scope": "core",
+      "raw": "3rd—magic circle against evil",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.friendship-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Friendship Subdomain",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "Inherited from Good Domain: 3rd—magic circle against evil",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.friendship",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.good-domain",
+            "level": 3
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Good",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.redemption-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Redemption Subdomain",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "Inherited from Good Domain: 3rd—magic circle against evil",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.redemption",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.good-domain",
+            "level": 3
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Good",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1479,6 +1535,66 @@
         }
       ],
       "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.magic-circle-against-evil:appears_on_spell_list:spell-list.good-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.good-domain",
+        "name": "Good Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.good:1cfea879",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "3rd—magic circle against evil",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Good"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.magic-circle-against-evil:appears_on_spell_list:spell-list.friendship-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.friendship-subdomain",
+        "name": "Friendship Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.friendship:1cfea879",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Good Domain: 3rd—magic circle against evil",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Good"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.magic-circle-against-evil:appears_on_spell_list:spell-list.redemption-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.redemption-subdomain",
+        "name": "Redemption Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.redemption:1cfea879",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Good Domain: 3rd—magic circle against evil",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Good"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -1553,6 +1669,30 @@
       "raw_value_sha256": "8ad8b8e2064f331e68c5a3a3e393c354dc510eec0c48ea0f80f003f6fc62cc1a",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/18",
+      "observation_id": "aon:domain.good:1cfea879",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "1a7bc853dbcfab96a731bdf0d53fa1c5fb311505f22f54003d4fb80665af7e0d",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/19",
+      "observation_id": "aon:subdomain.friendship:1cfea879",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d1e33efd371591abbc3c056967d070db6cf4007a130c35b110ab48dcfbfce6c0",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/levels/20",
+      "observation_id": "aon:subdomain.redemption:1cfea879",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d1e33efd371591abbc3c056967d070db6cf4007a130c35b110ab48dcfbfce6c0",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
     }
   ],
   "normalization": {
@@ -1593,6 +1733,21 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/17",
         "message": "Sorcerer Phoenix Bloodline grants Magic Circle against Evil as a level 3 spell; this is not general Sorcerer class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/18",
+        "message": "Good Domain grants Magic Circle against Evil as a level 3 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/19",
+        "message": "Friendship Subdomain grants Magic Circle against Evil as a level 3 derived spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/20",
+        "message": "Redemption Subdomain grants Magic Circle against Evil as a level 3 derived spell; this is not general Cleric class access."
       }
     ]
   }

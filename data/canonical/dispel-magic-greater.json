@@ -210,6 +210,39 @@
       "raw": "greater dispel magic (13th)",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.liberation-domain",
+      "list_kind": "domain",
+      "list_name": "Liberation Domain",
+      "level": 6,
+      "scope": "core",
+      "raw": "6th—greater dispel magic",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.freedom-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Freedom Subdomain",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "Inherited from Liberation Domain: 6th—greater dispel magic",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "subdomain.freedom",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.liberation-domain",
+            "level": 6
+          }
+        ],
+        "level_policy": "Inherit the associated domain spell at every level not named by Replacement Domain Spells.",
+        "source_url": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Liberation",
+        "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1188,6 +1221,46 @@
         }
       ],
       "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.dispel-magic-greater:appears_on_spell_list:spell-list.liberation-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.liberation-domain",
+        "name": "Liberation Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.liberation:950691dc",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th—greater dispel magic",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Liberation"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.dispel-magic-greater:appears_on_spell_list:spell-list.freedom-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.freedom-subdomain",
+        "name": "Freedom Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.freedom:950691dc",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Liberation Domain: 6th—greater dispel magic",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Liberation"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -1254,6 +1327,22 @@
       "raw_value_sha256": "00d54435d132108b23a6d014817256579cca7eb2d762edd76786c783a79382d3",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/22",
+      "observation_id": "aon:domain.liberation:950691dc",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "154a7fded3d1bc3d04703816d515c058dbb92a3fb8041899c86d94f40aef9c94",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/23",
+      "observation_id": "aon:subdomain.freedom:950691dc",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "e5de4202e9a831dbd3a7fd6cb097d0f8ec5726b87f328b8ec978b446aab55ffd",
+      "decision": "normalized",
+      "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
     }
   ],
   "normalization": {
@@ -1349,6 +1438,16 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/21",
         "message": "Sorcerer Oni Bloodline grants Dispel Magic, Greater as a level 6 spell; this is not general Sorcerer class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/22",
+        "message": "Liberation Domain grants Dispel Magic, Greater as a level 6 printed spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/23",
+        "message": "Freedom Subdomain grants Dispel Magic, Greater as a level 6 derived spell; this is not general Cleric class access."
       }
     ]
   }

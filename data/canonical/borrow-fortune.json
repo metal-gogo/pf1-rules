@@ -35,6 +35,16 @@
       "level": 3,
       "scope": "later_first_party",
       "raw": "psychic 3"
+    },
+    {
+      "spell_list_id": "spell-list.fate-subdomain",
+      "list_kind": "subdomain",
+      "list_name": "Fate Subdomain",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "3rd—borrow fortune",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -335,6 +345,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.borrow-fortune:appears_on_spell_list:spell-list.fate-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.fate-subdomain",
+        "name": "Fate Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.fate:05c8839f",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "3rd—borrow fortune",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Luck"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -385,6 +415,14 @@
       "raw_value_sha256": "061ea0fe40f8824f72806e805360e3cbc2f2ed49ee0fe9a2a0b4ad9c085e7c59",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/3",
+      "observation_id": "aon:subdomain.fate:05c8839f",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "9005a4ffe88808cdabc76339b00bf404ae5ba9af20331fc1a10347c92ad4dd12",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -395,6 +433,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/3",
+        "message": "Fate Subdomain grants Borrow Fortune as a level 3 printed spell; this is not general Cleric class access."
       }
     ]
   }
