@@ -43,6 +43,42 @@ describe("ingested spell catalog", () => {
     }));
   });
 
+  it("keeps a missing printed range distinct from a reviewed override", async () => {
+    const auraOfDistraction = await prisma.canonicalSpell.findUnique({
+      where: { spellId: "spell.aura-of-distraction" },
+    });
+    const payload = auraOfDistraction?.payload as {
+      normalization?: { warnings?: Array<{ code?: string; field_path?: string }> };
+      provenance?: Array<{
+        field_path?: string;
+        source_field?: string;
+        decision?: string;
+        note?: string;
+      }>;
+    } | undefined;
+
+    expect(auraOfDistraction).toEqual(expect.objectContaining({
+      rangeCategory: "unknown",
+      rangeFormula: null,
+      rangeRaw: null,
+      normalizationStatus: "needs_review",
+    }));
+    expect(payload?.normalization?.warnings).toContainEqual(expect.objectContaining({
+      code: "MISSING_PRINTED_RANGE",
+      field_path: "/effect/range",
+    }));
+    expect(payload?.provenance).toContainEqual(expect.objectContaining({
+      field_path: "/effect/range",
+      source_field: "spell_raw.range_raw",
+      decision: "normalized",
+      note: expect.stringContaining("no override was inferred"),
+    }));
+    expect(payload?.provenance).not.toContainEqual(expect.objectContaining({
+      field_path: "/effect/range",
+      decision: "manually_resolved",
+    }));
+  });
+
   it("keeps Wish's mandatory diamond component", async () => {
     const wish = await findSpell(prisma, "Wish");
     expect(wish?.components).toContainEqual(

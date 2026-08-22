@@ -8,7 +8,7 @@ import {
   spellListQualificationsLabel,
   type SpellListQualification,
 } from "../src/domain/spell-lists.js";
-import { parseLevels } from "../src/ingestion/normalize-level-zero.js";
+import { parseLevels, parseRange } from "../src/ingestion/normalize-level-zero.js";
 
 
 interface JsonSchemaValidator {
@@ -189,5 +189,21 @@ describe("qualified spell-list entries", () => {
         qualifications: [expect.objectContaining({ kind: "conditional" })],
       }),
     ]));
+  });
+});
+
+
+describe("missing printed values", () => {
+  it("keeps a blank printed range unknown instead of inferring an override", () => {
+    expect(parseRange(null)).toEqual({ category: "unknown", formula: null, raw: null });
+    expect(parseRange("   ")).toEqual({ category: "unknown", formula: null, raw: null });
+  });
+
+  it("continues to normalize a printed range", () => {
+    expect(parseRange("Close (25 ft. + 5 ft./2 levels)")).toEqual({
+      category: "close",
+      formula: "Close (25 ft. + 5 ft./2 levels)",
+      raw: "Close (25 ft. + 5 ft./2 levels)",
+    });
   });
 });

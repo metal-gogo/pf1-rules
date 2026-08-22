@@ -296,8 +296,10 @@ function parseCastingTime(raw: string | null) {
 }
 
 
-function parseRange(raw: string | null) {
-  if (!raw) throw new NormalizationIssue("source", "missing-range", "AoN did not expose range.");
+export function parseRange(raw: string | null) {
+  if (raw === null || raw.trim() === "") {
+    return { category: "unknown", formula: null, raw: null } as const;
+  }
   const lower = raw.toLocaleLowerCase("en-US");
   for (const category of ["personal", "touch", "close", "medium", "long", "unlimited"] as const) {
     if (lower.startsWith(category)) return { category, formula: lower === category ? null : raw, raw };
@@ -787,8 +789,10 @@ export function generateCanonicalBundle(
   const baseline = observations.find((item) => item.siteId === "aon");
   if (!baseline) throw new NormalizationIssue("source", "missing-aon-observation", "AoN baseline observation is missing.");
   const rangeOverride = reviewedRangeOverrides.get(spellId);
+  const missingPrintedRange = baseline.parsed.rangeRaw === null || baseline.parsed.rangeRaw.trim() === "";
   const blockingParserWarnings = baseline.parsed.warnings.filter((warning) =>
-    warning.severity === "error" && !(rangeOverride && warning.field === "range_raw")
+    warning.severity === "error" &&
+    !((rangeOverride || missingPrintedRange) && warning.field === "range_raw")
   );
   if (blockingParserWarnings.length > 0) {
     throw new NormalizationIssue("source", "aon-parser-error", blockingParserWarnings.map((warning) => warning.message).join(" "));
@@ -990,6 +994,14 @@ export function generateCanonicalBundle(
       field_path: "/effect/range",
       message: rangeOverride.rationale,
     });
+  } else if (missingPrintedRange) {
+    warnings.push({
+      code: "MISSING_PRINTED_RANGE",
+      field_path: "/effect/range",
+      message:
+        "AoN does not print a Range value. The canonical range remains unknown with a null " +
+        "raw value; no range was inferred and no canonical override was applied.",
+    });
   }
   if (parsed.sourcePageRaw && page === null) {
     warnings.push({
@@ -1069,7 +1081,9 @@ export function generateCanonicalBundle(
       note: "AoN baseline selected under provenance-first-v0; comparison observations remain attached.",
     })),
     normalization: {
-      status: inheritanceReference && !canResolveCanonicalSpell(availableCanonicalSpells, inheritanceReference.parentId)
+      status: missingPrintedRange && !rangeOverride
+        ? "needs_review"
+        : inheritanceReference && !canResolveCanonicalSpell(availableCanonicalSpells, inheritanceReference.parentId)
         ? "needs_review"
         : "validated",
       normalizer_version: "0.1.4-dependency-aliases",
@@ -1084,6 +1098,15 @@ export function generateCanonicalBundle(
       raw_value_sha256: hash(parsed.deliveryFieldsRaw),
       decision: "manually_resolved",
       note: rangeOverride.rationale,
+    });
+  } else if (missingPrintedRange) {
+    canonical.provenance.push({
+      field_path: "/effect/range",
+      observation_id: baseline.observationId,
+      source_field: "spell_raw.range_raw",
+      raw_value_sha256: hash(parsed.rangeRaw),
+      decision: "normalized",
+      note: "The source field is blank; the canonical range remains unknown and no override was inferred.",
     });
   }
   if (inheritanceReference) {
@@ -1114,6 +1137,16 @@ export function generateCanonicalBundle(
       selected_evidence: [{ observation_id: baseline.observationId, source_field: "spell_raw.delivery_fields_raw" }],
       considered_observation_ids: observationIds,
       rationale: rangeOverride.rationale,
+    });
+  } else if (missingPrintedRange) {
+    fieldDecisions.push({
+      canonical_path: "/effect/range",
+      decision: "select_source",
+      selected_evidence: [{ observation_id: baseline.observationId, source_field: "spell_raw.range_raw" }],
+      considered_observation_ids: observationIds,
+      rationale:
+        "AoN is the canonical baseline and prints no Range value. Preserve that absence as an " +
+        "unknown canonical range without deriving a replacement.",
     });
   }
   const decision = {
