@@ -107,6 +107,29 @@
       "level": 2,
       "scope": "later_first_party",
       "raw": "wizard 2"
+    },
+    {
+      "spell_list_id": "spell-list.omdura",
+      "list_kind": "class",
+      "list_name": "Omdura",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "Derived access from cleric 2; effective level 2.",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "class.omdura",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.cleric",
+            "level": 2
+          }
+        ],
+        "level_policy": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell.",
+        "source_url": "https://www.d20pfsrd.com/classes/base-classes/omdura/",
+        "note": "This is effective class access derived from the class rule, not a value printed on the spell page.",
+        "rule_scope": "third_party"
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -700,6 +723,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.lead-plating:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.lead-plating:8125729b0f55dc9e",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.lead-plating:d6ed58030e6859d8",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -765,6 +815,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "DERIVED_SPELL_LIST_ACCESS",
+        "field_path": "/levels/12",
+        "message": "Omdura 2 access is derived from an explicit class rule; no printed spell-page value was inferred."
       }
     ]
   }

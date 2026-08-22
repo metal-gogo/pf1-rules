@@ -83,6 +83,56 @@
       "level": 1,
       "scope": "later_first_party",
       "raw": "warpriest 1"
+    },
+    {
+      "spell_list_id": "spell-list.omdura",
+      "list_kind": "class",
+      "list_name": "Omdura",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "Derived access from cleric 1 and inquisitor 1; effective level 1.",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "class.omdura",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.cleric",
+            "level": 1
+          },
+          {
+            "spell_list_id": "spell-list.inquisitor",
+            "level": 1
+          }
+        ],
+        "level_policy": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell.",
+        "source_url": "https://www.d20pfsrd.com/classes/base-classes/omdura/",
+        "note": "This is effective class access derived from the class rule, not a value printed on the spell page.",
+        "rule_scope": "third_party"
+      },
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.oracle",
+      "list_kind": "class",
+      "list_name": "Oracle",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "Derived access from cleric 1; effective level 1.",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "class.oracle",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.cleric",
+            "level": 1
+          }
+        ],
+        "level_policy": "Use the Cleric spell list at the same spell level; retain separately printed Oracle and mystery access.",
+        "source_url": "https://legacy.aonprd.com/advancedPlayersGuide/baseClasses/oracle.html",
+        "note": "This is effective class access derived from the class rule, not a value printed on the spell page.",
+        "rule_scope": "later_first_party"
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -590,6 +640,74 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.detect-the-faithful:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.detect-the-faithful:82baac149b8a24dd",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.detect-the-faithful:fef4a41376559f2b",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.detect-the-faithful:82baac149b8a24dd",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.detect-the-faithful:fef4a41376559f2b",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.detect-the-faithful:appears_on_spell_list:spell-list.oracle",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.oracle",
+        "name": "Oracle Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.detect-the-faithful:82baac149b8a24dd",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.detect-the-faithful:fef4a41376559f2b",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use the Cleric spell list at the same spell level; retain separately printed Oracle and mystery access. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -655,6 +773,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "DERIVED_SPELL_LIST_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Omdura 1 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "DERIVED_SPELL_LIST_ACCESS",
+        "field_path": "/levels/10",
+        "message": "Oracle 1 access is derived from an explicit class rule; no printed spell-page value was inferred."
       }
     ]
   }

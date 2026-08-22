@@ -17,51 +17,255 @@
     {
       "canonical_path": "/levels",
       "decision": "normalize",
-      "selected_evidence": [{"observation_id": "aon:spell.break-enchantment:726fae5f", "source_field": "spell_raw.levels_raw"}],
-      "considered_observation_ids": ["aon:spell.break-enchantment:726fae5f", "legacy_aon:spell.break-enchantment:5a07829c", "d20pfsrd:spell.break-enchantment:93f3721d"],
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.break-enchantment:726fae5f",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.break-enchantment:726fae5f",
+        "legacy_aon:spell.break-enchantment:5a07829c",
+        "d20pfsrd:spell.break-enchantment:93f3721d"
+      ],
       "rationale": "AoN supplies the broadest first-party class access. Legacy confirms the Core subset, while d20PFSRD's additional domain, subdomain, bloodline, and mystery navigation remains preserved in its source observation rather than being automatically merged."
     },
     {
       "canonical_path": "/effect/delivery",
       "decision": "select_source",
-      "selected_evidence": [{"observation_id": "aon:spell.break-enchantment:726fae5f", "source_field": "spell_raw.delivery_fields_raw[0]"}],
-      "considered_observation_ids": ["aon:spell.break-enchantment:726fae5f", "legacy_aon:spell.break-enchantment:5a07829c", "d20pfsrd:spell.break-enchantment:93f3721d"],
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.break-enchantment:726fae5f",
+          "source_field": "spell_raw.delivery_fields_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.break-enchantment:726fae5f",
+        "legacy_aon:spell.break-enchantment:5a07829c",
+        "d20pfsrd:spell.break-enchantment:93f3721d"
+      ],
       "rationale": "All base sources agree on the plural Targets header and its value."
     },
     {
       "canonical_path": "/effect/targeting",
       "decision": "normalize",
-      "selected_evidence": [{"observation_id": "aon:spell.break-enchantment:726fae5f", "source_field": "spell_raw.delivery_fields_raw[0].value_raw"}],
-      "considered_observation_ids": ["aon:spell.break-enchantment:726fae5f", "legacy_aon:spell.break-enchantment:5a07829c", "d20pfsrd:spell.break-enchantment:93f3721d"],
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.break-enchantment:726fae5f",
+          "source_field": "spell_raw.delivery_fields_raw[0].value_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.break-enchantment:726fae5f",
+        "legacy_aon:spell.break-enchantment:5a07829c",
+        "d20pfsrd:spell.break-enchantment:93f3721d"
+      ],
       "rationale": "The literal field is normalized as up to one selected creature per level with a pairwise maximum separation of 30 feet."
     },
     {
       "canonical_path": "/description/raw",
       "decision": "select_source",
       "selected_evidence": [
-        {"observation_id": "aon:spell.break-enchantment:726fae5f", "source_field": "spell_raw.description_raw"},
-        {"observation_id": "legacy_aon:spell.break-enchantment:5a07829c", "source_field": "spell_raw.description_raw"}
+        {
+          "observation_id": "aon:spell.break-enchantment:726fae5f",
+          "source_field": "spell_raw.description_raw"
+        },
+        {
+          "observation_id": "legacy_aon:spell.break-enchantment:5a07829c",
+          "source_field": "spell_raw.description_raw"
+        }
       ],
-      "considered_observation_ids": ["aon:spell.break-enchantment:726fae5f", "legacy_aon:spell.break-enchantment:5a07829c", "d20pfsrd:spell.break-enchantment:93f3721d"],
+      "considered_observation_ids": [
+        "aon:spell.break-enchantment:726fae5f",
+        "legacy_aon:spell.break-enchantment:5a07829c",
+        "d20pfsrd:spell.break-enchantment:93f3721d"
+      ],
       "rationale": "AoN and Legacy independently include 'or stone to flesh'. d20PFSRD omits it, changing the explicit exception set. The higher-provenance corroborated wording is selected; the disagreement is not merged away."
     },
     {
       "canonical_path": "/publication",
       "decision": "normalize",
-      "selected_evidence": [{"observation_id": "aon:spell.break-enchantment:726fae5f", "source_field": "spell_raw.source_book_raw"}],
-      "considered_observation_ids": ["aon:spell.break-enchantment:726fae5f", "legacy_aon:spell.break-enchantment:5a07829c", "d20pfsrd:spell.break-enchantment:93f3721d"],
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.break-enchantment:726fae5f",
+          "source_field": "spell_raw.source_book_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.break-enchantment:726fae5f",
+        "legacy_aon:spell.break-enchantment:5a07829c",
+        "d20pfsrd:spell.break-enchantment:93f3721d"
+      ],
       "rationale": "AoN explicitly identifies the Core Rulebook, printed page 251, and PFS legality."
+    },
+    {
+      "canonical_path": "/levels/18",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.break-enchantment:726fae5f",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.break-enchantment:726fae5f"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
     }
   ],
   "relationship_decisions": [
-    {"relationship_id": "spell.break-enchantment:has_school:magic-school.abjuration", "decision": "accept", "evidence": [{"observation_id": "aon:spell.break-enchantment:726fae5f", "source_field": "spell_raw.links_raw[1]"}], "considered_observation_ids": ["aon:spell.break-enchantment:726fae5f", "legacy_aon:spell.break-enchantment:5a07829c", "d20pfsrd:spell.break-enchantment:93f3721d"], "rationale": "All base sources identify Abjuration."},
-    {"relationship_id": "spell.break-enchantment:published_in:publication.pathfinder-rpg-core-rulebook", "decision": "accept", "evidence": [{"observation_id": "aon:spell.break-enchantment:726fae5f", "source_field": "spell_raw.links_raw[0]"}], "considered_observation_ids": ["aon:spell.break-enchantment:726fae5f", "legacy_aon:spell.break-enchantment:5a07829c", "d20pfsrd:spell.break-enchantment:93f3721d"], "rationale": "AoN provides an explicit Core Rulebook citation."},
-    {"relationship_id": "spell.break-enchantment:has_mythic_variant:mythic-spell-variant.break-enchantment", "decision": "accept", "evidence": [{"observation_id": "aon:spell.break-enchantment:726fae5f", "source_field": "spell_raw.sections_raw[1].heading_raw"}, {"observation_id": "legacy_aon:spell.break-enchantment:b10b0986", "source_field": "spell_raw.sections_raw[0].heading_raw"}], "considered_observation_ids": ["aon:spell.break-enchantment:726fae5f", "legacy_aon:spell.break-enchantment:b10b0986", "d20pfsrd:spell.break-enchantment:93f3721d"], "rationale": "Three pages supply positive evidence for a separately identifiable mythic modification."},
-    {"relationship_id": "spell.break-enchantment:references:spell.dispel-magic", "decision": "accept", "evidence": [{"observation_id": "legacy_aon:spell.break-enchantment:5a07829c", "source_field": "spell_raw.links_raw[1]"}], "considered_observation_ids": ["aon:spell.break-enchantment:726fae5f", "legacy_aon:spell.break-enchantment:5a07829c", "d20pfsrd:spell.break-enchantment:93f3721d"], "rationale": "The spell is named by every base source."},
-    {"relationship_id": "spell.break-enchantment:references:spell.stone-to-flesh", "decision": "accept", "evidence": [{"observation_id": "aon:spell.break-enchantment:726fae5f", "source_field": "spell_raw.references_raw[1]"}, {"observation_id": "legacy_aon:spell.break-enchantment:5a07829c", "source_field": "spell_raw.references_raw[1]"}], "considered_observation_ids": ["aon:spell.break-enchantment:726fae5f", "legacy_aon:spell.break-enchantment:5a07829c", "d20pfsrd:spell.break-enchantment:93f3721d"], "rationale": "AoN and Legacy agree on the named spell; d20PFSRD's omission is recorded as a conflict."},
-    {"relationship_id": "spell.break-enchantment:uses_definition:rule.caster-level", "decision": "accept", "evidence": [{"observation_id": "d20pfsrd:spell.break-enchantment:93f3721d", "source_field": "spell_raw.links_raw[17]"}], "considered_observation_ids": ["aon:spell.break-enchantment:726fae5f", "legacy_aon:spell.break-enchantment:5a07829c", "d20pfsrd:spell.break-enchantment:93f3721d"], "rationale": "Caster-level checks are central to the base and mythic mechanics."},
-    {"relationship_id": "spell.break-enchantment:uses_definition:rule.curse", "decision": "accept", "evidence": [{"observation_id": "aon:spell.break-enchantment:726fae5f", "source_field": "spell_raw.description_raw"}], "considered_observation_ids": ["aon:spell.break-enchantment:726fae5f", "legacy_aon:spell.break-enchantment:5a07829c", "d20pfsrd:spell.break-enchantment:93f3721d"], "rationale": "Curse DCs and cursed-item behavior are explicit mechanics."},
-    {"relationship_id": "spell.break-enchantment:uses_definition:rule.spell-resistance", "decision": "accept", "evidence": [{"observation_id": "legacy_aon:spell.break-enchantment:5a07829c", "source_field": "spell_raw.links_raw[0]"}], "considered_observation_ids": ["aon:spell.break-enchantment:726fae5f", "legacy_aon:spell.break-enchantment:5a07829c", "d20pfsrd:spell.break-enchantment:93f3721d"], "rationale": "Legacy links the stat-block field to the general rule, and all sources agree that resistance does not apply."}
+    {
+      "relationship_id": "spell.break-enchantment:has_school:magic-school.abjuration",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.break-enchantment:726fae5f",
+          "source_field": "spell_raw.links_raw[1]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.break-enchantment:726fae5f",
+        "legacy_aon:spell.break-enchantment:5a07829c",
+        "d20pfsrd:spell.break-enchantment:93f3721d"
+      ],
+      "rationale": "All base sources identify Abjuration."
+    },
+    {
+      "relationship_id": "spell.break-enchantment:published_in:publication.pathfinder-rpg-core-rulebook",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.break-enchantment:726fae5f",
+          "source_field": "spell_raw.links_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.break-enchantment:726fae5f",
+        "legacy_aon:spell.break-enchantment:5a07829c",
+        "d20pfsrd:spell.break-enchantment:93f3721d"
+      ],
+      "rationale": "AoN provides an explicit Core Rulebook citation."
+    },
+    {
+      "relationship_id": "spell.break-enchantment:has_mythic_variant:mythic-spell-variant.break-enchantment",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.break-enchantment:726fae5f",
+          "source_field": "spell_raw.sections_raw[1].heading_raw"
+        },
+        {
+          "observation_id": "legacy_aon:spell.break-enchantment:b10b0986",
+          "source_field": "spell_raw.sections_raw[0].heading_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.break-enchantment:726fae5f",
+        "legacy_aon:spell.break-enchantment:b10b0986",
+        "d20pfsrd:spell.break-enchantment:93f3721d"
+      ],
+      "rationale": "Three pages supply positive evidence for a separately identifiable mythic modification."
+    },
+    {
+      "relationship_id": "spell.break-enchantment:references:spell.dispel-magic",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.break-enchantment:5a07829c",
+          "source_field": "spell_raw.links_raw[1]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.break-enchantment:726fae5f",
+        "legacy_aon:spell.break-enchantment:5a07829c",
+        "d20pfsrd:spell.break-enchantment:93f3721d"
+      ],
+      "rationale": "The spell is named by every base source."
+    },
+    {
+      "relationship_id": "spell.break-enchantment:references:spell.stone-to-flesh",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.break-enchantment:726fae5f",
+          "source_field": "spell_raw.references_raw[1]"
+        },
+        {
+          "observation_id": "legacy_aon:spell.break-enchantment:5a07829c",
+          "source_field": "spell_raw.references_raw[1]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.break-enchantment:726fae5f",
+        "legacy_aon:spell.break-enchantment:5a07829c",
+        "d20pfsrd:spell.break-enchantment:93f3721d"
+      ],
+      "rationale": "AoN and Legacy agree on the named spell; d20PFSRD's omission is recorded as a conflict."
+    },
+    {
+      "relationship_id": "spell.break-enchantment:uses_definition:rule.caster-level",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.break-enchantment:93f3721d",
+          "source_field": "spell_raw.links_raw[17]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.break-enchantment:726fae5f",
+        "legacy_aon:spell.break-enchantment:5a07829c",
+        "d20pfsrd:spell.break-enchantment:93f3721d"
+      ],
+      "rationale": "Caster-level checks are central to the base and mythic mechanics."
+    },
+    {
+      "relationship_id": "spell.break-enchantment:uses_definition:rule.curse",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.break-enchantment:726fae5f",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.break-enchantment:726fae5f",
+        "legacy_aon:spell.break-enchantment:5a07829c",
+        "d20pfsrd:spell.break-enchantment:93f3721d"
+      ],
+      "rationale": "Curse DCs and cursed-item behavior are explicit mechanics."
+    },
+    {
+      "relationship_id": "spell.break-enchantment:uses_definition:rule.spell-resistance",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.break-enchantment:5a07829c",
+          "source_field": "spell_raw.links_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.break-enchantment:726fae5f",
+        "legacy_aon:spell.break-enchantment:5a07829c",
+        "d20pfsrd:spell.break-enchantment:93f3721d"
+      ],
+      "rationale": "Legacy links the stat-block field to the general rule, and all sources agree that resistance does not apply."
+    },
+    {
+      "relationship_id": "spell.break-enchantment:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.break-enchantment:726fae5f",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.break-enchantment:726fae5f"
+      ],
+      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    }
   ],
-  "unresolved_questions": ["What reusable structure should represent one caster-level check for each removable effect?"]
+  "unresolved_questions": [
+    "What reusable structure should represent one caster-level check for each removable effect?"
+  ]
 }

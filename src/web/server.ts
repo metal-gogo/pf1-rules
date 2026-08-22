@@ -734,6 +734,7 @@ async function classSpellsPage(prisma: PrismaClient, classSlug: string): Promise
         spellLevel: true,
         listName: true,
         scope: true,
+        accessBasis: true,
         spell: {
           select: {
             spellId: true,
@@ -820,7 +821,7 @@ async function classSpellsPage(prisma: PrismaClient, classSlug: string): Promise
             );
             const searchText = `${spell.name} ${display.summary} ${qualifiedAccess ?? ""}`.toLocaleLowerCase();
             return `<tr data-school="${escapeHtml(spell.school)}" data-level="${level}" data-components="${escapeHtml(display.components.join(" "))}" data-search="${escapeHtml(searchText)}">
-              <th class="key-column" scope="row"><a class="spell-name" href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a>${spell.legacy35Material ? ' <span class="legacy-badge">Legacy 3.5</span>' : ""}${qualifiedAccess ? ` <span class="muted">(${escapeHtml(qualifiedAccess)})</span>` : ""}</th>
+              <th class="key-column" scope="row"><a class="spell-name" href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a>${spell.legacy35Material ? ' <span class="legacy-badge">Legacy 3.5</span>' : ""}${entry.accessBasis === "derived" ? ' <span class="muted">(derived access)</span>' : ""}${qualifiedAccess ? ` <span class="muted">(${escapeHtml(qualifiedAccess)})</span>` : ""}</th>
               <td class="school-column">${escapeHtml(school)}</td>
               <td class="components-column">${componentAbbreviations(display.components)}</td>
               <td><span class="spell-summary">${escapeHtml(display.summary)}</span></td>

@@ -116,6 +116,20 @@ describe("local rules browser", () => {
     expect(html).toContain("Wandering Star Motes");
   });
 
+  it("labels Omdura and other inherited memberships as derived access", async () => {
+    const classResponse = await fetch(`${baseUrl}/classes/omdura`);
+    const classHtml = await classResponse.text();
+    expect(classResponse.status).toBe(200);
+    expect(classHtml).toContain("<h1>Omdura spells</h1>");
+    expect(classHtml).toContain("(derived access)");
+
+    const spellResponse = await fetch(`${baseUrl}/spells/spell.mages-lucubration`);
+    const spellHtml = await spellResponse.text();
+    expect(spellResponse.status).toBe(200);
+    expect(spellHtml).toContain("Arcanist</a> 6");
+    expect(spellHtml).toContain("(derived access)");
+  });
+
   it("labels qualified class access without exposing a synthetic spell list", async () => {
     const classResponse = await fetch(`${baseUrl}/classes/oracle`);
     const classHtml = await classResponse.text();

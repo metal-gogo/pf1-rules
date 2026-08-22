@@ -47,6 +47,87 @@ describe("ingested spell catalog", () => {
     }));
   });
 
+  it("keeps inherited class access distinct from printed spell-page values", async () => {
+    const expectedDerivedCounts = {
+      "spell-list.arcanist": 5,
+      "spell-list.hunter": 7,
+      "spell-list.investigator": 7,
+      "spell-list.omdura": 1238,
+      "spell-list.oracle": 12,
+      "spell-list.skald": 19,
+      "spell-list.warpriest": 6,
+    } as const;
+
+    for (const [spellListId, count] of Object.entries(expectedDerivedCounts)) {
+      expect(await prisma.spellLevel.count({
+        where: { spellListId, accessBasis: "derived" },
+      })).toBe(count);
+    }
+
+    const omduraLevels = await prisma.spellLevel.groupBy({
+      by: ["spellLevel"],
+      where: { spellListId: "spell-list.omdura", accessBasis: "derived" },
+      _count: { _all: true },
+      orderBy: { spellLevel: "asc" },
+    });
+    expect(Object.fromEntries(omduraLevels.map((row) => [row.spellLevel, row._count._all])))
+      .toEqual({ 0: 26, 1: 212, 2: 283, 3: 257, 4: 211, 5: 132, 6: 117 });
+
+    const light = await prisma.spellLevel.findFirst({
+      where: { spellId: "spell.light", spellListId: "spell-list.omdura" },
+    });
+    expect(light).toEqual(expect.objectContaining({
+      spellLevel: 0,
+      scope: "core",
+      accessBasis: "derived",
+      raw: expect.stringContaining("Derived access"),
+    }));
+    expect(light?.derivation).toEqual(expect.objectContaining({
+      rule_owner_entity_id: "class.omdura",
+      rule_scope: "third_party",
+      source_url: "https://www.d20pfsrd.com/classes/base-classes/omdura/",
+    }));
+
+    const explicitExceptions = [
+      ["spell.waters-of-lamashtu", "spell-list.investigator", 3],
+      ["spell.alpha-instinct", "spell-list.skald", 2],
+      ["spell.mad-sultans-melody", "spell-list.skald", 4],
+      ["spell.curse-of-the-outcast", "spell-list.skald", 5],
+    ] as const;
+    for (const [spellId, spellListId, spellLevel] of explicitExceptions) {
+      expect(await prisma.spellLevel.findFirst({ where: { spellId, spellListId } }))
+        .toEqual(expect.objectContaining({ spellLevel, accessBasis: "printed" }));
+    }
+    expect(await prisma.spellLevel.findFirst({
+      where: { spellId: "spell.besmaras-grasping-depths", spellListId: "spell-list.warpriest" },
+    })).toEqual(expect.objectContaining({ spellLevel: 6, accessBasis: "derived" }));
+  });
+
+  it("registers NPC classes and the Adept spell-list owner", async () => {
+    const [npcClasses, relationship] = await Promise.all([
+      prisma.entity.findMany({
+        where: { type: "npc_class" },
+        select: { id: true },
+        orderBy: { id: "asc" },
+      }),
+      prisma.ruleRelationship.findUnique({
+        where: { id: "npc-class.adept:owns_spell_list:spell-list.adept" },
+      }),
+    ]);
+
+    expect(npcClasses.map((entity) => entity.id)).toEqual([
+      "npc-class.adept",
+      "npc-class.aristocrat",
+      "npc-class.commoner",
+      "npc-class.expert",
+      "npc-class.warrior",
+    ]);
+    expect(relationship).toEqual(expect.objectContaining({
+      relationshipType: "owns_spell_list",
+      targetEntityId: "spell-list.adept",
+    }));
+  });
+
   it("normalizes every AoN Red Mantis Assassin catalog membership", async () => {
     const [levels, compactLevels, catalogObservations] = await Promise.all([
       prisma.spellLevel.findMany({
@@ -86,9 +167,12 @@ describe("ingested spell catalog", () => {
       orderBy: { name: "asc" },
     });
     const levels = spells.flatMap((spell) => spell.levels);
+    const printedLevels = levels.filter((level) => level.accessBasis === "printed");
+    const derivedLevels = levels.filter((level) => level.accessBasis === "derived");
 
     expect(spells).toHaveLength(27);
-    expect(levels).toHaveLength(115);
+    expect(printedLevels).toHaveLength(115);
+    expect(derivedLevels).toHaveLength(12);
     expect(levels.every((level) => level.scope === "legacy_3_5")).toBe(true);
     expect(spells.map((spell) => spell.name)).toContain("Pattern Recognition");
     expect(spells.every((spell) => {

@@ -173,6 +173,33 @@
           "raw": "Half-Elf"
         }
       ]
+    },
+    {
+      "spell_list_id": "spell-list.omdura",
+      "list_kind": "class",
+      "list_name": "Omdura",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "Derived access from cleric 4 and inquisitor 4; effective level 4.",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "class.omdura",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.cleric",
+            "level": 4
+          },
+          {
+            "spell_list_id": "spell-list.inquisitor",
+            "level": 4
+          }
+        ],
+        "level_policy": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell.",
+        "source_url": "https://www.d20pfsrd.com/classes/base-classes/omdura/",
+        "note": "This is effective class access derived from the class rule, not a value printed on the spell page.",
+        "rule_scope": "third_party"
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -530,6 +557,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.probe-history:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.probe-history:1b1a582dd9756c00",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4 (Half-Elf)",
+          "source_href": null
+        },
+        {
+          "observation_id": "aon:spell.probe-history:1b1a582dd9756c00",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 4 (Half-Elf)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -585,6 +639,12 @@
   "normalization": {
     "status": "validated",
     "normalizer_version": "0.1.4-dependency-aliases",
-    "warnings": []
+    "warnings": [
+      {
+        "code": "DERIVED_SPELL_LIST_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Omdura 4 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      }
+    ]
   }
 }

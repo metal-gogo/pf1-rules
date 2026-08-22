@@ -93,6 +93,33 @@
       "level": 5,
       "scope": "later_first_party",
       "raw": "wizard 5"
+    },
+    {
+      "spell_list_id": "spell-list.omdura",
+      "list_kind": "class",
+      "list_name": "Omdura",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "Derived access from cleric 5 and inquisitor 5; effective level 5.",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "class.omdura",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.cleric",
+            "level": 5
+          },
+          {
+            "spell_list_id": "spell-list.inquisitor",
+            "level": 5
+          }
+        ],
+        "level_policy": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell.",
+        "source_url": "https://www.d20pfsrd.com/classes/base-classes/omdura/",
+        "note": "This is effective class access derived from the class rule, not a value printed on the spell page.",
+        "rule_scope": "third_party"
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -619,6 +646,40 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.suns-disdain-mass:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.suns-disdain-mass:7763a28c17091d6e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.suns-disdain-mass:b6f299c158f18f6b",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-inquisitor/"
+        },
+        {
+          "observation_id": "aon:spell.suns-disdain-mass:7763a28c17091d6e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -689,6 +750,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/casting/components_raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "DERIVED_SPELL_LIST_ACCESS",
+        "field_path": "/levels/10",
+        "message": "Omdura 5 access is derived from an explicit class rule; no printed spell-page value was inferred."
       }
     ]
   }

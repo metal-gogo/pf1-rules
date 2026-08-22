@@ -300,9 +300,10 @@
     "spellListDerivation": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["rule_owner_entity_id", "source_memberships", "level_policy", "source_url", "note"],
+      "required": ["rule_owner_entity_id", "rule_scope", "source_memberships", "level_policy", "source_url", "note"],
       "properties": {
         "rule_owner_entity_id": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*\\.[a-z0-9][a-z0-9.-]*$"},
+        "rule_scope": {"enum": ["core", "later_first_party", "legacy_3_5", "third_party", "unknown"]},
         "source_memberships": {
           "type": "array",
           "minItems": 1,

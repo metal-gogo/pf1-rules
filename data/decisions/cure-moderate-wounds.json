@@ -4,49 +4,170 @@
   "decision_id": "canonical-decision:spell.cure-moderate-wounds:v0.1",
   "entity_id": "spell.cure-moderate-wounds",
   "canonical_record_path": "../canonical/cure-moderate-wounds.json",
-  "observation_ids": ["aon:spell.cure-moderate-wounds:4e2b087b", "legacy_aon:spell.cure-moderate-wounds:d2e06126", "d20pfsrd:spell.cure-moderate-wounds:18b9086f"],
+  "observation_ids": [
+    "aon:spell.cure-moderate-wounds:4e2b087b",
+    "legacy_aon:spell.cure-moderate-wounds:d2e06126",
+    "d20pfsrd:spell.cure-moderate-wounds:18b9086f"
+  ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.cure-moderate-wounds:4e2b087b",
   "status": "accepted",
   "field_decisions": [
     {
-      "canonical_path": "/levels", "decision": "combine",
-      "selected_evidence": [{"observation_id": "aon:spell.cure-moderate-wounds:4e2b087b", "source_field": "spell_raw.levels_raw"}, {"observation_id": "d20pfsrd:spell.cure-moderate-wounds:18b9086f", "source_field": "spell_raw.domains_raw"}],
-      "considered_observation_ids": ["aon:spell.cure-moderate-wounds:4e2b087b", "legacy_aon:spell.cure-moderate-wounds:d2e06126", "d20pfsrd:spell.cure-moderate-wounds:18b9086f"],
+      "canonical_path": "/levels",
+      "decision": "combine",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.cure-moderate-wounds:4e2b087b",
+          "source_field": "spell_raw.levels_raw"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.cure-moderate-wounds:18b9086f",
+          "source_field": "spell_raw.domains_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-moderate-wounds:4e2b087b",
+        "legacy_aon:spell.cure-moderate-wounds:d2e06126",
+        "d20pfsrd:spell.cure-moderate-wounds:18b9086f"
+      ],
       "rationale": "AoN supplies the broad first-party class and formulae baseline. d20PFSRD's Healing domain 2 is retained as a separately typed, reviewable domain entry."
     },
     {
-      "canonical_path": "/rules_inheritance/0", "decision": "derived",
-      "selected_evidence": [{"observation_id": "aon:spell.cure-moderate-wounds:4e2b087b", "source_field": "spell_raw.description_raw"}, {"observation_id": "legacy_aon:spell.cure-moderate-wounds:d2e06126", "source_field": "spell_raw.links_raw[0]"}, {"observation_id": "d20pfsrd:spell.cure-moderate-wounds:18b9086f", "source_field": "spell_raw.links_raw[11]"}],
-      "considered_observation_ids": ["aon:spell.cure-moderate-wounds:4e2b087b", "legacy_aon:spell.cure-moderate-wounds:d2e06126", "d20pfsrd:spell.cure-moderate-wounds:18b9086f"],
+      "canonical_path": "/rules_inheritance/0",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.cure-moderate-wounds:4e2b087b",
+          "source_field": "spell_raw.description_raw"
+        },
+        {
+          "observation_id": "legacy_aon:spell.cure-moderate-wounds:d2e06126",
+          "source_field": "spell_raw.links_raw[0]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.cure-moderate-wounds:18b9086f",
+          "source_field": "spell_raw.links_raw[11]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-moderate-wounds:4e2b087b",
+        "legacy_aon:spell.cure-moderate-wounds:d2e06126",
+        "d20pfsrd:spell.cure-moderate-wounds:18b9086f"
+      ],
       "rationale": "Every source says the spell functions like Cure Light Wounds. AoN's repeated stat block corroborates the resolved casting and effect fields; the child overrides only the stated healing amount."
     },
     {
-      "canonical_path": "/description/raw", "decision": "select_source",
-      "selected_evidence": [{"observation_id": "aon:spell.cure-moderate-wounds:4e2b087b", "source_field": "spell_raw.description_raw"}],
-      "considered_observation_ids": ["aon:spell.cure-moderate-wounds:4e2b087b", "legacy_aon:spell.cure-moderate-wounds:d2e06126", "d20pfsrd:spell.cure-moderate-wounds:18b9086f"],
+      "canonical_path": "/description/raw",
+      "decision": "select_source",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.cure-moderate-wounds:4e2b087b",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-moderate-wounds:4e2b087b",
+        "legacy_aon:spell.cure-moderate-wounds:d2e06126",
+        "d20pfsrd:spell.cure-moderate-wounds:18b9086f"
+      ],
       "rationale": "The three descriptions agree. AoN wins by provenance, and the compact functions-like wording is preserved rather than silently expanded."
+    },
+    {
+      "canonical_path": "/levels/18",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.cure-moderate-wounds:4e2b087b",
+          "source_field": "spell_raw.levels_raw"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.cure-moderate-wounds:18b9086f",
+          "source_field": "spell_raw.domains_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-moderate-wounds:4e2b087b",
+        "d20pfsrd:spell.cure-moderate-wounds:18b9086f"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
     }
   ],
   "relationship_decisions": [
     {
-      "relationship_id": "spell.cure-moderate-wounds:functions_like:spell.cure-light-wounds", "decision": "accept",
-      "evidence": [{"observation_id": "legacy_aon:spell.cure-moderate-wounds:d2e06126", "source_field": "spell_raw.links_raw[0]"}, {"observation_id": "d20pfsrd:spell.cure-moderate-wounds:18b9086f", "source_field": "spell_raw.links_raw[11]"}],
-      "considered_observation_ids": ["aon:spell.cure-moderate-wounds:4e2b087b", "legacy_aon:spell.cure-moderate-wounds:d2e06126", "d20pfsrd:spell.cure-moderate-wounds:18b9086f"],
+      "relationship_id": "spell.cure-moderate-wounds:functions_like:spell.cure-light-wounds",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.cure-moderate-wounds:d2e06126",
+          "source_field": "spell_raw.links_raw[0]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.cure-moderate-wounds:18b9086f",
+          "source_field": "spell_raw.links_raw[11]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-moderate-wounds:4e2b087b",
+        "legacy_aon:spell.cure-moderate-wounds:d2e06126",
+        "d20pfsrd:spell.cure-moderate-wounds:18b9086f"
+      ],
       "rationale": "This explicit parent relationship powers rule resolution and preserves both source links."
     },
     {
-      "relationship_id": "spell.cure-moderate-wounds:counterpart_of:spell.inflict-moderate-wounds", "decision": "accept",
-      "evidence": [{"observation_id": "aon:spell.cure-moderate-wounds:4e2b087b", "source_field": "spell_raw.description_raw"}],
-      "considered_observation_ids": ["aon:spell.cure-moderate-wounds:4e2b087b", "legacy_aon:spell.cure-moderate-wounds:d2e06126", "d20pfsrd:spell.cure-moderate-wounds:18b9086f"],
+      "relationship_id": "spell.cure-moderate-wounds:counterpart_of:spell.inflict-moderate-wounds",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cure-moderate-wounds:4e2b087b",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-moderate-wounds:4e2b087b",
+        "legacy_aon:spell.cure-moderate-wounds:d2e06126",
+        "d20pfsrd:spell.cure-moderate-wounds:18b9086f"
+      ],
       "rationale": "The paired name, rank, amount, and inverse energy behavior make it useful for comparison. It does not grant inherited mechanics."
     },
     {
-      "relationship_id": "spell.cure-moderate-wounds:has_mythic_variant:mythic-spell-variant.cure-moderate-wounds", "decision": "accept",
-      "evidence": [{"observation_id": "aon:spell.cure-moderate-wounds:4e2b087b", "source_field": "spell_raw.sections_raw[1].heading_raw"}],
-      "considered_observation_ids": ["aon:spell.cure-moderate-wounds:4e2b087b", "legacy_aon:spell.cure-moderate-wounds:d2e06126", "d20pfsrd:spell.cure-moderate-wounds:18b9086f"],
+      "relationship_id": "spell.cure-moderate-wounds:has_mythic_variant:mythic-spell-variant.cure-moderate-wounds",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cure-moderate-wounds:4e2b087b",
+          "source_field": "spell_raw.sections_raw[1].heading_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-moderate-wounds:4e2b087b",
+        "legacy_aon:spell.cure-moderate-wounds:d2e06126",
+        "d20pfsrd:spell.cure-moderate-wounds:18b9086f"
+      ],
       "rationale": "The explicitly named mythic subsection is now a separately identified spell variant. Its rules and publication no longer belong to the base spell record."
+    },
+    {
+      "relationship_id": "spell.cure-moderate-wounds:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cure-moderate-wounds:4e2b087b",
+          "source_field": "spell_raw.levels_raw"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.cure-moderate-wounds:18b9086f",
+          "source_field": "spell_raw.domains_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-moderate-wounds:4e2b087b",
+        "d20pfsrd:spell.cure-moderate-wounds:18b9086f"
+      ],
+      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
     }
   ],
-  "unresolved_questions": ["Which first-party domain source should independently confirm Healing domain 2 access?", "What reusable conditional effect shape should encode healing living creatures and damaging undead?"]
+  "unresolved_questions": [
+    "Which first-party domain source should independently confirm Healing domain 2 access?",
+    "What reusable conditional effect shape should encode healing living creatures and damaging undead?"
+  ]
 }

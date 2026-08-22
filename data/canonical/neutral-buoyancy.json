@@ -91,6 +91,29 @@
       "level": 2,
       "scope": "later_first_party",
       "raw": "shaman 2"
+    },
+    {
+      "spell_list_id": "spell-list.skald",
+      "list_kind": "class",
+      "list_name": "Skald",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "Derived access from bard 2; effective level 2.",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "class.skald",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.bard",
+            "level": 2
+          }
+        ],
+        "level_policy": "Use the Bard spell list through level 6 at the same spell level; retain separately printed Skald spells.",
+        "source_url": "https://legacy.aonprd.com/advancedClassGuide/classes/skald.html",
+        "note": "This is effective class access derived from the class rule, not a value printed on the spell page.",
+        "rule_scope": "later_first_party"
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -685,6 +708,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.neutral-buoyancy:appears_on_spell_list:spell-list.skald",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.skald",
+        "name": "Skald Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.neutral-buoyancy:bc740e138100c3f2",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "bard",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/bard"
+        },
+        {
+          "observation_id": "aon:spell.neutral-buoyancy:86dfe93007b34c16",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "bard 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use the Bard spell list through level 6 at the same spell level; retain separately printed Skald spells. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -740,6 +790,12 @@
   "normalization": {
     "status": "validated",
     "normalizer_version": "0.1.1-level-zero-bulk",
-    "warnings": []
+    "warnings": [
+      {
+        "code": "DERIVED_SPELL_LIST_ACCESS",
+        "field_path": "/levels/10",
+        "message": "Skald 2 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      }
+    ]
   }
 }

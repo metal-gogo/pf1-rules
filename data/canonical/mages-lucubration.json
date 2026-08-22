@@ -19,6 +19,29 @@
       "level": 6,
       "scope": "core",
       "raw": "wizard 6"
+    },
+    {
+      "spell_list_id": "spell-list.arcanist",
+      "list_kind": "class",
+      "list_name": "Arcanist",
+      "level": 6,
+      "scope": "core",
+      "raw": "Derived access from wizard 6; effective level 6.",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "class.arcanist",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.wizard",
+            "level": 6
+          }
+        ],
+        "level_policy": "Use the Sorcerer/Wizard spell list; use the lower level if the source lists differ.",
+        "source_url": "https://legacy.aonprd.com/advancedClassGuide/classes/arcanist.html",
+        "note": "This is effective class access derived from the class rule, not a value printed on the spell page.",
+        "rule_scope": "later_first_party"
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -271,6 +294,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.mages-lucubration:appears_on_spell_list:spell-list.arcanist",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.arcanist",
+        "name": "Arcanist Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.mages-lucubration:824ac7d62e782db2",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "wizard",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard"
+        },
+        {
+          "observation_id": "aon:spell.mages-lucubration:c41eda97e8aa8810",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "wizard 6",
+          "source_href": null
+        }
+      ],
+      "note": "Use the Sorcerer/Wizard spell list; use the lower level if the source lists differ. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -326,6 +376,12 @@
   "normalization": {
     "status": "validated",
     "normalizer_version": "0.1.1-level-zero-bulk",
-    "warnings": []
+    "warnings": [
+      {
+        "code": "DERIVED_SPELL_LIST_ACCESS",
+        "field_path": "/levels/1",
+        "message": "Arcanist 6 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      }
+    ]
   }
 }
