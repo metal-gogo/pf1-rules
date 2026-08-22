@@ -1528,6 +1528,100 @@ export async function reconcileRedMantisCatalogMemberships() {
 }
 
 
+export async function reconcileSahirAfiyunOwnership() {
+  const legacySpellListId = "spell-list.sahirafiyun";
+  const spellListId = "spell-list.sahir-afiyun";
+  const summary = { spellListId, reclassified: 0, registriesUpdated: 0 };
+
+  for (const canonicalPath of directJsonFiles(path.join(projectRoot, "data", "canonical"))) {
+    const canonical = loadJson(canonicalPath);
+    const level = canonical.levels.find(
+      (entry: ValidatedJson) =>
+        entry.spell_list_id === legacySpellListId || entry.spell_list_id === spellListId,
+    );
+    if (!level) continue;
+
+    if (level.list_kind !== "class" && level.list_kind !== "feat") {
+      throw new Error(
+        `${canonical.spell_id} has unexpected Sahir-Afiyun list kind ${level.list_kind}.`,
+      );
+    }
+    level.spell_list_id = spellListId;
+    level.list_kind = "feat";
+    level.list_name = "Sahir-Afiyun";
+
+    const relationship = canonical.relationships.find(
+      (entry: ValidatedJson) =>
+        entry.type === "appears_on_spell_list" &&
+        (entry.target?.entity_id === legacySpellListId ||
+          entry.target?.entity_id === spellListId),
+    );
+    if (!relationship) {
+      throw new Error(`${canonical.spell_id} lacks its Sahir-Afiyun list relationship.`);
+    }
+    relationship.relationship_id =
+      `${canonical.spell_id}:appears_on_spell_list:${spellListId}`;
+    relationship.target.entity_id = spellListId;
+    relationship.target.name = "Sahir-Afiyun spell choices";
+    relationship.note =
+      "AoN prints this level under Sahirafiyun. The Sahir-Afiyun feat grants " +
+      "selectable access to the spell; this is not a class spell-list membership.";
+    writeGeneratedJson(canonicalPath, canonical, true);
+
+    const decisionPath = path.join(
+      projectRoot,
+      "data",
+      "decisions",
+      `${canonical.spell_id.replace(/^spell\./, "")}.json`,
+    );
+    const decision = loadJson(decisionPath);
+    const relationshipDecision = decision.relationship_decisions.find(
+      (entry: ValidatedJson) =>
+        entry.relationship_id ===
+          `${canonical.spell_id}:appears_on_spell_list:${legacySpellListId}` ||
+        entry.relationship_id ===
+          `${canonical.spell_id}:appears_on_spell_list:${spellListId}`,
+    );
+    if (!relationshipDecision) {
+      throw new Error(`${canonical.spell_id} lacks its Sahir-Afiyun relationship decision.`);
+    }
+    relationshipDecision.relationship_id =
+      `${canonical.spell_id}:appears_on_spell_list:${spellListId}`;
+    relationshipDecision.rationale =
+      "AoN prints the named level. Sahir-Afiyun is a feat-owned selectable spell set, " +
+      "not a class, so the level remains canonical with list kind feat.";
+    writeGeneratedJson(decisionPath, decision, true);
+    summary.reclassified += 1;
+  }
+
+  for (const registryPath of directJsonFiles(path.join(projectRoot, "data", "entities"))) {
+    const registry = loadJson(registryPath);
+    const entity = registry.entities.find(
+      (entry: ValidatedJson) =>
+        entry.entity_id === legacySpellListId || entry.entity_id === spellListId,
+    );
+    if (!entity) continue;
+    entity.entity_id = spellListId;
+    entity.name = "Sahir-Afiyun spell choices";
+    const note = "This level-bearing list is owned by the Sahir-Afiyun feat, not a class.";
+    if (!entity.notes.includes(note)) entity.notes.push(note);
+    writeGeneratedJson(registryPath, registry, true);
+    summary.registriesUpdated += 1;
+  }
+
+  if (summary.reclassified !== 17) {
+    throw new Error(`Expected 17 Sahir-Afiyun spells, reclassified ${summary.reclassified}.`);
+  }
+  if (summary.registriesUpdated !== 1) {
+    throw new Error(
+      `Expected one Sahir-Afiyun spell-list registry, updated ${summary.registriesUpdated}.`,
+    );
+  }
+  validatePackage();
+  return summary;
+}
+
+
 export async function ingestDiscoveredDependencies() {
   let availableCanonicalSpells = new Map(
     directJsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) => {
@@ -1721,6 +1815,8 @@ const run = command === "retry-d20"
   ? ingestLegacy35ScopeEntries()
   : command === "reconcile-red-mantis"
   ? reconcileRedMantisCatalogMemberships()
+  : command === "reconcile-sahir-afiyun"
+  ? reconcileSahirAfiyunOwnership()
   : command === "all-spells-completeness"
   ? ingestAllSpellsCompletenessIdentities()
   : command === "dependencies"

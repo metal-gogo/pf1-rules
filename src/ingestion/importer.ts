@@ -326,6 +326,21 @@ async function insertEntityEvidence(tx: Prisma.TransactionClient): Promise<numbe
 }
 
 
+async function insertEntityRelationships(tx: Prisma.TransactionClient): Promise<number> {
+  let count = 0;
+  for (const filename of jsonFiles(path.join(projectRoot, "data", "entities"))) {
+    const registry = loadJson(filename);
+    for (const entity of registry.entities) {
+      for (const relationship of entity.relationships ?? []) {
+        await insertRelationship(tx, entity.entity_id, "registry_entity", relationship);
+        count += 1;
+      }
+    }
+  }
+  return count;
+}
+
+
 async function insertCoverage(tx: Prisma.TransactionClient): Promise<number> {
   let count = 0;
   for (const filename of jsonFiles(path.join(projectRoot, "data", "coverage"))) {
@@ -779,6 +794,7 @@ export async function importPackage(prisma: PrismaClient): Promise<ImportStatist
       const spellSummaries = await insertSpellSummaryObservations(tx);
       const observations = await insertObservations(tx);
       const entityEvidence = await insertEntityEvidence(tx);
+      await insertEntityRelationships(tx);
       const coverageChecks = await insertCoverage(tx);
       const canonicalSpellResult = await insertCanonicalSpells(tx, spellSummaries.selected);
       const mythicSpellVariants = await insertVariants(tx);

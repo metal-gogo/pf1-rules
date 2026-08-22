@@ -19,6 +19,34 @@ beforeAll(async () => {
 });
 
 describe("ingested spell catalog", () => {
+  it("models Sahir-Afiyun as feat-granted access rather than a class", async () => {
+    const [levels, legacyLevels, relationship] = await Promise.all([
+      prisma.spellLevel.findMany({
+        where: { spellListId: "spell-list.sahir-afiyun" },
+        select: { listKind: true },
+      }),
+      prisma.spellLevel.count({
+        where: { spellListId: "spell-list.sahirafiyun" },
+      }),
+      prisma.ruleRelationship.findUnique({
+        where: {
+          id: "feat.sahir-afiyun:grants_spell_access:spell-list.sahir-afiyun",
+        },
+      }),
+    ]);
+
+    expect(levels).toHaveLength(17);
+    expect(levels.every((level) => level.listKind === "feat")).toBe(true);
+    expect(legacyLevels).toBe(0);
+    expect(relationship).toEqual(expect.objectContaining({
+      ownerEntityId: "feat.sahir-afiyun",
+      ownerKind: "registry_entity",
+      relationshipType: "grants_spell_access",
+      targetEntityId: "spell-list.sahir-afiyun",
+      status: "accepted",
+    }));
+  });
+
   it("normalizes every AoN Red Mantis Assassin catalog membership", async () => {
     const [levels, compactLevels, catalogObservations] = await Promise.all([
       prisma.spellLevel.findMany({
@@ -59,7 +87,7 @@ describe("ingested spell catalog", () => {
     });
     const levels = spells.flatMap((spell) => spell.levels);
 
-    expect(spells).toHaveLength(23);
+    expect(spells).toHaveLength(27);
     expect(levels).toHaveLength(115);
     expect(levels.every((level) => level.scope === "legacy_3_5")).toBe(true);
     expect(spells.map((spell) => spell.name)).toContain("Pattern Recognition");

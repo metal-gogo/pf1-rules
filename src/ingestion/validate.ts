@@ -348,6 +348,25 @@ export function validatePackage(): PackageStatistics {
     }
   }
 
+  for (const filename of registryPaths) {
+    const registry = loadJson(filename);
+    for (const entity of registry.entities) {
+      for (const relationship of entity.relationships ?? []) {
+        const targetId = relationship.target.entity_id;
+        if (targetId && !registeredIds.has(targetId)) {
+          throw new Error(`${entity.entity_id} references unregistered entity ${targetId}`);
+        }
+        for (const evidence of relationship.evidence) {
+          if (!observations.has(evidence.observation_id)) {
+            throw new Error(
+              `${relationship.relationship_id} uses unknown observation ${evidence.observation_id}`,
+            );
+          }
+        }
+      }
+    }
+  }
+
   for (const [observationId, observation] of observations) {
     const raw = observation.spell_raw ?? observation.entity_raw;
     for (const link of raw.links_raw ?? []) {

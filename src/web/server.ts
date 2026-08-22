@@ -427,6 +427,12 @@ function listHref(id: string): string {
   return `/lists/${encodeURIComponent(id)}`;
 }
 
+function relatedEntityHref(type: string, id: string): string {
+  if (type === "spell") return spellHref(id);
+  if (type === "spell_list") return listHref(id);
+  return entityHref(id);
+}
+
 function classHref(id: string): string {
   const prefix = "spell-list.";
   const slug = id.startsWith(prefix) ? id.slice(prefix.length) : id;
@@ -992,21 +998,34 @@ async function entityPage(prisma: PrismaClient, entityId: string): Promise<strin
         <dt>Aliases</dt><dd>${aliases.length ? aliases.map(escapeHtml).join(", ") : "None recorded"}</dd>
       </dl>
       ${primaryDefinition ? `<section><h2>Definition</h2>${paragraphs(primaryDefinition.descriptionRaw)}<p class="muted">Source wording from <a href="${href(sourceHref(primaryDefinition.id))}">${escapeHtml(primaryDefinition.siteId)}</a>, retrieved ${escapeHtml(primaryDefinition.retrievedAt.toISOString().slice(0, 10))}.</p></section>` : ""}
-      <section><h2>Related entities</h2>${outgoing.length ? `<ul>${outgoing.map((relationship) => `<li>${escapeHtml(humanize(relationship.relationshipType))}: ${relationship.targetEntityId ? `<a href="${href(entityHref(relationship.targetEntityId))}">${escapeHtml(relationship.targetName)}</a>` : escapeHtml(relationship.targetName)}</li>`).join("")}</ul>` : "<p>No outgoing relationships.</p>"}</section>
+      <section><h2>Related entities</h2>${outgoing.length ? `<ul>${outgoing.map((relationship) => `<li>${escapeHtml(humanize(relationship.relationshipType))}: ${relationship.targetEntityId ? `<a href="${href(relatedEntityHref(relationship.targetEntityType, relationship.targetEntityId))}">${escapeHtml(relationship.targetName)}</a>` : escapeHtml(relationship.targetName)}</li>`).join("")}</ul>` : "<p>No outgoing relationships.</p>"}</section>
       <section><h2>Referenced by</h2>${incoming.length ? `<ul>${incoming.map((relationship) => { const owner = ownerById.get(relationship.ownerEntityId); return `<li><a href="${href(owner?.type === "spell" ? spellHref(relationship.ownerEntityId) : entityHref(relationship.ownerEntityId))}">${escapeHtml(owner?.name ?? relationship.ownerEntityId)}</a> — ${escapeHtml(humanize(relationship.relationshipType))}</li>`; }).join("")}</ul>` : "<p>No incoming relationships.</p>"}</section>
       <section><h2>Source observations</h2>${observations.length ? `<ul>${observations.map((observation) => `<li><a href="${href(sourceHref(observation.id))}">${escapeHtml(observation.siteId)}: ${escapeHtml(observation.pageTitleRaw ?? entity.name)}</a></li>`).join("")}</ul>` : "<p>No observations recorded.</p>"}</section>
     </article>`);
 }
 
 async function spellListPage(prisma: PrismaClient, listId: string): Promise<string | null> {
-  const [entity, entries] = await Promise.all([
+  const [entity, entries, ownerRelationships] = await Promise.all([
     prisma.entity.findUnique({ where: { id: listId }, select: { id: true, name: true, type: true, status: true } }),
     spellsForList(prisma, listId),
+    prisma.ruleRelationship.findMany({
+      where: {
+        targetEntityId: listId,
+        relationshipType: { in: ["owns_spell_list", "grants_spell_access", "inherits_spell_list"] },
+      },
+      orderBy: { ownerEntityId: "asc" },
+    }),
   ]);
   if (!entity) return null;
+  const owners = await prisma.entity.findMany({
+    where: { id: { in: ownerRelationships.map((relationship) => relationship.ownerEntityId) } },
+    select: { id: true, name: true, type: true },
+  });
+  const ownerById = new Map(owners.map((owner) => [owner.id, owner]));
   return page(entity.name, `<nav aria-label="Breadcrumb"><ol><li><a href="/entities?type=spell_list">Spell lists</a></li><li aria-current="page">${escapeHtml(entity.name)}</li></ol></nav>
     <h1>${escapeHtml(entity.name)}</h1>
     <p><code>${escapeHtml(entity.id)}</code></p>
+    ${ownerRelationships.length ? `<section><h2>Access owners</h2><ul>${ownerRelationships.map((relationship) => { const owner = ownerById.get(relationship.ownerEntityId); return `<li><a href="${href(relatedEntityHref(owner?.type ?? "unknown", relationship.ownerEntityId))}">${escapeHtml(owner?.name ?? relationship.ownerEntityId)}</a> — ${escapeHtml(humanize(relationship.relationshipType))}</li>`; }).join("")}</ul></section>` : ""}
     ${entries.length ? `<table><caption>Ingested spells on this list</caption><thead><tr><th scope="col">Level</th><th scope="col">Spell</th><th scope="col">Scope</th></tr></thead><tbody>${entries.map((entry) => `<tr><td>${entry.spellLevel}</td><th scope="row"><a href="${href(spellHref(entry.spellId))}">${escapeHtml(entry.spell.name)}</a></th><td>${escapeHtml(humanize(entry.scope))}</td></tr>`).join("")}</tbody></table>` : "<p>No ingested spells are attached to this list.</p>"}
     <p><a href="${href(entityHref(entity.id))}">View the underlying entity record</a></p>`);
 }

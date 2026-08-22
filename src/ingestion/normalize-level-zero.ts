@@ -216,13 +216,15 @@ export function parseLevels(raw: string | null, publicationBook: string | null) 
         const printedListName = combinedListName.trim().toLocaleLowerCase("en-US");
         const listName = printedListName === "redmantisassassin"
           ? "red mantis assassin"
+          : printedListName === "sahirafiyun"
+          ? "Sahir-Afiyun"
           : printedListName;
         const entryRaw = groupQualification
           ? `${trimmed} (${groupQualification[1]})`
           : trimmed;
         return {
           spell_list_id: `spell-list.${slug(listName)}`,
-          list_kind: "class",
+          list_kind: printedListName === "sahirafiyun" ? "feat" : "class",
           list_name: listName,
           level: Number(match[2]),
           scope: coreBook && coreLists.has(listName) ? "core" : "later_first_party",

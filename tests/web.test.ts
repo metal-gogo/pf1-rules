@@ -39,7 +39,24 @@ describe("local rules browser", () => {
     expect(html).toContain("<h1>Spells by class</h1>");
     expect(html.match(/href="\/classes\/cleric"/g)).toHaveLength(1);
     expect(html).toContain('/classes/wizard');
+    expect(html).not.toContain('/classes/sahir-afiyun');
     expect(html).toContain('/spells/alphabetical');
+  });
+
+  it("links the Sahir-Afiyun feat to its selectable spell set", async () => {
+    const featResponse = await fetch(`${baseUrl}/entities/feat.sahir-afiyun`);
+    const featHtml = await featResponse.text();
+    expect(featResponse.status).toBe(200);
+    expect(featHtml).toContain("<h1>Sahir-Afiyun</h1>");
+    expect(featHtml).toContain('/lists/spell-list.sahir-afiyun');
+    expect(featHtml).toContain("Grants Spell Access");
+
+    const listResponse = await fetch(`${baseUrl}/lists/spell-list.sahir-afiyun`);
+    const listHtml = await listResponse.text();
+    expect(listResponse.status).toBe(200);
+    expect(listHtml).toContain("<h2>Access owners</h2>");
+    expect(listHtml).toContain('/entities/feat.sahir-afiyun');
+    expect(listHtml).toContain("Absorbing Inhalation");
   });
 
   it("groups a class's spells into detailed tables by level", async () => {

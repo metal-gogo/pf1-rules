@@ -22,7 +22,7 @@
       "required": ["entity_id", "entity_type", "name", "status", "aliases", "evidence", "notes"],
       "properties": {
         "entity_id": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*\\.[a-z0-9][a-z0-9.-]*$"},
-        "entity_type": {"enum": ["spell", "mythic_spell_variant", "spell_family", "rule", "condition", "feat", "class_feature", "deity", "mystery", "archetype", "monster", "item", "magic_school", "subschool", "descriptor", "spell_list", "action", "publication", "visual_aid", "unknown"]},
+        "entity_type": {"enum": ["spell", "mythic_spell_variant", "spell_family", "rule", "condition", "feat", "class", "npc_class", "class_feature", "deity", "domain", "subdomain", "mystery", "bloodline", "patron", "spirit", "archetype", "monster", "item", "magic_school", "subschool", "descriptor", "spell_list", "action", "publication", "visual_aid", "unknown"]},
         "name": {"type": "string", "minLength": 1},
         "status": {"enum": ["stub", "resolved"]},
         "aliases": {
@@ -47,7 +47,49 @@
         "notes": {
           "type": "array",
           "items": {"type": "string"}
+        },
+        "relationships": {
+          "type": "array",
+          "description": "Canonical semantic edges owned by this registry entity.",
+          "items": {"$ref": "#/$defs/relationship"}
         }
+      }
+    },
+    "relationship": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["relationship_id", "type", "target", "status", "evidence", "note"],
+      "properties": {
+        "relationship_id": {"type": "string", "pattern": "^[a-z0-9.-]+:[a-z_]+:[a-z0-9.-]+$"},
+        "type": {"enum": ["owns_spell_list", "grants_spell_access", "inherits_spell_list", "references", "unknown"]},
+        "target": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["entity_type", "entity_id", "name"],
+          "properties": {
+            "entity_type": {"enum": ["spell", "mythic_spell_variant", "spell_family", "rule", "condition", "feat", "class", "npc_class", "class_feature", "deity", "domain", "subdomain", "mystery", "bloodline", "patron", "spirit", "archetype", "monster", "item", "magic_school", "subschool", "descriptor", "spell_list", "action", "publication", "visual_aid", "unknown"]},
+            "entity_id": {"type": ["string", "null"]},
+            "name": {"type": "string", "minLength": 1}
+          }
+        },
+        "status": {"enum": ["accepted", "pending_review", "rejected"]},
+        "evidence": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["observation_id", "source_field", "evidence_kind", "anchor_text_raw", "source_href"],
+            "properties": {
+              "observation_id": {"type": "string"},
+              "source_field": {"type": "string"},
+              "evidence_kind": {"enum": ["hyperlink", "plain_text", "manual_verification"]},
+              "anchor_text_raw": {"type": ["string", "null"]},
+              "source_href": {"type": ["string", "null"]}
+            }
+          }
+        },
+        "note": {"type": ["string", "null"]}
       }
     }
   }
