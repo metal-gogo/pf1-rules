@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.cure-moderate-wounds:4e2b087b",
     "legacy_aon:spell.cure-moderate-wounds:d2e06126",
-    "d20pfsrd:spell.cure-moderate-wounds:18b9086f"
+    "d20pfsrd:spell.cure-moderate-wounds:18b9086f",
+    "aon:bloodline.sorcerer.unicorn:71ed1006"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.cure-moderate-wounds:4e2b087b",
@@ -91,6 +92,20 @@
         "d20pfsrd:spell.cure-moderate-wounds:18b9086f"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/19",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.unicorn:71ed1006",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.unicorn:71ed1006"
+      ],
+      "rationale": "AoN clearly transcribes the owning sorcerer bloodline's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -164,6 +179,20 @@
         "d20pfsrd:spell.cure-moderate-wounds:18b9086f"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.cure-moderate-wounds:appears_on_spell_list:spell-list.sorcerer-unicorn-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.unicorn:71ed1006",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.unicorn:71ed1006"
+      ],
+      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
     }
   ],
   "unresolved_questions": [

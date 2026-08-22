@@ -99,6 +99,16 @@
       "level": 3,
       "scope": "core",
       "raw": "wizard 3"
+    },
+    {
+      "spell_list_id": "spell-list.bloodrager-vestige-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Bloodrager Vestige Bloodline",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "phantom steed (13th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -748,6 +758,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.phantom-steed:appears_on_spell_list:spell-list.bloodrager-vestige-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.bloodrager-vestige-bloodline",
+        "name": "Bloodrager Vestige Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.bloodrager.vestige:11505921",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "phantom steed (13th)",
+          "source_href": "https://www.aonprd.com/BloodragerBloodlineDisplay.aspx?ItemName=Vestige"
+        }
+      ],
+      "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
     }
   ],
   "provenance": [
@@ -798,6 +828,14 @@
       "raw_value_sha256": "b9e6300acc8803e3b43c4fdaba7a5d357a86f467deadd64304bea352ef636eaf",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/11",
+      "observation_id": "aon:bloodline.bloodrager.vestige:11505921",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "4ea55b17ae1980479f05eb984c23565c59858f292d5fbced5ba1647d0b9777f9",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -823,6 +861,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/11",
+        "message": "Bloodrager Vestige Bloodline grants Phantom Steed as a level 3 spell; this is not general Bloodrager class access."
       }
     ]
   }

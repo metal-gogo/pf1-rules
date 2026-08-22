@@ -156,6 +156,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.bloodrager-hag-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Bloodrager Hag Bloodline",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "blindness/deafness (10th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1005,6 +1015,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.blindness-deafness:appears_on_spell_list:spell-list.bloodrager-hag-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.bloodrager-hag-bloodline",
+        "name": "Bloodrager Hag Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.bloodrager.hag:8981221d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "blindness/deafness (10th)",
+          "source_href": "https://www.aonprd.com/BloodragerBloodlineDisplay.aspx?ItemName=Hag"
+        }
+      ],
+      "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
     }
   ],
   "provenance": [
@@ -1055,6 +1085,14 @@
       "raw_value_sha256": "8ad5847a7d0b60b76e1b6bc8b89e7dfa507505cf0837c16f63c5c82d06ec18ac",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/16",
+      "observation_id": "aon:bloodline.bloodrager.hag:8981221d",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "61bdfb60569f135ab39a1428ce1fc8769d006240315b22cd138364f9d4110787",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1090,6 +1128,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/15",
         "message": "Omdura 3 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/16",
+        "message": "Bloodrager Hag Bloodline grants Blindness/Deafness as a level 2 spell; this is not general Bloodrager class access."
       }
     ]
   }

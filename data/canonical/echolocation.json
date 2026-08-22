@@ -101,6 +101,16 @@
       "level": 5,
       "scope": "later_first_party",
       "raw": "wizard 5"
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer-nanite-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Sorcerer Nanite Bloodline",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "echolocation (11th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -709,6 +719,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.echolocation:appears_on_spell_list:spell-list.sorcerer-nanite-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-nanite-bloodline",
+        "name": "Sorcerer Nanite Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.nanite:8df03b2c",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "echolocation (11th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Nanite"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     }
   ],
   "provenance": [
@@ -759,6 +789,14 @@
       "raw_value_sha256": "c08c8fddb0b82ab2eaef3b856a62dfdc46790ff49c63951b6011908fea11df9b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/11",
+      "observation_id": "aon:bloodline.sorcerer.nanite:8df03b2c",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "6198b1f3fb1cc2c54211272a425c3b1c6d81e839c06ed0f5fb3c81ae338bd64f",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -774,6 +812,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/11",
+        "message": "Sorcerer Nanite Bloodline grants Echolocation as a level 5 spell; this is not general Sorcerer class access."
       }
     ]
   }

@@ -475,6 +475,41 @@ describe("ingested spell catalog", () => {
     }));
   });
 
+  it("keeps Sorcerer and Bloodrager bloodline lists distinct", async () => {
+    const [bloodlines, sorcererRows, bloodragerRows, legacyRows, sorcererArcane, bloodragerArcane] =
+      await Promise.all([
+        prisma.entity.count({ where: { type: "bloodline", status: "resolved" } }),
+        prisma.spellLevel.findMany({
+          where: { listKind: "bloodline", spellListId: { startsWith: "spell-list.sorcerer-" } },
+        }),
+        prisma.spellLevel.findMany({
+          where: { listKind: "bloodline", spellListId: { startsWith: "spell-list.bloodrager-" } },
+        }),
+        prisma.spellLevel.count({
+          where: {
+            listKind: "bloodline",
+            NOT: [
+              { spellListId: { startsWith: "spell-list.sorcerer-" } },
+              { spellListId: { startsWith: "spell-list.bloodrager-" } },
+            ],
+          },
+        }),
+        prisma.spellLevel.findFirst({
+          where: { spellId: "spell.wish", spellListId: "spell-list.sorcerer-arcane-bloodline" },
+        }),
+        prisma.spellLevel.findFirst({
+          where: { spellId: "spell.dimension-door", spellListId: "spell-list.bloodrager-arcane-bloodline" },
+        }),
+      ]);
+
+    expect(bloodlines).toBe(75);
+    expect(sorcererRows).toHaveLength(459);
+    expect(bloodragerRows).toHaveLength(96);
+    expect(legacyRows).toBe(0);
+    expect(sorcererArcane).toEqual(expect.objectContaining({ spellLevel: 9, accessBasis: "printed" }));
+    expect(bloodragerArcane).toEqual(expect.objectContaining({ spellLevel: 4, accessBasis: "printed" }));
+  });
+
   it("preserves catalog summaries and selects a sourced canonical description", async () => {
     const light = await prisma.canonicalSpell.findUnique({
       where: { spellId: "spell.light" },

@@ -37,6 +37,26 @@
       "level": 7,
       "scope": "later_first_party",
       "raw": "wizard 7"
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer-phoenix-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Sorcerer Phoenix Bloodline",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "firebrand (15th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer-salamander-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Sorcerer Salamander Bloodline",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "firebrandAPG (15th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -457,6 +477,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.firebrand:appears_on_spell_list:spell-list.sorcerer-phoenix-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-phoenix-bloodline",
+        "name": "Sorcerer Phoenix Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.phoenix:52cae343",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "firebrand (15th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Phoenix"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.firebrand:appears_on_spell_list:spell-list.sorcerer-salamander-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-salamander-bloodline",
+        "name": "Sorcerer Salamander Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.salamander:e2b38673",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "firebrandAPG (15th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Salamander"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     }
   ],
   "provenance": [
@@ -507,6 +567,22 @@
       "raw_value_sha256": "ddebb60c8655da479c7681a3b8715ad391c59230a8656600b85c0ad911e08de0",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/3",
+      "observation_id": "aon:bloodline.sorcerer.phoenix:52cae343",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "e59d7c93efd44bd5fb8879cb59ba52a9afea1f08639a146127b283f6b146c5dc",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:bloodline.sorcerer.salamander:e2b38673",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "aacfb0a4687b7078b93b87961606ab2cb8e71d6b894af364ea684b589d8faaca",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -527,6 +603,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/3",
+        "message": "Sorcerer Phoenix Bloodline grants Firebrand as a level 7 spell; this is not general Sorcerer class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Sorcerer Salamander Bloodline grants Firebrand as a level 7 spell; this is not general Sorcerer class access."
       }
     ]
   }

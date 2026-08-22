@@ -174,6 +174,26 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer-unicorn-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Sorcerer Unicorn Bloodline",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "cure serious wounds (7th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.bloodrager-phoenix-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Bloodrager Phoenix Bloodline",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "cure serious wounds (13th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1174,6 +1194,46 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.cure-serious-wounds:appears_on_spell_list:spell-list.sorcerer-unicorn-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-unicorn-bloodline",
+        "name": "Sorcerer Unicorn Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.unicorn:71ed1006",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cure serious wounds (7th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Unicorn"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.cure-serious-wounds:appears_on_spell_list:spell-list.bloodrager-phoenix-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.bloodrager-phoenix-bloodline",
+        "name": "Bloodrager Phoenix Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.bloodrager.phoenix:3b4be128",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cure serious wounds (13th)",
+          "source_href": "https://www.aonprd.com/BloodragerBloodlineDisplay.aspx?ItemName=Phoenix"
+        }
+      ],
+      "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
     }
   ],
   "provenance": [
@@ -1224,6 +1284,22 @@
       "raw_value_sha256": "7a07debb2313033b3f9ef7b8e42fdbb354bc3b926ef1e80d70baeff44e1a83d2",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/18",
+      "observation_id": "aon:bloodline.sorcerer.unicorn:71ed1006",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "9d606734ff4b7b22da2baac2509cc62913c707f4d397a3d4e10e5c60d9cd1b93",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/19",
+      "observation_id": "aon:bloodline.bloodrager.phoenix:3b4be128",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "f370d0348a460f186ca48d7afee2cd87f4e5510d5669af893da9eedab901653b",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1314,6 +1390,16 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/17",
         "message": "Omdura 3 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/18",
+        "message": "Sorcerer Unicorn Bloodline grants Cure Serious Wounds as a level 3 spell; this is not general Sorcerer class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/19",
+        "message": "Bloodrager Phoenix Bloodline grants Cure Serious Wounds as a level 3 spell; this is not general Bloodrager class access."
       }
     ]
   }

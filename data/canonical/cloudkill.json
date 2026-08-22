@@ -69,6 +69,16 @@
       "level": 5,
       "scope": "core",
       "raw": "wizard 5"
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer-orc-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Sorcerer Orc Bloodline",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "cloudkill (11th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -779,6 +789,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.cloudkill:appears_on_spell_list:spell-list.sorcerer-orc-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-orc-bloodline",
+        "name": "Sorcerer Orc Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.orc:aff6783d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cloudkill (11th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Orc"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     }
   ],
   "provenance": [
@@ -829,6 +859,14 @@
       "raw_value_sha256": "d8df15bc7194ee40347db812fada49de2ef1abd823baeb226bae757843afd5bb",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:bloodline.sorcerer.orc:aff6783d",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "747220f33729b71cb733eae2354025bcca9ce2e05949a617c2a9f01de29ba7a0",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -859,6 +897,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Sorcerer Orc Bloodline grants Cloudkill as a level 5 spell; this is not general Sorcerer class access."
       }
     ]
   }

@@ -160,6 +160,26 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer-infernal-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Sorcerer Infernal Bloodline",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "protection from good (3rd)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.bloodrager-infernal-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Bloodrager Infernal Bloodline",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "protection from good (7th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1023,6 +1043,46 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.protection-from-good:appears_on_spell_list:spell-list.sorcerer-infernal-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-infernal-bloodline",
+        "name": "Sorcerer Infernal Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.infernal:a42b373f",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "protection from good (3rd)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Infernal"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.protection-from-good:appears_on_spell_list:spell-list.bloodrager-infernal-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.bloodrager-infernal-bloodline",
+        "name": "Bloodrager Infernal Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.bloodrager.infernal:244112ee",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "protection from good (7th)",
+          "source_href": "https://www.aonprd.com/BloodragerBloodlineDisplay.aspx?ItemName=Infernal"
+        }
+      ],
+      "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
     }
   ],
   "provenance": [
@@ -1073,6 +1133,22 @@
       "raw_value_sha256": "71a53a50a89df22a82934baef202a88f3f1419be5d06c0e32898265ceb627ad6",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/16",
+      "observation_id": "aon:bloodline.sorcerer.infernal:a42b373f",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "db369f17997d9ad8673168b3a58ed78ef5e3a54c06d050a7137f1c21b2be4af1",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/17",
+      "observation_id": "aon:bloodline.bloodrager.infernal:244112ee",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "713d4576cc46e348949590b3765061da70b7a8a62b055c6c1975977843f8615c",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1133,6 +1209,16 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/15",
         "message": "Omdura 1 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/16",
+        "message": "Sorcerer Infernal Bloodline grants Protection from Good as a level 1 spell; this is not general Sorcerer class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/17",
+        "message": "Bloodrager Infernal Bloodline grants Protection from Good as a level 1 spell; this is not general Bloodrager class access."
       }
     ]
   }

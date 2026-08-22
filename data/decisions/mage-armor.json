@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.mage-armor:d562b74736edebaf",
     "legacy_aon:spell.mage-armor:bb649edf1debf64e",
-    "d20pfsrd:spell.mage-armor:1963d4b45ed733c1"
+    "d20pfsrd:spell.mage-armor:1963d4b45ed733c1",
+    "aon:bloodline.sorcerer.draconic:fa318bb6"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.mage-armor:d562b74736edebaf",
@@ -108,6 +109,20 @@
         "d20pfsrd:spell.mage-armor:1963d4b45ed733c1"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/10",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.draconic:fa318bb6",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.draconic:fa318bb6"
+      ],
+      "rationale": "AoN clearly transcribes the owning sorcerer bloodline's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -538,6 +553,20 @@
         "d20pfsrd:spell.mage-armor:1963d4b45ed733c1"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.mage-armor:appears_on_spell_list:spell-list.sorcerer-draconic-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.draconic:fa318bb6",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.draconic:fa318bb6"
+      ],
+      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
     }
   ],
   "unresolved_questions": [

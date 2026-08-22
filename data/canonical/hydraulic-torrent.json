@@ -69,6 +69,16 @@
       "level": 3,
       "scope": "later_first_party",
       "raw": "wizard 3"
+    },
+    {
+      "spell_list_id": "spell-list.bloodrager-aquatic-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Bloodrager Aquatic Bloodline",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "hydraulic torrent (13th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -763,6 +773,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.hydraulic-torrent:appears_on_spell_list:spell-list.bloodrager-aquatic-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.bloodrager-aquatic-bloodline",
+        "name": "Bloodrager Aquatic Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.bloodrager.aquatic:dd5d7fe3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "hydraulic torrent (13th)",
+          "source_href": "https://www.aonprd.com/BloodragerBloodlineDisplay.aspx?ItemName=Aquatic"
+        }
+      ],
+      "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
     }
   ],
   "provenance": [
@@ -813,6 +843,14 @@
       "raw_value_sha256": "5f6365addf271c4cab7e7accfbc15cf90d30dd66dfd9d8eee43a2101de374c8e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:bloodline.bloodrager.aquatic:dd5d7fe3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "86c66ccf4c4fe8c1db36e9e5dc7e3e3e32ca569c2fa23b59d323fcfd67d543d8",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -838,6 +876,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Bloodrager Aquatic Bloodline grants Hydraulic Torrent as a level 3 spell; this is not general Bloodrager class access."
       }
     ]
   }

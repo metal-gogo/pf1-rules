@@ -43,6 +43,26 @@
       "level": 4,
       "scope": "later_first_party",
       "raw": "shaman 4"
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer-verdant-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Sorcerer Verdant Bloodline",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "command plants (9th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.bloodrager-verdant-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Bloodrager Verdant Bloodline",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "command plants (16th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -451,6 +471,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.command-plants:appears_on_spell_list:spell-list.sorcerer-verdant-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-verdant-bloodline",
+        "name": "Sorcerer Verdant Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.verdant:69afdfd9",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "command plants (9th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Verdant"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.command-plants:appears_on_spell_list:spell-list.bloodrager-verdant-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.bloodrager-verdant-bloodline",
+        "name": "Bloodrager Verdant Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.bloodrager.verdant:5d500dc4",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "command plants (16th)",
+          "source_href": "https://www.aonprd.com/BloodragerBloodlineDisplay.aspx?ItemName=Verdant"
+        }
+      ],
+      "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
     }
   ],
   "provenance": [
@@ -501,6 +561,22 @@
       "raw_value_sha256": "427dfda776637be89ebc83fcfdeceb4a0fa9a00c94d75272a613bad0ee58ad32",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:bloodline.sorcerer.verdant:69afdfd9",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "8a5d36d3d93158602d4298b55f00a52ea75db078e615bc6c593fa7c294929f30",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:bloodline.bloodrager.verdant:5d500dc4",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "4afa4681215209f37c0a0fd5a1d3657d079fda4ea0fe9295b02c074722e8dc1a",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -521,6 +597,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Sorcerer Verdant Bloodline grants Command Plants as a level 4 spell; this is not general Sorcerer class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Bloodrager Verdant Bloodline grants Command Plants as a level 4 spell; this is not general Bloodrager class access."
       }
     ]
   }

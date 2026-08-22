@@ -182,6 +182,20 @@ describe("local rules browser", () => {
     expect(ownerHtml).toContain("/lists/spell-list.flame-spirit");
   });
 
+  it("routes same-named bloodlines through class-specific owners", async () => {
+    const sorcererResponse = await fetch(`${baseUrl}/entities/bloodline.sorcerer.arcane`);
+    const sorcererHtml = await sorcererResponse.text();
+    expect(sorcererResponse.status).toBe(200);
+    expect(sorcererHtml).toContain("<h1>Sorcerer Arcane Bloodline</h1>");
+    expect(sorcererHtml).toContain("/lists/spell-list.sorcerer-arcane-bloodline");
+
+    const bloodragerResponse = await fetch(`${baseUrl}/entities/bloodline.bloodrager.arcane`);
+    const bloodragerHtml = await bloodragerResponse.text();
+    expect(bloodragerResponse.status).toBe(200);
+    expect(bloodragerHtml).toContain("<h1>Bloodrager Arcane Bloodline</h1>");
+    expect(bloodragerHtml).toContain("/lists/spell-list.bloodrager-arcane-bloodline");
+  });
+
   it("serves the interactive class filters", async () => {
     const response = await fetch(`${baseUrl}/class-spells.js`);
     const script = await response.text();

@@ -79,12 +79,14 @@
       "raw": "Elemental School fire 3"
     },
     {
-      "spell_list_id": "spell-list.efreeti-bloodline",
+      "spell_list_id": "spell-list.sorcerer-efreeti-bloodline",
       "list_kind": "bloodline",
-      "list_name": "efreeti bloodline",
+      "list_name": "Sorcerer Efreeti Bloodline",
       "level": 3,
       "scope": "later_first_party",
-      "raw": "Bloodline efreeti 3"
+      "raw": "fireball (7th)",
+      "access_basis": "printed",
+      "qualifications": []
     },
     {
       "spell_list_id": "spell-list.flame-mystery",
@@ -599,6 +601,26 @@
         }
       ],
       "note": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
+    },
+    {
+      "relationship_id": "spell.fireball:appears_on_spell_list:spell-list.sorcerer-efreeti-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-efreeti-bloodline",
+        "name": "Sorcerer Efreeti Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.efreeti:15e6ed3f",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "fireball (7th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Efreeti"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     }
   ],
   "provenance": [
@@ -665,6 +687,14 @@
       "raw_value_sha256": "7394abd66e4ac9a20530ff7efe664edaa2ba157f488b7eadebbd9fc4bb9caa85",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:bloodline.sorcerer.efreeti:15e6ed3f",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "343a6d9a748a316472872d469c6858a54908c3192ea68dbf5b4d1481a5190a9c",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -695,6 +725,11 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/11",
         "message": "Flame Spirit grants Fireball as a level 3 spell; this is not general Shaman class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Sorcerer Efreeti Bloodline grants Fireball as a level 3 spell; this is not general Sorcerer class access."
       }
     ]
   }

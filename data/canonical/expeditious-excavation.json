@@ -76,6 +76,16 @@
       "scope": "later_first_party",
       "raw": "bloodrager 1",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer-deep-earth-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Sorcerer Deep Earth Bloodline",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "expeditious excavation (3rd)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -629,6 +639,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.expeditious-excavation:appears_on_spell_list:spell-list.sorcerer-deep-earth-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-deep-earth-bloodline",
+        "name": "Sorcerer Deep Earth Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.deep-earth:6a3059cd",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "expeditious excavation (3rd)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Deep%20Earth"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     }
   ],
   "provenance": [
@@ -687,6 +717,14 @@
       "raw_value_sha256": "f0b87319a87080328bebf814b2205a949fc9cb5b8bf22312408980193e17c9f3",
       "decision": "manually_resolved",
       "note": "Reviewed catalog policy: AoN remains the preferred publication transcription. When an additional class membership is printed by d20PFSRD, it may be added to the canonical class union after review; Foundry PF1 is corroborating catalog evidence when it agrees. Preserve every source claim and never replace an AoN level merely because another catalog assigns the same class a different level."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:bloodline.sorcerer.deep-earth:6a3059cd",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "69ddb7cec9f03a9eab2b2e82c844cc61eb811d8661b721e70ca3d35cc54ac77e",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -707,6 +745,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Sorcerer Deep Earth Bloodline grants Expeditious Excavation as a level 1 spell; this is not general Sorcerer class access."
       }
     ]
   }

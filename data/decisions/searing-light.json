@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.searing-light:f855e613bfdec658",
     "legacy_aon:spell.searing-light:e573e20802fd0577",
-    "d20pfsrd:spell.searing-light:e574b13cc74a0191"
+    "d20pfsrd:spell.searing-light:e574b13cc74a0191",
+    "aon:bloodline.sorcerer.solar:c55558cb",
+    "aon:bloodline.bloodrager.sphinx:6ab79c3d"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.searing-light:f855e613bfdec658",
@@ -127,6 +129,34 @@
         "d20pfsrd:spell.searing-light:e574b13cc74a0191"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/5",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.solar:c55558cb",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.solar:c55558cb"
+      ],
+      "rationale": "AoN clearly transcribes the owning sorcerer bloodline's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/6",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:bloodline.bloodrager.sphinx:6ab79c3d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.bloodrager.sphinx:6ab79c3d"
+      ],
+      "rationale": "AoN clearly transcribes the owning bloodrager bloodline's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -416,6 +446,34 @@
         "d20pfsrd:spell.searing-light:e574b13cc74a0191"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.searing-light:appears_on_spell_list:spell-list.sorcerer-solar-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.solar:c55558cb",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.solar:c55558cb"
+      ],
+      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
+    },
+    {
+      "relationship_id": "spell.searing-light:appears_on_spell_list:spell-list.bloodrager-sphinx-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.bloodrager.sphinx:6ab79c3d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.bloodrager.sphinx:6ab79c3d"
+      ],
+      "rationale": "AoN prints the spell on the owning bloodrager bloodline page; it is modeled as bloodline access rather than general Bloodrager access."
     }
   ],
   "unresolved_questions": [

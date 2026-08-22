@@ -67,6 +67,16 @@
       "level": 5,
       "scope": "core",
       "raw": "wizard 5"
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer-undead-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Sorcerer Undead Bloodline",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "waves of fatigue (11th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -507,6 +517,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.waves-of-fatigue:appears_on_spell_list:spell-list.sorcerer-undead-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-undead-bloodline",
+        "name": "Sorcerer Undead Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.undead:67c5fd9c",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "waves of fatigue (11th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Undead"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     }
   ],
   "provenance": [
@@ -557,6 +587,14 @@
       "raw_value_sha256": "92146b4ff0cff468cbf123e79a7961bb6aa16f919c09c25b68727de3f56aa9c9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:bloodline.sorcerer.undead:67c5fd9c",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "2f2be212b2adc250fb7dfee8f6c8b8f001a6486f5dfd27b3ccebace628451b27",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -577,6 +615,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Sorcerer Undead Bloodline grants Waves of Fatigue as a level 5 spell; this is not general Sorcerer class access."
       }
     ]
   }

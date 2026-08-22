@@ -138,6 +138,26 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer-destined-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Sorcerer Destined Bloodline",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "alarm (3rd)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer-kobold-sorcerer-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Sorcerer Kobold Sorcerer Bloodline",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "alarm (3rd)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -852,6 +872,46 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.alarm:appears_on_spell_list:spell-list.sorcerer-destined-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-destined-bloodline",
+        "name": "Sorcerer Destined Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.destined:68dfa6a8",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "alarm (3rd)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Destined"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.alarm:appears_on_spell_list:spell-list.sorcerer-kobold-sorcerer-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-kobold-sorcerer-bloodline",
+        "name": "Sorcerer Kobold Sorcerer Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.kobold-sorcerer:911d7070",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "alarm (3rd)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Kobold%20Sorcerer"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     }
   ],
   "provenance": [
@@ -902,6 +962,22 @@
       "raw_value_sha256": "38b9eab27e68828b25e2d454def66f034c6e70bb63a308f0bd7239a25cffe12f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/14",
+      "observation_id": "aon:bloodline.sorcerer.destined:68dfa6a8",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "cddf4449c00b333521342d40dfe9cf92419826b109374bd5de80ea2abd6ddbaa",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/15",
+      "observation_id": "aon:bloodline.sorcerer.kobold-sorcerer:911d7070",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "cddf4449c00b333521342d40dfe9cf92419826b109374bd5de80ea2abd6ddbaa",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -937,6 +1013,16 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/13",
         "message": "Omdura 1 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/14",
+        "message": "Sorcerer Destined Bloodline grants Alarm as a level 1 spell; this is not general Sorcerer class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/15",
+        "message": "Sorcerer Kobold Sorcerer Bloodline grants Alarm as a level 1 spell; this is not general Sorcerer class access."
       }
     ]
   }

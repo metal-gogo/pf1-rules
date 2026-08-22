@@ -53,6 +53,26 @@
       "level": 8,
       "scope": "core",
       "raw": "wizard 8"
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer-arcane-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Sorcerer Arcane Bloodline",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "power word stun (17th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer-infernal-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Sorcerer Infernal Bloodline",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "power word stun (17th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -520,6 +540,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.power-word-stun:appears_on_spell_list:spell-list.sorcerer-arcane-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-arcane-bloodline",
+        "name": "Sorcerer Arcane Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.arcane:b8a87a92",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "power word stun (17th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Arcane"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.power-word-stun:appears_on_spell_list:spell-list.sorcerer-infernal-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-infernal-bloodline",
+        "name": "Sorcerer Infernal Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.infernal:a42b373f",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "power word stun (17th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Infernal"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     }
   ],
   "provenance": [
@@ -570,6 +630,22 @@
       "raw_value_sha256": "382b72cbcb88798f34170c4a071fde7031cd84bbe7a3718f3772a6c387fb3106",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:bloodline.sorcerer.arcane:b8a87a92",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "91f5a4f66f62c980d845a023b1ef4a423519411c0e721c715cc3c9b97de29ad2",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:bloodline.sorcerer.infernal:a42b373f",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "91f5a4f66f62c980d845a023b1ef4a423519411c0e721c715cc3c9b97de29ad2",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -595,6 +671,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Sorcerer Arcane Bloodline grants Power Word Stun as a level 8 spell; this is not general Sorcerer class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Sorcerer Infernal Bloodline grants Power Word Stun as a level 8 spell; this is not general Sorcerer class access."
       }
     ]
   }

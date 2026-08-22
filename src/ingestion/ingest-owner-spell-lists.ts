@@ -36,6 +36,19 @@ const reviewedOwnerSpellIds = new Map<string, string[]>([
   ["elemental aura (cold only)", ["spell.elemental-aura"]],
   ["summon monster v (ice elementals only)", ["spell.summon-monster-5"]],
   ["repel metal and stone", ["spell.repel-metal-or-stone"]],
+  ["slipsream", ["spell.slipstream"]],
+  ["meteor swarm (dealing cold damage)", ["spell.meteor-swarm"]],
+  ["summon monster viii (elementals only)", ["spell.summon-monster-8"]],
+  ["planar binding (devils and creatures with the fiendish template only)", ["spell.planar-binding"]],
+  ["transmute rock to mud", ["spell.transmute-rock-to-mud"]],
+  ["fire shield (warm shield)", ["spell.fire-shield"]],
+  ["fire shield (warm only)", ["spell.fire-shield"]],
+  ["giant vermin (scorpions only)", ["spell.giant-vermin"]],
+  ["vermin shap ii", ["spell.vermin-shape-ii"]],
+  ["summon monster iii (reptiles only)", ["spell.summon-monster-3"]],
+  ["summon monster vii (reptiles only)", ["spell.summon-monster-7"]],
+  ["shield of dawn", ["spell.shield-of-the-dawnflower"]],
+  ["call lightning storm (dealing fire damage, damage increased outdoors at night)", ["spell.call-lightning-storm"]],
 ]);
 
 interface Capture {
@@ -60,6 +73,7 @@ interface OwnerRecord {
   listKind: "mystery" | "patron" | "spirit" | "bloodline";
   name: string;
   listName: string;
+  legacyListId?: string;
   className: "Oracle" | "Witch" | "Shaman" | "Sorcerer" | "Bloodrager";
   definitionType: string;
   sectionHeading: string;
@@ -176,17 +190,36 @@ function spiritLinks(html: string, baseUrl: string): Array<{ name: string; url: 
 }
 
 
+function bloodlineLinks(
+  html: string,
+  baseUrl: string,
+  displayPage: "BloodlineDisplay.aspx" | "BloodragerBloodlineDisplay.aspx",
+): Array<{ name: string; url: string }> {
+  const doc = cheerio.load(html);
+  const values = new Map<string, { name: string; url: string }>();
+  doc(`a[href*="${displayPage}?ItemName="]`).each((_index, element) => {
+    const name = cleanText(doc(element).text());
+    const href = doc(element).attr("href");
+    if (!name || !href) return;
+    values.set(slug(name), { name, url: new URL(href, baseUrl).toString() });
+  });
+  return [...values.values()].sort((left, right) => left.name.localeCompare(right.name));
+}
+
+
 function parseMystery(capture: Capture, rawPath: string): OwnerRecord {
   const doc = cheerio.load(capture.body);
   const output = doc('span[id^="MainContent_DataListTypes_LabelName_"]').first();
   if (output.length !== 1) throw new Error(`AoN mystery detail block missing at ${capture.url}`);
   const heading = cleanText(output.find("h1.title").first().text());
   const name = heading.replace(/^PFS (?:Legal|Limited|Restricted)\s+/i, "").trim();
-  const definitionRaw = cleanText(output.text());
+  const normalized = output.clone();
+  normalized.find("sup").remove();
+  const definitionRaw = cleanText(normalized.text());
   const bonusMatch = /Bonus Spells:\s*(.*?)\s*Revelations:/i.exec(definitionRaw);
   if (!bonusMatch?.[1]) throw new Error(`${name} lacks a bounded Bonus Spells section.`);
   const spells: OwnerSpell[] = [];
-  const entryPattern = /(?:^|,\s*)(.+?)\s*\((\d+)(?:st|nd|rd|th)\)(?=,|\.|$)/gi;
+  const entryPattern = /(?:^|,\s*)(.+?)\s*\((\d+)(?:st|nd|rd|th)\)(?=,|\.|Spells marked|$)/gi;
   for (const match of bonusMatch[1].matchAll(entryPattern)) {
     const gainedLevel = Number(match[2]);
     if (gainedLevel < 2 || gainedLevel > 18 || gainedLevel % 2 !== 0) {
@@ -313,6 +346,70 @@ function parseSpirit(capture: Capture, rawPath: string): OwnerRecord {
     className: "Shaman",
     definitionType: "Shaman Spirit",
     sectionHeading: "Spirit Magic Spells",
+    sourceUrl: capture.url,
+    sourceBook,
+    definitionRaw,
+    spells,
+    capture,
+    rawPath,
+  };
+}
+
+
+function parseBloodline(
+  capture: Capture,
+  rawPath: string,
+  className: "Sorcerer" | "Bloodrager",
+): OwnerRecord {
+  const doc = cheerio.load(capture.body);
+  const output = doc('span[id^="MainContent_DataListTypes_LabelName_"]').first();
+  if (output.length !== 1) throw new Error(`AoN bloodline detail block missing at ${capture.url}`);
+  const heading = cleanText(output.find("h1.title").first().text());
+  const baseName = heading
+    .replace(/^PFS (?:Legal|Limited|Restricted)\s+/i, "")
+    .replace(/\s+Bloodline$/i, "")
+    .trim();
+  const normalized = output.clone();
+  normalized.find("sup").remove();
+  const definitionRaw = cleanText(normalized.text());
+  const endHeading = className === "Sorcerer" ? "Bonus Feats" : "Bloodline Powers";
+  const bonusMatch = new RegExp(`Bonus Spells:\\s*(.*?)\\s*${endHeading}:`, "i").exec(definitionRaw);
+  if (!bonusMatch?.[1]) throw new Error(`${className} ${baseName} lacks a bounded Bonus Spells section.`);
+  const spells: OwnerSpell[] = [];
+  const entryPattern = /(?:^|,\s*)(.+?)\s*\((\d+)(?:st|nd|rd|th)\)(?=,|\.|Spells marked|$)/gi;
+  for (const match of bonusMatch[1].matchAll(entryPattern)) {
+    const gainedLevel = Number(match[2]);
+    const spellLevel = className === "Sorcerer" ? (gainedLevel - 1) / 2 : (gainedLevel - 4) / 3;
+    const expected = className === "Sorcerer"
+      ? gainedLevel >= 3 && gainedLevel <= 19 && gainedLevel % 2 === 1
+      : [7, 10, 13, 16].includes(gainedLevel);
+    if (!expected || !Number.isInteger(spellLevel)) {
+      throw new Error(`${className} ${baseName} has unexpected bonus-spell level ${gainedLevel}.`);
+    }
+    spells.push({
+      spellName: cleanText(match[1]!),
+      spellLevel,
+      raw: cleanText(match[0]!.replace(/^,\s*/, "")),
+    });
+  }
+  const expectedCount = className === "Sorcerer" ? 9 : 4;
+  if (spells.length !== expectedCount) {
+    throw new Error(`${className} ${baseName} parsed ${spells.length} bonus spells instead of ${expectedCount}: ${bonusMatch[1]}`);
+  }
+  const sourceBook = cleanText(output.find('a[href*="paizo.com"]').first().text()) || null;
+  const ownerSlug = slug(baseName);
+  const classSlug = className.toLocaleLowerCase("en-US");
+  return {
+    entityId: `bloodline.${classSlug}.${ownerSlug}`,
+    entityType: "bloodline",
+    listId: `spell-list.${classSlug}-${ownerSlug}-bloodline`,
+    ...(className === "Sorcerer" ? { legacyListId: `spell-list.${ownerSlug}-bloodline` } : {}),
+    listKind: "bloodline",
+    name: `${className} ${baseName} Bloodline`,
+    listName: `${className} ${baseName} Bloodline Bonus Spells`,
+    className,
+    definitionType: `${className} Bloodline`,
+    sectionHeading: "Bonus Spells",
     sourceUrl: capture.url,
     sourceBook,
     definitionRaw,
@@ -464,9 +561,15 @@ function addOwnerSpellMembership(
       qualification.kind === owner.entityType && qualification[owner.entityType]?.entity_id === owner.entityId,
     ),
   );
-  const levelIndex = qualifiedClass ? canonical.levels.indexOf(qualifiedClass) : canonical.levels.length;
-  const oldRelationshipId = qualifiedClass
-    ? `${canonical.spell_id}:appears_on_spell_list:spell-list.${owner.className.toLocaleLowerCase("en-US")}`
+  const legacyMembership = owner.legacyListId
+    ? canonical.levels.find((level: ValidatedJson) => level.spell_list_id === owner.legacyListId)
+    : null;
+  const replaceableMembership = qualifiedClass ?? legacyMembership;
+  const levelIndex = replaceableMembership
+    ? canonical.levels.indexOf(replaceableMembership)
+    : canonical.levels.length;
+  const oldRelationshipId = replaceableMembership
+    ? `${canonical.spell_id}:appears_on_spell_list:${replaceableMembership.spell_list_id}`
     : null;
   const relationshipId = `${canonical.spell_id}:appears_on_spell_list:${owner.listId}`;
   const level = {
@@ -479,7 +582,7 @@ function addOwnerSpellMembership(
     access_basis: "printed",
     qualifications: [],
   };
-  if (qualifiedClass) canonical.levels[levelIndex] = level;
+  if (replaceableMembership) canonical.levels[levelIndex] = level;
   else canonical.levels.push(level);
 
   const evidence = [{
@@ -537,7 +640,7 @@ function addOwnerSpellMembership(
   };
   if (oldDecision) Object.assign(oldDecision, relationshipDecision);
   else decision.relationship_decisions.push(relationshipDecision);
-  return qualifiedClass ? "reclassified" : "added";
+  return replaceableMembership ? "reclassified" : "added";
 }
 
 
@@ -704,6 +807,40 @@ export async function ingestSpiritSpellLists() {
 }
 
 
+async function ingestBloodlineSpellLists(className: "Sorcerer" | "Bloodrager") {
+  await assertAonAllowsOwners();
+  const classSlug = className.toLocaleLowerCase("en-US");
+  const catalogPage = className === "Sorcerer" ? "SorcererBloodlines.aspx" : "BloodragerBloodlines.aspx";
+  const displayPage = className === "Sorcerer" ? "BloodlineDisplay.aspx" : "BloodragerBloodlineDisplay.aspx";
+  const expectedOwners = className === "Sorcerer" ? 51 : 24;
+  const catalogRawPath = path.join(
+    projectRoot,
+    "data",
+    "raw",
+    "catalogs",
+    "spell-list-owners",
+    `${classSlug}-bloodlines-aon.html`,
+  );
+  const catalog = await fetchPage(`https://www.aonprd.com/${catalogPage}`, catalogRawPath);
+  const links = bloodlineLinks(catalog.body, catalog.url, displayPage);
+  if (links.length !== expectedOwners) {
+    throw new Error(`Expected ${expectedOwners} AoN ${className} bloodlines, found ${links.length}.`);
+  }
+  const owners: OwnerRecord[] = [];
+  for (const link of links) {
+    const ownerSlug = slug(link.name);
+    const entityId = `bloodline.${classSlug}.${ownerSlug}`;
+    const rawPath = path.join(projectRoot, "data", "raw", "entities", entityId, "aon.html");
+    owners.push(parseBloodline(await fetchPage(link.url, rawPath), rawPath, className));
+  }
+  return ingestOwnerRecords(`${classSlug}-bloodline`, catalog, owners);
+}
+
+
+export const ingestSorcererBloodlineSpellLists = () => ingestBloodlineSpellLists("Sorcerer");
+export const ingestBloodragerBloodlineSpellLists = () => ingestBloodlineSpellLists("Bloodrager");
+
+
 const command = process.argv[2];
 const operation = command === "mysteries"
   ? ingestMysterySpellLists
@@ -711,6 +848,10 @@ const operation = command === "mysteries"
     ? ingestPatronSpellLists
     : command === "spirits"
       ? ingestSpiritSpellLists
+    : command === "sorcerer-bloodlines"
+      ? ingestSorcererBloodlineSpellLists
+    : command === "bloodrager-bloodlines"
+      ? ingestBloodragerBloodlineSpellLists
     : null;
 if (!operation) throw new Error(`Unknown owner-list command: ${command ?? "<missing>"}`);
 operation()

@@ -109,6 +109,26 @@
       "level": 1,
       "scope": "core",
       "raw": "wizard 1"
+    },
+    {
+      "spell_list_id": "spell-list.bloodrager-destined-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Bloodrager Destined Bloodline",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "shield (7th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.bloodrager-draconic-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Bloodrager Draconic Bloodline",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "shield (7th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -850,6 +870,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.shield:appears_on_spell_list:spell-list.bloodrager-destined-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.bloodrager-destined-bloodline",
+        "name": "Bloodrager Destined Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.bloodrager.destined:6fd60b2c",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "shield (7th)",
+          "source_href": "https://www.aonprd.com/BloodragerBloodlineDisplay.aspx?ItemName=Destined"
+        }
+      ],
+      "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
+    },
+    {
+      "relationship_id": "spell.shield:appears_on_spell_list:spell-list.bloodrager-draconic-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.bloodrager-draconic-bloodline",
+        "name": "Bloodrager Draconic Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.bloodrager.draconic:e41cf9f6",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "shield (7th)",
+          "source_href": "https://www.aonprd.com/BloodragerBloodlineDisplay.aspx?ItemName=Draconic"
+        }
+      ],
+      "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
     }
   ],
   "provenance": [
@@ -900,6 +960,22 @@
       "raw_value_sha256": "d4fe8f50879547df8db43133a1d6c1af51d1a3467172d3fa8ddd15696e050091",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/12",
+      "observation_id": "aon:bloodline.bloodrager.destined:6fd60b2c",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "1159bba720711ec285b68e9d011bda9af8ec598149db2e854123d18fe63f96c1",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/13",
+      "observation_id": "aon:bloodline.bloodrager.draconic:e41cf9f6",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "1159bba720711ec285b68e9d011bda9af8ec598149db2e854123d18fe63f96c1",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -915,6 +991,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/12",
+        "message": "Bloodrager Destined Bloodline grants Shield as a level 1 spell; this is not general Bloodrager class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/13",
+        "message": "Bloodrager Draconic Bloodline grants Shield as a level 1 spell; this is not general Bloodrager class access."
       }
     ]
   }

@@ -67,6 +67,16 @@
       "level": 4,
       "scope": "core",
       "raw": "wizard 4"
+    },
+    {
+      "spell_list_id": "spell-list.bloodrager-undead-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Bloodrager Undead Bloodline",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "enervation (16th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -719,6 +729,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.enervation:appears_on_spell_list:spell-list.bloodrager-undead-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.bloodrager-undead-bloodline",
+        "name": "Bloodrager Undead Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.bloodrager.undead:a9016224",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "enervation (16th)",
+          "source_href": "https://www.aonprd.com/BloodragerBloodlineDisplay.aspx?ItemName=Undead"
+        }
+      ],
+      "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
     }
   ],
   "provenance": [
@@ -769,6 +799,14 @@
       "raw_value_sha256": "e410cc85f2deac5b5c0519b823d574919f4b7307942e72abe6d4b0878eeeac34",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:bloodline.bloodrager.undead:a9016224",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "ffbbdddb1fea252b4f319988ac90701079a32fa2f7e0448e3777d38474a8d889",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -794,6 +832,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Bloodrager Undead Bloodline grants Enervation as a level 4 spell; this is not general Bloodrager class access."
       }
     ]
   }

@@ -59,6 +59,16 @@
       "level": 5,
       "scope": "later_first_party",
       "raw": "wizard 5"
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer-ghoul-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Sorcerer Ghoul Bloodline",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "hungry earth (11th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -737,6 +747,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.hungry-earth:appears_on_spell_list:spell-list.sorcerer-ghoul-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-ghoul-bloodline",
+        "name": "Sorcerer Ghoul Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.ghoul:c0c80f39",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "hungry earth (11th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Ghoul"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     }
   ],
   "provenance": [
@@ -787,6 +817,14 @@
       "raw_value_sha256": "fb416905027b64d7f3cff4220b25e837acd4ff862963793f472682c97e258cea",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:bloodline.sorcerer.ghoul:c0c80f39",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "7e3426408f104468377a807c120aa5652842e91be077ba66225ad4722270633c",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -847,6 +885,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Sorcerer Ghoul Bloodline grants Hungry Earth as a level 5 spell; this is not general Sorcerer class access."
       }
     ]
   }

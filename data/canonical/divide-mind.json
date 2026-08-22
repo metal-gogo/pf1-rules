@@ -21,6 +21,16 @@
       "level": 9,
       "scope": "later_first_party",
       "raw": "psychic 9"
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer-possessed-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Sorcerer Possessed Bloodline",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "divide mind (19th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -422,6 +432,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.divide-mind:appears_on_spell_list:spell-list.sorcerer-possessed-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-possessed-bloodline",
+        "name": "Sorcerer Possessed Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.possessed:545722c9",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "divide mind (19th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Possessed"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     }
   ],
   "provenance": [
@@ -472,6 +502,14 @@
       "raw_value_sha256": "ad0f53398ec6f0df372c26c8720e3bfcf462a945aaa8c06270f47a91670be81a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/1",
+      "observation_id": "aon:bloodline.sorcerer.possessed:545722c9",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "a3eee66dcc118be6c28c05a15dc3accb70138fad572b8f7d08f6f47088e42d84",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -487,6 +525,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/1",
+        "message": "Sorcerer Possessed Bloodline grants Divide Mind as a level 9 spell; this is not general Sorcerer class access."
       }
     ]
   }

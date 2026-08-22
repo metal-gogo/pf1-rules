@@ -182,6 +182,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer-unicorn-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Sorcerer Unicorn Bloodline",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "cure moderate wounds (5th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -491,6 +501,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.cure-moderate-wounds:appears_on_spell_list:spell-list.sorcerer-unicorn-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-unicorn-bloodline",
+        "name": "Sorcerer Unicorn Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.unicorn:71ed1006",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cure moderate wounds (5th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Unicorn"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     }
   ],
   "provenance": [
@@ -533,6 +563,14 @@
       "raw_value_sha256": null,
       "decision": "copied",
       "note": "The compact functions-like wording remains the canonical raw text."
+    },
+    {
+      "field_path": "/levels/19",
+      "observation_id": "aon:bloodline.sorcerer.unicorn:71ed1006",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "b3149f9ec65a7efbbab0c0041afdf99be96290120603296713e2e4bb764450da",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -558,6 +596,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/18",
         "message": "Omdura 2 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/19",
+        "message": "Sorcerer Unicorn Bloodline grants Cure Moderate Wounds as a level 2 spell; this is not general Sorcerer class access."
       }
     ]
   }

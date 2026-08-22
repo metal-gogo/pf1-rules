@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.dispel-magic-greater:75f145a4662d97a5",
     "legacy_aon:spell.dispel-magic-greater:a6f54dc4e717a249",
-    "d20pfsrd:spell.dispel-magic-greater:773a511ee777332e"
+    "d20pfsrd:spell.dispel-magic-greater:773a511ee777332e",
+    "aon:bloodline.sorcerer.celestial:85c74ca5",
+    "aon:bloodline.sorcerer.oni:726ad2e8"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.dispel-magic-greater:75f145a4662d97a5",
@@ -127,6 +129,34 @@
         "d20pfsrd:spell.dispel-magic-greater:773a511ee777332e"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/20",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.celestial:85c74ca5",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.celestial:85c74ca5"
+      ],
+      "rationale": "AoN clearly transcribes the owning sorcerer bloodline's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/21",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.oni:726ad2e8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.oni:726ad2e8"
+      ],
+      "rationale": "AoN clearly transcribes the owning sorcerer bloodline's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -756,6 +786,34 @@
         "d20pfsrd:spell.dispel-magic-greater:773a511ee777332e"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.dispel-magic-greater:appears_on_spell_list:spell-list.sorcerer-celestial-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.celestial:85c74ca5",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.celestial:85c74ca5"
+      ],
+      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
+    },
+    {
+      "relationship_id": "spell.dispel-magic-greater:appears_on_spell_list:spell-list.sorcerer-oni-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.oni:726ad2e8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.oni:726ad2e8"
+      ],
+      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
     }
   ],
   "unresolved_questions": [

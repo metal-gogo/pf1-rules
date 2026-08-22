@@ -44,6 +44,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.bloodrager-kyton-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Bloodrager Kyton Bloodline",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "persuasive goad (7th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -417,6 +427,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.persuasive-goad:appears_on_spell_list:spell-list.bloodrager-kyton-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.bloodrager-kyton-bloodline",
+        "name": "Bloodrager Kyton Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.bloodrager.kyton:d2756670",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "persuasive goad (7th)",
+          "source_href": "https://www.aonprd.com/BloodragerBloodlineDisplay.aspx?ItemName=Kyton"
+        }
+      ],
+      "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
     }
   ],
   "provenance": [
@@ -467,6 +497,14 @@
       "raw_value_sha256": "cbd80270102e71d4303c6d7f42b8a3ad6854bd53ea076d26bfeae4145885af77",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/2",
+      "observation_id": "aon:bloodline.bloodrager.kyton:d2756670",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "47045e2f0e1395175fc79d7ab2bc6ef26f8ee7b6484488683c9185fd24e0a08d",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -497,6 +535,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/1",
         "message": "Omdura 1 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/2",
+        "message": "Bloodrager Kyton Bloodline grants Persuasive Goad as a level 1 spell; this is not general Bloodrager class access."
       }
     ]
   }

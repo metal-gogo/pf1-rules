@@ -53,6 +53,16 @@
       "level": 6,
       "scope": "core",
       "raw": "wizard 6"
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer-ghoul-bloodline",
+      "list_kind": "bloodline",
+      "list_name": "Sorcerer Ghoul Bloodline",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "move earth (13th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -445,6 +455,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.move-earth:appears_on_spell_list:spell-list.sorcerer-ghoul-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-ghoul-bloodline",
+        "name": "Sorcerer Ghoul Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.ghoul:c0c80f39",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "move earth (13th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Ghoul"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     }
   ],
   "provenance": [
@@ -495,6 +525,14 @@
       "raw_value_sha256": "84e0f1bed48abfc0a75087abc2c74292eb6cf9b7051e4c4e868a0182d6571386",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:bloodline.sorcerer.ghoul:c0c80f39",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "dce95d0756ea5596571d6ee314107d6f8afc90400b0a816924ee03c874c3198b",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -520,6 +558,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Sorcerer Ghoul Bloodline grants Move Earth as a level 6 spell; this is not general Sorcerer class access."
       }
     ]
   }
