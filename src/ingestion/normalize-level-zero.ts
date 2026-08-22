@@ -310,13 +310,92 @@ export function parseRange(raw: string | null) {
 }
 
 
-const reviewedRangeOverrides = new Map<string, {
-  category: "touch";
+type ReviewedRangeOverride = {
+  category: "personal" | "touch" | "distance";
+  formula: string | null;
+  evidenceField: "spell_raw.range_raw" | "spell_raw.delivery_fields_raw";
   rationale: string;
-}>([
+};
+
+
+const reviewedRangeOverrides = new Map<string, ReviewedRangeOverride>([
   ["spell.abundant-ammunition", {
     category: "touch",
+    formula: null,
+    evidenceField: "spell_raw.delivery_fields_raw",
     rationale: "Reviewed project decision: the printed Range field is blank, but the printed Target is one container touched. Use touch as the canonical range while preserving the missing source value.",
+  }],
+  ["spell.aura-of-distraction", {
+    category: "personal",
+    formula: null,
+    evidenceField: "spell_raw.delivery_fields_raw",
+    rationale: "Reviewed project decision: the printed Range field is blank and the printed Area is a 20-ft.-radius emanation centered on you. Use personal as the canonical range while preserving the missing source value.",
+  }],
+  ["spell.ban-corruption", {
+    category: "personal",
+    formula: null,
+    evidenceField: "spell_raw.delivery_fields_raw",
+    rationale: "Reviewed project decision: the printed Range field is blank and the printed Area is a 30 ft.-radius emanation centered on you. Use personal as the canonical range while preserving the missing source value.",
+  }],
+  ["spell.blaze-of-glory", {
+    category: "personal",
+    formula: null,
+    evidenceField: "spell_raw.delivery_fields_raw",
+    rationale: "Reviewed project decision: the printed Range field is blank and the printed Area is a 30-ft.-radius burst centered on you. Use personal as the canonical range while preserving the missing source value.",
+  }],
+  ["spell.burst-of-force", {
+    category: "personal",
+    formula: null,
+    evidenceField: "spell_raw.delivery_fields_raw",
+    rationale: "Reviewed project decision: the printed Range field is blank and the printed Area is a 20-ft.-radius burst centered on you. Use personal as the canonical range while preserving the missing source value.",
+  }],
+  ["spell.conditional-favor", {
+    category: "touch",
+    formula: null,
+    evidenceField: "spell_raw.range_raw",
+    rationale: "Reviewed project decision: the printed Range field is blank and the printed Target says only one creature; it does not print or imply touch. Use touch as an explicit canonical override while preserving the missing source value.",
+  }],
+  ["spell.damnation", {
+    category: "personal",
+    formula: null,
+    evidenceField: "spell_raw.delivery_fields_raw",
+    rationale: "Reviewed project decision: the printed Range field is blank and the printed Area is a 30-ft.-radius burst centered on you. Use personal as the canonical range while preserving the missing source value.",
+  }],
+  ["spell.frozen-note", {
+    category: "personal",
+    formula: null,
+    evidenceField: "spell_raw.delivery_fields_raw",
+    rationale: "Reviewed project decision: the printed Range field is blank and the printed Area is a 30-ft.-radius emanation centered on you. Use personal as the canonical range while preserving the missing source value.",
+  }],
+  ["spell.hammer-of-mending", {
+    category: "personal",
+    formula: null,
+    evidenceField: "spell_raw.delivery_fields_raw",
+    rationale: "Reviewed project decision: the printed Range field is blank and the printed Area is a 30-ft.-radius burst centered on you. Use personal as the canonical range while preserving the missing source value.",
+  }],
+  ["spell.healing-flames", {
+    category: "personal",
+    formula: null,
+    evidenceField: "spell_raw.delivery_fields_raw",
+    rationale: "Reviewed project decision: the printed Range field is blank and the printed Area is a 10-ft.-radius burst centered on you. Use personal as the canonical range while preserving the missing source value.",
+  }],
+  ["spell.massacre", {
+    category: "distance",
+    formula: "60-ft. line",
+    evidenceField: "spell_raw.delivery_fields_raw",
+    rationale: "Reviewed project decision: the printed Range field is blank and the printed Area is a 60-ft. line. Copy the Area text into the canonical range formula while preserving the missing printed Range as a null raw value.",
+  }],
+  ["spell.stone-throwing", {
+    category: "touch",
+    formula: null,
+    evidenceField: "spell_raw.delivery_fields_raw",
+    rationale: "Reviewed project decision: the printed Range field is blank, but the printed Target is creature touched. Use touch as the canonical range while preserving the missing source value.",
+  }],
+  ["spell.telekinetic-storm", {
+    category: "personal",
+    formula: null,
+    evidenceField: "spell_raw.delivery_fields_raw",
+    rationale: "Reviewed project decision: the printed Range field is blank and the printed Area is a 40-ft.-radius burst centered on you. Use personal as the canonical range while preserving the missing source value.",
   }],
 ]);
 export const reviewedCanonicalOverrideSpellIds = new Set(reviewedRangeOverrides.keys());
@@ -1045,7 +1124,7 @@ export function generateCanonicalBundle(
     casting: { time: castingTime, components, components_raw: parsed.componentsRaw, conditional_components: [] },
     effect: {
       range: rangeOverride
-        ? { category: rangeOverride.category, formula: null, raw: null }
+        ? { category: rangeOverride.category, formula: rangeOverride.formula, raw: null }
         : parseRange(parsed.rangeRaw),
       delivery: { resolution: delivery.length ? "fixed" : "none", entries: delivery },
       targeting: parseTargeting(targetField?.value_raw ?? null),
@@ -1091,11 +1170,14 @@ export function generateCanonicalBundle(
     },
   };
   if (rangeOverride) {
+    const overrideEvidence = rangeOverride.evidenceField === "spell_raw.delivery_fields_raw"
+      ? parsed.deliveryFieldsRaw
+      : parsed.rangeRaw;
     canonical.provenance.push({
       field_path: "/effect/range",
       observation_id: baseline.observationId,
-      source_field: "spell_raw.delivery_fields_raw",
-      raw_value_sha256: hash(parsed.deliveryFieldsRaw),
+      source_field: rangeOverride.evidenceField,
+      raw_value_sha256: hash(overrideEvidence),
       decision: "manually_resolved",
       note: rangeOverride.rationale,
     });
@@ -1134,7 +1216,7 @@ export function generateCanonicalBundle(
     fieldDecisions.push({
       canonical_path: "/effect/range",
       decision: "derived",
-      selected_evidence: [{ observation_id: baseline.observationId, source_field: "spell_raw.delivery_fields_raw" }],
+      selected_evidence: [{ observation_id: baseline.observationId, source_field: rangeOverride.evidenceField }],
       considered_observation_ids: observationIds,
       rationale: rangeOverride.rationale,
     });

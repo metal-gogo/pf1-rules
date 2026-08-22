@@ -43,40 +43,55 @@ describe("ingested spell catalog", () => {
     }));
   });
 
-  it("keeps a missing printed range distinct from a reviewed override", async () => {
-    const auraOfDistraction = await prisma.canonicalSpell.findUnique({
-      where: { spellId: "spell.aura-of-distraction" },
-    });
-    const payload = auraOfDistraction?.payload as {
-      normalization?: { warnings?: Array<{ code?: string; field_path?: string }> };
-      provenance?: Array<{
-        field_path?: string;
-        source_field?: string;
-        decision?: string;
-        note?: string;
-      }>;
-    } | undefined;
+  it("keeps reviewed blank Range overrides auditable without inventing printed values", async () => {
+    const expectations = [
+      ["spell.aura-of-distraction", "personal", null, "spell_raw.delivery_fields_raw"],
+      ["spell.ban-corruption", "personal", null, "spell_raw.delivery_fields_raw"],
+      ["spell.blaze-of-glory", "personal", null, "spell_raw.delivery_fields_raw"],
+      ["spell.burst-of-force", "personal", null, "spell_raw.delivery_fields_raw"],
+      ["spell.conditional-favor", "touch", null, "spell_raw.range_raw"],
+      ["spell.damnation", "personal", null, "spell_raw.delivery_fields_raw"],
+      ["spell.frozen-note", "personal", null, "spell_raw.delivery_fields_raw"],
+      ["spell.hammer-of-mending", "personal", null, "spell_raw.delivery_fields_raw"],
+      ["spell.healing-flames", "personal", null, "spell_raw.delivery_fields_raw"],
+      ["spell.massacre", "distance", "60-ft. line", "spell_raw.delivery_fields_raw"],
+      ["spell.stone-throwing", "touch", null, "spell_raw.delivery_fields_raw"],
+      ["spell.telekinetic-storm", "personal", null, "spell_raw.delivery_fields_raw"],
+    ] as const;
 
-    expect(auraOfDistraction).toEqual(expect.objectContaining({
-      rangeCategory: "unknown",
-      rangeFormula: null,
-      rangeRaw: null,
-      normalizationStatus: "needs_review",
-    }));
-    expect(payload?.normalization?.warnings).toContainEqual(expect.objectContaining({
-      code: "MISSING_PRINTED_RANGE",
-      field_path: "/effect/range",
-    }));
-    expect(payload?.provenance).toContainEqual(expect.objectContaining({
-      field_path: "/effect/range",
-      source_field: "spell_raw.range_raw",
-      decision: "normalized",
-      note: expect.stringContaining("no override was inferred"),
-    }));
-    expect(payload?.provenance).not.toContainEqual(expect.objectContaining({
-      field_path: "/effect/range",
-      decision: "manually_resolved",
-    }));
+    for (const [spellId, rangeCategory, rangeFormula, sourceField] of expectations) {
+      const spell = await prisma.canonicalSpell.findUnique({ where: { spellId } });
+      const payload = spell?.payload as {
+        normalization?: { warnings?: Array<{ code?: string; field_path?: string }> };
+        provenance?: Array<{
+          field_path?: string;
+          source_field?: string;
+          decision?: string;
+          note?: string;
+        }>;
+      } | undefined;
+
+      expect(spell).toEqual(expect.objectContaining({
+        rangeCategory,
+        rangeFormula,
+        rangeRaw: null,
+        normalizationStatus: "validated",
+      }));
+      expect(payload?.normalization?.warnings).toContainEqual(expect.objectContaining({
+        code: "REVIEWED_RANGE_OVERRIDE",
+        field_path: "/effect/range",
+      }));
+      expect(payload?.normalization?.warnings).not.toContainEqual(expect.objectContaining({
+        code: "MISSING_PRINTED_RANGE",
+        field_path: "/effect/range",
+      }));
+      expect(payload?.provenance).toContainEqual(expect.objectContaining({
+        field_path: "/effect/range",
+        source_field: sourceField,
+        decision: "manually_resolved",
+        note: expect.stringContaining("Reviewed project decision"),
+      }));
+    }
   });
 
   it("keeps Wish's mandatory diamond component", async () => {

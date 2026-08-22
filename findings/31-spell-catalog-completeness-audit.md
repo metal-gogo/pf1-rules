@@ -2,6 +2,10 @@
 
 Audit date: 2026-08-21 (America/Mexico_City)
 
+Post-audit update: the 12 canonical spells with blank printed Range values now
+have explicit reviewed overrides. See
+[Reviewed decisions for spells with a blank printed Range](32-reviewed-missing-range-decisions.md).
+
 ## Outcome
 
 [C] The validated local database now has **3,001 canonical spells**. The audit compared **21,595 captured AoN class/level memberships** across all 30 project class lists and spell levels 0 through 9 with the canonical `spell_levels` table.
@@ -59,7 +63,7 @@ The cells show remaining membership gaps by class and level. Zero means the loca
 
 ## Fixed source failures
 
-[C] These spells are now canonical. AoN and d20PFSRD both omit a printed Range for the captured spell page. Each canonical record uses an unknown Range and remains `needs_review`; none uses a reviewed override.
+[C] These spells are now canonical. AoN and d20PFSRD both omit a printed Range for the captured spell page. At audit completion, each canonical record used an unknown Range and remained `needs_review`; none used a reviewed override. The subsequent explicit decisions linked above replaced those unknown canonical values with reviewed overrides while preserving every missing printed Range as raw `null`.
 
 - **Antipaladin 1 (1):** Conditional Favor.
 - **Arcanist 2 (2):** Aura of Distraction; Stone Throwing.
