@@ -29,7 +29,10 @@ import {
   d20SearchResultUrls,
   d20SearchUrl,
 } from "./d20-source-resolver.js";
-import { legacy35CanonicalizationEnabled } from "./scope-policy.js";
+import {
+  legacy35CanonicalizationEnabled,
+  redMantisCatalogCanonicalizationEnabled,
+} from "./scope-policy.js";
 
 
 const userAgent = "PF1RulesPrivateResearch/0.1 (local archival experiment)";
@@ -1233,6 +1236,139 @@ export async function retryReviewedCanonicalOverrides() {
 }
 
 
+export async function reconcileRedMantisCatalogMemberships() {
+  if (!redMantisCatalogCanonicalizationEnabled) {
+    throw new Error("Red Mantis Assassin catalog canonicalization is not enabled.");
+  }
+
+  const catalogListId = "spell-list.red-mantis-assassin";
+  const compactListId = "spell-list.redmantisassassin";
+  const summary = {
+    catalogListId,
+    normalized: 0,
+    levels: [] as Array<{ level: number; normalized: number }>,
+  };
+
+  for (let level = 0; level <= 9; level += 1) {
+    const { manifestPath } = levelPaths(level);
+    const manifest = loadJson(manifestPath);
+    let normalizedCount = 0;
+
+    for (const spell of manifest.spells) {
+      const catalogMembership = spell.catalog_memberships.find(
+        (membership: ValidatedJson) => membership.spell_list_id === catalogListId,
+      );
+      if (!catalogMembership) continue;
+
+      const canonicalPath = path.join(
+        projectRoot,
+        "data",
+        "canonical",
+        `${spell.spell_id.replace(/^spell\./, "")}.json`,
+      );
+      if (!fs.existsSync(canonicalPath)) continue;
+      const canonical = loadJson(canonicalPath);
+      const exact = canonical.levels.find(
+        (entry: ValidatedJson) => entry.spell_list_id === catalogListId,
+      );
+      if (exact) {
+        if (exact.level !== catalogMembership.level) {
+          throw new Error(
+            `${spell.spell_id} has Red Mantis Assassin level ${exact.level}, ` +
+              `but the catalog records level ${catalogMembership.level}.`,
+          );
+        }
+        continue;
+      }
+
+      const compact = canonical.levels.find(
+        (entry: ValidatedJson) => entry.spell_list_id === compactListId,
+      );
+      if (!compact || compact.level !== catalogMembership.level) {
+        throw new Error(
+          `${spell.spell_id} lacks matching spell-page evidence for the Red Mantis ` +
+            `Assassin level ${catalogMembership.level}; refusing to infer a level.`,
+        );
+      }
+
+      compact.spell_list_id = catalogListId;
+      compact.list_name = "red mantis assassin";
+      const canonicalRelationship = canonical.relationships.find(
+        (relationship: ValidatedJson) =>
+          relationship.type === "appears_on_spell_list" &&
+          relationship.target?.entity_id === compactListId,
+      );
+      if (!canonicalRelationship) {
+        throw new Error(
+          `${spell.spell_id} lacks its compact Red Mantis Assassin relationship.`,
+        );
+      }
+      canonicalRelationship.relationship_id =
+        `${spell.spell_id}:appears_on_spell_list:${catalogListId}`;
+      canonicalRelationship.target.entity_id = catalogListId;
+      canonicalRelationship.target.name = "red mantis assassin Spell List";
+      writeGeneratedJson(canonicalPath, canonical, true);
+
+      const decisionPath = path.join(
+        projectRoot,
+        "data",
+        "decisions",
+        `${spell.spell_id.replace(/^spell\./, "")}.json`,
+      );
+      const decision = loadJson(decisionPath);
+      const relationshipDecision = decision.relationship_decisions.find(
+        (entry: ValidatedJson) =>
+          entry.relationship_id ===
+            `${spell.spell_id}:appears_on_spell_list:${compactListId}`,
+      );
+      if (!relationshipDecision) {
+        throw new Error(
+          `${spell.spell_id} lacks its compact Red Mantis Assassin decision.`,
+        );
+      }
+      relationshipDecision.relationship_id =
+        `${spell.spell_id}:appears_on_spell_list:${catalogListId}`;
+      writeGeneratedJson(decisionPath, decision, true);
+      normalizedCount += 1;
+    }
+    summary.normalized += normalizedCount;
+    summary.levels.push({ level, normalized: normalizedCount });
+  }
+
+  for (const registryPath of directJsonFiles(path.join(projectRoot, "data", "entities"))) {
+    const registry = loadJson(registryPath);
+    const compact = registry.entities.find(
+      (entity: ValidatedJson) => entity.entity_id === compactListId,
+    );
+    if (!compact) continue;
+    const normalized = registry.entities.find(
+      (entity: ValidatedJson) => entity.entity_id === catalogListId,
+    );
+    if (!normalized) {
+      throw new Error(`${registryPath} lacks the normalized Red Mantis Assassin entity.`);
+    }
+    for (const evidence of compact.evidence) {
+      if (!normalized.evidence.some(
+        (item: ValidatedJson) => JSON.stringify(item) === JSON.stringify(evidence),
+      )) {
+        normalized.evidence.push(evidence);
+      }
+    }
+    normalized.evidence.sort((left: ValidatedJson, right: ValidatedJson) =>
+      String(left.observation_id).localeCompare(String(right.observation_id)) ||
+      String(left.anchor_text_raw).localeCompare(String(right.anchor_text_raw))
+    );
+    registry.entities = registry.entities.filter(
+      (entity: ValidatedJson) => entity.entity_id !== compactListId,
+    );
+    writeGeneratedJson(registryPath, registry, true);
+  }
+
+  validatePackage();
+  return summary;
+}
+
+
 export async function ingestDiscoveredDependencies() {
   let availableCanonicalSpells = new Map(
     directJsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) => {
@@ -1424,6 +1560,8 @@ const run = command === "retry-d20"
   ? retryReviewedCanonicalOverrides()
   : command === "legacy-3.5"
   ? ingestLegacy35ScopeEntries()
+  : command === "reconcile-red-mantis"
+  ? reconcileRedMantisCatalogMemberships()
   : command === "dependencies"
   ? ingestDiscoveredDependencies()
   : command === "rollout-inheritance"

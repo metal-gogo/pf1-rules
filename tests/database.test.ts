@@ -19,6 +19,38 @@ beforeAll(async () => {
 });
 
 describe("ingested spell catalog", () => {
+  it("normalizes every AoN Red Mantis Assassin catalog membership", async () => {
+    const [levels, compactLevels, catalogObservations] = await Promise.all([
+      prisma.spellLevel.findMany({
+        where: { spellListId: "spell-list.red-mantis-assassin" },
+        select: { spellId: true, spellLevel: true },
+      }),
+      prisma.spellLevel.count({
+        where: { spellListId: "spell-list.redmantisassassin" },
+      }),
+      prisma.spellSummaryObservation.findMany({
+        where: {
+          spellListId: "spell-list.red-mantis-assassin",
+          siteId: "aon",
+        },
+        select: { spellId: true, spellLevel: true, sourceUrl: true },
+      }),
+    ]);
+    const catalogKeys = new Set(
+      catalogObservations.map((entry) => `${entry.spellId}:${entry.spellLevel}`),
+    );
+
+    expect(levels).toHaveLength(274);
+    expect(compactLevels).toBe(0);
+    expect(catalogObservations).toHaveLength(274);
+    expect(levels.every((entry) =>
+      catalogKeys.has(`${entry.spellId}:${entry.spellLevel}`)
+    )).toBe(true);
+    expect(catalogObservations.every((entry) =>
+      entry.sourceUrl === "https://www.aonprd.com/Spells.aspx?Class=RedMantisAssassin"
+    )).toBe(true);
+  });
+
   it("marks every enabled legacy 3.5 spell and list membership", async () => {
     const spells = await prisma.canonicalSpell.findMany({
       where: { legacy35Material: true },

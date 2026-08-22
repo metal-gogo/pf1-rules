@@ -87,6 +87,18 @@ describe("local rules browser", () => {
     expect(html).toContain('/spells/spell.miracle');
   });
 
+  it("serves the normalized Red Mantis Assassin class catalog", async () => {
+    const response = await fetch(`${baseUrl}/classes/red-mantis-assassin`);
+    const html = await response.text();
+
+    expect(response.status).toBe(200);
+    expect(html).toContain("<h1>Red Mantis Assassin spells</h1>");
+    expect(html).toContain('<h2 id="level-1">Level 1 Red Mantis Assassin Spells');
+    expect(html).toContain('<h2 id="level-4">Level 4 Red Mantis Assassin Spells');
+    expect(html).toContain("Alter Winds");
+    expect(html).toContain("Wandering Star Motes");
+  });
+
   it("labels qualified class access without exposing a synthetic spell list", async () => {
     const classResponse = await fetch(`${baseUrl}/classes/oracle`);
     const classHtml = await classResponse.text();

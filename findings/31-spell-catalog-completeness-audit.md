@@ -8,15 +8,16 @@ have explicit reviewed overrides. See
 
 Post-audit scope update: all 23 legacy first-party 3.5 spells and their 115
 class/level memberships are now ingested with explicit legacy markers. The
-canonical spell count is 3,024 and the remaining AoN gaps are the 273 Red
-Mantis Assassin catalog/detail mismatches. See
+canonical spell count is 3,024. The 273 apparent Red Mantis Assassin gaps were
+then reconciled as compact-label normalization failures, leaving zero AoN
+catalog membership gaps. See
 [Legacy first-party 3.5 spell ingestion](33-legacy-35-scope-ingestion.md).
 
 ## Outcome
 
-[C] The validated local database now has **3,024 canonical spells**. The audit compared **21,595 captured AoN class/level memberships** across all 30 project class lists and spell levels 0 through 9 with the canonical `spell_levels` table.
+[C] The validated local database now has **3,024 canonical spells**. The audit compared **21,602 captured AoN class/level memberships** across all 30 project class lists and spell levels 0 through 9 with the canonical `spell_levels` table. The database has 21,595 nonblank summary observations because Contact Nalfeshnee has seven memberships with blank catalog summaries; those seven memberships are still validated and canonical.
 
-[C] The initial database had 456 missing AoN membership rows involving 308 names: 68 membership rows for 12 source-blocked spells, 115 rows for 23 deliberate legacy-3.5 exclusions, and 273 Red Mantis Assassin catalog/detail disagreements. The safe ingestion fix added all 12 source-blocked spells without inventing Range values. After the later explicit scope approval, the current database has **273 remaining AoN gaps**, all Red Mantis Assassin catalog/detail mismatches. Source failures, normalization failures, and deliberate scope exclusions are now zero.
+[C] The initial database had 456 missing AoN membership rows involving 308 names: 68 membership rows for 12 source-blocked spells, 115 rows for 23 deliberate legacy-3.5 exclusions, and 273 apparent Red Mantis Assassin catalog/detail disagreements. The safe ingestion fix added all 12 source-blocked spells without inventing Range values. The later scope approval added the legacy records. A final evidence replay proved that all 273 spell pages print the same Red Mantis level as the catalog under the compact token `redmantisassassin`; normalizing that token to `spell-list.red-mantis-assassin` leaves **zero AoN membership gaps**.
 
 [C] d20PFSRD exposes 20 catalog pages covering 22 of the 30 AoN class lists; it has no separate catalog for Adept, Arcanist, Hunter, Investigator, Red Mantis Assassin, Sahir-Afiyun, Skald, or Warpriest. A live comparison parsed 13,096 d20PFSRD membership rows. Exact spell-name and spell-URL matches were checked against the d20PFSRD spell page's printed level field. This produced 25 d20PFSRD memberships (20 unique spells) that are absent from both AoN and canonical levels.
 
@@ -27,7 +28,7 @@ Mantis Assassin catalog/detail mismatches. See
 | Source failure | 12 | 0 | [C] Ingest with Range `unknown`, raw `null`, `MISSING_PRINTED_RANGE`, source-field provenance, and `needs_review`. Do not derive Range from Target, Effect, or prose. |
 | Normalization failure | 0 | 0 | [C] No action. Keep replay validation in place. |
 | Deliberate scope exclusion | 23 | 0 | [C] Resolved after explicit scope approval. Canonical records and memberships carry legacy 3.5 markers and remain distinguishable from Pathfinder-native material. |
-| AoN catalog mismatch | 273 | 273 | [C] Keep Red Mantis catalog memberships in `spell_summary_observations`. Add a catalog-membership provenance model before any promotion into canonical `levels`; promotion requires explicit policy approval because spell detail pages do not print the values. |
+| AoN catalog mismatch | 273 | 0 | [C] Resolved as a normalization failure after replaying the spell-page evidence. The approved policy allows catalog precedence, but none of these 273 rows needed a catalog-only override. Keep catalog summaries separate from the spell-page raw level text. |
 | d20PFSRD catalog mismatch | 20 | 20 | [P] Preserve as source disagreement. Verify against the cited Paizo publication or approve a secondary-source precedence rule before modifying canonical levels. |
 
 ## Current AoN gap count matrix
@@ -55,7 +56,7 @@ The cells show remaining membership gaps by class and level. Zero means the loca
 | Paladin | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Psychic | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Ranger | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Red Mantis Assassin | 0 | 74 | 76 | 73 | 50 | 0 | 0 | 0 | 0 | 0 |
+| Red Mantis Assassin | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Sahir-Afiyun | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Shaman | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Skald | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
@@ -187,9 +188,9 @@ The cells show remaining membership gaps by class and level. Zero means the loca
 - **Wizard 5 (1):** Apparent Master.
 - **Wizard 6 (3):** Flesh to Ooze; Hardening; Torrent of Elemental Rage.
 
-## AoN catalog/detail mismatches
+## Resolved Red Mantis normalization gaps
 
-[C] Every mismatch below is on the Red Mantis Assassin catalog. AoN's class catalog prints the membership, but the spell detail page, the canonical baseline for `levels`, does not. These are catalog-only observations, not missing captured evidence.
+[C] Every apparent mismatch below was on the Red Mantis Assassin catalog. A direct replay showed that each spell detail page prints the same level using AoN's compact `redmantisassassin` token. The older canonical records converted that token into the separate ID `spell-list.redmantisassassin`, while the catalog correctly used `spell-list.red-mantis-assassin`. The reconciliation merged the IDs, preserved the compact text in each level's `raw` field, retained the catalog observations separately, and did not infer any level.
 
 - **Red Mantis Assassin 1 (74):** Alchemical Tinkering; Alter Musical Instrument; Alter Winds; Animate Rope; Ant Haul; Blend; Blood Money; Blurred Movement; Body Capacitance; Break; Burning Disarm; Chastise; Clarion Call; Color Spray; Crafter's Curse; Crafter's Fortune; Damp Powder; Dancing Lantern; Dazzling Blade; Disguise Self; Disguise Weapon; Emblazon Crest; Enlarge Person; Enlarge Tail; Erase; Expeditious Excavation; Expeditious Retreat; Fabricate Bullets; Face of the Devourer; Feather Fall; Forced Quiet; Gravity Bow; Illusion of Calm; Jump; Jury-Rig; Liberating Command; Lighten Object; Long Arm; Longshot; Lose the Trail; Lucky Number; Magic Aura; Magic Weapon; Marid's Mastery; Mirror Polish; Mirror Strike; Monkey Fish; Negative Reaction; Peasant Armaments; Poisoned Egg; Polypurpose Panacea; Recharge Innate Magic; Reduce Person; Refine Improvised Weapon; Reinforce Armaments; Serren's Swift Girding; Shadow Weapon; Silent Image; Snapdragon Fireworks; Stone Fist; Strong Wings; Sundering Shards; Touch of Gracelessness; Touch of the Sea; Transfer Tattoo; Tripvine; Unerring Weapon; Urban Grace; Vanish; Ventriloquism; Vocal Alteration; Weaken Powder; Windy Escape; Youthful Appearance.
 - **Red Mantis Assassin 2 (76):** Aboleth's Lung; Accelerate Poison; Adhesive Blood; Air Step; Alter Self; Angelic Aspect, Lesser; Animal Aspect; Ant Haul, Communal; Badger's Ferocity; Bear's Endurance; Blood Armor; Blood Blaze; Blur; Boiling Blood; Brittle Portal; Bull's Strength; Buoyancy; Carry Companion; Cat's Grace; Certain Grip; Darkvision; Destabilize Powder; Disfiguring Touch; Disguise Other; Dragonvoice; Eagle's Splendor; Eldritch Conduit; Extreme Flexibility; Familiar Figment; Fleshcurdle; Fox's Cunning; Ghostly Disguise; Glide; Haunting Mists; Hypnotic Pattern; Invisibility; Jitterbugs; Kinetic Reverberation; Knock; Levitate; Mad Hallucination; Magic Mouth; Magic Siege Engine; Make Whole; Masterwork Transformation; Minor Image; Mirror Hideaway; Mirror Image; Misdirection; Owl's Wisdom; Phantom Trap; Pyrotechnics; Raiment of Command; Recoil Fire; Reinforce Armaments, Communal; Rope Trick; Rovagug's Fury; Sculpt Simulacrum; Shadow Anchor; Silent Table; Silk To Steel; Snow Shape (Ulfen); Spider Climb; Squeeze; Stabilize Powder; Staggering Fall; Steal Breath; Symbol of Mirroring; Tattoo Potion; Telekinetic Assembly; Thunder Fire; Time Shudder; Transmute Wine to Blood; Twilight Haze; Twisted Space; Whispering Wind.
@@ -228,6 +229,6 @@ The cells show remaining membership gaps by class and level. Zero means the loca
 
 - [C] AoN class catalogs: https://www.aonprd.com/Spells.aspx?Class=All and the 30 captured class URLs stored in `data/ingestion/level-0-spells.json` through `level-9-spells.json`.
 - [C] d20PFSRD catalog index: https://www.d20pfsrd.com/magic/spell-lists-and-domains/.
-- [C] Local validation: `pnpm verify` passed after ingestion with 50 unit/integration tests and 10 browser tests.
+- [C] Local validation: `pnpm verify` passed after reconciliation with 55 unit/integration tests and 10 browser tests.
 - [S] d20PFSRD class pages contain internal catalog/detail disagreements and grouped-page links. The audit counts a d20PFSRD-only membership only when the class row maps by exact normalized spell name and URL to a captured d20PFSRD observation and that observation's printed level field independently confirms the same class/level.
 - [C] No source value was inferred, no reviewed canonical override was added, and the existing Abundant Ammunition reviewed override remains separately labeled `REVIEWED_RANGE_OVERRIDE` with `manually_resolved` provenance.

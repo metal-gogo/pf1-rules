@@ -297,10 +297,12 @@ export function validatePackage(): PackageStatistics {
   const ingestionManifestPaths = directJsonFiles(
     path.join(projectRoot, "data", "ingestion"),
   );
+  const ingestionManifests: ValidatedJson[] = [];
   const ingestionSpellIds = new Set<string>();
   let ingestionQueueItems = 0;
   for (const filename of ingestionManifestPaths) {
     const record = loadJson(filename);
+    ingestionManifests.push(record);
     assertValid(ingestionManifestValidator, record, filename);
     verifyIngestionManifest(record, filename);
     for (const spell of record.spells) ingestionSpellIds.add(spell.spell_id);
@@ -403,6 +405,26 @@ export function validatePackage(): PackageStatistics {
     }
   }
   validateSpellInheritance(canonicalById.values() as Iterable<InheritableSpell>);
+
+  for (const manifest of ingestionManifests) {
+    for (const spell of manifest.spells) {
+      const canonical = canonicalById.get(spell.spell_id);
+      if (!canonical) continue;
+      for (const membership of spell.catalog_memberships) {
+        const matches = canonical.levels.some(
+          (level: ValidatedJson) =>
+            level.spell_list_id === membership.spell_list_id &&
+            level.level === membership.level,
+        );
+        if (!matches) {
+          throw new Error(
+            `${spell.spell_id} is missing catalog membership ` +
+              `${membership.spell_list_id} ${membership.level}`,
+          );
+        }
+      }
+    }
+  }
 
   const variantPaths = directJsonFiles(path.join(projectRoot, "data", "variants"));
   const variantsById = new Map<string, ValidatedJson>();
