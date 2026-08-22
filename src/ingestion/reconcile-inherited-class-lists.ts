@@ -21,6 +21,7 @@ interface DerivedListSpec {
   levelPolicy: string;
   sourceUrl: string;
   ruleScope: "core" | "later_first_party" | "legacy_3_5" | "third_party" | "unknown";
+  includeSpellIds?: string[];
 }
 
 const derivedLists: DerivedListSpec[] = [
@@ -110,6 +111,26 @@ const derivedLists: DerivedListSpec[] = [
     sourceUrl: "https://legacy.aonprd.com/advancedClassGuide/classes/hunter.html",
     ruleScope: "later_first_party",
   },
+  {
+    targetSpellListId: "spell-list.summoner-unchained",
+    targetListName: "Summoner (Unchained)",
+    ownerEntityId: "class.summoner-unchained",
+    ownerName: "Summoner (Unchained)",
+    ownerType: "class",
+    sourceLists: [{ spellListId: "spell-list.summoner", maximumLevel: 6 }],
+    levelPolicy: "Apply Monster Summoner's Handbook summoner spell options to both the base and Unchained Summoner at the printed Summoner level.",
+    sourceUrl: "https://paizo.com/blog/i-can-call-spirits-from-the-vasty-deep",
+    ruleScope: "later_first_party",
+    includeSpellIds: [
+      "spell.alter-summoned-monster",
+      "spell.final-sacrifice",
+      "spell.gird-ally",
+      "spell.instant-restoration",
+      "spell.masters-escape",
+      "spell.masters-mutation",
+      "spell.summon-laborers",
+    ],
+  },
 ];
 
 const npcClasses = ["Adept", "Aristocrat", "Commoner", "Expert", "Warrior"] as const;
@@ -150,6 +171,7 @@ function uniqueEvidence(evidence: ValidatedJson[]): ValidatedJson[] {
 
 
 function sourceLevels(record: ValidatedJson, spec: DerivedListSpec): ValidatedJson[] {
+  if (spec.includeSpellIds && !spec.includeSpellIds.includes(record.spell_id)) return [];
   return record.levels.filter((level: ValidatedJson) => {
     const source = spec.sourceLists.find((item) => item.spellListId === level.spell_list_id);
     return source && (source.maximumLevel === undefined || level.level <= source.maximumLevel);

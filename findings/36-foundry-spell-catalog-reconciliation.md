@@ -4,6 +4,8 @@ Audit date: 2026-08-21 (America/Mexico_City)
 
 Foundry PF1 snapshot: [`1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f`](https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/commit/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f)
 
+> Historical snapshot: the 112-row backlog below records the state before class-rule, owner-list, and handbook compatibility reconciliation. The current result is [64 missing memberships and 24 competing-level claims](./38-foundry-only-membership-evaluation.md).
+
 ## Outcome
 
 [C] The pinned Foundry snapshot contains 3,028 spell records. The pre-reconciliation local database contained 3,024 canonical spells. Normalized identity matching paired 2,994 names directly and 26 more through explicit title or numbering aliases. Six Foundry names were genuine AoN identities absent locally. They are now ingested, bringing the local canonical count to 3,030 and mapping every Foundry spell identity.
@@ -255,4 +257,3 @@ The secondary catalogs propose these domain values, which are still review candi
 - [C] AoN identities link to the current spell pages; immutable local captures and parser observations are stored under `data/raw` and `data/observations`.
 - [C] Foundry remains candidate/catalog evidence. The project does not yet preserve Foundry YAML as a source-observation type, so Foundry-only values are documented here and are not mislabeled as printed evidence.
 - [S] A future Foundry observation adapter would make this comparison replayable without a temporary clone and would preserve each YAML field independently.
-

@@ -55,6 +55,7 @@ describe("ingested spell catalog", () => {
       "spell-list.omdura": 1238,
       "spell-list.oracle": 12,
       "spell-list.skald": 19,
+      "spell-list.summoner-unchained": 7,
       "spell-list.warpriest": 6,
     } as const;
 
@@ -87,6 +88,28 @@ describe("ingested spell catalog", () => {
       rule_scope: "third_party",
       source_url: "https://www.d20pfsrd.com/classes/base-classes/omdura/",
     }));
+
+    const handbookSpell = await prisma.spellLevel.findFirst({
+      where: {
+        spellId: "spell.alter-summoned-monster",
+        spellListId: "spell-list.summoner-unchained",
+      },
+    });
+    expect(handbookSpell).toEqual(expect.objectContaining({
+      spellLevel: 2,
+      accessBasis: "derived",
+      raw: expect.stringContaining("Derived access"),
+    }));
+    expect(handbookSpell?.derivation).toEqual(expect.objectContaining({
+      rule_owner_entity_id: "class.summoner-unchained",
+      rule_scope: "later_first_party",
+      source_url: "https://paizo.com/blog/i-can-call-spirits-from-the-vasty-deep",
+      source_memberships: [{ spell_list_id: "spell-list.summoner", level: 2 }],
+    }));
+
+    expect(await prisma.spellLevel.findFirst({
+      where: { spellId: "spell.alter-summoned-monster", spellListId: "spell-list.summoner" },
+    })).toEqual(expect.objectContaining({ spellLevel: 2, accessBasis: "printed" }));
 
     const explicitExceptions = [
       ["spell.waters-of-lamashtu", "spell-list.investigator", 3],
