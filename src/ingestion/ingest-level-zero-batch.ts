@@ -29,6 +29,7 @@ import {
   d20SearchResultUrls,
   d20SearchUrl,
 } from "./d20-source-resolver.js";
+import { legacy35CanonicalizationEnabled } from "./scope-policy.js";
 
 
 const userAgent = "PF1RulesPrivateResearch/0.1 (local archival experiment)";
@@ -629,6 +630,7 @@ async function ingestSpell(
   bulkEntities: Map<string, GeneratedEntity>,
   baseEntityIds: Set<string>,
   artifactScope: string,
+  legacy35Material: boolean,
   offlineOnly = false,
   allowCanonicalUpdate = false,
 ): Promise<"ingested" | "issue"> {
@@ -692,7 +694,12 @@ async function ingestSpell(
       if (!offlineOnly) throw error;
     }
 
-    const bundle = generateCanonicalBundle(spell.spell_id, inputs, availableCanonicalSpells);
+    const bundle = generateCanonicalBundle(
+      spell.spell_id,
+      inputs,
+      availableCanonicalSpells,
+      { legacy35Material },
+    );
     for (const entity of bundle.entities) {
       if (!baseEntityIds.has(entity.entity_id)) mergeEntity(bulkEntities, entity);
     }
@@ -768,11 +775,16 @@ export async function ingestSpellLevelBatch(
   );
   const report = { batch: batchNumber, ingested: [] as string[], issues: [] as string[], skipped: [] as string[] };
   for (const spell of selected) {
+    const legacy35Material = spell.catalog_memberships.some(
+      (membership: ValidatedJson) => membership.legacy_3_5_material === true,
+    );
     const canonicalPath = path.join(projectRoot, "data", "canonical", `${spell.spell_id.replace(/^spell\./, "")}.json`);
     const canonicalExists = fs.existsSync(canonicalPath) &&
       !refreshSelected &&
       (!refreshCanonical || reviewedCanonicalIds.has(spell.spell_id));
-    if (canonicalExists || spell.issue?.kind === "scope") {
+    const scopeExcluded = spell.issue?.kind === "scope" &&
+      !(legacy35CanonicalizationEnabled && legacy35Material);
+    if (canonicalExists || scopeExcluded) {
       if (retryD20Only && canonicalExists && isD20ResolutionIssue(spell)) delete spell.issue;
       if (canonicalExists && onlyIssueCode && spell.issue?.code === onlyIssueCode) delete spell.issue;
       report.skipped.push(spell.name);
@@ -786,6 +798,7 @@ export async function ingestSpellLevelBatch(
       bulkEntities,
       baseEntityIds,
       artifactScope,
+      legacy35Material,
       offlineOnly,
       refreshSelected,
     );
@@ -1096,6 +1109,86 @@ export async function retryCachedSourceIssues(requestedLevel?: number) {
 }
 
 
+export async function ingestLegacy35ScopeEntries() {
+  if (!legacy35CanonicalizationEnabled) {
+    throw new Error("Legacy 3.5 canonicalization is not enabled by the accepted scope policy.");
+  }
+  await assertIngestionSourcesAllowed();
+  const issueCode = "legacy-3.5-out-of-scope";
+  const assignedSpellIds = new Set<string>();
+  const summary = {
+    issueCode,
+    batches: 0,
+    ingested: 0,
+    issues: 0,
+    skipped: 0,
+    levels: [] as Array<{ level: number; batches: number; ingested: number; issues: number; skipped: number }>,
+  };
+  for (let level = 0; level <= 9; level += 1) {
+    const { manifestPath } = levelPaths(level);
+    const manifest = loadJson(manifestPath);
+    const spellIdsByBatch = new Map<number, Set<string>>();
+    for (const spell of manifest.spells) {
+      const legacy35Material = spell.catalog_memberships.some(
+        (membership: ValidatedJson) => membership.legacy_3_5_material === true,
+      );
+      if (!legacy35Material || assignedSpellIds.has(spell.spell_id)) continue;
+      const batch = Number(spell.batch);
+      const ids = spellIdsByBatch.get(batch) ?? new Set<string>();
+      ids.add(spell.spell_id);
+      spellIdsByBatch.set(batch, ids);
+      assignedSpellIds.add(spell.spell_id);
+    }
+    const affectedBatches = [...spellIdsByBatch.keys()].sort((left, right) => left - right);
+    const levelSummary = { level, batches: affectedBatches.length, ingested: 0, issues: 0, skipped: 0 };
+    for (const batch of affectedBatches) {
+      const spellIds = spellIdsByBatch.get(batch) ?? new Set<string>();
+      const allCanonical = [...spellIds].every((spellId) => fs.existsSync(path.join(
+        projectRoot,
+        "data",
+        "canonical",
+        `${spellId.replace(/^spell\./, "")}.json`,
+      )));
+      const report = await ingestSpellLevelBatch(
+        level,
+        batch,
+        false,
+        false,
+        false,
+        allCanonical,
+        undefined,
+        spellIds,
+        true,
+      );
+      levelSummary.ingested += report.ingested.length;
+      levelSummary.issues += report.issues.length;
+      levelSummary.skipped += report.skipped.length;
+      process.stderr.write(
+        `Ingested legacy 3.5 scope entries for level ${level} batch ${batch}: ` +
+        `${report.ingested.length} ingested, ${report.issues.length} issues, ` +
+        `${report.skipped.length} already canonical.\n`,
+      );
+    }
+    const refreshedManifest = loadJson(manifestPath);
+    const canonicalSpells = new Map(
+      directJsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) => {
+        const record = loadJson(filename);
+        return [record.spell_id, record] as const;
+      }),
+    );
+    refreshDiscoveredDependencies(refreshedManifest, canonicalSpells);
+    writeGeneratedJson(manifestPath, refreshedManifest, true);
+    summary.batches += levelSummary.batches;
+    summary.ingested += levelSummary.ingested;
+    summary.issues += levelSummary.issues;
+    summary.skipped += levelSummary.skipped;
+    summary.levels.push(levelSummary);
+  }
+  validatePackage();
+  return summary;
+}
+
+
 export async function retryReviewedCanonicalOverrides() {
   const summary = {
     batches: 0,
@@ -1329,6 +1422,8 @@ const run = command === "retry-d20"
   ? retryCachedSourceIssues(process.argv[3] === undefined || process.argv[3] === "all" ? undefined : level)
   : command === "retry-reviewed-overrides"
   ? retryReviewedCanonicalOverrides()
+  : command === "legacy-3.5"
+  ? ingestLegacy35ScopeEntries()
   : command === "dependencies"
   ? ingestDiscoveredDependencies()
   : command === "rollout-inheritance"

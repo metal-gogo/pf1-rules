@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { projectRoot } from "../config.js";
+import { legacy35CanonicalizationEnabled } from "./scope-policy.js";
 
 
 const parserVersion = "0.1.0";
@@ -270,7 +271,8 @@ export async function captureSpellLevelCatalog(level: number): Promise<Record<st
     const catalogMemberships = membershipsByName.get(name)?.sort((left, right) =>
       left.list_name.localeCompare(right.list_name, "en-US"),
     ) ?? [];
-    const issue = catalogMemberships.some((membership) => membership.legacy_3_5_material)
+    const issue = !legacy35CanonicalizationEnabled &&
+      catalogMemberships.some((membership) => membership.legacy_3_5_material)
       ? {
           kind: "scope",
           code: "legacy-3.5-out-of-scope",

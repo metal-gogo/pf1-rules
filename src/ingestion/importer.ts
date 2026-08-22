@@ -443,6 +443,7 @@ async function insertCanonicalSpells(
       data: {
         spellId: record.spell_id,
         ruleset: record.ruleset,
+        legacy35Material: record.legacy_3_5_material ?? false,
         name: record.name,
         school: record.classification.school,
         subschool: record.classification.subschool ?? null,

@@ -181,6 +181,21 @@ describe("local rules browser", () => {
     expect(html).toContain("/sources/");
   });
 
+  it("visibly distinguishes legacy 3.5 spells from Pathfinder-native spells", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.admonishing-ray`);
+    const html = await response.text();
+    expect(response.status).toBe(200);
+    expect(html).toContain("<strong>Legacy 3.5 material.</strong>");
+    expect(html).toContain("it is not a Pathfinder-native spell");
+    expect(html).toContain("Legacy 3 5");
+
+    const classResponse = await fetch(`${baseUrl}/classes/cleric`);
+    const classHtml = await classResponse.text();
+    expect(classResponse.status).toBe(200);
+    expect(classHtml).toContain("Admonishing Ray");
+    expect(classHtml).toContain('<span class="legacy-badge">Legacy 3.5</span>');
+  });
+
   it("supports search without client-side JavaScript", async () => {
     const response = await fetch(`${baseUrl}/search?q=afflictions`);
     const html = await response.text();

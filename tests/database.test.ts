@@ -19,6 +19,30 @@ beforeAll(async () => {
 });
 
 describe("ingested spell catalog", () => {
+  it("marks every enabled legacy 3.5 spell and list membership", async () => {
+    const spells = await prisma.canonicalSpell.findMany({
+      where: { legacy35Material: true },
+      include: { levels: true },
+      orderBy: { name: "asc" },
+    });
+    const levels = spells.flatMap((spell) => spell.levels);
+
+    expect(spells).toHaveLength(23);
+    expect(levels).toHaveLength(115);
+    expect(levels.every((level) => level.scope === "legacy_3_5")).toBe(true);
+    expect(spells.map((spell) => spell.name)).toContain("Pattern Recognition");
+    expect(spells.every((spell) => {
+      const payload = spell.payload as {
+        legacy_3_5_material?: boolean;
+        normalization?: { warnings?: Array<{ code?: string }> };
+      };
+      return payload.legacy_3_5_material === true &&
+        payload.normalization?.warnings?.some(
+          (warning) => warning.code === "LEGACY_3_5_MATERIAL",
+        );
+    })).toBe(true);
+  });
+
   it("keeps the reviewed Abundant Ammunition range override auditable", async () => {
     const abundantAmmunition = await prisma.canonicalSpell.findUnique({
       where: { spellId: "spell.abundant-ammunition" },
@@ -170,10 +194,10 @@ describe("ingested spell catalog", () => {
     expect(clericSummary?.summaryRaw).toBe("Object shines like a torch.");
     expect(clericSummary?.contentSha256).toMatch(/^[a-f0-9]{64}$/);
 
-    const unresolvedSummary = await prisma.spellSummaryObservation.findFirst({
+    const legacySummary = await prisma.spellSummaryObservation.findFirst({
       where: { spellId: "spell.enhanced-diplomacy" },
     });
-    expect(unresolvedSummary?.spellName).toBe("Enhanced Diplomacy");
+    expect(legacySummary?.spellName).toBe("Enhanced Diplomacy");
   });
 
   it("materializes inherited spell rules with an auditable trace", async () => {
@@ -192,24 +216,18 @@ describe("ingested spell catalog", () => {
   it("tracks the complete level-0 ingestion catalog", async () => {
     const summary = await ingestionQueueSummary(prisma);
     expect(summary.total).toBe(53);
-    expect(summary.byStatus).toEqual({
-      ingested: 51,
-      scope_issue: 2,
-    });
+    expect(summary.byStatus).toEqual({ ingested: 53 });
     expect(summary.batches).toHaveLength(6);
   });
 
-  it("derives ingested status and preserves explicit scope issues", async () => {
+  it("derives ingested status after enabling the legacy 3.5 scope", async () => {
     const ingested = await listIngestionQueue(prisma, { status: "ingested" });
-    expect(ingested).toHaveLength(51);
+    expect(ingested).toHaveLength(53);
     expect(ingested.map((item) => item.entityId)).toContain("spell.light");
+    expect(ingested.map((item) => item.entityId)).toContain("spell.enhanced-diplomacy");
+    expect(ingested.map((item) => item.entityId)).toContain("spell.sign-of-the-dawnflower");
 
     const issues = await listIngestionQueue(prisma, { issuesOnly: true });
-    expect(issues).toHaveLength(2);
-    expect(issues.filter((item) => item.status === "scope_issue").map((item) => item.entityId)).toEqual([
-      "spell.enhanced-diplomacy",
-      "spell.sign-of-the-dawnflower",
-    ]);
-    expect(issues.every((item) => item.status.endsWith("_issue"))).toBe(true);
+    expect(issues).toHaveLength(0);
   });
 });

@@ -6,11 +6,17 @@ Post-audit update: the 12 canonical spells with blank printed Range values now
 have explicit reviewed overrides. See
 [Reviewed decisions for spells with a blank printed Range](32-reviewed-missing-range-decisions.md).
 
+Post-audit scope update: all 23 legacy first-party 3.5 spells and their 115
+class/level memberships are now ingested with explicit legacy markers. The
+canonical spell count is 3,024 and the remaining AoN gaps are the 273 Red
+Mantis Assassin catalog/detail mismatches. See
+[Legacy first-party 3.5 spell ingestion](33-legacy-35-scope-ingestion.md).
+
 ## Outcome
 
-[C] The validated local database now has **3,001 canonical spells**. The audit compared **21,595 captured AoN class/level memberships** across all 30 project class lists and spell levels 0 through 9 with the canonical `spell_levels` table.
+[C] The validated local database now has **3,024 canonical spells**. The audit compared **21,595 captured AoN class/level memberships** across all 30 project class lists and spell levels 0 through 9 with the canonical `spell_levels` table.
 
-[C] The initial database had 456 missing AoN membership rows involving 308 names: 68 membership rows for 12 source-blocked spells, 115 rows for 23 deliberate legacy-3.5 exclusions, and 273 Red Mantis Assassin catalog/detail disagreements. The safe ingestion fix added all 12 source-blocked spells without inventing Range values. The current database has **388 remaining AoN gaps**: 115 deliberate scope exclusions and 273 catalog mismatches. Source failures and normalization failures are both zero.
+[C] The initial database had 456 missing AoN membership rows involving 308 names: 68 membership rows for 12 source-blocked spells, 115 rows for 23 deliberate legacy-3.5 exclusions, and 273 Red Mantis Assassin catalog/detail disagreements. The safe ingestion fix added all 12 source-blocked spells without inventing Range values. After the later explicit scope approval, the current database has **273 remaining AoN gaps**, all Red Mantis Assassin catalog/detail mismatches. Source failures, normalization failures, and deliberate scope exclusions are now zero.
 
 [C] d20PFSRD exposes 20 catalog pages covering 22 of the 30 AoN class lists; it has no separate catalog for Adept, Arcanist, Hunter, Investigator, Red Mantis Assassin, Sahir-Afiyun, Skald, or Warpriest. A live comparison parsed 13,096 d20PFSRD membership rows. Exact spell-name and spell-URL matches were checked against the d20PFSRD spell page's printed level field. This produced 25 d20PFSRD memberships (20 unique spells) that are absent from both AoN and canonical levels.
 
@@ -20,7 +26,7 @@ have explicit reviewed overrides. See
 | --- | ---: | ---: | --- |
 | Source failure | 12 | 0 | [C] Ingest with Range `unknown`, raw `null`, `MISSING_PRINTED_RANGE`, source-field provenance, and `needs_review`. Do not derive Range from Target, Effect, or prose. |
 | Normalization failure | 0 | 0 | [C] No action. Keep replay validation in place. |
-| Deliberate scope exclusion | 23 | 23 | [C] Keep catalog coverage, raw evidence, and queue issues. Do not canonicalize unless legacy first-party 3.5 material becomes an explicitly enabled scope. |
+| Deliberate scope exclusion | 23 | 0 | [C] Resolved after explicit scope approval. Canonical records and memberships carry legacy 3.5 markers and remain distinguishable from Pathfinder-native material. |
 | AoN catalog mismatch | 273 | 273 | [C] Keep Red Mantis catalog memberships in `spell_summary_observations`. Add a catalog-membership provenance model before any promotion into canonical `levels`; promotion requires explicit policy approval because spell detail pages do not print the values. |
 | d20PFSRD catalog mismatch | 20 | 20 | [P] Preserve as source disagreement. Verify against the cited Paizo publication or approve a secondary-source precedence rule before modifying canonical levels. |
 
@@ -33,33 +39,33 @@ The cells show remaining membership gaps by class and level. Zero means the loca
 | Adept | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Alchemist | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Antipaladin | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Arcanist | 0 | 2 | 3 | 3 | 3 | 1 | 3 | 0 | 0 | 0 |
-| Bard | 0 | 1 | 3 | 0 | 1 | 0 | 0 | 0 | 0 | 0 |
+| Arcanist | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Bard | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Bloodrager | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Cleric | 2 | 1 | 4 | 1 | 3 | 1 | 0 | 0 | 0 | 0 |
-| Druid | 2 | 1 | 2 | 2 | 3 | 0 | 0 | 0 | 0 | 0 |
-| Hunter | 2 | 1 | 2 | 3 | 2 | 0 | 0 | 0 | 0 | 0 |
+| Cleric | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Druid | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Hunter | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Inquisitor | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Investigator | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Magus | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Medium | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Mesmerist | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Occultist | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Oracle | 2 | 1 | 4 | 1 | 3 | 1 | 0 | 0 | 0 | 0 |
-| Paladin | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Oracle | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Paladin | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Psychic | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Ranger | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Red Mantis Assassin | 0 | 75 | 76 | 73 | 50 | 0 | 0 | 0 | 0 | 0 |
+| Ranger | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Red Mantis Assassin | 0 | 74 | 76 | 73 | 50 | 0 | 0 | 0 | 0 | 0 |
 | Sahir-Afiyun | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Shaman | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Skald | 0 | 1 | 3 | 0 | 1 | 0 | 0 | 0 | 0 | 0 |
-| Sorcerer | 0 | 2 | 3 | 3 | 3 | 1 | 3 | 0 | 0 | 0 |
+| Skald | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| Sorcerer | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Spiritualist | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Summoner | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Summoner (Unchained) | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Warpriest | 2 | 1 | 4 | 1 | 3 | 1 | 0 | 0 | 0 | 0 |
+| Warpriest | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | Witch | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Wizard | 0 | 2 | 3 | 3 | 3 | 1 | 3 | 0 | 0 | 0 |
+| Wizard | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 
 ## Fixed source failures
 
@@ -120,9 +126,9 @@ The cells show remaining membership gaps by class and level. Zero means the loca
 - **Wizard 5 (2):** Burst of Force; Hammer of Mending.
 - **Wizard 9 (1):** Massacre.
 
-## Deliberate scope exclusions
+## Resolved deliberate scope exclusions
 
-[C] AoN marks every spell below as legacy 3.5 material. Names repeat when the same excluded spell appears on multiple class lists or at different levels.
+[C] AoN marks every spell below as legacy 3.5 material. These memberships were excluded at audit time and are now canonical after explicit scope approval, with legacy markers described in finding 33. Names repeat when the same spell appears on multiple class lists or at different levels.
 
 - **Arcanist 1 (2):** Pattern Recognition; Shield Speech.
 - **Arcanist 2 (3):** Admonishing Ray; Reveal True Shape; Veil of Ash.

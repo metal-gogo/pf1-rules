@@ -5,6 +5,7 @@ import type { SpellListQualification } from "../domain/spell-lists.js";
 import { readJsonPointer } from "../domain/spell-inheritance.js";
 import type { ParsedLink, ParsedSpellPage, SiteId } from "./spell-page-parser.js";
 import { slug } from "./spell-page-parser.js";
+import { legacy35CanonicalizationRationale } from "./scope-policy.js";
 
 
 export interface ParsedObservationInput {
@@ -209,7 +210,10 @@ export function parseLevels(raw: string | null, publicationBook: string | null) 
         throw new NormalizationIssue("schema", "unparsed-spell-level", `Cannot normalize spell-list entry: ${trimmed}`);
       }
       return match[1].split("/").map((combinedListName) => {
-        const listName = combinedListName.trim().toLocaleLowerCase("en-US");
+        const printedListName = combinedListName.trim().toLocaleLowerCase("en-US");
+        const listName = printedListName === "redmantisassassin"
+          ? "red mantis assassin"
+          : printedListName;
         const entryRaw = groupQualification
           ? `${trimmed} (${groupQualification[1]})`
           : trimmed;
@@ -864,6 +868,7 @@ export function generateCanonicalBundle(
   spellId: string,
   observations: ParsedObservationInput[],
   availableCanonicalSpells: AvailableCanonicalSpells,
+  options: { legacy35Material?: boolean } = {},
 ) {
   const baseline = observations.find((item) => item.siteId === "aon");
   if (!baseline) throw new NormalizationIssue("source", "missing-aon-observation", "AoN baseline observation is missing.");
@@ -880,7 +885,10 @@ export function generateCanonicalBundle(
 
   const parsed = baseline.parsed;
   const normalizedClassification = classification(parsed.schoolRaw);
-  const levels = parseLevels(parsed.levelsRaw, parsed.sourceBookRaw);
+  const levels = parseLevels(parsed.levelsRaw, parsed.sourceBookRaw).map((level) => ({
+    ...level,
+    ...(options.legacy35Material ? { scope: "legacy_3_5" } : {}),
+  }));
   const castingTime = parseCastingTime(parsed.castingTimeRaw);
   const components = parseComponents(parsed.componentsRaw);
   const delivery = parsed.deliveryFieldsRaw.map((field) => ({
@@ -1067,6 +1075,13 @@ export function generateCanonicalBundle(
   addRelationship("uses_definition", "rule", "rule.spell-resistance", "Spell Resistance", baselineEvidence("spell_raw.spell_resistance_raw", parsed.spellResistanceRaw));
 
   const warnings: Array<{ code: string; field_path: string | null; message: string }> = [];
+  if (options.legacy35Material) {
+    warnings.push({
+      code: "LEGACY_3_5_MATERIAL",
+      field_path: "/legacy_3_5_material",
+      message: legacy35CanonicalizationRationale,
+    });
+  }
   if (rangeOverride) {
     warnings.push({
       code: "REVIEWED_RANGE_OVERRIDE",
@@ -1117,6 +1132,7 @@ export function generateCanonicalBundle(
     schema_version: "0.1.0",
     spell_id: spellId,
     ruleset: "Pathfinder First Edition",
+    ...(options.legacy35Material ? { legacy_3_5_material: true } : {}),
     name: parsed.nameRaw,
     aliases: [],
     classification: normalizedClassification,
@@ -1250,7 +1266,10 @@ export function generateCanonicalBundle(
       rationale: "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence.",
     })),
     unresolved_questions: warnings
-      .filter((warning) => warning.code !== "REVIEWED_RANGE_OVERRIDE")
+      .filter((warning) =>
+        warning.code !== "REVIEWED_RANGE_OVERRIDE" &&
+        warning.code !== "LEGACY_3_5_MATERIAL"
+      )
       .map((warning) => warning.message),
   };
   return { canonical, decision, entities: [...entityMap.values()] };

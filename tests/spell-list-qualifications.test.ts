@@ -190,6 +190,18 @@ describe("qualified spell-list entries", () => {
       }),
     ]));
   });
+
+  it("normalizes AoN's compact Red Mantis Assassin list label", () => {
+    expect(parseLevels(
+      "arcanist 1, redmantisassassin 1, sorcerer 1, wizard 1",
+      "Legacy of Fire Player's Guide",
+    )).toContainEqual(expect.objectContaining({
+      spell_list_id: "spell-list.red-mantis-assassin",
+      list_name: "red mantis assassin",
+      level: 1,
+      raw: "redmantisassassin 1",
+    }));
+  });
 });
 
 

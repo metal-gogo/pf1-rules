@@ -25,6 +25,8 @@ th, td { border-block-end: 1px solid var(--table-divider); padding: .55rem; text
 .data-table thead th { background: Canvas; position: sticky; top: 0; z-index: 1; }
 .data-table .key-column { background: Canvas; left: 0; position: sticky; z-index: 1; }
 .data-table thead .key-column { z-index: 2; }
+.legacy-badge { border: 1px solid; border-radius: .25rem; display: inline-block; font-size: .78em; font-weight: 700; margin-inline-start: .35rem; padding: .05rem .3rem; }
+.legacy-notice { border-inline-start: .3rem solid; padding: .65rem .85rem; }
 .catalog-filters { align-items: end; border: 1px solid; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); padding: 1rem; }
 .catalog-filter { display: grid; gap: .25rem; min-width: 0; }
 .catalog-filter input, .catalog-filter select { box-sizing: border-box; max-width: 100%; min-height: 2.5rem; width: 100%; }
@@ -633,6 +635,7 @@ async function alphabeticalSpellsPage(prisma: PrismaClient, url: URL): Promise<s
     select: {
       spellId: true,
       name: true,
+      legacy35Material: true,
       school: true,
       publicationBook: true,
       publicationPage: true,
@@ -669,7 +672,7 @@ async function alphabeticalSpellsPage(prisma: PrismaClient, url: URL): Promise<s
       <caption class="visually-hidden">Filtered canonical spells</caption>
       <thead><tr><th class="key-column" scope="col">Name</th><th scope="col">School</th><th scope="col">Publication</th></tr></thead>
       <tbody>${spells.map((spell) => `<tr>
-        <th class="key-column" scope="row"><a href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a></th>
+        <th class="key-column" scope="row"><a href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a>${spell.legacy35Material ? ' <span class="legacy-badge">Legacy 3.5</span>' : ""}</th>
         <td>${escapeHtml(humanize(spell.school))}</td>
         <td>${escapeHtml(spell.publicationBook)}${spell.publicationPage === null ? "" : `, page ${spell.publicationPage}`}</td>
       </tr>`).join("")}</tbody>
@@ -729,6 +732,7 @@ async function classSpellsPage(prisma: PrismaClient, classSlug: string): Promise
           select: {
             spellId: true,
             name: true,
+            legacy35Material: true,
             school: true,
             subschool: true,
             descriptionRaw: true,
@@ -810,7 +814,7 @@ async function classSpellsPage(prisma: PrismaClient, classSlug: string): Promise
             );
             const searchText = `${spell.name} ${display.summary} ${qualifiedAccess ?? ""}`.toLocaleLowerCase();
             return `<tr data-school="${escapeHtml(spell.school)}" data-level="${level}" data-components="${escapeHtml(display.components.join(" "))}" data-search="${escapeHtml(searchText)}">
-              <th class="key-column" scope="row"><a class="spell-name" href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a>${qualifiedAccess ? ` <span class="muted">(${escapeHtml(qualifiedAccess)})</span>` : ""}</th>
+              <th class="key-column" scope="row"><a class="spell-name" href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a>${spell.legacy35Material ? ' <span class="legacy-badge">Legacy 3.5</span>' : ""}${qualifiedAccess ? ` <span class="muted">(${escapeHtml(qualifiedAccess)})</span>` : ""}</th>
               <td class="school-column">${escapeHtml(school)}</td>
               <td class="components-column">${componentAbbreviations(display.components)}</td>
               <td><span class="spell-summary">${escapeHtml(display.summary)}</span></td>
@@ -908,6 +912,7 @@ async function spellPage(prisma: PrismaClient, spellId: string): Promise<string 
     <article>
       <h1>${escapeHtml(spell.name)}</h1>
       <p><code>${escapeHtml(spell.spellId)}</code></p>
+      ${spell.legacy35Material ? '<p class="legacy-notice"><strong>Legacy 3.5 material.</strong> AoN catalogs this first-party spell for reference, but it is not a Pathfinder-native spell.</p>' : ""}
       <dl>
         <dt>School</dt><dd>${escapeHtml(humanize(spell.school))}${spell.subschool ? ` (${escapeHtml(spell.subschool)})` : ""}</dd>
         <dt>Casting time</dt><dd>${escapeHtml(spell.castingTimeRaw ?? `${spell.castingTimeAmount ?? ""} ${humanize(spell.castingTimeUnit)}`)}</dd>

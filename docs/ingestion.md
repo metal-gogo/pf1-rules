@@ -30,6 +30,7 @@ pnpm ingest:level-9:all
 pnpm ingest:retry-normalization
 pnpm ingest:retry-source-issues
 pnpm ingest:retry-reviewed-overrides
+pnpm ingest:legacy-3.5
 pnpm ingest:dependencies
 pnpm ingest:linked-entities
 pnpm db:stats
@@ -55,6 +56,13 @@ while retaining any source issue that the cached evidence cannot resolve.
 reviewed canonical override. The canonical value, missing raw source value,
 supporting source field, and manual-resolution rationale remain separate in the
 generated provenance and decision records.
+
+`pnpm ingest:legacy-3.5` ingests the explicitly enabled first-party legacy 3.5
+scope from AoN catalog evidence. Generated records set
+`legacy_3_5_material: true`, every spell-list membership uses scope
+`legacy_3_5`, and the local database and web pages expose the same flag. These
+records are cataloged for use with the PF1 database but are not represented as
+Pathfinder-native rules.
 
 `pnpm ingest:dependencies` reconciles dependency references across every spell-level
 manifest. It resolves canonical names and known aliases, ingests missing parents from
