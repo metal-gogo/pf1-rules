@@ -35,6 +35,16 @@
       "level": 6,
       "scope": "later_first_party",
       "raw": "shaman 6"
+    },
+    {
+      "spell_list_id": "spell-list.nature-mystery",
+      "list_kind": "mystery",
+      "list_name": "Nature Mystery",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "awaken (10th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -2023,6 +2033,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.awaken:appears_on_spell_list:spell-list.nature-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.nature-mystery",
+        "name": "Nature Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.nature:3d2b1109",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "awaken (10th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Nature"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -2073,6 +2103,14 @@
       "raw_value_sha256": "b0c1eac89b81272aaffe134792e7e877a072768f68cb87379e815c4e29140a15",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/3",
+      "observation_id": "aon:mystery.nature:3d2b1109",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "60ee00f53c349b915b229f055ce21a63744f07505e009682a6f0b9770b7614c8",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -2093,6 +2131,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/3",
+        "message": "Nature Mystery grants Awaken as a level 5 bonus spell; this is not general Oracle class access."
       }
     ]
   }

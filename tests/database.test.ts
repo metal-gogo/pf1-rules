@@ -372,28 +372,50 @@ describe("ingested spell catalog", () => {
     expect(clericNine.map((entry) => entry.spell.spellId)).toContain("spell.miracle");
   });
 
-  it("persists mystery access on the base class list without flattening it", async () => {
-    const fireball = await findSpell(prisma, "Fireball");
-    const flameMystery = fireball?.levels.find((level) =>
-      level.spellListId === "spell-list.oracle" &&
-      level.qualifications.some((qualification) => qualification.kind === "mystery")
-    );
+  it("models complete Oracle mystery lists outside general class access", async () => {
+    const [mysteries, mysteryLists, mysteryRows, fireball] = await Promise.all([
+      prisma.entity.count({ where: { type: "mystery", status: "resolved" } }),
+      prisma.entity.count({
+        where: { type: "spell_list", id: { endsWith: "-mystery" }, status: "resolved" },
+      }),
+      prisma.spellLevel.findMany({
+        where: { listKind: "mystery" },
+        select: { spellListId: true },
+      }),
+      findSpell(prisma, "Fireball"),
+    ]);
 
+    expect(mysteries).toBe(34);
+    expect(mysteryLists).toBe(34);
+    expect(mysteryRows).toHaveLength(306);
+    expect(new Set(mysteryRows.map((row) => row.spellListId)).size).toBe(34);
+
+    const flameMystery = fireball?.levels.find(
+      (level) => level.spellListId === "spell-list.flame-mystery",
+    );
     expect(flameMystery).toEqual(expect.objectContaining({
-      listKind: "class",
-      listName: "oracle",
+      listKind: "mystery",
+      listName: "Flame Mystery",
       spellLevel: 3,
+      accessBasis: "printed",
+      raw: "fireball (6th)",
     }));
-    expect(flameMystery?.qualifications).toContainEqual(expect.objectContaining({
-      kind: "mystery",
-      payload: {
-        kind: "mystery",
-        mystery: { entity_id: "mystery.flame", name: "flame" },
-        raw: "Mystery flame",
+    expect(fireball?.levels.some((level) => level.spellListId === "spell-list.oracle"))
+      .toBe(false);
+    expect(await prisma.ruleRelationship.findUnique({
+      where: { id: "mystery.flame:owns_spell_list:spell-list.flame-mystery" },
+    })).toEqual(expect.objectContaining({
+      relationshipType: "owns_spell_list",
+      status: "accepted",
+    }));
+
+    const normalizedSourceName = await prisma.spellLevel.findFirst({
+      where: {
+        spellId: "spell.horrid-wilting",
+        spellListId: "spell-list.reaper-mystery",
       },
-    }));
-    expect(fireball?.levels.map((level) => level.spellListId))
-      .not.toContain("spell-list.flame-mystery");
+    });
+    expect(normalizedSourceName?.raw).toBe("horrid withering (16th)");
   });
 
   it("preserves catalog summaries and selects a sourced canonical description", async () => {

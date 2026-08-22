@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.magic-vestment:f3aeb0551684b271",
     "legacy_aon:spell.magic-vestment:0d3c27f3dfeee12e",
-    "d20pfsrd:spell.magic-vestment:e0c0b9fa73706b6a"
+    "d20pfsrd:spell.magic-vestment:e0c0b9fa73706b6a",
+    "aon:mystery.battle:de0aa28c"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.magic-vestment:f3aeb0551684b271",
@@ -127,6 +128,20 @@
         "d20pfsrd:spell.magic-vestment:e0c0b9fa73706b6a"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/7",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.battle:de0aa28c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.battle:de0aa28c"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -484,6 +499,20 @@
         "d20pfsrd:spell.magic-vestment:e0c0b9fa73706b6a"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.magic-vestment:appears_on_spell_list:spell-list.battle-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.battle:de0aa28c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.battle:de0aa28c"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
     }
   ],
   "unresolved_questions": [

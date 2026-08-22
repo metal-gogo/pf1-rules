@@ -78,6 +78,16 @@
       "level": 4,
       "scope": "later_first_party",
       "raw": "wizard 4"
+    },
+    {
+      "spell_list_id": "spell-list.lunar-mystery",
+      "list_kind": "mystery",
+      "list_name": "Lunar Mystery",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "moonstruck (8th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -812,6 +822,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.moonstruck:appears_on_spell_list:spell-list.lunar-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.lunar-mystery",
+        "name": "Lunar Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.lunar:8e477077",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "moonstruck (8th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Lunar"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -862,6 +892,14 @@
       "raw_value_sha256": "daedc1c61540feb2f93a598fc0e5a45ceb7bfadadd6681a8cca8561ba7382846",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:mystery.lunar:8e477077",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "713be628933d25bb9bdfda9be0f5409efa0720aca24b71fa12cfe2b7a210cc57",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -902,6 +940,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Lunar Mystery grants Moonstruck as a level 4 bonus spell; this is not general Oracle class access."
       }
     ]
   }

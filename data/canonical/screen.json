@@ -43,6 +43,16 @@
       "level": 8,
       "scope": "core",
       "raw": "wizard 8"
+    },
+    {
+      "spell_list_id": "spell-list.streets-mystery",
+      "list_kind": "mystery",
+      "list_name": "Streets Mystery",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "screen (14th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -415,6 +425,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.screen:appears_on_spell_list:spell-list.streets-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.streets-mystery",
+        "name": "Streets Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.streets:a2589e64",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "screen (14th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Streets"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -465,6 +495,14 @@
       "raw_value_sha256": "b758cb8ce15d367b475b1b5c06533045c36335960aa7e64ab38beb6cb5f62e00",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:mystery.streets:a2589e64",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "e3693d3274938e4b06652df5e7b045f93c6d4b6cc191741fed98101a566b4b01",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -485,6 +523,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Streets Mystery grants Screen as a level 7 bonus spell; this is not general Oracle class access."
       }
     ]
   }

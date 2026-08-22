@@ -86,6 +86,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.succor-mystery",
+      "list_kind": "mystery",
+      "list_name": "Succor Mystery",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "shield of fortificationACG (4th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -697,6 +707,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.shield-of-fortification:appears_on_spell_list:spell-list.succor-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.succor-mystery",
+        "name": "Succor Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.succor:91f454e1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "shield of fortificationACG (4th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Succor"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -747,6 +777,14 @@
       "raw_value_sha256": "a75e6d648c5219c54c774aaf2784b6551861aceb580cf68561dde455d78cf959",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:mystery.succor:91f454e1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "f38d95810205c21fbcf755af95fa8774c5e9d0f3140275bf609849a8ab563ee2",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -782,6 +820,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/6",
         "message": "Omdura 1 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Succor Mystery grants Shield of Fortification as a level 2 bonus spell; this is not general Oracle class access."
       }
     ]
   }

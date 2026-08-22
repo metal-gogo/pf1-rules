@@ -118,6 +118,16 @@
       "level": 3,
       "scope": "core",
       "raw": "wizard 3"
+    },
+    {
+      "spell_list_id": "spell-list.lunar-mystery",
+      "list_kind": "mystery",
+      "list_name": "Lunar Mystery",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "rage (6th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1081,6 +1091,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.rage:appears_on_spell_list:spell-list.lunar-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.lunar-mystery",
+        "name": "Lunar Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.lunar:8e477077",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "rage (6th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Lunar"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -1131,6 +1161,14 @@
       "raw_value_sha256": "63f1deb20e291fe1bd991d3a24df44422e6cbcd8853a55dd48ad52eaafe32fb3",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/13",
+      "observation_id": "aon:mystery.lunar:8e477077",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "01c136276052a03486b2a68b662322812ba07506a1bb3444d4b0963fdadbfab0",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1156,6 +1194,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/13",
+        "message": "Lunar Mystery grants Rage as a level 3 bonus spell; this is not general Oracle class access."
       }
     ]
   }

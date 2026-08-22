@@ -76,6 +76,26 @@
       "scope": "core",
       "raw": "wizard 6",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.dark-tapestry-mystery",
+      "list_kind": "mystery",
+      "list_name": "Dark Tapestry Mystery",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "planar binding (12th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.outer-rifts-mystery",
+      "list_kind": "mystery",
+      "list_name": "Outer Rifts Mystery",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "planar binding (12th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -3023,6 +3043,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.planar-binding:appears_on_spell_list:spell-list.dark-tapestry-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.dark-tapestry-mystery",
+        "name": "Dark Tapestry Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.dark-tapestry:2ee5ab35",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "planar binding (12th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Dark%20Tapestry"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.planar-binding:appears_on_spell_list:spell-list.outer-rifts-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.outer-rifts-mystery",
+        "name": "Outer Rifts Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.outer-rifts:8135dd44",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "planar binding (12th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Outer%20Rifts"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -3073,6 +3133,22 @@
       "raw_value_sha256": "6d77663c12b23ffe2772f282741c00f35a42b651771bd6b198b3025939478681",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:mystery.dark-tapestry:2ee5ab35",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "a22541c73ec9dbfda3cd6c9573c5b8e87f20d9c6bd46141826e4656510fdb6c4",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:mystery.outer-rifts:8135dd44",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "a22541c73ec9dbfda3cd6c9573c5b8e87f20d9c6bd46141826e4656510fdb6c4",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -3133,6 +3209,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Dark Tapestry Mystery grants Planar Binding as a level 6 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Outer Rifts Mystery grants Planar Binding as a level 6 bonus spell; this is not general Oracle class access."
       }
     ]
   }

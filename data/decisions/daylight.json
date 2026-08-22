@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.daylight:8beee82b4ff92ee8",
     "legacy_aon:spell.daylight:9d88281ca9136f2a",
-    "d20pfsrd:spell.daylight:d8be64995df77768"
+    "d20pfsrd:spell.daylight:d8be64995df77768",
+    "aon:mystery.heavens:d660daad",
+    "aon:mystery.solar:1d791874"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.daylight:8beee82b4ff92ee8",
@@ -127,6 +129,34 @@
         "d20pfsrd:spell.daylight:d8be64995df77768"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/17",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.heavens:d660daad",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.heavens:d660daad"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/18",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.solar:1d791874",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.solar:1d791874"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -712,6 +742,34 @@
         "d20pfsrd:spell.daylight:d8be64995df77768"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.daylight:appears_on_spell_list:spell-list.heavens-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.heavens:d660daad",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.heavens:d660daad"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
+    },
+    {
+      "relationship_id": "spell.daylight:appears_on_spell_list:spell-list.solar-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.solar:1d791874",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.solar:1d791874"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
     }
   ],
   "unresolved_questions": [

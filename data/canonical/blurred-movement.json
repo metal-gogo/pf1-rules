@@ -131,6 +131,16 @@
       "level": 1,
       "scope": "later_first_party",
       "raw": "wizard 1"
+    },
+    {
+      "spell_list_id": "spell-list.shadow-mystery",
+      "list_kind": "mystery",
+      "list_name": "Shadow Mystery",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "blurred movement (2nd)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -977,6 +987,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.blurred-movement:appears_on_spell_list:spell-list.shadow-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.shadow-mystery",
+        "name": "Shadow Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.shadow:d06014e6",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "blurred movement (2nd)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Shadow"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -1027,6 +1057,14 @@
       "raw_value_sha256": "b90637dbbee1dc812eda64c7d7fb761e0af5221f8d7bd00a8ff853635f90e71a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/15",
+      "observation_id": "aon:mystery.shadow:d06014e6",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "03921522ec2a99cef08fe262df858ec38582dfba674c617166b640306555ee36",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1047,6 +1085,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/15",
+        "message": "Shadow Mystery grants Blurred Movement as a level 1 bonus spell; this is not general Oracle class access."
       }
     ]
   }

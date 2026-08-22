@@ -99,6 +99,16 @@
       "level": 4,
       "scope": "later_first_party",
       "raw": "wizard 4"
+    },
+    {
+      "spell_list_id": "spell-list.outer-rifts-mystery",
+      "list_kind": "mystery",
+      "list_name": "Outer Rifts Mystery",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "vermin shape I (6th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -940,6 +950,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.vermin-shape-i:appears_on_spell_list:spell-list.outer-rifts-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.outer-rifts-mystery",
+        "name": "Outer Rifts Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.outer-rifts:8135dd44",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "vermin shape I (6th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Outer%20Rifts"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -990,6 +1020,14 @@
       "raw_value_sha256": "946d885fb3ac6184c6975de24e42ea26bef487a46484f9421e8b9f6b7172ae97",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/11",
+      "observation_id": "aon:mystery.outer-rifts:8135dd44",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d3f9160f08dc3a37d5537dcb82b80fa4f71bed2970c9a0f77db01cd08674f8c6",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1015,6 +1053,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/11",
+        "message": "Outer Rifts Mystery grants Vermin Shape I as a level 3 bonus spell; this is not general Oracle class access."
       }
     ]
   }

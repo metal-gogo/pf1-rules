@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.true-seeing:cb9e1434ab700a95",
     "legacy_aon:spell.true-seeing:57f060ebbcafbefa",
-    "d20pfsrd:spell.true-seeing:74c5096bf363e086"
+    "d20pfsrd:spell.true-seeing:74c5096bf363e086",
+    "aon:mystery.dragon:6998e6da",
+    "aon:mystery.intrigue:e6f78c01"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.true-seeing:cb9e1434ab700a95",
@@ -127,6 +129,34 @@
         "d20pfsrd:spell.true-seeing:74c5096bf363e086"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/22",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.dragon:6998e6da",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.dragon:6998e6da"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/23",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.intrigue:e6f78c01",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.intrigue:e6f78c01"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -868,6 +898,34 @@
         "d20pfsrd:spell.true-seeing:74c5096bf363e086"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.true-seeing:appears_on_spell_list:spell-list.dragon-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.dragon:6998e6da",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.dragon:6998e6da"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
+    },
+    {
+      "relationship_id": "spell.true-seeing:appears_on_spell_list:spell-list.intrigue-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.intrigue:e6f78c01",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.intrigue:e6f78c01"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
     }
   ],
   "unresolved_questions": [

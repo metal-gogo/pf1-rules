@@ -77,6 +77,26 @@
       "level": 2,
       "scope": "core",
       "raw": "wizard 2"
+    },
+    {
+      "spell_list_id": "spell-list.juju-mystery",
+      "list_kind": "mystery",
+      "list_name": "Juju Mystery",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "hideous laughter (4th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.whimsy-mystery",
+      "list_kind": "mystery",
+      "list_name": "Whimsy Mystery",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "hideous laughter (4th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -825,6 +845,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.hideous-laughter:appears_on_spell_list:spell-list.juju-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.juju-mystery",
+        "name": "Juju Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.juju:7692329e",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "hideous laughter (4th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Juju"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.hideous-laughter:appears_on_spell_list:spell-list.whimsy-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.whimsy-mystery",
+        "name": "Whimsy Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.whimsy:75fff951",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "hideous laughter (4th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Whimsy"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -875,6 +935,22 @@
       "raw_value_sha256": "9cb54691e109fdbe8022bc8e240263c7eaaf067365982d98797fb39cc16e8f2a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:mystery.juju:7692329e",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "9fc04f0738c91c37b641167341c67e1cb0e9633ea192ec85aa49c2609a1c22e1",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/9",
+      "observation_id": "aon:mystery.whimsy:75fff951",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "9fc04f0738c91c37b641167341c67e1cb0e9633ea192ec85aa49c2609a1c22e1",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -900,6 +976,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Juju Mystery grants Hideous Laughter as a level 2 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Whimsy Mystery grants Hideous Laughter as a level 2 bonus spell; this is not general Oracle class access."
       }
     ]
   }

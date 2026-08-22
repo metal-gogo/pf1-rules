@@ -91,6 +91,16 @@
       "level": 4,
       "scope": "core",
       "raw": "wizard 4"
+    },
+    {
+      "spell_list_id": "spell-list.dark-tapestry-mystery",
+      "list_kind": "mystery",
+      "list_name": "Dark Tapestry Mystery",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "black tentacles (8th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1155,6 +1165,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.black-tentacles:appears_on_spell_list:spell-list.dark-tapestry-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.dark-tapestry-mystery",
+        "name": "Dark Tapestry Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.dark-tapestry:2ee5ab35",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "black tentacles (8th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Dark%20Tapestry"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -1205,6 +1235,14 @@
       "raw_value_sha256": "c391209ed44ad01f3670e40d94f825149dc2550e7a0afafd7967d1fbc0f96c73",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/10",
+      "observation_id": "aon:mystery.dark-tapestry:2ee5ab35",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "1854cb8f1fdf5466aa4f1fb0e25b08ce41d7f4164ce2220fbe9b81b59a235872",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1240,6 +1278,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/10",
+        "message": "Dark Tapestry Mystery grants Black Tentacles as a level 4 bonus spell; this is not general Oracle class access."
       }
     ]
   }

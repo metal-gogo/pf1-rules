@@ -92,6 +92,26 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.bones-mystery",
+      "list_kind": "mystery",
+      "list_name": "Bones Mystery",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "slay living (10th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.reaper-mystery",
+      "list_kind": "mystery",
+      "list_name": "Reaper Mystery",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "slay living (10th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -640,6 +660,46 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.slay-living:appears_on_spell_list:spell-list.bones-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.bones-mystery",
+        "name": "Bones Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.bones:8a6d69b3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "slay living (10th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Bones"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.slay-living:appears_on_spell_list:spell-list.reaper-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.reaper-mystery",
+        "name": "Reaper Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.reaper:50aab3ff",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "slay living (10th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Reaper"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -690,6 +750,22 @@
       "raw_value_sha256": "486afcaa6d236a023f3dd17e0fea69807b859fac7e217a4793c6385ff77128cf",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:mystery.bones:8a6d69b3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "97f70cf28580c86d4c75ad0bccc5e23c8205a6a142f965ca409c9c92b49ba3d1",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/9",
+      "observation_id": "aon:mystery.reaper:50aab3ff",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "97f70cf28580c86d4c75ad0bccc5e23c8205a6a142f965ca409c9c92b49ba3d1",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -715,6 +791,16 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/7",
         "message": "Omdura 5 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Bones Mystery grants Slay Living as a level 5 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Reaper Mystery grants Slay Living as a level 5 bonus spell; this is not general Oracle class access."
       }
     ]
   }

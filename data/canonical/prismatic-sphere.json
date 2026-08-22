@@ -35,6 +35,16 @@
       "level": 9,
       "scope": "core",
       "raw": "wizard 9"
+    },
+    {
+      "spell_list_id": "spell-list.solar-mystery",
+      "list_kind": "mystery",
+      "list_name": "Solar Mystery",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "prismatic sphere (18th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -588,6 +598,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.prismatic-sphere:appears_on_spell_list:spell-list.solar-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.solar-mystery",
+        "name": "Solar Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.solar:1d791874",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "prismatic sphere (18th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Solar"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -638,6 +668,14 @@
       "raw_value_sha256": "44dc076f23ea453fe8e610c42251e0351c010a070dca1863aa73b39d51723591",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/3",
+      "observation_id": "aon:mystery.solar:1d791874",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "c133dbf6f004d4689db9a655eb0060c2988ab6c2d0ec01152c6162a187f6739e",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -713,6 +751,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/3",
+        "message": "Solar Mystery grants Prismatic Sphere as a level 9 bonus spell; this is not general Oracle class access."
       }
     ]
   }

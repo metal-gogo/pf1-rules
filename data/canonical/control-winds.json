@@ -45,6 +45,16 @@
       "level": 5,
       "scope": "later_first_party",
       "raw": "shaman 5"
+    },
+    {
+      "spell_list_id": "spell-list.wind-mystery",
+      "list_kind": "mystery",
+      "list_name": "Wind Mystery",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "control winds (10th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -493,6 +503,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.control-winds:appears_on_spell_list:spell-list.wind-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.wind-mystery",
+        "name": "Wind Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.wind:b78484f2",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "control winds (10th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Wind"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -543,6 +573,14 @@
       "raw_value_sha256": "6dd262083002471197779924fdce5838f4866b7f7389d4673c56ea536a5e79a8",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:mystery.wind:b78484f2",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "aeea23182053cae11577fdd579936f5ed516c52464a48e1db011fd5f0553e27f",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -568,6 +606,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Wind Mystery grants Control Winds as a level 5 bonus spell; this is not general Oracle class access."
       }
     ]
   }

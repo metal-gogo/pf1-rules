@@ -87,22 +87,14 @@
       "raw": "Bloodline efreeti 3"
     },
     {
-      "spell_list_id": "spell-list.oracle",
-      "list_kind": "class",
-      "list_name": "oracle",
+      "spell_list_id": "spell-list.flame-mystery",
+      "list_kind": "mystery",
+      "list_name": "Flame Mystery",
       "level": 3,
       "scope": "later_first_party",
-      "raw": "Mystery flame 3",
-      "qualifications": [
-        {
-          "kind": "mystery",
-          "mystery": {
-            "entity_id": "mystery.flame",
-            "name": "flame"
-          },
-          "raw": "Mystery flame"
-        }
-      ]
+      "raw": "fireball (6th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -527,6 +519,26 @@
         }
       ],
       "note": "The local rule link applies to the base spell and is inherited by its mythic variant."
+    },
+    {
+      "relationship_id": "spell.fireball:appears_on_spell_list:spell-list.flame-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.flame-mystery",
+        "name": "Flame Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.flame:f6116050",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "fireball (6th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Flame"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -569,6 +581,14 @@
       "raw_value_sha256": null,
       "decision": "copied",
       "note": "AoN wording selected under provenance-first-v0; the semantically matching alternatives remain preserved."
+    },
+    {
+      "field_path": "/levels/9",
+      "observation_id": "aon:mystery.flame:f6116050",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "23a92d9919ce1bebdc23500a67bddd7f27eb55ad570f085846254060b682732a",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -584,6 +604,11 @@
         "code": "DAMAGE_MODEL_DEFERRED",
         "field_path": "/description",
         "message": "Damage remains in source wording until another damage spell tests a reusable structured damage model."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Flame Mystery grants Fireball as a level 3 bonus spell; this is not general Oracle class access."
       }
     ]
   }

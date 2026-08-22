@@ -137,6 +137,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.life-mystery",
+      "list_kind": "mystery",
+      "list_name": "Life Mystery",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "restoration (8th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1260,6 +1270,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.restoration:appears_on_spell_list:spell-list.life-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.life-mystery",
+        "name": "Life Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.life:daadb585",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "restoration (8th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Life"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -1310,6 +1340,14 @@
       "raw_value_sha256": "b7411a855a62422e46fc32391f55a9c32ca02ef7a529568d0131b253051f5714",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/12",
+      "observation_id": "aon:mystery.life:daadb585",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "0eca18eebfe937103f26e269703fe51a1b293b8a499f8343d58d42cf56de2a27",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1335,6 +1373,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/11",
         "message": "Omdura 4 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/12",
+        "message": "Life Mystery grants Restoration as a level 4 bonus spell; this is not general Oracle class access."
       }
     ]
   }

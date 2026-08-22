@@ -107,6 +107,16 @@
       "level": 6,
       "scope": "core",
       "raw": "wizard 6"
+    },
+    {
+      "spell_list_id": "spell-list.whimsy-mystery",
+      "list_kind": "mystery",
+      "list_name": "Whimsy Mystery",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "mislead (12th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -855,6 +865,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.mislead:appears_on_spell_list:spell-list.whimsy-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.whimsy-mystery",
+        "name": "Whimsy Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.whimsy:75fff951",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "mislead (12th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Whimsy"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -905,6 +935,14 @@
       "raw_value_sha256": "6a289baf98b1326e11fdbcefb7b95ee1aa917b62d8044d63805c4fd6d687f801",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/12",
+      "observation_id": "aon:mystery.whimsy:75fff951",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "ed8e76e3b77016880fe2fc7bc48a209d0a9f40dbd6e1cb9fa61205dcd2753863",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -930,6 +968,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/12",
+        "message": "Whimsy Mystery grants Mislead as a level 6 bonus spell; this is not general Oracle class access."
       }
     ]
   }

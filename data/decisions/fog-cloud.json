@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.fog-cloud:b521ba5a68686615",
     "legacy_aon:spell.fog-cloud:fca134798a24e005",
-    "d20pfsrd:spell.fog-cloud:62944f152bf3d67c"
+    "d20pfsrd:spell.fog-cloud:62944f152bf3d67c",
+    "aon:mystery.battle:de0aa28c"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.fog-cloud:b521ba5a68686615",
@@ -108,6 +109,20 @@
         "d20pfsrd:spell.fog-cloud:62944f152bf3d67c"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/9",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.battle:de0aa28c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.battle:de0aa28c"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -538,6 +553,20 @@
         "d20pfsrd:spell.fog-cloud:62944f152bf3d67c"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.fog-cloud:appears_on_spell_list:spell-list.battle-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.battle:de0aa28c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.battle:de0aa28c"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
     }
   ],
   "unresolved_questions": [

@@ -51,6 +51,16 @@
       "level": 8,
       "scope": "later_first_party",
       "raw": "wizard 8"
+    },
+    {
+      "spell_list_id": "spell-list.spellscar-mystery",
+      "list_kind": "mystery",
+      "list_name": "Spellscar Mystery",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "spellscar (16th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -449,6 +459,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.spellscar:appears_on_spell_list:spell-list.spellscar-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.spellscar-mystery",
+        "name": "Spellscar Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.spellscar:37f882ea",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "spellscar (16th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Spellscar"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -499,6 +529,14 @@
       "raw_value_sha256": "c20d3734471d824672b3c36afa5b76a193defe8ff8701cd9fe84bd60c117ea7f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:mystery.spellscar:37f882ea",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "f33317819abce7569e4548e2701faa366292bfc5e782bf04738a575cb95caed1",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -519,6 +557,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Spellscar Mystery grants Spellscar as a level 8 bonus spell; this is not general Oracle class access."
       }
     ]
   }

@@ -109,6 +109,26 @@
       "level": 4,
       "scope": "core",
       "raw": "wizard 4"
+    },
+    {
+      "spell_list_id": "spell-list.battle-mystery",
+      "list_kind": "mystery",
+      "list_name": "Battle Mystery",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "wall of fire (8th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.flame-mystery",
+      "list_kind": "mystery",
+      "list_name": "Flame Mystery",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "wall of fire (8th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -804,6 +824,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.wall-of-fire:appears_on_spell_list:spell-list.battle-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.battle-mystery",
+        "name": "Battle Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.battle:de0aa28c",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "wall of fire (8th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Battle"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.wall-of-fire:appears_on_spell_list:spell-list.flame-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.flame-mystery",
+        "name": "Flame Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.flame:f6116050",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "wall of fire (8th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Flame"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -854,6 +914,22 @@
       "raw_value_sha256": "0c52d4a6272a26d76a12596d02ce159c1ed9a99e2a65eb09537256ea6debb386",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/12",
+      "observation_id": "aon:mystery.battle:de0aa28c",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "5517118db71b0df1e7eee4e810b0f1ac946bd0dfb66c0142919acebeeb9bf8c5",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/13",
+      "observation_id": "aon:mystery.flame:f6116050",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "5517118db71b0df1e7eee4e810b0f1ac946bd0dfb66c0142919acebeeb9bf8c5",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -879,6 +955,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/12",
+        "message": "Battle Mystery grants Wall of Fire as a level 4 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/13",
+        "message": "Flame Mystery grants Wall of Fire as a level 4 bonus spell; this is not general Oracle class access."
       }
     ]
   }

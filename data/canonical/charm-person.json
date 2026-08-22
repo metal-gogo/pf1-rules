@@ -93,6 +93,16 @@
       "level": 1,
       "scope": "core",
       "raw": "wizard 1"
+    },
+    {
+      "spell_list_id": "spell-list.intrigue-mystery",
+      "list_kind": "mystery",
+      "list_name": "Intrigue Mystery",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "charm person (2nd)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1053,6 +1063,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.charm-person:appears_on_spell_list:spell-list.intrigue-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.intrigue-mystery",
+        "name": "Intrigue Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.intrigue:e6f78c01",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "charm person (2nd)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Intrigue"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -1103,6 +1133,14 @@
       "raw_value_sha256": "286de66233b83da3165850a74559077f6a6531752e32f1945f4702398bc1ad39",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/10",
+      "observation_id": "aon:mystery.intrigue:e6f78c01",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d0ea305fd04026d927e36ae6d9a131a83234586337ec2469589a1d9f22f8324b",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1123,6 +1161,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/10",
+        "message": "Intrigue Mystery grants Charm Person as a level 1 bonus spell; this is not general Oracle class access."
       }
     ]
   }

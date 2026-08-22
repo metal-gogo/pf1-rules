@@ -75,6 +75,16 @@
       "level": 2,
       "scope": "core",
       "raw": "wizard 2"
+    },
+    {
+      "spell_list_id": "spell-list.occult-mystery",
+      "list_kind": "mystery",
+      "list_name": "Occult Mystery",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "spectral hand (4th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -685,6 +695,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.spectral-hand:appears_on_spell_list:spell-list.occult-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.occult-mystery",
+        "name": "Occult Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.occult:38412cd3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "spectral hand (4th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Occult"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -735,6 +765,14 @@
       "raw_value_sha256": "12307fc2f5a6584eea3bbe695016012ad14740fb9d058e92468501d4cfe907bb",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:mystery.occult:38412cd3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "76814bb9dfb5843e180c4d7eafa81767ef3e1bb12324d18dd4fa24e904218778",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -765,6 +803,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Occult Mystery grants Spectral Hand as a level 2 bonus spell; this is not general Oracle class access."
       }
     ]
   }

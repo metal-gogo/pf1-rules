@@ -35,6 +35,16 @@
       "level": 9,
       "scope": "later_first_party",
       "raw": "witch 9"
+    },
+    {
+      "spell_list_id": "spell-list.elemental-mystery",
+      "list_kind": "mystery",
+      "list_name": "Elemental Mystery",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "elemental swarm (18th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -553,6 +563,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.elemental-swarm:appears_on_spell_list:spell-list.elemental-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.elemental-mystery",
+        "name": "Elemental Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.elemental:f58ece0f",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "elemental swarm (18th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Elemental"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -603,6 +633,14 @@
       "raw_value_sha256": "e410cc85f2deac5b5c0519b823d574919f4b7307942e72abe6d4b0878eeeac34",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/3",
+      "observation_id": "aon:mystery.elemental:f58ece0f",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "b5d00875e040f3fd880fab5df62fdb0741999c9446e8a181d45ca372d635b895",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -623,6 +661,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/3",
+        "message": "Elemental Mystery grants Elemental Swarm as a level 9 bonus spell; this is not general Oracle class access."
       }
     ]
   }

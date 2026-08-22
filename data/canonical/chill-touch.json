@@ -75,6 +75,16 @@
       "level": 1,
       "scope": "core",
       "raw": "wizard 1"
+    },
+    {
+      "spell_list_id": "spell-list.reaper-mystery",
+      "list_kind": "mystery",
+      "list_name": "Reaper Mystery",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "chill touch (2nd)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -665,6 +675,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.chill-touch:appears_on_spell_list:spell-list.reaper-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.reaper-mystery",
+        "name": "Reaper Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.reaper:50aab3ff",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "chill touch (2nd)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Reaper"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -715,6 +745,14 @@
       "raw_value_sha256": "dcd4615fc5df9b87a779fa576657310f00fe4dc6bafcd5ef31883129052f30ee",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:mystery.reaper:50aab3ff",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "01f0ed4cfcd82b4955e98908e8d66184bf14fc6467fa4663e9cd3e203fdecf61",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -730,6 +768,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Reaper Mystery grants Chill Touch as a level 1 bonus spell; this is not general Oracle class access."
       }
     ]
   }

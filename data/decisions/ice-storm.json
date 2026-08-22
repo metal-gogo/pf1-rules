@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.ice-storm:9699426f0433a735",
     "legacy_aon:spell.ice-storm:89cde0a3ecf10e92",
-    "d20pfsrd:spell.ice-storm:f2f5538c293a8b79"
+    "d20pfsrd:spell.ice-storm:f2f5538c293a8b79",
+    "aon:mystery.apocalypse:4cebc0bb",
+    "aon:mystery.winter:877fc031"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.ice-storm:9699426f0433a735",
@@ -108,6 +110,34 @@
         "d20pfsrd:spell.ice-storm:f2f5538c293a8b79"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/10",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.apocalypse:4cebc0bb",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.apocalypse:4cebc0bb"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/11",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.winter:877fc031",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.winter:877fc031"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -510,6 +540,34 @@
         "d20pfsrd:spell.ice-storm:f2f5538c293a8b79"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.ice-storm:appears_on_spell_list:spell-list.apocalypse-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.apocalypse:4cebc0bb",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.apocalypse:4cebc0bb"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
+    },
+    {
+      "relationship_id": "spell.ice-storm:appears_on_spell_list:spell-list.winter-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.winter:877fc031",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.winter:877fc031"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
     }
   ],
   "unresolved_questions": [

@@ -51,6 +51,16 @@
       "level": 4,
       "scope": "later_first_party",
       "raw": "skald 4"
+    },
+    {
+      "spell_list_id": "spell-list.nature-mystery",
+      "list_kind": "mystery",
+      "list_name": "Nature Mystery",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "speak with plants (6th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -397,6 +407,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.speak-with-plants:appears_on_spell_list:spell-list.nature-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.nature-mystery",
+        "name": "Nature Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.nature:3d2b1109",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "speak with plants (6th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Nature"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -447,6 +477,14 @@
       "raw_value_sha256": "12307fc2f5a6584eea3bbe695016012ad14740fb9d058e92468501d4cfe907bb",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:mystery.nature:3d2b1109",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "91272b8d1b0bc2af16c8faf116f9cfb8d4dcb838839e05d13a32574c63a4821d",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -467,6 +505,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Nature Mystery grants Speak with Plants as a level 3 bonus spell; this is not general Oracle class access."
       }
     ]
   }

@@ -194,6 +194,36 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.bones-mystery",
+      "list_kind": "mystery",
+      "list_name": "Bones Mystery",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "cause fear (2nd)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.dragon-mystery",
+      "list_kind": "mystery",
+      "list_name": "Dragon Mystery",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "cause fear (2nd)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.godclaw-mystery",
+      "list_kind": "mystery",
+      "list_name": "Godclaw Mystery",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "cause fear (2nd)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1279,6 +1309,66 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.cause-fear:appears_on_spell_list:spell-list.bones-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.bones-mystery",
+        "name": "Bones Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.bones:8a6d69b3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cause fear (2nd)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Bones"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.cause-fear:appears_on_spell_list:spell-list.dragon-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.dragon-mystery",
+        "name": "Dragon Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.dragon:6998e6da",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cause fear (2nd)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Dragon"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.cause-fear:appears_on_spell_list:spell-list.godclaw-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.godclaw-mystery",
+        "name": "Godclaw Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.godclaw:56fddf5d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cause fear (2nd)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Godclaw"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -1329,6 +1419,30 @@
       "raw_value_sha256": "b96b0b50c46eea997a990de932ee1d21d4e390aadeaf8801659ae7963b99a6a9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/20",
+      "observation_id": "aon:mystery.bones:8a6d69b3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "5eff7d5a77598e08dd45737b893986df2d9551985dff1235ad9b2c857f1a0639",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/21",
+      "observation_id": "aon:mystery.dragon:6998e6da",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "5eff7d5a77598e08dd45737b893986df2d9551985dff1235ad9b2c857f1a0639",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/22",
+      "observation_id": "aon:mystery.godclaw:56fddf5d",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "5eff7d5a77598e08dd45737b893986df2d9551985dff1235ad9b2c857f1a0639",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1354,6 +1468,21 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/19",
         "message": "Omdura 1 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/20",
+        "message": "Bones Mystery grants Cause Fear as a level 1 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/21",
+        "message": "Dragon Mystery grants Cause Fear as a level 1 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/22",
+        "message": "Godclaw Mystery grants Cause Fear as a level 1 bonus spell; this is not general Oracle class access."
       }
     ]
   }

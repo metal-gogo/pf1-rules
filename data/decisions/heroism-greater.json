@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.heroism-greater:b081393d43b795ad",
     "legacy_aon:spell.heroism-greater:d75dd2374dc326a1",
-    "d20pfsrd:spell.heroism-greater:9ee27d7d7adff2c4"
+    "d20pfsrd:spell.heroism-greater:9ee27d7d7adff2c4",
+    "aon:mystery.ancestor:a7be2624",
+    "aon:mystery.succor:91f454e1"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.heroism-greater:b081393d43b795ad",
@@ -108,6 +110,34 @@
         "d20pfsrd:spell.heroism-greater:9ee27d7d7adff2c4"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/10",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.ancestor:a7be2624",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.ancestor:a7be2624"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/11",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.succor:91f454e1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.succor:91f454e1"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -570,6 +600,34 @@
         "d20pfsrd:spell.heroism-greater:9ee27d7d7adff2c4"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.heroism-greater:appears_on_spell_list:spell-list.ancestor-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.ancestor:a7be2624",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.ancestor:a7be2624"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
+    },
+    {
+      "relationship_id": "spell.heroism-greater:appears_on_spell_list:spell-list.succor-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.succor:91f454e1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.succor:91f454e1"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
     }
   ],
   "unresolved_questions": [

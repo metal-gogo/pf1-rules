@@ -37,6 +37,16 @@
       "level": 9,
       "scope": "later_first_party",
       "raw": "wizard 9"
+    },
+    {
+      "spell_list_id": "spell-list.winter-mystery",
+      "list_kind": "mystery",
+      "list_name": "Winter Mystery",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "mass icy prisonUM (18th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -461,6 +471,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.icy-prison-mass:appears_on_spell_list:spell-list.winter-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.winter-mystery",
+        "name": "Winter Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.winter:877fc031",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "mass icy prisonUM (18th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Winter"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -511,6 +541,14 @@
       "raw_value_sha256": "6df2a85f0c3a8c07f314705f0a06e64484a0c594ad432919c4b7d3cc9d5a8a8b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/3",
+      "observation_id": "aon:mystery.winter:877fc031",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "6cdf9fa8697d1164ac45338e38f143d1e715060efb3fa6d5fcc93f32ffec5ba0",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -586,6 +624,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/effect/spell_resistance",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/3",
+        "message": "Winter Mystery grants Icy Prison, Mass as a level 9 bonus spell; this is not general Oracle class access."
       }
     ]
   }

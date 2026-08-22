@@ -46,6 +46,16 @@
       "level": 8,
       "scope": "later_first_party",
       "raw": "wizard 8"
+    },
+    {
+      "spell_list_id": "spell-list.volcano-mystery",
+      "list_kind": "mystery",
+      "list_name": "Volcano Mystery",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "wall of lava (16th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -695,6 +705,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.wall-of-lava:appears_on_spell_list:spell-list.volcano-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.volcano-mystery",
+        "name": "Volcano Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.volcano:6909d144",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "wall of lava (16th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Volcano"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -745,6 +775,14 @@
       "raw_value_sha256": "c7e9d89763930643d58ce289728ce44326470364705d0b2cf28e64623ead66c2",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:mystery.volcano:6909d144",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "ac25f15ce4b49dfc72dfdb611556511d9a3267dc2b13e8d6302673a1091aa437",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -770,6 +808,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Volcano Mystery grants Wall of Lava as a level 8 bonus spell; this is not general Oracle class access."
       }
     ]
   }

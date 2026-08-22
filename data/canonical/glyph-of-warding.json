@@ -78,6 +78,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.streets-mystery",
+      "list_kind": "mystery",
+      "list_name": "Streets Mystery",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "glyph of warding (6th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -756,6 +766,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.glyph-of-warding:appears_on_spell_list:spell-list.streets-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.streets-mystery",
+        "name": "Streets Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.streets:a2589e64",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "glyph of warding (6th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Streets"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -806,6 +836,14 @@
       "raw_value_sha256": "8157e64adf1095e3b2c753ff817c7f83646faad7870196848f77a596c67af559",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:mystery.streets:a2589e64",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "4ed5636bc2c99a089db57d9b4e4dece8b32451a6527298041dd6a8efd2eec012",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -836,6 +874,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/5",
         "message": "Omdura 3 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Streets Mystery grants Glyph of Warding as a level 3 bonus spell; this is not general Oracle class access."
       }
     ]
   }

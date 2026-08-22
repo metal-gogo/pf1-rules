@@ -67,6 +67,26 @@
       "level": 1,
       "scope": "core",
       "raw": "wizard 1"
+    },
+    {
+      "spell_list_id": "spell-list.spellscar-mystery",
+      "list_kind": "mystery",
+      "list_name": "Spellscar Mystery",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "ray of enfeeblement (2nd)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.succor-mystery",
+      "list_kind": "mystery",
+      "list_name": "Succor Mystery",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "ray of enfeeblement (2nd)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -650,6 +670,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.ray-of-enfeeblement:appears_on_spell_list:spell-list.spellscar-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.spellscar-mystery",
+        "name": "Spellscar Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.spellscar:37f882ea",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "ray of enfeeblement (2nd)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Spellscar"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.ray-of-enfeeblement:appears_on_spell_list:spell-list.succor-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.succor-mystery",
+        "name": "Succor Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.succor:91f454e1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "ray of enfeeblement (2nd)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Succor"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -700,6 +760,22 @@
       "raw_value_sha256": "63f1deb20e291fe1bd991d3a24df44422e6cbcd8853a55dd48ad52eaafe32fb3",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:mystery.spellscar:37f882ea",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "3d316c5fb1c89769bd0b9e30dc8909d127ed243baa0c714b019162281320fb1d",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:mystery.succor:91f454e1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "3d316c5fb1c89769bd0b9e30dc8909d127ed243baa0c714b019162281320fb1d",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -725,6 +801,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Spellscar Mystery grants Ray of Enfeeblement as a level 1 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Succor Mystery grants Ray of Enfeeblement as a level 1 bonus spell; this is not general Oracle class access."
       }
     ]
   }

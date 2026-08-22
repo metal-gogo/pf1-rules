@@ -61,6 +61,16 @@
       "level": 6,
       "scope": "core",
       "raw": "wizard 6"
+    },
+    {
+      "spell_list_id": "spell-list.heavens-mystery",
+      "list_kind": "mystery",
+      "list_name": "Heavens Mystery",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "chain lightning (12th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -682,6 +692,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.chain-lightning:appears_on_spell_list:spell-list.heavens-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.heavens-mystery",
+        "name": "Heavens Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.heavens:d660daad",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "chain lightning (12th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Heavens"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -732,6 +762,14 @@
       "raw_value_sha256": "0ab1600d94c03778425cf3aea72bcc1769477ead080c8f4c5bfc54f60daca665",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:mystery.heavens:d660daad",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "12d666d565693be6c0e53ca91c849b7e3ab8e2eefeae06b7a32fa3becf276715",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -767,6 +805,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Heavens Mystery grants Chain Lightning as a level 6 bonus spell; this is not general Oracle class access."
       }
     ]
   }

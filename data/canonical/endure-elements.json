@@ -186,6 +186,36 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.elemental-mystery",
+      "list_kind": "mystery",
+      "list_name": "Elemental Mystery",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "Endure elements (2nd)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.outer-rifts-mystery",
+      "list_kind": "mystery",
+      "list_name": "Outer Rifts Mystery",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "endure elements (2nd)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.winter-mystery",
+      "list_kind": "mystery",
+      "list_name": "Winter Mystery",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "endure elements (2nd)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1251,6 +1281,66 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.endure-elements:appears_on_spell_list:spell-list.elemental-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.elemental-mystery",
+        "name": "Elemental Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.elemental:f58ece0f",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Endure elements (2nd)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Elemental"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.endure-elements:appears_on_spell_list:spell-list.outer-rifts-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.outer-rifts-mystery",
+        "name": "Outer Rifts Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.outer-rifts:8135dd44",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "endure elements (2nd)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Outer%20Rifts"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.endure-elements:appears_on_spell_list:spell-list.winter-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.winter-mystery",
+        "name": "Winter Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.winter:877fc031",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "endure elements (2nd)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Winter"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -1301,6 +1391,30 @@
       "raw_value_sha256": "e410cc85f2deac5b5c0519b823d574919f4b7307942e72abe6d4b0878eeeac34",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/20",
+      "observation_id": "aon:mystery.elemental:f58ece0f",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "81d81d82f8004c683ef1ac6436d3a40c955c6c98940fc135cd829cb2c3ccc740",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/21",
+      "observation_id": "aon:mystery.outer-rifts:8135dd44",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "f8a2006bc1043e8b90cbf519fe46a26f3500a0362b7060acf7692dd7c1f57695",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/22",
+      "observation_id": "aon:mystery.winter:877fc031",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "f8a2006bc1043e8b90cbf519fe46a26f3500a0362b7060acf7692dd7c1f57695",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1331,6 +1445,21 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/19",
         "message": "Omdura 1 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/20",
+        "message": "Elemental Mystery grants Endure Elements as a level 1 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/21",
+        "message": "Outer Rifts Mystery grants Endure Elements as a level 1 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/22",
+        "message": "Winter Mystery grants Endure Elements as a level 1 bonus spell; this is not general Oracle class access."
       }
     ]
   }

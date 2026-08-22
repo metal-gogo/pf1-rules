@@ -53,6 +53,16 @@
       "level": 8,
       "scope": "later_first_party",
       "raw": "shaman 8"
+    },
+    {
+      "spell_list_id": "spell-list.battle-mystery",
+      "list_kind": "mystery",
+      "list_name": "Battle Mystery",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "earthquake (16th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -897,6 +907,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.earthquake:appears_on_spell_list:spell-list.battle-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.battle-mystery",
+        "name": "Battle Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.battle:de0aa28c",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "earthquake (16th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Battle"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -947,6 +977,14 @@
       "raw_value_sha256": "95149d458eaa2bfa022d365829d04607378cf46e6b35da99bde8ce58c8194178",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:mystery.battle:de0aa28c",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "801caa9f4db31f34879be0a2cb9f53e2073fccfddcac8d62b07fc1336b7b655e",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -972,6 +1010,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Battle Mystery grants Earthquake as a level 8 bonus spell; this is not general Oracle class access."
       }
     ]
   }

@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.heat-metal:dbba08a9c83ad5e3",
     "legacy_aon:spell.heat-metal:c12bafb6b829ab26",
-    "d20pfsrd:spell.heat-metal:723c93ac6de67e10"
+    "d20pfsrd:spell.heat-metal:723c93ac6de67e10",
+    "aon:mystery.metal:3e732dcb",
+    "aon:mystery.volcano:6909d144"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.heat-metal:dbba08a9c83ad5e3",
@@ -108,6 +110,34 @@
         "d20pfsrd:spell.heat-metal:723c93ac6de67e10"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/4",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.metal:3e732dcb",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.metal:3e732dcb"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/5",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.volcano:6909d144",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.volcano:6909d144"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -406,6 +436,34 @@
         "d20pfsrd:spell.heat-metal:723c93ac6de67e10"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.heat-metal:appears_on_spell_list:spell-list.metal-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.metal:3e732dcb",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.metal:3e732dcb"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
+    },
+    {
+      "relationship_id": "spell.heat-metal:appears_on_spell_list:spell-list.volcano-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.volcano:6909d144",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.volcano:6909d144"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
     }
   ],
   "unresolved_questions": [

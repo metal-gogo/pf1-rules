@@ -117,6 +117,16 @@
       "level": 2,
       "scope": "core",
       "raw": "wizard 2"
+    },
+    {
+      "spell_list_id": "spell-list.godclaw-mystery",
+      "list_kind": "mystery",
+      "list_name": "Godclaw Mystery",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "daze monster (4th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -880,6 +890,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.daze-monster:appears_on_spell_list:spell-list.godclaw-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.godclaw-mystery",
+        "name": "Godclaw Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.godclaw:56fddf5d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "daze monster (4th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Godclaw"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -930,6 +960,14 @@
       "raw_value_sha256": "d0d1235fd0fd29ed6dafaa71f968e4d81c646f4009b35be7a77d8e1a6fafeaca",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/13",
+      "observation_id": "aon:mystery.godclaw:56fddf5d",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d24a70a81dd367dbefc680683f3625198661aeb86051d7b37bb38fa639fa9d09",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1005,6 +1043,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/13",
+        "message": "Godclaw Mystery grants Daze Monster as a level 2 bonus spell; this is not general Oracle class access."
       }
     ]
   }

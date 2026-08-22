@@ -61,6 +61,16 @@
       "level": 6,
       "scope": "later_first_party",
       "raw": "wizard 6"
+    },
+    {
+      "spell_list_id": "spell-list.waves-mystery",
+      "list_kind": "mystery",
+      "list_name": "Waves Mystery",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "fluid form (12th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -594,6 +604,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.fluid-form:appears_on_spell_list:spell-list.waves-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.waves-mystery",
+        "name": "Waves Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.waves:55241ac7",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "fluid form (12th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Waves"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -644,6 +674,14 @@
       "raw_value_sha256": "e069a366d214a8a4838a6f54e01d360497a7d2223687a8754f2409f1dfa768a3",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:mystery.waves:55241ac7",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "38350a734b8545b550222699020d4952bccb7e9839e998e07ce0dd8a91676d89",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -659,6 +697,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Waves Mystery grants Fluid Form as a level 6 bonus spell; this is not general Oracle class access."
       }
     ]
   }

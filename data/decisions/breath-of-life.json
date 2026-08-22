@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.breath-of-life:f7dfc920f502635a",
     "legacy_aon:spell.breath-of-life:050c22720ab646cd",
-    "d20pfsrd:spell.breath-of-life:480a5c75d7d82bc6"
+    "d20pfsrd:spell.breath-of-life:480a5c75d7d82bc6",
+    "aon:mystery.life:daadb585"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.breath-of-life:f7dfc920f502635a",
@@ -122,6 +123,20 @@
         "aon:spell.breath-of-life:f7dfc920f502635a"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/6",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.life:daadb585",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.life:daadb585"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -502,6 +517,20 @@
         "aon:spell.breath-of-life:f7dfc920f502635a"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.breath-of-life:appears_on_spell_list:spell-list.life-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.life:daadb585",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.life:daadb585"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
     }
   ],
   "unresolved_questions": [

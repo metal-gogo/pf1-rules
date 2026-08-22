@@ -45,6 +45,26 @@
       "level": 2,
       "scope": "later_first_party",
       "raw": "psychic 2"
+    },
+    {
+      "spell_list_id": "spell-list.metal-mystery",
+      "list_kind": "mystery",
+      "list_name": "Metal Mystery",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "heat metal (4th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.volcano-mystery",
+      "list_kind": "mystery",
+      "list_name": "Volcano Mystery",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "heat metal (4th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -546,6 +566,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.heat-metal:appears_on_spell_list:spell-list.metal-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.metal-mystery",
+        "name": "Metal Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.metal:3e732dcb",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "heat metal (4th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Metal"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.heat-metal:appears_on_spell_list:spell-list.volcano-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.volcano-mystery",
+        "name": "Volcano Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.volcano:6909d144",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "heat metal (4th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Volcano"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -596,6 +656,22 @@
       "raw_value_sha256": "f6f167791a30ef6cf1fd10f22254e035156b6a25268c2734ab8ae9e69e08789a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:mystery.metal:3e732dcb",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "919aa01349ae649b3ee424dc8d4cef2c7e3f2886732361dccf0a081adaa3d225",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:mystery.volcano:6909d144",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "919aa01349ae649b3ee424dc8d4cef2c7e3f2886732361dccf0a081adaa3d225",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -621,6 +697,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Metal Mystery grants Heat Metal as a level 2 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Volcano Mystery grants Heat Metal as a level 2 bonus spell; this is not general Oracle class access."
       }
     ]
   }

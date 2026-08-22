@@ -77,6 +77,16 @@
       "level": 2,
       "scope": "core",
       "raw": "wizard 2"
+    },
+    {
+      "spell_list_id": "spell-list.wind-mystery",
+      "list_kind": "mystery",
+      "list_name": "Wind Mystery",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "gust of wind (4th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -761,6 +771,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.gust-of-wind:appears_on_spell_list:spell-list.wind-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.wind-mystery",
+        "name": "Wind Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.wind:b78484f2",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "gust of wind (4th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Wind"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -811,6 +841,14 @@
       "raw_value_sha256": "86128aeca0e1a92a73cd7850912551bde0c159c8c3d341a1fc1692a2795104ef",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:mystery.wind:b78484f2",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "da1c006ac11c7256eaaadf55fab7bad814308ea8d106a004710bd386a80ab03c",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -836,6 +874,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Wind Mystery grants Gust of Wind as a level 2 bonus spell; this is not general Oracle class access."
       }
     ]
   }

@@ -170,6 +170,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.waves-mystery",
+      "list_kind": "mystery",
+      "list_name": "Waves Mystery",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "water breathing (6th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -937,6 +947,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.water-breathing:appears_on_spell_list:spell-list.waves-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.waves-mystery",
+        "name": "Waves Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.waves:55241ac7",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "water breathing (6th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Waves"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -987,6 +1017,14 @@
       "raw_value_sha256": "92146b4ff0cff468cbf123e79a7961bb6aa16f919c09c25b68727de3f56aa9c9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/18",
+      "observation_id": "aon:mystery.waves:55241ac7",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "ce2620d5a62c735a9f8190018463ac74e52d8ae0a03c9823b9bba6743e247346",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1007,6 +1045,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/17",
         "message": "Omdura 3 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/18",
+        "message": "Waves Mystery grants Water Breathing as a level 3 bonus spell; this is not general Oracle class access."
       }
     ]
   }

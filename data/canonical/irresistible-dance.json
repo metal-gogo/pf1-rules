@@ -85,6 +85,16 @@
       "level": 8,
       "scope": "core",
       "raw": "wizard 8"
+    },
+    {
+      "spell_list_id": "spell-list.whimsy-mystery",
+      "list_kind": "mystery",
+      "list_name": "Whimsy Mystery",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "irresistible dance (16th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -788,6 +798,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.irresistible-dance:appears_on_spell_list:spell-list.whimsy-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.whimsy-mystery",
+        "name": "Whimsy Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.whimsy:75fff951",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "irresistible dance (16th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Whimsy"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -838,6 +868,14 @@
       "raw_value_sha256": "e9030d72f06d9a7dba5b5f41f734a562c440dce14517b4dee6e2ca5b84834691",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/9",
+      "observation_id": "aon:mystery.whimsy:75fff951",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "2b35ccf54bbe57f5f46d6fbadaebf30019575ed5a36435a84b8356209d1a5f95",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -863,6 +901,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Whimsy Mystery grants Irresistible Dance as a level 8 bonus spell; this is not general Oracle class access."
       }
     ]
   }

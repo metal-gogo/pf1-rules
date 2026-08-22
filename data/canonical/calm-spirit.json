@@ -82,6 +82,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.reaper-mystery",
+      "list_kind": "mystery",
+      "list_name": "Reaper Mystery",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "calm spirit (4th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -718,6 +728,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.calm-spirit:appears_on_spell_list:spell-list.reaper-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.reaper-mystery",
+        "name": "Reaper Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.reaper:50aab3ff",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "calm spirit (4th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Reaper"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -768,6 +798,14 @@
       "raw_value_sha256": "02006a03379d288c69256b12a15b4352b1409b6a27666b0542587417b98c9d28",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:mystery.reaper:50aab3ff",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "c7f7b43f4e701a3f582db7013772a1c0f5bf1dd5cc7e4ee0860897a09265c289",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -803,6 +841,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/6",
         "message": "Omdura 2 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Reaper Mystery grants Calm Spirit as a level 2 bonus spell; this is not general Oracle class access."
       }
     ]
   }

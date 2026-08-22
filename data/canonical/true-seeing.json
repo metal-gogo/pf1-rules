@@ -206,6 +206,26 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.dragon-mystery",
+      "list_kind": "mystery",
+      "list_name": "Dragon Mystery",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "true seeing (14th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.intrigue-mystery",
+      "list_kind": "mystery",
+      "list_name": "Intrigue Mystery",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "true seeing (10th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1275,6 +1295,46 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.true-seeing:appears_on_spell_list:spell-list.dragon-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.dragon-mystery",
+        "name": "Dragon Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.dragon:6998e6da",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "true seeing (14th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Dragon"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.true-seeing:appears_on_spell_list:spell-list.intrigue-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.intrigue-mystery",
+        "name": "Intrigue Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.intrigue:e6f78c01",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "true seeing (10th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Intrigue"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -1325,6 +1385,22 @@
       "raw_value_sha256": "79d57ef6d1070a36c19664275460605ceca90ae2032529364e2e649d816a99ed",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/22",
+      "observation_id": "aon:mystery.dragon:6998e6da",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "7dbcec1af38f55a9087c61cd2b27a512fb9fcd8827042a93340497879a9e51f9",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/23",
+      "observation_id": "aon:mystery.intrigue:e6f78c01",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "b96ce67ecef3957f620eb26b9ab5d50ca3499f0aaa55580c9f99f71f7a0d7f46",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1350,6 +1426,16 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/21",
         "message": "Omdura 5 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/22",
+        "message": "Dragon Mystery grants True Seeing as a level 7 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/23",
+        "message": "Intrigue Mystery grants True Seeing as a level 5 bonus spell; this is not general Oracle class access."
       }
     ]
   }

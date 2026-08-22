@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.incendiary-cloud:cb83d64c2b3ade98",
     "legacy_aon:spell.incendiary-cloud:1f71788e8f16fb43",
-    "d20pfsrd:spell.incendiary-cloud:196744651255583d"
+    "d20pfsrd:spell.incendiary-cloud:196744651255583d",
+    "aon:mystery.apocalypse:4cebc0bb",
+    "aon:mystery.flame:f6116050"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.incendiary-cloud:cb83d64c2b3ade98",
@@ -108,6 +110,34 @@
         "d20pfsrd:spell.incendiary-cloud:196744651255583d"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/4",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.apocalypse:4cebc0bb",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.apocalypse:4cebc0bb"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/5",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.flame:f6116050",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.flame:f6116050"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -430,6 +460,34 @@
         "d20pfsrd:spell.incendiary-cloud:196744651255583d"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.incendiary-cloud:appears_on_spell_list:spell-list.apocalypse-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.apocalypse:4cebc0bb",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.apocalypse:4cebc0bb"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
+    },
+    {
+      "relationship_id": "spell.incendiary-cloud:appears_on_spell_list:spell-list.flame-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.flame:f6116050",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.flame:f6116050"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
     }
   ],
   "unresolved_questions": [

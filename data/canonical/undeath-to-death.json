@@ -102,6 +102,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.reaper-mystery",
+      "list_kind": "mystery",
+      "list_name": "Reaper Mystery",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "undeath to death (12th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -814,6 +824,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.undeath-to-death:appears_on_spell_list:spell-list.reaper-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.reaper-mystery",
+        "name": "Reaper Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.reaper:50aab3ff",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "undeath to death (12th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Reaper"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -864,6 +894,14 @@
       "raw_value_sha256": "79d57ef6d1070a36c19664275460605ceca90ae2032529364e2e649d816a99ed",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/9",
+      "observation_id": "aon:mystery.reaper:50aab3ff",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "4f154ed7983b6bcd2f7baafefbe16fe218e8748c79392f1a942b73ea110afa07",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -934,6 +972,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/8",
         "message": "Omdura 6 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Reaper Mystery grants Undeath to Death as a level 6 bonus spell; this is not general Oracle class access."
       }
     ]
   }

@@ -122,6 +122,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.time-mystery",
+      "list_kind": "mystery",
+      "list_name": "Time Mystery",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "gentle repose (4th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -727,6 +737,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.gentle-repose:appears_on_spell_list:spell-list.time-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.time-mystery",
+        "name": "Time Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.time:c0617d9c",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "gentle repose (4th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Time"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -777,6 +807,14 @@
       "raw_value_sha256": "30edd1f1766bedea0c71ccc262bded16b05320c070d7cf85fd7273206ea78e9e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/12",
+      "observation_id": "aon:mystery.time:c0617d9c",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "1be41df1f6acea1acc741725b2a50b880667841b742fcc8ea6770844dea760da",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -807,6 +845,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/11",
         "message": "Omdura 2 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/12",
+        "message": "Time Mystery grants Gentle Repose as a level 2 bonus spell; this is not general Oracle class access."
       }
     ]
   }

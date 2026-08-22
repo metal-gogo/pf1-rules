@@ -91,6 +91,16 @@
       "level": 5,
       "scope": "core",
       "raw": "wizard 5"
+    },
+    {
+      "spell_list_id": "spell-list.streets-mystery",
+      "list_kind": "mystery",
+      "list_name": "Streets Mystery",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "false vision (10th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -813,6 +823,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.false-vision:appears_on_spell_list:spell-list.streets-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.streets-mystery",
+        "name": "Streets Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.streets:a2589e64",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "false vision (10th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Streets"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -863,6 +893,14 @@
       "raw_value_sha256": "46f2309bc12234f5abb0a2f06233fb5d26e9062bafa87eef037abbc346cd9de3",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/10",
+      "observation_id": "aon:mystery.streets:a2589e64",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "1115b50f3537fc9577bda3a3d25b86a410060d25ee8dc6d90a4fd7eeec371ba4",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -883,6 +921,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/10",
+        "message": "Streets Mystery grants False Vision as a level 5 bonus spell; this is not general Oracle class access."
       }
     ]
   }

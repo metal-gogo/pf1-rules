@@ -176,6 +176,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.godclaw-mystery",
+      "list_kind": "mystery",
+      "list_name": "Godclaw Mystery",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "hold person (6th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1108,6 +1118,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.hold-person:appears_on_spell_list:spell-list.godclaw-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.godclaw-mystery",
+        "name": "Godclaw Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.godclaw:56fddf5d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "hold person (6th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Godclaw"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -1158,6 +1188,14 @@
       "raw_value_sha256": "9cb54691e109fdbe8022bc8e240263c7eaaf067365982d98797fb39cc16e8f2a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/18",
+      "observation_id": "aon:mystery.godclaw:56fddf5d",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "8fee43b1507a55307a341b73cc64ead2d3eac31224be36e703eda98ad82f3721",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1183,6 +1221,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/17",
         "message": "Omdura 2 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/18",
+        "message": "Godclaw Mystery grants Hold Person as a level 3 bonus spell; this is not general Oracle class access."
       }
     ]
   }

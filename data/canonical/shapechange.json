@@ -51,6 +51,16 @@
       "level": 9,
       "scope": "core",
       "raw": "wizard 9"
+    },
+    {
+      "spell_list_id": "spell-list.juju-mystery",
+      "list_kind": "mystery",
+      "list_name": "Juju Mystery",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "shapechange (18th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -698,6 +708,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.shapechange:appears_on_spell_list:spell-list.juju-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.juju-mystery",
+        "name": "Juju Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.juju:7692329e",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "shapechange (18th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Juju"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -748,6 +778,14 @@
       "raw_value_sha256": "92c3b4276bdd1054cc6e88fa27a493a68e3735d30512be994d073613b8406798",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:mystery.juju:7692329e",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "64e7577d30b93ddca8e3505a765cb3bdd5f17d8f64e860b4c1c4930c654a3ed4",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -763,6 +801,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Juju Mystery grants Shapechange as a level 9 bonus spell; this is not general Oracle class access."
       }
     ]
   }

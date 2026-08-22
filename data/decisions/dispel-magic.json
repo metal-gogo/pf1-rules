@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.dispel-magic:8d426367069d02b6",
     "legacy_aon:spell.dispel-magic:a6f54dc4f2c20e19",
-    "d20pfsrd:spell.dispel-magic:e44f5a1c18c3100b"
+    "d20pfsrd:spell.dispel-magic:e44f5a1c18c3100b",
+    "aon:mystery.spellscar:37f882ea"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.dispel-magic:8d426367069d02b6",
@@ -131,6 +132,20 @@
         "d20pfsrd:spell.dispel-magic:e44f5a1c18c3100b"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/24",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.spellscar:37f882ea",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.spellscar:37f882ea"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -1072,6 +1087,20 @@
         "d20pfsrd:spell.dispel-magic:e44f5a1c18c3100b"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.dispel-magic:appears_on_spell_list:spell-list.spellscar-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.spellscar:37f882ea",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.spellscar:37f882ea"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
     }
   ],
   "unresolved_questions": [

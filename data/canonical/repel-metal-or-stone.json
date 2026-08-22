@@ -21,6 +21,26 @@
       "level": 8,
       "scope": "core",
       "raw": "druid 8"
+    },
+    {
+      "spell_list_id": "spell-list.metal-mystery",
+      "list_kind": "mystery",
+      "list_name": "Metal Mystery",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "repel metal or stone (16th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.stone-mystery",
+      "list_kind": "mystery",
+      "list_name": "Stone Mystery",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "repel metal or stone (16th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -381,6 +401,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.repel-metal-or-stone:appears_on_spell_list:spell-list.metal-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.metal-mystery",
+        "name": "Metal Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.metal:3e732dcb",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "repel metal or stone (16th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Metal"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.repel-metal-or-stone:appears_on_spell_list:spell-list.stone-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.stone-mystery",
+        "name": "Stone Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.stone:07805889",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "repel metal or stone (16th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Stone"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -431,6 +491,22 @@
       "raw_value_sha256": "ec112b722840386aa253b612ed524cd4b46f3a602873a628f80c72ef30c130c3",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/1",
+      "observation_id": "aon:mystery.metal:3e732dcb",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "6d079d59be68cc39062108ccec9a31f90fa03484dc0f1520784f536dabb3b100",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/2",
+      "observation_id": "aon:mystery.stone:07805889",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "6d079d59be68cc39062108ccec9a31f90fa03484dc0f1520784f536dabb3b100",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -446,6 +522,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/1",
+        "message": "Metal Mystery grants Repel Metal or Stone as a level 8 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/2",
+        "message": "Stone Mystery grants Repel Metal or Stone as a level 8 bonus spell; this is not general Oracle class access."
       }
     ]
   }

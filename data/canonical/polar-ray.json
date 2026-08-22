@@ -37,6 +37,16 @@
       "level": 8,
       "scope": "core",
       "raw": "wizard 8"
+    },
+    {
+      "spell_list_id": "spell-list.winter-mystery",
+      "list_kind": "mystery",
+      "list_name": "Winter Mystery",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "polar ray (16th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -497,6 +507,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.polar-ray:appears_on_spell_list:spell-list.winter-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.winter-mystery",
+        "name": "Winter Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.winter:877fc031",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "polar ray (16th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Winter"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -547,6 +577,14 @@
       "raw_value_sha256": "2bbe10a94d7ee7f90fe927b34c9973b69395feb7b6ccef1f20a6af0134d543cf",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/3",
+      "observation_id": "aon:mystery.winter:877fc031",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "2ed74d0d6a6418447f1752522eb7b3b8b178fdfa25b386d6c800629a684d5b8f",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -572,6 +610,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/3",
+        "message": "Winter Mystery grants Polar Ray as a level 8 bonus spell; this is not general Oracle class access."
       }
     ]
   }

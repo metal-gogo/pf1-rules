@@ -75,6 +75,26 @@
       "level": 7,
       "scope": "core",
       "raw": "wizard 7"
+    },
+    {
+      "spell_list_id": "spell-list.battle-mystery",
+      "list_kind": "mystery",
+      "list_name": "Battle Mystery",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "control weather (14th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.wind-mystery",
+      "list_kind": "mystery",
+      "list_name": "Wind Mystery",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "control weather (14th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -708,6 +728,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.control-weather:appears_on_spell_list:spell-list.battle-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.battle-mystery",
+        "name": "Battle Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.battle:de0aa28c",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "control weather (14th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Battle"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.control-weather:appears_on_spell_list:spell-list.wind-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.wind-mystery",
+        "name": "Wind Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.wind:b78484f2",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "control weather (14th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Wind"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -758,6 +818,22 @@
       "raw_value_sha256": "6dd262083002471197779924fdce5838f4866b7f7389d4673c56ea536a5e79a8",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:mystery.battle:de0aa28c",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "a1c574e5db0dbdcd28f25cbc891f4a232220bd7474cc5c7b7a647b6c08e7fddf",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/9",
+      "observation_id": "aon:mystery.wind:b78484f2",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "a1c574e5db0dbdcd28f25cbc891f4a232220bd7474cc5c7b7a647b6c08e7fddf",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -783,6 +859,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Battle Mystery grants Control Weather as a level 7 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Wind Mystery grants Control Weather as a level 7 bonus spell; this is not general Oracle class access."
       }
     ]
   }

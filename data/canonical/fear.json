@@ -158,6 +158,36 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.bones-mystery",
+      "list_kind": "mystery",
+      "list_name": "Bones Mystery",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "fear (8th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.dragon-mystery",
+      "list_kind": "mystery",
+      "list_name": "Dragon Mystery",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "fear (8th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.juju-mystery",
+      "list_kind": "mystery",
+      "list_name": "Juju Mystery",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "fear (6th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1149,6 +1179,66 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.fear:appears_on_spell_list:spell-list.bones-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.bones-mystery",
+        "name": "Bones Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.bones:8a6d69b3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "fear (8th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Bones"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.fear:appears_on_spell_list:spell-list.dragon-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.dragon-mystery",
+        "name": "Dragon Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.dragon:6998e6da",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "fear (8th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Dragon"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.fear:appears_on_spell_list:spell-list.juju-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.juju-mystery",
+        "name": "Juju Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.juju:7692329e",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "fear (6th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Juju"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -1199,6 +1289,30 @@
       "raw_value_sha256": "1868730e7818b3f5dbc766fa729321c5f33ed6c6608f9ebeb9358af52837b2e0",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/16",
+      "observation_id": "aon:mystery.bones:8a6d69b3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "6dd7d045318858fe6999aa32c09b4199bcf385fafb5196336db50b6f258e0628",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/17",
+      "observation_id": "aon:mystery.dragon:6998e6da",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "6dd7d045318858fe6999aa32c09b4199bcf385fafb5196336db50b6f258e0628",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/18",
+      "observation_id": "aon:mystery.juju:7692329e",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "3ed912c9b92dc18109eec80a2b228081955abc43f38d91b05ab9716bd97ea1c9",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1224,6 +1338,21 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/15",
         "message": "Omdura 4 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/16",
+        "message": "Bones Mystery grants Fear as a level 4 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/17",
+        "message": "Dragon Mystery grants Fear as a level 4 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/18",
+        "message": "Juju Mystery grants Fear as a level 3 bonus spell; this is not general Oracle class access."
       }
     ]
   }

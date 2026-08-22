@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.time-stop:49d71d89fcee0663",
     "legacy_aon:spell.time-stop:971a526ec5655370",
-    "d20pfsrd:spell.time-stop:f3fc44e175d81bf0"
+    "d20pfsrd:spell.time-stop:f3fc44e175d81bf0",
+    "aon:mystery.lore:8596c228",
+    "aon:mystery.time:c0617d9c"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.time-stop:49d71d89fcee0663",
@@ -108,6 +110,34 @@
         "d20pfsrd:spell.time-stop:f3fc44e175d81bf0"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/4",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.lore:8596c228",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.lore:8596c228"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/5",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.time:c0617d9c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.time:c0617d9c"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -402,6 +432,34 @@
         "d20pfsrd:spell.time-stop:f3fc44e175d81bf0"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.time-stop:appears_on_spell_list:spell-list.lore-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.lore:8596c228",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.lore:8596c228"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
+    },
+    {
+      "relationship_id": "spell.time-stop:appears_on_spell_list:spell-list.time-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.time:c0617d9c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.time:c0617d9c"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
     }
   ],
   "unresolved_questions": [

@@ -35,6 +35,16 @@
       "level": 4,
       "scope": "later_first_party",
       "raw": "ranger 4"
+    },
+    {
+      "spell_list_id": "spell-list.lunar-mystery",
+      "list_kind": "mystery",
+      "list_name": "Lunar Mystery",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "aspect of the wolf (10th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -508,6 +518,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.aspect-of-the-wolf:appears_on_spell_list:spell-list.lunar-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.lunar-mystery",
+        "name": "Lunar Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.lunar:8e477077",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "aspect of the wolf (10th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Lunar"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -558,6 +588,14 @@
       "raw_value_sha256": "3d0cf0b3723e6c122544b1eae1eb55bd9c546be7b2ac9ebe1cbaae967a7aad20",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/3",
+      "observation_id": "aon:mystery.lunar:8e477077",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "ccc34b8eb56458a17746d5a35de45af266f866c6d64f2d8dfe3790a2e8016a06",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -578,6 +616,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/3",
+        "message": "Lunar Mystery grants Aspect of the Wolf as a level 5 bonus spell; this is not general Oracle class access."
       }
     ]
   }

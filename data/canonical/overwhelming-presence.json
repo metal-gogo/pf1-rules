@@ -117,6 +117,26 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.dragon-mystery",
+      "list_kind": "mystery",
+      "list_name": "Dragon Mystery",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "overwhelming presence (18th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.intrigue-mystery",
+      "list_kind": "mystery",
+      "list_name": "Intrigue Mystery",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "overwhelming presence (18th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -984,6 +1004,46 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.overwhelming-presence:appears_on_spell_list:spell-list.dragon-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.dragon-mystery",
+        "name": "Dragon Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.dragon:6998e6da",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "overwhelming presence (18th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Dragon"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.overwhelming-presence:appears_on_spell_list:spell-list.intrigue-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.intrigue-mystery",
+        "name": "Intrigue Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.intrigue:e6f78c01",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "overwhelming presence (18th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Intrigue"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -1034,6 +1094,22 @@
       "raw_value_sha256": "e7081a53b4dd8e0e19218682cd78275500aa367982bd53a9e17e414ee227061a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/11",
+      "observation_id": "aon:mystery.dragon:6998e6da",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "981222afdbb530cf10b545c432545ce0e3325f23ca43fb36efbb9ce1d19347c5",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/12",
+      "observation_id": "aon:mystery.intrigue:e6f78c01",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "981222afdbb530cf10b545c432545ce0e3325f23ca43fb36efbb9ce1d19347c5",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1054,6 +1130,16 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/10",
         "message": "Omdura 6 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/11",
+        "message": "Dragon Mystery grants Overwhelming Presence as a level 9 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/12",
+        "message": "Intrigue Mystery grants Overwhelming Presence as a level 9 bonus spell; this is not general Oracle class access."
       }
     ]
   }

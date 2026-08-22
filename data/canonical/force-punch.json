@@ -69,6 +69,16 @@
       "level": 3,
       "scope": "later_first_party",
       "raw": "wizard 3"
+    },
+    {
+      "spell_list_id": "spell-list.ascetic-mystery",
+      "list_kind": "mystery",
+      "list_name": "Ascetic Mystery",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "force punchUM (6th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -677,6 +687,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.force-punch:appears_on_spell_list:spell-list.ascetic-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.ascetic-mystery",
+        "name": "Ascetic Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.ascetic:7807af1f",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "force punchUM (6th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Ascetic"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -727,6 +757,14 @@
       "raw_value_sha256": "f07f7cd7e2ba0c45941d2cf2a46ca77a4bb73c17c91de3910437fff9f5c9e0dd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:mystery.ascetic:7807af1f",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "0a08c4d57e974ffbe9fd21c0ee62c41f3c229d55b2f1d2774251f5dbce730d9a",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -752,6 +790,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Ascetic Mystery grants Force Punch as a level 3 bonus spell; this is not general Oracle class access."
       }
     ]
   }

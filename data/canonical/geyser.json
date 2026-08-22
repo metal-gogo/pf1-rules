@@ -62,6 +62,26 @@
       "level": 5,
       "scope": "later_first_party",
       "raw": "wizard 5"
+    },
+    {
+      "spell_list_id": "spell-list.volcano-mystery",
+      "list_kind": "mystery",
+      "list_name": "Volcano Mystery",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "geyser (10th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.waves-mystery",
+      "list_kind": "mystery",
+      "list_name": "Waves Mystery",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "geyser (10th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -746,6 +766,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.geyser:appears_on_spell_list:spell-list.volcano-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.volcano-mystery",
+        "name": "Volcano Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.volcano:6909d144",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "geyser (10th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Volcano"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.geyser:appears_on_spell_list:spell-list.waves-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.waves-mystery",
+        "name": "Waves Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.waves:55241ac7",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "geyser (10th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Waves"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -796,6 +856,22 @@
       "raw_value_sha256": "42d0ea9be06935ab119e205256041bd0a0977ad45f85f9c6aaee5280ed7a9afa",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:mystery.volcano:6909d144",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d42990f1a6c65a58b00af4f5411a29abb82cf7c4cb059b54c57389ad44fa322f",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:mystery.waves:55241ac7",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d42990f1a6c65a58b00af4f5411a29abb82cf7c4cb059b54c57389ad44fa322f",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -821,6 +897,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Volcano Mystery grants Geyser as a level 5 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Waves Mystery grants Geyser as a level 5 bonus spell; this is not general Oracle class access."
       }
     ]
   }

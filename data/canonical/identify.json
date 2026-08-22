@@ -123,6 +123,16 @@
       "level": 1,
       "scope": "core",
       "raw": "wizard 1"
+    },
+    {
+      "spell_list_id": "spell-list.lore-mystery",
+      "list_kind": "mystery",
+      "list_name": "Lore Mystery",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "identify (2nd)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -904,6 +914,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.identify:appears_on_spell_list:spell-list.lore-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.lore-mystery",
+        "name": "Lore Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.lore:8596c228",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "identify (2nd)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Lore"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -954,6 +984,14 @@
       "raw_value_sha256": "8fafa2c21c951bbac340836de781ee9c4f54a61dc00daeb61b70889eac1f31a4",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/14",
+      "observation_id": "aon:mystery.lore:8596c228",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "bfcda362308b1b64282ed0a5651fe42f4dd3d9d5f3e0b5c5575d0d56a3a6e15b",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -994,6 +1032,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/effect/spell_resistance",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/14",
+        "message": "Lore Mystery grants Identify as a level 1 bonus spell; this is not general Oracle class access."
       }
     ]
   }

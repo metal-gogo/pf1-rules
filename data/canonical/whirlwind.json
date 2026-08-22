@@ -29,6 +29,16 @@
       "level": 8,
       "scope": "later_first_party",
       "raw": "shaman 8"
+    },
+    {
+      "spell_list_id": "spell-list.wind-mystery",
+      "list_kind": "mystery",
+      "list_name": "Wind Mystery",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "whirlwind (16th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -444,6 +454,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.whirlwind:appears_on_spell_list:spell-list.wind-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.wind-mystery",
+        "name": "Wind Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.wind:b78484f2",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "whirlwind (16th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Wind"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -494,6 +524,14 @@
       "raw_value_sha256": "61fac1ab5f9a4db95c300f814fe422dc4bc3410904d712561cf778fd43c081a9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/2",
+      "observation_id": "aon:mystery.wind:b78484f2",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "e8f1536e2d410647eb33712a4de658251ead95f5312df41e9698a67ec5747ac8",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -514,6 +552,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/2",
+        "message": "Wind Mystery grants Whirlwind as a level 8 bonus spell; this is not general Oracle class access."
       }
     ]
   }

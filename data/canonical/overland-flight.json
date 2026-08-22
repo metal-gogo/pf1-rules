@@ -115,6 +115,16 @@
       "level": 5,
       "scope": "core",
       "raw": "wizard 5"
+    },
+    {
+      "spell_list_id": "spell-list.heavens-mystery",
+      "list_kind": "mystery",
+      "list_name": "Heavens Mystery",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "overland flight (10th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1039,6 +1049,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.overland-flight:appears_on_spell_list:spell-list.heavens-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.heavens-mystery",
+        "name": "Heavens Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.heavens:d660daad",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "overland flight (10th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Heavens"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -1089,6 +1119,14 @@
       "raw_value_sha256": "5be70f34367546e57c9d9b1d7808c549ef4e323deb61acbc1943cae8e09879a3",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/13",
+      "observation_id": "aon:mystery.heavens:d660daad",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "fc26d29dfbecb0a74b02c479715c6388db54ca1302df97821e2f07fd47ca06b8",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1139,6 +1177,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/13",
+        "message": "Heavens Mystery grants Overland Flight as a level 5 bonus spell; this is not general Oracle class access."
       }
     ]
   }

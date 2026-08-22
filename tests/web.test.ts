@@ -130,18 +130,30 @@ describe("local rules browser", () => {
     expect(spellHtml).toContain("(derived access)");
   });
 
-  it("labels qualified class access without exposing a synthetic spell list", async () => {
+  it("routes mystery access through the mystery owner and spell list", async () => {
     const classResponse = await fetch(`${baseUrl}/classes/oracle`);
     const classHtml = await classResponse.text();
     expect(classResponse.status).toBe(200);
-    expect(classHtml).toContain("Fireball");
-    expect(classHtml).toContain("Mystery: flame");
+    expect(classHtml).not.toContain("Fireball");
 
     const spellResponse = await fetch(`${baseUrl}/spells/spell.fireball`);
     const spellHtml = await spellResponse.text();
     expect(spellResponse.status).toBe(200);
-    expect(spellHtml).toContain("Oracle</a> 3 — Mystery: flame");
-    expect(spellHtml).not.toContain("Flame Mystery Bonus Spell List");
+    expect(spellHtml).toContain("Flame Mystery</a> 3");
+    expect(spellHtml).not.toContain("Oracle</a> 3");
+
+    const ownerResponse = await fetch(`${baseUrl}/entities/mystery.flame`);
+    const ownerHtml = await ownerResponse.text();
+    expect(ownerResponse.status).toBe(200);
+    expect(ownerHtml).toContain("<h1>Flame Mystery</h1>");
+    expect(ownerHtml).toContain("/lists/spell-list.flame-mystery");
+    expect(ownerHtml).toContain("<h2>Definition</h2>");
+
+    const listResponse = await fetch(`${baseUrl}/lists/spell-list.flame-mystery`);
+    const listHtml = await listResponse.text();
+    expect(listResponse.status).toBe(200);
+    expect(listHtml).toContain("<h2>Access owners</h2>");
+    expect(listHtml).toContain("Fireball");
   });
 
   it("serves the interactive class filters", async () => {

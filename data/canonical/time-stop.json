@@ -43,6 +43,26 @@
       "level": 9,
       "scope": "core",
       "raw": "wizard 9"
+    },
+    {
+      "spell_list_id": "spell-list.lore-mystery",
+      "list_kind": "mystery",
+      "list_name": "Lore Mystery",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "time stop (18th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.time-mystery",
+      "list_kind": "mystery",
+      "list_name": "Time Mystery",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "time stop (18th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -509,6 +529,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.time-stop:appears_on_spell_list:spell-list.lore-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.lore-mystery",
+        "name": "Lore Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.lore:8596c228",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "time stop (18th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Lore"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.time-stop:appears_on_spell_list:spell-list.time-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.time-mystery",
+        "name": "Time Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.time:c0617d9c",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "time stop (18th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Time"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -559,6 +619,22 @@
       "raw_value_sha256": "4e74c825c856a1c454711ca86d638fe2a57e2768a9988eba745e338a0ead2365",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:mystery.lore:8596c228",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "e581415e6b567e7d7e15ac2874f0a5dc67e5617e8a2bd9d3dce1d1bd319631e1",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:mystery.time:c0617d9c",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "e581415e6b567e7d7e15ac2874f0a5dc67e5617e8a2bd9d3dce1d1bd319631e1",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -584,6 +660,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Lore Mystery grants Time Stop as a level 9 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Time Mystery grants Time Stop as a level 9 bonus spell; this is not general Oracle class access."
       }
     ]
   }

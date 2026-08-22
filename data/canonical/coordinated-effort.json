@@ -66,6 +66,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.succor-mystery",
+      "list_kind": "mystery",
+      "list_name": "Succor Mystery",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "coordinated effortAPG (6th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -493,6 +503,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.coordinated-effort:appears_on_spell_list:spell-list.succor-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.succor-mystery",
+        "name": "Succor Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.succor:91f454e1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "coordinated effortAPG (6th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Succor"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -543,6 +573,14 @@
       "raw_value_sha256": "d82aa89df8da2ae91990366ed5045f477295ea2f70122e4e8f2c1a99b13e6d8e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:mystery.succor:91f454e1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "e769492a8776c3893fe267da0f0d6eb576798e65a199eda818ca80bc3c1e66da",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -568,6 +606,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/4",
         "message": "Omdura 3 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Succor Mystery grants Coordinated Effort as a level 3 bonus spell; this is not general Oracle class access."
       }
     ]
   }

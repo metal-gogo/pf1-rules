@@ -61,6 +61,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.godclaw-mystery",
+      "list_kind": "mystery",
+      "list_name": "Godclaw Mystery",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "dictum (14th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -966,6 +976,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.dictum:appears_on_spell_list:spell-list.godclaw-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.godclaw-mystery",
+        "name": "Godclaw Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.godclaw:56fddf5d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "dictum (14th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Godclaw"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -1016,6 +1046,14 @@
       "raw_value_sha256": "f14f43413da1524af71f1856e18d26cf57d918225c8a80274eb4681cb6818a92",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:mystery.godclaw:56fddf5d",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d64baebecd7f80312d10e55ea4a617c44c5a67c9da1a58e790d7df9e83ead7be",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1046,6 +1084,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/3",
         "message": "Omdura 6 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Godclaw Mystery grants Dictum as a level 7 bonus spell; this is not general Oracle class access."
       }
     ]
   }

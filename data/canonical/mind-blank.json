@@ -51,6 +51,16 @@
       "level": 8,
       "scope": "core",
       "raw": "wizard 8"
+    },
+    {
+      "spell_list_id": "spell-list.intrigue-mystery",
+      "list_kind": "mystery",
+      "list_name": "Intrigue Mystery",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "mind blank (16th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -833,6 +843,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.mind-blank:appears_on_spell_list:spell-list.intrigue-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.intrigue-mystery",
+        "name": "Intrigue Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.intrigue:e6f78c01",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "mind blank (16th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Intrigue"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -883,6 +913,14 @@
       "raw_value_sha256": "3862da76aba46c3ac3d4b4a30782d36ddba2c8322296fd15f6c754c6e84eca77",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:mystery.intrigue:e6f78c01",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "7e27c0155211b85e6e18db43b03f00848439bb65b8efb55f617dfaf9740b8ef4",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -903,6 +941,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Intrigue Mystery grants Mind Blank as a level 8 bonus spell; this is not general Oracle class access."
       }
     ]
   }

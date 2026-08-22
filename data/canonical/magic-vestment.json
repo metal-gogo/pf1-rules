@@ -86,6 +86,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.battle-mystery",
+      "list_kind": "mystery",
+      "list_name": "Battle Mystery",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "magic vestment (6th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -659,6 +669,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.magic-vestment:appears_on_spell_list:spell-list.battle-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.battle-mystery",
+        "name": "Battle Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.battle:de0aa28c",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "magic vestment (6th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Battle"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -709,6 +739,14 @@
       "raw_value_sha256": "77089587874093bea63e76ca7ab667a73d55ed23c094f8528b700074b825571b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:mystery.battle:de0aa28c",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "fc13583a8cb6290ca861090208dd5671d3c9c822553b9e4814a4bee43e3c06ed",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -739,6 +777,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/6",
         "message": "Omdura 3 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Battle Mystery grants Magic Vestment as a level 3 bonus spell; this is not general Oracle class access."
       }
     ]
   }

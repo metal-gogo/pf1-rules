@@ -35,6 +35,16 @@
       "level": 7,
       "scope": "core",
       "raw": "wizard 7"
+    },
+    {
+      "spell_list_id": "spell-list.bones-mystery",
+      "list_kind": "mystery",
+      "list_name": "Bones Mystery",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "control undead (14th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -454,6 +464,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.control-undead:appears_on_spell_list:spell-list.bones-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.bones-mystery",
+        "name": "Bones Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.bones:8a6d69b3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "control undead (14th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Bones"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -504,6 +534,14 @@
       "raw_value_sha256": "af9212c8f7835598d17d105e745a45fa762c9eeb8100d3a6d211689e93e22726",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/3",
+      "observation_id": "aon:mystery.bones:8a6d69b3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "842337cc6b17d6aa5713e698c165aff9a2b74358fd7fa523f31b921d61c4059f",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -524,6 +562,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/3",
+        "message": "Bones Mystery grants Control Undead as a level 7 bonus spell; this is not general Oracle class access."
       }
     ]
   }

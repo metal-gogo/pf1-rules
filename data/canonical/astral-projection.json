@@ -67,6 +67,26 @@
       "level": 9,
       "scope": "core",
       "raw": "wizard 9"
+    },
+    {
+      "spell_list_id": "spell-list.ancestor-mystery",
+      "list_kind": "mystery",
+      "list_name": "Ancestor Mystery",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "astral projection (18th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.occult-mystery",
+      "list_kind": "mystery",
+      "list_name": "Occult Mystery",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "astral projection (18th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -680,6 +700,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.astral-projection:appears_on_spell_list:spell-list.ancestor-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.ancestor-mystery",
+        "name": "Ancestor Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.ancestor:a7be2624",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "astral projection (18th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Ancestor"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.astral-projection:appears_on_spell_list:spell-list.occult-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.occult-mystery",
+        "name": "Occult Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.occult:38412cd3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "astral projection (18th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Occult"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -730,6 +790,22 @@
       "raw_value_sha256": "b4c97060e1b2e2b6a8cc7394ce7d748654f876e8d41702f1841ef863c15b8bae",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:mystery.ancestor:a7be2624",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d3ef7298e5afe8a56f189850d5425aee1aaeff1e8a033ae8bfbabc992800a2d1",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:mystery.occult:38412cd3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d3ef7298e5afe8a56f189850d5425aee1aaeff1e8a033ae8bfbabc992800a2d1",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -755,6 +831,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Ancestor Mystery grants Astral Projection as a level 9 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Occult Mystery grants Astral Projection as a level 9 bonus spell; this is not general Oracle class access."
       }
     ]
   }

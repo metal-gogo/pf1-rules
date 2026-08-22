@@ -53,6 +53,16 @@
       "level": 6,
       "scope": "later_first_party",
       "raw": "wizard 6"
+    },
+    {
+      "spell_list_id": "spell-list.volcano-mystery",
+      "list_kind": "mystery",
+      "list_name": "Volcano Mystery",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "contagious flame (12th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -486,6 +496,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.contagious-flame:appears_on_spell_list:spell-list.volcano-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.volcano-mystery",
+        "name": "Volcano Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.volcano:6909d144",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "contagious flame (12th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Volcano"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -536,6 +566,14 @@
       "raw_value_sha256": "d82aa89df8da2ae91990366ed5045f477295ea2f70122e4e8f2c1a99b13e6d8e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:mystery.volcano:6909d144",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d0b8606ade289e550e8d359ef03e3990a6ab3f7486eb15eae92f136ea78c6163",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -556,6 +594,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Volcano Mystery grants Contagious Flame as a level 6 bonus spell; this is not general Oracle class access."
       }
     ]
   }

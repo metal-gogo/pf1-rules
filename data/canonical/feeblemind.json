@@ -77,6 +77,16 @@
       "level": 5,
       "scope": "core",
       "raw": "wizard 5"
+    },
+    {
+      "spell_list_id": "spell-list.dark-tapestry-mystery",
+      "list_kind": "mystery",
+      "list_name": "Dark Tapestry Mystery",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "feeblemind (10th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -827,6 +837,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.feeblemind:appears_on_spell_list:spell-list.dark-tapestry-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.dark-tapestry-mystery",
+        "name": "Dark Tapestry Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.dark-tapestry:2ee5ab35",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "feeblemind (10th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Dark%20Tapestry"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -877,6 +907,14 @@
       "raw_value_sha256": "1868730e7818b3f5dbc766fa729321c5f33ed6c6608f9ebeb9358af52837b2e0",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:mystery.dark-tapestry:2ee5ab35",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "74465434054b1fa4bce9c283e2e0cf4b000f9049f4e891ce7bff971d44fb75d9",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -897,6 +935,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Dark Tapestry Mystery grants Feeblemind as a level 5 bonus spell; this is not general Oracle class access."
       }
     ]
   }

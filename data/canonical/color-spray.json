@@ -77,6 +77,16 @@
       "level": 1,
       "scope": "core",
       "raw": "wizard 1"
+    },
+    {
+      "spell_list_id": "spell-list.heavens-mystery",
+      "list_kind": "mystery",
+      "list_name": "Heavens Mystery",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "color spray (2nd)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -924,6 +934,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.color-spray:appears_on_spell_list:spell-list.heavens-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.heavens-mystery",
+        "name": "Heavens Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.heavens:d660daad",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "color spray (2nd)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Heavens"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -974,6 +1004,14 @@
       "raw_value_sha256": "d8df15bc7194ee40347db812fada49de2ef1abd823baeb226bae757843afd5bb",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:mystery.heavens:d660daad",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "95cdae2e9e0ff3ff1c0c0a09f7b94f159c792d80b80e5c4abde3b84eeeb8bd94",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -999,6 +1037,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Heavens Mystery grants Color Spray as a level 1 bonus spell; this is not general Oracle class access."
       }
     ]
   }

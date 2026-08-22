@@ -123,6 +123,26 @@
       "level": 1,
       "scope": "core",
       "raw": "wizard 1"
+    },
+    {
+      "spell_list_id": "spell-list.ancestor-mystery",
+      "list_kind": "mystery",
+      "list_name": "Ancestor Mystery",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "unseen servant (2nd)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.occult-mystery",
+      "list_kind": "mystery",
+      "list_name": "Occult Mystery",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "unseen servant (2nd)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -878,6 +898,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.unseen-servant:appears_on_spell_list:spell-list.ancestor-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.ancestor-mystery",
+        "name": "Ancestor Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.ancestor:a7be2624",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "unseen servant (2nd)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Ancestor"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.unseen-servant:appears_on_spell_list:spell-list.occult-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.occult-mystery",
+        "name": "Occult Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.occult:38412cd3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "unseen servant (2nd)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Occult"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -928,6 +988,22 @@
       "raw_value_sha256": "cdd9298cd8a10e17f19db1754033b0f2cb6af73c6010e94ae77e34612012802e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/14",
+      "observation_id": "aon:mystery.ancestor:a7be2624",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d4d0b7803a78ea5bf3414e97567ddcda9a510450b0c1201df1fad900e64795d0",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/15",
+      "observation_id": "aon:mystery.occult:38412cd3",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d4d0b7803a78ea5bf3414e97567ddcda9a510450b0c1201df1fad900e64795d0",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -948,6 +1024,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/14",
+        "message": "Ancestor Mystery grants Unseen Servant as a level 1 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/15",
+        "message": "Occult Mystery grants Unseen Servant as a level 1 bonus spell; this is not general Oracle class access."
       }
     ]
   }

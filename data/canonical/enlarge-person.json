@@ -123,6 +123,16 @@
       "level": 1,
       "scope": "core",
       "raw": "wizard 1"
+    },
+    {
+      "spell_list_id": "spell-list.battle-mystery",
+      "list_kind": "mystery",
+      "list_name": "Battle Mystery",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "enlarge person (2nd)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1451,6 +1461,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.enlarge-person:appears_on_spell_list:spell-list.battle-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.battle-mystery",
+        "name": "Battle Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.battle:de0aa28c",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "enlarge person (2nd)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Battle"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -1501,6 +1531,14 @@
       "raw_value_sha256": "e410cc85f2deac5b5c0519b823d574919f4b7307942e72abe6d4b0878eeeac34",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/14",
+      "observation_id": "aon:mystery.battle:de0aa28c",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "2326e2f8d95b01591c72048f3b93cf298190bbcff8189b8fdbcae996e0d3c136",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1526,6 +1564,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/14",
+        "message": "Battle Mystery grants Enlarge Person as a level 1 bonus spell; this is not general Oracle class access."
       }
     ]
   }

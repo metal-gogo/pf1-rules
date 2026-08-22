@@ -67,6 +67,16 @@
       "level": 4,
       "scope": "core",
       "raw": "wizard 4"
+    },
+    {
+      "spell_list_id": "spell-list.streets-mystery",
+      "list_kind": "mystery",
+      "list_name": "Streets Mystery",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "illusory wall (8th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -521,6 +531,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.illusory-wall:appears_on_spell_list:spell-list.streets-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.streets-mystery",
+        "name": "Streets Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.streets:a2589e64",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "illusory wall (8th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Streets"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -571,6 +601,14 @@
       "raw_value_sha256": "8fafa2c21c951bbac340836de781ee9c4f54a61dc00daeb61b70889eac1f31a4",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:mystery.streets:a2589e64",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "a26a2851c1b4398dc0693edbb10586225b87fceb98d882c9b966afa07134f608",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -586,6 +624,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Streets Mystery grants Illusory Wall as a level 4 bonus spell; this is not general Oracle class access."
       }
     ]
   }

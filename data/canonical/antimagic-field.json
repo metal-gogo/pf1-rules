@@ -67,6 +67,26 @@
       "level": 6,
       "scope": "core",
       "raw": "wizard 6"
+    },
+    {
+      "spell_list_id": "spell-list.dragon-mystery",
+      "list_kind": "mystery",
+      "list_name": "Dragon Mystery",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "antimagic field (12th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.spellscar-mystery",
+      "list_kind": "mystery",
+      "list_name": "Spellscar Mystery",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "antimagic field (12th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -807,6 +827,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.antimagic-field:appears_on_spell_list:spell-list.dragon-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.dragon-mystery",
+        "name": "Dragon Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.dragon:6998e6da",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "antimagic field (12th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Dragon"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.antimagic-field:appears_on_spell_list:spell-list.spellscar-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.spellscar-mystery",
+        "name": "Spellscar Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.spellscar:37f882ea",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "antimagic field (12th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Spellscar"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -857,6 +917,22 @@
       "raw_value_sha256": "5cd4038ea6964edc3430fadaae44e1c29f8786fc719692cc9d7dc4b8d6bc9c74",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:mystery.dragon:6998e6da",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "8495dc8d496fd873e823a630e1b4385714aac63ed9dc86671a51cbb701ea2dcb",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:mystery.spellscar:37f882ea",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "8495dc8d496fd873e823a630e1b4385714aac63ed9dc86671a51cbb701ea2dcb",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -892,6 +968,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Dragon Mystery grants Antimagic Field as a level 6 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Spellscar Mystery grants Antimagic Field as a level 6 bonus spell; this is not general Oracle class access."
       }
     ]
   }

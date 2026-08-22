@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.ray-of-enfeeblement:3b53b2c6ad096bb6",
     "legacy_aon:spell.ray-of-enfeeblement:6a0e7ef0aa601e80",
-    "d20pfsrd:spell.ray-of-enfeeblement:1181e8bf87c0bcc7"
+    "d20pfsrd:spell.ray-of-enfeeblement:1181e8bf87c0bcc7",
+    "aon:mystery.spellscar:37f882ea",
+    "aon:mystery.succor:91f454e1"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.ray-of-enfeeblement:3b53b2c6ad096bb6",
@@ -108,6 +110,34 @@
         "d20pfsrd:spell.ray-of-enfeeblement:1181e8bf87c0bcc7"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/7",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.spellscar:37f882ea",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.spellscar:37f882ea"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/8",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:mystery.succor:91f454e1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.succor:91f454e1"
+      ],
+      "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -486,6 +516,34 @@
         "d20pfsrd:spell.ray-of-enfeeblement:1181e8bf87c0bcc7"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.ray-of-enfeeblement:appears_on_spell_list:spell-list.spellscar-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.spellscar:37f882ea",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.spellscar:37f882ea"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
+    },
+    {
+      "relationship_id": "spell.ray-of-enfeeblement:appears_on_spell_list:spell-list.succor-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.succor:91f454e1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.succor:91f454e1"
+      ],
+      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
     }
   ],
   "unresolved_questions": [

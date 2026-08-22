@@ -69,6 +69,16 @@
       "level": 4,
       "scope": "core",
       "raw": "wizard 4"
+    },
+    {
+      "spell_list_id": "spell-list.heavens-mystery",
+      "list_kind": "mystery",
+      "list_name": "Heavens Mystery",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "rainbow pattern (8th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -671,6 +681,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.rainbow-pattern:appears_on_spell_list:spell-list.heavens-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.heavens-mystery",
+        "name": "Heavens Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.heavens:d660daad",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "rainbow pattern (8th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Heavens"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -721,6 +751,14 @@
       "raw_value_sha256": "63f1deb20e291fe1bd991d3a24df44422e6cbcd8853a55dd48ad52eaafe32fb3",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:mystery.heavens:d660daad",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "de731a8d04973ad4e01d211914ea9607c348a5290d4398409fb7718a912373c2",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -751,6 +789,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Heavens Mystery grants Rainbow Pattern as a level 4 bonus spell; this is not general Oracle class access."
       }
     ]
   }

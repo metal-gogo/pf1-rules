@@ -53,6 +53,26 @@
       "level": 8,
       "scope": "core",
       "raw": "wizard 8"
+    },
+    {
+      "spell_list_id": "spell-list.heavens-mystery",
+      "list_kind": "mystery",
+      "list_name": "Heavens Mystery",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "sunburst (16th)",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.solar-mystery",
+      "list_kind": "mystery",
+      "list_name": "Solar Mystery",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "sunburst (16th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -620,6 +640,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.sunburst:appears_on_spell_list:spell-list.heavens-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.heavens-mystery",
+        "name": "Heavens Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.heavens:d660daad",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "sunburst (16th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Heavens"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.sunburst:appears_on_spell_list:spell-list.solar-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.solar-mystery",
+        "name": "Solar Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.solar:1d791874",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "sunburst (16th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Solar"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -670,6 +730,22 @@
       "raw_value_sha256": "56dab84833912459b68daf05512f7bc5b95c8bf69bda05517f0f69afb32a67ad",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:mystery.heavens:d660daad",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "dc50532fd18545d18ea31400c63dffdbbfc5e017dc3e99978300d6ea47cff451",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:mystery.solar:1d791874",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "dc50532fd18545d18ea31400c63dffdbbfc5e017dc3e99978300d6ea47cff451",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -685,6 +761,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Heavens Mystery grants Sunburst as a level 8 bonus spell; this is not general Oracle class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Solar Mystery grants Sunburst as a level 8 bonus spell; this is not general Oracle class access."
       }
     ]
   }

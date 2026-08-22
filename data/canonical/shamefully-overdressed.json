@@ -76,6 +76,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.whimsy-mystery",
+      "list_kind": "mystery",
+      "list_name": "Whimsy Mystery",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "shamefully overdressedUI (6th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -652,6 +662,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.shamefully-overdressed:appears_on_spell_list:spell-list.whimsy-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.whimsy-mystery",
+        "name": "Whimsy Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.whimsy:75fff951",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "shamefully overdressedUI (6th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Whimsy"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -702,6 +732,14 @@
       "raw_value_sha256": "83299cb68cf17de7df108c30aac3a3314cf578e5a81027ae2aca6abc8fe13194",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:mystery.whimsy:75fff951",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "32df1e0ef911b03f744550cd66a45783da771701c53bc650a4fe35980da87072",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -722,6 +760,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/5",
         "message": "Omdura 2 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Whimsy Mystery grants Shamefully Overdressed as a level 3 bonus spell; this is not general Oracle class access."
       }
     ]
   }
