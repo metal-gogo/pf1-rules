@@ -1,0 +1,632 @@
+{
+  "$schema": "../../schemas/canonical-spell.schema.json",
+  "schema_version": "0.1.0",
+  "spell_id": "spell.spellcasting-contract",
+  "ruleset": "Pathfinder First Edition",
+  "name": "Spellcasting Contract",
+  "aliases": [],
+  "classification": {
+    "school": "evocation",
+    "subschool": null,
+    "descriptors": [],
+    "raw": "evocation"
+  },
+  "levels": [
+    {
+      "spell_list_id": "spell-list.cleric",
+      "list_kind": "class",
+      "list_name": "cleric",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "cleric 7 (Asmodeus)",
+      "qualifications": [
+        {
+          "kind": "deity",
+          "deity": {
+            "entity_id": "deity.asmodeus",
+            "name": "Asmodeus"
+          },
+          "raw": "Asmodeus"
+        }
+      ]
+    },
+    {
+      "spell_list_id": "spell-list.oracle",
+      "list_kind": "class",
+      "list_name": "oracle",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "oracle 7 (Asmodeus)",
+      "qualifications": [
+        {
+          "kind": "deity",
+          "deity": {
+            "entity_id": "deity.asmodeus",
+            "name": "Asmodeus"
+          },
+          "raw": "Asmodeus"
+        }
+      ]
+    }
+  ],
+  "casting": {
+    "time": {
+      "kind": "timed",
+      "amount": 10,
+      "unit": "minute",
+      "raw": "10 minutes"
+    },
+    "components": [
+      {
+        "type": "verbal",
+        "details": null,
+        "cost_gp": null,
+        "raw": "V"
+      },
+      {
+        "type": "somatic",
+        "details": null,
+        "cost_gp": null,
+        "raw": "S"
+      },
+      {
+        "type": "divine_focus",
+        "details": null,
+        "cost_gp": null,
+        "raw": "DF"
+      }
+    ],
+    "components_raw": "V, S, DF",
+    "conditional_components": []
+  },
+  "effect": {
+    "range": {
+      "category": "touch",
+      "formula": null,
+      "raw": "touch"
+    },
+    "delivery": {
+      "resolution": "fixed",
+      "entries": [
+        {
+          "label_raw": "Target",
+          "value_raw": "creature touched",
+          "kinds": [
+            "target"
+          ]
+        }
+      ]
+    },
+    "targeting": {
+      "mode": "single",
+      "subject_kind": "creature",
+      "selection": "selected",
+      "count": {
+        "kind": "fixed",
+        "fixed": 1,
+        "formula": null,
+        "raw": "creature touched"
+      },
+      "separation": null,
+      "raw": "creature touched"
+    },
+    "area": null,
+    "duration": {
+      "kind": "permanent",
+      "formula": null,
+      "dismissible": true,
+      "concentration": null,
+      "raw": "permanent until discharged (D)"
+    },
+    "saving_throw": {
+      "types": [
+        "will"
+      ],
+      "outcome": "Will negates (harmless)",
+      "harmless": true,
+      "object": null,
+      "conditional": null,
+      "raw": "Will negates (harmless)"
+    },
+    "spell_resistance": {
+      "applies": true,
+      "harmless": true,
+      "object": null,
+      "conditional": null,
+      "raw": "yes (harmless)"
+    }
+  },
+  "description": {
+    "raw": "This spell functions like lesser spellcasting contract, except if the target has 9 HD or more, you can imbue him with one or two 2nd-level spells and one 3rd-level spell.",
+    "search_text": "\"this spell functions like lesser spellcasting contract, except if the target has 9 hd or more, you can imbue him with one or two 2nd-level spells and one 3rd-level spell.\"",
+    "sections": []
+  },
+  "publication": {
+    "publisher": "Paizo",
+    "book": "Pathfinder #29: Mother of Flies",
+    "page": 68,
+    "first_party_status": "confirmed",
+    "pfs_status": "legal",
+    "supplemental": []
+  },
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.spellcasting-contract-lesser",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.spellcasting-contract:fc9f35a3d1415382",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell functions like lesser spellcasting contract, except if the target has 9 HD or more, you can imbue him with one or two 2nd-level spells and one 3rd-level spell."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "creature touched",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"creature touched\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "single",
+            "subject_kind": "creature",
+            "selection": "selected",
+            "count": {
+              "kind": "fixed",
+              "fixed": 1,
+              "formula": null,
+              "raw": "creature touched"
+            },
+            "separation": null,
+            "raw": "creature touched"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"creature touched\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions like lesser spellcasting contract, except if the target has 9 HD or more, you can imbue him with one or two 2nd-level spells and one 3rd-level spell.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions like lesser spellcasting contract, except if the target has 9 HD or more, you can imbue him with one or two 2nd-level spells and one 3rd-level spell.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
+  "relationships": [
+    {
+      "relationship_id": "spell.spellcasting-contract:appears_on_spell_list:spell-list.cleric",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.cleric",
+        "name": "cleric Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.spellcasting-contract:fc9f35a3d1415382",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 7 (Asmodeus)",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.spellcasting-contract:appears_on_spell_list:spell-list.cleric-oracle",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.cleric-oracle",
+        "name": "cleric/oracle"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.spellcasting-contract:c187f30e06ea443f",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric/oracle",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.spellcasting-contract:c187f30e06ea443f",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric/oracle",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.spellcasting-contract:c187f30e06ea443f",
+          "source_field": "spell_raw.links_raw[11]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric/oracle",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.spellcasting-contract:appears_on_spell_list:spell-list.oracle",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.oracle",
+        "name": "oracle Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.spellcasting-contract:fc9f35a3d1415382",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "oracle 7 (Asmodeus)",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.spellcasting-contract:functions_like:spell.spellcasting-contract-lesser",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.spellcasting-contract-lesser",
+        "name": "Spellcasting Contract, Lesser"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.spellcasting-contract:fc9f35a3d1415382",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "This spell functions like lesser spellcasting contract, except if the target has 9 HD or more, you can imbue him with one or two 2nd-level spells and one 3rd-level spell.",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.spellcasting-contract:has_school:magic-school.evocation",
+      "type": "has_school",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.evocation",
+        "name": "evocation"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.spellcasting-contract:fc9f35a3d1415382",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "evocation",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=5"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.spellcasting-contract:c187f30e06ea443f",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "evocation",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Evocation"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.spellcasting-contract:c187f30e06ea443f",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "evocation",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Evocation"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.spellcasting-contract:c187f30e06ea443f",
+          "source_field": "spell_raw.links_raw[10]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "evocation",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Evocation"
+        },
+        {
+          "observation_id": "aon:spell.spellcasting-contract:fc9f35a3d1415382",
+          "source_field": "spell_raw.school_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "evocation",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.spellcasting-contract:published_in:publication.pathfinder-29-mother-of-flies",
+      "type": "published_in",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.pathfinder-29-mother-of-flies",
+        "name": "Pathfinder #29: Mother of Flies"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.spellcasting-contract:fc9f35a3d1415382",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Pathfinder #29: Mother of Flies pg. 68",
+          "source_href": "http://paizo.com/pathfinder/adventurePath/councilOfThieves/v5748btpy8bc1"
+        },
+        {
+          "observation_id": "aon:spell.spellcasting-contract:fc9f35a3d1415382",
+          "source_field": "spell_raw.source_book_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Pathfinder #29: Mother of Flies pg. 68",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.spellcasting-contract:references:spell.imbue-with-spell-ability",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.imbue-with-spell-ability",
+        "name": "imbue with spell ability"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.spellcasting-contract:c187f30e06ea443f",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "imbue with spell ability",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/i/imbue-with-spell-ability"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.spellcasting-contract:references:spell.spellcasting-contract-greater",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.spellcasting-contract-greater",
+        "name": "Spellcasting Contract, Greater"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.spellcasting-contract:c187f30e06ea443f",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Spellcasting Contract, Greater",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/spellcasting-contract/#spellcasting_contract_greater"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.spellcasting-contract:references:spell.spellcasting-contract-lesser",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.spellcasting-contract-lesser",
+        "name": "Spellcasting Contract, Lesser"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.spellcasting-contract:c187f30e06ea443f",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Spellcasting Contract, Lesser",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/spellcasting-contract/#spellcasting_contract_lesser"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.spellcasting-contract:uses_definition:rule.abjuration",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.abjuration",
+        "name": "abjuration"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.spellcasting-contract:c187f30e06ea443f",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "abjuration",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Abjuration"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.spellcasting-contract:uses_definition:rule.conjuration",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.conjuration",
+        "name": "conjuration"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.spellcasting-contract:c187f30e06ea443f",
+          "source_field": "spell_raw.links_raw[9]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "conjuration",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Conjuration"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.spellcasting-contract:uses_definition:rule.divination",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.divination",
+        "name": "divination"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.spellcasting-contract:c187f30e06ea443f",
+          "source_field": "spell_raw.links_raw[8]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "divination",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Divination"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.spellcasting-contract:uses_definition:rule.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.spellcasting-contract:fc9f35a3d1415382",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes (harmless)",
+          "source_href": null
+        }
+      ],
+      "note": null
+    }
+  ],
+  "provenance": [
+    {
+      "field_path": "/classification",
+      "observation_id": "aon:spell.spellcasting-contract:fc9f35a3d1415382",
+      "source_field": "spell_raw.school_raw",
+      "raw_value_sha256": "d048b3eac2bd26b4bf0ccf76c974beaecd48fbb0b7915e4f7006b19538a4a9f4",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels",
+      "observation_id": "aon:spell.spellcasting-contract:fc9f35a3d1415382",
+      "source_field": "spell_raw.levels_raw",
+      "raw_value_sha256": "c3453596a1f96dd063e6411073743eef638a8cad48379bb547bcb6c4e2db8188",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/casting",
+      "observation_id": "aon:spell.spellcasting-contract:fc9f35a3d1415382",
+      "source_field": "spell_raw.components_raw",
+      "raw_value_sha256": "5de38fe056a1e71e729a0919b0073734c5562593e2e473adb2ace9ee61e8779e",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/effect",
+      "observation_id": "aon:spell.spellcasting-contract:fc9f35a3d1415382",
+      "source_field": "spell_raw.delivery_fields_raw",
+      "raw_value_sha256": "f8bb8a820adeb9b179d5b465c71c0950668a65864958b619c8456e5ce3122290",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description",
+      "observation_id": "aon:spell.spellcasting-contract:fc9f35a3d1415382",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "9a48429b139bdbe410471e283c25da02064552168f51650c53e0b577368469bf",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/publication",
+      "observation_id": "aon:spell.spellcasting-contract:fc9f35a3d1415382",
+      "source_field": "spell_raw.source_book_raw",
+      "raw_value_sha256": "dcdcf826e48587e9049ad89a1dad865d98a1a9935f5083b94c16849ee1bad273",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    }
+  ],
+  "normalization": {
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
+    "warnings": [
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/time",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/components_raw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/range",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/duration",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/saving_throw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/spell_resistance",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/description/raw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      }
+    ]
+  }
+}

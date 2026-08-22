@@ -1,0 +1,632 @@
+{
+  "$schema": "../../schemas/canonical-spell.schema.json",
+  "schema_version": "0.1.0",
+  "spell_id": "spell.summon-kami",
+  "ruleset": "Pathfinder First Edition",
+  "name": "Summon Kami",
+  "aliases": [],
+  "classification": {
+    "school": "conjuration",
+    "subschool": "summoning",
+    "descriptors": [],
+    "raw": "conjuration (summoning)"
+  },
+  "levels": [
+    {
+      "spell_list_id": "spell-list.druid",
+      "list_kind": "class",
+      "list_name": "druid",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "druid 5 (Tian)",
+      "qualifications": [
+        {
+          "kind": "conditional",
+          "condition": {
+            "raw": "Tian",
+            "search_text": "tian"
+          },
+          "raw": "Tian"
+        }
+      ]
+    },
+    {
+      "spell_list_id": "spell-list.hunter",
+      "list_kind": "class",
+      "list_name": "hunter",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "hunter 5 (Tian)",
+      "qualifications": [
+        {
+          "kind": "conditional",
+          "condition": {
+            "raw": "Tian",
+            "search_text": "tian"
+          },
+          "raw": "Tian"
+        }
+      ]
+    },
+    {
+      "spell_list_id": "spell-list.shaman",
+      "list_kind": "class",
+      "list_name": "shaman",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "shaman 5 (Tian)",
+      "qualifications": [
+        {
+          "kind": "conditional",
+          "condition": {
+            "raw": "Tian",
+            "search_text": "tian"
+          },
+          "raw": "Tian"
+        }
+      ]
+    }
+  ],
+  "casting": {
+    "time": {
+      "kind": "timed",
+      "amount": 1,
+      "unit": "round",
+      "raw": "1 round"
+    },
+    "components": [
+      {
+        "type": "verbal",
+        "details": null,
+        "cost_gp": null,
+        "raw": "V"
+      },
+      {
+        "type": "somatic",
+        "details": null,
+        "cost_gp": null,
+        "raw": "S"
+      },
+      {
+        "type": "divine_focus",
+        "details": null,
+        "cost_gp": null,
+        "raw": "DF"
+      }
+    ],
+    "components_raw": "V, S, DF",
+    "conditional_components": []
+  },
+  "effect": {
+    "range": {
+      "category": "close",
+      "formula": "close (25 ft. + 5 ft./2 levels)",
+      "raw": "close (25 ft. + 5 ft./2 levels)"
+    },
+    "delivery": {
+      "resolution": "fixed",
+      "entries": [
+        {
+          "label_raw": "Effect",
+          "value_raw": "one or more kami",
+          "kinds": [
+            "effect"
+          ]
+        }
+      ]
+    },
+    "targeting": null,
+    "area": null,
+    "duration": {
+      "kind": "timed",
+      "formula": "1 round/level (D)",
+      "dismissible": true,
+      "concentration": null,
+      "raw": "1 round/level (D)"
+    },
+    "saving_throw": {
+      "types": [
+        "none"
+      ],
+      "outcome": null,
+      "harmless": null,
+      "object": null,
+      "conditional": null,
+      "raw": "none"
+    },
+    "spell_resistance": {
+      "applies": false,
+      "harmless": null,
+      "object": null,
+      "conditional": null,
+      "raw": "no"
+    }
+  },
+  "description": {
+    "raw": "This spell functions as summon nature’s ally V, except you can summon one kodama, 1d3 fukujin, or 1d4+1 shikigami.",
+    "search_text": "\"this spell functions as summon nature’s ally v, except you can summon one kodama, 1d3 fukujin, or 1d4+1 shikigami.\"",
+    "sections": []
+  },
+  "publication": {
+    "publisher": "Paizo",
+    "book": "Inner Sea Races",
+    "page": 223,
+    "first_party_status": "confirmed",
+    "pfs_status": "legal",
+    "supplemental": []
+  },
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.summon-natures-ally-5",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell functions as summon nature’s ally V, except you can summon one kodama, 1d3 fukujin, or 1d4+1 shikigami."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Effect",
+                "value_raw": "one or more kami",
+                "kinds": [
+                  "effect"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Effect\",\"value_raw\":\"one or more kami\",\"kinds\":[\"effect\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as summon nature’s ally V, except you can summon one kodama, 1d3 fukujin, or 1d4+1 shikigami.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as summon nature’s ally V, except you can summon one kodama, 1d3 fukujin, or 1d4+1 shikigami.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
+  "relationships": [
+    {
+      "relationship_id": "spell.summon-kami:appears_on_spell_list:spell-list.druid",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.druid",
+        "name": "druid"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.summon-kami:39c087ed62667c55",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "druid",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-druid/"
+        },
+        {
+          "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "druid 5 (Tian)",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.summon-kami:appears_on_spell_list:spell-list.hunter",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.hunter",
+        "name": "hunter Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "hunter 5 (Tian)",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.summon-kami:appears_on_spell_list:spell-list.shaman",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.shaman",
+        "name": "shaman"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.summon-kami:39c087ed62667c55",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "shaman",
+          "source_href": "https://www.d20pfsrd.com/classes/hybrid-classes/shaman"
+        },
+        {
+          "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "shaman 5 (Tian)",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.summon-kami:functions_like:spell.summon-natures-ally-5",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.summon-natures-ally-5",
+        "name": "Summon Nature's Ally 5"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "This spell functions as summon nature’s ally V, except you can summon one kodama, 1d3 fukujin, or 1d4+1 shikigami.",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.summon-kami:has_school:magic-school.conjuration",
+      "type": "has_school",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.conjuration",
+        "name": "conjuration"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "conjuration",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=2"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.summon-kami:39c087ed62667c55",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "conjuration",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Conjuration"
+        },
+        {
+          "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
+          "source_field": "spell_raw.school_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "conjuration",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.summon-kami:has_subschool:subschool.summoning",
+      "type": "has_subschool",
+      "target": {
+        "entity_type": "subschool",
+        "entity_id": "subschool.summoning",
+        "name": "summoning"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "summoning",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=23"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.summon-kami:published_in:publication.inner-sea-races",
+      "type": "published_in",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.inner-sea-races",
+        "name": "Inner Sea Races"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Inner Sea Races pg. 223",
+          "source_href": "http://paizo.com/products/btpy9g9v?Pathfinder-Campaign-Setting-Inner-Sea-Races"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.summon-kami:39c087ed62667c55",
+          "source_field": "spell_raw.links_raw[9]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Pathfinder Campaign Setting: Inner Sea Races",
+          "source_href": "http://www.amazon.com/gp/product/1601257228/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1601257228&linkCode=as2&tag=httpwwwd20pfs-20&linkId=5GTXWLOCMWVI6NUI"
+        },
+        {
+          "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
+          "source_field": "spell_raw.source_book_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inner Sea Races pg. 223",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.summon-kami:references:spell.summon-natures-ally-v",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.summon-natures-ally-v",
+        "name": "summon nature’s ally V"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.summon-kami:39c087ed62667c55",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "summon nature’s ally V",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/summon-natures-ally"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.summon-kami:uses_definition:rule.fukujin",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.fukujin",
+        "name": "fukujin"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.summon-kami:39c087ed62667c55",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "fukujin",
+          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/outsiders/kami/kami-fukujin"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.summon-kami:uses_definition:rule.kami",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.kami",
+        "name": "kami"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.summon-kami:39c087ed62667c55",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "kami",
+          "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/creature-types#subtype-kami"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.summon-kami:uses_definition:rule.kodama",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.kodama",
+        "name": "kodama"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.summon-kami:39c087ed62667c55",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "kodama",
+          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/outsiders/kami/kami-kodama"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.summon-kami:uses_definition:rule.shikigami",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.shikigami",
+        "name": "shikigami"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.summon-kami:39c087ed62667c55",
+          "source_field": "spell_raw.links_raw[8]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "shikigami",
+          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/outsiders/kami/kami-shikigami"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.summon-kami:uses_definition:rule.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "no",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.summon-kami:uses_definition:rule.summon",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.summon",
+        "name": "summon"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.summon-kami:39c087ed62667c55",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "summon",
+          "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/universal-monster-rules#TOC-Summon-Sp-"
+        }
+      ],
+      "note": null
+    }
+  ],
+  "provenance": [
+    {
+      "field_path": "/classification",
+      "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
+      "source_field": "spell_raw.school_raw",
+      "raw_value_sha256": "77034d313002a08bdb5fe98e954b71233e8194f73997d4273f2c7d08713e514d",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels",
+      "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
+      "source_field": "spell_raw.levels_raw",
+      "raw_value_sha256": "dcc3fce426c29c730284cf652932835a532d8b807d01f914bf7f7d298fcd0045",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/casting",
+      "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
+      "source_field": "spell_raw.components_raw",
+      "raw_value_sha256": "5de38fe056a1e71e729a0919b0073734c5562593e2e473adb2ace9ee61e8779e",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/effect",
+      "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
+      "source_field": "spell_raw.delivery_fields_raw",
+      "raw_value_sha256": "875b9a43e7b7d2a777a794298b5c8fa8fe8e0824c384aa007a669e5e8081cdb6",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description",
+      "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "311cddd3f3647bdaa20319a520364dc055bb1dd70719ff51a3f12e6c75bdbb98",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/publication",
+      "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
+      "source_field": "spell_raw.source_book_raw",
+      "raw_value_sha256": "47ba2ce083b48e199920b0f6d539a27b05b0b8464ad9ebbfda869f86404cb122",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    }
+  ],
+  "normalization": {
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
+    "warnings": [
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/classification",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/time",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/components_raw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/range",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/duration",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/saving_throw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/spell_resistance",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      }
+    ]
+  }
+}

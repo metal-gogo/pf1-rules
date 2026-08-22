@@ -19,6 +19,30 @@ beforeAll(async () => {
 });
 
 describe("ingested spell catalog", () => {
+  it("keeps the reviewed Abundant Ammunition range override auditable", async () => {
+    const abundantAmmunition = await prisma.canonicalSpell.findUnique({
+      where: { spellId: "spell.abundant-ammunition" },
+    });
+    const payload = abundantAmmunition?.payload as {
+      normalization?: { warnings?: Array<{ code?: string; field_path?: string }> };
+      provenance?: Array<{ field_path?: string; decision?: string }>;
+    } | undefined;
+
+    expect(abundantAmmunition).toEqual(expect.objectContaining({
+      rangeCategory: "touch",
+      rangeFormula: null,
+      rangeRaw: null,
+    }));
+    expect(payload?.normalization?.warnings).toContainEqual(expect.objectContaining({
+      code: "REVIEWED_RANGE_OVERRIDE",
+      field_path: "/effect/range",
+    }));
+    expect(payload?.provenance).toContainEqual(expect.objectContaining({
+      field_path: "/effect/range",
+      decision: "manually_resolved",
+    }));
+  });
+
   it("keeps Wish's mandatory diamond component", async () => {
     const wish = await findSpell(prisma, "Wish");
     expect(wish?.components).toContainEqual(

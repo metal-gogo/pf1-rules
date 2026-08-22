@@ -1,0 +1,484 @@
+{
+  "$schema": "../../schemas/canonical-spell.schema.json",
+  "schema_version": "0.1.0",
+  "spell_id": "spell.spellcasting-contract-greater",
+  "ruleset": "Pathfinder First Edition",
+  "name": "Spellcasting Contract, Greater",
+  "aliases": [],
+  "classification": {
+    "school": "evocation",
+    "subschool": null,
+    "descriptors": [],
+    "raw": "evocation"
+  },
+  "levels": [
+    {
+      "spell_list_id": "spell-list.cleric",
+      "list_kind": "class",
+      "list_name": "cleric",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "cleric 9 (Asmodeus)",
+      "qualifications": [
+        {
+          "kind": "deity",
+          "deity": {
+            "entity_id": "deity.asmodeus",
+            "name": "Asmodeus"
+          },
+          "raw": "Asmodeus"
+        }
+      ]
+    },
+    {
+      "spell_list_id": "spell-list.oracle",
+      "list_kind": "class",
+      "list_name": "oracle",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "oracle 9 (Asmodeus)",
+      "qualifications": [
+        {
+          "kind": "deity",
+          "deity": {
+            "entity_id": "deity.asmodeus",
+            "name": "Asmodeus"
+          },
+          "raw": "Asmodeus"
+        }
+      ]
+    }
+  ],
+  "casting": {
+    "time": {
+      "kind": "timed",
+      "amount": 10,
+      "unit": "minute",
+      "raw": "10 minutes"
+    },
+    "components": [
+      {
+        "type": "verbal",
+        "details": null,
+        "cost_gp": null,
+        "raw": "V"
+      },
+      {
+        "type": "somatic",
+        "details": null,
+        "cost_gp": null,
+        "raw": "S"
+      },
+      {
+        "type": "divine_focus",
+        "details": null,
+        "cost_gp": null,
+        "raw": "DF"
+      }
+    ],
+    "components_raw": "V, S, DF",
+    "conditional_components": []
+  },
+  "effect": {
+    "range": {
+      "category": "touch",
+      "formula": null,
+      "raw": "touch"
+    },
+    "delivery": {
+      "resolution": "fixed",
+      "entries": [
+        {
+          "label_raw": "Target",
+          "value_raw": "creature touched",
+          "kinds": [
+            "target"
+          ]
+        }
+      ]
+    },
+    "targeting": {
+      "mode": "single",
+      "subject_kind": "creature",
+      "selection": "selected",
+      "count": {
+        "kind": "fixed",
+        "fixed": 1,
+        "formula": null,
+        "raw": "creature touched"
+      },
+      "separation": null,
+      "raw": "creature touched"
+    },
+    "area": null,
+    "duration": {
+      "kind": "permanent",
+      "formula": null,
+      "dismissible": true,
+      "concentration": null,
+      "raw": "permanent until discharged (D)"
+    },
+    "saving_throw": {
+      "types": [
+        "will"
+      ],
+      "outcome": "Will negates (harmless)",
+      "harmless": true,
+      "object": null,
+      "conditional": null,
+      "raw": "Will negates (harmless)"
+    },
+    "spell_resistance": {
+      "applies": true,
+      "harmless": true,
+      "object": null,
+      "conditional": null,
+      "raw": "yes (harmless)"
+    }
+  },
+  "description": {
+    "raw": "This spell functions like lesser spellcasting contract, except if the target has 13 HD or more you can imbue him with one or two 4th-level spells and one 5th-level spell.",
+    "search_text": "\"this spell functions like lesser spellcasting contract, except if the target has 13 hd or more you can imbue him with one or two 4th-level spells and one 5th-level spell.\"",
+    "sections": []
+  },
+  "publication": {
+    "publisher": "Paizo",
+    "book": "Pathfinder #29: Mother of Flies",
+    "page": 68,
+    "first_party_status": "confirmed",
+    "pfs_status": "legal",
+    "supplemental": []
+  },
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.spellcasting-contract-lesser",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.spellcasting-contract-greater:0586aa53b85e11ce",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell functions like lesser spellcasting contract, except if the target has 13 HD or more you can imbue him with one or two 4th-level spells and one 5th-level spell."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "creature touched",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"creature touched\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "single",
+            "subject_kind": "creature",
+            "selection": "selected",
+            "count": {
+              "kind": "fixed",
+              "fixed": 1,
+              "formula": null,
+              "raw": "creature touched"
+            },
+            "separation": null,
+            "raw": "creature touched"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"creature touched\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions like lesser spellcasting contract, except if the target has 13 HD or more you can imbue him with one or two 4th-level spells and one 5th-level spell.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions like lesser spellcasting contract, except if the target has 13 HD or more you can imbue him with one or two 4th-level spells and one 5th-level spell.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
+  "relationships": [
+    {
+      "relationship_id": "spell.spellcasting-contract-greater:appears_on_spell_list:spell-list.cleric",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.cleric",
+        "name": "cleric Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.spellcasting-contract-greater:0586aa53b85e11ce",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 9 (Asmodeus)",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.spellcasting-contract-greater:appears_on_spell_list:spell-list.cleric-oracle",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.cleric-oracle",
+        "name": "cleric/oracle"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.spellcasting-contract-greater:c187f30e06ea443f",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric/oracle",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.spellcasting-contract-greater:appears_on_spell_list:spell-list.oracle",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.oracle",
+        "name": "oracle Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.spellcasting-contract-greater:0586aa53b85e11ce",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "oracle 9 (Asmodeus)",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.spellcasting-contract-greater:functions_like:spell.spellcasting-contract-lesser",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.spellcasting-contract-lesser",
+        "name": "Spellcasting Contract, Lesser"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.spellcasting-contract-greater:0586aa53b85e11ce",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "This spell functions like lesser spellcasting contract, except if the target has 13 HD or more you can imbue him with one or two 4th-level spells and one 5th-level spell.",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.spellcasting-contract-greater:has_school:magic-school.evocation",
+      "type": "has_school",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.evocation",
+        "name": "evocation"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.spellcasting-contract-greater:0586aa53b85e11ce",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "evocation",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=5"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.spellcasting-contract-greater:c187f30e06ea443f",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "evocation",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Evocation"
+        },
+        {
+          "observation_id": "aon:spell.spellcasting-contract-greater:0586aa53b85e11ce",
+          "source_field": "spell_raw.school_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "evocation",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.spellcasting-contract-greater:published_in:publication.pathfinder-29-mother-of-flies",
+      "type": "published_in",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.pathfinder-29-mother-of-flies",
+        "name": "Pathfinder #29: Mother of Flies"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.spellcasting-contract-greater:0586aa53b85e11ce",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Pathfinder #29: Mother of Flies pg. 68",
+          "source_href": "http://paizo.com/pathfinder/adventurePath/councilOfThieves/v5748btpy8bc1"
+        },
+        {
+          "observation_id": "aon:spell.spellcasting-contract-greater:0586aa53b85e11ce",
+          "source_field": "spell_raw.source_book_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Pathfinder #29: Mother of Flies pg. 68",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.spellcasting-contract-greater:uses_definition:rule.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.spellcasting-contract-greater:0586aa53b85e11ce",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes (harmless)",
+          "source_href": null
+        }
+      ],
+      "note": null
+    }
+  ],
+  "provenance": [
+    {
+      "field_path": "/classification",
+      "observation_id": "aon:spell.spellcasting-contract-greater:0586aa53b85e11ce",
+      "source_field": "spell_raw.school_raw",
+      "raw_value_sha256": "d048b3eac2bd26b4bf0ccf76c974beaecd48fbb0b7915e4f7006b19538a4a9f4",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels",
+      "observation_id": "aon:spell.spellcasting-contract-greater:0586aa53b85e11ce",
+      "source_field": "spell_raw.levels_raw",
+      "raw_value_sha256": "3c86a2dd9d69722502b592d4513a6f42bece155aa2fd96d985ed55ea38113153",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/casting",
+      "observation_id": "aon:spell.spellcasting-contract-greater:0586aa53b85e11ce",
+      "source_field": "spell_raw.components_raw",
+      "raw_value_sha256": "5de38fe056a1e71e729a0919b0073734c5562593e2e473adb2ace9ee61e8779e",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/effect",
+      "observation_id": "aon:spell.spellcasting-contract-greater:0586aa53b85e11ce",
+      "source_field": "spell_raw.delivery_fields_raw",
+      "raw_value_sha256": "f8bb8a820adeb9b179d5b465c71c0950668a65864958b619c8456e5ce3122290",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description",
+      "observation_id": "aon:spell.spellcasting-contract-greater:0586aa53b85e11ce",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "4b37100589721ef1a24a19bcf62dda56e4709f82067640b1188948d35c1092d1",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/publication",
+      "observation_id": "aon:spell.spellcasting-contract-greater:0586aa53b85e11ce",
+      "source_field": "spell_raw.source_book_raw",
+      "raw_value_sha256": "dcdcf826e48587e9049ad89a1dad865d98a1a9935f5083b94c16849ee1bad273",
+      "decision": "normalized",
+      "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    }
+  ],
+  "normalization": {
+    "status": "validated",
+    "normalizer_version": "0.1.4-dependency-aliases",
+    "warnings": [
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/levels",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/time",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/casting/components_raw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/range",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/duration",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/saving_throw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/effect/spell_resistance",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "SOURCE_VARIATION",
+        "field_path": "/description/raw",
+        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      }
+    ]
+  }
+}

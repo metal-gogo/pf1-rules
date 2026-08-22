@@ -12,6 +12,7 @@ import {
   normalizeUnresolvedSpellReference,
   NormalizationIssue,
   type ParsedObservationInput,
+  reviewedCanonicalOverrideSpellIds,
   resolveCanonicalSpellReference,
 } from "./normalize-level-zero.js";
 import {
@@ -968,6 +969,177 @@ export async function retryD20SourceFailures(requestedLevel?: number) {
 }
 
 
+export async function retrySpellLevelNormalizationIssues(requestedLevel?: number) {
+  const levels = requestedLevel === undefined ? Array.from({ length: 10 }, (_value, level) => level) : [requestedLevel];
+  if (levels.some((level) => !Number.isInteger(level) || level < 0 || level > 9)) {
+    throw new Error("Retry level must be an integer from 0 through 9, or omitted for all levels.");
+  }
+  const issueCode = "unparsed-spell-level";
+  const summary = {
+    issueCode,
+    batches: 0,
+    ingested: 0,
+    issues: 0,
+    skipped: 0,
+    levels: [] as Array<{ level: number; batches: number; ingested: number; issues: number; skipped: number }>,
+  };
+  for (const level of levels) {
+    const { manifestPath } = levelPaths(level);
+    const manifest = loadJson(manifestPath);
+    const affectedBatches = [...new Set<number>(
+      manifest.spells
+        .filter((spell: ValidatedJson) => spell.issue?.code === issueCode)
+        .map((spell: ValidatedJson) => Number(spell.batch)),
+    )].sort((left, right) => left - right);
+    const levelSummary = { level, batches: affectedBatches.length, ingested: 0, issues: 0, skipped: 0 };
+    for (const batch of affectedBatches) {
+      const report = await ingestSpellLevelBatch(
+        level,
+        batch,
+        false,
+        false,
+        false,
+        true,
+        issueCode,
+      );
+      levelSummary.ingested += report.ingested.length;
+      levelSummary.issues += report.issues.length;
+      levelSummary.skipped += report.skipped.length;
+      process.stderr.write(
+        `Retried level ${level} batch ${batch} from cached sources: ${report.ingested.length} ingested, ` +
+        `${report.issues.length} issues, ${report.skipped.length} skipped.\n`,
+      );
+    }
+    const refreshedManifest = loadJson(manifestPath);
+    const canonicalSpells = new Map(
+      directJsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) => {
+        const record = loadJson(filename);
+        return [record.spell_id, record] as const;
+      }),
+    );
+    refreshDiscoveredDependencies(refreshedManifest, canonicalSpells);
+    writeGeneratedJson(manifestPath, refreshedManifest, true);
+    summary.batches += levelSummary.batches;
+    summary.ingested += levelSummary.ingested;
+    summary.issues += levelSummary.issues;
+    summary.skipped += levelSummary.skipped;
+    summary.levels.push(levelSummary);
+  }
+  validatePackage();
+  return summary;
+}
+
+
+export async function retryCachedSourceIssues(requestedLevel?: number) {
+  const levels = requestedLevel === undefined ? Array.from({ length: 10 }, (_value, level) => level) : [requestedLevel];
+  if (levels.some((level) => !Number.isInteger(level) || level < 0 || level > 9)) {
+    throw new Error("Retry level must be an integer from 0 through 9, or omitted for all levels.");
+  }
+  const summary = {
+    batches: 0,
+    ingested: 0,
+    issues: 0,
+    skipped: 0,
+    levels: [] as Array<{ level: number; batches: number; ingested: number; issues: number; skipped: number }>,
+  };
+  for (const level of levels) {
+    const { manifestPath } = levelPaths(level);
+    const manifest = loadJson(manifestPath);
+    const sourceIssueIdsByBatch = new Map<number, Set<string>>();
+    for (const spell of manifest.spells.filter((entry: ValidatedJson) => entry.issue?.kind === "source")) {
+      const batch = Number(spell.batch);
+      const ids = sourceIssueIdsByBatch.get(batch) ?? new Set<string>();
+      ids.add(spell.spell_id);
+      sourceIssueIdsByBatch.set(batch, ids);
+    }
+    const affectedBatches = [...sourceIssueIdsByBatch.keys()].sort((left, right) => left - right);
+    const levelSummary = { level, batches: affectedBatches.length, ingested: 0, issues: 0, skipped: 0 };
+    for (const batch of affectedBatches) {
+      const report = await ingestSpellLevelBatch(
+        level,
+        batch,
+        false,
+        false,
+        false,
+        true,
+        undefined,
+        sourceIssueIdsByBatch.get(batch),
+      );
+      levelSummary.ingested += report.ingested.length;
+      levelSummary.issues += report.issues.length;
+      levelSummary.skipped += report.skipped.length;
+      process.stderr.write(
+        `Retried cached source issues for level ${level} batch ${batch}: ${report.ingested.length} ingested, ` +
+        `${report.issues.length} issues, ${report.skipped.length} skipped.\n`,
+      );
+    }
+    const refreshedManifest = loadJson(manifestPath);
+    const canonicalSpells = new Map(
+      directJsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) => {
+        const record = loadJson(filename);
+        return [record.spell_id, record] as const;
+      }),
+    );
+    for (const spell of refreshedManifest.spells) {
+      if (spell.issue?.kind === "source" && canonicalSpells.has(spell.spell_id)) delete spell.issue;
+    }
+    refreshDiscoveredDependencies(refreshedManifest, canonicalSpells);
+    writeGeneratedJson(manifestPath, refreshedManifest, true);
+    summary.batches += levelSummary.batches;
+    summary.ingested += levelSummary.ingested;
+    summary.issues += levelSummary.issues;
+    summary.skipped += levelSummary.skipped;
+    summary.levels.push(levelSummary);
+  }
+  validatePackage();
+  return summary;
+}
+
+
+export async function retryReviewedCanonicalOverrides() {
+  const summary = {
+    batches: 0,
+    ingested: 0,
+    issues: 0,
+    skipped: 0,
+    levels: [] as Array<{ level: number; batches: number; ingested: number; issues: number; skipped: number }>,
+  };
+  for (let level = 0; level <= 9; level += 1) {
+    const { manifestPath } = levelPaths(level);
+    const manifest = loadJson(manifestPath);
+    const affectedBatches = [...new Set<number>(
+      manifest.spells
+        .filter((spell: ValidatedJson) => reviewedCanonicalOverrideSpellIds.has(spell.spell_id))
+        .map((spell: ValidatedJson) => Number(spell.batch)),
+    )].sort((left, right) => left - right);
+    const levelSummary = { level, batches: affectedBatches.length, ingested: 0, issues: 0, skipped: 0 };
+    for (const batch of affectedBatches) {
+      const report = await ingestSpellLevelBatch(
+        level,
+        batch,
+        false,
+        false,
+        false,
+        true,
+        undefined,
+        reviewedCanonicalOverrideSpellIds,
+        true,
+      );
+      levelSummary.ingested += report.ingested.length;
+      levelSummary.issues += report.issues.length;
+      levelSummary.skipped += report.skipped.length;
+    }
+    summary.batches += levelSummary.batches;
+    summary.ingested += levelSummary.ingested;
+    summary.issues += levelSummary.issues;
+    summary.skipped += levelSummary.skipped;
+    summary.levels.push(levelSummary);
+  }
+  validatePackage();
+  return summary;
+}
+
+
 export async function ingestDiscoveredDependencies() {
   let availableCanonicalSpells = new Map(
     directJsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) => {
@@ -1054,7 +1226,9 @@ export async function ingestDiscoveredDependencies() {
   );
   const reconciliationGroups = new Map<string, { level: number; batch: number; spellIds: Set<string> }>();
   for (const record of availableCanonicalSpells.values()) {
-    if (!(record.rules_inheritance ?? []).some((rule: ValidatedJson) => rule.resolution_status === "missing_parent")) {
+    if (!(record.rules_inheritance ?? []).some((rule: ValidatedJson) =>
+      rule.resolution_status === "missing_parent" || rule.resolution_status === "pending"
+    )) {
       continue;
     }
     const candidates = catalogCandidates.get(record.spell_id) ?? [];
@@ -1149,6 +1323,12 @@ const startBatch = Number(process.argv[4] ?? "1");
 const endBatch = process.argv[5] === undefined ? undefined : Number(process.argv[5]);
 const run = command === "retry-d20"
   ? retryD20SourceFailures(process.argv[3] === undefined || process.argv[3] === "all" ? undefined : level)
+  : command === "retry-normalization"
+  ? retrySpellLevelNormalizationIssues(process.argv[3] === undefined || process.argv[3] === "all" ? undefined : level)
+  : command === "retry-source-issues"
+  ? retryCachedSourceIssues(process.argv[3] === undefined || process.argv[3] === "all" ? undefined : level)
+  : command === "retry-reviewed-overrides"
+  ? retryReviewedCanonicalOverrides()
   : command === "dependencies"
   ? ingestDiscoveredDependencies()
   : command === "rollout-inheritance"

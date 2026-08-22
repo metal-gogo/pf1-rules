@@ -308,6 +308,18 @@ function parseRange(raw: string | null) {
 }
 
 
+const reviewedRangeOverrides = new Map<string, {
+  category: "touch";
+  rationale: string;
+}>([
+  ["spell.abundant-ammunition", {
+    category: "touch",
+    rationale: "Reviewed project decision: the printed Range field is blank, but the printed Target is one container touched. Use touch as the canonical range while preserving the missing source value.",
+  }],
+]);
+export const reviewedCanonicalOverrideSpellIds = new Set(reviewedRangeOverrides.keys());
+
+
 function parseTargeting(raw: string | null) {
   if (!raw) return null;
   const lower = raw.toLocaleLowerCase("en-US");
@@ -774,8 +786,12 @@ export function generateCanonicalBundle(
 ) {
   const baseline = observations.find((item) => item.siteId === "aon");
   if (!baseline) throw new NormalizationIssue("source", "missing-aon-observation", "AoN baseline observation is missing.");
-  if (baseline.parsed.warnings.some((warning) => warning.severity === "error")) {
-    throw new NormalizationIssue("source", "aon-parser-error", baseline.parsed.warnings.map((warning) => warning.message).join(" "));
+  const rangeOverride = reviewedRangeOverrides.get(spellId);
+  const blockingParserWarnings = baseline.parsed.warnings.filter((warning) =>
+    warning.severity === "error" && !(rangeOverride && warning.field === "range_raw")
+  );
+  if (blockingParserWarnings.length > 0) {
+    throw new NormalizationIssue("source", "aon-parser-error", blockingParserWarnings.map((warning) => warning.message).join(" "));
   }
   const inheritanceReference = detectSpellInheritance(baseline.parsed, availableCanonicalSpells);
 
@@ -968,6 +984,13 @@ export function generateCanonicalBundle(
   addRelationship("uses_definition", "rule", "rule.spell-resistance", "Spell Resistance", baselineEvidence("spell_raw.spell_resistance_raw", parsed.spellResistanceRaw));
 
   const warnings: Array<{ code: string; field_path: string | null; message: string }> = [];
+  if (rangeOverride) {
+    warnings.push({
+      code: "REVIEWED_RANGE_OVERRIDE",
+      field_path: "/effect/range",
+      message: rangeOverride.rationale,
+    });
+  }
   if (parsed.sourcePageRaw && page === null) {
     warnings.push({
       code: "INVALID_PUBLICATION_PAGE",
@@ -1009,7 +1032,9 @@ export function generateCanonicalBundle(
     levels,
     casting: { time: castingTime, components, components_raw: parsed.componentsRaw, conditional_components: [] },
     effect: {
-      range: parseRange(parsed.rangeRaw),
+      range: rangeOverride
+        ? { category: rangeOverride.category, formula: null, raw: null }
+        : parseRange(parsed.rangeRaw),
       delivery: { resolution: delivery.length ? "fixed" : "none", entries: delivery },
       targeting: parseTargeting(targetField?.value_raw ?? null),
       area: parseArea(areaField?.value_raw ?? null),
@@ -1051,6 +1076,16 @@ export function generateCanonicalBundle(
       warnings,
     },
   };
+  if (rangeOverride) {
+    canonical.provenance.push({
+      field_path: "/effect/range",
+      observation_id: baseline.observationId,
+      source_field: "spell_raw.delivery_fields_raw",
+      raw_value_sha256: hash(parsed.deliveryFieldsRaw),
+      decision: "manually_resolved",
+      note: rangeOverride.rationale,
+    });
+  }
   if (inheritanceReference) {
     canonical.rules_inheritance = [inheritanceRule(
       inheritanceReference,
@@ -1072,6 +1107,15 @@ export function generateCanonicalBundle(
     considered_observation_ids: observationIds,
     rationale: "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning.",
   }));
+  if (rangeOverride) {
+    fieldDecisions.push({
+      canonical_path: "/effect/range",
+      decision: "derived",
+      selected_evidence: [{ observation_id: baseline.observationId, source_field: "spell_raw.delivery_fields_raw" }],
+      considered_observation_ids: observationIds,
+      rationale: rangeOverride.rationale,
+    });
+  }
   const decision = {
     $schema: "../../schemas/canonical-decision.schema.json",
     schema_version: "0.1.0",
@@ -1090,7 +1134,9 @@ export function generateCanonicalBundle(
       considered_observation_ids: observationIds,
       rationale: "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence.",
     })),
-    unresolved_questions: warnings.map((warning) => warning.message),
+    unresolved_questions: warnings
+      .filter((warning) => warning.code !== "REVIEWED_RANGE_OVERRIDE")
+      .map((warning) => warning.message),
   };
   return { canonical, decision, entities: [...entityMap.values()] };
 }

@@ -23,15 +23,17 @@ describe("dependency reconciliation", () => {
     expect(pending).toEqual([]);
   });
 
-  it("has no canonical inheritance rules with missing parents", () => {
-    const missingParents = jsonFiles(path.join(projectRoot, "data", "canonical"))
+  it("has no unresolved canonical inheritance rules", () => {
+    const unresolvedInheritance = jsonFiles(path.join(projectRoot, "data", "canonical"))
       .flatMap((filename) => {
         const spell = JSON.parse(fs.readFileSync(filename, "utf8"));
         return (spell.rules_inheritance ?? [])
-          .filter((rule: { resolution_status?: string }) => rule.resolution_status === "missing_parent")
-          .map((rule: { from_spell_id?: string }) => `${spell.spell_id} -> ${rule.from_spell_id}`);
+          .filter((rule: { resolution_status?: string }) => rule.resolution_status !== "resolved")
+          .map((rule: { from_spell_id?: string; resolution_status?: string }) =>
+            `${spell.spell_id} -> ${rule.from_spell_id} (${rule.resolution_status ?? "unknown"})`
+          );
       });
 
-    expect(missingParents).toEqual([]);
+    expect(unresolvedInheritance).toEqual([]);
   });
 });
