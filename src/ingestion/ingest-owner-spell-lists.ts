@@ -32,6 +32,10 @@ const reviewedOwnerSpellIds = new Map<string, string[]>([
   ["elemental body iv (water only)", ["spell.elemental-body-iv"]],
   ["resist energy (cold only)", ["spell.resist-energy"]],
   ["globe of invulnerability (greater)", ["spell.globe-of-invulnerability"]],
+  ["elemental touch (cold only)", ["spell.elemental-touch"]],
+  ["elemental aura (cold only)", ["spell.elemental-aura"]],
+  ["summon monster v (ice elementals only)", ["spell.summon-monster-5"]],
+  ["repel metal and stone", ["spell.repel-metal-or-stone"]],
 ]);
 
 interface Capture {
@@ -159,6 +163,19 @@ function mysteryLinks(html: string, baseUrl: string): Array<{ name: string; url:
 }
 
 
+function spiritLinks(html: string, baseUrl: string): Array<{ name: string; url: string }> {
+  const doc = cheerio.load(html);
+  const values = new Map<string, { name: string; url: string }>();
+  doc('a[href*="ShamanSpiritDisplay.aspx?ItemName="]').each((_index, element) => {
+    const name = cleanText(doc(element).text());
+    const href = doc(element).attr("href");
+    if (!name || !href) return;
+    values.set(slug(name), { name, url: new URL(href, baseUrl).toString() });
+  });
+  return [...values.values()].sort((left, right) => left.name.localeCompare(right.name));
+}
+
+
 function parseMystery(capture: Capture, rawPath: string): OwnerRecord {
   const doc = cheerio.load(capture.body);
   const output = doc('span[id^="MainContent_DataListTypes_LabelName_"]').first();
@@ -253,6 +270,56 @@ function parsePatrons(capture: Capture, rawPath: string): OwnerRecord[] {
     });
   });
   return owners.sort((left, right) => left.name.localeCompare(right.name));
+}
+
+
+function parseSpirit(capture: Capture, rawPath: string): OwnerRecord {
+  const doc = cheerio.load(capture.body);
+  const output = doc('span[id^="MainContent_DataListTypes_LabelName_"]').first();
+  if (output.length !== 1) throw new Error(`AoN spirit detail block missing at ${capture.url}`);
+  const heading = cleanText(output.find("h1.title").first().text());
+  const baseName = heading
+    .replace(/^PFS (?:Legal|Limited|Restricted)\s+/i, "")
+    .replace(/\s+Spirit$/i, "")
+    .trim();
+  const definitionRaw = cleanText(output.text());
+  const spellMatch = /Spirit Magic Spells:\s*(.*?)\s*Hexes:/i.exec(definitionRaw);
+  if (!spellMatch?.[1]) throw new Error(`${baseName} lacks a bounded Spirit Magic Spells section.`);
+  const spells: OwnerSpell[] = [];
+  const entryPattern = /(?:^|,\s*)(.+?)\s*\((\d+)(?:st|nd|rd|th)\)(?=,|\.|$)/gi;
+  for (const match of spellMatch[1].matchAll(entryPattern)) {
+    const spellLevel = Number(match[2]);
+    if (spellLevel < 1 || spellLevel > 9) {
+      throw new Error(`${baseName} has unexpected spirit spell level ${spellLevel}.`);
+    }
+    spells.push({
+      spellName: cleanText(match[1]!),
+      spellLevel,
+      raw: cleanText(match[0]!.replace(/^,\s*/, "")),
+    });
+  }
+  if (spells.length !== 9) {
+    throw new Error(`${baseName} parsed ${spells.length} spirit spells instead of 9: ${spellMatch[1]}`);
+  }
+  const sourceBook = cleanText(output.find('a[href*="paizo.com"]').first().text()) || null;
+  const ownerSlug = slug(baseName);
+  return {
+    entityId: `spirit.${ownerSlug}`,
+    entityType: "spirit",
+    listId: `spell-list.${ownerSlug}-spirit`,
+    listKind: "spirit",
+    name: `${baseName} Spirit`,
+    listName: `${baseName} Spirit Magic Spells`,
+    className: "Shaman",
+    definitionType: "Shaman Spirit",
+    sectionHeading: "Spirit Magic Spells",
+    sourceUrl: capture.url,
+    sourceBook,
+    definitionRaw,
+    spells,
+    capture,
+    rawPath,
+  };
 }
 
 
@@ -614,11 +681,36 @@ export async function ingestPatronSpellLists() {
 }
 
 
+export async function ingestSpiritSpellLists() {
+  await assertAonAllowsOwners();
+  const catalogRawPath = path.join(
+    projectRoot,
+    "data",
+    "raw",
+    "catalogs",
+    "spell-list-owners",
+    "spirits-aon.html",
+  );
+  const catalog = await fetchPage("https://www.aonprd.com/ShamanSpirits.aspx", catalogRawPath);
+  const links = spiritLinks(catalog.body, catalog.url);
+  if (links.length !== 17) throw new Error(`Expected 17 AoN spirits, found ${links.length}.`);
+  const owners: OwnerRecord[] = [];
+  for (const link of links) {
+    const ownerSlug = slug(link.name);
+    const rawPath = path.join(projectRoot, "data", "raw", "entities", `spirit.${ownerSlug}`, "aon.html");
+    owners.push(parseSpirit(await fetchPage(link.url, rawPath), rawPath));
+  }
+  return ingestOwnerRecords("spirit", catalog, owners);
+}
+
+
 const command = process.argv[2];
 const operation = command === "mysteries"
   ? ingestMysterySpellLists
   : command === "patrons"
     ? ingestPatronSpellLists
+    : command === "spirits"
+      ? ingestSpiritSpellLists
     : null;
 if (!operation) throw new Error(`Unknown owner-list command: ${command ?? "<missing>"}`);
 operation()

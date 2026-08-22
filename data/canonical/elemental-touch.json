@@ -72,6 +72,16 @@
       "level": 2,
       "scope": "later_first_party",
       "raw": "wizard 2"
+    },
+    {
+      "spell_list_id": "spell-list.frost-spirit",
+      "list_kind": "spirit",
+      "list_name": "Frost Spirit",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "elemental touch (cold only) (2nd)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -879,6 +889,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.elemental-touch:appears_on_spell_list:spell-list.frost-spirit",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.frost-spirit",
+        "name": "Frost Spirit Magic Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spirit.frost:4b1c4aca",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "elemental touch (cold only) (2nd)",
+          "source_href": "https://www.aonprd.com/ShamanSpiritDisplay.aspx?ItemName=Frost"
+        }
+      ],
+      "note": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
     }
   ],
   "provenance": [
@@ -929,6 +959,14 @@
       "raw_value_sha256": "2bb3bcc4bac684ee4ee2415e126c994a92d45907f802d3e5ef305a23149b85ba",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:spirit.frost:4b1c4aca",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d4faa6e592d906fd14c3b85f6a4c3498232a0d38c21dd83700fb01972d65f429",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -954,6 +992,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Frost Spirit grants Elemental Touch as a level 2 spell; this is not general Shaman class access."
       }
     ]
   }

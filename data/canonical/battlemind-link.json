@@ -100,6 +100,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.tribe-spirit",
+      "list_kind": "spirit",
+      "list_name": "Tribe Spirit",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "battlemind link (6th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -841,6 +851,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.battlemind-link:appears_on_spell_list:spell-list.tribe-spirit",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.tribe-spirit",
+        "name": "Tribe Spirit Magic Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spirit.tribe:b74938de",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "battlemind link (6th)",
+          "source_href": "https://www.aonprd.com/ShamanSpiritDisplay.aspx?ItemName=Tribe"
+        }
+      ],
+      "note": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
     }
   ],
   "provenance": [
@@ -891,6 +921,14 @@
       "raw_value_sha256": "3bdc90936b075bcd6be835ddcab07af24f2605cce5b57ef4efdb9be2476960db",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/9",
+      "observation_id": "aon:spirit.tribe:b74938de",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d0c6629fef9dd6040bb8c32a7f283a3ee5034efa83dcc342273d7070b3d9dd06",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -921,6 +959,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/8",
         "message": "Omdura 4 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Tribe Spirit grants Battlemind Link as a level 6 spell; this is not general Shaman class access."
       }
     ]
   }

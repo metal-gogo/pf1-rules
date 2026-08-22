@@ -107,6 +107,16 @@
       "level": 7,
       "scope": "later_first_party",
       "raw": "wizard 7"
+    },
+    {
+      "spell_list_id": "spell-list.dark-tapestry-spirit",
+      "list_kind": "spirit",
+      "list_name": "Dark Tapestry Spirit",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "contact entity IV (7th)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -710,6 +720,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.contact-entity-iv:appears_on_spell_list:spell-list.dark-tapestry-spirit",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.dark-tapestry-spirit",
+        "name": "Dark Tapestry Spirit Magic Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spirit.dark-tapestry:71645e3d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "contact entity IV (7th)",
+          "source_href": "https://www.aonprd.com/ShamanSpiritDisplay.aspx?ItemName=Dark%20Tapestry"
+        }
+      ],
+      "note": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
     }
   ],
   "provenance": [
@@ -760,6 +790,14 @@
       "raw_value_sha256": "7013ec5b49a144e15f0b2b493dd02c77b7a679bfb52e95bd6c7dc551f0f12d3d",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/12",
+      "observation_id": "aon:spirit.dark-tapestry:71645e3d",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "e384f4861ca9edcc6705c2365400af7e4be3b976f2762e9488175b8d3f4427d7",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -785,6 +823,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/effect/duration",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/12",
+        "message": "Dark Tapestry Spirit grants Contact Entity IV as a level 7 spell; this is not general Shaman class access."
       }
     ]
   }

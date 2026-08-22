@@ -138,6 +138,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.dark-tapestry-spirit",
+      "list_kind": "spirit",
+      "list_name": "Dark Tapestry Spirit",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "contact entity I (2nd)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -595,6 +605,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.contact-entity-i:appears_on_spell_list:spell-list.dark-tapestry-spirit",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.dark-tapestry-spirit",
+        "name": "Dark Tapestry Spirit Magic Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spirit.dark-tapestry:71645e3d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "contact entity I (2nd)",
+          "source_href": "https://www.aonprd.com/ShamanSpiritDisplay.aspx?ItemName=Dark%20Tapestry"
+        }
+      ],
+      "note": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
     }
   ],
   "provenance": [
@@ -645,6 +675,14 @@
       "raw_value_sha256": "0ef97d59f78987d811bb52ef72ab9f322cf28b11ae20e84c14de01a9b602662d",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/14",
+      "observation_id": "aon:spirit.dark-tapestry:71645e3d",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "463d61eeae6da19fa781d8a2b8108288074f7eab88f7379156db6a75a655bfd8",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -655,6 +693,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/13",
         "message": "Omdura 2 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/14",
+        "message": "Dark Tapestry Spirit grants Contact Entity I as a level 2 spell; this is not general Shaman class access."
       }
     ]
   }

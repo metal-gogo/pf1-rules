@@ -198,6 +198,16 @@
       "raw": "2nd — detect undead",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.life-spirit",
+      "list_kind": "spirit",
+      "list_name": "Life Spirit",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "detect undead (1st)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1005,6 +1015,26 @@
         }
       ],
       "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.detect-undead:appears_on_spell_list:spell-list.life-spirit",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.life-spirit",
+        "name": "Life Spirit Magic Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spirit.life:47a9d6bc",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "detect undead (1st)",
+          "source_href": "https://www.aonprd.com/ShamanSpiritDisplay.aspx?ItemName=Life"
+        }
+      ],
+      "note": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
     }
   ],
   "provenance": [
@@ -1087,6 +1117,14 @@
       "raw_value_sha256": "911715ef62a2e174eeeb3ebd78721c767ff5209d15e044f3608789b046904081",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/20",
+      "observation_id": "aon:spirit.life:47a9d6bc",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "6b25bf3aedb2bd92d0036f2754384ce8724ce7d7d0cf7dd151bd748288fd5f0a",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1147,6 +1185,11 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/19",
         "message": "Plague Patron grants Detect Undead as a level 1 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/20",
+        "message": "Life Spirit grants Detect Undead as a level 1 spell; this is not general Shaman class access."
       }
     ]
   }

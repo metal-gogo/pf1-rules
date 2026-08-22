@@ -169,6 +169,19 @@ describe("local rules browser", () => {
     expect(ownerHtml).toContain("/lists/spell-list.water-patron");
   });
 
+  it("routes spirit access through the spirit owner and spell list", async () => {
+    const spellResponse = await fetch(`${baseUrl}/spells/spell.fireball`);
+    const spellHtml = await spellResponse.text();
+    expect(spellResponse.status).toBe(200);
+    expect(spellHtml).toContain("Flame Spirit</a> 3");
+
+    const ownerResponse = await fetch(`${baseUrl}/entities/spirit.flame`);
+    const ownerHtml = await ownerResponse.text();
+    expect(ownerResponse.status).toBe(200);
+    expect(ownerHtml).toContain("<h1>Flame Spirit</h1>");
+    expect(ownerHtml).toContain("/lists/spell-list.flame-spirit");
+  });
+
   it("serves the interactive class filters", async () => {
     const response = await fetch(`${baseUrl}/class-spells.js`);
     const script = await response.text();

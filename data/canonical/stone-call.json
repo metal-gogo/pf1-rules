@@ -97,6 +97,16 @@
       "raw": "4th — stone call",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.stone-spirit",
+      "list_kind": "spirit",
+      "list_name": "Stone Spirit",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "stone call (2nd)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -637,6 +647,26 @@
         }
       ],
       "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.stone-call:appears_on_spell_list:spell-list.stone-spirit",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.stone-spirit",
+        "name": "Stone Spirit Magic Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spirit.stone:2b8749dd",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "stone call (2nd)",
+          "source_href": "https://www.aonprd.com/ShamanSpiritDisplay.aspx?ItemName=Stone"
+        }
+      ],
+      "note": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
     }
   ],
   "provenance": [
@@ -703,6 +733,14 @@
       "raw_value_sha256": "896abb3aab903692c87f5dd0f4fde2ff21a0c2d5dadc9615bedb1fb9777b7651",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/10",
+      "observation_id": "aon:spirit.stone:2b8749dd",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d9a9a4b749cb7893ea3d85d130369f1389571a2dffca548fc794dcc9cd420de4",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -733,6 +771,11 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/9",
         "message": "Mountain Patron grants Stone Call as a level 2 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/10",
+        "message": "Stone Spirit grants Stone Call as a level 2 spell; this is not general Shaman class access."
       }
     ]
   }

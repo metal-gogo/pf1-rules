@@ -77,6 +77,16 @@
       "level": 1,
       "scope": "later_first_party",
       "raw": "wizard 1"
+    },
+    {
+      "spell_list_id": "spell-list.waves-spirit",
+      "list_kind": "spirit",
+      "list_name": "Waves Spirit",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "hydraulic push (1st)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -751,6 +761,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.hydraulic-push:appears_on_spell_list:spell-list.waves-spirit",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.waves-spirit",
+        "name": "Waves Spirit Magic Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spirit.waves:5f0cb588",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "hydraulic push (1st)",
+          "source_href": "https://www.aonprd.com/ShamanSpiritDisplay.aspx?ItemName=Waves"
+        }
+      ],
+      "note": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
     }
   ],
   "provenance": [
@@ -801,6 +831,14 @@
       "raw_value_sha256": "362af81d62c9041510d43689ab6a75233865760865ac293e5a3f5c82dad567af",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:spirit.waves:5f0cb588",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "1caf52fa3dfb00e8d0806e68d1d15c034097ae99872ef718dc055507589e5a15",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -826,6 +864,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Waves Spirit grants Hydraulic Push as a level 1 spell; this is not general Shaman class access."
       }
     ]
   }

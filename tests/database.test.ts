@@ -449,6 +449,32 @@ describe("ingested spell catalog", () => {
     }));
   });
 
+  it("models complete Shaman spirit lists", async () => {
+    const [spirits, spiritLists, spiritRows, normalizedName] = await Promise.all([
+      prisma.entity.count({ where: { type: "spirit", status: "resolved" } }),
+      prisma.entity.count({
+        where: { type: "spell_list", id: { endsWith: "-spirit" }, status: "resolved" },
+      }),
+      prisma.spellLevel.findMany({ where: { listKind: "spirit" } }),
+      prisma.spellLevel.findFirst({
+        where: {
+          spellId: "spell.repel-metal-or-stone",
+          spellListId: "spell-list.stone-spirit",
+        },
+      }),
+    ]);
+
+    expect(spirits).toBe(17);
+    expect(spiritLists).toBe(17);
+    expect(spiritRows).toHaveLength(153);
+    expect(new Set(spiritRows.map((row) => row.spellListId)).size).toBe(17);
+    expect(normalizedName).toEqual(expect.objectContaining({
+      spellLevel: 8,
+      accessBasis: "printed",
+      raw: "repel metal and stone (8th)",
+    }));
+  });
+
   it("preserves catalog summaries and selects a sourced canonical description", async () => {
     const light = await prisma.canonicalSpell.findUnique({
       where: { spellId: "spell.light" },
