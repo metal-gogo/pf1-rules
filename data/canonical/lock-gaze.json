@@ -116,6 +116,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.conspiracies-patron",
+      "list_kind": "patron",
+      "list_name": "Conspiracies Patron",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "2nd — lock gaze",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -764,6 +774,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.lock-gaze:appears_on_spell_list:spell-list.conspiracies-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.conspiracies-patron",
+        "name": "Conspiracies Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.conspiracies:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd — lock gaze",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -814,6 +844,14 @@
       "raw_value_sha256": "692066350ebd295cdccbfea78cd3e08c3aebdff77c1f6dc49d2e8410d31eec4f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/11",
+      "observation_id": "aon:patron.conspiracies:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "ff51f1aeca9f3c41406191283872496166d9f2a49cdb639cfd534edb0fe4579c",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -839,6 +877,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/10",
         "message": "Omdura 1 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/11",
+        "message": "Conspiracies Patron grants Lock Gaze as a level 1 spell; this is not general Witch class access."
       }
     ]
   }

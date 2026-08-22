@@ -110,6 +110,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.time-patron",
+      "list_kind": "patron",
+      "list_name": "Time Patron",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "4th — silence",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -706,6 +716,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.silence:appears_on_spell_list:spell-list.time-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.time-patron",
+        "name": "Time Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.time:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th — silence",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -756,6 +786,14 @@
       "raw_value_sha256": "724fe247da1487718f6cefbf3eb0147cca8f21ae061f666b57b58eed3b93e282",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/10",
+      "observation_id": "aon:patron.time:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "61f30632efa726c84fdfd6668977106b52711ef18cf3e924831311f5be75ec94",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -796,6 +834,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/9",
         "message": "Omdura 2 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/10",
+        "message": "Time Patron grants Silence as a level 2 spell; this is not general Witch class access."
       }
     ]
   }

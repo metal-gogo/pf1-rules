@@ -103,6 +103,16 @@
       "level": 4,
       "scope": "core",
       "raw": "wizard 4"
+    },
+    {
+      "spell_list_id": "spell-list.nightmares-patron",
+      "list_kind": "patron",
+      "list_name": "Nightmares Patron",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "8th — phantasmal killer",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -847,6 +857,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.phantasmal-killer:appears_on_spell_list:spell-list.nightmares-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.nightmares-patron",
+        "name": "Nightmares Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.nightmares:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "8th — phantasmal killer",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -897,6 +927,14 @@
       "raw_value_sha256": "b9e6300acc8803e3b43c4fdaba7a5d357a86f467deadd64304bea352ef636eaf",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/11",
+      "observation_id": "aon:patron.nightmares:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "b39abc1d2c1c4d13c90b1f74db261c3f3f1ba287050e4e76b0844bd940f487a7",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -927,6 +965,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/11",
+        "message": "Nightmares Patron grants Phantasmal Killer as a level 4 spell; this is not general Witch class access."
       }
     ]
   }

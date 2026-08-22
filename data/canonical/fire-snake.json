@@ -69,6 +69,16 @@
       "level": 5,
       "scope": "later_first_party",
       "raw": "wizard 5"
+    },
+    {
+      "spell_list_id": "spell-list.light-patron",
+      "list_kind": "patron",
+      "list_name": "Light Patron",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "10th — fire snake",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -709,6 +719,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.fire-snake:appears_on_spell_list:spell-list.light-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.light-patron",
+        "name": "Light Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.light:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "10th — fire snake",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -759,6 +789,14 @@
       "raw_value_sha256": "ddebb60c8655da479c7681a3b8715ad391c59230a8656600b85c0ad911e08de0",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:patron.light:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "de83b7694f313015ca3667d631f63ac218c59c9716fdaadc0441819fa619ec41",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -784,6 +822,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Light Patron grants Fire Snake as a level 5 spell; this is not general Witch class access."
       }
     ]
   }

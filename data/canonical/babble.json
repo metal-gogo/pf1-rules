@@ -77,6 +77,16 @@
       "level": 3,
       "scope": "later_first_party",
       "raw": "wizard 3"
+    },
+    {
+      "spell_list_id": "spell-list.entropy-patron",
+      "list_kind": "patron",
+      "list_name": "Entropy Patron",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "6th — babble",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -652,6 +662,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.babble:appears_on_spell_list:spell-list.entropy-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.entropy-patron",
+        "name": "Entropy Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.entropy:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th — babble",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -702,6 +732,14 @@
       "raw_value_sha256": "8400d25f0b2617e1ce9ef21bca5253240f7621537dec29c11d95f4408ab9a43c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:patron.entropy:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "ed605b7b98d58408d9da2cddc6639dcedc4a8ffe7932222f578b376e9bba7cf1",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -722,6 +760,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Entropy Patron grants Babble as a level 3 spell; this is not general Witch class access."
       }
     ]
   }

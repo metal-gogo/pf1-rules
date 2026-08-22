@@ -59,6 +59,16 @@
       "level": 6,
       "scope": "core",
       "raw": "wizard 6"
+    },
+    {
+      "spell_list_id": "spell-list.mountain-patron",
+      "list_kind": "patron",
+      "list_name": "Mountain Patron",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "12th — flesh to stone",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -685,6 +695,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.flesh-to-stone:appears_on_spell_list:spell-list.mountain-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.mountain-patron",
+        "name": "Mountain Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.mountain:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "12th — flesh to stone",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -735,6 +765,14 @@
       "raw_value_sha256": "9f41b823f7e8dfb5ac7710f3f4dd02bf9b10f2c05f0ff9d2042d816dc846625d",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:patron.mountain:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "1a1644496bf458a236c6d7a5a9d362223d7ed61e9847f066fc08709e6fef92f1",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -760,6 +798,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Mountain Patron grants Flesh to Stone as a level 6 spell; this is not general Witch class access."
       }
     ]
   }

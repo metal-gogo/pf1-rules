@@ -56,6 +56,16 @@
       "scope": "later_first_party",
       "raw": "witch 9",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.healing-patron",
+      "list_kind": "patron",
+      "list_name": "Healing Patron",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "16th — mass cure critical wounds",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -627,6 +637,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.cure-critical-wounds-mass:appears_on_spell_list:spell-list.healing-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.healing-patron",
+        "name": "Healing Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.healing:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "16th — mass cure critical wounds",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -677,6 +707,14 @@
       "raw_value_sha256": "05d7b528bed104fa8ce18e61f778ab6c460d31d88a3f340297d24cbb483f2dbf",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:patron.healing:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "e11990c72f6d338b485609c81f8d3d78459e05431c3a58ed2c46b8efde2b27f3",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -762,6 +800,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Healing Patron grants Cure Critical Wounds, Mass as a level 8 spell; this is not general Witch class access."
       }
     ]
   }

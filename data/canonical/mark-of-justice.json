@@ -88,6 +88,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.jynx-patron",
+      "list_kind": "patron",
+      "list_name": "Jynx Patron",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "10th — mark of justice",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -751,6 +761,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.mark-of-justice:appears_on_spell_list:spell-list.jynx-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.jynx-patron",
+        "name": "Jynx Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.jynx:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "10th — mark of justice",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -801,6 +831,14 @@
       "raw_value_sha256": "7641c048789c31a9bde0e3e55a3f95e2f1db06027606d9fe21e885609048d1e9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:patron.jynx:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "4ac4501c6fec886eec39d5ef17bc4bfd20ad540fa6e304df309c0d01f8101732",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -826,6 +864,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/6",
         "message": "Omdura 5 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Jynx Patron grants Mark of Justice as a level 5 spell; this is not general Witch class access."
       }
     ]
   }

@@ -45,6 +45,16 @@
       "level": 1,
       "scope": "later_first_party",
       "raw": "shaman 1"
+    },
+    {
+      "spell_list_id": "spell-list.thorns-patron",
+      "list_kind": "patron",
+      "list_name": "Thorns Patron",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "2nd — thorn javelin",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -509,6 +519,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.thorn-javelin:appears_on_spell_list:spell-list.thorns-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.thorns-patron",
+        "name": "Thorns Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.thorns:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd — thorn javelin",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -559,6 +589,14 @@
       "raw_value_sha256": "766fce21b8b319ce63bbaf43f6cd21a979d324f291bf9ab12999f18f3aec4161",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:patron.thorns:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "c0f13fc1a9c9a33ddd58bff6385bd2250867aae743210dde84065f718a5a1ca5",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -579,6 +617,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Thorns Patron grants Thorn Javelin as a level 1 spell; this is not general Witch class access."
       }
     ]
   }

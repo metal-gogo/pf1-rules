@@ -68,6 +68,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.death-patron",
+      "list_kind": "patron",
+      "list_name": "Death Patron",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "4th — blessing of courage and life",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -520,6 +530,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.blessing-of-courage-and-life:appears_on_spell_list:spell-list.death-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.death-patron",
+        "name": "Death Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.death:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th — blessing of courage and life",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -570,6 +600,14 @@
       "raw_value_sha256": "ad926becaf2537588687e5f96bda78997e913e32a0f6440de3c68356047a17dd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:patron.death:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "af918ccf388957d736b0e832c9f5c3f3df66c37fcbe43cd07350cc59ae5c7988",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -595,6 +633,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/4",
         "message": "Omdura 2 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Death Patron grants Blessing of Courage and Life as a level 2 spell; this is not general Witch class access."
       }
     ]
   }

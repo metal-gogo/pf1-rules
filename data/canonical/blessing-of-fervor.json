@@ -58,6 +58,26 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.ancestors-patron",
+      "list_kind": "patron",
+      "list_name": "Ancestors Patron",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "8th — blessing of fervor",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.fate-patron",
+      "list_kind": "patron",
+      "list_name": "Fate Patron",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "8th — blessing of fervor",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -697,6 +717,46 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.blessing-of-fervor:appears_on_spell_list:spell-list.ancestors-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.ancestors-patron",
+        "name": "Ancestors Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.ancestors:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "8th — blessing of fervor",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.blessing-of-fervor:appears_on_spell_list:spell-list.fate-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.fate-patron",
+        "name": "Fate Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.fate:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "8th — blessing of fervor",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -747,6 +807,22 @@
       "raw_value_sha256": "ad926becaf2537588687e5f96bda78997e913e32a0f6440de3c68356047a17dd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:patron.ancestors:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "47f8b5877c31a217070036045eba8bf21083845bf90ae4e2e2bf7dc20957752a",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:patron.fate:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "47f8b5877c31a217070036045eba8bf21083845bf90ae4e2e2bf7dc20957752a",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -777,6 +853,16 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/3",
         "message": "Omdura 4 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Ancestors Patron grants Blessing of Fervor as a level 4 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Fate Patron grants Blessing of Fervor as a level 4 spell; this is not general Witch class access."
       }
     ]
   }

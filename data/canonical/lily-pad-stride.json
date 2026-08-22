@@ -27,6 +27,26 @@
       "level": 3,
       "scope": "later_first_party",
       "raw": "hunter 3"
+    },
+    {
+      "spell_list_id": "spell-list.plant-patron",
+      "list_kind": "patron",
+      "list_name": "Plant Patron",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "6th — lily pad stride",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.woodlands-patron",
+      "list_kind": "patron",
+      "list_name": "Woodlands Patron",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "6th — lily pad stride",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -355,6 +375,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.lily-pad-stride:appears_on_spell_list:spell-list.plant-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.plant-patron",
+        "name": "Plant Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.plant:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th — lily pad stride",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.lily-pad-stride:appears_on_spell_list:spell-list.woodlands-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.woodlands-patron",
+        "name": "Woodlands Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.woodlands:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th — lily pad stride",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -405,6 +465,22 @@
       "raw_value_sha256": "daedc1c61540feb2f93a598fc0e5a45ceb7bfadadd6681a8cca8561ba7382846",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/2",
+      "observation_id": "aon:patron.plant:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "69ab7bb89de778ae70139d16f2561cad096cf6227ecc0582b0ec131dd08d5416",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/3",
+      "observation_id": "aon:patron.woodlands:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "69ab7bb89de778ae70139d16f2561cad096cf6227ecc0582b0ec131dd08d5416",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -435,6 +511,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/2",
+        "message": "Plant Patron grants Lily Pad Stride as a level 3 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/3",
+        "message": "Woodlands Patron grants Lily Pad Stride as a level 3 spell; this is not general Witch class access."
       }
     ]
   }

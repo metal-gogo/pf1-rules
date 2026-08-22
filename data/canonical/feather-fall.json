@@ -115,6 +115,16 @@
       "level": 1,
       "scope": "core",
       "raw": "wizard 1"
+    },
+    {
+      "spell_list_id": "spell-list.spring-patron",
+      "list_kind": "patron",
+      "list_name": "Spring Patron",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "2nd — feather fall",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -877,6 +887,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.feather-fall:appears_on_spell_list:spell-list.spring-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.spring-patron",
+        "name": "Spring Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.spring:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd — feather fall",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -927,6 +957,14 @@
       "raw_value_sha256": "1868730e7818b3f5dbc766fa729321c5f33ed6c6608f9ebeb9358af52837b2e0",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/13",
+      "observation_id": "aon:patron.spring:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "57e5412dc3e679de8df4918903a09de2e584b6a05924ba97d659aa672a427a24",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -952,6 +990,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/13",
+        "message": "Spring Patron grants Feather Fall as a level 1 spell; this is not general Witch class access."
       }
     ]
   }

@@ -55,6 +55,26 @@
       "level": 7,
       "scope": "later_first_party",
       "raw": "wizard 7"
+    },
+    {
+      "spell_list_id": "spell-list.revenge-patron",
+      "list_kind": "patron",
+      "list_name": "Revenge Patron",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "14th — phantasmal revenge",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.vengeance-patron",
+      "list_kind": "patron",
+      "list_name": "Vengeance Patron",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "14th — phantasmal revenge",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -652,6 +672,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.phantasmal-revenge:appears_on_spell_list:spell-list.revenge-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.revenge-patron",
+        "name": "Revenge Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.revenge:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "14th — phantasmal revenge",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.phantasmal-revenge:appears_on_spell_list:spell-list.vengeance-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.vengeance-patron",
+        "name": "Vengeance Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.vengeance:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "14th — phantasmal revenge",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -702,6 +762,22 @@
       "raw_value_sha256": "1a6faa697a7ab2b757746fb007e35e71792ae86a2808716ebe7452de9713afb4",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:patron.revenge:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d7ce1f65489d00b05a2bd8191e88379dcd7e308e1766cb10a88ace127c11b410",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:patron.vengeance:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d7ce1f65489d00b05a2bd8191e88379dcd7e308e1766cb10a88ace127c11b410",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -737,6 +813,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Revenge Patron grants Phantasmal Revenge as a level 7 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Vengeance Patron grants Phantasmal Revenge as a level 7 spell; this is not general Witch class access."
       }
     ]
   }

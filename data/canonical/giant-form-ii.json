@@ -35,6 +35,16 @@
       "level": 8,
       "scope": "core",
       "raw": "wizard 8"
+    },
+    {
+      "spell_list_id": "spell-list.strength-patron",
+      "list_kind": "patron",
+      "list_name": "Strength Patron",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "16th — giant form II",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -790,6 +800,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.giant-form-ii:appears_on_spell_list:spell-list.strength-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.strength-patron",
+        "name": "Strength Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.strength:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "16th — giant form II",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -840,6 +870,14 @@
       "raw_value_sha256": "30edd1f1766bedea0c71ccc262bded16b05320c070d7cf85fd7273206ea78e9e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/3",
+      "observation_id": "aon:patron.strength:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "9fe17a94861048a80a162068888df44133985fd2c0a4aa4c4bd93415836dc32a",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -900,6 +938,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/3",
+        "message": "Strength Patron grants Giant Form II as a level 8 spell; this is not general Witch class access."
       }
     ]
   }

@@ -418,6 +418,37 @@ describe("ingested spell catalog", () => {
     expect(normalizedSourceName?.raw).toBe("horrid withering (16th)");
   });
 
+  it("models complete Witch patron lists and expands the printed Water alternative", async () => {
+    const [patrons, patronLists, patronRows, blessWater, curseWater] = await Promise.all([
+      prisma.entity.count({ where: { type: "patron", status: "resolved" } }),
+      prisma.entity.count({
+        where: { type: "spell_list", id: { endsWith: "-patron" }, status: "resolved" },
+      }),
+      prisma.spellLevel.findMany({ where: { listKind: "patron" } }),
+      prisma.spellLevel.findFirst({
+        where: { spellId: "spell.bless-water", spellListId: "spell-list.water-patron" },
+      }),
+      prisma.spellLevel.findFirst({
+        where: { spellId: "spell.curse-water", spellListId: "spell-list.water-patron" },
+      }),
+    ]);
+
+    expect(patrons).toBe(52);
+    expect(patronLists).toBe(52);
+    expect(patronRows).toHaveLength(469);
+    expect(new Set(patronRows.map((row) => row.spellListId)).size).toBe(52);
+    expect(blessWater).toEqual(expect.objectContaining({
+      spellLevel: 1,
+      accessBasis: "printed",
+      raw: "2nd — bless water/curse water",
+    }));
+    expect(curseWater).toEqual(expect.objectContaining({
+      spellLevel: 1,
+      accessBasis: "printed",
+      raw: "2nd — bless water/curse water",
+    }));
+  });
+
   it("preserves catalog summaries and selects a sourced canonical description", async () => {
     const light = await prisma.canonicalSpell.findUnique({
       where: { spellId: "spell.light" },

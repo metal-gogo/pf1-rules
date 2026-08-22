@@ -25,6 +25,15 @@ const reviewedOwnerSpellNames = new Map<string, string>([
   ["minor creation (wood items only)", "Minor Creation"],
 ]);
 
+const reviewedOwnerSpellIds = new Map<string, string[]>([
+  ["flesh to stone", ["spell.flesh-to-stone"]],
+  ["bless water/curse water", ["spell.bless-water", "spell.curse-water"]],
+  ["elemental body iii (water only)", ["spell.elemental-body-iii"]],
+  ["elemental body iv (water only)", ["spell.elemental-body-iv"]],
+  ["resist energy (cold only)", ["spell.resist-energy"]],
+  ["globe of invulnerability (greater)", ["spell.globe-of-invulnerability"]],
+]);
+
 interface Capture {
   body: string;
   url: string;
@@ -42,10 +51,14 @@ interface OwnerSpell {
 
 interface OwnerRecord {
   entityId: string;
-  entityType: "mystery";
+  entityType: "mystery" | "patron" | "spirit" | "bloodline";
   listId: string;
-  listKind: "mystery";
+  listKind: "mystery" | "patron" | "spirit" | "bloodline";
   name: string;
+  listName: string;
+  className: "Oracle" | "Witch" | "Shaman" | "Sorcerer" | "Bloodrager";
+  definitionType: string;
+  sectionHeading: string;
   sourceUrl: string;
   sourceBook: string | null;
   definitionRaw: string;
@@ -127,9 +140,9 @@ async function assertAonAllowsOwners(): Promise<void> {
   if (!response.ok) throw new Error(`Cannot verify AoN robots policy: HTTP ${response.status}`);
   const body = await response.text();
   const disallowed = body.split(/\r?\n/).some((line) =>
-    /^\s*disallow\s*:\s*\/(?:OracleMysteries|MysteryDisplay)\.aspx/i.test(line),
+    /^\s*disallow\s*:\s*\/(?:OracleMysteries|MysteryDisplay|WitchPatrons|ShamanSpirits|ShamanSpiritDisplay|SorcererBloodlines|BloodlineDisplay|BloodragerBloodlines|BloodragerBloodlineDisplay)\.aspx/i.test(line),
   );
-  if (disallowed) throw new Error("AoN robots.txt disallows mystery owner capture.");
+  if (disallowed) throw new Error("AoN robots.txt disallows spell-list owner capture.");
 }
 
 
@@ -179,6 +192,10 @@ function parseMystery(capture: Capture, rawPath: string): OwnerRecord {
     listId: `spell-list.${ownerSlug}-mystery`,
     listKind: "mystery",
     name: `${name} Mystery`,
+    listName: `${name} Mystery Bonus Spells`,
+    className: "Oracle",
+    definitionType: "Oracle Mystery",
+    sectionHeading: "Bonus Spells",
     sourceUrl: capture.url,
     sourceBook,
     definitionRaw,
@@ -186,6 +203,56 @@ function parseMystery(capture: Capture, rawPath: string): OwnerRecord {
     capture,
     rawPath,
   };
+}
+
+
+function parsePatrons(capture: Capture, rawPath: string): OwnerRecord[] {
+  const doc = cheerio.load(capture.body);
+  const owners: OwnerRecord[] = [];
+  doc('span[id^="MainContent_DataListTypes_LabelName_"]').each((_index, element) => {
+    const output = doc(element);
+    const name = cleanText(output.children("b").first().text());
+    if (!name) return;
+    const normalized = output.clone();
+    normalized.find("sup").remove();
+    const definitionRaw = cleanText(normalized.text());
+    const spells: OwnerSpell[] = [];
+    const entryPattern = /(\d+)(?:st|nd|rd|th)\s*[—-]\s*(.+?)(?=,\s*\d+(?:st|nd|rd|th)\s*[—-]|\.\s*$)/gi;
+    for (const match of definitionRaw.matchAll(entryPattern)) {
+      const gainedLevel = Number(match[1]);
+      if (gainedLevel < 2 || gainedLevel > 18 || gainedLevel % 2 !== 0) {
+        throw new Error(`${name} has unexpected patron-spell level ${gainedLevel}.`);
+      }
+      spells.push({
+        spellName: cleanText(match[2]!),
+        spellLevel: gainedLevel / 2,
+        raw: cleanText(match[0]!),
+      });
+    }
+    if (spells.length !== 9) {
+      throw new Error(`${name} parsed ${spells.length} patron spells instead of 9: ${definitionRaw}`);
+    }
+    const sourceBook = cleanText(output.find('a[href*="paizo.com"]').first().text()) || null;
+    const ownerSlug = slug(name);
+    owners.push({
+      entityId: `patron.${ownerSlug}`,
+      entityType: "patron",
+      listId: `spell-list.${ownerSlug}-patron`,
+      listKind: "patron",
+      name: `${name} Patron`,
+      listName: `${name} Patron Spells`,
+      className: "Witch",
+      definitionType: "Witch Patron",
+      sectionHeading: "Patron Spells",
+      sourceUrl: capture.url,
+      sourceBook,
+      definitionRaw,
+      spells,
+      capture,
+      rawPath,
+    });
+  });
+  return owners.sort((left, right) => left.name.localeCompare(right.name));
 }
 
 
@@ -212,24 +279,24 @@ function sourceObservation(owner: OwnerRecord): ValidatedJson {
       response_content_type: owner.capture.response_content_type,
     },
     parser: {
-      name: "aon-mystery-spell-list-adapter",
+      name: `aon-${owner.entityType}-spell-list-adapter`,
       version: parserVersion,
       parsed_at: owner.capture.retrieved_at,
     },
     page: {
       title_raw: owner.name,
-      breadcrumbs_raw: ["Classes", "Oracle", "Mysteries", owner.name],
+      breadcrumbs_raw: ["Classes", owner.className, owner.definitionType, owner.name],
       license_notice_raw: null,
       source_notice_raw: owner.sourceBook,
     },
     entity_raw: {
       name_raw: owner.name,
-      definition_type_raw: "Oracle Mystery",
+      definition_type_raw: owner.definitionType,
       source_book_raw: owner.sourceBook,
       definition_raw: owner.definitionRaw,
       links_raw: [],
       sections_raw: [{
-        heading_raw: "Bonus Spells",
+        heading_raw: owner.sectionHeading,
         body_raw: owner.spells.map((spell) => spell.raw).join(", "),
       }],
     },
@@ -263,16 +330,16 @@ function upsertOwnerEntities(
   const relationship = {
     relationship_id: `${owner.entityId}:owns_spell_list:${owner.listId}`,
     type: "owns_spell_list",
-    target: { entity_type: "spell_list", entity_id: owner.listId, name: `${owner.name} Bonus Spells` },
+    target: { entity_type: "spell_list", entity_id: owner.listId, name: owner.listName },
     status: "accepted",
     evidence: [{
       observation_id: observationId,
       source_field: "entity_raw.sections_raw[0]",
       evidence_kind: "plain_text",
-      anchor_text_raw: "Bonus Spells",
+      anchor_text_raw: owner.sectionHeading,
       source_href: owner.sourceUrl,
     }],
-    note: "This Oracle mystery owns the listed bonus-spell access; it is not a class spell list.",
+    note: `This ${owner.definitionType.toLocaleLowerCase("en-US")} owns the listed spell access; it is not a class spell list.`,
   };
   const existingOwner = findEntityLocation(registries, owner.entityId);
   if (existingOwner) {
@@ -280,7 +347,7 @@ function upsertOwnerEntities(
     existingOwner.entity.name = owner.name;
     existingOwner.entity.status = "resolved";
     existingOwner.entity.evidence = evidence;
-    existingOwner.entity.notes = ["Definition and complete bonus-spell list captured from Archives of Nethys."];
+    existingOwner.entity.notes = ["Definition and complete granted-spell list captured from Archives of Nethys."];
     existingOwner.entity.relationships = [relationship];
   } else {
     ownerRegistry.record.entities.push({
@@ -290,26 +357,26 @@ function upsertOwnerEntities(
       status: "resolved",
       aliases: [],
       evidence,
-      notes: ["Definition and complete bonus-spell list captured from Archives of Nethys."],
+      notes: ["Definition and complete granted-spell list captured from Archives of Nethys."],
       relationships: [relationship],
     });
   }
 
   const existingList = findEntityLocation(registries, owner.listId);
   if (existingList) {
-    existingList.entity.name = `${owner.name} Bonus Spells`;
+    existingList.entity.name = owner.listName;
     existingList.entity.status = "resolved";
     existingList.entity.evidence = evidence;
-    existingList.entity.notes = ["Complete mystery bonus-spell list captured from its owning AoN page."];
+    existingList.entity.notes = [`Complete ${owner.definitionType.toLocaleLowerCase("en-US")} spell list captured from its owning AoN page.`];
   } else {
     ownerRegistry.record.entities.push({
       entity_id: owner.listId,
       entity_type: "spell_list",
-      name: `${owner.name} Bonus Spells`,
+      name: owner.listName,
       status: "resolved",
       aliases: [],
       evidence,
-      notes: ["Complete mystery bonus-spell list captured from its owning AoN page."],
+      notes: [`Complete ${owner.definitionType.toLocaleLowerCase("en-US")} spell list captured from its owning AoN page.`],
     });
   }
 }
@@ -324,15 +391,15 @@ function addOwnerSpellMembership(
 ): "added" | "reclassified" | "existing" {
   const existing = canonical.levels.find((level: ValidatedJson) => level.spell_list_id === owner.listId);
   if (existing) return "existing";
-  const qualifiedOracle = canonical.levels.find((level: ValidatedJson) =>
-    level.spell_list_id === "spell-list.oracle" &&
+  const qualifiedClass = canonical.levels.find((level: ValidatedJson) =>
+    level.spell_list_id === `spell-list.${owner.className.toLocaleLowerCase("en-US")}` &&
     (level.qualifications ?? []).some((qualification: ValidatedJson) =>
-      qualification.kind === "mystery" && qualification.mystery?.entity_id === owner.entityId,
+      qualification.kind === owner.entityType && qualification[owner.entityType]?.entity_id === owner.entityId,
     ),
   );
-  const levelIndex = qualifiedOracle ? canonical.levels.indexOf(qualifiedOracle) : canonical.levels.length;
-  const oldRelationshipId = qualifiedOracle
-    ? `${canonical.spell_id}:appears_on_spell_list:spell-list.oracle`
+  const levelIndex = qualifiedClass ? canonical.levels.indexOf(qualifiedClass) : canonical.levels.length;
+  const oldRelationshipId = qualifiedClass
+    ? `${canonical.spell_id}:appears_on_spell_list:spell-list.${owner.className.toLocaleLowerCase("en-US")}`
     : null;
   const relationshipId = `${canonical.spell_id}:appears_on_spell_list:${owner.listId}`;
   const level = {
@@ -345,7 +412,7 @@ function addOwnerSpellMembership(
     access_basis: "printed",
     qualifications: [],
   };
-  if (qualifiedOracle) canonical.levels[levelIndex] = level;
+  if (qualifiedClass) canonical.levels[levelIndex] = level;
   else canonical.levels.push(level);
 
   const evidence = [{
@@ -358,10 +425,10 @@ function addOwnerSpellMembership(
   const relationship = {
     relationship_id: relationshipId,
     type: "appears_on_spell_list",
-    target: { entity_type: "spell_list", entity_id: owner.listId, name: `${owner.name} Bonus Spells` },
+    target: { entity_type: "spell_list", entity_id: owner.listId, name: owner.listName },
     status: "accepted",
     evidence,
-    note: "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access.",
+    note: `Printed by the owning ${owner.definitionType.toLocaleLowerCase("en-US")}; this is ${owner.listKind} access, not general ${owner.className} class access.`,
   };
   const oldRelationship = oldRelationshipId
     ? canonical.relationships.find((candidate: ValidatedJson) => candidate.relationship_id === oldRelationshipId)
@@ -380,7 +447,7 @@ function addOwnerSpellMembership(
   canonical.normalization.warnings.push({
     code: "OWNER_GRANTED_SPELL_ACCESS",
     field_path: `/levels/${levelIndex}`,
-    message: `${owner.name} grants ${canonical.name} as a level ${ownerSpell.spellLevel} bonus spell; this is not general Oracle class access.`,
+    message: `${owner.name} grants ${canonical.name} as a level ${ownerSpell.spellLevel} spell; this is not general ${owner.className} class access.`,
   });
 
   if (!decision.observation_ids.includes(observationId)) decision.observation_ids.push(observationId);
@@ -389,7 +456,7 @@ function addOwnerSpellMembership(
     decision: "normalize",
     selected_evidence: [{ observation_id: observationId, source_field: "entity_raw.sections_raw[0]" }],
     considered_observation_ids: [observationId],
-    rationale: "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level.",
+    rationale: `AoN clearly transcribes the owning ${owner.definitionType.toLocaleLowerCase("en-US")}'s printed spell entry. The gained class level is normalized to spell level.`,
   });
   const oldDecision = oldRelationshipId
     ? decision.relationship_decisions.find((candidate: ValidatedJson) => candidate.relationship_id === oldRelationshipId)
@@ -399,28 +466,19 @@ function addOwnerSpellMembership(
     decision: "accept",
     evidence: [{ observation_id: observationId, source_field: "entity_raw.sections_raw[0]" }],
     considered_observation_ids: [observationId],
-    rationale: "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access.",
+    rationale: `AoN prints the spell on the owning ${owner.definitionType.toLocaleLowerCase("en-US")} page; it is modeled as ${owner.listKind} access rather than general ${owner.className} access.`,
   };
   if (oldDecision) Object.assign(oldDecision, relationshipDecision);
   else decision.relationship_decisions.push(relationshipDecision);
-  return qualifiedOracle ? "reclassified" : "added";
+  return qualifiedClass ? "reclassified" : "added";
 }
 
 
-export async function ingestMysterySpellLists() {
-  await assertAonAllowsOwners();
-  const catalogRawPath = path.join(
-    projectRoot,
-    "data",
-    "raw",
-    "catalogs",
-    "spell-list-owners",
-    "mysteries-aon.html",
-  );
-  const catalog = await fetchPage("https://www.aonprd.com/OracleMysteries.aspx", catalogRawPath);
-  const links = mysteryLinks(catalog.body, catalog.url);
-  if (links.length !== 34) throw new Error(`Expected 34 AoN mysteries, found ${links.length}.`);
-
+function ingestOwnerRecords(
+  family: string,
+  catalog: Capture,
+  owners: OwnerRecord[],
+) {
   const canonicalFiles = directJsonFiles(path.join(projectRoot, "data", "canonical"));
   const canonicals = new Map(canonicalFiles.map((filename) => {
     const record = loadJson(filename);
@@ -441,10 +499,7 @@ export async function ingestMysterySpellLists() {
     unresolved,
   };
 
-  for (const link of links) {
-    const ownerSlug = slug(link.name);
-    const rawPath = path.join(projectRoot, "data", "raw", "entities", `mystery.${ownerSlug}`, "aon.html");
-    const owner = parseMystery(await fetchPage(link.url, rawPath), rawPath);
+  for (const owner of owners) {
     const observation = sourceObservation(owner);
     const observationId = observation.observation_id;
     writeJson(
@@ -454,30 +509,35 @@ export async function ingestMysterySpellLists() {
     upsertOwnerEntities(owner, observationId, registries);
     report.owners += 1;
     for (const ownerSpell of owner.spells) {
-      const reviewedName = reviewedOwnerSpellNames.get(
-        ownerSpell.spellName.toLocaleLowerCase("en-US"),
-      );
-      const canonical = resolveCanonicalSpellReference(reviewedName ?? ownerSpell.spellName, available);
-      if (!canonical) {
+      const referenceKey = ownerSpell.spellName.toLocaleLowerCase("en-US");
+      const reviewedName = reviewedOwnerSpellNames.get(referenceKey);
+      const reviewedIds = reviewedOwnerSpellIds.get(referenceKey);
+      const resolved = reviewedIds
+        ? reviewedIds.map((spellId) => available.get(spellId)).filter((record): record is ValidatedJson => Boolean(record))
+        : [resolveCanonicalSpellReference(reviewedName ?? ownerSpell.spellName, available)]
+          .filter((record): record is ValidatedJson => Boolean(record));
+      if (resolved.length === 0 || (reviewedIds && resolved.length !== reviewedIds.length)) {
         unresolved.push({ owner: owner.name, spell: ownerSpell.spellName, level: ownerSpell.spellLevel });
         continue;
       }
-      if (reviewedName) {
-        normalizedReferences.push({
-          owner: owner.name,
-          printed: ownerSpell.spellName,
-          canonical: canonical.name,
-        });
-      }
-      const item = canonicals.get(canonical.spell_id)!;
-      const decisionPath = path.join(projectRoot, "data", "decisions", path.basename(item.filename));
-      const decision = loadJson(decisionPath);
-      const result = addOwnerSpellMembership(owner, ownerSpell, observationId, item.record, decision);
-      report[result] += 1;
-      report.rows += 1;
-      if (result !== "existing") {
-        writeJson(item.filename, item.record);
-        writeJson(decisionPath, decision);
+      for (const canonical of resolved) {
+        if (reviewedName || reviewedIds) {
+          normalizedReferences.push({
+            owner: owner.name,
+            printed: ownerSpell.spellName,
+            canonical: canonical.name,
+          });
+        }
+        const item = canonicals.get(canonical.spell_id)!;
+        const decisionPath = path.join(projectRoot, "data", "decisions", path.basename(item.filename));
+        const decision = loadJson(decisionPath);
+        const result = addOwnerSpellMembership(owner, ownerSpell, observationId, item.record, decision);
+        report[result] += 1;
+        report.rows += 1;
+        if (result !== "existing") {
+          writeJson(item.filename, item.record);
+          writeJson(decisionPath, decision);
+        }
       }
     }
   }
@@ -488,35 +548,80 @@ export async function ingestMysterySpellLists() {
     );
     writeJson(registry.filename, registry.record);
   }
-  const mysteryListIds = new Set(links.map((link) => `spell-list.${slug(link.name)}-mystery`));
+  const ownerListIds = new Set(owners.map((owner) => owner.listId));
   const canonicalRows = [...available.values()].flatMap((record) =>
-    record.levels.filter((level: ValidatedJson) => mysteryListIds.has(level.spell_list_id)),
+    record.levels.filter((level: ValidatedJson) => ownerListIds.has(level.spell_list_id)),
   );
-  const rowsByList = Object.fromEntries([...mysteryListIds].sort().map((listId) => [
+  const rowsByList = Object.fromEntries([...ownerListIds].sort().map((listId) => [
     listId,
     canonicalRows.filter((level: ValidatedJson) => level.spell_list_id === listId).length,
   ]));
-  writeJson(path.join(projectRoot, "data", "reports", "mystery-spell-list-ingestion.json"), {
+  writeJson(path.join(projectRoot, "data", "reports", `${family}-spell-list-ingestion.json`), {
     generated_at: catalog.retrieved_at,
     source_catalog_url: catalog.url,
     source_catalog_sha256: catalog.content_sha256,
-    owner_count: links.length,
+    owner_count: owners.length,
     canonical_rows: canonicalRows.length,
     rows_by_list: rowsByList,
     normalized_references: normalizedReferences,
     unresolved,
   });
   if (unresolved.length > 0) {
-    throw new Error(`Mystery ingestion has ${unresolved.length} unresolved spell references.`);
+    throw new Error(`${family} ingestion has ${unresolved.length} unresolved spell references.`);
   }
   validatePackage();
   return report;
 }
 
 
+export async function ingestMysterySpellLists() {
+  await assertAonAllowsOwners();
+  const catalogRawPath = path.join(
+    projectRoot,
+    "data",
+    "raw",
+    "catalogs",
+    "spell-list-owners",
+    "mysteries-aon.html",
+  );
+  const catalog = await fetchPage("https://www.aonprd.com/OracleMysteries.aspx", catalogRawPath);
+  const links = mysteryLinks(catalog.body, catalog.url);
+  if (links.length !== 34) throw new Error(`Expected 34 AoN mysteries, found ${links.length}.`);
+  const owners: OwnerRecord[] = [];
+  for (const link of links) {
+    const ownerSlug = slug(link.name);
+    const rawPath = path.join(projectRoot, "data", "raw", "entities", `mystery.${ownerSlug}`, "aon.html");
+    owners.push(parseMystery(await fetchPage(link.url, rawPath), rawPath));
+  }
+  return ingestOwnerRecords("mystery", catalog, owners);
+}
+
+
+export async function ingestPatronSpellLists() {
+  await assertAonAllowsOwners();
+  const rawPath = path.join(
+    projectRoot,
+    "data",
+    "raw",
+    "catalogs",
+    "spell-list-owners",
+    "patrons-aon.html",
+  );
+  const catalog = await fetchPage("https://www.aonprd.com/WitchPatrons.aspx", rawPath);
+  const owners = parsePatrons(catalog, rawPath);
+  if (owners.length !== 52) throw new Error(`Expected 52 AoN patrons, found ${owners.length}.`);
+  return ingestOwnerRecords("patron", catalog, owners);
+}
+
+
 const command = process.argv[2];
-if (command !== "mysteries") throw new Error(`Unknown owner-list command: ${command ?? "<missing>"}`);
-ingestMysterySpellLists()
+const operation = command === "mysteries"
+  ? ingestMysterySpellLists
+  : command === "patrons"
+    ? ingestPatronSpellLists
+    : null;
+if (!operation) throw new Error(`Unknown owner-list command: ${command ?? "<missing>"}`);
+operation()
   .then((report) => process.stdout.write(`${JSON.stringify(report, null, 2)}\n`))
   .catch((error: unknown) => {
     process.stderr.write(`${error instanceof Error ? error.stack ?? error.message : String(error)}\n`);

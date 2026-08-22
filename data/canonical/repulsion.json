@@ -122,6 +122,26 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.space-patron",
+      "list_kind": "patron",
+      "list_name": "Space Patron",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "12th — repulsion",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.thorns-patron",
+      "list_kind": "patron",
+      "list_name": "Thorns Patron",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "14th — repulsion",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -754,6 +774,46 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.repulsion:appears_on_spell_list:spell-list.space-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.space-patron",
+        "name": "Space Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.space:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "12th — repulsion",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.repulsion:appears_on_spell_list:spell-list.thorns-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.thorns-patron",
+        "name": "Thorns Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.thorns:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "14th — repulsion",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -804,6 +864,22 @@
       "raw_value_sha256": "ec112b722840386aa253b612ed524cd4b46f3a602873a628f80c72ef30c130c3",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/12",
+      "observation_id": "aon:patron.space:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "df4bff983b6a0fe669caa06fb2364f9cedb9e041d33b3dfb79801df7dad2dfb0",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/13",
+      "observation_id": "aon:patron.thorns:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "3db749a2c71198cffb6cf06c14f8a6e8b89972a925f3d1ca79e13d4bf5158054",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -829,6 +905,16 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/11",
         "message": "Omdura 6 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/12",
+        "message": "Space Patron grants Repulsion as a level 6 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/13",
+        "message": "Thorns Patron grants Repulsion as a level 7 spell; this is not general Witch class access."
       }
     ]
   }

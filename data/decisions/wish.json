@@ -4,25 +4,264 @@
   "decision_id": "canonical-decision:spell.wish:v0.1",
   "entity_id": "spell.wish",
   "canonical_record_path": "../canonical/wish.json",
-  "observation_ids": ["aon:spell.wish:d174ce0e", "legacy_aon:spell.wish:bdbd4716", "legacy_aon:spell.wish:4db13eb1", "d20pfsrd:spell.wish:584aed26"],
+  "observation_ids": [
+    "aon:spell.wish:d174ce0e",
+    "legacy_aon:spell.wish:bdbd4716",
+    "legacy_aon:spell.wish:4db13eb1",
+    "d20pfsrd:spell.wish:584aed26",
+    "aon:patron.fate:15d234b1"
+  ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.wish:d174ce0e",
   "status": "accepted",
   "field_decisions": [
-    {"canonical_path": "/classification", "decision": "select_source", "selected_evidence": [{"observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.school_raw"}], "considered_observation_ids": ["aon:spell.wish:d174ce0e", "legacy_aon:spell.wish:bdbd4716", "d20pfsrd:spell.wish:584aed26"], "rationale": "All three base observations agree on Universal; AoN supplies the authoritative linked definition."},
-    {"canonical_path": "/levels", "decision": "combine", "selected_evidence": [{"observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.levels_raw"}, {"observation_id": "d20pfsrd:spell.wish:584aed26", "source_field": "spell_raw.domains_raw"}], "considered_observation_ids": ["aon:spell.wish:d174ce0e", "legacy_aon:spell.wish:bdbd4716", "d20pfsrd:spell.wish:584aed26"], "rationale": "AoN supplies the modern first-party class list. d20PFSRD's bloodline records are separately typed additions and do not overwrite it."},
-    {"canonical_path": "/casting/components", "decision": "normalize", "selected_evidence": [{"observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.components_raw"}, {"observation_id": "legacy_aon:spell.wish:bdbd4716", "source_field": "spell_raw.components_raw"}, {"observation_id": "d20pfsrd:spell.wish:584aed26", "source_field": "spell_raw.components_raw"}], "considered_observation_ids": ["aon:spell.wish:d174ce0e", "legacy_aon:spell.wish:bdbd4716", "d20pfsrd:spell.wish:584aed26"], "rationale": "All sources agree on verbal, somatic, and a mandatory diamond worth 25,000 gp."},
-    {"canonical_path": "/casting/conditional_components", "decision": "normalize", "selected_evidence": [{"observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.description_raw"}, {"observation_id": "legacy_aon:spell.wish:bdbd4716", "source_field": "spell_raw.description_raw"}], "considered_observation_ids": ["aon:spell.wish:d174ce0e", "legacy_aon:spell.wish:bdbd4716", "d20pfsrd:spell.wish:584aed26"], "rationale": "A duplicated spell's material component is additional and conditional only when its cost exceeds 10,000 gp."},
-    {"canonical_path": "/effect/delivery", "decision": "normalize", "selected_evidence": [{"observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.delivery_fields_raw[0]"}], "considered_observation_ids": ["aon:spell.wish:d174ce0e", "legacy_aon:spell.wish:bdbd4716", "d20pfsrd:spell.wish:584aed26"], "rationale": "AoN's exact `Target, Effect, or Area` label is retained. Legacy and d20PFSRD render the same combined field without `or`; the selected Wish effect determines delivery."},
-    {"canonical_path": "/effect/saving_throw", "decision": "normalize", "selected_evidence": [{"observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.saving_throw_raw"}, {"observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.description_raw"}], "considered_observation_ids": ["aon:spell.wish:d174ce0e", "legacy_aon:spell.wish:bdbd4716", "d20pfsrd:spell.wish:584aed26"], "rationale": "The stat block says `none, see text`; specific effects and duplicated spells can allow saves, so the canonical value is conditional."},
-    {"canonical_path": "/description/raw", "decision": "select_source", "selected_evidence": [{"observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.description_raw"}], "considered_observation_ids": ["aon:spell.wish:d174ce0e", "legacy_aon:spell.wish:bdbd4716", "d20pfsrd:spell.wish:584aed26"], "rationale": "AoN is selected by provenance. Legacy independently agrees; d20PFSRD has only minor typography differences."},
-    {"canonical_path": "/publication", "decision": "normalize", "selected_evidence": [{"observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.source_book_raw"}], "considered_observation_ids": ["aon:spell.wish:d174ce0e", "legacy_aon:spell.wish:bdbd4716", "d20pfsrd:spell.wish:584aed26"], "rationale": "AoN explicitly identifies PRPG Core Rulebook page 370."}
+    {
+      "canonical_path": "/classification",
+      "decision": "select_source",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.wish:d174ce0e",
+          "source_field": "spell_raw.school_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.wish:d174ce0e",
+        "legacy_aon:spell.wish:bdbd4716",
+        "d20pfsrd:spell.wish:584aed26"
+      ],
+      "rationale": "All three base observations agree on Universal; AoN supplies the authoritative linked definition."
+    },
+    {
+      "canonical_path": "/levels",
+      "decision": "combine",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.wish:d174ce0e",
+          "source_field": "spell_raw.levels_raw"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.wish:584aed26",
+          "source_field": "spell_raw.domains_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.wish:d174ce0e",
+        "legacy_aon:spell.wish:bdbd4716",
+        "d20pfsrd:spell.wish:584aed26"
+      ],
+      "rationale": "AoN supplies the modern first-party class list. d20PFSRD's bloodline records are separately typed additions and do not overwrite it."
+    },
+    {
+      "canonical_path": "/casting/components",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.wish:d174ce0e",
+          "source_field": "spell_raw.components_raw"
+        },
+        {
+          "observation_id": "legacy_aon:spell.wish:bdbd4716",
+          "source_field": "spell_raw.components_raw"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.wish:584aed26",
+          "source_field": "spell_raw.components_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.wish:d174ce0e",
+        "legacy_aon:spell.wish:bdbd4716",
+        "d20pfsrd:spell.wish:584aed26"
+      ],
+      "rationale": "All sources agree on verbal, somatic, and a mandatory diamond worth 25,000 gp."
+    },
+    {
+      "canonical_path": "/casting/conditional_components",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.wish:d174ce0e",
+          "source_field": "spell_raw.description_raw"
+        },
+        {
+          "observation_id": "legacy_aon:spell.wish:bdbd4716",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.wish:d174ce0e",
+        "legacy_aon:spell.wish:bdbd4716",
+        "d20pfsrd:spell.wish:584aed26"
+      ],
+      "rationale": "A duplicated spell's material component is additional and conditional only when its cost exceeds 10,000 gp."
+    },
+    {
+      "canonical_path": "/effect/delivery",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.wish:d174ce0e",
+          "source_field": "spell_raw.delivery_fields_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.wish:d174ce0e",
+        "legacy_aon:spell.wish:bdbd4716",
+        "d20pfsrd:spell.wish:584aed26"
+      ],
+      "rationale": "AoN's exact `Target, Effect, or Area` label is retained. Legacy and d20PFSRD render the same combined field without `or`; the selected Wish effect determines delivery."
+    },
+    {
+      "canonical_path": "/effect/saving_throw",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.wish:d174ce0e",
+          "source_field": "spell_raw.saving_throw_raw"
+        },
+        {
+          "observation_id": "aon:spell.wish:d174ce0e",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.wish:d174ce0e",
+        "legacy_aon:spell.wish:bdbd4716",
+        "d20pfsrd:spell.wish:584aed26"
+      ],
+      "rationale": "The stat block says `none, see text`; specific effects and duplicated spells can allow saves, so the canonical value is conditional."
+    },
+    {
+      "canonical_path": "/description/raw",
+      "decision": "select_source",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.wish:d174ce0e",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.wish:d174ce0e",
+        "legacy_aon:spell.wish:bdbd4716",
+        "d20pfsrd:spell.wish:584aed26"
+      ],
+      "rationale": "AoN is selected by provenance. Legacy independently agrees; d20PFSRD has only minor typography differences."
+    },
+    {
+      "canonical_path": "/publication",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.wish:d174ce0e",
+          "source_field": "spell_raw.source_book_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.wish:d174ce0e",
+        "legacy_aon:spell.wish:bdbd4716",
+        "d20pfsrd:spell.wish:584aed26"
+      ],
+      "rationale": "AoN explicitly identifies PRPG Core Rulebook page 370."
+    },
+    {
+      "canonical_path": "/levels/9",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:patron.fate:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.fate:15d234b1"
+      ],
+      "rationale": "AoN clearly transcribes the owning witch patron's printed spell entry. The gained class level is normalized to spell level."
+    }
   ],
   "relationship_decisions": [
-    {"relationship_id": "spell.wish:has_mythic_variant:mythic-spell-variant.wish", "decision": "accept", "evidence": [{"observation_id": "aon:spell.wish:d174ce0e", "source_field": "spell_raw.sections_raw[1].heading_raw"}, {"observation_id": "legacy_aon:spell.wish:4db13eb1", "source_field": "spell_raw.links_raw[0]"}], "considered_observation_ids": ["aon:spell.wish:d174ce0e", "legacy_aon:spell.wish:4db13eb1", "d20pfsrd:spell.wish:584aed26"], "rationale": "AoN and the separate Legacy page explicitly identify Mythic Wish; d20PFSRD's omission is recorded rather than treated as contradictory."},
-    {"relationship_id": "spell.wish:references:spell.geas-quest", "decision": "accept", "evidence": [{"observation_id": "legacy_aon:spell.wish:bdbd4716", "source_field": "spell_raw.links_raw[1]"}], "considered_observation_ids": ["aon:spell.wish:d174ce0e", "legacy_aon:spell.wish:bdbd4716", "d20pfsrd:spell.wish:584aed26"], "rationale": "All sources name Geas/Quest; Legacy and d20PFSRD make it a direct spell link."},
-    {"relationship_id": "spell.wish:references:spell.insanity", "decision": "accept", "evidence": [{"observation_id": "legacy_aon:spell.wish:bdbd4716", "source_field": "spell_raw.links_raw[2]"}], "considered_observation_ids": ["aon:spell.wish:d174ce0e", "legacy_aon:spell.wish:bdbd4716", "d20pfsrd:spell.wish:584aed26"], "rationale": "All sources name Insanity; Legacy and d20PFSRD make it a direct spell link."},
-    {"relationship_id": "spell.wish:references:spell.resurrection", "decision": "accept", "evidence": [{"observation_id": "legacy_aon:spell.wish:bdbd4716", "source_field": "spell_raw.links_raw[3]"}], "considered_observation_ids": ["aon:spell.wish:d174ce0e", "legacy_aon:spell.wish:bdbd4716", "legacy_aon:spell.wish:4db13eb1", "d20pfsrd:spell.wish:584aed26"], "rationale": "All sources say the revive option duplicates Resurrection, and both Legacy pages link it."}
+    {
+      "relationship_id": "spell.wish:has_mythic_variant:mythic-spell-variant.wish",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.wish:d174ce0e",
+          "source_field": "spell_raw.sections_raw[1].heading_raw"
+        },
+        {
+          "observation_id": "legacy_aon:spell.wish:4db13eb1",
+          "source_field": "spell_raw.links_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.wish:d174ce0e",
+        "legacy_aon:spell.wish:4db13eb1",
+        "d20pfsrd:spell.wish:584aed26"
+      ],
+      "rationale": "AoN and the separate Legacy page explicitly identify Mythic Wish; d20PFSRD's omission is recorded rather than treated as contradictory."
+    },
+    {
+      "relationship_id": "spell.wish:references:spell.geas-quest",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.wish:bdbd4716",
+          "source_field": "spell_raw.links_raw[1]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.wish:d174ce0e",
+        "legacy_aon:spell.wish:bdbd4716",
+        "d20pfsrd:spell.wish:584aed26"
+      ],
+      "rationale": "All sources name Geas/Quest; Legacy and d20PFSRD make it a direct spell link."
+    },
+    {
+      "relationship_id": "spell.wish:references:spell.insanity",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.wish:bdbd4716",
+          "source_field": "spell_raw.links_raw[2]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.wish:d174ce0e",
+        "legacy_aon:spell.wish:bdbd4716",
+        "d20pfsrd:spell.wish:584aed26"
+      ],
+      "rationale": "All sources name Insanity; Legacy and d20PFSRD make it a direct spell link."
+    },
+    {
+      "relationship_id": "spell.wish:references:spell.resurrection",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.wish:bdbd4716",
+          "source_field": "spell_raw.links_raw[3]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.wish:d174ce0e",
+        "legacy_aon:spell.wish:bdbd4716",
+        "legacy_aon:spell.wish:4db13eb1",
+        "d20pfsrd:spell.wish:584aed26"
+      ],
+      "rationale": "All sources say the revive option duplicates Resurrection, and both Legacy pages link it."
+    },
+    {
+      "relationship_id": "spell.wish:appears_on_spell_list:spell-list.fate-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.fate:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.fate:15d234b1"
+      ],
+      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
+    }
   ],
   "unresolved_questions": [
     "What reusable effect-option model should represent Wish's enumerated safe effects without flattening their distinct targets, durations, and saves?",

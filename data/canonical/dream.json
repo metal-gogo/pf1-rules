@@ -109,6 +109,36 @@
       "level": 5,
       "scope": "core",
       "raw": "wizard 5"
+    },
+    {
+      "spell_list_id": "spell-list.decadence-patron",
+      "list_kind": "patron",
+      "list_name": "Decadence Patron",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "10th — dream",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.stars-patron",
+      "list_kind": "patron",
+      "list_name": "Stars Patron",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "10th — dream",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.wisdom-patron",
+      "list_kind": "patron",
+      "list_name": "Wisdom Patron",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "10th — dream",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -789,6 +819,66 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.dream:appears_on_spell_list:spell-list.decadence-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.decadence-patron",
+        "name": "Decadence Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.decadence:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "10th — dream",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.dream:appears_on_spell_list:spell-list.stars-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.stars-patron",
+        "name": "Stars Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.stars:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "10th — dream",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.dream:appears_on_spell_list:spell-list.wisdom-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.wisdom-patron",
+        "name": "Wisdom Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.wisdom:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "10th — dream",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -839,6 +929,30 @@
       "raw_value_sha256": "0e161d92586a4e14e0c56ea2094b189bb7beabab7d523324c89529fa2e0d00ed",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/12",
+      "observation_id": "aon:patron.decadence:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "b7b503c690d4a12b5a8b6ff2bf1a243b28b2c08577637d7efbd1c91fab008d7b",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/13",
+      "observation_id": "aon:patron.stars:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "b7b503c690d4a12b5a8b6ff2bf1a243b28b2c08577637d7efbd1c91fab008d7b",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/14",
+      "observation_id": "aon:patron.wisdom:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "b7b503c690d4a12b5a8b6ff2bf1a243b28b2c08577637d7efbd1c91fab008d7b",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -864,6 +978,21 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/12",
+        "message": "Decadence Patron grants Dream as a level 5 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/13",
+        "message": "Stars Patron grants Dream as a level 5 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/14",
+        "message": "Wisdom Patron grants Dream as a level 5 spell; this is not general Witch class access."
       }
     ]
   }

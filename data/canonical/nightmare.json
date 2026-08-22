@@ -101,6 +101,16 @@
       "level": 5,
       "scope": "core",
       "raw": "wizard 5"
+    },
+    {
+      "spell_list_id": "spell-list.nightmares-patron",
+      "list_kind": "patron",
+      "list_name": "Nightmares Patron",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "10th — nightmare",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -824,6 +834,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.nightmare:appears_on_spell_list:spell-list.nightmares-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.nightmares-patron",
+        "name": "Nightmares Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.nightmares:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "10th — nightmare",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -874,6 +904,14 @@
       "raw_value_sha256": "84e0f1bed48abfc0a75087abc2c74292eb6cf9b7051e4c4e868a0182d6571386",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/11",
+      "observation_id": "aon:patron.nightmares:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "a36f59a806731207f4f42e636624d5633a0f44f34b6dfd787b7c497b04ad9bc6",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -909,6 +947,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/11",
+        "message": "Nightmares Patron grants Nightmare as a level 5 spell; this is not general Witch class access."
       }
     ]
   }

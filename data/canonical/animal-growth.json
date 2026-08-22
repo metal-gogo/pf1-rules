@@ -67,6 +67,16 @@
       "level": 5,
       "scope": "core",
       "raw": "wizard 5"
+    },
+    {
+      "spell_list_id": "spell-list.animals-patron",
+      "list_kind": "patron",
+      "list_name": "Animals Patron",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "10th — animal growth",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -636,6 +646,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.animal-growth:appears_on_spell_list:spell-list.animals-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.animals-patron",
+        "name": "Animals Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.animals:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "10th — animal growth",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -686,6 +716,14 @@
       "raw_value_sha256": "38b9eab27e68828b25e2d454def66f034c6e70bb63a308f0bd7239a25cffe12f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:patron.animals:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "2c85c86c45f6cdf05c2e7e4df458d59b91b6ac370fce6ce7d9022775298dbd82",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -706,6 +744,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Animals Patron grants Animal Growth as a level 5 spell; this is not general Witch class access."
       }
     ]
   }

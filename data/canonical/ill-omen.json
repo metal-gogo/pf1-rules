@@ -46,6 +46,26 @@
       "level": 1,
       "scope": "later_first_party",
       "raw": "witch 1"
+    },
+    {
+      "spell_list_id": "spell-list.jynx-patron",
+      "list_kind": "patron",
+      "list_name": "Jynx Patron",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "2nd — ill omen",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.portents-patron",
+      "list_kind": "patron",
+      "list_name": "Portents Patron",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "2nd — ill omen",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -533,6 +553,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.ill-omen:appears_on_spell_list:spell-list.jynx-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.jynx-patron",
+        "name": "Jynx Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.jynx:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd — ill omen",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.ill-omen:appears_on_spell_list:spell-list.portents-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.portents-patron",
+        "name": "Portents Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.portents:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd — ill omen",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -583,6 +643,22 @@
       "raw_value_sha256": "5f6365addf271c4cab7e7accfbc15cf90d30dd66dfd9d8eee43a2101de374c8e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:patron.jynx:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "85ee2ec275b747913a0467b37b1e6196660af09c753a63d403f7549c008d8ecc",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:patron.portents:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "85ee2ec275b747913a0467b37b1e6196660af09c753a63d403f7549c008d8ecc",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -613,6 +689,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Jynx Patron grants Ill Omen as a level 1 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Portents Patron grants Ill Omen as a level 1 spell; this is not general Witch class access."
       }
     ]
   }

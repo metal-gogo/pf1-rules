@@ -60,6 +60,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.healing-patron",
+      "list_kind": "patron",
+      "list_name": "Healing Patron",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "12th — pillar of life",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -501,6 +511,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.pillar-of-life:appears_on_spell_list:spell-list.healing-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.healing-patron",
+        "name": "Healing Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.healing:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "12th — pillar of life",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -551,6 +581,14 @@
       "raw_value_sha256": "d191c31114b14542c8de99f24746d5359ef6b1347ba5275062eea0ccb7bf1987",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:patron.healing:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "44d1ca7bf05cf83679eb4e9967c9d6340a5b6900930b3d5f73b3173ddc1ff596",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -581,6 +619,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/3",
         "message": "Omdura 5 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Healing Patron grants Pillar of Life as a level 6 spell; this is not general Witch class access."
       }
     ]
   }

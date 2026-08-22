@@ -85,6 +85,16 @@
       "level": 1,
       "scope": "later_first_party",
       "raw": "wizard 1"
+    },
+    {
+      "spell_list_id": "spell-list.mind-patron",
+      "list_kind": "patron",
+      "list_name": "Mind Patron",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "2nd — mindlink",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -640,6 +650,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.mindlink:appears_on_spell_list:spell-list.mind-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.mind-patron",
+        "name": "Mind Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.mind:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd — mindlink",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -690,6 +720,14 @@
       "raw_value_sha256": "6430339be8c2f5182bad37245c278d34e64def4b05f0561e4a6c0ee12eba9b03",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/9",
+      "observation_id": "aon:patron.mind:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "dd781608b927395d6749343019ad281088e3d1b8774128afbd278960433d0803",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -710,6 +748,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Mind Patron grants Mindlink as a level 1 spell; this is not general Witch class access."
       }
     ]
   }

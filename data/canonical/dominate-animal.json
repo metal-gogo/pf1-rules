@@ -53,6 +53,16 @@
       "level": 3,
       "scope": "later_first_party",
       "raw": "shaman 3"
+    },
+    {
+      "spell_list_id": "spell-list.animals-patron",
+      "list_kind": "patron",
+      "list_name": "Animals Patron",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "6th — dominate animal",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -453,6 +463,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.dominate-animal:appears_on_spell_list:spell-list.animals-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.animals-patron",
+        "name": "Animals Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.animals:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th — dominate animal",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -503,6 +533,14 @@
       "raw_value_sha256": "8c6ca2c408a1adbcd9d1ce60c63766808d9f5b1428f2b0399b5d43de65926209",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:patron.animals:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "dacf142317fa7bc5f5a8b5e899fa72fb0738454b4b8b935033f6638758dbcc0a",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -528,6 +566,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Animals Patron grants Dominate Animal as a level 3 spell; this is not general Witch class access."
       }
     ]
   }

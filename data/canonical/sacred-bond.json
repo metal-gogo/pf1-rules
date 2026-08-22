@@ -78,6 +78,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.recovery-patron",
+      "list_kind": "patron",
+      "list_name": "Recovery Patron",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "6th — sacred bond",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -504,6 +514,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.sacred-bond:appears_on_spell_list:spell-list.recovery-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.recovery-patron",
+        "name": "Recovery Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.recovery:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th — sacred bond",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -554,6 +584,14 @@
       "raw_value_sha256": "8f4194cb785ec136aba626a6867398cc9f9ea0fe03906bb0f5f976a984b1d4e4",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:patron.recovery:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "75fb60a1a766851f30004a526a5d1a7e082232e13f6d8d9524238f7b7b7dc028",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -584,6 +622,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/5",
         "message": "Omdura 2 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Recovery Patron grants Sacred Bond as a level 3 spell; this is not general Witch class access."
       }
     ]
   }

@@ -29,6 +29,16 @@
       "level": 6,
       "scope": "later_first_party",
       "raw": "hunter 6"
+    },
+    {
+      "spell_list_id": "spell-list.aurora-patron",
+      "list_kind": "patron",
+      "list_name": "Aurora Patron",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "10th — blazing rainbow",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -497,6 +507,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.blazing-rainbow:appears_on_spell_list:spell-list.aurora-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.aurora-patron",
+        "name": "Aurora Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.aurora:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "10th — blazing rainbow",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -547,6 +577,14 @@
       "raw_value_sha256": "50e5b40b2bdccb3733a8ca6ca72235feb4ef23d9073fedc4790641d584327fbd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/2",
+      "observation_id": "aon:patron.aurora:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "940a6ef3acdea77f87fdd2c286f8d4820dfe573cf9ead813ef378a2ac68bc276",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -567,6 +605,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/2",
+        "message": "Aurora Patron grants Blazing Rainbow as a level 5 spell; this is not general Witch class access."
       }
     ]
   }

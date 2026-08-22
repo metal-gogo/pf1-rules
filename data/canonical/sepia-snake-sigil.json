@@ -69,6 +69,16 @@
       "level": 3,
       "scope": "core",
       "raw": "wizard 3"
+    },
+    {
+      "spell_list_id": "spell-list.decadence-patron",
+      "list_kind": "patron",
+      "list_name": "Decadence Patron",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "6th — sepia snake sigil",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -649,6 +659,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.sepia-snake-sigil:appears_on_spell_list:spell-list.decadence-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.decadence-patron",
+        "name": "Decadence Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.decadence:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th — sepia snake sigil",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -699,6 +729,14 @@
       "raw_value_sha256": "aa8219debb0efe2856681501fd8dbe565400c254de8892820a7c8c0f88085683",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:patron.decadence:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "769aca96f80780b35c834fd4571f7e708056c4d8cb333b7f37538062963919b2",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -719,6 +757,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Decadence Patron grants Sepia Snake Sigil as a level 3 spell; this is not general Witch class access."
       }
     ]
   }

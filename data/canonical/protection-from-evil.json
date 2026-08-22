@@ -160,6 +160,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.boundaries-patron",
+      "list_kind": "patron",
+      "list_name": "Boundaries Patron",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "2nd — protection from evil",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1216,6 +1226,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.protection-from-evil:appears_on_spell_list:spell-list.boundaries-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.boundaries-patron",
+        "name": "Boundaries Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.boundaries:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd — protection from evil",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -1266,6 +1296,14 @@
       "raw_value_sha256": "b6a93377085364b0877a6177e8077eaa69f8a43403cd057010491f93bb1cf43e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/16",
+      "observation_id": "aon:patron.boundaries:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "149c3ac65a8cc299331f5e4c52fdb3809cf89c9843a86df5b8410fde344ee3c8",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1296,6 +1334,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/15",
         "message": "Omdura 1 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/16",
+        "message": "Boundaries Patron grants Protection from Evil as a level 1 spell; this is not general Witch class access."
       }
     ]
   }

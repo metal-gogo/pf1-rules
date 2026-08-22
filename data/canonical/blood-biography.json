@@ -142,6 +142,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.portents-patron",
+      "list_kind": "patron",
+      "list_name": "Portents Patron",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "6th — blood biography",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -775,6 +785,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.blood-biography:appears_on_spell_list:spell-list.portents-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.portents-patron",
+        "name": "Portents Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.portents:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th — blood biography",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -825,6 +855,14 @@
       "raw_value_sha256": "061ea0fe40f8824f72806e805360e3cbc2f2ed49ee0fe9a2a0b4ad9c085e7c59",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/14",
+      "observation_id": "aon:patron.portents:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "aa73a875d2b251766dd6a4e5afa0d71db2745e4892eef884eea4c5724dd5c640",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -855,6 +893,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/13",
         "message": "Omdura 3 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/14",
+        "message": "Portents Patron grants Blood Biography as a level 3 spell; this is not general Witch class access."
       }
     ]
   }

@@ -43,6 +43,16 @@
       "level": 2,
       "scope": "later_first_party",
       "raw": "shaman 2"
+    },
+    {
+      "spell_list_id": "spell-list.rot-patron",
+      "list_kind": "patron",
+      "list_name": "Rot Patron",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "4th — warp wood",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -430,6 +440,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.warp-wood:appears_on_spell_list:spell-list.rot-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.rot-patron",
+        "name": "Rot Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.rot:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th — warp wood",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -480,6 +510,14 @@
       "raw_value_sha256": "92146b4ff0cff468cbf123e79a7961bb6aa16f919c09c25b68727de3f56aa9c9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:patron.rot:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "5d0efc6c938690597700c655f9c9be1da70be984048f1bbd88dc0a60b37276ba",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -500,6 +538,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Rot Patron grants Warp Wood as a level 2 spell; this is not general Witch class access."
       }
     ]
   }

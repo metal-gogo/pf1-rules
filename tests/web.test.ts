@@ -156,6 +156,19 @@ describe("local rules browser", () => {
     expect(listHtml).toContain("Fireball");
   });
 
+  it("routes patron access through the patron owner and spell list", async () => {
+    const spellResponse = await fetch(`${baseUrl}/spells/spell.bless-water`);
+    const spellHtml = await spellResponse.text();
+    expect(spellResponse.status).toBe(200);
+    expect(spellHtml).toContain("Water Patron</a> 1");
+
+    const ownerResponse = await fetch(`${baseUrl}/entities/patron.water`);
+    const ownerHtml = await ownerResponse.text();
+    expect(ownerResponse.status).toBe(200);
+    expect(ownerHtml).toContain("<h1>Water Patron</h1>");
+    expect(ownerHtml).toContain("/lists/spell-list.water-patron");
+  });
+
   it("serves the interactive class filters", async () => {
     const response = await fetch(`${baseUrl}/class-spells.js`);
     const script = await response.text();

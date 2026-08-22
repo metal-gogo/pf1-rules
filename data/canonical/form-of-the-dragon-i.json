@@ -59,6 +59,16 @@
       "level": 6,
       "scope": "core",
       "raw": "wizard 6"
+    },
+    {
+      "spell_list_id": "spell-list.transformation-patron",
+      "list_kind": "patron",
+      "list_name": "Transformation Patron",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "12th — form of the dragon I",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1056,6 +1066,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.form-of-the-dragon-i:appears_on_spell_list:spell-list.transformation-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.transformation-patron",
+        "name": "Transformation Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.transformation:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "12th — form of the dragon I",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -1106,6 +1136,14 @@
       "raw_value_sha256": "cc8882f4c8e2dc1e4e8302ee36952f6f825dc84ef820a33b7a4a00b078ae091b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:patron.transformation:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "85d68b5249e7db4781e6588da1b5bec526d05151b719fcfedabd7e3f067c0150",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1136,6 +1174,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Transformation Patron grants Form of the Dragon I as a level 6 spell; this is not general Witch class access."
       }
     ]
   }

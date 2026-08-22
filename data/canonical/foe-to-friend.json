@@ -45,6 +45,16 @@
       "level": 5,
       "scope": "later_first_party",
       "raw": "skald 5"
+    },
+    {
+      "spell_list_id": "spell-list.mercy-patron",
+      "list_kind": "patron",
+      "list_name": "Mercy Patron",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "14th — foe to friend",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -438,6 +448,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.foe-to-friend:appears_on_spell_list:spell-list.mercy-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.mercy-patron",
+        "name": "Mercy Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.mercy:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "14th — foe to friend",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -488,6 +518,14 @@
       "raw_value_sha256": "bba216b13284169fbc00794a2fa650567e0c22593a0ef1387a599119a8d61702",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:patron.mercy:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "49d643bf57975c763d564b8c74ba02fbf2d0b38919f601a1fe93c61ab5bc8056",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -503,6 +541,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Mercy Patron grants Foe to Friend as a level 7 spell; this is not general Witch class access."
       }
     ]
   }

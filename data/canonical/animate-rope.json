@@ -75,6 +75,16 @@
       "level": 1,
       "scope": "core",
       "raw": "wizard 1"
+    },
+    {
+      "spell_list_id": "spell-list.trickery-patron",
+      "list_kind": "patron",
+      "list_name": "Trickery Patron",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "2nd — animate rope",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -655,6 +665,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.animate-rope:appears_on_spell_list:spell-list.trickery-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.trickery-patron",
+        "name": "Trickery Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.trickery:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd — animate rope",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -705,6 +735,14 @@
       "raw_value_sha256": "5cd4038ea6964edc3430fadaae44e1c29f8786fc719692cc9d7dc4b8d6bc9c74",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:patron.trickery:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "f0c42f8a8fcb5174a6eeb9dff211fe7e7f388274f3aa61d9becff4c85caa128b",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -735,6 +773,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Trickery Patron grants Animate Rope as a level 1 spell; this is not general Witch class access."
       }
     ]
   }

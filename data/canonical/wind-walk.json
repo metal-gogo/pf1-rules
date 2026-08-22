@@ -92,6 +92,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.storms-patron",
+      "list_kind": "patron",
+      "list_name": "Storms Patron",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "12th — wind walk",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -632,6 +642,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.wind-walk:appears_on_spell_list:spell-list.storms-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.storms-patron",
+        "name": "Storms Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.storms:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "12th — wind walk",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -682,6 +712,14 @@
       "raw_value_sha256": "61fac1ab5f9a4db95c300f814fe422dc4bc3410904d712561cf778fd43c081a9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:patron.storms:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "7f3c0ec746ebc85a17caf46a3a91e9e7cf36d494e5747fe91955308184028e30",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -707,6 +745,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/7",
         "message": "Omdura 6 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Storms Patron grants Wind Walk as a level 6 spell; this is not general Witch class access."
       }
     ]
   }

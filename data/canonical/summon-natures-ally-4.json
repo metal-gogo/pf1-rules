@@ -47,6 +47,16 @@
       "scope": "later_first_party",
       "raw": "shaman 4",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.animals-patron",
+      "list_kind": "patron",
+      "list_name": "Animals Patron",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "8th — summon nature's ally IV",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -367,6 +377,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.summon-natures-ally-4:appears_on_spell_list:spell-list.animals-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.animals-patron",
+        "name": "Animals Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.animals:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "8th — summon nature's ally IV",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -417,11 +447,25 @@
       "raw_value_sha256": "acc230869eea4845ca5fa99d9b75670a4e81a8a60118ea74380b2e170cf9ca7b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:patron.animals:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "1c89fc8d5deb8865e7d4b6b398f30d5d361a1516a2278d0921b133eebc78c76d",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
     "status": "validated",
     "normalizer_version": "0.1.4-dependency-aliases",
-    "warnings": []
+    "warnings": [
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Animals Patron grants Summon Nature's Ally 4 as a level 4 spell; this is not general Witch class access."
+      }
+    ]
   }
 }

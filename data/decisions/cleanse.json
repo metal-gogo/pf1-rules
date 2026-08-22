@@ -7,7 +7,10 @@
   "observation_ids": [
     "aon:spell.cleanse:0396cb63b40cb900",
     "legacy_aon:spell.cleanse:aeefebd980879d66",
-    "d20pfsrd:spell.cleanse:d054fa247577b740"
+    "d20pfsrd:spell.cleanse:d054fa247577b740",
+    "aon:patron.healing:15d234b1",
+    "aon:patron.mercy:15d234b1",
+    "aon:patron.recovery:15d234b1"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.cleanse:0396cb63b40cb900",
@@ -127,6 +130,48 @@
         "d20pfsrd:spell.cleanse:d054fa247577b740"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/5",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:patron.healing:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.healing:15d234b1"
+      ],
+      "rationale": "AoN clearly transcribes the owning witch patron's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/6",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:patron.mercy:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.mercy:15d234b1"
+      ],
+      "rationale": "AoN clearly transcribes the owning witch patron's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/7",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:patron.recovery:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.recovery:15d234b1"
+      ],
+      "rationale": "AoN clearly transcribes the owning witch patron's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -524,6 +569,48 @@
         "d20pfsrd:spell.cleanse:d054fa247577b740"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.cleanse:appears_on_spell_list:spell-list.healing-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.healing:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.healing:15d234b1"
+      ],
+      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
+    },
+    {
+      "relationship_id": "spell.cleanse:appears_on_spell_list:spell-list.mercy-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.mercy:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.mercy:15d234b1"
+      ],
+      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
+    },
+    {
+      "relationship_id": "spell.cleanse:appears_on_spell_list:spell-list.recovery-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.recovery:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.recovery:15d234b1"
+      ],
+      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
     }
   ],
   "unresolved_questions": [

@@ -81,6 +81,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.spirits-patron",
+      "list_kind": "patron",
+      "list_name": "Spirits Patron",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "16th — planar ally",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -2615,6 +2625,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.planar-ally:appears_on_spell_list:spell-list.spirits-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.spirits-patron",
+        "name": "Spirits Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.spirits:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "16th — planar ally",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -2665,6 +2695,14 @@
       "raw_value_sha256": "26bb11f869713ab86c0c9bd12c44f3b241139b52075c7927a995c7adc85deae5",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:patron.spirits:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "ca7bc443b2dcd9724b8e75ef9e643ceceb120039be4c7ac3d3d9d206f740cd38",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -2715,6 +2753,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/5",
         "message": "Omdura 6 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Spirits Patron grants Planar Ally as a level 8 spell; this is not general Witch class access."
       }
     ]
   }

@@ -123,6 +123,26 @@
       "level": 1,
       "scope": "core",
       "raw": "wizard 1"
+    },
+    {
+      "spell_list_id": "spell-list.agility-patron",
+      "list_kind": "patron",
+      "list_name": "Agility Patron",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "2nd — jump",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.transformation-patron",
+      "list_kind": "patron",
+      "list_name": "Transformation Patron",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "2nd — jump",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -757,6 +777,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.jump:appears_on_spell_list:spell-list.agility-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.agility-patron",
+        "name": "Agility Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.agility:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd — jump",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.jump:appears_on_spell_list:spell-list.transformation-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.transformation-patron",
+        "name": "Transformation Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.transformation:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd — jump",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -807,6 +867,22 @@
       "raw_value_sha256": "e9030d72f06d9a7dba5b5f41f734a562c440dce14517b4dee6e2ca5b84834691",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/14",
+      "observation_id": "aon:patron.agility:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "e3262790739804ac396d8c26842368ebb1ee7cface3caf57e025d57758b608f5",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/15",
+      "observation_id": "aon:patron.transformation:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "e3262790739804ac396d8c26842368ebb1ee7cface3caf57e025d57758b608f5",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -827,6 +903,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/casting/components_raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/14",
+        "message": "Agility Patron grants Jump as a level 1 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/15",
+        "message": "Transformation Patron grants Jump as a level 1 spell; this is not general Witch class access."
       }
     ]
   }

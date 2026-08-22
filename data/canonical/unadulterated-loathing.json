@@ -86,6 +86,16 @@
       "level": 3,
       "scope": "later_first_party",
       "raw": "wizard 3"
+    },
+    {
+      "spell_list_id": "spell-list.enchantment-patron",
+      "list_kind": "patron",
+      "list_name": "Enchantment Patron",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "6th — unadulterated loathing",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -687,6 +697,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.unadulterated-loathing:appears_on_spell_list:spell-list.enchantment-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.enchantment-patron",
+        "name": "Enchantment Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.enchantment:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th — unadulterated loathing",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -737,6 +767,14 @@
       "raw_value_sha256": "7a317e761b4ec80402347f7f2f4fa58822b4f58d785cb653b6bb263d4b11f3ae",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/9",
+      "observation_id": "aon:patron.enchantment:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "49f2c253b979d8047231a8b2c1aed18a9b3431ef969db5e7d9d1ab8fb7bad23e",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -757,6 +795,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Enchantment Patron grants Unadulterated Loathing as a level 3 spell; this is not general Witch class access."
       }
     ]
   }

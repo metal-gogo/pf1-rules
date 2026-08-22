@@ -35,6 +35,26 @@
       "level": 2,
       "scope": "core",
       "raw": "wizard 2"
+    },
+    {
+      "spell_list_id": "spell-list.occult-patron",
+      "list_kind": "patron",
+      "list_name": "Occult Patron",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "4th — command undead",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.plague-patron",
+      "list_kind": "patron",
+      "list_name": "Plague Patron",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "4th — command undead",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -434,6 +454,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.command-undead:appears_on_spell_list:spell-list.occult-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.occult-patron",
+        "name": "Occult Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.occult:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th — command undead",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.command-undead:appears_on_spell_list:spell-list.plague-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.plague-patron",
+        "name": "Plague Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.plague:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th — command undead",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -484,6 +544,22 @@
       "raw_value_sha256": "427dfda776637be89ebc83fcfdeceb4a0fa9a00c94d75272a613bad0ee58ad32",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/3",
+      "observation_id": "aon:patron.occult:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "c1abc5611e66a488e4e4e16bdf70acfdc54ecb0d1e743f1c6bd93a38cfc7d028",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:patron.plague:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "c1abc5611e66a488e4e4e16bdf70acfdc54ecb0d1e743f1c6bd93a38cfc7d028",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -519,6 +595,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/3",
+        "message": "Occult Patron grants Command Undead as a level 2 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Plague Patron grants Command Undead as a level 2 spell; this is not general Witch class access."
       }
     ]
   }

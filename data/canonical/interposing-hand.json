@@ -61,6 +61,16 @@
       "level": 5,
       "scope": "core",
       "raw": "wizard 5"
+    },
+    {
+      "spell_list_id": "spell-list.protection-patron",
+      "list_kind": "patron",
+      "list_name": "Protection Patron",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "10th — interposing hand",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -777,6 +787,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.interposing-hand:appears_on_spell_list:spell-list.protection-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.protection-patron",
+        "name": "Protection Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.protection:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "10th — interposing hand",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -827,6 +857,14 @@
       "raw_value_sha256": "49eaf885eefec3c2b6f92730942f32643a9533afc0a0950059a2ef13bb8d6015",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:patron.protection:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "5a7fb6d23eb838fd769e77d19d798083a918e4104031277ed0fa779501794cb8",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -847,6 +885,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Protection Patron grants Interposing Hand as a level 5 spell; this is not general Witch class access."
       }
     ]
   }

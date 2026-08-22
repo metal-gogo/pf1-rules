@@ -129,6 +129,26 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.enchantment-patron",
+      "list_kind": "patron",
+      "list_name": "Enchantment Patron",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "4th — calm emotions",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.peace-patron",
+      "list_kind": "patron",
+      "list_name": "Peace Patron",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "4th — calm emotions",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -925,6 +945,46 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.calm-emotions:appears_on_spell_list:spell-list.enchantment-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.enchantment-patron",
+        "name": "Enchantment Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.enchantment:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th — calm emotions",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.calm-emotions:appears_on_spell_list:spell-list.peace-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.peace-patron",
+        "name": "Peace Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.peace:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th — calm emotions",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -975,6 +1035,22 @@
       "raw_value_sha256": "b96b0b50c46eea997a990de932ee1d21d4e390aadeaf8801659ae7963b99a6a9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/12",
+      "observation_id": "aon:patron.enchantment:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "308e3e223cf7a12132dd8d7acfd68ff4b1c1b8b1ae9adaffc5e2e0d36a5542c4",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/13",
+      "observation_id": "aon:patron.peace:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "308e3e223cf7a12132dd8d7acfd68ff4b1c1b8b1ae9adaffc5e2e0d36a5542c4",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1005,6 +1081,16 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/11",
         "message": "Omdura 2 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/12",
+        "message": "Enchantment Patron grants Calm Emotions as a level 2 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/13",
+        "message": "Peace Patron grants Calm Emotions as a level 2 spell; this is not general Witch class access."
       }
     ]
   }

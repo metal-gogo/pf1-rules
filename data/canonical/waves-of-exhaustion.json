@@ -59,6 +59,16 @@
       "level": 7,
       "scope": "core",
       "raw": "wizard 7"
+    },
+    {
+      "spell_list_id": "spell-list.occult-patron",
+      "list_kind": "patron",
+      "list_name": "Occult Patron",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "14th — waves of exhaustion",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -532,6 +542,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.waves-of-exhaustion:appears_on_spell_list:spell-list.occult-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.occult-patron",
+        "name": "Occult Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.occult:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "14th — waves of exhaustion",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -582,6 +612,14 @@
       "raw_value_sha256": "92146b4ff0cff468cbf123e79a7961bb6aa16f919c09c25b68727de3f56aa9c9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:patron.occult:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "ebef2d6b5bc598f7778694de86b7de4b8ebfd4e46b2968ea60680b5257b04df7",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -602,6 +640,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Occult Patron grants Waves of Exhaustion as a level 7 spell; this is not general Witch class access."
       }
     ]
   }

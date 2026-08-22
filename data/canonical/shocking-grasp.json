@@ -61,6 +61,16 @@
       "level": 1,
       "scope": "core",
       "raw": "wizard 1"
+    },
+    {
+      "spell_list_id": "spell-list.elements-patron",
+      "list_kind": "patron",
+      "list_name": "Elements Patron",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "2nd — shocking grasp",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -534,6 +544,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.shocking-grasp:appears_on_spell_list:spell-list.elements-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.elements-patron",
+        "name": "Elements Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.elements:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd — shocking grasp",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -584,6 +614,14 @@
       "raw_value_sha256": "724fe247da1487718f6cefbf3eb0147cca8f21ae061f666b57b58eed3b93e282",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:patron.elements:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "0ab98d69ed32a7f279ded961ae295daad8f02b1174a5318f7389c1917b8b168c",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -609,6 +647,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Elements Patron grants Shocking Grasp as a level 1 spell; this is not general Witch class access."
       }
     ]
   }

@@ -37,6 +37,16 @@
       "level": 7,
       "scope": "core",
       "raw": "wizard 7"
+    },
+    {
+      "spell_list_id": "spell-list.shadow-patron",
+      "list_kind": "patron",
+      "list_name": "Shadow Patron",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "14th — shadow conjuration (greater)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -466,6 +476,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.shadow-conjuration-greater:appears_on_spell_list:spell-list.shadow-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.shadow-patron",
+        "name": "Shadow Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.shadow:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "14th — shadow conjuration (greater)",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -516,6 +546,14 @@
       "raw_value_sha256": "4cf84c587c0b42ff4a64b4da906c1bb0dfa8a26435b97d41f58ce1cfb78a7b0e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/3",
+      "observation_id": "aon:patron.shadow:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "4a94896357872cdf36bc6716f16fc3a72b5d474276ca9830d297d9b5ff0cf138",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -606,6 +644,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/3",
+        "message": "Shadow Patron grants Shadow Conjuration, Greater as a level 7 spell; this is not general Witch class access."
       }
     ]
   }

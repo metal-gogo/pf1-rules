@@ -29,6 +29,16 @@
       "level": 3,
       "scope": "later_first_party",
       "raw": "hunter 3"
+    },
+    {
+      "spell_list_id": "spell-list.rot-patron",
+      "list_kind": "patron",
+      "list_name": "Rot Patron",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "6th — fungal infestation",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -375,6 +385,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.fungal-infestation:appears_on_spell_list:spell-list.rot-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.rot-patron",
+        "name": "Rot Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.rot:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th — fungal infestation",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -425,6 +455,14 @@
       "raw_value_sha256": "f07f7cd7e2ba0c45941d2cf2a46ca77a4bb73c17c91de3910437fff9f5c9e0dd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/2",
+      "observation_id": "aon:patron.rot:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d019f7366895bb907207c81493816c3fc2e5ba3429dec8fbd2814e68697d8992",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -440,6 +478,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/2",
+        "message": "Rot Patron grants Fungal Infestation as a level 3 spell; this is not general Witch class access."
       }
     ]
   }

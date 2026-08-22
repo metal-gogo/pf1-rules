@@ -110,6 +110,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.endurance-patron",
+      "list_kind": "patron",
+      "list_name": "Endurance Patron",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "8th — spell immunity",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -849,6 +859,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.spell-immunity:appears_on_spell_list:spell-list.endurance-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.endurance-patron",
+        "name": "Endurance Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.endurance:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "8th — spell immunity",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -899,6 +929,14 @@
       "raw_value_sha256": "12307fc2f5a6584eea3bbe695016012ad14740fb9d058e92468501d4cfe907bb",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/10",
+      "observation_id": "aon:patron.endurance:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "9e8a7ca07a6cd244584a30966a1617d20c9b71f85001c01788949ea97bd63fac",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -924,6 +962,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/9",
         "message": "Omdura 4 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/10",
+        "message": "Endurance Patron grants Spell Immunity as a level 4 spell; this is not general Witch class access."
       }
     ]
   }

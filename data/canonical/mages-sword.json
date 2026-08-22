@@ -45,6 +45,16 @@
       "level": 7,
       "scope": "core",
       "raw": "wizard 7"
+    },
+    {
+      "spell_list_id": "spell-list.thorns-patron",
+      "list_kind": "patron",
+      "list_name": "Thorns Patron",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "16th — mage's sword",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -693,6 +703,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.mages-sword:appears_on_spell_list:spell-list.thorns-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.thorns-patron",
+        "name": "Thorns Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.thorns:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "16th — mage's sword",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -743,6 +773,14 @@
       "raw_value_sha256": "0279e903f5164f3c3b5bad16bb23058b0b9054944659cc1b91f6db48017dd182",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:patron.thorns:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "5aa3fd21cb903996f3ff48469c74025711f5fdb7d7a7966477e249ba15eb34f1",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -763,6 +801,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Thorns Patron grants Mage's Sword as a level 8 spell; this is not general Witch class access."
       }
     ]
   }

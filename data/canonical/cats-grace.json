@@ -163,6 +163,16 @@
       "level": 2,
       "scope": "core",
       "raw": "wizard 2"
+    },
+    {
+      "spell_list_id": "spell-list.agility-patron",
+      "list_kind": "patron",
+      "list_name": "Agility Patron",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "4th — cat's grace",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1115,6 +1125,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.cats-grace:appears_on_spell_list:spell-list.agility-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.agility-patron",
+        "name": "Agility Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.agility:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th — cat's grace",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -1165,6 +1195,14 @@
       "raw_value_sha256": "b96b0b50c46eea997a990de932ee1d21d4e390aadeaf8801659ae7963b99a6a9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/19",
+      "observation_id": "aon:patron.agility:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "e3c2d916f41b818b713597f9b3791efc5ab9b4057cad394570bf767993b2cb0d",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1185,6 +1223,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/19",
+        "message": "Agility Patron grants Cat's Grace as a level 2 spell; this is not general Witch class access."
       }
     ]
   }

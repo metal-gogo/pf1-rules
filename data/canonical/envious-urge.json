@@ -70,6 +70,26 @@
       "level": 6,
       "scope": "later_first_party",
       "raw": "wizard 6"
+    },
+    {
+      "spell_list_id": "spell-list.decadence-patron",
+      "list_kind": "patron",
+      "list_name": "Decadence Patron",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "12th — envious urge",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.insanity-patron",
+      "list_kind": "patron",
+      "list_name": "Insanity Patron",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "12th — envious urge",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -644,6 +664,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.envious-urge:appears_on_spell_list:spell-list.decadence-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.decadence-patron",
+        "name": "Decadence Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.decadence:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "12th — envious urge",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.envious-urge:appears_on_spell_list:spell-list.insanity-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.insanity-patron",
+        "name": "Insanity Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.insanity:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "12th — envious urge",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -694,6 +754,22 @@
       "raw_value_sha256": "c08c8fddb0b82ab2eaef3b856a62dfdc46790ff49c63951b6011908fea11df9b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:patron.decadence:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "dc8a6e290182163e25984a617c4887f787d4de749c29beea2db9e553d66871ca",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:patron.insanity:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "dc8a6e290182163e25984a617c4887f787d4de749c29beea2db9e553d66871ca",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -709,6 +785,16 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Decadence Patron grants Envious Urge as a level 6 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Insanity Patron grants Envious Urge as a level 6 spell; this is not general Witch class access."
       }
     ]
   }

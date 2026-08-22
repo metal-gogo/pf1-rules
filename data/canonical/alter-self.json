@@ -139,6 +139,16 @@
       "level": 2,
       "scope": "core",
       "raw": "wizard 2"
+    },
+    {
+      "spell_list_id": "spell-list.spring-patron",
+      "list_kind": "patron",
+      "list_name": "Spring Patron",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "4th — alter self",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -927,6 +937,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.alter-self:appears_on_spell_list:spell-list.spring-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.spring-patron",
+        "name": "Spring Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.spring:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th — alter self",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -977,6 +1007,14 @@
       "raw_value_sha256": "38b9eab27e68828b25e2d454def66f034c6e70bb63a308f0bd7239a25cffe12f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/16",
+      "observation_id": "aon:patron.spring:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "940b24af0c103d972d7d6d478a14739122ac2cc8f96d4d506e69dfeb3383fa23",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -992,6 +1030,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/16",
+        "message": "Spring Patron grants Alter Self as a level 2 spell; this is not general Witch class access."
       }
     ]
   }

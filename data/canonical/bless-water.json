@@ -80,6 +80,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.water-patron",
+      "list_kind": "patron",
+      "list_name": "Water Patron",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "2nd — bless water/curse water",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -540,6 +550,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.bless-water:appears_on_spell_list:spell-list.water-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.water-patron",
+        "name": "Water Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.water:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd — bless water/curse water",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -590,6 +620,14 @@
       "raw_value_sha256": "0cdfb9e3daf460f7fd03c0f84c8e89279a1ed2b83d7a013ee4122193dfa57572",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:patron.water:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "f9ed27b410a9cb753972c205cde9bb32c1c21fbd695f08f43d7f9fdf1f4f9360",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -610,6 +648,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/5",
         "message": "Omdura 1 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Water Patron grants Bless Water as a level 1 spell; this is not general Witch class access."
       }
     ]
   }

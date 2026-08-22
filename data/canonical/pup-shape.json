@@ -67,6 +67,16 @@
       "level": 3,
       "scope": "later_first_party",
       "raw": "wizard 3"
+    },
+    {
+      "spell_list_id": "spell-list.spring-patron",
+      "list_kind": "patron",
+      "list_name": "Spring Patron",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "6th — pup shape",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -728,6 +738,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.pup-shape:appears_on_spell_list:spell-list.spring-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.spring-patron",
+        "name": "Spring Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.spring:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th — pup shape",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -778,6 +808,14 @@
       "raw_value_sha256": "9654057441c7587683c095016f35b6b8e5aa26f8bed4f3440466fe28c363b4b1",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:patron.spring:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "c7e1b1931b23c2e9b1e99ac39a461296ae48f4ab5172b1a5f7662ddeab480391",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -818,6 +856,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Spring Patron grants Pup Shape as a level 3 spell; this is not general Witch class access."
       }
     ]
   }

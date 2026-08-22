@@ -76,6 +76,16 @@
       "scope": "later_first_party",
       "raw": "wizard 9",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.decadence-patron",
+      "list_kind": "patron",
+      "list_name": "Decadence Patron",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "18th — symbol of strife",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -532,6 +542,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.symbol-of-strife:appears_on_spell_list:spell-list.decadence-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.decadence-patron",
+        "name": "Decadence Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.decadence:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "18th — symbol of strife",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -582,11 +612,25 @@
       "raw_value_sha256": "78cc7da7122566630f494e1fb1c9c6dd57e6670b4e33548d283e893938cce8e0",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:patron.decadence:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "59a7028709fd0afdca6631c5902e458c575d304edcde37bbd685ec005d77032e",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
     "status": "validated",
     "normalizer_version": "0.1.4-dependency-aliases",
-    "warnings": []
+    "warnings": [
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Decadence Patron grants Symbol of Strife as a level 9 spell; this is not general Witch class access."
+      }
+    ]
   }
 }

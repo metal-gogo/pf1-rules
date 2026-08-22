@@ -82,6 +82,16 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.occult-patron",
+      "list_kind": "patron",
+      "list_name": "Occult Patron",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "10th — snake staff",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -709,6 +719,26 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.snake-staff:appears_on_spell_list:spell-list.occult-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.occult-patron",
+        "name": "Occult Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.occult:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "10th — snake staff",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -759,6 +789,14 @@
       "raw_value_sha256": "dcd16175d5fdc0f4afa2eefb1e72b76babf0218054878a224e2f441fe54db588",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:patron.occult:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d00f884b2f621769918bbf8ece147d286bf7e7e75d2e7c0ea4fae21a5518112e",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -789,6 +827,11 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/6",
         "message": "Omdura 5 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Occult Patron grants Snake Staff as a level 5 spell; this is not general Witch class access."
       }
     ]
   }

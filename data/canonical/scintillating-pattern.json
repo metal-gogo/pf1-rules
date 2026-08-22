@@ -45,6 +45,16 @@
       "level": 8,
       "scope": "core",
       "raw": "wizard 8"
+    },
+    {
+      "spell_list_id": "spell-list.deception-patron",
+      "list_kind": "patron",
+      "list_name": "Deception Patron",
+      "level": 8,
+      "scope": "later_first_party",
+      "raw": "16th — scintillating pattern",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -602,6 +612,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.scintillating-pattern:appears_on_spell_list:spell-list.deception-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.deception-patron",
+        "name": "Deception Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.deception:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "16th — scintillating pattern",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -652,6 +682,14 @@
       "raw_value_sha256": "a1909593040821e33c5e747473fb954697afcb409b2dda6d5d1daeb4d9a089b2",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "aon:patron.deception:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "57a64ba1dceeb5e98d3be5d03de9ae0cc0786d76c09dc800f6ee3d4b020e9e31",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -672,6 +710,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Deception Patron grants Scintillating Pattern as a level 8 spell; this is not general Witch class access."
       }
     ]
   }

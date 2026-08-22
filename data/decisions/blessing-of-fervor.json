@@ -7,7 +7,9 @@
   "observation_ids": [
     "aon:spell.blessing-of-fervor:6397018e25859727",
     "legacy_aon:spell.blessing-of-fervor:168b0d4257197e48",
-    "d20pfsrd:spell.blessing-of-fervor:85e930e9a334279b"
+    "d20pfsrd:spell.blessing-of-fervor:85e930e9a334279b",
+    "aon:patron.ancestors:15d234b1",
+    "aon:patron.fate:15d234b1"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.blessing-of-fervor:6397018e25859727",
@@ -122,6 +124,34 @@
         "aon:spell.blessing-of-fervor:6397018e25859727"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/4",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:patron.ancestors:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.ancestors:15d234b1"
+      ],
+      "rationale": "AoN clearly transcribes the owning witch patron's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/5",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:patron.fate:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.fate:15d234b1"
+      ],
+      "rationale": "AoN clearly transcribes the owning witch patron's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -538,6 +568,34 @@
         "aon:spell.blessing-of-fervor:6397018e25859727"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.blessing-of-fervor:appears_on_spell_list:spell-list.ancestors-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.ancestors:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.ancestors:15d234b1"
+      ],
+      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
+    },
+    {
+      "relationship_id": "spell.blessing-of-fervor:appears_on_spell_list:spell-list.fate-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.fate:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.fate:15d234b1"
+      ],
+      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
     }
   ],
   "unresolved_questions": [

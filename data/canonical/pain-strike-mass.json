@@ -62,6 +62,16 @@
       "level": 5,
       "scope": "later_first_party",
       "raw": "wizard 5"
+    },
+    {
+      "spell_list_id": "spell-list.vengeance-patron",
+      "list_kind": "patron",
+      "list_name": "Vengeance Patron",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "12th — mass pain strike",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -587,6 +597,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.pain-strike-mass:appears_on_spell_list:spell-list.vengeance-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.vengeance-patron",
+        "name": "Vengeance Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.vengeance:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "12th — mass pain strike",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -637,6 +667,14 @@
       "raw_value_sha256": "0d9947cb87d53397db5bebc1c6cc275372c6f1baa1ee0bc50ee70fd1ab309bda",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:patron.vengeance:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "2bb95fed4df4593bbe4e8f2539925590d6225dd2ff57ab2700b59cd9fbdff528",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -717,6 +755,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/effect/spell_resistance",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Vengeance Patron grants Pain Strike, Mass as a level 6 spell; this is not general Witch class access."
       }
     ]
   }

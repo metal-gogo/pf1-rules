@@ -178,6 +178,26 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.moon-patron",
+      "list_kind": "patron",
+      "list_name": "Moon Patron",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "6th — owl's wisdom",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.wisdom-patron",
+      "list_kind": "patron",
+      "list_name": "Wisdom Patron",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "4th — owl's wisdom",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1142,6 +1162,46 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.owls-wisdom:appears_on_spell_list:spell-list.moon-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.moon-patron",
+        "name": "Moon Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.moon:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th — owl's wisdom",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.owls-wisdom:appears_on_spell_list:spell-list.wisdom-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.wisdom-patron",
+        "name": "Wisdom Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.wisdom:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th — owl's wisdom",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -1192,6 +1252,22 @@
       "raw_value_sha256": "aa83ce1c8d40ce520226b29ac1463231832ffc176bcdfe793c739afcf5cdea94",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/19",
+      "observation_id": "aon:patron.moon:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "7a9e8cdf161900f79894743ecc3e055ebb05bb2e28d69dbd5d1ecb63c7e5a6d8",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/20",
+      "observation_id": "aon:patron.wisdom:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "9c3702253c344574f67112fc33b3dd615cebe18ad979dc8d0a5422ce5a1f5ce2",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1217,6 +1293,16 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/18",
         "message": "Omdura 2 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/19",
+        "message": "Moon Patron grants Owl's Wisdom as a level 3 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/20",
+        "message": "Wisdom Patron grants Owl's Wisdom as a level 2 spell; this is not general Witch class access."
       }
     ]
   }

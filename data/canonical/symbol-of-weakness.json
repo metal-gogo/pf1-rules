@@ -67,6 +67,16 @@
       "level": 7,
       "scope": "core",
       "raw": "wizard 7"
+    },
+    {
+      "spell_list_id": "spell-list.nightmares-patron",
+      "list_kind": "patron",
+      "list_name": "Nightmares Patron",
+      "level": 7,
+      "scope": "later_first_party",
+      "raw": "14th — symbol of weakness",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -602,6 +612,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.symbol-of-weakness:appears_on_spell_list:spell-list.nightmares-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.nightmares-patron",
+        "name": "Nightmares Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.nightmares:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "14th — symbol of weakness",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -652,6 +682,14 @@
       "raw_value_sha256": "1d0dac3c93bcebd17b6ce7100b191ba312bf84617c4f721781999478835a571d",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:patron.nightmares:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "6c3ebe2453fc67336cab745867b014a447989ded10cbb292a70b21dd0436af05",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -727,6 +765,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Nightmares Patron grants Symbol of Weakness as a level 7 spell; this is not general Witch class access."
       }
     ]
   }

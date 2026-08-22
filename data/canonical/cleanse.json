@@ -70,6 +70,36 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.healing-patron",
+      "list_kind": "patron",
+      "list_name": "Healing Patron",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "10th — cleanse",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.mercy-patron",
+      "list_kind": "patron",
+      "list_name": "Mercy Patron",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "10th — cleanse",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.recovery-patron",
+      "list_kind": "patron",
+      "list_name": "Recovery Patron",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "10th — cleanse",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -683,6 +713,66 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.cleanse:appears_on_spell_list:spell-list.healing-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.healing-patron",
+        "name": "Healing Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.healing:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "10th — cleanse",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.cleanse:appears_on_spell_list:spell-list.mercy-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.mercy-patron",
+        "name": "Mercy Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.mercy:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "10th — cleanse",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.cleanse:appears_on_spell_list:spell-list.recovery-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.recovery-patron",
+        "name": "Recovery Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.recovery:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "10th — cleanse",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -733,6 +823,30 @@
       "raw_value_sha256": "e91395e60dc49bf8b9077413832cdbb0ba2d9a0352e990bcf83680ded3784436",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "aon:patron.healing:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "21e8d6d8d73fca43aa3eeb835a6cb218cddf705641faf8d33a6a7edf167b777a",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "aon:patron.mercy:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "21e8d6d8d73fca43aa3eeb835a6cb218cddf705641faf8d33a6a7edf167b777a",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:patron.recovery:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "21e8d6d8d73fca43aa3eeb835a6cb218cddf705641faf8d33a6a7edf167b777a",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -758,6 +872,21 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/4",
         "message": "Omdura 5 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Healing Patron grants Cleanse as a level 5 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Mercy Patron grants Cleanse as a level 5 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Recovery Patron grants Cleanse as a level 5 spell; this is not general Witch class access."
       }
     ]
   }

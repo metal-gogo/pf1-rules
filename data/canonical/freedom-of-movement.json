@@ -166,6 +166,26 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.agility-patron",
+      "list_kind": "patron",
+      "list_name": "Agility Patron",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "8th — freedom of movement",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.recovery-patron",
+      "list_kind": "patron",
+      "list_name": "Recovery Patron",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "8th — freedom of movement",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -979,6 +999,46 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.freedom-of-movement:appears_on_spell_list:spell-list.agility-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.agility-patron",
+        "name": "Agility Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.agility:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "8th — freedom of movement",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.freedom-of-movement:appears_on_spell_list:spell-list.recovery-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.recovery-patron",
+        "name": "Recovery Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.recovery:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "8th — freedom of movement",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -1029,6 +1089,22 @@
       "raw_value_sha256": "ff168d99d647c5faf44a5d9b5d3890f77d023f6d850133a650c21f53c6a98fc5",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/17",
+      "observation_id": "aon:patron.agility:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "6bde5dad914306e697b3ac01f6327f1bdb4a0a8817ed26d4097d3a98030dc22b",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/18",
+      "observation_id": "aon:patron.recovery:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "6bde5dad914306e697b3ac01f6327f1bdb4a0a8817ed26d4097d3a98030dc22b",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1049,6 +1125,16 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/16",
         "message": "Omdura 4 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/17",
+        "message": "Agility Patron grants Freedom of Movement as a level 4 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/18",
+        "message": "Recovery Patron grants Freedom of Movement as a level 4 spell; this is not general Witch class access."
       }
     ]
   }

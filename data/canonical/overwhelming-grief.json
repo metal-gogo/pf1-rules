@@ -70,6 +70,16 @@
       "level": 4,
       "scope": "later_first_party",
       "raw": "wizard 4"
+    },
+    {
+      "spell_list_id": "spell-list.enchantment-patron",
+      "list_kind": "patron",
+      "list_name": "Enchantment Patron",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "8th — overwhelming grief",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -590,6 +600,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.overwhelming-grief:appears_on_spell_list:spell-list.enchantment-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.enchantment-patron",
+        "name": "Enchantment Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.enchantment:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "8th — overwhelming grief",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -640,6 +670,14 @@
       "raw_value_sha256": "e7081a53b4dd8e0e19218682cd78275500aa367982bd53a9e17e414ee227061a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:patron.enchantment:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "ab1d7803251af4afa968ed6b87f3231fb6e00d079a4cce102e9cb0f7df3b0587",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -660,6 +698,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Enchantment Patron grants Overwhelming Grief as a level 4 spell; this is not general Witch class access."
       }
     ]
   }

@@ -77,6 +77,16 @@
       "level": 3,
       "scope": "later_first_party",
       "raw": "wizard 3"
+    },
+    {
+      "spell_list_id": "spell-list.nightmares-patron",
+      "list_kind": "patron",
+      "list_name": "Nightmares Patron",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "6th — oneiric horror",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -795,6 +805,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.oneiric-horror:appears_on_spell_list:spell-list.nightmares-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.nightmares-patron",
+        "name": "Nightmares Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.nightmares:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th — oneiric horror",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -845,6 +875,14 @@
       "raw_value_sha256": "cd8610b317e8502be298a2c9be33c77ea2b65547ad36e2001722fba8d639b452",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/8",
+      "observation_id": "aon:patron.nightmares:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "fb85693f1d4d7bfc2e2e50db8cb5232180f99a6cd22f7e5deb9e40a55dad20a6",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -870,6 +908,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/8",
+        "message": "Nightmares Patron grants Oneiric Horror as a level 3 spell; this is not general Witch class access."
       }
     ]
   }

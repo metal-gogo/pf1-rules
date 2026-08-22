@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.retribution:5733981dcee7993d",
     "legacy_aon:spell.retribution:1a38e23631e79c9e",
-    "d20pfsrd:spell.retribution:960dba06f7a76d81"
+    "d20pfsrd:spell.retribution:960dba06f7a76d81",
+    "aon:patron.jynx:15d234b1"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.retribution:5733981dcee7993d",
@@ -127,6 +128,20 @@
         "aon:spell.retribution:5733981dcee7993d"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/2",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:patron.jynx:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.jynx:15d234b1"
+      ],
+      "rationale": "AoN clearly transcribes the owning witch patron's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -344,6 +359,20 @@
         "aon:spell.retribution:5733981dcee7993d"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.retribution:appears_on_spell_list:spell-list.jynx-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.jynx:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.jynx:15d234b1"
+      ],
+      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
     }
   ],
   "unresolved_questions": [

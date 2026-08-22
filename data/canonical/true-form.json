@@ -67,6 +67,16 @@
       "level": 4,
       "scope": "later_first_party",
       "raw": "wizard 4"
+    },
+    {
+      "spell_list_id": "spell-list.spring-patron",
+      "list_kind": "patron",
+      "list_name": "Spring Patron",
+      "level": 4,
+      "scope": "later_first_party",
+      "raw": "8th — true form",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -695,6 +705,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.true-form:appears_on_spell_list:spell-list.spring-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.spring-patron",
+        "name": "Spring Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.spring:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "8th — true form",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -745,6 +775,14 @@
       "raw_value_sha256": "6dd41e0f819c4b6a4fe9c12d2302f167da4b29fa92dd4487a70581bbab236911",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:patron.spring:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "7c8f549b8ca7fd9c29a02604e537584b4f046c1d346b483dd4344655467a6875",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -775,6 +813,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Spring Patron grants True Form as a level 4 spell; this is not general Witch class access."
       }
     ]
   }

@@ -69,6 +69,16 @@
       "level": 2,
       "scope": "later_first_party",
       "raw": "wizard 2"
+    },
+    {
+      "spell_list_id": "spell-list.winter-patron",
+      "list_kind": "patron",
+      "list_name": "Winter Patron",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "2nd — unshakable chill",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -575,6 +585,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.unshakable-chill:appears_on_spell_list:spell-list.winter-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.winter-patron",
+        "name": "Winter Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.winter:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd — unshakable chill",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -625,6 +655,14 @@
       "raw_value_sha256": "06963dab14bb338ee1437f02532345144e34451f33aa3b3ba4e24e17d6b851b2",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "aon:patron.winter:15d234b1",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d7860b5173ae3f6346870bd62b3caf09012492c398cc5a56e392aeeefa3c9c44",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -650,6 +688,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Winter Patron grants Unshakable Chill as a level 1 spell; this is not general Witch class access."
       }
     ]
   }

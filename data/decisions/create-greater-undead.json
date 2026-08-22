@@ -6,7 +6,8 @@
   "canonical_record_path": "../canonical/create-greater-undead.json",
   "observation_ids": [
     "aon:spell.create-greater-undead:86995d82b1435ef7",
-    "legacy_aon:spell.create-greater-undead:1db83a914c169550"
+    "legacy_aon:spell.create-greater-undead:1db83a914c169550",
+    "aon:patron.plague:15d234b1"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.create-greater-undead:86995d82b1435ef7",
@@ -101,6 +102,20 @@
         "legacy_aon:spell.create-greater-undead:1db83a914c169550"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/6",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:patron.plague:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.plague:15d234b1"
+      ],
+      "rationale": "AoN clearly transcribes the owning witch patron's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -295,6 +310,20 @@
         "legacy_aon:spell.create-greater-undead:1db83a914c169550"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.create-greater-undead:appears_on_spell_list:spell-list.plague-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.plague:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.plague:15d234b1"
+      ],
+      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
     }
   ],
   "unresolved_questions": [
