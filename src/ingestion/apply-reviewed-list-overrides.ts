@@ -135,7 +135,7 @@ const reviewedFoundryAdditions = [
   ["vermin-shape-ii", "Vermin Shape II", "bloodrager", 4, "packs/spells/transmutation/vermin-shape-ii.j8fufy7sr3bty5du.yaml"],
 ].map((item) => foundryReview(item as [string, string, string, number, string]));
 
-const reviewedFoundryExclusions = [
+const reviewedFoundryUnchainedAdditions = [
   ["banishing-blade", "Banishing Blade", "summoner-unchained", 5, "packs/spells/abjuration/banishing-blade.t4l1o78v9gcp3jag.yaml"],
   ["punishing-armor", "Punishing Armor", "summoner-unchained", 1, "packs/spells/abjuration/punishing-armor.bmr954ayksd33hdk.yaml"],
   ["thaumaturgic-circle", "Thaumaturgic Circle", "summoner-unchained", 4, "packs/spells/abjuration/thaumaturgic-circle.phlu5va1l0h3v3do.yaml"],
@@ -292,12 +292,9 @@ function foundryEvidence(
 
 function foundryRationale(
   spec: FoundryMembershipReview,
-  action: "add" | "exclude" | "lower" | "retain",
+  action: "add" | "lower" | "retain",
 ): string {
   const source = `pinned Foundry PF1 ${foundryCommit}`;
-  if (action === "exclude") {
-    return `Reviewed project decision: keep ${spec.spellName} off the ${spec.targetListName} list and retain AoN as the preferred list source instead of the ${source} assertion.`;
-  }
   if (action === "lower") {
     return `Reviewed project decision: use the lower ${spec.targetListName} ${spec.foundryLevel} level from ${source} instead of canonical level ${spec.canonicalLevel}. This is a canonical override, not a printed AoN value.`;
   }
@@ -416,6 +413,7 @@ function applyExclusion(spec: ListOverride): boolean {
 
 function applyFoundryAddition(spec: FoundryMembershipReview): boolean {
   const { canonicalPath, decisionPath, record, decision } = loadSpecFiles(spec);
+  const relationshipId = `${spec.spellId}:appears_on_spell_list:${spec.targetSpellListId}`;
   const existing = record.levels.filter((item: ValidatedJson) =>
     item.spell_list_id === spec.targetSpellListId,
   );
@@ -424,13 +422,32 @@ function applyFoundryAddition(spec: FoundryMembershipReview): boolean {
       existing.length === 1 &&
       existing[0].level === spec.foundryLevel &&
       existing[0].access_basis === "reviewed_override"
-    ) return false;
+    ) {
+      const relationshipDecisions = decision.relationship_decisions.filter(
+        (item: ValidatedJson) => item.relationship_id === relationshipId,
+      );
+      if (relationshipDecisions.length === 1 && relationshipDecisions[0].decision === "accept") {
+        return false;
+      }
+      const evidence = foundryEvidence(decision, spec);
+      decision.relationship_decisions = decision.relationship_decisions.filter(
+        (item: ValidatedJson) => item.relationship_id !== relationshipId,
+      );
+      decision.relationship_decisions.push({
+        relationship_id: relationshipId,
+        decision: "accept",
+        evidence: evidence.selected,
+        considered_observation_ids: evidence.considered,
+        rationale: foundryRationale(spec, "add"),
+      });
+      writeJson(decisionPath, decision);
+      return true;
+    }
     throw new Error(`${spec.spellId} already has incompatible ${spec.targetListName} access.`);
   }
 
   const evidence = foundryEvidence(decision, spec);
   const levelIndex = record.levels.length;
-  const relationshipId = `${spec.spellId}:appears_on_spell_list:${spec.targetSpellListId}`;
   const rationale = foundryRationale(spec, "add");
   const scope = record.levels.find((item: ValidatedJson) => item.level === spec.foundryLevel)?.scope ??
     record.levels[0]?.scope ?? "later_first_party";
@@ -468,6 +485,9 @@ function applyFoundryAddition(spec: FoundryMembershipReview): boolean {
     considered_observation_ids: evidence.considered,
     rationale,
   });
+  decision.relationship_decisions = decision.relationship_decisions.filter(
+    (item: ValidatedJson) => item.relationship_id !== relationshipId,
+  );
   decision.relationship_decisions.push({
     relationship_id: relationshipId,
     decision: "accept",
@@ -476,32 +496,6 @@ function applyFoundryAddition(spec: FoundryMembershipReview): boolean {
     rationale,
   });
   writeJson(canonicalPath, record);
-  writeJson(decisionPath, decision);
-  return true;
-}
-
-
-function applyFoundryExclusion(spec: FoundryMembershipReview): boolean {
-  const { decisionPath, record, decision } = loadSpecFiles(spec);
-  if (record.levels.some((item: ValidatedJson) => item.spell_list_id === spec.targetSpellListId)) {
-    throw new Error(`${spec.spellId} unexpectedly has ${spec.targetListName} access.`);
-  }
-  const relationshipId = `${spec.spellId}:appears_on_spell_list:${spec.targetSpellListId}`;
-  const existing = decision.relationship_decisions.find((item: ValidatedJson) =>
-    item.relationship_id === relationshipId,
-  );
-  if (existing) {
-    if (existing.decision === "reject") return false;
-    throw new Error(`${spec.spellId} has an incompatible ${spec.targetListName} relationship decision.`);
-  }
-  const evidence = foundryEvidence(decision, spec);
-  decision.relationship_decisions.push({
-    relationship_id: relationshipId,
-    decision: "reject",
-    evidence: evidence.selected,
-    considered_observation_ids: evidence.considered,
-    rationale: foundryRationale(spec, "exclude"),
-  });
   writeJson(decisionPath, decision);
   return true;
 }
@@ -585,8 +579,11 @@ export function applyReviewedListOverrides(): {
 } {
   const additions = reviewedAdditions.filter(applyAddition).length;
   const exclusions = reviewedExclusions.filter(applyExclusion).length;
-  const foundryAdditions = reviewedFoundryAdditions.filter(applyFoundryAddition).length;
-  const foundryExclusions = reviewedFoundryExclusions.filter(applyFoundryExclusion).length;
+  const foundryAdditions = [
+    ...reviewedFoundryAdditions,
+    ...reviewedFoundryUnchainedAdditions,
+  ].filter(applyFoundryAddition).length;
+  const foundryExclusions = 0;
   const lowerLevelChanges = reviewedFoundryLowerLevels.filter(applyFoundryLowerLevel).length;
   const lowerLevelRetentions = reviewedFoundryLowerRetentions
     .filter(applyFoundryLowerRetention).length;

@@ -6,6 +6,8 @@ Audit date: 2026-08-22 (America/Mexico_City)
 > levels below were resolved by reviewed project decisions on 2026-08-23. The
 > current zero-gap result is in
 > [Reviewed Foundry membership resolution](./39-reviewed-foundry-membership-resolution.md).
+> The initial decision to reject the first 34 Unchained Summoner candidates was
+> reversed later that day; they are now reviewed overrides.
 
 Foundry PF1 snapshot: [`1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f`](https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/commit/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f)
 

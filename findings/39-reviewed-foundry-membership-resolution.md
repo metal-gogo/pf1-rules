@@ -19,9 +19,9 @@ value printed by AoN.
 
 ## Decisions
 
-- [C] Keep 34 Foundry-only Unchained Summoner candidates absent. AoN remains the
-  preferred list source for these candidates, and every rejection is recorded
-  in the spell's canonical decision file.
+- [C] Add all 34 Foundry-only Unchained Summoner candidates as reviewed
+  overrides. This supersedes the earlier decision to keep them absent in favor
+  of AoN.
 - [C] Add Hostile Juxtaposition, Greater to Unchained Summoner 6 as a reviewed
   override. Use the lower reviewed Mesmerist 4 level instead of the preserved
   AoN level 6.

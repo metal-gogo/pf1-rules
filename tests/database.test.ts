@@ -380,15 +380,21 @@ describe("ingested spell catalog", () => {
     expect(level("spell.animus-mine", "spell-list.psychic"))
       .toEqual(expect.objectContaining({ spellLevel: 2, accessBasis: "printed" }));
 
-    expect(await prisma.spellLevel.count({
+    expect(await prisma.spellLevel.findFirst({
       where: { spellId: "spell.banishing-blade", spellListId: "spell-list.summoner-unchained" },
-    })).toBe(0);
+    })).toEqual(expect.objectContaining({ spellLevel: 5, accessBasis: "reviewed_override" }));
+    expect(await prisma.spellLevel.count({
+      where: {
+        spellListId: "spell-list.summoner-unchained",
+        accessBasis: "reviewed_override",
+      },
+    })).toBe(36);
     expect(await prisma.decisionRelationshipItem.findFirst({
       where: {
         decisionId: "canonical-decision:spell.banishing-blade:v0.1",
         relationshipId: "spell.banishing-blade:appears_on_spell_list:spell-list.summoner-unchained",
       },
-    })).toEqual(expect.objectContaining({ decision: "reject" }));
+    })).toEqual(expect.objectContaining({ decision: "accept" }));
   });
 
   it("adds reviewed secondary-catalog class memberships with explicit provenance", async () => {

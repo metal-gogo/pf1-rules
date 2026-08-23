@@ -32,7 +32,7 @@ Derived access is labeled `access_basis: derived`. It does not replace or masque
 | Skald | 870 | Effective Bard access plus explicit and reviewed Skald rows. |
 | Warpriest | 993 | Effective Cleric access through level 6 plus explicit Warpriest rows. |
 | Hunter | 817 | Effective Druid/Ranger access through level 6. |
-| Summoner (Unchained) | 371 | Includes seven narrowly derived *Monster Summoner's Handbook* options and one reviewed override. |
+| Summoner (Unchained) | 405 | Includes seven narrowly derived *Monster Summoner's Handbook* options, 35 reviewed additions, and one reviewed lower-level override. |
 
 ## Owner catalogs completed
 
