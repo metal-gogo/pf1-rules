@@ -4,4 +4,5 @@
 - [Architecture and policy](architecture.md) — understand provenance, canonicalization, source selection, and database direction.
 - [Data and schemas](data-and-schemas.md) — find durable records, captured artifacts, JSON schemas, and fixtures.
 - [Ingestion](ingestion.md) — capture sources, process level-scoped queues, validate records, and review ingestion design notes.
+- [Rich-text spell descriptions](rich-text.md) — understand inline relationship rules and roll rich text out to more spells.
 - [Research findings](research-findings.md) — browse the chronological spell investigations and design decisions.

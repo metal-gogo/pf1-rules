@@ -6,6 +6,11 @@ import {
   spellListQualificationsLabel,
   type SpellListQualification,
 } from "../domain/spell-lists.js";
+import type {
+  RichTextDocument,
+  RichTextInlineNode,
+  RichTextMark,
+} from "../domain/rich-text.js";
 import type { PrismaClient } from "../generated/prisma/client.js";
 import { findSpell, searchRules, spellsForList } from "../query/spells.js";
 
@@ -45,7 +50,7 @@ dd { margin-block-end: .65rem; }
 .skip-link { position: absolute; left: -10000px; }
 .skip-link:focus { left: 1rem; top: 1rem; background: Canvas; padding: .5rem; z-index: 1; }
 .visually-hidden { clip: rect(0 0 0 0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
-.muted { color: GrayText; }
+.muted { color: color-mix(in srgb, CanvasText 72%, Canvas); }
 .notice { border: 1px solid; padding: .75rem; }
 .spell-list-kinds ul { display: flex; flex-wrap: wrap; gap: .35rem 1rem; }
 .spell-list-section { margin-block: 2.5rem; }
@@ -103,6 +108,10 @@ dd { margin-block-end: .65rem; }
 .component-list { white-space: nowrap; }
 .component-list abbr { text-decoration-thickness: 1px; text-underline-offset: .12em; }
 .component-reference section { scroll-margin-top: 1rem; }
+.rule-reference article { border-block-start: 1px solid var(--table-divider); scroll-margin-top: 1rem; }
+.rich-description ul { padding-inline-start: 1.5rem; }
+.embedded-spell { border-inline-start: .3rem solid var(--table-divider); margin-block: 2rem; padding-inline-start: 1rem; }
+.embedded-spell > h2 { margin-block-end: .25rem; }
 mark { background: Mark; color: MarkText; }
 [hidden] { display: none !important; }
 @media (max-width: 38rem) {
@@ -435,6 +444,53 @@ function relatedEntityHref(type: string, id: string): string {
   return entityHref(id);
 }
 
+function referenceAnchor(id: string): string {
+  return id.slice(id.indexOf(".") + 1);
+}
+
+function relationshipHref(relationship: {
+  targetEntityType: string;
+  targetEntityId: string | null;
+}): string | null {
+  const { targetEntityId, targetEntityType } = relationship;
+  if (!targetEntityId) return null;
+  const anchor = referenceAnchor(targetEntityId);
+  if (targetEntityType === "magic_school" || targetEntityType === "subschool") {
+    return `/rules/magic-schools#${encodeURIComponent(anchor)}`;
+  }
+  if (targetEntityType === "action") {
+    return `/rules/actions#${encodeURIComponent(anchor)}`;
+  }
+  if (targetEntityType === "rule" && targetEntityId.endsWith("-saving-throw")) {
+    return `/rules/saving-throws#${encodeURIComponent(anchor)}`;
+  }
+  return relatedEntityHref(targetEntityType, targetEntityId);
+}
+
+function linkedText(value: string, links: { text: string; url: string }[]): string {
+  const normalized = value.toLocaleLowerCase();
+  const matches = links
+    .map((link) => ({ ...link, start: normalized.indexOf(link.text.toLocaleLowerCase()) }))
+    .filter((link) => link.start >= 0)
+    .sort((left, right) => left.start - right.start);
+  let position = 0;
+  let result = "";
+  for (const match of matches) {
+    if (match.start < position) continue;
+    result += escapeHtml(value.slice(position, match.start));
+    const end = match.start + match.text.length;
+    result += `<a href="${href(match.url)}">${escapeHtml(value.slice(match.start, end))}</a>`;
+    position = end;
+  }
+  return result + escapeHtml(value.slice(position));
+}
+
+function rawJsonField(value: unknown, field: string): string | null {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return null;
+  const item = (value as Record<string, unknown>)[field];
+  return typeof item === "string" ? item : null;
+}
+
 function classHref(id: string): string {
   const prefix = "spell-list.";
   const slug = id.startsWith(prefix) ? id.slice(prefix.length) : id;
@@ -456,12 +512,134 @@ function humanize(value: string): string {
   return value.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
+function spellFamilyNames(name: string): string[] {
+  const baseName = name.replace(/,\s*(?:Greater|Lesser)$/i, "");
+  return [baseName, `${baseName}, Lesser`, `${baseName}, Greater`];
+}
+
 function paragraphs(value: string): string {
   return value
     .split(/\n\s*\n/)
     .filter(Boolean)
     .map((paragraph) => `<p>${escapeHtml(paragraph).replaceAll("\n", "<br>")}</p>`)
     .join("");
+}
+
+type LinkRelationship = {
+  id: string;
+  targetEntityType: string;
+  targetEntityId: string | null;
+  targetName: string;
+  status: string;
+};
+
+type SpellRecord = NonNullable<Awaited<ReturnType<typeof findSpell>>>;
+
+function richTextDocument(payload: unknown): RichTextDocument | null {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) return null;
+  const description = (payload as Record<string, unknown>).description;
+  if (!description || typeof description !== "object" || Array.isArray(description)) return null;
+  const document = (description as Record<string, unknown>).document;
+  if (!document || typeof document !== "object" || Array.isArray(document)) return null;
+  const candidate = document as { node_type?: unknown; content?: unknown };
+  return candidate.node_type === "document" && Array.isArray(candidate.content)
+    ? document as RichTextDocument
+    : null;
+}
+
+function payloadRelationships(payload: unknown): LinkRelationship[] {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) return [];
+  const relationships = (payload as Record<string, unknown>).relationships;
+  if (!Array.isArray(relationships)) return [];
+  return relationships.flatMap((value) => {
+    if (!value || typeof value !== "object" || Array.isArray(value)) return [];
+    const relationship = value as Record<string, any>;
+    if (!relationship.target || typeof relationship.target !== "object") return [];
+    return [{
+      id: String(relationship.relationship_id),
+      targetEntityType: String(relationship.target.entity_type),
+      targetEntityId: relationship.target.entity_id === null
+        ? null
+        : String(relationship.target.entity_id),
+      targetName: String(relationship.target.name),
+      status: String(relationship.status),
+    }];
+  });
+}
+
+function markedHtml(value: string, marks: RichTextMark[] | undefined): string {
+  let result = escapeHtml(value);
+  for (const mark of marks ?? []) {
+    result = mark === "italic" ? `<em>${result}</em>` : `<strong>${result}</strong>`;
+  }
+  return result;
+}
+
+function richTextInline(
+  node: RichTextInlineNode,
+  relationships: Map<string, LinkRelationship>,
+): string {
+  if (node.node_type === "hard_break") return "<br>";
+  const content = markedHtml(node.value, node.marks);
+  if (node.node_type === "text") return content;
+  const relationship = relationships.get(node.relationship_id);
+  const url = relationship?.status === "accepted" ? relationshipHref(relationship) : null;
+  return url ? `<a href="${href(url)}">${content}</a>` : content;
+}
+
+function renderRichText(
+  document: RichTextDocument,
+  relationships: LinkRelationship[],
+): string {
+  const byId = new Map(relationships.map((relationship) => [relationship.id, relationship]));
+  const inline = (content: RichTextInlineNode[]) =>
+    content.map((node) => richTextInline(node, byId)).join("");
+  return `<div class="rich-description">${document.content.map((block) =>
+    block.node_type === "paragraph"
+      ? `<p>${inline(block.content)}</p>`
+      : `<ul>${block.content.map((item) => `<li>${inline(item.content)}</li>`).join("")}</ul>`
+  ).join("")}</div>`;
+}
+
+function spellDescription(spell: SpellRecord, relationships: LinkRelationship[]): string {
+  const document = richTextDocument(spell.payload);
+  return document ? renderRichText(document, relationships) : paragraphs(spell.descriptionRaw);
+}
+
+function embeddedSpell(
+  spell: SpellRecord,
+  relationships: LinkRelationship[],
+  headingLevel: 2 | 3 = 2,
+): string {
+  const levels = spell.levels.map((level) =>
+    `<li><a href="${href(level.listKind === "class" ? classHref(level.spellListId) : listHref(level.spellListId))}">${escapeHtml(humanize(level.listName))}</a> ${level.spellLevel}</li>`
+  ).join("");
+  const delivery = spell.deliveryFields.map((field) =>
+    `<dt>${escapeHtml(field.labelRaw)}</dt><dd>${escapeHtml(field.valueRaw ?? "Not recorded")}</dd>`
+  ).join("");
+  const schoolRelationship = relationships.find((relationship) =>
+    relationship.status === "accepted" && relationship.id.includes(":has_school:")
+  );
+  const schoolUrl = schoolRelationship && relationshipHref(schoolRelationship);
+  const savingThrow = rawJsonField(spell.savingThrow, "raw") ?? "Not recorded";
+  const spellResistance = rawJsonField(spell.spellResistance, "raw") ?? "Not recorded";
+  const headingId = `embedded-${referenceAnchor(spell.spellId)}`;
+  const descriptionHeadingLevel = headingLevel + 1;
+  return `<section class="embedded-spell" aria-labelledby="${href(headingId)}" data-embedded-spell="${escapeHtml(spell.spellId)}">
+    <h${headingLevel} id="${href(headingId)}">${escapeHtml(spell.name)}</h${headingLevel}>
+    <dl>
+      <dt>School</dt><dd>${schoolUrl ? `<a href="${href(schoolUrl)}">${escapeHtml(humanize(spell.school))}</a>` : escapeHtml(humanize(spell.school))}${spell.subschool ? ` (${escapeHtml(humanize(spell.subschool))})` : ""}</dd>
+      <dt>Levels</dt><dd><ul>${levels}</ul></dd>
+      <dt>Casting time</dt><dd>${escapeHtml(spell.castingTimeRaw ?? humanize(spell.castingTimeUnit))}</dd>
+      <dt>Components</dt><dd>${escapeHtml(spell.componentsRaw ?? "Not recorded")}</dd>
+      <dt>Range</dt><dd>${escapeHtml(spell.rangeRaw ?? humanize(spell.rangeCategory))}</dd>
+      ${delivery}
+      <dt>Duration</dt><dd>${escapeHtml(spell.durationRaw ?? humanize(spell.durationKind))}</dd>
+      <dt>Saving throw</dt><dd>${escapeHtml(savingThrow)}</dd>
+      <dt>Spell resistance</dt><dd>${escapeHtml(spellResistance)}</dd>
+    </dl>
+    <h${descriptionHeadingLevel}>Description</h${descriptionHeadingLevel}>${spellDescription(spell, relationships)}
+  </section>`;
 }
 
 function page(title: string, content: string): string {
@@ -482,6 +660,7 @@ function page(title: string, content: string): string {
       <ul>
         <li><a href="/spells">Spell lists</a></li>
         <li><a href="/spells/alphabetical">Alphabetical</a></li>
+        <li><a href="/rules">Rules reference</a></li>
         <li><a href="/entities">Entities</a></li>
         <li><a href="/search">Search</a></li>
       </ul>
@@ -765,6 +944,134 @@ function spellComponentsPage(): string {
     </article>`);
 }
 
+type RuleReferenceEntity = {
+  id: string;
+  name: string;
+  status: string;
+  observations: { id: string; siteId: string; descriptionRaw: string }[];
+};
+
+function rulesPage(): string {
+  return page("Rules reference", `<h1>Rules reference</h1>
+    <p>Use these grouped references as stable destinations for links from spell metadata.</p>
+    <ul>
+      <li><a href="/rules/magic-schools">Magic schools and subschools</a></li>
+      <li><a href="/rules/actions">Actions</a></li>
+      <li><a href="/rules/saving-throws">Saving throws</a></li>
+      <li><a href="/spell-components">Spell components</a></li>
+    </ul>`);
+}
+
+function ruleReferencePage(
+  title: string,
+  introduction: string,
+  groups: { heading: string; entities: RuleReferenceEntity[] }[],
+): string {
+  const entities = groups.flatMap((group) => group.entities);
+  return page(title, `<nav aria-label="Breadcrumb"><ol><li><a href="/rules">Rules reference</a></li><li aria-current="page">${escapeHtml(title)}</li></ol></nav>
+    <article class="rule-reference">
+      <h1>${escapeHtml(title)}</h1>
+      <p>${escapeHtml(introduction)}</p>
+      <nav aria-label="On this page"><ul>${entities.map((entity) => `<li><a href="#${href(referenceAnchor(entity.id))}">${escapeHtml(entity.name)}</a></li>`).join("")}</ul></nav>
+      ${groups.map((group) => {
+        const headingId = group.heading.toLocaleLowerCase().replaceAll(" ", "-");
+        return `<section aria-labelledby="${href(headingId)}">
+        <h2 id="${href(headingId)}">${escapeHtml(group.heading)}</h2>
+        ${group.entities.map((entity) => {
+          const observation = entity.observations.find((item) => item.siteId === "aon") ?? entity.observations[0];
+          return `<article id="${href(referenceAnchor(entity.id))}">
+            <h3>${escapeHtml(entity.name)}</h3>
+            ${observation ? paragraphs(observation.descriptionRaw) : '<p class="notice">Definition not yet imported.</p>'}
+            <p>Record status: ${escapeHtml(entity.status)}${observation ? ` · <a href="${href(sourceHref(observation.id))}">View source observation</a>` : ""} · <a href="${href(entityHref(entity.id))}">View entity record</a></p>
+          </article>`;
+        }).join("")}
+      </section>`;
+      }).join("")}
+    </article>`);
+}
+
+async function magicSchoolsPage(prisma: PrismaClient): Promise<string> {
+  const entities = await prisma.entity.findMany({
+    where: {
+      type: { in: ["magic_school", "subschool"] },
+      targetRelationships: {
+        some: { status: "accepted", relationshipType: { in: ["has_school", "has_subschool"] } },
+      },
+    },
+    select: {
+      id: true,
+      name: true,
+      status: true,
+      observations: {
+        select: { id: true, siteId: true, descriptionRaw: true },
+        orderBy: { siteId: "asc" },
+      },
+    },
+    orderBy: { name: "asc" },
+  });
+  return ruleReferencePage(
+    "Magic schools and subschools",
+    "A spell's school identifies the broad kind of magic it uses. A subschool narrows that classification.",
+    [
+      { heading: "Schools", entities: entities.filter((entity) => entity.id.startsWith("magic-school.")) },
+      { heading: "Subschools", entities: entities.filter((entity) => entity.id.startsWith("subschool.")) },
+    ],
+  );
+}
+
+async function actionsPage(prisma: PrismaClient): Promise<string> {
+  const entities = await prisma.entity.findMany({
+    where: {
+      type: "action",
+      targetRelationships: { some: { status: "accepted", relationshipType: "uses_action" } },
+    },
+    select: {
+      id: true,
+      name: true,
+      status: true,
+      observations: {
+        select: { id: true, siteId: true, descriptionRaw: true },
+        orderBy: { siteId: "asc" },
+      },
+    },
+    orderBy: { name: "asc" },
+  });
+  return ruleReferencePage(
+    "Actions",
+    "These action types are referenced by the casting times and rules in the local database.",
+    [{ heading: "Action types", entities }],
+  );
+}
+
+async function savingThrowsPage(prisma: PrismaClient): Promise<string> {
+  const entities = await prisma.entity.findMany({
+    where: {
+      id: {
+        in: [
+          "rule.fortitude-saving-throw",
+          "rule.reflex-saving-throw",
+          "rule.will-saving-throw",
+        ],
+      },
+    },
+    select: {
+      id: true,
+      name: true,
+      status: true,
+      observations: {
+        select: { id: true, siteId: true, descriptionRaw: true },
+        orderBy: { siteId: "asc" },
+      },
+    },
+    orderBy: { name: "asc" },
+  });
+  return ruleReferencePage(
+    "Saving throws",
+    "Fortitude, Reflex, and Will saving throws resist different kinds of effects.",
+    [{ heading: "Saving throw types", entities }],
+  );
+}
+
 
 function qualificationLabel(
   qualifications: readonly { payload: unknown }[],
@@ -932,7 +1239,10 @@ async function spellPage(prisma: PrismaClient, spellId: string): Promise<string 
   ]);
   if (!spell) return null;
 
-  const [observations, owners] = await Promise.all([
+  const inheritedSpellIds = [...new Set(spell.inheritance
+    .filter((inheritance) => inheritance.relationship === "functions_like")
+    .map((inheritance) => inheritance.fromSpellId))];
+  const [observations, owners, inheritedSpells, familyIdentities] = await Promise.all([
     prisma.sourceObservation.findMany({
       where: { entityId: spell.spellId },
       select: { id: true, siteId: true, pageTitleRaw: true, retrievedAt: true },
@@ -942,8 +1252,54 @@ async function spellPage(prisma: PrismaClient, spellId: string): Promise<string 
       where: { id: { in: [...new Set(incoming.map((relationship) => relationship.ownerEntityId))] } },
       select: { id: true, name: true, type: true },
     }),
+    Promise.all(inheritedSpellIds.map((parentId) => findSpell(prisma, parentId))),
+    prisma.canonicalSpell.findMany({
+      where: { name: { in: spellFamilyNames(spell.name) } },
+      select: { spellId: true },
+      orderBy: { name: "asc" },
+    }),
   ]);
   const ownerById = new Map(owners.map((owner) => [owner.id, owner]));
+  const inheritedSpellById = new Map(inheritedSpells.flatMap((parent) =>
+    parent ? [[parent.spellId, parent] as const] : []
+  ));
+  const familySpells = (await Promise.all(familyIdentities
+    .filter((identity) => identity.spellId !== spell.spellId)
+    .map((identity) => findSpell(prisma, identity.spellId))))
+    .filter((candidate): candidate is SpellRecord => candidate !== null);
+
+  const acceptedRelationship = (relationshipType: string, targetEntityId?: string) => outgoing.find(
+    (relationship) => relationship.status === "accepted"
+      && relationship.relationshipType === relationshipType
+      && (!targetEntityId || relationship.targetEntityId === targetEntityId),
+  );
+  const schoolRelationship = acceptedRelationship("has_school");
+  const subschoolRelationship = acceptedRelationship("has_subschool");
+  const actionRelationship = acceptedRelationship("uses_action");
+  const publicationRelationship = acceptedRelationship("published_in");
+  const schoolUrl = schoolRelationship && relationshipHref(schoolRelationship);
+  const subschoolUrl = subschoolRelationship && relationshipHref(subschoolRelationship);
+  const actionUrl = actionRelationship && relationshipHref(actionRelationship);
+  const publicationUrl = publicationRelationship && relationshipHref(publicationRelationship);
+  const castingTimeRaw = spell.castingTimeRaw ?? `${spell.castingTimeAmount ?? ""} ${humanize(spell.castingTimeUnit)}`;
+  const castingTime = actionRelationship && actionUrl
+    ? linkedText(castingTimeRaw, [{ text: actionRelationship.targetName, url: actionUrl }])
+    : escapeHtml(castingTimeRaw);
+  const savingThrowRaw = rawJsonField(spell.savingThrow, "raw") ?? "Not recorded";
+  const savingThrowTypes = spell.savingThrow && typeof spell.savingThrow === "object" && !Array.isArray(spell.savingThrow)
+    ? (spell.savingThrow as Record<string, unknown>).types
+    : [];
+  const savingThrowLinks = Array.isArray(savingThrowTypes)
+    ? savingThrowTypes.flatMap((type) => {
+      if (typeof type !== "string") return [];
+      const relationship = acceptedRelationship("uses_definition", `rule.${type}-saving-throw`);
+      const url = relationship && relationshipHref(relationship);
+      return url ? [{ text: humanize(type), url }] : [];
+    })
+    : [];
+  const spellResistanceRaw = rawJsonField(spell.spellResistance, "raw") ?? "Not recorded";
+  const spellResistanceRelationship = acceptedRelationship("uses_definition", "rule.spell-resistance");
+  const spellResistanceUrl = spellResistanceRelationship && relationshipHref(spellResistanceRelationship);
 
   const componentRows = spell.components.map((component) => `<li>
     ${escapeHtml(component.raw ?? humanize(component.componentType))}
@@ -957,14 +1313,47 @@ async function spellPage(prisma: PrismaClient, spellId: string): Promise<string 
     </li>`;
   }).join("");
   const deliveryRows = spell.deliveryFields.map((field) => `<dt>${escapeHtml(field.labelRaw)}</dt><dd>${escapeHtml(field.valueRaw ?? "Not recorded")}</dd>`).join("");
-  const description = spell.descriptionSections.length > 0
-    ? spell.descriptionSections.map((section) => `<section><h2>${escapeHtml(section.heading)}</h2>${paragraphs(section.body)}</section>`).join("")
-    : `<section><h2>Description</h2>${paragraphs(spell.descriptionRaw)}</section>`;
-  const related = outgoing.map((relationship) => `<li>
-    ${escapeHtml(humanize(relationship.relationshipType))}:
-    ${relationship.targetEntityId ? `<a href="${href(entityHref(relationship.targetEntityId))}">${escapeHtml(relationship.targetName)}</a>` : escapeHtml(relationship.targetName)}
-    <span class="muted">(${escapeHtml(relationship.status)})</span>
-  </li>`).join("");
+  const description = richTextDocument(spell.payload)
+    ? `<section><h2>Description</h2>${spellDescription(spell, outgoing)}</section>`
+    : spell.descriptionSections.length > 0
+      ? spell.descriptionSections.map((section) => `<section><h2>${escapeHtml(section.heading)}</h2>${paragraphs(section.body)}</section>`).join("")
+      : `<section><h2>Description</h2>${spellDescription(spell, outgoing)}</section>`;
+  const renderedInheritance = new Set<string>();
+  const inheritedRules = spell.inheritance.flatMap((inheritance) => {
+    if (
+      inheritance.relationship !== "functions_like" ||
+      renderedInheritance.has(inheritance.fromSpellId)
+    ) return [];
+    renderedInheritance.add(inheritance.fromSpellId);
+    const parent = inheritedSpellById.get(inheritance.fromSpellId);
+    if (inheritance.resolutionStatus === "resolved" && parent) {
+      return [embeddedSpell(
+        parent,
+        payloadRelationships(parent.payload),
+      )];
+    }
+    return [`<aside class="notice"><p>This spell functions like <a href="${href(spellHref(inheritance.fromSpellId))}">${escapeHtml(parent?.name ?? inheritance.fromSpellId)}</a>, but that parent is not fully resolved in the local rules data.</p></aside>`];
+  }).join("");
+  const familyRules = familySpells.flatMap((familySpell) => {
+    if (renderedInheritance.has(familySpell.spellId)) return [];
+    renderedInheritance.add(familySpell.spellId);
+    return [embeddedSpell(
+      familySpell,
+      payloadRelationships(familySpell.payload),
+      3,
+    )];
+  });
+  const spellFamily = familyRules.length > 0
+    ? `<section aria-labelledby="spell-family"><h2 id="spell-family">Spell family</h2><p>These records share the same base title. This grouping aids navigation and does not by itself assert rules inheritance.</p>${familyRules.join("")}</section>`
+    : "";
+  const related = outgoing.map((relationship) => {
+    const targetUrl = relationshipHref(relationship);
+    return `<li>
+      ${escapeHtml(humanize(relationship.relationshipType))}:
+      ${targetUrl ? `<a href="${href(targetUrl)}">${escapeHtml(relationship.targetName)}</a>` : escapeHtml(relationship.targetName)}
+      <span class="muted">(${escapeHtml(relationship.status)})</span>
+    </li>`;
+  }).join("");
   const backlinks = incoming.map((relationship) => {
     const owner = ownerById.get(relationship.ownerEntityId);
     const ownerUrl = owner?.type === "spell" ? spellHref(relationship.ownerEntityId) : entityHref(relationship.ownerEntityId);
@@ -977,17 +1366,21 @@ async function spellPage(prisma: PrismaClient, spellId: string): Promise<string 
       <p><code>${escapeHtml(spell.spellId)}</code></p>
       ${spell.legacy35Material ? '<p class="legacy-notice"><strong>Legacy 3.5 material.</strong> AoN catalogs this first-party spell for reference, but it is not a Pathfinder-native spell.</p>' : ""}
       <dl>
-        <dt>School</dt><dd>${escapeHtml(humanize(spell.school))}${spell.subschool ? ` (${escapeHtml(spell.subschool)})` : ""}</dd>
-        <dt>Casting time</dt><dd>${escapeHtml(spell.castingTimeRaw ?? `${spell.castingTimeAmount ?? ""} ${humanize(spell.castingTimeUnit)}`)}</dd>
+        <dt>School</dt><dd>${schoolUrl ? `<a href="${href(schoolUrl)}">${escapeHtml(humanize(spell.school))}</a>` : escapeHtml(humanize(spell.school))}${spell.subschool ? ` (${subschoolUrl ? `<a href="${href(subschoolUrl)}">${escapeHtml(humanize(spell.subschool))}</a>` : escapeHtml(humanize(spell.subschool))})` : ""}</dd>
+        <dt>Casting time</dt><dd>${castingTime}</dd>
         <dt>Components</dt><dd>${escapeHtml(spell.componentsRaw ?? "Not recorded")}</dd>
         <dt>Range</dt><dd>${escapeHtml(spell.rangeRaw ?? humanize(spell.rangeCategory))}</dd>
         ${deliveryRows}
         <dt>Duration</dt><dd>${escapeHtml(spell.durationRaw ?? humanize(spell.durationKind))}</dd>
-        <dt>Publication</dt><dd>${escapeHtml(spell.publicationBook)}${spell.publicationPage === null ? "" : `, page ${spell.publicationPage}`}</dd>
+        <dt>Saving throw</dt><dd>${linkedText(savingThrowRaw, savingThrowLinks)}</dd>
+        <dt>${spellResistanceUrl ? `<a href="${href(spellResistanceUrl)}">Spell resistance</a>` : "Spell resistance"}</dt><dd>${escapeHtml(spellResistanceRaw)}</dd>
+        <dt>Publication</dt><dd>${publicationUrl ? `<a href="${href(publicationUrl)}">${escapeHtml(spell.publicationBook)}</a>` : escapeHtml(spell.publicationBook)}${spell.publicationPage === null ? "" : `, page ${spell.publicationPage}`}</dd>
       </dl>
       <section aria-labelledby="spell-lists"><h2 id="spell-lists">Spell lists</h2><ul>${levelRows}</ul></section>
       <section aria-labelledby="components"><h2 id="components">Components</h2><ul>${componentRows || "<li>None recorded</li>"}</ul></section>
       ${description}
+      ${inheritedRules}
+      ${spellFamily}
       ${spell.mythicVariant ? `<section id="mythic"><h2>Mythic ${escapeHtml(spell.name)}</h2>${paragraphs(spell.mythicVariant.rulesRaw)}${spell.mythicVariant.augmentations.length ? `<h3>Augmentations</h3><ul>${spell.mythicVariant.augmentations.map((augmentation) => `<li><strong>${escapeHtml(augmentation.name)}</strong>: ${escapeHtml(augmentation.raw)}</li>`).join("")}</ul>` : ""}</section>` : ""}
       <section aria-labelledby="related-rules"><h2 id="related-rules">Related rules</h2>${related ? `<ul>${related}</ul>` : "<p>No outgoing relationships.</p>"}</section>
       <section aria-labelledby="referenced-by"><h2 id="referenced-by">Referenced by</h2>${backlinks ? `<ul>${backlinks}</ul>` : "<p>No incoming relationships.</p>"}</section>
@@ -1173,6 +1566,10 @@ export function createRequestHandler(prisma: PrismaClient) {
       else if (url.pathname === "/spells") result = await spellListsPage(prisma);
       else if (url.pathname === "/spells/alphabetical") result = await alphabeticalSpellsPage(prisma, url);
       else if (url.pathname === "/spell-components") result = spellComponentsPage();
+      else if (url.pathname === "/rules") result = rulesPage();
+      else if (url.pathname === "/rules/magic-schools") result = await magicSchoolsPage(prisma);
+      else if (url.pathname === "/rules/actions") result = await actionsPage(prisma);
+      else if (url.pathname === "/rules/saving-throws") result = await savingThrowsPage(prisma);
       else if (url.pathname === "/entities") result = await entitiesPage(prisma, url);
       else if (url.pathname === "/search") result = await searchPage(prisma, url);
       else if (url.pathname.startsWith("/classes/")) result = await classSpellsPage(prisma, decodeURIComponent(url.pathname.slice(9)));

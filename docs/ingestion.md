@@ -35,6 +35,7 @@ pnpm ingest:reconcile-inherited-lists
 pnpm ingest:legacy-3.5
 pnpm ingest:dependencies
 pnpm ingest:linked-entities
+pnpm ingest:rich-text-pilot
 pnpm db:stats
 pnpm validate
 pnpm verify
@@ -73,6 +74,14 @@ manifest. It resolves canonical names and known aliases, ingests missing parents
 existing raw captures without downloading new sources, regenerates children that had
 missing parents, and rebuilds the dependency queues from current observation evidence.
 The command is idempotent; a completed run reports no pending dependencies.
+
+`pnpm ingest:rich-text-pilot` regenerates rich-text documents, provenance, and
+canonical decisions only for the 11 reviewed pilot spells. It reads immutable
+local observations, resolves inline targets through accepted canonical
+relationships, and leaves every other spell on schema version `0.1.0`. Run
+`pnpm db:import` after reviewing generated changes. Do not broaden this command
+until each new spell passes the checklist in
+[Rich-text spell descriptions](rich-text.md).
 
 - [Ingestion implementation](../src/ingestion/)
 - [Level-0 ingestion queue](../findings/17-level-zero-ingestion-queue.md)

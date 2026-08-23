@@ -33,6 +33,15 @@ describe("local rules browser", () => {
     expect(html).toContain("Database summary");
   });
 
+  it("uses normal same-tab navigation for links and forms", async () => {
+    const response = await fetch(baseUrl);
+    const html = await response.text();
+    expect(html).not.toContain("<base ");
+    expect(html).not.toContain("target=");
+    expect(html).toContain('<a class="skip-link" href="#content">');
+    expect(html).toContain('form action="/search" method="get" role="search"');
+  });
+
   it("lists every ingested spell-list source kind", async () => {
     const response = await fetch(`${baseUrl}/spells`);
     const html = await response.text();
@@ -285,6 +294,29 @@ describe("local rules browser", () => {
     expect(html).toContain('<section id="divine-focus">');
   });
 
+  it("groups relationship targets on stable rule-reference anchors", async () => {
+    const [schoolsResponse, actionsResponse, savesResponse] = await Promise.all([
+      fetch(`${baseUrl}/rules/magic-schools`),
+      fetch(`${baseUrl}/rules/actions`),
+      fetch(`${baseUrl}/rules/saving-throws`),
+    ]);
+    const [schools, actions, saves] = await Promise.all([
+      schoolsResponse.text(),
+      actionsResponse.text(),
+      savesResponse.text(),
+    ]);
+    expect(schoolsResponse.status).toBe(200);
+    expect(schools).toContain('<article id="conjuration">');
+    expect(schools).toContain('<article id="healing">');
+    expect(schools).toContain("Certain divine conjurations heal creatures");
+    expect(actionsResponse.status).toBe(200);
+    expect(actions).toContain('<article id="standard-action">');
+    expect(actions).toContain("most commonly to make an attack or cast a spell");
+    expect(savesResponse.status).toBe(200);
+    expect(saves).toContain('<article id="will-saving-throw">');
+    expect(saves).toContain("Definition not yet imported.");
+  });
+
   it("renders a bounded alphabetical spell catalog with filters", async () => {
     const response = await fetch(`${baseUrl}/spells/alphabetical`);
     const html = await response.text();
@@ -327,8 +359,90 @@ describe("local rules browser", () => {
     expect(response.status).toBe(200);
     expect(html).toContain("<h1>Light</h1>");
     expect(html).toContain("/classes/cleric");
-    expect(html).toContain("/entities/spell.permanency");
+    expect(html).toContain("/spells/spell.permanency");
     expect(html).toContain("/sources/");
+  });
+
+  it("links Cure Light Wounds metadata through its accepted relationships", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.cure-light-wounds`);
+    const html = await response.text();
+    expect(response.status).toBe(200);
+    expect(html).toContain('<a href="/rules/magic-schools#conjuration">Conjuration</a>');
+    expect(html).toContain('<a href="/rules/magic-schools#healing">Healing</a>');
+    expect(html).toContain('<a href="/rules/actions#standard-action">standard action</a>');
+    expect(html).toContain('<a href="/rules/saving-throws#will-saving-throw">Will</a> half');
+    expect(html).toContain('<a href="/entities/rule.spell-resistance">Spell resistance</a>');
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(description).toContain('<a href="/entities/rule.spell-resistance">spell resistance</a>');
+  });
+
+  it.each([
+    ["break-enchantment", "/entities/rule.caster-level"],
+    ["restoration", "/spells/spell.restoration-lesser"],
+    ["restoration-greater", "/spells/spell.restoration-lesser"],
+    ["restoration-lesser", "/entities/rule.ability-damage"],
+    ["bestow-curse", "/spells/spell.break-enchantment"],
+    ["curse-major", "/spells/spell.bestow-curse"],
+    ["conditional-curse", "/spells/spell.bestow-curse"],
+    ["cure-light-wounds", "/entities/rule.spell-resistance"],
+    ["cure-moderate-wounds", "/spells/spell.cure-light-wounds"],
+    ["darkness", "/spells/spell.darkness"],
+  ])("renders persisted inline links for pilot spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    expect(response.status).toBe(200);
+    expect(html).toContain('class="rich-description"');
+    expect(html).toContain(`href="${target}"`);
+  });
+
+  it("renders Greater Bestow Curse's persisted list without inventing missing links", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.bestow-curse-greater`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain('<div class="rich-description">');
+    expect(description).toContain("<ul><li>–12 penalty");
+    expect(description).not.toContain("<a ");
+  });
+
+  it("shows exact lesser and greater title variants without asserting inheritance", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.bestow-curse-greater`);
+    const html = await response.text();
+    expect(response.status).toBe(200);
+    expect(html).toContain('<h2 id="spell-family">Spell family</h2>');
+    expect(html).toContain("does not by itself assert rules inheritance");
+    expect(html.match(/data-embedded-spell="spell.bestow-curse"/g)).toHaveLength(1);
+    expect(html).toContain('<h3 id="embedded-bestow-curse">Bestow Curse</h3>');
+  });
+
+  it("keeps mythic Darkness separate and links only explicit spell references", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.darkness`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain("Mythic Darkness");
+    expect(description).not.toContain('/entities/descriptor.darkness');
+    expect(description.match(/href="\/spells\/spell\.darkness"/g)).toHaveLength(2);
+  });
+
+  it("falls back to escaped plain-text descriptions outside the pilot", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.light`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain('class="rich-description"');
+    expect(description).toContain("<p>");
+  });
+
+  it("expands each resolved functions-like parent once without recursion", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.conditional-curse`);
+    const html = await response.text();
+    expect(response.status).toBe(200);
+    expect(html.match(/data-embedded-spell="spell.bestow-curse"/g)).toHaveLength(1);
+    expect(html).toContain('<h2 id="embedded-bestow-curse">Bestow Curse</h2>');
+    const embedded = html.match(/<section class="embedded-spell"[\s\S]*?<\/section>/)?.[0] ?? "";
+    expect(embedded).not.toContain("Related rules");
+    expect(embedded).not.toContain("Source observations");
   });
 
   it("visibly distinguishes legacy 3.5 spells from Pathfinder-native spells", async () => {

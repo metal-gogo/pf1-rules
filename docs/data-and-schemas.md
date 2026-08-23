@@ -20,4 +20,11 @@
 The generated SQLite database at `data/database/pf1_spells.db` is intentionally
 ignored by Git. Migrations and validated JSON records can rebuild it.
 
+Canonical schema versions `0.1.0` and `0.2.0` are accepted. Version `0.2.0`
+requires `description.document`; version `0.1.0` retains the plain-text
+description contract. Rich-text documents live inside the existing canonical
+payload and do not require a Prisma migration. See
+[Rich-text spell descriptions](rich-text.md) for the node contract and rollout
+policy.
+
 Return to the [project index](index.md).

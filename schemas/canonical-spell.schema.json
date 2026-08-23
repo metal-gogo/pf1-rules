@@ -24,7 +24,7 @@
   ],
   "properties": {
     "$schema": {"type": "string"},
-    "schema_version": {"const": "0.1.0"},
+    "schema_version": {"enum": ["0.1.0", "0.2.0"]},
     "spell_id": {"type": "string", "pattern": "^spell\\.[a-z0-9-]+$"},
     "ruleset": {"const": "Pathfinder First Edition"},
     "legacy_3_5_material": {
@@ -146,6 +146,7 @@
       "properties": {
         "raw": {"type": "string"},
         "search_text": {"type": "string"},
+        "document": {"$ref": "#/$defs/richTextDocument"},
         "sections": {
           "type": "array",
           "items": {
@@ -296,7 +297,107 @@
       }
     }
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"schema_version": {"const": "0.2.0"}},
+        "required": ["schema_version"]
+      },
+      "then": {
+        "properties": {
+          "description": {
+            "type": "object",
+            "properties": {"document": true},
+            "required": ["document"]
+          }
+        }
+      }
+    }
+  ],
   "$defs": {
+    "richTextMarks": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"enum": ["italic", "bold"]}
+    },
+    "richTextText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_type", "value"],
+      "properties": {
+        "node_type": {"const": "text"},
+        "value": {"type": "string", "minLength": 1},
+        "marks": {"$ref": "#/$defs/richTextMarks"}
+      }
+    },
+    "richTextEntityLink": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_type", "value", "relationship_id"],
+      "properties": {
+        "node_type": {"const": "entity_link"},
+        "value": {"type": "string", "minLength": 1},
+        "relationship_id": {"type": "string", "pattern": "^[a-z0-9.-]+:[a-z_]+:[a-z0-9.-]+$"},
+        "marks": {"$ref": "#/$defs/richTextMarks"}
+      }
+    },
+    "richTextHardBreak": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_type"],
+      "properties": {"node_type": {"const": "hard_break"}}
+    },
+    "richTextInline": {
+      "oneOf": [
+        {"$ref": "#/$defs/richTextText"},
+        {"$ref": "#/$defs/richTextEntityLink"},
+        {"$ref": "#/$defs/richTextHardBreak"}
+      ]
+    },
+    "richTextParagraph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_type", "content"],
+      "properties": {
+        "node_type": {"const": "paragraph"},
+        "content": {"type": "array", "items": {"$ref": "#/$defs/richTextInline"}}
+      }
+    },
+    "richTextListItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_type", "content"],
+      "properties": {
+        "node_type": {"const": "list_item"},
+        "content": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/richTextInline"}}
+      }
+    },
+    "richTextUnorderedList": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_type", "content"],
+      "properties": {
+        "node_type": {"const": "unordered_list"},
+        "content": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/richTextListItem"}}
+      }
+    },
+    "richTextDocument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_type", "content"],
+      "properties": {
+        "node_type": {"const": "document"},
+        "content": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {"$ref": "#/$defs/richTextParagraph"},
+              {"$ref": "#/$defs/richTextUnorderedList"}
+            ]
+          }
+        }
+      }
+    },
     "spellListDerivation": {
       "type": "object",
       "additionalProperties": false,

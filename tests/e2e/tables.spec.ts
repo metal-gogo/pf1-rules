@@ -48,6 +48,68 @@ test("spell-list directory exposes every source kind without page overflow", asy
   await expectNoPageOverflow(page);
 });
 
+test("Cure Light Wounds uses same-tab navigation to the matching rule heading", async ({ page }) => {
+  await page.goto("/spells/spell.cure-light-wounds");
+
+  await page.locator('dl a[href="/rules/actions#standard-action"]').click();
+  await expect(page).toHaveURL(/\/rules\/actions#standard-action$/);
+  await expect(page.locator("#standard-action")).toBeVisible();
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+});
+
+test("rich spell descriptions link inline and expand functions-like content once", async ({ page }) => {
+  await page.goto("/spells/spell.restoration");
+
+  const description = page.locator(".rich-description").first();
+  await expect(description.getByRole("link", { name: "lesser restoration" })).toHaveAttribute(
+    "href",
+    "/spells/spell.restoration-lesser",
+  );
+  await expect(page.locator('[data-embedded-spell="spell.restoration-lesser"]')).toHaveCount(1);
+  await expect(page.locator("[data-embedded-spell] [data-embedded-spell]")).toHaveCount(0);
+  await expectNoPageOverflow(page);
+  let results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+
+  await description.getByRole("link", { name: "lesser restoration" }).click();
+  await expect(page).toHaveURL(/\/spells\/spell\.restoration-lesser$/);
+});
+
+test("pilot lists remain semantic and accessible on mobile", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/spells/spell.bestow-curse-greater");
+
+  const description = page.locator(".rich-description").first();
+  await expect(description.locator("ul")).toHaveCount(1);
+  await expect(description.locator("ul > li")).toHaveCount(5);
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+});
+
+test("spell families render once without implying recursive inheritance", async ({ page }) => {
+  await page.goto("/spells/spell.bestow-curse-greater");
+
+  await expect(page.getByRole("heading", { level: 2, name: "Spell family" })).toBeVisible();
+  await expect(page.getByText("does not by itself assert rules inheritance")).toBeVisible();
+  await expect(page.locator('[data-embedded-spell="spell.bestow-curse"]')).toHaveCount(1);
+  await expect(page.locator("[data-embedded-spell] [data-embedded-spell]")).toHaveCount(0);
+  await expectNoPageOverflow(page);
+});
+
+test("Darkness excludes mythic text and links only explicit spell references", async ({ page }) => {
+  await page.goto("/spells/spell.darkness");
+
+  const description = page.locator(".rich-description").first();
+  await expect(description).not.toContainText("Mythic Darkness");
+  await expect(description.locator('a[href="/entities/descriptor.darkness"]')).toHaveCount(0);
+  await expect(description.locator('a[href="/spells/spell.darkness"]')).toHaveCount(2);
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+});
+
 test("class tables retain context and use four focused columns", async ({ page }) => {
   await page.goto("/classes/cleric");
 

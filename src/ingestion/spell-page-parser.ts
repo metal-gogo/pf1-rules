@@ -113,7 +113,7 @@ function sectionAfterHeading(html: string, heading: string): string {
   const match = expression.exec(html);
   if (!match || match.index === undefined) return "";
   const rest = html.slice(match.index + match[0].length);
-  const next = /<(?:h3[^>]*|p\s+class=["']divider["'])>/i.exec(rest);
+  const next = /<(?:h[12][^>]*class=["'][^"']*title[^"']*["']|h3[^>]*|p\s+class=["']divider["'])>/i.exec(rest);
   return rest.slice(0, next?.index ?? rest.length);
 }
 

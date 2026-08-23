@@ -158,40 +158,118 @@
         "aon:subdomain.resurrection:c5987ad2"
       ],
       "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.cure-light-wounds:704ba163",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-light-wounds:704ba163",
+        "legacy_aon:spell.cure-light-wounds:4d4fc230",
+        "d20pfsrd:spell.cure-light-wounds:d23904b8",
+        "aon:patron.mercy:15d234b1",
+        "aon:bloodline.sorcerer.unicorn:71ed1006",
+        "aon:domain.healing:c5987ad2",
+        "aon:subdomain.restoration:c5987ad2",
+        "aon:subdomain.resurrection:c5987ad2"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
     {
-      "relationship_id": "spell.cure-light-wounds:has_subschool:subschool.healing",
+      "relationship_id": "spell.cure-light-wounds:appears_on_spell_list:spell-list.healing-domain",
       "decision": "accept",
       "evidence": [
         {
-          "observation_id": "aon:spell.cure-light-wounds:704ba163",
-          "source_field": "spell_raw.links_raw[2]"
+          "observation_id": "aon:domain.healing:c5987ad2",
+          "source_field": "entity_raw.sections_raw[0]"
         }
       ],
       "considered_observation_ids": [
-        "aon:spell.cure-light-wounds:704ba163",
-        "legacy_aon:spell.cure-light-wounds:4d4fc230",
-        "d20pfsrd:spell.cure-light-wounds:d23904b8"
+        "aon:domain.healing:c5987ad2"
       ],
-      "rationale": "All sources classify it as conjuration (healing); AoN supplies the direct subschool link."
+      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
     },
     {
-      "relationship_id": "spell.cure-light-wounds:member_of_family:spell-family.cure-wounds",
+      "relationship_id": "spell.cure-light-wounds:appears_on_spell_list:spell-list.mercy-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.mercy:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.mercy:15d234b1"
+      ],
+      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds:appears_on_spell_list:spell-list.omdura",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "aon:spell.cure-light-wounds:704ba163",
-          "source_field": "spell_raw.name_raw"
+          "source_field": "spell_raw.levels_raw"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.cure-light-wounds:d23904b8",
+          "source_field": "spell_raw.domains_raw"
         }
       ],
       "considered_observation_ids": [
         "aon:spell.cure-light-wounds:704ba163",
-        "legacy_aon:spell.cure-light-wounds:4d4fc230",
         "d20pfsrd:spell.cure-light-wounds:d23904b8"
       ],
-      "rationale": "Family membership is useful for discovery and later comparisons but grants no inherited mechanics."
+      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds:appears_on_spell_list:spell-list.restoration-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.restoration:c5987ad2",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.restoration:c5987ad2"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds:appears_on_spell_list:spell-list.resurrection-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.resurrection:c5987ad2",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.resurrection:c5987ad2"
+      ],
+      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds:appears_on_spell_list:spell-list.sorcerer-unicorn-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.unicorn:71ed1006",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.unicorn:71ed1006"
+      ],
+      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
     },
     {
       "relationship_id": "spell.cure-light-wounds:counterpart_of:spell.inflict-light-wounds",
@@ -226,97 +304,179 @@
       "rationale": "The explicitly named mythic subsection is now a separately identified spell variant. Its rules and publication no longer belong to the base spell record."
     },
     {
-      "relationship_id": "spell.cure-light-wounds:appears_on_spell_list:spell-list.omdura",
+      "relationship_id": "spell.cure-light-wounds:has_school:magic-school.conjuration",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "aon:spell.cure-light-wounds:704ba163",
-          "source_field": "spell_raw.levels_raw"
+          "source_field": "spell_raw.links_raw[1]"
         },
         {
           "observation_id": "d20pfsrd:spell.cure-light-wounds:d23904b8",
-          "source_field": "spell_raw.domains_raw"
+          "source_field": "spell_raw.links_raw[0]"
         }
       ],
       "considered_observation_ids": [
         "aon:spell.cure-light-wounds:704ba163",
-        "d20pfsrd:spell.cure-light-wounds:d23904b8"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.cure-light-wounds:appears_on_spell_list:spell-list.mercy-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.mercy:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.mercy:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.cure-light-wounds:appears_on_spell_list:spell-list.sorcerer-unicorn-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.unicorn:71ed1006",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.unicorn:71ed1006"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
-    },
-    {
-      "relationship_id": "spell.cure-light-wounds:appears_on_spell_list:spell-list.healing-domain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:domain.healing:c5987ad2",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:domain.healing:c5987ad2"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
-    },
-    {
-      "relationship_id": "spell.cure-light-wounds:appears_on_spell_list:spell-list.restoration-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.restoration:c5987ad2",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.restoration:c5987ad2"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
-    },
-    {
-      "relationship_id": "spell.cure-light-wounds:appears_on_spell_list:spell-list.resurrection-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.resurrection:c5987ad2",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
+        "legacy_aon:spell.cure-light-wounds:4d4fc230",
+        "d20pfsrd:spell.cure-light-wounds:d23904b8",
+        "aon:patron.mercy:15d234b1",
+        "aon:bloodline.sorcerer.unicorn:71ed1006",
+        "aon:domain.healing:c5987ad2",
+        "aon:subdomain.restoration:c5987ad2",
         "aon:subdomain.resurrection:c5987ad2"
       ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+      "rationale": "Canonical local school link with both source URLs retained as evidence."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds:has_subschool:subschool.healing",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cure-light-wounds:704ba163",
+          "source_field": "spell_raw.links_raw[2]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-light-wounds:704ba163",
+        "legacy_aon:spell.cure-light-wounds:4d4fc230",
+        "d20pfsrd:spell.cure-light-wounds:d23904b8"
+      ],
+      "rationale": "All sources classify it as conjuration (healing); AoN supplies the direct subschool link."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds:member_of_family:spell-family.cure-wounds",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cure-light-wounds:704ba163",
+          "source_field": "spell_raw.name_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-light-wounds:704ba163",
+        "legacy_aon:spell.cure-light-wounds:4d4fc230",
+        "d20pfsrd:spell.cure-light-wounds:d23904b8"
+      ],
+      "rationale": "Family membership is useful for discovery and later comparisons but grants no inherited mechanics."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds:published_in:publication.pathfinder-rpg-core-rulebook",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cure-light-wounds:704ba163",
+          "source_field": "spell_raw.links_raw[0]"
+        },
+        {
+          "observation_id": "legacy_aon:spell.cure-light-wounds:4d4fc230",
+          "source_field": "page.source_notice_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-light-wounds:704ba163",
+        "legacy_aon:spell.cure-light-wounds:4d4fc230",
+        "d20pfsrd:spell.cure-light-wounds:d23904b8",
+        "aon:patron.mercy:15d234b1",
+        "aon:bloodline.sorcerer.unicorn:71ed1006",
+        "aon:domain.healing:c5987ad2",
+        "aon:subdomain.restoration:c5987ad2",
+        "aon:subdomain.resurrection:c5987ad2"
+      ],
+      "rationale": "AoN supplies page 263; Legacy confirms Core scope."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds:uses_action:action.standard-action",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.cure-light-wounds:d23904b8",
+          "source_field": "spell_raw.links_raw[11]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-light-wounds:704ba163",
+        "legacy_aon:spell.cure-light-wounds:4d4fc230",
+        "d20pfsrd:spell.cure-light-wounds:d23904b8",
+        "aon:patron.mercy:15d234b1",
+        "aon:bloodline.sorcerer.unicorn:71ed1006",
+        "aon:domain.healing:c5987ad2",
+        "aon:subdomain.restoration:c5987ad2",
+        "aon:subdomain.resurrection:c5987ad2"
+      ],
+      "rationale": "All sources agree; d20PFSRD supplies the direct definition link."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds:uses_definition:rule.aiming-a-spell",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cure-light-wounds:704ba163",
+          "source_field": "spell_raw.delivery_fields_raw[0].value_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-light-wounds:704ba163",
+        "legacy_aon:spell.cure-light-wounds:4d4fc230",
+        "d20pfsrd:spell.cure-light-wounds:d23904b8",
+        "aon:patron.mercy:15d234b1",
+        "aon:bloodline.sorcerer.unicorn:71ed1006",
+        "aon:domain.healing:c5987ad2",
+        "aon:subdomain.restoration:c5987ad2",
+        "aon:subdomain.resurrection:c5987ad2"
+      ],
+      "rationale": "The general rule defines selected spell targets; this spell uses a single target rather than an area."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds:uses_definition:rule.spell-resistance",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cure-light-wounds:704ba163",
+          "source_field": "spell_raw.spell_resistance_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-light-wounds:704ba163",
+        "legacy_aon:spell.cure-light-wounds:4d4fc230",
+        "d20pfsrd:spell.cure-light-wounds:d23904b8",
+        "aon:patron.mercy:15d234b1",
+        "aon:bloodline.sorcerer.unicorn:71ed1006",
+        "aon:domain.healing:c5987ad2",
+        "aon:subdomain.restoration:c5987ad2",
+        "aon:subdomain.resurrection:c5987ad2"
+      ],
+      "rationale": "No inspected bounded entry links the term directly, but the mechanic appears in every source."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds:uses_definition:rule.will-saving-throw",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.cure-light-wounds:4d4fc230",
+          "source_field": "spell_raw.links_raw[0]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.cure-light-wounds:d23904b8",
+          "source_field": "spell_raw.links_raw[12]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-light-wounds:704ba163",
+        "legacy_aon:spell.cure-light-wounds:4d4fc230",
+        "d20pfsrd:spell.cure-light-wounds:d23904b8",
+        "aon:patron.mercy:15d234b1",
+        "aon:bloodline.sorcerer.unicorn:71ed1006",
+        "aon:domain.healing:c5987ad2",
+        "aon:subdomain.restoration:c5987ad2",
+        "aon:subdomain.resurrection:c5987ad2"
+      ],
+      "rationale": "The raw conditional/harmless wording remains authoritative."
     }
   ],
   "unresolved_questions": [
     "How should conditional healing of living creatures versus damage to undead be normalized after testing the cure and inflict families?",
-    "Which first-party domain source should independently confirm Healing domain 1 access?"
+    "Which first-party domain source should independently confirm Healing domain 1 access?",
+    "Rich-text link: No occurrence of \"Inflict Light Wounds\" matched accepted relationship spell.cure-light-wounds:counterpart_of:spell.inflict-light-wounds; the relationship remains under Related rules."
   ]
 }

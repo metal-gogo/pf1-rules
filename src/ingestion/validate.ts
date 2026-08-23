@@ -11,6 +11,11 @@ import addFormatsModule from "ajv-formats";
 import { projectRoot } from "../config.js";
 import type { ValidatedJson } from "../domain/json.js";
 import {
+  comparableRichText,
+  richTextLeafText,
+  type RichTextDocument,
+} from "../domain/rich-text.js";
+import {
   validateSpellInheritance,
   type InheritableSpell,
 } from "../domain/spell-inheritance.js";
@@ -235,6 +240,42 @@ function resolveJsonPointer(document: unknown, pointer: string): unknown {
 }
 
 
+function verifyRichText(record: ValidatedJson, recordPath: string): void {
+  if (record.schema_version !== "0.2.0") return;
+  const document = record.description.document as RichTextDocument;
+  if (
+    comparableRichText(richTextLeafText(document)) !==
+    comparableRichText(String(record.description.raw))
+  ) {
+    throw new Error(`Rich-text leaf text differs from description.raw in ${recordPath}`);
+  }
+  const relationships = new Map<string, ValidatedJson>(
+    record.relationships.map((relationship: ValidatedJson) => [
+      relationship.relationship_id,
+      relationship,
+    ]),
+  );
+  const inlineContent = document.content.flatMap((block) =>
+    block.node_type === "paragraph"
+      ? block.content
+      : block.content.flatMap((item) => item.content)
+  );
+  for (const node of inlineContent) {
+    if (node.node_type !== "entity_link") continue;
+    const relationship = relationships.get(node.relationship_id);
+    if (
+      !relationship ||
+      relationship.status !== "accepted" ||
+      !relationship.target.entity_id
+    ) {
+      throw new Error(
+        `Rich-text link ${node.relationship_id} is not an accepted resolved relationship in ${recordPath}`,
+      );
+    }
+  }
+}
+
+
 export function validatePackage(): PackageStatistics {
   const schemasDirectory = path.join(projectRoot, "schemas");
   const ajv = new Ajv2020({ allErrors: true, strict: true });
@@ -382,6 +423,7 @@ export function validatePackage(): PackageStatistics {
   for (const filename of canonicalPaths) {
     const record = loadJson(filename);
     assertValid(canonicalValidator, record, filename);
+    verifyRichText(record, filename);
     if (!registeredIds.has(record.spell_id)) {
       throw new Error(`${record.spell_id} has no entity registry entry`);
     }

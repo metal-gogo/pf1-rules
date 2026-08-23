@@ -70,4 +70,36 @@ but they do not replace canonical JSON, source observations, or captured source
 artifacts. The [native Markdown design note](../findings/29-native-markdown-read-model.md)
 records a possible future route and content-negotiation contract.
 
+## Rich-text spell descriptions
+
+Schema version `0.2.0` stores a small semantic JSON document under
+`description.document`. The document contains paragraphs, unordered lists, list
+items, text, hard breaks, and entity links. Text and entity links may carry
+bold or italic marks. Entity-link nodes store only a canonical relationship ID;
+the accepted relationship remains authoritative for the target and local URL.
+Schema version `0.1.0` remains valid and uses the plain-text renderer.
+
+The canonical payload remains the only persistent store for rich text. The
+relational database has no duplicate rich-text tables. `description.raw`,
+`search_text`, and description sections remain available for compatibility,
+and validation compares document leaf text with `description.raw` after
+normalizing structural whitespace.
+
+Inline links come from bounded source HTML and accepted canonical
+relationships. Classification relationships such as `has_descriptor` do not
+become description links merely because their label occurs in prose. When an
+ordinary term has the same name as the current spell, source emphasis or an
+explicit source link distinguishes the spell reference; ambiguous occurrences
+remain plain text. Mythic and other separately titled variants must not be
+included in a base spell's description.
+
+The web read model renders semantic, escaped HTML and normal same-tab links.
+Resolved `functions_like` parents expand once after the description and never
+recurse. Separately, exact base, `, Lesser`, and `, Greater` titles form a
+navigation family and may also display once. Title grouping does not assert
+rules inheritance; only a canonical relationship can do that.
+
+See [Rich-text spell descriptions](rich-text.md) for the pilot scope,
+normalization rules, and rollout checklist.
+
 Return to the [project index](index.md).

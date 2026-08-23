@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 
 import type { ValidatedJson } from "../domain/json.js";
+import { linkRichTextDocument, parseRichTextHtml } from "../domain/rich-text.js";
 import type { SpellListQualification } from "../domain/spell-lists.js";
 import { readJsonPointer } from "../domain/spell-inheritance.js";
 import type { ParsedLink, ParsedSpellPage, SiteId } from "./spell-page-parser.js";
@@ -1040,6 +1041,7 @@ export function generateCanonicalBundle(
   options: {
     legacy35Material?: boolean;
     allowMissingPrintedLevels?: boolean;
+    richText?: boolean;
   } = {},
 ) {
   const baseline = observations.find((item) => item.siteId === "aon");
@@ -1179,14 +1181,23 @@ export function generateCanonicalBundle(
         addEntity(link.targetEntityIdHint, targetType, targetName, entityEvidence);
         continue;
       }
+      const resolvedSpell = targetType === "spell"
+        ? resolveCanonicalSpellReference(
+            link.anchorTextRaw,
+            availableCanonicalSpells,
+            link.targetEntityIdHint,
+          )
+        : null;
       const sameAsBaselinePublication = targetType === "publication" &&
         publicationComparable(targetName) === publicationComparable(book);
       const targetId = sameAsBaselinePublication
         ? publicationId(book)
         : targetType === "publication"
           ? publicationId(targetName)
-        : link.targetEntityIdHint;
-      const canonicalTargetName = sameAsBaselinePublication ? book : targetName;
+        : resolvedSpell?.spell_id ?? link.targetEntityIdHint;
+      const canonicalTargetName = sameAsBaselinePublication
+        ? book
+        : resolvedSpell?.name ?? targetName;
       const evidence = {
         observation_id: observation.observationId,
         source_field: `spell_raw.links_raw[${index}]`,
@@ -1393,9 +1404,25 @@ export function generateCanonicalBundle(
   }
 
   const relationships = [...relationshipMap.values()].sort((left, right) => left.relationship_id.localeCompare(right.relationship_id));
+  const richText = options.richText
+    ? linkRichTextDocument(parseRichTextHtml(parsed.descriptionHtml), relationships, {
+        ownerEntityId: spellId,
+      })
+    : null;
+  for (const warning of richText?.warnings ?? []) {
+    warnings.push({
+      code: warning.code,
+      field_path: "/description/document",
+      message: warning.code === "AMBIGUOUS_RICH_TEXT_LINK"
+        ? `The phrase ${JSON.stringify(warning.phrase)} matches multiple accepted relationships ` +
+          `(${warning.relationship_ids.join(", ")}); it remains unlinked.`
+        : `No occurrence of ${JSON.stringify(warning.phrase)} matched accepted relationship ` +
+          `${warning.relationship_ids[0]}; the relationship remains under Related rules.`,
+    });
+  }
   const canonical: ValidatedJson = {
     $schema: "../../schemas/canonical-spell.schema.json",
-    schema_version: "0.1.0",
+    schema_version: options.richText ? "0.2.0" : "0.1.0",
     spell_id: spellId,
     ruleset: "Pathfinder First Edition",
     ...(options.legacy35Material ? { legacy_3_5_material: true } : {}),
@@ -1415,7 +1442,12 @@ export function generateCanonicalBundle(
       saving_throw: parseSavingThrow(parsed.savingThrowRaw),
       spell_resistance: parseSpellResistance(parsed.spellResistanceRaw),
     },
-    description: { raw: parsed.descriptionRaw, search_text: cleanComparable(parsed.descriptionRaw), sections: [] },
+    description: {
+      raw: parsed.descriptionRaw,
+      search_text: cleanComparable(parsed.descriptionRaw),
+      sections: [],
+      ...(richText ? { document: richText.document } : {}),
+    },
     publication: {
       publisher: "Paizo",
       book,
@@ -1449,7 +1481,9 @@ export function generateCanonicalBundle(
         : inheritanceReference && !canResolveCanonicalSpell(availableCanonicalSpells, inheritanceReference.parentId)
         ? "needs_review"
         : "validated",
-      normalizer_version: options.allowMissingPrintedLevels && !parsed.levelsRaw
+      normalizer_version: options.richText
+        ? "0.2.0-rich-text-pilot"
+        : options.allowMissingPrintedLevels && !parsed.levelsRaw
         ? "0.1.6-missing-printed-levels"
         : reviewedCatalogLevels.length > 0 || reviewedAonLevelSelection
         ? "0.1.5-reviewed-catalog-memberships"
@@ -1457,6 +1491,16 @@ export function generateCanonicalBundle(
       warnings,
     },
   };
+  if (richText) {
+    canonical.provenance.push({
+      field_path: "/description/document",
+      observation_id: baseline.observationId,
+      source_field: "spell_raw.description_raw",
+      raw_value_sha256: hash(parsed.descriptionRaw),
+      decision: "normalized",
+      note: "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships.",
+    });
+  }
   if (rangeOverride) {
     const overrideEvidence = rangeOverride.evidenceField === "spell_raw.delivery_fields_raw"
       ? parsed.deliveryFieldsRaw

@@ -157,6 +157,24 @@
         "aon:patron.shadow:15d234b1"
       ],
       "rationale": "AoN clearly transcribes the owning witch patron's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.darkness:cdf63e9499c90e1d",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.darkness:cdf63e9499c90e1d",
+        "legacy_aon:spell.darkness:0e847b55d5422a79",
+        "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a",
+        "aon:patron.moon:15d234b1",
+        "aon:patron.shadow:15d234b1"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -305,6 +323,20 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.darkness:appears_on_spell_list:spell-list.moon-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.moon:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.moon:15d234b1"
+      ],
+      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
+    },
+    {
       "relationship_id": "spell.darkness:appears_on_spell_list:spell-list.occultist",
       "decision": "accept",
       "evidence": [
@@ -321,6 +353,25 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.darkness:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.darkness:cdf63e9499c90e1d",
+          "source_field": "spell_raw.levels_raw"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a",
+          "source_field": "spell_raw.links_raw[4]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.darkness:cdf63e9499c90e1d",
+        "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a"
+      ],
+      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
       "relationship_id": "spell.darkness:appears_on_spell_list:spell-list.oracle",
       "decision": "accept",
       "evidence": [
@@ -335,6 +386,20 @@
         "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.darkness:appears_on_spell_list:spell-list.shadow-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.shadow:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.shadow:15d234b1"
+      ],
+      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
     },
     {
       "relationship_id": "spell.darkness:appears_on_spell_list:spell-list.shaman",
@@ -513,20 +578,34 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.darkness:published_in:publication.pathfinder-rpg-mythic-adventures",
+      "relationship_id": "spell.darkness:references:spell.darkness",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a",
-          "source_field": "spell_raw.links_raw[17]"
+          "source_field": "spell_raw.links_raw[10]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a",
+          "source_field": "spell_raw.links_raw[13]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a",
+          "source_field": "spell_raw.links_raw[15]"
+        },
+        {
+          "observation_id": "aon:spell.darkness:cdf63e9499c90e1d",
+          "source_field": "spell_raw.description_raw"
         }
       ],
       "considered_observation_ids": [
         "aon:spell.darkness:cdf63e9499c90e1d",
         "legacy_aon:spell.darkness:0e847b55d5422a79",
-        "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a"
+        "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a",
+        "aon:patron.moon:15d234b1",
+        "aon:patron.shadow:15d234b1"
       ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+      "rationale": "Italicized same-name occurrences refer to the spell; unmarked occurrences retain their ordinary rules meaning."
     },
     {
       "relationship_id": "spell.darkness:uses_action:action.standard-action",
@@ -573,70 +652,6 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.darkness:uses_definition:rule.human",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a",
-          "source_field": "spell_raw.links_raw[14]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.darkness:cdf63e9499c90e1d",
-        "legacy_aon:spell.darkness:0e847b55d5422a79",
-        "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.darkness:uses_definition:rule.mythic-adventures-pg-90",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.darkness:cdf63e9499c90e1d",
-          "source_field": "spell_raw.links_raw[3]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.darkness:cdf63e9499c90e1d",
-        "legacy_aon:spell.darkness:0e847b55d5422a79",
-        "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.darkness:uses_definition:rule.see-in-darkness",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a",
-          "source_field": "spell_raw.links_raw[12]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.darkness:cdf63e9499c90e1d",
-        "legacy_aon:spell.darkness:0e847b55d5422a79",
-        "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.darkness:uses_definition:rule.source",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a",
-          "source_field": "spell_raw.links_raw[16]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.darkness:cdf63e9499c90e1d",
-        "legacy_aon:spell.darkness:0e847b55d5422a79",
-        "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.darkness:uses_definition:rule.spell-resistance",
       "decision": "accept",
       "evidence": [
@@ -655,53 +670,6 @@
         "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.darkness:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.darkness:cdf63e9499c90e1d",
-          "source_field": "spell_raw.levels_raw"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a",
-          "source_field": "spell_raw.links_raw[4]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.darkness:cdf63e9499c90e1d",
-        "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.darkness:appears_on_spell_list:spell-list.moon-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.moon:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.moon:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.darkness:appears_on_spell_list:spell-list.shadow-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.shadow:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.shadow:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
     }
   ],
   "unresolved_questions": [
