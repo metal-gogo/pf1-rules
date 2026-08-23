@@ -110,6 +110,53 @@
         "rule_scope": "third_party"
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.sorcerer",
+      "list_kind": "class",
+      "list_name": "sorcerer",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "Reviewed canonical override: Sorcerer 6; https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/abjuration/seer-s-bane.5ggd0hecvu0una9p.yaml.",
+      "access_basis": "reviewed_override",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.wizard",
+      "list_kind": "class",
+      "list_name": "wizard",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "Reviewed canonical override: Wizard 6; https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/abjuration/seer-s-bane.5ggd0hecvu0una9p.yaml.",
+      "access_basis": "reviewed_override",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.arcanist",
+      "list_kind": "class",
+      "list_name": "Arcanist",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "Derived access from sorcerer 6 and wizard 6; effective level 6.",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "class.arcanist",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.sorcerer",
+            "level": 6
+          },
+          {
+            "spell_list_id": "spell-list.wizard",
+            "level": 6
+          }
+        ],
+        "level_policy": "Use the Sorcerer/Wizard spell list; use the lower level if the source lists differ.",
+        "source_url": "https://legacy.aonprd.com/advancedClassGuide/classes/arcanist.html",
+        "note": "This is effective class access derived from the class rule, not a value printed on the spell page."
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -482,6 +529,73 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.seers-bane:appears_on_spell_list:spell-list.sorcerer",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer",
+        "name": "Sorcerer Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.seers-bane:7c82c54d14ecd9e2",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Pinned Foundry PF1 assertion: Sorcerer 6",
+          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/abjuration/seer-s-bane.5ggd0hecvu0una9p.yaml"
+        }
+      ],
+      "note": "Reviewed project decision: add Sorcerer 6 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
+    },
+    {
+      "relationship_id": "spell.seers-bane:appears_on_spell_list:spell-list.wizard",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.wizard",
+        "name": "Wizard Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.seers-bane:7c82c54d14ecd9e2",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Pinned Foundry PF1 assertion: Wizard 6",
+          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/abjuration/seer-s-bane.5ggd0hecvu0una9p.yaml"
+        }
+      ],
+      "note": "Reviewed project decision: add Wizard 6 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
+    },
+    {
+      "relationship_id": "spell.seers-bane:appears_on_spell_list:spell-list.arcanist",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.arcanist",
+        "name": "Arcanist Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.seers-bane:7c82c54d14ecd9e2",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Pinned Foundry PF1 assertion: Sorcerer 6",
+          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/abjuration/seer-s-bane.5ggd0hecvu0una9p.yaml"
+        },
+        {
+          "observation_id": "aon:spell.seers-bane:7c82c54d14ecd9e2",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Pinned Foundry PF1 assertion: Wizard 6",
+          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/abjuration/seer-s-bane.5ggd0hecvu0una9p.yaml"
+        }
+      ],
+      "note": "Use the Sorcerer/Wizard spell list; use the lower level if the source lists differ. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -542,6 +656,21 @@
         "code": "DERIVED_SPELL_LIST_ACCESS",
         "field_path": "/levels/4",
         "message": "Omdura 6 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "REVIEWED_FOUNDRY_MEMBERSHIP",
+        "field_path": "/levels/5",
+        "message": "Reviewed project decision: add Sorcerer 6 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
+      },
+      {
+        "code": "REVIEWED_FOUNDRY_MEMBERSHIP",
+        "field_path": "/levels/6",
+        "message": "Reviewed project decision: add Wizard 6 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
+      },
+      {
+        "code": "DERIVED_SPELL_LIST_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Arcanist 6 access is derived from an explicit class rule; no printed spell-page value was inferred."
       }
     ]
   }

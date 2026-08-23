@@ -26,6 +26,12 @@ now canonical; 25 competing levels retain AoN; 112 Foundry-only membership
 candidates remain pending review. The canonical spell count is now 3,030. See
 [Foundry spell catalog reconciliation](36-foundry-spell-catalog-reconciliation.md).
 
+Post-review update: all remaining Foundry membership and competing-level
+assertions are now resolved by explicit project decisions. The replayed pinned
+audit has zero missing memberships, zero competing levels, and zero unmapped
+identities. See
+[Reviewed Foundry membership resolution](39-reviewed-foundry-membership-resolution.md).
+
 ## Outcome
 
 [C] The validated local database now has **3,024 canonical spells**. The audit compared **21,602 captured AoN class/level memberships** across all 30 project class lists and spell levels 0 through 9 with the canonical `spell_levels` table. The database has 21,595 nonblank summary observations because Contact Nalfeshnee has seven memberships with blank catalog summaries; those seven memberships are still validated and canonical.

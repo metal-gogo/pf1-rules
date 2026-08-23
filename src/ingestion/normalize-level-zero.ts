@@ -406,6 +406,12 @@ const reviewedRangeOverrides = new Map<string, ReviewedRangeOverride>([
     evidenceField: "spell_raw.delivery_fields_raw",
     rationale: "Reviewed project decision: the printed Range field is blank and the printed Area is a 40-ft.-radius burst centered on you. Use personal as the canonical range while preserving the missing source value.",
   }],
+  ["spell.torrent-of-elemental-rage", {
+    category: "distance",
+    formula: "persistent line of elements 30 ft. long",
+    evidenceField: "spell_raw.delivery_fields_raw",
+    rationale: "Reviewed project decision: the printed Range field is blank and the printed Effect is a persistent line of elements 30 ft. long. Copy the Effect text into the canonical range formula while preserving the missing printed Range as a null raw value.",
+  }],
 ]);
 
 

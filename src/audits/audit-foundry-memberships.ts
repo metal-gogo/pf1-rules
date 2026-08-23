@@ -106,6 +106,10 @@ export function auditFoundryMemberships(foundryRoot: string) {
     const record = JSON.parse(fs.readFileSync(filename, "utf8")) as ValidatedJson;
     return [record.spell_id, record] as const;
   }));
+  const decisions = new Map(directJsonFiles(path.join(projectRoot, "data", "decisions")).map((filename) => {
+    const decision = JSON.parse(fs.readFileSync(filename, "utf8")) as ValidatedJson;
+    return [decision.entity_id, decision] as const;
+  }));
   const unmapped: Array<{ name: string; filename: string }> = [];
   const missing: ValidatedJson[] = [];
   const competing: ValidatedJson[] = [];
@@ -129,6 +133,18 @@ export function auditFoundryMemberships(foundryRoot: string) {
       if (record.levels.some((item: ValidatedJson) =>
         item.spell_list_id === listId && item.level === level,
       )) continue;
+      const relationshipId = `${record.spell_id}:appears_on_spell_list:${listId}`;
+      if (decisions.get(record.spell_id)?.relationship_decisions.some(
+        (item: ValidatedJson) => item.relationship_id === relationshipId && item.decision === "reject",
+      )) continue;
+      const reviewedLowerLevel = record.levels.some((item: ValidatedJson, index: number) =>
+        item.spell_list_id === listId &&
+        item.level < level &&
+        record.normalization.warnings.some((warning: ValidatedJson) =>
+          warning.code === "REVIEWED_LOWER_SPELL_LEVEL" && warning.field_path === `/levels/${index}`,
+        ),
+      );
+      if (reviewedLowerLevel) continue;
       const item = {
         spell_id: record.spell_id,
         spell_name: record.name,

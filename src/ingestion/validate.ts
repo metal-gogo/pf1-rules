@@ -459,7 +459,17 @@ export function validatePackage(): PackageStatistics {
             level.spell_list_id === membership.spell_list_id &&
             level.level === membership.level,
         );
-        if (!matches) {
+        const reviewedLowerOverride = canonical.levels.some(
+          (level: ValidatedJson, index: number) =>
+            level.spell_list_id === membership.spell_list_id &&
+            level.level < membership.level &&
+            level.access_basis === "reviewed_override" &&
+            canonical.normalization.warnings.some((warning: ValidatedJson) =>
+              warning.code === "REVIEWED_LOWER_SPELL_LEVEL" &&
+              warning.field_path === `/levels/${index}`,
+            ),
+        );
+        if (!matches && !reviewedLowerOverride) {
           throw new Error(
             `${spell.spell_id} is missing catalog membership ` +
               `${membership.spell_list_id} ${membership.level}`,

@@ -21,18 +21,18 @@ Derived access is labeled `access_basis: derived`. It does not replace or masque
 | Adept | 76 | Owned by an explicit NPC-class entity. |
 | Cleric | 1,139 | Printed memberships plus 6 reviewed Oracle-to-Cleric overrides. |
 | Inquisitor | 656 | Printed memberships. |
-| Omdura | 1,238 | Derived from its Cleric/Inquisitor rule. |
+| Omdura | 1,242 | Derived from its Cleric/Inquisitor rule. |
 | Oracle | 1,141 | General Cleric-derived access plus explicit Oracle rows; mystery access is separate. |
-| Sorcerer | 1,897 | Printed memberships plus 10 reviewed Wizard-to-Sorcerer overrides. |
-| Wizard | 1,897 | Printed memberships. |
-| Arcanist | 1,897 | Effective Sorcerer/Wizard access, with derived rows labeled. |
+| Sorcerer | 1,899 | Printed memberships plus 12 reviewed overrides. |
+| Wizard | 1,899 | Printed memberships plus 2 reviewed Foundry overrides. |
+| Arcanist | 1,899 | Effective Sorcerer/Wizard access, with derived rows labeled. |
 | Alchemist | 408 | Printed formula-list memberships. |
 | Investigator | 409 | Effective Alchemist access plus explicit Investigator rows. |
 | Bard | 868 | Printed memberships. |
-| Skald | 869 | Effective Bard access plus explicit Skald rows. |
-| Warpriest | 988 | Effective Cleric access through level 6 plus explicit Warpriest rows. |
+| Skald | 870 | Effective Bard access plus explicit and reviewed Skald rows. |
+| Warpriest | 993 | Effective Cleric access through level 6 plus explicit Warpriest rows. |
 | Hunter | 817 | Effective Druid/Ranger access through level 6. |
-| Summoner (Unchained) | 370 | Includes seven narrowly derived *Monster Summoner's Handbook* options. |
+| Summoner (Unchained) | 371 | Includes seven narrowly derived *Monster Summoner's Handbook* options and one reviewed override. |
 
 ## Owner catalogs completed
 
@@ -47,12 +47,12 @@ Derived access is labeled `access_basis: derived`. It does not replace or masque
 
 ## Source-backed inherited access completed
 
-- Omdura: 1,238 derived rows.
+- Omdura: 1,242 derived rows.
 - Oracle: 12 derived rows were added during the class-rule reconciliation; owner ingestion then separated mystery-only access from the general class list.
-- Arcanist: 5 derived rows.
+- Arcanist: 7 derived rows.
 - Investigator: 7 derived rows.
 - Skald: 19 derived rows.
-- Warpriest: 6 derived rows.
+- Warpriest: 11 derived rows.
 - Hunter: 7 derived rows.
 - Summoner (Unchained): 7 *Monster Summoner's Handbook* rows derived from Paizo's explicit compatibility statement.
 
@@ -61,6 +61,11 @@ Derived access is labeled `access_basis: derived`. It does not replace or masque
 [C] Ten Wizard-only identities were added to Sorcerer at the Wizard level by explicit project decision. Six Oracle-only identities were added to Cleric at the Oracle level. These 16 rows use `access_basis: reviewed_override`; they are not labeled as printed or derived values.
 
 [C] Oracle's Burden 2 and Oracle's Vessel 4 remain Oracle-only. Their rejected Cleric candidate relationships are recorded in the canonical decision files.
+
+[C] The 2026-08-23 Foundry review added two more Sorcerer overrides, two
+Wizard overrides, and their two derived Arcanist rows. Reviewed Cleric
+overrides now also flow through the existing Omdura and Warpriest class rules;
+those consequences remain labeled `derived`.
 
 ## Safety invariants
 

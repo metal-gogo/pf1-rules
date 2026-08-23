@@ -38,6 +38,9 @@
 - [`markdown.new` normalization evaluation](../findings/28-markdown-new-evaluation.md)
 - [Native Markdown read model for LLM use](../findings/29-native-markdown-read-model.md)
 - [Spell inheritance rollout](../findings/30-spell-inheritance-rollout.md)
+- [Spell catalog completeness audit](../findings/31-spell-catalog-completeness-audit.md)
+- [Foundry-only membership evaluation](../findings/38-foundry-only-membership-evaluation.md)
+- [Reviewed Foundry membership resolution](../findings/39-reviewed-foundry-membership-resolution.md)
 
 Browse the complete [findings directory](../findings/) for the chronological
 decision record.

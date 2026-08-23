@@ -4,7 +4,7 @@ Audit date: 2026-08-21 (America/Mexico_City)
 
 Foundry PF1 snapshot: [`1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f`](https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/commit/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f)
 
-> Historical snapshot: the 112-row backlog below records the state before class-rule, owner-list, handbook compatibility, and reviewed-override reconciliation. The current result is [63 missing memberships and 24 competing-level claims](./38-foundry-only-membership-evaluation.md).
+> Historical snapshot: the 112-row backlog below records the state before class-rule, owner-list, handbook compatibility, and reviewed-override reconciliation. The current result is [zero missing memberships and zero competing-level claims](./39-reviewed-foundry-membership-resolution.md).
 
 ## Outcome
 

@@ -53,6 +53,52 @@
       "raw": "Reviewed canonical override: cleric 5; source membership oracle 5.",
       "access_basis": "reviewed_override",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.omdura",
+      "list_kind": "class",
+      "list_name": "Omdura",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "Derived access from cleric 5; effective level 5.",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "class.omdura",
+        "rule_scope": "third_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.cleric",
+            "level": 5
+          }
+        ],
+        "level_policy": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell.",
+        "source_url": "https://www.d20pfsrd.com/classes/base-classes/omdura/",
+        "note": "This is effective class access derived from the class rule, not a value printed on the spell page."
+      },
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.warpriest",
+      "list_kind": "class",
+      "list_name": "Warpriest",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "Derived access from cleric 5; effective level 5.",
+      "access_basis": "derived",
+      "derivation": {
+        "rule_owner_entity_id": "class.warpriest",
+        "rule_scope": "later_first_party",
+        "source_memberships": [
+          {
+            "spell_list_id": "spell-list.cleric",
+            "level": 5
+          }
+        ],
+        "level_policy": "Use Cleric spells through level 6 at the same spell level; retain separately printed Warpriest spells.",
+        "source_url": "https://legacy.aonprd.com/advancedClassGuide/classes/warpriest.html",
+        "note": "This is effective class access derived from the class rule, not a value printed on the spell page."
+      },
+      "qualifications": []
     }
   ],
   "casting": {
@@ -647,6 +693,60 @@
         }
       ],
       "note": "Reviewed project decision: add cleric 5 access to match the preserved oracle 5 membership. This is a canonical override, not a printed or derived value."
+    },
+    {
+      "relationship_id": "spell.jungle-mind:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.jungle-mind:544f3682f03dce24",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "oracle",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/oracle"
+        },
+        {
+          "observation_id": "aon:spell.jungle-mind:4eec54f1567b961d",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "oracle 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.jungle-mind:appears_on_spell_list:spell-list.warpriest",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.warpriest",
+        "name": "Warpriest Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.jungle-mind:544f3682f03dce24",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "oracle",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/oracle"
+        },
+        {
+          "observation_id": "aon:spell.jungle-mind:4eec54f1567b961d",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "oracle 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 at the same spell level; retain separately printed Warpriest spells. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -717,6 +817,16 @@
         "code": "REVIEWED_SPELL_LIST_OVERRIDE",
         "field_path": "/levels/4",
         "message": "Reviewed project decision: add cleric 5 access to match the preserved oracle 5 membership. This is a canonical override, not a printed or derived value."
+      },
+      {
+        "code": "DERIVED_SPELL_LIST_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Omdura 5 access is derived from an explicit class rule; no printed spell-page value was inferred."
+      },
+      {
+        "code": "DERIVED_SPELL_LIST_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Warpriest 5 access is derived from an explicit class rule; no printed spell-page value was inferred."
       }
     ]
   }

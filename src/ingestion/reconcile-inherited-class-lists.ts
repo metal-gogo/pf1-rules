@@ -340,12 +340,45 @@ export function reconcileInheritedClassLists() {
         ) {
           const sourceLevel = Math.min(...sources.map((source) => Number(source.level)));
           const sourceScope = sources.find((source) => source.level === sourceLevel)?.scope ?? "unknown";
+          const sourceMemberships = sources
+            .map((source) => ({ spell_list_id: source.spell_list_id, level: source.level }))
+            .filter((source, index, all) => all.findIndex((candidate) =>
+              candidate.spell_list_id === source.spell_list_id && candidate.level === source.level,
+            ) === index)
+            .sort((left, right) =>
+              left.level - right.level || left.spell_list_id.localeCompare(right.spell_list_id)
+            );
+          const sourceLabel = sourceMemberships
+            .map((source) => `${source.spell_list_id.replace("spell-list.", "")} ${source.level}`)
+            .join(" and ");
+          if (existingTarget.level !== sourceLevel) {
+            existingTarget.level = sourceLevel;
+            changed = true;
+          }
           if (existingTarget.scope !== sourceScope) {
             existingTarget.scope = sourceScope;
             changed = true;
           }
+          const raw = `Derived access from ${sourceLabel}; effective level ${sourceLevel}.`;
+          if (existingTarget.raw !== raw) {
+            existingTarget.raw = raw;
+            changed = true;
+          }
+          if (JSON.stringify(existingTarget.derivation.source_memberships) !== JSON.stringify(sourceMemberships)) {
+            existingTarget.derivation.source_memberships = sourceMemberships;
+            changed = true;
+          }
           if (existingTarget.derivation.rule_scope !== spec.ruleScope) {
             existingTarget.derivation.rule_scope = spec.ruleScope;
+            changed = true;
+          }
+          const levelIndex = record.levels.indexOf(existingTarget);
+          const warning = record.normalization.warnings.find((item: ValidatedJson) =>
+            item.code === "DERIVED_SPELL_LIST_ACCESS" && item.field_path === `/levels/${levelIndex}`,
+          );
+          const message = `${spec.targetListName} ${sourceLevel} access is derived from an explicit class rule; no printed spell-page value was inferred.`;
+          if (warning && warning.message !== message) {
+            warning.message = message;
             changed = true;
           }
         }

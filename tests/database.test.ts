@@ -49,14 +49,14 @@ describe("ingested spell catalog", () => {
 
   it("keeps inherited class access distinct from printed spell-page values", async () => {
     const expectedDerivedCounts = {
-      "spell-list.arcanist": 5,
+      "spell-list.arcanist": 7,
       "spell-list.hunter": 7,
       "spell-list.investigator": 7,
-      "spell-list.omdura": 1238,
+      "spell-list.omdura": 1242,
       "spell-list.oracle": 12,
       "spell-list.skald": 19,
       "spell-list.summoner-unchained": 7,
-      "spell-list.warpriest": 6,
+      "spell-list.warpriest": 11,
     } as const;
 
     for (const [spellListId, count] of Object.entries(expectedDerivedCounts)) {
@@ -72,7 +72,7 @@ describe("ingested spell catalog", () => {
       orderBy: { spellLevel: "asc" },
     });
     expect(Object.fromEntries(omduraLevels.map((row) => [row.spellLevel, row._count._all])))
-      .toEqual({ 0: 26, 1: 212, 2: 283, 3: 257, 4: 211, 5: 132, 6: 117 });
+      .toEqual({ 0: 26, 1: 213, 2: 283, 3: 258, 4: 212, 5: 134, 6: 116 });
 
     const light = await prisma.spellLevel.findFirst({
       where: { spellId: "spell.light", spellListId: "spell-list.omdura" },
@@ -112,18 +112,18 @@ describe("ingested spell catalog", () => {
     })).toEqual(expect.objectContaining({ spellLevel: 2, accessBasis: "printed" }));
 
     const explicitExceptions = [
-      ["spell.waters-of-lamashtu", "spell-list.investigator", 3],
-      ["spell.alpha-instinct", "spell-list.skald", 2],
-      ["spell.mad-sultans-melody", "spell-list.skald", 4],
-      ["spell.curse-of-the-outcast", "spell-list.skald", 5],
+      ["spell.waters-of-lamashtu", "spell-list.investigator", 2, "reviewed_override"],
+      ["spell.alpha-instinct", "spell-list.skald", 2, "printed"],
+      ["spell.mad-sultans-melody", "spell-list.skald", 3, "reviewed_override"],
+      ["spell.curse-of-the-outcast", "spell-list.skald", 4, "reviewed_override"],
     ] as const;
-    for (const [spellId, spellListId, spellLevel] of explicitExceptions) {
+    for (const [spellId, spellListId, spellLevel, accessBasis] of explicitExceptions) {
       expect(await prisma.spellLevel.findFirst({ where: { spellId, spellListId } }))
-        .toEqual(expect.objectContaining({ spellLevel, accessBasis: "printed" }));
+        .toEqual(expect.objectContaining({ spellLevel, accessBasis }));
     }
     expect(await prisma.spellLevel.findFirst({
       where: { spellId: "spell.besmaras-grasping-depths", spellListId: "spell-list.warpriest" },
-    })).toEqual(expect.objectContaining({ spellLevel: 6, accessBasis: "derived" }));
+    })).toEqual(expect.objectContaining({ spellLevel: 5, accessBasis: "derived" }));
   });
 
   it("preserves reviewed class-list overrides and explicit exclusions", async () => {
@@ -146,13 +146,16 @@ describe("ingested spell catalog", () => {
       { spellId: "spell.firewalkers-meditation", spellLevel: 4 },
       { spellId: "spell.mages-lucubration", spellLevel: 6 },
       { spellId: "spell.mnemonic-enhancer", spellLevel: 4 },
+      { spellId: "spell.petulengros-validation", spellLevel: 1 },
       { spellId: "spell.rite-of-centered-mind", spellLevel: 1 },
+      { spellId: "spell.seers-bane", spellLevel: 6 },
       { spellId: "spell.spirit-bonds", spellLevel: 3 },
       { spellId: "spell.temporal-regression", spellLevel: 8 },
       { spellId: "spell.visualization-of-the-body", spellLevel: 2 },
       { spellId: "spell.visualization-of-the-mind", spellLevel: 2 },
     ]);
     expect(clericOverrides).toEqual([
+      { spellId: "spell.besmaras-grasping-depths", spellLevel: 5 },
       { spellId: "spell.borrow-fortune", spellLevel: 3 },
       { spellId: "spell.divine-vessel", spellLevel: 8 },
       { spellId: "spell.embrace-destiny", spellLevel: 1 },
@@ -302,6 +305,7 @@ describe("ingested spell catalog", () => {
       ["spell.massacre", "distance", "60-ft. line", "spell_raw.delivery_fields_raw"],
       ["spell.stone-throwing", "touch", null, "spell_raw.delivery_fields_raw"],
       ["spell.telekinetic-storm", "personal", null, "spell_raw.delivery_fields_raw"],
+      ["spell.torrent-of-elemental-rage", "distance", "persistent line of elements 30 ft. long", "spell_raw.delivery_fields_raw"],
     ] as const;
 
     for (const [spellId, rangeCategory, rangeFormula, sourceField] of expectations) {
@@ -337,6 +341,54 @@ describe("ingested spell catalog", () => {
         note: expect.stringContaining("Reviewed project decision"),
       }));
     }
+  });
+
+  it("applies reviewed Foundry membership and lower-level decisions", async () => {
+    const memberships = await prisma.spellLevel.findMany({
+      where: {
+        spellId: {
+          in: [
+            "spell.animus-mine",
+            "spell.besmaras-grasping-depths",
+            "spell.hostile-juxtaposition-greater",
+            "spell.petulengros-validation",
+            "spell.seers-bane",
+          ],
+        },
+      },
+    });
+    const level = (spellId: string, spellListId: string) => memberships.find(
+      (item) => item.spellId === spellId && item.spellListId === spellListId,
+    );
+
+    expect(level("spell.petulengros-validation", "spell-list.sorcerer"))
+      .toEqual(expect.objectContaining({ spellLevel: 1, accessBasis: "reviewed_override" }));
+    expect(level("spell.petulengros-validation", "spell-list.wizard"))
+      .toEqual(expect.objectContaining({ spellLevel: 1, accessBasis: "reviewed_override" }));
+    expect(level("spell.petulengros-validation", "spell-list.arcanist"))
+      .toEqual(expect.objectContaining({ spellLevel: 1, accessBasis: "derived" }));
+    expect(level("spell.seers-bane", "spell-list.arcanist"))
+      .toEqual(expect.objectContaining({ spellLevel: 6, accessBasis: "derived" }));
+    expect(level("spell.hostile-juxtaposition-greater", "spell-list.summoner-unchained"))
+      .toEqual(expect.objectContaining({ spellLevel: 6, accessBasis: "reviewed_override" }));
+    expect(level("spell.hostile-juxtaposition-greater", "spell-list.mesmerist"))
+      .toEqual(expect.objectContaining({ spellLevel: 4, accessBasis: "reviewed_override" }));
+    expect(level("spell.besmaras-grasping-depths", "spell-list.cleric"))
+      .toEqual(expect.objectContaining({ spellLevel: 5, accessBasis: "reviewed_override" }));
+    expect(level("spell.besmaras-grasping-depths", "spell-list.warpriest"))
+      .toEqual(expect.objectContaining({ spellLevel: 5, accessBasis: "derived" }));
+    expect(level("spell.animus-mine", "spell-list.psychic"))
+      .toEqual(expect.objectContaining({ spellLevel: 2, accessBasis: "printed" }));
+
+    expect(await prisma.spellLevel.count({
+      where: { spellId: "spell.banishing-blade", spellListId: "spell-list.summoner-unchained" },
+    })).toBe(0);
+    expect(await prisma.decisionRelationshipItem.findFirst({
+      where: {
+        decisionId: "canonical-decision:spell.banishing-blade:v0.1",
+        relationshipId: "spell.banishing-blade:appears_on_spell_list:spell-list.summoner-unchained",
+      },
+    })).toEqual(expect.objectContaining({ decision: "reject" }));
   });
 
   it("adds reviewed secondary-catalog class memberships with explicit provenance", async () => {
@@ -385,19 +437,19 @@ describe("ingested spell catalog", () => {
     }
   });
 
-  it("keeps reviewed AoN levels instead of adding conflicting catalog levels", async () => {
+  it("keeps one reviewed lower level instead of duplicate conflicting levels", async () => {
     const expectedLevels = [
       ["spell.alpha-instinct", "spell-list.mesmerist", [2]],
       ["spell.horrific-doubles", "spell-list.mesmerist", [3]],
       ["spell.horrific-doubles", "spell-list.psychic", [3]],
       ["spell.improve-trap", "spell-list.inquisitor", [3]],
-      ["spell.positive-pulse-greater", "spell-list.paladin", [4]],
-      ["spell.positive-pulse-greater", "spell-list.summoner", [4]],
+      ["spell.positive-pulse-greater", "spell-list.paladin", [3]],
+      ["spell.positive-pulse-greater", "spell-list.summoner", [3]],
       ["spell.soothing-word", "spell-list.ranger", [2]],
       ["spell.vinetrap", "spell-list.cleric", [8]],
       ["spell.vinetrap", "spell-list.druid", [8]],
       ["spell.vinetrap", "spell-list.oracle", [8]],
-      ["spell.wither-limb", "spell-list.spiritualist", [6]],
+      ["spell.wither-limb", "spell-list.spiritualist", [5]],
     ] as const;
 
     for (const [spellId, spellListId, spellLevels] of expectedLevels) {

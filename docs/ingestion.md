@@ -30,6 +30,8 @@ pnpm ingest:level-9:all
 pnpm ingest:retry-normalization
 pnpm ingest:retry-source-issues
 pnpm ingest:retry-reviewed-overrides
+pnpm ingest:reviewed-list-overrides
+pnpm ingest:reconcile-inherited-lists
 pnpm ingest:legacy-3.5
 pnpm ingest:dependencies
 pnpm ingest:linked-entities
@@ -55,7 +57,9 @@ while retaining any source issue that the cached evidence cannot resolve.
 `pnpm ingest:retry-reviewed-overrides` replays only records with an explicit
 reviewed canonical override. The canonical value, missing raw source value,
 supporting source field, and manual-resolution rationale remain separate in the
-generated provenance and decision records.
+generated provenance and decision records. Run `pnpm ingest:reviewed-list-overrides`
+and `pnpm ingest:reconcile-inherited-lists` afterward so reviewed membership
+decisions and their class-rule consequences are reapplied to regenerated records.
 
 `pnpm ingest:legacy-3.5` ingests the explicitly enabled first-party legacy 3.5
 scope from AoN catalog evidence. Generated records set
@@ -88,5 +92,6 @@ The command is idempotent; a completed run reports no pending dependencies.
 - [Entry-link inventory](../findings/03-all-entry-links.md)
 - [Area rules and visual aids](../findings/05-area-rules-and-visual-aids.md)
 - [Spell variant entities](../findings/08-spell-variant-entities.md)
+- [Reviewed Foundry membership resolution](../findings/39-reviewed-foundry-membership-resolution.md)
 
 Return to the [project index](index.md).
