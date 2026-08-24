@@ -4,6 +4,9 @@ Source capture must be explicit, rate-limited, and reproducible. Raw snapshots
 are immutable, so parsing can be repeated locally without downloading a page
 again. Conflicting values remain visible for review.
 
+For the proposed feat workflow, pilot scope, and taxonomy decisions, see the
+[feat ingestion plan](feat-ingestion-plan.md).
+
 ## Commands
 
 ```bash
@@ -98,6 +101,7 @@ descriptors live under `/rules/descriptors`; illumination levels live under
 entity pages until a reviewed grouped reference is introduced.
 
 - [Ingestion implementation](../src/ingestion/)
+- [Feat ingestion plan](feat-ingestion-plan.md)
 - [Level-0 ingestion queue](../findings/17-level-zero-ingestion-queue.md)
 - [Level-0 bulk ingestion result](../findings/18-level-zero-bulk-ingestion.md)
 - [Level-1 bulk ingestion result](../findings/19-level-one-bulk-ingestion.md)
