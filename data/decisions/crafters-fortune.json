@@ -123,6 +123,23 @@
         "aon:subdomain.industry:494f5640"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.crafters-fortune:fff73859fd9434bc",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.crafters-fortune:fff73859fd9434bc",
+        "legacy_aon:spell.crafters-fortune:9430e7e95555208a",
+        "d20pfsrd:spell.crafters-fortune:ee635b985e1ca4c3",
+        "aon:subdomain.industry:494f5640"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -161,6 +178,40 @@
         "d20pfsrd:spell.crafters-fortune:ee635b985e1ca4c3"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.crafters-fortune:appears_on_spell_list:spell-list.artifice-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.crafters-fortune:ee635b985e1ca4c3",
+          "source_field": "spell_raw.links_raw[3]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.crafters-fortune:fff73859fd9434bc",
+        "legacy_aon:spell.crafters-fortune:9430e7e95555208a",
+        "d20pfsrd:spell.crafters-fortune:ee635b985e1ca4c3"
+      ],
+      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.crafters-fortune:appears_on_spell_list:spell-list.industry-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.industry:494f5640",
+          "source_field": "entity_raw.sections_raw[0]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.crafters-fortune:ee635b985e1ca4c3",
+          "source_field": "spell_raw.links_raw[4]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.industry:494f5640"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.crafters-fortune:appears_on_spell_list:spell-list.investigator",
@@ -327,22 +378,6 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.crafters-fortune:uses_definition:rule.artifice",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.crafters-fortune:ee635b985e1ca4c3",
-          "source_field": "spell_raw.links_raw[3]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.crafters-fortune:fff73859fd9434bc",
-        "legacy_aon:spell.crafters-fortune:9430e7e95555208a",
-        "d20pfsrd:spell.crafters-fortune:ee635b985e1ca4c3"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.crafters-fortune:uses_definition:rule.craft",
       "decision": "accept",
       "evidence": [
@@ -353,22 +388,6 @@
         {
           "observation_id": "d20pfsrd:spell.crafters-fortune:ee635b985e1ca4c3",
           "source_field": "spell_raw.links_raw[8]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.crafters-fortune:fff73859fd9434bc",
-        "legacy_aon:spell.crafters-fortune:9430e7e95555208a",
-        "d20pfsrd:spell.crafters-fortune:ee635b985e1ca4c3"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.crafters-fortune:uses_definition:rule.industry",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.crafters-fortune:ee635b985e1ca4c3",
-          "source_field": "spell_raw.links_raw[4]"
         }
       ],
       "considered_observation_ids": [
@@ -411,7 +430,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.crafters-fortune:uses_definition:rule.will",
+      "relationship_id": "spell.crafters-fortune:uses_definition:rule.will-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -425,20 +444,6 @@
         "d20pfsrd:spell.crafters-fortune:ee635b985e1ca4c3"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.crafters-fortune:appears_on_spell_list:spell-list.industry-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.industry:494f5640",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.industry:494f5640"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

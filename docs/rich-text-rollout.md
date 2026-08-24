@@ -12,8 +12,8 @@ Audit date: 2026-08-23.
 | Category | Spells | Meaning |
 | --- | ---: | --- |
 | Total canonical spells | 3,030 | Complete corpus |
-| Rich text stored | 437 | 11-spell pilot, seventeen reviewed 25-spell rollout batches, and one reviewed warning record |
-| Safe candidates with links | 1,820 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
+| Rich text stored | 462 | 11-spell pilot, eighteen reviewed 25-spell rollout batches, and one reviewed warning record |
+| Safe candidates with links | 1,795 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
 | Safe structure-only candidates | 310 | Source text matches, but no known relationship currently produces an inline link |
 | Source mismatch | 291 | Current canonical text and the newly bounded AoN description differ |
 | Link warnings | 172 | At least one accepted relationship is ambiguous or unmatched |
@@ -487,6 +487,48 @@ Semantic review rejected Cloak of Chaos title navigation to the Chaos domain,
 Corrosive Consumption's ordinary `touch` delivery prose as a touch attack, and
 Counterbalancing Aura's alignment `components` as spell components.
 
+### Batch 18
+
+The eighteenth rollout batch contains:
+
+- Crafter's Curse; Crafter's Fortune; Create Armaments; Create Demiplane,
+  Greater; Create Greater Undead; Create Mindscape and its Greater variant.
+- Create Pit; Create Soul Gem; Create Treasure Map; Create Variant Mummy;
+  Creeping Doom; Creeping Ice; Crime of Opportunity; Crime Wave.
+- Crimson Breath; Crimson Confession; Crown of Glory; Cruel Jaunt; Crushing
+  Despair; Crushing Hand; Cultural Adaptation; Curative Distillation; Mass Cure
+  Critical Wounds; Mass Cure Light Wounds.
+
+Review of this batch established these normalization rules:
+
+- Secondary-source links to a domain, subdomain, mystery, elemental school, or
+  class spell list are spell-list membership, not description definitions.
+  Batch 18 corrects Artifice, Industry, Medium, Caves, Earth, Juju, Jungle,
+  Nature, Scalykind, Isolation, and Community relationships accordingly.
+- Creature links resolve to monster entities for shadows, wraiths, spectres,
+  devourers, centipede swarms, and the three variant mummies. Create Greater
+  Undead also links the Undead type and caster-level rule.
+- Crime of Opportunity's entire effect is expressed through Crime Wave, so the
+  direct relationship is `functions_like` and expands Crime Wave once. Greater
+  Create Mindscape links only the first parent reference; its later reordered
+  title remains plain. Mass Cure Light Wounds likewise does not link its own
+  title fragment back to Cure Light Wounds.
+- Reviewed missing links cover Creeping Doom's swarm rules and action; Creeping
+  Ice's difficult terrain and bull rush; Crime Wave's teamwork feats and saving
+  throw; Crown of Glory's enhancement bonus and Hit Dice; Cruel Jaunt's Sense
+  Fear, fear, and carrying-capacity references; Crushing Despair's checks and
+  rolls; and Mass Cure Light Wounds' positive energy and Undead rules.
+
+Semantic review rejected Create Demiplane, Greater's unrelated Solitude
+navigation, Create Soul Gem's self-link and false Expend, Judgment, and Unholy
+targets, Creeping Ice's ordinary adjective `slow` as the Slow spell, Cruel
+Jaunt's own teleportation effect as the Teleport spell, and Crushing Despair's
+unrelated third-party modified-spell link.
+
+Create Greater Undead and Crime Wave contain source tables. Their text remains
+lossless, but row and cell semantics are flattened under the current `0.2.0`
+AST. Links were not added across concatenated cell boundaries.
+
 ## Open questions and issues
 
 ### Source boundaries
@@ -535,11 +577,11 @@ the intended target.
 ### Source tables
 
 The current AST supports paragraphs and unordered lists, not tables. Calculated
-Luck, Call Spirit, and Contact Other Plane demonstrate that flattening cells
-preserves words but not their relationships. Decide whether `0.3.0` should add
-semantic table nodes or whether the canonical normalizer should convert source
-tables to another accessible structure. Do not add phrase links across
-concatenated cells.
+Luck, Call Spirit, Contact Other Plane, Create Greater Undead, and Crime Wave
+demonstrate that flattening cells preserves words but not their relationships.
+Decide whether `0.3.0` should add semantic table nodes or whether the canonical
+normalizer should convert source tables to another accessible structure. Do not
+add phrase links across concatenated cells.
 
 ## Batch workflow
 

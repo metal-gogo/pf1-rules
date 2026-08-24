@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.crime-of-opportunity",
   "ruleset": "Pathfinder First Edition",
   "name": "Crime of Opportunity",
@@ -121,7 +121,33 @@
   "description": {
     "raw": "You awaken a sudden criminal impulse in the target, compelling it to commit a criminal act as if affected by the crime wave spell.",
     "search_text": "\"you awaken a sudden criminal impulse in the target, compelling it to commit a criminal act as if affected by the crime wave spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You awaken a sudden criminal impulse in the target, compelling it to commit a criminal act as if affected by the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "crime wave",
+              "relationship_id": "spell.crime-of-opportunity:functions_like:spell.crime-wave",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -131,7 +157,136 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.crime-wave",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.crime-of-opportunity:1650b36f47aa6052",
+        "source_field": "spell_raw.description_raw",
+        "raw": "You awaken a sudden criminal impulse in the target, compelling it to commit a criminal act as if affected by the crime wave spell."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "material",
+              "details": "a silt purse",
+              "cost_gp": null,
+              "raw": "M (a silt purse)"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (a silt purse)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, M (a silt purse)",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (a silt purse)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/range",
+          "value": {
+            "category": "close",
+            "formula": "close (25 ft. + 5 ft./2 levels)",
+            "raw": "close (25 ft. + 5 ft./2 levels)"
+          },
+          "source_field": "spell_raw.range_raw",
+          "raw": "close (25 ft. + 5 ft./2 levels)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "one creature",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one creature\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "single",
+            "subject_kind": "creature",
+            "selection": "selected",
+            "count": {
+              "kind": "fixed",
+              "fixed": 1,
+              "formula": null,
+              "raw": "one creature"
+            },
+            "separation": null,
+            "raw": "one creature"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one creature\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "timed",
+            "formula": "1 round",
+            "dismissible": null,
+            "concentration": null,
+            "raw": "1 round"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "1 round",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "You awaken a sudden criminal impulse in the target, compelling it to commit a criminal act as if affected by the crime wave spell.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "You awaken a sudden criminal impulse in the target, compelling it to commit a criminal act as if affected by the crime wave spell.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.crime-of-opportunity:appears_on_spell_list:spell-list.antipaladin",
@@ -183,6 +338,26 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "mesmerist 1",
           "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.crime-of-opportunity:functions_like:spell.crime-wave",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.crime-wave",
+        "name": "Crime Wave"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.crime-of-opportunity:4e9acfb8ad767de4",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "crime wave",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/crime-wave"
         }
       ],
       "note": null
@@ -317,26 +492,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.crime-of-opportunity:references:spell.crime-wave",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.crime-wave",
-        "name": "crime wave"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.crime-of-opportunity:4e9acfb8ad767de4",
-          "source_field": "spell_raw.links_raw[7]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "crime wave",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/crime-wave"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.crime-of-opportunity:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -384,11 +539,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.crime-of-opportunity:uses_definition:rule.will",
+      "relationship_id": "spell.crime-of-opportunity:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -452,11 +607,19 @@
       "raw_value_sha256": "1c49cce5c718f5b3e8c9a3273ca894eeb605cc679efca2f5ca31e7e056fe4cbb",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.crime-of-opportunity:1650b36f47aa6052",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "1416fa9dbefc2c4b6333580ee717e21a86ab7061d9a451d7e9239b2d13c903f7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

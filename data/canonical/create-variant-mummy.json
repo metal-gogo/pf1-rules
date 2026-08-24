@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.create-variant-mummy",
   "ruleset": "Pathfinder First Edition",
   "name": "Create Variant Mummy",
@@ -145,7 +145,71 @@
   "description": {
     "raw": "This spell functions as create undead (Pathfinder RPG Core Rulebook 262), except it creates one of the following variant mummies: bog mummy, ice mummy, or Osirian tomb guardian.",
     "search_text": "\"this spell functions as create undead (pathfinder rpg core rulebook 262), except it creates one of the following variant mummies: bog mummy, ice mummy, or osirian tomb guardian.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "create undead",
+              "relationship_id": "spell.create-variant-mummy:functions_like:spell.create-undead",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " ("
+            },
+            {
+              "node_type": "text",
+              "value": "Pathfinder RPG Core Rulebook",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " 262), except it creates one of the following variant mummies: "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bog mummy",
+              "relationship_id": "spell.create-variant-mummy:uses_definition:monster.bog-mummy"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "ice mummy",
+              "relationship_id": "spell.create-variant-mummy:uses_definition:monster.ice-mummy"
+            },
+            {
+              "node_type": "text",
+              "value": ", or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Osirian tomb guardian",
+              "relationship_id": "spell.create-variant-mummy:uses_definition:monster.tomb-guardian-mummy"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -155,7 +219,112 @@
     "pfs_status": "not_legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.create-undead",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.create-variant-mummy:8e1d4d04465e4a51",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell functions as create undead (Pathfinder RPG Core Rulebook 262), except it creates one of the following variant mummies: bog mummy, ice mummy, or Osirian tomb guardian."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "material",
+              "details": "onyx gems worth 50 gp per HD of the undead to be created",
+              "cost_gp": 50,
+              "raw": "M (onyx gems worth 50 gp per HD of the undead to be created)"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (onyx gems worth 50 gp per HD of the undead to be created)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, M (onyx gems worth 50 gp per HD of the undead to be created)",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (onyx gems worth 50 gp per HD of the undead to be created)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "1 corpse steeped in a peat bog for at least 24 hours",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"1 corpse steeped in a peat bog for at least 24 hours\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "single",
+            "subject_kind": "other",
+            "selection": "selected",
+            "count": {
+              "kind": "fixed",
+              "fixed": 1,
+              "formula": null,
+              "raw": "1 corpse steeped in a peat bog for at least 24 hours"
+            },
+            "separation": null,
+            "raw": "1 corpse steeped in a peat bog for at least 24 hours"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"1 corpse steeped in a peat bog for at least 24 hours\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as create undead (Pathfinder RPG Core Rulebook 262), except it creates one of the following variant mummies: bog mummy, ice mummy, or Osirian tomb guardian.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as create undead (Pathfinder RPG Core Rulebook 262), except it creates one of the following variant mummies: bog mummy, ice mummy, or Osirian tomb guardian.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.create-variant-mummy:appears_on_spell_list:spell-list.arcanist",
@@ -305,6 +474,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.create-variant-mummy:functions_like:spell.create-undead",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.create-undead",
+        "name": "Create Undead"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.create-variant-mummy:ad22b51374e27f6a",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "create undead",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/create-undead"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.create-variant-mummy:has_descriptor:descriptor.evil",
       "type": "has_descriptor",
       "target": {
@@ -413,32 +602,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.create-variant-mummy:references:spell.create-undead",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.create-undead",
-        "name": "create undead"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.create-variant-mummy:ad22b51374e27f6a",
-          "source_field": "spell_raw.links_raw[5]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "create undead",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/create-undead"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.create-variant-mummy:uses_definition:rule.bog-mummy",
+      "relationship_id": "spell.create-variant-mummy:uses_definition:monster.bog-mummy",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.bog-mummy",
-        "name": "bog mummy"
+        "entity_type": "monster",
+        "entity_id": "monster.bog-mummy",
+        "name": "Bog mummy"
       },
       "status": "accepted",
       "evidence": [
@@ -453,12 +622,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.create-variant-mummy:uses_definition:rule.ice-mummy",
+      "relationship_id": "spell.create-variant-mummy:uses_definition:monster.ice-mummy",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.ice-mummy",
-        "name": "ice mummy"
+        "entity_type": "monster",
+        "entity_id": "monster.ice-mummy",
+        "name": "Ice mummy"
       },
       "status": "accepted",
       "evidence": [
@@ -468,6 +637,33 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "ice mummy",
           "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/undead/mummy/#variant_mummies"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.create-variant-mummy:uses_definition:monster.tomb-guardian-mummy",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "monster",
+        "entity_id": "monster.tomb-guardian-mummy",
+        "name": "Tomb guardian mummy"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.create-variant-mummy:ad22b51374e27f6a",
+          "source_field": "spell_raw.links_raw[8]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Tomb Guardian mummy",
+          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/undead/mummy/#variant_mummies"
+        },
+        {
+          "observation_id": "aon:spell.create-variant-mummy:8e1d4d04465e4a51",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Osirian tomb guardian",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Create+Variant+Mummy"
         }
       ],
       "note": null
@@ -488,26 +684,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "no",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.create-variant-mummy:uses_definition:rule.tomb-guardian-mummy",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.tomb-guardian-mummy",
-        "name": "Tomb Guardian mummy"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.create-variant-mummy:ad22b51374e27f6a",
-          "source_field": "spell_raw.links_raw[8]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Tomb Guardian mummy",
-          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/undead/mummy/#variant_mummies"
         }
       ],
       "note": null
@@ -581,11 +757,19 @@
       "raw_value_sha256": "8f0c19f09399cfa2de6f71d619c7932f32933ed2510fa1be01c40f81310beffd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.create-variant-mummy:8e1d4d04465e4a51",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "36477b18c1b47b79bc4a1133aef158a30cac1287562c0da9751407d13748cb00",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

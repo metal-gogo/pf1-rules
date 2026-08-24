@@ -77,6 +77,23 @@ test("rich spell descriptions link inline and expand functions-like content once
   await expect(page).toHaveURL(/\/spells\/spell\.restoration-lesser$/);
 });
 
+test("Batch 18 links and expands Crime Wave without recursive or new-tab navigation", async ({ page }) => {
+  await page.goto("/spells/spell.crime-of-opportunity");
+
+  const description = page.locator(".rich-description").first();
+  const crimeWaveLink = description.getByRole("link", { name: "crime wave" });
+  await expect(crimeWaveLink).toHaveAttribute("href", "/spells/spell.crime-wave");
+  await expect(crimeWaveLink).not.toHaveAttribute("target", "_blank");
+  await expect(page.locator('[data-embedded-spell="spell.crime-wave"]')).toHaveCount(1);
+  await expect(page.locator("[data-embedded-spell] [data-embedded-spell]")).toHaveCount(0);
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+
+  await crimeWaveLink.click();
+  await expect(page).toHaveURL(/\/spells\/spell\.crime-wave$/);
+});
+
 test("pilot lists remain semantic and accessible on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/spells/spell.bestow-curse-greater");

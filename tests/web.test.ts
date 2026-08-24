@@ -1043,6 +1043,78 @@ describe("local rules browser", () => {
     expect(description.match(/href="\/spells\/spell.fireball"/g)).toHaveLength(2);
   });
 
+  it.each([
+    ["crafters-curse", "/entities/rule.craft"],
+    ["crafters-fortune", "/entities/rule.luck-bonus"],
+    ["create-armaments", "/entities/condition.broken"],
+    ["create-demiplane-greater", "/spells/spell.create-demiplane"],
+    ["create-greater-undead", "/entities/monster.shadow"],
+    ["create-mindscape", "/entities/rule.mindscape"],
+    ["create-mindscape-greater", "/spells/spell.create-mindscape"],
+    ["create-pit", "/entities/rule.falling-damage"],
+    ["create-soul-gem", "/spells/spell.resurrection"],
+    ["create-treasure-map", "/entities/condition.dead"],
+    ["create-variant-mummy", "/entities/monster.bog-mummy"],
+    ["creeping-doom", "/entities/monster.centipede-swarm"],
+    ["creeping-ice", "/entities/rule.difficult-terrain"],
+    ["crime-of-opportunity", "/spells/spell.crime-wave"],
+    ["crime-wave", "/entities/rule.teamwork-feats"],
+    ["crimson-breath", "/entities/rule.poison"],
+    ["crimson-confession", "/spells/spell.detect-magic"],
+    ["crown-of-glory", "/entities/rule.hit-dice"],
+    ["cruel-jaunt", "/spells/spell.sense-fear"],
+    ["crushing-despair", "/spells/spell.good-hope"],
+    ["crushing-hand", "/spells/spell.interposing-hand"],
+    ["cultural-adaptation", "/spells/spell.tongues"],
+    ["curative-distillation", "/entities/rule.hit-points"],
+    ["cure-critical-wounds-mass", "/spells/spell.cure-light-wounds-mass"],
+    ["cure-light-wounds-mass", "/entities/rule.positive-energy"],
+  ])("renders eighteenth-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["create-demiplane-greater", "/entities/rule.solitude"],
+    ["create-soul-gem", "/spells/spell.expend"],
+    ["create-soul-gem", "/entities/rule.judgment"],
+    ["create-soul-gem", "/entities/rule.unholy"],
+    ["creeping-ice", "/spells/spell.slow"],
+    ["cruel-jaunt", "/spells/spell.teleport"],
+    ["crushing-despair", "/entities/rule.crushing-despair-modified"],
+  ])("omits eighteenth-batch semantic false positives from spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain(`href="${target}"`);
+  });
+
+  it("does not link Greater Create Mindscape or Mass Cure Light Wounds back through their own titles", async () => {
+    const [mindscapeResponse, cureResponse] = await Promise.all([
+      fetch(`${baseUrl}/spells/spell.create-mindscape-greater`),
+      fetch(`${baseUrl}/spells/spell.cure-light-wounds-mass`),
+    ]);
+    const [mindscapeHtml, cureHtml] = await Promise.all([
+      mindscapeResponse.text(),
+      cureResponse.text(),
+    ]);
+    const mindscapeDescription = mindscapeHtml.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const cureDescription = cureHtml.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(mindscapeDescription.match(/href="\/spells\/spell.create-mindscape"/g)).toHaveLength(1);
+    expect(cureDescription).not.toContain('href="/spells/spell.cure-light-wounds"');
+  });
+
+  it("expands Crime of Opportunity's reviewed Crime Wave inheritance once", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.crime-of-opportunity`);
+    const html = await response.text();
+    expect(response.status).toBe(200);
+    expect(html.match(/data-embedded-spell="spell.crime-wave"/g)).toHaveLength(1);
+  });
+
   it("keeps Magic Aura's unmatched spell relationships outside its description", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.magic-aura`);
     const html = await response.text();

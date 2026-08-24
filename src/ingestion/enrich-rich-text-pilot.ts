@@ -255,6 +255,14 @@ const canonicalTargets = new Map<string, {
   ["rule.occultists", { id: "class.occultist", name: "Occultist", type: "class" }],
   ["rule.bloodragers", { id: "class.bloodrager", name: "Bloodrager", type: "class" }],
   ["rule.sorcerers", { id: "class.sorcerer", name: "Sorcerer", type: "class" }],
+  ["rule.bog-mummy", { id: "monster.bog-mummy", name: "Bog mummy", type: "monster" }],
+  ["rule.centipede-swarm", { id: "monster.centipede-swarm", name: "Centipede swarm", type: "monster" }],
+  ["rule.centipede-swarms", { id: "monster.centipede-swarm", name: "Centipede swarm", type: "monster" }],
+  ["rule.ice-mummy", { id: "monster.ice-mummy", name: "Ice mummy", type: "monster" }],
+  ["rule.tomb-guardian-mummy", { id: "monster.tomb-guardian-mummy", name: "Tomb guardian mummy", type: "monster" }],
+  ["rule.extra-dimensional", { id: "rule.extradimensional", name: "Extradimensional" }],
+  ["rule.potion-of", { id: "rule.potion", name: "Potion" }],
+  ["spell.create-soul-gems", { id: "spell.create-soul-gem", name: "Create Soul Gem", type: "spell", relationshipType: "references" }],
 ]);
 
 const canonicalRelationshipTargets = new Map<string, {
@@ -302,6 +310,58 @@ const canonicalRelationshipTargets = new Map<string, {
   [
     "spell.control-winds:uses_definition:rule.wind",
     { id: "rule.wind-effects", name: "Wind effects", type: "rule", relationshipType: "uses_definition" },
+  ],
+  [
+    "spell.crime-of-opportunity:references:spell.crime-wave",
+    { id: "spell.crime-wave", name: "Crime Wave", type: "spell", relationshipType: "functions_like" },
+  ],
+  [
+    "spell.crafters-fortune:uses_definition:rule.artifice",
+    { id: "spell-list.artifice-domain", name: "Artifice Domain Spells", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.crafters-fortune:uses_definition:rule.industry",
+    { id: "spell-list.industry-subdomain", name: "Industry Subdomain Spells", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.create-mindscape:uses_definition:rule.medium",
+    { id: "spell-list.medium", name: "medium Spell List", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.create-pit:uses_definition:rule.caves",
+    { id: "spell-list.caves-subdomain", name: "Caves Subdomain Spells", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.create-pit:uses_definition:rule.earth",
+    { id: "spell-list.earth-elemental-school", name: "Earth Elemental School Spells", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.creeping-doom:uses_definition:rule.juju-pap39-pzo9039",
+    { id: "spell-list.juju-mystery", name: "Juju Mystery Spells", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.creeping-doom:uses_definition:rule.jungle",
+    { id: "spell-list.jungle-domain", name: "Jungle Domain Spells", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.creeping-doom:uses_definition:rule.nature",
+    { id: "spell-list.nature-mystery", name: "Nature Mystery Spells", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.creeping-doom:uses_definition:rule.scalykind",
+    { id: "spell-list.scalykind-domain", name: "Scalykind Domain Spells", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.crushing-despair:uses_definition:rule.isolation",
+    { id: "spell-list.isolation-subdomain", name: "Isolation Subdomain Spells", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.cure-critical-wounds-mass:references:spell.cure-light-wounds-mass",
+    { id: "spell.cure-light-wounds-mass", name: "Cure Light Wounds, Mass", type: "spell", relationshipType: "functions_like" },
+  ],
+  [
+    "spell.cure-critical-wounds-mass:uses_definition:rule.community",
+    { id: "spell-list.community-domain", name: "Community Domain Spells", type: "spell_list", relationshipType: "appears_on_spell_list" },
   ],
 ]);
 
@@ -569,6 +629,34 @@ const rejectedDescriptionRelationships = new Map([
     "spell.counterbalancing-aura:uses_definition:rule.components",
     "The description discusses alignment components, not spell components.",
   ],
+  [
+    "spell.create-demiplane-greater:uses_definition:rule.solitude",
+    "The source link is spell-list navigation to the Solitude subdomain and is unrelated to the selected description.",
+  ],
+  [
+    "spell.create-soul-gem:references:spell.expend",
+    "The description uses “expend” as a verb for spending soul points; it does not reference the Expend spell.",
+  ],
+  [
+    "spell.create-soul-gem:uses_definition:rule.judgment",
+    "The soul's judgment in the Great Beyond is unrelated to the inquisitor Judgment class feature linked by the secondary source.",
+  ],
+  [
+    "spell.create-soul-gem:uses_definition:rule.unholy",
+    "The location is described as unholy; the secondary href points to the unrelated Unholy weapon special ability.",
+  ],
+  [
+    "spell.creeping-ice:references:spell.slow",
+    "The description uses “slow” as an ordinary adjective for the ice's growth, not as a reference to the Slow spell.",
+  ],
+  [
+    "spell.cruel-jaunt:references:spell.teleport",
+    "The description uses “teleport” for Cruel Jaunt's own movement effect; it does not invoke the Teleport spell.",
+  ],
+  [
+    "spell.crushing-despair:uses_definition:rule.crushing-despair-modified",
+    "The secondary link points to an unrelated third-party modified spell and is not part of the selected first-party description.",
+  ],
 ]);
 
 
@@ -803,6 +891,52 @@ const reviewedDescriptionReferences = new Map<string, ReviewedDescriptionReferen
   ]],
   ["spell.cowards-lament", [
     { targetType: "rule", targetId: "rule.attack-rolls", targetName: "Attack rolls", anchorText: "attack rolls" },
+  ]],
+  ["spell.create-greater-undead", [
+    { targetType: "rule", targetId: "rule.undead", targetName: "Undead", anchorText: "undead" },
+    { targetType: "rule", targetId: "rule.caster-level", targetName: "Caster level", anchorText: "caster level" },
+    { targetType: "monster", targetId: "monster.shadow", targetName: "Shadow", anchorText: "shadows" },
+    { targetType: "monster", targetId: "monster.wraith", targetName: "Wraith", anchorText: "wraiths" },
+    { targetType: "monster", targetId: "monster.spectre", targetName: "Spectre", anchorText: "spectres" },
+    { targetType: "monster", targetId: "monster.devourer", targetName: "Devourer", anchorText: "devourers" },
+  ]],
+  ["spell.create-variant-mummy", [
+    { targetType: "monster", targetId: "monster.tomb-guardian-mummy", targetName: "Tomb guardian mummy", anchorText: "Osirian tomb guardian" },
+  ]],
+  ["spell.creeping-ice", [
+    { targetType: "rule", targetId: "rule.difficult-terrain", targetName: "Difficult terrain", anchorText: "difficult terrain" },
+    { targetType: "rule", targetId: "rule.bull-rush", targetName: "Bull rush", anchorText: "bull rushed" },
+  ]],
+  ["spell.creeping-doom", [
+    { targetType: "rule", targetId: "rule.swarm", targetName: "Swarms", anchorText: "swarm attack" },
+    { targetType: "rule", targetId: "rule.hit-points", targetName: "Hit points", anchorText: "hit points" },
+    { targetType: "rule", targetId: "rule.poison", targetName: "Poison", anchorText: "poison" },
+    { targetType: "rule", targetId: "rule.distraction", targetName: "Distraction", anchorText: "distraction" },
+    { type: "uses_definition", targetType: "action", targetId: "action.standard-action", targetName: "Standard action", anchorText: "standard action" },
+  ]],
+  ["spell.crime-wave", [
+    { targetType: "rule", targetId: "rule.teamwork-feats", targetName: "Teamwork feats", anchorText: "teamwork feats" },
+    { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saving throw" },
+  ]],
+  ["spell.crown-of-glory", [
+    { targetType: "rule", targetId: "rule.enhancement-bonus", targetName: "Enhancement bonus", anchorText: "enhancement bonus" },
+    { targetType: "rule", targetId: "rule.hit-dice", targetName: "Hit Dice", anchorText: "HD" },
+  ]],
+  ["spell.cruel-jaunt", [
+    { type: "references", targetType: "spell", targetId: "spell.sense-fear", targetName: "Sense Fear", anchorText: "sense fear" },
+    { targetType: "rule", targetId: "rule.fear", targetName: "Fear", anchorText: "fear effect" },
+    { targetType: "rule", targetId: "rule.fear", targetName: "Fear", anchorText: "fear condition" },
+    { targetType: "rule", targetId: "rule.carrying-capacity", targetName: "Carrying capacity", anchorText: "maximum load" },
+  ]],
+  ["spell.crushing-despair", [
+    { targetType: "rule", targetId: "rule.attack-rolls", targetName: "Attack rolls", anchorText: "attack rolls" },
+    { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saving throws" },
+    { targetType: "rule", targetId: "rule.ability-check", targetName: "Ability checks", anchorText: "ability checks" },
+    { targetType: "rule", targetId: "rule.skill-check", targetName: "Skill checks", anchorText: "skill checks" },
+  ]],
+  ["spell.cure-light-wounds-mass", [
+    { targetType: "rule", targetId: "rule.positive-energy", targetName: "Positive energy", anchorText: "positive energy" },
+    { targetType: "rule", targetId: "rule.undead", targetName: "Undead", anchorText: "undead" },
   ]],
 ]);
 
@@ -1793,6 +1927,19 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
       keepFirstAndLastRelationshipLinks(
         richText.document,
         "spell.controlled-fireball:functions_like:spell.fireball",
+      );
+    }
+    if (spellId === "spell.create-mindscape-greater") {
+      keepFirstRelationshipLink(
+        richText.document,
+        "spell.create-mindscape-greater:functions_like:spell.create-mindscape",
+      );
+    }
+    if (spellId === "spell.cure-light-wounds-mass") {
+      removeRelationshipLinkValues(
+        richText.document,
+        "spell.cure-light-wounds-mass:mass_variant_of:spell.cure-light-wounds",
+        ["cure light wounds"],
       );
     }
     if (spellId === "spell.baleful-shadow-transmutation") {

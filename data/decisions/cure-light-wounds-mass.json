@@ -74,9 +74,75 @@
         "aon:spell.cure-light-wounds-mass:77b86185"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.cure-light-wounds-mass:77b86185",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-light-wounds-mass:77b86185",
+        "legacy_aon:spell.cure-light-wounds-mass:4d4fc230",
+        "d20pfsrd:spell.cure-light-wounds-mass:d23904b8"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.cure-light-wounds-mass:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cure-light-wounds-mass:77b86185",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-light-wounds-mass:77b86185"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds-mass:has_school:magic-school.conjuration",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cure-light-wounds-mass:77b86185",
+          "source_field": "spell_raw.links_raw[1]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.cure-light-wounds-mass:d23904b8",
+          "source_field": "spell_raw.links_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-light-wounds-mass:77b86185",
+        "legacy_aon:spell.cure-light-wounds-mass:4d4fc230",
+        "d20pfsrd:spell.cure-light-wounds-mass:d23904b8"
+      ],
+      "rationale": "All three sources agree."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds-mass:has_subschool:subschool.healing",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cure-light-wounds-mass:77b86185",
+          "source_field": "spell_raw.links_raw[2]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-light-wounds-mass:77b86185",
+        "legacy_aon:spell.cure-light-wounds-mass:4d4fc230",
+        "d20pfsrd:spell.cure-light-wounds-mass:d23904b8"
+      ],
+      "rationale": "Healing is a subschool in this field."
+    },
     {
       "relationship_id": "spell.cure-light-wounds-mass:mass_variant_of:spell.cure-light-wounds",
       "decision": "accept",
@@ -95,7 +161,7 @@
         "legacy_aon:spell.cure-light-wounds-mass:4d4fc230",
         "d20pfsrd:spell.cure-light-wounds-mass:d23904b8"
       ],
-      "rationale": "The relation supports related-spell navigation. It is deliberately non-inheriting because this mass spell contains a complete stat block and description."
+      "rationale": "Semantic variant link only. This mass spell is mechanically self-contained and does not inherit missing text from the base spell."
     },
     {
       "relationship_id": "spell.cure-light-wounds-mass:member_of_family:spell-family.cure-wounds",
@@ -115,21 +181,127 @@
         "legacy_aon:spell.cure-light-wounds-mass:4d4fc230",
         "d20pfsrd:spell.cure-light-wounds-mass:d23904b8"
       ],
-      "rationale": "The descriptions explicitly say 'other cure spells.' Family membership is navigation metadata, not a rule dependency."
+      "rationale": "Family membership groups related spells but does not itself imply rules inheritance."
     },
     {
-      "relationship_id": "spell.cure-light-wounds-mass:appears_on_spell_list:spell-list.omdura",
+      "relationship_id": "spell.cure-light-wounds-mass:published_in:publication.pathfinder-rpg-core-rulebook",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "aon:spell.cure-light-wounds-mass:77b86185",
-          "source_field": "spell_raw.levels_raw"
+          "source_field": "spell_raw.links_raw[0]"
+        },
+        {
+          "observation_id": "legacy_aon:spell.cure-light-wounds-mass:4d4fc230",
+          "source_field": "page.source_notice_raw"
         }
       ],
       "considered_observation_ids": [
-        "aon:spell.cure-light-wounds-mass:77b86185"
+        "aon:spell.cure-light-wounds-mass:77b86185",
+        "legacy_aon:spell.cure-light-wounds-mass:4d4fc230",
+        "d20pfsrd:spell.cure-light-wounds-mass:d23904b8"
       ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+      "rationale": "AoN supplies page 263; Legacy confirms Core scope."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds-mass:uses_action:action.standard-action",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.cure-light-wounds-mass:d23904b8",
+          "source_field": "spell_raw.links_raw[7]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-light-wounds-mass:77b86185",
+        "legacy_aon:spell.cure-light-wounds-mass:4d4fc230",
+        "d20pfsrd:spell.cure-light-wounds-mass:d23904b8"
+      ],
+      "rationale": "All sources agree; d20PFSRD supplies the direct definition link."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds-mass:uses_definition:rule.aiming-a-spell",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cure-light-wounds-mass:77b86185",
+          "source_field": "spell_raw.delivery_fields_raw[0].value_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-light-wounds-mass:77b86185",
+        "legacy_aon:spell.cure-light-wounds-mass:4d4fc230",
+        "d20pfsrd:spell.cure-light-wounds-mass:d23904b8"
+      ],
+      "rationale": "This is a multiple-target spell, not an area spell."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds-mass:uses_definition:rule.positive-energy",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cure-light-wounds-mass:77b86185",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-light-wounds-mass:77b86185",
+        "legacy_aon:spell.cure-light-wounds-mass:4d4fc230",
+        "d20pfsrd:spell.cure-light-wounds-mass:d23904b8"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds-mass:uses_definition:rule.spell-resistance",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cure-light-wounds-mass:77b86185",
+          "source_field": "spell_raw.spell_resistance_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-light-wounds-mass:77b86185",
+        "legacy_aon:spell.cure-light-wounds-mass:4d4fc230",
+        "d20pfsrd:spell.cure-light-wounds-mass:d23904b8"
+      ],
+      "rationale": "The mechanic appears in all three stat blocks."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds-mass:uses_definition:rule.undead",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cure-light-wounds-mass:77b86185",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-light-wounds-mass:77b86185",
+        "legacy_aon:spell.cure-light-wounds-mass:4d4fc230",
+        "d20pfsrd:spell.cure-light-wounds-mass:d23904b8"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.cure-light-wounds-mass:uses_definition:rule.will-saving-throw",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.cure-light-wounds-mass:4d4fc230",
+          "source_field": "spell_raw.links_raw[0]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.cure-light-wounds-mass:d23904b8",
+          "source_field": "spell_raw.links_raw[8]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cure-light-wounds-mass:77b86185",
+        "legacy_aon:spell.cure-light-wounds-mass:4d4fc230",
+        "d20pfsrd:spell.cure-light-wounds-mass:d23904b8"
+      ],
+      "rationale": "Raw conditional/harmless branches remain preserved."
     }
   ],
   "unresolved_questions": [

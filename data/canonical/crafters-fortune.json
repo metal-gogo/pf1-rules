@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.crafters-fortune",
   "ruleset": "Pathfinder First Edition",
   "name": "Crafter's Fortune",
@@ -169,7 +169,39 @@
   "description": {
     "raw": "The target is struck by inspiration and gains a +5 luck bonus on its next Craft skill check.",
     "search_text": "\"the target is struck by inspiration and gains a +5 luck bonus on its next craft skill check.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target is struck by inspiration and gains a +5 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "luck bonus",
+              "relationship_id": "spell.crafters-fortune:uses_definition:rule.luck-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on its next "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Craft",
+              "relationship_id": "spell.crafters-fortune:uses_definition:rule.craft"
+            },
+            {
+              "node_type": "text",
+              "value": " skill check."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -227,6 +259,53 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.crafters-fortune:appears_on_spell_list:spell-list.artifice-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.artifice-domain",
+        "name": "Artifice Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.crafters-fortune:ee635b985e1ca4c3",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Artifice",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/artifice-domain/"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.crafters-fortune:appears_on_spell_list:spell-list.industry-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.industry-subdomain",
+        "name": "Industry Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.industry:494f5640",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—crafter’s fortune",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Artifice"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.crafters-fortune:ee635b985e1ca4c3",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "industry",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/artifice-domain/industry-subdomain/"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.crafters-fortune:appears_on_spell_list:spell-list.investigator",
@@ -444,26 +523,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.crafters-fortune:uses_definition:rule.artifice",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.artifice",
-        "name": "Artifice"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.crafters-fortune:ee635b985e1ca4c3",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Artifice",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/artifice-domain/"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.crafters-fortune:uses_definition:rule.craft",
       "type": "uses_definition",
       "target": {
@@ -486,26 +545,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Craft",
           "source_href": "https://www.d20pfsrd.com/skills/craft"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.crafters-fortune:uses_definition:rule.industry",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.industry",
-        "name": "industry"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.crafters-fortune:ee635b985e1ca4c3",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "industry",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/artifice-domain/industry-subdomain/"
         }
       ],
       "note": null
@@ -551,11 +590,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.crafters-fortune:uses_definition:rule.will",
+      "relationship_id": "spell.crafters-fortune:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -569,26 +608,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.crafters-fortune:appears_on_spell_list:spell-list.industry-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.industry-subdomain",
-        "name": "Industry Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.industry:494f5640",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "1st—crafter’s fortune",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Artifice"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -647,11 +666,19 @@
       "raw_value_sha256": "128d98770f1c08636ce9e960d8a3a881529cc258dc7354b7eadaf5e3e0d29ba1",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.crafters-fortune:fff73859fd9434bc",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "acccd16e286876b49a33b2396a43e71cc5c9488cc69e61e11fc6e5fd38762889",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

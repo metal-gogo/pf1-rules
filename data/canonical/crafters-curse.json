@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.crafters-curse",
   "ruleset": "Pathfinder First Edition",
   "name": "Crafter's Curse",
@@ -145,7 +145,41 @@
   "description": {
     "raw": "The target of crafter’s curse takes a –5 penalty on all Craft skill checks while the spell lasts.",
     "search_text": "\"the target of crafter’s curse takes a –5 penalty on all craft skill checks while the spell lasts.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target of "
+            },
+            {
+              "node_type": "text",
+              "value": "crafter’s curse ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "takes a –5 penalty on all "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Craft",
+              "relationship_id": "spell.crafters-curse:uses_definition:rule.craft"
+            },
+            {
+              "node_type": "text",
+              "value": " skill checks while the spell lasts."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -373,26 +407,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.crafters-curse:references:spell.crafters-curse",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.crafters-curse",
-        "name": "crafter's curse"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.crafters-curse:9b1b409d734e65b0",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "crafter's curse",
-          "source_href": "https://legacy.aonprd.com/advancedPlayersGuide/spells/crafterSCurse.html#crafter's-curse"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.crafters-curse:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -487,11 +501,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.crafters-curse:uses_definition:rule.will",
+      "relationship_id": "spell.crafters-curse:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -555,11 +569,19 @@
       "raw_value_sha256": "18ec40a5dc8e817b98654f434ce4d01fb18c96a7d6a1025350e831a13ab484ba",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.crafters-curse:2a2c605465d95fd5",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "57315af7e21e4c7e83c6edeb077eb48a72cf116feb9fcdfb156ebc90c05baa21",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

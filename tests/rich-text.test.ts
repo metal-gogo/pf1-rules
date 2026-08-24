@@ -196,6 +196,40 @@ describe("rich-text schema and source parsing", () => {
         "rule.source",
       ]));
   });
+
+  it("keeps Batch 18 spell-list metadata and semantic rejections distinct", () => {
+    const craftersFortune = canonical("crafters-fortune");
+    expect(craftersFortune.relationships).toContainEqual(expect.objectContaining({
+      relationship_id:
+        "spell.crafters-fortune:appears_on_spell_list:spell-list.artifice-domain",
+      type: "appears_on_spell_list",
+      status: "accepted",
+    }));
+
+    const creepingDoom = canonical("creeping-doom");
+    expect(creepingDoom.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.creeping-doom:appears_on_spell_list:spell-list.jungle-domain",
+      type: "appears_on_spell_list",
+      status: "accepted",
+    }));
+
+    const creepingIce = canonical("creeping-ice");
+    expect(creepingIce.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.creeping-ice:references:spell.slow",
+      status: "rejected",
+    }));
+
+    const crimeOfOpportunity = canonical("crime-of-opportunity");
+    expect(crimeOfOpportunity.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.crime-of-opportunity:functions_like:spell.crime-wave",
+      type: "functions_like",
+      status: "accepted",
+    }));
+
+    const createSoulGem = canonical("create-soul-gem");
+    expect(createSoulGem.relationships.map((item: ValidatedJson) => item.target.entity_id))
+      .not.toContain(createSoulGem.spell_id);
+  });
 });
 
 

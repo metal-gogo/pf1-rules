@@ -120,6 +120,21 @@
         "aon:spell.create-soul-gem:202f0ac8dcc2ee93"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.create-soul-gem:202f0ac8dcc2ee93",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.create-soul-gem:202f0ac8dcc2ee93",
+        "d20pfsrd:spell.create-soul-gem:40d57c6aca94a740"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -175,6 +190,25 @@
         "d20pfsrd:spell.create-soul-gem:40d57c6aca94a740"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.create-soul-gem:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.create-soul-gem:40d57c6aca94a740",
+          "source_field": "spell_raw.links_raw[1]"
+        },
+        {
+          "observation_id": "aon:spell.create-soul-gem:202f0ac8dcc2ee93",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:spell.create-soul-gem:40d57c6aca94a740",
+        "aon:spell.create-soul-gem:202f0ac8dcc2ee93"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.create-soul-gem:appears_on_spell_list:spell-list.oracle",
@@ -408,23 +442,8 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.create-soul-gem:references:spell.create-soul-gems",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.create-soul-gem:40d57c6aca94a740",
-          "source_field": "spell_raw.links_raw[15]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.create-soul-gem:202f0ac8dcc2ee93",
-        "d20pfsrd:spell.create-soul-gem:40d57c6aca94a740"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.create-soul-gem:references:spell.expend",
-      "decision": "accept",
+      "decision": "reject",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.create-soul-gem:40d57c6aca94a740",
@@ -435,7 +454,7 @@
         "aon:spell.create-soul-gem:202f0ac8dcc2ee93",
         "d20pfsrd:spell.create-soul-gem:40d57c6aca94a740"
       ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+      "rationale": "The description uses “expend” as a verb for spending soul points; it does not reference the Expend spell."
     },
     {
       "relationship_id": "spell.create-soul-gem:references:spell.resurrection",
@@ -511,7 +530,7 @@
     },
     {
       "relationship_id": "spell.create-soul-gem:uses_definition:rule.judgment",
-      "decision": "accept",
+      "decision": "reject",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.create-soul-gem:40d57c6aca94a740",
@@ -522,7 +541,7 @@
         "aon:spell.create-soul-gem:202f0ac8dcc2ee93",
         "d20pfsrd:spell.create-soul-gem:40d57c6aca94a740"
       ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+      "rationale": "The soul's judgment in the Great Beyond is unrelated to the inquisitor Judgment class feature linked by the secondary source."
     },
     {
       "relationship_id": "spell.create-soul-gem:uses_definition:rule.spell-resistance",
@@ -541,7 +560,7 @@
     },
     {
       "relationship_id": "spell.create-soul-gem:uses_definition:rule.unholy",
-      "decision": "accept",
+      "decision": "reject",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.create-soul-gem:40d57c6aca94a740",
@@ -552,10 +571,10 @@
         "aon:spell.create-soul-gem:202f0ac8dcc2ee93",
         "d20pfsrd:spell.create-soul-gem:40d57c6aca94a740"
       ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+      "rationale": "The location is described as unholy; the secondary href points to the unrelated Unholy weapon special ability."
     },
     {
-      "relationship_id": "spell.create-soul-gem:uses_definition:rule.will",
+      "relationship_id": "spell.create-soul-gem:uses_definition:rule.will-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -572,25 +591,6 @@
         "d20pfsrd:spell.create-soul-gem:40d57c6aca94a740"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.create-soul-gem:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.create-soul-gem:40d57c6aca94a740",
-          "source_field": "spell_raw.links_raw[1]"
-        },
-        {
-          "observation_id": "aon:spell.create-soul-gem:202f0ac8dcc2ee93",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:spell.create-soul-gem:40d57c6aca94a740",
-        "aon:spell.create-soul-gem:202f0ac8dcc2ee93"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
     }
   ],
   "unresolved_questions": [

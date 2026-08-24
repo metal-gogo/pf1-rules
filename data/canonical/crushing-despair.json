@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.crushing-despair",
   "ruleset": "Pathfinder First Edition",
   "name": "Crushing Despair",
@@ -196,7 +196,85 @@
   "description": {
     "raw": "An invisible cone of despair causes great sadness in the subjects. Each affected creature takes a –2 penalty on attack rolls, saving throws, ability checks, skill checks, and weapon damage rolls.\n\nCrushing despair counters and dispels good hope.",
     "search_text": "\"an invisible cone of despair causes great sadness in the subjects. each affected creature takes a –2 penalty on attack rolls, saving throws, ability checks, skill checks, and weapon damage rolls.\\n\\ncrushing despair counters and dispels good hope.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "An invisible cone of despair causes great sadness in the subjects. Each affected creature takes a –2 penalty on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack rolls",
+              "relationship_id": "spell.crushing-despair:uses_definition:rule.attack-rolls"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throws",
+              "relationship_id": "spell.crushing-despair:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "ability checks",
+              "relationship_id": "spell.crushing-despair:uses_definition:rule.ability-check"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "skill checks",
+              "relationship_id": "spell.crushing-despair:uses_definition:rule.skill-check"
+            },
+            {
+              "node_type": "text",
+              "value": ", and weapon damage rolls."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Crushing despair",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " counters and dispels "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "good hope",
+              "relationship_id": "spell.crushing-despair:references:spell.good-hope",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -281,6 +359,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.crushing-despair:appears_on_spell_list:spell-list.isolation-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.isolation-subdomain",
+        "name": "Isolation Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.isolation:8d2b8555",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th—crushing despair",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Void"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.crushing-despair:1b50db986a0d7604",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "isolation",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/void-domain/isolation"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.crushing-despair:appears_on_spell_list:spell-list.mesmerist",
@@ -597,7 +702,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.good-hope",
-        "name": "good hope"
+        "name": "Good Hope"
       },
       "status": "accepted",
       "evidence": [
@@ -646,6 +751,46 @@
       "note": null
     },
     {
+      "relationship_id": "spell.crushing-despair:uses_definition:rule.ability-check",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.ability-check",
+        "name": "Ability checks"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.crushing-despair:389b8b16c1f8bf5c",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "ability checks",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Crushing+Despair"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.crushing-despair:uses_definition:rule.attack-rolls",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.attack-rolls",
+        "name": "Attack rolls"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.crushing-despair:389b8b16c1f8bf5c",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "attack rolls",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Crushing+Despair"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.crushing-despair:uses_definition:rule.crushing-despair-modified",
       "type": "uses_definition",
       "target": {
@@ -653,7 +798,7 @@
         "entity_id": "rule.crushing-despair-modified",
         "name": "crushing despair (modified)"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.crushing-despair:1b50db986a0d7604",
@@ -663,27 +808,47 @@
           "source_href": "https://www.d20pfsrd.com/magic/3rd-party-spells/orphaned-bookworm-productions/crushing-despair-modified-for-effects/"
         }
       ],
-      "note": null
+      "note": "The secondary link points to an unrelated third-party modified spell and is not part of the selected first-party description."
     },
     {
-      "relationship_id": "spell.crushing-despair:uses_definition:rule.isolation",
+      "relationship_id": "spell.crushing-despair:uses_definition:rule.saving-throws",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.isolation",
-        "name": "isolation"
+        "entity_id": "rule.saving-throws",
+        "name": "Saving throws"
       },
       "status": "accepted",
       "evidence": [
         {
-          "observation_id": "d20pfsrd:spell.crushing-despair:1b50db986a0d7604",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "isolation",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/void-domain/isolation"
+          "observation_id": "aon:spell.crushing-despair:389b8b16c1f8bf5c",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "saving throws",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Crushing+Despair"
         }
       ],
-      "note": null
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.crushing-despair:uses_definition:rule.skill-check",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.skill-check",
+        "name": "Skill checks"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.crushing-despair:389b8b16c1f8bf5c",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "skill checks",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Crushing+Despair"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.crushing-despair:uses_definition:rule.spell-resistance",
@@ -713,11 +878,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.crushing-despair:uses_definition:rule.will",
+      "relationship_id": "spell.crushing-despair:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -738,26 +903,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.crushing-despair:appears_on_spell_list:spell-list.isolation-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.isolation-subdomain",
-        "name": "Isolation Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.isolation:8d2b8555",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "4th—crushing despair",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Void"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -816,11 +961,19 @@
       "raw_value_sha256": "a7a603d0708a17b6e84ae2fe31d8265ca6421edf2af855012bcc8a1f9cf5e2a5",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.crushing-despair:389b8b16c1f8bf5c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "61dcd9cb245af90f689f0612f97833575be0aff8f7f39457bea016f46fa1e59b",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

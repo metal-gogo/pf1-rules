@@ -176,6 +176,26 @@
         "aon:subdomain.undead:941bc1dd"
       ],
       "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.create-greater-undead:86995d82b1435ef7",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.create-greater-undead:86995d82b1435ef7",
+        "legacy_aon:spell.create-greater-undead:1db83a914c169550",
+        "aon:patron.plague:15d234b1",
+        "aon:domain.death:941bc1dd",
+        "aon:subdomain.murder:941bc1dd",
+        "aon:subdomain.shadow:941bc1dd",
+        "aon:subdomain.undead:941bc1dd"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -210,6 +230,34 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.create-greater-undead:appears_on_spell_list:spell-list.death-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.death:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.death:941bc1dd"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.create-greater-undead:appears_on_spell_list:spell-list.murder-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.murder:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.murder:941bc1dd"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
       "relationship_id": "spell.create-greater-undead:appears_on_spell_list:spell-list.oracle",
       "decision": "accept",
       "evidence": [
@@ -223,6 +271,34 @@
         "legacy_aon:spell.create-greater-undead:1db83a914c169550"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.create-greater-undead:appears_on_spell_list:spell-list.plague-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.plague:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.plague:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.create-greater-undead:appears_on_spell_list:spell-list.shadow-subdomain-from-death",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.shadow:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.shadow:941bc1dd"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.create-greater-undead:appears_on_spell_list:spell-list.shaman",
@@ -255,6 +331,20 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.create-greater-undead:appears_on_spell_list:spell-list.undead-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.undead:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.undead:941bc1dd"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
       "relationship_id": "spell.create-greater-undead:appears_on_spell_list:spell-list.wizard",
       "decision": "accept",
       "evidence": [
@@ -276,6 +366,10 @@
         {
           "observation_id": "aon:spell.create-greater-undead:86995d82b1435ef7",
           "source_field": "spell_raw.description_raw"
+        },
+        {
+          "observation_id": "legacy_aon:spell.create-greater-undead:1db83a914c169550",
+          "source_field": "spell_raw.links_raw[0]"
         }
       ],
       "considered_observation_ids": [
@@ -342,19 +436,104 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.create-greater-undead:references:spell.create-undead",
+      "relationship_id": "spell.create-greater-undead:uses_definition:monster.devourer",
       "decision": "accept",
       "evidence": [
         {
-          "observation_id": "legacy_aon:spell.create-greater-undead:1db83a914c169550",
-          "source_field": "spell_raw.links_raw[0]"
+          "observation_id": "aon:spell.create-greater-undead:86995d82b1435ef7",
+          "source_field": "spell_raw.description_raw"
         }
       ],
       "considered_observation_ids": [
         "aon:spell.create-greater-undead:86995d82b1435ef7",
-        "legacy_aon:spell.create-greater-undead:1db83a914c169550"
+        "legacy_aon:spell.create-greater-undead:1db83a914c169550",
+        "aon:patron.plague:15d234b1",
+        "aon:domain.death:941bc1dd",
+        "aon:subdomain.murder:941bc1dd",
+        "aon:subdomain.shadow:941bc1dd",
+        "aon:subdomain.undead:941bc1dd"
       ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+      "rationale": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.create-greater-undead:uses_definition:monster.shadow",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.create-greater-undead:86995d82b1435ef7",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.create-greater-undead:86995d82b1435ef7",
+        "legacy_aon:spell.create-greater-undead:1db83a914c169550",
+        "aon:patron.plague:15d234b1",
+        "aon:domain.death:941bc1dd",
+        "aon:subdomain.murder:941bc1dd",
+        "aon:subdomain.shadow:941bc1dd",
+        "aon:subdomain.undead:941bc1dd"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.create-greater-undead:uses_definition:monster.spectre",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.create-greater-undead:86995d82b1435ef7",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.create-greater-undead:86995d82b1435ef7",
+        "legacy_aon:spell.create-greater-undead:1db83a914c169550",
+        "aon:patron.plague:15d234b1",
+        "aon:domain.death:941bc1dd",
+        "aon:subdomain.murder:941bc1dd",
+        "aon:subdomain.shadow:941bc1dd",
+        "aon:subdomain.undead:941bc1dd"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.create-greater-undead:uses_definition:monster.wraith",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.create-greater-undead:86995d82b1435ef7",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.create-greater-undead:86995d82b1435ef7",
+        "legacy_aon:spell.create-greater-undead:1db83a914c169550",
+        "aon:patron.plague:15d234b1",
+        "aon:domain.death:941bc1dd",
+        "aon:subdomain.murder:941bc1dd",
+        "aon:subdomain.shadow:941bc1dd",
+        "aon:subdomain.undead:941bc1dd"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.create-greater-undead:uses_definition:rule.caster-level",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.create-greater-undead:86995d82b1435ef7",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.create-greater-undead:86995d82b1435ef7",
+        "legacy_aon:spell.create-greater-undead:1db83a914c169550",
+        "aon:patron.plague:15d234b1",
+        "aon:domain.death:941bc1dd",
+        "aon:subdomain.murder:941bc1dd",
+        "aon:subdomain.shadow:941bc1dd",
+        "aon:subdomain.undead:941bc1dd"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.create-greater-undead:uses_definition:rule.spell-resistance",
@@ -372,74 +551,24 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.create-greater-undead:appears_on_spell_list:spell-list.plague-patron",
+      "relationship_id": "spell.create-greater-undead:uses_definition:rule.undead",
       "decision": "accept",
       "evidence": [
         {
-          "observation_id": "aon:patron.plague:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
+          "observation_id": "aon:spell.create-greater-undead:86995d82b1435ef7",
+          "source_field": "spell_raw.description_raw"
         }
       ],
       "considered_observation_ids": [
-        "aon:patron.plague:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.create-greater-undead:appears_on_spell_list:spell-list.death-domain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:domain.death:941bc1dd",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:domain.death:941bc1dd"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
-    },
-    {
-      "relationship_id": "spell.create-greater-undead:appears_on_spell_list:spell-list.murder-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.murder:941bc1dd",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.murder:941bc1dd"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
-    },
-    {
-      "relationship_id": "spell.create-greater-undead:appears_on_spell_list:spell-list.shadow-subdomain-from-death",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.shadow:941bc1dd",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.shadow:941bc1dd"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
-    },
-    {
-      "relationship_id": "spell.create-greater-undead:appears_on_spell_list:spell-list.undead-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.undead:941bc1dd",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
+        "aon:spell.create-greater-undead:86995d82b1435ef7",
+        "legacy_aon:spell.create-greater-undead:1db83a914c169550",
+        "aon:patron.plague:15d234b1",
+        "aon:domain.death:941bc1dd",
+        "aon:subdomain.murder:941bc1dd",
+        "aon:subdomain.shadow:941bc1dd",
         "aon:subdomain.undead:941bc1dd"
       ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+      "rationale": "The selected source wording explicitly uses this rules term."
     }
   ],
   "unresolved_questions": [
