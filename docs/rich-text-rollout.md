@@ -12,8 +12,8 @@ Audit date: 2026-08-23.
 | Category | Spells | Meaning |
 | --- | ---: | --- |
 | Total canonical spells | 3,030 | Complete corpus |
-| Rich text stored | 462 | 11-spell pilot, eighteen reviewed 25-spell rollout batches, and one reviewed warning record |
-| Safe candidates with links | 1,795 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
+| Rich text stored | 487 | 11-spell pilot, nineteen reviewed 25-spell rollout batches, and one reviewed warning record |
+| Safe candidates with links | 1,770 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
 | Safe structure-only candidates | 310 | Source text matches, but no known relationship currently produces an inline link |
 | Source mismatch | 291 | Current canonical text and the newly bounded AoN description differ |
 | Link warnings | 172 | At least one accepted relationship is ambiguous or unmatched |
@@ -528,6 +528,48 @@ unrelated third-party modified-spell link.
 Create Greater Undead and Crime Wave contain source tables. Their text remains
 lossless, but row and cell semantics are flattened under the current `0.2.0`
 AST. Links were not added across concatenated cell boundaries.
+
+### Batch 19
+
+The nineteenth rollout batch contains:
+
+- Mass Cure Moderate Wounds; Mass Cure Serious Wounds; Curse of Befouled
+  Fortune; Curse of Disgust; Curse of Dragonflies; Curse of Keeping; Curse of
+  Magic Negation; Curse of the Outcast; Curse of Unexpected Death; Curse Water.
+- Cursed Earth; Cursed Treasure; Cushioning Bands; Cyclic Reincarnation; Daemon
+  Ward; Damnation; Damnation of Memory; Damp Powder; Dance of a Hundred Cuts;
+  Dance of a Thousand Cuts.
+- Dancing Darkness; Dancing Lantern; Dancing Lights; Dark-Light; Dark Whispers.
+
+Review of this batch established these normalization rules:
+
+- Mass Cure Moderate Wounds and Mass Cure Serious Wounds inherit directly from
+  Mass Cure Light Wounds. Cyclic Reincarnation inherits from Reincarnate even
+  though its source phrase places `except as noted` after the parent name.
+- Swashbuckler resolves to its class page; Charmed Life and Lore Master resolve
+  to class-feature pages; plural caster-level and disease IDs share their
+  established canonical definitions; and the truncated secondary anchor
+  `hakes` resolves to the Shakes disease.
+- Curse Water links Negative Energy, Unholy Water, Holy Water, Undead, and
+  separately links Good/Evil from each Outsider occurrence. Curse of Unexpected
+  Death links only its two explicit touch attacks, while ordinary `touch` verbs
+  remain plain. Cursed Treasure's delivery verb likewise remains plain.
+- Reviewed missing links cover Curse of Befouled Fortune's checks, bonuses, and
+  class features; Curse of the Outcast's attitude rule; Cushioning Bands'
+  defensive rules; Damp Powder's actions and firearm rules; Dancing Darkness'
+  illumination terms; Dancing Lantern and Dancing Lights equipment and monster
+  references; Dark-Light's Light descriptor; and Dark Whispers' line of effect.
+- Damnation of Memory's ordinary detectable magic aura resolves to a rules
+  entity, not the identically named Magic Aura spell.
+
+Semantic review rejected Curse of Dragonflies' medium range as a link to the
+Medium class and Daemon Ward's duplicate publication navigation as a rules
+definition.
+
+Dancing Darkness's selected source says “Dancing shadows can be made
+permanent,” although the spell is named Dancing Darkness. The wording is
+preserved as source evidence and may be a copy-editing anomaly; do not silently
+rewrite it without errata or another authoritative source.
 
 ## Open questions and issues
 

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.cushioning-bands",
   "ruleset": "Pathfinder First Edition",
   "name": "Cushioning Bands",
@@ -147,7 +147,114 @@
   "description": {
     "raw": "Invisible bands of force encircle vital areas of the target. The bands resist crushing forces and impacts without interfering with movement. The target gains DR 2/piercing or slashing and takes half damage from constriction, falling, and being buried, as well as from similar crushing effects such as crushing hand. Grapple checks for attacks other than constricting (such as pinning or swallowing whole) are not affected. Once the spell has blocked 12 points of damage per caster level (to a maximum of 120 points at 10th level), it is discharged. The bands have no effect on incorporeal attacks unless they deal damage from constriction or crushing, or unless the attacks would be subject to damage reduction.",
     "search_text": "\"invisible bands of force encircle vital areas of the target. the bands resist crushing forces and impacts without interfering with movement. the target gains dr 2/piercing or slashing and takes half damage from constriction, falling, and being buried, as well as from similar crushing effects such as crushing hand. grapple checks for attacks other than constricting (such as pinning or swallowing whole) are not affected. once the spell has blocked 12 points of damage per caster level (to a maximum of 120 points at 10th level), it is discharged. the bands have no effect on incorporeal attacks unless they deal damage from constriction or crushing, or unless the attacks would be subject to damage reduction.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Invisible bands of force encircle vital areas of the target. The bands resist crushing forces and impacts without interfering with movement. The target gains "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "DR",
+              "relationship_id": "spell.cushioning-bands:uses_definition:rule.damage-reduction"
+            },
+            {
+              "node_type": "text",
+              "value": " 2/piercing or slashing and takes half damage from "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "constriction",
+              "relationship_id": "spell.cushioning-bands:uses_definition:rule.constrict"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "falling",
+              "relationship_id": "spell.cushioning-bands:uses_definition:rule.falling-damage"
+            },
+            {
+              "node_type": "text",
+              "value": ", and being buried, as well as from similar crushing effects such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "crushing hand",
+              "relationship_id": "spell.cushioning-bands:references:spell.crushing-hand",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ". "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Grapple",
+              "relationship_id": "spell.cushioning-bands:uses_definition:rule.grapple"
+            },
+            {
+              "node_type": "text",
+              "value": " checks for attacks other than constricting (such as pinning or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "swallowing whole",
+              "relationship_id": "spell.cushioning-bands:uses_definition:rule.swallow-whole"
+            },
+            {
+              "node_type": "text",
+              "value": ") are not affected. Once the spell has blocked 12 points of damage per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.cushioning-bands:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (to a maximum of 120 points at 10th level), it is discharged. The bands have no effect on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "incorporeal",
+              "relationship_id": "spell.cushioning-bands:uses_definition:rule.incorporeal"
+            },
+            {
+              "node_type": "text",
+              "value": " attacks unless they deal damage from "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "constriction",
+              "relationship_id": "spell.cushioning-bands:uses_definition:rule.constrict"
+            },
+            {
+              "node_type": "text",
+              "value": " or crushing, or unless the attacks would be subject to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "damage reduction",
+              "relationship_id": "spell.cushioning-bands:uses_definition:rule.damage-reduction"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -454,7 +561,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.crushing-hand",
-        "name": "crushing hand"
+        "name": "Crushing Hand"
       },
       "status": "accepted",
       "evidence": [
@@ -523,6 +630,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.cushioning-bands:uses_definition:rule.constrict",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.constrict",
+        "name": "Constrict"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cushioning-bands:afce165c7630b146",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "constriction",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Cushioning+Bands"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.cushioning-bands:uses_definition:rule.damage-reduction",
       "type": "uses_definition",
       "target": {
@@ -538,20 +665,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "damage reduction",
           "source_href": "https://www.d20pfsrd.com/gamemastering/special-abilities#TOC-Damage-Reduction"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.cushioning-bands:uses_definition:rule.dr",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.dr",
-        "name": "DR"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.cushioning-bands:e6a3bbe240eec222",
           "source_field": "spell_raw.links_raw[7]",
@@ -561,6 +675,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.cushioning-bands:uses_definition:rule.falling-damage",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.falling-damage",
+        "name": "Falling damage"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cushioning-bands:afce165c7630b146",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "falling",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Cushioning+Bands"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.cushioning-bands:uses_definition:rule.grapple",
@@ -623,11 +757,31 @@
       "note": null
     },
     {
-      "relationship_id": "spell.cushioning-bands:uses_definition:rule.will",
+      "relationship_id": "spell.cushioning-bands:uses_definition:rule.swallow-whole",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.swallow-whole",
+        "name": "Swallow whole"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cushioning-bands:afce165c7630b146",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "swallowing whole",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Cushioning+Bands"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.cushioning-bands:uses_definition:rule.will-saving-throw",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -691,11 +845,19 @@
       "raw_value_sha256": "12e410e262fb4f327d1b010f7df014ea2a5efdfec86e46882e1533c90f2b8de3",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.cushioning-bands:afce165c7630b146",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "04d9244f1d88b766017a98d833260eeac915c8f70b7cf073467aa917cff508b2",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

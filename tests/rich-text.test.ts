@@ -230,6 +230,38 @@ describe("rich-text schema and source parsing", () => {
     expect(createSoulGem.relationships.map((item: ValidatedJson) => item.target.entity_id))
       .not.toContain(createSoulGem.spell_id);
   });
+
+  it("keeps Batch 19 inheritance and homonyms semantically distinct", () => {
+    const cyclicReincarnation = canonical("cyclic-reincarnation");
+    expect(cyclicReincarnation.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.cyclic-reincarnation:functions_like:spell.reincarnate",
+      type: "functions_like",
+      status: "accepted",
+    }));
+
+    const damnationOfMemory = canonical("damnation-of-memory");
+    expect(damnationOfMemory.relationships).toContainEqual(expect.objectContaining({
+      relationship_id:
+        "spell.damnation-of-memory:uses_definition:rule.magic-aura-detection",
+      type: "uses_definition",
+      status: "accepted",
+    }));
+    expect(damnationOfMemory.relationships.map((item: ValidatedJson) => item.relationship_id))
+      .not.toContain("spell.damnation-of-memory:references:spell.magic-aura");
+
+    const curseOfDragonflies = canonical("curse-of-dragonflies");
+    expect(curseOfDragonflies.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.curse-of-dragonflies:uses_definition:rule.medium",
+      status: "rejected",
+    }));
+
+    const daemonWard = canonical("daemon-ward");
+    expect(daemonWard.relationships).toContainEqual(expect.objectContaining({
+      relationship_id:
+        "spell.daemon-ward:uses_definition:rule.pathfinder-campaign-setting-horsemen-of-the-apocalypse-book-of-the-damned-vol-3",
+      status: "rejected",
+    }));
+  });
 });
 
 

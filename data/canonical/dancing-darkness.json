@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.dancing-darkness",
   "ruleset": "Pathfinder First Edition",
   "name": "Dancing Darkness",
@@ -176,7 +176,102 @@
   "description": {
     "raw": "You create either up to four spheres of darkness that each reduce the illumination level by one step within a 20-foot-radius, or one dimly lit, vaguely humanoid shape. Each sphere of dancing darkness must stay within a 10-foot-radius area of one another but can otherwise move as you desire (no concentration required): forward or back, up or down, straight or turning corners, or the like. The darkness can move up to 100 feet per round. The effect winks out if the distance between you and it exceeds the spell’s range.\n\nDancing shadows can be made permanent with a permanency spell.",
     "search_text": "\"you create either up to four spheres of darkness that each reduce the illumination level by one step within a 20-foot-radius, or one dimly lit, vaguely humanoid shape. each sphere of dancing darkness must stay within a 10-foot-radius area of one another but can otherwise move as you desire (no concentration required): forward or back, up or down, straight or turning corners, or the like. the darkness can move up to 100 feet per round. the effect winks out if the distance between you and it exceeds the spell’s range.\\n\\ndancing shadows can be made permanent with a permanency spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create either up to four "
+            },
+            {
+              "node_type": "text",
+              "value": "spheres of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "darkness",
+              "relationship_id": "spell.dancing-darkness:uses_definition:illumination.darkness"
+            },
+            {
+              "node_type": "text",
+              "value": " that each reduce the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "illumination level",
+              "relationship_id": "spell.dancing-darkness:uses_definition:illumination.levels"
+            },
+            {
+              "node_type": "text",
+              "value": " by one step within a 20-foot-radius, or one "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dimly lit",
+              "relationship_id": "spell.dancing-darkness:uses_definition:illumination.dim-light"
+            },
+            {
+              "node_type": "text",
+              "value": ", vaguely "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "humanoid",
+              "relationship_id": "spell.dancing-darkness:uses_definition:rule.humanoid"
+            },
+            {
+              "node_type": "text",
+              "value": " shape. Each sphere of "
+            },
+            {
+              "node_type": "text",
+              "value": "dancing darkness",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " must stay within a 10-foot-radius area of one another but can otherwise move as you desire (no "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concentration",
+              "relationship_id": "spell.dancing-darkness:uses_definition:rule.concentration"
+            },
+            {
+              "node_type": "text",
+              "value": " required): forward or back, up or down, straight or turning corners, or the like. The darkness can move up to 100 feet per round. The effect winks out if the distance between you and it exceeds the spell’s range."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": " Dancing shadows can be made permanent with a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "permanency",
+              "relationship_id": "spell.dancing-darkness:references:spell.permanency",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -605,7 +700,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.permanency",
-        "name": "permanency"
+        "name": "Permanency"
       },
       "status": "accepted",
       "evidence": [
@@ -645,6 +740,66 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.dancing-darkness:uses_definition:illumination.darkness",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "illumination.darkness",
+        "name": "Darkness"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.dancing-darkness:98d219b4501b3371",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "darkness",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Dancing+Darkness"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.dancing-darkness:uses_definition:illumination.dim-light",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "illumination.dim-light",
+        "name": "Dim light"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.dancing-darkness:98d219b4501b3371",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "dimly lit",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Dancing+Darkness"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.dancing-darkness:uses_definition:illumination.levels",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "illumination.levels",
+        "name": "Illumination levels"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.dancing-darkness:98d219b4501b3371",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "illumination level",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Dancing+Darkness"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.dancing-darkness:uses_definition:rule.concentration",
@@ -755,11 +910,19 @@
       "raw_value_sha256": "de375763a09a11ba021c515e0cb99d11e79f32659491911f1ec97b2948f3ddaf",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.dancing-darkness:98d219b4501b3371",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "0fa108161618a22d18ad0fc1722c1e10f8437655bf83b4308059023047d6bbc1",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

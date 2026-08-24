@@ -1115,6 +1115,60 @@ describe("local rules browser", () => {
     expect(html.match(/data-embedded-spell="spell.crime-wave"/g)).toHaveLength(1);
   });
 
+  it.each([
+    ["cure-moderate-wounds-mass", "/spells/spell.cure-light-wounds-mass"],
+    ["cure-serious-wounds-mass", "/spells/spell.cure-light-wounds-mass"],
+    ["curse-of-befouled-fortune", "/entities/class-feature.charmed-life"],
+    ["curse-of-disgust", "/entities/condition.sickened"],
+    ["curse-of-dragonflies", "/spells/spell.gaseous-form"],
+    ["curse-of-keeping", "/spells/spell.dispel-magic"],
+    ["curse-of-magic-negation", "/entities/rule.spellblight"],
+    ["curse-of-the-outcast", "/entities/rule.attitude"],
+    ["curse-of-unexpected-death", "/entities/rule.touch-attack"],
+    ["curse-water", "/entities/item.unholy-water"],
+    ["cursed-earth", "/entities/rule.shakes"],
+    ["cursed-treasure", "/spells/spell.bestow-curse"],
+    ["cushioning-bands", "/entities/rule.falling-damage"],
+    ["cyclic-reincarnation", "/spells/spell.reincarnate"],
+    ["daemon-ward", "/spells/spell.death-ward"],
+    ["damnation", "/rules/descriptors#evil"],
+    ["damnation-of-memory", "/entities/rule.magic-aura-detection"],
+    ["damp-powder", "/rules/actions#full-round-action"],
+    ["dance-of-a-hundred-cuts", "/entities/rule.caster-level"],
+    ["dance-of-a-thousand-cuts", "/spells/spell.haste"],
+    ["dancing-darkness", "/rules/illumination#darkness"],
+    ["dancing-lantern", "/entities/item.lantern"],
+    ["dancing-lights", "/entities/monster.will-o-wisp"],
+    ["dark-light", "/rules/descriptors#light"],
+    ["dark-whispers", "/entities/rule.line-of-effect"],
+  ])("renders nineteenth-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it("links Curse of Unexpected Death's touch attacks but not its ordinary touch verbs", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.curse-of-unexpected-death`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description.match(/href="\/entities\/rule.touch-attack"/g)).toHaveLength(2);
+  });
+
+  it.each([
+    ["curse-of-dragonflies", "/classes/medium"],
+    ["cursed-treasure", "/entities/rule.touch-attack"],
+    ["damnation-of-memory", "/spells/spell.magic-aura"],
+  ])("omits nineteenth-batch semantic false positives from spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain(`href="${target}"`);
+  });
+
   it("keeps Magic Aura's unmatched spell relationships outside its description", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.magic-aura`);
     const html = await response.text();

@@ -120,6 +120,21 @@
         "aon:spell.daemon-ward:3c84c0ffb12afc60"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.daemon-ward:3c84c0ffb12afc60",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.daemon-ward:3c84c0ffb12afc60",
+        "d20pfsrd:spell.daemon-ward:88ccfa4d96e7e042"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -190,6 +205,25 @@
         "d20pfsrd:spell.daemon-ward:88ccfa4d96e7e042"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.daemon-ward:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.daemon-ward:88ccfa4d96e7e042",
+          "source_field": "spell_raw.links_raw[1]"
+        },
+        {
+          "observation_id": "aon:spell.daemon-ward:3c84c0ffb12afc60",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:spell.daemon-ward:88ccfa4d96e7e042",
+        "aon:spell.daemon-ward:3c84c0ffb12afc60"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.daemon-ward:appears_on_spell_list:spell-list.oracle",
@@ -311,6 +345,10 @@
         {
           "observation_id": "aon:spell.daemon-ward:3c84c0ffb12afc60",
           "source_field": "spell_raw.description_raw"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.daemon-ward:88ccfa4d96e7e042",
+          "source_field": "spell_raw.links_raw[6]"
         }
       ],
       "considered_observation_ids": [
@@ -362,21 +400,6 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.daemon-ward:references:spell.death-ward",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.daemon-ward:88ccfa4d96e7e042",
-          "source_field": "spell_raw.links_raw[6]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.daemon-ward:3c84c0ffb12afc60",
-        "d20pfsrd:spell.daemon-ward:88ccfa4d96e7e042"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.daemon-ward:uses_action:action.standard-action",
       "decision": "accept",
       "evidence": [
@@ -392,7 +415,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.daemon-ward:uses_definition:rule.daemons",
+      "relationship_id": "spell.daemon-ward:uses_definition:rule.daemon",
       "decision": "accept",
       "evidence": [
         {
@@ -408,7 +431,7 @@
     },
     {
       "relationship_id": "spell.daemon-ward:uses_definition:rule.pathfinder-campaign-setting-horsemen-of-the-apocalypse-book-of-the-damned-vol-3",
-      "decision": "accept",
+      "decision": "reject",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.daemon-ward:88ccfa4d96e7e042",
@@ -419,7 +442,7 @@
         "aon:spell.daemon-ward:3c84c0ffb12afc60",
         "d20pfsrd:spell.daemon-ward:88ccfa4d96e7e042"
       ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+      "rationale": "The secondary source's publication navigation duplicates the canonical Published In relationship and is not a rules definition."
     },
     {
       "relationship_id": "spell.daemon-ward:uses_definition:rule.spell-resistance",
@@ -435,25 +458,6 @@
         "d20pfsrd:spell.daemon-ward:88ccfa4d96e7e042"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.daemon-ward:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.daemon-ward:88ccfa4d96e7e042",
-          "source_field": "spell_raw.links_raw[1]"
-        },
-        {
-          "observation_id": "aon:spell.daemon-ward:3c84c0ffb12afc60",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:spell.daemon-ward:88ccfa4d96e7e042",
-        "aon:spell.daemon-ward:3c84c0ffb12afc60"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
     }
   ],
   "unresolved_questions": [

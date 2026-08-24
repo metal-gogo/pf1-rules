@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.curse-of-dragonflies",
   "ruleset": "Pathfinder First Edition",
   "name": "Curse of Dragonflies",
@@ -188,7 +188,60 @@
   "description": {
     "raw": "You invest a target with cursed elemental energy, making the open skies anathema to it. If the affected creature ever tries to fly more than 5 feet above the ground, paper insects erupt from the air around the creature to interfere with its movement. The affected creature’s flight maneuverability decreases by one step for every 3 caster levels you have. A creature whose maneuverability would be brought below clumsy must land at the end of its turn each round or fall.\n\nThis spell does not affect incorporeal creatures or creatures that are otherwise intangible (such as a wizard using gaseous form to fly).",
     "search_text": "\"you invest a target with cursed elemental energy, making the open skies anathema to it. if the affected creature ever tries to fly more than 5 feet above the ground, paper insects erupt from the air around the creature to interfere with its movement. the affected creature’s flight maneuverability decreases by one step for every 3 caster levels you have. a creature whose maneuverability would be brought below clumsy must land at the end of its turn each round or fall.\\n\\nthis spell does not affect incorporeal creatures or creatures that are otherwise intangible (such as a wizard using gaseous form to fly).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You invest a target with cursed elemental energy, making the open skies anathema to it. If the affected creature ever tries to fly more than 5 feet above the ground, "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "paper",
+              "relationship_id": "spell.curse-of-dragonflies:uses_definition:rule.paper"
+            },
+            {
+              "node_type": "text",
+              "value": " insects erupt from the air around the creature to interfere with its movement. The affected creature’s flight maneuverability decreases by one step for every 3 caster levels you have. A creature whose maneuverability would be brought below clumsy must land at the end of its turn each round or fall."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": " This spell does not affect "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "incorporeal",
+              "relationship_id": "spell.curse-of-dragonflies:uses_definition:rule.incorporeal"
+            },
+            {
+              "node_type": "text",
+              "value": " creatures or creatures that are otherwise intangible (such as a wizard using "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "gaseous form",
+              "relationship_id": "spell.curse-of-dragonflies:references:spell.gaseous-form",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " to fly)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -389,6 +442,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.curse-of-dragonflies:appears_on_spell_list:spell-list.summoner-unchained",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.summoner-unchained",
+        "name": "Summoner (Unchained) Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.curse-of-dragonflies:8dfa49702906324e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 4",
+          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/conjuration/curse-of-dragonflies.bLOXAvcgrCd2cIty.yaml"
+        }
+      ],
+      "note": "Reviewed project decision: add Summoner (Unchained) 4 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
+    },
+    {
       "relationship_id": "spell.curse-of-dragonflies:appears_on_spell_list:spell-list.witch",
       "type": "appears_on_spell_list",
       "target": {
@@ -570,7 +643,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.gaseous-form",
-        "name": "gaseous form"
+        "name": "Gaseous Form"
       },
       "status": "accepted",
       "evidence": [
@@ -639,7 +712,7 @@
         "entity_id": "rule.medium",
         "name": "medium"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.curse-of-dragonflies:c5827681d2c27c2b",
@@ -649,7 +722,7 @@
           "source_href": "https://www.d20pfsrd.com/alternative-rule-systems/occult-adventures/occult-classes/medium"
         }
       ],
-      "note": null
+      "note": "The secondary source links the medium range category to the unrelated Medium class page."
     },
     {
       "relationship_id": "spell.curse-of-dragonflies:uses_definition:rule.paper",
@@ -692,11 +765,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.curse-of-dragonflies:uses_definition:rule.will",
+      "relationship_id": "spell.curse-of-dragonflies:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -710,26 +783,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.curse-of-dragonflies:appears_on_spell_list:spell-list.summoner-unchained",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.summoner-unchained",
-        "name": "Summoner (Unchained) Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.curse-of-dragonflies:8dfa49702906324e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "manual_verification",
-          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 4",
-          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/conjuration/curse-of-dragonflies.bLOXAvcgrCd2cIty.yaml"
-        }
-      ],
-      "note": "Reviewed project decision: add Summoner (Unchained) 4 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
     }
   ],
   "provenance": [
@@ -780,11 +833,19 @@
       "raw_value_sha256": "a1e00074be3edc6a97948222a5c48133b0734b7c13ddfeeab772b739fbc3173f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.curse-of-dragonflies:8dfa49702906324e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "ec12c8f010a5e1887547786de8c55cea6000f5c989380adf5614776dfe6d054a",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.cure-serious-wounds-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Cure Serious Wounds, Mass",
@@ -142,7 +142,33 @@
   "description": {
     "raw": "This spell functions like mass cure light wounds, except that it cures 3d8 points of damage + 1 point per caster level (maximum +35).",
     "search_text": "\"this spell functions like mass cure light wounds, except that it cures 3d8 points of damage + 1 point per caster level (maximum +35).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "mass cure light wounds",
+              "relationship_id": "spell.cure-serious-wounds-mass:functions_like:spell.cure-light-wounds-mass",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that it cures 3d8 points of damage + 1 point per caster level (maximum +35)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -436,6 +462,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like mass cure light wounds, except that it cures 3d8 points of damage + 1 point per caster level (maximum +35).",
           "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.cure-serious-wounds-mass:e81e7e37b279f1fa",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "mass cure light wounds",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/cure-light-wounds"
         }
       ],
       "note": null
@@ -542,26 +575,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.cure-serious-wounds-mass:references:spell.mass-cure-light-wounds",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.mass-cure-light-wounds",
-        "name": "mass cure light wounds"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.cure-serious-wounds-mass:e81e7e37b279f1fa",
-          "source_field": "spell_raw.links_raw[5]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "mass cure light wounds",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/cure-light-wounds"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.cure-serious-wounds-mass:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -650,11 +663,19 @@
       "raw_value_sha256": "7a07debb2313033b3f9ef7b8e42fdbb354bc3b926ef1e80d70baeff44e1a83d2",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.cure-serious-wounds-mass:1f5a2dc27eced798",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "8cd8189ee7981128df546d69e42383fc409d1526db982b866f509a13bb6fef24",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

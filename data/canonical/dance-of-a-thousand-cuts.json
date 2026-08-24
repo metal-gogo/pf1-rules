@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.dance-of-a-thousand-cuts",
   "ruleset": "Pathfinder First Edition",
   "name": "Dance of a Thousand Cuts",
@@ -117,7 +117,45 @@
   "description": {
     "raw": "This spell functions as dance of a hundred cuts, except you also gain the benefits of haste.",
     "search_text": "\"this spell functions as dance of a hundred cuts, except you also gain the benefits of haste.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dance of a hundred cuts",
+              "relationship_id": "spell.dance-of-a-thousand-cuts:functions_like:spell.dance-of-a-hundred-cuts",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you also gain the benefits of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "haste",
+              "relationship_id": "spell.dance-of-a-thousand-cuts:references:spell.haste",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -192,6 +230,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.dance-of-a-thousand-cuts:appears_on_spell_list:spell-list.duels-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.duels-subdomain",
+        "name": "Duels Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.duels:a29bc5fb",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "8th—dance of a thousand cuts",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=War"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
       "relationship_id": "spell.dance-of-a-thousand-cuts:appears_on_spell_list:spell-list.skald",
       "type": "appears_on_spell_list",
       "target": {
@@ -227,6 +285,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as dance of a hundred cuts, except you also gain the benefits of haste.",
           "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.dance-of-a-thousand-cuts:e336325da03f26ab",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dance of a hundred cuts",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/dance-of-a-hundred-cuts"
         }
       ],
       "note": null
@@ -300,32 +365,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.dance-of-a-thousand-cuts:references:spell.dance-of-a-hundred-cuts",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.dance-of-a-hundred-cuts",
-        "name": "dance of a hundred cuts"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.dance-of-a-thousand-cuts:e336325da03f26ab",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "dance of a hundred cuts",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/dance-of-a-hundred-cuts"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.dance-of-a-thousand-cuts:references:spell.haste",
       "type": "references",
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.haste",
-        "name": "haste"
+        "name": "Haste"
       },
       "status": "accepted",
       "evidence": [
@@ -385,26 +430,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.dance-of-a-thousand-cuts:appears_on_spell_list:spell-list.duels-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.duels-subdomain",
-        "name": "Duels Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.duels:a29bc5fb",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "8th—dance of a thousand cuts",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=War"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -463,11 +488,19 @@
       "raw_value_sha256": "d44d1b678a0d0131cfc5ce1baeb83642c749a9a25950ad71410414261fd2fd87",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.dance-of-a-thousand-cuts:b7c470066e96ee08",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "4ffad622189b7580afe2dfde1bcfe80cf40db85b28b3b60d8d9d536adf57a71d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

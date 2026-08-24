@@ -94,6 +94,23 @@ test("Batch 18 links and expands Crime Wave without recursive or new-tab navigat
   await expect(page).toHaveURL(/\/spells\/spell\.crime-wave$/);
 });
 
+test("Batch 19 separates Curse Water's alignment and creature-type links", async ({ page }) => {
+  await page.goto("/spells/spell.curse-water");
+
+  const description = page.locator(".rich-description").first();
+  await expect(description.locator('a[href="/entities/rule.good"]')).toHaveText("good");
+  await expect(description.locator('a[href="/entities/rule.evil"]')).toHaveText("evil");
+  await expect(description.locator('a[href="/entities/rule.outsider"]')).toHaveCount(2);
+  const unholyWater = description.locator('a[href="/entities/item.unholy-water"]').first();
+  await expect(unholyWater).not.toHaveAttribute("target", "_blank");
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+
+  await unholyWater.click();
+  await expect(page).toHaveURL(/\/entities\/item\.unholy-water$/);
+});
+
 test("pilot lists remain semantic and accessible on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/spells/spell.bestow-curse-greater");

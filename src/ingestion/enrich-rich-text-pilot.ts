@@ -103,6 +103,14 @@ const alluringLightContextualTargets = new Set([
 
 const antiSummoningContextualTargets = new Set(["rule.summon"]);
 
+const dancingDarknessContextualTargets = new Set(["illumination.darkness"]);
+
+const curseWaterContextualTargets = new Set([
+  "rule.good",
+  "rule.evil",
+  "rule.outsider",
+]);
+
 const canonicalTargets = new Map<string, {
   id: string;
   name: string;
@@ -262,6 +270,12 @@ const canonicalTargets = new Map<string, {
   ["rule.tomb-guardian-mummy", { id: "monster.tomb-guardian-mummy", name: "Tomb guardian mummy", type: "monster" }],
   ["rule.extra-dimensional", { id: "rule.extradimensional", name: "Extradimensional" }],
   ["rule.potion-of", { id: "rule.potion", name: "Potion" }],
+  ["rule.caster-levels", { id: "rule.caster-level", name: "Caster level" }],
+  ["rule.diseases", { id: "rule.disease", name: "Disease" }],
+  ["rule.hakes", { id: "rule.shakes", name: "Shakes" }],
+  ["rule.lore-master", { id: "class-feature.lore-master", name: "Lore master", type: "class_feature" }],
+  ["rule.swashbucklers", { id: "class.swashbuckler", name: "Swashbuckler", type: "class" }],
+  ["rule.will-o-wisps", { id: "monster.will-o-wisp", name: "Will-o'-wisp", type: "monster" }],
   ["spell.create-soul-gems", { id: "spell.create-soul-gem", name: "Create Soul Gem", type: "spell", relationshipType: "references" }],
 ]);
 
@@ -362,6 +376,22 @@ const canonicalRelationshipTargets = new Map<string, {
   [
     "spell.cure-critical-wounds-mass:uses_definition:rule.community",
     { id: "spell-list.community-domain", name: "Community Domain Spells", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.cure-moderate-wounds-mass:references:spell.cure-light-wounds-mass",
+    { id: "spell.cure-light-wounds-mass", name: "Cure Light Wounds, Mass", type: "spell", relationshipType: "functions_like" },
+  ],
+  [
+    "spell.cure-serious-wounds-mass:references:spell.cure-light-wounds-mass",
+    { id: "spell.cure-light-wounds-mass", name: "Cure Light Wounds, Mass", type: "spell", relationshipType: "functions_like" },
+  ],
+  [
+    "spell.cyclic-reincarnation:references:spell.reincarnate",
+    { id: "spell.reincarnate", name: "Reincarnate", type: "spell", relationshipType: "functions_like" },
+  ],
+  [
+    "spell.damnation-of-memory:references:spell.magic-aura",
+    { id: "rule.magic-aura-detection", name: "Magic aura", type: "rule", relationshipType: "uses_definition" },
   ],
 ]);
 
@@ -657,6 +687,14 @@ const rejectedDescriptionRelationships = new Map([
     "spell.crushing-despair:uses_definition:rule.crushing-despair-modified",
     "The secondary link points to an unrelated third-party modified spell and is not part of the selected first-party description.",
   ],
+  [
+    "spell.curse-of-dragonflies:uses_definition:rule.medium",
+    "The secondary source links the medium range category to the unrelated Medium class page.",
+  ],
+  [
+    "spell.daemon-ward:uses_definition:rule.pathfinder-campaign-setting-horsemen-of-the-apocalypse-book-of-the-damned-vol-3",
+    "The secondary source's publication navigation duplicates the canonical Published In relationship and is not a rules definition.",
+  ],
 ]);
 
 
@@ -937,6 +975,62 @@ const reviewedDescriptionReferences = new Map<string, ReviewedDescriptionReferen
   ["spell.cure-light-wounds-mass", [
     { targetType: "rule", targetId: "rule.positive-energy", targetName: "Positive energy", anchorText: "positive energy" },
     { targetType: "rule", targetId: "rule.undead", targetName: "Undead", anchorText: "undead" },
+  ]],
+  ["spell.curse-of-befouled-fortune", [
+    { targetType: "rule", targetId: "rule.luck-bonus", targetName: "Luck bonus", anchorText: "luck bonuses" },
+    { targetType: "class_feature", targetId: "class-feature.charmed-life", targetName: "Charmed life", anchorText: "charmed life" },
+    { targetType: "rule", targetId: "rule.attack-rolls", targetName: "Attack rolls", anchorText: "attack" },
+    { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saving throw" },
+    { targetType: "rule", targetId: "rule.skill-check", targetName: "Skill checks", anchorText: "skill check" },
+  ]],
+  ["spell.curse-of-unexpected-death", [
+    { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saving throw" },
+  ]],
+  ["spell.curse-of-the-outcast", [
+    { targetType: "rule", targetId: "rule.attitude", targetName: "Attitude", anchorText: "initial attitude" },
+  ]],
+  ["spell.curse-water", [
+    { targetType: "rule", targetId: "rule.negative-energy", targetName: "Negative energy", anchorText: "negative energy" },
+    { targetType: "item", targetId: "item.unholy-water", targetName: "Unholy water", anchorText: "unholy water" },
+    { targetType: "rule", targetId: "rule.good", targetName: "Good", anchorText: "good" },
+    { targetType: "rule", targetId: "rule.outsider", targetName: "Outsider", anchorText: "outsiders" },
+    { targetType: "rule", targetId: "rule.undead", targetName: "Undead", anchorText: "undead" },
+    { targetType: "rule", targetId: "rule.evil", targetName: "Evil", anchorText: "evil" },
+  ]],
+  ["spell.cursed-earth", [
+    { targetType: "rule", targetId: "rule.shakes", targetName: "Shakes", anchorText: "shakes" },
+  ]],
+  ["spell.cushioning-bands", [
+    { targetType: "rule", targetId: "rule.constrict", targetName: "Constrict", anchorText: "constriction" },
+    { targetType: "rule", targetId: "rule.falling-damage", targetName: "Falling damage", anchorText: "falling" },
+    { targetType: "rule", targetId: "rule.swallow-whole", targetName: "Swallow whole", anchorText: "swallowing whole" },
+  ]],
+  ["spell.damp-powder", [
+    { type: "uses_definition", targetType: "action", targetId: "action.full-round-action", targetName: "Full-round action", anchorText: "full-round action" },
+    { type: "uses_definition", targetType: "action", targetId: "action.standard-action", targetName: "Standard action", anchorText: "standard action" },
+    { targetType: "rule", targetId: "rule.firearm", targetName: "Firearm", anchorText: "firearm" },
+  ]],
+  ["spell.dancing-darkness", [
+    { targetType: "rule", targetId: "illumination.darkness", targetName: "Darkness", anchorText: "darkness" },
+    { targetType: "rule", targetId: "illumination.levels", targetName: "Illumination levels", anchorText: "illumination level" },
+    { targetType: "rule", targetId: "illumination.dim-light", targetName: "Dim light", anchorText: "dimly lit" },
+  ]],
+  ["spell.dancing-lantern", [
+    { targetType: "item", targetId: "item.lantern", targetName: "Lantern", anchorText: "lantern" },
+    { targetType: "item", targetId: "item.oil", targetName: "Oil", anchorText: "oil" },
+    { targetType: "rule", targetId: "rule.caster-level", targetName: "Caster level", anchorText: "CL" },
+  ]],
+  ["spell.dancing-lights", [
+    { targetType: "item", targetId: "item.lantern", targetName: "Lantern", anchorText: "lanterns" },
+    { targetType: "item", targetId: "item.torch", targetName: "Torch", anchorText: "torches" },
+    { targetType: "monster", targetId: "monster.will-o-wisp", targetName: "Will-o'-wisp", anchorText: "will-o'-wisps" },
+    { targetType: "rule", targetId: "rule.concentration", targetName: "Concentration", anchorText: "concentration" },
+  ]],
+  ["spell.dark-light", [
+    { targetType: "descriptor", targetId: "descriptor.light", targetName: "Light", anchorText: "light" },
+  ]],
+  ["spell.dark-whispers", [
+    { targetType: "rule", targetId: "rule.line-of-effect", targetName: "Line of effect", anchorText: "line of effect" },
   ]],
 ]);
 
@@ -1834,6 +1928,12 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
       ) && (
         spellId !== "spell.baleful-shadow-transmutation" ||
         relationship.target.entity_id !== "subschool.polymorph"
+      ) && (
+        spellId !== "spell.dancing-darkness" ||
+        !dancingDarknessContextualTargets.has(String(relationship.target.entity_id))
+      ) && (
+        spellId !== "spell.curse-water" ||
+        !curseWaterContextualTargets.has(String(relationship.target.entity_id))
       )
     );
     if (spellId === "spell.darkness") {
@@ -1886,6 +1986,34 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
     }
     if (spellId === "spell.anti-summoning-shield") {
       linkAntiSummoningShieldContext(sourceDocument);
+    }
+    if (spellId === "spell.dancing-darkness") {
+      linkContext(sourceDocument, "spheres of darkness", [{
+        value: "darkness",
+        relationshipId: "spell.dancing-darkness:uses_definition:illumination.darkness",
+      }]);
+    }
+    if (spellId === "spell.curse-water") {
+      linkContext(sourceDocument, "good outsiders", [
+        {
+          value: "good",
+          relationshipId: "spell.curse-water:uses_definition:rule.good",
+        },
+        {
+          value: "outsiders",
+          relationshipId: "spell.curse-water:uses_definition:rule.outsider",
+        },
+      ]);
+      linkContext(sourceDocument, "evil outsiders", [
+        {
+          value: "evil",
+          relationshipId: "spell.curse-water:uses_definition:rule.evil",
+        },
+        {
+          value: "outsiders",
+          relationshipId: "spell.curse-water:uses_definition:rule.outsider",
+        },
+      ]);
     }
     const richText = linkRichTextDocument(
       sourceDocument,
@@ -1940,6 +2068,20 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
         richText.document,
         "spell.cure-light-wounds-mass:mass_variant_of:spell.cure-light-wounds",
         ["cure light wounds"],
+      );
+    }
+    if (spellId === "spell.curse-of-unexpected-death") {
+      removeRelationshipLinkValues(
+        richText.document,
+        "spell.curse-of-unexpected-death:uses_definition:rule.touch-attack",
+        ["touch"],
+      );
+    }
+    if (spellId === "spell.cursed-treasure") {
+      removeRelationshipLinkValues(
+        richText.document,
+        "spell.cursed-treasure:uses_definition:rule.touch-attack",
+        ["touch"],
       );
     }
     if (spellId === "spell.baleful-shadow-transmutation") {
