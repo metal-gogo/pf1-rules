@@ -170,6 +170,23 @@ test("Batch 22 links only the explicit Snare spell reference", async ({ page }) 
   await expect(page).toHaveURL(/\/spells\/spell\.snare$/);
 });
 
+test("Batch 23 links only Greater Discharge's three parent references", async ({ page }) => {
+  await page.goto("/spells/spell.discharge-greater");
+
+  const description = page.locator(".rich-description").first();
+  const parentLinks = description.locator('a[href="/spells/spell.discharge"]');
+  await expect(parentLinks).toHaveCount(3);
+  await expect(parentLinks.first()).not.toHaveAttribute("target", "_blank");
+  await expect(page.locator('[data-embedded-spell="spell.discharge"]')).toHaveCount(1);
+  await expect(page.locator("[data-embedded-spell] [data-embedded-spell]")).toHaveCount(0);
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+
+  await parentLinks.first().click();
+  await expect(page).toHaveURL(/\/spells\/spell\.discharge$/);
+});
+
 test("pilot lists remain semantic and accessible on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/spells/spell.bestow-curse-greater");

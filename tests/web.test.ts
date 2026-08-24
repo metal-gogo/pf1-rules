@@ -1326,6 +1326,63 @@ describe("local rules browser", () => {
     expect(snaresDescription.match(/href="\/spells\/spell.snare"/g)).toHaveLength(1);
   });
 
+  it.each([
+    ["detect-the-faithful", "/entities/rule.line-of-sight"],
+    ["detect-thoughts", "/entities/rule.intelligence"],
+    ["determine-depth", "/spells/spell.passwall"],
+    ["detonate", "/rules/descriptors#acid"],
+    ["detoxify", "/entities/rule.poison"],
+    ["devil-snare", "/spells/spell.dimensional-anchor"],
+    ["diagnose-disease", "/entities/condition.sickened"],
+    ["die-for-your-master", "/spells/spell.bleed-for-your-master"],
+    ["dimensional-anchor", "/spells/spell.astral-projection"],
+    ["dimensional-blade", "/spells/spell.mage-armor"],
+    ["dimensional-bounce", "/entities/rule.line-of-effect"],
+    ["diminish-plants", "/spells/spell.entangle"],
+    ["diminish-resistance", "/rules/descriptors#sonic"],
+    ["diminished-detection", "/spells/spell.detect-magic"],
+    ["disable-construct", "/entities/rule.immunity-to-magic"],
+    ["discern-location", "/rules/magic-schools#scrying"],
+    ["discharge", "/entities/rule.robot"],
+    ["discharge-greater", "/spells/spell.discharge"],
+    ["discovery-torch", "/rules/illumination#bright-light"],
+    ["disguise-other", "/spells/spell.disguise-self"],
+    ["disguise-self", "/entities/rule.creature-type"],
+    ["disguise-weapon", "/entities/item.greatsword"],
+    ["dismissal", "/entities/rule.extraplanar"],
+    ["dispel-balance", "/spells/spell.dispel-magic"],
+    ["dispel-chaos", "/spells/spell.dispel-evil"],
+  ])("renders twenty-third-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it("links only semantic Batch 23 spell and touch references", async () => {
+    const [greaterResponse, resistanceResponse, depthResponse, snareResponse, balanceResponse] =
+      await Promise.all([
+        fetch(`${baseUrl}/spells/spell.discharge-greater`),
+        fetch(`${baseUrl}/spells/spell.diminish-resistance`),
+        fetch(`${baseUrl}/spells/spell.determine-depth`),
+        fetch(`${baseUrl}/spells/spell.devil-snare`),
+        fetch(`${baseUrl}/spells/spell.dispel-balance`),
+      ]);
+    const descriptions = await Promise.all(
+      [greaterResponse, resistanceResponse, depthResponse, snareResponse, balanceResponse].map(
+        async (response) => (await response.text()).match(
+          /<section><h2>Description<\/h2>(.*?)<\/section>/s,
+        )?.[1] ?? "",
+      ),
+    );
+    expect(descriptions[0]!.match(/href="\/spells\/spell.discharge"/g)).toHaveLength(3);
+    expect(descriptions[1]!).not.toContain('href="/spells/spell.resistance"');
+    for (const description of descriptions.slice(2)) {
+      expect(description).not.toContain('>touch</a>');
+    }
+  });
+
   it("links Curse of Unexpected Death's touch attacks but not its ordinary touch verbs", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.curse-of-unexpected-death`);
     const html = await response.text();

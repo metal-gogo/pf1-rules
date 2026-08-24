@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.dimensional-bounce",
   "ruleset": "Pathfinder First Edition",
   "name": "Dimensional Bounce",
@@ -153,7 +153,78 @@
   "description": {
     "raw": "You designate two locations within range and create a dimensional link between them; you must have line of effect to both locations when casting this spell. As a swift action, you can teleport from your current location to either of the designated locations as if you had cast dimension door. The spell is discharged once you have used it to teleport a number of times equal to one-fourth your caster level (maximum 5 times).",
     "search_text": "\"you designate two locations within range and create a dimensional link between them; you must have line of effect to both locations when casting this spell. as a swift action, you can teleport from your current location to either of the designated locations as if you had cast dimension door. the spell is discharged once you have used it to teleport a number of times equal to one-fourth your caster level (maximum 5 times).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You designate two locations within range and create a dimensional link between them; you must have "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "line of effect",
+              "relationship_id": "spell.dimensional-bounce:uses_definition:rule.line-of-effect"
+            },
+            {
+              "node_type": "text",
+              "value": " to both locations when casting this spell. As a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "swift action",
+              "relationship_id": "spell.dimensional-bounce:uses_action:action.swift-action"
+            },
+            {
+              "node_type": "text",
+              "value": ", you can "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "teleport",
+              "relationship_id": "spell.dimensional-bounce:references:spell.teleport"
+            },
+            {
+              "node_type": "text",
+              "value": " from your current location to either of the designated locations as if you had cast "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dimension door",
+              "relationship_id": "spell.dimensional-bounce:references:spell.dimension-door",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ". The spell is discharged once you have used it to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "teleport",
+              "relationship_id": "spell.dimensional-bounce:references:spell.teleport"
+            },
+            {
+              "node_type": "text",
+              "value": " a number of times equal to one-fourth your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.dimensional-bounce:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum 5 times)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -455,7 +526,7 @@
         "entity_id": "publication.will",
         "name": "Will"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.dimensional-bounce:a5fc4c3a7e84995a",
@@ -465,7 +536,7 @@
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
         }
       ],
-      "note": null
+      "note": "The source href points to the Will saving-throw rules, not a publication."
     },
     {
       "relationship_id": "spell.dimensional-bounce:references:spell.dimension-door",
@@ -473,7 +544,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.dimension-door",
-        "name": "dimension door"
+        "name": "Dimension Door"
       },
       "status": "accepted",
       "evidence": [
@@ -500,7 +571,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.teleport",
-        "name": "teleport"
+        "name": "Teleport"
       },
       "status": "accepted",
       "evidence": [
@@ -607,6 +678,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.dimensional-bounce:uses_definition:rule.line-of-effect",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.line-of-effect",
+        "name": "Line of effect"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.dimensional-bounce:0d9309d300c3bf03",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "line of effect",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Dimensional+Bounce"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     }
   ],
   "provenance": [
@@ -657,11 +748,19 @@
       "raw_value_sha256": "7e878fa5b978241062b9fa30400625ab1b197873abf2f19c37e43dbdb71d553e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.dimensional-bounce:0d9309d300c3bf03",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "840c1abe22cfed7a300c8b73281f949f3d31829fa1e54cae9647b08cbfbf6bfa",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

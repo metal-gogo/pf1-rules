@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.dimensional-blade",
   "ruleset": "Pathfinder First Edition",
   "name": "Dimensional Blade",
@@ -212,7 +212,101 @@
   "description": {
     "raw": "This spell gives you the power to turn one melee weapon in your hand into a two-dimensional object with length and height but no width. A sword becomes a flat image of a sword, a mace is reduced to a flat outline, and so on. The magic of the spell allows the weapon to be wielded by you normally, creating just enough depth to grasp it.\n\nAttacks made with the weapon are melee touch attacks that ignore all armor. Force effects, such as mage armor and shield, still apply their AC against attacks made with a dimensional blade. Bludgeoning weapons used to make attacks with this spell deal half damage and are treated as slashing weapons. If the weapon leaves your hand before the end of the spell, the effect ends.",
     "search_text": "\"this spell gives you the power to turn one melee weapon in your hand into a two-dimensional object with length and height but no width. a sword becomes a flat image of a sword, a mace is reduced to a flat outline, and so on. the magic of the spell allows the weapon to be wielded by you normally, creating just enough depth to grasp it.\\n\\nattacks made with the weapon are melee touch attacks that ignore all armor. force effects, such as mage armor and shield, still apply their ac against attacks made with a dimensional blade. bludgeoning weapons used to make attacks with this spell deal half damage and are treated as slashing weapons. if the weapon leaves your hand before the end of the spell, the effect ends.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell gives you the power to turn one melee weapon in your hand into a two-dimensional object with length and height but no width. A sword becomes a flat image of a sword, a mace is reduced to a flat outline, and so on. The magic of the spell allows the weapon to be wielded by you normally, creating just enough depth to grasp it."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": " "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Attacks",
+              "relationship_id": "spell.dimensional-blade:uses_definition:rule.attack-rolls"
+            },
+            {
+              "node_type": "text",
+              "value": " made with the weapon are melee "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch",
+              "relationship_id": "spell.dimensional-blade:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " attacks that ignore all armor. "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Force effects",
+              "relationship_id": "spell.dimensional-blade:uses_definition:descriptor.force"
+            },
+            {
+              "node_type": "text",
+              "value": ", such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "mage armor",
+              "relationship_id": "spell.dimensional-blade:references:spell.mage-armor",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "shield",
+              "relationship_id": "spell.dimensional-blade:references:spell.shield",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", still apply their "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "AC",
+              "relationship_id": "spell.dimensional-blade:uses_definition:rule.armor-class"
+            },
+            {
+              "node_type": "text",
+              "value": " against attacks made with a "
+            },
+            {
+              "node_type": "text",
+              "value": "dimensional blade",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ". Bludgeoning weapons used to make attacks with this spell deal half damage and are treated as slashing weapons. If the weapon leaves your hand before the end of the spell, the effect ends."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -580,7 +674,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.mage-armor",
-        "name": "mage armor"
+        "name": "Mage Armor"
       },
       "status": "accepted",
       "evidence": [
@@ -600,7 +694,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.shield",
-        "name": "shield"
+        "name": "Shield"
       },
       "status": "accepted",
       "evidence": [
@@ -662,26 +756,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.dimensional-blade:uses_definition:rule.touch",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.dimensional-blade:dee73da067e84865",
-          "source_field": "spell_raw.links_raw[9]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "touch",
-          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Touch-Attacks"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.dimensional-blade:appears_on_spell_list:spell-list.omdura",
       "type": "appears_on_spell_list",
       "target": {
@@ -721,6 +795,86 @@
         }
       ],
       "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.dimensional-blade:uses_definition:descriptor.force",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.force",
+        "name": "Force"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.dimensional-blade:b103b64c69a765cc",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Force effects",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Dimensional+Blade"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.dimensional-blade:uses_definition:rule.armor-class",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.armor-class",
+        "name": "Armor Class"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.dimensional-blade:b103b64c69a765cc",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "AC",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Dimensional+Blade"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.dimensional-blade:uses_definition:rule.attack-rolls",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.attack-rolls",
+        "name": "Attack rolls"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.dimensional-blade:b103b64c69a765cc",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Attacks",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Dimensional+Blade"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.dimensional-blade:uses_definition:rule.touch-attack",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.dimensional-blade:dee73da067e84865",
+          "source_field": "spell_raw.links_raw[9]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "touch",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Touch-Attacks"
+        }
+      ],
+      "note": null
     }
   ],
   "provenance": [
@@ -771,11 +925,19 @@
       "raw_value_sha256": "68502025c3c70160e1432b31d39fad3090207c39309184c11f9e6e661cea58c8",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.dimensional-blade:b103b64c69a765cc",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e2927c267f89e357d24dd6500e72faa434a1752e6c663092b700f7acb6fdaae7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

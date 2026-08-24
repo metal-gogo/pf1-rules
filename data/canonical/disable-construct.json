@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.disable-construct",
   "ruleset": "Pathfinder First Edition",
   "name": "Disable Construct",
@@ -153,7 +153,93 @@
   "description": {
     "raw": "You can make a melee touch attack to send a pulse into the target, interfering with the magic that endows it with life. If the construct fails its saving throw, it becomes helpless, but it receives a new save each round at the end of its turn to shake off the effect. If the construct is normally immune to magic, the pulse is less effective and the construct receives a +4 bonus on its saving throw.",
     "search_text": "\"you can make a melee touch attack to send a pulse into the target, interfering with the magic that endows it with life. if the construct fails its saving throw, it becomes helpless, but it receives a new save each round at the end of its turn to shake off the effect. if the construct is normally immune to magic, the pulse is less effective and the construct receives a +4 bonus on its saving throw.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You can make a melee "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch attack",
+              "relationship_id": "spell.disable-construct:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " to send a pulse into the target, interfering with the magic that endows it with life. If the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "construct",
+              "relationship_id": "spell.disable-construct:uses_definition:rule.construct"
+            },
+            {
+              "node_type": "text",
+              "value": " fails its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throw",
+              "relationship_id": "spell.disable-construct:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": ", it becomes "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "helpless",
+              "relationship_id": "spell.disable-construct:uses_definition:condition.helpless"
+            },
+            {
+              "node_type": "text",
+              "value": ", but it receives a new save each round at the end of its turn to shake off the effect. If the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "construct",
+              "relationship_id": "spell.disable-construct:uses_definition:rule.construct"
+            },
+            {
+              "node_type": "text",
+              "value": " is normally "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "immune to magic",
+              "relationship_id": "spell.disable-construct:uses_definition:rule.immunity-to-magic"
+            },
+            {
+              "node_type": "text",
+              "value": ", the pulse is less effective and the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "construct",
+              "relationship_id": "spell.disable-construct:uses_definition:rule.construct"
+            },
+            {
+              "node_type": "text",
+              "value": " receives a +4 bonus on its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throw",
+              "relationship_id": "spell.disable-construct:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -415,7 +501,7 @@
         "entity_id": "publication.will",
         "name": "Will"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.disable-construct:f0d923fc93609ed4",
@@ -425,7 +511,7 @@
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
         }
       ],
-      "note": null
+      "note": "The source href points to the Will saving-throw rules, not a publication."
     },
     {
       "relationship_id": "spell.disable-construct:uses_action:action.standard-action",
@@ -536,12 +622,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.disable-construct:uses_definition:rule.touch",
+      "relationship_id": "spell.disable-construct:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -551,20 +637,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "touch",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Touch-Attacks"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.disable-construct:uses_definition:rule.touch-attack",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.touch-attack",
-        "name": "touch attack"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.disable-construct:f0d923fc93609ed4",
           "source_field": "spell_raw.links_raw[8]",
@@ -574,6 +647,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.disable-construct:uses_definition:rule.immunity-to-magic",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.immunity-to-magic",
+        "name": "Immunity to magic"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.disable-construct:503733a612e17028",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "immune to magic",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Disable+Construct"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.disable-construct:uses_definition:rule.saving-throws",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.saving-throws",
+        "name": "Saving throws"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.disable-construct:503733a612e17028",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "saving throw",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Disable+Construct"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     }
   ],
   "provenance": [
@@ -624,11 +737,19 @@
       "raw_value_sha256": "7e878fa5b978241062b9fa30400625ab1b197873abf2f19c37e43dbdb71d553e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.disable-construct:503733a612e17028",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "65a07daf3b2aa4842bfac44e47123a584b91ccb001be0cfb3a4dfb89eb211614",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

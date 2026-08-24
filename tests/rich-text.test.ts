@@ -396,6 +396,35 @@ describe("rich-text schema and source parsing", () => {
       (relationship: Record<string, unknown>) => relationship.status === "rejected",
     )).toBe(true);
   });
+
+  it("keeps Batch 23 contextual rules and parent-spell references distinct", () => {
+    const greaterDischarge = canonical("discharge-greater");
+    expect(JSON.stringify(greaterDischarge.description.document).match(
+      /functions_like:spell\.discharge/g,
+    )).toHaveLength(3);
+
+    const diminishResistance = canonical("diminish-resistance");
+    const resistanceDocument = JSON.stringify(diminishResistance.description.document);
+    expect(resistanceDocument).not.toContain("references:spell.resistance");
+    for (const descriptor of ["acid", "cold", "electricity", "fire", "sonic"]) {
+      expect(resistanceDocument).toContain(`uses_definition:descriptor.${descriptor}`);
+    }
+
+    for (const slug of ["determine-depth", "devil-snare", "dispel-balance"]) {
+      const document = JSON.stringify(canonical(slug).description.document);
+      expect(document).not.toContain('"value":"touch","relationship_id"');
+    }
+
+    const discoveryTorch = JSON.stringify(canonical("discovery-torch").description.document);
+    expect(discoveryTorch).toContain("uses_definition:illumination.bright-light");
+    expect(discoveryTorch).toContain("uses_definition:descriptor.light");
+    expect(discoveryTorch).toContain("uses_definition:descriptor.darkness");
+
+    const disguiseWeapon = JSON.stringify(canonical("disguise-weapon").description.document);
+    for (const item of ["greatsword", "quarterstaff", "club", "dagger"]) {
+      expect(disguiseWeapon).toContain(`uses_definition:item.${item}`);
+    }
+  });
 });
 
 

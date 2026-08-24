@@ -12,8 +12,8 @@ Audit date: 2026-08-23.
 | Category | Spells | Meaning |
 | --- | ---: | --- |
 | Total canonical spells | 3,030 | Complete corpus |
-| Rich text stored | 562 | 11-spell pilot, twenty-two reviewed 25-spell rollout batches, and one reviewed warning record |
-| Safe candidates with links | 1,703 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
+| Rich text stored | 587 | 11-spell pilot, twenty-three reviewed 25-spell rollout batches, and one reviewed warning record |
+| Safe candidates with links | 1,678 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
 | Safe structure-only candidates | 302 | Source text matches, but no known relationship currently produces an inline link |
 | Source mismatch | 291 | Current canonical text and the newly bounded AoN description differ |
 | Link warnings | 172 | At least one accepted relationship is ambiguous or unmatched |
@@ -681,6 +681,47 @@ Review of this batch established these normalization rules:
 Detect Evil's source tables remain lossless text but do not retain row and cell
 semantics under the current minimal AST. This is the same known table-boundary
 issue recorded below and does not alter the visible rules wording.
+
+### Batch 23
+
+The twenty-third rollout batch contains:
+
+- Detect the Faithful; Detect Thoughts; Determine Depth; Detonate; Detoxify;
+  Devil Snare; Diagnose Disease; Die for Your Master.
+- Dimensional Anchor; Dimensional Blade; Dimensional Bounce; Diminish Plants;
+  Diminish Resistance; Diminished Detection; Disable Construct; Discern
+  Location; Discharge; Greater Discharge.
+- Discovery Torch; Disguise Other; Disguise Self; Disguise Weapon; Dismissal;
+  Dispel Balance; Dispel Chaos.
+
+Review of this batch established these normalization rules:
+
+- Greater Discharge has eleven occurrences of `discharge`, but only three name
+  the parent spell: its two “functions as” clauses and “as though by” clause.
+  The title fragments, category headings, and discharge verbs remain plain.
+  The three links still expand the parent only once.
+- Generic resistance does not identify the Resistance spell. Diminish
+  Resistance instead links Acid, Cold, Electricity, Fire, and Sonic to their
+  descriptor headings. Energy-rule source IDs for those terms normalize to the
+  same canonical descriptor identities.
+- Ordinary contact wording remains plain. Determine Depth's range phrase,
+  Devil Snare's “Your touch,” and Dispel Balance's “with a touch” do not link
+  the touch-attack rule; explicit ranged, melee, and other touch attacks do.
+- Discovery Torch links bright light to the illumination page and treats
+  “Light spells” and “darkness spells” as descriptors rather than individual
+  spells. Disguise Weapon resolves greatsword, quarterstaff, club, and dagger
+  to equipment entities.
+- Reviewed missing links cover line of sight; energy descriptors and saving
+  throws; extradimensional travel, spell-like abilities, and summoning;
+  attacks, Armor Class, Force, and line of effect; Plant creatures; immunity to
+  magic; scrying and planes; robots; creature types, creature subtypes, and the
+  Glamer subschool; and extraplanar creatures.
+
+Detect Undead was deliberately not substituted into this batch. Its selected
+source description contains a table, so converting it while table-AST work was
+changing concurrently would couple this rollout to unreviewed structural
+changes. Re-run it after that work is committed and verify its row and cell
+semantics before accepting inline links.
 
 ## Open questions and issues
 

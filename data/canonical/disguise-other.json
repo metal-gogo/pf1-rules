@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.disguise-other",
   "ruleset": "Pathfinder First Edition",
   "name": "Disguise Other",
@@ -210,7 +210,33 @@
   "description": {
     "raw": "This spell functions as disguise self, except you can disguise either yourself or another creature.",
     "search_text": "\"this spell functions as disguise self, except you can disguise either yourself or another creature.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "disguise self",
+              "relationship_id": "spell.disguise-other:functions_like:spell.disguise-self",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you can disguise either yourself or another creature."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -575,6 +601,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as disguise self, except you can disguise either yourself or another creature.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.disguise-other:aed92de312387ee7",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "disguise self",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/disguiseSelf.html#disguise-self"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.disguise-other:d2785708df915068",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "disguise self",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/disguise-self/"
         }
       ],
       "note": null
@@ -670,33 +710,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "Ultimate Magic pg. 217",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.disguise-other:references:spell.disguise-self",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.disguise-self",
-        "name": "disguise self"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.disguise-other:aed92de312387ee7",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "disguise self",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/disguiseSelf.html#disguise-self"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.disguise-other:d2785708df915068",
-          "source_field": "spell_raw.links_raw[7]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "disguise self",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/disguise-self/"
         }
       ],
       "note": null
@@ -852,11 +865,19 @@
       "raw_value_sha256": "530532cf66fe360834741a2430cc962b54764a1cb20f6a83fc237c939b2e2b38",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.disguise-other:ebcaeca236521579",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "06332e86c9b10929cab0f906410207a905a3669b1d581e28487d95f430cec220",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

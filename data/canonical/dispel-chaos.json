@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.dispel-chaos",
   "ruleset": "Pathfinder First Edition",
   "name": "Dispel Chaos",
@@ -239,7 +239,33 @@
   "description": {
     "raw": "This spell functions like dispel evil, except that you are surrounded by constant, blue lawful energy, and the spell affects chaotic creatures and spells rather than evil ones.",
     "search_text": "\"this spell functions like dispel evil, except that you are surrounded by constant, blue lawful energy, and the spell affects chaotic creatures and spells rather than evil ones.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dispel evil",
+              "relationship_id": "spell.dispel-chaos:functions_like:spell.dispel-evil",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that you are surrounded by constant, blue lawful energy, and the spell affects chaotic creatures and spells rather than evil ones."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -463,6 +489,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like dispel evil, except that you are surrounded by constant, blue lawful energy, and the spell affects chaotic creatures and spells rather than evil ones.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.dispel-chaos:651593acb93a6ab7",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dispel evil",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/dispelEvil.html#dispel-evil"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.dispel-chaos:661a7918cdbc7fdd",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dispel evil",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/dispel-evil"
         }
       ],
       "note": null
@@ -551,33 +591,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "PRPG Core Rulebook pg. 271",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.dispel-chaos:references:spell.dispel-evil",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.dispel-evil",
-        "name": "dispel evil"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.dispel-chaos:651593acb93a6ab7",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "dispel evil",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/dispelEvil.html#dispel-evil"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.dispel-chaos:661a7918cdbc7fdd",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "dispel evil",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/dispel-evil"
         }
       ],
       "note": null
@@ -837,11 +850,19 @@
       "raw_value_sha256": "b1a0aeb820330b646d897eacc14fa79caf553ef7cc2f0201c7ff8bbc94d0b230",
       "decision": "normalized",
       "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.dispel-chaos:e8b387f6edbb2125",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "8f2017ff57666677a8f05c828671cfdec738e8530a8aa8df531a0512055cd3d2",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

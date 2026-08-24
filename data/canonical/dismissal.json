@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.dismissal",
   "ruleset": "Pathfinder First Edition",
   "name": "Dismissal",
@@ -262,7 +262,39 @@
   "description": {
     "raw": "This spell forces an extraplanar creature back to its proper plane if it fails a Will save. If the spell is successful, the creature is instantly whisked away, but there is a 20% chance of actually sending the subject to a plane other than its own.",
     "search_text": "\"this spell forces an extraplanar creature back to its proper plane if it fails a will save. if the spell is successful, the creature is instantly whisked away, but there is a 20% chance of actually sending the subject to a plane other than its own.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell forces an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "extraplanar",
+              "relationship_id": "spell.dismissal:uses_definition:rule.extraplanar"
+            },
+            {
+              "node_type": "text",
+              "value": " creature back to its proper plane if it fails a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will save",
+              "relationship_id": "spell.dismissal:uses_definition:rule.will-save"
+            },
+            {
+              "node_type": "text",
+              "value": ". If the spell is successful, the creature is instantly whisked away, but there is a 20% chance of actually sending the subject to a plane other than its own."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -771,40 +803,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.dismissal:uses_definition:rule.will",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.will",
-        "name": "Will"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.dismissal:1ba4c05410928521",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Will",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/combat.html#will"
-        },
-        {
-          "observation_id": "legacy_aon:spell.dismissal:1ba4c05410928521",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Will",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/combat.html#will"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.dismissal:1d08ab23f1bf77db",
-          "source_field": "spell_raw.links_raw[9]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Will",
-          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.dismissal:uses_definition:rule.will-save",
       "type": "uses_definition",
       "target": {
@@ -897,6 +895,60 @@
         }
       ],
       "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.dismissal:uses_definition:rule.extraplanar",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.extraplanar",
+        "name": "Extraplanar"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.dismissal:be4e5304b50eb924",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "extraplanar",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Dismissal"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.dismissal:uses_definition:rule.will-saving-throw",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.will-saving-throw",
+        "name": "Will"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.dismissal:1ba4c05410928521",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Will",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/combat.html#will"
+        },
+        {
+          "observation_id": "legacy_aon:spell.dismissal:1ba4c05410928521",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Will",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/combat.html#will"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.dismissal:1d08ab23f1bf77db",
+          "source_field": "spell_raw.links_raw[9]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Will",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
+        }
+      ],
+      "note": null
     }
   ],
   "provenance": [
@@ -963,11 +1015,19 @@
       "raw_value_sha256": "62610301aa0bc146a389d4e7a1ef75f2b373986ecd0015b804988a8b3c35b444",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.dismissal:be4e5304b50eb924",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "ecbb9d56e0bae5c63b561dff9b5fc998789ca90022e746f2e8268c8479b6dcf7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
