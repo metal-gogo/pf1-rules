@@ -111,6 +111,27 @@ test("Batch 19 separates Curse Water's alignment and creature-type links", async
   await expect(page).toHaveURL(/\/entities\/item\.unholy-water$/);
 });
 
+test("Batch 20 separates Greater Darkvision's parent spell from its granted sense", async ({ page }) => {
+  await page.goto("/spells/spell.darkvision-greater");
+
+  const description = page.locator(".rich-description").first();
+  const parent = description.locator('a[href="/spells/spell.darkvision"]');
+  const sense = description.locator('a[href="/entities/rule.darkvision"]');
+  await expect(parent).toHaveCount(1);
+  await expect(sense).toHaveCount(1);
+  await expect(parent).not.toHaveAttribute("target", "_blank");
+  await expect(page.locator('[data-embedded-spell="spell.darkvision"]')).toHaveCount(0);
+  await expect(page.locator("aside.notice")).toContainText(
+    "that parent is not fully resolved in the local rules data",
+  );
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+
+  await sense.click();
+  await expect(page).toHaveURL(/\/entities\/rule\.darkvision$/);
+});
+
 test("pilot lists remain semantic and accessible on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/spells/spell.bestow-curse-greater");

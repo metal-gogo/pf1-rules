@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.daze-monster",
   "ruleset": "Pathfinder First Edition",
   "name": "Daze Monster",
@@ -219,7 +219,42 @@
   "description": {
     "raw": "This spell functions like daze, but can affect any one living creature of any type. Creatures of 7 or more HD are not affected.",
     "search_text": "\"this spell functions like daze, but can affect any one living creature of any type. creatures of 7 or more hd are not affected.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "daze",
+              "relationship_id": "spell.daze-monster:functions_like:spell.daze",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", but can affect any one living creature of any type. Creatures of 7 or more "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "HD",
+              "relationship_id": "spell.daze-monster:uses_definition:rule.hit-dice"
+            },
+            {
+              "node_type": "text",
+              "value": " are not affected."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -407,6 +442,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.daze-monster:appears_on_spell_list:spell-list.godclaw-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.godclaw-mystery",
+        "name": "Godclaw Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.godclaw:56fddf5d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "daze monster (4th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Godclaw"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     },
     {
       "relationship_id": "spell.daze-monster:appears_on_spell_list:spell-list.medium",
@@ -678,6 +733,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like daze, but can affect any one living creature of any type. Creatures of 7 or more HD are not affected.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.daze-monster:e4126d4ad96b532b",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "daze",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/daze.html#daze"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.daze-monster:ded47a54001a7823",
+          "source_field": "spell_raw.links_raw[10]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "daze",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/daze/"
         }
       ],
       "note": null
@@ -805,33 +874,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.daze-monster:references:spell.daze",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.daze",
-        "name": "daze"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.daze-monster:e4126d4ad96b532b",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "daze",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/daze.html#daze"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.daze-monster:ded47a54001a7823",
-          "source_field": "spell_raw.links_raw[10]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "daze",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/daze/"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.daze-monster:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -852,12 +894,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.daze-monster:uses_definition:rule.hd",
+      "relationship_id": "spell.daze-monster:uses_definition:rule.hit-dice",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.hd",
-        "name": "HD"
+        "entity_id": "rule.hit-dice",
+        "name": "Hit Dice"
       },
       "status": "accepted",
       "evidence": [
@@ -890,26 +932,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.daze-monster:appears_on_spell_list:spell-list.godclaw-mystery",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.godclaw-mystery",
-        "name": "Godclaw Mystery Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.godclaw:56fddf5d",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "daze monster (4th)",
-          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Godclaw"
-        }
-      ],
-      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -968,11 +990,19 @@
       "raw_value_sha256": "d24a70a81dd367dbefc680683f3625198661aeb86051d7b37bb38fa639fa9d09",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.daze-monster:0239aad7a38e7b72",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d8d39e92edd60a9d5544156ab1086d2d4bf85b8cf21d14f2774f301d71e24774",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

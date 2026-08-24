@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.dazzling-blade-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Dazzling Blade, Mass",
@@ -129,7 +129,54 @@
   "description": {
     "raw": "This spell functions like dazzling blade, except that it affects multiple weapons. Each wielder of a dazzling blade can discharge the weapon’s effect to attempt to blind a foe independently of the others.",
     "search_text": "\"this spell functions like dazzling blade, except that it affects multiple weapons. each wielder of a dazzling blade can discharge the weapon’s effect to attempt to blind a foe independently of the others.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dazzling blade",
+              "relationship_id": "spell.dazzling-blade-mass:functions_like:spell.dazzling-blade",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that it affects multiple weapons. Each wielder of a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dazzling blade",
+              "relationship_id": "spell.dazzling-blade-mass:functions_like:spell.dazzling-blade",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " can discharge the weapon’s effect to attempt to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blind",
+              "relationship_id": "spell.dazzling-blade-mass:uses_definition:condition.blinded"
+            },
+            {
+              "node_type": "text",
+              "value": " a foe independently of the others."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -446,12 +493,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.dazzling-blade-mass:uses_definition:condition.blind",
+      "relationship_id": "spell.dazzling-blade-mass:uses_definition:condition.blinded",
       "type": "uses_definition",
       "target": {
         "entity_type": "condition",
-        "entity_id": "condition.blind",
-        "name": "blind"
+        "entity_id": "condition.blinded",
+        "name": "Blinded"
       },
       "status": "accepted",
       "evidence": [
@@ -534,11 +581,19 @@
       "raw_value_sha256": "4232958a19e3736687efd5f7486f6603daa46f59c970ff638060b7858e2da182",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.dazzling-blade-mass:0a7e46232a3c5732",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "07d9e4a9a84ffd3de64c411e952042eb5f46fd538977e93a6830b9c539cd0bd0",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.deafening-song-bolt",
   "ruleset": "Pathfinder First Edition",
   "name": "Deafening Song Bolt",
@@ -115,7 +115,39 @@
   "description": {
     "raw": "Three notes you sing or perform become tangible bolts of arcane energy that shriek across the battlefield. Each bolt requires a ranged touch attack to hit and deals 3d10 points of sonic damage, deafening the target for 1d6 rounds. The bolts may be fired at the same or different targets, but all must be fired simultaneously.",
     "search_text": "\"three notes you sing or perform become tangible bolts of arcane energy that shriek across the battlefield. each bolt requires a ranged touch attack to hit and deals 3d10 points of sonic damage, deafening the target for 1d6 rounds. the bolts may be fired at the same or different targets, but all must be fired simultaneously.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Three notes you sing or perform become tangible bolts of arcane energy that shriek across the battlefield. Each bolt requires a ranged "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch attack",
+              "relationship_id": "spell.deafening-song-bolt:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " to hit and deals 3d10 points of sonic damage, "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "deafening",
+              "relationship_id": "spell.deafening-song-bolt:uses_definition:condition.deaf"
+            },
+            {
+              "node_type": "text",
+              "value": " the target for 1d6 rounds. The bolts may be fired at the same or different targets, but all must be fired simultaneously."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -297,12 +329,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.deafening-song-bolt:uses_definition:condition.deafening",
+      "relationship_id": "spell.deafening-song-bolt:uses_definition:condition.deaf",
       "type": "uses_definition",
       "target": {
         "entity_type": "condition",
-        "entity_id": "condition.deafening",
-        "name": "deafening"
+        "entity_id": "condition.deaf",
+        "name": "Deafened"
       },
       "status": "accepted",
       "evidence": [
@@ -405,11 +437,19 @@
       "raw_value_sha256": "85d79c1dd8c8e994b47b9801e9e9f4c4a1d8115376a8ee2b59acf8f8a6f49ece",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.deafening-song-bolt:aebbae7d33dc78bf",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "b63a2e867536cd9a64585abdb1ad609d5036de589a4779726d8c50f56ea7045a",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

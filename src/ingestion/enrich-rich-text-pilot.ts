@@ -166,11 +166,19 @@ const canonicalTargets = new Map<string, {
   ["rule.hit-die", { id: "rule.hit-dice", name: "Hit Dice" }],
   ["rule.combat-maneuver", { id: "rule.combat-maneuvers", name: "Combat maneuvers" }],
   ["rule.paladin", { id: "class.paladin", name: "Paladin", type: "class" }],
+  ["rule.clerics", { id: "class.cleric", name: "Cleric", type: "class" }],
+  ["rule.oracles", { id: "class.oracle", name: "Oracle", type: "class" }],
+  ["rule.witches", { id: "class.witch", name: "Witch", type: "class" }],
   ["rule.magic-aura", { id: "spell.magic-aura", name: "Magic Aura", type: "spell", relationshipType: "references" }],
   ["rule.animal-companion", { id: "class-feature.animal-companion", name: "Animal companion", type: "class_feature" }],
   ["rule.animal-companions", { id: "class-feature.animal-companion", name: "Animal companion", type: "class_feature" }],
   ["rule.shield-guardians", { id: "monster.shield-guardian", name: "Shield guardian", type: "monster" }],
   ["rule.daemons", { id: "rule.daemon", name: "Daemon" }],
+  ["rule.undeads", { id: "rule.undead", name: "Undead" }],
+  ["rule.potions", { id: "rule.potion", name: "Potion" }],
+  ["condition.deafening", { id: "condition.deaf", name: "Deafened", type: "condition" }],
+  ["rule.fire-elemental", { id: "monster.fire-elemental", name: "Fire elemental", type: "monster" }],
+  ["rule.magic-jar", { id: "spell.magic-jar", name: "Magic Jar", type: "spell", relationshipType: "references" }],
   ["rule.trumpet-archons", { id: "monster.trumpet-archon", name: "Trumpet archon", type: "monster" }],
   ["rule.arcanist", { id: "class.arcanist", name: "Arcanist", type: "class" }],
   ["rule.magus-arcana", { id: "class-feature.magus-arcana", name: "Magus arcana", type: "class_feature" }],
@@ -388,6 +396,10 @@ const canonicalRelationshipTargets = new Map<string, {
   [
     "spell.cyclic-reincarnation:references:spell.reincarnate",
     { id: "spell.reincarnate", name: "Reincarnate", type: "spell", relationshipType: "functions_like" },
+  ],
+  [
+    "spell.daywalker:references:spell.energy-drain",
+    { id: "rule.energy-drain", name: "Energy drain", type: "rule", relationshipType: "uses_definition" },
   ],
   [
     "spell.damnation-of-memory:references:spell.magic-aura",
@@ -693,6 +705,34 @@ const rejectedDescriptionRelationships = new Map([
   ],
   [
     "spell.daemon-ward:uses_definition:rule.pathfinder-campaign-setting-horsemen-of-the-apocalypse-book-of-the-damned-vol-3",
+    "The secondary source's publication navigation duplicates the canonical Published In relationship and is not a rules definition.",
+  ],
+  [
+    "spell.daywalker:uses_definition:condition.dead",
+    "The description uses “dead” to describe flesh, not the Dead condition.",
+  ],
+  [
+    "spell.daywalker:uses_definition:rule.touch-attack",
+    "The description discusses an undead creature whose touch deals damage; it does not describe a touch attack.",
+  ],
+  [
+    "spell.daywalker:uses_definition:rule.unholy-water",
+    "The secondary source link is unrelated navigation; unholy water does not appear in the selected description.",
+  ],
+  [
+    "spell.daze:uses_definition:rule.pathfinder-roleplaying-game-ultimate-magic",
+    "The secondary source link names a publication and is not a rules definition in the selected description.",
+  ],
+  [
+    "spell.death-candle:uses_definition:rule.summon",
+    "The description uses “summon” as a spellcasting verb; the source href points to the monster Summon ability.",
+  ],
+  [
+    "spell.death-clutch:uses_definition:rule.regeneration",
+    "The phrase describes the Regenerate spell restoring a heart, not the monster Regeneration ability.",
+  ],
+  [
+    "spell.death-knell-aura-greater:uses_definition:rule.pathfinder-campaign-setting-horsemen-of-the-apocalypse-book-of-the-damned-vol-3",
     "The secondary source's publication navigation duplicates the canonical Published In relationship and is not a rules definition.",
   ],
 ]);
@@ -1032,6 +1072,36 @@ const reviewedDescriptionReferences = new Map<string, ReviewedDescriptionReferen
   ["spell.dark-whispers", [
     { targetType: "rule", targetId: "rule.line-of-effect", targetName: "Line of effect", anchorText: "line of effect" },
   ]],
+  ["spell.darkvault", [
+    { targetType: "rule", targetId: "illumination.levels", targetName: "Illumination levels", anchorText: "illumination level" },
+    { targetType: "rule", targetId: "illumination.levels", targetName: "Illumination levels", anchorText: "light level" },
+  ]],
+  ["spell.darkvision-greater", [
+    { targetType: "rule", targetId: "rule.darkvision", targetName: "Darkvision", anchorText: "darkvision" },
+  ]],
+  ["spell.daze", [
+    { targetType: "rule", targetId: "rule.hit-dice", targetName: "Hit Dice", anchorText: "Hit Dice" },
+    { targetType: "rule", targetId: "rule.hit-dice", targetName: "Hit Dice", anchorText: "HD" },
+    { targetType: "rule", targetId: "rule.humanoid", targetName: "Humanoid", anchorText: "Humanoids" },
+  ]],
+  ["spell.dazzling-blade", [
+    { targetType: "rule", targetId: "rule.silver", targetName: "Silver", anchorText: "silver" },
+  ]],
+  ["spell.deadly-juggernaut", [
+    { targetType: "rule", targetId: "rule.damage-reduction", targetName: "Damage reduction", anchorText: "DR" },
+    { targetType: "rule", targetId: "rule.ability-check", targetName: "Ability checks", anchorText: "Strength checks" },
+    { targetType: "rule", targetId: "rule.skill-check", targetName: "Skill checks", anchorText: "skill checks" },
+  ]],
+  ["spell.death-knell-aura-greater", [
+    { targetType: "condition", targetId: "condition.dying", targetName: "Dying", anchorText: "dying" },
+    { targetType: "condition", targetId: "condition.stable", targetName: "Stable", anchorText: "stabilize" },
+  ]],
+  ["spell.deathwine", [
+    { targetType: "rule", targetId: "rule.negative-energy", targetName: "Negative energy", anchorText: "negative energy" },
+  ]],
+  ["spell.debilitating-portent", [
+    { targetType: "class", targetId: "class.witch", targetName: "Witch", anchorText: "witches" },
+  ]],
 ]);
 
 
@@ -1226,6 +1296,33 @@ function keepFirstAndLastRelationshipLinks(
         ...block,
         content: block.content.map((item) => ({ ...item, content: replace(item.content) })),
       });
+}
+
+
+function distinguishGreaterDarkvisionReferences(document: RichTextDocument): void {
+  const spellRelationshipId =
+    "spell.darkvision-greater:functions_like:spell.darkvision";
+  const ruleRelationshipId =
+    "spell.darkvision-greater:uses_definition:rule.darkvision";
+  let occurrence = 0;
+  const replace = (content: RichTextInlineNode[]): RichTextInlineNode[] =>
+    content.map((node) => {
+      if (
+        node.node_type !== "entity_link" ||
+        node.relationship_id !== spellRelationshipId
+      ) return node;
+      occurrence += 1;
+      return occurrence === 1 ? node : { ...node, relationship_id: ruleRelationshipId };
+    });
+  document.content = document.content.map((block) => block.node_type === "paragraph"
+    ? { ...block, content: replace(block.content) }
+    : {
+        ...block,
+        content: block.content.map((item) => ({ ...item, content: replace(item.content) })),
+      });
+  if (occurrence !== 2) {
+    throw new Error(`Expected two Darkvision references, found ${occurrence}`);
+  }
 }
 
 
@@ -2062,6 +2159,9 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
         richText.document,
         "spell.create-mindscape-greater:functions_like:spell.create-mindscape",
       );
+    }
+    if (spellId === "spell.darkvision-greater") {
+      distinguishGreaterDarkvisionReferences(richText.document);
     }
     if (spellId === "spell.cure-light-wounds-mass") {
       removeRelationshipLinkValues(

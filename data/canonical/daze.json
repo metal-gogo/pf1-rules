@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.daze",
   "ruleset": "Pathfinder First Edition",
   "name": "Daze",
@@ -256,7 +256,84 @@
   "description": {
     "raw": "This spell clouds the mind of a humanoid creature with 4 or fewer Hit Dice so that it takes no actions. Humanoids of 5 or more HD are not affected. A dazed subject is not stunned, so attackers get no special advantage against it. After a creature has been dazed by this spell, it is immune to the effects of this spell for 1 minute.",
     "search_text": "\"this spell clouds the mind of a humanoid creature with 4 or fewer hit dice so that it takes no actions. humanoids of 5 or more hd are not affected. a dazed subject is not stunned, so attackers get no special advantage against it. after a creature has been dazed by this spell, it is immune to the effects of this spell for 1 minute.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell clouds the mind of a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "humanoid",
+              "relationship_id": "spell.daze:uses_definition:rule.humanoid"
+            },
+            {
+              "node_type": "text",
+              "value": " creature with 4 or fewer "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Hit Dice",
+              "relationship_id": "spell.daze:uses_definition:rule.hit-dice"
+            },
+            {
+              "node_type": "text",
+              "value": " so that it takes no actions. "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Humanoids",
+              "relationship_id": "spell.daze:uses_definition:rule.humanoid"
+            },
+            {
+              "node_type": "text",
+              "value": " of 5 or more "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "HD",
+              "relationship_id": "spell.daze:uses_definition:rule.hit-dice"
+            },
+            {
+              "node_type": "text",
+              "value": " are not affected. A "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dazed",
+              "relationship_id": "spell.daze:uses_definition:condition.dazed"
+            },
+            {
+              "node_type": "text",
+              "value": " subject is not "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "stunned",
+              "relationship_id": "spell.daze:uses_definition:condition.stunned"
+            },
+            {
+              "node_type": "text",
+              "value": ", so attackers get no special advantage against it. After a creature has been "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dazed",
+              "relationship_id": "spell.daze:uses_definition:condition.dazed"
+            },
+            {
+              "node_type": "text",
+              "value": " by this spell, it is immune to the effects of this spell for 1 minute."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -442,6 +519,40 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.daze:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.daze:b1e16390476c7586",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.daze:b1e16390476c7586",
+          "source_field": "spell_raw.links_raw[21]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.daze:a63fc233439bed5a",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 0",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.daze:appears_on_spell_list:spell-list.psychic",
@@ -951,12 +1062,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.daze:uses_definition:rule.ac",
+      "relationship_id": "spell.daze:uses_definition:rule.armor-class",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.ac",
-        "name": "AC"
+        "entity_id": "rule.armor-class",
+        "name": "Armor Class"
       },
       "status": "accepted",
       "evidence": [
@@ -969,6 +1080,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.daze:uses_definition:rule.hit-dice",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.hit-dice",
+        "name": "Hit Dice"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.daze:a63fc233439bed5a",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Hit Dice",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Daze"
+        },
+        {
+          "observation_id": "aon:spell.daze:a63fc233439bed5a",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "HD",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Daze"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.daze:uses_definition:rule.humanoid",
@@ -993,6 +1131,13 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "humanoid",
           "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/creature-types#TOC-Humanoid"
+        },
+        {
+          "observation_id": "aon:spell.daze:a63fc233439bed5a",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Humanoids",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Daze"
         }
       ],
       "note": null
@@ -1005,7 +1150,7 @@
         "entity_id": "rule.pathfinder-roleplaying-game-ultimate-magic",
         "name": "Pathfinder Roleplaying Game: Ultimate Magic"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.daze:b1e16390476c7586",
@@ -1015,7 +1160,7 @@
           "source_href": "http://www.amazon.com/gp/product/1601252994/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1601252994&linkCode=as2&tag=httpwwwd20pfs-20"
         }
       ],
-      "note": null
+      "note": "The secondary source link names a publication and is not a rules definition in the selected description."
     },
     {
       "relationship_id": "spell.daze:uses_definition:rule.spell-resistance",
@@ -1045,11 +1190,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.daze:uses_definition:rule.will",
+      "relationship_id": "spell.daze:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -1070,40 +1215,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.daze:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.daze:b1e16390476c7586",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.daze:b1e16390476c7586",
-          "source_field": "spell_raw.links_raw[21]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.daze:a63fc233439bed5a",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 0",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -1154,11 +1265,19 @@
       "raw_value_sha256": "d0d1235fd0fd29ed6dafaa71f968e4d81c646f4009b35be7a77d8e1a6fafeaca",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.daze:a63fc233439bed5a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e4908369e4179a2ccbd0794785d3ffdfa570f8428b6da23cbdce2c97ed60a7dc",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

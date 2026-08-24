@@ -1149,6 +1149,62 @@ describe("local rules browser", () => {
     expect(description).toContain(`href="${target}"`);
   });
 
+  it.each([
+    ["darkvault", "/rules/illumination#levels"],
+    ["darkvision-communal", "/spells/spell.darkvision"],
+    ["darkvision-greater", "/entities/rule.darkvision"],
+    ["darting-duplicate", "/entities/rule.attack-of-opportunity"],
+    ["daywalker", "/entities/rule.energy-drain"],
+    ["daze", "/entities/rule.hit-dice"],
+    ["daze-mass", "/spells/spell.daze"],
+    ["daze-monster", "/spells/spell.daze"],
+    ["dazzling-blade", "/entities/rule.silver"],
+    ["dazzling-blade-mass", "/spells/spell.dazzling-blade"],
+    ["deadeyes-lore", "/entities/rule.survival"],
+    ["deadly-finale", "/entities/condition.bleed"],
+    ["deadly-juggernaut", "/entities/rule.damage-reduction"],
+    ["deadmans-contingency", "/spells/spell.magic-mouth"],
+    ["deafening-song-bolt", "/entities/condition.deaf"],
+    ["death-candle", "/entities/monster.fire-elemental"],
+    ["death-clutch", "/spells/spell.regenerate"],
+    ["death-knell-aura-greater", "/spells/spell.magic-jar"],
+    ["death-pact", "/spells/spell.dominate-person"],
+    ["deathwine", "/entities/rule.negative-energy"],
+    ["debilitating-pain", "/entities/condition.stunned"],
+    ["debilitating-pain-mass", "/spells/spell.debilitating-pain"],
+    ["debilitating-portent", "/classes/witch"],
+    ["debilitating-speech", "/rules/actions#full-round-action"],
+    ["decapitate", "/entities/rule.critical-hit"],
+  ])("renders twentieth-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["daywalker", "/entities/rule.touch-attack"],
+    ["daywalker", "/spells/spell.energy-drain"],
+    ["daywalker", "/entities/condition.dead"],
+    ["death-candle", "/entities/rule.summon"],
+    ["death-clutch", "/entities/rule.regeneration"],
+  ])("omits twentieth-batch semantic false positives from spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain(`href="${target}"`);
+  });
+
+  it("links Greater Darkvision's parent spell and its granted sense separately", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.darkvision-greater`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(description.match(/href="\/spells\/spell.darkvision"/g)).toHaveLength(1);
+    expect(description.match(/href="\/entities\/rule.darkvision"/g)).toHaveLength(1);
+  });
+
   it("links Curse of Unexpected Death's touch attacks but not its ordinary touch verbs", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.curse-of-unexpected-death`);
     const html = await response.text();

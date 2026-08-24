@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.daze-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Daze, Mass",
@@ -226,7 +226,33 @@
   "description": {
     "raw": "This spell functions as daze, except as noted above.",
     "search_text": "\"this spell functions as daze, except as noted above.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "daze",
+              "relationship_id": "spell.daze-mass:functions_like:spell.daze",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except as noted above."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -499,6 +525,33 @@
       "note": null
     },
     {
+      "relationship_id": "spell.daze-mass:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.daze-mass:75318dc0366f0b3a",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.daze-mass:3925c52a738f97df",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.daze-mass:appears_on_spell_list:spell-list.psychic",
       "type": "appears_on_spell_list",
       "target": {
@@ -708,6 +761,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as daze, except as noted above.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.daze-mass:aa5b308d8b5b5472",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "daze",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/daze.html#daze"
         }
       ],
       "note": null
@@ -855,26 +915,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.daze-mass:references:spell.daze",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.daze",
-        "name": "daze"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.daze-mass:aa5b308d8b5b5472",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "daze",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/daze.html#daze"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.daze-mass:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -953,33 +993,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.daze-mass:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.daze-mass:75318dc0366f0b3a",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.daze-mass:3925c52a738f97df",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -1030,11 +1043,19 @@
       "raw_value_sha256": "893bea029d18df057e836e10b4b94d8cfaa35de6cd1d2a7ce6bcdcfd5092ec01",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.daze-mass:3925c52a738f97df",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "b4d836700bf09dc00ae194824def23f732e5421ff650145cc96bf4d58a197a93",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

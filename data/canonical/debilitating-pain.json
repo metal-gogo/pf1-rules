@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.debilitating-pain",
   "ruleset": "Pathfinder First Edition",
   "name": "Debilitating Pain",
@@ -122,7 +122,39 @@
   "description": {
     "raw": "The target is overcome with intense pain, causing it to be stunned on a failed save or dazed for 1 round on a successful save.",
     "search_text": "\"the target is overcome with intense pain, causing it to be stunned on a failed save or dazed for 1 round on a successful save.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target is overcome with intense pain, causing it to be "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "stunned",
+              "relationship_id": "spell.debilitating-pain:uses_definition:condition.stunned"
+            },
+            {
+              "node_type": "text",
+              "value": " on a failed save or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dazed",
+              "relationship_id": "spell.debilitating-pain:uses_definition:condition.dazed"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 round on a successful save."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -480,11 +512,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.debilitating-pain:uses_definition:rule.will",
+      "relationship_id": "spell.debilitating-pain:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -548,11 +580,19 @@
       "raw_value_sha256": "29e232124b0f388504fa1538a3cd43323eba3f74e4ed58fc7b653e9dc79c4969",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.debilitating-pain:72b65bd3ba90ea22",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "8889324cfb53f9e391dad4e9664285bace42129db807af4fc4e27735abd80941",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

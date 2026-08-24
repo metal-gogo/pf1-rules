@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.deadly-finale",
   "ruleset": "Pathfinder First Edition",
   "name": "Deadly Finale",
@@ -115,7 +115,48 @@
   "description": {
     "raw": "You must have a bardic performance in effect to cast this spell. With a flourish, you immediately end your performance, dealing 2d8 points of sonic damage to each target. In addition, each target takes 3d6 points of bleed damage for 1d6 rounds. A save negates the bleed damage but not the sonic damage.",
     "search_text": "\"you must have a bardic performance in effect to cast this spell. with a flourish, you immediately end your performance, dealing 2d8 points of sonic damage to each target. in addition, each target takes 3d6 points of bleed damage for 1d6 rounds. a save negates the bleed damage but not the sonic damage.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You must have a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bardic performance",
+              "relationship_id": "spell.deadly-finale:uses_definition:rule.bardic-performance"
+            },
+            {
+              "node_type": "text",
+              "value": " in effect to cast this spell. With a flourish, you immediately end your performance, dealing 2d8 points of sonic damage to each target. In addition, each target takes 3d6 points of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bleed",
+              "relationship_id": "spell.deadly-finale:uses_definition:condition.bleed"
+            },
+            {
+              "node_type": "text",
+              "value": " damage for 1d6 rounds. A save negates the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bleed",
+              "relationship_id": "spell.deadly-finale:uses_definition:condition.bleed"
+            },
+            {
+              "node_type": "text",
+              "value": " damage but not the sonic damage."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -344,11 +385,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.deadly-finale:uses_definition:rule.fortitude",
+      "relationship_id": "spell.deadly-finale:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -432,11 +473,19 @@
       "raw_value_sha256": "85d79c1dd8c8e994b47b9801e9e9f4c4a1d8115376a8ee2b59acf8f8a6f49ece",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.deadly-finale:21577545ee10df9e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3bb71065789a7cfa2c65510dd9d3d3c6c73cd5168548863b389eae3aafda89dc",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

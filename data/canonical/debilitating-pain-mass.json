@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.debilitating-pain-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Debilitating Pain, Mass",
@@ -122,7 +122,33 @@
   "description": {
     "raw": "This spell functions as per debilitating pain, except you can target one creature for every 4 caster levels you have.",
     "search_text": "\"this spell functions as per debilitating pain, except you can target one creature for every 4 caster levels you have.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "debilitating pain",
+              "relationship_id": "spell.debilitating-pain-mass:functions_like:spell.debilitating-pain",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you can target one creature for every 4 caster levels you have."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -554,11 +580,19 @@
       "raw_value_sha256": "29e232124b0f388504fa1538a3cd43323eba3f74e4ed58fc7b653e9dc79c4969",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.debilitating-pain-mass:8315c3ed7faeeb21",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "cda6a2b7a3bb091b1888fd647caa660797673018ad11b107962dd1704a43cafa",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

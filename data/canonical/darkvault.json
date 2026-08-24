@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.darkvault",
   "ruleset": "Pathfinder First Edition",
   "name": "Darkvault",
@@ -230,7 +230,100 @@
   "description": {
     "raw": "You ward an area’s shadows such that light cannot penetrate them. The illumination level in the affected area no longer changes when nonmagical light enters it. Any magical effect must succeed at a caster level check (DC = 10 + your caster level) in order to change the light level within the spell’s radius. Darkvault has no effect on spells or effects that would make the spell’s area darker.\n\nThe spell must be cast on an area, such as a cave or room. A spellcaster of 11th level or higher can make darkvault permanent with a permanency spell, at a cost of 7,500 gp.",
     "search_text": "\"you ward an area’s shadows such that light cannot penetrate them. the illumination level in the affected area no longer changes when nonmagical light enters it. any magical effect must succeed at a caster level check (dc = 10 + your caster level) in order to change the light level within the spell’s radius. darkvault has no effect on spells or effects that would make the spell’s area darker.\\n\\nthe spell must be cast on an area, such as a cave or room. a spellcaster of 11th level or higher can make darkvault permanent with a permanency spell, at a cost of 7,500 gp.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You ward an area’s shadows such that light cannot penetrate them. The "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "illumination level",
+              "relationship_id": "spell.darkvault:uses_definition:illumination.levels"
+            },
+            {
+              "node_type": "text",
+              "value": " in the affected area no longer changes when nonmagical light enters it. Any magical effect must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.darkvault:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " check (DC = 10 + your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.darkvault:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": ") in order to change the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "light level",
+              "relationship_id": "spell.darkvault:uses_definition:illumination.levels"
+            },
+            {
+              "node_type": "text",
+              "value": " within the spell’s radius. "
+            },
+            {
+              "node_type": "text",
+              "value": "Darkvault",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " has no effect on spells or effects that would make the spell’s area darker."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": " The spell must be cast on an area, such as a cave or room. A spellcaster of 11th level or higher can make "
+            },
+            {
+              "node_type": "text",
+              "value": "darkvault",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " permanent with a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "permanency",
+              "relationship_id": "spell.darkvault:references:spell.permanency",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell, at a cost of 7,500 gp."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -382,6 +475,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.darkvault:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.darkvault:e3d13403a2f72069",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.darkvault:a1a54a7607b55546",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.darkvault:appears_on_spell_list:spell-list.oracle",
@@ -638,7 +758,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.permanency",
-        "name": "permanency"
+        "name": "Permanency"
       },
       "status": "accepted",
       "evidence": [
@@ -678,6 +798,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.darkvault:uses_definition:illumination.levels",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "illumination.levels",
+        "name": "Illumination levels"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.darkvault:a1a54a7607b55546",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "illumination level",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Darkvault"
+        },
+        {
+          "observation_id": "aon:spell.darkvault:a1a54a7607b55546",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "light level",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Darkvault"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.darkvault:uses_definition:rule.caster-level",
@@ -725,33 +872,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.darkvault:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.darkvault:e3d13403a2f72069",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.darkvault:a1a54a7607b55546",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -802,11 +922,19 @@
       "raw_value_sha256": "fe3b227ec3533a5523ae24ea4ceb53b054a848101f04a05acd6f1c65d873fbe9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.darkvault:a1a54a7607b55546",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "0eb1fa2dcd9ccac793ee84ba71b4bd3d10bb5648448df312c3144aaa92ca7b3c",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

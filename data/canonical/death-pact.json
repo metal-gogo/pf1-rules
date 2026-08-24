@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.death-pact",
   "ruleset": "Pathfinder First Edition",
   "name": "Death Pact",
@@ -150,7 +150,93 @@
   "description": {
     "raw": "You take control of a creature’s mind and implant deadly subconscious commands. This spell functions as dominate person, allowing you to control your subject and see through her senses, but also implants a powerful burst of psychic energy in the subject’s mind. At any point during the spell’s duration, you can trigger this burst as an immediate action, dealing 1d8 points of damage per caster level (Fortitude half) to the subject. If this damage is enough to reduce to target to 0 or fewer hit points, the target dies instantly.\n\nYour target can also willingly trigger this psychic burst as an immediate action. You can specify conditions (such as being captured) when she should do so, though such orders are considered dangerous and allow the subject a new Will saving throw with a +2 bonus.",
     "search_text": "\"you take control of a creature’s mind and implant deadly subconscious commands. this spell functions as dominate person, allowing you to control your subject and see through her senses, but also implants a powerful burst of psychic energy in the subject’s mind. at any point during the spell’s duration, you can trigger this burst as an immediate action, dealing 1d8 points of damage per caster level (fortitude half) to the subject. if this damage is enough to reduce to target to 0 or fewer hit points, the target dies instantly.\\n\\nyour target can also willingly trigger this psychic burst as an immediate action. you can specify conditions (such as being captured) when she should do so, though such orders are considered dangerous and allow the subject a new will saving throw with a +2 bonus.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You take control of a creature’s mind and implant deadly subconscious commands. This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dominate person",
+              "relationship_id": "spell.death-pact:functions_like:spell.dominate-person"
+            },
+            {
+              "node_type": "text",
+              "value": ", allowing you to control your subject and see through her senses, but also implants a powerful burst of psychic energy in the subject’s mind. At any point during the spell’s duration, you can trigger this burst as an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "immediate action",
+              "relationship_id": "spell.death-pact:uses_action:action.immediate-action"
+            },
+            {
+              "node_type": "text",
+              "value": ", dealing 1d8 points of damage per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.death-pact:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " ("
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.death-pact:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " half) to the subject. If this damage is enough to reduce to target to 0 or fewer "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.death-pact:uses_definition:rule.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": ", the target dies instantly."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": " Your target can also willingly trigger this psychic burst as an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "immediate action",
+              "relationship_id": "spell.death-pact:uses_action:action.immediate-action"
+            },
+            {
+              "node_type": "text",
+              "value": ". You can specify conditions (such as being captured) when she should do so, though such orders are considered dangerous and allow the subject a new "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.death-pact:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saving throw with a +2 bonus."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -160,7 +246,164 @@
     "pfs_status": "not_legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.dominate-person",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.death-pact:c874f3f292ac8968",
+        "source_field": "spell_raw.description_raw",
+        "raw": "You take control of a creature’s mind and implant deadly subconscious commands. This spell functions as dominate person, allowing you to control your subject and see through her senses, but also implants a powerful burst of psychic energy in the subject’s mind. At any point during the spell’s duration, you can trigger this burst as an immediate action, dealing 1d8 points of damage per caster level (Fortitude half) to the subject. If this damage is enough to reduce to target to 0 or fewer hit points, the target dies instantly.\n\nYour target can also willingly trigger this psychic burst as an immediate action. You can specify conditions (such as being captured) when she should do so, though such orders are considered dangerous and allow the subject a new Will saving throw with a +2 bonus."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/time",
+          "value": {
+            "kind": "timed",
+            "amount": 1,
+            "unit": "minute",
+            "raw": "1 minute"
+          },
+          "source_field": "spell_raw.casting_time_raw",
+          "raw": "1 minute",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "material",
+              "details": "a contract signed in blood",
+              "cost_gp": null,
+              "raw": "M (a contract signed in blood)"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (a contract signed in blood)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, M (a contract signed in blood)",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (a contract signed in blood)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/range",
+          "value": {
+            "category": "touch",
+            "formula": null,
+            "raw": "touch"
+          },
+          "source_field": "spell_raw.range_raw",
+          "raw": "touch",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "one creature",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one creature\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "single",
+            "subject_kind": "creature",
+            "selection": "selected",
+            "count": {
+              "kind": "fixed",
+              "fixed": 1,
+              "formula": null,
+              "raw": "one creature"
+            },
+            "separation": null,
+            "raw": "one creature"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one creature\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "timed",
+            "formula": "24 hours",
+            "dismissible": null,
+            "concentration": null,
+            "raw": "24 hours"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "24 hours",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/saving_throw",
+          "value": {
+            "types": [
+              "will"
+            ],
+            "outcome": "Will negates, see text",
+            "harmless": null,
+            "object": null,
+            "conditional": true,
+            "raw": "Will negates, see text"
+          },
+          "source_field": "spell_raw.saving_throw_raw",
+          "raw": "Will negates, see text",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "You take control of a creature’s mind and implant deadly subconscious commands. This spell functions as dominate person, allowing you to control your subject and see through her senses, but also implants a powerful burst of psychic energy in the subject’s mind. At any point during the spell’s duration, you can trigger this burst as an immediate action, dealing 1d8 points of damage per caster level (Fortitude half) to the subject. If this damage is enough to reduce to target to 0 or fewer hit points, the target dies instantly.\n\nYour target can also willingly trigger this psychic burst as an immediate action. You can specify conditions (such as being captured) when she should do so, though such orders are considered dangerous and allow the subject a new Will saving throw with a +2 bonus.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "You take control of a creature’s mind and implant deadly subconscious commands. This spell functions as dominate person, allowing you to control your subject and see through her senses, but also implants a powerful burst of psychic energy in the subject’s mind. At any point during the spell’s duration, you can trigger this burst as an immediate action, dealing 1d8 points of damage per caster level (Fortitude half) to the subject. If this damage is enough to reduce to target to 0 or fewer hit points, the target dies instantly.\n\nYour target can also willingly trigger this psychic burst as an immediate action. You can specify conditions (such as being captured) when she should do so, though such orders are considered dangerous and allow the subject a new Will saving throw with a +2 bonus.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.death-pact:appears_on_spell_list:spell-list.bard",
@@ -291,6 +534,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.death-pact:functions_like:spell.dominate-person",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.dominate-person",
+        "name": "Dominate Person"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.death-pact:34bda7ceb80580c0",
+          "source_field": "spell_raw.links_raw[8]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dominate person",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/dominate-person"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.death-pact:has_descriptor:descriptor.mind-affecting",
       "type": "has_descriptor",
       "target": {
@@ -393,26 +656,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.death-pact:references:spell.dominate-person",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.dominate-person",
-        "name": "dominate person"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.death-pact:34bda7ceb80580c0",
-          "source_field": "spell_raw.links_raw[8]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "dominate person",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/dominate-person"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.death-pact:uses_action:action.immediate-action",
       "type": "uses_action",
       "target": {
@@ -460,11 +703,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.death-pact:uses_definition:rule.fortitude",
+      "relationship_id": "spell.death-pact:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -520,12 +763,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.death-pact:uses_definition:rule.touch",
+      "relationship_id": "spell.death-pact:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -540,11 +783,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.death-pact:uses_definition:rule.will",
+      "relationship_id": "spell.death-pact:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -631,11 +874,19 @@
       "raw_value_sha256": "ef94d3b9d26314b8e5d47d1002968943224f4b929a585fb0045ade8abd6ab407",
       "decision": "manually_resolved",
       "note": "Reviewed catalog policy: AoN remains the preferred publication transcription. When an additional class membership is printed by d20PFSRD, it may be added to the canonical class union after review; Foundry PF1 is corroborating catalog evidence when it agrees. Preserve every source claim and never replace an AoN level merely because another catalog assigns the same class a different level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.death-pact:c874f3f292ac8968",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "83eec5fe457666f6479efe6269f317dbca092ed2fa73cd668e7ce8a0cb9a78f8",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.5-reviewed-catalog-memberships",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "REVIEWED_CATALOG_MEMBERSHIP_UNION",

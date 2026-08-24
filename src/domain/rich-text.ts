@@ -229,7 +229,10 @@ function linkCandidates(
         relationship.type === "references"
       ) ||
       hasDescriptionEvidence;
-    if (!expectsMatch && relationship.type !== "uses_definition") continue;
+    if (
+      !expectsMatch &&
+      !["uses_definition", "uses_action"].includes(String(relationship.type))
+    ) continue;
     const phrases = new Set<string>([
       String(relationship.target.name),
       naturalSpellName(String(relationship.target.name)),

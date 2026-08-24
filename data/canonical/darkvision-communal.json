@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.darkvision-communal",
   "ruleset": "Pathfinder First Edition",
   "name": "Darkvision, Communal",
@@ -191,7 +191,33 @@
   "description": {
     "raw": "This spell functions like darkvision, except you may divide the duration in 1-hour intervals among the creatures touched.",
     "search_text": "\"this spell functions like darkvision, except you may divide the duration in 1-hour intervals among the creatures touched.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "darkvision",
+              "relationship_id": "spell.darkvision-communal:functions_like:spell.darkvision",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you may divide the duration in 1-hour intervals among the creatures touched."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -559,6 +585,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like darkvision, except you may divide the duration in 1-hour intervals among the creatures touched.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.darkvision-communal:479f53a6a67efca5",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "darkvision",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/darkvision.html#darkvision"
         }
       ],
       "note": null
@@ -640,26 +673,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "Ultimate Combat pg. 226",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.darkvision-communal:references:spell.darkvision",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.darkvision",
-        "name": "darkvision"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.darkvision-communal:479f53a6a67efca5",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "darkvision",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/darkvision.html#darkvision"
         }
       ],
       "note": null
@@ -752,11 +765,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.darkvision-communal:uses_definition:rule.will",
+      "relationship_id": "spell.darkvision-communal:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -820,11 +833,19 @@
       "raw_value_sha256": "7faf4556744ef936bc195b15c1eab0302e15d57e0442c4ac2fa54fd41f13cc90",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.darkvision-communal:e4a90741101d3bea",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "b5f68b975329c7dd987d8557db00436de35f2400fa31c87bc5b21ac9591c4374",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

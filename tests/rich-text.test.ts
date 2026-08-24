@@ -262,6 +262,50 @@ describe("rich-text schema and source parsing", () => {
       status: "rejected",
     }));
   });
+
+  it("keeps Batch 20 spell, rule, and source-navigation meanings distinct", () => {
+    const greaterDarkvision = canonical("darkvision-greater");
+    const greaterDocument = JSON.stringify(greaterDarkvision.description.document);
+    expect(greaterDocument.match(/functions_like:spell\.darkvision/g)).toHaveLength(1);
+    expect(greaterDocument.match(/uses_definition:rule\.darkvision/g)).toHaveLength(1);
+
+    const daywalker = canonical("daywalker");
+    expect(daywalker.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.daywalker:uses_definition:rule.energy-drain",
+      status: "accepted",
+    }));
+    for (const relationshipId of [
+      "spell.daywalker:uses_definition:condition.dead",
+      "spell.daywalker:uses_definition:rule.touch-attack",
+      "spell.daywalker:uses_definition:rule.unholy-water",
+    ]) {
+      expect(daywalker.relationships).toContainEqual(expect.objectContaining({
+        relationship_id: relationshipId,
+        status: "rejected",
+      }));
+    }
+
+    const deathCandle = canonical("death-candle");
+    expect(deathCandle.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.death-candle:uses_definition:monster.fire-elemental",
+      status: "accepted",
+    }));
+    expect(deathCandle.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.death-candle:uses_definition:rule.summon",
+      status: "rejected",
+    }));
+
+    const greaterAura = canonical("death-knell-aura-greater");
+    expect(greaterAura.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.death-knell-aura-greater:references:spell.magic-jar",
+      status: "accepted",
+    }));
+    expect(greaterAura.relationships).toContainEqual(expect.objectContaining({
+      relationship_id:
+        "spell.death-knell-aura-greater:uses_definition:rule.pathfinder-campaign-setting-horsemen-of-the-apocalypse-book-of-the-damned-vol-3",
+      status: "rejected",
+    }));
+  });
 });
 
 
@@ -292,6 +336,23 @@ describe("rich-text relationship enrichment", () => {
         "spell.test:uses_definition:rule.negative-level",
         "spell.test:uses_definition:rule.negative-levels",
       ]);
+  });
+
+  it("links accepted casting actions when the metadata phrase appears in prose", () => {
+    const source = parseRichTextHtml("You can dismiss the spell as an immediate action.");
+    const result = linkRichTextDocument(source, [
+      relationship(
+        "spell.test:uses_action:action.immediate-action",
+        "uses_action",
+        "Immediate action",
+        "action.immediate-action",
+        { anchor: "immediate action", sourceField: "spell_raw.casting_time_raw" },
+      ),
+    ]);
+    expect(JSON.stringify(result.document)).toContain(
+      "spell.test:uses_action:action.immediate-action",
+    );
+    expect(result.warnings).toEqual([]);
   });
 
   it("uses relationship priority and leaves same-priority ambiguity unlinked", () => {

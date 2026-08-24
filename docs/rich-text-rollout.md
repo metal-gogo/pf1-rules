@@ -12,9 +12,9 @@ Audit date: 2026-08-23.
 | Category | Spells | Meaning |
 | --- | ---: | --- |
 | Total canonical spells | 3,030 | Complete corpus |
-| Rich text stored | 487 | 11-spell pilot, nineteen reviewed 25-spell rollout batches, and one reviewed warning record |
-| Safe candidates with links | 1,770 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
-| Safe structure-only candidates | 310 | Source text matches, but no known relationship currently produces an inline link |
+| Rich text stored | 512 | 11-spell pilot, twenty reviewed 25-spell rollout batches, and one reviewed warning record |
+| Safe candidates with links | 1,753 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
+| Safe structure-only candidates | 302 | Source text matches, but no known relationship currently produces an inline link |
 | Source mismatch | 291 | Current canonical text and the newly bounded AoN description differ |
 | Link warnings | 172 | At least one accepted relationship is ambiguous or unmatched |
 | Missing AoN baseline | 0 | No current blocker |
@@ -570,6 +570,47 @@ Dancing Darkness's selected source says “Dancing shadows can be made
 permanent,” although the spell is named Dancing Darkness. The wording is
 preserved as source evidence and may be a copy-editing anomaly; do not silently
 rewrite it without errata or another authoritative source.
+
+### Batch 20
+
+The twentieth rollout batch contains:
+
+- Darkvault; Communal Darkvision; Greater Darkvision; Darting Duplicate;
+  Daywalker; Daze; Mass Daze; Daze Monster; Dazzling Blade; Mass Dazzling
+  Blade.
+- Deadeye's Lore; Deadly Finale; Deadly Juggernaut; Deadman's Contingency;
+  Deafening Song Bolt; Death Candle; Death Clutch; Greater Death Knell Aura;
+  Death Pact; Deathwine.
+- Debilitating Pain; Mass Debilitating Pain; Debilitating Portent;
+  Debilitating Speech; Decapitate.
+
+Review of this batch established these normalization rules:
+
+- An accepted `uses_action` relationship is eligible for inline matching when
+  its exact action phrase appears in description prose. This links free,
+  immediate, standard, and full-round actions without duplicating metadata or
+  guessing at render time.
+- Greater Darkvision links only its first `darkvision` occurrence to the parent
+  spell. Its second occurrence names the granted sense and links to the
+  Darkvision rule. Greater Death Knell Aura similarly treats Magic Jar as a
+  spell reference, while Death Candle resolves a named fire elemental to a
+  monster and retains Elemental as the creature type.
+- Plural cleric, oracle, witch, undead, and potion references resolve to their
+  established canonical entities. `Deafening` resolves to the Deafened
+  condition, and Daywalker's energy drain resolves to the monster rule rather
+  than the identically named spell.
+- Reviewed missing links cover Darkvault's illumination levels; Daze's Hit
+  Dice; Dazzling Blade's silver material; Deadly Juggernaut's checks, damage
+  reduction, and skills; Greater Death Knell Aura's Dying and Stable
+  conditions; Deathwine's negative energy; and Debilitating Portent's Witch
+  class reference.
+
+Semantic review rejected Daywalker's ordinary `touch`, descriptive `dead
+flesh`, unrelated unholy-water navigation, and misclassified Energy Drain
+spell target; Death Candle's spellcasting verb `summon`; Death Clutch's
+ordinary heart regeneration as the monster Regeneration ability; Daze's
+publication navigation; and Greater Death Knell Aura's duplicate publication
+navigation.
 
 ## Open questions and issues
 

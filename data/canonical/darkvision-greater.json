@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.darkvision-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Darkvision, Greater",
@@ -199,7 +199,42 @@
   "description": {
     "raw": "This spell functions as darkvision, except the target’s darkvision has a range of 120 feet.",
     "search_text": "\"this spell functions as darkvision, except the target’s darkvision has a range of 120 feet.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "darkvision",
+              "relationship_id": "spell.darkvision-greater:functions_like:spell.darkvision",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except the target’s "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "darkvision",
+              "relationship_id": "spell.darkvision-greater:uses_definition:rule.darkvision"
+            },
+            {
+              "node_type": "text",
+              "value": " has a range of 120 feet."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -566,6 +601,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as darkvision, except the target’s darkvision has a range of 120 feet.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.darkvision-greater:dc379573d66a9661",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "darkvision",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/darkvision.html#darkvision"
         }
       ],
       "note": null
@@ -652,26 +694,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.darkvision-greater:references:spell.darkvision",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.darkvision",
-        "name": "darkvision"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.darkvision-greater:dc379573d66a9661",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "darkvision",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/darkvision.html#darkvision"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.darkvision-greater:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -714,6 +736,13 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "darkvision",
           "source_href": "https://www.d20pfsrd.com/gamemastering/special-abilities#TOC-Darkvision"
+        },
+        {
+          "observation_id": "aon:spell.darkvision-greater:dda4e8bdb9010506",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "darkvision",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Darkvision%2C+Greater"
         }
       ],
       "note": null
@@ -827,11 +856,19 @@
       "raw_value_sha256": "893bea029d18df057e836e10b4b94d8cfaa35de6cd1d2a7ce6bcdcfd5092ec01",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.darkvision-greater:dda4e8bdb9010506",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "a67f5503dae348b92e4a5ff65394f1b17542991d650089ff0df32d01af005b6b",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
