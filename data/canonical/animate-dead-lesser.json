@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.animate-dead-lesser",
   "ruleset": "Pathfinder First Edition",
   "name": "Animate Dead, Lesser",
@@ -200,7 +200,69 @@
   "description": {
     "raw": "This spell functions as animate dead, except you can only create a single Small or Medium skeleton or zombie. You cannot create variant skeletons or zombies with this spell.",
     "search_text": "\"this spell functions as animate dead, except you can only create a single small or medium skeleton or zombie. you cannot create variant skeletons or zombies with this spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "animate dead",
+              "relationship_id": "spell.animate-dead-lesser:functions_like:spell.animate-dead",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you can only create a single Small or Medium "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "skeleton",
+              "relationship_id": "spell.animate-dead-lesser:uses_definition:rule.skeleton"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "zombie",
+              "relationship_id": "spell.animate-dead-lesser:uses_definition:rule.zombie"
+            },
+            {
+              "node_type": "text",
+              "value": ". You cannot create variant "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "skeletons",
+              "relationship_id": "spell.animate-dead-lesser:uses_definition:rule.skeleton"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "zombies",
+              "relationship_id": "spell.animate-dead-lesser:uses_definition:rule.zombie"
+            },
+            {
+              "node_type": "text",
+              "value": " with this spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -365,6 +427,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.animate-dead-lesser:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.animate-dead-lesser:4d17c446924f927d",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.animate-dead-lesser:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -527,6 +609,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as animate dead, except you can only create a single Small or Medium skeleton or zombie. You cannot create variant skeletons or zombies with this spell.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.animate-dead-lesser:d8e837d9631754f2",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "animate dead",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/animateDead.html#animate-dead"
         }
       ],
       "note": null
@@ -640,26 +729,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.animate-dead-lesser:references:spell.animate-dead",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.animate-dead",
-        "name": "animate dead"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.animate-dead-lesser:d8e837d9631754f2",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "animate dead",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/animateDead.html#animate-dead"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.animate-dead-lesser:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -755,20 +824,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "skeleton",
           "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/templates/skeleton"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.animate-dead-lesser:uses_definition:rule.skeletons",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.skeletons",
-        "name": "skeletons"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.animate-dead-lesser:d2112900401381f4",
           "source_field": "spell_raw.links_raw[7]",
@@ -815,20 +871,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "zombie",
           "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/templates/zombie"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.animate-dead-lesser:uses_definition:rule.zombies",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.zombies",
-        "name": "zombies"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.animate-dead-lesser:d2112900401381f4",
           "source_field": "spell_raw.links_raw[8]",
@@ -838,26 +881,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.animate-dead-lesser:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.animate-dead-lesser:4d17c446924f927d",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -908,11 +931,19 @@
       "raw_value_sha256": "da27ced0f132861575636fba93acf06c2c38223a9a55d9717915d867c8208733",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.animate-dead-lesser:4d17c446924f927d",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "abb5becdeac349a5458b86ee5047a43952eadb67f37d98fefa901eb6eb32a814",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

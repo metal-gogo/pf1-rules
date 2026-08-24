@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.bouncy-body",
   "ruleset": "Pathfinder First Edition",
   "name": "Bouncy Body",
@@ -153,7 +153,102 @@
   "description": {
     "raw": "The target’s flesh becomes flexible and rubbery. It gains a +2 circumstance bonus on grapple combat maneuver checks and Escape Artist checks, as well as to its CMD against combat maneuver checks to grapple. Anytime the target would take falling damage, it treats falls as 20 feet shorter (minimum 0) for the purpose of determining damage. In addition, if the target falls against a hard surface, it can attempt an Acrobatics check (DC = the distance fallen) to attempt to bounce upward; success means the creature bounces upward half the distance fallen.",
     "search_text": "\"the target’s flesh becomes flexible and rubbery. it gains a +2 circumstance bonus on grapple combat maneuver checks and escape artist checks, as well as to its cmd against combat maneuver checks to grapple. anytime the target would take falling damage, it treats falls as 20 feet shorter (minimum 0) for the purpose of determining damage. in addition, if the target falls against a hard surface, it can attempt an acrobatics check (dc = the distance fallen) to attempt to bounce upward; success means the creature bounces upward half the distance fallen.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target’s flesh becomes flexible and rubbery. It gains a +2 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "circumstance bonus",
+              "relationship_id": "spell.bouncy-body:uses_definition:rule.circumstance-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "grapple",
+              "relationship_id": "spell.bouncy-body:uses_definition:rule.grapple"
+            },
+            {
+              "node_type": "text",
+              "value": " "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "combat maneuver",
+              "relationship_id": "spell.bouncy-body:uses_definition:rule.combat-maneuvers"
+            },
+            {
+              "node_type": "text",
+              "value": " checks and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Escape Artist",
+              "relationship_id": "spell.bouncy-body:uses_definition:rule.escape-artist"
+            },
+            {
+              "node_type": "text",
+              "value": " checks, as well as to its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "CMD",
+              "relationship_id": "spell.bouncy-body:uses_definition:rule.combat-maneuver-defense"
+            },
+            {
+              "node_type": "text",
+              "value": " against "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "combat maneuver",
+              "relationship_id": "spell.bouncy-body:uses_definition:rule.combat-maneuvers"
+            },
+            {
+              "node_type": "text",
+              "value": " checks to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "grapple",
+              "relationship_id": "spell.bouncy-body:uses_definition:rule.grapple"
+            },
+            {
+              "node_type": "text",
+              "value": ". Anytime the target would take "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "falling damage",
+              "relationship_id": "spell.bouncy-body:uses_definition:rule.falling-damage"
+            },
+            {
+              "node_type": "text",
+              "value": ", it treats falls as 20 feet shorter (minimum 0) for the purpose of determining damage. In addition, if the target falls against a hard surface, it can attempt an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Acrobatics",
+              "relationship_id": "spell.bouncy-body:uses_definition:rule.acrobatics"
+            },
+            {
+              "node_type": "text",
+              "value": " check (DC = the distance fallen) to attempt to bounce upward; success means the creature bounces upward half the distance fallen."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -489,12 +584,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.bouncy-body:uses_definition:rule.cmd",
+      "relationship_id": "spell.bouncy-body:uses_definition:rule.combat-maneuver-defense",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.cmd",
-        "name": "CMD"
+        "entity_id": "rule.combat-maneuver-defense",
+        "name": "Combat Maneuver Defense"
       },
       "status": "accepted",
       "evidence": [
@@ -509,12 +604,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.bouncy-body:uses_definition:rule.combat-maneuver",
+      "relationship_id": "spell.bouncy-body:uses_definition:rule.combat-maneuvers",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.combat-maneuver",
-        "name": "combat maneuver"
+        "entity_id": "rule.combat-maneuvers",
+        "name": "Combat maneuvers"
       },
       "status": "accepted",
       "evidence": [
@@ -561,6 +656,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.bouncy-body:uses_definition:rule.falling-damage",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.falling-damage",
+        "name": "Falling damage"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.bouncy-body:8f08ced7b06a36e7",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "falling damage",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Bouncy+Body"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.bouncy-body:uses_definition:rule.grapple",
@@ -610,12 +725,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.bouncy-body:uses_definition:rule.touch",
+      "relationship_id": "spell.bouncy-body:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -678,11 +793,19 @@
       "raw_value_sha256": "69061b4a393c10f6b7e3c1ef391e1a0bc931482cc599d1416d9acd0c4401f3db",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.bouncy-body:8f08ced7b06a36e7",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "11527b9280c41c5e5838b675eebc51a9f7a3c9bd6873e4529662cb60fab23a2c",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

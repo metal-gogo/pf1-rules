@@ -23,6 +23,7 @@ const reviewedOwnerSpellNames = new Map<string, string>([
   ["statue (metal statue instead of iron)", "Statue"],
   ["horrid withering", "Horrid Wilting"],
   ["minor creation (wood items only)", "Minor Creation"],
+  ["tapestry’s embrace*", "Call the Void"],
 ]);
 
 const reviewedOwnerSpellIds = new Map<string, string[]>([
@@ -41,6 +42,8 @@ const reviewedOwnerSpellIds = new Map<string, string[]>([
   ["summon monster viii (elementals only)", ["spell.summon-monster-8"]],
   ["planar binding (devils and creatures with the fiendish template only)", ["spell.planar-binding"]],
   ["transmute rock to mud", ["spell.transmute-rock-to-mud"]],
+  ["transmute mud to rock", ["spell.transmute-mud-to-rock"]],
+  ["stone to flesh", ["spell.stone-to-flesh"]],
   ["fire shield (warm shield)", ["spell.fire-shield"]],
   ["fire shield (warm only)", ["spell.fire-shield"]],
   ["giant vermin (scorpions only)", ["spell.giant-vermin"]],
@@ -99,6 +102,8 @@ const reviewedOwnerSpellIds = new Map<string, string[]>([
   ["summon nature’s ally vii (brachiosaurus or tyrannosaurus only)", ["spell.summon-natures-ally-7"]],
 ]);
 
+const reviewedUnavailableOwnerSpells = new Set(["lightning rod (?)"]);
+
 interface Capture {
   body: string;
   url: string;
@@ -118,14 +123,14 @@ interface OwnerSpell {
 
 interface OwnerRecord {
   entityId: string;
-  entityType: "domain" | "subdomain" | "mystery" | "patron" | "spirit" | "bloodline";
+  entityType: "domain" | "subdomain" | "mystery" | "patron" | "spirit" | "bloodline" | "magic_school";
   listId: string;
-  listKind: "domain" | "subdomain" | "mystery" | "patron" | "spirit" | "bloodline";
+  listKind: "domain" | "subdomain" | "mystery" | "patron" | "spirit" | "bloodline" | "elemental_school";
   name: string;
   listName: string;
   membershipName?: string;
   legacyListId?: string;
-  className: "Cleric" | "Oracle" | "Witch" | "Shaman" | "Sorcerer" | "Bloodrager";
+  className: "Cleric" | "Oracle" | "Witch" | "Shaman" | "Sorcerer" | "Bloodrager" | "Wizard";
   definitionType: string;
   sectionHeading: string;
   sourceUrl: string;
@@ -215,6 +220,35 @@ async function assertAonAllowsOwners(): Promise<void> {
     /^\s*disallow\s*:\s*\/(?:OracleMysteries|MysteryDisplay|WitchPatrons|ShamanSpirits|ShamanSpiritDisplay|SorcererBloodlines|BloodlineDisplay|BloodragerBloodlines|BloodragerBloodlineDisplay|ClericDomains|DomainDisplay)\.aspx/i.test(line),
   );
   if (disallowed) throw new Error("AoN robots.txt disallows spell-list owner capture.");
+}
+
+
+async function assertD20AllowsElementalSchools(): Promise<void> {
+  const targetPath = "/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/";
+  const response = await fetch("https://www.d20pfsrd.com/robots.txt", {
+    headers: { accept: "text/plain", "user-agent": userAgent },
+    signal: AbortSignal.timeout(45_000),
+  });
+  if (response.status === 404) return;
+  if (!response.ok) throw new Error(`Cannot verify d20PFSRD robots policy: HTTP ${response.status}`);
+  let applies = false;
+  const rules: Array<{ allow: boolean; path: string }> = [];
+  for (const rawLine of (await response.text()).split(/\r?\n/)) {
+    const line = rawLine.replace(/#.*$/, "").trim();
+    const separator = line.indexOf(":");
+    if (separator < 0) continue;
+    const field = line.slice(0, separator).trim().toLocaleLowerCase("en-US");
+    const value = line.slice(separator + 1).trim();
+    if (field === "user-agent") {
+      applies = value === "*" || userAgent.toLocaleLowerCase("en-US").startsWith(value.toLocaleLowerCase("en-US"));
+    } else if (applies && value && (field === "allow" || field === "disallow")) {
+      rules.push({ allow: field === "allow", path: value });
+    }
+  }
+  const match = rules
+    .filter((rule) => targetPath.startsWith(rule.path.replace(/\*.*$/, "")))
+    .sort((left, right) => right.path.length - left.path.length || Number(right.allow) - Number(left.allow))[0];
+  if (match && !match.allow) throw new Error(`robots.txt disallows https://www.d20pfsrd.com${targetPath}`);
 }
 
 
@@ -487,6 +521,67 @@ function parseBloodline(
 }
 
 
+function parseElementalSchool(capture: Capture, rawPath: string, name: string): OwnerRecord {
+  const doc = cheerio.load(capture.body);
+  doc("script, style, nav, footer").remove();
+  const pageText = cleanText(doc("body").text());
+  const headings = [`${name} Elementalist Wizard Spells`, `${name} Elementalist Spells`];
+  const headingNode = doc(
+    'span[id$="_elementalist_spells"], span[id$="_elementalist_wizard_spells"]',
+  ).last();
+  const listElement = headingNode.length
+    ? headingNode.closest("h4").nextAll("p").first()
+    : doc("b").filter((_index, element) => headings.includes(cleanText(doc(element).text()))).last().closest("p");
+  if (listElement.length !== 1) throw new Error(`${name} lacks a bounded elementalist spell list.`);
+  const listHeading = headings.find((heading) => cleanText(listElement.text()).startsWith(heading));
+  const listRaw = cleanText(listElement.text())
+    .slice(listHeading?.length ?? 0)
+    .replace(/^:\s*/, "")
+    .replace(/\.$/, "");
+  const spells: OwnerSpell[] = [];
+  const levelPattern = /(\d+)(?:st|nd|rd|th)?\s*[—-]\s*(.*?)(?=\s*\d+(?:st|nd|rd|th)?\s*[—-]|$)/gi;
+  for (const levelMatch of listRaw.matchAll(levelPattern)) {
+    const spellLevel = Number(levelMatch[1]);
+    if (spellLevel < 0 || spellLevel > 9) {
+      throw new Error(`${name} has unexpected elementalist spell level ${spellLevel}.`);
+    }
+    for (const spellName of levelMatch[2]!.split(/,\s*/)) {
+      const normalizedName = cleanText(spellName);
+      if (normalizedName) {
+        spells.push({ spellName: normalizedName, spellLevel, raw: `${levelMatch[1]}—${normalizedName}` });
+      }
+    }
+  }
+  const levels = new Set(spells.map((spell) => spell.spellLevel));
+  if (spells.length < 20 || levels.size !== 10) {
+    throw new Error(`${name} parsed ${spells.length} spells across ${levels.size} levels.`);
+  }
+  const schoolSlug = slug(name);
+  const definitionStart = pageText.toLocaleLowerCase("en-US").indexOf(name.toLocaleLowerCase("en-US"));
+  const definitionEnd = pageText.indexOf("Section 15", definitionStart);
+  return {
+    entityId: `magic-school.${schoolSlug}-elemental`,
+    entityType: "magic_school",
+    listId: `spell-list.${schoolSlug}-elemental-school`,
+    listKind: "elemental_school",
+    name: `${name} Elemental School`,
+    listName: `${name} Elemental School`,
+    membershipName: `${name} Elemental School`,
+    className: "Wizard",
+    definitionType: "Wizard Elemental Arcane School",
+    sectionHeading: `${name} Elementalist Spells`,
+    sourceUrl: capture.url,
+    sourceBook: null,
+    scope: "later_first_party",
+    definitionRaw: pageText.slice(Math.max(0, definitionStart), definitionEnd < 0 ? undefined : definitionEnd),
+    sectionBodyRaw: listRaw,
+    spells,
+    capture,
+    rawPath,
+  };
+}
+
+
 interface ParsedSubdomain {
   baseName: string;
   name: string;
@@ -597,7 +692,8 @@ function parseDomainPage(capture: Capture, rawPath: string): {
 
 
 function sourceObservation(owner: OwnerRecord): ValidatedJson {
-  const observationId = `aon:${owner.entityId}:${owner.capture.content_sha256.slice(0, 8)}`;
+  const siteId = owner.sourceUrl.includes("d20pfsrd.com") ? "d20pfsrd" : "aon";
+  const observationId = `${siteId}:${owner.entityId}:${owner.capture.content_sha256.slice(0, 8)}`;
   const observationDirectory = path.join(projectRoot, "data", "observations", "entities", owner.entityId);
   return {
     $schema: "../../../../schemas/source-entity-observation.schema.json",
@@ -605,9 +701,11 @@ function sourceObservation(owner: OwnerRecord): ValidatedJson {
     observation_id: observationId,
     entity_type: owner.entityType,
     source: {
-      site_id: "aon",
+      site_id: siteId,
       url: owner.sourceUrl,
-      license_url: "https://www.aonprd.com/Licenses.aspx",
+      license_url: siteId === "aon"
+        ? "https://www.aonprd.com/Licenses.aspx"
+        : "https://www.d20pfsrd.com/extras/legal/",
       declared_publisher: "Paizo",
       first_party_status: "confirmed",
     },
@@ -619,7 +717,7 @@ function sourceObservation(owner: OwnerRecord): ValidatedJson {
       response_content_type: owner.capture.response_content_type,
     },
     parser: {
-      name: `aon-${owner.entityType}-spell-list-adapter`,
+      name: `${siteId}-${owner.entityType}-spell-list-adapter`,
       version: parserVersion,
       parsed_at: owner.capture.retrieved_at,
     },
@@ -659,6 +757,9 @@ function upsertOwnerEntities(
   observationId: string,
   registries: Array<{ filename: string; record: ValidatedJson }>,
 ): void {
+  const sourceName = owner.sourceUrl.includes("d20pfsrd.com")
+    ? "d20PFSRD"
+    : "Archives of Nethys";
   const ownerRegistry = registries.find(({ record }) => record.registry_id === "spell-list-owner-entities-v0.1");
   if (!ownerRegistry) throw new Error("Spell-list owner registry is missing.");
   const evidence = [{
@@ -704,7 +805,7 @@ function upsertOwnerEntities(
       ...(existingOwner.entity.evidence ?? []).filter((item: ValidatedJson) => item.observation_id !== observationId),
       ...evidence,
     ];
-    existingOwner.entity.notes = ["Definition and complete granted-spell list captured from Archives of Nethys."];
+    existingOwner.entity.notes = [`Definition and complete granted-spell list captured from ${sourceName}.`];
     const relationships = [...(existingOwner.entity.relationships ?? [])];
     const relationshipCandidates = parentRelationship ? [relationship, parentRelationship] : [relationship];
     for (const candidate of relationshipCandidates) {
@@ -721,7 +822,7 @@ function upsertOwnerEntities(
       status: "resolved",
       aliases: [],
       evidence,
-      notes: ["Definition and complete granted-spell list captured from Archives of Nethys."],
+      notes: [`Definition and complete granted-spell list captured from ${sourceName}.`],
       relationships: [relationship, parentRelationship].filter(Boolean),
     });
   }
@@ -731,7 +832,7 @@ function upsertOwnerEntities(
     existingList.entity.name = owner.listName;
     existingList.entity.status = "resolved";
     existingList.entity.evidence = evidence;
-    existingList.entity.notes = [`Complete ${owner.definitionType.toLocaleLowerCase("en-US")} spell list captured from its owning AoN page.`];
+    existingList.entity.notes = [`Complete ${owner.definitionType.toLocaleLowerCase("en-US")} spell list captured from its owning ${sourceName} page.`];
   } else {
     ownerRegistry.record.entities.push({
       entity_id: owner.listId,
@@ -740,7 +841,7 @@ function upsertOwnerEntities(
       status: "resolved",
       aliases: [],
       evidence,
-      notes: [`Complete ${owner.definitionType.toLocaleLowerCase("en-US")} spell list captured from its owning AoN page.`],
+      notes: [`Complete ${owner.definitionType.toLocaleLowerCase("en-US")} spell list captured from its owning ${sourceName} page.`],
     });
   }
 }
@@ -753,6 +854,7 @@ function addOwnerSpellMembership(
   canonical: ValidatedJson,
   decision: ValidatedJson,
 ): "added" | "reclassified" | "existing" {
+  const sourceName = owner.sourceUrl.includes("d20pfsrd.com") ? "d20PFSRD" : "AoN";
   const existing = canonical.levels.find((level: ValidatedJson) => level.spell_list_id === owner.listId);
   const accessBasis = ownerSpell.accessBasis ?? "printed";
   const exactExisting = existing &&
@@ -839,7 +941,7 @@ function addOwnerSpellMembership(
     considered_observation_ids: [observationId],
     rationale: accessBasis === "derived"
       ? `The owning ${owner.definitionType.toLocaleLowerCase("en-US")} prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived.`
-      : `AoN clearly transcribes the owning ${owner.definitionType.toLocaleLowerCase("en-US")}'s printed spell entry. The gained class level is normalized to spell level.`,
+      : `${sourceName} clearly transcribes the owning ${owner.definitionType.toLocaleLowerCase("en-US")}'s printed spell entry. The gained class level is normalized to spell level.`,
   });
   const oldDecision = oldRelationshipId
     ? decision.relationship_decisions.find((candidate: ValidatedJson) => candidate.relationship_id === oldRelationshipId)
@@ -851,7 +953,7 @@ function addOwnerSpellMembership(
     considered_observation_ids: [observationId],
     rationale: accessBasis === "derived"
       ? `The owning ${owner.definitionType.toLocaleLowerCase("en-US")} replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived.`
-      : `AoN prints the spell on the owning ${owner.definitionType.toLocaleLowerCase("en-US")} page; it is modeled as ${owner.listKind} access rather than general ${owner.className} access.`,
+      : `${sourceName} prints the spell on the owning ${owner.definitionType.toLocaleLowerCase("en-US")} page; it is modeled as ${owner.listKind} access rather than general ${owner.className} access.`,
   };
   if (oldDecision) Object.assign(oldDecision, relationshipDecision);
   else decision.relationship_decisions.push(relationshipDecision);
@@ -873,6 +975,7 @@ function ingestOwnerRecords(
   const registries = directJsonFiles(path.join(projectRoot, "data", "entities"))
     .map((filename) => ({ filename, record: loadJson(filename) }));
   const unresolved: Array<{ owner: string; spell: string; level: number }> = [];
+  const unavailable: Array<{ owner: string; spell: string; level: number }> = [];
   const normalizedReferences: Array<{ owner: string; printed: string; canonical: string }> = [];
   const report = {
     owners: new Set(owners.map((owner) => owner.entityId)).size,
@@ -882,6 +985,7 @@ function ingestOwnerRecords(
     reclassified: 0,
     existing: 0,
     normalizedReferences,
+    unavailable,
     unresolved,
   };
   const ownerRecordCounts = new Map<string, number>();
@@ -892,9 +996,10 @@ function ingestOwnerRecords(
   for (const owner of owners) {
     const observation = sourceObservation(owner);
     const observationId = observation.observation_id;
+    const siteId = owner.sourceUrl.includes("d20pfsrd.com") ? "d20pfsrd" : "aon";
     const observationFilename = (ownerRecordCounts.get(owner.entityId) ?? 0) > 1
-      ? `aon-${parserVersion}-${owner.capture.content_sha256.slice(0, 8)}.json`
-      : `aon-${parserVersion}.json`;
+      ? `${siteId}-${parserVersion}-${owner.capture.content_sha256.slice(0, 8)}.json`
+      : `${siteId}-${parserVersion}.json`;
     writeJson(
       path.join(projectRoot, "data", "observations", "entities", owner.entityId, observationFilename),
       observation,
@@ -909,7 +1014,8 @@ function ingestOwnerRecords(
         : [resolveCanonicalSpellReference(reviewedName ?? ownerSpell.spellName, available)]
           .filter((record): record is ValidatedJson => Boolean(record));
       if (resolved.length === 0 || (reviewedIds && resolved.length !== reviewedIds.length)) {
-        unresolved.push({ owner: owner.name, spell: ownerSpell.spellName, level: ownerSpell.spellLevel });
+        const target = reviewedUnavailableOwnerSpells.has(referenceKey) ? unavailable : unresolved;
+        target.push({ owner: owner.name, spell: ownerSpell.spellName, level: ownerSpell.spellLevel });
         continue;
       }
       for (const canonical of resolved) {
@@ -957,6 +1063,7 @@ function ingestOwnerRecords(
     canonical_rows: canonicalRows.length,
     rows_by_list: rowsByList,
     normalized_references: normalizedReferences,
+    reviewed_unavailable_references: unavailable,
     unresolved,
   });
   if (unresolved.length > 0) {
@@ -1062,6 +1169,45 @@ async function ingestBloodlineSpellLists(className: "Sorcerer" | "Bloodrager") {
 
 export const ingestSorcererBloodlineSpellLists = () => ingestBloodlineSpellLists("Sorcerer");
 export const ingestBloodragerBloodlineSpellLists = () => ingestBloodlineSpellLists("Bloodrager");
+
+
+export async function ingestElementalSchoolSpellLists() {
+  await assertD20AllowsElementalSchools();
+  const baseUrl = "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/";
+  const catalogRawPath = path.join(
+    projectRoot,
+    "data",
+    "raw",
+    "catalogs",
+    "spell-list-owners",
+    "elemental-schools-d20pfsrd.html",
+  );
+  const catalog = await fetchPage(baseUrl, catalogRawPath);
+  const pages = [
+    ["Aether", "aether-elemental-school/"],
+    ["Air", "air/"],
+    ["Earth", "earth/"],
+    ["Fire", "fire/"],
+    ["Metal", "metal/"],
+    ["Void", "void-elemental-school/"],
+    ["Water", "water/"],
+    ["Wood", "wood/"],
+  ] as const;
+  const owners: OwnerRecord[] = [];
+  for (const [name, pagePath] of pages) {
+    const rawPath = path.join(
+      projectRoot,
+      "data",
+      "raw",
+      "entities",
+      `magic-school.${slug(name)}-elemental`,
+      "d20pfsrd.html",
+    );
+    const capture = await fetchPage(new URL(pagePath, baseUrl).toString(), rawPath);
+    owners.push(parseElementalSchool(capture, rawPath, name));
+  }
+  return ingestOwnerRecords("elemental-school", catalog, owners);
+}
 
 
 export async function ingestDomainSpellLists() {
@@ -1211,6 +1357,8 @@ const operation = command === "mysteries"
       ? ingestBloodragerBloodlineSpellLists
     : command === "domains"
       ? ingestDomainSpellLists
+    : command === "elemental-schools"
+      ? ingestElementalSchoolSpellLists
     : null;
 if (!operation) throw new Error(`Unknown owner-list command: ${command ?? "<missing>"}`);
 operation()

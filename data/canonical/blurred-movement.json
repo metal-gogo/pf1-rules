@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.blurred-movement",
   "ruleset": "Pathfinder First Edition",
   "name": "Blurred Movement",
@@ -227,7 +227,42 @@
   "description": {
     "raw": "This spell functions as blur, except that the blurring occurs only when you move at least 10 feet on your turn and ceases at the end of your movement. It is therefore mainly used to protect against attacks on your turn, such as attacks of opportunity. If you move at least twice your speed on your turn, the blurring lasts until the start of your next turn.",
     "search_text": "\"this spell functions as blur, except that the blurring occurs only when you move at least 10 feet on your turn and ceases at the end of your movement. it is therefore mainly used to protect against attacks on your turn, such as attacks of opportunity. if you move at least twice your speed on your turn, the blurring lasts until the start of your next turn.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blur",
+              "relationship_id": "spell.blurred-movement:functions_like:spell.blur",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that the blurring occurs only when you move at least 10 feet on your turn and ceases at the end of your movement. It is therefore mainly used to protect against attacks on your turn, such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attacks of opportunity",
+              "relationship_id": "spell.blurred-movement:uses_definition:rule.attacks-of-opportunity"
+            },
+            {
+              "node_type": "text",
+              "value": ". If you move at least twice your speed on your turn, the blurring lasts until the start of your next turn."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -647,6 +682,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.blurred-movement:appears_on_spell_list:spell-list.shadow-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.shadow-mystery",
+        "name": "Shadow Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.shadow:d06014e6",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "blurred movement (2nd)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Shadow"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
       "relationship_id": "spell.blurred-movement:appears_on_spell_list:spell-list.skald",
       "type": "appears_on_spell_list",
       "target": {
@@ -802,6 +857,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as blur, except that the blurring occurs only when you move at least 10 feet on your turn and ceases at the end of your movement. It is therefore mainly used to protect against attacks on your turn, such as attacks of opportunity. If you move at least twice your speed on your turn, the blurring lasts until the start of your next turn.",
           "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.blurred-movement:8830a16a70d58a6e",
+          "source_field": "spell_raw.links_raw[11]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "blur",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/b/blur/"
         }
       ],
       "note": null
@@ -902,26 +964,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.blurred-movement:references:spell.blur",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.blur",
-        "name": "blur"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.blurred-movement:8830a16a70d58a6e",
-          "source_field": "spell_raw.links_raw[11]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "blur",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/b/blur/"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.blurred-movement:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -987,26 +1029,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.blurred-movement:appears_on_spell_list:spell-list.shadow-mystery",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.shadow-mystery",
-        "name": "Shadow Mystery Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.shadow:d06014e6",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "blurred movement (2nd)",
-          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Shadow"
-        }
-      ],
-      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -1065,11 +1087,19 @@
       "raw_value_sha256": "03921522ec2a99cef08fe262df858ec38582dfba674c617166b640306555ee36",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.blurred-movement:8aa4c400ed4392c4",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "c4b70783c1d3a7c0fa0b37909c6010a46acfcc0601d01dec08b953bf7146cb49",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

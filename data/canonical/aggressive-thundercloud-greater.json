@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.aggressive-thundercloud-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Aggressive Thundercloud, Greater",
@@ -157,7 +157,51 @@
   "description": {
     "raw": "This spell functions as aggressive thundercloud, except it deals 6d6 points of electricity damage to any creature it strikes. The first creature damaged by the cloud is also stunned for 1 round (Fortitude negates); this is a sonic effect.",
     "search_text": "\"this spell functions as aggressive thundercloud, except it deals 6d6 points of electricity damage to any creature it strikes. the first creature damaged by the cloud is also stunned for 1 round (fortitude negates); this is a sonic effect.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "aggressive thundercloud",
+              "relationship_id": "spell.aggressive-thundercloud-greater:functions_like:spell.aggressive-thundercloud",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it deals 6d6 points of electricity damage to any creature it strikes. The first creature damaged by the cloud is also "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "stunned",
+              "relationship_id": "spell.aggressive-thundercloud-greater:uses_definition:condition.stunned"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 round ("
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.aggressive-thundercloud-greater:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " negates); this is a sonic effect."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -585,12 +629,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.aggressive-thundercloud-greater:uses_definition:rule.fort",
+      "relationship_id": "spell.aggressive-thundercloud-greater:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -612,11 +656,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.aggressive-thundercloud-greater:uses_definition:rule.reflex",
+      "relationship_id": "spell.aggressive-thundercloud-greater:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -700,11 +744,19 @@
       "raw_value_sha256": "12421b51f5e71cd257c4bcb0b714517a9219973d951380e668a832f406a06bf6",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.aggressive-thundercloud-greater:b376f77e77ba85ec",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "57d6e3cc75bab31de5dba06ad6fa298b8db85c1cd37ae8e99a580a3eb2701490",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

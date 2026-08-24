@@ -187,6 +187,26 @@
         "aon:subdomain.family:c83a2eb7"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.calm-emotions:06ab1226216925f2",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.calm-emotions:06ab1226216925f2",
+        "legacy_aon:spell.calm-emotions:d6dfe489c967750b",
+        "d20pfsrd:spell.calm-emotions:7f6a4a90f727faeb",
+        "aon:patron.enchantment:15d234b1",
+        "aon:patron.peace:15d234b1",
+        "aon:domain.charm:fd537e7d",
+        "aon:subdomain.family:c83a2eb7"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -209,6 +229,20 @@
         "d20pfsrd:spell.calm-emotions:7f6a4a90f727faeb"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.calm-emotions:appears_on_spell_list:spell-list.charm-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.charm:fd537e7d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.charm:fd537e7d"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.calm-emotions:appears_on_spell_list:spell-list.cleric",
@@ -241,6 +275,34 @@
         "d20pfsrd:spell.calm-emotions:7f6a4a90f727faeb"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.calm-emotions:appears_on_spell_list:spell-list.enchantment-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.enchantment:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.enchantment:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.calm-emotions:appears_on_spell_list:spell-list.family-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.family:c83a2eb7",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.family:c83a2eb7"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.calm-emotions:appears_on_spell_list:spell-list.inquisitor",
@@ -295,6 +357,25 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.calm-emotions:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.calm-emotions:06ab1226216925f2",
+          "source_field": "spell_raw.levels_raw"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.calm-emotions:7f6a4a90f727faeb",
+          "source_field": "spell_raw.links_raw[4]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.calm-emotions:06ab1226216925f2",
+        "d20pfsrd:spell.calm-emotions:7f6a4a90f727faeb"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.calm-emotions:appears_on_spell_list:spell-list.oracle",
       "decision": "accept",
       "evidence": [
@@ -309,6 +390,20 @@
         "d20pfsrd:spell.calm-emotions:7f6a4a90f727faeb"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.calm-emotions:appears_on_spell_list:spell-list.peace-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.peace:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.peace:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.calm-emotions:appears_on_spell_list:spell-list.psychic",
@@ -344,7 +439,7 @@
         "legacy_aon:spell.calm-emotions:d6dfe489c967750b",
         "d20pfsrd:spell.calm-emotions:7f6a4a90f727faeb"
       ],
-      "rationale": "AoN prints the named level. Sahir-Afiyun is a feat-owned selectable spell set, not a class, so the level remains canonical with list kind feat."
+      "rationale": "AoN prints this level under Sahirafiyun. The Sahir-Afiyun feat grants selectable access to the spell; this is not a class spell-list membership."
     },
     {
       "relationship_id": "spell.calm-emotions:appears_on_spell_list:spell-list.shaman",
@@ -587,41 +682,53 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.calm-emotions:uses_definition:class-feature.inspire-courage",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.calm-emotions:06ab1226216925f2",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.calm-emotions:06ab1226216925f2",
+        "legacy_aon:spell.calm-emotions:d6dfe489c967750b",
+        "d20pfsrd:spell.calm-emotions:7f6a4a90f727faeb",
+        "aon:patron.enchantment:15d234b1",
+        "aon:patron.peace:15d234b1",
+        "aon:domain.charm:fd537e7d",
+        "aon:subdomain.family:c83a2eb7"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.calm-emotions:uses_definition:class-feature.rage",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.calm-emotions:06ab1226216925f2",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.calm-emotions:06ab1226216925f2",
+        "legacy_aon:spell.calm-emotions:d6dfe489c967750b",
+        "d20pfsrd:spell.calm-emotions:7f6a4a90f727faeb",
+        "aon:patron.enchantment:15d234b1",
+        "aon:patron.peace:15d234b1",
+        "aon:domain.charm:fd537e7d",
+        "aon:subdomain.family:c83a2eb7"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.calm-emotions:uses_definition:condition.confused",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.calm-emotions:7f6a4a90f727faeb",
           "source_field": "spell_raw.links_raw[14]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.calm-emotions:06ab1226216925f2",
-        "legacy_aon:spell.calm-emotions:d6dfe489c967750b",
-        "d20pfsrd:spell.calm-emotions:7f6a4a90f727faeb"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.calm-emotions:uses_definition:rule.charm",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.calm-emotions:7f6a4a90f727faeb",
-          "source_field": "spell_raw.links_raw[7]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.calm-emotions:06ab1226216925f2",
-        "legacy_aon:spell.calm-emotions:d6dfe489c967750b",
-        "d20pfsrd:spell.calm-emotions:7f6a4a90f727faeb"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.calm-emotions:uses_definition:rule.confused",
-      "decision": "accept",
-      "evidence": [
+        },
         {
           "observation_id": "legacy_aon:spell.calm-emotions:d6dfe489c967750b",
           "source_field": "spell_raw.links_raw[5]"
@@ -651,6 +758,46 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.calm-emotions:uses_definition:rule.fear",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.calm-emotions:06ab1226216925f2",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.calm-emotions:06ab1226216925f2",
+        "legacy_aon:spell.calm-emotions:d6dfe489c967750b",
+        "d20pfsrd:spell.calm-emotions:7f6a4a90f727faeb",
+        "aon:patron.enchantment:15d234b1",
+        "aon:patron.peace:15d234b1",
+        "aon:domain.charm:fd537e7d",
+        "aon:subdomain.family:c83a2eb7"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.calm-emotions:uses_definition:rule.morale-bonus",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.calm-emotions:06ab1226216925f2",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.calm-emotions:06ab1226216925f2",
+        "legacy_aon:spell.calm-emotions:d6dfe489c967750b",
+        "d20pfsrd:spell.calm-emotions:7f6a4a90f727faeb",
+        "aon:patron.enchantment:15d234b1",
+        "aon:patron.peace:15d234b1",
+        "aon:domain.charm:fd537e7d",
+        "aon:subdomain.family:c83a2eb7"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.calm-emotions:uses_definition:rule.spell-resistance",
       "decision": "accept",
       "evidence": [
@@ -671,7 +818,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.calm-emotions:uses_definition:rule.will",
+      "relationship_id": "spell.calm-emotions:uses_definition:rule.will-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -691,79 +838,20 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.calm-emotions:appears_on_spell_list:spell-list.omdura",
+      "relationship_id": "spell.calm-emotions:uses_definition:subschool.charm",
       "decision": "accept",
       "evidence": [
         {
-          "observation_id": "aon:spell.calm-emotions:06ab1226216925f2",
-          "source_field": "spell_raw.levels_raw"
-        },
-        {
           "observation_id": "d20pfsrd:spell.calm-emotions:7f6a4a90f727faeb",
-          "source_field": "spell_raw.links_raw[4]"
+          "source_field": "spell_raw.links_raw[7]"
         }
       ],
       "considered_observation_ids": [
         "aon:spell.calm-emotions:06ab1226216925f2",
+        "legacy_aon:spell.calm-emotions:d6dfe489c967750b",
         "d20pfsrd:spell.calm-emotions:7f6a4a90f727faeb"
       ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.calm-emotions:appears_on_spell_list:spell-list.enchantment-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.enchantment:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.enchantment:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.calm-emotions:appears_on_spell_list:spell-list.peace-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.peace:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.peace:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.calm-emotions:appears_on_spell_list:spell-list.charm-domain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:domain.charm:fd537e7d",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:domain.charm:fd537e7d"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
-    },
-    {
-      "relationship_id": "spell.calm-emotions:appears_on_spell_list:spell-list.family-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.family:c83a2eb7",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.family:c83a2eb7"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
+      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     }
   ],
   "unresolved_questions": [

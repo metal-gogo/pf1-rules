@@ -61,6 +61,16 @@
       "level": 3,
       "scope": "core",
       "raw": "wizard 3"
+    },
+    {
+      "spell_list_id": "spell-list.aether-elemental-school",
+      "list_kind": "elemental_school",
+      "list_name": "Aether Elemental School",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "3—tiny hut;",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -461,6 +471,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.tiny-hut:appears_on_spell_list:spell-list.aether-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.aether-elemental-school",
+        "name": "Aether Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "3—tiny hut;",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/aether-elemental-school/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -511,6 +541,14 @@
       "raw_value_sha256": "335c3cab83abb0c95accdf98ee22f74250976ae29e410c4ad0996590fb0271b9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "4d896957a039e5cf5f17e2b8c382bad377035b86dcbc15442e8e83af0402e702",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -526,6 +564,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Aether Elemental School grants Tiny Hut as a level 3 printed spell; this is not general Wizard class access."
       }
     ]
   }

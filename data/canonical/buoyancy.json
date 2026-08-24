@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.buoyancy",
   "ruleset": "Pathfinder First Edition",
   "name": "Buoyancy",
@@ -163,7 +163,30 @@
   "description": {
     "raw": "The affected targets become incredibly buoyant, floating naturally on any water at least 1 foot deep. An affected creature that deliberately tries to submerge must succeed at a DC 20 Swim check every round to stay underwater. If a target spends at least 1 round on dry land, the spell ends for that creature only.",
     "search_text": "\"the affected targets become incredibly buoyant, floating naturally on any water at least 1 foot deep. an affected creature that deliberately tries to submerge must succeed at a dc 20 swim check every round to stay underwater. if a target spends at least 1 round on dry land, the spell ends for that creature only.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The affected targets become incredibly buoyant, floating naturally on any water at least 1 foot deep. An affected creature that deliberately tries to submerge must succeed at a DC 20 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Swim",
+              "relationship_id": "spell.buoyancy:uses_definition:rule.swim"
+            },
+            {
+              "node_type": "text",
+              "value": " check every round to stay underwater. If a target spends at least 1 round on dry land, the spell ends for that creature only."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -579,11 +602,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.buoyancy:uses_definition:rule.will",
+      "relationship_id": "spell.buoyancy:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -654,11 +677,19 @@
       "raw_value_sha256": "ab802feb2f1bed414653d8b7798527f5bc336a64880ec0a8533d396dc240420e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.buoyancy:7a0e03d2cd0652de",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e6ad4d581709d62955e9ffe24f07a3cf9437f63dbc2ff45a4616b2686f06f943",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

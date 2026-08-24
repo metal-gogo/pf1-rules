@@ -197,9 +197,58 @@
         "aon:subdomain.souls:8db954e0"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.antilife-shell:0f0f479094a32ee2",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.antilife-shell:0f0f479094a32ee2",
+        "legacy_aon:spell.antilife-shell:9f56ad55b56f03b9",
+        "d20pfsrd:spell.antilife-shell:917e931c65642aa2",
+        "aon:patron.animals:15d234b1",
+        "aon:domain.animal:a6829b5b",
+        "aon:subdomain.fur:a6829b5b",
+        "aon:subdomain.insect:a6829b5b",
+        "aon:subdomain.souls:8db954e0"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.animal-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.animal:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.animal:a6829b5b"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.animals-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.animals:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.animals:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
     {
       "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.cleric",
       "decision": "accept",
@@ -253,6 +302,20 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.fur-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.fur:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.fur:a6829b5b"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
       "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.hunter",
       "decision": "accept",
       "evidence": [
@@ -267,6 +330,34 @@
         "d20pfsrd:spell.antilife-shell:917e931c65642aa2"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.insect-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.insect:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.insect:a6829b5b"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.antilife-shell:0f0f479094a32ee2",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.antilife-shell:0f0f479094a32ee2"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.oracle",
@@ -319,6 +410,20 @@
         "d20pfsrd:spell.antilife-shell:917e931c65642aa2"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.souls-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.souls:8db954e0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.souls:8db954e0"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.warpriest",
@@ -381,7 +486,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.antilife-shell:uses_definition:rule.aberrations",
+      "relationship_id": "spell.antilife-shell:uses_definition:rule.aberration",
       "decision": "accept",
       "evidence": [
         {
@@ -403,19 +508,7 @@
         {
           "observation_id": "d20pfsrd:spell.antilife-shell:917e931c65642aa2",
           "source_field": "spell_raw.links_raw[4]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.antilife-shell:0f0f479094a32ee2",
-        "legacy_aon:spell.antilife-shell:9f56ad55b56f03b9",
-        "d20pfsrd:spell.antilife-shell:917e931c65642aa2"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.antilife-shell:uses_definition:rule.animals",
-      "decision": "accept",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.antilife-shell:917e931c65642aa2",
           "source_field": "spell_raw.links_raw[6]"
@@ -429,7 +522,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.antilife-shell:uses_definition:rule.constructs",
+      "relationship_id": "spell.antilife-shell:uses_definition:rule.construct",
       "decision": "accept",
       "evidence": [
         {
@@ -445,7 +538,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.antilife-shell:uses_definition:rule.dragons",
+      "relationship_id": "spell.antilife-shell:uses_definition:rule.dragon",
       "decision": "accept",
       "evidence": [
         {
@@ -461,7 +554,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.antilife-shell:uses_definition:rule.elementals",
+      "relationship_id": "spell.antilife-shell:uses_definition:rule.elemental",
       "decision": "accept",
       "evidence": [
         {
@@ -493,7 +586,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.antilife-shell:uses_definition:rule.giants",
+      "relationship_id": "spell.antilife-shell:uses_definition:rule.giant",
       "decision": "accept",
       "evidence": [
         {
@@ -509,7 +602,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.antilife-shell:uses_definition:rule.humanoids",
+      "relationship_id": "spell.antilife-shell:uses_definition:rule.humanoid",
       "decision": "accept",
       "evidence": [
         {
@@ -525,7 +618,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.antilife-shell:uses_definition:rule.magical-beasts",
+      "relationship_id": "spell.antilife-shell:uses_definition:rule.magical-beast",
       "decision": "accept",
       "evidence": [
         {
@@ -541,7 +634,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.antilife-shell:uses_definition:rule.monstrous-humanoids",
+      "relationship_id": "spell.antilife-shell:uses_definition:rule.monstrous-humanoid",
       "decision": "accept",
       "evidence": [
         {
@@ -557,7 +650,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.antilife-shell:uses_definition:rule.oozes",
+      "relationship_id": "spell.antilife-shell:uses_definition:rule.ooze",
       "decision": "accept",
       "evidence": [
         {
@@ -573,7 +666,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.antilife-shell:uses_definition:rule.outsiders",
+      "relationship_id": "spell.antilife-shell:uses_definition:rule.outsider",
       "decision": "accept",
       "evidence": [
         {
@@ -589,7 +682,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.antilife-shell:uses_definition:rule.plants",
+      "relationship_id": "spell.antilife-shell:uses_definition:rule.plant",
       "decision": "accept",
       "evidence": [
         {
@@ -671,90 +764,6 @@
         "d20pfsrd:spell.antilife-shell:917e931c65642aa2"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.antilife-shell:0f0f479094a32ee2",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.antilife-shell:0f0f479094a32ee2"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.animals-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.animals:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.animals:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.animal-domain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:domain.animal:a6829b5b",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:domain.animal:a6829b5b"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
-    },
-    {
-      "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.fur-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.fur:a6829b5b",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.fur:a6829b5b"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
-    },
-    {
-      "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.insect-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.insect:a6829b5b",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.insect:a6829b5b"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
-    },
-    {
-      "relationship_id": "spell.antilife-shell:appears_on_spell_list:spell-list.souls-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.souls:8db954e0",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.souls:8db954e0"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

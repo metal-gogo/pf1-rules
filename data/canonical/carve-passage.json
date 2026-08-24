@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.carve-passage",
   "ruleset": "Pathfinder First Edition",
   "name": "Carve Passage",
@@ -195,7 +195,55 @@
   "description": {
     "raw": "You can excavate and move an amount of snow, earth, dust, sand, and loose or packed rocks or ice chunks (each no more than 5 feet in diameter) whose volume fills one 5-foot cube per level. If you are buried, you can open a space around yourself and use any remaining cubes for tunneling. This spell is otherwise similar to expeditious excavation (Pathfinder RPG Advanced Player’s Guide 220). Carve passage has no effect on earth creatures or solid rock or ice.",
     "search_text": "\"you can excavate and move an amount of snow, earth, dust, sand, and loose or packed rocks or ice chunks (each no more than 5 feet in diameter) whose volume fills one 5-foot cube per level. if you are buried, you can open a space around yourself and use any remaining cubes for tunneling. this spell is otherwise similar to expeditious excavation (pathfinder rpg advanced player’s guide 220). carve passage has no effect on earth creatures or solid rock or ice.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You can excavate and move an amount of snow, earth, dust, sand, and loose or packed rocks or ice chunks (each no more than 5 feet in diameter) whose volume fills one 5-foot cube per level. If you are buried, you can open a space around yourself and use any remaining cubes for tunneling. This spell is otherwise similar to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "expeditious excavation",
+              "relationship_id": "spell.carve-passage:functions_like:spell.expeditious-excavation",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " ("
+            },
+            {
+              "node_type": "text",
+              "value": "Pathfinder RPG Advanced Player’s Guide",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " 220). "
+            },
+            {
+              "node_type": "text",
+              "value": "Carve passage",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " has no effect on earth creatures or solid rock or ice."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -205,7 +253,112 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.expeditious-excavation",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.carve-passage:929a87f6fdef13a8",
+        "source_field": "spell_raw.description_raw",
+        "raw": "You can excavate and move an amount of snow, earth, dust, sand, and loose or packed rocks or ice chunks (each no more than 5 feet in diameter) whose volume fills one 5-foot cube per level. If you are buried, you can open a space around yourself and use any remaining cubes for tunneling. This spell is otherwise similar to expeditious excavation (Pathfinder RPG Advanced Player’s Guide 220). Carve passage has no effect on earth creatures or solid rock or ice."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "focus",
+              "details": "a tiny diamond pick worth 500 gp",
+              "cost_gp": 500,
+              "raw": "F (a tiny diamond pick worth 500 gp)"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, F (a tiny diamond pick worth 500 gp)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, F (a tiny diamond pick worth 500 gp)",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, F (a tiny diamond pick worth 500 gp)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Area",
+                "value_raw": "dirt or loose rock in one 5-ft. cube/level",
+                "kinds": [
+                  "area"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Area\",\"value_raw\":\"dirt or loose rock in one 5-ft. cube/level\",\"kinds\":[\"area\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/area",
+          "value": {
+            "propagation": "other",
+            "geometry": "other",
+            "geometry_basis": "unknown",
+            "dimensions": {
+              "radius_ft": null,
+              "length_ft": null,
+              "width_ft": null,
+              "height_ft": null
+            },
+            "shapeable": null,
+            "raw": "dirt or loose rock in one 5-ft. cube/level"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Area\",\"value_raw\":\"dirt or loose rock in one 5-ft. cube/level\",\"kinds\":[\"area\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "You can excavate and move an amount of snow, earth, dust, sand, and loose or packed rocks or ice chunks (each no more than 5 feet in diameter) whose volume fills one 5-foot cube per level. If you are buried, you can open a space around yourself and use any remaining cubes for tunneling. This spell is otherwise similar to expeditious excavation (Pathfinder RPG Advanced Player’s Guide 220). Carve passage has no effect on earth creatures or solid rock or ice.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "You can excavate and move an amount of snow, earth, dust, sand, and loose or packed rocks or ice chunks (each no more than 5 feet in diameter) whose volume fills one 5-foot cube per level. If you are buried, you can open a space around yourself and use any remaining cubes for tunneling. This spell is otherwise similar to expeditious excavation (Pathfinder RPG Advanced Player’s Guide 220). Carve passage has no effect on earth creatures or solid rock or ice.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.carve-passage:appears_on_spell_list:spell-list.arcanist",
@@ -335,6 +488,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.carve-passage:functions_like:spell.expeditious-excavation",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.expeditious-excavation",
+        "name": "Expeditious Excavation"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.carve-passage:4aa0d1be6b27ec0e",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "expeditious excavation",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/e/expeditious-excavation"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.carve-passage:has_descriptor:descriptor.earth",
       "type": "has_descriptor",
       "target": {
@@ -425,26 +598,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "Inner Sea Races pg. 218",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.carve-passage:references:spell.expeditious-excavation",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.expeditious-excavation",
-        "name": "expeditious excavation"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.carve-passage:4aa0d1be6b27ec0e",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "expeditious excavation",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/e/expeditious-excavation"
         }
       ],
       "note": null
@@ -545,11 +698,19 @@
       "raw_value_sha256": "f4cd2b81fd2bf4a2096086cb4313fbaecd84019c4996e6ec6c8c70c71203e760",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.carve-passage:929a87f6fdef13a8",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "cb1a31574d276d8c9f8ef663e71d9ee3e462012c5b4078774262df5bd24ba960",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -31,6 +31,15 @@ const validateQualification = new Ajv2020({ strict: true, allErrors: true }).com
 
 
 describe("qualified spell-list entries", () => {
+  it("classifies alchemist and investigator entries as formulae", () => {
+    expect(parseLevels("alchemist 1, investigator 2, wizard 3", "Advanced Class Guide"))
+      .toMatchObject([
+        { spell_list_id: "spell-list.alchemist", list_kind: "formulae" },
+        { spell_list_id: "spell-list.investigator", list_kind: "formulae" },
+        { spell_list_id: "spell-list.wizard", list_kind: "class" },
+      ]);
+  });
+
   const qualifications: SpellListQualification[] = [
     {
       kind: "deity",

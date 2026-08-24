@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.conversing-wind",
   "ruleset": "Pathfinder First Edition",
   "name": "Conversing Wind",
@@ -139,7 +139,33 @@
   "description": {
     "raw": "This spell functions as whispering wind, except it can carry responses and doesn’t end after delivering its first message. After the wind completes its initial message, it waits for 1 round, then copies what it hear, and returns at the same speed and by the same route. It delivers what it heard to the location where the spell was originally cast. The wind continues back and forth in this way until the duration ends or the spell is dismissed.",
     "search_text": "\"this spell functions as whispering wind, except it can carry responses and doesn’t end after delivering its first message. after the wind completes its initial message, it waits for 1 round, then copies what it hear, and returns at the same speed and by the same route. it delivers what it heard to the location where the spell was originally cast. the wind continues back and forth in this way until the duration ends or the spell is dismissed.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "whispering wind",
+              "relationship_id": "spell.conversing-wind:functions_like:spell.whispering-wind",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it can carry responses and doesn’t end after delivering its first message. After the wind completes its initial message, it waits for 1 round, then copies what it hear, and returns at the same speed and by the same route. It delivers what it heard to the location where the spell was originally cast. The wind continues back and forth in this way until the duration ends or the spell is dismissed."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -342,6 +368,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as whispering wind, except it can carry responses and doesn’t end after delivering its first message. After the wind completes its initial message, it waits for 1 round, then copies what it hear, and returns at the same speed and by the same route. It delivers what it heard to the location where the spell was originally cast. The wind continues back and forth in this way until the duration ends or the spell is dismissed.",
           "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.conversing-wind:2cee63ee2cef0bbc",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "whispering wind",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/w/whispering-wind"
         }
       ],
       "note": null
@@ -442,26 +475,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.conversing-wind:references:spell.whispering-wind",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.whispering-wind",
-        "name": "whispering wind"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.conversing-wind:2cee63ee2cef0bbc",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "whispering wind",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/w/whispering-wind"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.conversing-wind:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -550,11 +563,19 @@
       "raw_value_sha256": "04f43744323f24803e0bff281838d958f0b558de1984a118897badaafb4b841f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.conversing-wind:d86c6486ba4be9c0",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "4c9e282d96bc20ae43495b600e5bf85b3ae947e048ee4c5058294d5ff043d2ab",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

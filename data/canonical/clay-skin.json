@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.clay-skin",
   "ruleset": "Pathfinder First Edition",
   "name": "Clay Skin",
@@ -206,7 +206,48 @@
   "description": {
     "raw": "The target’s skin becomes as thick and tough as clay, granting the target DR 5/adamantine. Once the spell has prevented a total of 5 points of damage per caster level (maximum 50 points), it is discharged and the spell ends.",
     "search_text": "\"the target’s skin becomes as thick and tough as clay, granting the target dr 5/adamantine. once the spell has prevented a total of 5 points of damage per caster level (maximum 50 points), it is discharged and the spell ends.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target’s skin becomes as thick and tough as clay, granting the target "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "DR",
+              "relationship_id": "spell.clay-skin:uses_definition:rule.damage-reduction"
+            },
+            {
+              "node_type": "text",
+              "value": " 5/"
+            },
+            {
+              "node_type": "entity_link",
+              "value": "adamantine",
+              "relationship_id": "spell.clay-skin:uses_definition:rule.adamantine"
+            },
+            {
+              "node_type": "text",
+              "value": ". Once the spell has prevented a total of 5 points of damage per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.clay-skin:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum 50 points), it is discharged and the spell ends."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -365,6 +406,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.clay-skin:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.clay-skin:cd282ca6438a7250",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.clay-skin:74144d6a025c3eed",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.clay-skin:appears_on_spell_list:spell-list.sorcerer",
@@ -602,12 +670,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.clay-skin:uses_definition:rule.dr",
+      "relationship_id": "spell.clay-skin:uses_definition:rule.damage-reduction",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.dr",
-        "name": "DR"
+        "entity_id": "rule.damage-reduction",
+        "name": "Damage reduction"
       },
       "status": "accepted",
       "evidence": [
@@ -642,12 +710,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.clay-skin:uses_definition:rule.touch",
+      "relationship_id": "spell.clay-skin:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -662,11 +730,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.clay-skin:uses_definition:rule.will",
+      "relationship_id": "spell.clay-skin:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -680,33 +748,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.clay-skin:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.clay-skin:cd282ca6438a7250",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.clay-skin:74144d6a025c3eed",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -757,11 +798,19 @@
       "raw_value_sha256": "5165040031d9e09b647c5f04999256fbed974f8fec86d64e2e3da247a3de19f2",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.clay-skin:74144d6a025c3eed",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "252092bc5020bf00ecf1123fb127f08cdec43149d25b2fbebdb7f364606170e9",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

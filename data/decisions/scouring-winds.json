@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.scouring-winds:2fa16e6da2dd3e3f",
     "legacy_aon:spell.scouring-winds:7b68f2e998b86a3c",
-    "d20pfsrd:spell.scouring-winds:0fd5940661fa85e7"
+    "d20pfsrd:spell.scouring-winds:0fd5940661fa85e7",
+    "d20pfsrd:magic-school.wood-elemental:d18ad88c"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.scouring-winds:2fa16e6da2dd3e3f",
@@ -108,6 +109,20 @@
         "d20pfsrd:spell.scouring-winds:0fd5940661fa85e7"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/5",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.wood-elemental:d18ad88c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.wood-elemental:d18ad88c"
+      ],
+      "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -422,6 +437,20 @@
         "d20pfsrd:spell.scouring-winds:0fd5940661fa85e7"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.scouring-winds:appears_on_spell_list:spell-list.wood-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.wood-elemental:d18ad88c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.wood-elemental:d18ad88c"
+      ],
+      "rationale": "d20PFSRD prints the spell on the owning wizard elemental arcane school page; it is modeled as elemental_school access rather than general Wizard access."
     }
   ],
   "unresolved_questions": [

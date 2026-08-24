@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.cold-ice-strike",
   "ruleset": "Pathfinder First Edition",
   "name": "Cold Ice Strike",
@@ -178,7 +178,39 @@
   "description": {
     "raw": "You create a shredding flurry of ice slivers, which blast from your hand in a line. The line deals 1d6 points of cold damage per caster level (maximum 15d6).",
     "search_text": "\"you create a shredding flurry of ice slivers, which blast from your hand in a line. the line deals 1d6 points of cold damage per caster level (maximum 15d6).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create a shredding flurry of ice slivers, which blast from your hand in a line. The line deals 1d6 points of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "cold damage",
+              "relationship_id": "spell.cold-ice-strike:uses_definition:descriptor.cold"
+            },
+            {
+              "node_type": "text",
+              "value": " per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.cold-ice-strike:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum 15d6)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -269,6 +301,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.cold-ice-strike:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cold-ice-strike:0879fbc973a467b8",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 6",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.cold-ice-strike:appears_on_spell_list:spell-list.oracle",
@@ -493,6 +545,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.cold-ice-strike:uses_definition:descriptor.cold",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.cold",
+        "name": "Cold"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cold-ice-strike:0879fbc973a467b8",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "cold damage",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Cold+Ice+Strike"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.cold-ice-strike:uses_definition:rule.caster-level",
       "type": "uses_definition",
       "target": {
@@ -513,11 +585,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.cold-ice-strike:uses_definition:rule.reflex",
+      "relationship_id": "spell.cold-ice-strike:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -551,26 +623,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.cold-ice-strike:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.cold-ice-strike:0879fbc973a467b8",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 6",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -621,11 +673,19 @@
       "raw_value_sha256": "04441800fe800746b14164bb763ec4791953615f9acdce368d3e25d31ee1f685",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.cold-ice-strike:0879fbc973a467b8",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "5ea90046d94fa5742ec4837f03ef14a06061d21410f1ede8b08412f4be5cc873",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.campfire-wall:d15af54492908446",
     "legacy_aon:spell.campfire-wall:61f87dc0c094ab4b",
-    "d20pfsrd:spell.campfire-wall:32bb15a771001e4f"
+    "d20pfsrd:spell.campfire-wall:32bb15a771001e4f",
+    "d20pfsrd:magic-school.fire-elemental:73dcc41d"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.campfire-wall:d15af54492908446",
@@ -108,6 +109,36 @@
         "d20pfsrd:spell.campfire-wall:32bb15a771001e4f"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.campfire-wall:d15af54492908446",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.campfire-wall:d15af54492908446",
+        "legacy_aon:spell.campfire-wall:61f87dc0c094ab4b",
+        "d20pfsrd:spell.campfire-wall:32bb15a771001e4f"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
+    },
+    {
+      "canonical_path": "/levels/9",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.fire-elemental:73dcc41d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.fire-elemental:73dcc41d"
+      ],
+      "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -166,6 +197,20 @@
         "d20pfsrd:spell.campfire-wall:32bb15a771001e4f"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.campfire-wall:appears_on_spell_list:spell-list.fire-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.fire-elemental:73dcc41d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.fire-elemental:73dcc41d"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     },
     {
       "relationship_id": "spell.campfire-wall:appears_on_spell_list:spell-list.hunter",
@@ -396,6 +441,22 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.campfire-wall:uses_definition:item.torch",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.campfire-wall:d15af54492908446",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.campfire-wall:d15af54492908446",
+        "legacy_aon:spell.campfire-wall:61f87dc0c094ab4b",
+        "d20pfsrd:spell.campfire-wall:32bb15a771001e4f"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.campfire-wall:uses_definition:rule.concealment",
       "decision": "accept",
       "evidence": [
@@ -430,6 +491,38 @@
         "d20pfsrd:spell.campfire-wall:32bb15a771001e4f"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.campfire-wall:uses_definition:rule.total-concealment",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.campfire-wall:d15af54492908446",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.campfire-wall:d15af54492908446",
+        "legacy_aon:spell.campfire-wall:61f87dc0c094ab4b",
+        "d20pfsrd:spell.campfire-wall:32bb15a771001e4f"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.campfire-wall:uses_definition:rule.undead",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.campfire-wall:d15af54492908446",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.campfire-wall:d15af54492908446",
+        "legacy_aon:spell.campfire-wall:61f87dc0c094ab4b",
+        "d20pfsrd:spell.campfire-wall:32bb15a771001e4f"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
     }
   ],
   "unresolved_questions": [

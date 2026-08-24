@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.barrow-haze",
   "ruleset": "Pathfinder First Edition",
   "name": "Barrow Haze",
@@ -117,7 +117,58 @@
   "description": {
     "raw": "Barrow haze creates a bank of fog similar to that created by fog cloud, except that the vapors are black and they have a necromantic link to you. The vapors do not interfere with your vision. Because of your link to the haze, if any part of it is within 30 feet of you, any creatures within the haze count as in range for the purpose of using any of your hexes that have a maximum range of 30 feet.\n\nFor example, suppose you have the slumber hex, you are 25 feet from one edge of the haze, and an opponent is 40 feet farther away at the other extreme of the cloud. You can use your slumber hex on that opponent even though it is actually 65 feet away from you.",
     "search_text": "\"barrow haze creates a bank of fog similar to that created by fog cloud, except that the vapors are black and they have a necromantic link to you. the vapors do not interfere with your vision. because of your link to the haze, if any part of it is within 30 feet of you, any creatures within the haze count as in range for the purpose of using any of your hexes that have a maximum range of 30 feet.\\n\\nfor example, suppose you have the slumber hex, you are 25 feet from one edge of the haze, and an opponent is 40 feet farther away at the other extreme of the cloud. you can use your slumber hex on that opponent even though it is actually 65 feet away from you.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Barrow haze",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " creates a bank of fog similar to that created by "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fog cloud",
+              "relationship_id": "spell.barrow-haze:references:spell.fog-cloud",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that the vapors are black and they have a necromantic link to you. The vapors do not interfere with your vision. Because of your link to the haze, if any part of it is within 30 feet of you, any creatures within the haze count as in range for the purpose of using any of your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hexes",
+              "relationship_id": "spell.barrow-haze:uses_definition:class-feature.hexes"
+            },
+            {
+              "node_type": "text",
+              "value": " that have a maximum range of 30 feet."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": " For example, suppose you have the slumber hex, you are 25 feet from one edge of the haze, and an opponent is 40 feet farther away at the other extreme of the cloud. You can use your slumber hex on that opponent even though it is actually 65 feet away from you."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -305,32 +356,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.barrow-haze:references:spell.barrow-haze",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.barrow-haze",
-        "name": "barrow haze"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.barrow-haze:5f4c5f6d8faee92a",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "barrow haze",
-          "source_href": "https://legacy.aonprd.com/advancedClassGuide/spells/barrowHaze.html"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.barrow-haze:references:spell.fog-cloud",
       "type": "references",
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.fog-cloud",
-        "name": "fog cloud"
+        "name": "Fog Cloud"
       },
       "status": "accepted",
       "evidence": [
@@ -379,12 +410,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.barrow-haze:uses_definition:rule.hexes",
+      "relationship_id": "spell.barrow-haze:uses_definition:class-feature.hexes",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.hexes",
-        "name": "hexes"
+        "entity_type": "class_feature",
+        "entity_id": "class-feature.hexes",
+        "name": "Hexes"
       },
       "status": "accepted",
       "evidence": [
@@ -467,11 +498,19 @@
       "raw_value_sha256": "5dc5144a9811f715818120fe5c9007c5e03689284235f8279ea31439757f4476",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.barrow-haze:7a939ccee0bb7091",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "cfe168872509ad33c40c34a7a2f54b7d8fc4700eb872f23853835654d76a343f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

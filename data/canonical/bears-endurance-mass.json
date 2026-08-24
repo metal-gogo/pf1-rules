@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.bears-endurance-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Bear's Endurance, Mass",
@@ -246,7 +246,48 @@
   "description": {
     "raw": "Mass bear's endurance works like bear's endurance, except that it affects multiple creatures.",
     "search_text": "\"mass bear's endurance works like bear's endurance, except that it affects multiple creatures.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Mass ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bear's endurance",
+              "relationship_id": "spell.bears-endurance-mass:references:spell.bears-endurance",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " works like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bear's endurance",
+              "relationship_id": "spell.bears-endurance-mass:references:spell.bears-endurance",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that it affects multiple creatures."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -319,6 +360,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.bears-endurance-mass:appears_on_spell_list:spell-list.endurance-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.endurance-patron",
+        "name": "Endurance Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.endurance:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "12th — bear's endurance (mass)",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
       "relationship_id": "spell.bears-endurance-mass:appears_on_spell_list:spell-list.hunter",
       "type": "appears_on_spell_list",
       "target": {
@@ -357,6 +418,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.bears-endurance-mass:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.bears-endurance-mass:77b58dc028e634b9",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 6",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.bears-endurance-mass:appears_on_spell_list:spell-list.oracle",
@@ -578,7 +659,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.bears-endurance",
-        "name": "bear's endurance"
+        "name": "Bear's Endurance"
       },
       "status": "accepted",
       "evidence": [
@@ -638,46 +719,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.bears-endurance-mass:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.bears-endurance-mass:77b58dc028e634b9",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 6",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.bears-endurance-mass:appears_on_spell_list:spell-list.endurance-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.endurance-patron",
-        "name": "Endurance Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.endurance:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "12th — bear's endurance (mass)",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -736,11 +777,19 @@
       "raw_value_sha256": "e840fe6348fb3ef38aa8a3c6701239cd705401664ae63fdd53fb4f334c2f6a2a",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.bears-endurance-mass:77b58dc028e634b9",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "27088991b1af6ca07cebf078d663a23b72525f98c97d8c7f4f77c2776972d6f9",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

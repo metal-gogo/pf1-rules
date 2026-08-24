@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.blood-scent",
   "ruleset": "Pathfinder First Edition",
   "name": "Blood Scent",
@@ -430,7 +430,98 @@
   "description": {
     "raw": "You greatly magnify the target’s ability to smell the presence of blood. The target is considered to have the scent universal monster ability, but only for purposes of detecting and pinpointing injured creatures (below full hit points). Creatures below half their full hit points or suffering bleed damage are considered strong scents for this ability.\n\nOrcs and any creature under the effects of rage gain a +2 morale bonus on attack and damage rolls against creatures they can smell with this spell, or a +4 morale bonus if the target’s blood counts as a strong scent.",
     "search_text": "\"you greatly magnify the target’s ability to smell the presence of blood. the target is considered to have the scent universal monster ability, but only for purposes of detecting and pinpointing injured creatures (below full hit points). creatures below half their full hit points or suffering bleed damage are considered strong scents for this ability.\\n\\norcs and any creature under the effects of rage gain a +2 morale bonus on attack and damage rolls against creatures they can smell with this spell, or a +4 morale bonus if the target’s blood counts as a strong scent.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You greatly magnify the target’s ability to smell the presence of blood. The target is considered to have the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "scent",
+              "relationship_id": "spell.blood-scent:uses_definition:rule.scent"
+            },
+            {
+              "node_type": "text",
+              "value": " universal monster ability, but only for purposes of detecting and pinpointing injured creatures (below full "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.blood-scent:uses_definition:rule.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": "). Creatures below half their full "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.blood-scent:uses_definition:rule.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": " or suffering "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bleed",
+              "relationship_id": "spell.blood-scent:uses_definition:condition.bleed"
+            },
+            {
+              "node_type": "text",
+              "value": " damage are considered strong scents for this ability."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "entity_link",
+              "value": "Orcs",
+              "relationship_id": "spell.blood-scent:uses_definition:rule.orc"
+            },
+            {
+              "node_type": "text",
+              "value": " and any creature under the effects of rage gain a +2 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "morale bonus",
+              "relationship_id": "spell.blood-scent:uses_definition:rule.morale-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on attack and damage rolls against creatures they can smell with this spell, or a +4 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "morale bonus",
+              "relationship_id": "spell.blood-scent:uses_definition:rule.morale-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " if the target’s blood counts as a strong "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "scent",
+              "relationship_id": "spell.blood-scent:uses_definition:rule.scent"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -663,6 +754,47 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.blood-scent:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.blood-scent:43867dbb84eb8d89",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.blood-scent:2145715c420d56f2",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3 (orc)",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.blood-scent:43867dbb84eb8d89",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.blood-scent:2145715c420d56f2",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 3 (orc)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.blood-scent:appears_on_spell_list:spell-list.oracle",
@@ -1055,12 +1187,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.blood-scent:uses_definition:rule.orcs",
+      "relationship_id": "spell.blood-scent:uses_definition:rule.orc",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.orcs",
-        "name": "Orcs"
+        "entity_id": "rule.orc",
+        "name": "Orc"
       },
       "status": "accepted",
       "evidence": [
@@ -1122,11 +1254,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.blood-scent:uses_definition:rule.will",
+      "relationship_id": "spell.blood-scent:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -1140,47 +1272,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.blood-scent:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.blood-scent:43867dbb84eb8d89",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.blood-scent:2145715c420d56f2",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3 (orc)",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.blood-scent:43867dbb84eb8d89",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.blood-scent:2145715c420d56f2",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 3 (orc)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -1231,11 +1322,19 @@
       "raw_value_sha256": "95c4ead5cf5dc0cc6a183226f5373d9ef778588fdb002da8858f0735804b3775",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.blood-scent:2145715c420d56f2",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "db98a48abdd902e7e51da73807910af5baa19f292e242d2b1062d84ef5562692",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

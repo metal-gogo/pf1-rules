@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.ray-of-frost:45c6937bc3555f96",
     "legacy_aon:spell.ray-of-frost:7bed537016ec6df2",
-    "d20pfsrd:spell.ray-of-frost:e087de8a2cd71c4d"
+    "d20pfsrd:spell.ray-of-frost:e087de8a2cd71c4d",
+    "d20pfsrd:magic-school.water-elemental:2b7c823c"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.ray-of-frost:45c6937bc3555f96",
@@ -108,6 +109,20 @@
         "d20pfsrd:spell.ray-of-frost:e087de8a2cd71c4d"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/levels/4",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.water-elemental:2b7c823c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.water-elemental:2b7c823c"
+      ],
+      "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -314,6 +329,20 @@
         "d20pfsrd:spell.ray-of-frost:e087de8a2cd71c4d"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.ray-of-frost:appears_on_spell_list:spell-list.water-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.water-elemental:2b7c823c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.water-elemental:2b7c823c"
+      ],
+      "rationale": "d20PFSRD prints the spell on the owning wizard elemental arcane school page; it is modeled as elemental_school access rather than general Wizard access."
     }
   ],
   "unresolved_questions": [

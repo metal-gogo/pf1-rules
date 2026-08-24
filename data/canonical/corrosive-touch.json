@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.corrosive-touch",
   "ruleset": "Pathfinder First Edition",
   "name": "Corrosive Touch",
@@ -155,7 +155,39 @@
   "description": {
     "raw": "Your successful melee touch attack deals 1d4 points of acid damage per caster level (maximum 5d4).",
     "search_text": "\"your successful melee touch attack deals 1d4 points of acid damage per caster level (maximum 5d4).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Your successful melee "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch attack",
+              "relationship_id": "spell.corrosive-touch:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " deals 1d4 points of acid damage per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.corrosive-touch:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum 5d4)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -613,11 +645,19 @@
       "raw_value_sha256": "ea2ce5df9837067bcd6b00ac9ebad1e3a998747e803df139fde06e7fb4929070",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.corrosive-touch:b51f4e704d12763f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "416e8f19cc97467a3be94f6b83dfa8b3906c40c89f7751a1a7f44ff097ea833f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

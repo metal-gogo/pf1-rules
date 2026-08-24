@@ -52,7 +52,8 @@ describe("local rules browser", () => {
       "Classes",
       "Domains",
       "Subdomains",
-      "Bloodlines",
+      "Bloodrager bloodlines",
+      "Sorcerer bloodlines",
       "Mysteries",
       "Patrons",
       "Spirits",
@@ -65,15 +66,22 @@ describe("local rules browser", () => {
     expect(html.match(/href="\/classes\/cleric"/g)).toHaveLength(1);
     expect(html).toContain('/classes/wizard');
     expect(html).not.toContain('/classes/sahir-afiyun');
+    expect(html).not.toContain('/classes/alchemist');
+    expect(html).not.toContain('/classes/investigator');
     expect(html).toContain('/lists/spell-list.air-domain');
     expect(html).toContain('/lists/spell-list.cloud-subdomain');
     expect(html).toContain('/lists/spell-list.sorcerer-arcane-bloodline');
     expect(html).toContain('/lists/spell-list.flame-mystery');
     expect(html).toContain('/lists/spell-list.water-patron');
     expect(html).toContain('/lists/spell-list.flame-spirit');
-    expect(html).toContain('/lists/spell-list.fire-elemental-school');
+    for (const school of ["aether", "air", "earth", "fire", "metal", "void", "water", "wood"]) {
+      expect(html).toContain(`/lists/spell-list.${school}-elemental-school`);
+    }
+    expect(html).not.toContain("<h2>Bloodlines ");
     expect(html).toContain('/lists/spell-list.sahir-afiyun');
     expect(html).toContain('/lists/spell-list.alchemist');
+    expect(html).toMatch(/Alchemist<\/a>\s*<p>408 spells <span class="muted">· levels 1–6<\/span>/);
+    expect(html).toMatch(/Investigator<\/a>\s*<p>409 spells <span class="muted">· levels 1–6<\/span>/);
     expect(html).toContain('/spells/alphabetical');
   });
 
@@ -295,15 +303,19 @@ describe("local rules browser", () => {
   });
 
   it("groups relationship targets on stable rule-reference anchors", async () => {
-    const [schoolsResponse, actionsResponse, savesResponse] = await Promise.all([
+    const [schoolsResponse, actionsResponse, savesResponse, descriptorsResponse, illuminationResponse] = await Promise.all([
       fetch(`${baseUrl}/rules/magic-schools`),
       fetch(`${baseUrl}/rules/actions`),
       fetch(`${baseUrl}/rules/saving-throws`),
+      fetch(`${baseUrl}/rules/descriptors`),
+      fetch(`${baseUrl}/rules/illumination`),
     ]);
-    const [schools, actions, saves] = await Promise.all([
+    const [schools, actions, saves, descriptors, illumination] = await Promise.all([
       schoolsResponse.text(),
       actionsResponse.text(),
       savesResponse.text(),
+      descriptorsResponse.text(),
+      illuminationResponse.text(),
     ]);
     expect(schoolsResponse.status).toBe(200);
     expect(schools).toContain('<article id="conjuration">');
@@ -315,6 +327,13 @@ describe("local rules browser", () => {
     expect(savesResponse.status).toBe(200);
     expect(saves).toContain('<article id="will-saving-throw">');
     expect(saves).toContain("Definition not yet imported.");
+    expect(descriptorsResponse.status).toBe(200);
+    expect(descriptors).toContain('<article id="darkness">');
+    expect(descriptors).toContain("Spells that create darkness or reduce the amount of light");
+    expect(illuminationResponse.status).toBe(200);
+    for (const anchor of ["bright-light", "normal-light", "dim-light", "darkness"]) {
+      expect(illumination).toContain(`<article id="${anchor}">`);
+    }
   });
 
   it("renders a bounded alphabetical spell catalog with filters", async () => {
@@ -386,13 +405,663 @@ describe("local rules browser", () => {
     ["conditional-curse", "/spells/spell.bestow-curse"],
     ["cure-light-wounds", "/entities/rule.spell-resistance"],
     ["cure-moderate-wounds", "/spells/spell.cure-light-wounds"],
-    ["darkness", "/spells/spell.darkness"],
+    ["darkness", "/rules/descriptors#darkness"],
   ])("renders persisted inline links for pilot spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
     expect(response.status).toBe(200);
     expect(html).toContain('class="rich-description"');
     expect(html).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["abeyance", "/spells/spell.remove-curse"],
+    ["abjuring-step", "/entities/rule.attacks-of-opportunity"],
+    ["absolution", "/spells/spell.heroism"],
+    ["absorb-rune-ii", "/spells/spell.absorb-rune-i"],
+    ["acidic-spray", "/rules/saving-throws#reflex-saving-throw"],
+  ])("renders reviewed rollout links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain('class="rich-description"');
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["age-resistance", "/spells/spell.age-resistance-lesser"],
+    ["aggravate-affliction", "/entities/rule.afflictions"],
+    ["aggressive-thundercloud", "/entities/item.candle"],
+    ["agonize", "/rules/saving-throws#fortitude-saving-throw"],
+    ["akashic-communion", "/entities/rule.knowledge"],
+    ["align-weapon", "/entities/rule.damage-reduction"],
+  ])("renders second-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["advanced-scurvy", "/entities/rule.natural"],
+    ["age-resistance-lesser", "/entities/condition.dying"],
+    ["air-bubble", "/entities/rule.air"],
+    ["air-step", "/entities/condition.stable"],
+    ["akashic-communion", "/entities/rule.extraplanar"],
+  ])("omits reviewed false-positive link from spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["align-weapon-communal", "/spells/spell.align-weapon"],
+    ["allied-cloak", "/classes/bard"],
+    ["alluring-light", "/rules/illumination#dim-light"],
+    ["alluring-spores", "/rules/magic-schools#enchantment"],
+    ["analyze-aura", "/spells/spell.magic-aura"],
+    ["ancestral-memory", "/entities/monster.clay-golem"],
+    ["anchored-step", "/entities/rule.combat-maneuver-defense"],
+    ["angelic-aspect-greater", "/entities/rule.damage-reduction"],
+  ])("renders third-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["ally-across-time", "/entities/rule.summon"],
+    ["alter-summoned-monster", "/entities/rule.summon"],
+    ["alter-winds", "/entities/rule.wind"],
+  ])("omits third-batch false-positive link from spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["animal-growth", "/entities/rule.armor-class"],
+    ["animate-dead-lesser", "/entities/rule.skeleton"],
+    ["anti-summoning-shield", "/rules/magic-schools#summoning"],
+    ["antitech-field", "/entities/item.sling"],
+    ["antithetical-constraint", "/spells/spell.magic-missile"],
+    ["ape-walk", "/entities/monster.monkey"],
+  ])("renders fourth-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it("links only the rules-specific Summon occurrence in Anti-Summoning Shield", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.anti-summoning-shield`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description.match(/href="\/entities\/rule\.summon"/g)).toHaveLength(1);
+  });
+
+  it("does not link Apport Object's transport verb to the monster Summon ability", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.apport-object`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain('href="/entities/rule.summon"');
+  });
+
+  it.each([
+    ["aquatic-cavalry", "/entities/monster.hippocampus"],
+    ["arcana-theft", "/rules/saving-throws"],
+    ["arcane-concordance", "/entities/feat.enlarge-spell"],
+    ["arcane-disruption", "/classes/arcanist"],
+    ["arcane-mark", "/entities/item.gem-of-seeing"],
+    ["arcane-pocket", "/entities/item.bag-of-holding"],
+    ["archons-trumpet", "/entities/monster.trumpet-archon"],
+    ["aspect-of-the-bear", "/entities/rule.combat-maneuver-bonus"],
+    ["aspect-of-the-falcon", "/entities/feat.improved-critical"],
+  ])("renders fifth-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["aquatic-cavalry", "/entities/rule.summon"],
+    ["army-across-time", "/entities/rule.summon"],
+    ["arcane-eye", "/entities/rule.arcane"],
+    ["arcane-pocket", "/entities/rule.touch-attack"],
+    ["arid-refuge", "/entities/rule.impervious"],
+    ["ashen-path", "/entities/rule.touch-attack"],
+  ])("omits fifth-batch false-positive link from spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["aspect-of-the-nightingale", "/rules/magic-schools#charm"],
+    ["assumed-likeness", "/rules/magic-schools#illusion"],
+    ["atavism", "/entities/rule.hit-dice"],
+    ["atonement", "/classes/paladin"],
+    ["aura-alteration", "/spells/spell.magic-aura"],
+    ["aura-of-greater-courage", "/entities/rule.fear"],
+    ["aura-sight", "/entities/spell-family.detect-alignment"],
+    ["awaken", "/entities/class-feature.animal-companion"],
+    ["awaken-construct", "/entities/monster.shield-guardian"],
+    ["awaken-the-devoured", "/entities/rule.daemon"],
+  ])("renders sixth-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["atonement", "/entities/rule.redemption"],
+    ["aura-of-distraction", "/entities/rule.distraction"],
+  ])("omits sixth-batch false-positive link from spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["badgers-ferocity", "/spells/spell.keen-edge"],
+    ["balance-of-suffering", "/entities/rule.hit-points"],
+    ["banishment", "/spells/spell.dismissal"],
+    ["banshee-blast", "/entities/monster.ghost"],
+    ["barbed-chains", "/entities/item.chain"],
+    ["barghest-feast", "/entities/rule.hit-dice"],
+    ["barrow-haze", "/entities/class-feature.hexes"],
+    ["beanstalk", "/entities/item.rope"],
+    ["beastspeak", "/entities/class-feature.wild-shape"],
+    ["bed-of-iron", "/entities/condition.fatigued"],
+  ])("renders seventh-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["barbed-chains", "/entities/rule.summon"],
+    ["beacon-of-guilt", "/entities/rule.touch-attack"],
+  ])("omits seventh-batch false-positive link from spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain(`href="${target}"`);
+  });
+
+  it("distinguishes the Polymorph spell from generic polymorph effects", async () => {
+    const [balefulResponse, beastspeakResponse] = await Promise.all([
+      fetch(`${baseUrl}/spells/spell.baleful-shadow-transmutation`),
+      fetch(`${baseUrl}/spells/spell.beastspeak`),
+    ]);
+    const [balefulHtml, beastspeakHtml] = await Promise.all([
+      balefulResponse.text(),
+      beastspeakResponse.text(),
+    ]);
+    const baleful = balefulHtml.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const beastspeak = beastspeakHtml.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(baleful.match(/href="\/spells\/spell\.polymorph"/g)).toHaveLength(1);
+    expect(baleful.match(/href="\/rules\/magic-schools#polymorph"/g)).toHaveLength(2);
+    expect(beastspeak).toContain('href="/rules/magic-schools#polymorph"');
+    expect(beastspeak).not.toContain('href="/spells/spell.polymorph"');
+  });
+
+  it.each([
+    ["bereave", "/spells/spell.cure-light-wounds"],
+    ["bestow-auras", "/entities/class-feature.aura-of-resolve"],
+    ["billowing-skirt", "/entities/item.kilt"],
+    ["bind-sage", "/entities/monster.caulborn"],
+    ["bite-the-hand", "/entities/class-feature.eidolon"],
+    ["black-spot", "/entities/monster.ghost"],
+    ["blade-tutors-spirit", "/entities/feat.power-attack"],
+    ["bladed-dash-greater", "/spells/spell.bladed-dash"],
+  ])("renders eighth-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["bereave", "/entities/item.chain"],
+    ["binding-earth", "/spells/spell.binding"],
+    ["binding", "/entities/rule.law"],
+  ])("omits eighth-batch source artifacts from spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain(`href="${target}"`);
+  });
+
+  it("adds reviewed illumination, vision, descriptor, and spell links to Blacklight", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.blacklight`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    for (const target of [
+      "/rules/illumination#darkness",
+      "/entities/rule.darkvision",
+      "/rules/descriptors#light",
+      "/spells/spell.daylight",
+    ]) expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["blast-of-wind", "/spells/spell.gust-of-wind"],
+    ["blazing-rainbow", "/entities/item.longbow"],
+    ["bless-water", "/entities/item.holy-water"],
+    ["blessed-fist", "/entities/feat.improved-unarmed-strike"],
+    ["blessing-of-the-mole", "/entities/rule.darkvision"],
+    ["blight", "/entities/rule.plant"],
+    ["blood-in-the-water", "/entities/monster.shark"],
+    ["blood-money", "/spells/spell.stoneskin"],
+  ])("renders ninth-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["bleed-for-your-master", "/entities/rule.touch-attack"],
+    ["blight", "/entities/rule.daemon"],
+    ["bloatbomb", "/entities/rule.touch-attack"],
+    ["blood-money", "/entities/rule.pathfinder-adventure-path-rise-of-the-runelords-anniversary-edition"],
+  ])("omits ninth-batch source artifacts from spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain(`href="${target}"`);
+  });
+
+  it("promotes whole-spell functions-like wording and defers an unreviewed parent", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.blast-of-wind`);
+    const html = await response.text();
+    const related = html.match(/<section aria-labelledby="related-rules">([\s\S]*?)<\/section>/)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(html).not.toContain('data-embedded-spell="spell.gust-of-wind"');
+    expect(html).toContain("that parent is not fully resolved in the local rules data");
+    expect(html.match(/href="\/spells\/spell.gust-of-wind"/g)?.length).toBeGreaterThanOrEqual(1);
+    expect(related).toContain("Functions Like:");
+    expect(related.match(/href="\/spells\/spell.gust-of-wind"/g)).toHaveLength(1);
+    expect(related).not.toContain("References:");
+  });
+
+  it.each([
+    ["binding-earth-mass", "/spells/spell.binding-earth"],
+    ["blood-sentinel", "/entities/feat.alertness"],
+    ["blood-song", "/rules/magic-schools#healing"],
+    ["bloodbath", "/entities/item.dagger"],
+    ["bloodstone-mirror", "/entities/deity.arazni"],
+    ["blur", "/entities/rule.concealment"],
+    ["bolts-of-bedevilment", "/entities/condition.dazed"],
+    ["bone-fists", "/entities/item.armor-spikes"],
+    ["bone-flense", "/classes/red-mantis-assassin"],
+    ["bone-flense", "/entities/monster.giant-mantis"],
+  ])("renders tenth-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["bone-flense", "/entities/rule.crimson-assassins"],
+    ["bone-flense", "/entities/rule.humanoid"],
+  ])("omits tenth-batch source artifacts from spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["bouncy-body", "/entities/rule.falling-damage"],
+    ["bow-spirit", "/entities/item.sphere-of-annihilation"],
+    ["bowstaff", "/entities/item.quarterstaff"],
+    ["brand-greater", "/entities/item.torch"],
+    ["brand-of-conformity", "/entities/rule.dwarf"],
+    ["brightest-light", "/rules/descriptors#darkness"],
+    ["brightest-night", "/rules/illumination#dim-light"],
+    ["brilliant-inspiration", "/entities/rule.ability-check"],
+    ["brow-gasher", "/entities/condition.bleed"],
+    ["bullet-ward", "/entities/rule.armor-class"],
+    ["bulls-strength", "/entities/rule.enhancement-bonus"],
+  ])("renders eleventh-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["boneshatter", "/entities/rule.skeleton"],
+    ["borrow-corruption", "/entities/rule.touch-attack"],
+    ["bountiful-banquet", "/entities/rule.animal"],
+  ])("omits eleventh-batch semantic false positives from spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain(`href="${target}"`);
+  });
+
+  it("links only Brand, Greater's real parent reference", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.brand-greater`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description.match(/href="\/spells\/spell.brand"/g)).toHaveLength(1);
+  });
+
+  it("treats Brightest Light as Daylight inheritance and generic darkness as a descriptor", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.brightest-light`);
+    const html = await response.text();
+    const related = html.match(/<section aria-labelledby="related-rules">([\s\S]*?)<\/section>/)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(related).toContain("Functions Like:");
+    expect(related).toContain('href="/spells/spell.daylight"');
+    expect(html).not.toContain('href="/spells/spell.darkness"');
+  });
+
+  it.each([
+    ["burdened-thoughts", "/entities/rule.carrying-capacity"],
+    ["burst-bonds", "/entities/rule.swallow-whole"],
+    ["burst-of-glory", "/entities/rule.temporary-hit-points"],
+    ["burst-with-light", "/rules/illumination#normal-light"],
+    ["calcific-touch", "/spells/spell.slow"],
+    ["calcific-touch", "/entities/condition.petrified"],
+  ])("renders twelfth-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it("canonicalizes Grapple wording and rejects Call Construct's ordinary summon verb", async () => {
+    const [bondsResponse, constructResponse] = await Promise.all([
+      fetch(`${baseUrl}/spells/spell.burst-bonds`),
+      fetch(`${baseUrl}/spells/spell.call-construct`),
+    ]);
+    const [bondsHtml, constructHtml] = await Promise.all([
+      bondsResponse.text(),
+      constructResponse.text(),
+    ]);
+    const bonds = bondsHtml.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const construct = constructHtml.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(bondsResponse.status).toBe(200);
+    expect(constructResponse.status).toBe(200);
+    expect(bonds).toContain('href="/entities/rule.grapple"');
+    expect(bonds).not.toContain('href="/entities/rule.grappling"');
+    expect(construct).not.toContain('href="/entities/rule.summon"');
+  });
+
+  it.each([
+    ["calm-air", "/entities/rule.wind-effects"],
+    ["campfire-wall", "/entities/rule.total-concealment"],
+    ["canopic-conversion", "/spells/spell.geas-quest"],
+    ["cast-out", "/rules/magic-schools#compulsion"],
+    ["castigate", "/entities/condition.cowering"],
+    ["cauterizing-weapon", "/rules/descriptors#acid"],
+    ["cave-fangs", "/entities/class-feature.spirit-animal"],
+    ["chain-of-perdition", "/rules/illumination#darkness"],
+    ["chain-of-perdition", "/entities/condition.invisibility"],
+  ])("renders thirteenth-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["carry-companion", "/entities/rule.touch-attack"],
+    ["catatonia", "/entities/rule.touch-attack"],
+    ["caustic-safeguard", "/entities/rule.touch-attack"],
+    ["cauterizing-weapon", "/rules/magic-schools#healing"],
+    ["cauterizing-weapon", "/entities/rule.negating"],
+    ["cave-fangs", "/entities/rule.animal"],
+    ["cave-fangs", "/entities/condition.disabled"],
+    ["chain-of-perdition", "/spells/spell.darkness"],
+    ["chain-of-perdition", "/spells/spell.invisibility"],
+  ])("omits thirteenth-batch semantic false positives from spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain(`href="${target}"`);
+  });
+
+  it("promotes Carve Passage's whole-spell similar-to relationship", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.carve-passage`);
+    const html = await response.text();
+    const related = html.match(/<section aria-labelledby="related-rules">([\s\S]*?)<\/section>/)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(related).toContain("Functions Like:");
+    expect(related).toContain('href="/spells/spell.expeditious-excavation"');
+  });
+
+  it.each([
+    ["charons-dispensation", "/spells/spell.mindwipe"],
+    ["cheetahs-sprint", "/entities/rule.fly"],
+    ["circle-of-clarity", "/rules/magic-schools#figment"],
+    ["claim-identity", "/rules/magic-schools#polymorph"],
+    ["cleanse", "/entities/rule.ability-damage"],
+    ["cleanse", "/entities/rule.poison"],
+    ["cleansing-fire", "/rules/descriptors#evil"],
+  ])("renders fourteenth-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["chameleon-stride-greater", "/entities/rule.advanced-players-guide"],
+    ["charnel-house", "/entities/rule.meat"],
+  ])("omits fourteenth-batch source artifacts from spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain(`href="${target}"`);
+  });
+
+  it("links only Mass Charm Person's real parent reference", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.charm-person-mass`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description.match(/href="\/spells\/spell.charm-person"/g)).toHaveLength(1);
+  });
+
+  it.each([
+    ["cloak-of-shadows", "/rules/illumination#dim-light"],
+    ["cloak-of-shadows", "/entities/rule.sunlight-vulnerability"],
+    ["cloak-of-winds", "/entities/rule.wind-effects"],
+    ["cloud-shape", "/entities/rule.fly"],
+    ["coin-shot", "/entities/rule.touch-attack"],
+    ["cold-ice-strike", "/rules/descriptors#cold"],
+    ["collaborative-thaumaturgy", "/entities/feat.empower-spell"],
+    ["command-undead", "/entities/rule.undead"],
+    ["compel-hostility", "/entities/class-feature.eidolon"],
+  ])("renders fifteenth-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["climbing-beanstalk", "/entities/rule.plant"],
+    ["cloak-of-secrets", "/spells/spell.identify"],
+    ["cloak-of-winds", "/entities/rule.wind"],
+  ])("omits fifteenth-batch semantic false positives from spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain(`href="${target}"`);
+  });
+
+  it("links only Greater Command's real parent reference", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.command-greater`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description.match(/href="\/spells\/spell.command"/g)).toHaveLength(1);
+  });
+
+  it.each([
+    ["compel-tongue-mass", "/spells/spell.compel-tongue"],
+    ["compelling-rant", "/spells/spell.borrow-corruption"],
+    ["concealed-breath", "/entities/rule.drowning"],
+    ["condensed-ether", "/entities/feat.blind-fight"],
+    ["conditional-favor", "/entities/rule.poison"],
+    ["confess", "/entities/condition.sickened"],
+    ["confusion-lesser", "/entities/condition.confused"],
+    ["conjure-carriage", "/entities/monster.horse"],
+    ["constricting-coils", "/entities/monster.snake"],
+    ["contact-nalfeshnee", "/entities/monster.nalfeshnee"],
+    ["contact-other-plane", "/entities/rule.intelligence"],
+    ["contagion-greater", "/entities/rule.disease"],
+    ["contagious-flame", "/rules/descriptors#fire"],
+    ["contest-of-skill", "/classes/fighter"],
+    ["contest-of-skill", "/entities/class-feature.weapon-mastery"],
+  ])("renders sixteenth-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it("links Contact High's touch attack but not its ordinary touch verb", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.contact-high`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description.match(/href="\/entities\/rule.touch-attack"/g)).toHaveLength(1);
+  });
+
+  it("links only Contagious Suggestion's real parent reference", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.contagious-suggestion`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description.match(/href="\/spells\/spell.suggestion"/g)).toHaveLength(1);
+  });
+
+  it.each([
+    ["calm-emotions", "/entities/class-feature.inspire-courage"],
+    ["calm-emotions", "/entities/class-feature.rage"],
+    ["cloak-of-chaos", "/entities/rule.deflection-bonus"],
+    ["contingent-action", "/entities/rule.ready"],
+    ["contingent-scroll", "/entities/rule.scroll"],
+    ["contingent-venom", "/spells/spell.magic-mouth"],
+    ["continual-flame", "/entities/item.torch"],
+    ["continual-flame", "/rules/descriptors#darkness"],
+    ["control-construct", "/entities/rule.concentration"],
+    ["control-summoned-creature", "/rules/magic-schools#summoning"],
+    ["control-water", "/entities/monster.water-elemental"],
+    ["control-winds", "/entities/rule.wind-effects"],
+    ["controlled-fireball", "/classes/magus"],
+    ["controlled-fireball", "/rules/descriptors#ruse"],
+    ["coordinated-effort", "/entities/feat.outflank"],
+    ["corpse-lanterns", "/rules/illumination#dim-light"],
+    ["corpse-lanterns", "/rules/magic-schools#pattern"],
+    ["counterbalancing-aura", "/entities/condition.nauseated"],
+    ["countless-eyes", "/entities/rule.flanking"],
+    ["cowards-cowl", "/entities/rule.fear"],
+    ["cowards-lament", "/entities/rule.attack-rolls"],
+  ])("renders seventeenth-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["cloak-of-chaos", "/entities/rule.chaos"],
+    ["corrosive-consumption", "/entities/rule.touch-attack"],
+    ["counterbalancing-aura", "/entities/rule.components"],
+  ])("omits seventeenth-batch contextual false positives from spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain(`href="${target}"`);
+  });
+
+  it("distinguishes Calm Emotions' Rage spell from the barbarian class feature", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.calm-emotions`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description.match(/href="\/spells\/spell.rage"/g)).toHaveLength(1);
+    expect(description.match(/href="\/entities\/class-feature.rage"/g)).toHaveLength(1);
+  });
+
+  it("links Controlled Fireball's parent and explicit identification, but not its own title", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.controlled-fireball`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description.match(/href="\/spells\/spell.fireball"/g)).toHaveLength(2);
+  });
+
+  it("keeps Magic Aura's unmatched spell relationships outside its description", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.magic-aura`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain('class="rich-description"');
+    expect(description).not.toContain('href="/spells/spell.arcane-sight"');
+    expect(html).toContain('href="/spells/spell.arcane-sight"');
+  });
+
+  it("omits self-navigation and does not link rejected source placeholders", async () => {
+    const [toxicityResponse, sprayResponse] = await Promise.all([
+      fetch(`${baseUrl}/spells/spell.absorb-toxicity`),
+      fetch(`${baseUrl}/spells/spell.acidic-spray`),
+    ]);
+    const [toxicity, spray] = await Promise.all([toxicityResponse.text(), sprayResponse.text()]);
+    expect(toxicity).not.toContain('href="/spells/spell.absorb-toxicity"');
+    expect(spray).not.toContain('href="/spells/spell.reflex"');
+    expect(spray).toContain('<span class="muted">(rejected)</span>');
   });
 
   it("renders Greater Bestow Curse's persisted list without inventing missing links", async () => {
@@ -415,14 +1084,29 @@ describe("local rules browser", () => {
     expect(html).toContain('<h3 id="embedded-bestow-curse">Bestow Curse</h3>');
   });
 
-  it("keeps mythic Darkness separate and links only explicit spell references", async () => {
+  it("renders Darkness rules links, its separate mythic section, and Deeper Darkness", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.darkness`);
     const html = await response.text();
     const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
     expect(response.status).toBe(200);
     expect(description).not.toContain("Mythic Darkness");
-    expect(description).not.toContain('/entities/descriptor.darkness');
-    expect(description.match(/href="\/spells\/spell\.darkness"/g)).toHaveLength(2);
+    expect(description).not.toContain('href="/spells/spell.darkness"');
+    for (const target of [
+      "/rules/descriptors#darkness",
+      "/rules/illumination#bright-light",
+      "/rules/illumination#normal-light",
+      "/rules/illumination#dim-light",
+      "/rules/illumination#darkness",
+      "/entities/rule.light-vulnerability",
+      "/entities/rule.light-sensitivity",
+      "/entities/rule.concealment",
+      "/entities/rule.total-concealment",
+      "/entities/item.torch",
+      "/entities/item.lantern",
+    ]) expect(description).toContain(`href="${target}"`);
+    expect(html).toContain('<h2>Mythic Darkness</h2>');
+    expect(html).toContain('<strong>Source</strong>: Mythic Adventures, page 90');
+    expect(html.match(/data-embedded-spell="spell.deeper-darkness"/g)).toHaveLength(1);
   });
 
   it("falls back to escaped plain-text descriptions outside the pilot", async () => {

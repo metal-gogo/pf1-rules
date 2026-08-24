@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.archons-trumpet",
   "ruleset": "Pathfinder First Edition",
   "name": "Archon's Trumpet",
@@ -164,7 +164,39 @@
   "description": {
     "raw": "Upon hearing a booming report, as if from a trumpet archon’s\nmighty horn, all creatures in the area of the burst are paralyzed\nfor 1d4 rounds.",
     "search_text": "\"upon hearing a booming report, as if from a trumpet archon’s\\nmighty horn, all creatures in the area of the burst are paralyzed\\nfor 1d4 rounds.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Upon hearing a booming report, as if from a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "trumpet archon’s",
+              "relationship_id": "spell.archons-trumpet:uses_definition:monster.trumpet-archon"
+            },
+            {
+              "node_type": "text",
+              "value": " mighty horn, all creatures in the area of the burst are "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "paralyzed",
+              "relationship_id": "spell.archons-trumpet:uses_definition:condition.paralyzed"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1d4 rounds."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -547,6 +579,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.archons-trumpet:uses_definition:monster.trumpet-archon",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "monster",
+        "entity_id": "monster.trumpet-archon",
+        "name": "Trumpet archon"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.archons-trumpet:abc1f968e26bb6ae",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "trumpet archon’s",
+          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/outsiders/archon/trumpet-archon"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.archons-trumpet:uses_definition:rule.book-of-magic-spell-codex-volume-1",
       "type": "uses_definition",
       "target": {
@@ -567,12 +619,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.archons-trumpet:uses_definition:rule.fort",
+      "relationship_id": "spell.archons-trumpet:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -602,26 +654,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "yes",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.archons-trumpet:uses_definition:rule.trumpet-archons",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.trumpet-archons",
-        "name": "trumpet archon’s"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.archons-trumpet:abc1f968e26bb6ae",
-          "source_field": "spell_raw.links_raw[7]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "trumpet archon’s",
-          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/outsiders/archon/trumpet-archon"
         }
       ],
       "note": null
@@ -675,11 +707,19 @@
       "raw_value_sha256": "3abdd6155566bc416c172016c3c9cfc4ae385e7b48b8f92ba110c0ca85d937cd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.archons-trumpet:46600e4f8bbc8baf",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d33c6b5db8fbb92f4913db77309e9219a54bd5f5d8e341ae1d1e4a701496a742",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

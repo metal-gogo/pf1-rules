@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.absorb-rune-iii",
   "ruleset": "Pathfinder First Edition",
   "name": "Absorb Rune III",
@@ -143,7 +143,33 @@
   "description": {
     "raw": "This spell functions like absorb rune I, but it can affect runes equivalent to a spell of 8th level or lower.",
     "search_text": "\"this spell functions like absorb rune i, but it can affect runes equivalent to a spell of 8th level or lower.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "absorb rune I",
+              "relationship_id": "spell.absorb-rune-iii:functions_like:spell.absorb-rune-i",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", but it can affect runes equivalent to a spell of 8th level or lower."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -333,6 +359,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like absorb rune I, but it can affect runes equivalent to a spell of 8th level or lower.",
           "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.absorb-rune-iii:fc22fcd6421a9664",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "absorb rune I",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/a/absorb-rune-i/#Absorb_Rune_I"
         }
       ],
       "note": null
@@ -401,26 +434,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "Adventurer's Guide pg. 60",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.absorb-rune-iii:references:spell.absorb-rune-i",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.absorb-rune-i",
-        "name": "absorb rune I"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.absorb-rune-iii:fc22fcd6421a9664",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "absorb rune I",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/a/absorb-rune-i/#Absorb_Rune_I"
         }
       ],
       "note": null
@@ -514,11 +527,19 @@
       "raw_value_sha256": "e5d447c42d03822d61edaa8b232de2b7fd1e7ad18d22fa5635321034f6801024",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.absorb-rune-iii:bfcce66cf9313367",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d11fd29701ec810d6b11bd784d80e0cc84c8d95c47c0bcfc7eba8278e5546b02",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

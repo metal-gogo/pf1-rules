@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.boneshatter",
   "ruleset": "Pathfinder First Edition",
   "name": "Boneshatter",
@@ -174,7 +174,75 @@
   "description": {
     "raw": "The target’s bones (or exoskeleton) splinter, dealing 1d6 points of damage per caster level (maximum 15d6) to the target, which is also exhausted for 1 minute per caster level from the pain and exertion of the transformation.\n\nIf the target succeeds at its save, it takes half damage and is fatigued rather than exhausted. Objects made of bone, chitin, or similar material take half again as much damage (+50%) from this spell. This spell has no effect on a creature that has neither a skeleton nor a hard carapace.",
     "search_text": "\"the target’s bones (or exoskeleton) splinter, dealing 1d6 points of damage per caster level (maximum 15d6) to the target, which is also exhausted for 1 minute per caster level from the pain and exertion of the transformation.\\n\\nif the target succeeds at its save, it takes half damage and is fatigued rather than exhausted. objects made of bone, chitin, or similar material take half again as much damage (+50%) from this spell. this spell has no effect on a creature that has neither a skeleton nor a hard carapace.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target’s bones (or exoskeleton) splinter, dealing 1d6 points of damage per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.boneshatter:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum 15d6) to the target, which is also "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "exhausted",
+              "relationship_id": "spell.boneshatter:uses_definition:condition.exhausted"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 minute per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.boneshatter:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " from the pain and exertion of the transformation."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": " If the target succeeds at its save, it takes half damage and is "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fatigued",
+              "relationship_id": "spell.boneshatter:uses_definition:condition.fatigued"
+            },
+            {
+              "node_type": "text",
+              "value": " rather than "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "exhausted",
+              "relationship_id": "spell.boneshatter:uses_definition:condition.exhausted"
+            },
+            {
+              "node_type": "text",
+              "value": ". Objects made of bone, chitin, or similar material take half again as much damage (+50%) from this spell. This spell has no effect on a creature that has neither a skeleton nor a hard carapace."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -252,6 +320,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.boneshatter:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.boneshatter:094124c9434c183c",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.boneshatter:appears_on_spell_list:spell-list.oracle",
@@ -563,11 +651,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.boneshatter:uses_definition:rule.fortitude",
+      "relationship_id": "spell.boneshatter:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -590,7 +678,7 @@
         "entity_id": "rule.skeleton",
         "name": "skeleton"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.boneshatter:f8af6537e9521a1d",
@@ -600,7 +688,7 @@
           "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/templates/skeleton"
         }
       ],
-      "note": null
+      "note": "The description refers to a creature's anatomy, not the Skeleton undead template linked by the secondary source."
     },
     {
       "relationship_id": "spell.boneshatter:uses_definition:rule.spell-resistance",
@@ -621,26 +709,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.boneshatter:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.boneshatter:094124c9434c183c",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -691,11 +759,19 @@
       "raw_value_sha256": "d2269029600dff9da5e08e9cf361262055a57356335ba2a9d9608ee92831e4fd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.boneshatter:094124c9434c183c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "532e3c583c989594549195922a40e7bf643e87ae4d77cc7bfef8b91d5c015566",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

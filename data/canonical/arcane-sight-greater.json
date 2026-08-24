@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.arcane-sight-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Arcane Sight, Greater",
@@ -137,7 +137,66 @@
   "description": {
     "raw": "This spell functions like arcane sight, except that you automatically know which spells or magical effects are active upon any individual or object you see.\n\nUnlike arcane sight, this spell cannot be made permanent with a permanency spell.",
     "search_text": "\"this spell functions like arcane sight, except that you automatically know which spells or magical effects are active upon any individual or object you see.\\n\\nunlike arcane sight, this spell cannot be made permanent with a permanency spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "arcane sight",
+              "relationship_id": "spell.arcane-sight-greater:functions_like:spell.arcane-sight",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that you automatically know which spells or magical effects are active upon any individual or object you see."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Unlike "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "arcane sight",
+              "relationship_id": "spell.arcane-sight-greater:functions_like:spell.arcane-sight",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", this spell cannot be made permanent with a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "permanency",
+              "relationship_id": "spell.arcane-sight-greater:references:spell.permanency",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -334,6 +393,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like arcane sight, except that you automatically know which spells or magical effects are active upon any individual or object you see.\n\nUnlike arcane sight, this spell cannot be made permanent with a permanency spell.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.arcane-sight-greater:cd25a662245567f4",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "arcane sight",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/arcaneSight.html#arcane-sight"
+        },
+        {
+          "observation_id": "legacy_aon:spell.arcane-sight-greater:cd25a662245567f4",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "arcane sight",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/arcaneSight.html#arcane-sight"
         }
       ],
       "note": null
@@ -407,39 +480,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.arcane-sight-greater:references:spell.arcane-sight",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.arcane-sight",
-        "name": "arcane sight"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.arcane-sight-greater:cd25a662245567f4",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "arcane sight",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/arcaneSight.html#arcane-sight"
-        },
-        {
-          "observation_id": "legacy_aon:spell.arcane-sight-greater:cd25a662245567f4",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "arcane sight",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/arcaneSight.html#arcane-sight"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.arcane-sight-greater:references:spell.permanency",
       "type": "references",
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.permanency",
-        "name": "permanency"
+        "name": "Permanency"
       },
       "status": "accepted",
       "evidence": [
@@ -549,11 +595,19 @@
       "raw_value_sha256": "b4c97060e1b2e2b6a8cc7394ce7d748654f876e8d41702f1841ef863c15b8bae",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.arcane-sight-greater:e77d617aa22e6957",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "b3f2c668ff6da489d8229ceee59b71bf71d510a1acc9e5bae21136758262cdbb",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

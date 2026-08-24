@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.bone-fists",
   "ruleset": "Pathfinder First Edition",
   "name": "Bone Fists",
@@ -222,7 +222,48 @@
   "description": {
     "raw": "The bones of your targets’ joints grow thick and sharp, protruding painfully through the skin at the knuckles, elbows, shoulders, spine, and knees. The targets each gain a +1 bonus to natural armor and a +2 bonus on damage rolls with natural weapons, and they are treated as having armor spikes, with which they are proficient.",
     "search_text": "\"the bones of your targets’ joints grow thick and sharp, protruding painfully through the skin at the knuckles, elbows, shoulders, spine, and knees. the targets each gain a +1 bonus to natural armor and a +2 bonus on damage rolls with natural weapons, and they are treated as having armor spikes, with which they are proficient.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The bones of your targets’ joints grow thick and sharp, protruding painfully through the skin at the knuckles, elbows, shoulders, spine, and knees. The targets each gain a +1 bonus to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "natural armor",
+              "relationship_id": "spell.bone-fists:uses_definition:rule.natural-armor"
+            },
+            {
+              "node_type": "text",
+              "value": " and a +2 bonus on damage rolls with "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "natural weapons",
+              "relationship_id": "spell.bone-fists:uses_definition:rule.natural-attacks"
+            },
+            {
+              "node_type": "text",
+              "value": ", and they are treated as having "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "armor spikes",
+              "relationship_id": "spell.bone-fists:uses_definition:item.armor-spikes"
+            },
+            {
+              "node_type": "text",
+              "value": ", with which they are proficient."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -354,6 +395,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.bone-fists:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.bone-fists:2b200c4f3b3b0a0d",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.bone-fists:a0b51371b4044cfd",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.bone-fists:appears_on_spell_list:spell-list.oracle",
@@ -632,12 +700,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.bone-fists:uses_definition:rule.armor-spikes",
+      "relationship_id": "spell.bone-fists:uses_definition:item.armor-spikes",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.armor-spikes",
-        "name": "armor spikes"
+        "entity_type": "item",
+        "entity_id": "item.armor-spikes",
+        "name": "Armor spikes"
       },
       "status": "accepted",
       "evidence": [
@@ -672,12 +740,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.bone-fists:uses_definition:rule.natural-weapons",
+      "relationship_id": "spell.bone-fists:uses_definition:rule.natural-attacks",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.natural-weapons",
-        "name": "natural weapons"
+        "entity_id": "rule.natural-attacks",
+        "name": "Natural attacks"
       },
       "status": "accepted",
       "evidence": [
@@ -710,33 +778,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.bone-fists:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.bone-fists:2b200c4f3b3b0a0d",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.bone-fists:a0b51371b4044cfd",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -787,11 +828,19 @@
       "raw_value_sha256": "44f9121e7483b37d43c5b7f9b8365c4c97d104824a3bb83a9f30b0b60b2d2ad7",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.bone-fists:a0b51371b4044cfd",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "c9aff8e462c677074d02fa68141c9b2b8f6bcee81762bd8d5cac037019ed6b5b",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

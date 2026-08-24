@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.spark:76d728b6ed5eb8f0",
     "legacy_aon:spell.spark:2f351930ace809f3",
-    "d20pfsrd:spell.spark:472f49f1a75956ee"
+    "d20pfsrd:spell.spark:472f49f1a75956ee",
+    "d20pfsrd:magic-school.fire-elemental:73dcc41d"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.spark:76d728b6ed5eb8f0",
@@ -122,6 +123,20 @@
         "aon:spell.spark:76d728b6ed5eb8f0"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/14",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.fire-elemental:73dcc41d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.fire-elemental:73dcc41d"
+      ],
+      "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -534,6 +549,20 @@
         "aon:spell.spark:76d728b6ed5eb8f0"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.spark:appears_on_spell_list:spell-list.fire-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.fire-elemental:73dcc41d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.fire-elemental:73dcc41d"
+      ],
+      "rationale": "d20PFSRD prints the spell on the owning wizard elemental arcane school page; it is modeled as elemental_school access rather than general Wizard access."
     }
   ],
   "unresolved_questions": [

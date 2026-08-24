@@ -36,10 +36,11 @@ written.
 
 Classification and access metadata are not prose links. For example,
 `has_descriptor: descriptor.darkness` can classify the Darkness spell without
-turning each ordinary use of “darkness” into a descriptor link. When a term is
-also the current spell's name, an explicit source link or semantic emphasis
-must identify the self-reference. Otherwise the occurrence stays unlinked and
-the relationship remains available under Related rules.
+turning each ordinary use of “darkness” into a descriptor link. When one word
+can mean a descriptor, illumination level, spell, or ordinary noun, the pilot
+normalizer uses an exact source phrase to assign the persisted entity link. It
+does not store offsets, and a spell never links to its own page. An unmatched or
+changed context fails normalization instead of guessing.
 
 Ambiguous or unmatched phrases remain unlinked and produce a normalization
 warning. Rejected relationships never produce an entity-link node.
@@ -55,10 +56,16 @@ once after the current description. The expansion includes the rules metadata
 and description needed to understand the spell, but excludes provenance,
 backlinks, Related rules, mythic sections, and further embedded spells.
 
-Exact title variants also form a display family: the base title, `, Lesser`,
-and `, Greater`. Existing family members may be shown once even when the current
-description does not name them. This is a navigation rule only and must be
-labeled as such; it does not create or imply `functions_like` inheritance.
+Title variants also form a display family: the base title, `, Lesser`,
+`, Greater`, and `Deeper ` plus the base title. Existing family members may be
+shown once even when the current description does not name them. This is a
+navigation rule only and must be labeled as such; it does not create or imply
+`functions_like` inheritance.
+
+A mythic version is a separate canonical variant linked to its base spell. The
+web page renders its named rules and publication in a dedicated `#mythic`
+section after the base description and family content. Mythic prose never
+becomes part of `description.raw` or `description.document`.
 
 ## Pilot scope
 
@@ -91,8 +98,9 @@ Use this checklist when adding the remaining spells:
 4. Review every accepted relationship for prose-link eligibility. Exclude
    classification, publication, access, and other metadata unless the evidence
    explicitly identifies description text.
-5. Review same-name and rules-term ambiguity in context. Preserve source
-   semantics; do not link an ordinary noun only because its spelling matches an
+5. Review same-name and rules-term ambiguity in context. Use an exact contextual
+   phrase for a persisted link when global matching would be wrong; do not link
+   an ordinary noun or the current spell merely because its spelling matches an
    entity name.
 6. Confirm repeated matches, singular/plural overlap, priority, unmatched
    warnings, and rejected relationships.
@@ -101,13 +109,16 @@ Use this checklist when adding the remaining spells:
    and set the canonical record to schema version `0.2.0`.
 8. Regenerate the matching decision artifact and validate raw/document text
    equivalence plus accepted relationship references.
-9. Check direct inheritance expansion and exact lesser/greater family display
-   independently. Never infer inheritance from a title.
+9. Check direct inheritance expansion and base, lesser, greater, or deeper
+   family display independently. Never infer inheritance from a title.
 10. Add table-driven web coverage, browser navigation and accessibility checks,
     import the database, and run the complete `pnpm verify` workflow.
 
 Backfill additional spells in reviewed batches rather than changing all records
 at once. Keep non-reviewed records on version `0.1.0` until their source
 boundaries and links pass this checklist.
+
+See [Rich-text rollout status](rich-text-rollout.md) for current corpus counts,
+completed batches, and unresolved issue categories.
 
 Return to the [project index](index.md).

@@ -59,6 +59,16 @@
       "level": 1,
       "scope": "later_first_party",
       "raw": "ranger 1"
+    },
+    {
+      "spell_list_id": "spell-list.void-elemental-school",
+      "list_kind": "elemental_school",
+      "list_name": "Void Elemental School",
+      "level": 1,
+      "scope": "later_first_party",
+      "raw": "1—keen senses",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -552,6 +562,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.keen-senses:appears_on_spell_list:spell-list.void-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.void-elemental-school",
+        "name": "Void Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.void-elemental:443edb4d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1—keen senses",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/void-elemental-school/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -602,6 +632,14 @@
       "raw_value_sha256": "18e36de729e623d99b20d4aa980f83e366e76ad837bb832725cb3ccee7ca79ce",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "d20pfsrd:magic-school.void-elemental:443edb4d",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "87a64c1165b078fb7cbd653cfefd46a4a6e7e2b773787892f1ed0b5e6f06b4cd",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -627,6 +665,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/casting/components_raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Void Elemental School grants Keen Senses as a level 1 printed spell; this is not general Wizard class access."
       }
     ]
   }

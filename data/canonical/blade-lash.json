@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.blade-lash",
   "ruleset": "Pathfinder First Edition",
   "name": "Blade Lash",
@@ -113,7 +113,39 @@
   "description": {
     "raw": "Your weapon elongates and becomes whiplike. As part of casting this spell, you can use this weapon to attempt a trip combat maneuver against one creature within 20 feet, and you gain a +10 bonus on your roll, after which the weapon returns to its previous form.",
     "search_text": "\"your weapon elongates and becomes whiplike. as part of casting this spell, you can use this weapon to attempt a trip combat maneuver against one creature within 20 feet, and you gain a +10 bonus on your roll, after which the weapon returns to its previous form.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Your weapon elongates and becomes whiplike. As part of casting this spell, you can use this weapon to attempt a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "trip",
+              "relationship_id": "spell.blade-lash:uses_definition:rule.trip"
+            },
+            {
+              "node_type": "text",
+              "value": " "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "combat maneuver",
+              "relationship_id": "spell.blade-lash:uses_definition:rule.combat-maneuvers"
+            },
+            {
+              "node_type": "text",
+              "value": " against one creature within 20 feet, and you gain a +10 bonus on your roll, after which the weapon returns to its previous form."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -275,12 +307,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.blade-lash:uses_definition:rule.combat-maneuver",
+      "relationship_id": "spell.blade-lash:uses_definition:rule.combat-maneuvers",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.combat-maneuver",
-        "name": "combat maneuver"
+        "entity_id": "rule.combat-maneuvers",
+        "name": "Combat maneuvers"
       },
       "status": "accepted",
       "evidence": [
@@ -315,12 +347,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.blade-lash:uses_definition:rule.touch",
+      "relationship_id": "spell.blade-lash:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -403,11 +435,19 @@
       "raw_value_sha256": "50e5b40b2bdccb3733a8ca6ca72235feb4ef23d9073fedc4790641d584327fbd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.blade-lash:80b38f3f7e08613a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "82cbc6c6961713680b6dfc18a7c20030188f8455dae72e3d1beae74553112986",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

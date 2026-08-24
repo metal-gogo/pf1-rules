@@ -11,7 +11,8 @@
     "aon:patron.time:15d234b1",
     "aon:domain.travel:4a91e51b",
     "aon:subdomain.exploration:4a91e51b",
-    "aon:subdomain.portal:4a91e51b"
+    "aon:subdomain.portal:4a91e51b",
+    "d20pfsrd:magic-school.void-elemental:443edb4d"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.teleport:6e4e3562d86eb0b6",
@@ -168,6 +169,20 @@
         "aon:subdomain.portal:4a91e51b"
       ],
       "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/levels/15",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.void-elemental:443edb4d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.void-elemental:443edb4d"
+      ],
+      "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -714,6 +729,20 @@
         "aon:subdomain.portal:4a91e51b"
       ],
       "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
+    },
+    {
+      "relationship_id": "spell.teleport:appears_on_spell_list:spell-list.void-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.void-elemental:443edb4d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.void-elemental:443edb4d"
+      ],
+      "rationale": "d20PFSRD prints the spell on the owning wizard elemental arcane school page; it is modeled as elemental_school access rather than general Wizard access."
     }
   ],
   "unresolved_questions": [

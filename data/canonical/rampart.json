@@ -45,6 +45,16 @@
       "level": 7,
       "scope": "later_first_party",
       "raw": "wizard 7"
+    },
+    {
+      "spell_list_id": "spell-list.earth-elemental-school",
+      "list_kind": "elemental_school",
+      "list_name": "Earth Elemental School",
+      "level": 7,
+      "scope": "core",
+      "raw": "7—rampart",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -534,6 +544,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.rampart:appears_on_spell_list:spell-list.earth-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.earth-elemental-school",
+        "name": "Earth Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.earth-elemental:b766c5d6",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "7—rampart",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/earth/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -584,6 +614,14 @@
       "raw_value_sha256": "bd34439488bb2d55f3a967c6dc0c7567cec42c9a511f573f87ca9309b70f3aa1",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "d20pfsrd:magic-school.earth-elemental:b766c5d6",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "db5e969f361cc4a0bedc509249603f6a1980c91f7db77ab867f20f162faf5b52",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -599,6 +637,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Earth Elemental School grants Rampart as a level 7 printed spell; this is not general Wizard class access."
       }
     ]
   }

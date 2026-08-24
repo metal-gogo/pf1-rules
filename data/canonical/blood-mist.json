@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.blood-mist",
   "ruleset": "Pathfinder First Edition",
   "name": "Blood Mist",
@@ -131,7 +131,48 @@
   "description": {
     "raw": "This spell summons forth a misty cloud of rust-red toxic algae. Any creature within the mist is coated by it, turning the creature the same reddish color. All targets within the mist gain concealment. Any creature within the mist must save or take 1d4 points of Wisdom damage and become enraged, attacking any creatures it detects nearby (as the “attack nearest creature” result of the confused condition). An enraged creature remains so as long as the spell is in effect. A creature only needs to save once each time it is within the mist (though leaving and returning requires another save).",
     "search_text": "\"this spell summons forth a misty cloud of rust-red toxic algae. any creature within the mist is coated by it, turning the creature the same reddish color. all targets within the mist gain concealment. any creature within the mist must save or take 1d4 points of wisdom damage and become enraged, attacking any creatures it detects nearby (as the “attack nearest creature” result of the confused condition). an enraged creature remains so as long as the spell is in effect. a creature only needs to save once each time it is within the mist (though leaving and returning requires another save).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell summons forth a misty cloud of rust-red toxic algae. Any creature within the mist is coated by it, turning the creature the same reddish color. All targets within the mist gain "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.blood-mist:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": ". Any creature within the mist must save or take 1d4 points of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Wisdom damage",
+              "relationship_id": "spell.blood-mist:uses_definition:rule.wisdom-damage"
+            },
+            {
+              "node_type": "text",
+              "value": " and become enraged, attacking any creatures it detects nearby (as the “attack nearest creature” result of the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "confused",
+              "relationship_id": "spell.blood-mist:uses_definition:condition.confused"
+            },
+            {
+              "node_type": "text",
+              "value": " condition). An enraged creature remains so as long as the spell is in effect. A creature only needs to save once each time it is within the mist (though leaving and returning requires another save)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -189,6 +230,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.blood-mist:appears_on_spell_list:spell-list.lunar-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.lunar-mystery",
+        "name": "Lunar Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.lunar:8e477077",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "blood mist (16th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Lunar"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     },
     {
       "relationship_id": "spell.blood-mist:appears_on_spell_list:spell-list.shaman",
@@ -407,11 +468,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.blood-mist:uses_definition:rule.fortitude",
+      "relationship_id": "spell.blood-mist:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -465,26 +526,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.blood-mist:appears_on_spell_list:spell-list.lunar-mystery",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.lunar-mystery",
-        "name": "Lunar Mystery Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.lunar:8e477077",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "blood mist (16th)",
-          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Lunar"
-        }
-      ],
-      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -543,11 +584,19 @@
       "raw_value_sha256": "ba3c555e114c0fa779d7cfcdfc866d2b0a0f8d7b90505a264ce7ce2fbb2c330d",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.blood-mist:1f5afe87c4836b7d",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "a9e31b150434fcfb6e06bf123e96e1f1cb8656b9fa81ba9f55dc8f1f8ef1efeb",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

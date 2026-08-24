@@ -61,6 +61,16 @@
       "level": 5,
       "scope": "core",
       "raw": "wizard 5"
+    },
+    {
+      "spell_list_id": "spell-list.earth-elemental-school",
+      "list_kind": "elemental_school",
+      "list_name": "Earth Elemental School",
+      "level": 5,
+      "scope": "core",
+      "raw": "5—transmute mud to rock",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -520,6 +530,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.transmute-mud-to-rock:appears_on_spell_list:spell-list.earth-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.earth-elemental-school",
+        "name": "Earth Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.earth-elemental:b766c5d6",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "5—transmute mud to rock",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/earth/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -570,6 +600,14 @@
       "raw_value_sha256": "f276d6363a0ae350427f76d0e834a248f1d75cef64779c75e913fe747e85cf1c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "d20pfsrd:magic-school.earth-elemental:b766c5d6",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "8401f8fa8d3e2fe0d3ac0ca8db4284a0a9da3f3e7d48c488b0831e1f16961f03",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -585,6 +623,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/levels",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Earth Elemental School grants Transmute Mud to Rock as a level 5 printed spell; this is not general Wizard class access."
       }
     ]
   }

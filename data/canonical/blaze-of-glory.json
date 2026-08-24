@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.blaze-of-glory",
   "ruleset": "Pathfinder First Edition",
   "name": "Blaze of Glory",
@@ -103,7 +103,112 @@
   "description": {
     "raw": "You fall unconscious but also unleash a spectacular wave of holy energy that heartens and heals your allies while leaving your opponents daunted and damaged. You can cast this spell as either a standard action on your turn, or as an immediate action when brought to below 0 hit points. If cast as a standard action, you are immediately reduced to –1 hit points, but stable, after casting the spell.\n\nWhen you cast this spell, any good creature within range is healed for 1d6 points of damage per two caster levels. All evil creatures within range take the same amount as damage instead (a successful Will save halves this damage). In addition, all allies and enemies within range are affected as if by the prayer spell for 1 round per caster level.",
     "search_text": "\"you fall unconscious but also unleash a spectacular wave of holy energy that heartens and heals your allies while leaving your opponents daunted and damaged. you can cast this spell as either a standard action on your turn, or as an immediate action when brought to below 0 hit points. if cast as a standard action, you are immediately reduced to –1 hit points, but stable, after casting the spell.\\n\\nwhen you cast this spell, any good creature within range is healed for 1d6 points of damage per two caster levels. all evil creatures within range take the same amount as damage instead (a successful will save halves this damage). in addition, all allies and enemies within range are affected as if by the prayer spell for 1 round per caster level.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You fall "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "unconscious",
+              "relationship_id": "spell.blaze-of-glory:uses_definition:condition.unconscious"
+            },
+            {
+              "node_type": "text",
+              "value": " but also unleash a spectacular wave of holy energy that heartens and heals your allies while leaving your opponents daunted and damaged. You can cast this spell as either a standard action on your turn, or as an immediate action when brought to below 0 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.blaze-of-glory:uses_definition:rule.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": ". If cast as a standard action, you are immediately reduced to –1 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.blaze-of-glory:uses_definition:rule.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": ", but "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "stable",
+              "relationship_id": "spell.blaze-of-glory:uses_definition:condition.stable"
+            },
+            {
+              "node_type": "text",
+              "value": ", after casting the spell. "
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "When you cast this spell, any good creature within range is healed for 1d6 points of damage per two caster levels. All "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "evil",
+              "relationship_id": "spell.blaze-of-glory:uses_definition:rule.evil"
+            },
+            {
+              "node_type": "text",
+              "value": " creatures within range take the same amount as damage instead (a successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.blaze-of-glory:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save halves this damage). In addition, all allies and enemies within range are affected as if by the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "prayer",
+              "relationship_id": "spell.blaze-of-glory:references:spell.prayer",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "spell for 1 round per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.blaze-of-glory:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -304,7 +409,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.prayer",
-        "name": "prayer"
+        "name": "Prayer"
       },
       "status": "accepted",
       "evidence": [
@@ -494,11 +599,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.blaze-of-glory:uses_definition:rule.will",
+      "relationship_id": "spell.blaze-of-glory:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -577,11 +682,19 @@
       "raw_value_sha256": "c4f0da054823310fe0be54b05ecc3e248f46f085ff96bb8fdfa110efda5b08e1",
       "decision": "manually_resolved",
       "note": "Reviewed project decision: the printed Range field is blank and the printed Area is a 30-ft.-radius burst centered on you. Use personal as the canonical range while preserving the missing source value."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.blaze-of-glory:36ef28a1c6dc0c66",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3dc75c2c38f986178acda564a9b9e52152a83c6cd2f21c7f0f3fc6a9d2b1f66f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "REVIEWED_RANGE_OVERRIDE",

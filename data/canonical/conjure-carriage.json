@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.conjure-carriage",
   "ruleset": "Pathfinder First Edition",
   "name": "Conjure Carriage",
@@ -163,7 +163,48 @@
   "description": {
     "raw": "You create a fine wooden carriage with whatever cosmetic embellishments you desire. It is well constructed, although not exceptionally ostentatious. The carriage can carry up to six Medium or Small passengers. When conjured, the carriage comes with a team of two quasi-real light horses, which are already harnessed to the carriage. At your command, an invisible coachman similar to an unseen servant can assume the role of driver and direct the carriage, although it can’t perform any complex or dangerous driving, and fails any checks made to drive the carriage in such conditions. At the end of the spell’s duration, the carriage, horses, and coachman disappear into nothingness, depositing everything on or in it on the ground in its space.",
     "search_text": "\"you create a fine wooden carriage with whatever cosmetic embellishments you desire. it is well constructed, although not exceptionally ostentatious. the carriage can carry up to six medium or small passengers. when conjured, the carriage comes with a team of two quasi-real light horses, which are already harnessed to the carriage. at your command, an invisible coachman similar to an unseen servant can assume the role of driver and direct the carriage, although it can’t perform any complex or dangerous driving, and fails any checks made to drive the carriage in such conditions. at the end of the spell’s duration, the carriage, horses, and coachman disappear into nothingness, depositing everything on or in it on the ground in its space.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create a fine wooden carriage with whatever cosmetic embellishments you desire. It is well constructed, although not exceptionally ostentatious. The carriage can carry up to six Medium or Small passengers. When conjured, the carriage comes with a team of two quasi-real "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "light horses",
+              "relationship_id": "spell.conjure-carriage:uses_definition:monster.horse"
+            },
+            {
+              "node_type": "text",
+              "value": ", which are already harnessed to the carriage. At your command, an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "invisible",
+              "relationship_id": "spell.conjure-carriage:uses_definition:condition.invisible"
+            },
+            {
+              "node_type": "text",
+              "value": " coachman similar to an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "unseen servant",
+              "relationship_id": "spell.conjure-carriage:references:spell.unseen-servant"
+            },
+            {
+              "node_type": "text",
+              "value": " can assume the role of driver and direct the carriage, although it can’t perform any complex or dangerous driving, and fails any checks made to drive the carriage in such conditions. At the end of the spell’s duration, the carriage, horses, and coachman disappear into nothingness, depositing everything on or in it on the ground in its space."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -504,7 +545,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.unseen-servant",
-        "name": "unseen servant"
+        "name": "Unseen Servant"
       },
       "status": "accepted",
       "evidence": [
@@ -539,12 +580,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.conjure-carriage:uses_definition:rule.light-horses",
+      "relationship_id": "spell.conjure-carriage:uses_definition:monster.horse",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.light-horses",
-        "name": "light horses"
+        "entity_type": "monster",
+        "entity_id": "monster.horse",
+        "name": "Light horse"
       },
       "status": "accepted",
       "evidence": [
@@ -627,11 +668,19 @@
       "raw_value_sha256": "fa9d4634ab1549e490032775e64ce589be91482774caefa999bd99ac8adba7a9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.conjure-carriage:68003ca288c03f15",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d7c6838470cb2340160ba4a7c32abc0e177edffab122aabcf58e12e9e60b79a0",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

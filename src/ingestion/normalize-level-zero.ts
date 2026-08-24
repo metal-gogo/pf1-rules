@@ -225,7 +225,11 @@ export function parseLevels(raw: string | null, publicationBook: string | null) 
           : trimmed;
         return {
           spell_list_id: `spell-list.${slug(listName)}`,
-          list_kind: printedListName === "sahirafiyun" ? "feat" : "class",
+          list_kind: printedListName === "sahirafiyun"
+            ? "feat"
+            : printedListName === "alchemist" || printedListName === "investigator"
+              ? "formulae"
+              : "class",
           list_name: listName,
           level: Number(match[2]),
           scope: coreBook && coreLists.has(listName) ? "core" : "later_first_party",
@@ -1031,6 +1035,23 @@ function inheritanceRule(
       ? "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
       : "The direct parent is canonical, but an ancestor remains unresolved; inherited paths and child overrides are preserved pending full-chain resolution.",
   };
+}
+
+
+export function materializeSpellInheritanceRule(
+  child: ValidatedJson,
+  observationId: string,
+  parsed: ParsedSpellPage,
+  available: AvailableCanonicalSpells,
+  parentId: string,
+  parentName: string,
+): ValidatedJson {
+  return inheritanceRule(
+    { parentId, parentName, basisRaw: parsed.descriptionRaw },
+    child,
+    { siteId: "aon", observationId, parsed },
+    available,
+  );
 }
 
 

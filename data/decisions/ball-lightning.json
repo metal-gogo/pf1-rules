@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.ball-lightning:6007411e2b9bed6f",
     "legacy_aon:spell.ball-lightning:f4eb01420627e359",
-    "d20pfsrd:spell.ball-lightning:0a2a70b0f3a1bbb7"
+    "d20pfsrd:spell.ball-lightning:0a2a70b0f3a1bbb7",
+    "d20pfsrd:magic-school.air-elemental:45be08db"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.ball-lightning:6007411e2b9bed6f",
@@ -108,9 +109,53 @@
         "d20pfsrd:spell.ball-lightning:0a2a70b0f3a1bbb7"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.ball-lightning:6007411e2b9bed6f",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.ball-lightning:6007411e2b9bed6f",
+        "legacy_aon:spell.ball-lightning:f4eb01420627e359",
+        "d20pfsrd:spell.ball-lightning:0a2a70b0f3a1bbb7"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
+    },
+    {
+      "canonical_path": "/levels/9",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.air-elemental:45be08db",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.air-elemental:45be08db"
+      ],
+      "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.ball-lightning:appears_on_spell_list:spell-list.air-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.air-elemental:45be08db",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.air-elemental:45be08db"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
     {
       "relationship_id": "spell.ball-lightning:appears_on_spell_list:spell-list.arcanist",
       "decision": "accept",
@@ -380,22 +425,6 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.ball-lightning:references:spell.ball-lightning",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.ball-lightning:f4eb01420627e359",
-          "source_field": "spell_raw.links_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.ball-lightning:6007411e2b9bed6f",
-        "legacy_aon:spell.ball-lightning:f4eb01420627e359",
-        "d20pfsrd:spell.ball-lightning:0a2a70b0f3a1bbb7"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.ball-lightning:uses_action:action.move-action",
       "decision": "accept",
       "evidence": [
@@ -432,7 +461,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.ball-lightning:uses_definition:rule.reflex",
+      "relationship_id": "spell.ball-lightning:uses_definition:rule.reflex-saving-throw",
       "decision": "accept",
       "evidence": [
         {

@@ -153,6 +153,25 @@
         "aon:subdomain.storms:a10f8682"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.call-lightning-storm:221511634fc50f42",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.call-lightning-storm:221511634fc50f42",
+        "legacy_aon:spell.call-lightning-storm:ee89013387adffce",
+        "d20pfsrd:spell.call-lightning-storm:ee4051cc172383bb",
+        "aon:patron.storms:15d234b1",
+        "aon:bloodline.sorcerer.starsoul:909e0f6e",
+        "aon:subdomain.storms:a10f8682"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -229,12 +248,62 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.call-lightning-storm:appears_on_spell_list:spell-list.sorcerer-starsoul-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.starsoul:909e0f6e",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.starsoul:909e0f6e"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.call-lightning-storm:appears_on_spell_list:spell-list.storms-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.storms:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.storms:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.call-lightning-storm:appears_on_spell_list:spell-list.storms-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.storms:a10f8682",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.storms:a10f8682"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
       "relationship_id": "spell.call-lightning-storm:functions_like:spell.call-lightning",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "aon:spell.call-lightning-storm:221511634fc50f42",
           "source_field": "spell_raw.description_raw"
+        },
+        {
+          "observation_id": "legacy_aon:spell.call-lightning-storm:ee89013387adffce",
+          "source_field": "spell_raw.links_raw[0]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.call-lightning-storm:ee4051cc172383bb",
+          "source_field": "spell_raw.links_raw[4]"
         }
       ],
       "considered_observation_ids": [
@@ -309,26 +378,6 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.call-lightning-storm:references:spell.call-lightning",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.call-lightning-storm:ee89013387adffce",
-          "source_field": "spell_raw.links_raw[0]"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.call-lightning-storm:ee4051cc172383bb",
-          "source_field": "spell_raw.links_raw[4]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.call-lightning-storm:221511634fc50f42",
-        "legacy_aon:spell.call-lightning-storm:ee89013387adffce",
-        "d20pfsrd:spell.call-lightning-storm:ee4051cc172383bb"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.call-lightning-storm:uses_definition:rule.spell-resistance",
       "decision": "accept",
       "evidence": [
@@ -359,48 +408,6 @@
         "d20pfsrd:spell.call-lightning-storm:ee4051cc172383bb"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.call-lightning-storm:appears_on_spell_list:spell-list.storms-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.storms:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.storms:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.call-lightning-storm:appears_on_spell_list:spell-list.sorcerer-starsoul-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.starsoul:909e0f6e",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.starsoul:909e0f6e"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
-    },
-    {
-      "relationship_id": "spell.call-lightning-storm:appears_on_spell_list:spell-list.storms-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.storms:a10f8682",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.storms:a10f8682"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

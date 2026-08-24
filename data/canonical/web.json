@@ -59,6 +59,16 @@
       "level": 2,
       "scope": "core",
       "raw": "wizard 2"
+    },
+    {
+      "spell_list_id": "spell-list.wood-elemental-school",
+      "list_kind": "elemental_school",
+      "list_name": "Wood Elemental School",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "2—web",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -675,6 +685,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.web:appears_on_spell_list:spell-list.wood-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.wood-elemental-school",
+        "name": "Wood Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.wood-elemental:d18ad88c",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2—web",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/wood/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -725,6 +755,14 @@
       "raw_value_sha256": "92146b4ff0cff468cbf123e79a7961bb6aa16f919c09c25b68727de3f56aa9c9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "d20pfsrd:magic-school.wood-elemental:d18ad88c",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "e31143679c8defab4dd21a7bb7af97d02d3638f3817d4f7f008c8a9755e3ba34",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -755,6 +793,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Wood Elemental School grants Web as a level 2 printed spell; this is not general Wizard class access."
       }
     ]
   }

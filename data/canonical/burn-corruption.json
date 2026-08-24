@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.burn-corruption",
   "ruleset": "Pathfinder First Edition",
   "name": "Burn Corruption",
@@ -190,7 +190,102 @@
   "description": {
     "raw": "This spell fills the area with violet flames that scour an area clean of life—especially of the corrupted life of the Abyss. Creatures (and foliage) in the area take 1d8 points of fire damage per 2 caster levels you possess (maximum 7d8) unless they are outsiders with the chaotic and evil subtypes or are otherwise tainted by demons, in which case they instead take 1d6 points of fire damage per caster level (maximum 15d6). This fire damage ignores the fire resistance granted by the demon subtype, but it does not penetrate any other form of fire resistance or immunity.",
     "search_text": "\"this spell fills the area with violet flames that scour an area clean of life—especially of the corrupted life of the abyss. creatures (and foliage) in the area take 1d8 points of fire damage per 2 caster levels you possess (maximum 7d8) unless they are outsiders with the chaotic and evil subtypes or are otherwise tainted by demons, in which case they instead take 1d6 points of fire damage per caster level (maximum 15d6). this fire damage ignores the fire resistance granted by the demon subtype, but it does not penetrate any other form of fire resistance or immunity.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell fills the area with violet flames that scour an area clean of life—especially of the corrupted life of the Abyss. Creatures (and foliage) in the area take 1d8 points of fire damage per 2 caster levels you possess (maximum 7d8) unless they are "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "outsiders",
+              "relationship_id": "spell.burn-corruption:uses_definition:rule.outsider"
+            },
+            {
+              "node_type": "text",
+              "value": " with the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "chaotic",
+              "relationship_id": "spell.burn-corruption:uses_definition:rule.chaotic"
+            },
+            {
+              "node_type": "text",
+              "value": " and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "evil",
+              "relationship_id": "spell.burn-corruption:uses_definition:rule.evil"
+            },
+            {
+              "node_type": "text",
+              "value": " subtypes or are otherwise tainted by "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "demons",
+              "relationship_id": "spell.burn-corruption:uses_definition:rule.demons"
+            },
+            {
+              "node_type": "text",
+              "value": ", in which case they instead take 1d6 points of fire damage per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.burn-corruption:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum 15d6). This fire damage ignores the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fire resistance",
+              "relationship_id": "spell.burn-corruption:uses_definition:rule.fire-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": " granted by the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "demon",
+              "relationship_id": "spell.burn-corruption:uses_definition:rule.demon"
+            },
+            {
+              "node_type": "text",
+              "value": " subtype, but it does not penetrate any other form of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fire resistance",
+              "relationship_id": "spell.burn-corruption:uses_definition:rule.fire-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "immunity",
+              "relationship_id": "spell.burn-corruption:uses_definition:rule.immunity"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -633,12 +728,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.burn-corruption:uses_definition:rule.outsiders",
+      "relationship_id": "spell.burn-corruption:uses_definition:rule.outsider",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.outsiders",
-        "name": "outsiders"
+        "entity_id": "rule.outsider",
+        "name": "Outsider"
       },
       "status": "accepted",
       "evidence": [
@@ -653,11 +748,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.burn-corruption:uses_definition:rule.reflex",
+      "relationship_id": "spell.burn-corruption:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -741,11 +836,19 @@
       "raw_value_sha256": "f4cd2b81fd2bf4a2096086cb4313fbaecd84019c4996e6ec6c8c70c71203e760",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.burn-corruption:6b0722c452cef105",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d719cc3cd848491693f5fa9daf8544ef76b3c6b1711064d053efd7dde2a94794",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -8,7 +8,8 @@
     "aon:spell.cats-grace-mass:8b460889f9558915",
     "legacy_aon:spell.cats-grace-mass:1dd4b6df753e69ec",
     "d20pfsrd:spell.cats-grace-mass:3b403c0703804ab3",
-    "aon:patron.agility:15d234b1"
+    "aon:patron.agility:15d234b1",
+    "d20pfsrd:magic-school.wood-elemental:d18ad88c"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.cats-grace-mass:8b460889f9558915",
@@ -123,9 +124,54 @@
         "aon:patron.agility:15d234b1"
       ],
       "rationale": "AoN clearly transcribes the owning witch patron's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.cats-grace-mass:8b460889f9558915",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cats-grace-mass:8b460889f9558915",
+        "legacy_aon:spell.cats-grace-mass:1dd4b6df753e69ec",
+        "d20pfsrd:spell.cats-grace-mass:3b403c0703804ab3",
+        "aon:patron.agility:15d234b1"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
+    },
+    {
+      "canonical_path": "/levels/12",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.wood-elemental:d18ad88c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.wood-elemental:d18ad88c"
+      ],
+      "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.cats-grace-mass:appears_on_spell_list:spell-list.agility-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.agility:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.agility:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
     {
       "relationship_id": "spell.cats-grace-mass:appears_on_spell_list:spell-list.arcanist",
       "decision": "accept",
@@ -355,12 +401,30 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.cats-grace-mass:appears_on_spell_list:spell-list.wood-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.wood-elemental:d18ad88c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.wood-elemental:d18ad88c"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
+    {
       "relationship_id": "spell.cats-grace-mass:functions_like:spell.cats-grace",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "aon:spell.cats-grace-mass:8b460889f9558915",
           "source_field": "spell_raw.description_raw"
+        },
+        {
+          "observation_id": "legacy_aon:spell.cats-grace-mass:1dd4b6df753e69ec",
+          "source_field": "spell_raw.links_raw[0]"
         }
       ],
       "considered_observation_ids": [
@@ -419,22 +483,6 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.cats-grace-mass:references:spell.cats-grace",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.cats-grace-mass:1dd4b6df753e69ec",
-          "source_field": "spell_raw.links_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.cats-grace-mass:8b460889f9558915",
-        "legacy_aon:spell.cats-grace-mass:1dd4b6df753e69ec",
-        "d20pfsrd:spell.cats-grace-mass:3b403c0703804ab3"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.cats-grace-mass:uses_action:action.standard-action",
       "decision": "accept",
       "evidence": [
@@ -481,20 +529,6 @@
         "d20pfsrd:spell.cats-grace-mass:3b403c0703804ab3"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.cats-grace-mass:appears_on_spell_list:spell-list.agility-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.agility:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.agility:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
     }
   ],
   "unresolved_questions": [

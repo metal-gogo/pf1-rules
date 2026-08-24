@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.cackling-skull",
   "ruleset": "Pathfinder First Edition",
   "name": "Cackling Skull",
@@ -105,7 +105,42 @@
   "description": {
     "raw": "This spell functions as magic mouth, except rather than creating an illusory mouth on any surface, it affects a skull. In addition, when the skull’s magic is triggered, it releases wild and unnerving cackles before speaking its message. All creatures that can hear the cackles must save or become shaken for 1d4 rounds.",
     "search_text": "\"this spell functions as magic mouth, except rather than creating an illusory mouth on any surface, it affects a skull. in addition, when the skull’s magic is triggered, it releases wild and unnerving cackles before speaking its message. all creatures that can hear the cackles must save or become shaken for 1d4 rounds.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "magic mouth",
+              "relationship_id": "spell.cackling-skull:functions_like:spell.magic-mouth",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except rather than creating an illusory mouth on any surface, it affects a skull. In addition, when the skull’s magic is triggered, it releases wild and unnerving cackles before speaking its message. All creatures that can hear the cackles must save or become "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "shaken",
+              "relationship_id": "spell.cackling-skull:uses_definition:condition.shaken"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1d4 rounds."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -288,6 +323,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as magic mouth, except rather than creating an illusory mouth on any surface, it affects a skull. In addition, when the skull’s magic is triggered, it releases wild and unnerving cackles before speaking its message. All creatures that can hear the cackles must save or become shaken for 1d4 rounds.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.cackling-skull:59c5329d7af269fc",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "magic mouth",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/magicMouth.html#magic-mouth"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.cackling-skull:f3e0d56f613a2066",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "magic mouth",
+          "source_href": "https://www.d20pfsrd.com/magic-mouth"
         }
       ],
       "note": null
@@ -388,26 +437,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.cackling-skull:references:spell.magic-mouth",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.magic-mouth",
-        "name": "magic mouth"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.cackling-skull:59c5329d7af269fc",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "magic mouth",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/magicMouth.html#magic-mouth"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.cackling-skull:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -455,26 +484,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.cackling-skull:uses_definition:rule.magic-mouth",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.magic-mouth",
-        "name": "magic mouth"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.cackling-skull:f3e0d56f613a2066",
-          "source_field": "spell_raw.links_raw[5]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "magic mouth",
-          "source_href": "https://www.d20pfsrd.com/magic-mouth"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.cackling-skull:uses_definition:rule.spell-resistance",
       "type": "uses_definition",
       "target": {
@@ -495,11 +504,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.cackling-skull:uses_definition:rule.will",
+      "relationship_id": "spell.cackling-skull:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -563,11 +572,19 @@
       "raw_value_sha256": "72bf3288fcdefd204b02004e9f9c9f6691fe0fb531af3012577e782e04dbf153",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.cackling-skull:83e2babf155ebae0",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "32cf09aa3dd3c747b61ae888bb463ff86a91179d7347cfd237407bc40c5a287b",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

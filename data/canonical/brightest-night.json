@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.brightest-night",
   "ruleset": "Pathfinder First Edition",
   "name": "Brightest Night",
@@ -216,7 +216,66 @@
   "description": {
     "raw": "You grant low-light vision to the affected creatures. Creatures that already have low-light vision have their existing lowlight vision enhanced so that they can see four times as far in conditions of dim light. Creatures within 10 feet of someone under the effects of brightest night do not gain concealment from dim light.",
     "search_text": "\"you grant low-light vision to the affected creatures. creatures that already have low-light vision have their existing lowlight vision enhanced so that they can see four times as far in conditions of dim light. creatures within 10 feet of someone under the effects of brightest night do not gain concealment from dim light.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You grant "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "low-light vision",
+              "relationship_id": "spell.brightest-night:uses_definition:rule.low-light-vision"
+            },
+            {
+              "node_type": "text",
+              "value": " to the affected creatures. Creatures that already have "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "low-light vision",
+              "relationship_id": "spell.brightest-night:uses_definition:rule.low-light-vision"
+            },
+            {
+              "node_type": "text",
+              "value": " have their existing lowlight vision enhanced so that they can see four times as far in conditions of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dim light",
+              "relationship_id": "spell.brightest-night:uses_definition:illumination.dim-light"
+            },
+            {
+              "node_type": "text",
+              "value": ". Creatures within 10 feet of someone under the effects of brightest night do not gain "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.brightest-night:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": " from "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dim light",
+              "relationship_id": "spell.brightest-night:uses_definition:illumination.dim-light"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -362,6 +421,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.brightest-night:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.brightest-night:c9b278f2e0423931",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.brightest-night:391712d99208fae2",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.brightest-night:appears_on_spell_list:spell-list.oracle",
@@ -648,6 +734,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.brightest-night:uses_definition:illumination.dim-light",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "illumination.dim-light",
+        "name": "Dim light"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.brightest-night:391712d99208fae2",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "dim light",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Brightest+Night"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.brightest-night:uses_definition:rule.concealment",
       "type": "uses_definition",
       "target": {
@@ -720,33 +826,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.brightest-night:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.brightest-night:c9b278f2e0423931",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.brightest-night:391712d99208fae2",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -797,11 +876,19 @@
       "raw_value_sha256": "f757f457c5ac795dd99c4a10dbee2dbb11ebfa7c66420eb61299ec41277e96f5",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.brightest-night:391712d99208fae2",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d99e761257ba76737abf0442a6d0803195c904034a137caaf0d7141a87bad57a",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

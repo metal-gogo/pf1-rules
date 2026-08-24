@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.air-walk-communal",
   "ruleset": "Pathfinder First Edition",
   "name": "Air Walk, Communal",
@@ -192,7 +192,33 @@
   "description": {
     "raw": "This spell functions like air walk, except divide the duration in 10-minute intervals among the creatures touched.",
     "search_text": "\"this spell functions like air walk, except divide the duration in 10-minute intervals among the creatures touched.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "air walk",
+              "relationship_id": "spell.air-walk-communal:functions_like:spell.air-walk",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except divide the duration in 10-minute intervals among the creatures touched."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -418,6 +444,33 @@
       "note": null
     },
     {
+      "relationship_id": "spell.air-walk-communal:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.air-walk-communal:c47b7e6fd38adef0",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.air-walk-communal:bf2b3ccfc9fa60d9",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.air-walk-communal:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -473,6 +526,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like air walk, except divide the duration in 10-minute intervals among the creatures touched.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.air-walk-communal:bee660d74f2cd2d4",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "air walk",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/airWalk.html#air-walk"
         }
       ],
       "note": null
@@ -566,26 +626,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.air-walk-communal:references:spell.air-walk",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.air-walk",
-        "name": "air walk"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.air-walk-communal:bee660d74f2cd2d4",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "air walk",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/airWalk.html#air-walk"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.air-walk-communal:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -631,33 +671,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.air-walk-communal:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.air-walk-communal:c47b7e6fd38adef0",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.air-walk-communal:bf2b3ccfc9fa60d9",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -708,11 +721,19 @@
       "raw_value_sha256": "02f884c250a035f5bb7b293dab44663bc895e32f0d46f310b5606618c8926cea",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.air-walk-communal:bf2b3ccfc9fa60d9",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "7bc153ec181692b0f03e0405aab1cf9c62741a0f532b6af2d2752f8b9497d915",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

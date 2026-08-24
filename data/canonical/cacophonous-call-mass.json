@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.cacophonous-call-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Cacophonous Call, Mass",
@@ -121,7 +121,33 @@
   "description": {
     "raw": "This spell functions as cacophonous call, except that it affects multiple creatures.",
     "search_text": "\"this spell functions as cacophonous call, except that it affects multiple creatures.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "cacophonous call",
+              "relationship_id": "spell.cacophonous-call-mass:functions_like:spell.cacophonous-call",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that it affects multiple creatures."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -268,6 +294,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as cacophonous call, except that it affects multiple creatures.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.cacophonous-call-mass:447b9c525da928a4",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cacophonous call",
+          "source_href": "https://legacy.aonprd.com/advancedPlayersGuide/spells/cacophonousCall.html#cacophonous-call"
         }
       ],
       "note": null
@@ -395,26 +428,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.cacophonous-call-mass:references:spell.cacophonous-call",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.cacophonous-call",
-        "name": "cacophonous call"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.cacophonous-call-mass:447b9c525da928a4",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cacophonous call",
-          "source_href": "https://legacy.aonprd.com/advancedPlayersGuide/spells/cacophonousCall.html#cacophonous-call"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.cacophonous-call-mass:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -503,11 +516,19 @@
       "raw_value_sha256": "0e9492ebde6d831e355cfc883cf6873b50283a98f6f0ed8c513da1a1ff47357c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.cacophonous-call-mass:e40a26a47c26487a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "69de7191a63858860d548af416908f88619a599a4664985fdd152a14b1db88ad",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

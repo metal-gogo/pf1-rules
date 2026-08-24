@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.bolt-of-glory",
   "ruleset": "Pathfinder First Edition",
   "legacy_3_5_material": true,
@@ -93,7 +93,48 @@
   "description": {
     "raw": "You fire a ray of positive energy. A creature struck takes varying damage, depending on its nature and home plane of existence. Neutral outsiders and creatures native to the Material Plane and Elemental Planes take 1d6 points of damage per 2 levels (maximum 7d6). Evil outsiders, undead, and natives of the Negative Energy Plane take 1d6 points of damage per level (maximum 15d6). All other creatures take no damage.",
     "search_text": "\"you fire a ray of positive energy. a creature struck takes varying damage, depending on its nature and home plane of existence. neutral outsiders and creatures native to the material plane and elemental planes take 1d6 points of damage per 2 levels (maximum 7d6). evil outsiders, undead, and natives of the negative energy plane take 1d6 points of damage per level (maximum 15d6). all other creatures take no damage.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You fire a ray of positive energy. A creature struck takes varying damage, depending on its nature and home plane of existence. Neutral "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "outsiders",
+              "relationship_id": "spell.bolt-of-glory:uses_definition:rule.outsider"
+            },
+            {
+              "node_type": "text",
+              "value": " and creatures native to the Material Plane and Elemental Planes take 1d6 points of damage per 2 levels (maximum 7d6). Evil "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "outsiders",
+              "relationship_id": "spell.bolt-of-glory:uses_definition:rule.outsider"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "undead",
+              "relationship_id": "spell.bolt-of-glory:uses_definition:rule.undead"
+            },
+            {
+              "node_type": "text",
+              "value": ", and natives of the Negative Energy Plane take 1d6 points of damage per level (maximum 15d6). All other creatures take no damage."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -261,12 +302,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.bolt-of-glory:uses_definition:rule.outsiders",
+      "relationship_id": "spell.bolt-of-glory:uses_definition:rule.outsider",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.outsiders",
-        "name": "outsiders"
+        "entity_id": "rule.outsider",
+        "name": "Outsider"
       },
       "status": "accepted",
       "evidence": [
@@ -376,11 +417,19 @@
       "raw_value_sha256": "772fd91d3cb60f076c9f2e35e26556d94241e725585cabcbd1444fd4d2db1d26",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.bolt-of-glory:cea9ee39cb13c1bb",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "74d8ab656d4aa783baf5d7a2c70389642581d1d739c29f9076933357da8f9b9f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "needs_review",
-    "normalizer_version": "0.1.6-missing-printed-levels",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "LEGACY_3_5_MATERIAL",

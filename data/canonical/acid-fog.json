@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.acid-fog",
   "ruleset": "Pathfinder First Edition",
   "name": "Acid Fog",
@@ -61,6 +61,16 @@
       "level": 6,
       "scope": "later_first_party",
       "raw": "12th — acid fog",
+      "access_basis": "printed",
+      "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.earth-elemental-school",
+      "list_kind": "elemental_school",
+      "list_name": "Earth Elemental School",
+      "level": 6,
+      "scope": "core",
+      "raw": "6—acid fog",
       "access_basis": "printed",
       "qualifications": []
     }
@@ -143,7 +153,40 @@
   "description": {
     "raw": "Acid fog creates a billowing mass of misty vapors like the solid fog spell. In addition to slowing down creatures and obscuring sight, this spell's vapors are highly acidic. Each round on your turn, starting when you cast the spell, the fog deals 2d6 points of acid damage to each creature and object within it.",
     "search_text": "\"acid fog creates a billowing mass of misty vapors like the solid fog spell. in addition to slowing down creatures and obscuring sight, this spell's vapors are highly acidic. each round on your turn, starting when you cast the spell, the fog deals 2d6 points of acid damage to each creature and object within it.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Acid fog",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " creates a billowing mass of misty vapors like the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "solid fog",
+              "relationship_id": "spell.acid-fog:references:spell.solid-fog",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell. In addition to slowing down creatures and obscuring sight, this spell's vapors are highly acidic. Each round on your turn, starting when you cast the spell, the fog deals 2d6 points of acid damage to each creature and object within it."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -174,6 +217,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.acid-fog:appears_on_spell_list:spell-list.autumn-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.autumn-patron",
+        "name": "Autumn Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.autumn:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "12th — acid fog",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.acid-fog:appears_on_spell_list:spell-list.earth-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.earth-elemental-school",
+        "name": "Earth Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.earth-elemental:b766c5d6",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6—acid fog",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/earth/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     },
     {
       "relationship_id": "spell.acid-fog:appears_on_spell_list:spell-list.magus",
@@ -416,7 +499,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.solid-fog",
-        "name": "solid fog"
+        "name": "Solid Fog"
       },
       "status": "accepted",
       "evidence": [
@@ -510,26 +593,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.acid-fog:appears_on_spell_list:spell-list.autumn-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.autumn-patron",
-        "name": "Autumn Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.autumn:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "12th — acid fog",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -588,11 +651,27 @@
       "raw_value_sha256": "9c6c13fda7ddf39bf3dc43c4ee996169702a14cbbfb1266bb5f2855138469479",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/6",
+      "observation_id": "d20pfsrd:magic-school.earth-elemental:b766c5d6",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "310187daab0fc337d2a8aaf1ae53488d12bfa09f227a5a5bcebf334653a94d95",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.acid-fog:7d0188be3cfa7b1f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "175818a1c7022c426188b87109b920bc7ef633ebd88ee2402e474804749fd460",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
@@ -613,6 +692,11 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/5",
         "message": "Autumn Patron grants Acid Fog as a level 6 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/6",
+        "message": "Earth Elemental School grants Acid Fog as a level 6 printed spell; this is not general Wizard class access."
       }
     ]
   }

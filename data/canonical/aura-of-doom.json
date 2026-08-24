@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.aura-of-doom",
   "ruleset": "Pathfinder First Edition",
   "name": "Aura of Doom",
@@ -176,7 +176,39 @@
   "description": {
     "raw": "You emanate an almost palpable aura of horror. All non-allies within this spell’s area, or that later enter the area, must make a Will save to avoid becoming shaken. A successful save suppresses the effect. Creatures that leave the area and come back must save again to avoid being affected by the effect.",
     "search_text": "\"you emanate an almost palpable aura of horror. all non-allies within this spell’s area, or that later enter the area, must make a will save to avoid becoming shaken. a successful save suppresses the effect. creatures that leave the area and come back must save again to avoid being affected by the effect.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You emanate an almost palpable aura of horror. All non-allies within this spell’s area, or that later enter the area, must make a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.aura-of-doom:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save to avoid becoming "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "shaken",
+              "relationship_id": "spell.aura-of-doom:uses_definition:condition.shaken"
+            },
+            {
+              "node_type": "text",
+              "value": ". A successful save suppresses the effect. Creatures that leave the area and come back must save again to avoid being affected by the effect."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -227,6 +259,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.aura-of-doom:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.aura-of-doom:b9385a956ae09a51",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.aura-of-doom:appears_on_spell_list:spell-list.oracle",
@@ -532,11 +584,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.aura-of-doom:uses_definition:rule.will",
+      "relationship_id": "spell.aura-of-doom:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -557,26 +609,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.aura-of-doom:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.aura-of-doom:b9385a956ae09a51",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -627,11 +659,19 @@
       "raw_value_sha256": "3bdc90936b075bcd6be835ddcab07af24f2605cce5b57ef4efdb9be2476960db",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.aura-of-doom:b9385a956ae09a51",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "8542a1f73cb1f9800e4ab8274c19cc3850765d1e5fdb8b632543bf570c996eb4",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

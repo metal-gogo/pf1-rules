@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.rapid-repair:430ea0e31c53a5dc",
     "legacy_aon:spell.rapid-repair:9c716d96037cc9a0",
-    "d20pfsrd:spell.rapid-repair:ca7624784d9a5fb6"
+    "d20pfsrd:spell.rapid-repair:ca7624784d9a5fb6",
+    "d20pfsrd:magic-school.metal-elemental:542a211d"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.rapid-repair:430ea0e31c53a5dc",
@@ -122,6 +123,20 @@
         "aon:spell.rapid-repair:430ea0e31c53a5dc"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/8",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.metal-elemental:542a211d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.metal-elemental:542a211d"
+      ],
+      "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -466,6 +481,20 @@
         "aon:spell.rapid-repair:430ea0e31c53a5dc"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.rapid-repair:appears_on_spell_list:spell-list.metal-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.metal-elemental:542a211d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.metal-elemental:542a211d"
+      ],
+      "rationale": "d20PFSRD prints the spell on the owning wizard elemental arcane school page; it is modeled as elemental_school access rather than general Wizard access."
     }
   ],
   "unresolved_questions": [

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.call-the-void",
   "ruleset": "Pathfinder First Edition",
   "name": "Call the Void",
@@ -43,6 +43,16 @@
       "level": 3,
       "scope": "later_first_party",
       "raw": "wizard 3"
+    },
+    {
+      "spell_list_id": "spell-list.void-elemental-school",
+      "list_kind": "elemental_school",
+      "list_name": "Void Elemental School",
+      "level": 3,
+      "scope": "later_first_party",
+      "raw": "3—tapestry’s embrace*",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -129,7 +139,57 @@
   "description": {
     "raw": "This spell surrounds you with an aura of nothingness that channels the mysterious energies of the Dark Tapestry. Creatures adjacent to you when this spell is cast and at the start of your turn take 2d6 points of damage. In addition, creatures affected by your aura are fatigued, cannot breathe, and cannot speak or cast spells with somatic components. Creatures adjacent to you are allowed a Reflex save to halve the damage and negate the fatigue effect, but cannot breathe or speak regardless of whether their save is successful as long as they are adjacent to you.",
     "search_text": "\"this spell surrounds you with an aura of nothingness that channels the mysterious energies of the dark tapestry. creatures adjacent to you when this spell is cast and at the start of your turn take 2d6 points of damage. in addition, creatures affected by your aura are fatigued, cannot breathe, and cannot speak or cast spells with somatic components. creatures adjacent to you are allowed a reflex save to halve the damage and negate the fatigue effect, but cannot breathe or speak regardless of whether their save is successful as long as they are adjacent to you.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell surrounds you with an aura of nothingness that channels the mysterious energies of the Dark Tapestry. Creatures adjacent to you when this spell is cast and at the start of your turn take 2d6 points of damage. In addition, creatures affected by your aura are "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fatigued",
+              "relationship_id": "spell.call-the-void:uses_definition:condition.fatigued"
+            },
+            {
+              "node_type": "text",
+              "value": ", cannot breathe, and cannot speak or cast spells with somatic "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "components",
+              "relationship_id": "spell.call-the-void:uses_definition:rule.components"
+            },
+            {
+              "node_type": "text",
+              "value": ". Creatures adjacent to you are allowed a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.call-the-void:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save to halve the damage and negate the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fatigue",
+              "relationship_id": "spell.call-the-void:uses_definition:condition.fatigued"
+            },
+            {
+              "node_type": "text",
+              "value": " effect, but cannot breathe or speak regardless of whether their save is successful as long as they are adjacent to you."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -200,6 +260,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.call-the-void:appears_on_spell_list:spell-list.void-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.void-elemental-school",
+        "name": "Void Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.void-elemental:443edb4d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "3—tapestry’s embrace*",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/void-elemental-school/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     },
     {
       "relationship_id": "spell.call-the-void:appears_on_spell_list:spell-list.witch",
@@ -337,12 +417,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.call-the-void:uses_definition:condition.fatigue",
+      "relationship_id": "spell.call-the-void:uses_definition:condition.fatigued",
       "type": "uses_definition",
       "target": {
         "entity_type": "condition",
-        "entity_id": "condition.fatigue",
-        "name": "fatigue"
+        "entity_id": "condition.fatigued",
+        "name": "Fatigued"
       },
       "status": "accepted",
       "evidence": [
@@ -352,20 +432,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "fatigue",
           "source_href": "https://www.d20pfsrd.com/gamemastering/conditions#TOC-Fatigued"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.call-the-void:uses_definition:condition.fatigued",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "condition",
-        "entity_id": "condition.fatigued",
-        "name": "fatigued"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.call-the-void:c486d38a1cae0e37",
           "source_field": "spell_raw.links_raw[6]",
@@ -397,11 +464,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.call-the-void:uses_definition:rule.reflex",
+      "relationship_id": "spell.call-the-void:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -512,11 +579,27 @@
       "raw_value_sha256": "47e922c8976ed6d3341fb4fac81de4839babc27db290f4d1b7dec174de237108",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "d20pfsrd:magic-school.void-elemental:443edb4d",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "4a7039f89ee3181d76f543826ef9089c4df75e13d9562f93da7396fc965db0bd",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.call-the-void:6d778346636f9a88",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "577f539d7f824a5cb1469777427b9bc9cd023b243e94a3a765c41ac9d58d75cb",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
@@ -532,6 +615,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Void Elemental School grants Call the Void as a level 3 printed spell; this is not general Wizard class access."
       }
     ]
   }

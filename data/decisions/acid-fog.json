@@ -8,7 +8,8 @@
     "aon:spell.acid-fog:7d0188be3cfa7b1f",
     "legacy_aon:spell.acid-fog:96bd92de667e2503",
     "d20pfsrd:spell.acid-fog:a836c9c5d84584e2",
-    "aon:patron.autumn:15d234b1"
+    "aon:patron.autumn:15d234b1",
+    "d20pfsrd:magic-school.earth-elemental:b766c5d6"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.acid-fog:7d0188be3cfa7b1f",
@@ -123,6 +124,37 @@
         "aon:patron.autumn:15d234b1"
       ],
       "rationale": "AoN clearly transcribes the owning witch patron's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.acid-fog:7d0188be3cfa7b1f",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.acid-fog:7d0188be3cfa7b1f",
+        "legacy_aon:spell.acid-fog:96bd92de667e2503",
+        "d20pfsrd:spell.acid-fog:a836c9c5d84584e2",
+        "aon:patron.autumn:15d234b1"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
+    },
+    {
+      "canonical_path": "/levels/6",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.earth-elemental:b766c5d6",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.earth-elemental:b766c5d6"
+      ],
+      "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -141,6 +173,34 @@
         "d20pfsrd:spell.acid-fog:a836c9c5d84584e2"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.acid-fog:appears_on_spell_list:spell-list.autumn-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.autumn:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.autumn:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.acid-fog:appears_on_spell_list:spell-list.earth-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.earth-elemental:b766c5d6",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.earth-elemental:b766c5d6"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     },
     {
       "relationship_id": "spell.acid-fog:appears_on_spell_list:spell-list.magus",
@@ -397,20 +457,6 @@
         "d20pfsrd:spell.acid-fog:a836c9c5d84584e2"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.acid-fog:appears_on_spell_list:spell-list.autumn-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.autumn:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.autumn:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
     }
   ],
   "unresolved_questions": [

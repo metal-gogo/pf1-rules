@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.charons-dispensation",
   "ruleset": "Pathfinder First Edition",
   "name": "Charon's Dispensation",
@@ -234,7 +234,63 @@
   "description": {
     "raw": "The target of this spell gains immunity to the harmful effects of touching or drinking from the River Styx and a +4 profane bonus on saves against effects that alter or suppress memory (such as modify memory or mindwipe). This does not grant the target the ability to breathe water, nor does it grant any protection against creatures or mundane hazards such as rapids. The spell has no power to restore memory to a creature already suffering from an existing fugue or amnesia state.",
     "search_text": "\"the target of this spell gains immunity to the harmful effects of touching or drinking from the river styx and a +4 profane bonus on saves against effects that alter or suppress memory (such as modify memory or mindwipe). this does not grant the target the ability to breathe water, nor does it grant any protection against creatures or mundane hazards such as rapids. the spell has no power to restore memory to a creature already suffering from an existing fugue or amnesia state.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target of this spell gains "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "immunity",
+              "relationship_id": "spell.charons-dispensation:uses_definition:rule.immunity"
+            },
+            {
+              "node_type": "text",
+              "value": " to the harmful effects of touching or drinking from the River Styx and a +4 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "profane bonus",
+              "relationship_id": "spell.charons-dispensation:uses_definition:rule.profane-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on saves against effects that alter or suppress memory (such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "modify memory",
+              "relationship_id": "spell.charons-dispensation:references:spell.modify-memory",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "mindwipe",
+              "relationship_id": "spell.charons-dispensation:references:spell.mindwipe",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "). This does not grant the target the ability to breathe water, nor does it grant any protection against creatures or mundane hazards such as rapids. The spell has no power to restore memory to a creature already suffering from an existing fugue or amnesia state. "
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -373,6 +429,47 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.charons-dispensation:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.charons-dispensation:40aec54982b11bd6",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.charons-dispensation:f95f2a1859e4dc64",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.charons-dispensation:40aec54982b11bd6",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.charons-dispensation:f95f2a1859e4dc64",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.charons-dispensation:appears_on_spell_list:spell-list.oracle",
@@ -671,12 +768,32 @@
       "note": null
     },
     {
+      "relationship_id": "spell.charons-dispensation:references:spell.mindwipe",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.mindwipe",
+        "name": "Mindwipe"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.charons-dispensation:f95f2a1859e4dc64",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "mindwipe",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Charon%27s+Dispensation"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.charons-dispensation:references:spell.modify-memory",
       "type": "references",
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.modify-memory",
-        "name": "modify memory"
+        "name": "Modify Memory"
       },
       "status": "accepted",
       "evidence": [
@@ -778,11 +895,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.charons-dispensation:uses_definition:rule.will",
+      "relationship_id": "spell.charons-dispensation:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -796,47 +913,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.charons-dispensation:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.charons-dispensation:40aec54982b11bd6",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.charons-dispensation:f95f2a1859e4dc64",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 4",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.charons-dispensation:40aec54982b11bd6",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.charons-dispensation:f95f2a1859e4dc64",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -887,11 +963,19 @@
       "raw_value_sha256": "32cda8b218b1563335a7fe60f6b0a9ffd92c26af033960ede8fdeecec14cdfcd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.charons-dispensation:f95f2a1859e4dc64",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "1bc051e0c4ac69a2c8e6eeb94b87ab385e788bf4435d63cbc205edc80ad1e63a",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

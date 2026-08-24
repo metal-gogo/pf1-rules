@@ -43,6 +43,16 @@
       "level": 5,
       "scope": "later_first_party",
       "raw": "wizard 5"
+    },
+    {
+      "spell_list_id": "spell-list.metal-elemental-school",
+      "list_kind": "elemental_school",
+      "list_name": "Metal Elemental School",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "5—unbreakable construct",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -509,6 +519,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.unbreakable-construct:appears_on_spell_list:spell-list.metal-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.metal-elemental-school",
+        "name": "Metal Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.metal-elemental:542a211d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "5—unbreakable construct",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/metal/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -559,6 +589,14 @@
       "raw_value_sha256": "7a317e761b4ec80402347f7f2f4fa58822b4f58d785cb653b6bb263d4b11f3ae",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/4",
+      "observation_id": "d20pfsrd:magic-school.metal-elemental:542a211d",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "e872ef8c28586c98c4e8ece9eefe0d9f209b869fd93077394092c5f036931819",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -579,6 +617,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "legacy_aon differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/4",
+        "message": "Metal Elemental School grants Unbreakable Construct as a level 5 printed spell; this is not general Wizard class access."
       }
     ]
   }

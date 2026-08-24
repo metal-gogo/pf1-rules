@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.burst-of-force",
   "ruleset": "Pathfinder First Edition",
   "name": "Burst of Force",
@@ -129,7 +129,66 @@
   "description": {
     "raw": "With a burst of telekinetic force, you deal 1d6 points of force damage per caster level (maximum 15d6 points of damage) to all other creatures in the affected area. A successful Fortitude save reduces the damage taken by half. A creature that fails its Fortitude save must also succeed at a Reflex save or be knocked prone.",
     "search_text": "\"with a burst of telekinetic force, you deal 1d6 points of force damage per caster level (maximum 15d6 points of damage) to all other creatures in the affected area. a successful fortitude save reduces the damage taken by half. a creature that fails its fortitude save must also succeed at a reflex save or be knocked prone.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "With a burst of telekinetic force, you deal 1d6 points of force damage per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.burst-of-force:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum 15d6 points of damage) to all other creatures in the affected area. A successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.burst-of-force:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save reduces the damage taken by half. A creature that fails its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.burst-of-force:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save must also succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.burst-of-force:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save or be knocked "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "prone",
+              "relationship_id": "spell.burst-of-force:uses_definition:condition.prone"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -404,11 +463,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.burst-of-force:uses_definition:rule.fortitude",
+      "relationship_id": "spell.burst-of-force:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -458,11 +517,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.burst-of-force:uses_definition:rule.reflex",
+      "relationship_id": "spell.burst-of-force:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -554,11 +613,19 @@
       "raw_value_sha256": "8d0c98eac6462f1494539528e03e3184e4a1e365c7031482662d553c4377b58b",
       "decision": "manually_resolved",
       "note": "Reviewed project decision: the printed Range field is blank and the printed Area is a 20-ft.-radius burst centered on you. Use personal as the canonical range while preserving the missing source value."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.burst-of-force:f484cc23b5cf87cc",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "41813707befd724a57844bd0c1a0b4b22513b54e98d5534ac0eec2045d8020b3",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "REVIEWED_RANGE_OVERRIDE",

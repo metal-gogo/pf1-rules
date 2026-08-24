@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.badgers-ferocity",
   "ruleset": "Pathfinder First Edition",
   "name": "Badger's Ferocity",
@@ -208,7 +208,42 @@
   "description": {
     "raw": "This functions like keen edge, except it affects multiple weapons and requires your concentration. You select the weapons to be affected, and can only affect one weapon per creature. If a creature's weapon exceeds the spell's range, the spell ends for that weapon.",
     "search_text": "\"this functions like keen edge, except it affects multiple weapons and requires your concentration. you select the weapons to be affected, and can only affect one weapon per creature. if a creature's weapon exceeds the spell's range, the spell ends for that weapon.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "keen edge",
+              "relationship_id": "spell.badgers-ferocity:functions_like:spell.keen-edge",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it affects multiple weapons and requires your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concentration",
+              "relationship_id": "spell.badgers-ferocity:uses_definition:rule.concentration"
+            },
+            {
+              "node_type": "text",
+              "value": ". You select the weapons to be affected, and can only affect one weapon per creature. If a creature's weapon exceeds the spell's range, the spell ends for that weapon."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -218,7 +253,121 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.keen-edge",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.badgers-ferocity:e2b406d93a311a21",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This functions like keen edge, except it affects multiple weapons and requires your concentration. You select the weapons to be affected, and can only affect one weapon per creature. If a creature's weapon exceeds the spell's range, the spell ends for that weapon."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "one weapon/3 levels",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one weapon/3 levels\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "single",
+            "subject_kind": "other",
+            "selection": "selected",
+            "count": {
+              "kind": "fixed",
+              "fixed": 1,
+              "formula": null,
+              "raw": "one weapon/3 levels"
+            },
+            "separation": null,
+            "raw": "one weapon/3 levels"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one weapon/3 levels\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "concentration",
+            "formula": null,
+            "dismissible": null,
+            "concentration": true,
+            "raw": "concentration"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "concentration",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/saving_throw",
+          "value": {
+            "types": [
+              "will"
+            ],
+            "outcome": "Will negates (harmless)",
+            "harmless": true,
+            "object": null,
+            "conditional": null,
+            "raw": "Will negates (harmless)"
+          },
+          "source_field": "spell_raw.saving_throw_raw",
+          "raw": "Will negates (harmless)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/spell_resistance",
+          "value": {
+            "applies": true,
+            "harmless": true,
+            "object": null,
+            "conditional": null,
+            "raw": "yes (harmless)"
+          },
+          "source_field": "spell_raw.spell_resistance_raw",
+          "raw": "yes (harmless)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This functions like keen edge, except it affects multiple weapons and requires your concentration. You select the weapons to be affected, and can only affect one weapon per creature. If a creature's weapon exceeds the spell's range, the spell ends for that weapon.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This functions like keen edge, except it affects multiple weapons and requires your concentration. You select the weapons to be affected, and can only affect one weapon per creature. If a creature's weapon exceeds the spell's range, the spell ends for that weapon.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.badgers-ferocity:appears_on_spell_list:spell-list.arcanist",
@@ -346,6 +495,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.badgers-ferocity:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.badgers-ferocity:e2b406d93a311a21",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.badgers-ferocity:appears_on_spell_list:spell-list.oracle",
@@ -495,6 +664,33 @@
       "note": null
     },
     {
+      "relationship_id": "spell.badgers-ferocity:functions_like:spell.keen-edge",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.keen-edge",
+        "name": "Keen Edge"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.badgers-ferocity:7b2459b8620544b6",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "keen edge",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/keenEdge.html#keen-edge"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.badgers-ferocity:26aacbdfb58240b0",
+          "source_field": "spell_raw.links_raw[8]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "keen edge",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/b/k/keen-edge"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.badgers-ferocity:has_school:magic-school.transmutation",
       "type": "has_school",
       "target": {
@@ -558,33 +754,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "Ultimate Magic pg. 207",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.badgers-ferocity:references:spell.keen-edge",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.keen-edge",
-        "name": "keen edge"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.badgers-ferocity:7b2459b8620544b6",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "keen edge",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/keenEdge.html#keen-edge"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.badgers-ferocity:26aacbdfb58240b0",
-          "source_field": "spell_raw.links_raw[8]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "keen edge",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/b/k/keen-edge"
         }
       ],
       "note": null
@@ -664,11 +833,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.badgers-ferocity:uses_definition:rule.will",
+      "relationship_id": "spell.badgers-ferocity:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -682,26 +851,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.badgers-ferocity:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.badgers-ferocity:e2b406d93a311a21",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -752,11 +901,19 @@
       "raw_value_sha256": "3bdc90936b075bcd6be835ddcab07af24f2605cce5b57ef4efdb9be2476960db",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.badgers-ferocity:e2b406d93a311a21",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "6fc3a70521be4f34012f54e58f30aebaafa44c0b131dc57220aea1b0140621db",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,0 +1,20 @@
+{
+  "$schema": "../../schemas/canonical-decision.schema.json",
+  "schema_version": "0.1.0",
+  "decision_id": "canonical-decision:mythic-spell-variant.darkness:v0.1",
+  "entity_id": "mythic-spell-variant.darkness",
+  "canonical_record_path": "../variants/darkness-mythic.json",
+  "observation_ids": ["aon:spell.darkness:cdf63e9499c90e1d", "legacy_aon:spell.darkness:0e847b55d5422a79", "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a"],
+  "policy_id": "provenance-first-v0",
+  "baseline_observation_id": "aon:spell.darkness:cdf63e9499c90e1d",
+  "status": "accepted",
+  "field_decisions": [
+    {"canonical_path": "/rules_text/raw", "decision": "select_source", "selected_evidence": [{"observation_id": "aon:spell.darkness:cdf63e9499c90e1d", "source_field": "spell_raw.description_raw"}], "considered_observation_ids": ["aon:spell.darkness:cdf63e9499c90e1d", "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a"], "rationale": "AoN and d20PFSRD display the same named mythic subsection after the base spell description."},
+    {"canonical_path": "/publication", "decision": "normalize", "selected_evidence": [{"observation_id": "aon:spell.darkness:cdf63e9499c90e1d", "source_field": "spell_raw.description_raw"}], "considered_observation_ids": ["aon:spell.darkness:cdf63e9499c90e1d", "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a"], "rationale": "AoN explicitly identifies Mythic Adventures page 90 as the source of the mythic subsection."}
+  ],
+  "relationship_decisions": [
+    {"relationship_id": "mythic-spell-variant.darkness:mythic_version_of:spell.darkness", "decision": "accept", "evidence": [{"observation_id": "aon:spell.darkness:cdf63e9499c90e1d", "source_field": "spell_raw.description_raw"}], "considered_observation_ids": ["aon:spell.darkness:cdf63e9499c90e1d", "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a"], "rationale": "The sources explicitly label this subsection Mythic Darkness."},
+    {"relationship_id": "mythic-spell-variant.darkness:published_in:publication.mythic-adventures", "decision": "accept", "evidence": [{"observation_id": "aon:spell.darkness:cdf63e9499c90e1d", "source_field": "spell_raw.description_raw"}], "considered_observation_ids": ["aon:spell.darkness:cdf63e9499c90e1d", "d20pfsrd:spell.darkness:15a9e6e92a1c8a9a"], "rationale": "AoN attributes the mythic subsection to Mythic Adventures page 90."}
+  ],
+  "unresolved_questions": []
+}

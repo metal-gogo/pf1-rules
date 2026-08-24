@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.calm-air",
   "ruleset": "Pathfinder First Edition",
   "name": "Calm Air",
@@ -155,7 +155,57 @@
   "description": {
     "raw": "This spell calms the air and disperses fog, dust, and other particles. The wind force in the area is reduced in strength by one step per 4 caster levels (to a minimum wind force of light) and clouds are dispersed, although parts of nonmagical clouds that extend beyond the area are not affected. If a magical cloud or wind’s point of origin is inside the area of a calm air spell, the whole effect is suppressed; otherwise, only the part inside the area is suppressed. Suppression still counts against the duration of a wind or cloud effect. Magical wind and cloud effects are suppressed only if you succeed at a caster level check (DC 11 + effect’s caster level). You can move the calm air effect by concentrating as a standard action.",
     "search_text": "\"this spell calms the air and disperses fog, dust, and other particles. the wind force in the area is reduced in strength by one step per 4 caster levels (to a minimum wind force of light) and clouds are dispersed, although parts of nonmagical clouds that extend beyond the area are not affected. if a magical cloud or wind’s point of origin is inside the area of a calm air spell, the whole effect is suppressed; otherwise, only the part inside the area is suppressed. suppression still counts against the duration of a wind or cloud effect. magical wind and cloud effects are suppressed only if you succeed at a caster level check (dc 11 + effect’s caster level). you can move the calm air effect by concentrating as a standard action.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell calms the air and disperses fog, dust, and other particles. The "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "wind force",
+              "relationship_id": "spell.calm-air:uses_definition:rule.wind-effects"
+            },
+            {
+              "node_type": "text",
+              "value": " in the area is reduced in strength by one step per 4 caster levels (to a minimum "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "wind force",
+              "relationship_id": "spell.calm-air:uses_definition:rule.wind-effects"
+            },
+            {
+              "node_type": "text",
+              "value": " of light) and clouds are dispersed, although parts of nonmagical clouds that extend beyond the area are not affected. If a magical cloud or wind’s point of origin is inside the area of a calm air spell, the whole effect is suppressed; otherwise, only the part inside the area is suppressed. Suppression still counts against the duration of a wind or cloud effect. Magical wind and cloud effects are suppressed only if you succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.calm-air:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " check (DC 11 + effect’s "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.calm-air:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": "). You can move the calm air effect by concentrating as a standard action."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -516,6 +566,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.calm-air:uses_definition:rule.wind-effects",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.wind-effects",
+        "name": "Wind effects"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.calm-air:4f4272b4344e1e0c",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "wind force",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Calm+Air"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     }
   ],
   "provenance": [
@@ -566,11 +636,19 @@
       "raw_value_sha256": "04f43744323f24803e0bff281838d958f0b558de1984a118897badaafb4b841f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.calm-air:4f4272b4344e1e0c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "29375f476b9f200480a08758240e7e6b5b015058d918ee6727d72f41531afe1d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

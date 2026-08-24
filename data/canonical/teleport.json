@@ -165,6 +165,16 @@
         "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.void-elemental-school",
+      "list_kind": "elemental_school",
+      "list_name": "Void Elemental School",
+      "level": 5,
+      "scope": "later_first_party",
+      "raw": "5—teleport",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -990,6 +1000,26 @@
         }
       ],
       "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.teleport:appears_on_spell_list:spell-list.void-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.void-elemental-school",
+        "name": "Void Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.void-elemental:443edb4d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "5—teleport",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/void-elemental-school/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -1072,6 +1102,14 @@
       "raw_value_sha256": "4528166e53028ab847352abacbb708c6082baa26b48fd8ec91fe097649178e4d",
       "decision": "normalized",
       "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/levels/15",
+      "observation_id": "d20pfsrd:magic-school.void-elemental:443edb4d",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d70729ab4b0cb4923c1c57396f18cb13256aaac9606bba471c470bd9bd5ef4a3",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1117,6 +1155,11 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/14",
         "message": "Portal Subdomain grants Teleport as a level 5 derived spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/15",
+        "message": "Void Elemental School grants Teleport as a level 5 printed spell; this is not general Wizard class access."
       }
     ]
   }

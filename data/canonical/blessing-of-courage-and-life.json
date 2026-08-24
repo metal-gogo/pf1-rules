@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.blessing-of-courage-and-life",
   "ruleset": "Pathfinder First Edition",
   "name": "Blessing of Courage and Life",
@@ -170,7 +170,30 @@
   "description": {
     "raw": "With this prayer you provide long-lasting succor to a wounded creature. For as long as the effect lasts, the target receives a +2 morale bonus on saving throws against fear and death effects. At any time while the spell is in effect, the target can choose to end the spell as a swift action for a burst of healing energy. The target loses the saving throw bonus, but is healed of 1d8 points of damage +1 point per caster level (maximum +10).",
     "search_text": "\"with this prayer you provide long-lasting succor to a wounded creature. for as long as the effect lasts, the target receives a +2 morale bonus on saving throws against fear and death effects. at any time while the spell is in effect, the target can choose to end the spell as a swift action for a burst of healing energy. the target loses the saving throw bonus, but is healed of 1d8 points of damage +1 point per caster level (maximum +10).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "With this prayer you provide long-lasting succor to a wounded creature. For as long as the effect lasts, the target receives a +2 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "morale bonus",
+              "relationship_id": "spell.blessing-of-courage-and-life:uses_definition:rule.morale-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on saving throws against fear and death effects. At any time while the spell is in effect, the target can choose to end the spell as a swift action for a burst of healing energy. The target loses the saving throw bonus, but is healed of 1d8 points of damage +1 point per caster level (maximum +10)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -221,6 +244,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.blessing-of-courage-and-life:appears_on_spell_list:spell-list.death-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.death-patron",
+        "name": "Death Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.death:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th — blessing of courage and life",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.blessing-of-courage-and-life:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.blessing-of-courage-and-life:d1b20fe7d96a9b5e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.blessing-of-courage-and-life:appears_on_spell_list:spell-list.oracle",
@@ -492,11 +555,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.blessing-of-courage-and-life:uses_definition:rule.will",
+      "relationship_id": "spell.blessing-of-courage-and-life:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -510,46 +573,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.blessing-of-courage-and-life:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.blessing-of-courage-and-life:d1b20fe7d96a9b5e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.blessing-of-courage-and-life:appears_on_spell_list:spell-list.death-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.death-patron",
-        "name": "Death Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.death:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "4th — blessing of courage and life",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -608,11 +631,19 @@
       "raw_value_sha256": "af918ccf388957d736b0e832c9f5c3f3df66c37fcbe43cd07350cc59ae5c7988",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.blessing-of-courage-and-life:d1b20fe7d96a9b5e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "82267610004b614306aeafd2a8bf22f6317672bad4892423ebf2460f663eaae2",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

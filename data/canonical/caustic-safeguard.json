@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.caustic-safeguard",
   "ruleset": "Pathfinder First Edition",
   "name": "Caustic Safeguard",
@@ -161,7 +161,30 @@
   "description": {
     "raw": "You imbue a single object with an acidic protective ward. Any creature other than you that touches the object takes 1d6 points of acid damage per 2 caster levels (maximum 10d6; Reflex half). Each time the spell discharges, the number of damage dice it deals is halved (rounded down); when the spell’s damage dice reach 0, the spell ends. While casting this spell, you can touch up to one creature per 4 caster levels, which allows them to handle the warded object without triggering this spell.",
     "search_text": "\"you imbue a single object with an acidic protective ward. any creature other than you that touches the object takes 1d6 points of acid damage per 2 caster levels (maximum 10d6; reflex half). each time the spell discharges, the number of damage dice it deals is halved (rounded down); when the spell’s damage dice reach 0, the spell ends. while casting this spell, you can touch up to one creature per 4 caster levels, which allows them to handle the warded object without triggering this spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You imbue a single object with an acidic protective ward. Any creature other than you that touches the object takes 1d6 points of acid damage per 2 caster levels (maximum 10d6; "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.caustic-safeguard:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " half). Each time the spell discharges, the number of damage dice it deals is halved (rounded down); when the spell’s damage dice reach 0, the spell ends. While casting this spell, you can touch up to one creature per 4 caster levels, which allows them to handle the warded object without triggering this spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -464,11 +487,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.caustic-safeguard:uses_definition:rule.reflex",
+      "relationship_id": "spell.caustic-safeguard:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -511,14 +534,14 @@
       "note": null
     },
     {
-      "relationship_id": "spell.caustic-safeguard:uses_definition:rule.touch",
+      "relationship_id": "spell.caustic-safeguard:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.caustic-safeguard:d80b205ff5e09bad",
@@ -528,7 +551,7 @@
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Touch-Attacks"
         }
       ],
-      "note": null
+      "note": "Touching the warded object is a trigger, not a touch attack."
     },
     {
       "relationship_id": "spell.caustic-safeguard:uses_definition:rule.vial",
@@ -599,11 +622,19 @@
       "raw_value_sha256": "b17fb202197e3557bcba4f81ddb34f63b2db870500d9f443b3c4d93b83908e27",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.caustic-safeguard:49f4a65d484795de",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d0b7fd9298736dad373d54f0d4ad8752da5852070403aed67ae2f664518e3933",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

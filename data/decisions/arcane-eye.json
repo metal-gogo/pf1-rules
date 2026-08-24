@@ -123,6 +123,23 @@
         "aon:subdomain.arcane:44b410b9"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.arcane-eye:222bf5a85c52445e",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.arcane-eye:222bf5a85c52445e",
+        "legacy_aon:spell.arcane-eye:d033033b11adf8aa",
+        "d20pfsrd:spell.arcane-eye:0e1951b0a850efd5",
+        "aon:subdomain.arcane:44b410b9"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -145,6 +162,20 @@
         "d20pfsrd:spell.arcane-eye:0e1951b0a850efd5"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.arcane-eye:appears_on_spell_list:spell-list.arcane-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.arcane:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.arcane:44b410b9"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.arcane-eye:appears_on_spell_list:spell-list.arcanist",
@@ -376,7 +407,7 @@
     },
     {
       "relationship_id": "spell.arcane-eye:uses_definition:rule.arcane",
-      "decision": "accept",
+      "decision": "reject",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.arcane-eye:0e1951b0a850efd5",
@@ -388,7 +419,7 @@
         "legacy_aon:spell.arcane-eye:d033033b11adf8aa",
         "d20pfsrd:spell.arcane-eye:0e1951b0a850efd5"
       ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+      "rationale": "The source href points to the Arcane subdomain, but “arcane” appears only as part of this spell’s name."
     },
     {
       "relationship_id": "spell.arcane-eye:uses_definition:rule.spell-resistance",
@@ -409,20 +440,6 @@
         "d20pfsrd:spell.arcane-eye:0e1951b0a850efd5"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.arcane-eye:appears_on_spell_list:spell-list.arcane-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.arcane:44b410b9",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.arcane:44b410b9"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

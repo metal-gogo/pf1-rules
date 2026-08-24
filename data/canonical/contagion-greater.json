@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.contagion-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Contagion, Greater",
@@ -195,7 +195,51 @@
   "description": {
     "raw": "This spell functions as contagion, except the victim cannot overcome the disease without magic—making the required number of saves does not cure it. The DC to remove the disease with magic is equal to the save DC + 5.",
     "search_text": "\"this spell functions as contagion, except the victim cannot overcome the disease without magic—making the required number of saves does not cure it. the dc to remove the disease with magic is equal to the save dc + 5.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "contagion",
+              "relationship_id": "spell.contagion-greater:functions_like:spell.contagion",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except the victim cannot overcome the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "disease",
+              "relationship_id": "spell.contagion-greater:uses_definition:rule.disease"
+            },
+            {
+              "node_type": "text",
+              "value": " without magic—making the required number of saves does not cure it. The DC to remove the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "disease",
+              "relationship_id": "spell.contagion-greater:uses_definition:rule.disease"
+            },
+            {
+              "node_type": "text",
+              "value": " with magic is equal to the save DC + 5."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -398,6 +442,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.contagion-greater:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.contagion-greater:3c5ddedd77afd632",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.contagion-greater:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -540,6 +604,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as contagion, except the victim cannot overcome the disease without magic—making the required number of saves does not cure it. The DC to remove the disease with magic is equal to the save DC + 5.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.contagion-greater:c295188557f5a6bb",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "contagion",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/contagion.html#contagion"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.contagion-greater:2696cba01e460550",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "contagion",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/contagion"
         }
       ],
       "note": null
@@ -694,33 +772,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.contagion-greater:references:spell.contagion",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.contagion",
-        "name": "contagion"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.contagion-greater:c295188557f5a6bb",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "contagion",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/contagion.html#contagion"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.contagion-greater:2696cba01e460550",
-          "source_field": "spell_raw.links_raw[7]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "contagion",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/contagion"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.contagion-greater:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -748,11 +799,31 @@
       "note": null
     },
     {
-      "relationship_id": "spell.contagion-greater:uses_definition:rule.fortitude",
+      "relationship_id": "spell.contagion-greater:uses_definition:rule.disease",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.disease",
+        "name": "Disease"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.contagion-greater:3c5ddedd77afd632",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "disease",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Contagion%2C+Greater"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.contagion-greater:uses_definition:rule.fortitude-saving-throw",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -826,26 +897,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.contagion-greater:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.contagion-greater:3c5ddedd77afd632",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -896,11 +947,19 @@
       "raw_value_sha256": "04441800fe800746b14164bb763ec4791953615f9acdce368d3e25d31ee1f685",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.contagion-greater:3c5ddedd77afd632",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "05dd83d6946a1a6882cb140864b15add592dc51eda6465e30ae678835400a5c9",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

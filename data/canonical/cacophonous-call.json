@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.cacophonous-call",
   "ruleset": "Pathfinder First Edition",
   "name": "Cacophonous Call",
@@ -121,7 +121,39 @@
   "description": {
     "raw": "You fill your target’s mind with a blaring cacophony of discordant sounds, making it hard for the target to act and concentrate. The creature gains the nauseated condition for the duration of the spell if it fails its Will save.",
     "search_text": "\"you fill your target’s mind with a blaring cacophony of discordant sounds, making it hard for the target to act and concentrate. the creature gains the nauseated condition for the duration of the spell if it fails its will save.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You fill your target’s mind with a blaring cacophony of discordant sounds, making it hard for the target to act and concentrate. The creature gains the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "nauseated",
+              "relationship_id": "spell.cacophonous-call:uses_definition:condition.nauseated"
+            },
+            {
+              "node_type": "text",
+              "value": " condition for the duration of the spell if it fails its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.cacophonous-call:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -391,11 +423,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.cacophonous-call:uses_definition:rule.will",
+      "relationship_id": "spell.cacophonous-call:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -466,11 +498,19 @@
       "raw_value_sha256": "0e9492ebde6d831e355cfc883cf6873b50283a98f6f0ed8c513da1a1ff47357c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.cacophonous-call:a74b9869ab6e4572",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "31e9a96e520cd400501c74a26d6bda98094e32ba126429105f849d1f9849b827",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

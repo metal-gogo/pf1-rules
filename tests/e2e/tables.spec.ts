@@ -35,7 +35,8 @@ test("spell-list directory exposes every source kind without page overflow", asy
     "Classes",
     "Domains",
     "Subdomains",
-    "Bloodlines",
+    "Bloodrager bloodlines",
+    "Sorcerer bloodlines",
     "Mysteries",
     "Patrons",
     "Spirits",
@@ -98,13 +99,18 @@ test("spell families render once without implying recursive inheritance", async 
   await expectNoPageOverflow(page);
 });
 
-test("Darkness excludes mythic text and links only explicit spell references", async ({ page }) => {
+test("Darkness separates mythic rules and links contextual definitions", async ({ page }) => {
   await page.goto("/spells/spell.darkness");
 
   const description = page.locator(".rich-description").first();
   await expect(description).not.toContainText("Mythic Darkness");
-  await expect(description.locator('a[href="/entities/descriptor.darkness"]')).toHaveCount(0);
-  await expect(description.locator('a[href="/spells/spell.darkness"]')).toHaveCount(2);
+  await expect(description.locator('a[href="/spells/spell.darkness"]')).toHaveCount(0);
+  await expect(description.locator('a[href="/rules/descriptors#darkness"]')).toHaveCount(1);
+  await expect(description.locator('a[href^="/rules/illumination#"]')).toHaveCount(6);
+  await expect(description.locator('a[href="/entities/item.torch"]')).toHaveCount(1);
+  await expect(description.locator('a[href="/entities/item.lantern"]')).toHaveCount(1);
+  await expect(page.getByRole("heading", { level: 2, name: "Mythic Darkness" })).toBeVisible();
+  await expect(page.locator('[data-embedded-spell="spell.deeper-darkness"]')).toHaveCount(1);
   await expectNoPageOverflow(page);
   const results = await new AxeBuilder({ page }).analyze();
   expect(results.violations).toEqual([]);

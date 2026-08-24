@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.aquatic-cavalry",
   "ruleset": "Pathfinder First Edition",
   "name": "Aquatic Cavalry",
@@ -155,7 +155,57 @@
   "description": {
     "raw": "You summon a school of hippocampi (one plus one per 3 caster levels, to a maximum of six at 15th level) to serve as combat-trained mounts. The hippocampi avoid combat if possible but defend themselves if attacked. If any hippocampus attacks, the remaining duration of the spell changes from 1 hour per level to 1 round per level (so if a full 4 hours remained, the hippocampi last for only 4 more rounds).",
     "search_text": "\"you summon a school of hippocampi (one plus one per 3 caster levels, to a maximum of six at 15th level) to serve as combat-trained mounts. the hippocampi avoid combat if possible but defend themselves if attacked. if any hippocampus attacks, the remaining duration of the spell changes from 1 hour per level to 1 round per level (so if a full 4 hours remained, the hippocampi last for only 4 more rounds).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You summon a school of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hippocampi",
+              "relationship_id": "spell.aquatic-cavalry:uses_definition:monster.hippocampus"
+            },
+            {
+              "node_type": "text",
+              "value": " (one plus one per 3 caster levels, to a maximum of six at 15th level) to serve as combat-trained mounts. The "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hippocampi",
+              "relationship_id": "spell.aquatic-cavalry:uses_definition:monster.hippocampus"
+            },
+            {
+              "node_type": "text",
+              "value": " avoid combat if possible but defend themselves if attacked. If any "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hippocampus",
+              "relationship_id": "spell.aquatic-cavalry:uses_definition:monster.hippocampus"
+            },
+            {
+              "node_type": "text",
+              "value": " attacks, the remaining duration of the spell changes from 1 hour per level to 1 round per level (so if a full 4 hours remained, the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hippocampi",
+              "relationship_id": "spell.aquatic-cavalry:uses_definition:monster.hippocampus"
+            },
+            {
+              "node_type": "text",
+              "value": " last for only 4 more rounds)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -465,12 +515,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.aquatic-cavalry:uses_definition:rule.hippocampi",
+      "relationship_id": "spell.aquatic-cavalry:uses_definition:monster.hippocampus",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.hippocampi",
-        "name": "hippocampi"
+        "entity_type": "monster",
+        "entity_id": "monster.hippocampus",
+        "name": "Hippocampus"
       },
       "status": "accepted",
       "evidence": [
@@ -494,20 +544,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "hippocampi",
           "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/magical-beasts/hippocampus"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.aquatic-cavalry:uses_definition:rule.hippocampus",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.hippocampus",
-        "name": "hippocampus"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.aquatic-cavalry:5dad6f26d59056fb",
           "source_field": "spell_raw.links_raw[8]",
@@ -560,7 +597,7 @@
         "entity_id": "rule.summon",
         "name": "summon"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.aquatic-cavalry:5dad6f26d59056fb",
@@ -570,7 +607,7 @@
           "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/universal-monster-rules#TOC-Summon-Sp-"
         }
       ],
-      "note": null
+      "note": "The description uses “summon” as a spellcasting verb; the source href points to the monster Summon ability."
     }
   ],
   "provenance": [
@@ -621,11 +658,19 @@
       "raw_value_sha256": "1a2fc64184f7d07915ea87c4930248fcd36c800b679739c44f6a46c3ff841622",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.aquatic-cavalry:e6f8273b5bd8f6bc",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "78c7748a59be9c7348a1f986cf72fc12091fff5fa49e1a45774909fe0832e701",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

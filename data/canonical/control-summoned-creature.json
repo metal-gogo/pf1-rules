@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.control-summoned-creature",
   "ruleset": "Pathfinder First Edition",
   "name": "Control Summoned Creature",
@@ -236,7 +236,48 @@
   "description": {
     "raw": "You seize control of a summoned creature by disrupting the bond between it and the caster who summoned it. If the creature fails its save, you may command it as if you had summoned it. The original caster can attempt to regain control of the creature as a standard action by making an opposed Spellcraft check against you. When your spell ends, control reverts to the original summoner. If the summoning spell ends before this spell ends, the remaining duration of this spell is lost.",
     "search_text": "\"you seize control of a summoned creature by disrupting the bond between it and the caster who summoned it. if the creature fails its save, you may command it as if you had summoned it. the original caster can attempt to regain control of the creature as a standard action by making an opposed spellcraft check against you. when your spell ends, control reverts to the original summoner. if the summoning spell ends before this spell ends, the remaining duration of this spell is lost.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You seize control of a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "summoned creature",
+              "relationship_id": "spell.control-summoned-creature:uses_definition:subschool.summoning"
+            },
+            {
+              "node_type": "text",
+              "value": " by disrupting the bond between it and the caster who summoned it. If the creature fails its save, you may command it as if you had summoned it. The original caster can attempt to regain control of the creature as a standard action by making an opposed "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Spellcraft",
+              "relationship_id": "spell.control-summoned-creature:uses_definition:rule.spellcraft"
+            },
+            {
+              "node_type": "text",
+              "value": " check against you. When your spell ends, control reverts to the original summoner. If the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "summoning spell",
+              "relationship_id": "spell.control-summoned-creature:uses_definition:subschool.summoning"
+            },
+            {
+              "node_type": "text",
+              "value": " ends before this spell ends, the remaining duration of this spell is lost."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -294,6 +335,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.control-summoned-creature:appears_on_spell_list:spell-list.boundaries-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.boundaries-patron",
+        "name": "Boundaries Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.boundaries:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "10th — control summoned creature",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.control-summoned-creature:appears_on_spell_list:spell-list.cleric",
@@ -374,6 +435,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.control-summoned-creature:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.control-summoned-creature:3762f75c991a13a6",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.control-summoned-creature:appears_on_spell_list:spell-list.oracle",
@@ -786,11 +867,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.control-summoned-creature:uses_definition:rule.will",
+      "relationship_id": "spell.control-summoned-creature:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -806,44 +887,31 @@
       "note": null
     },
     {
-      "relationship_id": "spell.control-summoned-creature:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
+      "relationship_id": "spell.control-summoned-creature:uses_definition:subschool.summoning",
+      "type": "uses_definition",
       "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
+        "entity_type": "subschool",
+        "entity_id": "subschool.summoning",
+        "name": "Summoning"
       },
       "status": "accepted",
       "evidence": [
         {
           "observation_id": "aon:spell.control-summoned-creature:3762f75c991a13a6",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.control-summoned-creature:appears_on_spell_list:spell-list.boundaries-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.boundaries-patron",
-        "name": "Boundaries Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "summoned creature",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Control+Summoned+Creature"
+        },
         {
-          "observation_id": "aon:patron.boundaries:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "10th — control summoned creature",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+          "observation_id": "aon:spell.control-summoned-creature:3762f75c991a13a6",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "summoning spell",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Control+Summoned+Creature"
         }
       ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+      "note": "The selected source wording explicitly uses this rules term."
     }
   ],
   "provenance": [
@@ -902,11 +970,19 @@
       "raw_value_sha256": "0311ffa54cea989e522e9d59fd0838a8d4256a16bc354480365b03461cc4ad78",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.control-summoned-creature:3762f75c991a13a6",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "4d2b07f6a4000d6c85c71d57ffd47e7e9bff4618e87a0903970c7662b9713ba1",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

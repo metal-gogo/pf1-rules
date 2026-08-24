@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.cowards-lament",
   "ruleset": "Pathfinder First Edition",
   "name": "Coward's Lament",
@@ -136,7 +136,57 @@
   "description": {
     "raw": "You compel an opponent to face you in combat, or suffer for its cowardice. Each round that the target fails to attack you in melee, it receives a cumulative –1 penalty to its Armor Class, attack rolls, and saving throws (maximum penalty –5). Each round at the end of its turn, the target may attempt a Will saving throw to prevent the penalties from increasing for that round. All penalties reset to zero when the target attacks you in melee, but increase again if it stops attacking. If the target is prevented from attacking you by physical restraint, magic, or impassable terrain, the penalties do not increase. If you move away from the target, the spell ends.",
     "search_text": "\"you compel an opponent to face you in combat, or suffer for its cowardice. each round that the target fails to attack you in melee, it receives a cumulative –1 penalty to its armor class, attack rolls, and saving throws (maximum penalty –5). each round at the end of its turn, the target may attempt a will saving throw to prevent the penalties from increasing for that round. all penalties reset to zero when the target attacks you in melee, but increase again if it stops attacking. if the target is prevented from attacking you by physical restraint, magic, or impassable terrain, the penalties do not increase. if you move away from the target, the spell ends.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You compel an opponent to face you in combat, or suffer for its cowardice. Each round that the target fails to attack you in melee, it receives a cumulative –1 penalty to its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Armor Class",
+              "relationship_id": "spell.cowards-lament:uses_definition:rule.armor-class"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack rolls",
+              "relationship_id": "spell.cowards-lament:uses_definition:rule.attack-rolls"
+            },
+            {
+              "node_type": "text",
+              "value": ", and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throws",
+              "relationship_id": "spell.cowards-lament:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum penalty –5). Each round at the end of its turn, the target may attempt a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.cowards-lament:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saving throw to prevent the penalties from increasing for that round. All penalties reset to zero when the target attacks you in melee, but increase again if it stops attacking. If the target is prevented from attacking you by physical restraint, magic, or impassable terrain, the penalties do not increase. If you move away from the target, the spell ends."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -174,6 +224,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.cowards-lament:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.cowards-lament:b959bf0a005bf805",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.cowards-lament:8378b3319f8b4203",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.cowards-lament:has_descriptor:descriptor.mind-affecting",
@@ -345,6 +422,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.cowards-lament:uses_definition:rule.attack-rolls",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.attack-rolls",
+        "name": "Attack rolls"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cowards-lament:8378b3319f8b4203",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "attack rolls",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Coward%27s+Lament"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.cowards-lament:uses_definition:rule.saving-throws",
       "type": "uses_definition",
       "target": {
@@ -385,11 +482,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.cowards-lament:uses_definition:rule.will",
+      "relationship_id": "spell.cowards-lament:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -410,33 +507,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.cowards-lament:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.cowards-lament:b959bf0a005bf805",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.cowards-lament:8378b3319f8b4203",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -487,11 +557,19 @@
       "raw_value_sha256": "d82aa89df8da2ae91990366ed5045f477295ea2f70122e4e8f2c1a99b13e6d8e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.cowards-lament:8378b3319f8b4203",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "a648c091b13317f2abc29e6887499ce8ef0fcf3398acf948a47e834ac556fb2d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

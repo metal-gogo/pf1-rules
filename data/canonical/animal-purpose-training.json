@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.animal-purpose-training",
   "ruleset": "Pathfinder First Edition",
   "name": "Animal Purpose Training",
@@ -216,7 +216,57 @@
   "description": {
     "raw": "You instill the target animal with a general purpose (see the Handle Animal skill), which can be any purpose except combat training—fighting, guarding, heavy labor, hunting, performance, or riding. This purpose supersedes the animal’s previous trained purpose and any tricks it knows. When the spell ends, the animal reverts to its previous trained purpose and known tricks.",
     "search_text": "\"you instill the target animal with a general purpose (see the handle animal skill), which can be any purpose except combat training—fighting, guarding, heavy labor, hunting, performance, or riding. this purpose supersedes the animal’s previous trained purpose and any tricks it knows. when the spell ends, the animal reverts to its previous trained purpose and known tricks.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You instill the target "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "animal",
+              "relationship_id": "spell.animal-purpose-training:uses_definition:rule.animal"
+            },
+            {
+              "node_type": "text",
+              "value": " with a general purpose (see the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Handle Animal",
+              "relationship_id": "spell.animal-purpose-training:uses_definition:rule.handle-animal"
+            },
+            {
+              "node_type": "text",
+              "value": " skill), which can be any purpose except combat training—fighting, guarding, heavy labor, hunting, performance, or riding. This purpose supersedes the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "animal’s",
+              "relationship_id": "spell.animal-purpose-training:uses_definition:rule.animal"
+            },
+            {
+              "node_type": "text",
+              "value": " previous trained purpose and any tricks it knows. When the spell ends, the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "animal",
+              "relationship_id": "spell.animal-purpose-training:uses_definition:rule.animal"
+            },
+            {
+              "node_type": "text",
+              "value": " reverts to its previous trained purpose and known tricks."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -355,6 +405,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.animal-purpose-training:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.animal-purpose-training:0f983c12e743efc5",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.animal-purpose-training:7f8698307c664539",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.animal-purpose-training:appears_on_spell_list:spell-list.paladin",
@@ -670,20 +747,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "animal",
           "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/creature-types#TOC-Animal"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.animal-purpose-training:uses_definition:rule.animals",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.animals",
-        "name": "animal’s"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.animal-purpose-training:0f983c12e743efc5",
           "source_field": "spell_raw.links_raw[15]",
@@ -740,33 +804,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.animal-purpose-training:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.animal-purpose-training:0f983c12e743efc5",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.animal-purpose-training:7f8698307c664539",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -817,11 +854,19 @@
       "raw_value_sha256": "ca351ded24158a4e82c0207643fca95212e7d5b256b561e0b91268a4e4413552",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.animal-purpose-training:7f8698307c664539",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "9927c6175d140dd9a668532d10774cf9840b2555519db23e2dbe039ab4ddb504",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

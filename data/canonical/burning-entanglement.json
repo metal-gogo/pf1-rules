@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.burning-entanglement",
   "ruleset": "Pathfinder First Edition",
   "name": "Burning Entanglement",
@@ -143,7 +143,78 @@
   "description": {
     "raw": "This spell functions as per entangle, except it sets the foliage on fire. A creature that begins its turn entangled by the spell takes 4d6 points of fire damage (Reflex half), and a creature that begins its turn in the area but is not entangled takes 2d6 points of fire damage (Reflex negates). Smoke rising from the vines partially obscures visibility. Creatures can see things in the smoke within 5 feet clearly, but attacks against anything farther away in the smoke must contend with concealment (20% miss chance). When the spell’s duration expires, the vines burn away entirely.",
     "search_text": "\"this spell functions as per entangle, except it sets the foliage on fire. a creature that begins its turn entangled by the spell takes 4d6 points of fire damage (reflex half), and a creature that begins its turn in the area but is not entangled takes 2d6 points of fire damage (reflex negates). smoke rising from the vines partially obscures visibility. creatures can see things in the smoke within 5 feet clearly, but attacks against anything farther away in the smoke must contend with concealment (20% miss chance). when the spell’s duration expires, the vines burn away entirely.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "entangle",
+              "relationship_id": "spell.burning-entanglement:functions_like:spell.entangle",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it sets the foliage on fire. A creature that begins its turn "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "entangled",
+              "relationship_id": "spell.burning-entanglement:uses_definition:condition.entangled"
+            },
+            {
+              "node_type": "text",
+              "value": " by the spell takes 4d6 points of fire damage ("
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.burning-entanglement:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " half), and a creature that begins its turn in the area but is not "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "entangled",
+              "relationship_id": "spell.burning-entanglement:uses_definition:condition.entangled"
+            },
+            {
+              "node_type": "text",
+              "value": " takes 2d6 points of fire damage ("
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.burning-entanglement:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " negates). Smoke rising from the vines partially obscures visibility. Creatures can see things in the smoke within 5 feet clearly, but attacks against anything farther away in the smoke must contend with "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.burning-entanglement:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": " (20% miss chance). When the spell’s duration expires, the vines burn away entirely."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -485,7 +556,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.entangle",
-        "name": "entangle"
+        "name": "Entangle"
       },
       "status": "accepted",
       "evidence": [
@@ -574,11 +645,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.burning-entanglement:uses_definition:rule.reflex",
+      "relationship_id": "spell.burning-entanglement:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -676,11 +747,19 @@
       "raw_value_sha256": "b632c1f3d771150cf139e1f252e16d79176b5cd32dd08bd8099ab3a53b954463",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.burning-entanglement:77ae9fe59b9a77d2",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "222b58f50815b9efd3bc3470e01339276f3dca2b057206039082a5cf92ed350c",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": []
   }
 }

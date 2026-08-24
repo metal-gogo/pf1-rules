@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.blightburn-weapon",
   "ruleset": "Pathfinder First Edition",
   "name": "Blightburn Weapon",
@@ -190,7 +190,30 @@
   "description": {
     "raw": "You transform the target weapon into pure blightburn. The\nweapon functions as normal, but any creature that touches it,\nor that it strikes, takes 2d6 points of fire damage each round it\nremains in contact. In addition, the weapon emanates an aura of\nradiation that causes blightburn sickness. This is as the disease\n(see page 29), but with a 10-foot radius and a save DC equal to\nthis spell’s save DC.",
     "search_text": "\"you transform the target weapon into pure blightburn. the\\nweapon functions as normal, but any creature that touches it,\\nor that it strikes, takes 2d6 points of fire damage each round it\\nremains in contact. in addition, the weapon emanates an aura of\\nradiation that causes blightburn sickness. this is as the disease\\n(see page 29), but with a 10-foot radius and a save dc equal to\\nthis spell’s save dc.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You transform the target weapon into pure blightburn. The weapon functions as normal, but any creature that touches it, or that it strikes, takes 2d6 points of fire damage each round it remains in contact. In addition, the weapon emanates an aura of radiation that causes blightburn sickness. This is as the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "disease",
+              "relationship_id": "spell.blightburn-weapon:uses_definition:rule.disease"
+            },
+            {
+              "node_type": "text",
+              "value": " (see page 29), but with a 10-foot radius and a save DC equal to this spell’s save DC."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -322,6 +345,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.blightburn-weapon:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.blightburn-weapon:864676ad1ff54619",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.blightburn-weapon:6ad47c0406893c91",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.blightburn-weapon:appears_on_spell_list:spell-list.sorcerer",
@@ -539,11 +589,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.blightburn-weapon:uses_definition:rule.will",
+      "relationship_id": "spell.blightburn-weapon:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -557,33 +607,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.blightburn-weapon:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.blightburn-weapon:864676ad1ff54619",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.blightburn-weapon:6ad47c0406893c91",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -634,11 +657,19 @@
       "raw_value_sha256": "c75f240e6e5d6113a1146bce0072889d5ab5df382f165a7d2c2fcffeb2c5863d",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.blightburn-weapon:6ad47c0406893c91",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "90a91f42a715d3c98b5495ab9c720273134e1b31ec6eb6ec17ce86be4fb7cfe7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

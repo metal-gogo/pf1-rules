@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.bullet-shield",
   "ruleset": "Pathfinder First Edition",
   "name": "Bullet Shield",
@@ -167,7 +167,59 @@
   "description": {
     "raw": "The warded creature gains a +4 deflection bonus to AC against firearm and ranged attacks, with an additional +1 to the bonus for every five caster levels you have (to a maximum of +8 at 20th level). Though the spell is called bullet shield, it also grants this protection from attacks made from firearms with the scatter weapon quality.",
     "search_text": "\"the warded creature gains a +4 deflection bonus to ac against firearm and ranged attacks, with an additional +1 to the bonus for every five caster levels you have (to a maximum of +8 at 20th level). though the spell is called bullet shield, it also grants this protection from attacks made from firearms with the scatter weapon quality.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The warded creature gains a +4 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "deflection bonus",
+              "relationship_id": "spell.bullet-shield:uses_definition:rule.deflection-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "AC",
+              "relationship_id": "spell.bullet-shield:uses_definition:rule.armor-class"
+            },
+            {
+              "node_type": "text",
+              "value": " against "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "firearm",
+              "relationship_id": "spell.bullet-shield:uses_definition:rule.firearm"
+            },
+            {
+              "node_type": "text",
+              "value": " and ranged attacks, with an additional +1 to the bonus for every five caster levels you have (to a maximum of +8 at 20th level). Though the spell is called "
+            },
+            {
+              "node_type": "text",
+              "value": "bullet shield",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", it also grants this protection from attacks made from firearms with the scatter weapon quality."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -449,26 +501,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.bullet-shield:references:spell.bullet-shield",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.bullet-shield",
-        "name": "bullet shield"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.bullet-shield:3e9c1a8f6a1e0b99",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "bullet shield",
-          "source_href": "https://legacy.aonprd.com/ultimateCombat/spells/bulletShield.html#bullet-shield"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.bullet-shield:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -494,6 +526,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.bullet-shield:uses_definition:rule.armor-class",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.armor-class",
+        "name": "Armor Class"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.bullet-shield:7f859635d44c9bfa",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "AC",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Bullet+Shield"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.bullet-shield:uses_definition:rule.deflection-bonus",
@@ -556,11 +608,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.bullet-shield:uses_definition:rule.will",
+      "relationship_id": "spell.bullet-shield:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -624,11 +676,19 @@
       "raw_value_sha256": "c9c8900af7edfb555d4fef67d16517a7cd92ab6fcf863c4357b7caa156c3f5de",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.bullet-shield:7f859635d44c9bfa",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "6e3e9ce6d53d2f1fd4aec769d0033fd0d4e4038adfba8d8e8c5fda300147f258",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

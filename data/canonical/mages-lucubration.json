@@ -56,6 +56,16 @@
       "raw": "Reviewed canonical override: sorcerer 6; source membership wizard 6.",
       "access_basis": "reviewed_override",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.void-elemental-school",
+      "list_kind": "elemental_school",
+      "list_name": "Void Elemental School",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "6—mage’s lucubration",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -362,6 +372,26 @@
         }
       ],
       "note": "Reviewed project decision: add sorcerer 6 access to match the preserved wizard 6 membership. This is a canonical override, not a printed or derived value."
+    },
+    {
+      "relationship_id": "spell.mages-lucubration:appears_on_spell_list:spell-list.void-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.void-elemental-school",
+        "name": "Void Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.void-elemental:443edb4d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6—mage’s lucubration",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/void-elemental-school/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -412,6 +442,14 @@
       "raw_value_sha256": "3251374de05c8be2cbbec9cef8e2d07893bf781e15dbb71b9bb67bee94cc971c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/3",
+      "observation_id": "d20pfsrd:magic-school.void-elemental:443edb4d",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "747ff7738f6651af2291941482979d942a8183421631353e619c267cfc2c27d6",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -427,6 +465,11 @@
         "code": "REVIEWED_SPELL_LIST_OVERRIDE",
         "field_path": "/levels/2",
         "message": "Reviewed project decision: add sorcerer 6 access to match the preserved wizard 6 membership. This is a canonical override, not a printed or derived value."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/3",
+        "message": "Void Elemental School grants Mage's Lucubration as a level 6 printed spell; this is not general Wizard class access."
       }
     ]
   }

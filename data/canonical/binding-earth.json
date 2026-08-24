@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.binding-earth",
   "ruleset": "Pathfinder First Edition",
   "name": "Binding Earth",
@@ -159,7 +159,95 @@
   "description": {
     "raw": "If the target of this spell fails its Fortitude save, areas of earth and stone floor act as a snapping quagmire that pulls the target down and damages it if it attempts to move through such terrain.\n\nIf the target is a creature, it treats all areas of earth and stone it moves through as difficult terrain. Furthermore, for each 5 feet a creature moves through such areas, it takes 1d6 points of damage. Creatures with a burrow speed or the earth glide ability are unaffected by binding earth.\n\nIf cast on an unattended object resting on an area of stone or earth, the stone or earth warps and wraps around it, pulling it firmly to the ground. A DC 15 Strength check is required to pull the object free from snapping earth or stone.",
     "search_text": "\"if the target of this spell fails its fortitude save, areas of earth and stone floor act as a snapping quagmire that pulls the target down and damages it if it attempts to move through such terrain.\\n\\nif the target is a creature, it treats all areas of earth and stone it moves through as difficult terrain. furthermore, for each 5 feet a creature moves through such areas, it takes 1d6 points of damage. creatures with a burrow speed or the earth glide ability are unaffected by binding earth.\\n\\nif cast on an unattended object resting on an area of stone or earth, the stone or earth warps and wraps around it, pulling it firmly to the ground. a dc 15 strength check is required to pull the object free from snapping earth or stone.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "If the target of this spell fails its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.binding-earth:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save, areas of earth and stone floor act as a snapping quagmire that pulls the target down and damages it if it attempts to move through such terrain."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "If the target is a creature, it treats all areas of earth and stone it moves through as difficult terrain. Furthermore, for each 5 feet a creature moves through such areas, it takes 1d6 points of damage. Creatures with a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "burrow",
+              "relationship_id": "spell.binding-earth:uses_definition:rule.burrow"
+            },
+            {
+              "node_type": "text",
+              "value": " speed or the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "earth glide",
+              "relationship_id": "spell.binding-earth:uses_definition:rule.earth-glide"
+            },
+            {
+              "node_type": "text",
+              "value": " ability are unaffected by "
+            },
+            {
+              "node_type": "text",
+              "value": "binding earth",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "If cast on an unattended object resting on an area of stone or earth, the stone or earth warps and wraps around it, pulling it firmly to the ground. A DC 15 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Strength",
+              "relationship_id": "spell.binding-earth:uses_definition:rule.strength"
+            },
+            {
+              "node_type": "text",
+              "value": " check is required to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "pull",
+              "relationship_id": "spell.binding-earth:uses_definition:rule.pull"
+            },
+            {
+              "node_type": "text",
+              "value": " the object free from snapping earth or stone."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -367,9 +455,9 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.binding",
-        "name": "binding"
+        "name": "Binding"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "legacy_aon:spell.binding-earth:f7f2a97457086ed7",
@@ -379,7 +467,7 @@
           "source_href": "https://legacy.aonprd.com/coreRulebook/spells/binding.html#binding"
         }
       ],
-      "note": null
+      "note": "The source link matches “binding” only as part of this spell’s own name; Binding Earth does not reference the Binding spell."
     },
     {
       "relationship_id": "spell.binding-earth:uses_action:action.standard-action",
@@ -449,12 +537,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.binding-earth:uses_definition:rule.fort",
+      "relationship_id": "spell.binding-earth:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -464,20 +552,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Fort",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.binding-earth:uses_definition:rule.fortitude",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.fortitude",
-        "name": "Fortitude"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.binding-earth:27f4f0012ae960d4",
           "source_field": "spell_raw.links_raw[5]",
@@ -597,11 +672,19 @@
       "raw_value_sha256": "3601d642a08baa48697eaecaf48f6289ccef332af95358b16a0a88cff4b835b3",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.binding-earth:1cb805f490671133",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "4396104b3c599655e42e093b59a7a37729030adfbbce078f6e9ce36f0d47c3b3",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

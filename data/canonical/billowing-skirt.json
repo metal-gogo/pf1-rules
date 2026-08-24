@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.billowing-skirt",
   "ruleset": "Pathfinder First Edition",
   "name": "Billowing Skirt",
@@ -198,7 +198,51 @@
   "description": {
     "raw": "A skirt, kilt, or gown you are wearing enables you to control your falls through the air. A creature wearing the enchanted item of clothing falls slowly as if affected by feather fall and can attempt a DC 15 Fly skill check as a move action to hover in place for 1 round.",
     "search_text": "\"a skirt, kilt, or gown you are wearing enables you to control your falls through the air. a creature wearing the enchanted item of clothing falls slowly as if affected by feather fall and can attempt a dc 15 fly skill check as a move action to hover in place for 1 round.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "A skirt, "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "kilt",
+              "relationship_id": "spell.billowing-skirt:uses_definition:item.kilt"
+            },
+            {
+              "node_type": "text",
+              "value": ", or gown you are wearing enables you to control your falls through the air. A creature wearing the enchanted item of clothing falls slowly as if affected by "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "feather fall",
+              "relationship_id": "spell.billowing-skirt:references:spell.feather-fall",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " and can attempt a DC 15 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fly",
+              "relationship_id": "spell.billowing-skirt:uses_definition:rule.fly"
+            },
+            {
+              "node_type": "text",
+              "value": " skill check as a move action to hover in place for 1 round."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -310,6 +354,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.billowing-skirt:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.billowing-skirt:c41d2ac5a1d5dc6c",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.billowing-skirt:4cd3ecb88f9c7752",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.billowing-skirt:appears_on_spell_list:spell-list.shaman",
@@ -519,7 +590,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.feather-fall",
-        "name": "feather fall"
+        "name": "Feather Fall"
       },
       "status": "accepted",
       "evidence": [
@@ -581,32 +652,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.billowing-skirt:uses_definition:rule.fly",
+      "relationship_id": "spell.billowing-skirt:uses_definition:item.kilt",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.fly",
-        "name": "Fly"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.billowing-skirt:c41d2ac5a1d5dc6c",
-          "source_field": "spell_raw.links_raw[11]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Fly",
-          "source_href": "https://www.d20pfsrd.com/skills/fly"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.billowing-skirt:uses_definition:rule.kilt",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.kilt",
-        "name": "kilt"
+        "entity_type": "item",
+        "entity_id": "item.kilt",
+        "name": "Kilt"
       },
       "status": "accepted",
       "evidence": [
@@ -623,6 +674,26 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "kilt",
           "source_href": "https://www.d20pfsrd.com/equipment/goods-and-services/containers-bags-boxes-more#TOC-Kilt"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.billowing-skirt:uses_definition:rule.fly",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.fly",
+        "name": "Fly"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.billowing-skirt:c41d2ac5a1d5dc6c",
+          "source_field": "spell_raw.links_raw[11]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Fly",
+          "source_href": "https://www.d20pfsrd.com/skills/fly"
         }
       ],
       "note": null
@@ -646,33 +717,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.billowing-skirt:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.billowing-skirt:c41d2ac5a1d5dc6c",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.billowing-skirt:4cd3ecb88f9c7752",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -723,11 +767,19 @@
       "raw_value_sha256": "afbb5a89331bf73c65d67e052066d06c3f66fa78263627a42bae25109c58b8bd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.billowing-skirt:4cd3ecb88f9c7752",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "43be7d5acfa149a5e1a9f598078925f9cfe58557f3f1a0f5cb8b423ca6246cd2",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

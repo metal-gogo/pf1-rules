@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.acid-arrow",
   "ruleset": "Pathfinder First Edition",
   "name": "Acid Arrow",
@@ -53,6 +53,16 @@
       "level": 2,
       "scope": "core",
       "raw": "wizard 2"
+    },
+    {
+      "spell_list_id": "spell-list.earth-elemental-school",
+      "list_kind": "elemental_school",
+      "list_name": "Earth Elemental School",
+      "level": 2,
+      "scope": "core",
+      "raw": "2—acid arrow",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -139,7 +149,30 @@
   "description": {
     "raw": "An arrow of acid springs from your hand and speeds to its target. You must succeed on a ranged touch attack to hit your target. The arrow deals 2d4 points of acid damage with no splash damage. For every three caster levels you possess, the acid, unless neutralized, lasts for another round (to a maximum of 6 additional rounds at 18th level), dealing another 2d4 points of damage in each round.",
     "search_text": "\"an arrow of acid springs from your hand and speeds to its target. you must succeed on a ranged touch attack to hit your target. the arrow deals 2d4 points of acid damage with no splash damage. for every three caster levels you possess, the acid, unless neutralized, lasts for another round (to a maximum of 6 additional rounds at 18th level), dealing another 2d4 points of damage in each round.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "An arrow of acid springs from your hand and speeds to its target. You must succeed on a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "ranged touch attack",
+              "relationship_id": "spell.acid-arrow:uses_definition:rule.ranged-touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " to hit your target. The arrow deals 2d4 points of acid damage with no splash damage. For every three caster levels you possess, the acid, unless neutralized, lasts for another round (to a maximum of 6 additional rounds at 18th level), dealing another 2d4 points of damage in each round."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -197,6 +230,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.acid-arrow:appears_on_spell_list:spell-list.earth-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.earth-elemental-school",
+        "name": "Earth Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.earth-elemental:b766c5d6",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2—acid arrow",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/earth/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     },
     {
       "relationship_id": "spell.acid-arrow:appears_on_spell_list:spell-list.magus",
@@ -536,11 +589,27 @@
       "raw_value_sha256": "0227d9cdf9219a22025bffab058a9b2bd5df510835b65ff970710279c16f87b1",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/5",
+      "observation_id": "d20pfsrd:magic-school.earth-elemental:b766c5d6",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "bb2aa4bb69bee38bfde467403216cc68af8541b9be9255cb96eac4ff4e48fa00",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.acid-arrow:23dbeeb63c283b71",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "326d671642294c80394e63c047c6673d232267ef6a6e608cb40ff9b52803d347",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
@@ -556,6 +625,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/casting/components_raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/5",
+        "message": "Earth Elemental School grants Acid Arrow as a level 2 printed spell; this is not general Wizard class access."
       }
     ]
   }

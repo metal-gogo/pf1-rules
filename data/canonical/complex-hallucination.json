@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.complex-hallucination",
   "ruleset": "Pathfinder First Edition",
   "name": "Complex Hallucination",
@@ -181,7 +181,33 @@
   "description": {
     "raw": "This spell functions as audiovisual hallucination, except that the phantasm you create can also include olfactory, tactile, and thermal effects.",
     "search_text": "\"this spell functions as audiovisual hallucination, except that the phantasm you create can also include olfactory, tactile, and thermal effects.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "audiovisual hallucination",
+              "relationship_id": "spell.complex-hallucination:functions_like:spell.audiovisual-hallucination",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that the phantasm you create can also include olfactory, tactile, and thermal effects."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -546,6 +572,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as audiovisual hallucination, except that the phantasm you create can also include olfactory, tactile, and thermal effects.",
           "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.complex-hallucination:fec465e5b34d198e",
+          "source_field": "spell_raw.links_raw[11]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "audiovisual hallucination",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/a/audiovisual-hallucination"
         }
       ],
       "note": null
@@ -673,26 +706,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.complex-hallucination:references:spell.audiovisual-hallucination",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.audiovisual-hallucination",
-        "name": "audiovisual hallucination"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.complex-hallucination:fec465e5b34d198e",
-          "source_field": "spell_raw.links_raw[11]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "audiovisual hallucination",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/a/audiovisual-hallucination"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.complex-hallucination:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -801,11 +814,19 @@
       "raw_value_sha256": "a640dbf712e66f4d2ac8c5a4c0a1a0fb3b5def6510e92b66ebc038a0e610aea8",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.complex-hallucination:b649a2b31b3cce6e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "a93b35703079f0c7b59f66fdaaab773682ed70464cafc7a932cba5464f6c8598",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.absorb-rune-ii",
   "ruleset": "Pathfinder First Edition",
   "name": "Absorb Rune II",
@@ -206,7 +206,33 @@
   "description": {
     "raw": "This spell functions like absorb rune I, but it can affect runes equivalent to a spell of 5th level or lower.",
     "search_text": "\"this spell functions like absorb rune i, but it can affect runes equivalent to a spell of 5th level or lower.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "absorb rune I",
+              "relationship_id": "spell.absorb-rune-ii:functions_like:spell.absorb-rune-i",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", but it can affect runes equivalent to a spell of 5th level or lower."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -382,6 +408,33 @@
       "note": null
     },
     {
+      "relationship_id": "spell.absorb-rune-ii:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.absorb-rune-ii:fc22fcd6421a9664",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.absorb-rune-ii:cffc8e560fd25187",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 6",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.absorb-rune-ii:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -517,6 +570,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like absorb rune I, but it can affect runes equivalent to a spell of 5th level or lower.",
           "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.absorb-rune-ii:fc22fcd6421a9664",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "absorb rune I",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/a/absorb-rune-i/#Absorb_Rune_I"
         }
       ],
       "note": null
@@ -590,26 +650,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.absorb-rune-ii:references:spell.absorb-rune-i",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.absorb-rune-i",
-        "name": "absorb rune I"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.absorb-rune-ii:fc22fcd6421a9664",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "absorb rune I",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/a/absorb-rune-i/#Absorb_Rune_I"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.absorb-rune-ii:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -648,33 +688,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.absorb-rune-ii:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.absorb-rune-ii:fc22fcd6421a9664",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.absorb-rune-ii:cffc8e560fd25187",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 6",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -725,11 +738,19 @@
       "raw_value_sha256": "e5d447c42d03822d61edaa8b232de2b7fd1e7ad18d22fa5635321034f6801024",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.absorb-rune-ii:cffc8e560fd25187",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "dadbe9acd0018f8ee299e0276526c15d77ae353e994d12c3b97e01f7aa81de74",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

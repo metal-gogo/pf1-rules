@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.blood-transcription",
   "ruleset": "Pathfinder First Edition",
   "name": "Blood Transcription",
@@ -157,7 +157,30 @@
   "description": {
     "raw": "By consuming 1 pint of blood from a spellcaster killed within the last 24 hours, you can attempt to learn a spell that spellcaster knew. Select one spell available to the dead spellcaster (this must be a spell on your spell list); you gain the knowledge of this spell for 24 hours. During this time, you may write it down (or teach it to your familiar, if you are a witch) using the normal rules for copying a spell from another source. Once you have learned it, you may prepare the spell normally.",
     "search_text": "\"by consuming 1 pint of blood from a spellcaster killed within the last 24 hours, you can attempt to learn a spell that spellcaster knew. select one spell available to the dead spellcaster (this must be a spell on your spell list); you gain the knowledge of this spell for 24 hours. during this time, you may write it down (or teach it to your familiar, if you are a witch) using the normal rules for copying a spell from another source. once you have learned it, you may prepare the spell normally.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "By consuming 1 pint of blood from a spellcaster killed within the last 24 hours, you can attempt to learn a spell that spellcaster knew. Select one spell available to the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dead",
+              "relationship_id": "spell.blood-transcription:uses_definition:condition.dead"
+            },
+            {
+              "node_type": "text",
+              "value": " spellcaster (this must be a spell on your spell list); you gain the knowledge of this spell for 24 hours. During this time, you may write it down (or teach it to your familiar, if you are a witch) using the normal rules for copying a spell from another source. Once you have learned it, you may prepare the spell normally."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -262,6 +285,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.blood-transcription:appears_on_spell_list:spell-list.sorcerer",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer",
+        "name": "sorcerer"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.blood-transcription:fe8497a1fdda0d02",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "wizard",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard"
+        },
+        {
+          "observation_id": "aon:spell.blood-transcription:1e753ef572153267",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "wizard 2",
+          "source_href": null
+        }
+      ],
+      "note": "Reviewed project decision: add sorcerer 2 access to match the preserved wizard 2 membership. This is a canonical override, not a printed or derived value."
     },
     {
       "relationship_id": "spell.blood-transcription:appears_on_spell_list:spell-list.witch",
@@ -492,33 +542,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.blood-transcription:appears_on_spell_list:spell-list.sorcerer",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.sorcerer",
-        "name": "sorcerer"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.blood-transcription:fe8497a1fdda0d02",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "wizard",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard"
-        },
-        {
-          "observation_id": "aon:spell.blood-transcription:1e753ef572153267",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "wizard 2",
-          "source_href": null
-        }
-      ],
-      "note": "Reviewed project decision: add sorcerer 2 access to match the preserved wizard 2 membership. This is a canonical override, not a printed or derived value."
     }
   ],
   "provenance": [
@@ -569,11 +592,19 @@
       "raw_value_sha256": "ab0284cb28f6e239da443b5fb650b4ae2ce5e8e048c9f873ab205cd8ff1d03db",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.blood-transcription:1e753ef572153267",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "7e3d6f28c9a8105d4ef923a2848cf5a6968e473177af6d4b0f47a4efbb78b4f7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

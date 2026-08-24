@@ -168,6 +168,26 @@
         "aon:bloodline.sorcerer.ghoul:c0c80f39"
       ],
       "rationale": "AoN clearly transcribes the owning sorcerer bloodline's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.control-undead:1d94cef8fec28599",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.control-undead:1d94cef8fec28599",
+        "legacy_aon:spell.control-undead:4c4396a6d3fe9623",
+        "d20pfsrd:spell.control-undead:1ec8b35ba07bd383",
+        "aon:mystery.bones:8a6d69b3",
+        "aon:patron.plague:15d234b1",
+        "aon:spirit.bones:ea72c994",
+        "aon:bloodline.sorcerer.ghoul:c0c80f39"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -204,6 +224,34 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.control-undead:appears_on_spell_list:spell-list.bones-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.bones:8a6d69b3",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.bones:8a6d69b3"
+      ],
+      "rationale": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.control-undead:appears_on_spell_list:spell-list.bones-spirit",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spirit.bones:ea72c994",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spirit.bones:ea72c994"
+      ],
+      "rationale": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
+    },
+    {
       "relationship_id": "spell.control-undead:appears_on_spell_list:spell-list.ghoul",
       "decision": "accept",
       "evidence": [
@@ -220,6 +268,20 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.control-undead:appears_on_spell_list:spell-list.plague-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.plague:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.plague:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
       "relationship_id": "spell.control-undead:appears_on_spell_list:spell-list.sorcerer",
       "decision": "accept",
       "evidence": [
@@ -234,6 +296,20 @@
         "d20pfsrd:spell.control-undead:1ec8b35ba07bd383"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.control-undead:appears_on_spell_list:spell-list.sorcerer-ghoul-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.ghoul:c0c80f39",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.ghoul:c0c80f39"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     },
     {
       "relationship_id": "spell.control-undead:appears_on_spell_list:spell-list.sorcerer-wizard",
@@ -332,7 +408,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.control-undead:uses_definition:rule.int",
+      "relationship_id": "spell.control-undead:uses_definition:rule.intelligence",
       "decision": "accept",
       "evidence": [
         {
@@ -392,7 +468,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.control-undead:uses_definition:rule.will",
+      "relationship_id": "spell.control-undead:uses_definition:rule.will-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -410,62 +486,6 @@
         "d20pfsrd:spell.control-undead:1ec8b35ba07bd383"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.control-undead:appears_on_spell_list:spell-list.bones-mystery",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.bones:8a6d69b3",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:mystery.bones:8a6d69b3"
-      ],
-      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
-    },
-    {
-      "relationship_id": "spell.control-undead:appears_on_spell_list:spell-list.plague-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.plague:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.plague:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.control-undead:appears_on_spell_list:spell-list.bones-spirit",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spirit.bones:ea72c994",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spirit.bones:ea72c994"
-      ],
-      "rationale": "AoN prints the spell on the owning shaman spirit page; it is modeled as spirit access rather than general Shaman access."
-    },
-    {
-      "relationship_id": "spell.control-undead:appears_on_spell_list:spell-list.sorcerer-ghoul-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.ghoul:c0c80f39",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.ghoul:c0c80f39"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
     }
   ],
   "unresolved_questions": [

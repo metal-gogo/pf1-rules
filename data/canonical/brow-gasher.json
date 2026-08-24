@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.brow-gasher",
   "ruleset": "Pathfinder First Edition",
   "name": "Brow Gasher",
@@ -192,7 +192,93 @@
   "description": {
     "raw": "You imbue a slashing melee weapon with the ability to deal a gruesome head wound. When the target weapon hits a living creature, in addition to the normal effects of that hit, the wielder can discharge this spell as a free action to open a gash on the target’s forehead that deals bleed damage equal to half your caster level. At the start of each of the target’s turns, when it takes bleed damage, it also takes a cumulative –1 penalty on all attack rolls. When that penalty reaches –3, the target also treats all targets as having concealment (20% miss chance). When the penalty reaches –5, the target is blinded. Stopping the bleed damage ends the effects this spell imposes on the bleeding creature. A target that is immune to bleed damage is also immune to all this spell’s effects.",
     "search_text": "\"you imbue a slashing melee weapon with the ability to deal a gruesome head wound. when the target weapon hits a living creature, in addition to the normal effects of that hit, the wielder can discharge this spell as a free action to open a gash on the target’s forehead that deals bleed damage equal to half your caster level. at the start of each of the target’s turns, when it takes bleed damage, it also takes a cumulative –1 penalty on all attack rolls. when that penalty reaches –3, the target also treats all targets as having concealment (20% miss chance). when the penalty reaches –5, the target is blinded. stopping the bleed damage ends the effects this spell imposes on the bleeding creature. a target that is immune to bleed damage is also immune to all this spell’s effects.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You imbue a slashing melee weapon with the ability to deal a gruesome head wound. When the target weapon hits a living creature, in addition to the normal effects of that hit, the wielder can discharge this spell as a free action to open a gash on the target’s forehead that deals "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bleed damage",
+              "relationship_id": "spell.brow-gasher:uses_definition:condition.bleed"
+            },
+            {
+              "node_type": "text",
+              "value": " equal to half your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.brow-gasher:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": ". At the start of each of the target’s turns, when it takes "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bleed damage",
+              "relationship_id": "spell.brow-gasher:uses_definition:condition.bleed"
+            },
+            {
+              "node_type": "text",
+              "value": ", it also takes a cumulative –1 penalty on all "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack rolls",
+              "relationship_id": "spell.brow-gasher:uses_definition:rule.attack-rolls"
+            },
+            {
+              "node_type": "text",
+              "value": ". When that penalty reaches –3, the target also treats all targets as having "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.brow-gasher:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": " (20% miss chance). When the penalty reaches –5, the target is "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blinded",
+              "relationship_id": "spell.brow-gasher:uses_definition:condition.blinded"
+            },
+            {
+              "node_type": "text",
+              "value": ". Stopping the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bleed damage",
+              "relationship_id": "spell.brow-gasher:uses_definition:condition.bleed"
+            },
+            {
+              "node_type": "text",
+              "value": " ends the effects this spell imposes on the bleeding creature. A target that is immune to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bleed damage",
+              "relationship_id": "spell.brow-gasher:uses_definition:condition.bleed"
+            },
+            {
+              "node_type": "text",
+              "value": " is also immune to all this spell’s effects."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -344,6 +430,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.brow-gasher:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.brow-gasher:677f922e001f1bac",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.brow-gasher:8f9e9c2b72d895f2",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.brow-gasher:appears_on_spell_list:spell-list.ranger",
@@ -541,6 +654,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.brow-gasher:uses_definition:condition.bleed",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "condition",
+        "entity_id": "condition.bleed",
+        "name": "Bleed"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.brow-gasher:8f9e9c2b72d895f2",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "bleed damage",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Brow+Gasher"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.brow-gasher:uses_definition:condition.blinded",
       "type": "uses_definition",
       "target": {
@@ -641,11 +774,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.brow-gasher:uses_definition:rule.will",
+      "relationship_id": "spell.brow-gasher:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -659,33 +792,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.brow-gasher:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.brow-gasher:677f922e001f1bac",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.brow-gasher:8f9e9c2b72d895f2",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -736,11 +842,19 @@
       "raw_value_sha256": "10dd47628633e2b06b440520d79d2671d0f677709e2f30dfacb3da09cc7e5f21",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.brow-gasher:8f9e9c2b72d895f2",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "47605f477316b7167f4943f235992f33a9f01d38c4e4c08911fd1ed9692e2d32",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

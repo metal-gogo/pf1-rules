@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.blacklight",
   "ruleset": "Pathfinder First Edition",
   "legacy_3_5_material": true,
@@ -127,7 +127,104 @@
   "description": {
     "raw": "You create an area of total darkness. The darkness is impenetrable even to darkvision, but you can see normally within it. Creatures outside the spell’s area, even you, cannot see through it.\n\nYou can cast the spell on a point in space, but the effect is stationary unless cast on a mobile object. You can cast the spell on a creature, and the effect then radiates from the creature and moves as it moves. Unattended objects and points in space do not get saving throws or benefit from spell resistance. Blacklight counters or dispels any light spell of equal or lower level. Daylight counters or dispels blacklight.",
     "search_text": "\"you create an area of total darkness. the darkness is impenetrable even to darkvision, but you can see normally within it. creatures outside the spell’s area, even you, cannot see through it.\\n\\nyou can cast the spell on a point in space, but the effect is stationary unless cast on a mobile object. you can cast the spell on a creature, and the effect then radiates from the creature and moves as it moves. unattended objects and points in space do not get saving throws or benefit from spell resistance. blacklight counters or dispels any light spell of equal or lower level. daylight counters or dispels blacklight.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create an area of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "total darkness",
+              "relationship_id": "spell.blacklight:uses_definition:illumination.darkness"
+            },
+            {
+              "node_type": "text",
+              "value": ". The darkness is impenetrable even to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "darkvision",
+              "relationship_id": "spell.blacklight:uses_definition:rule.darkvision"
+            },
+            {
+              "node_type": "text",
+              "value": ", but you can see normally within it. Creatures outside the spell’s area, even you, cannot see through it."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You can cast the spell on a point in space, but the effect is stationary unless cast on a mobile object. You can cast the spell on a creature, and the effect then radiates from the creature and moves as it moves. Unattended objects and points in space do not get saving throws or benefit from "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.blacklight:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": ". "
+            },
+            {
+              "node_type": "text",
+              "value": "Blacklight",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " counters or dispels any "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "light",
+              "relationship_id": "spell.blacklight:uses_definition:descriptor.light"
+            },
+            {
+              "node_type": "text",
+              "value": " spell"
+            },
+            {
+              "node_type": "text",
+              "value": " of equal or lower level. "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Daylight",
+              "relationship_id": "spell.blacklight:references:spell.daylight",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " counters or dispels "
+            },
+            {
+              "node_type": "text",
+              "value": "blacklight",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -281,6 +378,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.blacklight:references:spell.daylight",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.daylight",
+        "name": "Daylight"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.blacklight:651920a1b7656c99",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Daylight",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Blacklight"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.blacklight:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -299,6 +416,66 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.blacklight:uses_definition:descriptor.light",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.light",
+        "name": "Light"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.blacklight:651920a1b7656c99",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "light spell",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Blacklight"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.blacklight:uses_definition:illumination.darkness",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "illumination.darkness",
+        "name": "Darkness"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.blacklight:651920a1b7656c99",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "total darkness",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Blacklight"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.blacklight:uses_definition:rule.darkvision",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.darkvision",
+        "name": "Darkvision"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.blacklight:651920a1b7656c99",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "darkvision",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Blacklight"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.blacklight:uses_definition:rule.spell-resistance",
@@ -369,11 +546,19 @@
       "raw_value_sha256": "772fd91d3cb60f076c9f2e35e26556d94241e725585cabcbd1444fd4d2db1d26",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.blacklight:651920a1b7656c99",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "068b14f6a47715e1494f3e2f899889124683295d6a1e72718874243eb19942ba",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "LEGACY_3_5_MATERIAL",

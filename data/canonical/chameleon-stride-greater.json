@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.chameleon-stride-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Chameleon Stride, Greater",
@@ -119,7 +119,44 @@
   "description": {
     "raw": "This spell functions as chameleon stride (Pathfinder RPG Advanced Player’s Guide 210), except it confers its bonuses upon all allies within 10 feet of you at the time the spell is cast. Those affected by this spell are able to see each other and themselves as if they were unaffected by the spell. If an affected creature moves out of the area, it loses the benefit of the spell. Creatures that move into the area after the spell is cast do not gain its benefit.",
     "search_text": "\"this spell functions as chameleon stride (pathfinder rpg advanced player’s guide 210), except it confers its bonuses upon all allies within 10 feet of you at the time the spell is cast. those affected by this spell are able to see each other and themselves as if they were unaffected by the spell. if an affected creature moves out of the area, it loses the benefit of the spell. creatures that move into the area after the spell is cast do not gain its benefit.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "chameleon stride",
+              "relationship_id": "spell.chameleon-stride-greater:functions_like:spell.chameleon-stride",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " ("
+            },
+            {
+              "node_type": "text",
+              "value": "Pathfinder RPG Advanced Player’s Guide",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " 210), except it confers its bonuses upon all allies within 10 feet of you at the time the spell is cast. Those affected by this spell are able to see each other and themselves as if they were unaffected by the spell. If an affected creature moves out of the area, it loses the benefit of the spell. Creatures that move into the area after the spell is cast do not gain its benefit."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -129,7 +166,110 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.chameleon-stride",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.chameleon-stride-greater:08b4d545ba0dceba",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell functions as chameleon stride (Pathfinder RPG Advanced Player’s Guide 210), except it confers its bonuses upon all allies within 10 feet of you at the time the spell is cast. Those affected by this spell are able to see each other and themselves as if they were unaffected by the spell. If an affected creature moves out of the area, it loses the benefit of the spell. Creatures that move into the area after the spell is cast do not gain its benefit."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/range",
+          "value": {
+            "category": "distance",
+            "formula": "5 ft.",
+            "raw": "5 ft."
+          },
+          "source_field": "spell_raw.range_raw",
+          "raw": "5 ft.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Area",
+                "value_raw": "allies in a 10-ft.-radius emanation centered on you",
+                "kinds": [
+                  "area"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Area\",\"value_raw\":\"allies in a 10-ft.-radius emanation centered on you\",\"kinds\":[\"area\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": null,
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Area\",\"value_raw\":\"allies in a 10-ft.-radius emanation centered on you\",\"kinds\":[\"area\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/area",
+          "value": {
+            "propagation": "emanation",
+            "geometry": "sphere",
+            "geometry_basis": "explicit",
+            "dimensions": {
+              "radius_ft": null,
+              "length_ft": null,
+              "width_ft": null,
+              "height_ft": null
+            },
+            "shapeable": null,
+            "raw": "allies in a 10-ft.-radius emanation centered on you"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Area\",\"value_raw\":\"allies in a 10-ft.-radius emanation centered on you\",\"kinds\":[\"area\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "special",
+            "formula": "1 minute/level (see text)",
+            "dismissible": null,
+            "concentration": null,
+            "raw": "1 minute/level (see text)"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "1 minute/level (see text)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as chameleon stride (Pathfinder RPG Advanced Player’s Guide 210), except it confers its bonuses upon all allies within 10 feet of you at the time the spell is cast. Those affected by this spell are able to see each other and themselves as if they were unaffected by the spell. If an affected creature moves out of the area, it loses the benefit of the spell. Creatures that move into the area after the spell is cast do not gain its benefit.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as chameleon stride (Pathfinder RPG Advanced Player’s Guide 210), except it confers its bonuses upon all allies within 10 feet of you at the time the spell is cast. Those affected by this spell are able to see each other and themselves as if they were unaffected by the spell. If an affected creature moves out of the area, it loses the benefit of the spell. Creatures that move into the area after the spell is cast do not gain its benefit.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.chameleon-stride-greater:appears_on_spell_list:spell-list.hunter",
@@ -174,6 +314,26 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "ranger 3",
           "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.chameleon-stride-greater:functions_like:spell.chameleon-stride",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.chameleon-stride",
+        "name": "Chameleon Stride"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.chameleon-stride-greater:67649df853d266f8",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "chameleon stride",
+          "source_href": "https://legacy.aonprd.com/advancedPlayersGuide/spells/chameleonStride.html#chameleon-stride"
         }
       ],
       "note": null
@@ -274,26 +434,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.chameleon-stride-greater:references:spell.chameleon-stride",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.chameleon-stride",
-        "name": "chameleon stride"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.chameleon-stride-greater:67649df853d266f8",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "chameleon stride",
-          "source_href": "https://legacy.aonprd.com/advancedPlayersGuide/spells/chameleonStride.html#chameleon-stride"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.chameleon-stride-greater:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -321,7 +461,7 @@
         "entity_id": "rule.advanced-players-guide",
         "name": "Advanced Player’s Guide"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.chameleon-stride-greater:12d153d8c7049943",
@@ -331,7 +471,7 @@
           "source_href": "http://www.amazon.com/gp/product/1601252463/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1601252463&linkCode=as2&tag=httpwwwd20pfs-20"
         }
       ],
-      "note": null
+      "note": "The parenthetical book citation is provenance, not a rules definition in the spell description."
     },
     {
       "relationship_id": "spell.chameleon-stride-greater:uses_definition:rule.spell-resistance",
@@ -402,11 +542,19 @@
       "raw_value_sha256": "404e7a09d5b1c5f2d3e8d573d5796ebbdf45c270cdcfa20bbd6ab2cce00150cd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.chameleon-stride-greater:08b4d545ba0dceba",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "1fc3c3f2fb6be6ea3f97772db7bec3280af87c5dbcf343c32f4e0c1683d118f1",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

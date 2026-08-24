@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.anti-incorporeal-shell",
   "ruleset": "Pathfinder First Edition",
   "name": "Anti-Incorporeal Shell",
@@ -182,7 +182,39 @@
   "description": {
     "raw": "You bring into being a mobile, hemispherical energy field that incorporeal creatures cannot enter.\n\nThis spell can be used only defensively, not aggressively. Forcing an abjuration barrier against creatures that the spell keeps at bay collapses the barrier.",
     "search_text": "\"you bring into being a mobile, hemispherical energy field that incorporeal creatures cannot enter.\\n\\nthis spell can be used only defensively, not aggressively. forcing an abjuration barrier against creatures that the spell keeps at bay collapses the barrier.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You bring into being a mobile, hemispherical energy field that "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "incorporeal",
+              "relationship_id": "spell.anti-incorporeal-shell:uses_definition:rule.incorporeal"
+            },
+            {
+              "node_type": "text",
+              "value": " creatures cannot enter."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": " This spell can be used only defensively, not aggressively. Forcing an abjuration barrier against creatures that the spell keeps at bay collapses the barrier."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -220,6 +252,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.anti-incorporeal-shell:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.anti-incorporeal-shell:54651c0017e636eb",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.anti-incorporeal-shell:46b8249638d40af9",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.anti-incorporeal-shell:appears_on_spell_list:spell-list.oracle",
@@ -482,33 +541,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.anti-incorporeal-shell:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.anti-incorporeal-shell:54651c0017e636eb",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.anti-incorporeal-shell:46b8249638d40af9",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -559,11 +591,19 @@
       "raw_value_sha256": "5dc5144a9811f715818120fe5c9007c5e03689284235f8279ea31439757f4476",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.anti-incorporeal-shell:46b8249638d40af9",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "b18856b6627e607b350be28ea20ada7dcd6cb387215d3176cb36ac384e4abba9",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

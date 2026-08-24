@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.acid-maw",
   "ruleset": "Pathfinder First Edition",
   "name": "Acid Maw",
@@ -129,7 +129,48 @@
   "description": {
     "raw": "Your animal companion’s bite attack deals an additional 1d4 points of acid damage, and the acid deals another 1d4 points of acid damage to the target on the next round. The acid continues to deal damage for 1 additional round per 4 caster levels (to a maximum of 6 total rounds at caster level 20th). This ongoing acid damage doesn’t stack from multiple attacks, but the duration resets if a newer bite would cause the ongoing damage to last longer than the duration remaining from a previous one. The acid does not harm the animal companion.",
     "search_text": "\"your animal companion’s bite attack deals an additional 1d4 points of acid damage, and the acid deals another 1d4 points of acid damage to the target on the next round. the acid continues to deal damage for 1 additional round per 4 caster levels (to a maximum of 6 total rounds at caster level 20th). this ongoing acid damage doesn’t stack from multiple attacks, but the duration resets if a newer bite would cause the ongoing damage to last longer than the duration remaining from a previous one. the acid does not harm the animal companion.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "animal companion’s",
+              "relationship_id": "spell.acid-maw:uses_definition:class-feature.animal-companion"
+            },
+            {
+              "node_type": "text",
+              "value": " bite attack deals an additional 1d4 points of acid damage, and the acid deals another 1d4 points of acid damage to the target on the next round. The acid continues to deal damage for 1 additional round per 4 caster levels (to a maximum of 6 total rounds at "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.acid-maw:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " 20th). This ongoing acid damage doesn’t stack from multiple attacks, but the duration resets if a newer bite would cause the ongoing damage to last longer than the duration remaining from a previous one. The acid does not harm the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "animal companion",
+              "relationship_id": "spell.acid-maw:uses_definition:class-feature.animal-companion"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -338,12 +379,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.acid-maw:uses_definition:rule.animal-companion",
+      "relationship_id": "spell.acid-maw:uses_definition:class-feature.animal-companion",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.animal-companion",
-        "name": "animal companion"
+        "entity_type": "class_feature",
+        "entity_id": "class-feature.animal-companion",
+        "name": "Animal companion"
       },
       "status": "accepted",
       "evidence": [
@@ -360,20 +401,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "animal companion",
           "source_href": "https://www.d20pfsrd.com/classes/core-classes/druid/animal-companions"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.acid-maw:uses_definition:rule.animal-companions",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.animal-companions",
-        "name": "animal companion’s"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.acid-maw:3d9d1d9397909945",
           "source_field": "spell_raw.links_raw[6]",
@@ -445,11 +473,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.acid-maw:uses_definition:rule.will",
+      "relationship_id": "spell.acid-maw:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -513,11 +541,19 @@
       "raw_value_sha256": "d5e39ec4a044bd3465528c32f500dc262935fa48eb0873329d7cb8b830f2f012",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.acid-maw:f195577db0533c98",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d89e949fe4f2db137ce991ce9477376680c574f5dce23b74da1d3ed5a7738ee8",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -6,7 +6,8 @@
   "canonical_record_path": "../canonical/call-the-void.json",
   "observation_ids": [
     "aon:spell.call-the-void:6d778346636f9a88",
-    "d20pfsrd:spell.call-the-void:c486d38a1cae0e37"
+    "d20pfsrd:spell.call-the-void:c486d38a1cae0e37",
+    "d20pfsrd:magic-school.void-elemental:443edb4d"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.call-the-void:6d778346636f9a88",
@@ -101,6 +102,35 @@
         "d20pfsrd:spell.call-the-void:c486d38a1cae0e37"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.call-the-void:6d778346636f9a88",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.call-the-void:6d778346636f9a88",
+        "d20pfsrd:spell.call-the-void:c486d38a1cae0e37"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
+    },
+    {
+      "canonical_path": "/levels/4",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.void-elemental:443edb4d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.void-elemental:443edb4d"
+      ],
+      "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -148,6 +178,20 @@
         "d20pfsrd:spell.call-the-void:c486d38a1cae0e37"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.call-the-void:appears_on_spell_list:spell-list.void-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.void-elemental:443edb4d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.void-elemental:443edb4d"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     },
     {
       "relationship_id": "spell.call-the-void:appears_on_spell_list:spell-list.witch",
@@ -245,24 +289,13 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.call-the-void:uses_definition:condition.fatigue",
+      "relationship_id": "spell.call-the-void:uses_definition:condition.fatigued",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.call-the-void:c486d38a1cae0e37",
           "source_field": "spell_raw.links_raw[9]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.call-the-void:6d778346636f9a88",
-        "d20pfsrd:spell.call-the-void:c486d38a1cae0e37"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.call-the-void:uses_definition:condition.fatigued",
-      "decision": "accept",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.call-the-void:c486d38a1cae0e37",
           "source_field": "spell_raw.links_raw[6]"
@@ -290,7 +323,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.call-the-void:uses_definition:rule.reflex",
+      "relationship_id": "spell.call-the-void:uses_definition:rule.reflex-saving-throw",
       "decision": "accept",
       "evidence": [
         {

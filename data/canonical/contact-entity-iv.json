@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.contact-entity-iv",
   "ruleset": "Pathfinder First Edition",
   "name": "Contact Entity IV",
@@ -209,7 +209,41 @@
   "description": {
     "raw": "This spell functions like contact entity III, except that you can contact creatures from the contact entity IV list, and as noted above.",
     "search_text": "\"this spell functions like contact entity iii, except that you can contact creatures from the contact entity iv list, and as noted above.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "contact entity III",
+              "relationship_id": "spell.contact-entity-iv:functions_like:spell.contact-entity-iii"
+            },
+            {
+              "node_type": "text",
+              "value": ", except that you can contact creatures from the "
+            },
+            {
+              "node_type": "text",
+              "value": "contact entity IV",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " list, and as noted above."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -350,6 +384,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.contact-entity-iv:appears_on_spell_list:spell-list.dark-tapestry-spirit",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.dark-tapestry-spirit",
+        "name": "Dark Tapestry Spirit Magic Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spirit.dark-tapestry:71645e3d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "contact entity IV (7th)",
+          "source_href": "https://www.aonprd.com/ShamanSpiritDisplay.aspx?ItemName=Dark%20Tapestry"
+        }
+      ],
+      "note": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
     },
     {
       "relationship_id": "spell.contact-entity-iv:appears_on_spell_list:spell-list.medium",
@@ -720,26 +774,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.contact-entity-iv:appears_on_spell_list:spell-list.dark-tapestry-spirit",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.dark-tapestry-spirit",
-        "name": "Dark Tapestry Spirit Magic Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spirit.dark-tapestry:71645e3d",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "contact entity IV (7th)",
-          "source_href": "https://www.aonprd.com/ShamanSpiritDisplay.aspx?ItemName=Dark%20Tapestry"
-        }
-      ],
-      "note": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
     }
   ],
   "provenance": [
@@ -798,11 +832,19 @@
       "raw_value_sha256": "e384f4861ca9edcc6705c2365400af7e4be3b976f2762e9488175b8d3f4427d7",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.contact-entity-iv:ea37d5b1ee90a79c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "605ff765e387909b43884e4f8ee438a80edb31a073b627bdff9df8efd1cf2136",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

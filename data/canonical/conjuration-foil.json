@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.conjuration-foil",
   "ruleset": "Pathfinder First Edition",
   "name": "Conjuration Foil",
@@ -195,7 +195,66 @@
   "description": {
     "raw": "All creatures in the area gain a +4 bonus on saving throws against teleportation effects. If any creature would enter or depart the area via a summoning or teleportation effect, that creature takes 1d6 points of damage per spell level of the triggering effect (or half the HD of the originating creature if the effect has no spell level) and arrives in a random similar location within the triggering effect’s range, rather than the intended destination.\n\nA successful Will save halves the damage and negates the altered destination.",
     "search_text": "\"all creatures in the area gain a +4 bonus on saving throws against teleportation effects. if any creature would enter or depart the area via a summoning or teleportation effect, that creature takes 1d6 points of damage per spell level of the triggering effect (or half the hd of the originating creature if the effect has no spell level) and arrives in a random similar location within the triggering effect’s range, rather than the intended destination.\\n\\na successful will save halves the damage and negates the altered destination.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "All creatures in the area gain a +4 bonus on saving throws against "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "teleportation",
+              "relationship_id": "spell.conjuration-foil:uses_definition:rule.teleportation"
+            },
+            {
+              "node_type": "text",
+              "value": " effects. If any creature would enter or depart the area via a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "summoning",
+              "relationship_id": "spell.conjuration-foil:uses_definition:subschool.summoning"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "teleportation",
+              "relationship_id": "spell.conjuration-foil:uses_definition:rule.teleportation"
+            },
+            {
+              "node_type": "text",
+              "value": " effect, that creature takes 1d6 points of damage per spell level of the triggering effect (or half the HD of the originating creature if the effect has no spell level) and arrives in a random similar location within the triggering effect’s range, rather than the intended destination."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": " A successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.conjuration-foil:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save halves the damage and negates the altered destination."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -659,26 +718,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.conjuration-foil:uses_definition:rule.summoning",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.summoning",
-        "name": "summoning"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.conjuration-foil:a5d959c1e2579e0f",
-          "source_field": "spell_raw.links_raw[13]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "summoning",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Conjuration-Summoning"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.conjuration-foil:uses_definition:rule.teleportation",
       "type": "uses_definition",
       "target": {
@@ -706,11 +745,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.conjuration-foil:uses_definition:rule.will",
+      "relationship_id": "spell.conjuration-foil:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -728,6 +767,26 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Will",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.conjuration-foil:uses_definition:subschool.summoning",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "subschool",
+        "entity_id": "subschool.summoning",
+        "name": "Summoning"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.conjuration-foil:a5d959c1e2579e0f",
+          "source_field": "spell_raw.links_raw[13]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "summoning",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Conjuration-Summoning"
         }
       ],
       "note": null
@@ -781,11 +840,19 @@
       "raw_value_sha256": "fa9d4634ab1549e490032775e64ce589be91482774caefa999bd99ac8adba7a9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.conjuration-foil:e24b5a66121683b4",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "474c5355a126145cddc3c23f8167defb14203ee39415b6196cb6177cb2b8354a",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

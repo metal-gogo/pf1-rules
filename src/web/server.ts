@@ -441,6 +441,7 @@ function listHref(id: string): string {
 function relatedEntityHref(type: string, id: string): string {
   if (type === "spell") return spellHref(id);
   if (type === "spell_list") return listHref(id);
+  if (type === "class") return `/classes/${encodeURIComponent(referenceAnchor(id))}`;
   return entityHref(id);
 }
 
@@ -461,6 +462,14 @@ function relationshipHref(relationship: {
   if (targetEntityType === "action") {
     return `/rules/actions#${encodeURIComponent(anchor)}`;
   }
+  if (targetEntityType === "descriptor") {
+    return `/rules/descriptors#${encodeURIComponent(anchor)}`;
+  }
+  if (targetEntityId.startsWith("illumination.")) {
+    return `/rules/illumination#${encodeURIComponent(anchor)}`;
+  }
+  if (targetEntityId === "rule.components") return "/spell-components";
+  if (targetEntityId === "rule.saving-throws") return "/rules/saving-throws";
   if (targetEntityType === "rule" && targetEntityId.endsWith("-saving-throw")) {
     return `/rules/saving-throws#${encodeURIComponent(anchor)}`;
   }
@@ -513,8 +522,9 @@ function humanize(value: string): string {
 }
 
 function spellFamilyNames(name: string): string[] {
-  const baseName = name.replace(/,\s*(?:Greater|Lesser)$/i, "");
-  return [baseName, `${baseName}, Lesser`, `${baseName}, Greater`];
+  const titledBase = name.replace(/,\s*(?:Greater|Lesser)$/i, "");
+  const baseName = titledBase.replace(/^Deeper\s+/i, "");
+  return [baseName, `${baseName}, Lesser`, `${baseName}, Greater`, `Deeper ${baseName}`];
 }
 
 function paragraphs(value: string): string {
@@ -736,7 +746,8 @@ const spellListKindTitles: Record<string, string> = {
   class: "Classes",
   domain: "Domains",
   subdomain: "Subdomains",
-  bloodline: "Bloodlines",
+  bloodrager_bloodline: "Bloodrager bloodlines",
+  sorcerer_bloodline: "Sorcerer bloodlines",
   mystery: "Mysteries",
   patron: "Patrons",
   spirit: "Spirits",
@@ -759,6 +770,16 @@ function spellListDirectoryHref(listKind: string, listId: string): string {
   return listKind === "class" ? classHref(listId) : listHref(listId);
 }
 
+function spellListDisplayKind(listKind: string, listId: string): string {
+  if (listId === "spell-list.alchemist" || listId === "spell-list.investigator") {
+    return "formulae";
+  }
+  if (listKind !== "bloodline") return listKind;
+  return listId.startsWith("spell-list.bloodrager-")
+    ? "bloodrager_bloodline"
+    : "sorcerer_bloodline";
+}
+
 async function spellListsPage(prisma: PrismaClient): Promise<string> {
   const nameGroups = await prisma.spellLevel.groupBy({
     by: ["listKind", "spellListId", "listName"],
@@ -777,14 +798,15 @@ async function spellListsPage(prisma: PrismaClient): Promise<string> {
     maximumLevel: number;
   }>();
   for (const group of nameGroups) {
-    const key = `${group.listKind}:${group.spellListId}`;
+    const listKind = spellListDisplayKind(group.listKind, group.spellListId);
+    const key = `${listKind}:${group.spellListId}`;
     const existing = listsByKindAndId.get(key);
     const groupCount = group._count._all;
     const minimumLevel = group._min.spellLevel ?? 0;
     const maximumLevel = group._max.spellLevel ?? minimumLevel;
     if (!existing) {
       listsByKindAndId.set(key, {
-        listKind: group.listKind,
+        listKind,
         spellListId: group.spellListId,
         listName: group.listName,
         nameCount: groupCount,
@@ -958,6 +980,8 @@ function rulesPage(): string {
       <li><a href="/rules/magic-schools">Magic schools and subschools</a></li>
       <li><a href="/rules/actions">Actions</a></li>
       <li><a href="/rules/saving-throws">Saving throws</a></li>
+      <li><a href="/rules/descriptors">Spell descriptors</a></li>
+      <li><a href="/rules/illumination">Illumination levels</a></li>
       <li><a href="/spell-components">Spell components</a></li>
     </ul>`);
 }
@@ -1069,6 +1093,54 @@ async function savingThrowsPage(prisma: PrismaClient): Promise<string> {
     "Saving throws",
     "Fortitude, Reflex, and Will saving throws resist different kinds of effects.",
     [{ heading: "Saving throw types", entities }],
+  );
+}
+
+async function descriptorsPage(prisma: PrismaClient): Promise<string> {
+  const entities = await prisma.entity.findMany({
+    where: { type: "descriptor" },
+    select: {
+      id: true,
+      name: true,
+      status: true,
+      observations: {
+        select: { id: true, siteId: true, descriptionRaw: true },
+        orderBy: { siteId: "asc" },
+      },
+    },
+    orderBy: { name: "asc" },
+  });
+  return ruleReferencePage(
+    "Spell descriptors",
+    "Descriptors categorize spells that share a significant rules property.",
+    [{ heading: "Descriptors", entities }],
+  );
+}
+
+async function illuminationPage(prisma: PrismaClient): Promise<string> {
+  const ids = [
+    "illumination.bright-light",
+    "illumination.normal-light",
+    "illumination.dim-light",
+    "illumination.darkness",
+  ];
+  const entities = await prisma.entity.findMany({
+    where: { id: { in: ids } },
+    select: {
+      id: true,
+      name: true,
+      status: true,
+      observations: {
+        select: { id: true, siteId: true, descriptionRaw: true },
+        orderBy: { siteId: "asc" },
+      },
+    },
+  });
+  const byId = new Map(entities.map((entity) => [entity.id, entity]));
+  return ruleReferencePage(
+    "Illumination levels",
+    "Illumination levels describe the prevailing light in an area, from bright light through darkness.",
+    [{ heading: "Levels", entities: ids.flatMap((id) => byId.get(id) ?? []) }],
   );
 }
 
@@ -1326,7 +1398,11 @@ async function spellPage(prisma: PrismaClient, spellId: string): Promise<string 
     ) return [];
     renderedInheritance.add(inheritance.fromSpellId);
     const parent = inheritedSpellById.get(inheritance.fromSpellId);
-    if (inheritance.resolutionStatus === "resolved" && parent) {
+    if (
+      inheritance.resolutionStatus === "resolved" &&
+      parent &&
+      richTextDocument(parent.payload)
+    ) {
       return [embeddedSpell(
         parent,
         payloadRelationships(parent.payload),
@@ -1347,14 +1423,16 @@ async function spellPage(prisma: PrismaClient, spellId: string): Promise<string 
     ? `<section aria-labelledby="spell-family"><h2 id="spell-family">Spell family</h2><p>These records share the same base title. This grouping aids navigation and does not by itself assert rules inheritance.</p>${familyRules.join("")}</section>`
     : "";
   const related = outgoing.map((relationship) => {
-    const targetUrl = relationshipHref(relationship);
+    const targetUrl = relationship.status === "accepted" ? relationshipHref(relationship) : null;
     return `<li>
       ${escapeHtml(humanize(relationship.relationshipType))}:
       ${targetUrl ? `<a href="${href(targetUrl)}">${escapeHtml(relationship.targetName)}</a>` : escapeHtml(relationship.targetName)}
       <span class="muted">(${escapeHtml(relationship.status)})</span>
     </li>`;
   }).join("");
-  const backlinks = incoming.map((relationship) => {
+  const backlinks = incoming.filter((relationship) =>
+    relationship.status === "accepted"
+  ).map((relationship) => {
     const owner = ownerById.get(relationship.ownerEntityId);
     const ownerUrl = owner?.type === "spell" ? spellHref(relationship.ownerEntityId) : entityHref(relationship.ownerEntityId);
     return `<li><a href="${href(ownerUrl)}">${escapeHtml(owner?.name ?? relationship.ownerEntityId)}</a> — ${escapeHtml(humanize(relationship.relationshipType))}</li>`;
@@ -1381,7 +1459,7 @@ async function spellPage(prisma: PrismaClient, spellId: string): Promise<string 
       ${description}
       ${inheritedRules}
       ${spellFamily}
-      ${spell.mythicVariant ? `<section id="mythic"><h2>Mythic ${escapeHtml(spell.name)}</h2>${paragraphs(spell.mythicVariant.rulesRaw)}${spell.mythicVariant.augmentations.length ? `<h3>Augmentations</h3><ul>${spell.mythicVariant.augmentations.map((augmentation) => `<li><strong>${escapeHtml(augmentation.name)}</strong>: ${escapeHtml(augmentation.raw)}</li>`).join("")}</ul>` : ""}</section>` : ""}
+      ${spell.mythicVariant ? `<section id="mythic"><h2>${escapeHtml(spell.mythicVariant.name)}</h2><p><strong>Source</strong>: ${escapeHtml(spell.mythicVariant.publicationBook)}${spell.mythicVariant.publicationPage === null ? "" : `, page ${spell.mythicVariant.publicationPage}`}</p>${paragraphs(spell.mythicVariant.rulesRaw)}${spell.mythicVariant.augmentations.length ? `<h3>Augmentations</h3><ul>${spell.mythicVariant.augmentations.map((augmentation) => `<li><strong>${escapeHtml(augmentation.name)}</strong>: ${escapeHtml(augmentation.raw)}</li>`).join("")}</ul>` : ""}</section>` : ""}
       <section aria-labelledby="related-rules"><h2 id="related-rules">Related rules</h2>${related ? `<ul>${related}</ul>` : "<p>No outgoing relationships.</p>"}</section>
       <section aria-labelledby="referenced-by"><h2 id="referenced-by">Referenced by</h2>${backlinks ? `<ul>${backlinks}</ul>` : "<p>No incoming relationships.</p>"}</section>
       <section aria-labelledby="sources"><h2 id="sources">Source observations</h2>${observations.length ? `<ul>${observations.map((observation) => `<li><a href="${href(sourceHref(observation.id))}">${escapeHtml(observation.siteId)}: ${escapeHtml(observation.pageTitleRaw ?? spell.name)}</a> <span class="muted">(${escapeHtml(observation.retrievedAt.toISOString().slice(0, 10))})</span></li>`).join("")}</ul>` : "<p>No observations recorded.</p>"}</section>
@@ -1570,6 +1648,8 @@ export function createRequestHandler(prisma: PrismaClient) {
       else if (url.pathname === "/rules/magic-schools") result = await magicSchoolsPage(prisma);
       else if (url.pathname === "/rules/actions") result = await actionsPage(prisma);
       else if (url.pathname === "/rules/saving-throws") result = await savingThrowsPage(prisma);
+      else if (url.pathname === "/rules/descriptors") result = await descriptorsPage(prisma);
+      else if (url.pathname === "/rules/illumination") result = await illuminationPage(prisma);
       else if (url.pathname === "/entities") result = await entitiesPage(prisma, url);
       else if (url.pathname === "/search") result = await searchPage(prisma, url);
       else if (url.pathname.startsWith("/classes/")) result = await classSpellsPage(prisma, decodeURIComponent(url.pathname.slice(9)));

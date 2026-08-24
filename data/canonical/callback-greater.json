@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.callback-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Callback, Greater",
@@ -143,7 +143,33 @@
   "description": {
     "raw": "This spell functions as callback, except as noted above.",
     "search_text": "\"this spell functions as callback, except as noted above.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "callback",
+              "relationship_id": "spell.callback-greater:functions_like:spell.callback",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except as noted above."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -588,11 +614,19 @@
       "raw_value_sha256": "fb2e838855477081ed6326b1e7436173d7fac0d4ac6da83a88140c75fec4fc49",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.callback-greater:acd431b909d30bb5",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "16cc2dec74b0f43c2eef8c94cfdd908876ddaa75523af9af68d00298d0129274",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

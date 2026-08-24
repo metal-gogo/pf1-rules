@@ -88,14 +88,15 @@ normalizing structural whitespace.
 Inline links come from bounded source HTML and accepted canonical
 relationships. Classification relationships such as `has_descriptor` do not
 become description links merely because their label occurs in prose. When an
-ordinary term has the same name as the current spell, source emphasis or an
-explicit source link distinguishes the spell reference; ambiguous occurrences
-remain plain text. Mythic and other separately titled variants must not be
-included in a base spell's description.
+ordinary term has the same name as the current spell, source context determines
+the referenced rules entity; a spell never links to its own page. Ambiguous
+occurrences remain plain text. Mythic and other separately titled variants must
+not be included in a base spell's description. A modeled mythic variant instead
+renders as its own section on the base spell page.
 
 The web read model renders semantic, escaped HTML and normal same-tab links.
 Resolved `functions_like` parents expand once after the description and never
-recurse. Separately, exact base, `, Lesser`, and `, Greater` titles form a
+recurse. Separately, base, `, Lesser`, `, Greater`, and `Deeper` titles form a
 navigation family and may also display once. Title grouping does not assert
 rules inheritance; only a canonical relationship can do that.
 

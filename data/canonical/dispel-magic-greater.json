@@ -243,6 +243,16 @@
         "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.void-elemental-school",
+      "list_kind": "elemental_school",
+      "list_name": "Void Elemental School",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "6—dispel magic (greater)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1261,6 +1271,26 @@
         }
       ],
       "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.dispel-magic-greater:appears_on_spell_list:spell-list.void-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.void-elemental-school",
+        "name": "Void Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.void-elemental:443edb4d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6—dispel magic (greater)",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/void-elemental-school/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -1343,6 +1373,14 @@
       "raw_value_sha256": "e5de4202e9a831dbd3a7fd6cb097d0f8ec5726b87f328b8ec978b446aab55ffd",
       "decision": "normalized",
       "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/levels/24",
+      "observation_id": "d20pfsrd:magic-school.void-elemental:443edb4d",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "68c1b0564ee248d11b904573e84347b3f1dcd23b2dac7aec864298f58c27bd37",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1448,6 +1486,11 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/23",
         "message": "Freedom Subdomain grants Dispel Magic, Greater as a level 6 derived spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/24",
+        "message": "Void Elemental School grants Dispel Magic, Greater as a level 6 printed spell; this is not general Wizard class access."
       }
     ]
   }

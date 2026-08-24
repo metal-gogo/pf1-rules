@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.blood-boil",
   "ruleset": "Pathfinder First Edition",
   "name": "Blood Boil",
@@ -143,7 +143,66 @@
   "description": {
     "raw": "The temperature of the target creature’s blood (or other similar body fluid) begins to rise over the next 3 rounds during the caster’s turn. Each round starting with the first, the target creature attempts a new saving throw at the start of the caster’s turn to resist that round’s effect. A successful save does not end the spell effect, but does prevent that round’s effect. On the round that this spell is cast, the target becomes fatigued. On the next round, as the blood temperature begins to rise, the target’s capillaries burst, dealing 1d6 points of Constitution damage to the target. On the third and final round, the target’s blood begins to boil; the spell deals 1d6 points of damage per caster level (to a maximum of 15d6), and—if the target is still alive—the target becomes exhausted rather than fatigued.",
     "search_text": "\"the temperature of the target creature’s blood (or other similar body fluid) begins to rise over the next 3 rounds during the caster’s turn. each round starting with the first, the target creature attempts a new saving throw at the start of the caster’s turn to resist that round’s effect. a successful save does not end the spell effect, but does prevent that round’s effect. on the round that this spell is cast, the target becomes fatigued. on the next round, as the blood temperature begins to rise, the target’s capillaries burst, dealing 1d6 points of constitution damage to the target. on the third and final round, the target’s blood begins to boil; the spell deals 1d6 points of damage per caster level (to a maximum of 15d6), and—if the target is still alive—the target becomes exhausted rather than fatigued.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The temperature of the target creature’s blood (or other similar body fluid) begins to rise over the next 3 rounds during the caster’s turn. Each round starting with the first, the target creature attempts a new saving throw at the start of the caster’s turn to resist that round’s effect. A successful save does not end the spell effect, but does prevent that round’s effect. On the round that this spell is cast, the target becomes "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fatigued",
+              "relationship_id": "spell.blood-boil:uses_definition:condition.fatigued"
+            },
+            {
+              "node_type": "text",
+              "value": ". On the next round, as the blood temperature begins to rise, the target’s capillaries burst, dealing 1d6 points of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Constitution damage",
+              "relationship_id": "spell.blood-boil:uses_definition:rule.constitution-damage"
+            },
+            {
+              "node_type": "text",
+              "value": " to the target. On the third and final round, the target’s blood begins to boil; the spell deals 1d6 points of damage per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.blood-boil:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (to a maximum of 15d6), and—if the target is still alive—the target becomes "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "exhausted",
+              "relationship_id": "spell.blood-boil:uses_definition:condition.exhausted"
+            },
+            {
+              "node_type": "text",
+              "value": " rather than "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fatigued",
+              "relationship_id": "spell.blood-boil:uses_definition:condition.fatigued"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -472,12 +531,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.blood-boil:uses_definition:rule.fort",
+      "relationship_id": "spell.blood-boil:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -512,12 +571,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.blood-boil:uses_definition:rule.touch",
+      "relationship_id": "spell.blood-boil:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -580,11 +639,19 @@
       "raw_value_sha256": "3a0cda64030982d1e87864319cfddeebc11a1a962b0d37dd0651ed9b3fa021f7",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.blood-boil:c99107f7b5fd5824",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d9cee5934e853ffa4393e0d3106424bbb23b9665f1001ea69094604a1213f4d4",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

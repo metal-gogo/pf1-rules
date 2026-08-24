@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.confess",
   "ruleset": "Pathfinder First Edition",
   "name": "Confess",
@@ -153,7 +153,48 @@
   "description": {
     "raw": "You ask the target creature a single question. On the subject’s next action, it must answer truthfully in the same language as the question or take 1d6 points of damage per two caster levels (maximum 5d6) and be sickened for 2d4 rounds. A successful Will save negates the sickening effect and halves the damage. A creature that is unable to answer still takes damage.",
     "search_text": "\"you ask the target creature a single question. on the subject’s next action, it must answer truthfully in the same language as the question or take 1d6 points of damage per two caster levels (maximum 5d6) and be sickened for 2d4 rounds. a successful will save negates the sickening effect and halves the damage. a creature that is unable to answer still takes damage.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You ask the target creature a single question. On the subject’s next action, it must answer truthfully in the same language as the question or take 1d6 points of damage per two caster levels (maximum 5d6) and be "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sickened",
+              "relationship_id": "spell.confess:uses_definition:condition.sickened"
+            },
+            {
+              "node_type": "text",
+              "value": " for 2d4 rounds. A successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.confess:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save negates the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sickening",
+              "relationship_id": "spell.confess:uses_definition:condition.sickened"
+            },
+            {
+              "node_type": "text",
+              "value": " effect and halves the damage. A creature that is unable to answer still takes damage."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -211,6 +252,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.confess:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.confess:46d0b6709b7faa9f",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.confess:b3343a718bab9a6e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.confess:appears_on_spell_list:spell-list.psychic",
@@ -431,20 +499,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "sickened",
           "source_href": "https://www.d20pfsrd.com/gamemastering/conditions#TOC-Sickened"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.confess:uses_definition:condition.sickening",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "condition",
-        "entity_id": "condition.sickening",
-        "name": "sickening"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.confess:46d0b6709b7faa9f",
           "source_field": "spell_raw.links_raw[8]",
@@ -476,11 +531,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.confess:uses_definition:rule.will",
+      "relationship_id": "spell.confess:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -501,33 +556,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.confess:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.confess:46d0b6709b7faa9f",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.confess:b3343a718bab9a6e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -578,11 +606,19 @@
       "raw_value_sha256": "d82aa89df8da2ae91990366ed5045f477295ea2f70122e4e8f2c1a99b13e6d8e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.confess:b3343a718bab9a6e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f509109872d4a50cbd196298cd4778021d82263792280a06641a497aca3dcb6f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

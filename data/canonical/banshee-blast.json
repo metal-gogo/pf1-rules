@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.banshee-blast",
   "ruleset": "Pathfinder First Edition",
   "name": "Banshee Blast",
@@ -143,7 +143,66 @@
   "description": {
     "raw": "You create a cone of spectral energy resembling screaming elven ghosts that deals 1d4 points of damage per caster level (maximum 15d4); a successful Reflex save halves this damage. Any creature that fails its Reflex save must succeed at a Will save or become panicked for 1 round/level.",
     "search_text": "\"you create a cone of spectral energy resembling screaming elven ghosts that deals 1d4 points of damage per caster level (maximum 15d4); a successful reflex save halves this damage. any creature that fails its reflex save must succeed at a will save or become panicked for 1 round/level.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create a cone of spectral energy resembling screaming elven "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "ghosts",
+              "relationship_id": "spell.banshee-blast:uses_definition:monster.ghost"
+            },
+            {
+              "node_type": "text",
+              "value": " that deals 1d4 points of damage per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.banshee-blast:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum 15d4); a successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.banshee-blast:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save halves this damage. Any creature that fails its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.banshee-blast:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save must succeed at a Will save or become "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "panicked",
+              "relationship_id": "spell.banshee-blast:uses_definition:condition.panicked"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 round/level."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -480,7 +539,7 @@
         "entity_id": "publication.will",
         "name": "Will"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.banshee-blast:5a43e4a68adda0f7",
@@ -497,7 +556,7 @@
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
         }
       ],
-      "note": null
+      "note": "The source href points to the Will saving-throw rules, not a publication."
     },
     {
       "relationship_id": "spell.banshee-blast:uses_action:action.standard-action",
@@ -547,6 +606,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.banshee-blast:uses_definition:monster.ghost",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "monster",
+        "entity_id": "monster.ghost",
+        "name": "Ghost"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.banshee-blast:5a43e4a68adda0f7",
+          "source_field": "spell_raw.links_raw[8]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "ghosts",
+          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/undead/ghost"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.banshee-blast:uses_definition:rule.caster-level",
       "type": "uses_definition",
       "target": {
@@ -567,31 +646,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.banshee-blast:uses_definition:rule.ghosts",
+      "relationship_id": "spell.banshee-blast:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.ghosts",
-        "name": "ghosts"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.banshee-blast:5a43e4a68adda0f7",
-          "source_field": "spell_raw.links_raw[8]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "ghosts",
-          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/undead/ghost"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.banshee-blast:uses_definition:rule.reflex",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -689,11 +748,19 @@
       "raw_value_sha256": "5dc5144a9811f715818120fe5c9007c5e03689284235f8279ea31439757f4476",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.banshee-blast:d4e0880c467ecaf7",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "28100bb9edceb92ae06bcf92f2bc68021a5f7c3e8f210e05decc856917252c67",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

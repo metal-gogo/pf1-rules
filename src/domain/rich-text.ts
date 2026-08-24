@@ -184,7 +184,7 @@ function naturalSpellName(value: string): string {
 
 function relationshipPriority(relationship: ValidatedJson): number {
   if (relationship.type === "functions_like") return 0;
-  if (relationship.target.entity_type === "spell") return 1;
+  if (["spell", "spell_family"].includes(relationship.target.entity_type)) return 1;
   if (relationship.type === "uses_definition") return 2;
   return 3;
 }
@@ -196,7 +196,7 @@ interface LinkCandidate {
   relationshipId: string;
   priority: number;
   expectsMatch: boolean;
-  requiresItalic: boolean;
+  exactCase: boolean;
 }
 
 
@@ -214,12 +214,20 @@ function linkCandidates(
       !relationship.target?.entity_id ||
       !relationship.relationship_id
     ) continue;
+    if (
+      relationship.target.entity_type === "spell" &&
+      relationship.target.entity_id === ownerEntityId
+    ) continue;
     const hasDescriptionEvidence = (relationship.evidence ?? []).some(
       (evidence: ValidatedJson) =>
         evidence.source_field === "spell_raw.description_raw"
     );
     const expectsMatch = relationship.type === "functions_like" ||
       relationship.target.entity_type === "spell" ||
+      (
+        relationship.target.entity_type === "spell_family" &&
+        relationship.type === "references"
+      ) ||
       hasDescriptionEvidence;
     if (!expectsMatch && relationship.type !== "uses_definition") continue;
     const phrases = new Set<string>([
@@ -229,7 +237,10 @@ function linkCandidates(
     for (const evidence of relationship.evidence ?? []) {
       const anchor = String(evidence.anchor_text_raw ?? "").trim();
       if (
-        evidence.source_field === "spell_raw.description_raw" &&
+        (
+          evidence.source_field === "spell_raw.description_raw" ||
+          evidence.evidence_kind === "hyperlink"
+        ) &&
         anchor.length <= 100 &&
         !/[.!?](?:\s|$)/.test(anchor) &&
         (
@@ -249,9 +260,8 @@ function linkCandidates(
         relationshipId: String(relationship.relationship_id),
         priority: relationshipPriority(relationship),
         expectsMatch,
-        requiresItalic:
-          relationship.target.entity_type === "spell" &&
-          relationship.target.entity_id === ownerEntityId,
+        exactCase: relationship.target.entity_type !== "spell" &&
+          /^\p{Lu}[^\s]*$/u.test(phrase),
       });
     }
   }
@@ -276,7 +286,7 @@ function linkCandidates(
       });
       continue;
     }
-    resolved.push(best[0]!);
+    resolved.push(best.find((match) => !match.exactCase) ?? best[0]!);
   }
   return {
     candidates: resolved.sort((left, right) =>
@@ -297,10 +307,9 @@ function escapedRegExp(value: string): string {
 function linkTextNode(node: RichTextTextNode, candidates: LinkCandidate[]): RichTextInlineNode[] {
   const matches: Array<{ start: number; end: number; candidate: LinkCandidate }> = [];
   for (const candidate of candidates) {
-    if (candidate.requiresItalic && !node.marks?.includes("italic")) continue;
     const expression = new RegExp(
       `(?<![\\p{L}\\p{N}])${escapedRegExp(candidate.phrase)}(?![\\p{L}\\p{N}])`,
-      "giu",
+      candidate.exactCase ? "gu" : "giu",
     );
     for (const match of node.value.matchAll(expression)) {
       const start = match.index;

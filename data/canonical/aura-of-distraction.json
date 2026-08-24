@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.aura-of-distraction",
   "ruleset": "Pathfinder First Edition",
   "name": "Aura of Distraction",
@@ -144,7 +144,48 @@
   "description": {
     "raw": "You emit an aura of subsonic noise and mental imagery that makes concentrating difficult. Any creature within the aura that fails its save takes a –5 penalty on concentration checks. A creature must attempt the Will save upon entering the area of the aura, and the penalty ends as soon as the creature leaves the aura. A creature that succeeds at its save is immune to the effects of the aura for this casting of the spell, even if it leaves and reenters the aura, but must attempt another Will save each additional time this spell is cast. You are immune to your own aura of distraction.",
     "search_text": "\"you emit an aura of subsonic noise and mental imagery that makes concentrating difficult. any creature within the aura that fails its save takes a –5 penalty on concentration checks. a creature must attempt the will save upon entering the area of the aura, and the penalty ends as soon as the creature leaves the aura. a creature that succeeds at its save is immune to the effects of the aura for this casting of the spell, even if it leaves and reenters the aura, but must attempt another will save each additional time this spell is cast. you are immune to your own aura of distraction.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You emit an aura of subsonic noise and mental imagery that makes concentrating difficult. Any creature within the aura that fails its save takes a –5 penalty on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concentration",
+              "relationship_id": "spell.aura-of-distraction:uses_definition:rule.concentration"
+            },
+            {
+              "node_type": "text",
+              "value": " checks. A creature must attempt the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.aura-of-distraction:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save upon entering the area of the aura, and the penalty ends as soon as the creature leaves the aura. A creature that succeeds at its save is immune to the effects of the aura for this casting of the spell, even if it leaves and reenters the aura, but must attempt another "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.aura-of-distraction:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save each additional time this spell is cast. You are immune to your own aura of distraction."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -440,7 +481,7 @@
         "entity_id": "rule.distraction",
         "name": "distraction"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.aura-of-distraction:15ba91d98e9a3efa",
@@ -450,7 +491,7 @@
           "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/universal-monster-rules#TOC-Distraction-Ex-"
         }
       ],
-      "note": null
+      "note": "The phrase is part of this spell’s name; the source href points to the unrelated monster Distraction ability."
     },
     {
       "relationship_id": "spell.aura-of-distraction:uses_definition:rule.psychic",
@@ -493,11 +534,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.aura-of-distraction:uses_definition:rule.will",
+      "relationship_id": "spell.aura-of-distraction:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -583,11 +624,19 @@
       "raw_value_sha256": "825e8262afd53f987a6927b86a26464b30f4780aa84b965b26d087da86beae7d",
       "decision": "manually_resolved",
       "note": "Reviewed project decision: the printed Range field is blank and the printed Area is a 20-ft.-radius emanation centered on you. Use personal as the canonical range while preserving the missing source value."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.aura-of-distraction:106d187b2087f1c2",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "4386eb7a2b078452eac87285111209e3e010a38fad97cf066d2c631364905abe",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "REVIEWED_RANGE_OVERRIDE",

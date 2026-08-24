@@ -127,6 +127,22 @@
         "aon:spell.air-step:d910ad24dd08f100"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.air-step:d910ad24dd08f100",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.air-step:d910ad24dd08f100",
+        "legacy_aon:spell.air-step:925c342d931bf3b5",
+        "d20pfsrd:spell.air-step:37721afea921feb0"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -273,6 +289,25 @@
         "d20pfsrd:spell.air-step:37721afea921feb0"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.air-step:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.air-step:37721afea921feb0",
+          "source_field": "spell_raw.links_raw[3]"
+        },
+        {
+          "observation_id": "aon:spell.air-step:d910ad24dd08f100",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:spell.air-step:37721afea921feb0",
+        "aon:spell.air-step:d910ad24dd08f100"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.air-step:appears_on_spell_list:spell-list.oracle",
@@ -433,6 +468,14 @@
         {
           "observation_id": "aon:spell.air-step:d910ad24dd08f100",
           "source_field": "spell_raw.description_raw"
+        },
+        {
+          "observation_id": "legacy_aon:spell.air-step:925c342d931bf3b5",
+          "source_field": "spell_raw.links_raw[0]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.air-step:37721afea921feb0",
+          "source_field": "spell_raw.links_raw[9]"
         }
       ],
       "considered_observation_ids": [
@@ -511,26 +554,6 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.air-step:references:spell.air-walk",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.air-step:925c342d931bf3b5",
-          "source_field": "spell_raw.links_raw[0]"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.air-step:37721afea921feb0",
-          "source_field": "spell_raw.links_raw[9]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.air-step:d910ad24dd08f100",
-        "legacy_aon:spell.air-step:925c342d931bf3b5",
-        "d20pfsrd:spell.air-step:37721afea921feb0"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.air-step:uses_action:action.standard-action",
       "decision": "accept",
       "evidence": [
@@ -552,7 +575,7 @@
     },
     {
       "relationship_id": "spell.air-step:uses_definition:condition.stable",
-      "decision": "accept",
+      "decision": "reject",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.air-step:37721afea921feb0",
@@ -564,7 +587,7 @@
         "legacy_aon:spell.air-step:925c342d931bf3b5",
         "d20pfsrd:spell.air-step:37721afea921feb0"
       ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+      "rationale": "The description uses “stable” as an ordinary adjective, not the Stable condition."
     },
     {
       "relationship_id": "spell.air-step:uses_definition:rule.acrobatics",
@@ -709,25 +732,6 @@
         "d20pfsrd:spell.air-step:37721afea921feb0"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.air-step:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.air-step:37721afea921feb0",
-          "source_field": "spell_raw.links_raw[3]"
-        },
-        {
-          "observation_id": "aon:spell.air-step:d910ad24dd08f100",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:spell.air-step:37721afea921feb0",
-        "aon:spell.air-step:d910ad24dd08f100"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
     }
   ],
   "unresolved_questions": [

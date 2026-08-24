@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.bestow-grace",
   "ruleset": "Pathfinder First Edition",
   "name": "Bestow Grace",
@@ -111,7 +111,66 @@
   "description": {
     "raw": "With this spell you can bestow your divine grace on another good creature for a short amount of time, infusing that creature with a portion of your holy virtue. When you touch the subject, you grant that creature a sacred bonus to its saving throws equal to its Charisma bonus (if any) on all saving throws.",
     "search_text": "\"with this spell you can bestow your divine grace on another good creature for a short amount of time, infusing that creature with a portion of your holy virtue. when you touch the subject, you grant that creature a sacred bonus to its saving throws equal to its charisma bonus (if any) on all saving throws.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "With this spell you can bestow your divine grace on another "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "good",
+              "relationship_id": "spell.bestow-grace:uses_definition:rule.good"
+            },
+            {
+              "node_type": "text",
+              "value": " creature for a short amount of time, infusing that creature with a portion of your holy virtue. When you touch the subject, you grant that creature a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sacred bonus",
+              "relationship_id": "spell.bestow-grace:uses_definition:rule.sacred-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " to its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throws",
+              "relationship_id": "spell.bestow-grace:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": " equal to its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Charisma",
+              "relationship_id": "spell.bestow-grace:uses_definition:rule.charisma"
+            },
+            {
+              "node_type": "text",
+              "value": " bonus (if any) on all "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throws",
+              "relationship_id": "spell.bestow-grace:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -360,11 +419,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.bestow-grace:uses_definition:rule.will",
+      "relationship_id": "spell.bestow-grace:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -428,11 +487,19 @@
       "raw_value_sha256": "ad926becaf2537588687e5f96bda78997e913e32a0f6440de3c68356047a17dd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.bestow-grace:024aeb028526f0a7",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "fb1fdf6b04f812c5523435870129189f3a7babbeac8bbad77603183f02243a13",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": []
   }
 }

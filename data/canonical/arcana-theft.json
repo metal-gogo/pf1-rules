@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.arcana-theft",
   "ruleset": "Pathfinder First Edition",
   "name": "Arcana Theft",
@@ -115,7 +115,85 @@
   "description": {
     "raw": "This spell functions as a targeted dispel magic spell, except it only affects creatures and it requires a melee touch attack. If the melee touch attack is successful and the spell successfully dispels one spell affecting the target, that spell is instead transferred to you, treating you as the original target. You do not receive a new saving throw or spell resistance check against this spell and must accept its affects even if they are not beneficial. This does not alter the spell’s duration; for example, if the spell only has 4 rounds of duration remaining when it is stolen, it only affects you for 4 rounds. If the spell or effect has a duration of permanent, its duration continues for 1 hour per caster level of the original caster, after which it ends. The stolen spell does not revert to the original target.",
     "search_text": "\"this spell functions as a targeted dispel magic spell, except it only affects creatures and it requires a melee touch attack. if the melee touch attack is successful and the spell successfully dispels one spell affecting the target, that spell is instead transferred to you, treating you as the original target. you do not receive a new saving throw or spell resistance check against this spell and must accept its affects even if they are not beneficial. this does not alter the spell’s duration; for example, if the spell only has 4 rounds of duration remaining when it is stolen, it only affects you for 4 rounds. if the spell or effect has a duration of permanent, its duration continues for 1 hour per caster level of the original caster, after which it ends. the stolen spell does not revert to the original target.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as a targeted "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dispel magic",
+              "relationship_id": "spell.arcana-theft:functions_like:spell.dispel-magic",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "spell, except it only affects creatures and it requires a melee "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch attack",
+              "relationship_id": "spell.arcana-theft:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": ". If the melee "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch attack",
+              "relationship_id": "spell.arcana-theft:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " is successful and the spell successfully dispels one spell affecting the target, that spell is instead transferred to you, treating you as the original target. You do not receive a new "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throw",
+              "relationship_id": "spell.arcana-theft:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.arcana-theft:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": " check against this spell and must accept its affects even if they are not beneficial. This does not alter the spell’s duration; for example, if the spell only has 4 rounds of duration remaining when it is stolen, it only affects you for 4 rounds. If the spell or effect has a duration of permanent, its duration continues for 1 hour per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.arcana-theft:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " of the original caster, after which it ends. The stolen spell does not revert to the original target."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -364,7 +442,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.dispel-magic",
-        "name": "dispel magic"
+        "name": "Dispel Magic"
       },
       "status": "accepted",
       "evidence": [
@@ -433,12 +511,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.arcana-theft:uses_definition:rule.saving-throw",
+      "relationship_id": "spell.arcana-theft:uses_definition:rule.saving-throws",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.saving-throw",
-        "name": "saving throw"
+        "entity_id": "rule.saving-throws",
+        "name": "Saving throws"
       },
       "status": "accepted",
       "evidence": [
@@ -548,11 +626,19 @@
       "raw_value_sha256": "d5965de32b0045b9f9cbde7f9c0b22304665dea4e4a92f693dc6d99560342b7e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.arcana-theft:6a67cdcc6d36180a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "7dacf6b39aba1dc4a81ad22c5abed929be33357eb1ce10169b6b39cb724ad88e",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

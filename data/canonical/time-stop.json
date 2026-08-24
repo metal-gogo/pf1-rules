@@ -271,6 +271,16 @@
         "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.void-elemental-school",
+      "list_kind": "elemental_school",
+      "list_name": "Void Elemental School",
+      "level": 9,
+      "scope": "later_first_party",
+      "raw": "9—time stop",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -1037,6 +1047,26 @@
         }
       ],
       "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.time-stop:appears_on_spell_list:spell-list.void-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.void-elemental-school",
+        "name": "Void Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.void-elemental:443edb4d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "9—time stop",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/void-elemental-school/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -1207,6 +1237,14 @@
       "raw_value_sha256": "3cf2d5611c76440814a2c3d648d286fefaa63354066cc12791e5b16acdcea587",
       "decision": "normalized",
       "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/levels/19",
+      "observation_id": "d20pfsrd:magic-school.void-elemental:443edb4d",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "d0c581332be7963992e6e0a3521c78e43eedbed6be69f026a08c7213388f9ee0",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1307,6 +1345,11 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/18",
         "message": "Thievery Subdomain grants Time Stop as a level 9 derived spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/19",
+        "message": "Void Elemental School grants Time Stop as a level 9 printed spell; this is not general Wizard class access."
       }
     ]
   }

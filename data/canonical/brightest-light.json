@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.brightest-light",
   "ruleset": "Pathfinder First Edition",
   "name": "Brightest Light",
@@ -269,7 +269,87 @@
   "description": {
     "raw": "This trademark spell of the Lantern Bearers functions as daylight, except it lasts longer. In addition, as a swift action once during the spell’s duration, you can will the light to try to end a magical darkness effect located within 60 feet of the light this spell emits. Attempt a dispel check (1d20 + your caster level), with a DC equal to 11 + the caster level of the darkness effect. If you succeed, the darkness effect ends. Regardless of whether you are successful, the light from this spell dims to the brightness of a torch for the spell’s remaining duration.",
     "search_text": "\"this trademark spell of the lantern bearers functions as daylight, except it lasts longer. in addition, as a swift action once during the spell’s duration, you can will the light to try to end a magical darkness effect located within 60 feet of the light this spell emits. attempt a dispel check (1d20 + your caster level), with a dc equal to 11 + the caster level of the darkness effect. if you succeed, the darkness effect ends. regardless of whether you are successful, the light from this spell dims to the brightness of a torch for the spell’s remaining duration.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This trademark spell of the Lantern Bearers functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "daylight",
+              "relationship_id": "spell.brightest-light:functions_like:spell.daylight",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it lasts longer. In addition, as a swift action once during the spell’s duration, you can will the light to try to end a magical "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "darkness",
+              "relationship_id": "spell.brightest-light:uses_definition:descriptor.darkness"
+            },
+            {
+              "node_type": "text",
+              "value": " effect located within 60 feet of the light this spell emits. Attempt a dispel check (1d20 + your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.brightest-light:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": "), with a DC equal to 11 + the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.brightest-light:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " of the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "darkness",
+              "relationship_id": "spell.brightest-light:uses_definition:descriptor.darkness"
+            },
+            {
+              "node_type": "text",
+              "value": " effect. If you succeed, the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "darkness",
+              "relationship_id": "spell.brightest-light:uses_definition:descriptor.darkness"
+            },
+            {
+              "node_type": "text",
+              "value": " effect ends. Regardless of whether you are successful, the light from this spell dims to the brightness of a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "torch",
+              "relationship_id": "spell.brightest-light:uses_definition:item.torch"
+            },
+            {
+              "node_type": "text",
+              "value": " for the spell’s remaining duration."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -279,7 +359,55 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.daylight",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.brightest-light:a0868d94ed41157a",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This trademark spell of the Lantern Bearers functions as daylight, except it lasts longer. In addition, as a swift action once during the spell’s duration, you can will the light to try to end a magical darkness effect located within 60 feet of the light this spell emits. Attempt a dispel check (1d20 + your caster level), with a DC equal to 11 + the caster level of the darkness effect. If you succeed, the darkness effect ends. Regardless of whether you are successful, the light from this spell dims to the brightness of a torch for the spell’s remaining duration."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "timed",
+            "formula": "1 hour/level (D)",
+            "dismissible": true,
+            "concentration": null,
+            "raw": "1 hour/level (D)"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "1 hour/level (D)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This trademark spell of the Lantern Bearers functions as daylight, except it lasts longer. In addition, as a swift action once during the spell’s duration, you can will the light to try to end a magical darkness effect located within 60 feet of the light this spell emits. Attempt a dispel check (1d20 + your caster level), with a DC equal to 11 + the caster level of the darkness effect. If you succeed, the darkness effect ends. Regardless of whether you are successful, the light from this spell dims to the brightness of a torch for the spell’s remaining duration.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This trademark spell of the Lantern Bearers functions as daylight, except it lasts longer. In addition, as a swift action once during the spell’s duration, you can will the light to try to end a magical darkness effect located within 60 feet of the light this spell emits. Attempt a dispel check (1d20 + your caster level), with a DC equal to 11 + the caster level of the darkness effect. If you succeed, the darkness effect ends. Regardless of whether you are successful, the light from this spell dims to the brightness of a torch for the spell’s remaining duration.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.brightest-light:appears_on_spell_list:spell-list.arcanist",
@@ -484,6 +612,47 @@
       "note": null
     },
     {
+      "relationship_id": "spell.brightest-light:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.brightest-light:8a5b21d237950b40",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.brightest-light:a0868d94ed41157a",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.brightest-light:8a5b21d237950b40",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.brightest-light:a0868d94ed41157a",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.brightest-light:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -585,6 +754,33 @@
       "note": null
     },
     {
+      "relationship_id": "spell.brightest-light:appears_on_spell_list:spell-list.skald",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.skald",
+        "name": "Skald Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.brightest-light:8a5b21d237950b40",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "bard",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-bard/"
+        },
+        {
+          "observation_id": "aon:spell.brightest-light:a0868d94ed41157a",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "bard 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use the Bard spell list through level 6 at the same spell level; retain separately printed Skald spells. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.brightest-light:appears_on_spell_list:spell-list.sorcerer",
       "type": "appears_on_spell_list",
       "target": {
@@ -660,6 +856,26 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "wizard 4",
           "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.brightest-light:functions_like:spell.daylight",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.daylight",
+        "name": "Daylight"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.brightest-light:8a5b21d237950b40",
+          "source_field": "spell_raw.links_raw[11]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "daylight",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/daylight"
         }
       ],
       "note": null
@@ -780,46 +996,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.brightest-light:references:spell.darkness",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.darkness",
-        "name": "darkness"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.brightest-light:8a5b21d237950b40",
-          "source_field": "spell_raw.links_raw[13]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "darkness",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/darkness"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.brightest-light:references:spell.daylight",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.daylight",
-        "name": "daylight"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.brightest-light:8a5b21d237950b40",
-          "source_field": "spell_raw.links_raw[11]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "daylight",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/daylight"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.brightest-light:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -855,6 +1031,46 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "swift action",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Swift-Actions"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.brightest-light:uses_definition:descriptor.darkness",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.darkness",
+        "name": "Darkness"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.brightest-light:8a5b21d237950b40",
+          "source_field": "spell_raw.links_raw[13]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "darkness",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/darkness"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.brightest-light:uses_definition:item.torch",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "item",
+        "entity_id": "item.torch",
+        "name": "Torch"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.brightest-light:8a5b21d237950b40",
+          "source_field": "spell_raw.links_raw[16]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "torch",
+          "source_href": "https://www.d20pfsrd.com/equipment/goods-and-services/hunting-camping-survival-gear#TOC-Torch"
         }
       ],
       "note": null
@@ -905,94 +1121,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.brightest-light:uses_definition:rule.torch",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.torch",
-        "name": "torch"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.brightest-light:8a5b21d237950b40",
-          "source_field": "spell_raw.links_raw[16]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "torch",
-          "source_href": "https://www.d20pfsrd.com/equipment/goods-and-services/hunting-camping-survival-gear#TOC-Torch"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.brightest-light:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.brightest-light:8a5b21d237950b40",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.brightest-light:a0868d94ed41157a",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 4",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.brightest-light:8a5b21d237950b40",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.brightest-light:a0868d94ed41157a",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.brightest-light:appears_on_spell_list:spell-list.skald",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.skald",
-        "name": "Skald Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.brightest-light:8a5b21d237950b40",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "bard",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-bard/"
-        },
-        {
-          "observation_id": "aon:spell.brightest-light:a0868d94ed41157a",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "bard 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use the Bard spell list through level 6 at the same spell level; retain separately printed Skald spells. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -1043,11 +1171,19 @@
       "raw_value_sha256": "045c7ae9803fed7f79c34aaeb30f0b6eab670c804f5d9b1df8095fbd47fff7de",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.brightest-light:a0868d94ed41157a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "4b807f743cfa3549c807006b62697fa7d26f31c39b64b7a17e63e4a21c752fcd",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

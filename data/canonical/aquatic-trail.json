@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.aquatic-trail",
   "ruleset": "Pathfinder First Edition",
   "name": "Aquatic Trail",
@@ -162,7 +162,30 @@
   "description": {
     "raw": "You use divination magic to enhance the underwater trails in the area around you, allowing you to track creatures through the water as if across soft ground as long as they passed through the area less than 1 week ago (this lets you notice trails that are much older than normal underwater trails). The spell’s area moves with you, so you can follow the trail through the water over long distances. Other creatures can also follow the trail as long as they move with you. Because of the plethora of sea creatures in the higher zones, it’s possible that the trail that most interests you will be covered by the trails of other aquatic creatures, making this spell even more useful than normal in the Abyssal and Abaddonian zones.",
     "search_text": "\"you use divination magic to enhance the underwater trails in the area around you, allowing you to track creatures through the water as if across soft ground as long as they passed through the area less than 1 week ago (this lets you notice trails that are much older than normal underwater trails). the spell’s area moves with you, so you can follow the trail through the water over long distances. other creatures can also follow the trail as long as they move with you. because of the plethora of sea creatures in the higher zones, it’s possible that the trail that most interests you will be covered by the trails of other aquatic creatures, making this spell even more useful than normal in the abyssal and abaddonian zones.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You use divination magic to enhance the underwater trails in the area around you, allowing you to track creatures through the water as if across soft ground as long as they passed through the area less than 1 week ago (this lets you notice trails that are much older than normal underwater trails). The spell’s area moves with you, so you can follow the trail through the water over long distances. Other creatures can also follow the trail as long as they move with you. Because of the plethora of sea creatures in the higher zones, it’s possible that the trail that most interests you will be covered by the trails of other "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "aquatic",
+              "relationship_id": "spell.aquatic-trail:uses_definition:rule.aquatic"
+            },
+            {
+              "node_type": "text",
+              "value": " creatures, making this spell even more useful than normal in the Abyssal and Abaddonian zones."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -254,6 +277,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.aquatic-trail:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.aquatic-trail:62ef162cfaa4518b",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.aquatic-trail:a634df7842dffcfb",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.aquatic-trail:appears_on_spell_list:spell-list.ranger",
@@ -463,33 +513,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.aquatic-trail:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.aquatic-trail:62ef162cfaa4518b",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.aquatic-trail:a634df7842dffcfb",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -540,11 +563,19 @@
       "raw_value_sha256": "a4e1188283583c0ec547c21f59000350ecc8be1be300fc0f04808aa2fece5a77",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.aquatic-trail:a634df7842dffcfb",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "bf19ac356cc0b0b754d10216bc83bf7a217839a629e2e36c8fd5057fa91a3389",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

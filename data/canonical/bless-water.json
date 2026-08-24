@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.bless-water",
   "ruleset": "Pathfinder First Edition",
   "name": "Bless Water",
@@ -192,7 +192,30 @@
   "description": {
     "raw": "This transmutation imbues a flask (1 pint) of water with positive energy, turning it into holy water.",
     "search_text": "\"this transmutation imbues a flask (1 pint) of water with positive energy, turning it into holy water.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This transmutation imbues a flask (1 pint) of water with positive energy, turning it into "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "holy water",
+              "relationship_id": "spell.bless-water:uses_definition:item.holy-water"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -245,6 +268,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.bless-water:appears_on_spell_list:spell-list.divine-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.divine-subdomain",
+        "name": "Divine Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.divine:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd—bless water",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Magic"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
       "relationship_id": "spell.bless-water:appears_on_spell_list:spell-list.inquisitor",
       "type": "appears_on_spell_list",
       "target": {
@@ -270,6 +313,40 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.bless-water:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.bless-water:4fae2b09c0a76bec",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.bless-water:95ee884f68eeefe4",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.bless-water:4fae2b09c0a76bec",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.bless-water:appears_on_spell_list:spell-list.oracle",
@@ -337,6 +414,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.bless-water:appears_on_spell_list:spell-list.water-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.water-patron",
+        "name": "Water Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.water:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd — bless water/curse water",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.bless-water:has_descriptor:descriptor.good",
@@ -427,32 +524,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.bless-water:uses_definition:rule.divine",
+      "relationship_id": "spell.bless-water:uses_definition:item.holy-water",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.divine",
-        "name": "divine"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.bless-water:95ee884f68eeefe4",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "divine",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domai/magic-domain/divine"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.bless-water:uses_definition:rule.holy-water",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.holy-water",
-        "name": "holy water"
+        "entity_type": "item",
+        "entity_id": "item.holy-water",
+        "name": "Holy water"
       },
       "status": "accepted",
       "evidence": [
@@ -469,6 +546,26 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "holy water",
           "source_href": "https://www.d20pfsrd.com/equipment/goods-and-services/toys-games-puzzles#TOC-Holy-Water"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.bless-water:uses_definition:rule.divine",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.divine",
+        "name": "divine"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.bless-water:95ee884f68eeefe4",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "divine",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domai/magic-domain/divine"
         }
       ],
       "note": null
@@ -501,11 +598,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.bless-water:uses_definition:rule.will",
+      "relationship_id": "spell.bless-water:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -526,80 +623,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.bless-water:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.bless-water:4fae2b09c0a76bec",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.bless-water:95ee884f68eeefe4",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.bless-water:4fae2b09c0a76bec",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.bless-water:appears_on_spell_list:spell-list.water-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.water-patron",
-        "name": "Water Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.water:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "2nd — bless water/curse water",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
-    },
-    {
-      "relationship_id": "spell.bless-water:appears_on_spell_list:spell-list.divine-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.divine-subdomain",
-        "name": "Divine Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.divine:44b410b9",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "2nd—bless water",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Magic"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -666,11 +689,19 @@
       "raw_value_sha256": "c8a473ff1280320f6341634084afa03c1479785d3ca423b79d7e8ed3e263af1c",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.bless-water:4fae2b09c0a76bec",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "61173a3b280baf7a8afa39ffeb2d23cf84caa27d58cd61b0b2316caf8dd563d5",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.bloody-arrows",
   "ruleset": "Pathfinder First Edition",
   "name": "Bloody Arrows",
@@ -200,7 +200,66 @@
   "description": {
     "raw": "Whenever this spell’s target hits a creature with a ranged weapon that successfully deals piercing or slashing damage, the struck creature takes 1 point of bleed damage. Unlike most bleed damage, the bleed damage dealt by the subject of this spell is cumulative up to an amount equal to 1/2 your caster level (to a maximum of 5 points of bleed damage at 10th level).",
     "search_text": "\"whenever this spell’s target hits a creature with a ranged weapon that successfully deals piercing or slashing damage, the struck creature takes 1 point of bleed damage. unlike most bleed damage, the bleed damage dealt by the subject of this spell is cumulative up to an amount equal to 1/2 your caster level (to a maximum of 5 points of bleed damage at 10th level).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Whenever this spell’s target hits a creature with a ranged weapon that successfully deals piercing or slashing damage, the struck creature takes 1 point of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bleed",
+              "relationship_id": "spell.bloody-arrows:uses_definition:condition.bleed"
+            },
+            {
+              "node_type": "text",
+              "value": " damage. Unlike most "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bleed",
+              "relationship_id": "spell.bloody-arrows:uses_definition:condition.bleed"
+            },
+            {
+              "node_type": "text",
+              "value": " damage, the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bleed",
+              "relationship_id": "spell.bloody-arrows:uses_definition:condition.bleed"
+            },
+            {
+              "node_type": "text",
+              "value": " damage dealt by the subject of this spell is cumulative up to an amount equal to 1/2 your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.bloody-arrows:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (to a maximum of 5 points of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bleed",
+              "relationship_id": "spell.bloody-arrows:uses_definition:condition.bleed"
+            },
+            {
+              "node_type": "text",
+              "value": " damage at 10th level)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -332,6 +391,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.bloody-arrows:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.bloody-arrows:9aec6fbd5cba8118",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.bloody-arrows:e030731114148eff",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.bloody-arrows:appears_on_spell_list:spell-list.ranger",
@@ -649,33 +735,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.bloody-arrows:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.bloody-arrows:9aec6fbd5cba8118",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.bloody-arrows:e030731114148eff",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -726,11 +785,19 @@
       "raw_value_sha256": "04f43744323f24803e0bff281838d958f0b558de1984a118897badaafb4b841f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.bloody-arrows:e030731114148eff",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "5a0ef1be53dfdd390f7fce10df7c2884ea3c17903b908926bbbefc9653b32de6",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

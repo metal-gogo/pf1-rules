@@ -11,8 +11,12 @@ import {
   parseRichTextHtml,
   richTextLeafText,
   type RichTextDocument,
+  type RichTextInlineNode,
 } from "../domain/rich-text.js";
-import { resolveCanonicalSpellReference } from "./normalize-level-zero.js";
+import {
+  materializeSpellInheritanceRule,
+  resolveCanonicalSpellReference,
+} from "./normalize-level-zero.js";
 import { parseAonSpell } from "./spell-page-parser.js";
 
 
@@ -76,72 +80,1219 @@ const darknessMythicOnlyTargets = new Set([
   "rule.source",
 ]);
 
+const darknessContextualTargets = new Set([
+  "descriptor.darkness",
+  "illumination.bright-light",
+  "illumination.normal-light",
+  "illumination.dim-light",
+  "illumination.darkness",
+  "rule.light-vulnerability",
+  "rule.light-sensitivity",
+  "rule.concealment",
+  "rule.total-concealment",
+  "item.torch",
+  "item.lantern",
+  "mythic-spell-variant.darkness",
+]);
 
-function hasItalicValue(document: RichTextDocument, value: string): boolean {
-  const expected = value.toLocaleLowerCase("en-US");
-  return document.content.some((block) => {
-    const content = block.node_type === "paragraph"
-      ? block.content
-      : block.content.flatMap((item) => item.content);
-    return content.some((node) =>
-      node.node_type !== "hard_break" &&
-      node.marks?.includes("italic") &&
-      node.value.toLocaleLowerCase("en-US") === expected
-    );
-  });
+const alluringLightContextualTargets = new Set([
+  "illumination.normal-light",
+  "illumination.dim-light",
+  "illumination.darkness",
+]);
+
+const antiSummoningContextualTargets = new Set(["rule.summon"]);
+
+const canonicalTargets = new Map<string, {
+  id: string;
+  name: string;
+  type?: string;
+  relationshipType?: string;
+}>([
+  ["rule.fortitude", { id: "rule.fortitude-saving-throw", name: "Fortitude" }],
+  ["rule.fort", { id: "rule.fortitude-saving-throw", name: "Fortitude" }],
+  ["rule.reflex", { id: "rule.reflex-saving-throw", name: "Reflex" }],
+  ["rule.will", { id: "rule.will-saving-throw", name: "Will" }],
+  ["rule.affliction", { id: "rule.afflictions", name: "Afflictions" }],
+  ["rule.attack-roll", { id: "rule.attack-rolls", name: "Attack rolls" }],
+  ["rule.ac", { id: "rule.armor-class", name: "Armor Class" }],
+  ["rule.saving-throw", { id: "rule.saving-throws", name: "Saving throws" }],
+  ["rule.touch", { id: "rule.touch-attack", name: "Touch attack" }],
+  ["rule.enchantment", { id: "magic-school.enchantment", name: "Enchantment", type: "magic_school" }],
+  ["rule.illusion", { id: "magic-school.illusion", name: "Illusion", type: "magic_school" }],
+  ["rule.charm", { id: "subschool.charm", name: "Charm", type: "subschool" }],
+  ["rule.animals", { id: "rule.animal", name: "Animal" }],
+  ["rule.cmd", { id: "rule.combat-maneuver-defense", name: "Combat Maneuver Defense" }],
+  ["rule.dr", { id: "rule.damage-reduction", name: "Damage reduction" }],
+  ["rule.elven", { id: "rule.elf", name: "Elf" }],
+  ["rule.magic-auras", { id: "spell.magic-aura", name: "Magic Aura", type: "spell", relationshipType: "references" }],
+  ["rule.bards", { id: "class.bard", name: "Bard", type: "class" }],
+  ["rule.wizards", { id: "class.wizard", name: "Wizard", type: "class" }],
+  ["rule.caltrops", { id: "item.caltrops", name: "Caltrops", type: "item" }],
+  ["rule.light-level", { id: "illumination.levels", name: "Light level" }],
+  ["rule.clay-golem", { id: "monster.clay-golem", name: "Clay golem", type: "monster" }],
+  ["rule.skeletons", { id: "rule.skeleton", name: "Skeleton" }],
+  ["rule.zombies", { id: "rule.zombie", name: "Zombie" }],
+  ["rule.natural-attack", { id: "rule.natural-attacks", name: "Natural attacks" }],
+  ["rule.spell-like-ability", { id: "rule.spell-like-abilities", name: "Spell-like abilities" }],
+  ["rule.summoners", { id: "class.summoner", name: "Summoner", type: "class" }],
+  ["rule.summoning", { id: "subschool.summoning", name: "Summoning", type: "subschool" }],
+  ["rule.sling", { id: "item.sling", name: "Sling", type: "item" }],
+  ["rule.magic-missile", { id: "spell.magic-missile", name: "Magic Missile", type: "spell", relationshipType: "references" }],
+  ["rule.monkey", { id: "monster.monkey", name: "Monkey", type: "monster" }],
+  ["rule.humanoids", { id: "rule.humanoid", name: "Humanoid" }],
+  ["rule.aberrations", { id: "rule.aberration", name: "Aberration" }],
+  ["rule.dragons", { id: "rule.dragon", name: "Dragon" }],
+  ["rule.giants", { id: "rule.giant", name: "Giant" }],
+  ["rule.magical-beasts", { id: "rule.magical-beast", name: "Magical beast" }],
+  ["rule.monstrous-humanoids", { id: "rule.monstrous-humanoid", name: "Monstrous humanoid" }],
+  ["rule.oozes", { id: "rule.ooze", name: "Ooze" }],
+  ["rule.plants", { id: "rule.plant", name: "Plant" }],
+  ["rule.constructs", { id: "rule.construct", name: "Construct" }],
+  ["rule.elementals", { id: "rule.elemental", name: "Elemental" }],
+  ["rule.outsiders", { id: "rule.outsider", name: "Outsider" }],
+  ["rule.hippocampi", { id: "monster.hippocampus", name: "Hippocampus", type: "monster" }],
+  ["rule.hippocampus", { id: "monster.hippocampus", name: "Hippocampus", type: "monster" }],
+  ["rule.archon", { id: "rule.archons", name: "Archons" }],
+  ["rule.hd", { id: "rule.hit-dice", name: "Hit Dice" }],
+  ["rule.hit-die", { id: "rule.hit-dice", name: "Hit Dice" }],
+  ["rule.combat-maneuver", { id: "rule.combat-maneuvers", name: "Combat maneuvers" }],
+  ["rule.paladin", { id: "class.paladin", name: "Paladin", type: "class" }],
+  ["rule.magic-aura", { id: "spell.magic-aura", name: "Magic Aura", type: "spell", relationshipType: "references" }],
+  ["rule.animal-companion", { id: "class-feature.animal-companion", name: "Animal companion", type: "class_feature" }],
+  ["rule.animal-companions", { id: "class-feature.animal-companion", name: "Animal companion", type: "class_feature" }],
+  ["rule.shield-guardians", { id: "monster.shield-guardian", name: "Shield guardian", type: "monster" }],
+  ["rule.daemons", { id: "rule.daemon", name: "Daemon" }],
+  ["rule.trumpet-archons", { id: "monster.trumpet-archon", name: "Trumpet archon", type: "monster" }],
+  ["rule.arcanist", { id: "class.arcanist", name: "Arcanist", type: "class" }],
+  ["rule.magus-arcana", { id: "class-feature.magus-arcana", name: "Magus arcana", type: "class_feature" }],
+  ["rule.hexes", { id: "class-feature.hexes", name: "Hexes", type: "class_feature" }],
+  ["rule.enlarge-spell", { id: "feat.enlarge-spell", name: "Enlarge Spell", type: "feat" }],
+  ["rule.extend-spell", { id: "feat.extend-spell", name: "Extend Spell", type: "feat" }],
+  ["rule.silent-spell", { id: "feat.silent-spell", name: "Silent Spell", type: "feat" }],
+  ["rule.still-spell", { id: "feat.still-spell", name: "Still Spell", type: "feat" }],
+  ["rule.improved-critical", { id: "feat.improved-critical", name: "Improved Critical", type: "feat" }],
+  ["rule.gem-of-seeing", { id: "item.gem-of-seeing", name: "Gem of seeing", type: "item" }],
+  ["rule.robe-of-eyes", { id: "item.robe-of-eyes", name: "Robe of eyes", type: "item" }],
+  ["rule.bag-of-holding", { id: "item.bag-of-holding", name: "Bag of holding", type: "item" }],
+  ["rule.cmb", { id: "rule.combat-maneuver-bonus", name: "Combat Maneuver Bonus" }],
+  ["condition.daze", { id: "condition.dazed", name: "Dazed", type: "condition" }],
+  ["spell.dispelled", { id: "spell.dispel-magic", name: "Dispel Magic", type: "spell", relationshipType: "references" }],
+  ["condition.fatigue", { id: "condition.fatigued", name: "Fatigued", type: "condition" }],
+  ["rule.candle", { id: "item.candle", name: "Candle", type: "item" }],
+  ["rule.chain", { id: "item.chain", name: "Chain", type: "item" }],
+  ["rule.rope", { id: "item.rope", name: "Rope", type: "item" }],
+  ["rule.wild-shape", { id: "class-feature.wild-shape", name: "Wild shape", type: "class_feature" }],
+  ["rule.ghosts", { id: "monster.ghost", name: "Ghost", type: "monster" }],
+  ["rule.kilt", { id: "item.kilt", name: "Kilt", type: "item" }],
+  ["rule.caulborn", { id: "monster.caulborn", name: "Caulborn", type: "monster" }],
+  ["rule.paladins", { id: "class.paladin", name: "Paladin", type: "class" }],
+  ["rule.eidolon", { id: "class-feature.eidolon", name: "Eidolon", type: "class_feature" }],
+  ["rule.aura-of-resolve", { id: "class-feature.aura-of-resolve", name: "Aura of resolve", type: "class_feature" }],
+  ["rule.power-attack", { id: "feat.power-attack", name: "Power Attack", type: "feat" }],
+  ["rule.rod-of-cancellation", { id: "item.rod-of-cancellation", name: "Rod of cancellation", type: "item" }],
+  ["rule.sphere-of-annihilation", { id: "item.sphere-of-annihilation", name: "Sphere of annihilation", type: "item" }],
+  ["condition.bleed-damage", { id: "condition.bleed", name: "Bleed", type: "condition" }],
+  ["rule.longbow", { id: "item.longbow", name: "Longbow", type: "item" }],
+  ["rule.shortbow", { id: "item.shortbow", name: "Shortbow", type: "item" }],
+  ["rule.holy-water", { id: "item.holy-water", name: "Holy water", type: "item" }],
+  ["rule.improved-unarmed-strike", { id: "feat.improved-unarmed-strike", name: "Improved Unarmed Strike", type: "feat" }],
+  ["rule.monk", { id: "class.monk", name: "Monk", type: "class" }],
+  ["rule.sharks", { id: "monster.shark", name: "Shark", type: "monster" }],
+  ["rule.bleed", { id: "condition.bleed", name: "Bleed", type: "condition" }],
+  ["condition.dazes", { id: "condition.dazed", name: "Dazed", type: "condition" }],
+  ["rule.orcs", { id: "rule.orc", name: "Orc" }],
+  ["rule.alertness", { id: "feat.alertness", name: "Alertness", type: "feat" }],
+  ["rule.dagger", { id: "item.dagger", name: "Dagger", type: "item" }],
+  ["rule.araznis", { id: "deity.arazni", name: "Arazni", type: "deity" }],
+  ["rule.armor-spikes", { id: "item.armor-spikes", name: "Armor spikes", type: "item" }],
+  ["rule.giant-mantis", { id: "monster.giant-mantis", name: "Giant mantis", type: "monster" }],
+  ["rule.sawtooth-sabre", { id: "item.sawtooth-sabre", name: "Sawtooth sabre", type: "item" }],
+  ["rule.natural-weapons", { id: "rule.natural-attacks", name: "Natural attacks" }],
+  ["rule.conjuration", { id: "magic-school.conjuration", name: "Conjuration", type: "magic_school" }],
+  ["rule.transmutation", { id: "magic-school.transmutation", name: "Transmutation", type: "magic_school" }],
+  ["rule.healing", { id: "subschool.healing", name: "Healing", type: "subschool" }],
+  ["rule.mind-affecting", { id: "descriptor.mind-affecting", name: "Mind-affecting", type: "descriptor" }],
+  ["rule.dwarves", { id: "rule.dwarf", name: "Dwarf" }],
+  ["rule.gnomes", { id: "rule.gnome", name: "Gnome" }],
+  ["rule.torch", { id: "item.torch", name: "Torch", type: "item" }],
+  ["rule.grappling", { id: "rule.grapple", name: "Grapple" }],
+  ["rule.temporary-hit-point", { id: "rule.temporary-hit-points", name: "Temporary hit points" }],
+  ["rule.haunts", { id: "rule.haunt", name: "Haunt" }],
+  ["rule.ghost", { id: "monster.ghost", name: "Ghost", type: "monster" }],
+  ["rule.compulsion", { id: "subschool.compulsion", name: "Compulsion", type: "subschool" }],
+  ["condition.blind", { id: "condition.blinded", name: "Blinded", type: "condition" }],
+  ["condition.entangle", { id: "condition.entangled", name: "Entangled", type: "condition" }],
+  ["rule.figments", { id: "subschool.figment", name: "Figment", type: "subschool" }],
+  ["rule.glamers", { id: "subschool.glamer", name: "Glamer", type: "subschool" }],
+  ["rule.evil-descriptor", { id: "descriptor.evil", name: "Evil", type: "descriptor" }],
+  ["rule.con", { id: "rule.constitution", name: "Constitution" }],
+  ["rule.thought-components", { id: "rule.thought-component", name: "Thought component" }],
+  ["rule.spell-like", { id: "rule.spell-like-abilities", name: "Spell-like abilities" }],
+  ["rule.metamagic-feat", { id: "rule.metamagic-feats", name: "Metamagic feats" }],
+  ["rule.empower-spell", { id: "feat.empower-spell", name: "Empower Spell", type: "feat" }],
+  ["rule.maximize-spell", { id: "feat.maximize-spell", name: "Maximize Spell", type: "feat" }],
+  ["rule.widen-spell", { id: "feat.widen-spell", name: "Widen Spell", type: "feat" }],
+  ["condition.sickening", { id: "condition.sickened", name: "Sickened", type: "condition" }],
+  ["rule.confused", { id: "condition.confused", name: "Confused", type: "condition" }],
+  ["rule.int", { id: "rule.intelligence", name: "Intelligence" }],
+  ["rule.cha", { id: "rule.charisma", name: "Charisma" }],
+  ["rule.blind-fight", { id: "feat.blind-fight", name: "Blind-Fight", type: "feat" }],
+  ["rule.light-horse", { id: "monster.horse", name: "Light horse", type: "monster" }],
+  ["rule.light-horses", { id: "monster.horse", name: "Light horse", type: "monster" }],
+  ["rule.snake", { id: "monster.snake", name: "Snake", type: "monster" }],
+  ["rule.nalfeshnee", { id: "monster.nalfeshnee", name: "Nalfeshnee", type: "monster" }],
+  ["rule.fighters", { id: "class.fighter", name: "Fighter", type: "class" }],
+  ["rule.weapon-mastery", { id: "class-feature.weapon-mastery", name: "Weapon mastery", type: "class_feature" }],
+  ["rule.scrolls", { id: "rule.scroll", name: "Scroll" }],
+  ["rule.poisons", { id: "rule.poison", name: "Poison" }],
+  ["rule.magic-mouth", { id: "spell.magic-mouth", name: "Magic Mouth", type: "spell", relationshipType: "references" }],
+  ["rule.concentrate", { id: "rule.concentration", name: "Concentration" }],
+  ["rule.readied", { id: "rule.ready", name: "Ready" }],
+  ["rule.pattern", { id: "subschool.pattern", name: "Pattern", type: "subschool" }],
+  ["condition.nauseating", { id: "condition.nauseated", name: "Nauseated", type: "condition" }],
+  ["rule.flanked", { id: "rule.flanking", name: "Flanking" }],
+  ["rule.occultists", { id: "class.occultist", name: "Occultist", type: "class" }],
+  ["rule.bloodragers", { id: "class.bloodrager", name: "Bloodrager", type: "class" }],
+  ["rule.sorcerers", { id: "class.sorcerer", name: "Sorcerer", type: "class" }],
+]);
+
+const canonicalRelationshipTargets = new Map<string, {
+  id: string;
+  name: string;
+  type: string;
+  relationshipType: string;
+}>([
+  [
+    "spell.aura-of-greater-courage:references:spell.fear",
+    { id: "rule.fear", name: "Fear", type: "rule", relationshipType: "uses_definition" },
+  ],
+  [
+    "spell.aura-sight:references:spell.detect-chaos-evil-good-law",
+    { id: "spell-family.detect-alignment", name: "Detect alignment spells", type: "spell_family", relationshipType: "references" },
+  ],
+  [
+    "spell.beastspeak:references:spell.polymorph",
+    { id: "subschool.polymorph", name: "Polymorph", type: "subschool", relationshipType: "uses_definition" },
+  ],
+  [
+    "spell.brightest-light:references:spell.darkness",
+    { id: "descriptor.darkness", name: "Darkness", type: "descriptor", relationshipType: "uses_definition" },
+  ],
+  [
+    "spell.chain-of-perdition:references:spell.darkness",
+    { id: "illumination.darkness", name: "Darkness", type: "rule", relationshipType: "uses_definition" },
+  ],
+  [
+    "spell.chain-of-perdition:references:spell.invisibility",
+    { id: "condition.invisibility", name: "Invisibility", type: "condition", relationshipType: "uses_definition" },
+  ],
+  [
+    "spell.canopic-conversion:references:spell.geas-quest",
+    { id: "spell.geas-quest", name: "Geas", type: "spell", relationshipType: "references" },
+  ],
+  [
+    "spell.cloak-of-shadows:uses_definition:rule.vulnerability",
+    { id: "rule.sunlight-vulnerability", name: "Sunlight vulnerability", type: "rule", relationshipType: "uses_definition" },
+  ],
+  [
+    "spell.continual-flame:references:spell.darkness",
+    { id: "descriptor.darkness", name: "Darkness", type: "descriptor", relationshipType: "uses_definition" },
+  ],
+  [
+    "spell.control-winds:uses_definition:rule.wind",
+    { id: "rule.wind-effects", name: "Wind effects", type: "rule", relationshipType: "uses_definition" },
+  ],
+]);
+
+const rejectedRelationshipTargets = new Map([
+  [
+    "published_in:publication.will",
+    "The source href points to the Will saving-throw rules, not a publication.",
+  ],
+]);
+
+const rejectedDescriptionRelationships = new Map([
+  [
+    "spell.advanced-scurvy:uses_definition:rule.natural",
+    "The source link points to natural armor, but the description uses “natural” only in “natural healing.”",
+  ],
+  [
+    "spell.advanced-scurvy:uses_definition:rule.healing",
+    "The source href points to the conjuration (healing) subschool, but the description discusses ordinary natural healing.",
+  ],
+  [
+    "spell.advanced-scurvy:uses_definition:subschool.healing",
+    "The source href points to the conjuration (healing) subschool, but the description discusses ordinary natural healing.",
+  ],
+  [
+    "spell.adroit-retrieval:uses_definition:rule.supernatural",
+    "The description uses “supernatural” as an adjective for speed, not as the supernatural-ability rules term.",
+  ],
+  [
+    "spell.age-resistance-lesser:uses_definition:condition.dying",
+    "Dying of old age does not refer to the Dying condition.",
+  ],
+  [
+    "spell.air-bubble:uses_definition:rule.air",
+    "The source link identifies the air subtype in metadata; ordinary air in the description is not that rules entity.",
+  ],
+  [
+    "spell.air-step:uses_definition:condition.stable",
+    "The description uses “stable” as an ordinary adjective, not the Stable condition.",
+  ],
+  [
+    "spell.air-breathing:uses_definition:rule.touch-attack",
+    "The description uses “touch” as an ordinary verb; the source href points to touch attacks.",
+  ],
+  [
+    "spell.align-weapon:published_in:publication.will",
+    "The source href points to the Will saving throw rules, not a publication; the canonical Will relationship already records that rule.",
+  ],
+  [
+    "spell.akashic-communion:uses_definition:rule.extraplanar",
+    "The description calls a repository extraplanar; it does not apply the extraplanar creature subtype.",
+  ],
+  [
+    "spell.ally-across-time:uses_definition:rule.summon",
+    "The description uses “summon” as a verb; the source href points to the monster Summon ability.",
+  ],
+  [
+    "spell.alter-summoned-monster:uses_definition:rule.summon",
+    "The description uses “summon” for spellcasting; the source href points to the monster Summon ability.",
+  ],
+  [
+    "spell.alter-winds:uses_definition:rule.wind",
+    "The source href points to the Wind oracle mystery; ordinary wind in the description is covered by the separate wind-effects relationship.",
+  ],
+  [
+    "spell.apport-object:uses_definition:rule.summon",
+    "The description uses “summon” as an ordinary transport verb; the source href points to the monster Summon ability.",
+  ],
+  [
+    "spell.aquatic-cavalry:uses_definition:rule.summon",
+    "The description uses “summon” as a spellcasting verb; the source href points to the monster Summon ability.",
+  ],
+  [
+    "spell.army-across-time:uses_definition:rule.summon",
+    "The description uses “summon” as a spellcasting verb; the source href points to the monster Summon ability.",
+  ],
+  [
+    "spell.arcane-eye:uses_definition:rule.arcane",
+    "The source href points to the Arcane subdomain, but “arcane” appears only as part of this spell’s name.",
+  ],
+  [
+    "spell.arid-refuge:uses_definition:rule.impervious",
+    "The shelter is described with an ordinary adjective; the source href points to the Impervious weapon ability.",
+  ],
+  [
+    "spell.arcane-pocket:uses_definition:rule.touch-attack",
+    "The description uses “touch” as ordinary casting prose, not a touch attack.",
+  ],
+  [
+    "spell.ashen-path:uses_definition:rule.touch-attack",
+    "The description uses “touch” as an ordinary verb, not a touch attack.",
+  ],
+  [
+    "spell.atonement:uses_definition:rule.redemption",
+    "The heading describes moral redemption; the source href points to the unrelated Redemption subdomain.",
+  ],
+  [
+    "spell.aura-of-distraction:uses_definition:rule.distraction",
+    "The phrase is part of this spell’s name; the source href points to the unrelated monster Distraction ability.",
+  ],
+  [
+    "spell.barbed-chains:uses_definition:rule.summon",
+    "The description uses “summon” as a spellcasting verb; the source href points to the monster Summon ability.",
+  ],
+  [
+    "spell.beacon-of-guilt:uses_definition:rule.touch-attack",
+    "The description uses “touch” as an ordinary verb, not a touch attack.",
+  ],
+  [
+    "spell.bereave:uses_definition:item.chain",
+    "The source relationship has no matching description text and is unrelated to Bereave’s rules.",
+  ],
+  [
+    "spell.binding-earth:references:spell.binding",
+    "The source link matches “binding” only as part of this spell’s own name; Binding Earth does not reference the Binding spell.",
+  ],
+  [
+    "spell.binding-earth-mass:references:spell.binding",
+    "The source link matches “binding” only as part of Binding Earth’s name; the mass spell does not reference the Binding spell.",
+  ],
+  [
+    "spell.binding:uses_definition:rule.law",
+    "The link is source-page navigation to the Law domain and has no matching text in the spell description.",
+  ],
+  [
+    "spell.binding:uses_definition:rule.magic",
+    "The link is source-page navigation to the Magic domain and has no matching text in the spell description.",
+  ],
+  [
+    "spell.binding:uses_definition:rule.rites",
+    "The link is source-page navigation to the Rites subdomain and has no matching text in the spell description.",
+  ],
+  [
+    "spell.binding:uses_definition:rule.slavery",
+    "The link is source-page navigation to the Slavery subdomain and has no matching text in the spell description.",
+  ],
+  [
+    "spell.black-spot:uses_definition:rule.pathfinder-player-companion-pirates-of-the-inner-sea",
+    "The source-navigation link names a publication; the description does not use it as a rules definition.",
+  ],
+  [
+    "spell.blade-tutors-spirit:uses_definition:rule.pathfinder-player-companion-melee-tactics-toolbox",
+    "The source-navigation link names a publication; the description does not use it as a rules definition.",
+  ],
+  [
+    "spell.bladed-dash:uses_definition:rule.pathfinder-campaign-setting-inner-sea-magic",
+    "The source-navigation link names a publication; the description does not use it as a rules definition.",
+  ],
+  [
+    "spell.bladed-dash-greater:uses_definition:rule.pathfinder-campaign-setting-inner-sea-magic",
+    "The source-navigation link names a publication; the description does not use it as a rules definition.",
+  ],
+  [
+    "spell.blast-barrier:uses_definition:rule.pathfinder-campaign-setting-inner-sea-magic",
+    "The source-navigation link names a publication; the description does not use it as a rules definition.",
+  ],
+  [
+    "spell.bleed-for-your-master:uses_definition:rule.touch-attack",
+    "The spell targets a touched allied creature; it does not require a touch attack.",
+  ],
+  [
+    "spell.blessing-of-luck-and-resolve-mass:uses_definition:rule.pathfinder-roleplaying-game-advanced-race-guide",
+    "The source-navigation link names a publication; the description does not use it as a rules definition.",
+  ],
+  [
+    "spell.blight:uses_definition:rule.daemon",
+    "The source-navigation link has no matching description text and is unrelated to the spell’s plant effect.",
+  ],
+  [
+    "spell.blight:uses_definition:rule.radiation",
+    "The source-navigation link has no matching description text and is unrelated to the spell’s plant effect.",
+  ],
+  [
+    "spell.blight:uses_definition:rule.seasons",
+    "The source-navigation link has no matching description text and is unrelated to the spell’s plant effect.",
+  ],
+  [
+    "spell.bloatbomb:uses_definition:rule.touch-attack",
+    "The description uses “touch” as an ordinary trigger verb; no touch attack is attempted.",
+  ],
+  [
+    "spell.blood-money:uses_definition:rule.pathfinder-adventure-path-rise-of-the-runelords-anniversary-edition",
+    "The source-navigation link names a publication; the description does not use it as a rules definition.",
+  ],
+  [
+    "spell.bone-flense:uses_definition:rule.crimson-assassins",
+    "The secondary source substitutes an IP-safe organization name absent from the selected AoN wording; a reviewed Red Mantis class link replaces it.",
+  ],
+  [
+    "spell.bone-flense:uses_definition:rule.humanoid",
+    "The source relationship has no matching description text; Bone Flense applies based on anatomy, not the humanoid creature type.",
+  ],
+  [
+    "spell.boneshatter:uses_definition:rule.skeleton",
+    "The description refers to a creature's anatomy, not the Skeleton undead template linked by the secondary source.",
+  ],
+  [
+    "spell.borrow-corruption:uses_definition:rule.touch-attack",
+    "The description uses “touch” as ordinary casting prose; it does not describe a touch attack.",
+  ],
+  [
+    "spell.bountiful-banquet:uses_definition:rule.animal",
+    "The description mentions roasted animals as food, not creatures governed by the Animal type rules.",
+  ],
+  [
+    "spell.call-construct:uses_definition:rule.summon",
+    "The description uses “summon” as a spellcasting verb; the source href points to the monster Summon ability.",
+  ],
+  [
+    "spell.carry-companion:uses_definition:rule.touch-attack",
+    "The description uses “touch” as ordinary casting prose; it does not describe a touch attack.",
+  ],
+  [
+    "spell.catatonia:uses_definition:rule.touch-attack",
+    "The description uses “touch” as ordinary casting prose; it does not describe a touch attack.",
+  ],
+  [
+    "spell.caustic-safeguard:uses_definition:rule.touch-attack",
+    "Touching the warded object is a trigger, not a touch attack.",
+  ],
+  [
+    "spell.cauterizing-weapon:uses_definition:subschool.healing",
+    "The description discusses accelerated physical healing, not the conjuration (healing) subschool.",
+  ],
+  [
+    "spell.cauterizing-weapon:uses_definition:rule.negating",
+    "The description uses “negating” as an ordinary verb; it does not invoke the Negating weapon ability.",
+  ],
+  [
+    "spell.cave-fangs:uses_definition:rule.animal",
+    "The matched word is part of the spirit animal class feature, not the Animal creature type.",
+  ],
+  [
+    "spell.cave-fangs:uses_definition:condition.disabled",
+    "The description disables linked traps; it does not apply the Disabled creature condition.",
+  ],
+  [
+    "spell.chameleon-stride-greater:uses_definition:rule.advanced-players-guide",
+    "The parenthetical book citation is provenance, not a rules definition in the spell description.",
+  ],
+  [
+    "spell.charnel-house:uses_definition:rule.meat",
+    "The description's grisly illusion contains ordinary meat; it does not refer to the equipment entry for rations.",
+  ],
+  [
+    "spell.climbing-beanstalk:uses_definition:rule.plant",
+    "The description discusses ordinary botanical plant life, not creatures governed by the Plant type rules.",
+  ],
+  [
+    "spell.cloak-of-secrets:references:spell.identify",
+    "The description uses “identify” as an ordinary verb for recognizing spells; it does not reference the Identify spell.",
+  ],
+  [
+    "spell.cloak-of-winds:uses_definition:rule.wind",
+    "The source href points to the Wind oracle mystery; the description instead uses the general wind-effects rules.",
+  ],
+  [
+    "spell.cloak-of-chaos:uses_definition:rule.chaos",
+    "The source link is title navigation to the Chaos domain; the description does not use the domain as a rules term.",
+  ],
+  [
+    "spell.corrosive-consumption:uses_definition:rule.touch-attack",
+    "The description uses “touch” as ordinary delivery prose and does not state that the caster makes a touch attack.",
+  ],
+  [
+    "spell.counterbalancing-aura:uses_definition:rule.components",
+    "The description discusses alignment components, not spell components.",
+  ],
+]);
+
+
+function relationship(
+  spellId: string,
+  type: string,
+  targetType: string,
+  targetId: string,
+  targetName: string,
+  anchorText: string,
+  observationId: string,
+  sourceUrl: string,
+): ValidatedJson {
+  return {
+    relationship_id: `${spellId}:${type}:${targetId}`,
+    type,
+    target: { entity_type: targetType, entity_id: targetId, name: targetName },
+    status: "accepted",
+    evidence: [{
+      observation_id: observationId,
+      source_field: "spell_raw.description_raw",
+      evidence_kind: "manual_verification",
+      anchor_text_raw: anchorText,
+      source_href: sourceUrl,
+    }],
+    note: "The selected source wording explicitly uses this rules term.",
+  };
 }
 
 
-function addDisambiguatedSelfReference(
-  canonical: ValidatedJson,
+type ReviewedDescriptionReference = {
+  type?: string;
+  targetType: string;
+  targetId: string;
+  targetName: string;
+  anchorText: string;
+};
+
+const reviewedDescriptionReferences = new Map<string, ReviewedDescriptionReference[]>([
+  ["spell.bouncy-body", [
+    { targetType: "rule", targetId: "rule.falling-damage", targetName: "Falling damage", anchorText: "falling damage" },
+  ]],
+  ["spell.bow-spirit", [
+    { targetType: "item", targetId: "item.sphere-of-annihilation", targetName: "Sphere of annihilation", anchorText: "sphere of annihilation" },
+  ]],
+  ["spell.bowstaff", [
+    { targetType: "item", targetId: "item.shortbow", targetName: "Shortbow", anchorText: "shortbow" },
+    { targetType: "item", targetId: "item.club", targetName: "Club", anchorText: "club" },
+    { targetType: "item", targetId: "item.longbow", targetName: "Longbow", anchorText: "longbow" },
+    { targetType: "item", targetId: "item.quarterstaff", targetName: "Quarterstaff", anchorText: "quarterstaff" },
+  ]],
+  ["spell.brand-greater", [
+    { targetType: "item", targetId: "item.torch", targetName: "Torch", anchorText: "torch" },
+  ]],
+  ["spell.brightest-night", [
+    { targetType: "rule", targetId: "illumination.dim-light", targetName: "Dim light", anchorText: "dim light" },
+  ]],
+  ["spell.brilliant-inspiration", [
+    { targetType: "rule", targetId: "rule.ability-check", targetName: "Ability checks", anchorText: "ability check" },
+    { targetType: "rule", targetId: "rule.skill-check", targetName: "Skill checks", anchorText: "skill check" },
+  ]],
+  ["spell.brow-gasher", [
+    { targetType: "condition", targetId: "condition.bleed", targetName: "Bleed", anchorText: "bleed damage" },
+  ]],
+  ["spell.bullet-shield", [
+    { targetType: "rule", targetId: "rule.armor-class", targetName: "Armor Class", anchorText: "AC" },
+  ]],
+  ["spell.bullet-ward", [
+    { targetType: "rule", targetId: "rule.armor-class", targetName: "Armor Class", anchorText: "AC" },
+  ]],
+  ["spell.bulls-strength", [
+    { targetType: "rule", targetId: "rule.enhancement-bonus", targetName: "Enhancement bonus", anchorText: "enhancement bonus" },
+    { targetType: "rule", targetId: "rule.attack-rolls", targetName: "Attack rolls", anchorText: "attack rolls" },
+  ]],
+  ["spell.burdened-thoughts", [
+    { targetType: "rule", targetId: "rule.carrying-capacity", targetName: "Carrying capacity", anchorText: "heavy encumbrance" },
+  ]],
+  ["spell.burst-bonds", [
+    { targetType: "rule", targetId: "rule.swallow-whole", targetName: "Swallow whole", anchorText: "swallow whole" },
+  ]],
+  ["spell.burst-with-light", [
+    { targetType: "rule", targetId: "illumination.bright-light", targetName: "Bright light", anchorText: "bright light" },
+    { targetType: "rule", targetId: "illumination.normal-light", targetName: "Normal light", anchorText: "normal light" },
+    { targetType: "rule", targetId: "illumination.dim-light", targetName: "Dim light", anchorText: "dim light" },
+    { targetType: "rule", targetId: "illumination.darkness", targetName: "Darkness", anchorText: "darkness" },
+  ]],
+  ["spell.calcific-touch", [
+    { type: "references", targetType: "spell", targetId: "spell.slow", targetName: "Slow", anchorText: "slows" },
+    { targetType: "condition", targetId: "condition.petrified", targetName: "Petrified", anchorText: "petrified" },
+  ]],
+  ["spell.calm-air", [
+    { targetType: "rule", targetId: "rule.wind-effects", targetName: "Wind effects", anchorText: "wind force" },
+  ]],
+  ["spell.campfire-wall", [
+    { targetType: "item", targetId: "item.torch", targetName: "Torch", anchorText: "torch" },
+    { targetType: "rule", targetId: "rule.total-concealment", targetName: "Total concealment", anchorText: "total concealment" },
+    { targetType: "rule", targetId: "rule.undead", targetName: "Undead", anchorText: "undead" },
+  ]],
+  ["spell.canopic-conversion", [
+    { targetType: "rule", targetId: "rule.mummy", targetName: "Mummy", anchorText: "mummy" },
+    { type: "references", targetType: "spell", targetId: "spell.protection-from-evil", targetName: "Protection from Evil", anchorText: "protection from evil" },
+    { type: "references", targetType: "spell", targetId: "spell.sanctuary", targetName: "Sanctuary", anchorText: "sanctuary" },
+    { type: "references", targetType: "spell", targetId: "spell.suggestion", targetName: "Suggestion", anchorText: "suggestion" },
+    { type: "references", targetType: "spell", targetId: "spell.geas-quest", targetName: "Geas", anchorText: "geas" },
+  ]],
+  ["spell.cast-out", [
+    { targetType: "subschool", targetId: "subschool.compulsion", targetName: "Compulsion", anchorText: "compulsion" },
+  ]],
+  ["spell.castigate", [
+    { targetType: "condition", targetId: "condition.cowering", targetName: "Cowering", anchorText: "cowers" },
+  ]],
+  ["spell.cauterizing-weapon", [
+    { targetType: "descriptor", targetId: "descriptor.acid", targetName: "Acid", anchorText: "acid" },
+    { targetType: "descriptor", targetId: "descriptor.cold", targetName: "Cold", anchorText: "cold" },
+    { targetType: "descriptor", targetId: "descriptor.electricity", targetName: "Electricity", anchorText: "electricity" },
+    { targetType: "descriptor", targetId: "descriptor.fire", targetName: "Fire", anchorText: "fire" },
+    { targetType: "rule", targetId: "rule.silver", targetName: "Silver", anchorText: "silver" },
+    { targetType: "rule", targetId: "rule.evil", targetName: "Evil", anchorText: "evil" },
+    { targetType: "rule", targetId: "rule.good", targetName: "Good", anchorText: "good" },
+  ]],
+  ["spell.cave-fangs", [
+    { targetType: "class_feature", targetId: "class-feature.spirit-animal", targetName: "Spirit animal", anchorText: "spirit animal" },
+  ]],
+  ["spell.charons-dispensation", [
+    { type: "references", targetType: "spell", targetId: "spell.mindwipe", targetName: "Mindwipe", anchorText: "mindwipe" },
+  ]],
+  ["spell.cheetahs-sprint", [
+    { targetType: "rule", targetId: "rule.climb", targetName: "Climb", anchorText: "climb" },
+    { targetType: "rule", targetId: "rule.fly", targetName: "Fly", anchorText: "fly" },
+    { targetType: "rule", targetId: "rule.swim", targetName: "Swim", anchorText: "swim" },
+  ]],
+  ["spell.claim-identity", [
+    { targetType: "subschool", targetId: "subschool.polymorph", targetName: "Polymorph", anchorText: "polymorph" },
+  ]],
+  ["spell.cleanse", [
+    { targetType: "rule", targetId: "rule.ability-damage", targetName: "Ability damage", anchorText: "ability damage" },
+    { targetType: "rule", targetId: "rule.disease", targetName: "Disease", anchorText: "diseased" },
+    { targetType: "rule", targetId: "rule.poison", targetName: "Poison", anchorText: "poisoned" },
+  ]],
+  ["spell.cloak-of-shadows", [
+    { targetType: "rule", targetId: "rule.good", targetName: "Good", anchorText: "good" },
+    { targetType: "rule", targetId: "illumination.dim-light", targetName: "Dim light", anchorText: "dim light" },
+    { targetType: "rule", targetId: "illumination.darkness", targetName: "Darkness", anchorText: "darkness" },
+    { targetType: "rule", targetId: "rule.total-concealment", targetName: "Total concealment", anchorText: "total concealment" },
+  ]],
+  ["spell.cloak-of-winds", [
+    { targetType: "rule", targetId: "rule.wind-effects", targetName: "Wind effects", anchorText: "strong winds" },
+    { targetType: "rule", targetId: "rule.wind-effects", targetName: "Wind effects", anchorText: "windstorm" },
+  ]],
+  ["spell.cloud-shape", [
+    { targetType: "rule", targetId: "rule.fly", targetName: "Fly", anchorText: "fly" },
+  ]],
+  ["spell.coin-shot", [
+    { targetType: "rule", targetId: "rule.touch-attack", targetName: "Touch attack", anchorText: "touch attacks" },
+    { targetType: "rule", targetId: "rule.silver", targetName: "Silver", anchorText: "silver" },
+  ]],
+  ["spell.cold-ice-strike", [
+    { targetType: "descriptor", targetId: "descriptor.cold", targetName: "Cold", anchorText: "cold damage" },
+  ]],
+  ["spell.command-undead", [
+    { targetType: "rule", targetId: "rule.undead", targetName: "Undead", anchorText: "undead" },
+  ]],
+  ["spell.compel-hostility", [
+    { targetType: "subschool", targetId: "subschool.compulsion", targetName: "Compulsion", anchorText: "compulsion" },
+    { targetType: "class", targetId: "class.summoner", targetName: "Summoner", anchorText: "summoner" },
+    { targetType: "class_feature", targetId: "class-feature.eidolon", targetName: "Eidolon", anchorText: "eidolon" },
+  ]],
+  ["spell.compelling-rant", [
+    { targetType: "rule", targetId: "rule.ability-damage", targetName: "Ability damage", anchorText: "Wisdom damage" },
+    { targetType: "rule", targetId: "rule.the-sanity-rules", targetName: "Sanity rules", anchorText: "sanity system" },
+    { type: "references", targetType: "spell", targetId: "spell.restoration-greater", targetName: "Greater Restoration", anchorText: "greater restoration" },
+    { type: "references", targetType: "spell", targetId: "spell.miracle", targetName: "Miracle", anchorText: "miracle" },
+    { type: "references", targetType: "spell", targetId: "spell.wish", targetName: "Wish", anchorText: "wish" },
+    { type: "references", targetType: "spell", targetId: "spell.borrow-corruption", targetName: "Borrow Corruption", anchorText: "borrow corruption" },
+  ]],
+  ["spell.concealed-breath", [
+    { targetType: "rule", targetId: "rule.drowning", targetName: "Drowning", anchorText: "drowning" },
+    { targetType: "rule", targetId: "rule.poison", targetName: "Poison", anchorText: "poisons" },
+  ]],
+  ["spell.conditional-favor", [
+    { targetType: "rule", targetId: "rule.poison", targetName: "Poison", anchorText: "Poisons" },
+    { targetType: "rule", targetId: "rule.disease", targetName: "Disease", anchorText: "diseases" },
+    { targetType: "descriptor", targetId: "descriptor.curse", targetName: "Curse", anchorText: "curses" },
+  ]],
+  ["spell.contagion-greater", [
+    { targetType: "rule", targetId: "rule.disease", targetName: "Disease", anchorText: "disease" },
+  ]],
+  ["spell.contagious-flame", [
+    { targetType: "descriptor", targetId: "descriptor.fire", targetName: "Fire", anchorText: "fire" },
+  ]],
+  ["spell.contest-of-skill", [
+    { targetType: "class", targetId: "class.fighter", targetName: "Fighter", anchorText: "fighter’s" },
+  ]],
+  ["spell.calm-emotions", [
+    { targetType: "rule", targetId: "rule.morale-bonus", targetName: "Morale bonus", anchorText: "morale bonuses" },
+    { targetType: "class_feature", targetId: "class-feature.inspire-courage", targetName: "Inspire courage", anchorText: "inspire courage" },
+    { targetType: "class_feature", targetId: "class-feature.rage", targetName: "Rage", anchorText: "rage ability" },
+    { targetType: "rule", targetId: "rule.fear", targetName: "Fear", anchorText: "fear effects" },
+  ]],
+  ["spell.cloak-of-chaos", [
+    { targetType: "rule", targetId: "rule.deflection-bonus", targetName: "Deflection bonus", anchorText: "deflection bonus" },
+    { targetType: "rule", targetId: "rule.resistance-bonus", targetName: "Resistance bonus", anchorText: "resistance bonus" },
+    { targetType: "rule", targetId: "rule.possession", targetName: "Possession", anchorText: "possession" },
+  ]],
+  ["spell.continual-flame", [
+    { targetType: "descriptor", targetId: "descriptor.light", targetName: "Light", anchorText: "Light spells" },
+    { targetType: "item", targetId: "item.torch", targetName: "Torch", anchorText: "torch" },
+  ]],
+  ["spell.control-summoned-creature", [
+    { targetType: "subschool", targetId: "subschool.summoning", targetName: "Summoning", anchorText: "summoned creature" },
+    { targetType: "subschool", targetId: "subschool.summoning", targetName: "Summoning", anchorText: "summoning spell" },
+  ]],
+  ["spell.control-water", [
+    { targetType: "monster", targetId: "monster.water-elemental", targetName: "Water elemental", anchorText: "water elementals" },
+  ]],
+  ["spell.controlled-fireball", [
+    { targetType: "class", targetId: "class.magus", targetName: "Magus", anchorText: "magi" },
+    { targetType: "descriptor", targetId: "descriptor.ruse", targetName: "Ruse", anchorText: "ruse descriptor" },
+  ]],
+  ["spell.coordinated-effort", [
+    { targetType: "rule", targetId: "rule.teamwork-feats", targetName: "Teamwork feats", anchorText: "teamwork feat" },
+    { targetType: "feat", targetId: "feat.outflank", targetName: "Outflank", anchorText: "Outflank" },
+  ]],
+  ["spell.corpse-lanterns", [
+    { targetType: "rule", targetId: "illumination.dim-light", targetName: "Dim light", anchorText: "dim light" },
+    { targetType: "rule", targetId: "illumination.normal-light", targetName: "Normal light", anchorText: "normal light" },
+    { targetType: "rule", targetId: "illumination.bright-light", targetName: "Bright light", anchorText: "bright light" },
+  ]],
+  ["spell.cowards-cowl", [
+    { targetType: "rule", targetId: "rule.armor-class", targetName: "Armor Class", anchorText: "AC" },
+    { targetType: "rule", targetId: "rule.fear", targetName: "Fear", anchorText: "fear effects" },
+  ]],
+  ["spell.cowards-lament", [
+    { targetType: "rule", targetId: "rule.attack-rolls", targetName: "Attack rolls", anchorText: "attack rolls" },
+  ]],
+]);
+
+
+function addReviewedDescriptionReferences(
+  spellId: string,
+  relationships: ValidatedJson[],
+  observationId: string,
+  sourceUrl: string,
+): ValidatedJson[] {
+  const additions = reviewedDescriptionReferences.get(spellId) ?? [];
+  if (additions.length === 0) return relationships;
+  const byId = new Map(relationships.map((item) => [String(item.relationship_id), item]));
+  for (const addition of additions) {
+    const item = relationship(
+      spellId,
+      addition.type ?? "uses_definition",
+      addition.targetType,
+      addition.targetId,
+      addition.targetName,
+      addition.anchorText,
+      observationId,
+      sourceUrl,
+    );
+    const existing = byId.get(String(item.relationship_id));
+    if (!existing) {
+      byId.set(String(item.relationship_id), item);
+      continue;
+    }
+    for (const evidence of item.evidence) {
+      if (!existing.evidence.some((current: ValidatedJson) =>
+        JSON.stringify(current) === JSON.stringify(evidence)
+      )) existing.evidence.push(evidence);
+    }
+  }
+  return [...byId.values()].sort((left, right) =>
+    String(left.relationship_id).localeCompare(String(right.relationship_id))
+  );
+}
+
+
+function linkContext(
+  document: RichTextDocument,
+  context: string,
+  links: { value: string; relationshipId: string }[],
+): void {
+  let contextMatches = 0;
+  const replace = (content: RichTextInlineNode[]): RichTextInlineNode[] =>
+    content.flatMap((node) => {
+      if (node.node_type !== "text") return [node];
+      const contextStart = node.value.indexOf(context);
+      if (contextStart < 0) return [node];
+      contextMatches += 1;
+      const ranges = links.map((link) => {
+        const start = context.indexOf(link.value);
+        if (start < 0) throw new Error(`${JSON.stringify(link.value)} is absent from ${JSON.stringify(context)}`);
+        return { ...link, start, end: start + link.value.length };
+      }).sort((left, right) => left.start - right.start);
+      for (let index = 1; index < ranges.length; index += 1) {
+        if (ranges[index]!.start < ranges[index - 1]!.end) {
+          throw new Error(`Overlapping contextual links in ${JSON.stringify(context)}`);
+        }
+      }
+      const replacement: RichTextInlineNode[] = [];
+      const marks = node.marks ? { marks: node.marks } : {};
+      if (contextStart > 0) {
+        replacement.push({ node_type: "text", value: node.value.slice(0, contextStart), ...marks });
+      }
+      let offset = 0;
+      for (const range of ranges) {
+        if (range.start > offset) {
+          replacement.push({ node_type: "text", value: context.slice(offset, range.start), ...marks });
+        }
+        replacement.push({
+          node_type: "entity_link",
+          value: context.slice(range.start, range.end),
+          relationship_id: range.relationshipId,
+          ...marks,
+        });
+        offset = range.end;
+      }
+      if (offset < context.length) {
+        replacement.push({ node_type: "text", value: context.slice(offset), ...marks });
+      }
+      const contextEnd = contextStart + context.length;
+      if (contextEnd < node.value.length) {
+        replacement.push({ node_type: "text", value: node.value.slice(contextEnd), ...marks });
+      }
+      return replacement;
+    });
+
+  document.content = document.content.map((block) => block.node_type === "paragraph"
+    ? { ...block, content: replace(block.content) }
+    : {
+        ...block,
+        content: block.content.map((item) => ({ ...item, content: replace(item.content) })),
+      });
+  if (contextMatches !== 1) {
+    throw new Error(`Expected one rich-text context match for ${JSON.stringify(context)}, found ${contextMatches}`);
+  }
+}
+
+
+function keepFirstRelationshipLink(
+  document: RichTextDocument,
+  relationshipId: string,
+): void {
+  let matches = 0;
+  const replace = (content: RichTextInlineNode[]): RichTextInlineNode[] =>
+    content.map((node) => {
+      if (node.node_type !== "entity_link" || node.relationship_id !== relationshipId) {
+        return node;
+      }
+      matches += 1;
+      if (matches === 1) return node;
+      return {
+        node_type: "text",
+        value: node.value,
+        ...(node.marks ? { marks: node.marks } : {}),
+      };
+    });
+  document.content = document.content.map((block) => block.node_type === "paragraph"
+    ? { ...block, content: replace(block.content) }
+    : {
+        ...block,
+        content: block.content.map((item) => ({ ...item, content: replace(item.content) })),
+      });
+  if (matches < 1) {
+    throw new Error(`Expected at least one rich-text link for ${relationshipId}`);
+  }
+}
+
+
+function removeRelationshipLinkValues(
+  document: RichTextDocument,
+  relationshipId: string,
+  values: string[],
+): void {
+  const rejected = new Set(values);
+  const replace = (content: RichTextInlineNode[]): RichTextInlineNode[] =>
+    content.map((node) =>
+      node.node_type === "entity_link" &&
+        node.relationship_id === relationshipId &&
+        rejected.has(node.value)
+        ? {
+            node_type: "text",
+            value: node.value,
+            ...(node.marks ? { marks: node.marks } : {}),
+          }
+        : node
+    );
+  document.content = document.content.map((block) => block.node_type === "paragraph"
+    ? { ...block, content: replace(block.content) }
+    : {
+        ...block,
+        content: block.content.map((item) => ({ ...item, content: replace(item.content) })),
+      });
+}
+
+
+function keepFirstAndLastRelationshipLinks(
+  document: RichTextDocument,
+  relationshipId: string,
+): void {
+  const count = (content: RichTextInlineNode[]): number => content.filter((node) =>
+    node.node_type === "entity_link" && node.relationship_id === relationshipId
+  ).length;
+  const matches = document.content.reduce((total, block) => total + (
+    block.node_type === "paragraph"
+      ? count(block.content)
+      : block.content.reduce((subtotal, item) => subtotal + count(item.content), 0)
+  ), 0);
+  if (matches < 2) {
+    throw new Error(`Expected at least two rich-text links for ${relationshipId}, found ${matches}`);
+  }
+  let occurrence = 0;
+  const replace = (content: RichTextInlineNode[]): RichTextInlineNode[] =>
+    content.map((node) => {
+      if (node.node_type !== "entity_link" || node.relationship_id !== relationshipId) {
+        return node;
+      }
+      occurrence += 1;
+      if (occurrence === 1 || occurrence === matches) return node;
+      return {
+        node_type: "text",
+        value: node.value,
+        ...(node.marks ? { marks: node.marks } : {}),
+      };
+    });
+  document.content = document.content.map((block) => block.node_type === "paragraph"
+    ? { ...block, content: replace(block.content) }
+    : {
+        ...block,
+        content: block.content.map((item) => ({ ...item, content: replace(item.content) })),
+      });
+}
+
+
+function addDarknessReferences(
   document: RichTextDocument,
   relationships: ValidatedJson[],
   observationId: string,
   sourceUrl: string,
 ): ValidatedJson[] {
-  const sameNamedDescriptor = relationships.find((relationship) =>
-    relationship.status === "accepted" &&
-    relationship.type === "has_descriptor" &&
-    String(relationship.target.name).toLocaleLowerCase("en-US") ===
-      String(canonical.name).toLocaleLowerCase("en-US")
-  );
-  if (!sameNamedDescriptor || !hasItalicValue(document, canonical.name)) return relationships;
+  const additions = [
+    relationship("spell.darkness", "uses_definition", "rule", "illumination.bright-light", "Bright light", "bright light", observationId, sourceUrl),
+    relationship("spell.darkness", "uses_definition", "rule", "illumination.normal-light", "Normal light", "normal light", observationId, sourceUrl),
+    relationship("spell.darkness", "uses_definition", "rule", "illumination.dim-light", "Dim light", "dim light", observationId, sourceUrl),
+    relationship("spell.darkness", "uses_definition", "rule", "illumination.darkness", "Darkness", "darkness", observationId, sourceUrl),
+    relationship("spell.darkness", "uses_definition", "rule", "rule.light-vulnerability", "Light vulnerability", "light vulnerability", observationId, sourceUrl),
+    relationship("spell.darkness", "uses_definition", "rule", "rule.light-sensitivity", "Light sensitivity", "sensitivity", observationId, sourceUrl),
+    relationship("spell.darkness", "uses_definition", "rule", "rule.concealment", "Concealment", "concealment", observationId, sourceUrl),
+    relationship("spell.darkness", "uses_definition", "rule", "rule.total-concealment", "Total concealment", "total concealment", observationId, sourceUrl),
+    relationship("spell.darkness", "references", "item", "item.torch", "Torch", "torches", observationId, sourceUrl),
+    relationship("spell.darkness", "references", "item", "item.lantern", "Lantern", "lanterns", observationId, sourceUrl),
+    relationship("spell.darkness", "has_mythic_variant", "mythic_spell_variant", "mythic-spell-variant.darkness", "Mythic Darkness", "Mythic Darkness", observationId, sourceUrl),
+  ];
+  const byId = new Map(relationships.map((item) => [String(item.relationship_id), item]));
+  for (const addition of additions) byId.set(addition.relationship_id, addition);
 
-  const movedEvidence = sameNamedDescriptor.evidence.filter((evidence: ValidatedJson) =>
-    evidence.evidence_kind === "hyperlink" &&
-    /\/magic\/all-spells\//i.test(String(evidence.source_href ?? ""))
-  );
-  sameNamedDescriptor.evidence = sameNamedDescriptor.evidence.filter(
-    (evidence: ValidatedJson) => !movedEvidence.includes(evidence),
-  );
-  const relationshipId = `${canonical.spell_id}:references:${canonical.spell_id}`;
-  if (!relationships.some((relationship) => relationship.relationship_id === relationshipId)) {
-    relationships.push({
-      relationship_id: relationshipId,
-      type: "references",
-      target: {
-        entity_type: "spell",
-        entity_id: canonical.spell_id,
-        name: canonical.name,
-      },
-      status: "accepted",
-      evidence: [
-        ...movedEvidence,
-        {
-          observation_id: observationId,
-          source_field: "spell_raw.description_raw",
-          evidence_kind: "manual_verification",
-          anchor_text_raw: canonical.name,
-          source_href: sourceUrl,
-        },
-      ],
-      note:
-        "Italicized same-name occurrences refer to the spell; unmarked occurrences retain their ordinary rules meaning.",
-    });
-  }
-  return relationships.sort((left, right) =>
+  const descriptorId = "spell.darkness:has_descriptor:descriptor.darkness";
+  linkContext(document, "radiate darkness out to a 20-foot radius", [
+    { value: "darkness", relationshipId: descriptorId },
+  ]);
+  linkContext(document, "from bright light to normal light", [
+    { value: "bright light", relationshipId: "spell.darkness:uses_definition:illumination.bright-light" },
+    { value: "normal light", relationshipId: "spell.darkness:uses_definition:illumination.normal-light" },
+  ]);
+  linkContext(document, "from normal light to dim light", [
+    { value: "normal light", relationshipId: "spell.darkness:uses_definition:illumination.normal-light" },
+    { value: "dim light", relationshipId: "spell.darkness:uses_definition:illumination.dim-light" },
+  ]);
+  linkContext(document, "from dim light to darkness", [
+    { value: "dim light", relationshipId: "spell.darkness:uses_definition:illumination.dim-light" },
+    { value: "darkness", relationshipId: "spell.darkness:uses_definition:illumination.darkness" },
+  ]);
+  linkContext(document, "light vulnerability or sensitivity", [
+    { value: "light vulnerability", relationshipId: "spell.darkness:uses_definition:rule.light-vulnerability" },
+    { value: "sensitivity", relationshipId: "spell.darkness:uses_definition:rule.light-sensitivity" },
+  ]);
+  linkContext(document, "gain concealment (20% miss chance)", [
+    { value: "concealment", relationshipId: "spell.darkness:uses_definition:rule.concealment" },
+  ]);
+  linkContext(document, "gain total concealment (50% miss chance)", [
+    { value: "total concealment", relationshipId: "spell.darkness:uses_definition:rule.total-concealment" },
+  ]);
+  linkContext(document, "such as torches and lanterns", [
+    { value: "torches", relationshipId: "spell.darkness:references:item.torch" },
+    { value: "lanterns", relationshipId: "spell.darkness:references:item.lantern" },
+  ]);
+  return [...byId.values()].sort((left, right) =>
     String(left.relationship_id).localeCompare(String(right.relationship_id))
   );
+}
+
+
+function addAlluringLightReferences(
+  document: RichTextDocument,
+  relationships: ValidatedJson[],
+  observationId: string,
+  sourceUrl: string,
+): ValidatedJson[] {
+  const spellId = "spell.alluring-light";
+  const additions = [
+    relationship(spellId, "uses_definition", "rule", "illumination.normal-light", "Normal light", "normal light", observationId, sourceUrl),
+    relationship(spellId, "uses_definition", "rule", "illumination.dim-light", "Dim light", "dim light", observationId, sourceUrl),
+    relationship(spellId, "uses_definition", "rule", "illumination.darkness", "Darkness", "darkness", observationId, sourceUrl),
+  ];
+  const byId = new Map(relationships.map((item) => [String(item.relationship_id), item]));
+  for (const addition of additions) byId.set(addition.relationship_id, addition);
+
+  linkContext(document, "up to normal light", [{
+    value: "normal light",
+    relationshipId: `${spellId}:uses_definition:illumination.normal-light`,
+  }]);
+  linkContext(document, "darkness becomes dim light", [
+    { value: "darkness", relationshipId: `${spellId}:uses_definition:illumination.darkness` },
+    { value: "dim light", relationshipId: `${spellId}:uses_definition:illumination.dim-light` },
+  ]);
+  linkContext(document, "dim light becomes normal light", [
+    { value: "dim light", relationshipId: `${spellId}:uses_definition:illumination.dim-light` },
+    { value: "normal light", relationshipId: `${spellId}:uses_definition:illumination.normal-light` },
+  ]);
+  return [...byId.values()].sort((left, right) =>
+    String(left.relationship_id).localeCompare(String(right.relationship_id))
+  );
+}
+
+
+function addBlacklightReferences(
+  document: RichTextDocument,
+  relationships: ValidatedJson[],
+  observationId: string,
+  sourceUrl: string,
+): ValidatedJson[] {
+  const spellId = "spell.blacklight";
+  const additions = [
+    relationship(spellId, "uses_definition", "rule", "illumination.darkness", "Darkness", "total darkness", observationId, sourceUrl),
+    relationship(spellId, "uses_definition", "rule", "rule.darkvision", "Darkvision", "darkvision", observationId, sourceUrl),
+    relationship(spellId, "uses_definition", "descriptor", "descriptor.light", "Light", "light spell", observationId, sourceUrl),
+    relationship(spellId, "references", "spell", "spell.daylight", "Daylight", "Daylight", observationId, sourceUrl),
+  ];
+  const byId = new Map(relationships.map((item) => [String(item.relationship_id), item]));
+  for (const addition of additions) byId.set(addition.relationship_id, addition);
+
+  linkContext(document, "total darkness", [{
+    value: "total darkness",
+    relationshipId: `${spellId}:uses_definition:illumination.darkness`,
+  }]);
+  linkContext(document, "darkvision", [{
+    value: "darkvision",
+    relationshipId: `${spellId}:uses_definition:rule.darkvision`,
+  }]);
+  linkContext(document, "light spell", [{
+    value: "light",
+    relationshipId: `${spellId}:uses_definition:descriptor.light`,
+  }]);
+  linkContext(document, "Daylight", [{
+    value: "Daylight",
+    relationshipId: `${spellId}:references:spell.daylight`,
+  }]);
+  return [...byId.values()].sort((left, right) =>
+    String(left.relationship_id).localeCompare(String(right.relationship_id))
+  );
+}
+
+
+function addBlightReferences(
+  document: RichTextDocument,
+  relationships: ValidatedJson[],
+  observationId: string,
+  sourceUrl: string,
+): ValidatedJson[] {
+  const spellId = "spell.blight";
+  const plant = relationship(
+    spellId,
+    "uses_definition",
+    "rule",
+    "rule.plant",
+    "Plant",
+    "plant",
+    observationId,
+    sourceUrl,
+  );
+  const relationshipId = String(plant.relationship_id);
+  for (const context of [
+    "single plant of any size",
+    "plant creature",
+    "A plant that",
+    "plant life",
+  ]) {
+    linkContext(document, context, [{ value: "plant", relationshipId }]);
+  }
+  return [...relationships.filter((item) => item.relationship_id !== relationshipId), plant].sort(
+    (left, right) => String(left.relationship_id).localeCompare(String(right.relationship_id)),
+  );
+}
+
+
+function addBlurReferences(
+  document: RichTextDocument,
+  relationships: ValidatedJson[],
+  observationId: string,
+  sourceUrl: string,
+): ValidatedJson[] {
+  const concealment = relationship(
+    "spell.blur",
+    "uses_definition",
+    "rule",
+    "rule.concealment",
+    "Concealment",
+    "concealment",
+    observationId,
+    sourceUrl,
+  );
+  linkContext(document, "concealment (20% miss chance)", [{
+    value: "concealment",
+    relationshipId: String(concealment.relationship_id),
+  }]);
+  return [
+    ...relationships.filter((item) => item.relationship_id !== concealment.relationship_id),
+    concealment,
+  ].sort((left, right) =>
+    String(left.relationship_id).localeCompare(String(right.relationship_id))
+  );
+}
+
+
+function addBoneFlenseReferences(
+  document: RichTextDocument,
+  relationships: ValidatedJson[],
+  observationId: string,
+  sourceUrl: string,
+): ValidatedJson[] {
+  const redMantis = relationship(
+    "spell.bone-flense",
+    "uses_definition",
+    "class",
+    "class.red-mantis-assassin",
+    "Red Mantis Assassin",
+    "Red Mantis",
+    observationId,
+    sourceUrl,
+  );
+  linkContext(document, "member of the Red Mantis", [{
+    value: "Red Mantis",
+    relationshipId: String(redMantis.relationship_id),
+  }]);
+  return [
+    ...relationships.filter((item) => item.relationship_id !== redMantis.relationship_id),
+    redMantis,
+  ].sort((left, right) =>
+    String(left.relationship_id).localeCompare(String(right.relationship_id))
+  );
+}
+
+
+function linkAntiSummoningShieldContext(document: RichTextDocument): void {
+  linkContext(document, "summon spell-like ability", [{
+    value: "summon",
+    relationshipId: "spell.anti-summoning-shield:uses_definition:rule.summon",
+  }]);
+}
+
+
+function distinguishBalefulShadowPolymorphReferences(
+  document: RichTextDocument,
+  relationships: ValidatedJson[],
+  observationId: string,
+  sourceUrl: string,
+): ValidatedJson[] {
+  const spellRelationshipId =
+    "spell.baleful-shadow-transmutation:references:spell.polymorph";
+  const ruleRelationshipId =
+    "spell.baleful-shadow-transmutation:uses_definition:subschool.polymorph";
+  let spellLinks = 0;
+  let ruleLinks = 0;
+
+  for (const block of document.content) {
+    const content = block.node_type === "paragraph"
+      ? block.content
+      : block.content.flatMap((item) => item.content);
+    for (const node of content) {
+      if (
+        node.node_type !== "entity_link" ||
+        node.relationship_id !== spellRelationshipId
+      ) continue;
+      if (node.marks?.includes("italic")) {
+        spellLinks += 1;
+      } else {
+        node.relationship_id = ruleRelationshipId;
+        ruleLinks += 1;
+      }
+    }
+  }
+  if (spellLinks !== 1 || ruleLinks !== 2) {
+    throw new Error(
+      `Expected one Polymorph spell link and two polymorph-rule links, found ${spellLinks} and ${ruleLinks}`,
+    );
+  }
+
+  return [
+    ...relationships.filter((item) => item.relationship_id !== ruleRelationshipId),
+    relationship(
+    "spell.baleful-shadow-transmutation",
+    "uses_definition",
+    "subschool",
+    "subschool.polymorph",
+    "Polymorph",
+    "polymorph",
+    observationId,
+    sourceUrl,
+  )].sort((left, right) =>
+    String(left.relationship_id).localeCompare(String(right.relationship_id))
+  );
+}
+
+
+function explicitlyFunctionsLike(description: string, targetName: string): boolean {
+  const normalizedDescription = description.normalize("NFKC").toLocaleLowerCase("en-US");
+  const normalizedTarget = targetName.normalize("NFKC").toLocaleLowerCase("en-US");
+  const escapedTarget = normalizedTarget.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const boundary = "(?=$|[,.);:]|\\s+directed\\b|\\s+\\()";
+  const target = `(?:like|as) ${escapedTarget}${boundary}`;
+  return [
+    `\\bthis(?: spell)?(?: otherwise)? functions ${target}`,
+    `\\bthis(?: [\\p{L}\\p{N}'’-]+){0,4} spell` +
+      `(?: [\\p{L}\\p{N}'’-]+){0,8} functions ${target}`,
+    `\\bthis spell is(?: otherwise)? similar to ${escapedTarget}${boundary}`,
+  ].some((pattern) => new RegExp(pattern, "u").test(normalizedDescription));
 }
 
 
@@ -154,6 +1305,19 @@ function mergeRelationships(
   const changedIds = new Map<string, string>();
   for (const original of relationships) {
     const relationship = structuredClone(original);
+    const hyperlinkEvidence = relationship.evidence.filter(
+      (evidence: ValidatedJson) => evidence.evidence_kind === "hyperlink",
+    );
+    if (
+      relationship.status === "accepted" &&
+      hyperlinkEvidence.length > 0 &&
+      hyperlinkEvidence.every((evidence: ValidatedJson) =>
+        /\/void\(0\)$/i.test(String(evidence.source_href ?? ""))
+      )
+    ) {
+      relationship.status = "rejected";
+      relationship.note = "The source href is a non-navigating void(0) placeholder, not relationship evidence.";
+    }
     if (relationship.status === "accepted" && relationship.target.entity_type === "spell") {
       const resolved = resolveCanonicalSpellReference(
         String(relationship.target.name),
@@ -166,6 +1330,51 @@ function mergeRelationships(
         relationship.relationship_id = `${spellId}:${relationship.type}:${resolved.spell_id}`;
       }
     }
+    const relationshipTarget = canonicalRelationshipTargets.get(
+      String(original.relationship_id),
+    );
+    if (relationshipTarget) {
+      relationship.target.entity_id = relationshipTarget.id;
+      relationship.target.name = relationshipTarget.name;
+      relationship.target.entity_type = relationshipTarget.type;
+      relationship.type = relationshipTarget.relationshipType;
+      relationship.relationship_id = `${spellId}:${relationship.type}:${relationshipTarget.id}`;
+    }
+    const canonicalTarget = canonicalTargets.get(String(relationship.target.entity_id));
+    if (canonicalTarget) {
+      relationship.target.entity_id = canonicalTarget.id;
+      relationship.target.name = canonicalTarget.name;
+      relationship.target.entity_type = canonicalTarget.type ?? relationship.target.entity_type;
+      relationship.type = canonicalTarget.relationshipType ?? relationship.type;
+      relationship.relationship_id = `${spellId}:${relationship.type}:${canonicalTarget.id}`;
+    }
+    if (
+      relationship.status === "accepted" &&
+      relationship.type === "references" &&
+      relationship.target.entity_type === "spell" &&
+      explicitlyFunctionsLike(
+        String(canonicalSpells.get(spellId)?.description?.raw ?? ""),
+        String(relationship.target.name),
+      )
+    ) {
+      relationship.type = "functions_like";
+      relationship.relationship_id =
+        `${spellId}:functions_like:${relationship.target.entity_id}`;
+    }
+    const rejectionReason = rejectedDescriptionRelationships.get(
+      String(relationship.relationship_id),
+    ) ?? rejectedRelationshipTargets.get(
+      `${relationship.type}:${relationship.target.entity_id}`,
+    );
+    if (relationship.status === "accepted" && rejectionReason) {
+      relationship.status = "rejected";
+      relationship.note = rejectionReason;
+    }
+    if (
+      relationship.type === "references" &&
+      relationship.target.entity_type === "spell" &&
+      relationship.target.entity_id === spellId
+    ) continue;
     changedIds.set(String(original.relationship_id), String(relationship.relationship_id));
     const existing = merged.get(relationship.relationship_id);
     if (!existing) {
@@ -204,11 +1413,21 @@ function updateDecision(
   const canonicalRelationshipIds = new Set(
     relationships.map((relationship) => String(relationship.relationship_id)),
   );
+  const canonicalRelationshipById = new Map(
+    relationships.map((relationship) => [String(relationship.relationship_id), relationship]),
+  );
   const relationshipDecisions = new Map<string, ValidatedJson>();
   for (const original of decision.relationship_decisions) {
     const item = structuredClone(original);
     item.relationship_id = changedIds.get(item.relationship_id) ?? item.relationship_id;
     if (!canonicalRelationshipIds.has(item.relationship_id)) continue;
+    const canonicalRelationship = canonicalRelationshipById.get(item.relationship_id)!;
+    item.decision = canonicalRelationship.status === "accepted"
+      ? "accept"
+      : canonicalRelationship.status === "rejected"
+        ? "reject"
+        : "defer";
+    if (canonicalRelationship.note) item.rationale = canonicalRelationship.note;
     const existing = relationshipDecisions.get(item.relationship_id);
     if (!existing) {
       relationshipDecisions.set(item.relationship_id, item);
@@ -223,7 +1442,11 @@ function updateDecision(
     if (relationshipDecisions.has(relationship.relationship_id)) continue;
     relationshipDecisions.set(relationship.relationship_id, {
       relationship_id: relationship.relationship_id,
-      decision: "accept",
+      decision: relationship.status === "accepted"
+        ? "accept"
+        : relationship.status === "rejected"
+          ? "reject"
+          : "defer",
       evidence: relationship.evidence.map((evidence: ValidatedJson) => ({
         observation_id: evidence.observation_id,
         source_field: evidence.source_field,
@@ -261,27 +1484,163 @@ function updateDecision(
 }
 
 
-export function enrichRichTextPilot(): void {
+function canonicalIndex(): Map<string, ValidatedJson> {
   const canonicalSpells = new Map<string, ValidatedJson>();
   for (const filename of jsonFiles(path.join(projectRoot, "data", "canonical"))) {
     const spell = loadJson(filename);
     canonicalSpells.set(spell.spell_id, spell);
   }
+  return canonicalSpells;
+}
+
+
+function baselineObservationId(canonical: ValidatedJson): string | null {
+  return canonical.provenance.find((item: ValidatedJson) =>
+    item.field_path === "/description" || item.source_field === "spell_raw.description_raw"
+  )?.observation_id ?? canonical.relationships.flatMap(
+    (relationship: ValidatedJson) => relationship.evidence,
+  ).find((evidence: ValidatedJson) =>
+    evidence.source_field === "spell_raw.description_raw" &&
+    String(evidence.observation_id).startsWith("aon:")
+  )?.observation_id ?? null;
+}
+
+
+function entityLinkCount(document: RichTextDocument): number {
+  return document.content.reduce((count, block) => count + (
+    block.node_type === "paragraph"
+      ? block.content
+      : block.content.flatMap((item) => item.content)
+  ).filter((node) => node.node_type === "entity_link").length, 0);
+}
+
+
+export function auditRichTextRollout(): {
+  summary: {
+    total: number;
+    already_rich_text: number;
+    safe_with_links: number;
+    safe_structure_only: number;
+    source_mismatch: number;
+    missing_aon_baseline: number;
+    parser_error: number;
+    link_warnings: number;
+  };
+  safe_spell_ids: string[];
+  issue_samples: Record<string, string[]>;
+  issue_spell_ids: Record<string, string[]>;
+  link_warning_details: Record<string, ReturnType<typeof linkRichTextDocument>["warnings"]>;
+} {
+  const canonicalSpells = canonicalIndex();
+  const observations = observationIndex();
+  const summary = {
+    total: canonicalSpells.size,
+    already_rich_text: 0,
+    safe_with_links: 0,
+    safe_structure_only: 0,
+    source_mismatch: 0,
+    missing_aon_baseline: 0,
+    parser_error: 0,
+    link_warnings: 0,
+  };
+  const safeSpellIds: string[] = [];
+  const issueSamples: Record<string, string[]> = {};
+  const issueSpellIds: Record<string, string[]> = {};
+  const linkWarningDetails: Record<
+    string,
+    ReturnType<typeof linkRichTextDocument>["warnings"]
+  > = {};
+  const issue = (
+    category: "source_mismatch" | "missing_aon_baseline" | "parser_error" | "link_warnings",
+    spellId: string,
+  ): void => {
+    summary[category] += 1;
+    (issueSpellIds[category] ??= []).push(spellId);
+    const samples = issueSamples[category] ?? [];
+    if (samples.length < 25) samples.push(spellId);
+    issueSamples[category] = samples;
+  };
+
+  for (const [spellId, canonical] of [...canonicalSpells].sort(([left], [right]) =>
+    left.localeCompare(right)
+  )) {
+    if (canonical.schema_version === "0.2.0") {
+      summary.already_rich_text += 1;
+      continue;
+    }
+    const observationId = baselineObservationId(canonical);
+    const observation = observationId ? observations.get(observationId) : null;
+    if (!observationId || !observation || observation.record.source.site_id !== "aon") {
+      issue("missing_aon_baseline", spellId);
+      continue;
+    }
+    try {
+      const artifactPath = path.resolve(
+        path.dirname(observation.filename),
+        observation.record.retrieval.raw_artifact_path,
+      );
+      const parsed = parseAonSpell(
+        fs.readFileSync(artifactPath, "utf8"),
+        observation.record.source.url,
+      );
+      if (
+        comparableRichText(parsed.descriptionRaw) !==
+        comparableRichText(String(canonical.description.raw))
+      ) {
+        issue("source_mismatch", spellId);
+        continue;
+      }
+      const document = parseRichTextHtml(parsed.descriptionHtml);
+      const reconciled = mergeRelationships(
+        canonical.relationships,
+        spellId,
+        canonicalSpells,
+      );
+      const richText = linkRichTextDocument(document, reconciled.relationships, {
+        ownerEntityId: spellId,
+      });
+      if (
+        comparableRichText(richTextLeafText(richText.document)) !==
+        comparableRichText(String(canonical.description.raw))
+      ) {
+        issue("parser_error", spellId);
+        continue;
+      }
+      if (richText.warnings.length > 0) {
+        linkWarningDetails[spellId] = richText.warnings;
+        issue("link_warnings", spellId);
+        continue;
+      }
+      if (entityLinkCount(richText.document) > 0) {
+        summary.safe_with_links += 1;
+        safeSpellIds.push(spellId);
+      } else {
+        summary.safe_structure_only += 1;
+      }
+    } catch {
+      issue("parser_error", spellId);
+    }
+  }
+  return {
+    summary,
+    safe_spell_ids: safeSpellIds,
+    issue_samples: issueSamples,
+    issue_spell_ids: issueSpellIds,
+    link_warning_details: linkWarningDetails,
+  };
+}
+
+
+export function enrichRichTextSpells(spellIds: readonly string[]): void {
+  const canonicalSpells = canonicalIndex();
   const observations = observationIndex();
 
-  for (const spellId of richTextPilotSpellIds) {
+  for (const spellId of spellIds) {
     const filename = canonicalFilename(spellId);
     const canonical = loadJson(filename);
-    const baselineObservationId = canonical.provenance.find((item: ValidatedJson) =>
-      item.field_path === "/description" || item.source_field === "spell_raw.description_raw"
-    )?.observation_id ?? canonical.relationships.flatMap(
-      (relationship: ValidatedJson) => relationship.evidence,
-    ).find((evidence: ValidatedJson) =>
-      evidence.source_field === "spell_raw.description_raw" &&
-      String(evidence.observation_id).startsWith("aon:")
-    )?.observation_id;
-    const observation = observations.get(baselineObservationId);
-    if (!observation || observation.record.source.site_id !== "aon") {
+    const baselineId = baselineObservationId(canonical);
+    const observation = baselineId ? observations.get(baselineId) : null;
+    if (!baselineId || !observation || observation.record.source.site_id !== "aon") {
       throw new Error(`${spellId} has no indexed AoN baseline observation`);
     }
     const artifactPath = path.resolve(
@@ -314,24 +1673,154 @@ export function enrichRichTextPilot(): void {
 
     const reconciled = mergeRelationships(
       canonical.relationships.filter((relationship: ValidatedJson) =>
-        !leakedMythicSuffix ||
-        !darknessMythicOnlyTargets.has(String(relationship.target.entity_id))
+        spellId !== "spell.darkness" || (
+          relationship.target.entity_id !== "spell.darkness" &&
+          !darknessMythicOnlyTargets.has(String(relationship.target.entity_id))
+        )
       ),
       spellId,
       canonicalSpells,
     );
-    reconciled.relationships = addDisambiguatedSelfReference(
-      canonical,
-      sourceDocument,
+    reconciled.relationships = addReviewedDescriptionReferences(
+      spellId,
       reconciled.relationships,
-      baselineObservationId,
+      baselineId,
       observation.record.source.url,
     );
+    const automaticRelationships = reconciled.relationships.filter((relationship) =>
+      (
+        spellId !== "spell.darkness" ||
+        !darknessContextualTargets.has(String(relationship.target.entity_id))
+      ) && (
+        spellId !== "spell.alluring-light" ||
+        !alluringLightContextualTargets.has(String(relationship.target.entity_id))
+      ) && (
+        spellId !== "spell.anti-summoning-shield" ||
+        !antiSummoningContextualTargets.has(String(relationship.target.entity_id))
+      ) && (
+        spellId !== "spell.baleful-shadow-transmutation" ||
+        relationship.target.entity_id !== "subschool.polymorph"
+      )
+    );
+    if (spellId === "spell.darkness") {
+      reconciled.relationships = addDarknessReferences(
+        sourceDocument,
+        reconciled.relationships,
+        baselineId,
+        observation.record.source.url,
+      );
+    }
+    if (spellId === "spell.alluring-light") {
+      reconciled.relationships = addAlluringLightReferences(
+        sourceDocument,
+        reconciled.relationships,
+        baselineId,
+        observation.record.source.url,
+      );
+    }
+    if (spellId === "spell.blacklight") {
+      reconciled.relationships = addBlacklightReferences(
+        sourceDocument,
+        reconciled.relationships,
+        baselineId,
+        observation.record.source.url,
+      );
+    }
+    if (spellId === "spell.blight") {
+      reconciled.relationships = addBlightReferences(
+        sourceDocument,
+        reconciled.relationships,
+        baselineId,
+        observation.record.source.url,
+      );
+    }
+    if (spellId === "spell.blur") {
+      reconciled.relationships = addBlurReferences(
+        sourceDocument,
+        reconciled.relationships,
+        baselineId,
+        observation.record.source.url,
+      );
+    }
+    if (spellId === "spell.bone-flense") {
+      reconciled.relationships = addBoneFlenseReferences(
+        sourceDocument,
+        reconciled.relationships,
+        baselineId,
+        observation.record.source.url,
+      );
+    }
+    if (spellId === "spell.anti-summoning-shield") {
+      linkAntiSummoningShieldContext(sourceDocument);
+    }
     const richText = linkRichTextDocument(
       sourceDocument,
-      reconciled.relationships,
+      automaticRelationships,
       { ownerEntityId: spellId },
     );
+    if (spellId === "spell.brand-greater") {
+      keepFirstRelationshipLink(
+        richText.document,
+        "spell.brand-greater:functions_like:spell.brand",
+      );
+    }
+    if (spellId === "spell.charm-person-mass") {
+      keepFirstRelationshipLink(
+        richText.document,
+        "spell.charm-person-mass:functions_like:spell.charm-person",
+      );
+    }
+    if (spellId === "spell.command-greater") {
+      keepFirstRelationshipLink(
+        richText.document,
+        "spell.command-greater:functions_like:spell.command",
+      );
+    }
+    if (spellId === "spell.contact-high") {
+      removeRelationshipLinkValues(
+        richText.document,
+        "spell.contact-high:uses_definition:rule.touch-attack",
+        ["touch"],
+      );
+    }
+    if (spellId === "spell.contagious-suggestion") {
+      keepFirstRelationshipLink(
+        richText.document,
+        "spell.contagious-suggestion:functions_like:spell.suggestion",
+      );
+    }
+    if (spellId === "spell.controlled-fireball") {
+      keepFirstAndLastRelationshipLinks(
+        richText.document,
+        "spell.controlled-fireball:functions_like:spell.fireball",
+      );
+    }
+    if (spellId === "spell.baleful-shadow-transmutation") {
+      reconciled.relationships = distinguishBalefulShadowPolymorphReferences(
+        richText.document,
+        reconciled.relationships,
+        baselineId,
+        observation.record.source.url,
+      );
+    }
+    const inheritanceRules = reconciled.relationships
+      .filter((item) =>
+        item.status === "accepted" &&
+        item.type === "functions_like" &&
+        item.target.entity_type === "spell" &&
+        item.target.entity_id
+      )
+      .map((item) => materializeSpellInheritanceRule(
+        canonical,
+        baselineId,
+        parsed,
+        canonicalSpells,
+        String(item.target.entity_id),
+        String(item.target.name),
+      ));
+    if (canonical.rules_inheritance.length === 0 && inheritanceRules.length > 0) {
+      canonical.rules_inheritance = inheritanceRules;
+    }
     if (
       comparableRichText(richTextLeafText(richText.document)) !==
       comparableRichText(String(canonical.description.raw))
@@ -347,14 +1836,14 @@ export function enrichRichTextPilot(): void {
     );
     canonical.provenance.push({
       field_path: "/description/document",
-      observation_id: baselineObservationId,
+      observation_id: baselineId,
       source_field: "spell_raw.description_raw",
       raw_value_sha256: crypto.createHash("sha256").update(JSON.stringify(parsed.descriptionRaw)).digest("hex"),
       decision: "normalized",
       note:
         "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships.",
     });
-    canonical.normalization.normalizer_version = "0.2.0-rich-text-pilot";
+    canonical.normalization.normalizer_version = "0.2.0-rich-text";
     canonical.normalization.warnings = canonical.normalization.warnings.filter(
       (warning: ValidatedJson) =>
         warning.code !== "AMBIGUOUS_RICH_TEXT_LINK" &&
@@ -384,7 +1873,7 @@ export function enrichRichTextPilot(): void {
     fs.writeFileSync(filename, `${JSON.stringify(canonical, null, 2)}\n`, "utf8");
     updateDecision(
       spellId,
-      baselineObservationId,
+      baselineId,
       reconciled.changedIds,
       reconciled.relationships,
       warningMessages,
@@ -394,7 +1883,38 @@ export function enrichRichTextPilot(): void {
 }
 
 
+export function enrichRichTextPilot(): void {
+  enrichRichTextSpells(richTextPilotSpellIds);
+}
+
+
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  enrichRichTextPilot();
-  console.log(`Enriched ${richTextPilotSpellIds.length} pilot spells with rich text.`);
+  const batchArgument = process.argv.slice(2).find((argument) => argument.startsWith("--safe-batch="));
+  const idsArgument = process.argv.slice(2).find((argument) => argument.startsWith("--ids="));
+  if (process.argv.includes("--audit")) {
+    const audit = auditRichTextRollout();
+    console.log(JSON.stringify({
+      summary: audit.summary,
+      safe_spell_id_samples: audit.safe_spell_ids.slice(0, 25),
+      issue_samples: audit.issue_samples,
+    }, null, 2));
+  } else if (idsArgument) {
+    const spellIds = idsArgument.slice("--ids=".length).split(",").filter(Boolean);
+    if (spellIds.length === 0) throw new Error("--ids must contain at least one spell ID");
+    enrichRichTextSpells(spellIds);
+    console.log(`Enriched ${spellIds.length} selected spells with rich text.`);
+  } else if (batchArgument) {
+    const audit = auditRichTextRollout();
+    const batchSize = Number.parseInt(batchArgument.slice("--safe-batch=".length), 10);
+    if (!Number.isSafeInteger(batchSize) || batchSize < 1) {
+      throw new Error("--safe-batch must be a positive integer");
+    }
+    const spellIds = audit.safe_spell_ids.slice(0, batchSize);
+    enrichRichTextSpells(spellIds);
+    console.log(`Enriched ${spellIds.length} safe rollout spells with rich text.`);
+    console.log(spellIds.join("\n"));
+  } else {
+    enrichRichTextPilot();
+    console.log(`Enriched ${richTextPilotSpellIds.length} pilot spells with rich text.`);
+  }
 }

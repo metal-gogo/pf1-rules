@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.bloody-tears-and-jagged-smile",
   "ruleset": "Pathfinder First Edition",
   "name": "Bloody Tears and Jagged Smile",
@@ -228,7 +228,33 @@
   "description": {
     "raw": "Your eyes turn black and weep blood, and your teeth become\njagged fangs. You gain a bite attack (1d3 points of damage if\nyou are Small, 1d4 points of damage if you are Medium). You\ngain a +4 profane bonus on Intimidate checks and on your spell\nDCs for spells with the fear descriptor. You perceive creatures as\nif using deathwatch.",
     "search_text": "\"your eyes turn black and weep blood, and your teeth become\\njagged fangs. you gain a bite attack (1d3 points of damage if\\nyou are small, 1d4 points of damage if you are medium). you\\ngain a +4 profane bonus on intimidate checks and on your spell\\ndcs for spells with the fear descriptor. you perceive creatures as\\nif using deathwatch.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Your eyes turn black and weep blood, and your teeth become jagged fangs. You gain a bite attack (1d3 points of damage if you are Small, 1d4 points of damage if you are Medium). You gain a +4 profane bonus on Intimidate checks and on your spell DCs for spells with the fear descriptor. You perceive creatures as if using "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "deathwatch",
+              "relationship_id": "spell.bloody-tears-and-jagged-smile:references:spell.deathwatch",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -306,6 +332,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.bloody-tears-and-jagged-smile:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.bloody-tears-and-jagged-smile:2bbe76fba0d80039",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2 (Szuriel)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.bloody-tears-and-jagged-smile:appears_on_spell_list:spell-list.oracle",
@@ -481,7 +527,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.deathwatch",
-        "name": "deathwatch"
+        "name": "Deathwatch"
       },
       "status": "accepted",
       "evidence": [
@@ -541,26 +587,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.bloody-tears-and-jagged-smile:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.bloody-tears-and-jagged-smile:2bbe76fba0d80039",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2 (Szuriel)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -611,11 +637,19 @@
       "raw_value_sha256": "d716a544a02a1b440c35b658b588b8c5d861cbd376e6f88e2987f8ed97b02e0c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.bloody-tears-and-jagged-smile:2bbe76fba0d80039",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f835d92f3066b94c244462772a53f96b5808d9ca6b8ad7e3c51f91692b266d62",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

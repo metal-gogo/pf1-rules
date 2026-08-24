@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.compel-tongue-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Compel Tongue, Mass",
@@ -245,7 +245,33 @@
   "description": {
     "raw": "This spell functions as compel tongue, except it affects multiple creatures. The same language restriction applies to all creatures, and the same language must be imparted to all creatures affected by the same casting of this spell.",
     "search_text": "\"this spell functions as compel tongue, except it affects multiple creatures. the same language restriction applies to all creatures, and the same language must be imparted to all creatures affected by the same casting of this spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "compel tongue",
+              "relationship_id": "spell.compel-tongue-mass:functions_like:spell.compel-tongue",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it affects multiple creatures. The same language restriction applies to all creatures, and the same language must be imparted to all creatures affected by the same casting of this spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -516,6 +542,26 @@
         }
       ],
       "note": "Reviewed catalog policy: AoN remains the preferred publication transcription. When an additional class membership is printed by d20PFSRD, it may be added to the canonical class union after review; Foundry PF1 is corroborating catalog evidence when it agrees. Preserve every source claim and never replace an AoN level merely because another catalog assigns the same class a different level."
+    },
+    {
+      "relationship_id": "spell.compel-tongue-mass:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.compel-tongue-mass:2b2a44f5646bfd0e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.compel-tongue-mass:appears_on_spell_list:spell-list.oracle",
@@ -838,26 +884,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.compel-tongue-mass:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.compel-tongue-mass:2b2a44f5646bfd0e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -924,11 +950,19 @@
       "raw_value_sha256": "e8027d6e3a07e498d7fcd018cba8d78d3ac7581c864b67b4918e9cb723b402bc",
       "decision": "manually_resolved",
       "note": "Reviewed catalog policy: AoN remains the preferred publication transcription. When an additional class membership is printed by d20PFSRD, it may be added to the canonical class union after review; Foundry PF1 is corroborating catalog evidence when it agrees. Preserve every source claim and never replace an AoN level merely because another catalog assigns the same class a different level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.compel-tongue-mass:2b2a44f5646bfd0e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e1651047386b034fe38331bbc028ed1cc315d54e5f8d0eea876a139451604754",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.5-reviewed-catalog-memberships",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "REVIEWED_CATALOG_MEMBERSHIP_UNION",

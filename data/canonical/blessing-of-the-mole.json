@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.blessing-of-the-mole",
   "ruleset": "Pathfinder First Edition",
   "name": "Blessing of the Mole",
@@ -180,7 +180,48 @@
   "description": {
     "raw": "The targets gain darkvision 30 feet and a +2 competence bonus on Stealth checks.",
     "search_text": "\"the targets gain darkvision 30 feet and a +2 competence bonus on stealth checks.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The targets gain "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "darkvision",
+              "relationship_id": "spell.blessing-of-the-mole:uses_definition:rule.darkvision"
+            },
+            {
+              "node_type": "text",
+              "value": " 30 feet and a +2 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "competence bonus",
+              "relationship_id": "spell.blessing-of-the-mole:uses_definition:rule.competence-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Stealth",
+              "relationship_id": "spell.blessing-of-the-mole:uses_definition:rule.stealth"
+            },
+            {
+              "node_type": "text",
+              "value": " checks."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -278,6 +319,40 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.blessing-of-the-mole:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.blessing-of-the-mole:8760b2eecec72083",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.blessing-of-the-mole:198c767add44d152",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.blessing-of-the-mole:8760b2eecec72083",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.blessing-of-the-mole:appears_on_spell_list:spell-list.oracle",
@@ -527,40 +602,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.blessing-of-the-mole:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.blessing-of-the-mole:8760b2eecec72083",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.blessing-of-the-mole:198c767add44d152",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.blessing-of-the-mole:8760b2eecec72083",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -611,11 +652,19 @@
       "raw_value_sha256": "7d5e96912515b41b1237e7136903af00894b8431a024c448e9f6563ad2595232",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.blessing-of-the-mole:8760b2eecec72083",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "5d6b879e4723fa51337eb6aed582842d4c870af1febd3d39346a27a0617cb221",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

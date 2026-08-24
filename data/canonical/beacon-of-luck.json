@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.beacon-of-luck",
   "ruleset": "Pathfinder First Edition",
   "name": "Beacon of Luck",
@@ -262,7 +262,30 @@
   "description": {
     "raw": "You send out a burst of luck with a 30-foot radius centered around you. While the beacon of luck is in effect, you gain a +2 sacred bonus on all saving throws. As an immediate action before a saving throw is made, allies within the area can choose to benefit from this luck, rolling twice for a saving throw and taking the better result. Once a creature benefits from the beacon of luck in this way, it cannot gain the benefit of this spell for 24 hours.",
     "search_text": "\"you send out a burst of luck with a 30-foot radius centered around you. while the beacon of luck is in effect, you gain a +2 sacred bonus on all saving throws. as an immediate action before a saving throw is made, allies within the area can choose to benefit from this luck, rolling twice for a saving throw and taking the better result. once a creature benefits from the beacon of luck in this way, it cannot gain the benefit of this spell for 24 hours.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You send out a burst of luck with a 30-foot radius centered around you. While the beacon of luck is in effect, you gain a +2 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sacred bonus",
+              "relationship_id": "spell.beacon-of-luck:uses_definition:rule.sacred-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on all saving throws. As an immediate action before a saving throw is made, allies within the area can choose to benefit from this luck, rolling twice for a saving throw and taking the better result. Once a creature benefits from the beacon of luck in this way, it cannot gain the benefit of this spell for 24 hours."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -367,6 +390,40 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.beacon-of-luck:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.beacon-of-luck:1a8709d080d83292",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3 (Desna)",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.beacon-of-luck:07c7a5a032a17693",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.beacon-of-luck:1a8709d080d83292",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 4 (Desna)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.beacon-of-luck:appears_on_spell_list:spell-list.oracle",
@@ -609,40 +666,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.beacon-of-luck:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.beacon-of-luck:1a8709d080d83292",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3 (Desna)",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.beacon-of-luck:07c7a5a032a17693",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.beacon-of-luck:1a8709d080d83292",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 4 (Desna)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -693,11 +716,19 @@
       "raw_value_sha256": "f3b8b0efb84d459999ced9d5e41c522206efac822202fe0bac9fd1ec152418cd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.beacon-of-luck:1a8709d080d83292",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "64d23da7b2486ac5e7de45dc6fc0d3fd216c733bdcac18870b3379b9e2e66a21",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

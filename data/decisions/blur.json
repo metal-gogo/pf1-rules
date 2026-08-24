@@ -10,7 +10,8 @@
     "d20pfsrd:spell.blur:7b13dac359341b3c",
     "aon:bloodline.sorcerer.destined:68dfa6a8",
     "aon:bloodline.sorcerer.protean:ce836f40",
-    "aon:bloodline.bloodrager.destined:6fd60b2c"
+    "aon:bloodline.bloodrager.destined:6fd60b2c",
+    "d20pfsrd:magic-school.aether-elemental:3e5520a8"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.blur:60c042f02a0d27a0",
@@ -153,9 +154,56 @@
         "aon:bloodline.bloodrager.destined:6fd60b2c"
       ],
       "rationale": "AoN clearly transcribes the owning bloodrager bloodline's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.blur:60c042f02a0d27a0",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.blur:60c042f02a0d27a0",
+        "legacy_aon:spell.blur:d166f16d1e5c185a",
+        "d20pfsrd:spell.blur:7b13dac359341b3c",
+        "aon:bloodline.sorcerer.destined:68dfa6a8",
+        "aon:bloodline.sorcerer.protean:ce836f40",
+        "aon:bloodline.bloodrager.destined:6fd60b2c"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
+    },
+    {
+      "canonical_path": "/levels/19",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
+      ],
+      "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.blur:appears_on_spell_list:spell-list.aether-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
     {
       "relationship_id": "spell.blur:appears_on_spell_list:spell-list.alchemist",
       "decision": "accept",
@@ -211,6 +259,20 @@
         "d20pfsrd:spell.blur:7b13dac359341b3c"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.blur:appears_on_spell_list:spell-list.bloodrager-destined-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.bloodrager.destined:6fd60b2c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.bloodrager.destined:6fd60b2c"
+      ],
+      "rationale": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
     },
     {
       "relationship_id": "spell.blur:appears_on_spell_list:spell-list.destined",
@@ -379,6 +441,34 @@
         "d20pfsrd:spell.blur:7b13dac359341b3c"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.blur:appears_on_spell_list:spell-list.sorcerer-destined-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.destined:68dfa6a8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.destined:68dfa6a8"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.blur:appears_on_spell_list:spell-list.sorcerer-protean-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.protean:ce836f40",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.protean:ce836f40"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     },
     {
       "relationship_id": "spell.blur:appears_on_spell_list:spell-list.sorcerer-wizard",
@@ -601,6 +691,25 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.blur:uses_definition:rule.concealment",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.blur:60c042f02a0d27a0",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.blur:60c042f02a0d27a0",
+        "legacy_aon:spell.blur:d166f16d1e5c185a",
+        "d20pfsrd:spell.blur:7b13dac359341b3c",
+        "aon:bloodline.sorcerer.destined:68dfa6a8",
+        "aon:bloodline.sorcerer.protean:ce836f40",
+        "aon:bloodline.bloodrager.destined:6fd60b2c"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.blur:uses_definition:rule.spell-resistance",
       "decision": "accept",
       "evidence": [
@@ -621,7 +730,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.blur:uses_definition:rule.will",
+      "relationship_id": "spell.blur:uses_definition:rule.will-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -639,48 +748,6 @@
         "d20pfsrd:spell.blur:7b13dac359341b3c"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.blur:appears_on_spell_list:spell-list.sorcerer-destined-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.destined:68dfa6a8",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.destined:68dfa6a8"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
-    },
-    {
-      "relationship_id": "spell.blur:appears_on_spell_list:spell-list.sorcerer-protean-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.protean:ce836f40",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.protean:ce836f40"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
-    },
-    {
-      "relationship_id": "spell.blur:appears_on_spell_list:spell-list.bloodrager-destined-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.bloodrager.destined:6fd60b2c",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.bloodrager.destined:6fd60b2c"
-      ],
-      "rationale": "AoN prints the spell on the owning bloodrager bloodline page; it is modeled as bloodline access rather than general Bloodrager access."
     }
   ],
   "unresolved_questions": [

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.blur",
   "ruleset": "Pathfinder First Edition",
   "name": "Blur",
@@ -169,6 +169,16 @@
       "raw": "blur (10th)",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.aether-elemental-school",
+      "list_kind": "elemental_school",
+      "list_name": "Aether Elemental School",
+      "level": 2,
+      "scope": "later_first_party",
+      "raw": "2—blur",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -249,7 +259,87 @@
   "description": {
     "raw": "The subject's outline appears blurred, shifting, and wavering. This distortion grants the subject concealment (20% miss chance).\n\nA see invisibility spell does not counteract the blur effect, but a true seeing spell does.\n\nOpponents that cannot see the subject ignore the spell's effect (though fighting an unseen opponent carries penalties of its own).",
     "search_text": "\"the subject's outline appears blurred, shifting, and wavering. this distortion grants the subject concealment (20% miss chance).\\n\\na see invisibility spell does not counteract the blur effect, but a true seeing spell does.\\n\\nopponents that cannot see the subject ignore the spell's effect (though fighting an unseen opponent carries penalties of its own).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The subject's outline appears blurred, shifting, and wavering. This distortion grants the subject "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.blur:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": " (20% miss chance)"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "A "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "see invisibility",
+              "relationship_id": "spell.blur:references:spell.see-invisibility",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell does not counteract the "
+            },
+            {
+              "node_type": "text",
+              "value": "blur",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " effect, but a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "true seeing",
+              "relationship_id": "spell.blur:references:spell.true-seeing",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell does."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Opponents that cannot see the subject ignore the spell's effect (though fighting an unseen opponent carries penalties of its own)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -261,6 +351,26 @@
   },
   "rules_inheritance": [],
   "relationships": [
+    {
+      "relationship_id": "spell.blur:appears_on_spell_list:spell-list.aether-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.aether-elemental-school",
+        "name": "Aether Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2—blur",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/aether-elemental-school/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
     {
       "relationship_id": "spell.blur:appears_on_spell_list:spell-list.alchemist",
       "type": "appears_on_spell_list",
@@ -334,6 +444,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.blur:appears_on_spell_list:spell-list.bloodrager-destined-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.bloodrager-destined-bloodline",
+        "name": "Bloodrager Destined Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.bloodrager.destined:6fd60b2c",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "blur (10th)",
+          "source_href": "https://www.aonprd.com/BloodragerBloodlineDisplay.aspx?ItemName=Destined"
+        }
+      ],
+      "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
     },
     {
       "relationship_id": "spell.blur:appears_on_spell_list:spell-list.destined",
@@ -550,6 +680,46 @@
       "note": null
     },
     {
+      "relationship_id": "spell.blur:appears_on_spell_list:spell-list.sorcerer-destined-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-destined-bloodline",
+        "name": "Sorcerer Destined Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.destined:68dfa6a8",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "blur (5th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Destined"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.blur:appears_on_spell_list:spell-list.sorcerer-protean-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-protean-bloodline",
+        "name": "Sorcerer Protean Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.protean:ce836f40",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "blur (5th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Protean"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
       "relationship_id": "spell.blur:appears_on_spell_list:spell-list.sorcerer-wizard",
       "type": "appears_on_spell_list",
       "target": {
@@ -763,7 +933,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.see-invisibility",
-        "name": "see invisibility"
+        "name": "See Invisibility"
       },
       "status": "accepted",
       "evidence": [
@@ -790,7 +960,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.true-seeing",
-        "name": "true seeing"
+        "name": "True Seeing"
       },
       "status": "accepted",
       "evidence": [
@@ -839,6 +1009,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.blur:uses_definition:rule.concealment",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.concealment",
+        "name": "Concealment"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.blur:60c042f02a0d27a0",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "concealment",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Blur"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.blur:uses_definition:rule.spell-resistance",
       "type": "uses_definition",
       "target": {
@@ -866,11 +1056,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.blur:uses_definition:rule.will",
+      "relationship_id": "spell.blur:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -891,66 +1081,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.blur:appears_on_spell_list:spell-list.sorcerer-destined-bloodline",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.sorcerer-destined-bloodline",
-        "name": "Sorcerer Destined Bloodline Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.destined:68dfa6a8",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "blur (5th)",
-          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Destined"
-        }
-      ],
-      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
-    },
-    {
-      "relationship_id": "spell.blur:appears_on_spell_list:spell-list.sorcerer-protean-bloodline",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.sorcerer-protean-bloodline",
-        "name": "Sorcerer Protean Bloodline Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.protean:ce836f40",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "blur (5th)",
-          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Protean"
-        }
-      ],
-      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
-    },
-    {
-      "relationship_id": "spell.blur:appears_on_spell_list:spell-list.bloodrager-destined-bloodline",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.bloodrager-destined-bloodline",
-        "name": "Bloodrager Destined Bloodline Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.bloodrager.destined:6fd60b2c",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "blur (10th)",
-          "source_href": "https://www.aonprd.com/BloodragerBloodlineDisplay.aspx?ItemName=Destined"
-        }
-      ],
-      "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
     }
   ],
   "provenance": [
@@ -1025,11 +1155,27 @@
       "raw_value_sha256": "8aa24415e0e9ff41764a02c2f2808db9d029304991ff74a1e6bf73fcd029dac8",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/19",
+      "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "494fcb04b4d2668b6a41dc474c66b171a50a3690cff490da9108ec138bfe3cc1",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.blur:60c042f02a0d27a0",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "b08376d8e59957e7a9cb8d52df8466057f87e22c6776ee332f44dc777ab49124",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
@@ -1060,6 +1206,11 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/18",
         "message": "Bloodrager Destined Bloodline grants Blur as a level 2 spell; this is not general Bloodrager class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/19",
+        "message": "Aether Elemental School grants Blur as a level 2 printed spell; this is not general Wizard class access."
       }
     ]
   }

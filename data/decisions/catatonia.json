@@ -127,6 +127,22 @@
         "aon:spell.catatonia:9bab1d6b69751c6e"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.catatonia:9bab1d6b69751c6e",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.catatonia:9bab1d6b69751c6e",
+        "legacy_aon:spell.catatonia:77fe906a0b4c0a67",
+        "d20pfsrd:spell.catatonia:8a5937bec5377b37"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -261,6 +277,25 @@
         "d20pfsrd:spell.catatonia:8a5937bec5377b37"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.catatonia:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.catatonia:8a5937bec5377b37",
+          "source_field": "spell_raw.links_raw[3]"
+        },
+        {
+          "observation_id": "aon:spell.catatonia:9bab1d6b69751c6e",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:spell.catatonia:8a5937bec5377b37",
+        "aon:spell.catatonia:9bab1d6b69751c6e"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.catatonia:appears_on_spell_list:spell-list.oracle",
@@ -619,8 +654,8 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.catatonia:uses_definition:rule.touch",
-      "decision": "accept",
+      "relationship_id": "spell.catatonia:uses_definition:rule.touch-attack",
+      "decision": "reject",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.catatonia:8a5937bec5377b37",
@@ -632,7 +667,7 @@
         "legacy_aon:spell.catatonia:77fe906a0b4c0a67",
         "d20pfsrd:spell.catatonia:8a5937bec5377b37"
       ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+      "rationale": "The description uses “touch” as ordinary casting prose; it does not describe a touch attack."
     },
     {
       "relationship_id": "spell.catatonia:uses_definition:rule.undead",
@@ -653,25 +688,6 @@
         "d20pfsrd:spell.catatonia:8a5937bec5377b37"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.catatonia:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.catatonia:8a5937bec5377b37",
-          "source_field": "spell_raw.links_raw[3]"
-        },
-        {
-          "observation_id": "aon:spell.catatonia:9bab1d6b69751c6e",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:spell.catatonia:8a5937bec5377b37",
-        "aon:spell.catatonia:9bab1d6b69751c6e"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
     }
   ],
   "unresolved_questions": [

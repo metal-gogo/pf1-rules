@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.alluring-spores",
   "ruleset": "Pathfinder First Edition",
   "name": "Alluring Spores",
@@ -141,7 +141,39 @@
   "description": {
     "raw": "This spell creates a burst of spores that weaken the mind. Creatures within the area must succeed at a Fortitude save or take a –1 penalty on saving throws against your enchantment spells or effects for the duration of this spell. This penalty increases to –2 for any creature that is (or could be) sexually attracted to you.",
     "search_text": "\"this spell creates a burst of spores that weaken the mind. creatures within the area must succeed at a fortitude save or take a –1 penalty on saving throws against your enchantment spells or effects for the duration of this spell. this penalty increases to –2 for any creature that is (or could be) sexually attracted to you.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell creates a burst of spores that weaken the mind. Creatures within the area must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.alluring-spores:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save or take a –1 penalty on saving throws against your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "enchantment",
+              "relationship_id": "spell.alluring-spores:uses_definition:magic-school.enchantment"
+            },
+            {
+              "node_type": "text",
+              "value": " spells or effects for the duration of this spell. This penalty increases to –2 for any creature that is (or could be) sexually attracted to you."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -384,12 +416,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.alluring-spores:uses_definition:rule.enchantment",
+      "relationship_id": "spell.alluring-spores:uses_definition:magic-school.enchantment",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.enchantment",
-        "name": "enchantment"
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.enchantment",
+        "name": "Enchantment"
       },
       "status": "accepted",
       "evidence": [
@@ -404,12 +436,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.alluring-spores:uses_definition:rule.fort",
+      "relationship_id": "spell.alluring-spores:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -419,20 +451,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Fort",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.alluring-spores:uses_definition:rule.fortitude",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.fortitude",
-        "name": "Fortitude"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.alluring-spores:f5826cd1fb575067",
           "source_field": "spell_raw.links_raw[8]",
@@ -512,11 +531,19 @@
       "raw_value_sha256": "69fe04c7291f86bdc29fb50b0df812bd136fb0c9fde6a18516042185d9440b6d",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.alluring-spores:36e47918bf435204",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "978e48c91c111c703777e2481cf45ab032f3f831b36db8d2d43944ed2df9629b",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

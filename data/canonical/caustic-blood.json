@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.caustic-blood",
   "ruleset": "Pathfinder First Edition",
   "name": "Caustic Blood",
@@ -240,7 +240,57 @@
   "description": {
     "raw": "You imbue your blood with corrosive acid. Any time you take piercing or slashing damage, a spray of acidic blood spurts from your body in the direction of the opponent who inflicted the wound, dealing 1d6 points of acid damage per caster level (maximum 15d6, Reflex half). This spurt travels in a 10-foot line, damaging the first creature or object it touches, with no splash damage. After it contacts a creature or object, your acidic blood continues to burn that creature for 1 round, dealing 1d6 points of acid damage per 2 caster levels (maximum 7d6). A second successful Reflex save negates this additional damage.",
     "search_text": "\"you imbue your blood with corrosive acid. any time you take piercing or slashing damage, a spray of acidic blood spurts from your body in the direction of the opponent who inflicted the wound, dealing 1d6 points of acid damage per caster level (maximum 15d6, reflex half). this spurt travels in a 10-foot line, damaging the first creature or object it touches, with no splash damage. after it contacts a creature or object, your acidic blood continues to burn that creature for 1 round, dealing 1d6 points of acid damage per 2 caster levels (maximum 7d6). a second successful reflex save negates this additional damage.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You imbue your blood with corrosive acid. Any time you take piercing or slashing damage, a spray of acidic blood spurts from your body in the direction of the opponent who inflicted the wound, dealing 1d6 points of acid damage per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.caustic-blood:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum 15d6, "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.caustic-blood:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " half). This spurt travels in a 10-foot line, damaging the first creature or object it touches, with no "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "splash",
+              "relationship_id": "spell.caustic-blood:uses_definition:rule.splash"
+            },
+            {
+              "node_type": "text",
+              "value": " damage. After it contacts a creature or object, your acidic blood continues to burn that creature for 1 round, dealing 1d6 points of acid damage per 2 caster levels (maximum 7d6). A second successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.caustic-blood:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save negates this additional damage."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -459,6 +509,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.caustic-blood:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.caustic-blood:59ada6fbd231ef77",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.caustic-blood:appears_on_spell_list:spell-list.oracle",
@@ -771,11 +841,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.caustic-blood:uses_definition:rule.reflex",
+      "relationship_id": "spell.caustic-blood:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -863,26 +933,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.caustic-blood:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.caustic-blood:59ada6fbd231ef77",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -933,11 +983,19 @@
       "raw_value_sha256": "8b4df15126822d6586ceee4b8017db9b1490642bb67974b38c94e60abf6f1759",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.caustic-blood:59ada6fbd231ef77",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "5d22035d0475a39c818154993c641d88882b0ff0c2c7cac710d1cf6113b7f323",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

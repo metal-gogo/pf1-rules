@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.ball-lightning",
   "ruleset": "Pathfinder First Edition",
   "name": "Ball Lightning",
@@ -86,6 +86,16 @@
       "level": 4,
       "scope": "later_first_party",
       "raw": "wizard 4"
+    },
+    {
+      "spell_list_id": "spell-list.air-elemental-school",
+      "list_kind": "elemental_school",
+      "list_name": "Air Elemental School",
+      "level": 4,
+      "scope": "core",
+      "raw": "4—ball lightning",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -172,7 +182,59 @@
   "description": {
     "raw": "You create two globes of lightning that fly in whichever direction you indicate. For every 4 caster levels above 7th, you create an additional globe of lightning (3 globes at 11th, 4 globes at 15th, to the maximum of 5 globes at 19th). These globes fly at a rate of 20 feet per round and have perfect maneuverability. Wind does not affect a flying sphere’s course.\n\nIf a globe enters a space with a creature, it stops moving for the round and deals 3d6 points of electricity damage to that creature, though a successful Reflex save negates the damage. Creatures wearing metal armor take a –4 penalty on this saving throw.\n\nEach globe moves as long as you actively direct it (it’s a move action for you to direct all the spheres created by a single casting of this spell); otherwise they stay at rest. These globes have no mass and cannot push aside unwilling creatures or move solid objects. A ball lightning globe winks out if it exceeds the spell’s range.",
     "search_text": "\"you create two globes of lightning that fly in whichever direction you indicate. for every 4 caster levels above 7th, you create an additional globe of lightning (3 globes at 11th, 4 globes at 15th, to the maximum of 5 globes at 19th). these globes fly at a rate of 20 feet per round and have perfect maneuverability. wind does not affect a flying sphere’s course.\\n\\nif a globe enters a space with a creature, it stops moving for the round and deals 3d6 points of electricity damage to that creature, though a successful reflex save negates the damage. creatures wearing metal armor take a –4 penalty on this saving throw.\\n\\neach globe moves as long as you actively direct it (it’s a move action for you to direct all the spheres created by a single casting of this spell); otherwise they stay at rest. these globes have no mass and cannot push aside unwilling creatures or move solid objects. a ball lightning globe winks out if it exceeds the spell’s range.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create two globes of lightning that fly in whichever direction you indicate. For every 4 caster levels above 7th, you create an additional globe of lightning (3 globes at 11th, 4 globes at 15th, to the maximum of 5 globes at 19th). These globes fly at a rate of 20 feet per round and have perfect maneuverability. Wind does not affect a flying sphere’s course."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "If a globe enters a space with a creature, it stops moving for the round and deals 3d6 points of electricity damage to that creature, though a successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.ball-lightning:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save negates the damage. Creatures wearing metal armor take a –4 penalty on this saving throw."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Each globe moves as long as you actively direct it (it’s a move action for you to direct all the spheres created by a single casting of this spell); otherwise they stay at rest. These globes have no mass and cannot push aside unwilling creatures or move solid objects. A "
+            },
+            {
+              "node_type": "text",
+              "value": "ball lightning ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "globe winks out if it exceeds the spell’s range."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -184,6 +246,26 @@
   },
   "rules_inheritance": [],
   "relationships": [
+    {
+      "relationship_id": "spell.ball-lightning:appears_on_spell_list:spell-list.air-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.air-elemental-school",
+        "name": "Air Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.air-elemental:45be08db",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4—ball lightning",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/air/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
     {
       "relationship_id": "spell.ball-lightning:appears_on_spell_list:spell-list.arcanist",
       "type": "appears_on_spell_list",
@@ -542,26 +624,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.ball-lightning:references:spell.ball-lightning",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.ball-lightning",
-        "name": "ball lightning"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.ball-lightning:f4eb01420627e359",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "ball lightning",
-          "source_href": "https://legacy.aonprd.com/advancedPlayersGuide/spells/ballLightning.html#ball-lightning"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.ball-lightning:uses_action:action.move-action",
       "type": "uses_action",
       "target": {
@@ -609,11 +671,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.ball-lightning:uses_definition:rule.reflex",
+      "relationship_id": "spell.ball-lightning:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -704,11 +766,27 @@
       "raw_value_sha256": "3d0cf0b3723e6c122544b1eae1eb55bd9c546be7b2ac9ebe1cbaae967a7aad20",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/9",
+      "observation_id": "d20pfsrd:magic-school.air-elemental:45be08db",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "a17cc814baec7e6a15f32a6b6f4b5fc44965811f46a73ecbb58d9c24dc253581",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.ball-lightning:6007411e2b9bed6f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "9fd5ff8c50b871be51cc2ff17186441a761dbccd50bd64755be7353bdb3a1aa6",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
@@ -729,6 +807,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/9",
+        "message": "Air Elemental School grants Ball Lightning as a level 4 printed spell; this is not general Wizard class access."
       }
     ]
   }

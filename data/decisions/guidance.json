@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.guidance:b042e0b336268c77",
     "legacy_aon:spell.guidance:b06aef9a47fffd6f",
-    "d20pfsrd:spell.guidance:8cddfff29eec95fa"
+    "d20pfsrd:spell.guidance:8cddfff29eec95fa",
+    "d20pfsrd:magic-school.void-elemental:443edb4d"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.guidance:b042e0b336268c77",
@@ -127,6 +128,20 @@
         "d20pfsrd:spell.guidance:8cddfff29eec95fa"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/15",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.void-elemental:443edb4d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.void-elemental:443edb4d"
+      ],
+      "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -536,6 +551,20 @@
         "d20pfsrd:spell.guidance:8cddfff29eec95fa"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.guidance:appears_on_spell_list:spell-list.void-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.void-elemental:443edb4d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.void-elemental:443edb4d"
+      ],
+      "rationale": "d20PFSRD prints the spell on the owning wizard elemental arcane school page; it is modeled as elemental_school access rather than general Wizard access."
     }
   ],
   "unresolved_questions": [

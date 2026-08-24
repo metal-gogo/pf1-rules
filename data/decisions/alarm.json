@@ -187,9 +187,43 @@
         "aon:subdomain.ambush:85657314"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.alarm:434a0eeb66a8041b",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.alarm:434a0eeb66a8041b",
+        "legacy_aon:spell.alarm:cf7baf3b09ef9b68",
+        "d20pfsrd:spell.alarm:a23ea872f583f439",
+        "aon:bloodline.sorcerer.destined:68dfa6a8",
+        "aon:bloodline.sorcerer.kobold-sorcerer:911d7070",
+        "aon:subdomain.home:c83a2eb7",
+        "aon:subdomain.ambush:85657314"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.alarm:appears_on_spell_list:spell-list.ambush-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.ambush:85657314",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.ambush:85657314"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
     {
       "relationship_id": "spell.alarm:appears_on_spell_list:spell-list.arcanist",
       "decision": "accept",
@@ -225,6 +259,20 @@
         "d20pfsrd:spell.alarm:a23ea872f583f439"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.alarm:appears_on_spell_list:spell-list.home-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.home:c83a2eb7",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.home:c83a2eb7"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.alarm:appears_on_spell_list:spell-list.hunter",
@@ -277,6 +325,25 @@
         "d20pfsrd:spell.alarm:a23ea872f583f439"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.alarm:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.alarm:a23ea872f583f439",
+          "source_field": "spell_raw.links_raw[2]"
+        },
+        {
+          "observation_id": "aon:spell.alarm:434a0eeb66a8041b",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:spell.alarm:a23ea872f583f439",
+        "aon:spell.alarm:434a0eeb66a8041b"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.alarm:appears_on_spell_list:spell-list.psychic",
@@ -349,6 +416,34 @@
         "d20pfsrd:spell.alarm:a23ea872f583f439"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.alarm:appears_on_spell_list:spell-list.sorcerer-destined-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.destined:68dfa6a8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.destined:68dfa6a8"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.alarm:appears_on_spell_list:spell-list.sorcerer-kobold-sorcerer-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.kobold-sorcerer:911d7070",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.kobold-sorcerer:911d7070"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     },
     {
       "relationship_id": "spell.alarm:appears_on_spell_list:spell-list.sorcerer-wizard",
@@ -629,81 +724,6 @@
         "d20pfsrd:spell.alarm:a23ea872f583f439"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.alarm:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.alarm:a23ea872f583f439",
-          "source_field": "spell_raw.links_raw[2]"
-        },
-        {
-          "observation_id": "aon:spell.alarm:434a0eeb66a8041b",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:spell.alarm:a23ea872f583f439",
-        "aon:spell.alarm:434a0eeb66a8041b"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.alarm:appears_on_spell_list:spell-list.sorcerer-destined-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.destined:68dfa6a8",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.destined:68dfa6a8"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
-    },
-    {
-      "relationship_id": "spell.alarm:appears_on_spell_list:spell-list.sorcerer-kobold-sorcerer-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.kobold-sorcerer:911d7070",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.kobold-sorcerer:911d7070"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
-    },
-    {
-      "relationship_id": "spell.alarm:appears_on_spell_list:spell-list.home-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.home:c83a2eb7",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.home:c83a2eb7"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
-    },
-    {
-      "relationship_id": "spell.alarm:appears_on_spell_list:spell-list.ambush-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.ambush:85657314",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.ambush:85657314"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

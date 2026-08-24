@@ -8,7 +8,8 @@
     "aon:spell.condensed-ether:462a55651a5d9c2a",
     "legacy_aon:spell.condensed-ether:24ded14f4e339ec9",
     "d20pfsrd:spell.condensed-ether:544b8c0a28daf5fd",
-    "aon:patron.ethereal:15d234b1"
+    "aon:patron.ethereal:15d234b1",
+    "d20pfsrd:magic-school.aether-elemental:3e5520a8"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.condensed-ether:462a55651a5d9c2a",
@@ -123,9 +124,54 @@
         "aon:patron.ethereal:15d234b1"
       ],
       "rationale": "AoN clearly transcribes the owning witch patron's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.condensed-ether:462a55651a5d9c2a",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.condensed-ether:462a55651a5d9c2a",
+        "legacy_aon:spell.condensed-ether:24ded14f4e339ec9",
+        "d20pfsrd:spell.condensed-ether:544b8c0a28daf5fd",
+        "aon:patron.ethereal:15d234b1"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
+    },
+    {
+      "canonical_path": "/levels/6",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
+      ],
+      "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.condensed-ether:appears_on_spell_list:spell-list.aether-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
     {
       "relationship_id": "spell.condensed-ether:appears_on_spell_list:spell-list.arcanist",
       "decision": "accept",
@@ -141,6 +187,20 @@
         "d20pfsrd:spell.condensed-ether:544b8c0a28daf5fd"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.condensed-ether:appears_on_spell_list:spell-list.ethereal-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.ethereal:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.ethereal:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.condensed-ether:appears_on_spell_list:spell-list.psychic",
@@ -335,12 +395,12 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.condensed-ether:uses_definition:rule.armor-class",
+      "relationship_id": "spell.condensed-ether:uses_definition:feat.blind-fight",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.condensed-ether:544b8c0a28daf5fd",
-          "source_field": "spell_raw.links_raw[10]"
+          "source_field": "spell_raw.links_raw[13]"
         }
       ],
       "considered_observation_ids": [
@@ -351,12 +411,12 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.condensed-ether:uses_definition:rule.blind-fight",
+      "relationship_id": "spell.condensed-ether:uses_definition:rule.armor-class",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.condensed-ether:544b8c0a28daf5fd",
-          "source_field": "spell_raw.links_raw[13]"
+          "source_field": "spell_raw.links_raw[10]"
         }
       ],
       "considered_observation_ids": [
@@ -463,7 +523,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.condensed-ether:uses_definition:rule.reflex",
+      "relationship_id": "spell.condensed-ether:uses_definition:rule.reflex-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -493,20 +553,6 @@
         "d20pfsrd:spell.condensed-ether:544b8c0a28daf5fd"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.condensed-ether:appears_on_spell_list:spell-list.ethereal-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.ethereal:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.ethereal:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
     }
   ],
   "unresolved_questions": [

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.blessing-of-liberty",
   "ruleset": "Pathfinder First Edition",
   "name": "Blessing of Liberty",
@@ -127,7 +127,57 @@
   "description": {
     "raw": "You imbue yourself with the blessings of liberty. You gain a +1 luck bonus per 6 caster levels (minimum +1, maximum +3) to your CMD and on saving throws against spells and traps that would move you or impede your movement. You can end the spell’s effects as a swift action to gain a +20 foot enhancement bonus to your base speed for 1 round per whole minute of duration remaining.",
     "search_text": "\"you imbue yourself with the blessings of liberty. you gain a +1 luck bonus per 6 caster levels (minimum +1, maximum +3) to your cmd and on saving throws against spells and traps that would move you or impede your movement. you can end the spell’s effects as a swift action to gain a +20 foot enhancement bonus to your base speed for 1 round per whole minute of duration remaining.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You imbue yourself with the blessings of liberty. You gain a +1 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "luck bonus",
+              "relationship_id": "spell.blessing-of-liberty:uses_definition:rule.luck-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " per 6 caster levels (minimum +1, maximum +3) to your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "CMD",
+              "relationship_id": "spell.blessing-of-liberty:uses_definition:rule.combat-maneuver-defense"
+            },
+            {
+              "node_type": "text",
+              "value": " and on saving throws against spells and traps that would move you or impede your movement. You can end the spell’s effects as a swift action to gain a +20 foot "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "enhancement bonus",
+              "relationship_id": "spell.blessing-of-liberty:uses_definition:rule.enhancement-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " to your base "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "speed",
+              "relationship_id": "spell.blessing-of-liberty:uses_definition:rule.speed"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 round per whole minute of duration remaining."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -342,12 +392,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.blessing-of-liberty:uses_definition:rule.cmd",
+      "relationship_id": "spell.blessing-of-liberty:uses_definition:rule.combat-maneuver-defense",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.cmd",
-        "name": "CMD"
+        "entity_id": "rule.combat-maneuver-defense",
+        "name": "Combat Maneuver Defense"
       },
       "status": "accepted",
       "evidence": [
@@ -490,11 +540,19 @@
       "raw_value_sha256": "9991b639b694fcaf862681ee035253859d5322f9e4a7d266bd373a93a0daa763",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.blessing-of-liberty:54d19d8a589a21fc",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "b247cfa4f52b36eef0591ea8a51af535173ef8298525ade0f4106df7895fd28e",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

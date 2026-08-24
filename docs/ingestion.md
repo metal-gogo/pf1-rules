@@ -36,6 +36,8 @@ pnpm ingest:legacy-3.5
 pnpm ingest:dependencies
 pnpm ingest:linked-entities
 pnpm ingest:rich-text-pilot
+pnpm ingest:rich-text-batch
+pnpm audit:rich-text
 pnpm db:stats
 pnpm validate
 pnpm verify
@@ -82,6 +84,18 @@ relationships, and leaves every other spell on schema version `0.1.0`. Run
 `pnpm db:import` after reviewing generated changes. Do not broaden this command
 until each new spell passes the checklist in
 [Rich-text spell descriptions](rich-text.md).
+
+`pnpm audit:rich-text` classifies every remaining canonical spell without
+writing records. `pnpm ingest:rich-text-batch` converts the next 25
+source-equivalent, warning-free spells that contain at least one known inline
+relationship. Review the generated links before importing the database; the
+automation gate does not replace semantic review. Record batch results and
+unresolved categories in [Rich-text rollout status](rich-text-rollout.md).
+
+Contextual rich-text references may target grouped local pages. Spell
+descriptors live under `/rules/descriptors`; illumination levels live under
+`/rules/illumination`. Equipment and other standalone entities use their local
+entity pages until a reviewed grouped reference is introduced.
 
 - [Ingestion implementation](../src/ingestion/)
 - [Level-0 ingestion queue](../findings/17-level-zero-ingestion-queue.md)

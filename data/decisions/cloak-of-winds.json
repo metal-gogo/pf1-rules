@@ -9,7 +9,9 @@
     "legacy_aon:spell.cloak-of-winds:0fb82a95f4ca3f49",
     "d20pfsrd:spell.cloak-of-winds:58f3934458982193",
     "aon:mystery.wind:b78484f2",
-    "aon:spirit.wind:3cc74c81"
+    "aon:spirit.wind:3cc74c81",
+    "d20pfsrd:magic-school.air-elemental:45be08db",
+    "d20pfsrd:magic-school.wood-elemental:d18ad88c"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.cloak-of-winds:51a107f962a4b51a",
@@ -138,9 +140,69 @@
         "aon:spirit.wind:3cc74c81"
       ],
       "rationale": "AoN clearly transcribes the owning shaman spirit's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.cloak-of-winds:51a107f962a4b51a",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cloak-of-winds:51a107f962a4b51a",
+        "legacy_aon:spell.cloak-of-winds:0fb82a95f4ca3f49",
+        "d20pfsrd:spell.cloak-of-winds:58f3934458982193",
+        "aon:mystery.wind:b78484f2",
+        "aon:spirit.wind:3cc74c81"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
+    },
+    {
+      "canonical_path": "/levels/12",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.air-elemental:45be08db",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.air-elemental:45be08db"
+      ],
+      "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/levels/13",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.wood-elemental:d18ad88c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.wood-elemental:d18ad88c"
+      ],
+      "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.cloak-of-winds:appears_on_spell_list:spell-list.air-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.air-elemental:45be08db",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.air-elemental:45be08db"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
     {
       "relationship_id": "spell.cloak-of-winds:appears_on_spell_list:spell-list.arcanist",
       "decision": "accept",
@@ -318,6 +380,34 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.cloak-of-winds:appears_on_spell_list:spell-list.wind-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.wind:b78484f2",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.wind:b78484f2"
+      ],
+      "rationale": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.cloak-of-winds:appears_on_spell_list:spell-list.wind-spirit",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spirit.wind:3cc74c81",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spirit.wind:3cc74c81"
+      ],
+      "rationale": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
+    },
+    {
       "relationship_id": "spell.cloak-of-winds:appears_on_spell_list:spell-list.wizard",
       "decision": "accept",
       "evidence": [
@@ -332,6 +422,20 @@
         "d20pfsrd:spell.cloak-of-winds:58f3934458982193"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.cloak-of-winds:appears_on_spell_list:spell-list.wood-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.wood-elemental:d18ad88c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.wood-elemental:d18ad88c"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     },
     {
       "relationship_id": "spell.cloak-of-winds:has_descriptor:descriptor.air",
@@ -442,7 +546,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.cloak-of-winds:uses_definition:rule.fortitude",
+      "relationship_id": "spell.cloak-of-winds:uses_definition:rule.fortitude-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -495,7 +599,7 @@
     },
     {
       "relationship_id": "spell.cloak-of-winds:uses_definition:rule.wind",
-      "decision": "accept",
+      "decision": "reject",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.cloak-of-winds:58f3934458982193",
@@ -507,7 +611,29 @@
         "legacy_aon:spell.cloak-of-winds:0fb82a95f4ca3f49",
         "d20pfsrd:spell.cloak-of-winds:58f3934458982193"
       ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+      "rationale": "The source href points to the Wind oracle mystery; the description instead uses the general wind-effects rules."
+    },
+    {
+      "relationship_id": "spell.cloak-of-winds:uses_definition:rule.wind-effects",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.cloak-of-winds:51a107f962a4b51a",
+          "source_field": "spell_raw.description_raw"
+        },
+        {
+          "observation_id": "aon:spell.cloak-of-winds:51a107f962a4b51a",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.cloak-of-winds:51a107f962a4b51a",
+        "legacy_aon:spell.cloak-of-winds:0fb82a95f4ca3f49",
+        "d20pfsrd:spell.cloak-of-winds:58f3934458982193",
+        "aon:mystery.wind:b78484f2",
+        "aon:spirit.wind:3cc74c81"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.cloak-of-winds:uses_definition:rule.wood",
@@ -524,34 +650,6 @@
         "d20pfsrd:spell.cloak-of-winds:58f3934458982193"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.cloak-of-winds:appears_on_spell_list:spell-list.wind-mystery",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.wind:b78484f2",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:mystery.wind:b78484f2"
-      ],
-      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
-    },
-    {
-      "relationship_id": "spell.cloak-of-winds:appears_on_spell_list:spell-list.wind-spirit",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spirit.wind:3cc74c81",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spirit.wind:3cc74c81"
-      ],
-      "rationale": "AoN prints the spell on the owning shaman spirit page; it is modeled as spirit access rather than general Shaman access."
     }
   ],
   "unresolved_questions": [

@@ -8,7 +8,8 @@
     "aon:spell.contagious-flame:7a9acc19b8c9237a",
     "legacy_aon:spell.contagious-flame:9506b6cb8cd50ccc",
     "d20pfsrd:spell.contagious-flame:dfa9668e18e11054",
-    "aon:mystery.volcano:6909d144"
+    "aon:mystery.volcano:6909d144",
+    "d20pfsrd:magic-school.fire-elemental:73dcc41d"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.contagious-flame:7a9acc19b8c9237a",
@@ -123,6 +124,37 @@
         "aon:mystery.volcano:6909d144"
       ],
       "rationale": "AoN clearly transcribes the owning mystery's printed bonus-spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.contagious-flame:7a9acc19b8c9237a",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.contagious-flame:7a9acc19b8c9237a",
+        "legacy_aon:spell.contagious-flame:9506b6cb8cd50ccc",
+        "d20pfsrd:spell.contagious-flame:dfa9668e18e11054",
+        "aon:mystery.volcano:6909d144"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
+    },
+    {
+      "canonical_path": "/levels/6",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.fire-elemental:73dcc41d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.fire-elemental:73dcc41d"
+      ],
+      "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -141,6 +173,20 @@
         "d20pfsrd:spell.contagious-flame:dfa9668e18e11054"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.contagious-flame:appears_on_spell_list:spell-list.fire-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.fire-elemental:73dcc41d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.fire-elemental:73dcc41d"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     },
     {
       "relationship_id": "spell.contagious-flame:appears_on_spell_list:spell-list.magus",
@@ -209,6 +255,20 @@
         "d20pfsrd:spell.contagious-flame:dfa9668e18e11054"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.contagious-flame:appears_on_spell_list:spell-list.volcano-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.volcano:6909d144",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.volcano:6909d144"
+      ],
+      "rationale": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     },
     {
       "relationship_id": "spell.contagious-flame:appears_on_spell_list:spell-list.wizard",
@@ -335,6 +395,23 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.contagious-flame:uses_definition:descriptor.fire",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.contagious-flame:7a9acc19b8c9237a",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.contagious-flame:7a9acc19b8c9237a",
+        "legacy_aon:spell.contagious-flame:9506b6cb8cd50ccc",
+        "d20pfsrd:spell.contagious-flame:dfa9668e18e11054",
+        "aon:mystery.volcano:6909d144"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.contagious-flame:uses_definition:rule.spell-resistance",
       "decision": "accept",
       "evidence": [
@@ -381,20 +458,6 @@
         "d20pfsrd:spell.contagious-flame:dfa9668e18e11054"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.contagious-flame:appears_on_spell_list:spell-list.volcano-mystery",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.volcano:6909d144",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:mystery.volcano:6909d144"
-      ],
-      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
     }
   ],
   "unresolved_questions": [

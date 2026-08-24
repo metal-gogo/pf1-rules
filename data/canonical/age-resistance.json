@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.age-resistance",
   "ruleset": "Pathfinder First Edition",
   "name": "Age Resistance",
@@ -187,7 +187,60 @@
   "description": {
     "raw": "This spell functions as lesser age resistance, except you ignore the Strength, Dexterity, and Constitution penalties gained at middle and old age.",
     "search_text": "\"this spell functions as lesser age resistance, except you ignore the strength, dexterity, and constitution penalties gained at middle and old age.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "lesser age resistance",
+              "relationship_id": "spell.age-resistance:functions_like:spell.age-resistance-lesser",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you ignore the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Strength",
+              "relationship_id": "spell.age-resistance:uses_definition:rule.strength"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Dexterity",
+              "relationship_id": "spell.age-resistance:uses_definition:rule.dexterity"
+            },
+            {
+              "node_type": "text",
+              "value": ", and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Constitution",
+              "relationship_id": "spell.age-resistance:uses_definition:rule.constitution"
+            },
+            {
+              "node_type": "text",
+              "value": " penalties gained at middle and old age."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -634,12 +687,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.age-resistance:references:spell.lesser-age-resistance",
+      "relationship_id": "spell.age-resistance:references:spell.age-resistance-lesser",
       "type": "references",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.lesser-age-resistance",
-        "name": "lesser age resistance"
+        "entity_id": "spell.age-resistance-lesser",
+        "name": "Age Resistance, Lesser"
       },
       "status": "accepted",
       "evidence": [
@@ -951,11 +1004,19 @@
       "raw_value_sha256": "da27ced0f132861575636fba93acf06c2c38223a9a55d9717915d867c8208733",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.age-resistance:4ab04c9408aaf34a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e58218e3d714bfaf6df49dd32da84f127392ac45c2531bf162c9814fc86469d3",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

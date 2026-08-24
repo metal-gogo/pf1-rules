@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.acidic-spray",
   "ruleset": "Pathfinder First Edition",
   "name": "Acidic Spray",
@@ -125,7 +125,57 @@
   "description": {
     "raw": "A spray of acid erupts from your outstretched hand, dealing 1d6 points of acid damage per caster level (maximum 15d6) to each creature within its area (Reflex half). This acid continues to burn for 1 round, dealing 1d6 points of acid damage per two caster levels (maximum 7d6) to any creature that failed its saving throw against the spell (a second Reflex save on the creature's turn negates this additional damage).",
     "search_text": "\"a spray of acid erupts from your outstretched hand, dealing 1d6 points of acid damage per caster level (maximum 15d6) to each creature within its area (reflex half). this acid continues to burn for 1 round, dealing 1d6 points of acid damage per two caster levels (maximum 7d6) to any creature that failed its saving throw against the spell (a second reflex save on the creature's turn negates this additional damage).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "A spray of acid erupts from your outstretched hand, dealing 1d6 points of acid damage per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.acidic-spray:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum 15d6) to each creature within its area ("
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.acidic-spray:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " half). This acid continues to burn for 1 round, dealing 1d6 points of acid damage per two caster levels (maximum 7d6) to any creature that failed its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throw",
+              "relationship_id": "spell.acidic-spray:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": " against the spell (a second "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.acidic-spray:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save on the creature's turn negates this additional damage)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -374,7 +424,7 @@
         "entity_id": "spell.reflex",
         "name": "Reflex"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.acidic-spray:8d2187f1a81cb392",
@@ -384,7 +434,7 @@
           "source_href": "https://www.d20pfsrd.com/magic/all-spells/a/acidic-spray/void(0)"
         }
       ],
-      "note": null
+      "note": "The source href is a non-navigating void(0) placeholder, not relationship evidence."
     },
     {
       "relationship_id": "spell.acidic-spray:uses_action:action.standard-action",
@@ -434,11 +484,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.acidic-spray:uses_definition:rule.reflex",
+      "relationship_id": "spell.acidic-spray:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -454,12 +504,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.acidic-spray:uses_definition:rule.saving-throw",
+      "relationship_id": "spell.acidic-spray:uses_definition:rule.saving-throws",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.saving-throw",
-        "name": "saving throw"
+        "entity_id": "rule.saving-throws",
+        "name": "Saving throws"
       },
       "status": "accepted",
       "evidence": [
@@ -542,11 +592,19 @@
       "raw_value_sha256": "cefa0b59b61f3661d5cf2da5561bb9ed57f603b24894e4e6da6c8267b60382fe",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.acidic-spray:9e7e523812ef8ca4",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "37c0f1c331b5d7047db31603b69fe926b3af5a4a73e783823820caba83a6669a",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

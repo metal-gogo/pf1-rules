@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.binding-earth-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Binding Earth, Mass",
@@ -159,7 +159,33 @@
   "description": {
     "raw": "This spell functions as binding earth, except as noted above.",
     "search_text": "\"this spell functions as binding earth, except as noted above.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "binding earth",
+              "relationship_id": "spell.binding-earth-mass:functions_like:spell.binding-earth",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except as noted above."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -438,9 +464,9 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.binding",
-        "name": "binding"
+        "name": "Binding"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "legacy_aon:spell.binding-earth-mass:f7f2a97457086ed7",
@@ -450,7 +476,7 @@
           "source_href": "https://legacy.aonprd.com/coreRulebook/spells/binding.html#binding"
         }
       ],
-      "note": null
+      "note": "The source link matches “binding” only as part of Binding Earth’s name; the mass spell does not reference the Binding spell."
     },
     {
       "relationship_id": "spell.binding-earth-mass:uses_action:action.standard-action",
@@ -541,11 +567,19 @@
       "raw_value_sha256": "3601d642a08baa48697eaecaf48f6289ccef332af95358b16a0a88cff4b835b3",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.binding-earth-mass:af7c145f41b2d4ce",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3e7090943eac589c5fa091c38dc0b95b6e3c7682f0733774f80fe5263004acd0",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

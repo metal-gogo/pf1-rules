@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.chains-of-fire",
   "ruleset": "Pathfinder First Edition",
   "name": "Chains of Fire",
@@ -177,7 +177,33 @@
   "description": {
     "raw": "This spell functions like chain lightning, except as noted above, and the spell deals fire damage instead of electricity damage.",
     "search_text": "\"this spell functions like chain lightning, except as noted above, and the spell deals fire damage instead of electricity damage.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "chain lightning",
+              "relationship_id": "spell.chains-of-fire:functions_like:spell.chain-lightning",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except as noted above, and the spell deals fire damage instead of electricity damage."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -391,6 +417,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like chain lightning, except as noted above, and the spell deals fire damage instead of electricity damage.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.chains-of-fire:4305433fde9f9f1d",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "chain lightning",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/chainLightning.html#chain-lightning"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.chains-of-fire:cb4d6bc79f6a3723",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "chain lightning",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/chain-lightning"
         }
       ],
       "note": null
@@ -491,33 +531,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.chains-of-fire:references:spell.chain-lightning",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.chain-lightning",
-        "name": "chain lightning"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.chains-of-fire:4305433fde9f9f1d",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "chain lightning",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/chainLightning.html#chain-lightning"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.chains-of-fire:cb4d6bc79f6a3723",
-          "source_field": "spell_raw.links_raw[5]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "chain lightning",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/chain-lightning"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.chains-of-fire:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -545,11 +558,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.chains-of-fire:uses_definition:rule.reflex",
+      "relationship_id": "spell.chains-of-fire:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -633,11 +646,19 @@
       "raw_value_sha256": "a75f1c7eb4dc49af8ff9b5128e60d4fed39279c1e94882fa423b2e1b141a82f3",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.chains-of-fire:9f013335e30799b7",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "263e0239da36ef333e796ce0f6ffcb8b60f805b5fac26a144cda7eb2c38cdc99",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

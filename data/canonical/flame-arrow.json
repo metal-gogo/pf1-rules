@@ -69,6 +69,16 @@
       "level": 3,
       "scope": "core",
       "raw": "wizard 3"
+    },
+    {
+      "spell_list_id": "spell-list.fire-elemental-school",
+      "list_kind": "elemental_school",
+      "list_name": "Fire Elemental School",
+      "level": 3,
+      "scope": "core",
+      "raw": "3—flame arrow",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -575,6 +585,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.flame-arrow:appears_on_spell_list:spell-list.fire-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.fire-elemental-school",
+        "name": "Fire Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.fire-elemental:73dcc41d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "3—flame arrow",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/fire/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -625,6 +655,14 @@
       "raw_value_sha256": "e7de3a824e6a1f1ec322e493eeb39f87480a6180f3958662cdd3f9dc5a9f2b71",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/levels/7",
+      "observation_id": "d20pfsrd:magic-school.fire-elemental:73dcc41d",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "f613dbee9af02523581c0125501a9c2976e716b08632d620b29e9e5616cdc6f1",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -645,6 +683,11 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/7",
+        "message": "Fire Elemental School grants Flame Arrow as a level 3 printed spell; this is not general Wizard class access."
       }
     ]
   }

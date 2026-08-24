@@ -43,7 +43,7 @@ function relationship(
   type: string,
   targetName: string,
   targetId: string,
-  options: { status?: string; targetType?: string; anchor?: string } = {},
+  options: { status?: string; targetType?: string; anchor?: string; sourceField?: string } = {},
 ): ValidatedJson {
   return {
     relationship_id: id,
@@ -56,7 +56,7 @@ function relationship(
     status: options.status ?? "accepted",
     evidence: [{
       observation_id: "aon:test",
-      source_field: "spell_raw.description_raw",
+      source_field: options.sourceField ?? "spell_raw.description_raw",
       evidence_kind: "plain_text",
       anchor_text_raw: options.anchor ?? targetName,
       source_href: null,
@@ -127,13 +127,13 @@ describe("rich-text schema and source parsing", () => {
     });
   });
 
-  it("keeps every pilot document text-equivalent and linked only to accepted relationships", () => {
-    for (const slug of [
-      "break-enchantment", "restoration", "restoration-greater",
-      "restoration-lesser", "bestow-curse", "bestow-curse-greater",
-      "curse-major", "conditional-curse", "cure-light-wounds",
-      "cure-moderate-wounds", "darkness",
-    ]) {
+  it("keeps every rich-text document text-equivalent and linked only to accepted relationships", () => {
+    const slugs = fs.readdirSync(path.join(projectRoot, "data", "canonical"))
+      .filter((filename) => filename.endsWith(".json"))
+      .map((filename) => filename.replace(/\.json$/, ""))
+      .filter((slug) => canonical(slug).schema_version === "0.2.0");
+    expect(slugs.length).toBeGreaterThanOrEqual(36);
+    for (const slug of slugs) {
       const spell = canonical(slug);
       const document = spell.description.document as RichTextDocument;
       expect(spell.schema_version, slug).toBe("0.2.0");
@@ -152,11 +152,12 @@ describe("rich-text schema and source parsing", () => {
         const accepted = relationships.get(link.relationship_id);
         expect(accepted?.status, link.relationship_id).toBe("accepted");
         expect(accepted?.target.entity_id, link.relationship_id).toBeTruthy();
+        expect(accepted?.target.entity_id, link.relationship_id).not.toBe(spell.spell_id);
       }
     }
   });
 
-  it("keeps mythic Darkness separate and links only explicit spell-name occurrences", () => {
+  it("keeps Mythic Darkness separate and disambiguates contextual rules links", () => {
     const darkness = canonical("darkness");
     const document = darkness.description.document as RichTextDocument;
     const serialized = JSON.stringify(document);
@@ -171,13 +172,21 @@ describe("rich-text schema and source parsing", () => {
 
     expect(darkness.description.raw).not.toContain("Mythic Darkness");
     expect(serialized).not.toContain("Mythic Darkness");
-    expect(serialized).not.toContain("descriptor.darkness");
+    expect(serialized).not.toContain("spell.darkness:references:spell.darkness");
     expect(darknessLinks).toHaveLength(2);
-    for (const link of darknessLinks) {
-      if (link.node_type !== "entity_link") continue;
-      expect(link.relationship_id).toBe("spell.darkness:references:spell.darkness");
-      expect(link.marks).toEqual(["italic"]);
-    }
+    expect(darknessLinks.map((link) => link.node_type === "entity_link" ? link.relationship_id : ""))
+      .toEqual([
+        "spell.darkness:has_descriptor:descriptor.darkness",
+        "spell.darkness:uses_definition:illumination.darkness",
+      ]);
+    expect(inlineNodes.filter((node) =>
+      node.node_type === "text" &&
+      node.value.toLowerCase() === "darkness" &&
+      node.marks?.includes("italic")
+    )).toHaveLength(2);
+    expect(darkness.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.darkness:has_mythic_variant:mythic-spell-variant.darkness",
+    }));
     expect(darkness.relationships.map((item: ValidatedJson) => item.target.entity_id))
       .not.toEqual(expect.arrayContaining([
         "publication.pathfinder-rpg-mythic-adventures",
@@ -251,7 +260,7 @@ describe("rich-text relationship enrichment", () => {
     }));
   });
 
-  it("does not turn classification metadata into description links", () => {
+  it("does not turn classification metadata or self-references into description links", () => {
     const result = linkRichTextDocument(
       parseRichTextHtml("darkness and <i>darkness</i>"),
       [
@@ -260,7 +269,7 @@ describe("rich-text relationship enrichment", () => {
           "has_descriptor",
           "darkness",
           "descriptor.darkness",
-          { targetType: "descriptor" },
+          { targetType: "descriptor", sourceField: "spell_raw.school_raw" },
         ),
         relationship(
           "spell.darkness:references:spell.darkness",
@@ -273,8 +282,22 @@ describe("rich-text relationship enrichment", () => {
       { ownerEntityId: "spell.darkness" },
     );
 
-    expect(JSON.stringify(result.document)).not.toContain("descriptor.darkness");
-    expect(JSON.stringify(result.document).match(/spell\.darkness:references:spell\.darkness/g))
-      .toHaveLength(1);
+    expect(JSON.stringify(result.document)).not.toContain("entity_link");
+  });
+
+  it("preserves semantic case for single-word rules terms", () => {
+    const result = linkRichTextDocument(
+      parseRichTextHtml("A Knowledge check reveals knowledge about the subject."),
+      [relationship(
+        "spell.test:uses_definition:rule.knowledge",
+        "uses_definition",
+        "Knowledge",
+        "rule.knowledge",
+        { anchor: "Knowledge" },
+      )],
+    );
+    const serialized = JSON.stringify(result.document);
+    expect(serialized.match(/entity_link/g)).toHaveLength(1);
+    expect(serialized).toContain('"value":"Knowledge"');
   });
 });

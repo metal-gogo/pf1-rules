@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.cats-grace-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Cat's Grace, Mass",
@@ -109,6 +109,16 @@
       "raw": "12th — cat's grace (mass)",
       "access_basis": "printed",
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.wood-elemental-school",
+      "list_kind": "elemental_school",
+      "list_name": "Wood Elemental School",
+      "level": 6,
+      "scope": "later_first_party",
+      "raw": "6—cat’s grace (mass)",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -201,7 +211,33 @@
   "description": {
     "raw": "This spell functions like cat's grace, except it affects multiple creatures.",
     "search_text": "\"this spell functions like cat's grace, except it affects multiple creatures.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "cat's grace",
+              "relationship_id": "spell.cats-grace-mass:functions_like:spell.cats-grace",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it affects multiple creatures."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -296,6 +332,26 @@
     }
   ],
   "relationships": [
+    {
+      "relationship_id": "spell.cats-grace-mass:appears_on_spell_list:spell-list.agility-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.agility-patron",
+        "name": "Agility Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.agility:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "12th — cat's grace (mass)",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
     {
       "relationship_id": "spell.cats-grace-mass:appears_on_spell_list:spell-list.arcanist",
       "type": "appears_on_spell_list",
@@ -592,6 +648,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.cats-grace-mass:appears_on_spell_list:spell-list.wood-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.wood-elemental-school",
+        "name": "Wood Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.wood-elemental:d18ad88c",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6—cat’s grace (mass)",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/wood/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
+    {
       "relationship_id": "spell.cats-grace-mass:functions_like:spell.cats-grace",
       "type": "functions_like",
       "target": {
@@ -607,6 +683,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like cat's grace, except it affects multiple creatures.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.cats-grace-mass:1dd4b6df753e69ec",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cat's grace",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/catSGrace.html#cat-s-grace"
         }
       ],
       "note": null
@@ -680,26 +763,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.cats-grace-mass:references:spell.cats-grace",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.cats-grace",
-        "name": "cat's grace"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.cats-grace-mass:1dd4b6df753e69ec",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cat's grace",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/catSGrace.html#cat-s-grace"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.cats-grace-mass:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -758,26 +821,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.cats-grace-mass:appears_on_spell_list:spell-list.agility-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.agility-patron",
-        "name": "Agility Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.agility:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "12th — cat's grace (mass)",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -836,11 +879,27 @@
       "raw_value_sha256": "5c81eb830725cf40ca271fc7585e148adda8def2f5ec3d8a6d6187460795ccca",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/levels/12",
+      "observation_id": "d20pfsrd:magic-school.wood-elemental:d18ad88c",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "0270e0dee419819351c8f5c9f8d1fd37be9813d03c1b509ade1ac98b874c13c2",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.cats-grace-mass:8b460889f9558915",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d70c27e31b9a971253b805940039b69233fd71f0de77687867351b32a6129b52",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
@@ -916,6 +975,11 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/11",
         "message": "Agility Patron grants Cat's Grace, Mass as a level 6 spell; this is not general Witch class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/12",
+        "message": "Wood Elemental School grants Cat's Grace, Mass as a level 6 printed spell; this is not general Wizard class access."
       }
     ]
   }

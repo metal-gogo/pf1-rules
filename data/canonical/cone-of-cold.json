@@ -165,6 +165,16 @@
         "note": "This effective subdomain membership is derived from the printed replacement rule and the associated domain list."
       },
       "qualifications": []
+    },
+    {
+      "spell_list_id": "spell-list.water-elemental-school",
+      "list_kind": "elemental_school",
+      "list_name": "Water Elemental School",
+      "level": 5,
+      "scope": "core",
+      "raw": "5—cone of cold",
+      "access_basis": "printed",
+      "qualifications": []
     }
   ],
   "casting": {
@@ -952,6 +962,26 @@
         }
       ],
       "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.cone-of-cold:appears_on_spell_list:spell-list.water-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.water-elemental-school",
+        "name": "Water Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.water-elemental:2b7c823c",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "5—cone of cold",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/water/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -1058,6 +1088,14 @@
       "raw_value_sha256": "b85a35a21c984a2f23ccfd8d53125315a8e23131f339a06dc382b152abcf3377",
       "decision": "normalized",
       "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/levels/14",
+      "observation_id": "d20pfsrd:magic-school.water-elemental:2b7c823c",
+      "source_field": "entity_raw.sections_raw[0]",
+      "raw_value_sha256": "56ce6a1461fd9139047aec104572cffb3cc2e9049cec176461951f45c2f81672",
+      "decision": "normalized",
+      "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
     }
   ],
   "normalization": {
@@ -1118,6 +1156,11 @@
         "code": "OWNER_GRANTED_SPELL_ACCESS",
         "field_path": "/levels/13",
         "message": "Oceans Subdomain grants Cone of Cold as a level 6 derived spell; this is not general Cleric class access."
+      },
+      {
+        "code": "OWNER_GRANTED_SPELL_ACCESS",
+        "field_path": "/levels/14",
+        "message": "Water Elemental School grants Cone of Cold as a level 5 printed spell; this is not general Wizard class access."
       }
     ]
   }

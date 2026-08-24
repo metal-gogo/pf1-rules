@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.cleansing-fire",
   "ruleset": "Pathfinder First Edition",
   "name": "Cleansing Fire",
@@ -173,7 +173,90 @@
   "description": {
     "raw": "A ring of fire surrounds the area affected by the spell. The flames radiate heat, but not enough to damage adjacent creatures. The flames deal 2d6 points of fire damage to any creatures that pass through them (or 4d6 points of damage to undead creatures). If you manifest a portion of the ring in a square that contains a creature, that creature takes damage as if it passed through the ring.\n\nThe ring of flames attempts to dispel all ongoing spell effects with the evil descriptor within it, targeting each spell effect once per round as per dispel magic. Any attempt to cast a spell with the evil descriptor inside the ring of flames is targeted by a dispel magic affect that attempts to counterspell the evil spell.",
     "search_text": "\"a ring of fire surrounds the area affected by the spell. the flames radiate heat, but not enough to damage adjacent creatures. the flames deal 2d6 points of fire damage to any creatures that pass through them (or 4d6 points of damage to undead creatures). if you manifest a portion of the ring in a square that contains a creature, that creature takes damage as if it passed through the ring.\\n\\nthe ring of flames attempts to dispel all ongoing spell effects with the evil descriptor within it, targeting each spell effect once per round as per dispel magic. any attempt to cast a spell with the evil descriptor inside the ring of flames is targeted by a dispel magic affect that attempts to counterspell the evil spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "A ring of fire surrounds the area affected by the spell. The flames radiate heat, but not enough to damage adjacent creatures. The flames deal 2d6 points of fire damage to any creatures that pass through them (or 4d6 points of damage to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "undead",
+              "relationship_id": "spell.cleansing-fire:uses_definition:rule.undead"
+            },
+            {
+              "node_type": "text",
+              "value": " creatures). If you manifest a portion of the ring in a square that contains a creature, that creature takes damage as if it passed through the ring."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": " The ring of flames attempts to dispel all ongoing spell effects with the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "evil descriptor",
+              "relationship_id": "spell.cleansing-fire:uses_definition:descriptor.evil"
+            },
+            {
+              "node_type": "text",
+              "value": " within it, targeting each spell effect once per round as per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dispel magic",
+              "relationship_id": "spell.cleansing-fire:references:spell.dispel-magic",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ". Any attempt to cast a spell with the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "evil descriptor",
+              "relationship_id": "spell.cleansing-fire:uses_definition:descriptor.evil"
+            },
+            {
+              "node_type": "text",
+              "value": " inside the ring of flames is targeted by a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dispel magic",
+              "relationship_id": "spell.cleansing-fire:references:spell.dispel-magic",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " affect that attempts to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "counterspell",
+              "relationship_id": "spell.cleansing-fire:uses_definition:rule.counterspell"
+            },
+            {
+              "node_type": "text",
+              "value": " the evil spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -238,6 +321,47 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.cleansing-fire:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.cleansing-fire:e461901c94d6a4a3",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.cleansing-fire:ef5e1d11da65d689",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.cleansing-fire:e461901c94d6a4a3",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.cleansing-fire:ef5e1d11da65d689",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.cleansing-fire:appears_on_spell_list:spell-list.oracle",
@@ -434,7 +558,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.dispel-magic",
-        "name": "dispel magic"
+        "name": "Dispel Magic"
       },
       "status": "accepted",
       "evidence": [
@@ -483,6 +607,33 @@
       "note": null
     },
     {
+      "relationship_id": "spell.cleansing-fire:uses_definition:descriptor.evil",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.evil",
+        "name": "Evil"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.cleansing-fire:e461901c94d6a4a3",
+          "source_field": "spell_raw.links_raw[8]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "evil descriptor",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Magic-Descriptor-Evil"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.cleansing-fire:e461901c94d6a4a3",
+          "source_field": "spell_raw.links_raw[10]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "evil descriptor",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Magic-Descriptor-Evil"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.cleansing-fire:uses_definition:rule.concentration",
       "type": "uses_definition",
       "target": {
@@ -523,33 +674,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.cleansing-fire:uses_definition:rule.evil-descriptor",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.evil-descriptor",
-        "name": "evil descriptor"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.cleansing-fire:e461901c94d6a4a3",
-          "source_field": "spell_raw.links_raw[8]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "evil descriptor",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Magic-Descriptor-Evil"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.cleansing-fire:e461901c94d6a4a3",
-          "source_field": "spell_raw.links_raw[10]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "evil descriptor",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Magic-Descriptor-Evil"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.cleansing-fire:uses_definition:rule.spell-resistance",
       "type": "uses_definition",
       "target": {
@@ -570,12 +694,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.cleansing-fire:uses_definition:rule.touch",
+      "relationship_id": "spell.cleansing-fire:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -608,47 +732,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.cleansing-fire:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.cleansing-fire:e461901c94d6a4a3",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.cleansing-fire:ef5e1d11da65d689",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.cleansing-fire:e461901c94d6a4a3",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.cleansing-fire:ef5e1d11da65d689",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -699,11 +782,19 @@
       "raw_value_sha256": "035a712f40e5d9d4c5d232e58d2203af22a5bfdbc88b178fbdc946d09bef4664",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.cleansing-fire:ef5e1d11da65d689",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "44d924779f9db4cacb22056af7a7cb757c87e42108f893a18e03724c9459ca98",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

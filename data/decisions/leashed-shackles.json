@@ -7,7 +7,8 @@
   "observation_ids": [
     "aon:spell.leashed-shackles:d655a6c69f7d76c5",
     "legacy_aon:spell.leashed-shackles:7968076abe46c33c",
-    "d20pfsrd:spell.leashed-shackles:eebe8c6225414922"
+    "d20pfsrd:spell.leashed-shackles:eebe8c6225414922",
+    "d20pfsrd:magic-school.aether-elemental:3e5520a8"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.leashed-shackles:d655a6c69f7d76c5",
@@ -127,6 +128,20 @@
         "aon:spell.leashed-shackles:d655a6c69f7d76c5"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/levels/7",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
+      ],
+      "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -404,6 +419,20 @@
         "aon:spell.leashed-shackles:d655a6c69f7d76c5"
       ],
       "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+    },
+    {
+      "relationship_id": "spell.leashed-shackles:appears_on_spell_list:spell-list.aether-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
+      ],
+      "rationale": "d20PFSRD prints the spell on the owning wizard elemental arcane school page; it is modeled as elemental_school access rather than general Wizard access."
     }
   ],
   "unresolved_questions": [

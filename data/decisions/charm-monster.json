@@ -16,7 +16,8 @@
     "aon:domain.charm:fd537e7d",
     "aon:subdomain.captivation:fd537e7d",
     "aon:subdomain.love:fd537e7d",
-    "aon:subdomain.lust:fd537e7d"
+    "aon:subdomain.lust:fd537e7d",
+    "d20pfsrd:magic-school.wood-elemental:d18ad88c"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.charm-monster:cdb0f44f578e9340",
@@ -243,6 +244,45 @@
         "aon:subdomain.lust:fd537e7d"
       ],
       "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.charm-monster:cdb0f44f578e9340",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.charm-monster:cdb0f44f578e9340",
+        "legacy_aon:spell.charm-monster:960927450c9b769a",
+        "d20pfsrd:spell.charm-monster:662d8b644ff9c9af",
+        "aon:mystery.juju:7692329e",
+        "aon:patron.decadence:15d234b1",
+        "aon:bloodline.sorcerer.infernal:a42b373f",
+        "aon:bloodline.sorcerer.oni:726ad2e8",
+        "aon:bloodline.bloodrager.hag:8981221d",
+        "aon:domain.charm:fd537e7d",
+        "aon:subdomain.captivation:fd537e7d",
+        "aon:subdomain.love:fd537e7d",
+        "aon:subdomain.lust:fd537e7d"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
+    },
+    {
+      "canonical_path": "/levels/20",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.wood-elemental:d18ad88c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.wood-elemental:d18ad88c"
+      ],
+      "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -285,6 +325,104 @@
         "d20pfsrd:spell.charm-monster:662d8b644ff9c9af"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.bloodrager-hag-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.bloodrager.hag:8981221d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.bloodrager.hag:8981221d"
+      ],
+      "rationale": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
+    },
+    {
+      "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.captivation-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.captivation:fd537e7d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.captivation:fd537e7d"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.charm-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.charm:fd537e7d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.charm:fd537e7d"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.decadence-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.decadence:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.decadence:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.juju-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.juju:7692329e",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.juju:7692329e"
+      ],
+      "rationale": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.love-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.love:fd537e7d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.love:fd537e7d"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.lust-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.lust:fd537e7d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.lust:fd537e7d"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.mesmerist",
@@ -369,6 +507,34 @@
         "d20pfsrd:spell.charm-monster:662d8b644ff9c9af"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.sorcerer-infernal-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.infernal:a42b373f",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.infernal:a42b373f"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.sorcerer-oni-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.oni:726ad2e8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.oni:726ad2e8"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     },
     {
       "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.sorcerer-wizard",
@@ -487,12 +653,38 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.wood-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.wood-elemental:d18ad88c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.wood-elemental:d18ad88c"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
+    {
       "relationship_id": "spell.charm-monster:functions_like:spell.charm-person",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "aon:spell.charm-monster:cdb0f44f578e9340",
           "source_field": "spell_raw.description_raw"
+        },
+        {
+          "observation_id": "legacy_aon:spell.charm-monster:960927450c9b769a",
+          "source_field": "spell_raw.links_raw[0]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.charm-monster:662d8b644ff9c9af",
+          "source_field": "spell_raw.links_raw[11]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.charm-monster:662d8b644ff9c9af",
+          "source_field": "spell_raw.links_raw[23]"
         }
       ],
       "considered_observation_ids": [
@@ -589,30 +781,6 @@
         {
           "observation_id": "aon:spell.charm-monster:cdb0f44f578e9340",
           "source_field": "spell_raw.source_book_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.charm-monster:cdb0f44f578e9340",
-        "legacy_aon:spell.charm-monster:960927450c9b769a",
-        "d20pfsrd:spell.charm-monster:662d8b644ff9c9af"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.charm-monster:references:spell.charm-person",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.charm-monster:960927450c9b769a",
-          "source_field": "spell_raw.links_raw[0]"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.charm-monster:662d8b644ff9c9af",
-          "source_field": "spell_raw.links_raw[11]"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.charm-monster:662d8b644ff9c9af",
-          "source_field": "spell_raw.links_raw[23]"
         }
       ],
       "considered_observation_ids": [
@@ -731,7 +899,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.charm-monster:uses_definition:rule.skeletons",
+      "relationship_id": "spell.charm-monster:uses_definition:rule.skeleton",
       "decision": "accept",
       "evidence": [
         {
@@ -781,132 +949,6 @@
         "d20pfsrd:spell.charm-monster:662d8b644ff9c9af"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.juju-mystery",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.juju:7692329e",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:mystery.juju:7692329e"
-      ],
-      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
-    },
-    {
-      "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.decadence-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.decadence:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.decadence:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.sorcerer-infernal-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.infernal:a42b373f",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.infernal:a42b373f"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
-    },
-    {
-      "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.sorcerer-oni-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.oni:726ad2e8",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.oni:726ad2e8"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
-    },
-    {
-      "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.bloodrager-hag-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.bloodrager.hag:8981221d",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.bloodrager.hag:8981221d"
-      ],
-      "rationale": "AoN prints the spell on the owning bloodrager bloodline page; it is modeled as bloodline access rather than general Bloodrager access."
-    },
-    {
-      "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.charm-domain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:domain.charm:fd537e7d",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:domain.charm:fd537e7d"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
-    },
-    {
-      "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.captivation-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.captivation:fd537e7d",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.captivation:fd537e7d"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
-    },
-    {
-      "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.love-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.love:fd537e7d",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.love:fd537e7d"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
-    },
-    {
-      "relationship_id": "spell.charm-monster:appears_on_spell_list:spell-list.lust-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.lust:fd537e7d",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.lust:fd537e7d"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

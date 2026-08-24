@@ -8,7 +8,8 @@
     "aon:spell.calcific-touch:1e66f1c1377e7522",
     "legacy_aon:spell.calcific-touch:ffdc3f4bd80908dd",
     "d20pfsrd:spell.calcific-touch:f082fdf4821b5c9a",
-    "aon:subdomain.petrification:08dd1152"
+    "aon:subdomain.petrification:08dd1152",
+    "d20pfsrd:magic-school.earth-elemental:b766c5d6"
   ],
   "policy_id": "provenance-first-v0",
   "baseline_observation_id": "aon:spell.calcific-touch:1e66f1c1377e7522",
@@ -123,6 +124,37 @@
         "aon:subdomain.petrification:08dd1152"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.calcific-touch:1e66f1c1377e7522",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.calcific-touch:1e66f1c1377e7522",
+        "legacy_aon:spell.calcific-touch:ffdc3f4bd80908dd",
+        "d20pfsrd:spell.calcific-touch:f082fdf4821b5c9a",
+        "aon:subdomain.petrification:08dd1152"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
+    },
+    {
+      "canonical_path": "/levels/7",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.earth-elemental:b766c5d6",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.earth-elemental:b766c5d6"
+      ],
+      "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
     }
   ],
   "relationship_decisions": [
@@ -161,6 +193,34 @@
         "d20pfsrd:spell.calcific-touch:f082fdf4821b5c9a"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.calcific-touch:appears_on_spell_list:spell-list.earth-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.earth-elemental:b766c5d6",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.earth-elemental:b766c5d6"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
+    {
+      "relationship_id": "spell.calcific-touch:appears_on_spell_list:spell-list.petrification-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.petrification:08dd1152",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.petrification:08dd1152"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.calcific-touch:appears_on_spell_list:spell-list.psychic",
@@ -335,22 +395,6 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.calcific-touch:references:spell.calcific-touch",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.calcific-touch:ffdc3f4bd80908dd",
-          "source_field": "spell_raw.links_raw[3]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.calcific-touch:1e66f1c1377e7522",
-        "legacy_aon:spell.calcific-touch:ffdc3f4bd80908dd",
-        "d20pfsrd:spell.calcific-touch:f082fdf4821b5c9a"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.calcific-touch:references:spell.restoration",
       "decision": "accept",
       "evidence": [
@@ -369,6 +413,23 @@
         "d20pfsrd:spell.calcific-touch:f082fdf4821b5c9a"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.calcific-touch:references:spell.slow",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.calcific-touch:1e66f1c1377e7522",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.calcific-touch:1e66f1c1377e7522",
+        "legacy_aon:spell.calcific-touch:ffdc3f4bd80908dd",
+        "d20pfsrd:spell.calcific-touch:f082fdf4821b5c9a",
+        "aon:subdomain.petrification:08dd1152"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.calcific-touch:references:spell.stone-to-flesh",
@@ -411,6 +472,23 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.calcific-touch:uses_definition:condition.petrified",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.calcific-touch:1e66f1c1377e7522",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.calcific-touch:1e66f1c1377e7522",
+        "legacy_aon:spell.calcific-touch:ffdc3f4bd80908dd",
+        "d20pfsrd:spell.calcific-touch:f082fdf4821b5c9a",
+        "aon:subdomain.petrification:08dd1152"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.calcific-touch:uses_definition:rule.dexterity",
       "decision": "accept",
       "evidence": [
@@ -431,7 +509,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.calcific-touch:uses_definition:rule.fortitude",
+      "relationship_id": "spell.calcific-touch:uses_definition:rule.fortitude-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -481,20 +559,6 @@
         "d20pfsrd:spell.calcific-touch:f082fdf4821b5c9a"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.calcific-touch:appears_on_spell_list:spell-list.petrification-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.petrification:08dd1152",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.petrification:08dd1152"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

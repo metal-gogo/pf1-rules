@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.charm-fey",
   "ruleset": "Pathfinder First Edition",
   "name": "Charm Fey",
@@ -139,7 +139,51 @@
   "description": {
     "raw": "This spell functions as charm person, except it affects a fey instead of a humanoid.",
     "search_text": "\"this spell functions as charm person, except it affects a fey instead of a humanoid.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "charm person",
+              "relationship_id": "spell.charm-fey:functions_like:spell.charm-person",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it affects a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fey",
+              "relationship_id": "spell.charm-fey:uses_definition:rule.fey"
+            },
+            {
+              "node_type": "text",
+              "value": " instead of a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "humanoid",
+              "relationship_id": "spell.charm-fey:uses_definition:rule.humanoid"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -366,6 +410,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as charm person, except it affects a fey instead of a humanoid.",
           "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.charm-fey:404cc2e674da305e",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "charm person",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/charm-person"
         }
       ],
       "note": null
@@ -513,26 +564,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.charm-fey:references:spell.charm-person",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.charm-person",
-        "name": "charm person"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.charm-fey:404cc2e674da305e",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "charm person",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/charm-person"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.charm-fey:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -668,11 +699,19 @@
       "raw_value_sha256": "b0538498628742cf29bdb8986a9ac3897edfb08686279356711014b663c8e862",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.charm-fey:235310d4165bab5b",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d610d2871e6f799789f1aafb4432555ac93f6a74fdec4ab2d70925ed8103a995",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

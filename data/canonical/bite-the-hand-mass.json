@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.bite-the-hand-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Bite the Hand, Mass",
@@ -198,7 +198,33 @@
   "description": {
     "raw": "This spell functions like bite the hand, except as noted above. The target creatures do not need to have all been summoned by the same being.",
     "search_text": "\"this spell functions like bite the hand, except as noted above. the target creatures do not need to have all been summoned by the same being.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bite the hand",
+              "relationship_id": "spell.bite-the-hand-mass:functions_like:spell.bite-the-hand",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except as noted above. The target creatures do not need to have all been summoned by the same being."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -386,6 +412,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.bite-the-hand-mass:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.bite-the-hand-mass:ae2e5913aa7f4fc0",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.bite-the-hand-mass:0acd95a405c8af0e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 6",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.bite-the-hand-mass:appears_on_spell_list:spell-list.sorcerer",
@@ -657,12 +710,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.bite-the-hand-mass:uses_definition:rule.spell-like-ability",
+      "relationship_id": "spell.bite-the-hand-mass:uses_definition:rule.spell-like-abilities",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.spell-like-ability",
-        "name": "spell-like ability"
+        "entity_id": "rule.spell-like-abilities",
+        "name": "Spell-like abilities"
       },
       "status": "accepted",
       "evidence": [
@@ -695,33 +748,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.bite-the-hand-mass:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.bite-the-hand-mass:ae2e5913aa7f4fc0",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.bite-the-hand-mass:0acd95a405c8af0e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 6",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -772,11 +798,19 @@
       "raw_value_sha256": "b5c8ace574d3bcc186f6ee6fbf3b9bd7aaf9cdf4e6ae9c7665321f93c9e75d2a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.bite-the-hand-mass:0acd95a405c8af0e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2b43c910794dea2289f487a755e83430bac45a1a10331791dcda8b221c384b3c",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

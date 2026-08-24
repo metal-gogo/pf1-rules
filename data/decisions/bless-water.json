@@ -157,6 +157,24 @@
         "aon:subdomain.divine:44b410b9"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.bless-water:4fae2b09c0a76bec",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.bless-water:4fae2b09c0a76bec",
+        "legacy_aon:spell.bless-water:55a49aafc808680f",
+        "d20pfsrd:spell.bless-water:95ee884f68eeefe4",
+        "aon:patron.water:15d234b1",
+        "aon:subdomain.divine:44b410b9"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -193,6 +211,20 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.bless-water:appears_on_spell_list:spell-list.divine-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.divine:44b410b9",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.divine:44b410b9"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
       "relationship_id": "spell.bless-water:appears_on_spell_list:spell-list.inquisitor",
       "decision": "accept",
       "evidence": [
@@ -211,6 +243,25 @@
         "d20pfsrd:spell.bless-water:95ee884f68eeefe4"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.bless-water:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.bless-water:4fae2b09c0a76bec",
+          "source_field": "spell_raw.levels_raw"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.bless-water:95ee884f68eeefe4",
+          "source_field": "spell_raw.links_raw[2]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.bless-water:4fae2b09c0a76bec",
+        "d20pfsrd:spell.bless-water:95ee884f68eeefe4"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.bless-water:appears_on_spell_list:spell-list.oracle",
@@ -263,6 +314,20 @@
         "d20pfsrd:spell.bless-water:95ee884f68eeefe4"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.bless-water:appears_on_spell_list:spell-list.water-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.water:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.water:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.bless-water:has_descriptor:descriptor.good",
@@ -329,12 +394,16 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.bless-water:uses_definition:rule.divine",
+      "relationship_id": "spell.bless-water:uses_definition:item.holy-water",
       "decision": "accept",
       "evidence": [
         {
+          "observation_id": "legacy_aon:spell.bless-water:55a49aafc808680f",
+          "source_field": "spell_raw.links_raw[2]"
+        },
+        {
           "observation_id": "d20pfsrd:spell.bless-water:95ee884f68eeefe4",
-          "source_field": "spell_raw.links_raw[4]"
+          "source_field": "spell_raw.links_raw[6]"
         }
       ],
       "considered_observation_ids": [
@@ -345,16 +414,12 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.bless-water:uses_definition:rule.holy-water",
+      "relationship_id": "spell.bless-water:uses_definition:rule.divine",
       "decision": "accept",
       "evidence": [
         {
-          "observation_id": "legacy_aon:spell.bless-water:55a49aafc808680f",
-          "source_field": "spell_raw.links_raw[2]"
-        },
-        {
           "observation_id": "d20pfsrd:spell.bless-water:95ee884f68eeefe4",
-          "source_field": "spell_raw.links_raw[6]"
+          "source_field": "spell_raw.links_raw[4]"
         }
       ],
       "considered_observation_ids": [
@@ -385,7 +450,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.bless-water:uses_definition:rule.will",
+      "relationship_id": "spell.bless-water:uses_definition:rule.will-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -403,53 +468,6 @@
         "d20pfsrd:spell.bless-water:95ee884f68eeefe4"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.bless-water:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.bless-water:4fae2b09c0a76bec",
-          "source_field": "spell_raw.levels_raw"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.bless-water:95ee884f68eeefe4",
-          "source_field": "spell_raw.links_raw[2]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.bless-water:4fae2b09c0a76bec",
-        "d20pfsrd:spell.bless-water:95ee884f68eeefe4"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.bless-water:appears_on_spell_list:spell-list.water-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.water:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.water:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.bless-water:appears_on_spell_list:spell-list.divine-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.divine:44b410b9",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.divine:44b410b9"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.blast-of-wind",
   "ruleset": "Pathfinder First Edition",
   "name": "Blast of Wind",
@@ -127,7 +127,33 @@
   "description": {
     "raw": "With a spiraling gesture of your hand and a forceful exhalation, you create a brief but fierce (90 mph) blast of wind. This spell functions as gust of wind, except all creatures within the area are treated as though they were one size category smaller for the purpose of determining how the spell affects them. For every 4 caster levels beyond 7th, creatures in the area are treated as an additional size category smaller (to a maximum of three size categories smaller at 15th level).",
     "search_text": "\"with a spiraling gesture of your hand and a forceful exhalation, you create a brief but fierce (90 mph) blast of wind. this spell functions as gust of wind, except all creatures within the area are treated as though they were one size category smaller for the purpose of determining how the spell affects them. for every 4 caster levels beyond 7th, creatures in the area are treated as an additional size category smaller (to a maximum of three size categories smaller at 15th level).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "With a spiraling gesture of your hand and a forceful exhalation, you create a brief but fierce (90 mph) blast of wind. This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "gust of wind",
+              "relationship_id": "spell.blast-of-wind:functions_like:spell.gust-of-wind",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except all creatures within the area are treated as though they were one size category smaller for the purpose of determining how the spell affects them. For every 4 caster levels beyond 7th, creatures in the area are treated as an additional size category smaller (to a maximum of three size categories smaller at 15th level)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -137,7 +163,60 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.gust-of-wind",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.blast-of-wind:9708d312258ea7f8",
+        "source_field": "spell_raw.description_raw",
+        "raw": "With a spiraling gesture of your hand and a forceful exhalation, you create a brief but fierce (90 mph) blast of wind. This spell functions as gust of wind, except all creatures within the area are treated as though they were one size category smaller for the purpose of determining how the spell affects them. For every 4 caster levels beyond 7th, creatures in the area are treated as an additional size category smaller (to a maximum of three size categories smaller at 15th level)."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Effect",
+                "value_raw": "line-shaped blast of hurricane-force wind emanating out from you to the extreme of the range",
+                "kinds": [
+                  "effect"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Effect\",\"value_raw\":\"line-shaped blast of hurricane-force wind emanating out from you to the extreme of the range\",\"kinds\":[\"effect\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "With a spiraling gesture of your hand and a forceful exhalation, you create a brief but fierce (90 mph) blast of wind. This spell functions as gust of wind, except all creatures within the area are treated as though they were one size category smaller for the purpose of determining how the spell affects them. For every 4 caster levels beyond 7th, creatures in the area are treated as an additional size category smaller (to a maximum of three size categories smaller at 15th level).",
+          "source_field": "spell_raw.description_raw",
+          "raw": "With a spiraling gesture of your hand and a forceful exhalation, you create a brief but fierce (90 mph) blast of wind. This spell functions as gust of wind, except all creatures within the area are treated as though they were one size category smaller for the purpose of determining how the spell affects them. For every 4 caster levels beyond 7th, creatures in the area are treated as an additional size category smaller (to a maximum of three size categories smaller at 15th level).",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.blast-of-wind:appears_on_spell_list:spell-list.arcanist",
@@ -267,6 +346,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.blast-of-wind:functions_like:spell.gust-of-wind",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.gust-of-wind",
+        "name": "Gust of Wind"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.blast-of-wind:98cd7ca6ac02c6d1",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "gust of wind",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/g/gust-of-wind"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.blast-of-wind:has_descriptor:descriptor.air",
       "type": "has_descriptor",
       "target": {
@@ -362,26 +461,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.blast-of-wind:references:spell.gust-of-wind",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.gust-of-wind",
-        "name": "gust of wind"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.blast-of-wind:98cd7ca6ac02c6d1",
-          "source_field": "spell_raw.links_raw[5]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "gust of wind",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/g/gust-of-wind"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.blast-of-wind:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -409,12 +488,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.blast-of-wind:uses_definition:rule.fort",
+      "relationship_id": "spell.blast-of-wind:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -497,11 +576,19 @@
       "raw_value_sha256": "b838779fc111e3f0c1ea0e4e840337ec0ce59d3c4f5e87e67ff6697069773535",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.blast-of-wind:9708d312258ea7f8",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "6966de4d8d2a89a50fb3e98fe18f402b21ab8f6533ac61186374e1841fbb569d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
