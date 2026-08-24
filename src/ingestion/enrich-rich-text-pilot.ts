@@ -116,6 +116,8 @@ const curseWaterContextualTargets = new Set([
   "rule.outsider",
 ]);
 
+const detectSnaresContextualTargets = new Set(["spell.snare"]);
+
 const canonicalTargets = new Map<string, {
   id: string;
   name: string;
@@ -352,6 +354,14 @@ const canonicalRelationshipTargets = new Map<string, {
   ],
   [
     "spell.create-mindscape:uses_definition:rule.medium",
+    { id: "spell-list.medium", name: "medium Spell List", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.detect-mindscape:uses_definition:rule.medium",
+    { id: "spell-list.medium", name: "medium Spell List", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.detect-psychic-significance:uses_definition:rule.medium",
     { id: "spell-list.medium", name: "medium Spell List", type: "spell_list", relationshipType: "appears_on_spell_list" },
   ],
   [
@@ -796,6 +806,26 @@ const rejectedDescriptionRelationships = new Map([
     "spell.decollate:uses_definition:condition.dead",
     "The detached head only appears dead; the target is not subject to the Dead condition.",
   ],
+  [
+    "spell.detect-magic-greater:uses_definition:rule.pathfinder-roleplaying-game-ultimate-intrigue",
+    "The secondary source's publication navigation duplicates the canonical Published In relationship and is not a rules definition.",
+  ],
+  [
+    "spell.detect-magic-greater:uses_definition:rule.pzo1134",
+    "The secondary source's product-code navigation duplicates the canonical Published In relationship and is not a rules definition.",
+  ],
+  [
+    "spell.detect-psychic-significance:references:spell.detect-magic",
+    "The description uses “detect magic items” as a verb and object; it does not reference the Detect Magic spell.",
+  ],
+  [
+    "spell.detect-radiation:uses_definition:rule.see-in-darkness",
+    "The description says this spell does not let the caster see in darkness; it does not grant or invoke the See in Darkness ability.",
+  ],
+  [
+    "spell.detect-snares-and-pits:references:spell.detect-magic",
+    "The description uses “does not detect magic traps” as a verb phrase; it does not reference the Detect Magic spell.",
+  ],
 ]);
 
 
@@ -1221,6 +1251,57 @@ const reviewedDescriptionReferences = new Map<string, ReviewedDescriptionReferen
     { targetType: "rule", targetId: "rule.attack-rolls", targetName: "Attack rolls", anchorText: "attacks" },
     { targetType: "rule", targetId: "rule.skill-check", targetName: "Skill checks", anchorText: "skill checks" },
     { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saves" },
+  ]],
+  ["spell.denounce", [
+    { targetType: "rule", targetId: "rule.line-of-sight", targetName: "Line of sight", anchorText: "line of sight" },
+  ]],
+  ["spell.destabilize-powder", [
+    { targetType: "rule", targetId: "rule.firearm", targetName: "Firearm", anchorText: "firearm" },
+    { targetType: "rule", targetId: "rule.caster-level", targetName: "Caster level", anchorText: "caster levels" },
+    { type: "uses_action", targetType: "action", targetId: "action.standard-action", targetName: "Standard action", anchorText: "standard action" },
+  ]],
+  ["spell.destroy-robot", [
+    { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saving throw" },
+    { targetType: "rule", targetId: "rule.android", targetName: "Android", anchorText: "android" },
+  ]],
+  ["spell.destruction", [
+    { targetType: "rule", targetId: "rule.caster-level", targetName: "Caster level", anchorText: "caster level" },
+  ]],
+  ["spell.detect-animals-or-plants", [
+    { targetType: "rule", targetId: "rule.hit-points", targetName: "Hit points", anchorText: "hit points" },
+    { targetType: "rule", targetId: "rule.ability-score", targetName: "Ability score", anchorText: "ability score" },
+    { targetType: "rule", targetId: "rule.line-of-sight", targetName: "Line of sight", anchorText: "line of sight" },
+  ]],
+  ["spell.detect-demon", [
+    { targetType: "rule", targetId: "rule.hit-dice", targetName: "Hit Dice", anchorText: "HD" },
+    { targetType: "rule", targetId: "rule.line-of-sight", targetName: "Line of sight", anchorText: "line of sight" },
+  ]],
+  ["spell.detect-evil", [
+    { targetType: "rule", targetId: "rule.hit-dice", targetName: "Hit Dice", anchorText: "HD" },
+    { targetType: "rule", targetId: "rule.caster-level", targetName: "Caster level", anchorText: "caster level" },
+    { targetType: "rule", targetId: "rule.line-of-sight", targetName: "Line of sight", anchorText: "line of sight" },
+    { targetType: "class", targetId: "class.cleric", targetName: "Cleric", anchorText: "cleric" },
+    { targetType: "class", targetId: "class.cleric", targetName: "Cleric", anchorText: "clerics" },
+    { targetType: "rule", targetId: "rule.outsider", targetName: "Outsider", anchorText: "outsider" },
+    { targetType: "rule", targetId: "rule.animal", targetName: "Animal", anchorText: "Animals" },
+    { targetType: "rule", targetId: "rule.trap", targetName: "Traps", anchorText: "traps" },
+    { targetType: "rule", targetId: "rule.poison", targetName: "Poison", anchorText: "poisons" },
+  ]],
+  ["spell.detect-fiendish-presence", [
+    { targetType: "deity", targetId: "deity.asmodeus", targetName: "Asmodeus", anchorText: "Asmodeus" },
+  ]],
+  ["spell.detect-magic-greater", [
+    { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saving throw" },
+  ]],
+  ["spell.detect-metal", [
+    { targetType: "rule", targetId: "rule.silver", targetName: "Silver", anchorText: "silver" },
+  ]],
+  ["spell.detect-poison", [
+    { targetType: "rule", targetId: "rule.poison", targetName: "Poison", anchorText: "poison" },
+  ]],
+  ["spell.detect-snares-and-pits", [
+    { targetType: "rule", targetId: "rule.trap", targetName: "Traps", anchorText: "traps" },
+    { targetType: "rule", targetId: "rule.line-of-sight", targetName: "Line of sight", anchorText: "line of sight" },
   ]],
 ]);
 
@@ -1773,6 +1854,7 @@ function explicitlyFunctionsLike(description: string, targetName: string): boole
   const target = `(?:like|as) ${escapedTarget}${boundary}`;
   return [
     `\\bthis(?: spell)?(?: otherwise)? functions ${target}`,
+    `\\bthis spell functions similarly to ${escapedTarget}${boundary}`,
     `\\bthis(?: [\\p{L}\\p{N}'’-]+){0,4} spell` +
       `(?: [\\p{L}\\p{N}'’-]+){0,8} functions ${target}`,
     `\\bthis spell is(?: otherwise)? similar to ${escapedTarget}${boundary}`,
@@ -2193,6 +2275,9 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
       ) && (
         spellId !== "spell.curse-water" ||
         !curseWaterContextualTargets.has(String(relationship.target.entity_id))
+      ) && (
+        spellId !== "spell.detect-snares-and-pits" ||
+        !detectSnaresContextualTargets.has(String(relationship.target.entity_id))
       )
     );
     if (spellId === "spell.darkness") {
@@ -2274,6 +2359,12 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
         },
       ]);
     }
+    if (spellId === "spell.detect-snares-and-pits") {
+      linkContext(sourceDocument, "see the spell snare", [{
+        value: "snare",
+        relationshipId: "spell.detect-snares-and-pits:references:spell.snare",
+      }]);
+    }
     const richText = linkRichTextDocument(
       sourceDocument,
       automaticRelationships,
@@ -2332,6 +2423,12 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
       keepFirstRelationshipLink(
         richText.document,
         "spell.delayed-blast-fireball:functions_like:spell.fireball",
+      );
+    }
+    if (spellId === "spell.detect-magic-greater") {
+      keepFirstRelationshipLink(
+        richText.document,
+        "spell.detect-magic-greater:functions_like:spell.detect-magic",
       );
     }
     if (spellId === "spell.cure-light-wounds-mass") {

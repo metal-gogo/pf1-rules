@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.destroy-robot",
   "ruleset": "Pathfinder First Edition",
   "name": "Destroy Robot",
@@ -149,7 +149,75 @@
   "description": {
     "raw": "You attempt to destroy any one robot in range. When you cast this spell, your hand crackles with electricity. You must succeed at a ranged touch attack to affect the target. The target takes 12d6 points of damage + 1 point per caster level, or 3d6 points of damage + 1 point per caster level on a successful saving throw. A cyborg or android can be damaged by this spell, but takes half damage and gains a +4 bonus on the saving throw to resist the spell’s effects.",
     "search_text": "\"you attempt to destroy any one robot in range. when you cast this spell, your hand crackles with electricity. you must succeed at a ranged touch attack to affect the target. the target takes 12d6 points of damage + 1 point per caster level, or 3d6 points of damage + 1 point per caster level on a successful saving throw. a cyborg or android can be damaged by this spell, but takes half damage and gains a +4 bonus on the saving throw to resist the spell’s effects.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You attempt to destroy any one robot in range. When you cast this spell, your hand crackles with electricity. You must succeed at a ranged "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch attack",
+              "relationship_id": "spell.destroy-robot:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " to affect the target. The target takes 12d6 points of damage + 1 point per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.destroy-robot:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": ", or 3d6 points of damage + 1 point per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.destroy-robot:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " on a successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throw",
+              "relationship_id": "spell.destroy-robot:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": ". A cyborg or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "android",
+              "relationship_id": "spell.destroy-robot:uses_definition:rule.android"
+            },
+            {
+              "node_type": "text",
+              "value": " can be damaged by this spell, but takes half damage and gains a +4 bonus on the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throw",
+              "relationship_id": "spell.destroy-robot:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": " to resist the spell’s effects."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -384,6 +452,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.destroy-robot:uses_definition:rule.android",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.android",
+        "name": "Android"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.destroy-robot:7140bc55ebf17a23",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "android",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Destroy+Robot"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.destroy-robot:uses_definition:rule.caster-level",
       "type": "uses_definition",
       "target": {
@@ -411,11 +499,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.destroy-robot:uses_definition:rule.fortitude",
+      "relationship_id": "spell.destroy-robot:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -429,6 +517,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.destroy-robot:uses_definition:rule.saving-throws",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.saving-throws",
+        "name": "Saving throws"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.destroy-robot:7140bc55ebf17a23",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "saving throw",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Destroy+Robot"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.destroy-robot:uses_definition:rule.spell-resistance",
@@ -519,11 +627,19 @@
       "raw_value_sha256": "cc043e6f73d3d43eb2e1ee64c9312e94d28e784291e6bfab6bcf49ecfbbceb5b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.destroy-robot:7140bc55ebf17a23",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "51012bec8dcea97d26f0658e4222cd61b1667e3a4befa87ca846b7f7c45ce152",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

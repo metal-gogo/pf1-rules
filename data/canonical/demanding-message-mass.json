@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.demanding-message-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Demanding Message, Mass",
@@ -178,7 +178,66 @@
   "description": {
     "raw": "This spell functions as demanding message, except that you can issue one suggestion to each of the spell’s targets instead of just one. Each time you do so, it takes a standard action. You can issue a different suggestion to each target.",
     "search_text": "\"this spell functions as demanding message, except that you can issue one suggestion to each of the spell’s targets instead of just one. each time you do so, it takes a standard action. you can issue a different suggestion to each target.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "demanding message",
+              "relationship_id": "spell.demanding-message-mass:functions_like:spell.demanding-message",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that you can issue one "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "suggestion",
+              "relationship_id": "spell.demanding-message-mass:references:spell.suggestion",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " to each of the spell’s targets instead of just one. Each time you do so, it takes a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "standard action",
+              "relationship_id": "spell.demanding-message-mass:uses_action:action.standard-action"
+            },
+            {
+              "node_type": "text",
+              "value": ". You can issue a different "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "suggestion",
+              "relationship_id": "spell.demanding-message-mass:references:spell.suggestion",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " to each target."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -649,7 +708,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.suggestion",
-        "name": "suggestion"
+        "name": "Suggestion"
       },
       "status": "accepted",
       "evidence": [
@@ -718,11 +777,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.demanding-message-mass:uses_definition:rule.will",
+      "relationship_id": "spell.demanding-message-mass:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -786,11 +845,19 @@
       "raw_value_sha256": "6ca99ced40956f374536171fc60d42db765c6b89147c88694a0125fb99f3e210",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.demanding-message-mass:456436fdedca3753",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "bf01793c4abb636d93c200b9246a27e608190f8fe2902fbfcf7e977244eb1a41",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

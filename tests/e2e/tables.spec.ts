@@ -154,6 +154,22 @@ test("Batch 21 separates Deeper Darkness's spell, descriptor, and illumination l
   await expect(page).toHaveURL(/\/rules\/descriptors#darkness$/);
 });
 
+test("Batch 22 links only the explicit Snare spell reference", async ({ page }) => {
+  await page.goto("/spells/spell.detect-snares-and-pits");
+
+  const description = page.locator(".rich-description").first();
+  const snare = description.locator('a[href="/spells/spell.snare"]');
+  await expect(snare).toHaveCount(1);
+  await expect(description.locator('a[href="/spells/spell.detect-magic"]')).toHaveCount(0);
+  await expect(snare).not.toHaveAttribute("target", "_blank");
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+
+  await snare.click();
+  await expect(page).toHaveURL(/\/spells\/spell\.snare$/);
+});
+
 test("pilot lists remain semantic and accessible on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/spells/spell.bestow-curse-greater");

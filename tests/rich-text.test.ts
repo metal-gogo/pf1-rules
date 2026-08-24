@@ -343,6 +343,59 @@ describe("rich-text schema and source parsing", () => {
       /functions_like:spell\.fireball/g,
     )).toHaveLength(1);
   });
+
+  it("keeps Batch 22 inheritance, source navigation, and verb phrases distinct", () => {
+    const greaterDetectMagic = canonical("detect-magic-greater");
+    expect(JSON.stringify(greaterDetectMagic.description.document).match(
+      /functions_like:spell\.detect-magic/g,
+    )).toHaveLength(1);
+
+    const detectMindscape = canonical("detect-mindscape");
+    expect(detectMindscape.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.detect-mindscape:functions_like:spell.detect-thoughts",
+      status: "accepted",
+    }));
+    expect(detectMindscape.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.detect-mindscape:appears_on_spell_list:spell-list.medium",
+      status: "accepted",
+    }));
+
+    const psychicSignificance = canonical("detect-psychic-significance");
+    expect(psychicSignificance.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.detect-psychic-significance:references:spell.detect-magic",
+      status: "rejected",
+    }));
+    expect(psychicSignificance.relationships).toContainEqual(expect.objectContaining({
+      relationship_id:
+        "spell.detect-psychic-significance:appears_on_spell_list:spell-list.medium",
+      status: "accepted",
+    }));
+
+    const radiation = canonical("detect-radiation");
+    expect(radiation.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.detect-radiation:uses_definition:rule.see-in-darkness",
+      status: "rejected",
+    }));
+
+    const snares = canonical("detect-snares-and-pits");
+    const snaresDocument = JSON.stringify(snares.description.document);
+    expect(snaresDocument.match(/references:spell\.snare/g)).toHaveLength(1);
+    expect(snares.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.detect-snares-and-pits:references:spell.detect-magic",
+      status: "rejected",
+    }));
+
+    const greaterPublicationLinks = greaterDetectMagic.relationships.filter(
+      (relationship: Record<string, unknown>) => [
+        "spell.detect-magic-greater:uses_definition:rule.pathfinder-roleplaying-game-ultimate-intrigue",
+        "spell.detect-magic-greater:uses_definition:rule.pzo1134",
+      ].includes(String(relationship.relationship_id)),
+    );
+    expect(greaterPublicationLinks).toHaveLength(2);
+    expect(greaterPublicationLinks.every(
+      (relationship: Record<string, unknown>) => relationship.status === "rejected",
+    )).toBe(true);
+  });
 });
 
 

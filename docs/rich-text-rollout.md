@@ -12,8 +12,8 @@ Audit date: 2026-08-23.
 | Category | Spells | Meaning |
 | --- | ---: | --- |
 | Total canonical spells | 3,030 | Complete corpus |
-| Rich text stored | 537 | 11-spell pilot, twenty-one reviewed 25-spell rollout batches, and one reviewed warning record |
-| Safe candidates with links | 1,728 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
+| Rich text stored | 562 | 11-spell pilot, twenty-two reviewed 25-spell rollout batches, and one reviewed warning record |
+| Safe candidates with links | 1,703 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
 | Safe structure-only candidates | 302 | Source text matches, but no known relationship currently produces an inline link |
 | Source mismatch | 291 | Current canonical text and the newly bounded AoN description differ |
 | Link warnings | 172 | At least one accepted relationship is ambiguous or unmatched |
@@ -648,6 +648,40 @@ Semantic review rejected Blood Salvation's duplicate publication navigation
 as a rules definition and Decollate's merely apparent `dead` head as the Dead
 condition.
 
+### Batch 22
+
+The twenty-second rollout batch contains:
+
+- Mass Demanding Message; Denounce; Depilate; Destabilize Powder; Destroy
+  Robot; Destruction; Detect Aberration; Detect Animals or Plants.
+- Detect Anxieties; Detect Chaos; Detect Charm; Detect Demon; Detect Desires;
+  Detect Evil; Detect Fiendish Presence; Detect Good; Detect Law.
+- Greater Detect Magic; Detect Metal; Detect Mindscape; Detect Poison; Detect
+  Psychic Significance; Detect Radiation; Detect Relations; Detect Snares and
+  Pits.
+
+Review of this batch established these normalization rules:
+
+- “Functions similarly to” identifies direct spell inheritance, so Detect
+  Mindscape inherits from Detect Thoughts. Parent links inside a greater
+  spell's own title remain plain; Greater Detect Magic links Detect Magic only
+  in its inheritance clause.
+- Secondary-source Medium spell-list navigation is normalized as spell-list
+  membership for Detect Mindscape and Detect Psychic Significance. Greater
+  Detect Magic's duplicate publication and product-code navigation is
+  rejected as rules-definition evidence.
+- Common verb phrases do not become spell or monster-ability links. “Detect
+  magic items,” “does not detect magic traps,” and “see in darkness” remain
+  plain. Detect Snares and Pits links Snare only where the wording explicitly
+  says “the spell snare.”
+- Reviewed missing links cover line of sight; firearms, caster levels, and
+  standard actions; saving throws and Androids; hit points and ability scores;
+  Hit Dice; Asmodeus; Clerics and creature types; Silver; Poison; and traps.
+
+Detect Evil's source tables remain lossless text but do not retain row and cell
+semantics under the current minimal AST. This is the same known table-boundary
+issue recorded below and does not alter the visible rules wording.
+
 ## Open questions and issues
 
 ### Source boundaries
@@ -665,7 +699,7 @@ relationship whose phrase needs contextual matching.
 
 ### Missing relationships
 
-The 310 structure-only candidates may be genuinely link-free, but the audit can
+The 302 structure-only candidates may be genuinely link-free, but the audit can
 only evaluate relationships already present in canonical data. Review source
 links and common rules terminology before concluding that a spell needs no
 inline links.

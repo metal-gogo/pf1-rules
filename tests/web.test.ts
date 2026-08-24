@@ -1265,6 +1265,67 @@ describe("local rules browser", () => {
     expect(fireballDescription.match(/href="\/spells\/spell.fireball"/g)).toHaveLength(1);
   });
 
+  it.each([
+    ["demanding-message-mass", "/spells/spell.demanding-message"],
+    ["denounce", "/entities/rule.line-of-sight"],
+    ["depilate", "/spells/spell.break-enchantment"],
+    ["destabilize-powder", "/entities/rule.firearm"],
+    ["destroy-robot", "/rules/saving-throws"],
+    ["destruction", "/spells/spell.true-resurrection"],
+    ["detect-aberration", "/spells/spell.detect-animals-or-plants"],
+    ["detect-animals-or-plants", "/entities/rule.hit-points"],
+    ["detect-anxieties", "/spells/spell.detect-thoughts"],
+    ["detect-chaos", "/spells/spell.detect-evil"],
+    ["detect-charm", "/spells/spell.detect-magic"],
+    ["detect-demon", "/entities/rule.hit-dice"],
+    ["detect-desires", "/entities/rule.circumstance-bonus"],
+    ["detect-evil", "/entities/rule.line-of-sight"],
+    ["detect-fiendish-presence", "/entities/deity.asmodeus"],
+    ["detect-good", "/spells/spell.detect-evil"],
+    ["detect-law", "/spells/spell.detect-evil"],
+    ["detect-magic-greater", "/spells/spell.detect-magic"],
+    ["detect-metal", "/entities/rule.silver"],
+    ["detect-mindscape", "/spells/spell.detect-thoughts"],
+    ["detect-poison", "/entities/rule.poison"],
+    ["detect-psychic-significance", "/spells/spell.charge-object"],
+    ["detect-radiation", "/entities/rule.radiation"],
+    ["detect-relations", "/rules/saving-throws#will-saving-throw"],
+    ["detect-snares-and-pits", "/spells/spell.snare"],
+  ])("renders twenty-second-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["detect-psychic-significance", "/spells/spell.detect-magic"],
+    ["detect-radiation", "/entities/rule.see-in-darkness"],
+    ["detect-snares-and-pits", "/spells/spell.detect-magic"],
+  ])("omits twenty-second-batch semantic false positives from spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain(`href="${target}"`);
+  });
+
+  it("links only explicit parent-spell references in Batch 22", async () => {
+    const [magicResponse, snaresResponse] = await Promise.all([
+      fetch(`${baseUrl}/spells/spell.detect-magic-greater`),
+      fetch(`${baseUrl}/spells/spell.detect-snares-and-pits`),
+    ]);
+    const [magicHtml, snaresHtml] = await Promise.all([
+      magicResponse.text(),
+      snaresResponse.text(),
+    ]);
+    const magicDescription = magicHtml.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const snaresDescription = snaresHtml.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(magicDescription.match(/href="\/spells\/spell.detect-magic"/g)).toHaveLength(1);
+    expect(snaresDescription.match(/href="\/spells\/spell.snare"/g)).toHaveLength(1);
+  });
+
   it("links Curse of Unexpected Death's touch attacks but not its ordinary touch verbs", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.curse-of-unexpected-death`);
     const html = await response.text();

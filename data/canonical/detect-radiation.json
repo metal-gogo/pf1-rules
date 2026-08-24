@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.detect-radiation",
   "ruleset": "Pathfinder First Edition",
   "name": "Detect Radiation",
@@ -208,7 +208,39 @@
   "description": {
     "raw": "You detect radiation in the surrounding area. You see radioactive auras as a glowing green shimmer in the air that emanates from radioactive objects; the brighter and more intense the green, the more powerful the radioactivity. This glow does not provide illumination or allow you to see in darkness, apart from being able to see the glow itself. The spell can penetrate barriers, but 3 feet of dirt or wood, 1 foot of stone, 1 inch of common metal, or a thin sheet of lead blocks it—although radiation can seep into such barriers, causing them to become radioactive (and thus visible to the spell) in time.",
     "search_text": "\"you detect radiation in the surrounding area. you see radioactive auras as a glowing green shimmer in the air that emanates from radioactive objects; the brighter and more intense the green, the more powerful the radioactivity. this glow does not provide illumination or allow you to see in darkness, apart from being able to see the glow itself. the spell can penetrate barriers, but 3 feet of dirt or wood, 1 foot of stone, 1 inch of common metal, or a thin sheet of lead blocks it—although radiation can seep into such barriers, causing them to become radioactive (and thus visible to the spell) in time.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You detect "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "radiation",
+              "relationship_id": "spell.detect-radiation:uses_definition:rule.radiation"
+            },
+            {
+              "node_type": "text",
+              "value": " in the surrounding area. You see radioactive auras as a glowing green shimmer in the air that emanates from radioactive objects; the brighter and more intense the green, the more powerful the radioactivity. This glow does not provide illumination or allow you to see in darkness, apart from being able to see the glow itself. The spell can penetrate barriers, but 3 feet of dirt or wood, 1 foot of stone, 1 inch of common metal, or a thin sheet of lead blocks it—although "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "radiation",
+              "relationship_id": "spell.detect-radiation:uses_definition:rule.radiation"
+            },
+            {
+              "node_type": "text",
+              "value": " can seep into such barriers, causing them to become radioactive (and thus visible to the spell) in time."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -340,6 +372,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.detect-radiation:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.detect-radiation:aaf6bcba1cee84a2",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.detect-radiation:cd553c1f2c82b33a",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.detect-radiation:appears_on_spell_list:spell-list.oracle",
@@ -618,7 +677,7 @@
         "entity_id": "rule.see-in-darkness",
         "name": "see in darkness"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.detect-radiation:aaf6bcba1cee84a2",
@@ -628,7 +687,7 @@
           "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/universal-monster-rules#TOC-See-in-Darkness-Su-"
         }
       ],
-      "note": null
+      "note": "The description says this spell does not let the caster see in darkness; it does not grant or invoke the See in Darkness ability."
     },
     {
       "relationship_id": "spell.detect-radiation:uses_definition:rule.spell-resistance",
@@ -649,33 +708,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.detect-radiation:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.detect-radiation:aaf6bcba1cee84a2",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.detect-radiation:cd553c1f2c82b33a",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -726,11 +758,19 @@
       "raw_value_sha256": "cc043e6f73d3d43eb2e1ee64c9312e94d28e784291e6bfab6bcf49ecfbbceb5b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.detect-radiation:cd553c1f2c82b33a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "5d0d298d9ad5676aa3fc28b7388cc43454fc4c957a58ddd055a67ac415f2424f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
