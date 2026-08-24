@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.companion-life-link",
   "ruleset": "Pathfinder First Edition",
   "name": "Companion Life Link",
@@ -165,7 +165,30 @@
   "description": {
     "raw": "You create a life link between yourself and the target. You sense whenever the target is wounded and are made immediately aware if the target is slain. If you are wounded or slain, the target is made aware. As a free action, you can call out to the target, causing it to return to you (if able and willing); this ends the spell.",
     "search_text": "\"you create a life link between yourself and the target. you sense whenever the target is wounded and are made immediately aware if the target is slain. if you are wounded or slain, the target is made aware. as a free action, you can call out to the target, causing it to return to you (if able and willing); this ends the spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create a life link between yourself and the target. You sense whenever the target is wounded and are made immediately aware if the target is slain. If you are wounded or slain, the target is made aware. As a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "free action",
+              "relationship_id": "spell.companion-life-link:uses_action:action.free-action"
+            },
+            {
+              "node_type": "text",
+              "value": ", you can call out to the target, causing it to return to you (if able and willing); this ends the spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -474,12 +497,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.companion-life-link:uses_definition:rule.animal-companions",
+      "relationship_id": "spell.companion-life-link:uses_definition:class-feature.animal-companion",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.animal-companions",
-        "name": "animal companions"
+        "entity_type": "class_feature",
+        "entity_id": "class-feature.animal-companion",
+        "name": "Animal companion"
       },
       "status": "accepted",
       "evidence": [
@@ -494,12 +517,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.companion-life-link:uses_definition:rule.eidolon",
+      "relationship_id": "spell.companion-life-link:uses_definition:class-feature.eidolon",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.eidolon",
-        "name": "eidolon"
+        "entity_type": "class_feature",
+        "entity_id": "class-feature.eidolon",
+        "name": "Eidolon"
       },
       "status": "accepted",
       "evidence": [
@@ -534,12 +557,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.companion-life-link:uses_definition:rule.fort",
+      "relationship_id": "spell.companion-life-link:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -574,12 +597,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.companion-life-link:uses_definition:rule.touch",
+      "relationship_id": "spell.companion-life-link:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -642,11 +665,19 @@
       "raw_value_sha256": "404e7a09d5b1c5f2d3e8d573d5796ebbdf45c270cdcfa20bbd6ab2cce00150cd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.companion-life-link:2230bf6428518369",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "7dd44fb0912272325b351e0c29eff2b171f83bf77802b1517a8efe90fd5cf5e1",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

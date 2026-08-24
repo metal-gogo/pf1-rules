@@ -306,6 +306,43 @@ describe("rich-text schema and source parsing", () => {
       status: "rejected",
     }));
   });
+
+  it("keeps Batch 21 contextual darkness and spell-list navigation distinct", () => {
+    const deeperDarkness = canonical("deeper-darkness");
+    const document = JSON.stringify(deeperDarkness.description.document);
+    expect(document.match(/functions_like:spell\.darkness/g)).toHaveLength(2);
+    expect(document.match(/uses_definition:descriptor\.darkness/g)).toHaveLength(1);
+    expect(document.match(/uses_definition:illumination\.darkness/g)).toHaveLength(2);
+    expect(document).not.toContain("Deeper</a>");
+    expect(deeperDarkness.relationships).toContainEqual(expect.objectContaining({
+      relationship_id:
+        "spell.deeper-darkness:appears_on_spell_list:spell-list.sorcerer-div-bloodline",
+      status: "accepted",
+    }));
+    expect(deeperDarkness.relationships).toContainEqual(expect.objectContaining({
+      relationship_id:
+        "spell.deeper-darkness:appears_on_spell_list:spell-list.shadow-mystery",
+      status: "accepted",
+    }));
+
+    const bloodSalvation = canonical("blood-salvation");
+    expect(bloodSalvation.relationships).toContainEqual(expect.objectContaining({
+      relationship_id:
+        "spell.blood-salvation:uses_definition:rule.pathfinder-player-companion-advanced-class-origins",
+      status: "rejected",
+    }));
+
+    const decollate = canonical("decollate");
+    expect(decollate.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.decollate:uses_definition:condition.dead",
+      status: "rejected",
+    }));
+
+    const delayedFireball = canonical("delayed-blast-fireball");
+    expect(JSON.stringify(delayedFireball.description.document).match(
+      /functions_like:spell\.fireball/g,
+    )).toHaveLength(1);
+  });
 });
 
 

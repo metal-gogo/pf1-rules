@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.deflection",
   "ruleset": "Pathfinder First Edition",
   "name": "Deflection",
@@ -147,7 +147,75 @@
   "description": {
     "raw": "You surround yourself in a whirling barrier of force that sends any attack that misses you hurling back toward its source. This applies to any melee or ranged attack directed against you so long as it uses an attack roll to determine whether or not it strikes you. If an attack misses you, the attacker must make a second attack roll against its own Armor Class, using all of the applicable modifiers of the original attack and if it hits, the attacker takes the attack’s damage and suffers all the other consequences of getting struck with that attack. You cannot deflect attacks that miss you for any reason besides a failed attack roll (such as concealment). Similarly, you cannot deflect attacks that actually do strike you but simply fail to do any harm.",
     "search_text": "\"you surround yourself in a whirling barrier of force that sends any attack that misses you hurling back toward its source. this applies to any melee or ranged attack directed against you so long as it uses an attack roll to determine whether or not it strikes you. if an attack misses you, the attacker must make a second attack roll against its own armor class, using all of the applicable modifiers of the original attack and if it hits, the attacker takes the attack’s damage and suffers all the other consequences of getting struck with that attack. you cannot deflect attacks that miss you for any reason besides a failed attack roll (such as concealment). similarly, you cannot deflect attacks that actually do strike you but simply fail to do any harm.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You surround yourself in a whirling barrier of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "force",
+              "relationship_id": "spell.deflection:uses_definition:descriptor.force"
+            },
+            {
+              "node_type": "text",
+              "value": " that sends any attack that misses you hurling back toward its source. This applies to any melee or ranged attack directed against you so long as it uses an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack roll",
+              "relationship_id": "spell.deflection:uses_definition:rule.attack-rolls"
+            },
+            {
+              "node_type": "text",
+              "value": " to determine whether or not it strikes you. If an attack misses you, the attacker must make a second "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack roll",
+              "relationship_id": "spell.deflection:uses_definition:rule.attack-rolls"
+            },
+            {
+              "node_type": "text",
+              "value": " against its own "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Armor Class",
+              "relationship_id": "spell.deflection:uses_definition:rule.armor-class"
+            },
+            {
+              "node_type": "text",
+              "value": ", using all of the applicable modifiers of the original attack and if it hits, the attacker takes the attack’s damage and suffers all the other consequences of getting struck with that attack. You cannot deflect attacks that miss you for any reason besides a failed "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack roll",
+              "relationship_id": "spell.deflection:uses_definition:rule.attack-rolls"
+            },
+            {
+              "node_type": "text",
+              "value": " (such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.deflection:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": "). Similarly, you cannot deflect attacks that actually do strike you but simply fail to do any harm."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -178,6 +246,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.deflection:appears_on_spell_list:spell-list.defense-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.defense-subdomain",
+        "name": "Defense Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.defense:32d16f22",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "7th—deflection",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Protection"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.deflection:1ef653ba848ce718",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "defense",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/protection-domain/defense"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.deflection:appears_on_spell_list:spell-list.psychic",
@@ -382,6 +477,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.deflection:uses_definition:descriptor.force",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.force",
+        "name": "Force"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.deflection:72a55fe44391b594",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "force",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Deflection"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.deflection:uses_definition:rule.armor-class",
       "type": "uses_definition",
       "target": {
@@ -402,12 +517,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.deflection:uses_definition:rule.attack-roll",
+      "relationship_id": "spell.deflection:uses_definition:rule.attack-rolls",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.attack-roll",
-        "name": "attack roll"
+        "entity_id": "rule.attack-rolls",
+        "name": "Attack rolls"
       },
       "status": "accepted",
       "evidence": [
@@ -456,26 +571,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.deflection:uses_definition:rule.defense",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.defense",
-        "name": "defense"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.deflection:1ef653ba848ce718",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "defense",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/protection-domain/defense"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.deflection:uses_definition:rule.spell-resistance",
       "type": "uses_definition",
       "target": {
@@ -494,26 +589,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.deflection:appears_on_spell_list:spell-list.defense-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.defense-subdomain",
-        "name": "Defense Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.defense:32d16f22",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "7th—deflection",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Protection"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -572,11 +647,19 @@
       "raw_value_sha256": "014e0d653662b8a706b24e2635a7b21c85c70f9afbf24f0e2fc63f5e2beebc0d",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.deflection:72a55fe44391b594",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "44efc95c98a34e9ddb43fe20ee8c713648d387dc15a2b70066b6d468a2fcc1cb",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

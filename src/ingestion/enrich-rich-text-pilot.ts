@@ -105,6 +105,11 @@ const antiSummoningContextualTargets = new Set(["rule.summon"]);
 
 const dancingDarknessContextualTargets = new Set(["illumination.darkness"]);
 
+const deeperDarknessContextualTargets = new Set([
+  "descriptor.darkness",
+  "illumination.darkness",
+]);
+
 const curseWaterContextualTargets = new Set([
   "rule.good",
   "rule.evil",
@@ -400,6 +405,54 @@ const canonicalRelationshipTargets = new Map<string, {
   [
     "spell.daywalker:references:spell.energy-drain",
     { id: "rule.energy-drain", name: "Energy drain", type: "rule", relationshipType: "uses_definition" },
+  ],
+  [
+    "spell.deeper-darkness:uses_definition:rule.div",
+    { id: "spell-list.sorcerer-div-bloodline", name: "Sorcerer Div Bloodline", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.deeper-darkness:uses_definition:rule.shadow",
+    { id: "spell-list.shadow-mystery", name: "Shadow Mystery", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.defensive-shock:uses_definition:rule.metal",
+    { id: "spell-list.metal-elemental-school", name: "Metal Elemental School", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.deflection:uses_definition:rule.defense",
+    { id: "spell-list.defense-subdomain", name: "Defense Subdomain", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.defoliate:uses_definition:rule.radiation",
+    { id: "spell-list.radiation-subdomain", name: "Radiation Subdomain", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.delay-pain:uses_definition:rule.evil",
+    { id: "spell-list.kyton-subdomain-from-evil", name: "Kyton Subdomain (Evil Domain)", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.delay-pain:uses_definition:rule.kyton",
+    { id: "spell-list.kyton-subdomain-from-evil", name: "Kyton Subdomain (Evil Domain)", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.delay-pain:uses_definition:rule.law",
+    { id: "spell-list.kyton-subdomain-from-law", name: "Kyton Subdomain (Law Domain)", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.delayed-blast-fireball:uses_definition:rule.arson",
+    { id: "spell-list.arson-subdomain", name: "Arson Subdomain", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.demand:uses_definition:rule.nobility",
+    { id: "spell-list.nobility-domain", name: "Nobility Domain", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.demand:uses_definition:rule.torture",
+    { id: "spell-list.torture-subdomain", name: "Torture Subdomain", type: "spell_list", relationshipType: "appears_on_spell_list" },
+  ],
+  [
+    "spell.demand:uses_definition:subschool.charm",
+    { id: "spell-list.charm-domain", name: "Charm Domain", type: "spell_list", relationshipType: "appears_on_spell_list" },
   ],
   [
     "spell.damnation-of-memory:references:spell.magic-aura",
@@ -734,6 +787,14 @@ const rejectedDescriptionRelationships = new Map([
   [
     "spell.death-knell-aura-greater:uses_definition:rule.pathfinder-campaign-setting-horsemen-of-the-apocalypse-book-of-the-damned-vol-3",
     "The secondary source's publication navigation duplicates the canonical Published In relationship and is not a rules definition.",
+  ],
+  [
+    "spell.blood-salvation:uses_definition:rule.pathfinder-player-companion-advanced-class-origins",
+    "The secondary source's publication navigation duplicates the canonical Published In relationship and is not a rules definition.",
+  ],
+  [
+    "spell.decollate:uses_definition:condition.dead",
+    "The detached head only appears dead; the target is not subject to the Dead condition.",
   ],
 ]);
 
@@ -1102,6 +1163,65 @@ const reviewedDescriptionReferences = new Map<string, ReviewedDescriptionReferen
   ["spell.debilitating-portent", [
     { targetType: "class", targetId: "class.witch", targetName: "Witch", anchorText: "witches" },
   ]],
+  ["spell.blood-salvation", [
+    { targetType: "class_feature", targetId: "class-feature.blood-casting", targetName: "Blood casting", anchorText: "blood casting" },
+    { targetType: "class_feature", targetId: "class-feature.bloodrage", targetName: "Bloodrage", anchorText: "bloodrage" },
+  ]],
+  ["spell.deeper-darkness", [
+    { targetType: "descriptor", targetId: "descriptor.darkness", targetName: "Darkness", anchorText: "darkness" },
+    { targetType: "rule", targetId: "illumination.levels", targetName: "Illumination levels", anchorText: "light level" },
+    { targetType: "rule", targetId: "illumination.bright-light", targetName: "Bright light", anchorText: "Bright light" },
+    { targetType: "rule", targetId: "illumination.normal-light", targetName: "Normal light", anchorText: "normal light" },
+    { targetType: "rule", targetId: "illumination.dim-light", targetName: "Dim light", anchorText: "dim light" },
+    { targetType: "rule", targetId: "illumination.darkness", targetName: "Darkness", anchorText: "darkness" },
+    { targetType: "descriptor", targetId: "descriptor.light", targetName: "Light", anchorText: "light spell" },
+  ]],
+  ["spell.defensive-grace", [
+    { targetType: "class_feature", targetId: "class-feature.inspiration", targetName: "Inspiration", anchorText: "inspiration" },
+    { targetType: "rule", targetId: "rule.precision-damage", targetName: "Precision damage", anchorText: "precision damage" },
+    { targetType: "class_feature", targetId: "class-feature.precise-strike", targetName: "Precise strike", anchorText: "precise strike" },
+    { targetType: "class_feature", targetId: "class-feature.studied-combat", targetName: "Studied combat", anchorText: "studied combat" },
+    { targetType: "class_feature", targetId: "class-feature.studied-strike", targetName: "Studied strike", anchorText: "studied strike" },
+  ]],
+  ["spell.defensive-shock", [
+    { targetType: "descriptor", targetId: "descriptor.electricity", targetName: "Electricity", anchorText: "electricity damage" },
+    { targetType: "rule", targetId: "rule.caster-level", targetName: "Caster level", anchorText: "caster levels" },
+  ]],
+  ["spell.deflection", [
+    { targetType: "descriptor", targetId: "descriptor.force", targetName: "Force", anchorText: "force" },
+  ]],
+  ["spell.defoliate", [
+    { targetType: "rule", targetId: "rule.negative-energy", targetName: "Negative energy", anchorText: "negative energy" },
+    { targetType: "rule", targetId: "rule.plant", targetName: "Plant", anchorText: "plant creature" },
+    { targetType: "rule", targetId: "rule.touch-attack", targetName: "Touch attack", anchorText: "touch attack" },
+  ]],
+  ["spell.deft-digits", [
+    { targetType: "rule", targetId: "rule.fly", targetName: "Fly", anchorText: "fly speed" },
+    { targetType: "rule", targetId: "rule.skill-check", targetName: "Skill checks", anchorText: "skill check" },
+    { targetType: "rule", targetId: "rule.line-of-sight", targetName: "Line of sight", anchorText: "line of sight" },
+  ]],
+  ["spell.deja-vu", [
+    { type: "uses_action", targetType: "action", targetId: "action.full-round-action", targetName: "Full-round action", anchorText: "full-round" },
+    { type: "uses_action", targetType: "action", targetId: "action.standard-action", targetName: "Standard action", anchorText: "standard" },
+    { type: "uses_action", targetType: "action", targetId: "action.move-action", targetName: "Move action", anchorText: "move actions" },
+  ]],
+  ["spell.delay-pain", [
+    { targetType: "descriptor", targetId: "descriptor.pain", targetName: "Pain", anchorText: "Pain effects" },
+  ]],
+  ["spell.delayed-blast-fireball", [
+    { targetType: "descriptor", targetId: "descriptor.fire", targetName: "Fire", anchorText: "fire damage" },
+    { targetType: "rule", targetId: "rule.caster-level", targetName: "Caster level", anchorText: "caster level" },
+  ]],
+  ["spell.delectable-flesh", [
+    { targetType: "rule", targetId: "rule.ability-check", targetName: "Ability checks", anchorText: "ability checks" },
+    { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saving throws" },
+    { targetType: "rule", targetId: "rule.skill-check", targetName: "Skill checks", anchorText: "skill checks" },
+  ]],
+  ["spell.delusional-pride", [
+    { targetType: "rule", targetId: "rule.attack-rolls", targetName: "Attack rolls", anchorText: "attacks" },
+    { targetType: "rule", targetId: "rule.skill-check", targetName: "Skill checks", anchorText: "skill checks" },
+    { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saves" },
+  ]],
 ]);
 
 
@@ -1322,6 +1442,45 @@ function distinguishGreaterDarkvisionReferences(document: RichTextDocument): voi
       });
   if (occurrence !== 2) {
     throw new Error(`Expected two Darkvision references, found ${occurrence}`);
+  }
+}
+
+
+function distinguishDeeperDarknessReferences(document: RichTextDocument): void {
+  const spellRelationshipId = "spell.deeper-darkness:functions_like:spell.darkness";
+  const replacements = [
+    spellRelationshipId,
+    "spell.deeper-darkness:uses_definition:descriptor.darkness",
+    "spell.deeper-darkness:uses_definition:illumination.darkness",
+    "spell.deeper-darkness:uses_definition:illumination.darkness",
+    spellRelationshipId,
+    null,
+  ] as const;
+  let occurrence = 0;
+  const replace = (content: RichTextInlineNode[]): RichTextInlineNode[] =>
+    content.map((node) => {
+      if (
+        node.node_type !== "entity_link" ||
+        node.relationship_id !== spellRelationshipId
+      ) return node;
+      const replacement = replacements[occurrence++];
+      if (replacement) return { ...node, relationship_id: replacement };
+      return {
+        node_type: "text",
+        value: node.value,
+        ...(node.marks ? { marks: node.marks } : {}),
+      };
+    });
+  document.content = document.content.map((block) => block.node_type === "paragraph"
+    ? { ...block, content: replace(block.content) }
+    : {
+        ...block,
+        content: block.content.map((item) => ({ ...item, content: replace(item.content) })),
+      });
+  if (occurrence !== replacements.length) {
+    throw new Error(
+      `Expected ${replacements.length} Deeper Darkness references, found ${occurrence}`,
+    );
   }
 }
 
@@ -2029,6 +2188,9 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
         spellId !== "spell.dancing-darkness" ||
         !dancingDarknessContextualTargets.has(String(relationship.target.entity_id))
       ) && (
+        spellId !== "spell.deeper-darkness" ||
+        !deeperDarknessContextualTargets.has(String(relationship.target.entity_id))
+      ) && (
         spellId !== "spell.curse-water" ||
         !curseWaterContextualTargets.has(String(relationship.target.entity_id))
       )
@@ -2162,6 +2324,15 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
     }
     if (spellId === "spell.darkvision-greater") {
       distinguishGreaterDarkvisionReferences(richText.document);
+    }
+    if (spellId === "spell.deeper-darkness") {
+      distinguishDeeperDarknessReferences(richText.document);
+    }
+    if (spellId === "spell.delayed-blast-fireball") {
+      keepFirstRelationshipLink(
+        richText.document,
+        "spell.delayed-blast-fireball:functions_like:spell.fireball",
+      );
     }
     if (spellId === "spell.cure-light-wounds-mass") {
       removeRelationshipLinkValues(

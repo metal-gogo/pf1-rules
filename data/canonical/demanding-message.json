@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.demanding-message",
   "ruleset": "Pathfinder First Edition",
   "name": "Demanding Message",
@@ -185,7 +185,111 @@
   "description": {
     "raw": "This spell initially functions as message (allowing no save or spell resistance). Once during the message effect, you can concentrate as a standard action to issue a suggestion to one target as part of delivering a message. Spell resistance and a Will save apply to the suggestion, and it lasts for 1 hour per level or until completed.",
     "search_text": "\"this spell initially functions as message (allowing no save or spell resistance). once during the message effect, you can concentrate as a standard action to issue a suggestion to one target as part of delivering a message. spell resistance and a will save apply to the suggestion, and it lasts for 1 hour per level or until completed.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell initially functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "message",
+              "relationship_id": "spell.demanding-message:functions_like:spell.message",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " (allowing no save or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.demanding-message:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": "). Once during the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "message",
+              "relationship_id": "spell.demanding-message:functions_like:spell.message"
+            },
+            {
+              "node_type": "text",
+              "value": " effect, you can concentrate as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "standard action",
+              "relationship_id": "spell.demanding-message:uses_action:action.standard-action"
+            },
+            {
+              "node_type": "text",
+              "value": " to issue a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "suggestion",
+              "relationship_id": "spell.demanding-message:references:spell.suggestion",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " to one target as part of delivering a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "message",
+              "relationship_id": "spell.demanding-message:functions_like:spell.message"
+            },
+            {
+              "node_type": "text",
+              "value": ". "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Spell resistance",
+              "relationship_id": "spell.demanding-message:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": " and a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.demanding-message:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save apply to the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "suggestion",
+              "relationship_id": "spell.demanding-message:references:spell.suggestion",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", and it lasts for 1 hour per level or until completed."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -195,7 +299,84 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.message",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.demanding-message:0078e9ef0f500d8f",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell initially functions as message (allowing no save or spell resistance). Once during the message effect, you can concentrate as a standard action to issue a suggestion to one target as part of delivering a message. Spell resistance and a Will save apply to the suggestion, and it lasts for 1 hour per level or until completed."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "special",
+            "formula": "10 minutes/level, then 1 hour/level or until completed (D); see text",
+            "dismissible": true,
+            "concentration": null,
+            "raw": "10 minutes/level, then 1 hour/level or until completed (D); see text"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "10 minutes/level, then 1 hour/level or until completed (D); see text",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/saving_throw",
+          "value": {
+            "types": [
+              "will"
+            ],
+            "outcome": "Will negates (see text)",
+            "harmless": null,
+            "object": null,
+            "conditional": true,
+            "raw": "Will negates (see text)"
+          },
+          "source_field": "spell_raw.saving_throw_raw",
+          "raw": "Will negates (see text)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/spell_resistance",
+          "value": {
+            "applies": true,
+            "harmless": null,
+            "object": null,
+            "conditional": true,
+            "raw": "yes; see text"
+          },
+          "source_field": "spell_raw.spell_resistance_raw",
+          "raw": "yes; see text",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell initially functions as message (allowing no save or spell resistance). Once during the message effect, you can concentrate as a standard action to issue a suggestion to one target as part of delivering a message. Spell resistance and a Will save apply to the suggestion, and it lasts for 1 hour per level or until completed.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell initially functions as message (allowing no save or spell resistance). Once during the message effect, you can concentrate as a standard action to issue a suggestion to one target as part of delivering a message. Spell resistance and a Will save apply to the suggestion, and it lasts for 1 hour per level or until completed.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.demanding-message:appears_on_spell_list:spell-list.arcanist",
@@ -502,6 +683,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.demanding-message:functions_like:spell.message",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.message",
+        "name": "Message"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.demanding-message:4731ca4d8850fed6",
+          "source_field": "spell_raw.links_raw[12]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "message",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/m/message/"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.demanding-message:has_descriptor:descriptor.language-dependent",
       "type": "has_descriptor",
       "target": {
@@ -679,32 +880,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.demanding-message:references:spell.message",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.message",
-        "name": "message"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.demanding-message:4731ca4d8850fed6",
-          "source_field": "spell_raw.links_raw[12]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "message",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/m/message/"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.demanding-message:references:spell.suggestion",
       "type": "references",
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.suggestion",
-        "name": "suggestion"
+        "name": "Suggestion"
       },
       "status": "accepted",
       "evidence": [
@@ -801,11 +982,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.demanding-message:uses_definition:rule.will",
+      "relationship_id": "spell.demanding-message:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -883,11 +1064,19 @@
       "raw_value_sha256": "6ca99ced40956f374536171fc60d42db765c6b89147c88694a0125fb99f3e210",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.demanding-message:0078e9ef0f500d8f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "506746a69252e0198105e688f4b741f3dce93ad1fbf3f237980050f953566648",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

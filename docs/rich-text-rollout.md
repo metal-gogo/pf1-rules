@@ -12,8 +12,8 @@ Audit date: 2026-08-23.
 | Category | Spells | Meaning |
 | --- | ---: | --- |
 | Total canonical spells | 3,030 | Complete corpus |
-| Rich text stored | 512 | 11-spell pilot, twenty reviewed 25-spell rollout batches, and one reviewed warning record |
-| Safe candidates with links | 1,753 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
+| Rich text stored | 537 | 11-spell pilot, twenty-one reviewed 25-spell rollout batches, and one reviewed warning record |
+| Safe candidates with links | 1,728 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
 | Safe structure-only candidates | 302 | Source text matches, but no known relationship currently produces an inline link |
 | Source mismatch | 291 | Current canonical text and the newly bounded AoN description differ |
 | Link warnings | 172 | At least one accepted relationship is ambiguous or unmatched |
@@ -611,6 +611,42 @@ spell target; Death Candle's spellcasting verb `summon`; Death Clutch's
 ordinary heart regeneration as the monster Regeneration ability; Daze's
 publication navigation; and Greater Death Knell Aura's duplicate publication
 navigation.
+
+### Batch 21
+
+The twenty-first rollout batch contains:
+
+- Blood Salvation; Companion Life Link; Deceitful Veneer; Deceptive
+  Redundancy; Decollate; Decompose Corpse; Decrepit Disguise; Deeper Darkness;
+  Defending Bone; Defensive Grace.
+- Defensive Shock; Deflect Blame; Deflection; Defoliate; Deft Digits; Deja Vu;
+  Delay Disease; Delay Pain; Communal Delay Poison; Delayed Blast Fireball.
+- Delectable Flesh; Delusional Pride; Demand; Demand Offering; Demanding
+  Message.
+
+Review of this batch established these normalization rules:
+
+- Deeper Darkness links only the two phrases that explicitly invoke the
+  Darkness spell. Its emitted darkness links to the Darkness descriptor, its
+  illumination changes link to the exact light-level headings, and the
+  `darkness` inside its own title remains plain. Delayed Blast Fireball
+  likewise links Fireball only in its inheritance clause, not inside its own
+  title.
+- Secondary-source Div bloodline, Shadow mystery, Metal elemental school,
+  Defense, Radiation, Kyton, Arson, Charm, Nobility, and Torture navigation is
+  normalized as spell-list membership. These relationships remain available
+  in spell metadata but never compete with description terms.
+- Reviewed missing links cover Blood Salvation's class features; Defensive
+  Grace's investigator and swashbuckler features and precision damage;
+  Defensive Shock's Electricity descriptor; Deflection's Force descriptor;
+  Defoliate's negative energy, Plant type, and touch attack; Deft Digits' Fly,
+  skill-check, and line-of-sight rules; Deja Vu's action types; Delay Pain's
+  Pain descriptor; Delayed Blast Fireball's Fire descriptor and caster level;
+  and Delectable Flesh and Delusional Pride's rolls, checks, and saves.
+
+Semantic review rejected Blood Salvation's duplicate publication navigation
+as a rules definition and Decollate's merely apparent `dead` head as the Dead
+condition.
 
 ## Open questions and issues
 

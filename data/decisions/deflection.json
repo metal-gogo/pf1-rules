@@ -123,6 +123,23 @@
         "aon:subdomain.defense:32d16f22"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.deflection:72a55fe44391b594",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.deflection:72a55fe44391b594",
+        "legacy_aon:spell.deflection:ebc7730b792afde6",
+        "d20pfsrd:spell.deflection:1ef653ba848ce718",
+        "aon:subdomain.defense:32d16f22"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -141,6 +158,24 @@
         "d20pfsrd:spell.deflection:1ef653ba848ce718"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.deflection:appears_on_spell_list:spell-list.defense-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.defense:32d16f22",
+          "source_field": "entity_raw.sections_raw[0]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.deflection:1ef653ba848ce718",
+          "source_field": "spell_raw.links_raw[2]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.defense:32d16f22"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.deflection:appears_on_spell_list:spell-list.psychic",
@@ -295,6 +330,23 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.deflection:uses_definition:descriptor.force",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.deflection:72a55fe44391b594",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.deflection:72a55fe44391b594",
+        "legacy_aon:spell.deflection:ebc7730b792afde6",
+        "d20pfsrd:spell.deflection:1ef653ba848ce718",
+        "aon:subdomain.defense:32d16f22"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.deflection:uses_definition:rule.armor-class",
       "decision": "accept",
       "evidence": [
@@ -311,7 +363,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.deflection:uses_definition:rule.attack-roll",
+      "relationship_id": "spell.deflection:uses_definition:rule.attack-rolls",
       "decision": "accept",
       "evidence": [
         {
@@ -351,22 +403,6 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.deflection:uses_definition:rule.defense",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.deflection:1ef653ba848ce718",
-          "source_field": "spell_raw.links_raw[2]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.deflection:72a55fe44391b594",
-        "legacy_aon:spell.deflection:ebc7730b792afde6",
-        "d20pfsrd:spell.deflection:1ef653ba848ce718"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.deflection:uses_definition:rule.spell-resistance",
       "decision": "accept",
       "evidence": [
@@ -381,20 +417,6 @@
         "d20pfsrd:spell.deflection:1ef653ba848ce718"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.deflection:appears_on_spell_list:spell-list.defense-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.defense:32d16f22",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.defense:32d16f22"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.decompose-corpse",
   "ruleset": "Pathfinder First Edition",
   "name": "Decompose Corpse",
@@ -240,7 +240,48 @@
   "description": {
     "raw": "Using this spell, the caster rapidly decomposes the flesh from a single corpse of size Huge or smaller, leaving behind a perfectly cleaned skeleton. If it is cast on a non-skeletal corporeal undead, the creature takes a –2 penalty on all rolls and to its Armor Class and CMD for 1 minute.",
     "search_text": "\"using this spell, the caster rapidly decomposes the flesh from a single corpse of size huge or smaller, leaving behind a perfectly cleaned skeleton. if it is cast on a non-skeletal corporeal undead, the creature takes a –2 penalty on all rolls and to its armor class and cmd for 1 minute.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Using this spell, the caster rapidly decomposes the flesh from a single corpse of size Huge or smaller, leaving behind a perfectly cleaned skeleton. If it is cast on a non-skeletal corporeal "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "undead",
+              "relationship_id": "spell.decompose-corpse:uses_definition:rule.undead"
+            },
+            {
+              "node_type": "text",
+              "value": ", the creature takes a –2 penalty on all rolls and to its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Armor Class",
+              "relationship_id": "spell.decompose-corpse:uses_definition:rule.armor-class"
+            },
+            {
+              "node_type": "text",
+              "value": " and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "CMD",
+              "relationship_id": "spell.decompose-corpse:uses_definition:rule.combat-maneuver-defense"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 minute."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -414,6 +455,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.decompose-corpse:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.decompose-corpse:8f920ea29d7235c5",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.decompose-corpse:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -459,6 +520,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.decompose-corpse:appears_on_spell_list:spell-list.rot-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.rot-patron",
+        "name": "Rot Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.rot:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd — decompose corpse",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.decompose-corpse:appears_on_spell_list:spell-list.sorcerer",
@@ -710,12 +791,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.decompose-corpse:uses_definition:rule.cmd",
+      "relationship_id": "spell.decompose-corpse:uses_definition:rule.combat-maneuver-defense",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.cmd",
-        "name": "CMD"
+        "entity_id": "rule.combat-maneuver-defense",
+        "name": "Combat Maneuver Defense"
       },
       "status": "accepted",
       "evidence": [
@@ -730,11 +811,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.decompose-corpse:uses_definition:rule.fortitude",
+      "relationship_id": "spell.decompose-corpse:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -795,46 +876,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.decompose-corpse:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.decompose-corpse:8f920ea29d7235c5",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.decompose-corpse:appears_on_spell_list:spell-list.rot-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.rot-patron",
-        "name": "Rot Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.rot:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "2nd — decompose corpse",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -893,11 +934,19 @@
       "raw_value_sha256": "6d09d884cc698d6dcaa244003b0be12e3005203a8e97f0cde36a10fb059b07bf",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.decompose-corpse:8f920ea29d7235c5",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "7393735e25e4d6c9ec544d87979faba685f83c6a9397dbdf9a6e439a52fa3cc7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

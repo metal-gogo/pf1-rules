@@ -132,6 +132,28 @@ test("Batch 20 separates Greater Darkvision's parent spell from its granted sens
   await expect(page).toHaveURL(/\/entities\/rule\.darkvision$/);
 });
 
+test("Batch 21 separates Deeper Darkness's spell, descriptor, and illumination links", async ({ page }) => {
+  await page.goto("/spells/spell.deeper-darkness");
+
+  const description = page.locator(".rich-description").first();
+  const parent = description.locator('a[href="/spells/spell.darkness"]');
+  await expect(parent).toHaveCount(2);
+  await expect(description.locator('a[href="/rules/descriptors#darkness"]')).toHaveCount(1);
+  await expect(description.locator('a[href="/rules/illumination#darkness"]')).toHaveCount(2);
+  await expect(description.locator('a[href="/spells/spell.darkness"]', {
+    hasText: "Deeper darkness",
+  })).toHaveCount(0);
+  await expect(parent.first()).not.toHaveAttribute("target", "_blank");
+  await expect(page.locator('[data-embedded-spell="spell.darkness"]')).toHaveCount(1);
+  await expect(page.locator("[data-embedded-spell] [data-embedded-spell]")).toHaveCount(0);
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+
+  await description.locator('a[href="/rules/descriptors#darkness"]').click();
+  await expect(page).toHaveURL(/\/rules\/descriptors#darkness$/);
+});
+
 test("pilot lists remain semantic and accessible on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/spells/spell.bestow-curse-greater");

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.defoliate",
   "ruleset": "Pathfinder First Edition",
   "name": "Defoliate",
@@ -141,7 +141,84 @@
   "description": {
     "raw": "You hurl a tiny ball of negative energy, destroying plant life either in a line 60 feet long or a 10-foot-radius spread. This effect removes the cover and concealment provided by trees and undergrowth, eliminates the movement penalties associated with undergrowth, and so forth.\n\nYou may also target a single plant creature with this spell. You must succeed on a ranged touch attack to hit your target. An affected plant creature takes 2d8 points of damage.",
     "search_text": "\"you hurl a tiny ball of negative energy, destroying plant life either in a line 60 feet long or a 10-foot-radius spread. this effect removes the cover and concealment provided by trees and undergrowth, eliminates the movement penalties associated with undergrowth, and so forth.\\n\\nyou may also target a single plant creature with this spell. you must succeed on a ranged touch attack to hit your target. an affected plant creature takes 2d8 points of damage.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You hurl a tiny ball of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "negative energy",
+              "relationship_id": "spell.defoliate:uses_definition:rule.negative-energy"
+            },
+            {
+              "node_type": "text",
+              "value": ", destroying plant life either in a line 60 feet long or a 10-foot-radius spread. This effect removes the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "cover",
+              "relationship_id": "spell.defoliate:uses_definition:rule.cover"
+            },
+            {
+              "node_type": "text",
+              "value": " and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.defoliate:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": " provided by trees and undergrowth, eliminates the movement penalties associated with undergrowth, and so forth."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You may also target a single "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "plant creature",
+              "relationship_id": "spell.defoliate:uses_definition:rule.plant"
+            },
+            {
+              "node_type": "text",
+              "value": " with this spell. You must succeed on a ranged "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch attack",
+              "relationship_id": "spell.defoliate:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " to hit your target. An affected "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "plant creature",
+              "relationship_id": "spell.defoliate:uses_definition:rule.plant"
+            },
+            {
+              "node_type": "text",
+              "value": " takes 2d8 points of damage."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -219,6 +296,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.defoliate:appears_on_spell_list:spell-list.radiation-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.radiation-subdomain",
+        "name": "Radiation Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.radiation:08dd1152",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd—defoliate",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Earth"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.defoliate:ac1703f555d57745",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "radiation",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/earth-domain/radiation-subdomain"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.defoliate:appears_on_spell_list:spell-list.ranger",
@@ -436,24 +540,44 @@
       "note": null
     },
     {
-      "relationship_id": "spell.defoliate:uses_definition:rule.radiation",
+      "relationship_id": "spell.defoliate:uses_definition:rule.negative-energy",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.radiation",
-        "name": "radiation"
+        "entity_id": "rule.negative-energy",
+        "name": "Negative energy"
       },
       "status": "accepted",
       "evidence": [
         {
-          "observation_id": "d20pfsrd:spell.defoliate:ac1703f555d57745",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "radiation",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/earth-domain/radiation-subdomain"
+          "observation_id": "aon:spell.defoliate:403a53af6ca127d6",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "negative energy",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Defoliate"
         }
       ],
-      "note": null
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.defoliate:uses_definition:rule.plant",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.plant",
+        "name": "Plant"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.defoliate:403a53af6ca127d6",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "plant creature",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Defoliate"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.defoliate:uses_definition:rule.spell-resistance",
@@ -476,24 +600,24 @@
       "note": null
     },
     {
-      "relationship_id": "spell.defoliate:appears_on_spell_list:spell-list.radiation-subdomain",
-      "type": "appears_on_spell_list",
+      "relationship_id": "spell.defoliate:uses_definition:rule.touch-attack",
+      "type": "uses_definition",
       "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.radiation-subdomain",
-        "name": "Radiation Subdomain Spells"
+        "entity_type": "rule",
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
         {
-          "observation_id": "aon:subdomain.radiation:08dd1152",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "2nd—defoliate",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Earth"
+          "observation_id": "aon:spell.defoliate:403a53af6ca127d6",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "touch attack",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Defoliate"
         }
       ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+      "note": "The selected source wording explicitly uses this rules term."
     }
   ],
   "provenance": [
@@ -552,11 +676,19 @@
       "raw_value_sha256": "bf07311a01570df7d85186c6898d30afc4d728f816f01d1ec870de784dd2b523",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.defoliate:403a53af6ca127d6",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "c049046b1510e5922359ea7de2329f07ecf179f3c55952ab88c4df8dede3d50f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.blood-salvation",
   "ruleset": "Pathfinder First Edition",
   "name": "Blood Salvation",
@@ -105,7 +105,66 @@
   "description": {
     "raw": "While under the effect of this spell, you’re immune to any damaging area spells you cast. You can dismiss this spell as an immediate action when you are caught within the area of someone else’s damaging area spell; if you do, you’re immune to that particular casting of that spell as well. If you have the blood casting class feature, you can cast this spell as a swift action instead of a standard action while you’re in a bloodrage.",
     "search_text": "\"while under the effect of this spell, you’re immune to any damaging area spells you cast. you can dismiss this spell as an immediate action when you are caught within the area of someone else’s damaging area spell; if you do, you’re immune to that particular casting of that spell as well. if you have the blood casting class feature, you can cast this spell as a swift action instead of a standard action while you’re in a bloodrage.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "While under the effect of this spell, you’re immune to any damaging area spells you cast. You can dismiss this spell as an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "immediate action",
+              "relationship_id": "spell.blood-salvation:uses_action:action.immediate-action"
+            },
+            {
+              "node_type": "text",
+              "value": " when you are caught within the area of someone else’s damaging area spell; if you do, you’re immune to that particular casting of that spell as well. If you have the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blood casting",
+              "relationship_id": "spell.blood-salvation:uses_definition:class-feature.blood-casting"
+            },
+            {
+              "node_type": "text",
+              "value": " class feature, you can cast this spell as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "swift action",
+              "relationship_id": "spell.blood-salvation:uses_action:action.swift-action"
+            },
+            {
+              "node_type": "text",
+              "value": " instead of a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "standard action",
+              "relationship_id": "spell.blood-salvation:uses_action:action.standard-action"
+            },
+            {
+              "node_type": "text",
+              "value": " while you’re in a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bloodrage",
+              "relationship_id": "spell.blood-salvation:uses_definition:class-feature.bloodrage"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -280,6 +339,46 @@
       "note": null
     },
     {
+      "relationship_id": "spell.blood-salvation:uses_definition:class-feature.blood-casting",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "class_feature",
+        "entity_id": "class-feature.blood-casting",
+        "name": "Blood casting"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.blood-salvation:4dd7efbef584d612",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "blood casting",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Blood+Salvation"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.blood-salvation:uses_definition:class-feature.bloodrage",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "class_feature",
+        "entity_id": "class-feature.bloodrage",
+        "name": "Bloodrage"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.blood-salvation:4dd7efbef584d612",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "bloodrage",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Blood+Salvation"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.blood-salvation:uses_definition:rule.pathfinder-player-companion-advanced-class-origins",
       "type": "uses_definition",
       "target": {
@@ -287,7 +386,7 @@
         "entity_id": "rule.pathfinder-player-companion-advanced-class-origins",
         "name": "Pathfinder Player Companion: Advanced Class Origins"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.blood-salvation:58a017512d42e3aa",
@@ -297,7 +396,7 @@
           "source_href": "http://www.amazon.com/gp/product/1601256892/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1601256892&linkCode=as2&tag=httpwwwd20pfs-20&linkId=L7RPMODDPTJ24FG4"
         }
       ],
-      "note": null
+      "note": "The secondary source's publication navigation duplicates the canonical Published In relationship and is not a rules definition."
     },
     {
       "relationship_id": "spell.blood-salvation:uses_definition:rule.spell-resistance",
@@ -368,11 +467,19 @@
       "raw_value_sha256": "d5e39ec4a044bd3465528c32f500dc262935fa48eb0873329d7cb8b830f2f012",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.blood-salvation:4dd7efbef584d612",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2f3a0a643db49e9fe4c00ccbc80047b65ca11ca0a885ee1e0e652f217be22cf6",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

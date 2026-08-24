@@ -1205,6 +1205,66 @@ describe("local rules browser", () => {
     expect(description.match(/href="\/entities\/rule.darkvision"/g)).toHaveLength(1);
   });
 
+  it.each([
+    ["blood-salvation", "/entities/class-feature.blood-casting"],
+    ["companion-life-link", "/rules/actions#free-action"],
+    ["deceitful-veneer", "/spells/spell.discern-lies"],
+    ["deceptive-redundancy", "/spells/spell.dispel-magic"],
+    ["decollate", "/entities/rule.damage-reduction"],
+    ["decompose-corpse", "/entities/rule.undead"],
+    ["decrepit-disguise", "/spells/spell.quintessence"],
+    ["deeper-darkness", "/rules/descriptors#darkness"],
+    ["defending-bone", "/entities/rule.damage-reduction"],
+    ["defensive-grace", "/entities/class-feature.inspiration"],
+    ["defensive-shock", "/rules/descriptors#electricity"],
+    ["deflect-blame", "/entities/rule.bluff"],
+    ["deflection", "/rules/descriptors#force"],
+    ["defoliate", "/entities/rule.negative-energy"],
+    ["deft-digits", "/entities/rule.line-of-sight"],
+    ["deja-vu", "/rules/actions#full-round-action"],
+    ["delay-disease", "/entities/rule.disease"],
+    ["delay-pain", "/rules/descriptors#pain"],
+    ["delay-poison-communal", "/spells/spell.delay-poison"],
+    ["delayed-blast-fireball", "/rules/descriptors#fire"],
+    ["delectable-flesh", "/entities/rule.ability-check"],
+    ["delusional-pride", "/rules/saving-throws"],
+    ["demand", "/spells/spell.sending"],
+    ["demand-offering", "/rules/actions#immediate-action"],
+    ["demanding-message", "/spells/spell.message"],
+  ])("renders twenty-first-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["blood-salvation", "/entities/rule.pathfinder-player-companion-advanced-class-origins"],
+    ["decollate", "/entities/condition.dead"],
+  ])("omits twenty-first-batch semantic false positives from spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain(`href="${target}"`);
+  });
+
+  it("does not link parent names inside the child spell titles in Batch 21", async () => {
+    const [darknessResponse, fireballResponse] = await Promise.all([
+      fetch(`${baseUrl}/spells/spell.deeper-darkness`),
+      fetch(`${baseUrl}/spells/spell.delayed-blast-fireball`),
+    ]);
+    const [darknessHtml, fireballHtml] = await Promise.all([
+      darknessResponse.text(),
+      fireballResponse.text(),
+    ]);
+    const darknessDescription = darknessHtml.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const fireballDescription = fireballHtml.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(darknessDescription.match(/href="\/spells\/spell.darkness"/g)).toHaveLength(2);
+    expect(fireballDescription.match(/href="\/spells\/spell.fireball"/g)).toHaveLength(1);
+  });
+
   it("links Curse of Unexpected Death's touch attacks but not its ordinary touch verbs", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.curse-of-unexpected-death`);
     const html = await response.text();

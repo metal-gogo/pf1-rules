@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.delay-pain",
   "ruleset": "Pathfinder First Edition",
   "name": "Delay Pain",
@@ -250,7 +250,79 @@
   "description": {
     "raw": "You override the target’s ability to feel pain. Pain effects (such as pain strike and symbol of pain) do not affect the target until this spell’s duration has expired. This does not negate any physical damage, ability damage, or ability drain that a pain effect has already done, but it does negate ongoing penalties from pain while the spell lasts.",
     "search_text": "\"you override the target’s ability to feel pain. pain effects (such as pain strike and symbol of pain) do not affect the target until this spell’s duration has expired. this does not negate any physical damage, ability damage, or ability drain that a pain effect has already done, but it does negate ongoing penalties from pain while the spell lasts.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You override the target’s ability to feel pain. "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Pain effects",
+              "relationship_id": "spell.delay-pain:uses_definition:descriptor.pain"
+            },
+            {
+              "node_type": "text",
+              "value": " (such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "pain strike",
+              "relationship_id": "spell.delay-pain:references:spell.pain-strike",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "symbol of pain",
+              "relationship_id": "spell.delay-pain:references:spell.symbol-of-pain",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ") do not affect the target until this spell’s duration has expired. This does not negate any physical damage, "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "ability damage",
+              "relationship_id": "spell.delay-pain:uses_definition:rule.ability-damage"
+            },
+            {
+              "node_type": "text",
+              "value": ", or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "ability drain",
+              "relationship_id": "spell.delay-pain:uses_definition:rule.ability-drain"
+            },
+            {
+              "node_type": "text",
+              "value": " that a pain effect has already done, but it does negate ongoing penalties from pain while the spell lasts."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -404,6 +476,67 @@
       "note": null
     },
     {
+      "relationship_id": "spell.delay-pain:appears_on_spell_list:spell-list.kyton-subdomain-from-evil",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.kyton-subdomain-from-evil",
+        "name": "Kyton Subdomain Spells (Evil Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.kyton:442be5b2",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—delay pain",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Evil"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.delay-pain:9c6240e6b6cd9395",
+          "source_field": "spell_raw.links_raw[9]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "evil",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/evil-domain/kyton-subdomain"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.delay-pain:9c6240e6b6cd9395",
+          "source_field": "spell_raw.links_raw[8]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "kyton",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/evil-domain/kyton-subdomain/"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.delay-pain:appears_on_spell_list:spell-list.kyton-subdomain-from-law",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.kyton-subdomain-from-law",
+        "name": "Kyton Subdomain Spells (Law Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.kyton:e26007d3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—delay pain",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Law"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.delay-pain:9c6240e6b6cd9395",
+          "source_field": "spell_raw.links_raw[10]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "law",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/law-domain/kyton-subdomain-law"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
       "relationship_id": "spell.delay-pain:appears_on_spell_list:spell-list.mesmerist",
       "type": "appears_on_spell_list",
       "target": {
@@ -422,6 +555,40 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.delay-pain:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.delay-pain:6e3da857a675e843",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.delay-pain:9c6240e6b6cd9395",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.delay-pain:6e3da857a675e843",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.delay-pain:appears_on_spell_list:spell-list.oracle",
@@ -698,7 +865,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.pain-strike",
-        "name": "pain strike"
+        "name": "Pain Strike"
       },
       "status": "accepted",
       "evidence": [
@@ -725,7 +892,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.symbol-of-pain",
-        "name": "symbol of pain"
+        "name": "Symbol of Pain"
       },
       "status": "accepted",
       "evidence": [
@@ -774,6 +941,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.delay-pain:uses_definition:descriptor.pain",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.pain",
+        "name": "Pain"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.delay-pain:6e3da857a675e843",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Pain effects",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Delay+Pain"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.delay-pain:uses_definition:rule.ability-damage",
       "type": "uses_definition",
       "target": {
@@ -814,66 +1001,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.delay-pain:uses_definition:rule.evil",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.evil",
-        "name": "evil"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.delay-pain:9c6240e6b6cd9395",
-          "source_field": "spell_raw.links_raw[9]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "evil",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/evil-domain/kyton-subdomain"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.delay-pain:uses_definition:rule.kyton",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.kyton",
-        "name": "kyton"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.delay-pain:9c6240e6b6cd9395",
-          "source_field": "spell_raw.links_raw[8]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "kyton",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/evil-domain/kyton-subdomain/"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.delay-pain:uses_definition:rule.law",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.law",
-        "name": "law"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.delay-pain:9c6240e6b6cd9395",
-          "source_field": "spell_raw.links_raw[10]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "law",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/law-domain/kyton-subdomain-law"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.delay-pain:uses_definition:rule.spell-resistance",
       "type": "uses_definition",
       "target": {
@@ -894,11 +1021,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.delay-pain:uses_definition:rule.will",
+      "relationship_id": "spell.delay-pain:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -912,80 +1039,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.delay-pain:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.delay-pain:6e3da857a675e843",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.delay-pain:9c6240e6b6cd9395",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.delay-pain:6e3da857a675e843",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.delay-pain:appears_on_spell_list:spell-list.kyton-subdomain-from-evil",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.kyton-subdomain-from-evil",
-        "name": "Kyton Subdomain Spells (Evil Domain)"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.kyton:442be5b2",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "1st—delay pain",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Evil"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
-    },
-    {
-      "relationship_id": "spell.delay-pain:appears_on_spell_list:spell-list.kyton-subdomain-from-law",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.kyton-subdomain-from-law",
-        "name": "Kyton Subdomain Spells (Law Domain)"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.kyton:e26007d3",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "1st—delay pain",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Law"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -1052,11 +1105,19 @@
       "raw_value_sha256": "599042b8aa4ed12507792f0cd78def5af9a1b30140c01be4383d46e62fcd66d4",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.delay-pain:6e3da857a675e843",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "65c6f8bf131504f3818f3c5d7d8ba0da7564d20edfc516532977b8817f321636",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
