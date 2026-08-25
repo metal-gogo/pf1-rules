@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.dispel-good",
   "ruleset": "Pathfinder First Edition",
   "name": "Dispel Good",
@@ -377,7 +377,51 @@
   "description": {
     "raw": "This spell functions like dispel evil, except that you are surrounded by dark, wavering unholy energy, and the spell affects good creatures and spells rather than evil ones.",
     "search_text": "\"this spell functions like dispel evil, except that you are surrounded by dark, wavering unholy energy, and the spell affects good creatures and spells rather than evil ones.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dispel evil",
+              "relationship_id": "spell.dispel-good:functions_like:spell.dispel-evil",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that you are surrounded by dark, wavering unholy energy, and the spell affects "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "good",
+              "relationship_id": "spell.dispel-good:uses_definition:rule.good"
+            },
+            {
+              "node_type": "text",
+              "value": " creatures and spells rather than "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "evil",
+              "relationship_id": "spell.dispel-good:uses_definition:rule.evil"
+            },
+            {
+              "node_type": "text",
+              "value": " ones."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -601,6 +645,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like dispel evil, except that you are surrounded by dark, wavering unholy energy, and the spell affects good creatures and spells rather than evil ones.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.dispel-good:f51361144601af6e",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dispel evil",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/dispelEvil.html#dispel-evil"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.dispel-good:0fa808a5d533aa36",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dispel evil",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/dispel-evil"
         }
       ],
       "note": null
@@ -696,33 +754,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "PRPG Core Rulebook pg. 272",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.dispel-good:references:spell.dispel-evil",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.dispel-evil",
-        "name": "dispel evil"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.dispel-good:f51361144601af6e",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "dispel evil",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/dispelEvil.html#dispel-evil"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.dispel-good:0fa808a5d533aa36",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "dispel evil",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/dispel-evil"
         }
       ],
       "note": null
@@ -1000,6 +1031,46 @@
         }
       ],
       "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.dispel-good:uses_definition:rule.evil",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.evil",
+        "name": "Evil"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.dispel-good:f87b51d95d6ea748",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "evil",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Dispel+Good"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.dispel-good:uses_definition:rule.good",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.good",
+        "name": "Good"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.dispel-good:f87b51d95d6ea748",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "good",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Dispel+Good"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     }
   ],
   "provenance": [
@@ -1130,11 +1201,19 @@
       "raw_value_sha256": "5f3a867eeb35bf4cc5a5c0786b7e8f07f56252d8cf1e22a8fe212c3579212d40",
       "decision": "normalized",
       "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.dispel-good:f87b51d95d6ea748",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "1aaaf25656a6c2814a5aed6fe4f6072d3e1bb7a463718af39843276951a5e719",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

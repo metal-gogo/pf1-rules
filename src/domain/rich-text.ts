@@ -42,7 +42,33 @@ export interface RichTextUnorderedListNode {
   content: RichTextListItemNode[];
 }
 
-export type RichTextBlockNode = RichTextParagraphNode | RichTextUnorderedListNode;
+export interface RichTextHeadingNode {
+  node_type: "heading";
+  level: 2 | 3 | 4 | 5 | 6;
+  content: RichTextInlineNode[];
+}
+
+export interface RichTextTableCellNode {
+  node_type: "table_cell";
+  header: boolean;
+  content: RichTextInlineNode[];
+}
+
+export interface RichTextTableRowNode {
+  node_type: "table_row";
+  content: RichTextTableCellNode[];
+}
+
+export interface RichTextTableNode {
+  node_type: "table";
+  content: RichTextTableRowNode[];
+}
+
+export type RichTextBlockNode =
+  | RichTextParagraphNode
+  | RichTextUnorderedListNode
+  | RichTextHeadingNode
+  | RichTextTableNode;
 
 export interface RichTextDocument {
   node_type: "document";
@@ -53,6 +79,46 @@ export interface RichTextLinkWarning {
   code: "AMBIGUOUS_RICH_TEXT_LINK" | "UNMATCHED_RICH_TEXT_LINK";
   phrase: string;
   relationship_ids: string[];
+}
+
+
+export function richTextBlockInlines(block: RichTextBlockNode): RichTextInlineNode[] {
+  if (block.node_type === "paragraph" || block.node_type === "heading") {
+    return block.content;
+  }
+  if (block.node_type === "unordered_list") {
+    return block.content.flatMap((item) => item.content);
+  }
+  return block.content.flatMap((row) => row.content.flatMap((cell) => cell.content));
+}
+
+
+export function mapRichTextBlockInlines(
+  block: RichTextBlockNode,
+  transform: (content: RichTextInlineNode[]) => RichTextInlineNode[],
+): RichTextBlockNode {
+  if (block.node_type === "paragraph" || block.node_type === "heading") {
+    return { ...block, content: transform(block.content) };
+  }
+  if (block.node_type === "unordered_list") {
+    return {
+      ...block,
+      content: block.content.map((item) => ({
+        ...item,
+        content: transform(item.content),
+      })),
+    };
+  }
+  return {
+    ...block,
+    content: block.content.map((row) => ({
+      ...row,
+      content: row.content.map((cell) => ({
+        ...cell,
+        content: transform(cell.content),
+      })),
+    })),
+  };
 }
 
 
@@ -157,6 +223,38 @@ export function parseRichTextHtml(html: string): RichTextDocument {
           : [];
       });
       if (items.length > 0) blocks.push({ node_type: "unordered_list", content: items });
+      continue;
+    }
+    if (/^h[2-6]$/.test(tag)) {
+      flushParagraph();
+      const content = inlineContent($, $(node).contents().toArray());
+      if (content.length > 0) {
+        blocks.push({
+          node_type: "heading",
+          level: Number.parseInt(tag.slice(1), 10) as 2 | 3 | 4 | 5 | 6,
+          content,
+        });
+      }
+      continue;
+    }
+    if (tag === "table") {
+      flushParagraph();
+      const rows = $(node).find("tr").toArray().flatMap((row, rowIndex) => {
+        const cells = $(row).children("th, td").toArray().flatMap((cell) => {
+          const content = inlineContent($, $(cell).contents().toArray());
+          return content.length > 0
+            ? [{
+                node_type: "table_cell" as const,
+                header: rowIndex === 0 || String((cell as any).tagName).toLowerCase() === "th",
+                content,
+              }]
+            : [];
+        });
+        return cells.length > 0
+          ? [{ node_type: "table_row" as const, content: cells }]
+          : [];
+      });
+      if (rows.length > 0) blocks.push({ node_type: "table", content: rows });
       continue;
     }
     pending.push(node);
@@ -376,22 +474,11 @@ export function linkRichTextDocument(
     content.flatMap((node) => node.node_type === "text" ? linkTextNode(node, candidates) : [node]);
   const linkedDocument: RichTextDocument = {
       node_type: "document",
-      content: document.content.map((block) => block.node_type === "paragraph"
-        ? { ...block, content: linkInline(block.content) }
-        : {
-            ...block,
-            content: block.content.map((item) => ({
-              ...item,
-              content: linkInline(item.content),
-            })),
-          }),
+      content: document.content.map((block) => mapRichTextBlockInlines(block, linkInline)),
   };
   const linkedRelationshipIds = new Set<string>();
   for (const block of linkedDocument.content) {
-    const content = block.node_type === "paragraph"
-      ? block.content
-      : block.content.flatMap((item) => item.content);
-    for (const node of content) {
+    for (const node of richTextBlockInlines(block)) {
       if (node.node_type === "entity_link") linkedRelationshipIds.add(node.relationship_id);
     }
   }
@@ -417,12 +504,17 @@ export function linkRichTextDocument(
 
 export function richTextLeafText(document: RichTextDocument): string {
   return document.content.map((block) => {
-    if (block.node_type === "paragraph") {
+    if (block.node_type === "paragraph" || block.node_type === "heading") {
       return block.content.map((node) => node.node_type === "hard_break" ? "\n" : node.value).join("");
     }
-    return block.content.map((item) =>
-      item.content.map((node) => node.node_type === "hard_break" ? "\n" : node.value).join("")
-    ).join("");
+    if (block.node_type === "unordered_list") {
+      return block.content.map((item) =>
+        item.content.map((node) => node.node_type === "hard_break" ? "\n" : node.value).join("")
+      ).join("");
+    }
+    return block.content.map((row) => row.content.map((cell) =>
+      cell.content.map((node) => node.node_type === "hard_break" ? "\n" : node.value).join("")
+    ).join("")).join("");
   }).join("\n\n");
 }
 

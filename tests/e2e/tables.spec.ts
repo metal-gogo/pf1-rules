@@ -187,6 +187,33 @@ test("Batch 23 links only Greater Discharge's three parent references", async ({
   await expect(page).toHaveURL(/\/spells\/spell\.discharge$/);
 });
 
+test("Batch 24 folds Dispel variants and links only the explicit Silence spell", async ({ page }) => {
+  await page.goto("/spells/spell.dispel-good");
+
+  const variantDescription = page.locator(".rich-description").first();
+  const parent = variantDescription.locator('a[href="/spells/spell.dispel-evil"]');
+  await expect(parent).toHaveCount(1);
+  await expect(parent).not.toHaveAttribute("target", "_blank");
+  await expect(page.locator('[data-embedded-spell="spell.dispel-evil"]')).toHaveCount(1);
+  await expect(page.locator("[data-embedded-spell] [data-embedded-spell]")).toHaveCount(0);
+  await expectNoPageOverflow(page);
+
+  await parent.click();
+  await expect(page).toHaveURL(/\/spells\/spell\.dispel-evil$/);
+
+  await page.goto("/spells/spell.disrupt-silence");
+  const silence = page.locator(".rich-description").first()
+    .locator('a[href="/spells/spell.silence"]');
+  await expect(silence).toHaveCount(1);
+  await expect(silence).not.toHaveAttribute("target", "_blank");
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+
+  await silence.click();
+  await expect(page).toHaveURL(/\/spells\/spell\.silence$/);
+});
+
 test("pilot lists remain semantic and accessible on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/spells/spell.bestow-curse-greater");

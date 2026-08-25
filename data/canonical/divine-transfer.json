@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.divine-transfer",
   "ruleset": "Pathfinder First Edition",
   "name": "Divine Transfer",
@@ -105,7 +105,84 @@
   "description": {
     "raw": "With a single touch, you transfer some of your life essence to the subject, transferring your hit points and your resolve. When you touch the subject you can transfer up to a number of hit points equal to your Constitution score to the target. These hit points heal the subject, but cannot raise the subject’s hit points higher than its normal hit point total. In addition, the subject gains DR/evil equal to your Charisma bonus (if any) for the duration of the spell.",
     "search_text": "\"with a single touch, you transfer some of your life essence to the subject, transferring your hit points and your resolve. when you touch the subject you can transfer up to a number of hit points equal to your constitution score to the target. these hit points heal the subject, but cannot raise the subject’s hit points higher than its normal hit point total. in addition, the subject gains dr/evil equal to your charisma bonus (if any) for the duration of the spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "With a single touch, you transfer some of your life essence to the subject, transferring your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.divine-transfer:uses_definition:rule.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": " and your resolve. When you touch the subject you can transfer up to a number of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.divine-transfer:uses_definition:rule.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": " equal to your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Constitution",
+              "relationship_id": "spell.divine-transfer:uses_definition:rule.constitution"
+            },
+            {
+              "node_type": "text",
+              "value": " score to the target. These "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.divine-transfer:uses_definition:rule.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": " heal the subject, but cannot raise the subject’s "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.divine-transfer:uses_definition:rule.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": " higher than its normal hit point total. In addition, the subject gains DR/"
+            },
+            {
+              "node_type": "entity_link",
+              "value": "evil",
+              "relationship_id": "spell.divine-transfer:uses_definition:rule.evil"
+            },
+            {
+              "node_type": "text",
+              "value": " equal to your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Charisma",
+              "relationship_id": "spell.divine-transfer:uses_definition:rule.charisma"
+            },
+            {
+              "node_type": "text",
+              "value": " bonus (if any) for the duration of the spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -320,26 +397,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.divine-transfer:uses_definition:rule.fortitude",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.fortitude",
-        "name": "Fortitude"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.divine-transfer:99df172b1134ac76",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Fortitude",
-          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.divine-transfer:uses_definition:rule.hit-points",
       "type": "uses_definition",
       "target": {
@@ -399,6 +456,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.divine-transfer:uses_definition:rule.fortitude-saving-throw",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.divine-transfer:99df172b1134ac76",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Fortitude",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
+        }
+      ],
+      "note": null
     }
   ],
   "provenance": [
@@ -449,11 +526,19 @@
       "raw_value_sha256": "eb2a9a9509ca0a155668827e42cc0ea6135651568e59d7bd58dd99cd403a3f76",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.divine-transfer:666c101eb424b579",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e064d908384d5f3504be66a20abcaeb62cc6bc53844d0baeaf91fbc58475e9df",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

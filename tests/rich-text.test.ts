@@ -10,6 +10,7 @@ import {
   comparableRichText,
   linkRichTextDocument,
   parseRichTextHtml,
+  richTextBlockInlines,
   richTextLeafText,
   type RichTextDocument,
 } from "../src/domain/rich-text.js";
@@ -100,11 +101,7 @@ describe("rich-text schema and source parsing", () => {
     const restoration = parsedObservation("restoration/aon-0.1.6.json");
     const restorationDocument = parseRichTextHtml(restoration.descriptionHtml);
     expect(restorationDocument.content).toHaveLength(2);
-    const restorationInlines = restorationDocument.content.flatMap((block) =>
-      block.node_type === "paragraph"
-        ? block.content
-        : block.content.flatMap((item) => item.content)
-    );
+    const restorationInlines = restorationDocument.content.flatMap(richTextBlockInlines);
     expect(restorationInlines).toContainEqual({
       node_type: "text",
       value: "lesser restoration",
@@ -127,6 +124,75 @@ describe("rich-text schema and source parsing", () => {
     });
   });
 
+  it("preserves description headings and table structure", () => {
+    const document = parseRichTextHtml(
+      "<h2>Incarnations</h2><table><tr><td><b>d%</b></td><td><b>Form</b></td></tr>" +
+      "<tr><td>01</td><td>Bugbear</td></tr></table>",
+    );
+
+    expect(document.content).toEqual([
+      {
+        node_type: "heading",
+        level: 2,
+        content: [{ node_type: "text", value: "Incarnations" }],
+      },
+      {
+        node_type: "table",
+        content: [
+          {
+            node_type: "table_row",
+            content: [
+              {
+                node_type: "table_cell",
+                header: true,
+                content: [{ node_type: "text", value: "d%", marks: ["bold"] }],
+              },
+              {
+                node_type: "table_cell",
+                header: true,
+                content: [{ node_type: "text", value: "Form", marks: ["bold"] }],
+              },
+            ],
+          },
+          {
+            node_type: "table_row",
+            content: [
+              {
+                node_type: "table_cell",
+                header: false,
+                content: [{ node_type: "text", value: "01" }],
+              },
+              {
+                node_type: "table_cell",
+                header: false,
+                content: [{ node_type: "text", value: "Bugbear" }],
+              },
+            ],
+          },
+        ],
+      },
+    ]);
+    expect(comparableRichText(richTextLeafText(document)))
+      .toBe(comparableRichText("Incarnations d% Form 01 Bugbear"));
+  });
+
+  it("keeps Reincarnate's supplemental rules inside the bounded description", () => {
+    const reincarnate = parsedObservation("reincarnate/aon-0.1.5.json");
+    const document = parseRichTextHtml(reincarnate.descriptionHtml);
+
+    expect(reincarnate.descriptionRaw).toContain("Reincarnation on Golarion");
+    expect(document.content.filter((block) => block.node_type === "heading"))
+      .toHaveLength(3);
+    expect(document.content.filter((block) => block.node_type === "table"))
+      .toHaveLength(3);
+  });
+
+  it("keeps mythic title sections outside the bounded base description", () => {
+    const darkness = parsedObservation("darkness/aon-0.1.5.json");
+
+    expect(darkness.descriptionRaw).not.toContain("Mythic Darkness");
+  });
+
   it("keeps every rich-text document text-equivalent and linked only to accepted relationships", () => {
     const slugs = fs.readdirSync(path.join(projectRoot, "data", "canonical"))
       .filter((filename) => filename.endsWith(".json"))
@@ -143,10 +209,8 @@ describe("rich-text schema and source parsing", () => {
         item.relationship_id,
         item,
       ]));
-      const links = document.content.flatMap((block) =>
-        (block.node_type === "paragraph" ? block.content : block.content.flatMap((item) => item.content))
-          .filter((node) => node.node_type === "entity_link")
-      );
+      const links = document.content.flatMap(richTextBlockInlines)
+        .filter((node) => node.node_type === "entity_link");
       for (const link of links) {
         if (link.node_type !== "entity_link") continue;
         const accepted = relationships.get(link.relationship_id);
@@ -161,11 +225,7 @@ describe("rich-text schema and source parsing", () => {
     const darkness = canonical("darkness");
     const document = darkness.description.document as RichTextDocument;
     const serialized = JSON.stringify(document);
-    const inlineNodes = document.content.flatMap((block) =>
-      block.node_type === "paragraph"
-        ? block.content
-        : block.content.flatMap((item) => item.content)
-    );
+    const inlineNodes = document.content.flatMap(richTextBlockInlines);
     const darknessLinks = inlineNodes.filter((node) =>
       node.node_type === "entity_link" && node.value.toLowerCase() === "darkness"
     );
@@ -424,6 +484,40 @@ describe("rich-text schema and source parsing", () => {
     for (const item of ["greatsword", "quarterstaff", "club", "dagger"]) {
       expect(disguiseWeapon).toContain(`uses_definition:item.${item}`);
     }
+  });
+
+  it("keeps Batch 24 contextual spell, rules, and class links distinct", () => {
+    const disruptSilence = JSON.stringify(canonical("disrupt-silence").description.document);
+    expect(disruptSilence.match(/references:spell\.silence/g)).toHaveLength(1);
+
+    for (const slug of ["disrupt-link", "dissolution"]) {
+      const document = JSON.stringify(canonical(slug).description.document);
+      expect(document).not.toContain('"value":"touch","relationship_id"');
+    }
+
+    const displacement = JSON.stringify(canonical("displacement").description.document);
+    expect(displacement.match(/uses_definition:rule\.total-concealment/g)).toHaveLength(2);
+    expect(displacement).not.toContain("uses_definition:rule.concealment");
+
+    const divinePower = JSON.stringify(canonical("divine-power").description.document);
+    expect(divinePower).toContain("uses_definition:rule.speed-weapon");
+    expect(divinePower).not.toContain('"relationship_id":"spell.divine-power:uses_definition:rule.speed"');
+
+    const divineVessel = JSON.stringify(canonical("divine-vessel").description.document);
+    expect(divineVessel.match(/uses_definition:descriptor\.cold/g)).toHaveLength(3);
+    expect(divineVessel.match(/uses_definition:rule\.good/g)).toHaveLength(3);
+
+    const dominateAnimal = JSON.stringify(canonical("dominate-animal").description.document);
+    expect(dominateAnimal.match(/uses_definition:rule\.animal/g)).toHaveLength(4);
+    expect(dominateAnimal).toContain('"node_type":"text","value":"animal","marks":["italic"]');
+
+    const draconicAlly = JSON.stringify(canonical("draconic-ally").description.document);
+    for (const target of [
+      "class.inquisitor",
+      "class.warpriest",
+      "deity.apsu",
+      "deity.dahak",
+    ]) expect(draconicAlly).toContain(`uses_definition:${target}`);
   });
 });
 

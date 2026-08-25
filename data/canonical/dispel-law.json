@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.dispel-law",
   "ruleset": "Pathfinder First Edition",
   "name": "Dispel Law",
@@ -331,7 +331,51 @@
   "description": {
     "raw": "This spell functions like dispel evil, except that you are surrounded by flickering, yellow chaotic energy, and the spell affects lawful creatures and spells rather than evil ones.",
     "search_text": "\"this spell functions like dispel evil, except that you are surrounded by flickering, yellow chaotic energy, and the spell affects lawful creatures and spells rather than evil ones.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dispel evil",
+              "relationship_id": "spell.dispel-law:functions_like:spell.dispel-evil",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that you are surrounded by flickering, yellow chaotic energy, and the spell affects "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "lawful",
+              "relationship_id": "spell.dispel-law:uses_definition:rule.lawful"
+            },
+            {
+              "node_type": "text",
+              "value": " creatures and spells rather than "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "evil",
+              "relationship_id": "spell.dispel-law:uses_definition:rule.evil"
+            },
+            {
+              "node_type": "text",
+              "value": " ones."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -555,6 +599,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like dispel evil, except that you are surrounded by flickering, yellow chaotic energy, and the spell affects lawful creatures and spells rather than evil ones.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.dispel-law:d2d1387af7bd1c2b",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dispel evil",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/dispelEvil.html#dispel-evil"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.dispel-law:cb2ce94ae04047fc",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dispel evil",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/dispel-evil"
         }
       ],
       "note": null
@@ -643,33 +701,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "PRPG Core Rulebook pg. 272",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.dispel-law:references:spell.dispel-evil",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.dispel-evil",
-        "name": "dispel evil"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.dispel-law:d2d1387af7bd1c2b",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "dispel evil",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/dispelEvil.html#dispel-evil"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.dispel-law:cb2ce94ae04047fc",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "dispel evil",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/dispel-evil"
         }
       ],
       "note": null
@@ -927,6 +958,46 @@
         }
       ],
       "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.dispel-law:uses_definition:rule.evil",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.evil",
+        "name": "Evil"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.dispel-law:c6b89bbce07437c8",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "evil",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Dispel+Law"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.dispel-law:uses_definition:rule.lawful",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.lawful",
+        "name": "Lawful"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.dispel-law:c6b89bbce07437c8",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "lawful",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Dispel+Law"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     }
   ],
   "provenance": [
@@ -1041,11 +1112,19 @@
       "raw_value_sha256": "4024fd3ccb41e038e05d683be4dfcdb9096e74563e4f430b3c6317f7ff48968c",
       "decision": "normalized",
       "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.dispel-law:c6b89bbce07437c8",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f32735dca96f6a54f6b25f4cdbf7421012b857a9104b1140ea566afb45555321",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

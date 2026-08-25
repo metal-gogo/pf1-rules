@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.displacement",
   "ruleset": "Pathfinder First Edition",
   "name": "Displacement",
@@ -245,7 +245,70 @@
   "description": {
     "raw": "The subject of this spell appears to be about 2 feet away from its true location. The creature benefits from a 50% miss chance as if it had total concealment. Unlike actual total concealment, displacement does not prevent enemies from targeting the creature normally. True seeing reveals its true location and negates the miss chance.",
     "search_text": "\"the subject of this spell appears to be about 2 feet away from its true location. the creature benefits from a 50% miss chance as if it had total concealment. unlike actual total concealment, displacement does not prevent enemies from targeting the creature normally. true seeing reveals its true location and negates the miss chance.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The subject of this spell appears to be about 2 feet away from its true location. The creature benefits from a "
+            },
+            {
+              "node_type": "text",
+              "value": "50% miss chance as if it had "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "total concealment",
+              "relationship_id": "spell.displacement:uses_definition:rule.total-concealment"
+            },
+            {
+              "node_type": "text",
+              "value": ". "
+            },
+            {
+              "node_type": "text",
+              "value": "Unlike actual "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "total concealment",
+              "relationship_id": "spell.displacement:uses_definition:rule.total-concealment"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "text",
+              "value": "displacement",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " does not prevent enemies from targeting the creature normally. "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "True seeing",
+              "relationship_id": "spell.displacement:references:spell.true-seeing",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " reveals its true location and negates the miss chance."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -767,7 +830,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.true-seeing",
-        "name": "True seeing"
+        "name": "True Seeing"
       },
       "status": "accepted",
       "evidence": [
@@ -883,33 +946,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.displacement:uses_definition:rule.will",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.will",
-        "name": "Will"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.displacement:604d2b7a69aefa11",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Will",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/combat.html#will"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.displacement:3892f764be433048",
-          "source_field": "spell_raw.links_raw[13]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Will",
-          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.displacement:appears_on_spell_list:spell-list.bloodrager-aberrant-bloodline",
       "type": "appears_on_spell_list",
       "target": {
@@ -948,6 +984,53 @@
         }
       ],
       "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.displacement:uses_definition:rule.total-concealment",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.total-concealment",
+        "name": "Total concealment"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.displacement:3dc4462da6a7891c",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "total concealment",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Displacement"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.displacement:uses_definition:rule.will-saving-throw",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.will-saving-throw",
+        "name": "Will"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.displacement:604d2b7a69aefa11",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Will",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/combat.html#will"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.displacement:3892f764be433048",
+          "source_field": "spell_raw.links_raw[13]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Will",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
+        }
+      ],
+      "note": null
     }
   ],
   "provenance": [
@@ -1014,11 +1097,19 @@
       "raw_value_sha256": "ed3c434010ed1535fa0bd7197218a336b07ae5a18afec63b6b4d09c8845b990e",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.displacement:3dc4462da6a7891c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "78af2c76293b0fb7f5a7b31f270c5065719878f4841f66af1e8fe142fef64415",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

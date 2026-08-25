@@ -10,6 +10,7 @@ import type {
   RichTextDocument,
   RichTextInlineNode,
   RichTextMark,
+  RichTextTableRowNode,
 } from "../domain/rich-text.js";
 import type { PrismaClient } from "../generated/prisma/client.js";
 import { findSpell, searchRules, spellsForList } from "../query/spells.js";
@@ -30,6 +31,8 @@ th, td { border-block-end: 1px solid var(--table-divider); padding: .55rem; text
 .data-table thead th { background: Canvas; position: sticky; top: 0; z-index: 1; }
 .data-table .key-column { background: Canvas; left: 0; position: sticky; z-index: 1; }
 .data-table thead .key-column { z-index: 2; }
+.rich-text-table { min-width: 32rem; }
+.rich-text-table :is(th, td):not(:nth-child(2)) { text-align: center; }
 .legacy-badge { border: 1px solid; border-radius: .25rem; display: inline-block; font-size: .78em; font-weight: 700; margin-inline-start: .35rem; padding: .05rem .3rem; }
 .legacy-notice { border-inline-start: .3rem solid; padding: .65rem .85rem; }
 .catalog-filters { align-items: end; border: 1px solid; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); padding: 1rem; }
@@ -600,20 +603,41 @@ function richTextInline(
 function renderRichText(
   document: RichTextDocument,
   relationships: LinkRelationship[],
+  headingLevel = 3,
 ): string {
   const byId = new Map(relationships.map((relationship) => [relationship.id, relationship]));
   const inline = (content: RichTextInlineNode[]) =>
     content.map((node) => richTextInline(node, byId)).join("");
-  return `<div class="rich-description">${document.content.map((block) =>
-    block.node_type === "paragraph"
-      ? `<p>${inline(block.content)}</p>`
-      : `<ul>${block.content.map((item) => `<li>${inline(item.content)}</li>`).join("")}</ul>`
-  ).join("")}</div>`;
+  return `<div class="rich-description">${document.content.map((block) => {
+    if (block.node_type === "paragraph") return `<p>${inline(block.content)}</p>`;
+    if (block.node_type === "unordered_list") {
+      return `<ul>${block.content.map((item) => `<li>${inline(item.content)}</li>`).join("")}</ul>`;
+    }
+    if (block.node_type === "heading") {
+      const level = Math.min(6, headingLevel + block.level - 2);
+      return `<h${level}>${inline(block.content)}</h${level}>`;
+    }
+    const [firstRow, ...bodyRows] = block.content;
+    const columnHeaders = firstRow?.content.every((cell) => cell.header) ? firstRow : null;
+    const rows = columnHeaders ? bodyRows : block.content;
+    const row = (cells: RichTextTableRowNode["content"], header: boolean) => `<tr>${cells.map(
+      (cell, index) => header || index === 0
+        ? `<th scope="${header ? "col" : "row"}">${inline(cell.content)}</th>`
+        : `<td>${inline(cell.content)}</td>`,
+    ).join("")}</tr>`;
+    return `<div class="table-scroll" role="region" aria-label="Spell description table" tabindex="0"><table class="data-table rich-text-table">${columnHeaders ? `<thead>${row(columnHeaders.content, true)}</thead>` : ""}<tbody>${rows.map((item) => row(item.content, false)).join("")}</tbody></table></div>`;
+  }).join("")}</div>`;
 }
 
-function spellDescription(spell: SpellRecord, relationships: LinkRelationship[]): string {
+function spellDescription(
+  spell: SpellRecord,
+  relationships: LinkRelationship[],
+  headingLevel = 3,
+): string {
   const document = richTextDocument(spell.payload);
-  return document ? renderRichText(document, relationships) : paragraphs(spell.descriptionRaw);
+  return document
+    ? renderRichText(document, relationships, headingLevel)
+    : paragraphs(spell.descriptionRaw);
 }
 
 function embeddedSpell(
@@ -648,7 +672,7 @@ function embeddedSpell(
       <dt>Saving throw</dt><dd>${escapeHtml(savingThrow)}</dd>
       <dt>Spell resistance</dt><dd>${escapeHtml(spellResistance)}</dd>
     </dl>
-    <h${descriptionHeadingLevel}>Description</h${descriptionHeadingLevel}>${spellDescription(spell, relationships)}
+    <h${descriptionHeadingLevel}>Description</h${descriptionHeadingLevel}>${spellDescription(spell, relationships, descriptionHeadingLevel + 1)}
   </section>`;
 }
 
@@ -771,9 +795,6 @@ function spellListDirectoryHref(listKind: string, listId: string): string {
 }
 
 function spellListDisplayKind(listKind: string, listId: string): string {
-  if (listId === "spell-list.alchemist" || listId === "spell-list.investigator") {
-    return "formulae";
-  }
   if (listKind !== "bloodline") return listKind;
   return listId.startsWith("spell-list.bloodrager-")
     ? "bloodrager_bloodline"

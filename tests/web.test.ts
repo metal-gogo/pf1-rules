@@ -1115,6 +1115,20 @@ describe("local rules browser", () => {
     expect(html.match(/data-embedded-spell="spell.crime-wave"/g)).toHaveLength(1);
   });
 
+  it("renders Reincarnate's incarnation tables and supplemental headings", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.reincarnate`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+
+    expect(response.status).toBe(200);
+    expect(description.match(/class="data-table rich-text-table"/g)).toHaveLength(3);
+    expect(description).toContain("<h3>Reincarnation on Golarion</h3>");
+    expect(description).toContain("<h3>Core Incarnations</h3>");
+    expect(description).toContain("<h3>Other Incarnations</h3>");
+    expect(description).toContain('<th scope="row">01</th><td>');
+    expect(description).not.toContain("d%IncarnationStrDex");
+  });
+
   it.each([
     ["cure-moderate-wounds-mass", "/spells/spell.cure-light-wounds-mass"],
     ["cure-serious-wounds-mass", "/spells/spell.cure-light-wounds-mass"],
@@ -1379,6 +1393,64 @@ describe("local rules browser", () => {
     expect(descriptions[0]!.match(/href="\/spells\/spell.discharge"/g)).toHaveLength(3);
     expect(descriptions[1]!).not.toContain('href="/spells/spell.resistance"');
     for (const description of descriptions.slice(2)) {
+      expect(description).not.toContain('>touch</a>');
+    }
+  });
+
+  it.each([
+    ["dispel-evil", "/entities/rule.touch-attack"],
+    ["dispel-good", "/spells/spell.dispel-evil"],
+    ["dispel-law", "/spells/spell.dispel-evil"],
+    ["dispel-magic-greater", "/spells/spell.dispel-magic"],
+    ["displacement", "/entities/rule.total-concealment"],
+    ["display-aversion", "/spells/spell.minor-image"],
+    ["disrupt-link", "/entities/class-feature.animal-companion"],
+    ["disrupt-silence", "/spells/spell.silence"],
+    ["disrupting-weapon", "/entities/rule.undead"],
+    ["dissolution", "/spells/spell.miracle"],
+    ["distracting-cacophony", "/entities/rule.concentration"],
+    ["distressing-tone", "/entities/rule.critical-hit"],
+    ["divide-mind", "/rules/actions#swift-action"],
+    ["divination", "/spells/spell.augury"],
+    ["divine-arrow", "/entities/rule.lay-on-hands"],
+    ["divine-power", "/entities/rule.speed-weapon"],
+    ["divine-transfer", "/entities/rule.hit-points"],
+    ["divine-vessel", "/rules/descriptors#acid"],
+    ["dominate-animal", "/entities/rule.animal"],
+    ["dominate-monster", "/spells/spell.dominate-person"],
+    ["domination-link", "/spells/spell.detect-thoughts"],
+    ["dousing-rain", "/rules/descriptors#electricity"],
+    ["draconic-ally", "/classes/inquisitor"],
+    ["draconic-malice", "/classes/antipaladin"],
+    ["draconic-suppression", "/rules/saving-throws"],
+  ])("renders twenty-fourth-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it("links only semantic Batch 24 contextual references", async () => {
+    const [silenceResponse, displacementResponse, vesselResponse, linkResponse, dissolutionResponse] =
+      await Promise.all([
+        fetch(`${baseUrl}/spells/spell.disrupt-silence`),
+        fetch(`${baseUrl}/spells/spell.displacement`),
+        fetch(`${baseUrl}/spells/spell.divine-vessel`),
+        fetch(`${baseUrl}/spells/spell.disrupt-link`),
+        fetch(`${baseUrl}/spells/spell.dissolution`),
+      ]);
+    const descriptions = await Promise.all(
+      [silenceResponse, displacementResponse, vesselResponse, linkResponse, dissolutionResponse]
+        .map(async (response) => (await response.text()).match(
+          /<section><h2>Description<\/h2>(.*?)<\/section>/s,
+        )?.[1] ?? ""),
+    );
+    expect(descriptions[0]!.match(/href="\/spells\/spell.silence"/g)).toHaveLength(1);
+    expect(descriptions[1]!.match(/href="\/entities\/rule.total-concealment"/g)).toHaveLength(2);
+    expect(descriptions[2]!.match(/href="\/rules\/descriptors#cold"/g)).toHaveLength(3);
+    expect(descriptions[2]!.match(/href="\/entities\/rule.good"/g)).toHaveLength(3);
+    for (const description of descriptions.slice(3)) {
       expect(description).not.toContain('>touch</a>');
     }
   });

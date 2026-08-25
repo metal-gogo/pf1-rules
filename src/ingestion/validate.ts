@@ -12,6 +12,7 @@ import { projectRoot } from "../config.js";
 import type { ValidatedJson } from "../domain/json.js";
 import {
   comparableRichText,
+  richTextBlockInlines,
   richTextLeafText,
   type RichTextDocument,
 } from "../domain/rich-text.js";
@@ -255,11 +256,7 @@ function verifyRichText(record: ValidatedJson, recordPath: string): void {
       relationship,
     ]),
   );
-  const inlineContent = document.content.flatMap((block) =>
-    block.node_type === "paragraph"
-      ? block.content
-      : block.content.flatMap((item) => item.content)
-  );
+  const inlineContent = document.content.flatMap(richTextBlockInlines);
   for (const node of inlineContent) {
     if (node.node_type !== "entity_link") continue;
     const relationship = relationships.get(node.relationship_id);

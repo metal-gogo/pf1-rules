@@ -8,7 +8,9 @@ import type { ValidatedJson } from "../domain/json.js";
 import {
   comparableRichText,
   linkRichTextDocument,
+  mapRichTextBlockInlines,
   parseRichTextHtml,
+  richTextBlockInlines,
   richTextLeafText,
   type RichTextDocument,
   type RichTextInlineNode,
@@ -126,6 +128,15 @@ const discoveryTorchContextualTargets = new Set([
   "illumination.bright-light",
 ]);
 
+const displacementContextualTargets = new Set([
+  "rule.concealment",
+  "rule.total-concealment",
+]);
+
+const divinePowerRejectedTargets = new Set(["rule.speed"]);
+
+const divineVesselRejectedTargets = new Set(["rule.resist"]);
+
 const canonicalTargets = new Map<string, {
   id: string;
   name: string;
@@ -156,6 +167,9 @@ const canonicalTargets = new Map<string, {
   ["rule.magic-auras", { id: "spell.magic-aura", name: "Magic Aura", type: "spell", relationshipType: "references" }],
   ["rule.bards", { id: "class.bard", name: "Bard", type: "class" }],
   ["rule.wizards", { id: "class.wizard", name: "Wizard", type: "class" }],
+  ["rule.antipaladin", { id: "class.antipaladin", name: "Antipaladin", type: "class" }],
+  ["rule.inquisitors", { id: "class.inquisitor", name: "Inquisitor", type: "class" }],
+  ["rule.warpriests", { id: "class.warpriest", name: "Warpriest", type: "class" }],
   ["rule.caltrops", { id: "item.caltrops", name: "Caltrops", type: "item" }],
   ["rule.greatsword", { id: "item.greatsword", name: "Greatsword", type: "item" }],
   ["rule.quarterstaff", { id: "item.quarterstaff", name: "Quarterstaff", type: "item" }],
@@ -1383,6 +1397,65 @@ const reviewedDescriptionReferences = new Map<string, ReviewedDescriptionReferen
     { targetType: "rule", targetId: "rule.attack-rolls", targetName: "Attack rolls", anchorText: "attacks" },
     { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "Saving throws" },
   ]],
+  ["spell.dispel-evil", [
+    { targetType: "rule", targetId: "rule.touch-attack", targetName: "Touch attack", anchorText: "melee touch attack" },
+  ]],
+  ["spell.dispel-good", [
+    { targetType: "rule", targetId: "rule.good", targetName: "Good", anchorText: "good" },
+    { targetType: "rule", targetId: "rule.evil", targetName: "Evil", anchorText: "evil" },
+  ]],
+  ["spell.dispel-law", [
+    { targetType: "rule", targetId: "rule.lawful", targetName: "Lawful", anchorText: "lawful" },
+    { targetType: "rule", targetId: "rule.evil", targetName: "Evil", anchorText: "evil" },
+  ]],
+  ["spell.displacement", [
+    { targetType: "rule", targetId: "rule.total-concealment", targetName: "Total concealment", anchorText: "total concealment" },
+  ]],
+  ["spell.disrupting-weapon", [
+    { targetType: "rule", targetId: "rule.undead", targetName: "Undead", anchorText: "undead" },
+  ]],
+  ["spell.distressing-tone", [
+    { targetType: "rule", targetId: "rule.critical-hit", targetName: "Critical hits", anchorText: "critical hits" },
+  ]],
+  ["spell.divide-mind", [
+    { targetType: "rule", targetId: "rule.concentration", targetName: "Concentration", anchorText: "concentrating" },
+  ]],
+  ["spell.divine-arrow", [
+    { targetType: "rule", targetId: "rule.lay-on-hands", targetName: "Lay on hands", anchorText: "lay on hands" },
+  ]],
+  ["spell.divine-power", [
+    { targetType: "rule", targetId: "rule.speed-weapon", targetName: "Speed weapon special ability", anchorText: "speed" },
+  ]],
+  ["spell.divine-vessel", [
+    { targetType: "rule", targetId: "rule.spell-resistance", targetName: "Spell resistance", anchorText: "SR" },
+    { targetType: "rule", targetId: "rule.damage-reduction", targetName: "Damage reduction", anchorText: "DR" },
+    { targetType: "rule", targetId: "rule.damage-reduction", targetName: "Damage reduction", anchorText: "damage resistance" },
+    { targetType: "rule", targetId: "rule.attack-rolls", targetName: "Attack rolls", anchorText: "attacks" },
+    { targetType: "descriptor", targetId: "descriptor.acid", targetName: "Acid", anchorText: "acid" },
+    { targetType: "descriptor", targetId: "descriptor.cold", targetName: "Cold", anchorText: "cold" },
+    { targetType: "descriptor", targetId: "descriptor.electricity", targetName: "Electricity", anchorText: "electricity" },
+    { targetType: "descriptor", targetId: "descriptor.fire", targetName: "Fire", anchorText: "fire" },
+    { targetType: "descriptor", targetId: "descriptor.sonic", targetName: "Sonic", anchorText: "sonic" },
+    { targetType: "rule", targetId: "rule.poison", targetName: "Poison", anchorText: "poison" },
+    { targetType: "rule", targetId: "rule.chaotic", targetName: "Chaotic", anchorText: "chaotic" },
+    { targetType: "rule", targetId: "rule.good", targetName: "Good", anchorText: "good" },
+    { targetType: "rule", targetId: "rule.evil", targetName: "Evil", anchorText: "evil" },
+  ]],
+  ["spell.dousing-rain", [
+    { targetType: "descriptor", targetId: "descriptor.fire", targetName: "Fire", anchorText: "fires" },
+    { targetType: "descriptor", targetId: "descriptor.electricity", targetName: "Electricity", anchorText: "electricity" },
+  ]],
+  ["spell.draconic-ally", [
+    { targetType: "deity", targetId: "deity.apsu", targetName: "Apsu", anchorText: "Apsu" },
+    { targetType: "deity", targetId: "deity.dahak", targetName: "Dahak", anchorText: "Dahak" },
+  ]],
+  ["spell.draconic-malice", [
+    { targetType: "class", targetId: "class.antipaladin", targetName: "Antipaladin", anchorText: "antipaladin" },
+    { targetType: "class_feature", targetId: "class-feature.aura-of-cowardice", targetName: "Aura of cowardice", anchorText: "aura of cowardice" },
+  ]],
+  ["spell.draconic-suppression", [
+    { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saving throws" },
+  ]],
 ]);
 
 
@@ -1473,12 +1546,9 @@ function linkContext(
       return replacement;
     });
 
-  document.content = document.content.map((block) => block.node_type === "paragraph"
-    ? { ...block, content: replace(block.content) }
-    : {
-        ...block,
-        content: block.content.map((item) => ({ ...item, content: replace(item.content) })),
-      });
+  document.content = document.content.map((block) =>
+    mapRichTextBlockInlines(block, replace)
+  );
   if (contextMatches !== 1) {
     throw new Error(`Expected one rich-text context match for ${JSON.stringify(context)}, found ${contextMatches}`);
   }
@@ -1503,14 +1573,55 @@ function keepFirstRelationshipLink(
         ...(node.marks ? { marks: node.marks } : {}),
       };
     });
-  document.content = document.content.map((block) => block.node_type === "paragraph"
-    ? { ...block, content: replace(block.content) }
-    : {
-        ...block,
-        content: block.content.map((item) => ({ ...item, content: replace(item.content) })),
-      });
+  document.content = document.content.map((block) =>
+    mapRichTextBlockInlines(block, replace)
+  );
   if (matches < 1) {
     throw new Error(`Expected at least one rich-text link for ${relationshipId}`);
+  }
+}
+
+
+function keepRelationshipLinkOccurrences(
+  document: RichTextDocument,
+  relationshipId: string,
+  keptOccurrences: readonly number[],
+  expectedMatches: number,
+): void {
+  const kept = new Set(keptOccurrences);
+  let occurrence = 0;
+  const replace = (content: RichTextInlineNode[]): RichTextInlineNode[] =>
+    content.map((node) => {
+      if (node.node_type !== "entity_link" || node.relationship_id !== relationshipId) {
+        return node;
+      }
+      occurrence += 1;
+      if (kept.has(occurrence)) return node;
+      return {
+        node_type: "text",
+        value: node.value,
+        ...(node.marks ? { marks: node.marks } : {}),
+      };
+    });
+  document.content = document.content.map((block) => {
+    if (block.node_type === "paragraph") {
+      return { ...block, content: replace(block.content) };
+    }
+    if (block.node_type === "unordered_list") {
+      return {
+        ...block,
+        content: block.content.map((item) => ({
+          ...item,
+          content: replace(item.content),
+        })),
+      };
+    }
+    return block;
+  });
+  if (occurrence !== expectedMatches) {
+    throw new Error(
+      `Expected ${expectedMatches} rich-text links for ${relationshipId}, found ${occurrence}`,
+    );
   }
 }
 
@@ -1533,12 +1644,9 @@ function removeRelationshipLinkValues(
           }
         : node
     );
-  document.content = document.content.map((block) => block.node_type === "paragraph"
-    ? { ...block, content: replace(block.content) }
-    : {
-        ...block,
-        content: block.content.map((item) => ({ ...item, content: replace(item.content) })),
-      });
+  document.content = document.content.map((block) =>
+    mapRichTextBlockInlines(block, replace)
+  );
 }
 
 
@@ -1549,11 +1657,8 @@ function keepFirstAndLastRelationshipLinks(
   const count = (content: RichTextInlineNode[]): number => content.filter((node) =>
     node.node_type === "entity_link" && node.relationship_id === relationshipId
   ).length;
-  const matches = document.content.reduce((total, block) => total + (
-    block.node_type === "paragraph"
-      ? count(block.content)
-      : block.content.reduce((subtotal, item) => subtotal + count(item.content), 0)
-  ), 0);
+  const matches = document.content.reduce((total, block) =>
+    total + count(richTextBlockInlines(block)), 0);
   if (matches < 2) {
     throw new Error(`Expected at least two rich-text links for ${relationshipId}, found ${matches}`);
   }
@@ -1571,12 +1676,9 @@ function keepFirstAndLastRelationshipLinks(
         ...(node.marks ? { marks: node.marks } : {}),
       };
     });
-  document.content = document.content.map((block) => block.node_type === "paragraph"
-    ? { ...block, content: replace(block.content) }
-    : {
-        ...block,
-        content: block.content.map((item) => ({ ...item, content: replace(item.content) })),
-      });
+  document.content = document.content.map((block) =>
+    mapRichTextBlockInlines(block, replace)
+  );
 }
 
 
@@ -1595,12 +1697,9 @@ function distinguishGreaterDarkvisionReferences(document: RichTextDocument): voi
       occurrence += 1;
       return occurrence === 1 ? node : { ...node, relationship_id: ruleRelationshipId };
     });
-  document.content = document.content.map((block) => block.node_type === "paragraph"
-    ? { ...block, content: replace(block.content) }
-    : {
-        ...block,
-        content: block.content.map((item) => ({ ...item, content: replace(item.content) })),
-      });
+  document.content = document.content.map((block) =>
+    mapRichTextBlockInlines(block, replace)
+  );
   if (occurrence !== 2) {
     throw new Error(`Expected two Darkvision references, found ${occurrence}`);
   }
@@ -1632,12 +1731,9 @@ function distinguishDeeperDarknessReferences(document: RichTextDocument): void {
         ...(node.marks ? { marks: node.marks } : {}),
       };
     });
-  document.content = document.content.map((block) => block.node_type === "paragraph"
-    ? { ...block, content: replace(block.content) }
-    : {
-        ...block,
-        content: block.content.map((item) => ({ ...item, content: replace(item.content) })),
-      });
+  document.content = document.content.map((block) =>
+    mapRichTextBlockInlines(block, replace)
+  );
   if (occurrence !== replacements.length) {
     throw new Error(
       `Expected ${replacements.length} Deeper Darkness references, found ${occurrence}`,
@@ -1955,10 +2051,7 @@ function distinguishBalefulShadowPolymorphReferences(
   let ruleLinks = 0;
 
   for (const block of document.content) {
-    const content = block.node_type === "paragraph"
-      ? block.content
-      : block.content.flatMap((item) => item.content);
-    for (const node of content) {
+    for (const node of richTextBlockInlines(block)) {
       if (
         node.node_type !== "entity_link" ||
         node.relationship_id !== spellRelationshipId
@@ -2221,11 +2314,8 @@ function baselineObservationId(canonical: ValidatedJson): string | null {
 
 
 function entityLinkCount(document: RichTextDocument): number {
-  return document.content.reduce((count, block) => count + (
-    block.node_type === "paragraph"
-      ? block.content
-      : block.content.flatMap((item) => item.content)
-  ).filter((node) => node.node_type === "entity_link").length, 0);
+  return document.content.reduce((count, block) => count +
+    richTextBlockInlines(block).filter((node) => node.node_type === "entity_link").length, 0);
 }
 
 
@@ -2432,6 +2522,15 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
       ) && (
         spellId !== "spell.discovery-torch" ||
         !discoveryTorchContextualTargets.has(String(relationship.target.entity_id))
+      ) && (
+        spellId !== "spell.displacement" ||
+        !displacementContextualTargets.has(String(relationship.target.entity_id))
+      ) && (
+        spellId !== "spell.divine-power" ||
+        !divinePowerRejectedTargets.has(String(relationship.target.entity_id))
+      ) && (
+        spellId !== "spell.divine-vessel" ||
+        !divineVesselRejectedTargets.has(String(relationship.target.entity_id))
       )
     );
     if (spellId === "spell.darkness") {
@@ -2527,6 +2626,16 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
         relationshipId: "spell.detect-snares-and-pits:references:spell.snare",
       }]);
     }
+    if (spellId === "spell.displacement") {
+      linkContext(sourceDocument, "50% miss chance as if it had total concealment", [{
+        value: "total concealment",
+        relationshipId: "spell.displacement:uses_definition:rule.total-concealment",
+      }]);
+      linkContext(sourceDocument, "Unlike actual total concealment", [{
+        value: "total concealment",
+        relationshipId: "spell.displacement:uses_definition:rule.total-concealment",
+      }]);
+    }
     const richText = linkRichTextDocument(
       sourceDocument,
       automaticRelationships,
@@ -2595,6 +2704,50 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
     }
     if (spellId === "spell.discharge-greater") {
       distinguishGreaterDischargeReferences(richText.document);
+    }
+    if (spellId === "spell.disrupt-link") {
+      removeRelationshipLinkValues(
+        richText.document,
+        "spell.disrupt-link:uses_definition:rule.touch-attack",
+        ["touch"],
+      );
+    }
+    if (spellId === "spell.disrupt-silence") {
+      keepRelationshipLinkOccurrences(
+        richText.document,
+        "spell.disrupt-silence:references:spell.silence",
+        [5],
+        7,
+      );
+    }
+    if (spellId === "spell.dissolution") {
+      removeRelationshipLinkValues(
+        richText.document,
+        "spell.dissolution:uses_definition:rule.touch-attack",
+        ["touch"],
+      );
+    }
+    if (spellId === "spell.dominate-animal") {
+      keepRelationshipLinkOccurrences(
+        richText.document,
+        "spell.dominate-animal:uses_definition:rule.animal",
+        [1, 2, 4, 5],
+        5,
+      );
+    }
+    if (spellId === "spell.divine-vessel") {
+      keepRelationshipLinkOccurrences(
+        richText.document,
+        "spell.divine-vessel:uses_definition:descriptor.cold",
+        [2, 3, 4],
+        4,
+      );
+      keepRelationshipLinkOccurrences(
+        richText.document,
+        "spell.divine-vessel:uses_definition:rule.good",
+        [4, 5, 7],
+        7,
+      );
     }
     if (spellId === "spell.determine-depth") {
       removeRelationshipLinkValues(

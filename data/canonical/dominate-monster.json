@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.dominate-monster",
   "ruleset": "Pathfinder First Edition",
   "name": "Dominate Monster",
@@ -266,7 +266,33 @@
   "description": {
     "raw": "This spell functions like dominate person, except that the spell is not restricted by creature type.",
     "search_text": "\"this spell functions like dominate person, except that the spell is not restricted by creature type.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dominate person",
+              "relationship_id": "spell.dominate-monster:functions_like:spell.dominate-person",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that the spell is not restricted by creature type."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -520,6 +546,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like dominate person, except that the spell is not restricted by creature type.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.dominate-monster:9816ebe025f4a8fe",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dominate person",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/dominatePerson.html#dominate-person"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.dominate-monster:5a220b4cc223cddf",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dominate person",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/dominate-person"
         }
       ],
       "note": null
@@ -635,53 +675,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "PRPG Core Rulebook pg. 274",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.dominate-monster:references:spell.dominate-person",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.dominate-person",
-        "name": "dominate person"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.dominate-monster:9816ebe025f4a8fe",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "dominate person",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/dominatePerson.html#dominate-person"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.dominate-monster:5a220b4cc223cddf",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "dominate person",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/dominate-person"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.dominate-monster:uses_definition:rule.charm",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.charm",
-        "name": "charm"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.dominate-monster:5a220b4cc223cddf",
-          "source_field": "spell_raw.links_raw[5]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "charm",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/charm-domain"
         }
       ],
       "note": null
@@ -865,6 +858,26 @@
         }
       ],
       "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.dominate-monster:uses_definition:subschool.charm",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "subschool",
+        "entity_id": "subschool.charm",
+        "name": "Charm"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.dominate-monster:5a220b4cc223cddf",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "charm",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/charm-domain"
+        }
+      ],
+      "note": null
     }
   ],
   "provenance": [
@@ -979,11 +992,19 @@
       "raw_value_sha256": "4868ec5fae81728310ad658f58d2e0b7a79ed4467761843fc4cf160c8cb143bd",
       "decision": "normalized",
       "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.dominate-monster:58cecb7f65e2287c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "38118b868f479833128f2b31c5f5e21c3c4fd116de72b393817f831a78f59e95",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

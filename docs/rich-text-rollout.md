@@ -12,8 +12,8 @@ Audit date: 2026-08-23.
 | Category | Spells | Meaning |
 | --- | ---: | --- |
 | Total canonical spells | 3,030 | Complete corpus |
-| Rich text stored | 587 | 11-spell pilot, twenty-three reviewed 25-spell rollout batches, and one reviewed warning record |
-| Safe candidates with links | 1,678 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
+| Rich text stored | 612 | 11-spell pilot, twenty-four reviewed 25-spell rollout batches, and one reviewed warning record |
+| Safe candidates with links | 1,653 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
 | Safe structure-only candidates | 302 | Source text matches, but no known relationship currently produces an inline link |
 | Source mismatch | 291 | Current canonical text and the newly bounded AoN description differ |
 | Link warnings | 172 | At least one accepted relationship is ambiguous or unmatched |
@@ -340,12 +340,9 @@ Review of this batch established these normalization rules:
   condition. Call Construct's ordinary `summon` verb does not link to the
   monster Summon ability.
 
-Calculated Luck and Call Spirit expose a contract gap: their source
-descriptions contain real data tables. The `0.2.0` AST preserves their leaf
-text and Calculated Luck's preceding list, but it flattens table cells because
-the minimal schema has no table nodes. This needs a schema, parser, renderer,
-and accessibility decision before those tables can receive reliable cell-level
-links.
+Calculated Luck and Call Spirit were converted before table nodes existed, so
+their leaf text is preserved but their cells remain flattened. Re-enrich these
+records before adding cell-level links.
 
 ### Batch 13
 
@@ -525,9 +522,10 @@ targets, Creeping Ice's ordinary adjective `slow` as the Slow spell, Cruel
 Jaunt's own teleportation effect as the Teleport spell, and Crushing Despair's
 unrelated third-party modified-spell link.
 
-Create Greater Undead and Crime Wave contain source tables. Their text remains
-lossless, but row and cell semantics are flattened under the current `0.2.0`
-AST. Links were not added across concatenated cell boundaries.
+Create Greater Undead and Crime Wave were converted before table nodes existed.
+Their text remains lossless, but their row and cell semantics stay flattened
+until they are re-enriched. Links were not added across concatenated cell
+boundaries.
 
 ### Batch 19
 
@@ -678,9 +676,8 @@ Review of this batch established these normalization rules:
   standard actions; saving throws and Androids; hit points and ability scores;
   Hit Dice; Asmodeus; Clerics and creature types; Silver; Poison; and traps.
 
-Detect Evil's source tables remain lossless text but do not retain row and cell
-semantics under the current minimal AST. This is the same known table-boundary
-issue recorded below and does not alter the visible rules wording.
+Detect Evil was converted before table nodes existed. Its source tables remain
+lossless text but need re-enrichment to recover row and cell semantics.
 
 ### Batch 23
 
@@ -722,6 +719,43 @@ source description contains a table, so converting it while table-AST work was
 changing concurrently would couple this rollout to unreviewed structural
 changes. Re-run it after that work is committed and verify its row and cell
 semantics before accepting inline links.
+
+### Batch 24
+
+The twenty-fourth rollout batch contains:
+
+- Dispel Evil; Dispel Good; Dispel Law; Greater Dispel Magic; Displacement;
+  Display Aversion; Disrupt Link; Disrupt Silence; Disrupting Weapon.
+- Dissolution; Distracting Cacophony; Distressing Tone; Divide Mind; Divination;
+  Divine Arrow; Divine Power; Divine Transfer; Divine Vessel.
+- Dominate Animal; Dominate Monster; Domination Link; Dousing Rain; Draconic
+  Ally; Draconic Malice; Draconic Suppression.
+
+Review of this batch established these normalization rules:
+
+- Dispel Good and Dispel Law link and expand Dispel Evil once. Greater Dispel
+  Magic retains its explicit Dispel Magic references. Disrupt Silence links
+  only the example Silence spell; occurrences inside its own name and generic
+  magical-silence wording remain plain.
+- A bare `touch` does not imply a touch attack. Disrupt Link's “deliver touch
+  spells” familiar ability and Dissolution's ordinary contact wording remain
+  plain, while Dispel Evil's explicit melee touch attack links to the rule.
+- Displacement links both occurrences of total concealment to that specific
+  rule rather than linking the `concealment` substring. Divine Power's italic
+  `speed` names the weapon special ability, not movement speed.
+- Divine Vessel distinguishes energy descriptors from ordinary adjectives and
+  alignment terms from “good maneuverability.” Its SR, DR, energy types,
+  poison, attacks, and alignment effects link without treating the introductory
+  “cold and alien” description as Cold energy.
+- Draconic Ally normalizes Inquisitor and Warpriest references to class pages
+  and links Apsu and Dahak. Draconic Malice links Antipaladin and Aura of
+  Cowardice. These newly referenced entities remain documented stubs until
+  dedicated source captures are available.
+
+Both selected first-party and secondary-source artifacts for Dissolution say
+`1d0 points of damage`. The canonical wording remains unchanged because the
+rich-text rollout does not silently correct source text. Confirm the intended
+die from the printed source before making a separate erratum decision.
 
 ## Open questions and issues
 
@@ -770,12 +804,11 @@ the intended target.
 
 ### Source tables
 
-The current AST supports paragraphs and unordered lists, not tables. Calculated
-Luck, Call Spirit, Contact Other Plane, Create Greater Undead, and Crime Wave
-demonstrate that flattening cells preserves words but not their relationships.
-Decide whether `0.3.0` should add semantic table nodes or whether the canonical
-normalizer should convert source tables to another accessible structure. Do not
-add phrase links across concatenated cells.
+The `0.2.0` AST now supports semantic heading, table, row, and cell nodes.
+Reincarnate is the first reviewed conversion using them. Calculated Luck, Call
+Spirit, Contact Other Plane, Create Greater Undead, Crime Wave, and Detect Evil
+were converted earlier and remain migration candidates; re-enrich them before
+adding phrase links that depend on cell boundaries.
 
 ## Batch workflow
 
