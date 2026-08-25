@@ -157,6 +157,10 @@ const canonicalTargets = new Map<string, {
   ["rule.electricity", { id: "descriptor.electricity", name: "Electricity", type: "descriptor" }],
   ["rule.fire", { id: "descriptor.fire", name: "Fire", type: "descriptor" }],
   ["rule.sonic", { id: "descriptor.sonic", name: "Sonic", type: "descriptor" }],
+  ["rule.air-descriptor", { id: "descriptor.air", name: "Air", type: "descriptor" }],
+  ["rule.earth-descriptor", { id: "descriptor.earth", name: "Earth", type: "descriptor" }],
+  ["rule.fire-descriptor", { id: "descriptor.fire", name: "Fire", type: "descriptor" }],
+  ["rule.light-descriptor", { id: "descriptor.light", name: "Light", type: "descriptor" }],
   ["rule.enchantment", { id: "magic-school.enchantment", name: "Enchantment", type: "magic_school" }],
   ["rule.illusion", { id: "magic-school.illusion", name: "Illusion", type: "magic_school" }],
   ["rule.charm", { id: "subschool.charm", name: "Charm", type: "subschool" }],
@@ -179,6 +183,7 @@ const canonicalTargets = new Map<string, {
   ["rule.skeletons", { id: "rule.skeleton", name: "Skeleton" }],
   ["rule.zombies", { id: "rule.zombie", name: "Zombie" }],
   ["rule.natural-attack", { id: "rule.natural-attacks", name: "Natural attacks" }],
+  ["rule.improved-natural-attack", { id: "feat.improved-natural-attack", name: "Improved Natural Attack", type: "feat" }],
   ["rule.spell-like-ability", { id: "rule.spell-like-abilities", name: "Spell-like abilities" }],
   ["rule.summoners", { id: "class.summoner", name: "Summoner", type: "class" }],
   ["rule.summoning", { id: "subschool.summoning", name: "Summoning", type: "subschool" }],
@@ -273,6 +278,9 @@ const canonicalTargets = new Map<string, {
   ["rule.temporary-hit-point", { id: "rule.temporary-hit-points", name: "Temporary hit points" }],
   ["rule.haunts", { id: "rule.haunt", name: "Haunt" }],
   ["rule.ghost", { id: "monster.ghost", name: "Ghost", type: "monster" }],
+  ["rule.iron-golems", { id: "monster.iron-golem", name: "Iron golem", type: "monster" }],
+  ["rule.profane", { id: "rule.profane-bonus", name: "Profane bonus" }],
+  ["rule.swarms", { id: "rule.swarm", name: "Swarm" }],
   ["rule.compulsion", { id: "subschool.compulsion", name: "Compulsion", type: "subschool" }],
   ["condition.blind", { id: "condition.blinded", name: "Blinded", type: "condition" }],
   ["condition.entangle", { id: "condition.entangled", name: "Entangled", type: "condition" }],
@@ -855,6 +863,14 @@ const rejectedDescriptionRelationships = new Map([
   [
     "spell.detect-snares-and-pits:references:spell.detect-magic",
     "The description uses “does not detect magic traps” as a verb phrase; it does not reference the Detect Magic spell.",
+  ],
+  [
+    "spell.drain-poison:uses_definition:rule.touch-attack",
+    "The description uses “touch” for handling the poisoned weapon, not for a touch attack.",
+  ],
+  [
+    "spell.dream-voyage:uses_definition:rule.touch-attack",
+    "The description uses “touch” to select the spell's companions, not for a touch attack.",
   ],
 ]);
 
@@ -1456,6 +1472,46 @@ const reviewedDescriptionReferences = new Map<string, ReviewedDescriptionReferen
   ["spell.draconic-suppression", [
     { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saving throws" },
   ]],
+  ["spell.ceremony", [
+    { targetType: "descriptor", targetId: "descriptor.water", targetName: "Water", anchorText: "water descriptor" },
+  ]],
+  ["spell.curse-terrain-lesser", [
+    { type: "references", targetType: "spell", targetId: "spell.curse-terrain", targetName: "Curse Terrain", anchorText: "Curse Terrain" },
+    { type: "references", targetType: "spell", targetId: "spell.curse-terrain-greater", targetName: "Curse Terrain, Greater", anchorText: "Greater Curse Terrain" },
+    { type: "references", targetType: "spell", targetId: "spell.curse-terrain-supreme", targetName: "Curse Terrain, Supreme", anchorText: "Supreme Curse Terrain" },
+  ]],
+  ["spell.detect-undead", [
+    { targetType: "rule", targetId: "rule.undead", targetName: "Undead", anchorText: "undead" },
+  ]],
+  ["spell.drain-poison", [
+    { targetType: "rule", targetId: "rule.poison", targetName: "Poison", anchorText: "poison" },
+  ]],
+  ["spell.dread-bolt", [
+    { targetType: "rule", targetId: "rule.good", targetName: "Good", anchorText: "good" },
+    { targetType: "rule", targetId: "rule.evil", targetName: "Evil", anchorText: "evil" },
+  ]],
+  ["spell.dreadscape", [
+    { targetType: "rule", targetId: "rule.attitude", targetName: "Attitude", anchorText: "hostile attitude" },
+    { targetType: "rule", targetId: "rule.the-sanity-rules", targetName: "Sanity rules", anchorText: "sanity system" },
+  ]],
+  ["spell.dream-shield", [
+    { targetType: "magic_school", targetId: "magic-school.divination", targetName: "Divination", anchorText: "divinations" },
+    { targetType: "rule", targetId: "rule.possession", targetName: "Possession", anchorText: "possession" },
+  ]],
+  ["spell.dream-travel", [
+    { targetType: "descriptor", targetId: "descriptor.emotion", targetName: "Emotion", anchorText: "emotion effects" },
+  ]],
+  ["spell.dream-voyage", [
+    { targetType: "descriptor", targetId: "descriptor.emotion", targetName: "Emotion", anchorText: "emotion" },
+    { targetType: "rule", targetId: "rule.fear", targetName: "Fear", anchorText: "fear effects" },
+  ]],
+  ["spell.drunkards-breath", [
+    { targetType: "descriptor", targetId: "descriptor.poison", targetName: "Poison", anchorText: "poison effect" },
+    { targetType: "deity", targetId: "deity.cayden-cailean", targetName: "Cayden Cailean", anchorText: "Cayden Cailean" },
+  ]],
+  ["spell.dwarven-veil", [
+    { targetType: "rule", targetId: "rule.dwarf", targetName: "Dwarf", anchorText: "dwarves" },
+  ]],
 ]);
 
 
@@ -1603,21 +1659,9 @@ function keepRelationshipLinkOccurrences(
         ...(node.marks ? { marks: node.marks } : {}),
       };
     });
-  document.content = document.content.map((block) => {
-    if (block.node_type === "paragraph") {
-      return { ...block, content: replace(block.content) };
-    }
-    if (block.node_type === "unordered_list") {
-      return {
-        ...block,
-        content: block.content.map((item) => ({
-          ...item,
-          content: replace(item.content),
-        })),
-      };
-    }
-    return block;
-  });
+  document.content = document.content.map((block) =>
+    mapRichTextBlockInlines(block, replace)
+  );
   if (occurrence !== expectedMatches) {
     throw new Error(
       `Expected ${expectedMatches} rich-text links for ${relationshipId}, found ${occurrence}`,
@@ -2659,6 +2703,35 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
         "spell.command-greater:functions_like:spell.command",
       );
     }
+    if (spellId === "spell.ceremony") {
+      keepRelationshipLinkOccurrences(
+        richText.document,
+        "spell.ceremony:uses_definition:rule.touch-attack",
+        [2, 4, 5],
+        5,
+      );
+      for (const [descriptor, keptOccurrence, expectedMatches] of [
+        ["air", 2, 2],
+        ["earth", 2, 2],
+        ["fire", 3, 3],
+        ["water", 3, 3],
+      ] as const) {
+        keepRelationshipLinkOccurrences(
+          richText.document,
+          `spell.ceremony:uses_definition:descriptor.${descriptor}`,
+          [keptOccurrence],
+          expectedMatches,
+        );
+      }
+    }
+    if (spellId === "spell.curse-terrain-lesser") {
+      keepRelationshipLinkOccurrences(
+        richText.document,
+        "spell.curse-terrain-lesser:references:spell.curse-terrain",
+        [3],
+        3,
+      );
+    }
     if (spellId === "spell.contact-high") {
       removeRelationshipLinkValues(
         richText.document,
@@ -2686,6 +2759,38 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
     }
     if (spellId === "spell.darkvision-greater") {
       distinguishGreaterDarkvisionReferences(richText.document);
+    }
+    if (spellId === "spell.detect-undead") {
+      keepRelationshipLinkOccurrences(
+        richText.document,
+        "spell.detect-undead:uses_definition:rule.undead",
+        [1, 2, 3, 4, 5, 6, 7, 8, 9],
+        11,
+      );
+    }
+    if (spellId === "spell.dream-council") {
+      keepRelationshipLinkOccurrences(
+        richText.document,
+        "spell.dream-council:functions_like:spell.dream",
+        [1, 2, 6],
+        7,
+      );
+    }
+    if (spellId === "spell.dream-scan") {
+      keepRelationshipLinkOccurrences(
+        richText.document,
+        "spell.dream-scan:functions_like:spell.dream",
+        [1, 4],
+        4,
+      );
+    }
+    if (spellId === "spell.dream-travel") {
+      keepRelationshipLinkOccurrences(
+        richText.document,
+        "spell.dream-travel:references:spell.dream",
+        [2],
+        16,
+      );
     }
     if (spellId === "spell.deeper-darkness") {
       distinguishDeeperDarknessReferences(richText.document);

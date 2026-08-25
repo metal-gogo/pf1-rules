@@ -275,7 +275,7 @@ function phraseKey(value: string): string {
 
 
 function naturalSpellName(value: string): string {
-  const match = /^(.*?),\s*(greater|lesser|mass)$/i.exec(value.trim());
+  const match = /^(.*?),\s*(greater|lesser|mass|supreme)$/i.exec(value.trim());
   return match?.[1] && match[2] ? `${match[2]} ${match[1]}` : value;
 }
 

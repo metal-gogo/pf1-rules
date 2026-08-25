@@ -1455,6 +1455,34 @@ describe("local rules browser", () => {
     }
   });
 
+  it("renders Batch 25 tables and only reviewed contextual references", async () => {
+    const [ceremonyResponse, terrainResponse, undeadResponse, travelResponse] =
+      await Promise.all([
+        fetch(`${baseUrl}/spells/spell.ceremony`),
+        fetch(`${baseUrl}/spells/spell.curse-terrain-lesser`),
+        fetch(`${baseUrl}/spells/spell.detect-undead`),
+        fetch(`${baseUrl}/spells/spell.dream-travel`),
+      ]);
+    const descriptions = await Promise.all(
+      [ceremonyResponse, terrainResponse, undeadResponse, travelResponse]
+        .map(async (response) => (await response.text()).match(
+          /<section><h2>Description<\/h2>(.*?)<\/section>/s,
+        )?.[1] ?? ""),
+    );
+
+    expect(descriptions[0]!.match(/href="\/entities\/rule.touch-attack"/g))
+      .toHaveLength(3);
+    expect(descriptions[0]).toContain('href="/rules/descriptors#air"');
+    expect(descriptions[1]).toContain('<table class="data-table rich-text-table">');
+    expect(descriptions[1]).toContain('href="/spells/spell.curse-terrain-supreme"');
+    expect(descriptions[1]).not.toContain('href="/spells/spell.curse-terrain-lesser"');
+    expect(descriptions[2]).toContain('<table class="data-table rich-text-table">');
+    expect(descriptions[2]).toContain('href="/entities/rule.undead"');
+    expect(descriptions[3]!.match(/href="\/spells\/spell.dream"/g)).toHaveLength(1);
+    expect(descriptions[3]).toContain('aria-label="Spell description table 1 of 2"');
+    expect(descriptions[3]).toContain('aria-label="Spell description table 2 of 2"');
+  });
+
   it("links Curse of Unexpected Death's touch attacks but not its ordinary touch verbs", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.curse-of-unexpected-death`);
     const html = await response.text();

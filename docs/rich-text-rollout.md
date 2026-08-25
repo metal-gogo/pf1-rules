@@ -7,16 +7,16 @@ validation rules in [Rich-text spell descriptions](rich-text.md).
 
 ## Current status
 
-Audit date: 2026-08-23.
+Audit date: 2026-08-25.
 
 | Category | Spells | Meaning |
 | --- | ---: | --- |
 | Total canonical spells | 3,030 | Complete corpus |
-| Rich text stored | 612 | 11-spell pilot, twenty-four reviewed 25-spell rollout batches, and one reviewed warning record |
-| Safe candidates with links | 1,653 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
-| Safe structure-only candidates | 302 | Source text matches, but no known relationship currently produces an inline link |
-| Source mismatch | 291 | Current canonical text and the newly bounded AoN description differ |
-| Link warnings | 172 | At least one accepted relationship is ambiguous or unmatched |
+| Rich text stored | 638 | 11-spell pilot, twenty-five reviewed 25-spell rollout batches, Reincarnate, and one reviewed warning record |
+| Safe candidates with links | 1,632 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
+| Safe structure-only candidates | 306 | Source text matches, but no known relationship currently produces an inline link |
+| Source mismatch | 280 | Current canonical text and the newly bounded AoN description differ |
+| Link warnings | 174 | At least one accepted relationship is ambiguous or unmatched |
 | Missing AoN baseline | 0 | No current blocker |
 | Parser errors | 0 | No current blocker |
 
@@ -757,24 +757,59 @@ Both selected first-party and secondary-source artifacts for Dissolution say
 rich-text rollout does not silently correct source text. Confirm the intended
 die from the printed source before making a separate erratum decision.
 
+### Batch 25
+
+The twenty-fifth rollout batch contains:
+
+- Ceremony; Create Drug; Lesser Curse Terrain; Detect Undead; Dragon Turtle
+  Shell; Dragonvoice; Drain Construct; Drain Poison; Dread Bolt; Dreadscape.
+- Dream Council; Dream Dalliance; Dream Feast; Dream Reality; Dream Scan;
+  Dream Shield; Dream Travel; Dream Voyage; Dress Corpse; Drunkard's Breath.
+- Dungeonsight; Duplicate Familiar; Dust Form; Dust Ward; Dwarven Veil.
+
+Review of this batch established these normalization rules:
+
+- A `dream` match is retained only when the surrounding phrase names the Dream
+  spell. Dream Council, Dream Scan, and Dream Travel leave their own titles,
+  ordinary dreams, and the verb `dream` unlinked. Dream Voyage's four explicit
+  Dream Travel references remain linked and expand the parent once.
+- Ordinary `touch` remains plain. Ceremony links its three explicit touch
+  attacks but not “with a touch” or the Touch of Assuagement heading. Drain
+  Poison's weapon handling and Dream Voyage's target selection reject the
+  secondary source's touch-attack relationships.
+- Air, Earth, Fire, Light, and Water descriptor aliases resolve to the shared
+  descriptor pages. Profane bonus and swarm aliases resolve to their existing
+  definitions. Improved Natural Attack resolves to a feat, and iron golem
+  resolves to a monster rather than duplicate generic-rule stubs.
+- Lesser Curse Terrain and Detect Undead preserve their source tables as table,
+  row, header-cell, and data-cell nodes. The terrain-cost table links the three
+  other named Curse Terrain spells without self-linking the current spell.
+- Reviewed missing links cover Undead; Good and Evil alignment terms; hostile
+  attitude and sanity rules; Divination and possession; Emotion and Fear;
+  Poison; Cayden Cailean; Dwarf; and the Water descriptor.
+
+Detect Undead was deferred from Batch 23 while table support was changing. Its
+row and cell semantics are now reviewed and covered by canonical, web, and
+browser tests.
+
 ## Open questions and issues
 
 ### Source boundaries
 
-The 291 source mismatches require comparison before conversion. Likely causes
+The 280 source mismatches require comparison before conversion. Likely causes
 include mythic text folded into a base description, supplemental headings,
 parser-version differences, and prior manual corrections. Do not overwrite a
 canonical description merely to make it match the current parser.
 
 ### Ambiguous or unmatched relationships
 
-The 172 warning records remain unconverted. Review whether each relationship is
+The 174 warning records remain unconverted. Review whether each relationship is
 description evidence, metadata only, a source-navigation artifact, or a real
 relationship whose phrase needs contextual matching.
 
 ### Missing relationships
 
-The 302 structure-only candidates may be genuinely link-free, but the audit can
+The 306 structure-only candidates may be genuinely link-free, but the audit can
 only evaluate relationships already present in canonical data. Review source
 links and common rules terminology before concluding that a spell needs no
 inline links.

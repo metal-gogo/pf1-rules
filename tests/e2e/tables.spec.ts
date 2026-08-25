@@ -214,6 +214,28 @@ test("Batch 24 folds Dispel variants and links only the explicit Silence spell",
   await expect(page).toHaveURL(/\/spells\/spell\.silence$/);
 });
 
+test("Batch 25 preserves Detect Undead's table and contextual Dream link", async ({ page }) => {
+  await page.goto("/spells/spell.detect-undead");
+
+  const undeadDescription = page.locator(".rich-description").first();
+  await expect(undeadDescription.locator("table")).toHaveCount(1);
+  await expect(undeadDescription.locator("tbody tr")).toHaveCount(4);
+  await expect(undeadDescription.locator('a[href="/entities/rule.undead"]')).toHaveCount(9);
+  await expectNoPageOverflow(page);
+
+  await page.goto("/spells/spell.dream-travel");
+  const dream = page.locator(".rich-description").first()
+    .locator('a[href="/spells/spell.dream"]');
+  await expect(dream).toHaveCount(1);
+  await expect(dream).not.toHaveAttribute("target", "_blank");
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+
+  await dream.click();
+  await expect(page).toHaveURL(/\/spells\/spell\.dream$/);
+});
+
 test("pilot lists remain semantic and accessible on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/spells/spell.bestow-curse-greater");

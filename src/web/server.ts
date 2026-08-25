@@ -608,6 +608,8 @@ function renderRichText(
   const byId = new Map(relationships.map((relationship) => [relationship.id, relationship]));
   const inline = (content: RichTextInlineNode[]) =>
     content.map((node) => richTextInline(node, byId)).join("");
+  const tableCount = document.content.filter((block) => block.node_type === "table").length;
+  let tableIndex = 0;
   return `<div class="rich-description">${document.content.map((block) => {
     if (block.node_type === "paragraph") return `<p>${inline(block.content)}</p>`;
     if (block.node_type === "unordered_list") {
@@ -625,7 +627,11 @@ function renderRichText(
         ? `<th scope="${header ? "col" : "row"}">${inline(cell.content)}</th>`
         : `<td>${inline(cell.content)}</td>`,
     ).join("")}</tr>`;
-    return `<div class="table-scroll" role="region" aria-label="Spell description table" tabindex="0"><table class="data-table rich-text-table">${columnHeaders ? `<thead>${row(columnHeaders.content, true)}</thead>` : ""}<tbody>${rows.map((item) => row(item.content, false)).join("")}</tbody></table></div>`;
+    tableIndex += 1;
+    const tableLabel = tableCount === 1
+      ? "Spell description table"
+      : `Spell description table ${tableIndex} of ${tableCount}`;
+    return `<div class="table-scroll" role="region" aria-label="${tableLabel}" tabindex="0"><table class="data-table rich-text-table">${columnHeaders ? `<thead>${row(columnHeaders.content, true)}</thead>` : ""}<tbody>${rows.map((item) => row(item.content, false)).join("")}</tbody></table></div>`;
   }).join("")}</div>`;
 }
 

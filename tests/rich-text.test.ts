@@ -519,6 +519,61 @@ describe("rich-text schema and source parsing", () => {
       "deity.dahak",
     ]) expect(draconicAlly).toContain(`uses_definition:${target}`);
   });
+
+  it("keeps Batch 25 tables, homonyms, and canonical destinations distinct", () => {
+    const ceremony = JSON.stringify(canonical("ceremony").description.document);
+    expect(ceremony.match(/uses_definition:rule\.touch-attack/g)).toHaveLength(3);
+    for (const target of [
+      "descriptor.air",
+      "descriptor.earth",
+      "descriptor.fire",
+      "descriptor.light",
+      "descriptor.water",
+      "rule.profane-bonus",
+      "rule.swarm",
+    ]) expect(ceremony).toContain(`uses_definition:${target}`);
+    for (const descriptor of ["air", "earth", "fire", "light", "water"]) {
+      expect(ceremony.match(new RegExp(`uses_definition:descriptor\\.${descriptor}`, "g")))
+        .toHaveLength(1);
+    }
+
+    const detectUndead = canonical("detect-undead");
+    expect(detectUndead.description.document.content.filter(
+      (block: Record<string, unknown>) => block.node_type === "table",
+    )).toHaveLength(1);
+    expect(canonical("curse-terrain-lesser").description.document.content.filter(
+      (block: Record<string, unknown>) => block.node_type === "table",
+    )).toHaveLength(1);
+    expect(JSON.stringify(detectUndead.description.document).match(
+      /uses_definition:rule\.undead/g,
+    )).toHaveLength(9);
+
+    for (const slug of ["drain-poison", "dream-voyage"]) {
+      const spell = canonical(slug);
+      expect(spell.relationships).toContainEqual(expect.objectContaining({
+        relationship_id: `spell.${slug}:uses_definition:rule.touch-attack`,
+        status: "rejected",
+      }));
+      expect(JSON.stringify(spell.description.document)).not.toContain(
+        `spell.${slug}:uses_definition:rule.touch-attack`,
+      );
+    }
+
+    expect(JSON.stringify(canonical("dream-council").description.document).match(
+      /functions_like:spell\.dream/g,
+    )).toHaveLength(3);
+    expect(JSON.stringify(canonical("dream-scan").description.document).match(
+      /functions_like:spell\.dream/g,
+    )).toHaveLength(2);
+    expect(JSON.stringify(canonical("dream-travel").description.document).match(
+      /references:spell\.dream"/g,
+    )).toHaveLength(1);
+
+    expect(JSON.stringify(canonical("dragon-turtle-shell").description.document))
+      .toContain("uses_definition:feat.improved-natural-attack");
+    expect(JSON.stringify(canonical("dungeonsight").description.document))
+      .toContain("uses_definition:monster.iron-golem");
+  });
 });
 
 
