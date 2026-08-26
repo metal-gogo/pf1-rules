@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.false-belief",
   "ruleset": "Pathfinder First Edition",
   "name": "False Belief",
@@ -147,7 +147,33 @@
   "description": {
     "raw": "You temporarily alter the target’s memory (similar to modify memory) to eliminate, change, or implant a memory of up to 1 hour in length. When the duration of this expires, the target’s real memory returns, and the false memory fades to little more than a vague outline, like a dream. This false memory seems true to the target, so effects that detect lies or force the target to speak the truth (as the subject understands it) don’t detect the falsehood.",
     "search_text": "\"you temporarily alter the target’s memory (similar to modify memory) to eliminate, change, or implant a memory of up to 1 hour in length. when the duration of this expires, the target’s real memory returns, and the false memory fades to little more than a vague outline, like a dream. this false memory seems true to the target, so effects that detect lies or force the target to speak the truth (as the subject understands it) don’t detect the falsehood.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You temporarily alter the target’s memory (similar to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "modify memory",
+              "relationship_id": "spell.false-belief:functions_like:spell.modify-memory",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ") to eliminate, change, or implant a memory of up to 1 hour in length. When the duration of this expires, the target’s real memory returns, and the false memory fades to little more than a vague outline, like a dream. This false memory seems true to the target, so effects that detect lies or force the target to speak the truth (as the subject understands it) don’t detect the falsehood."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -157,7 +183,164 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.modify-memory",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.false-belief:d2947c8b33b54802",
+        "source_field": "spell_raw.description_raw",
+        "raw": "You temporarily alter the target’s memory (similar to modify memory) to eliminate, change, or implant a memory of up to 1 hour in length. When the duration of this expires, the target’s real memory returns, and the false memory fades to little more than a vague outline, like a dream. This false memory seems true to the target, so effects that detect lies or force the target to speak the truth (as the subject understands it) don’t detect the falsehood."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/time",
+          "value": {
+            "kind": "timed",
+            "amount": 10,
+            "unit": "minute",
+            "raw": "10 minutes, plus length of memory to be altered"
+          },
+          "source_field": "spell_raw.casting_time_raw",
+          "raw": "10 minutes, plus length of memory to be altered",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "material",
+              "details": "lemon juice and a scrap of parchment",
+              "cost_gp": null,
+              "raw": "M (lemon juice and a scrap of parchment)"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (lemon juice and a scrap of parchment)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, M (lemon juice and a scrap of parchment)",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (lemon juice and a scrap of parchment)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/range",
+          "value": {
+            "category": "touch",
+            "formula": null,
+            "raw": "touch"
+          },
+          "source_field": "spell_raw.range_raw",
+          "raw": "touch",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "willing creature touched",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"willing creature touched\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "single",
+            "subject_kind": "willing_creature",
+            "selection": "selected",
+            "count": {
+              "kind": "fixed",
+              "fixed": 1,
+              "formula": null,
+              "raw": "willing creature touched"
+            },
+            "separation": null,
+            "raw": "willing creature touched"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"willing creature touched\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "timed",
+            "formula": "1 hour/level",
+            "dismissible": null,
+            "concentration": null,
+            "raw": "1 hour/level"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "1 hour/level",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/saving_throw",
+          "value": {
+            "types": [
+              "none"
+            ],
+            "outcome": null,
+            "harmless": null,
+            "object": null,
+            "conditional": null,
+            "raw": "none"
+          },
+          "source_field": "spell_raw.saving_throw_raw",
+          "raw": "none",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "You temporarily alter the target’s memory (similar to modify memory) to eliminate, change, or implant a memory of up to 1 hour in length. When the duration of this expires, the target’s real memory returns, and the false memory fades to little more than a vague outline, like a dream. This false memory seems true to the target, so effects that detect lies or force the target to speak the truth (as the subject understands it) don’t detect the falsehood.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "You temporarily alter the target’s memory (similar to modify memory) to eliminate, change, or implant a memory of up to 1 hour in length. When the duration of this expires, the target’s real memory returns, and the false memory fades to little more than a vague outline, like a dream. This false memory seems true to the target, so effects that detect lies or force the target to speak the truth (as the subject understands it) don’t detect the falsehood.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.false-belief:appears_on_spell_list:spell-list.bard",
@@ -205,6 +388,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.false-belief:appears_on_spell_list:spell-list.intrigue-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.intrigue-mystery",
+        "name": "Intrigue Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.intrigue:e6f78c01",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "false belief (4th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Intrigue"
+        }
+      ],
+      "note": "Printed by the owning oracle mystery; this is mystery access, not general Oracle class access."
     },
     {
       "relationship_id": "spell.false-belief:appears_on_spell_list:spell-list.mesmerist",
@@ -276,6 +479,26 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "skald 2",
           "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.false-belief:functions_like:spell.modify-memory",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.modify-memory",
+        "name": "Modify Memory"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.false-belief:d0d16a30e68950df",
+          "source_field": "spell_raw.links_raw[9]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "modify memory",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/m/modify-memory/"
         }
       ],
       "note": null
@@ -410,26 +633,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.false-belief:references:spell.modify-memory",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.modify-memory",
-        "name": "modify memory"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.false-belief:d0d16a30e68950df",
-          "source_field": "spell_raw.links_raw[9]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "modify memory",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/m/modify-memory/"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.false-belief:uses_definition:rule.parchment",
       "type": "uses_definition",
       "target": {
@@ -470,12 +673,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.false-belief:uses_definition:rule.touch",
+      "relationship_id": "spell.false-belief:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -488,26 +691,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.false-belief:appears_on_spell_list:spell-list.intrigue-mystery",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.intrigue-mystery",
-        "name": "Intrigue Mystery Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.intrigue:e6f78c01",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "false belief (4th)",
-          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Intrigue"
-        }
-      ],
-      "note": "Printed by the owning oracle mystery; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -574,11 +757,19 @@
       "raw_value_sha256": "0d6f335fcaf2e2f953281e8679540e4644d3b3e3f1ffa6fada10f85832e5f7ed",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.false-belief:d2947c8b33b54802",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "155681788b463046b027cd427f112adc8778824426a691b071ee121cb15fa0e2",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

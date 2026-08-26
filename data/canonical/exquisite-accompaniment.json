@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.exquisite-accompaniment",
   "ruleset": "Pathfinder First Edition",
   "name": "Exquisite Accompaniment",
@@ -103,7 +103,48 @@
   "description": {
     "raw": "You create a phantom instrument, a glowing construct of magic in the form of a portable musical instrument of your choice. The instrument floats beside you, moving as you move (even if you teleport). It cannot be damaged, but can be dispelled. The instrument plays as you direct, and as long as it plays, you do not have to expend rounds of bardic performance from your daily allotment to maintain an effect. Activating a bardic performance or switching to a new effect still costs a round of your overall bardic performances per day.",
     "search_text": "\"you create a phantom instrument, a glowing construct of magic in the form of a portable musical instrument of your choice. the instrument floats beside you, moving as you move (even if you teleport). it cannot be damaged, but can be dispelled. the instrument plays as you direct, and as long as it plays, you do not have to expend rounds of bardic performance from your daily allotment to maintain an effect. activating a bardic performance or switching to a new effect still costs a round of your overall bardic performances per day.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create a phantom instrument, a glowing construct of magic in the form of a portable musical instrument of your choice. The instrument floats beside you, moving as you move (even if you teleport). It cannot be damaged, but can be dispelled. The instrument plays as you direct, and as long as it plays, you do not have to expend rounds of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bardic performance",
+              "relationship_id": "spell.exquisite-accompaniment:uses_definition:rule.bardic-performance"
+            },
+            {
+              "node_type": "text",
+              "value": " from your daily allotment to maintain an effect. Activating a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bardic performance",
+              "relationship_id": "spell.exquisite-accompaniment:uses_definition:rule.bardic-performance"
+            },
+            {
+              "node_type": "text",
+              "value": " or switching to a new effect still costs a round of your overall "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bardic performances",
+              "relationship_id": "spell.exquisite-accompaniment:uses_definition:rule.bardic-performance"
+            },
+            {
+              "node_type": "text",
+              "value": " per day."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -290,9 +331,9 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.teleport",
-        "name": "teleport"
+        "name": "Teleport"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.exquisite-accompaniment:842a27b8e074560a",
@@ -302,7 +343,7 @@
           "source_href": "https://www.d20pfsrd.com/magic/all-spells/e/t/teleport"
         }
       ],
-      "note": null
+      "note": "The description uses “teleport” as an ordinary movement verb, not as a reference to the Teleport spell."
     },
     {
       "relationship_id": "spell.exquisite-accompaniment:uses_action:action.standard-action",
@@ -354,20 +395,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "bardic performance",
           "source_href": "https://www.d20pfsrd.com/classes/core-classes/bard#TOC-Bardic-Performance"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.exquisite-accompaniment:uses_definition:rule.bardic-performances",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.bardic-performances",
-        "name": "bardic performances"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.exquisite-accompaniment:842a27b8e074560a",
           "source_field": "spell_raw.links_raw[7]",
@@ -447,11 +475,19 @@
       "raw_value_sha256": "1fcb951f42363ed6ab38d21af3066ce4a9959b774e8e0787da1bc0320958e965",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.exquisite-accompaniment:b23911e6ec93b3fc",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "10f2fcfef680178ff377cc087c976ad077355a553f59e17b9bf41d2eaf134a0c",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

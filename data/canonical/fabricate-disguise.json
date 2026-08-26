@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.fabricate-disguise",
   "ruleset": "Pathfinder First Edition",
   "name": "Fabricate Disguise",
@@ -202,7 +202,39 @@
   "description": {
     "raw": "You change outfits or create a disguise out of materials you are wearing or carrying (potentially including a disguise kit). The spell can’t alter your body or change the structure of objects, but can style wigs, apply makeup or piercings, and otherwise make use of tools to make superficial changes. In an instant, you have a nonmagical disguise or clothing change. Attempt a Disguise check to determine the effectiveness of the disguise.",
     "search_text": "\"you change outfits or create a disguise out of materials you are wearing or carrying (potentially including a disguise kit). the spell can’t alter your body or change the structure of objects, but can style wigs, apply makeup or piercings, and otherwise make use of tools to make superficial changes. in an instant, you have a nonmagical disguise or clothing change. attempt a disguise check to determine the effectiveness of the disguise.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You change outfits or create a disguise out of materials you are wearing or carrying (potentially including a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "disguise kit",
+              "relationship_id": "spell.fabricate-disguise:uses_definition:rule.disguise-kit"
+            },
+            {
+              "node_type": "text",
+              "value": "). The spell can’t alter your body or change the structure of objects, but can style wigs, apply makeup or piercings, and otherwise make use of tools to make superficial changes. In an instant, you have a nonmagical disguise or clothing change. Attempt a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Disguise",
+              "relationship_id": "spell.fabricate-disguise:uses_definition:rule.disguise"
+            },
+            {
+              "node_type": "text",
+              "value": " check to determine the effectiveness of the disguise."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -361,6 +393,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.fabricate-disguise:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.fabricate-disguise:6a750ea396c00f58",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.fabricate-disguise:0c72e3a69c357316",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.fabricate-disguise:appears_on_spell_list:spell-list.psychic",
@@ -650,33 +709,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.fabricate-disguise:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.fabricate-disguise:6a750ea396c00f58",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.fabricate-disguise:0c72e3a69c357316",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -727,11 +759,19 @@
       "raw_value_sha256": "1ba368be410433cecd5b176116fd8ea3c4d16bd230e996b67914e19b4a579362",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.fabricate-disguise:0c72e3a69c357316",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "c5a36668d6e32994f742282da7c28cb079f6d217b19f86387395101529393699",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

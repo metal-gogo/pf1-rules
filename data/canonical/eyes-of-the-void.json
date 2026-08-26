@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.eyes-of-the-void",
   "ruleset": "Pathfinder First Edition",
   "name": "Eyes of the Void",
@@ -167,7 +167,69 @@
   "description": {
     "raw": "You gain darkvision, the ability to see 60 feet even in total darkness, including that created by deeper darkness. Darkvision is black-and-white only, but otherwise like normal sight. While affected, your eyes turn completely black (but appear white to anyone viewing you with darkvision).",
     "search_text": "\"you gain darkvision, the ability to see 60 feet even in total darkness, including that created by deeper darkness. darkvision is black-and-white only, but otherwise like normal sight. while affected, your eyes turn completely black (but appear white to anyone viewing you with darkvision).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You gain "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "darkvision",
+              "relationship_id": "spell.eyes-of-the-void:uses_definition:rule.darkvision"
+            },
+            {
+              "node_type": "text",
+              "value": ", the ability to see 60 feet even in "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "total darkness",
+              "relationship_id": "spell.eyes-of-the-void:uses_definition:illumination.darkness"
+            },
+            {
+              "node_type": "text",
+              "value": ", including that created by "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "deeper darkness",
+              "relationship_id": "spell.eyes-of-the-void:references:spell.deeper-darkness",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ". "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Darkvision",
+              "relationship_id": "spell.eyes-of-the-void:uses_definition:rule.darkvision"
+            },
+            {
+              "node_type": "text",
+              "value": " is black-and-white only, but otherwise like normal sight. While affected, your eyes turn completely black (but appear white to anyone viewing you with "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "darkvision",
+              "relationship_id": "spell.eyes-of-the-void:uses_definition:rule.darkvision"
+            },
+            {
+              "node_type": "text",
+              "value": ")."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -447,7 +509,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.deeper-darkness",
-        "name": "deeper darkness"
+        "name": "Deeper Darkness"
       },
       "status": "accepted",
       "evidence": [
@@ -494,6 +556,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.eyes-of-the-void:uses_definition:illumination.darkness",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "illumination.darkness",
+        "name": "Darkness"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.eyes-of-the-void:ca7f75ac5ba41407",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "total darkness",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Eyes+of+the+Void"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.eyes-of-the-void:uses_definition:rule.darkvision",
@@ -598,11 +680,19 @@
       "raw_value_sha256": "ce17b930491db854194eb408dbe4f0b076922969e8bcd7e3b2ac85a114445292",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.eyes-of-the-void:ca7f75ac5ba41407",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "5f7826333477e4a4338a6be0082f8ad4ec734242dfd2977117001d0d919cc30d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -294,6 +294,25 @@ test("Batch 28 rejects state-name false positives and normalizes subschools", as
   expect(results.violations).toEqual([]);
 });
 
+test("Batch 29 preserves Fable Tapestry's table and normalizes scrying", async ({ page }) => {
+  await page.goto("/spells/spell.fable-tapestry");
+
+  const tapestry = page.locator(".rich-description").first();
+  await expect(tapestry.locator("table")).toHaveCount(1);
+  await expect(tapestry.locator("tbody tr")).toHaveCount(6);
+  await expect(tapestry.locator('a[href="/spells/spell.shadow-conjuration"]')).toHaveCount(1);
+  await expectNoPageOverflow(page);
+
+  await page.goto("/spells/spell.false-vision-greater");
+  const vision = page.locator(".rich-description").first();
+  await expect(vision.locator('a[href="/rules/magic-schools#scrying"]')).toHaveCount(2);
+  await expect(vision.locator('a[href="/spells/spell.scrying"]')).toHaveCount(0);
+  await expect(vision.locator('a[href="/spells/spell.false-vision"]')).toHaveCount(1);
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+});
+
 test("pilot lists remain semantic and accessible on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/spells/spell.bestow-curse-greater");

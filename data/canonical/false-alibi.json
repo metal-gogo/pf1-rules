@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.false-alibi",
   "ruleset": "Pathfinder First Edition",
   "name": "False Alibi",
@@ -240,7 +240,55 @@
   "description": {
     "raw": "This spell functions similarly to modify memory, except you can modify the target’s memory only in a specific way. In response to a triggering condition you determine, up to the last 5 minutes of the target’s memory are eliminated and replaced with a memory of your choosing (or no memory at all). For example, you could cast this on an assassin, set it to trigger when he completes his kill, and replace his memory of the murder with the memory of him discovering the body and picking up the murder weapon. You can cast this spell multiple times on the same target, even with the same trigger, affecting different memories. A single casting of false alibi affects a creature only until the specified condition has been triggered; once a condition has been triggered and the target’s memory altered, that condition no longer triggers this spell unless the victim is subject to another casting of false alibi that specifies the same trigger.",
     "search_text": "\"this spell functions similarly to modify memory, except you can modify the target’s memory only in a specific way. in response to a triggering condition you determine, up to the last 5 minutes of the target’s memory are eliminated and replaced with a memory of your choosing (or no memory at all). for example, you could cast this on an assassin, set it to trigger when he completes his kill, and replace his memory of the murder with the memory of him discovering the body and picking up the murder weapon. you can cast this spell multiple times on the same target, even with the same trigger, affecting different memories. a single casting of false alibi affects a creature only until the specified condition has been triggered; once a condition has been triggered and the target’s memory altered, that condition no longer triggers this spell unless the victim is subject to another casting of false alibi that specifies the same trigger.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions similarly to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "modify memory",
+              "relationship_id": "spell.false-alibi:functions_like:spell.modify-memory",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you can modify the target’s memory only in a specific way. In response to a triggering condition you determine, up to the last 5 minutes of the target’s memory are eliminated and replaced with a memory of your choosing (or no memory at all). For example, you could cast this on an assassin, set it to trigger when he completes his kill, and replace his memory of the murder with the memory of him discovering the body and picking up the murder weapon. You can cast this spell multiple times on the same target, even with the same trigger, affecting different memories. A single casting of "
+            },
+            {
+              "node_type": "text",
+              "value": "false alibi",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " affects a creature only until the specified condition has been triggered; once a condition has been triggered and the target’s memory altered, that condition no longer triggers this spell unless the victim is subject to another casting of "
+            },
+            {
+              "node_type": "text",
+              "value": "false alibi ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "that specifies the same trigger."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -250,7 +298,100 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.modify-memory",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.false-alibi:a4aa6337e4613ccd",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell functions similarly to modify memory, except you can modify the target’s memory only in a specific way. In response to a triggering condition you determine, up to the last 5 minutes of the target’s memory are eliminated and replaced with a memory of your choosing (or no memory at all). For example, you could cast this on an assassin, set it to trigger when he completes his kill, and replace his memory of the murder with the memory of him discovering the body and picking up the murder weapon. You can cast this spell multiple times on the same target, even with the same trigger, affecting different memories. A single casting of false alibi affects a creature only until the specified condition has been triggered; once a condition has been triggered and the target’s memory altered, that condition no longer triggers this spell unless the victim is subject to another casting of false alibi that specifies the same trigger."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/time",
+          "value": {
+            "kind": "timed",
+            "amount": 1,
+            "unit": "round",
+            "raw": "1 round"
+          },
+          "source_field": "spell_raw.casting_time_raw",
+          "raw": "1 round",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "material",
+              "details": "emerald dust worth 100 gp",
+              "cost_gp": 100,
+              "raw": "M (emerald dust worth 100 gp)"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (emerald dust worth 100 gp)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, M (emerald dust worth 100 gp)",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (emerald dust worth 100 gp)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "permanent",
+            "formula": null,
+            "dismissible": null,
+            "concentration": null,
+            "raw": "permanent; see text"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "permanent; see text",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions similarly to modify memory, except you can modify the target’s memory only in a specific way. In response to a triggering condition you determine, up to the last 5 minutes of the target’s memory are eliminated and replaced with a memory of your choosing (or no memory at all). For example, you could cast this on an assassin, set it to trigger when he completes his kill, and replace his memory of the murder with the memory of him discovering the body and picking up the murder weapon. You can cast this spell multiple times on the same target, even with the same trigger, affecting different memories. A single casting of false alibi affects a creature only until the specified condition has been triggered; once a condition has been triggered and the target’s memory altered, that condition no longer triggers this spell unless the victim is subject to another casting of false alibi that specifies the same trigger.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions similarly to modify memory, except you can modify the target’s memory only in a specific way. In response to a triggering condition you determine, up to the last 5 minutes of the target’s memory are eliminated and replaced with a memory of your choosing (or no memory at all). For example, you could cast this on an assassin, set it to trigger when he completes his kill, and replace his memory of the murder with the memory of him discovering the body and picking up the murder weapon. You can cast this spell multiple times on the same target, even with the same trigger, affecting different memories. A single casting of false alibi affects a creature only until the specified condition has been triggered; once a condition has been triggered and the target’s memory altered, that condition no longer triggers this spell unless the victim is subject to another casting of false alibi that specifies the same trigger.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.false-alibi:appears_on_spell_list:spell-list.bard",
@@ -347,6 +488,40 @@
       "note": null
     },
     {
+      "relationship_id": "spell.false-alibi:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.false-alibi:a4aa6337e4613ccd",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3 (Norgorber)",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.false-alibi:378824b83ea51256",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.false-alibi:a4aa6337e4613ccd",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 3 (Norgorber)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.false-alibi:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -402,6 +577,26 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "warpriest 3 (Norgorber)",
           "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.false-alibi:functions_like:spell.modify-memory",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.modify-memory",
+        "name": "Modify Memory"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.false-alibi:378824b83ea51256",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "modify memory",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/f/m/modify-memory"
         }
       ],
       "note": null
@@ -556,26 +751,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.false-alibi:references:spell.modify-memory",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.modify-memory",
-        "name": "modify memory"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.false-alibi:378824b83ea51256",
-          "source_field": "spell_raw.links_raw[7]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "modify memory",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/f/m/modify-memory"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.false-alibi:uses_definition:rule.spell-resistance",
       "type": "uses_definition",
       "target": {
@@ -596,11 +771,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.false-alibi:uses_definition:rule.will",
+      "relationship_id": "spell.false-alibi:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -614,40 +789,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.false-alibi:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.false-alibi:a4aa6337e4613ccd",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3 (Norgorber)",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.false-alibi:378824b83ea51256",
-          "source_field": "spell_raw.links_raw[5]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.false-alibi:a4aa6337e4613ccd",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 3 (Norgorber)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -698,11 +839,19 @@
       "raw_value_sha256": "814569c4cae9281cc81b45d0e1c7e67e1aa7465079acdc540196a998c7c2a04f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.false-alibi:a4aa6337e4613ccd",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "380d239820df1542a24c76b095ee7c8a64cf87c88dd06b7a9b495ed282998a77",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -175,6 +175,7 @@ const canonicalTargets = new Map<string, {
 }>([
   ["rule.fortitude", { id: "rule.fortitude-saving-throw", name: "Fortitude" }],
   ["rule.fort", { id: "rule.fortitude-saving-throw", name: "Fortitude" }],
+  ["rule.supernatural-abilities", { id: "rule.supernatural", name: "Supernatural abilities" }],
   ["rule.reflex", { id: "rule.reflex-saving-throw", name: "Reflex" }],
   ["rule.will", { id: "rule.will-saving-throw", name: "Will" }],
   ["rule.affliction", { id: "rule.afflictions", name: "Afflictions" }],
@@ -319,6 +320,8 @@ const canonicalTargets = new Map<string, {
   ["rule.siege-engines", { id: "rule.siege-engine", name: "Siege engine" }],
   ["rule.unholy-water", { id: "item.unholy-water", name: "Unholy water", type: "item" }],
   ["rule.haunts", { id: "rule.haunt", name: "Haunt" }],
+  ["rule.water-elementals", { id: "rule.water-elemental", name: "Water elemental" }],
+  ["rule.bardic-performances", { id: "rule.bardic-performance", name: "Bardic performance" }],
   ["rule.ghost", { id: "monster.ghost", name: "Ghost", type: "monster" }],
   ["rule.iron-golems", { id: "monster.iron-golem", name: "Iron golem", type: "monster" }],
   ["rule.profane", { id: "rule.profane-bonus", name: "Profane bonus" }],
@@ -560,6 +563,22 @@ const canonicalRelationshipTargets = new Map<string, {
   [
     "spell.enlightened-step:references:spell.air-walk",
     { id: "spell.air-walk", name: "Air Walk", type: "spell", relationshipType: "functions_like" },
+  ],
+  [
+    "spell.fairy-ring-retreat:references:spell.unseen-servant",
+    { id: "spell.unseen-servant", name: "Unseen Servant", type: "spell", relationshipType: "functions_like" },
+  ],
+  [
+    "spell.false-belief:references:spell.modify-memory",
+    { id: "spell.modify-memory", name: "Modify Memory", type: "spell", relationshipType: "functions_like" },
+  ],
+  [
+    "spell.false-vision:references:spell.scrying",
+    { id: "subschool.scrying", name: "Scrying", type: "subschool", relationshipType: "uses_definition" },
+  ],
+  [
+    "spell.false-vision-greater:references:spell.scrying",
+    { id: "subschool.scrying", name: "Scrying", type: "subschool", relationshipType: "uses_definition" },
   ],
 ]);
 
@@ -958,6 +977,18 @@ const rejectedDescriptionRelationships = new Map([
   [
     "spell.etheric-shards:uses_definition:condition.broken",
     "The material component names ordinary broken glass; it does not use the Broken condition.",
+  ],
+  [
+    "spell.expel-blood:references:spell.vortex",
+    "The text names the water elemental's Vortex ability, not the Vortex spell linked by the secondary source.",
+  ],
+  [
+    "spell.exquisite-accompaniment:references:spell.teleport",
+    "The description uses “teleport” as an ordinary movement verb, not as a reference to the Teleport spell.",
+  ],
+  [
+    "spell.fairy-ring-retreat:uses_definition:rule.animal",
+    "The text describes animal-like servants created by the spell, not creatures governed by the Animal type rules.",
   ],
 ]);
 
@@ -1848,6 +1879,68 @@ const reviewedDescriptionReferences = new Map<string, ReviewedDescriptionReferen
   ]],
   ["spell.excruciating-deformation", [
     { targetType: "rule", targetId: "rule.speed", targetName: "Speed", anchorText: "speed" },
+  ]],
+  ["spell.expeditious-construction", [
+    { targetType: "rule", targetId: "rule.caster-level", targetName: "Caster level", anchorText: "caster levels" },
+    { targetType: "rule", targetId: "rule.size", targetName: "Size", anchorText: "Large" },
+  ]],
+  ["spell.expeditious-excavation", [
+    { targetType: "rule", targetId: "rule.size", targetName: "Size", anchorText: "Medium" },
+    { targetType: "rule", targetId: "rule.size", targetName: "Size", anchorText: "size" },
+    { targetType: "rule", targetId: "rule.attacks-of-opportunity", targetName: "Attacks of opportunity", anchorText: "attacks of opportunity" },
+  ]],
+  ["spell.expel-blood", [
+    { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saving throw" },
+    { targetType: "rule", targetId: "rule.size", targetName: "Size", anchorText: "size" },
+    { targetType: "rule", targetId: "rule.size", targetName: "Size", anchorText: "Large" },
+    { targetType: "rule", targetId: "rule.size", targetName: "Size", anchorText: "Small" },
+  ]],
+  ["spell.expend", [
+    { targetType: "rule", targetId: "rule.supernatural", targetName: "Supernatural abilities", anchorText: "supernatural" },
+    { targetType: "rule", targetId: "rule.spell-like-abilities", targetName: "Spell-like abilities", anchorText: "spell-like ability" },
+    { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saving throw" },
+  ]],
+  ["spell.explosive-runes", [
+    { targetType: "descriptor", targetId: "descriptor.force", targetName: "Force", anchorText: "force" },
+    { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saving throw" },
+    { targetType: "rule", targetId: "rule.trap", targetName: "Trap", anchorText: "traps" },
+    { targetType: "rule", targetId: "rule.trapfinding", targetName: "Trapfinding", anchorText: "trapfinding" },
+    { targetType: "rule", targetId: "rule.disable-device", targetName: "Disable Device", anchorText: "Disable Device" },
+    { targetType: "rule", targetId: "rule.perception", targetName: "Perception", anchorText: "Perception" },
+  ]],
+  ["spell.eyes-of-the-void", [
+    { targetType: "rule", targetId: "illumination.darkness", targetName: "Darkness", anchorText: "total darkness" },
+  ]],
+  ["spell.face-of-the-devourer", [
+    { targetType: "rule", targetId: "rule.size", targetName: "Size", anchorText: "Medium" },
+    { targetType: "rule", targetId: "rule.size", targetName: "Size", anchorText: "Small" },
+    { targetType: "rule", targetId: "rule.size", targetName: "Size", anchorText: "Large" },
+  ]],
+  ["spell.fair-is-foul", [
+    { targetType: "rule", targetId: "rule.curse", targetName: "Curse", anchorText: "curse" },
+  ]],
+  ["spell.fairness", [
+    { targetType: "deity", targetId: "deity.abadar", targetName: "Abadar", anchorText: "Abadar" },
+  ]],
+  ["spell.fallback-strategy", [
+    { targetType: "rule", targetId: "rule.skill-check", targetName: "Skill checks", anchorText: "skill check" },
+  ]],
+  ["spell.false-future", [
+    { targetType: "magic_school", targetId: "magic-school.divination", targetName: "Divination", anchorText: "divinations" },
+  ]],
+  ["spell.false-resurrection-greater", [
+    { targetType: "rule", targetId: "rule.skill-check", targetName: "Skill checks", anchorText: "skill check" },
+    { targetType: "descriptor", targetId: "descriptor.ruse", targetName: "Ruse", anchorText: "ruse descriptor" },
+    { targetType: "magic_school", targetId: "magic-school.conjuration", targetName: "Conjuration", anchorText: "conjuration" },
+  ]],
+  ["spell.false-vision", [
+    { targetType: "rule", targetId: "rule.concentration", targetName: "Concentration", anchorText: "concentrate" },
+    { targetType: "rule", targetId: "rule.concentration", targetName: "Concentration", anchorText: "concentrating" },
+  ]],
+  ["spell.false-vision-greater", [
+    { type: "functions_like", targetType: "spell", targetId: "spell.false-vision", targetName: "False Vision", anchorText: "false vision" },
+    { targetType: "rule", targetId: "rule.plane", targetName: "Planes", anchorText: "plane" },
+    { targetType: "rule", targetId: "rule.concentration", targetName: "Concentration", anchorText: "concentrating" },
   ]],
 ]);
 
@@ -3145,6 +3238,20 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
       keepFirstRelationshipLink(
         richText.document,
         "spell.escape-alarm:functions_like:spell.alarm",
+      );
+    }
+    if (spellId === "spell.explosive-runes") {
+      keepFirstRelationshipLink(
+        richText.document,
+        "spell.explosive-runes:references:spell.erase",
+      );
+    }
+    if (spellId === "spell.false-resurrection-greater") {
+      keepRelationshipLinkOccurrences(
+        richText.document,
+        "spell.false-resurrection-greater:functions_like:spell.false-resurrection",
+        [1, 2],
+        4,
       );
     }
     if (spellId === "spell.ceremony") {

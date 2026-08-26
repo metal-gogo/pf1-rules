@@ -7,13 +7,13 @@ validation rules in [Rich-text spell descriptions](rich-text.md).
 
 ## Current status
 
-Audit date: 2026-08-25.
+Audit date: 2026-08-26.
 
 | Category | Spells | Meaning |
 | --- | ---: | --- |
 | Total canonical spells | 3,030 | Complete corpus |
-| Rich text stored | 713 | 11-spell pilot, twenty-eight reviewed 25-spell rollout batches, Reincarnate, and one reviewed warning record |
-| Safe candidates with links | 1,557 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
+| Rich text stored | 738 | 11-spell pilot, twenty-nine reviewed 25-spell rollout batches, Reincarnate, and one reviewed warning record |
+| Safe candidates with links | 1,532 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
 | Safe structure-only candidates | 306 | Source text matches, but no known relationship currently produces an inline link |
 | Source mismatch | 280 | Current canonical text and the newly bounded AoN description differ |
 | Link warnings | 174 | At least one accepted relationship is ambiguous or unmatched |
@@ -898,6 +898,49 @@ Canonical, database-backed web, and desktop/mobile browser tests cover these
 distinctions. Manual rendered review covered Ethereal Fists, Etheric Shards,
 and Evaluator's Lens, including paragraph boundaries, emphasis, contextual
 targets, and rejected relationships.
+
+### Batch 29
+
+The twenty-ninth rollout batch contains:
+
+- Expeditious Construction; Expeditious Excavation; Expel Blood; Expend;
+  Explode Head; Explosion of Rot; Explosive Runes; Exquisite Accompaniment;
+  Extreme Buoyancy; Extreme Flexibility.
+- Eyes of the Void; Fable Tapestry; Fabricate Disguise; Face of the Devourer;
+  Fair Is Foul; Fairness; Fairy Ring Retreat; Fallback Strategy; False Alibi;
+  False Belief.
+- False Future; Greater False Life; Greater False Resurrection; False Vision;
+  Greater False Vision.
+
+Review of this batch established these normalization rules:
+
+- Expel Blood rejects `vortex` because it names the water elemental ability,
+  not the Vortex spell. Exquisite Accompaniment leaves the ordinary verb
+  `teleport` unlinked, and Fairy Ring Retreat leaves animal-like servants
+  unlinked rather than treating them as the Animal creature type.
+- False Vision and Greater False Vision normalize `scrying` to the shared
+  subschool destination. False Belief → Modify Memory and Fairy Ring Retreat
+  → Unseen Servant are represented as `functions_like` relationships.
+- Explosive Runes → Erase and Greater False Resurrection → False Resurrection
+  use contextual occurrence filtering so only explicit references are linked.
+  Self/title links and ordinary homonyms remain plain.
+- Fable Tapestry preserves its source table, row and cell structure, emphasis,
+  and inline links for the explicitly named character abilities. Additional
+  reviewed links cover rules terms, actions, size, saving throws, skills,
+  descriptors, schools, planes, concentration, and Abadar.
+- `rule.supernatural-abilities` canonicalizes to the registered
+  `rule.supernatural` entity during normalization, preventing stale generated
+  relationships from failing validation.
+
+Canonical, database-backed web, and desktop/mobile browser tests cover these
+distinctions. Manual rendered review covered Expel Blood, Explosive Runes,
+Fable Tapestry, Greater False Resurrection, and Greater False Vision,
+including links, rejected relationships, table structure, emphasis,
+accessibility, and unchanged visible text.
+
+The 2026-08-26 audit reports 3,030 total spells, 738 rich-text records, 1,532
+safe candidates with links, 306 structure-only candidates, 280 source
+mismatches, 174 link warnings, 0 missing AoN baselines, and 0 parser errors.
 
 ## Open questions and issues
 

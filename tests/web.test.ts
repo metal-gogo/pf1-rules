@@ -1559,6 +1559,32 @@ describe("local rules browser", () => {
     expect(descriptions[4]!.match(/href="\/entities\/rule.attitude"/g)).toHaveLength(1);
   });
 
+  it("renders Batch 29 abilities, source tables, and scrying links semantically", async () => {
+    const [bloodResponse, runesResponse, tapestryResponse, resurrectionResponse, visionResponse] =
+      await Promise.all([
+        fetch(`${baseUrl}/spells/spell.expel-blood`),
+        fetch(`${baseUrl}/spells/spell.explosive-runes`),
+        fetch(`${baseUrl}/spells/spell.fable-tapestry`),
+        fetch(`${baseUrl}/spells/spell.false-resurrection-greater`),
+        fetch(`${baseUrl}/spells/spell.false-vision-greater`),
+      ]);
+    const descriptions = await Promise.all(
+      [bloodResponse, runesResponse, tapestryResponse, resurrectionResponse, visionResponse]
+        .map(async (response) => (await response.text()).match(
+          /<section><h2>Description<\/h2>(.*?)<\/section>/s,
+        )?.[1] ?? ""),
+    );
+
+    expect(descriptions[0]).not.toContain('href="/spells/spell.vortex"');
+    expect(descriptions[1]!.match(/href="\/spells\/spell.erase"/g)).toHaveLength(1);
+    expect(descriptions[1]).toContain('href="/entities/rule.disable-device"');
+    expect(descriptions[2]).toContain('<table class="data-table rich-text-table">');
+    expect(descriptions[3]!.match(/href="\/spells\/spell.false-resurrection"/g))
+      .toHaveLength(2);
+    expect(descriptions[4]).toContain('href="/rules/magic-schools#scrying"');
+    expect(descriptions[4]).not.toContain('href="/spells/spell.scrying"');
+  });
+
   it("links Curse of Unexpected Death's touch attacks but not its ordinary touch verbs", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.curse-of-unexpected-death`);
     const html = await response.text();

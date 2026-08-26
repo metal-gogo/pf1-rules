@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.false-life-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "False Life, Greater",
@@ -207,7 +207,63 @@
   "description": {
     "raw": "This spell functions as false life, except you gain temporary hit points equal to 2d10 + 1 point per caster level (maximum +20). The effects of this spell do not stack with those of false life.",
     "search_text": "\"this spell functions as false life, except you gain temporary hit points equal to 2d10 + 1 point per caster level (maximum +20). the effects of this spell do not stack with those of false life.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "false life",
+              "relationship_id": "spell.false-life-greater:functions_like:spell.false-life",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you gain "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "temporary hit points",
+              "relationship_id": "spell.false-life-greater:uses_definition:rule.temporary-hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": " equal to 2d10 + 1 point per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.false-life-greater:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum +20). The effects of this spell do not stack with those of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "false life",
+              "relationship_id": "spell.false-life-greater:functions_like:spell.false-life",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -572,6 +628,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as false life, except you gain temporary hit points equal to 2d10 + 1 point per caster level (maximum +20). The effects of this spell do not stack with those of false life.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.false-life-greater:c9d3a8a212bc90e6",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "false life",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/falseLife.html#false-life"
+        },
+        {
+          "observation_id": "legacy_aon:spell.false-life-greater:c9d3a8a212bc90e6",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "false life",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/falseLife.html#false-life"
         }
       ],
       "note": null
@@ -653,33 +723,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "Ultimate Magic pg. 219",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.false-life-greater:references:spell.false-life",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.false-life",
-        "name": "false life"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.false-life-greater:c9d3a8a212bc90e6",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "false life",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/falseLife.html#false-life"
-        },
-        {
-          "observation_id": "legacy_aon:spell.false-life-greater:c9d3a8a212bc90e6",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "false life",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/falseLife.html#false-life"
         }
       ],
       "note": null
@@ -833,11 +876,19 @@
       "raw_value_sha256": "1fcb951f42363ed6ab38d21af3066ce4a9959b774e8e0787da1bc0320958e965",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.false-life-greater:1a1f1c0ef6e72a9d",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "1c2b9cd76b7dbc793bc3b73a85fb6d5b7cfdfe64d2b7aa218302d9a0d23fe485",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

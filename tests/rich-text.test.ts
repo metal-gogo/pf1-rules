@@ -696,6 +696,60 @@ describe("rich-text schema and source parsing", () => {
       }));
     }
   });
+
+  it("keeps Batch 29 abilities, spell inheritance, and scrying semantics distinct", () => {
+    const blood = canonical("expel-blood");
+    const bloodDocument = JSON.stringify(blood.description.document);
+    expect(bloodDocument).not.toContain("references:spell.vortex");
+    expect(bloodDocument).not.toContain("uses_definition:rule.water-elementals");
+    expect(bloodDocument.match(/uses_definition:rule\.water-elemental"/g)).toHaveLength(7);
+
+    const runes = JSON.stringify(canonical("explosive-runes").description.document);
+    expect(runes.match(/references:spell\.erase/g)).toHaveLength(1);
+    for (const target of [
+      "descriptor.force",
+      "rule.disable-device",
+      "rule.perception",
+      "rule.trap",
+      "rule.trapfinding",
+    ]) expect(runes).toContain(`uses_definition:${target}`);
+
+    const accompaniment = JSON.stringify(canonical("exquisite-accompaniment").description.document);
+    expect(accompaniment).not.toContain("references:spell.teleport");
+    expect(accompaniment).not.toContain("rule.bardic-performances");
+
+    expect(JSON.stringify(canonical("fairy-ring-retreat").description.document))
+      .toContain("functions_like:spell.unseen-servant");
+    expect(JSON.stringify(canonical("false-belief").description.document))
+      .toContain("functions_like:spell.modify-memory");
+
+    for (const slug of ["false-vision", "false-vision-greater"]) {
+      const document = JSON.stringify(canonical(slug).description.document);
+      expect(document).toContain("uses_definition:subschool.scrying");
+      expect(document).not.toContain("references:spell.scrying");
+    }
+    expect(JSON.stringify(canonical("false-vision-greater").description.document))
+      .toContain("functions_like:spell.false-vision");
+
+    const resurrection = JSON.stringify(canonical("false-resurrection-greater").description.document);
+    expect(resurrection.match(/functions_like:spell\.false-resurrection/g)).toHaveLength(2);
+
+    const tapestry = canonical("fable-tapestry").description.document;
+    expect(tapestry.content.filter(
+      (block: Record<string, unknown>) => block.node_type === "table",
+    )).toHaveLength(1);
+
+    for (const [slug, relationshipId] of [
+      ["expel-blood", "spell.expel-blood:references:spell.vortex"],
+      ["exquisite-accompaniment", "spell.exquisite-accompaniment:references:spell.teleport"],
+      ["fairy-ring-retreat", "spell.fairy-ring-retreat:uses_definition:rule.animal"],
+    ] as const) {
+      expect(canonical(slug).relationships).toContainEqual(expect.objectContaining({
+        relationship_id: relationshipId,
+        status: "rejected",
+      }));
+    }
+  });
 });
 
 

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.fallback-strategy",
   "ruleset": "Pathfinder First Edition",
   "name": "Fallback Strategy",
@@ -238,7 +238,59 @@
   "description": {
     "raw": "While this spell is active, you may reroll one attack roll, combat maneuver check, or skill check before the result of the roll or check is known. You must take the result of the reroll, even if it’s worse than the original roll. Once the reroll is used, the spell ends. You can have no more than one fallback strategy active on you at the same time.",
     "search_text": "\"while this spell is active, you may reroll one attack roll, combat maneuver check, or skill check before the result of the roll or check is known. you must take the result of the reroll, even if it’s worse than the original roll. once the reroll is used, the spell ends. you can have no more than one fallback strategy active on you at the same time.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "While this spell is active, you may reroll one "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack roll",
+              "relationship_id": "spell.fallback-strategy:uses_definition:rule.attack-rolls"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "combat maneuver",
+              "relationship_id": "spell.fallback-strategy:uses_definition:rule.combat-maneuvers"
+            },
+            {
+              "node_type": "text",
+              "value": " check, or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "skill check",
+              "relationship_id": "spell.fallback-strategy:uses_definition:rule.skill-check"
+            },
+            {
+              "node_type": "text",
+              "value": " before the result of the roll or check is known. You must take the result of the reroll, even if it’s worse than the original roll. Once the reroll is used, the spell ends. You can have no more than one "
+            },
+            {
+              "node_type": "text",
+              "value": "fallback strategy ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "active on you at the same time."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -343,6 +395,40 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.fallback-strategy:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.fallback-strategy:3e843afc5da0d61f",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1 (Torag)",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.fallback-strategy:589dedf8ace85a66",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.fallback-strategy:3e843afc5da0d61f",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1 (Torag)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.fallback-strategy:appears_on_spell_list:spell-list.oracle",
@@ -527,12 +613,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.fallback-strategy:uses_definition:rule.attack-roll",
+      "relationship_id": "spell.fallback-strategy:uses_definition:rule.attack-rolls",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.attack-roll",
-        "name": "attack roll"
+        "entity_id": "rule.attack-rolls",
+        "name": "Attack rolls"
       },
       "status": "accepted",
       "evidence": [
@@ -547,12 +633,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.fallback-strategy:uses_definition:rule.combat-maneuver",
+      "relationship_id": "spell.fallback-strategy:uses_definition:rule.combat-maneuvers",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.combat-maneuver",
-        "name": "combat maneuver"
+        "entity_id": "rule.combat-maneuvers",
+        "name": "Combat maneuvers"
       },
       "status": "accepted",
       "evidence": [
@@ -565,6 +651,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.fallback-strategy:uses_definition:rule.skill-check",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.skill-check",
+        "name": "Skill checks"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.fallback-strategy:3e843afc5da0d61f",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "skill check",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Fallback+Strategy"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.fallback-strategy:uses_definition:rule.spell-resistance",
@@ -585,40 +691,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.fallback-strategy:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.fallback-strategy:3e843afc5da0d61f",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1 (Torag)",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.fallback-strategy:589dedf8ace85a66",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.fallback-strategy:3e843afc5da0d61f",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1 (Torag)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -669,11 +741,19 @@
       "raw_value_sha256": "c677ac0538290361f98e86c5726ee382adb17f2fe7f887239c5a92c72b8d291b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.fallback-strategy:3e843afc5da0d61f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f2989add626df2627478b39efdddf2e317a5a2512ebd5f45091e3b24c7cbc2a2",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
