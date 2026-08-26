@@ -1509,6 +1509,31 @@ describe("local rules browser", () => {
     expect(descriptions[4]).toContain('<table class="data-table rich-text-table">');
   });
 
+  it("renders Batch 27 planes, subtypes, titles, and attitudes semantically", async () => {
+    const [swarmResponse, greedResponse, sightResponse, siegeResponse, enthrallResponse] =
+      await Promise.all([
+        fetch(`${baseUrl}/spells/spell.elemental-swarm`),
+        fetch(`${baseUrl}/spells/spell.emblem-of-greed`),
+        fetch(`${baseUrl}/spells/spell.enchantment-sight`),
+        fetch(`${baseUrl}/spells/spell.energy-siege-shot`),
+        fetch(`${baseUrl}/spells/spell.enthrall`),
+      ]);
+    const descriptions = await Promise.all(
+      [swarmResponse, greedResponse, sightResponse, siegeResponse, enthrallResponse]
+        .map(async (response) => (await response.text()).match(
+          /<section><h2>Description<\/h2>(.*?)<\/section>/s,
+        )?.[1] ?? ""),
+    );
+
+    expect(descriptions[0]).toContain('href="/entities/rule.fire"');
+    expect(descriptions[0]).not.toContain('href="/rules/descriptors#fire"');
+    expect(descriptions[1]).toContain('href="/spells/spell.greater-magic-weapon"');
+    expect(descriptions[2]!.match(/href="\/rules\/magic-schools#enchantment"/g))
+      .toHaveLength(4);
+    expect(descriptions[3]).toContain('href="/entities/condition.deaf"');
+    expect(descriptions[4]!.match(/href="\/entities\/rule.attitude"/g)).toHaveLength(6);
+  });
+
   it("links Curse of Unexpected Death's touch attacks but not its ordinary touch verbs", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.curse-of-unexpected-death`);
     const html = await response.text();

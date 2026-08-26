@@ -12,8 +12,8 @@ Audit date: 2026-08-25.
 | Category | Spells | Meaning |
 | --- | ---: | --- |
 | Total canonical spells | 3,030 | Complete corpus |
-| Rich text stored | 663 | 11-spell pilot, twenty-six reviewed 25-spell rollout batches, Reincarnate, and one reviewed warning record |
-| Safe candidates with links | 1,632 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
+| Rich text stored | 688 | 11-spell pilot, twenty-seven reviewed 25-spell rollout batches, Reincarnate, and one reviewed warning record |
+| Safe candidates with links | 1,582 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
 | Safe structure-only candidates | 306 | Source text matches, but no known relationship currently produces an inline link |
 | Source mismatch | 280 | Current canonical text and the newly bounded AoN description differ |
 | Link warnings | 174 | At least one accepted relationship is ambiguous or unmatched |
@@ -826,6 +826,41 @@ Review of this batch established these normalization rules:
 Canonical, database-backed web, and desktop/mobile browser tests cover these
 distinctions. Manual rendered review covered Echean's Excellent Enclosure,
 Elemental Aura, Elemental Speech, Ectoplasmic Snare, and Elemental Mastery.
+
+### Batch 27
+
+The twenty-seventh rollout batch contains:
+
+- Elemental Swarm; Elude Time; Emblem of Greed; Embrace Destiny; Emergency
+  Force Sphere; Emotive Block; Empathy Conduit; Empower Holy Water.
+- Enchantment Foil; Enchantment Sight; Endothermic Touch; Communal Endure
+  Elements; Enemy Insight; Enemy's Heart; Energy Drain; Energy Hack; Energy
+  Siege Shot; Enhance Water.
+- Mass Enlarge Person; Enlarge Tail; Enlightened Step; Enshroud Thoughts;
+  Enter Image; Enthrall; Entice Fey.
+
+Review of this batch established these normalization rules:
+
+- Elemental Swarm distinguishes creature subtypes from spell descriptors. Its
+  final air, earth, fire, and water subtype terms resolve to rules entities,
+  while the same words in planar names remain plain. Large and Huge resolve to
+  the size rule, and Elemental in the spell title remains plain.
+- Enchantment Sight links four explicit references to the Enchantment school
+  while leaving its own italicized title plain. Energy Hack and Energy Siege
+  Shot link only explicit spell-descriptor uses; Energy Siege Shot normalizes
+  deafened to the canonical Deaf condition.
+- Enemy's Heart and Enlightened Step express explicit behavioral inheritance
+  from Death Knell and Air Walk as `functions_like`. Emblem of Greed resolves
+  Greater Magic Weapon to the spell, and Enhance Water resolves unholy water
+  to the item.
+- Enthrall links friendly, indifferent, unfriendly, and hostile only where the
+  text describes attitude values. Ordinary uses in “unfriendly to yours” and
+  “hostile act” remain plain.
+
+Canonical, database-backed web, and desktop/mobile browser tests cover these
+distinctions. Manual rendered review covered Elemental Swarm, Energy Siege
+Shot, and Enthrall, including link targets, paragraph structure, and preserved
+emphasis.
 
 ## Open questions and issues
 

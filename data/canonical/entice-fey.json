@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.entice-fey",
   "ruleset": "Pathfinder First Edition",
   "name": "Entice Fey",
@@ -143,7 +143,69 @@
   "description": {
     "raw": "This spell functions as lesser entice fey, except that the spell’s whimsical calling can produce a single fey of 12 Hit Dice or less, or two fey of the same kind whose Hit Dice total no more than 12.",
     "search_text": "\"this spell functions as lesser entice fey, except that the spell’s whimsical calling can produce a single fey of 12 hit dice or less, or two fey of the same kind whose hit dice total no more than 12.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "lesser entice fey",
+              "relationship_id": "spell.entice-fey:functions_like:spell.entice-fey-lesser",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that the spell’s whimsical calling can produce a single "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fey",
+              "relationship_id": "spell.entice-fey:uses_definition:rule.fey"
+            },
+            {
+              "node_type": "text",
+              "value": " of 12 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Hit Dice",
+              "relationship_id": "spell.entice-fey:uses_definition:rule.hit-dice"
+            },
+            {
+              "node_type": "text",
+              "value": " or less, or two "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fey",
+              "relationship_id": "spell.entice-fey:uses_definition:rule.fey"
+            },
+            {
+              "node_type": "text",
+              "value": " of the same kind whose "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Hit Dice",
+              "relationship_id": "spell.entice-fey:uses_definition:rule.hit-dice"
+            },
+            {
+              "node_type": "text",
+              "value": " total no more than 12."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -369,6 +431,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.entice-fey:appears_on_spell_list:spell-list.whimsy-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.whimsy-mystery",
+        "name": "Whimsy Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.whimsy:75fff951",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "entice fey (14th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Whimsy"
+        }
+      ],
+      "note": "Printed by the owning oracle mystery; this is mystery access, not general Oracle class access."
+    },
+    {
       "relationship_id": "spell.entice-fey:functions_like:spell.entice-fey-lesser",
       "type": "functions_like",
       "target": {
@@ -570,26 +652,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.entice-fey:appears_on_spell_list:spell-list.whimsy-mystery",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.whimsy-mystery",
-        "name": "Whimsy Mystery Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.whimsy:75fff951",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "entice fey (14th)",
-          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Whimsy"
-        }
-      ],
-      "note": "Printed by the owning oracle mystery; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -656,11 +718,19 @@
       "raw_value_sha256": "bfa06db771300615202b89eb2e596545d5915387286012d405ecf0ca28effd25",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.entice-fey:00f490c35a9b43f4",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "452ad287e4d3134baf734e876a14729b3c3bf615a5c34db474782d5555bafe1d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

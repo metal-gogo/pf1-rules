@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.enemy-insight",
   "ruleset": "Pathfinder First Edition",
   "name": "Enemy Insight",
@@ -119,7 +119,57 @@
   "description": {
     "raw": "You forge a mental bond between yourself and the other targets, each of which must have an Intelligence score of 3 or higher. Choose one of your favored enemy types (such as goblinoids or magical beasts). You grant the targets half your favored enemy bonus against that type of creature. If any target moves out of range, the spell ends for it.",
     "search_text": "\"you forge a mental bond between yourself and the other targets, each of which must have an intelligence score of 3 or higher. choose one of your favored enemy types (such as goblinoids or magical beasts). you grant the targets half your favored enemy bonus against that type of creature. if any target moves out of range, the spell ends for it.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You forge a mental bond between yourself and the other targets, each of which must have an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Intelligence",
+              "relationship_id": "spell.enemy-insight:uses_definition:rule.intelligence"
+            },
+            {
+              "node_type": "text",
+              "value": " score of 3 or higher. Choose one of your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "favored enemy",
+              "relationship_id": "spell.enemy-insight:uses_definition:rule.favored-enemy"
+            },
+            {
+              "node_type": "text",
+              "value": " types (such as goblinoids or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "magical beasts",
+              "relationship_id": "spell.enemy-insight:uses_definition:rule.magical-beast"
+            },
+            {
+              "node_type": "text",
+              "value": "). You grant the targets half your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "favored enemy",
+              "relationship_id": "spell.enemy-insight:uses_definition:rule.favored-enemy"
+            },
+            {
+              "node_type": "text",
+              "value": " bonus against that type of creature. If any target moves out of range, the spell ends for it."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -314,12 +364,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.enemy-insight:uses_definition:rule.magical-beasts",
+      "relationship_id": "spell.enemy-insight:uses_definition:rule.magical-beast",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.magical-beasts",
-        "name": "magical beasts"
+        "entity_id": "rule.magical-beast",
+        "name": "Magical beast"
       },
       "status": "accepted",
       "evidence": [
@@ -402,11 +452,19 @@
       "raw_value_sha256": "ce17b930491db854194eb408dbe4f0b076922969e8bcd7e3b2ac85a114445292",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.enemy-insight:74f1737df4ea004b",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "57415aa6efbdada9277078ccfb3157208241c1826e53eb02b07b912d60e254f4",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

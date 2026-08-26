@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.endure-elements-communal",
   "ruleset": "Pathfinder First Edition",
   "name": "Endure Elements, Communal",
@@ -224,7 +224,33 @@
   "description": {
     "raw": "This spell functions like endure elements, except you divide the duration in 1-hour increments among the creatures touched.",
     "search_text": "\"this spell functions like endure elements, except you divide the duration in 1-hour increments among the creatures touched.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "endure elements",
+              "relationship_id": "spell.endure-elements-communal:functions_like:spell.endure-elements",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you divide the duration in 1-hour increments among the creatures touched."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -450,6 +476,33 @@
       "note": null
     },
     {
+      "relationship_id": "spell.endure-elements-communal:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.endure-elements-communal:06718377a17fdd44",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.endure-elements-communal:86976e70aee391ae",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.endure-elements-communal:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -646,6 +699,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like endure elements, except you divide the duration in 1-hour increments among the creatures touched.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.endure-elements-communal:19d17d766e39577b",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "endure elements",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/endureElements.html#endure-elements"
         }
       ],
       "note": null
@@ -720,26 +780,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "Ultimate Combat pg. 228",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.endure-elements-communal:references:spell.endure-elements",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.endure-elements",
-        "name": "endure elements"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.endure-elements-communal:19d17d766e39577b",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "endure elements",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/endureElements.html#endure-elements"
         }
       ],
       "note": null
@@ -823,33 +863,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.endure-elements-communal:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.endure-elements-communal:06718377a17fdd44",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.endure-elements-communal:86976e70aee391ae",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -900,11 +913,19 @@
       "raw_value_sha256": "7a06da994e2d8662333e4ab8c8f37a766c987a27f483bb9967a9f577a9c93bcb",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.endure-elements-communal:86976e70aee391ae",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "ea7a883c37dbba63a6737f26b8e4e588cd3a2e56681c9b6a9223d3e61a38444d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

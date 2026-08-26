@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.endothermic-touch",
   "ruleset": "Pathfinder First Edition",
   "name": "Endothermic Touch",
@@ -165,7 +165,39 @@
   "description": {
     "raw": "This spell slows the metabolism and other bodily functions of a creature for a short amount of time. The target is staggered and moves at half its normal speed (round down to the next 5-foot increment), but it can hold its breath for twice as long as normal.",
     "search_text": "\"this spell slows the metabolism and other bodily functions of a creature for a short amount of time. the target is staggered and moves at half its normal speed (round down to the next 5-foot increment), but it can hold its breath for twice as long as normal.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell slows the metabolism and other bodily functions of a creature for a short amount of time. The target is "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "staggered",
+              "relationship_id": "spell.endothermic-touch:uses_definition:condition.staggered"
+            },
+            {
+              "node_type": "text",
+              "value": " and moves at half its normal "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "speed",
+              "relationship_id": "spell.endothermic-touch:uses_definition:rule.speed"
+            },
+            {
+              "node_type": "text",
+              "value": " (round down to the next 5-foot increment), but it can hold its breath for twice as long as normal."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -494,12 +526,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.endothermic-touch:uses_definition:rule.fort",
+      "relationship_id": "spell.endothermic-touch:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -534,6 +566,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.endothermic-touch:uses_definition:rule.speed",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.speed",
+        "name": "Speed"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.endothermic-touch:1e7b96b7b346ae76",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "speed",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Endothermic+Touch"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.endothermic-touch:uses_definition:rule.spell-resistance",
       "type": "uses_definition",
       "target": {
@@ -554,12 +606,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.endothermic-touch:uses_definition:rule.touch",
+      "relationship_id": "spell.endothermic-touch:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -622,11 +674,19 @@
       "raw_value_sha256": "dee3c9b66545d7228f4ab228731f99b66dc0669d23353867bd18346c48426930",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.endothermic-touch:1e7b96b7b346ae76",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "08bc258e2a1273d05f57abc7e1d8e0c1b3fc3e595789e84f01d02939cff40a45",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

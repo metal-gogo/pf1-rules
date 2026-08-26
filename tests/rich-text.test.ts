@@ -617,6 +617,45 @@ describe("rich-text schema and source parsing", () => {
         .toContain("functions_like:spell.ego-whip-i");
     }
   });
+
+  it("keeps Batch 27 planes, subtypes, titles, and attitudes distinct", () => {
+    const swarm = canonical("elemental-swarm");
+    const swarmDocument = JSON.stringify(swarm.description.document);
+    expect(swarmDocument.match(/uses_definition:rule\.elemental/g)).toHaveLength(7);
+    expect(swarmDocument).toContain('"node_type":"text","value":"Elemental"');
+    for (const subtype of ["air", "earth", "fire", "water"]) {
+      expect(swarmDocument).toContain(`uses_definition:rule.${subtype}`);
+    }
+    expect(swarm.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.elemental-swarm:uses_definition:descriptor.fire",
+      status: "rejected",
+    }));
+
+    const greed = JSON.stringify(canonical("emblem-of-greed").description.document);
+    expect(greed).toContain("references:spell.greater-magic-weapon");
+    expect(greed).not.toContain("uses_definition:rule.greater-magic-weapon");
+
+    const sight = JSON.stringify(canonical("enchantment-sight").description.document);
+    expect(sight.match(/uses_definition:magic-school\.enchantment/g)).toHaveLength(4);
+    expect(sight).toContain('"node_type":"text","value":"Enchantment","marks":["italic"]');
+
+    const siege = JSON.stringify(canonical("energy-siege-shot").description.document);
+    for (const descriptor of ["acid", "cold", "electricity", "fire", "force", "sonic"]) {
+      expect(siege).toContain(`uses_definition:descriptor.${descriptor}`);
+    }
+    expect(siege).toContain("uses_definition:condition.deaf");
+    expect(siege).not.toContain("uses_definition:condition.deafened");
+
+    expect(JSON.stringify(canonical("enthrall").description.document).match(
+      /uses_definition:rule\.attitude/g,
+    )).toHaveLength(6);
+    expect(JSON.stringify(canonical("enemys-heart").description.document))
+      .toContain("functions_like:spell.death-knell");
+    expect(JSON.stringify(canonical("enlightened-step").description.document))
+      .toContain("functions_like:spell.air-walk");
+    expect(JSON.stringify(canonical("enhance-water").description.document))
+      .toContain("uses_definition:item.unholy-water");
+  });
 });
 
 

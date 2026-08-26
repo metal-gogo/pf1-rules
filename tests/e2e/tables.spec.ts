@@ -258,6 +258,24 @@ test("Batch 26 preserves Elemental Mastery's table and contextual spell links", 
   await expect(page).toHaveURL(/\/spells\/spell\.antimagic-field$/);
 });
 
+test("Batch 27 separates elemental subtypes and contextual attitudes", async ({ page }) => {
+  await page.goto("/spells/spell.elemental-swarm");
+
+  const swarm = page.locator(".rich-description").first();
+  await expect(swarm.locator('a[href="/entities/rule.elemental"]')).toHaveCount(7);
+  await expect(swarm.locator('a[href="/entities/rule.fire"]')).toHaveCount(1);
+  await expect(swarm.locator('a[href="/rules/descriptors#fire"]')).toHaveCount(0);
+  await expectNoPageOverflow(page);
+
+  await page.goto("/spells/spell.enthrall");
+  const attitudes = page.locator(".rich-description").first()
+    .locator('a[href="/entities/rule.attitude"]');
+  await expect(attitudes).toHaveCount(6);
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+});
+
 test("pilot lists remain semantic and accessible on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/spells/spell.bestow-curse-greater");

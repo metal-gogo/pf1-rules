@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.enemys-heart",
   "ruleset": "Pathfinder First Edition",
   "name": "Enemy's Heart",
@@ -247,7 +247,93 @@
   "description": {
     "raw": "You cut out an enemy’s heart and consume it, absorbing that enemy’s power as your own. As part of casting this spell, you perform a coup de grace with a slashing weapon on a helpless, living adjacent target. If the target dies, you eat its heart to gain the spell’s benefits. If the target survives, the spell is not wasted and you can try again as long as you continue concentrating on the spell. When you consume the heart, you gain the benefits of a death knell spell, except you gain 1d8 temporary hit points +1 per Hit Die of the target, and the bonus to Strength is a profane bonus.",
     "search_text": "\"you cut out an enemy’s heart and consume it, absorbing that enemy’s power as your own. as part of casting this spell, you perform a coup de grace with a slashing weapon on a helpless, living adjacent target. if the target dies, you eat its heart to gain the spell’s benefits. if the target survives, the spell is not wasted and you can try again as long as you continue concentrating on the spell. when you consume the heart, you gain the benefits of a death knell spell, except you gain 1d8 temporary hit points +1 per hit die of the target, and the bonus to strength is a profane bonus.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You cut out an enemy’s heart and consume it, absorbing that enemy’s power as your own. As part of casting this spell, you perform a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "coup de grace",
+              "relationship_id": "spell.enemys-heart:uses_definition:rule.coup-de-grace"
+            },
+            {
+              "node_type": "text",
+              "value": " with a slashing weapon on a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "helpless",
+              "relationship_id": "spell.enemys-heart:uses_definition:condition.helpless"
+            },
+            {
+              "node_type": "text",
+              "value": ", living adjacent target. If the target dies, you eat its heart to gain the spell’s benefits. If the target survives, the spell is not wasted and you can try again as long as you continue "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concentrating",
+              "relationship_id": "spell.enemys-heart:uses_definition:rule.concentration"
+            },
+            {
+              "node_type": "text",
+              "value": " on the spell. When you consume the heart, you gain the benefits of a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "death knell",
+              "relationship_id": "spell.enemys-heart:functions_like:spell.death-knell"
+            },
+            {
+              "node_type": "text",
+              "value": " spell, except you gain 1d8 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "temporary hit points",
+              "relationship_id": "spell.enemys-heart:uses_definition:rule.temporary-hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": " +1 per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Hit Die",
+              "relationship_id": "spell.enemys-heart:uses_definition:rule.hit-dice"
+            },
+            {
+              "node_type": "text",
+              "value": " of the target, and the bonus to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Strength",
+              "relationship_id": "spell.enemys-heart:uses_definition:rule.strength"
+            },
+            {
+              "node_type": "text",
+              "value": " is a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "profane bonus",
+              "relationship_id": "spell.enemys-heart:uses_definition:rule.profane-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -257,7 +343,116 @@
     "pfs_status": "not_legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.death-knell",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.enemys-heart:a9c570220279fe32",
+        "source_field": "spell_raw.description_raw",
+        "raw": "You cut out an enemy’s heart and consume it, absorbing that enemy’s power as your own. As part of casting this spell, you perform a coup de grace with a slashing weapon on a helpless, living adjacent target. If the target dies, you eat its heart to gain the spell’s benefits. If the target survives, the spell is not wasted and you can try again as long as you continue concentrating on the spell. When you consume the heart, you gain the benefits of a death knell spell, except you gain 1d8 temporary hit points +1 per Hit Die of the target, and the bonus to Strength is a profane bonus."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/time",
+          "value": {
+            "kind": "action",
+            "amount": 1,
+            "unit": "full_round_action",
+            "raw": "1 full-round action, special see below"
+          },
+          "source_field": "spell_raw.casting_time_raw",
+          "raw": "1 full-round action, special see below",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "material",
+              "details": "target creature’s heart",
+              "cost_gp": null,
+              "raw": "M (target creature’s heart)"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (target creature’s heart)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, M (target creature’s heart)",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (target creature’s heart)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "concentration",
+            "formula": null,
+            "dismissible": null,
+            "concentration": true,
+            "raw": "concentration/1 minute per HD of the subject; see text"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "concentration/1 minute per HD of the subject; see text",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/saving_throw",
+          "value": {
+            "types": [
+              "none"
+            ],
+            "outcome": null,
+            "harmless": null,
+            "object": null,
+            "conditional": null,
+            "raw": "none"
+          },
+          "source_field": "spell_raw.saving_throw_raw",
+          "raw": "none",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "You cut out an enemy’s heart and consume it, absorbing that enemy’s power as your own. As part of casting this spell, you perform a coup de grace with a slashing weapon on a helpless, living adjacent target. If the target dies, you eat its heart to gain the spell’s benefits. If the target survives, the spell is not wasted and you can try again as long as you continue concentrating on the spell. When you consume the heart, you gain the benefits of a death knell spell, except you gain 1d8 temporary hit points +1 per Hit Die of the target, and the bonus to Strength is a profane bonus.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "You cut out an enemy’s heart and consume it, absorbing that enemy’s power as your own. As part of casting this spell, you perform a coup de grace with a slashing weapon on a helpless, living adjacent target. If the target dies, you eat its heart to gain the spell’s benefits. If the target survives, the spell is not wasted and you can try again as long as you continue concentrating on the spell. When you consume the heart, you gain the benefits of a death knell spell, except you gain 1d8 temporary hit points +1 per Hit Die of the target, and the bonus to Strength is a profane bonus.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.enemys-heart:appears_on_spell_list:spell-list.adept",
@@ -314,6 +509,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.enemys-heart:appears_on_spell_list:spell-list.cannibalism-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.cannibalism-subdomain",
+        "name": "Cannibalism Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.cannibalism:442be5b2",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd— enemy’s heart",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Evil"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
       "relationship_id": "spell.enemys-heart:appears_on_spell_list:spell-list.cleric",
       "type": "appears_on_spell_list",
       "target": {
@@ -339,6 +554,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.enemys-heart:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.enemys-heart:7d11d31b0069b69f",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.enemys-heart:a9c570220279fe32",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2 (orc)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.enemys-heart:appears_on_spell_list:spell-list.oracle",
@@ -403,6 +645,33 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "witch 2 (orc)",
           "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.enemys-heart:functions_like:spell.death-knell",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.death-knell",
+        "name": "Death Knell"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.enemys-heart:90a8d9915e743073",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "death knell",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/deathKnell.html#death-knell"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.enemys-heart:7d11d31b0069b69f",
+          "source_field": "spell_raw.links_raw[11]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "death knell",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/death-knell/"
         }
       ],
       "note": null
@@ -550,33 +819,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.enemys-heart:references:spell.death-knell",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.death-knell",
-        "name": "death knell"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.enemys-heart:90a8d9915e743073",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "death knell",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/deathKnell.html#death-knell"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.enemys-heart:7d11d31b0069b69f",
-          "source_field": "spell_raw.links_raw[11]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "death knell",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/death-knell/"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.enemys-heart:uses_action:action.full-round-action",
       "type": "uses_action",
       "target": {
@@ -659,6 +901,13 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "concentration",
           "source_href": "https://www.d20pfsrd.com/magic#TOC-Concentration"
+        },
+        {
+          "observation_id": "aon:spell.enemys-heart:a9c570220279fe32",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "concentrating",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Enemy%27s+Heart"
         }
       ],
       "note": null
@@ -684,12 +933,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.enemys-heart:uses_definition:rule.hit-die",
+      "relationship_id": "spell.enemys-heart:uses_definition:rule.hit-dice",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.hit-die",
-        "name": "Hit Die"
+        "entity_id": "rule.hit-dice",
+        "name": "Hit Dice"
       },
       "status": "accepted",
       "evidence": [
@@ -804,12 +1053,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.enemys-heart:uses_definition:rule.touch",
+      "relationship_id": "spell.enemys-heart:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -822,53 +1071,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.enemys-heart:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.enemys-heart:7d11d31b0069b69f",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.enemys-heart:a9c570220279fe32",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2 (orc)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.enemys-heart:appears_on_spell_list:spell-list.cannibalism-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.cannibalism-subdomain",
-        "name": "Cannibalism Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.cannibalism:442be5b2",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "2nd— enemy’s heart",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Evil"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -927,11 +1129,19 @@
       "raw_value_sha256": "894084d318bd8b19bf2e48267527d09715e29b32680ed997f404a01f36ece46d",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.enemys-heart:a9c570220279fe32",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "6024f5f445e099a5aa92a881378ce4cebdd24746e3a86fc8ee077b6343cd640f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

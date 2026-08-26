@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.emotive-block",
   "ruleset": "Pathfinder First Edition",
   "name": "Emotive Block",
@@ -117,7 +117,120 @@
   "description": {
     "raw": "You create an emotional block in the target’s mind, adding an emotion component to each spell or spell-like ability he uses. This is in addition to any other components the spell already requires, and doesn’t replace the somatic component. The target’s spelllike abilities require this emotion component, even though they normally don’t need spell components.\n\nAs usual with emotion components, the target can’t cast spells (or use spell-like abilities, in this case) while affected by a non-harmless emotion or fear effect.",
     "search_text": "\"you create an emotional block in the target’s mind, adding an emotion component to each spell or spell-like ability he uses. this is in addition to any other components the spell already requires, and doesn’t replace the somatic component. the target’s spelllike abilities require this emotion component, even though they normally don’t need spell components.\\n\\nas usual with emotion components, the target can’t cast spells (or use spell-like abilities, in this case) while affected by a non-harmless emotion or fear effect.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create an emotional block in the target’s mind, adding an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "emotion",
+              "relationship_id": "spell.emotive-block:uses_definition:descriptor.emotion"
+            },
+            {
+              "node_type": "text",
+              "value": " component to each spell or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell-like ability",
+              "relationship_id": "spell.emotive-block:uses_definition:rule.spell-like-abilities"
+            },
+            {
+              "node_type": "text",
+              "value": " he uses. This is in addition to any other "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "components",
+              "relationship_id": "spell.emotive-block:uses_definition:rule.components"
+            },
+            {
+              "node_type": "text",
+              "value": " the spell already requires, and doesn’t replace the somatic component. The target’s spelllike abilities require this "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "emotion",
+              "relationship_id": "spell.emotive-block:uses_definition:descriptor.emotion"
+            },
+            {
+              "node_type": "text",
+              "value": " component, even though they normally don’t need spell "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "components",
+              "relationship_id": "spell.emotive-block:uses_definition:rule.components"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "As usual with "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "emotion",
+              "relationship_id": "spell.emotive-block:uses_definition:descriptor.emotion"
+            },
+            {
+              "node_type": "text",
+              "value": " "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "components",
+              "relationship_id": "spell.emotive-block:uses_definition:rule.components"
+            },
+            {
+              "node_type": "text",
+              "value": ", the target can’t cast spells (or use "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell-like abilities",
+              "relationship_id": "spell.emotive-block:uses_definition:rule.spell-like-abilities"
+            },
+            {
+              "node_type": "text",
+              "value": ", in this case) while affected by a non-harmless "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "emotion",
+              "relationship_id": "spell.emotive-block:uses_definition:descriptor.emotion"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fear",
+              "relationship_id": "spell.emotive-block:uses_definition:rule.fear"
+            },
+            {
+              "node_type": "text",
+              "value": " effect."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -367,6 +480,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.emotive-block:uses_definition:descriptor.emotion",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.emotion",
+        "name": "Emotion"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.emotive-block:c12a8a74d077337c",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "emotion",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Emotive+Block"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.emotive-block:uses_definition:rule.components",
       "type": "uses_definition",
       "target": {
@@ -421,12 +554,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.emotive-block:uses_definition:rule.spell-like",
+      "relationship_id": "spell.emotive-block:uses_definition:rule.spell-like-abilities",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.spell-like",
-        "name": "spell-like"
+        "entity_id": "rule.spell-like-abilities",
+        "name": "Spell-like abilities"
       },
       "status": "accepted",
       "evidence": [
@@ -436,40 +569,14 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "spell-like",
           "source_href": "https://www.d20pfsrd.com/basics-ability-scores/glossary#TOC-Spell-Like-Abilities-Sp-"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.emotive-block:uses_definition:rule.spell-like-abilities",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.spell-like-abilities",
-        "name": "spell-like abilities"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.emotive-block:f6e5f19fe8396585",
           "source_field": "spell_raw.links_raw[13]",
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "spell-like abilities",
           "source_href": "https://www.d20pfsrd.com/magic#TOC-Spell-Like-Abilities-Sp-"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.emotive-block:uses_definition:rule.spell-like-ability",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.spell-like-ability",
-        "name": "spell-like ability"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.emotive-block:f6e5f19fe8396585",
           "source_field": "spell_raw.links_raw[8]",
@@ -501,11 +608,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.emotive-block:uses_definition:rule.will",
+      "relationship_id": "spell.emotive-block:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -569,11 +676,19 @@
       "raw_value_sha256": "41d18f9a2cc2421b038d243bd6fce848566a11a44118d67b715d13c4d225a5f1",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.emotive-block:c12a8a74d077337c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "c9562cf2336638602b0e57fc6006cee0a98b2fe76649b82db8b1434f772b4528",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
