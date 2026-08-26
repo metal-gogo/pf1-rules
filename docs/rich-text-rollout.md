@@ -12,7 +12,7 @@ Audit date: 2026-08-25.
 | Category | Spells | Meaning |
 | --- | ---: | --- |
 | Total canonical spells | 3,030 | Complete corpus |
-| Rich text stored | 638 | 11-spell pilot, twenty-five reviewed 25-spell rollout batches, Reincarnate, and one reviewed warning record |
+| Rich text stored | 663 | 11-spell pilot, twenty-six reviewed 25-spell rollout batches, Reincarnate, and one reviewed warning record |
 | Safe candidates with links | 1,632 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
 | Safe structure-only candidates | 306 | Source text matches, but no known relationship currently produces an inline link |
 | Source mismatch | 280 | Current canonical text and the newly bounded AoN description differ |
@@ -791,6 +791,41 @@ Review of this batch established these normalization rules:
 Detect Undead was deferred from Batch 23 while table support was changing. Its
 row and cell semantics are now reviewed and covered by canonical, web, and
 browser tests.
+
+### Batch 26
+
+The twenty-sixth rollout batch contains:
+
+- Dweomer Retaliation; Eagle Aerie; Eagle's Splendor; Mass Eagle's Splendor;
+  Eaglesoul; Early Judgment; Ears of the City; Earth Glide; Earth Tremor.
+- Echean's Excellent Enclosure; Echo; Echolocation; Ectoplasmic Eruption;
+  Ectoplasmic Hand; Ectoplasmic Snare; Effortless Armor.
+- Ego Whip II–V; Eldritch Fever; Elemental Assessor; Elemental Aura;
+  Elemental Mastery; Elemental Speech.
+
+Review of this batch established these normalization rules:
+
+- Ectoplasmic Snare rejects the secondary source's Snare relationship because
+  every occurrence names the current spell's tether. Elemental Aura likewise
+  leaves `elemental` plain when it occurs only in the current spell's name.
+- Elemental Speech distinguishes spell descriptors from creature subtypes:
+  `air spell` links the Air descriptor, while `air subtype` links the Air rules
+  entity, with the same treatment for Earth, Fire, and Water. Its own title
+  remains plain.
+- Eaglesoul's `Resistance 5 to acid and fire` resolves to Energy Resistance,
+  not the unrelated Resistance spell or a generic resistance record. Ifrit,
+  oread, sylph, and undine plurals resolve to their singular canonical race
+  entities.
+- Explicit inheritance from Ego Whip II–V to Ego Whip I is represented as
+  `functions_like`. Echean's Excellent Enclosure links every named spell and
+  item while preserving the inverted phrase `field of antimagic`.
+- Elemental Mastery's source table remains a table with one header row, four
+  body rows, row headers, and inline links. Source wording, emphasis, paragraph
+  boundaries, and all other rich-text structures remain text-equivalent.
+
+Canonical, database-backed web, and desktop/mobile browser tests cover these
+distinctions. Manual rendered review covered Echean's Excellent Enclosure,
+Elemental Aura, Elemental Speech, Ectoplasmic Snare, and Elemental Mastery.
 
 ## Open questions and issues
 

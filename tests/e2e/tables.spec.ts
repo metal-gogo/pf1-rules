@@ -236,6 +236,28 @@ test("Batch 25 preserves Detect Undead's table and contextual Dream link", async
   await expect(page).toHaveURL(/\/spells\/spell\.dream$/);
 });
 
+test("Batch 26 preserves Elemental Mastery's table and contextual spell links", async ({ page }) => {
+  await page.goto("/spells/spell.elemental-mastery");
+
+  const mastery = page.locator(".rich-description").first();
+  await expect(mastery.locator("table")).toHaveCount(1);
+  await expect(mastery.locator("tbody tr")).toHaveCount(4);
+  await expect(mastery.locator('a[href="/entities/rule.ifrit"]')).toHaveCount(2);
+  await expectNoPageOverflow(page);
+
+  await page.goto("/spells/spell.echeans-excellent-enclosure");
+  const antimagic = page.locator(".rich-description").first()
+    .locator('a[href="/spells/spell.antimagic-field"]');
+  await expect(antimagic).toHaveCount(3);
+  await expect(antimagic.first()).not.toHaveAttribute("target", "_blank");
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+
+  await antimagic.first().click();
+  await expect(page).toHaveURL(/\/spells\/spell\.antimagic-field$/);
+});
+
 test("pilot lists remain semantic and accessible on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/spells/spell.bestow-curse-greater");

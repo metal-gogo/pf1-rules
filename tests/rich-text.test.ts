@@ -574,6 +574,49 @@ describe("rich-text schema and source parsing", () => {
     expect(JSON.stringify(canonical("dungeonsight").description.document))
       .toContain("uses_definition:monster.iron-golem");
   });
+
+  it("keeps Batch 26 spell references, homonyms, and elemental contexts distinct", () => {
+    const enclosure = JSON.stringify(
+      canonical("echeans-excellent-enclosure").description.document,
+    );
+    for (const spell of [
+      "antimagic-field",
+      "dimension-door",
+      "dispel-magic",
+      "teleport",
+      "wall-of-force",
+    ]) expect(enclosure).toContain(`spell.${spell}`);
+
+    const snare = canonical("ectoplasmic-snare");
+    expect(snare.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.ectoplasmic-snare:references:spell.snare",
+      status: "rejected",
+    }));
+    expect(JSON.stringify(snare.description.document)).not.toContain("references:spell.snare");
+
+    const aura = JSON.stringify(canonical("elemental-aura").description.document);
+    expect(aura).not.toContain("uses_definition:rule.elemental");
+    for (const descriptor of ["acid", "cold", "electricity", "fire"]) {
+      expect(aura).toContain(`uses_definition:descriptor.${descriptor}`);
+    }
+
+    const speech = JSON.stringify(canonical("elemental-speech").description.document);
+    expect(speech.match(/uses_definition:rule\.elemental/g)).toHaveLength(2);
+    for (const element of ["air", "earth", "fire", "water"]) {
+      expect(speech).toContain(`uses_definition:descriptor.${element}`);
+      expect(speech).toContain(`uses_definition:rule.${element}`);
+    }
+
+    expect(canonical("elemental-mastery").description.document.content.filter(
+      (block: Record<string, unknown>) => block.node_type === "table",
+    )).toHaveLength(1);
+    expect(JSON.stringify(canonical("eaglesoul").description.document))
+      .toContain("uses_definition:rule.energy-resistance");
+    for (const tier of ["ii", "iii", "iv", "v"]) {
+      expect(JSON.stringify(canonical(`ego-whip-${tier}`).description.document))
+        .toContain("functions_like:spell.ego-whip-i");
+    }
+  });
 });
 
 

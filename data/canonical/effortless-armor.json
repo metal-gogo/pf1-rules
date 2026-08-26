@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.effortless-armor",
   "ruleset": "Pathfinder First Edition",
   "name": "Effortless Armor",
@@ -204,7 +204,48 @@
   "description": {
     "raw": "Armor you wear no longer reduces your speed. You also reduce the armor’s armor check penalty by 1 + 1 per five caster levels (maximum 5).",
     "search_text": "\"armor you wear no longer reduces your speed. you also reduce the armor’s armor check penalty by 1 + 1 per five caster levels (maximum 5).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Armor you wear no longer reduces your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "speed",
+              "relationship_id": "spell.effortless-armor:uses_definition:rule.speed"
+            },
+            {
+              "node_type": "text",
+              "value": ". You also reduce the armor’s "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "armor check penalty",
+              "relationship_id": "spell.effortless-armor:uses_definition:rule.armor-check-penalty"
+            },
+            {
+              "node_type": "text",
+              "value": " by 1 + 1 per five "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster levels",
+              "relationship_id": "spell.effortless-armor:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum 5)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -336,6 +377,47 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.effortless-armor:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.effortless-armor:4bf1984661ff0f61",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.effortless-armor:165fdfbc2cfe3673",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.effortless-armor:4bf1984661ff0f61",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.effortless-armor:165fdfbc2cfe3673",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.effortless-armor:appears_on_spell_list:spell-list.oracle",
@@ -574,12 +656,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.effortless-armor:uses_definition:rule.caster-levels",
+      "relationship_id": "spell.effortless-armor:uses_definition:rule.caster-level",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.caster-levels",
-        "name": "caster levels"
+        "entity_id": "rule.caster-level",
+        "name": "Caster level"
       },
       "status": "accepted",
       "evidence": [
@@ -592,6 +674,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.effortless-armor:uses_definition:rule.speed",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.speed",
+        "name": "Speed"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.effortless-armor:165fdfbc2cfe3673",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "speed",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Effortless+Armor"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.effortless-armor:uses_definition:rule.spell-resistance",
@@ -612,47 +714,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.effortless-armor:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.effortless-armor:4bf1984661ff0f61",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.effortless-armor:165fdfbc2cfe3673",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.effortless-armor:4bf1984661ff0f61",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.effortless-armor:165fdfbc2cfe3673",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -703,11 +764,19 @@
       "raw_value_sha256": "7a06da994e2d8662333e4ab8c8f37a766c987a27f483bb9967a9f577a9c93bcb",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.effortless-armor:165fdfbc2cfe3673",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "b89e8d663e0836ea4cee179203ffe1207704501d70be62dca18b8d0f15b5f1d6",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

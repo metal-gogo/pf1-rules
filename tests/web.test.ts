@@ -1483,6 +1483,32 @@ describe("local rules browser", () => {
     expect(descriptions[3]).toContain('aria-label="Spell description table 2 of 2"');
   });
 
+  it("renders Batch 26 spell, descriptor, subtype, and table links semantically", async () => {
+    const [enclosureResponse, snareResponse, auraResponse, speechResponse, masteryResponse] =
+      await Promise.all([
+        fetch(`${baseUrl}/spells/spell.echeans-excellent-enclosure`),
+        fetch(`${baseUrl}/spells/spell.ectoplasmic-snare`),
+        fetch(`${baseUrl}/spells/spell.elemental-aura`),
+        fetch(`${baseUrl}/spells/spell.elemental-speech`),
+        fetch(`${baseUrl}/spells/spell.elemental-mastery`),
+      ]);
+    const descriptions = await Promise.all(
+      [enclosureResponse, snareResponse, auraResponse, speechResponse, masteryResponse]
+        .map(async (response) => (await response.text()).match(
+          /<section><h2>Description<\/h2>(.*?)<\/section>/s,
+        )?.[1] ?? ""),
+    );
+
+    expect(descriptions[0]).toContain('href="/spells/spell.antimagic-field"');
+    expect(descriptions[0]).toContain('href="/spells/spell.wall-of-force"');
+    expect(descriptions[1]).not.toContain('href="/spells/spell.snare"');
+    expect(descriptions[2]).toContain('href="/rules/descriptors#acid"');
+    expect(descriptions[2]).not.toContain('href="/entities/rule.elemental"');
+    expect(descriptions[3]).toContain('href="/rules/descriptors#fire"');
+    expect(descriptions[3]).toContain('href="/entities/rule.fire"');
+    expect(descriptions[4]).toContain('<table class="data-table rich-text-table">');
+  });
+
   it("links Curse of Unexpected Death's touch attacks but not its ordinary touch verbs", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.curse-of-unexpected-death`);
     const html = await response.text();

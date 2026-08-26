@@ -137,6 +137,17 @@ const divinePowerRejectedTargets = new Set(["rule.speed"]);
 
 const divineVesselRejectedTargets = new Set(["rule.resist"]);
 
+const elementalSpeechContextualTargets = new Set([
+  "descriptor.air",
+  "descriptor.earth",
+  "descriptor.fire",
+  "descriptor.water",
+  "rule.air",
+  "rule.earth",
+  "rule.fire",
+  "rule.water",
+]);
+
 const canonicalTargets = new Map<string, {
   id: string;
   name: string;
@@ -276,6 +287,10 @@ const canonicalTargets = new Map<string, {
   ["rule.torch", { id: "item.torch", name: "Torch", type: "item" }],
   ["rule.grappling", { id: "rule.grapple", name: "Grapple" }],
   ["rule.temporary-hit-point", { id: "rule.temporary-hit-points", name: "Temporary hit points" }],
+  ["rule.ifrits", { id: "rule.ifrit", name: "Ifrit" }],
+  ["rule.oreads", { id: "rule.oread", name: "Oread" }],
+  ["rule.sylphs", { id: "rule.sylph", name: "Sylph" }],
+  ["rule.undines", { id: "rule.undine", name: "Undine" }],
   ["rule.haunts", { id: "rule.haunt", name: "Haunt" }],
   ["rule.ghost", { id: "monster.ghost", name: "Ghost", type: "monster" }],
   ["rule.iron-golems", { id: "monster.iron-golem", name: "Iron golem", type: "monster" }],
@@ -505,6 +520,10 @@ const canonicalRelationshipTargets = new Map<string, {
   [
     "spell.damnation-of-memory:references:spell.magic-aura",
     { id: "rule.magic-aura-detection", name: "Magic aura", type: "rule", relationshipType: "uses_definition" },
+  ],
+  [
+    "spell.eaglesoul:uses_definition:rule.resistance",
+    { id: "rule.energy-resistance", name: "Energy Resistance", type: "rule", relationshipType: "uses_definition" },
   ],
 ]);
 
@@ -871,6 +890,14 @@ const rejectedDescriptionRelationships = new Map([
   [
     "spell.dream-voyage:uses_definition:rule.touch-attack",
     "The description uses “touch” to select the spell's companions, not for a touch attack.",
+  ],
+  [
+    "spell.ectoplasmic-snare:references:spell.snare",
+    "The description uses “snare” as an ordinary noun for its own ectoplasmic tether, not as a reference to the Snare spell.",
+  ],
+  [
+    "spell.elemental-aura:uses_definition:rule.elemental",
+    "The description uses “elemental” only as part of this spell's own name, not as a creature-type reference.",
   ],
 ]);
 
@@ -1511,6 +1538,119 @@ const reviewedDescriptionReferences = new Map<string, ReviewedDescriptionReferen
   ]],
   ["spell.dwarven-veil", [
     { targetType: "rule", targetId: "rule.dwarf", targetName: "Dwarf", anchorText: "dwarves" },
+  ]],
+  ["spell.dweomer-retaliation", [
+    { targetType: "rule", targetId: "rule.counterspell", targetName: "Counterspell", anchorText: "counterspelling" },
+    { targetType: "rule", targetId: "rule.temporary-hit-points", targetName: "Temporary hit points", anchorText: "temporary hit points" },
+  ]],
+  ["spell.eaglesoul", [
+    { targetType: "rule", targetId: "rule.armor-class", targetName: "Armor Class", anchorText: "AC" },
+    { targetType: "rule", targetId: "rule.critical-hit", targetName: "Critical hits", anchorText: "critical threat roll" },
+    { targetType: "descriptor", targetId: "descriptor.acid", targetName: "Acid", anchorText: "acid" },
+    { targetType: "descriptor", targetId: "descriptor.fire", targetName: "Fire", anchorText: "fire" },
+    { targetType: "rule", targetId: "rule.good", targetName: "Good", anchorText: "good" },
+    { targetType: "rule", targetId: "rule.evil", targetName: "Evil", anchorText: "evil" },
+  ]],
+  ["spell.early-judgment", [
+    { targetType: "deity", targetId: "deity.pharasma", targetName: "Pharasma", anchorText: "Pharasma" },
+    { targetType: "rule", targetId: "rule.good", targetName: "Good", anchorText: "good" },
+    { targetType: "rule", targetId: "rule.neutral", targetName: "Neutral", anchorText: "neutral" },
+    { targetType: "rule", targetId: "rule.evil", targetName: "Evil", anchorText: "evil" },
+    { targetType: "rule", targetId: "rule.plane", targetName: "Planes", anchorText: "plane" },
+  ]],
+  ["spell.ears-of-the-city", [
+    { targetType: "rule", targetId: "rule.concentration", targetName: "Concentration", anchorText: "concentrates" },
+    { targetType: "rule", targetId: "rule.concentration", targetName: "Concentration", anchorText: "concentrating" },
+  ]],
+  ["spell.earth-glide", [
+    { targetType: "rule", targetId: "rule.concentration", targetName: "Concentration", anchorText: "concentration" },
+    { targetType: "condition", targetId: "condition.stunned", targetName: "Stunned", anchorText: "stunning" },
+    { targetType: "descriptor", targetId: "descriptor.fire", targetName: "Fire", anchorText: "fire" },
+  ]],
+  ["spell.echeans-excellent-enclosure", [
+    { type: "references", targetType: "spell", targetId: "spell.antimagic-field", targetName: "Antimagic Field", anchorText: "antimagic field" },
+    { type: "references", targetType: "spell", targetId: "spell.antimagic-field", targetName: "Antimagic Field", anchorText: "field of antimagic" },
+    { type: "references", targetType: "spell", targetId: "spell.wall-of-force", targetName: "Wall of Force", anchorText: "wall of force" },
+    { type: "references", targetType: "spell", targetId: "spell.dispel-magic", targetName: "Dispel Magic", anchorText: "dispel magic" },
+    { targetType: "item", targetId: "item.sphere-of-annihilation", targetName: "Sphere of annihilation", anchorText: "sphere of annihilation" },
+    { targetType: "item", targetId: "item.rod-of-cancellation", targetName: "Rod of cancellation", anchorText: "rod of cancellation" },
+    { targetType: "rule", targetId: "rule.hardness", targetName: "Hardness", anchorText: "hardness" },
+    { targetType: "rule", targetId: "rule.hit-points", targetName: "Hit points", anchorText: "hit points" },
+    { targetType: "rule", targetId: "rule.caster-level", targetName: "Caster level", anchorText: "caster level" },
+    { targetType: "rule", targetId: "rule.teleportation", targetName: "Teleportation", anchorText: "teleportation" },
+    { type: "references", targetType: "spell", targetId: "spell.dimension-door", targetName: "Dimension Door", anchorText: "dimension door" },
+    { type: "references", targetType: "spell", targetId: "spell.teleport", targetName: "Teleport", anchorText: "teleport" },
+    { targetType: "subschool", targetId: "subschool.summoning", targetName: "Summoning", anchorText: "summoned creatures" },
+    { targetType: "rule", targetId: "rule.incorporeal", targetName: "Incorporeal", anchorText: "incorporeal" },
+    { targetType: "rule", targetId: "rule.undead", targetName: "Undead", anchorText: "undead" },
+  ]],
+  ["spell.echo", [
+    { targetType: "rule", targetId: "rule.concentration", targetName: "Concentration", anchorText: "concentrate" },
+  ]],
+  ["spell.ectoplasmic-eruption", [
+    { targetType: "rule", targetId: "rule.ethereal", targetName: "Ethereal", anchorText: "ethereal" },
+    { targetType: "rule", targetId: "rule.magic-weapons", targetName: "Magic Weapons", anchorText: "magic weapons" },
+  ]],
+  ["spell.ectoplasmic-hand", [
+    { targetType: "rule", targetId: "rule.armor-class", targetName: "Armor Class", anchorText: "AC" },
+    { targetType: "rule", targetId: "rule.ability-score", targetName: "Ability score", anchorText: "ability score" },
+    { targetType: "rule", targetId: "rule.concentration", targetName: "Concentration", anchorText: "concentrate" },
+    { targetType: "rule", targetId: "rule.drag", targetName: "Drag", anchorText: "drag" },
+    { targetType: "rule", targetId: "rule.size", targetName: "Size", anchorText: "size" },
+    { targetType: "rule", targetId: "rule.steal", targetName: "Steal", anchorText: "steal" },
+  ]],
+  ["spell.ectoplasmic-snare", [
+    { targetType: "rule", targetId: "rule.concentration", targetName: "Concentration", anchorText: "concentrate" },
+    { targetType: "rule", targetId: "rule.ethereal", targetName: "Ethereal", anchorText: "ethereal" },
+  ]],
+  ["spell.effortless-armor", [
+    { targetType: "rule", targetId: "rule.speed", targetName: "Speed", anchorText: "speed" },
+  ]],
+  ["spell.ego-whip-ii", [
+    { type: "functions_like", targetType: "spell", targetId: "spell.ego-whip-i", targetName: "Ego Whip I", anchorText: "ego whip I" },
+    { targetType: "rule", targetId: "rule.ability-score", targetName: "Ability score", anchorText: "ability score" },
+  ]],
+  ["spell.ego-whip-iii", [
+    { type: "functions_like", targetType: "spell", targetId: "spell.ego-whip-i", targetName: "Ego Whip I", anchorText: "ego whip I" },
+    { targetType: "rule", targetId: "rule.ability-score", targetName: "Ability score", anchorText: "ability score" },
+  ]],
+  ["spell.ego-whip-iv", [
+    { type: "functions_like", targetType: "spell", targetId: "spell.ego-whip-i", targetName: "Ego Whip I", anchorText: "ego whip I" },
+    { targetType: "rule", targetId: "rule.ability-score", targetName: "Ability score", anchorText: "ability score" },
+  ]],
+  ["spell.ego-whip-v", [
+    { type: "functions_like", targetType: "spell", targetId: "spell.ego-whip-i", targetName: "Ego Whip I", anchorText: "ego whip I" },
+    { targetType: "rule", targetId: "rule.ability-score", targetName: "Ability score", anchorText: "ability score" },
+  ]],
+  ["spell.elemental-assessor", [
+    { targetType: "descriptor", targetId: "descriptor.acid", targetName: "Acid", anchorText: "acid" },
+    { targetType: "descriptor", targetId: "descriptor.cold", targetName: "Cold", anchorText: "cold" },
+    { targetType: "descriptor", targetId: "descriptor.electricity", targetName: "Electricity", anchorText: "electricity" },
+    { targetType: "descriptor", targetId: "descriptor.fire", targetName: "Fire", anchorText: "fire" },
+    { targetType: "rule", targetId: "rule.energy-resistance", targetName: "Energy Resistance", anchorText: "resistances" },
+  ]],
+  ["spell.elemental-aura", [
+    { targetType: "descriptor", targetId: "descriptor.acid", targetName: "Acid", anchorText: "acid" },
+    { targetType: "descriptor", targetId: "descriptor.cold", targetName: "Cold", anchorText: "cold" },
+    { targetType: "descriptor", targetId: "descriptor.electricity", targetName: "Electricity", anchorText: "electricity" },
+    { targetType: "descriptor", targetId: "descriptor.fire", targetName: "Fire", anchorText: "fire" },
+    { targetType: "rule", targetId: "rule.caster-level", targetName: "Caster level", anchorText: "caster levels" },
+  ]],
+  ["spell.elemental-mastery", [
+    { targetType: "rule", targetId: "rule.catch-on-fire", targetName: "Catch on fire", anchorText: "on fire" },
+    { targetType: "rule", targetId: "rule.ifrit", targetName: "Ifrit", anchorText: "ifrits" },
+    { targetType: "rule", targetId: "rule.undine", targetName: "Undine", anchorText: "undines" },
+    { targetType: "rule", targetId: "rule.speed", targetName: "Speed", anchorText: "speed" },
+  ]],
+  ["spell.elemental-speech", [
+    { targetType: "descriptor", targetId: "descriptor.air", targetName: "Air", anchorText: "air spell" },
+    { targetType: "descriptor", targetId: "descriptor.earth", targetName: "Earth", anchorText: "earth spell" },
+    { targetType: "descriptor", targetId: "descriptor.fire", targetName: "Fire", anchorText: "fire spell" },
+    { targetType: "descriptor", targetId: "descriptor.water", targetName: "Water", anchorText: "water spell" },
+    { targetType: "rule", targetId: "rule.air", targetName: "Air", anchorText: "air subtype" },
+    { targetType: "rule", targetId: "rule.earth", targetName: "Earth", anchorText: "earth subtype" },
+    { targetType: "rule", targetId: "rule.fire", targetName: "Fire", anchorText: "fire subtype" },
+    { targetType: "rule", targetId: "rule.water", targetName: "Water", anchorText: "water subtype" },
   ]],
 ]);
 
@@ -2575,6 +2715,9 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
       ) && (
         spellId !== "spell.divine-vessel" ||
         !divineVesselRejectedTargets.has(String(relationship.target.entity_id))
+      ) && (
+        spellId !== "spell.elemental-speech" ||
+        !elementalSpeechContextualTargets.has(String(relationship.target.entity_id))
       )
     );
     if (spellId === "spell.darkness") {
@@ -2663,6 +2806,38 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
           relationshipId: "spell.curse-water:uses_definition:rule.outsider",
         },
       ]);
+    }
+    if (spellId === "spell.elemental-speech") {
+      for (const element of ["air", "earth", "fire", "water"] as const) {
+        linkContext(sourceDocument, `${element} spell`, [{
+          value: element,
+          relationshipId: `spell.elemental-speech:uses_definition:descriptor.${element}`,
+        }]);
+        linkContext(sourceDocument, `${element} subtype`, [{
+          value: element,
+          relationshipId: `spell.elemental-speech:uses_definition:rule.${element}`,
+        }]);
+      }
+    }
+    if (spellId === "spell.echeans-excellent-enclosure") {
+      linkContext(sourceDocument, "field of antimagic", [{
+        value: "field of antimagic",
+        relationshipId: "spell.echeans-excellent-enclosure:references:spell.antimagic-field",
+      }]);
+    }
+    if (spellId === "spell.ectoplasmic-hand") {
+      for (const maneuver of ["drag", "steal"] as const) {
+        linkContext(sourceDocument, `${maneuver}APG`, [{
+          value: maneuver,
+          relationshipId: `spell.ectoplasmic-hand:uses_definition:rule.${maneuver}`,
+        }]);
+      }
+    }
+    if (spellId === "spell.elemental-mastery") {
+      linkContext(sourceDocument, "all speeds", [{
+        value: "speeds",
+        relationshipId: "spell.elemental-mastery:uses_definition:rule.speed",
+      }]);
     }
     if (spellId === "spell.detect-snares-and-pits") {
       linkContext(sourceDocument, "see the spell snare", [{
@@ -2852,6 +3027,14 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
         "spell.divine-vessel:uses_definition:rule.good",
         [4, 5, 7],
         7,
+      );
+    }
+    if (spellId === "spell.elemental-speech") {
+      keepRelationshipLinkOccurrences(
+        richText.document,
+        "spell.elemental-speech:uses_definition:rule.elemental",
+        [1, 2],
+        3,
       );
     }
     if (spellId === "spell.determine-depth") {

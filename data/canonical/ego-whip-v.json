@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.ego-whip-v",
   "ruleset": "Pathfinder First Edition",
   "name": "Ego Whip V",
@@ -102,7 +102,60 @@
   "description": {
     "raw": "This functions as ego whip I, but the target takes –10 penalty to the chosen ability score and is staggered for 1d10 rounds on a failed Will save. This spell can be undercast.",
     "search_text": "\"this functions as ego whip i, but the target takes –10 penalty to the chosen ability score and is staggered for 1d10 rounds on a failed will save. this spell can be undercast.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "ego whip I",
+              "relationship_id": "spell.ego-whip-v:functions_like:spell.ego-whip-i",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", but the target takes –10 penalty to the chosen "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "ability score",
+              "relationship_id": "spell.ego-whip-v:uses_definition:rule.ability-score"
+            },
+            {
+              "node_type": "text",
+              "value": " and is "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "staggered",
+              "relationship_id": "spell.ego-whip-v:uses_definition:condition.staggered"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1d10 rounds on a failed "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.ego-whip-v:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save. This spell can be undercast."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -112,7 +165,42 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.ego-whip-i",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.ego-whip-v:51d35dc32491c813",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This functions as ego whip I, but the target takes –10 penalty to the chosen ability score and is staggered for 1d10 rounds on a failed Will save. This spell can be undercast."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/description/raw",
+          "value": "This functions as ego whip I, but the target takes –10 penalty to the chosen ability score and is staggered for 1d10 rounds on a failed Will save. This spell can be undercast.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This functions as ego whip I, but the target takes –10 penalty to the chosen ability score and is staggered for 1d10 rounds on a failed Will save. This spell can be undercast.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.ego-whip-v:appears_on_spell_list:spell-list.psychic",
@@ -133,6 +221,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.ego-whip-v:functions_like:spell.ego-whip-i",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.ego-whip-i",
+        "name": "Ego Whip I"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.ego-whip-v:51d35dc32491c813",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "ego whip I",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Ego+Whip+V"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.ego-whip-v:has_descriptor:descriptor.emotion",
@@ -331,6 +439,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.ego-whip-v:uses_definition:rule.ability-score",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.ability-score",
+        "name": "Ability score"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.ego-whip-v:51d35dc32491c813",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "ability score",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Ego+Whip+V"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.ego-whip-v:uses_definition:rule.psychic",
       "type": "uses_definition",
       "target": {
@@ -371,11 +499,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.ego-whip-v:uses_definition:rule.will",
+      "relationship_id": "spell.ego-whip-v:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -439,11 +567,19 @@
       "raw_value_sha256": "41d18f9a2cc2421b038d243bd6fce848566a11a44118d67b715d13c4d225a5f1",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.ego-whip-v:51d35dc32491c813",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e466b9381afd8370c85dfd24f5959f1af9cd41cdee206319b63962343bc384e7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
