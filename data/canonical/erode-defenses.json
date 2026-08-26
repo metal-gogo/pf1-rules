@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.erode-defenses",
   "ruleset": "Pathfinder First Edition",
   "name": "Erode Defenses",
@@ -145,7 +145,95 @@
   "description": {
     "raw": "Your spell slowly begins to eat away at the defenses of your target.\nIf the target fails its saving throw, it loses 1 point from any damage\nreduction and natural armor bonus it may have. If the initial save\nwas not successful, the target may attempt a new saving throw\neach round for the duration of the spell or continue to suffer\ncumulative losses. If the first save fails but a subsequent save\nsucceeds, the eroding effects stop at that point, though any of the\npenalties already accrued remain until the spell expires. At the end\nof the spell’s duration, the target’s damage reduction and natural\narmor bonus immediately return to normal.\n\nOnly one erode defenses spell can affect a particular target\nat any one time.",
     "search_text": "\"your spell slowly begins to eat away at the defenses of your target.\\nif the target fails its saving throw, it loses 1 point from any damage\\nreduction and natural armor bonus it may have. if the initial save\\nwas not successful, the target may attempt a new saving throw\\neach round for the duration of the spell or continue to suffer\\ncumulative losses. if the first save fails but a subsequent save\\nsucceeds, the eroding effects stop at that point, though any of the\\npenalties already accrued remain until the spell expires. at the end\\nof the spell’s duration, the target’s damage reduction and natural\\narmor bonus immediately return to normal.\\n\\nonly one erode defenses spell can affect a particular target\\nat any one time.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Your spell slowly begins to eat away at the defenses of your target. If the target fails its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throw",
+              "relationship_id": "spell.erode-defenses:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": ", it loses 1 point from any "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "damage reduction",
+              "relationship_id": "spell.erode-defenses:uses_definition:rule.damage-reduction"
+            },
+            {
+              "node_type": "text",
+              "value": " and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "natural armor bonus",
+              "relationship_id": "spell.erode-defenses:uses_definition:rule.natural-armor-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " it may have. If the initial save was not successful, the target may attempt a new "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throw",
+              "relationship_id": "spell.erode-defenses:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": " each round for the duration of the spell or continue to suffer cumulative losses. If the first save fails but a subsequent save succeeds, the eroding effects stop at that point, though any of the penalties already accrued remain until the spell expires. At the end of the spell’s duration, the target’s "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "damage reduction",
+              "relationship_id": "spell.erode-defenses:uses_definition:rule.damage-reduction"
+            },
+            {
+              "node_type": "text",
+              "value": " and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "natural armor bonus",
+              "relationship_id": "spell.erode-defenses:uses_definition:rule.natural-armor-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " immediately return to normal."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": " Only one "
+            },
+            {
+              "node_type": "text",
+              "value": "erode defenses",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell can affect a particular target at any one time."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -434,12 +522,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.erode-defenses:uses_definition:rule.fort",
+      "relationship_id": "spell.erode-defenses:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -479,6 +567,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.erode-defenses:uses_definition:rule.saving-throws",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.saving-throws",
+        "name": "Saving throws"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.erode-defenses:815175fed3a0472a",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "saving throw",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Erode+Defenses"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.erode-defenses:uses_definition:rule.spell-resistance",
@@ -549,11 +657,19 @@
       "raw_value_sha256": "da8dfa733199a545a973302d142b8566284b37327f29262c5c9e6bb15785bdcb",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.erode-defenses:815175fed3a0472a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "da3afe84d86371642d99209c4cf81c2eb778a7ad2fc97eba7a0973ee50173bb5",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

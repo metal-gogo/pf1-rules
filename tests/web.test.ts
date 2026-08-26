@@ -1534,6 +1534,31 @@ describe("local rules browser", () => {
     expect(descriptions[4]!.match(/href="\/entities\/rule.attitude"/g)).toHaveLength(6);
   });
 
+  it("renders Batch 28 state, plane, and subschool links without false positives", async () => {
+    const [alarmResponse, fistsResponse, shardsResponse, lensResponse, tranquilityResponse] =
+      await Promise.all([
+        fetch(`${baseUrl}/spells/spell.escape-alarm`),
+        fetch(`${baseUrl}/spells/spell.ethereal-fists`),
+        fetch(`${baseUrl}/spells/spell.etheric-shards`),
+        fetch(`${baseUrl}/spells/spell.evaluators-lens`),
+        fetch(`${baseUrl}/spells/spell.euphoric-tranquility`),
+      ]);
+    const descriptions = await Promise.all(
+      [alarmResponse, fistsResponse, shardsResponse, lensResponse, tranquilityResponse]
+        .map(async (response) => (await response.text()).match(
+          /<section><h2>Description<\/h2>(.*?)<\/section>/s,
+        )?.[1] ?? ""),
+    );
+
+    expect(descriptions[0]!.match(/href="\/spells\/spell.alarm"/g)).toHaveLength(1);
+    expect(descriptions[1]).not.toContain('href="/spells/spell.etherealness"');
+    expect(descriptions[1]!.match(/href="\/entities\/rule.ethereal"/g)).toHaveLength(2);
+    expect(descriptions[2]).not.toContain('href="/entities/condition.disabled"');
+    expect(descriptions[3]).toContain('href="/rules/magic-schools#figment"');
+    expect(descriptions[3]).toContain('href="/entities/item.rod-of-cancellation"');
+    expect(descriptions[4]!.match(/href="\/entities\/rule.attitude"/g)).toHaveLength(1);
+  });
+
   it("links Curse of Unexpected Death's touch attacks but not its ordinary touch verbs", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.curse-of-unexpected-death`);
     const html = await response.text();

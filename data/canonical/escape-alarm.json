@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.escape-alarm",
   "ruleset": "Pathfinder First Edition",
   "name": "Escape Alarm",
@@ -230,7 +230,94 @@
   "description": {
     "raw": "You place a ward on an area that notifies you when a creature exits it. This functions as alarm, except as noted. It alerts you when a creature leaves, rather than enters, the area, and you can’t select a password to bypass its effects. Instead, when you place an escape alarm, you can attune up to one additional creature per caster level to the spell. You are automatically attuned to your own escape alarm and don’t count against the limit. Attuned creatures can enter and exit the spell’s area without triggering the alarm. If you select a mental alarm rather than an audible one, all attuned creatures receive the mental alert when someone exits the warded area.",
     "search_text": "\"you place a ward on an area that notifies you when a creature exits it. this functions as alarm, except as noted. it alerts you when a creature leaves, rather than enters, the area, and you can’t select a password to bypass its effects. instead, when you place an escape alarm, you can attune up to one additional creature per caster level to the spell. you are automatically attuned to your own escape alarm and don’t count against the limit. attuned creatures can enter and exit the spell’s area without triggering the alarm. if you select a mental alarm rather than an audible one, all attuned creatures receive the mental alert when someone exits the warded area.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You place a ward on an area that notifies you when a creature exits it. This functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "alarm",
+              "relationship_id": "spell.escape-alarm:functions_like:spell.alarm",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except as noted. It alerts you when a creature leaves, rather than enters, the area, and you can’t select a password to bypass its effects. Instead, when you place an "
+            },
+            {
+              "node_type": "text",
+              "value": "escape ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "alarm",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", you can attune up to one additional creature per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.escape-alarm:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " to the spell. You are automatically attuned to your own "
+            },
+            {
+              "node_type": "text",
+              "value": "escape ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "alarm",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " and don’t count against the limit. Attuned creatures can enter and exit the spell’s area without triggering the "
+            },
+            {
+              "node_type": "text",
+              "value": "alarm"
+            },
+            {
+              "node_type": "text",
+              "value": ". If you select a mental "
+            },
+            {
+              "node_type": "text",
+              "value": "alarm"
+            },
+            {
+              "node_type": "text",
+              "value": " rather than an audible one, all attuned creatures receive the mental alert when someone exits the warded area."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -240,7 +327,136 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.alarm",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.escape-alarm:f2c3f0e3cdb9accf",
+        "source_field": "spell_raw.description_raw",
+        "raw": "You place a ward on an area that notifies you when a creature exits it. This functions as alarm, except as noted. It alerts you when a creature leaves, rather than enters, the area, and you can’t select a password to bypass its effects. Instead, when you place an escape alarm, you can attune up to one additional creature per caster level to the spell. You are automatically attuned to your own escape alarm and don’t count against the limit. Attuned creatures can enter and exit the spell’s area without triggering the alarm. If you select a mental alarm rather than an audible one, all attuned creatures receive the mental alert when someone exits the warded area."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "focus",
+              "details": "a short segment of chain",
+              "cost_gp": null,
+              "raw": "F (a short segment of chain)"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, F (a short segment of chain)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, F (a short segment of chain)",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, F (a short segment of chain)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/range",
+          "value": {
+            "category": "medium",
+            "formula": "medium (100 ft. + 10 ft./level)",
+            "raw": "medium (100 ft. + 10 ft./level)"
+          },
+          "source_field": "spell_raw.range_raw",
+          "raw": "medium (100 ft. + 10 ft./level)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Area",
+                "value_raw": "ten 10-foot cubes/level",
+                "kinds": [
+                  "area"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Area\",\"value_raw\":\"ten 10-foot cubes/level\",\"kinds\":[\"area\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/area",
+          "value": {
+            "propagation": "other",
+            "geometry": "other",
+            "geometry_basis": "unknown",
+            "dimensions": {
+              "radius_ft": null,
+              "length_ft": null,
+              "width_ft": null,
+              "height_ft": null
+            },
+            "shapeable": null,
+            "raw": "ten 10-foot cubes/level"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Area\",\"value_raw\":\"ten 10-foot cubes/level\",\"kinds\":[\"area\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "timed",
+            "formula": "24 hours",
+            "dismissible": null,
+            "concentration": null,
+            "raw": "24 hours"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "24 hours",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "You place a ward on an area that notifies you when a creature exits it. This functions as alarm, except as noted. It alerts you when a creature leaves, rather than enters, the area, and you can’t select a password to bypass its effects. Instead, when you place an escape alarm, you can attune up to one additional creature per caster level to the spell. You are automatically attuned to your own escape alarm and don’t count against the limit. Attuned creatures can enter and exit the spell’s area without triggering the alarm. If you select a mental alarm rather than an audible one, all attuned creatures receive the mental alert when someone exits the warded area.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "You place a ward on an area that notifies you when a creature exits it. This functions as alarm, except as noted. It alerts you when a creature leaves, rather than enters, the area, and you can’t select a password to bypass its effects. Instead, when you place an escape alarm, you can attune up to one additional creature per caster level to the spell. You are automatically attuned to your own escape alarm and don’t count against the limit. Attuned creatures can enter and exit the spell’s area without triggering the alarm. If you select a mental alarm rather than an audible one, all attuned creatures receive the mental alert when someone exits the warded area.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.escape-alarm:appears_on_spell_list:spell-list.arcanist",
@@ -376,6 +592,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.escape-alarm:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.escape-alarm:ec236b505f888b7b",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.escape-alarm:f2c3f0e3cdb9accf",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.escape-alarm:appears_on_spell_list:spell-list.psychic",
@@ -600,6 +843,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.escape-alarm:functions_like:spell.alarm",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.alarm",
+        "name": "Alarm"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.escape-alarm:ec236b505f888b7b",
+          "source_field": "spell_raw.links_raw[16]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "alarm",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/a/alarm"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.escape-alarm:has_school:magic-school.abjuration",
       "type": "has_school",
       "target": {
@@ -668,26 +931,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.escape-alarm:references:spell.alarm",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.alarm",
-        "name": "alarm"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.escape-alarm:ec236b505f888b7b",
-          "source_field": "spell_raw.links_raw[16]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "alarm",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/a/alarm"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.escape-alarm:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -715,12 +958,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.escape-alarm:uses_definition:rule.chain",
+      "relationship_id": "spell.escape-alarm:uses_definition:item.chain",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.chain",
-        "name": "chain"
+        "entity_type": "item",
+        "entity_id": "item.chain",
+        "name": "Chain"
       },
       "status": "accepted",
       "evidence": [
@@ -733,6 +976,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.escape-alarm:uses_definition:rule.caster-level",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.caster-level",
+        "name": "Caster level"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.escape-alarm:f2c3f0e3cdb9accf",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "caster level",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Escape+Alarm"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.escape-alarm:uses_definition:rule.medium",
@@ -773,33 +1036,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.escape-alarm:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.escape-alarm:ec236b505f888b7b",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.escape-alarm:f2c3f0e3cdb9accf",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -850,11 +1086,19 @@
       "raw_value_sha256": "0d6495657c36cbcd0fc1ea1db7b2e8948f9cd0b3fee0887b36a6919f0ff60e5e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.escape-alarm:f2c3f0e3cdb9accf",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f598814dcbead085a075383010deb1f080c54e7cac1f352ca523413973432863",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

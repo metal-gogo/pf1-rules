@@ -276,6 +276,24 @@ test("Batch 27 separates elemental subtypes and contextual attitudes", async ({ 
   expect(results.violations).toEqual([]);
 });
 
+test("Batch 28 rejects state-name false positives and normalizes subschools", async ({ page }) => {
+  await page.goto("/spells/spell.ethereal-fists");
+
+  const fists = page.locator(".rich-description").first();
+  await expect(fists.locator('a[href="/spells/spell.etherealness"]')).toHaveCount(0);
+  await expect(fists.locator('a[href="/entities/rule.ethereal"]')).toHaveCount(2);
+  await expect(fists.locator('a[href="/entities/rule.ethereal-plane"]')).toHaveCount(1);
+  await expectNoPageOverflow(page);
+
+  await page.goto("/spells/spell.evaluators-lens");
+  const lens = page.locator(".rich-description").first();
+  await expect(lens.locator('a[href="/rules/magic-schools#figment"]')).toHaveCount(1);
+  await expect(lens.locator('a[href="/entities/item.rod-of-cancellation"]')).toHaveCount(1);
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+});
+
 test("pilot lists remain semantic and accessible on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/spells/spell.bestow-curse-greater");

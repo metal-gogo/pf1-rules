@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.entrap-spirit",
   "ruleset": "Pathfinder First Edition",
   "name": "Entrap Spirit",
@@ -145,7 +145,75 @@
   "description": {
     "raw": "You trap the target in the mirror used as the spell’s focus. The target cannot be affected by any means while inside the mirror. If the mirror is destroyed, any incorporeal creature within is immediately freed and any haunt within returns to its original location. Creatures that assumed incorporeal form through a spell or other means remain incorporeal while trapped, even if the duration of the effect that rendered them incorporeal expires. If your focus mirror belonged to the target, the target takes a –2 penalty on its saving throw.",
     "search_text": "\"you trap the target in the mirror used as the spell’s focus. the target cannot be affected by any means while inside the mirror. if the mirror is destroyed, any incorporeal creature within is immediately freed and any haunt within returns to its original location. creatures that assumed incorporeal form through a spell or other means remain incorporeal while trapped, even if the duration of the effect that rendered them incorporeal expires. if your focus mirror belonged to the target, the target takes a –2 penalty on its saving throw.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You trap the target in the mirror used as the spell’s focus. The target cannot be affected by any means while inside the mirror. If the mirror is destroyed, any "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "incorporeal",
+              "relationship_id": "spell.entrap-spirit:uses_definition:rule.incorporeal"
+            },
+            {
+              "node_type": "text",
+              "value": " creature within is immediately freed and any "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "haunt",
+              "relationship_id": "spell.entrap-spirit:uses_definition:rule.haunt"
+            },
+            {
+              "node_type": "text",
+              "value": " within returns to its original location. Creatures that assumed "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "incorporeal",
+              "relationship_id": "spell.entrap-spirit:uses_definition:rule.incorporeal"
+            },
+            {
+              "node_type": "text",
+              "value": " form through a spell or other means remain "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "incorporeal",
+              "relationship_id": "spell.entrap-spirit:uses_definition:rule.incorporeal"
+            },
+            {
+              "node_type": "text",
+              "value": " while trapped, even if the duration of the effect that rendered them "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "incorporeal",
+              "relationship_id": "spell.entrap-spirit:uses_definition:rule.incorporeal"
+            },
+            {
+              "node_type": "text",
+              "value": " expires. If your focus mirror belonged to the target, the target takes a –2 penalty on its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throw",
+              "relationship_id": "spell.entrap-spirit:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -230,6 +298,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.entrap-spirit:appears_on_spell_list:spell-list.sorcerer-possessed-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-possessed-bloodline",
+        "name": "Sorcerer Possessed Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.possessed:545722c9",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "entrap spirit (9th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Possessed"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     },
     {
       "relationship_id": "spell.entrap-spirit:appears_on_spell_list:spell-list.spiritualist",
@@ -456,6 +544,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.entrap-spirit:uses_definition:rule.saving-throws",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.saving-throws",
+        "name": "Saving throws"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.entrap-spirit:242782bef3c2a447",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "saving throw",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Entrap+Spirit"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.entrap-spirit:uses_definition:rule.spell-resistance",
       "type": "uses_definition",
       "target": {
@@ -476,11 +584,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.entrap-spirit:uses_definition:rule.will",
+      "relationship_id": "spell.entrap-spirit:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -494,26 +602,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.entrap-spirit:appears_on_spell_list:spell-list.sorcerer-possessed-bloodline",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.sorcerer-possessed-bloodline",
-        "name": "Sorcerer Possessed Bloodline Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.possessed:545722c9",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "entrap spirit (9th)",
-          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Possessed"
-        }
-      ],
-      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     }
   ],
   "provenance": [
@@ -572,11 +660,19 @@
       "raw_value_sha256": "dbb2e199fb273cb5f0a50ed284d7f3f15cb6cf9510178746629aee27e69c0f87",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.entrap-spirit:242782bef3c2a447",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f10b88c88c5e0f9ce193427b96034d27a8312760b8390d638c33a91df38b3da2",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

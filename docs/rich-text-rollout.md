@@ -12,8 +12,8 @@ Audit date: 2026-08-25.
 | Category | Spells | Meaning |
 | --- | ---: | --- |
 | Total canonical spells | 3,030 | Complete corpus |
-| Rich text stored | 688 | 11-spell pilot, twenty-seven reviewed 25-spell rollout batches, Reincarnate, and one reviewed warning record |
-| Safe candidates with links | 1,582 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
+| Rich text stored | 713 | 11-spell pilot, twenty-eight reviewed 25-spell rollout batches, Reincarnate, and one reviewed warning record |
+| Safe candidates with links | 1,557 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
 | Safe structure-only candidates | 306 | Source text matches, but no known relationship currently produces an inline link |
 | Source mismatch | 280 | Current canonical text and the newly bounded AoN description differ |
 | Link warnings | 174 | At least one accepted relationship is ambiguous or unmatched |
@@ -861,6 +861,43 @@ Canonical, database-backed web, and desktop/mobile browser tests cover these
 distinctions. Manual rendered review covered Elemental Swarm, Energy Siege
 Shot, and Enthrall, including link targets, paragraph structure, and preserved
 emphasis.
+
+### Batch 28
+
+The twenty-eighth rollout batch contains:
+
+- Greater Entice Fey; Enticing Adulation; Entomb; Entrap Spirit; Envious Urge;
+  Epidemic; Erase; Erase Impressions; Erode Defenses; Eroding Ray.
+- Escape Alarm; Escaping Ward; Ether Step; Ethereal Envelope; Ethereal
+  Envelopment; Ethereal Fists; Ethereal Jaunt; Etherealness; Etheric Shards.
+- Euphoric Cloud; Euphoric Tranquility; Evaluator's Lens; Evolution Surge and
+  its Greater variant; Excruciating Deformation.
+
+Review of this batch established these normalization rules:
+
+- Escape Alarm links only the explicit parent-spell reference in “functions as
+  alarm.” Alarm inside the current spell's title and ordinary descriptions of
+  its audible and mental effects remain plain.
+- Ethereal Fists treats lowercase `etherealness` as the ethereal state, not the
+  Etherealness spell. Its Ethereal and Material planar terms, unarmed strikes,
+  touch effects, Blink example, and concealment remain linked to their distinct
+  canonical destinations.
+- Evaluator's Lens normalizes Figment to the shared illusion subschool and
+  links Pattern, Force, saving throws, artifacts, Rod of Cancellation, Armor
+  Class, skills, and explicitly named spells without altering emphasis.
+- Ordinary verbs and metadata remain unlinked: Ether Step's “dodge a blow” is
+  not a Dodge rules reference, Ethereal Envelope being “broken open” does not
+  apply the Broken condition, and Etheric Shards being impossible to disable
+  does not apply the Disabled condition. Its broken-glass material component is
+  likewise not the Broken condition.
+- Explicit missing links cover saving throws, caster level, size, actions,
+  speed, planes, the ethereal state, Hit Points, Force, Abjuration, and Helpful
+  attitude where those terms appear in the description.
+
+Canonical, database-backed web, and desktop/mobile browser tests cover these
+distinctions. Manual rendered review covered Ethereal Fists, Etheric Shards,
+and Evaluator's Lens, including paragraph boundaries, emphasis, contextual
+targets, and rejected relationships.
 
 ## Open questions and issues
 

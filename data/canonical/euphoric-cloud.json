@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.euphoric-cloud",
   "ruleset": "Pathfinder First Edition",
   "name": "Euphoric Cloud",
@@ -173,7 +173,42 @@
   "description": {
     "raw": "You create a bank of fog similar to that created by fog cloud except its vapors are intoxicating. Living creatures in the cloud become fascinated. This condition lasts as long as a creature is in the cloud and for 1d4+1 rounds after it leaves. Any creature that succeeds at its save but remains in the cloud must continue to save each round on your turn.",
     "search_text": "\"you create a bank of fog similar to that created by fog cloud except its vapors are intoxicating. living creatures in the cloud become fascinated. this condition lasts as long as a creature is in the cloud and for 1d4+1 rounds after it leaves. any creature that succeeds at its save but remains in the cloud must continue to save each round on your turn.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create a bank of fog similar to that created by "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fog cloud",
+              "relationship_id": "spell.euphoric-cloud:references:spell.fog-cloud",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " except its vapors are intoxicating. Living creatures in the cloud become "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fascinated",
+              "relationship_id": "spell.euphoric-cloud:uses_definition:condition.fascinated"
+            },
+            {
+              "node_type": "text",
+              "value": ". This condition lasts as long as a creature is in the cloud and for 1d4+1 rounds after it leaves. Any creature that succeeds at its save but remains in the cloud must continue to save each round on your turn."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -588,7 +623,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.fog-cloud",
-        "name": "fog cloud"
+        "name": "Fog Cloud"
       },
       "status": "accepted",
       "evidence": [
@@ -657,12 +692,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.euphoric-cloud:uses_definition:rule.fort",
+      "relationship_id": "spell.euphoric-cloud:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -745,11 +780,19 @@
       "raw_value_sha256": "0e53060dedbbdeae9d19a068de04b230ee23885357e02af00d6543fac4a7297d",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.euphoric-cloud:0101773ef91c04ba",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3e656cee8fad7c42c5b8567ff9ddb43e243c96acbf7d4ec8104fc1f98ec67aa1",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

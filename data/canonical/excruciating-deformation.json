@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.excruciating-deformation",
   "ruleset": "Pathfinder First Edition",
   "name": "Excruciating Deformation",
@@ -156,7 +156,93 @@
   "description": {
     "raw": "Your touch attack causes your target to become painfully malformed. Its limbs twist and buckle, while its body contorts uncontrollably, shifting and warping. Each round the target suffers excruciating pain and takes 2d6 points of nonlethal damage, 1 point of Dexterity damage, and 1 point of Constitution damage, and its speed is reduced by 10 feet. Once per round as a free action on its turn, the target can attempt a new Fortitude saving throw to resist the spell for 1 round.",
     "search_text": "\"your touch attack causes your target to become painfully malformed. its limbs twist and buckle, while its body contorts uncontrollably, shifting and warping. each round the target suffers excruciating pain and takes 2d6 points of nonlethal damage, 1 point of dexterity damage, and 1 point of constitution damage, and its speed is reduced by 10 feet. once per round as a free action on its turn, the target can attempt a new fortitude saving throw to resist the spell for 1 round.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch attack",
+              "relationship_id": "spell.excruciating-deformation:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " causes your target to become painfully malformed. Its limbs twist and buckle, while its body contorts uncontrollably, shifting and warping. Each round the target suffers excruciating pain and takes 2d6 points of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "nonlethal damage",
+              "relationship_id": "spell.excruciating-deformation:uses_definition:rule.nonlethal-damage"
+            },
+            {
+              "node_type": "text",
+              "value": ", 1 point of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Dexterity damage",
+              "relationship_id": "spell.excruciating-deformation:uses_definition:rule.dexterity-damage"
+            },
+            {
+              "node_type": "text",
+              "value": ", and 1 point of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Constitution damage",
+              "relationship_id": "spell.excruciating-deformation:uses_definition:rule.constitution-damage"
+            },
+            {
+              "node_type": "text",
+              "value": ", and its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "speed",
+              "relationship_id": "spell.excruciating-deformation:uses_definition:rule.speed"
+            },
+            {
+              "node_type": "text",
+              "value": " is reduced by 10 feet. Once per round as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "free action",
+              "relationship_id": "spell.excruciating-deformation:uses_action:action.free-action"
+            },
+            {
+              "node_type": "text",
+              "value": " on its turn, the target can attempt a new "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.excruciating-deformation:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throw",
+              "relationship_id": "spell.excruciating-deformation:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": " to resist the spell for 1 round."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -586,11 +672,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.excruciating-deformation:uses_definition:rule.fortitude",
+      "relationship_id": "spell.excruciating-deformation:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -633,12 +719,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.excruciating-deformation:uses_definition:rule.saving-throw",
+      "relationship_id": "spell.excruciating-deformation:uses_definition:rule.saving-throws",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.saving-throw",
-        "name": "saving throw"
+        "entity_id": "rule.saving-throws",
+        "name": "Saving throws"
       },
       "status": "accepted",
       "evidence": [
@@ -651,6 +737,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.excruciating-deformation:uses_definition:rule.speed",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.speed",
+        "name": "Speed"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.excruciating-deformation:83027277fd87f45c",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "speed",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Excruciating+Deformation"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.excruciating-deformation:uses_definition:rule.spell-resistance",
@@ -741,11 +847,19 @@
       "raw_value_sha256": "1fcb951f42363ed6ab38d21af3066ce4a9959b774e8e0787da1bc0320958e965",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.excruciating-deformation:83027277fd87f45c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "ae3045a6ebc337dac3162e479549b4315464fe629f53763e53995882e5929c96",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

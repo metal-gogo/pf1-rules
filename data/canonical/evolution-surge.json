@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.evolution-surge",
   "ruleset": "Pathfinder First Edition",
   "name": "Evolution Surge",
@@ -121,7 +121,33 @@
   "description": {
     "raw": "This spell functions as lesser evolution surge, except that you can grant any evolution whose total cost does not exceed 4 evolution points.",
     "search_text": "\"this spell functions as lesser evolution surge, except that you can grant any evolution whose total cost does not exceed 4 evolution points.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "lesser evolution surge",
+              "relationship_id": "spell.evolution-surge:functions_like:spell.evolution-surge-lesser",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that you can grant any evolution whose total cost does not exceed 4 evolution points."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -345,12 +371,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.evolution-surge:references:spell.lesser-evolution-surge",
+      "relationship_id": "spell.evolution-surge:references:spell.evolution-surge-lesser",
       "type": "references",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.lesser-evolution-surge",
-        "name": "lesser evolution surge"
+        "entity_id": "spell.evolution-surge-lesser",
+        "name": "Evolution Surge, Lesser"
       },
       "status": "accepted",
       "evidence": [
@@ -412,11 +438,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.evolution-surge:uses_definition:rule.will",
+      "relationship_id": "spell.evolution-surge:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -480,11 +506,19 @@
       "raw_value_sha256": "da1bdc71be87658ae5343ba286841def1616a44ca67432aaa212128971a5a3c3",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.evolution-surge:1529d0ed63138034",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "b32683e13b5393095b7ec3a7a2810b70cf9274bd6bf75a3c190cdde6c0cc7d40",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -159,6 +159,14 @@ const elementalSwarmContextualTargets = new Set([
 
 const enthrallContextualTargets = new Set(["rule.attitude"]);
 
+const etherealFistsContextualTargets = new Set([
+  "rule.ethereal",
+  "rule.ethereal-plane",
+  "rule.material-plane",
+]);
+
+const euphoricTranquilityContextualTargets = new Set(["rule.attitude"]);
+
 const canonicalTargets = new Map<string, {
   id: string;
   name: string;
@@ -319,6 +327,7 @@ const canonicalTargets = new Map<string, {
   ["condition.blind", { id: "condition.blinded", name: "Blinded", type: "condition" }],
   ["condition.entangle", { id: "condition.entangled", name: "Entangled", type: "condition" }],
   ["rule.figments", { id: "subschool.figment", name: "Figment", type: "subschool" }],
+  ["rule.figment", { id: "subschool.figment", name: "Figment", type: "subschool" }],
   ["rule.glamers", { id: "subschool.glamer", name: "Glamer", type: "subschool" }],
   ["rule.evil-descriptor", { id: "descriptor.evil", name: "Evil", type: "descriptor" }],
   ["rule.con", { id: "rule.constitution", name: "Constitution" }],
@@ -929,6 +938,26 @@ const rejectedDescriptionRelationships = new Map([
   [
     "spell.elemental-swarm:uses_definition:descriptor.fire",
     "The description names the Elemental Plane of Fire and creatures with the fire subtype; neither occurrence denotes the Fire spell descriptor directly.",
+  ],
+  [
+    "spell.ether-step:uses_definition:rule.dodge",
+    "The description uses “dodge” as an ordinary verb for avoiding a blow, not as a named rules definition.",
+  ],
+  [
+    "spell.ethereal-envelope:uses_definition:condition.broken",
+    "The envelope can be broken open, but it does not gain the Broken condition.",
+  ],
+  [
+    "spell.ethereal-fists:references:spell.etherealness",
+    "The description uses “etherealness” for a state and gives Blink as an example; it does not explicitly reference the Etherealness spell.",
+  ],
+  [
+    "spell.etheric-shards:uses_definition:condition.disabled",
+    "The text says the magical trap cannot be disabled; it does not apply the Disabled creature condition.",
+  ],
+  [
+    "spell.etheric-shards:uses_definition:condition.broken",
+    "The material component names ordinary broken glass; it does not use the Broken condition.",
   ],
 ]);
 
@@ -1761,6 +1790,64 @@ const reviewedDescriptionReferences = new Map<string, ReviewedDescriptionReferen
     { targetType: "rule", targetId: "rule.hit-dice", targetName: "Hit Dice", anchorText: "HD" },
     { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saving throw" },
     { targetType: "rule", targetId: "rule.concentration", targetName: "Concentration", anchorText: "concentration" },
+  ]],
+  ["spell.enticing-adulation", [
+    { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saving throw" },
+  ]],
+  ["spell.entrap-spirit", [
+    { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saving throw" },
+  ]],
+  ["spell.erode-defenses", [
+    { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saving throw" },
+  ]],
+  ["spell.escape-alarm", [
+    { targetType: "rule", targetId: "rule.caster-level", targetName: "Caster level", anchorText: "caster level" },
+  ]],
+  ["spell.escaping-ward", [
+    { targetType: "rule", targetId: "rule.size", targetName: "Size", anchorText: "size" },
+    { targetType: "rule", targetId: "rule.caster-level", targetName: "Caster level", anchorText: "caster levels" },
+  ]],
+  ["spell.ether-step", [
+    { targetType: "rule", targetId: "rule.ethereal", targetName: "Ethereal", anchorText: "ethereal" },
+    { type: "uses_action", targetType: "action", targetId: "action.move-action", targetName: "Move action", anchorText: "move actions" },
+    { type: "uses_action", targetType: "action", targetId: "action.free-action", targetName: "Free action", anchorText: "free actions" },
+  ]],
+  ["spell.ethereal-envelope", [
+    { targetType: "rule", targetId: "rule.size", targetName: "Size", anchorText: "size" },
+    { targetType: "rule", targetId: "rule.armor-class", targetName: "Armor Class", anchorText: "AC" },
+  ]],
+  ["spell.ethereal-fists", [
+    { targetType: "rule", targetId: "rule.ethereal-plane", targetName: "Ethereal Plane", anchorText: "Ethereal Plane" },
+    { targetType: "rule", targetId: "rule.material-plane", targetName: "Material Plane", anchorText: "Material Plane" },
+    { targetType: "rule", targetId: "rule.ethereal", targetName: "Ethereal", anchorText: "ethereal" },
+    { targetType: "rule", targetId: "rule.unarmed-strike", targetName: "Unarmed strike", anchorText: "unarmed strikes" },
+  ]],
+  ["spell.ethereal-jaunt", [
+    { targetType: "rule", targetId: "rule.speed", targetName: "Speed", anchorText: "speed" },
+    { targetType: "descriptor", targetId: "descriptor.force", targetName: "Force", anchorText: "Force effects" },
+    { targetType: "magic_school", targetId: "magic-school.abjuration", targetName: "Abjuration", anchorText: "abjurations" },
+  ]],
+  ["spell.etherealness", [
+    { targetType: "rule", targetId: "rule.caster-level", targetName: "Caster level", anchorText: "caster levels" },
+  ]],
+  ["spell.etheric-shards", [
+    { targetType: "rule", targetId: "rule.ethereal", targetName: "Ethereal", anchorText: "ethereal" },
+    { targetType: "rule", targetId: "rule.hit-points", targetName: "Hit points", anchorText: "hit point damage" },
+  ]],
+  ["spell.euphoric-tranquility", [
+    { targetType: "rule", targetId: "rule.speed", targetName: "Speed", anchorText: "speed" },
+    { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saving throw" },
+    { targetType: "rule", targetId: "rule.attitude", targetName: "Attitude", anchorText: "attitude" },
+  ]],
+  ["spell.evaluators-lens", [
+    { targetType: "descriptor", targetId: "descriptor.force", targetName: "Force", anchorText: "force" },
+    { targetType: "rule", targetId: "rule.saving-throws", targetName: "Saving throws", anchorText: "saving throw" },
+    { targetType: "rule", targetId: "rule.artifact", targetName: "Artifact", anchorText: "artifacts" },
+    { targetType: "item", targetId: "item.rod-of-cancellation", targetName: "Rod of cancellation", anchorText: "rod of cancellation" },
+    { targetType: "rule", targetId: "rule.armor-class", targetName: "Armor Class", anchorText: "AC" },
+  ]],
+  ["spell.excruciating-deformation", [
+    { targetType: "rule", targetId: "rule.speed", targetName: "Speed", anchorText: "speed" },
   ]],
 ]);
 
@@ -2834,6 +2921,12 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
       ) && (
         spellId !== "spell.enthrall" ||
         !enthrallContextualTargets.has(String(relationship.target.entity_id))
+      ) && (
+        spellId !== "spell.ethereal-fists" ||
+        !etherealFistsContextualTargets.has(String(relationship.target.entity_id))
+      ) && (
+        spellId !== "spell.euphoric-tranquility" ||
+        !euphoricTranquilityContextualTargets.has(String(relationship.target.entity_id))
       )
     );
     if (spellId === "spell.darkness") {
@@ -2963,6 +3056,32 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
         })));
       }
     }
+    if (spellId === "spell.ethereal-fists") {
+      linkContext(sourceDocument, "Ethereal and Material planes", [
+        {
+          value: "Ethereal",
+          relationshipId: "spell.ethereal-fists:uses_definition:rule.ethereal-plane",
+        },
+        {
+          value: "Material",
+          relationshipId: "spell.ethereal-fists:uses_definition:rule.material-plane",
+        },
+      ]);
+      linkContext(sourceDocument, "ethereal creatures", [{
+        value: "ethereal",
+        relationshipId: "spell.ethereal-fists:uses_definition:rule.ethereal",
+      }]);
+      linkContext(sourceDocument, "due to etherealness", [{
+        value: "etherealness",
+        relationshipId: "spell.ethereal-fists:uses_definition:rule.ethereal",
+      }]);
+    }
+    if (spellId === "spell.euphoric-tranquility") {
+      linkContext(sourceDocument, "attitude of Helpful", [{
+        value: "Helpful",
+        relationshipId: "spell.euphoric-tranquility:uses_definition:rule.attitude",
+      }]);
+    }
     if (spellId === "spell.echeans-excellent-enclosure") {
       linkContext(sourceDocument, "field of antimagic", [{
         value: "field of antimagic",
@@ -3020,6 +3139,12 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
       keepFirstRelationshipLink(
         richText.document,
         "spell.command-greater:functions_like:spell.command",
+      );
+    }
+    if (spellId === "spell.escape-alarm") {
+      keepFirstRelationshipLink(
+        richText.document,
+        "spell.escape-alarm:functions_like:spell.alarm",
       );
     }
     if (spellId === "spell.ceremony") {

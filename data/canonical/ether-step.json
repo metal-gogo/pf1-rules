@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.ether-step",
   "ruleset": "Pathfinder First Edition",
   "name": "Ether Step",
@@ -146,7 +146,80 @@
   "description": {
     "raw": "You step into the Ethereal Plane long enough to dodge a blow or confound a spell; you must cast ether step after you are targeted by an attack or effect but before you learn the results of the attack or effect. This spell functions as ethereal jaunt, except that you become ethereal until the beginning of your next turn. On the turn after you cast this spell and return to your starting point, you can take only move actions or free actions.",
     "search_text": "\"you step into the ethereal plane long enough to dodge a blow or confound a spell; you must cast ether step after you are targeted by an attack or effect but before you learn the results of the attack or effect. this spell functions as ethereal jaunt, except that you become ethereal until the beginning of your next turn. on the turn after you cast this spell and return to your starting point, you can take only move actions or free actions.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You step into the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Ethereal Plane",
+              "relationship_id": "spell.ether-step:uses_definition:rule.ethereal-plane"
+            },
+            {
+              "node_type": "text",
+              "value": " long enough to dodge a blow or confound a spell; you must cast "
+            },
+            {
+              "node_type": "text",
+              "value": "ether step",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " after you are targeted by an attack or effect but before you learn the results of the attack or effect. This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "ethereal jaunt",
+              "relationship_id": "spell.ether-step:functions_like:spell.ethereal-jaunt",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that you become "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "ethereal",
+              "relationship_id": "spell.ether-step:uses_definition:rule.ethereal"
+            },
+            {
+              "node_type": "text",
+              "value": " until the beginning of your next turn. On the turn after you cast this spell and return to your starting point, you can take only "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "move actions",
+              "relationship_id": "spell.ether-step:uses_definition:action.move-action"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "free actions",
+              "relationship_id": "spell.ether-step:uses_definition:action.free-action"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -156,7 +229,88 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.ethereal-jaunt",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.ether-step:252ae9741cbdb88d",
+        "source_field": "spell_raw.description_raw",
+        "raw": "You step into the Ethereal Plane long enough to dodge a blow or confound a spell; you must cast ether step after you are targeted by an attack or effect but before you learn the results of the attack or effect. This spell functions as ethereal jaunt, except that you become ethereal until the beginning of your next turn. On the turn after you cast this spell and return to your starting point, you can take only move actions or free actions."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/time",
+          "value": {
+            "kind": "action",
+            "amount": 1,
+            "unit": "immediate_action",
+            "raw": "1 immediate action"
+          },
+          "source_field": "spell_raw.casting_time_raw",
+          "raw": "1 immediate action",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "S",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "S",
+          "source_field": "spell_raw.components_raw",
+          "raw": "S",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "special",
+            "formula": "see text",
+            "dismissible": null,
+            "concentration": null,
+            "raw": "see text"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "see text",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "You step into the Ethereal Plane long enough to dodge a blow or confound a spell; you must cast ether step after you are targeted by an attack or effect but before you learn the results of the attack or effect. This spell functions as ethereal jaunt, except that you become ethereal until the beginning of your next turn. On the turn after you cast this spell and return to your starting point, you can take only move actions or free actions.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "You step into the Ethereal Plane long enough to dodge a blow or confound a spell; you must cast ether step after you are targeted by an attack or effect but before you learn the results of the attack or effect. This spell functions as ethereal jaunt, except that you become ethereal until the beginning of your next turn. On the turn after you cast this spell and return to your starting point, you can take only move actions or free actions.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.ether-step:appears_on_spell_list:spell-list.arcanist",
@@ -273,6 +427,26 @@
       "note": "Reviewed catalog policy: AoN remains the preferred publication transcription. When an additional class membership is printed by d20PFSRD, it may be added to the canonical class union after review; Foundry PF1 is corroborating catalog evidence when it agrees. Preserve every source claim and never replace an AoN level merely because another catalog assigns the same class a different level."
     },
     {
+      "relationship_id": "spell.ether-step:appears_on_spell_list:spell-list.summoner-unchained",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.summoner-unchained",
+        "name": "Summoner (Unchained) Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.ether-step:252ae9741cbdb88d",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 5",
+          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/transmutation/ether-step.7a95u92t5y8zjwrl.yaml"
+        }
+      ],
+      "note": "Reviewed project decision: add Summoner (Unchained) 5 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
+    },
+    {
       "relationship_id": "spell.ether-step:appears_on_spell_list:spell-list.wizard",
       "type": "appears_on_spell_list",
       "target": {
@@ -288,6 +462,26 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "wizard 6",
           "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.ether-step:functions_like:spell.ethereal-jaunt",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.ethereal-jaunt",
+        "name": "Ethereal Jaunt"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.ether-step:f3b4fb4a50ad9008",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "ethereal jaunt",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/e/ethereal-jaunt"
         }
       ],
       "note": null
@@ -361,24 +555,24 @@
       "note": null
     },
     {
-      "relationship_id": "spell.ether-step:references:spell.ethereal-jaunt",
-      "type": "references",
+      "relationship_id": "spell.ether-step:uses_action:action.free-action",
+      "type": "uses_action",
       "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.ethereal-jaunt",
-        "name": "ethereal jaunt"
+        "entity_type": "action",
+        "entity_id": "action.free-action",
+        "name": "Free action"
       },
       "status": "accepted",
       "evidence": [
         {
-          "observation_id": "d20pfsrd:spell.ether-step:f3b4fb4a50ad9008",
-          "source_field": "spell_raw.links_raw[7]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "ethereal jaunt",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/e/ethereal-jaunt"
+          "observation_id": "aon:spell.ether-step:252ae9741cbdb88d",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "free actions",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Ether+Step"
         }
       ],
-      "note": null
+      "note": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.ether-step:uses_action:action.immediate-action",
@@ -408,6 +602,66 @@
       "note": null
     },
     {
+      "relationship_id": "spell.ether-step:uses_action:action.move-action",
+      "type": "uses_action",
+      "target": {
+        "entity_type": "action",
+        "entity_id": "action.move-action",
+        "name": "Move action"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.ether-step:252ae9741cbdb88d",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "move actions",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Ether+Step"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.ether-step:uses_definition:action.free-action",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "action",
+        "entity_id": "action.free-action",
+        "name": "Free action"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.ether-step:252ae9741cbdb88d",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "free actions",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Ether+Step"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.ether-step:uses_definition:action.move-action",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "action",
+        "entity_id": "action.move-action",
+        "name": "Move action"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.ether-step:252ae9741cbdb88d",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "move actions",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Ether+Step"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.ether-step:uses_definition:rule.dodge",
       "type": "uses_definition",
       "target": {
@@ -415,7 +669,7 @@
         "entity_id": "rule.dodge",
         "name": "dodge"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.ether-step:f3b4fb4a50ad9008",
@@ -425,7 +679,27 @@
           "source_href": "https://www.d20pfsrd.com/basics-ability-scores/glossary#TOC-Dodge-Bonus"
         }
       ],
-      "note": null
+      "note": "The description uses “dodge” as an ordinary verb for avoiding a blow, not as a named rules definition."
+    },
+    {
+      "relationship_id": "spell.ether-step:uses_definition:rule.ethereal",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.ethereal",
+        "name": "Ethereal"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.ether-step:252ae9741cbdb88d",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "ethereal",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Ether+Step"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
     },
     {
       "relationship_id": "spell.ether-step:uses_definition:rule.ethereal-plane",
@@ -466,26 +740,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.ether-step:appears_on_spell_list:spell-list.summoner-unchained",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.summoner-unchained",
-        "name": "Summoner (Unchained) Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.ether-step:252ae9741cbdb88d",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "manual_verification",
-          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 5",
-          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/transmutation/ether-step.7a95u92t5y8zjwrl.yaml"
-        }
-      ],
-      "note": "Reviewed project decision: add Summoner (Unchained) 5 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
     }
   ],
   "provenance": [
@@ -544,11 +798,19 @@
       "raw_value_sha256": "c73027327d6c6f8640267ea08649c922069075a1952c70afd51525291fb0a616",
       "decision": "manually_resolved",
       "note": "Reviewed catalog policy: AoN remains the preferred publication transcription. When an additional class membership is printed by d20PFSRD, it may be added to the canonical class union after review; Foundry PF1 is corroborating catalog evidence when it agrees. Preserve every source claim and never replace an AoN level merely because another catalog assigns the same class a different level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.ether-step:252ae9741cbdb88d",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "8c2066fa56b1c35cbfe365fedda7d1879cccda85e5040869b78f8a482b9f8fb6",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.5-reviewed-catalog-memberships",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "REVIEWED_CATALOG_MEMBERSHIP_UNION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.ethereal-fists",
   "ruleset": "Pathfinder First Edition",
   "name": "Ethereal Fists",
@@ -117,7 +117,108 @@
   "description": {
     "raw": "Your hands reach simultaneously into the Ethereal and Material planes, allowing you to deal normal damage with claws, unarmed strikes, and touch spells or effects to ethereal creatures. Miss chance due to etherealness (such as from the blink spell) doesn’t apply, though miss chance based on concealment does.",
     "search_text": "\"your hands reach simultaneously into the ethereal and material planes, allowing you to deal normal damage with claws, unarmed strikes, and touch spells or effects to ethereal creatures. miss chance due to etherealness (such as from the blink spell) doesn’t apply, though miss chance based on concealment does.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Your hands reach simultaneously into the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Ethereal",
+              "relationship_id": "spell.ethereal-fists:uses_definition:rule.ethereal-plane"
+            },
+            {
+              "node_type": "text",
+              "value": " and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Material",
+              "relationship_id": "spell.ethereal-fists:uses_definition:rule.material-plane"
+            },
+            {
+              "node_type": "text",
+              "value": " planes"
+            },
+            {
+              "node_type": "text",
+              "value": ", allowing you to deal normal damage with claws, "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "unarmed strikes",
+              "relationship_id": "spell.ethereal-fists:uses_definition:rule.unarmed-strike"
+            },
+            {
+              "node_type": "text",
+              "value": ", and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch",
+              "relationship_id": "spell.ethereal-fists:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " spells or effects to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "ethereal",
+              "relationship_id": "spell.ethereal-fists:uses_definition:rule.ethereal"
+            },
+            {
+              "node_type": "text",
+              "value": " creatures"
+            },
+            {
+              "node_type": "text",
+              "value": ". Miss chance "
+            },
+            {
+              "node_type": "text",
+              "value": "due to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "etherealness",
+              "relationship_id": "spell.ethereal-fists:uses_definition:rule.ethereal"
+            },
+            {
+              "node_type": "text",
+              "value": " (such as from the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blink",
+              "relationship_id": "spell.ethereal-fists:references:spell.blink",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell) doesn’t apply, though miss chance based on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.ethereal-fists:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": " does."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -148,6 +249,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.ethereal-fists:appears_on_spell_list:spell-list.ascetic-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.ascetic-mystery",
+        "name": "Ascetic Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.ascetic:7807af1f",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "ethereal fists (8th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Ascetic"
+        }
+      ],
+      "note": "Printed by the owning oracle mystery; this is mystery access, not general Oracle class access."
     },
     {
       "relationship_id": "spell.ethereal-fists:appears_on_spell_list:spell-list.magus",
@@ -277,7 +398,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.blink",
-        "name": "blink"
+        "name": "Blink"
       },
       "status": "accepted",
       "evidence": [
@@ -304,9 +425,9 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.etherealness",
-        "name": "etherealness"
+        "name": "Etherealness"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.ethereal-fists:9af2a90ec2b2cd2c",
@@ -316,7 +437,7 @@
           "source_href": "https://www.d20pfsrd.com/magic/all-spells/e/etherealness"
         }
       ],
-      "note": null
+      "note": "The description uses “etherealness” for a state and gives Blink as an example; it does not explicitly reference the Etherealness spell."
     },
     {
       "relationship_id": "spell.ethereal-fists:uses_action:action.standard-action",
@@ -366,6 +487,66 @@
       "note": null
     },
     {
+      "relationship_id": "spell.ethereal-fists:uses_definition:rule.ethereal",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.ethereal",
+        "name": "Ethereal"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.ethereal-fists:1fc19cee06155b19",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "ethereal",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Ethereal+Fists"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.ethereal-fists:uses_definition:rule.ethereal-plane",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.ethereal-plane",
+        "name": "Ethereal Plane"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.ethereal-fists:1fc19cee06155b19",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Ethereal Plane",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Ethereal+Fists"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.ethereal-fists:uses_definition:rule.material-plane",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.material-plane",
+        "name": "Material Plane"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.ethereal-fists:1fc19cee06155b19",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Material Plane",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Ethereal+Fists"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.ethereal-fists:uses_definition:rule.spell-resistance",
       "type": "uses_definition",
       "target": {
@@ -386,12 +567,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.ethereal-fists:uses_definition:rule.touch",
+      "relationship_id": "spell.ethereal-fists:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -406,24 +587,24 @@
       "note": null
     },
     {
-      "relationship_id": "spell.ethereal-fists:appears_on_spell_list:spell-list.ascetic-mystery",
-      "type": "appears_on_spell_list",
+      "relationship_id": "spell.ethereal-fists:uses_definition:rule.unarmed-strike",
+      "type": "uses_definition",
       "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.ascetic-mystery",
-        "name": "Ascetic Mystery Bonus Spells"
+        "entity_type": "rule",
+        "entity_id": "rule.unarmed-strike",
+        "name": "Unarmed strike"
       },
       "status": "accepted",
       "evidence": [
         {
-          "observation_id": "aon:mystery.ascetic:7807af1f",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "ethereal fists (8th)",
-          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Ascetic"
+          "observation_id": "aon:spell.ethereal-fists:1fc19cee06155b19",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "unarmed strikes",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Ethereal+Fists"
         }
       ],
-      "note": "Printed by the owning oracle mystery; this is mystery access, not general Oracle class access."
+      "note": "The selected source wording explicitly uses this rules term."
     }
   ],
   "provenance": [
@@ -490,11 +671,19 @@
       "raw_value_sha256": "4174673f8cdd3ec6a00ff146acf6b971b15f8d683ff45e4a6366745285f1bb60",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.ethereal-fists:1fc19cee06155b19",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "5ea74e2673a832f47b425e9e37172efe556e47036c2dd1a90fb32f1c7e37bd8a",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -656,6 +656,46 @@ describe("rich-text schema and source parsing", () => {
     expect(JSON.stringify(canonical("enhance-water").description.document))
       .toContain("uses_definition:item.unholy-water");
   });
+
+  it("keeps Batch 28 rules terms distinct from ordinary verbs and state nouns", () => {
+    const alarm = JSON.stringify(canonical("escape-alarm").description.document);
+    expect(alarm.match(/functions_like:spell\.alarm/g)).toHaveLength(1);
+    expect(alarm).toContain("uses_definition:rule.caster-level");
+
+    const fists = canonical("ethereal-fists");
+    const fistsDocument = JSON.stringify(fists.description.document);
+    expect(fistsDocument).not.toContain("references:spell.etherealness");
+    expect(fistsDocument.match(/uses_definition:rule\.ethereal"/g)).toHaveLength(2);
+    expect(fistsDocument).toContain("uses_definition:rule.ethereal-plane");
+    expect(fistsDocument).toContain("uses_definition:rule.material-plane");
+    expect(fistsDocument).toContain("uses_definition:rule.unarmed-strike");
+
+    const lens = JSON.stringify(canonical("evaluators-lens").description.document);
+    expect(lens).toContain("uses_definition:subschool.figment");
+    expect(lens).not.toContain("uses_definition:rule.figment");
+    expect(lens).toContain("uses_definition:item.rod-of-cancellation");
+    expect(lens).toContain("uses_definition:rule.artifact");
+
+    const tranquility = JSON.stringify(canonical("euphoric-tranquility").description.document);
+    expect(tranquility).toContain('"value":"Helpful","relationship_id":"spell.euphoric-tranquility:uses_definition:rule.attitude"');
+
+    const shards = canonical("etheric-shards");
+    expect(JSON.stringify(shards.description.document)).not.toContain(
+      "uses_definition:condition.disabled",
+    );
+    for (const [slug, relationshipId] of [
+      ["ether-step", "spell.ether-step:uses_definition:rule.dodge"],
+      ["ethereal-envelope", "spell.ethereal-envelope:uses_definition:condition.broken"],
+      ["ethereal-fists", "spell.ethereal-fists:references:spell.etherealness"],
+      ["etheric-shards", "spell.etheric-shards:uses_definition:condition.broken"],
+      ["etheric-shards", "spell.etheric-shards:uses_definition:condition.disabled"],
+    ] as const) {
+      expect(canonical(slug).relationships).toContainEqual(expect.objectContaining({
+        relationship_id: relationshipId,
+        status: "rejected",
+      }));
+    }
+  });
 });
 
 
