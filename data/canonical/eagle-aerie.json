@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.eagle-aerie",
   "ruleset": "Pathfinder First Edition",
   "name": "Eagle Aerie",
@@ -125,7 +125,50 @@
   "description": {
     "raw": "You summon a flight of giant eagles (one per three caster levels, maximum of six; Bestiary 118) to ferry you and your allies across the skies. The eagles avoid combat if possible but defend themselves if attacked; if the eagles attack, the remaining duration of the spell changes from 1 hour per level to 1 round per level (so if the spell had 5 full hours left, the eagles remain in combat for 5 rounds before the spell ends).",
     "search_text": "\"you summon a flight of giant eagles (one per three caster levels, maximum of six; bestiary 118) to ferry you and your allies across the skies. the eagles avoid combat if possible but defend themselves if attacked; if the eagles attack, the remaining duration of the spell changes from 1 hour per level to 1 round per level (so if the spell had 5 full hours left, the eagles remain in combat for 5 rounds before the spell ends).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You summon a flight of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "giant eagles",
+              "relationship_id": "spell.eagle-aerie:uses_definition:rule.giant-eagles"
+            },
+            {
+              "node_type": "text",
+              "value": " (one per three "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster levels",
+              "relationship_id": "spell.eagle-aerie:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": ", maximum of six; "
+            },
+            {
+              "node_type": "text",
+              "value": "Bestiary ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "118) to ferry you and your allies across the skies. The eagles avoid combat if possible but defend themselves if attacked; if the eagles attack, the remaining duration of the spell changes from 1 hour per level to 1 round per level (so if the spell had 5 full hours left, the eagles remain in combat for 5 rounds before the spell ends)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -367,12 +410,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.eagle-aerie:uses_definition:rule.caster-levels",
+      "relationship_id": "spell.eagle-aerie:uses_definition:rule.caster-level",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.caster-levels",
-        "name": "caster levels"
+        "entity_id": "rule.caster-level",
+        "name": "Caster level"
       },
       "status": "accepted",
       "evidence": [
@@ -475,11 +518,19 @@
       "raw_value_sha256": "aa6bc51809fe47bd244418033771f90a06153a7519d391badf1856f53814833e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.eagle-aerie:4afca088798e7fb4",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e8245cc023650f00f3a24a1b6e85fa057559ab31c1cd1e7eb3c8bc7e033ed599",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

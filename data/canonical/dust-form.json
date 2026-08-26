@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.dust-form",
   "ruleset": "Pathfinder First Edition",
   "name": "Dust Form",
@@ -14,7 +14,7 @@
   "levels": [
     {
       "spell_list_id": "spell-list.alchemist",
-      "list_kind": "class",
+      "list_kind": "formulae",
       "list_name": "alchemist",
       "level": 5,
       "scope": "later_first_party",
@@ -46,7 +46,7 @@
     },
     {
       "spell_list_id": "spell-list.investigator",
-      "list_kind": "class",
+      "list_kind": "formulae",
       "list_name": "investigator",
       "level": 5,
       "scope": "later_first_party",
@@ -198,7 +198,39 @@
   "description": {
     "raw": "Upon casting this spell, you keep your relative form, but you and your equipment become composed entirely of dust. While in this dust form, you take no penalties for squeezing, and can move through spaces as if you were a creature three size categories smaller without penalty. You are also considered incorporeal, though any nonmagical attack you make deals half damage (50%). Magic attacks are unaffected, and you can still use your magic items and other equipment as normal.\n\nIf the duration ends in a square that your normal space cannot occupy, you take 3d6 damage and are shunted to the nearest open space that you can normally occupy.",
     "search_text": "\"upon casting this spell, you keep your relative form, but you and your equipment become composed entirely of dust. while in this dust form, you take no penalties for squeezing, and can move through spaces as if you were a creature three size categories smaller without penalty. you are also considered incorporeal, though any nonmagical attack you make deals half damage (50%). magic attacks are unaffected, and you can still use your magic items and other equipment as normal.\\n\\nif the duration ends in a square that your normal space cannot occupy, you take 3d6 damage and are shunted to the nearest open space that you can normally occupy.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Upon casting this spell, you keep your relative form, but you and your equipment become composed entirely of dust. While in this dust form, you take no penalties for squeezing, and can move through spaces as if you were a creature three size categories smaller without penalty. You are also considered "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "incorporeal",
+              "relationship_id": "spell.dust-form:uses_definition:rule.incorporeal"
+            },
+            {
+              "node_type": "text",
+              "value": ", though any nonmagical attack you make deals half damage (50%). Magic attacks are unaffected, and you can still use your magic items and other equipment as normal. "
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "If the duration ends in a square that your normal space cannot occupy, you take 3d6 damage and are shunted to the nearest open space that you can normally occupy."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -330,6 +362,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.dust-form:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.dust-form:78cb6e66505e54b3",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.dust-form:8aff7121f9f4b640",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 6",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.dust-form:appears_on_spell_list:spell-list.oracle",
@@ -579,33 +638,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.dust-form:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.dust-form:78cb6e66505e54b3",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.dust-form:8aff7121f9f4b640",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 6",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -656,11 +688,19 @@
       "raw_value_sha256": "7a06da994e2d8662333e4ab8c8f37a766c987a27f483bb9967a9f577a9c93bcb",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.dust-form:8aff7121f9f4b640",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "04d05ef3f1043f5a38d9437a418f26b8afdb37d42da0e5f6ba0c407089ba0641",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

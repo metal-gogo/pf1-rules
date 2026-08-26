@@ -10,6 +10,7 @@ import {
   comparableRichText,
   linkRichTextDocument,
   parseRichTextHtml,
+  richTextBlockInlines,
   richTextLeafText,
   type RichTextDocument,
 } from "../src/domain/rich-text.js";
@@ -100,11 +101,7 @@ describe("rich-text schema and source parsing", () => {
     const restoration = parsedObservation("restoration/aon-0.1.6.json");
     const restorationDocument = parseRichTextHtml(restoration.descriptionHtml);
     expect(restorationDocument.content).toHaveLength(2);
-    const restorationInlines = restorationDocument.content.flatMap((block) =>
-      block.node_type === "paragraph"
-        ? block.content
-        : block.content.flatMap((item) => item.content)
-    );
+    const restorationInlines = restorationDocument.content.flatMap(richTextBlockInlines);
     expect(restorationInlines).toContainEqual({
       node_type: "text",
       value: "lesser restoration",
@@ -127,6 +124,75 @@ describe("rich-text schema and source parsing", () => {
     });
   });
 
+  it("preserves description headings and table structure", () => {
+    const document = parseRichTextHtml(
+      "<h2>Incarnations</h2><table><tr><td><b>d%</b></td><td><b>Form</b></td></tr>" +
+      "<tr><td>01</td><td>Bugbear</td></tr></table>",
+    );
+
+    expect(document.content).toEqual([
+      {
+        node_type: "heading",
+        level: 2,
+        content: [{ node_type: "text", value: "Incarnations" }],
+      },
+      {
+        node_type: "table",
+        content: [
+          {
+            node_type: "table_row",
+            content: [
+              {
+                node_type: "table_cell",
+                header: true,
+                content: [{ node_type: "text", value: "d%", marks: ["bold"] }],
+              },
+              {
+                node_type: "table_cell",
+                header: true,
+                content: [{ node_type: "text", value: "Form", marks: ["bold"] }],
+              },
+            ],
+          },
+          {
+            node_type: "table_row",
+            content: [
+              {
+                node_type: "table_cell",
+                header: false,
+                content: [{ node_type: "text", value: "01" }],
+              },
+              {
+                node_type: "table_cell",
+                header: false,
+                content: [{ node_type: "text", value: "Bugbear" }],
+              },
+            ],
+          },
+        ],
+      },
+    ]);
+    expect(comparableRichText(richTextLeafText(document)))
+      .toBe(comparableRichText("Incarnations d% Form 01 Bugbear"));
+  });
+
+  it("keeps Reincarnate's supplemental rules inside the bounded description", () => {
+    const reincarnate = parsedObservation("reincarnate/aon-0.1.5.json");
+    const document = parseRichTextHtml(reincarnate.descriptionHtml);
+
+    expect(reincarnate.descriptionRaw).toContain("Reincarnation on Golarion");
+    expect(document.content.filter((block) => block.node_type === "heading"))
+      .toHaveLength(3);
+    expect(document.content.filter((block) => block.node_type === "table"))
+      .toHaveLength(3);
+  });
+
+  it("keeps mythic title sections outside the bounded base description", () => {
+    const darkness = parsedObservation("darkness/aon-0.1.5.json");
+
+    expect(darkness.descriptionRaw).not.toContain("Mythic Darkness");
+  });
+
   it("keeps every rich-text document text-equivalent and linked only to accepted relationships", () => {
     const slugs = fs.readdirSync(path.join(projectRoot, "data", "canonical"))
       .filter((filename) => filename.endsWith(".json"))
@@ -143,10 +209,8 @@ describe("rich-text schema and source parsing", () => {
         item.relationship_id,
         item,
       ]));
-      const links = document.content.flatMap((block) =>
-        (block.node_type === "paragraph" ? block.content : block.content.flatMap((item) => item.content))
-          .filter((node) => node.node_type === "entity_link")
-      );
+      const links = document.content.flatMap(richTextBlockInlines)
+        .filter((node) => node.node_type === "entity_link");
       for (const link of links) {
         if (link.node_type !== "entity_link") continue;
         const accepted = relationships.get(link.relationship_id);
@@ -161,11 +225,7 @@ describe("rich-text schema and source parsing", () => {
     const darkness = canonical("darkness");
     const document = darkness.description.document as RichTextDocument;
     const serialized = JSON.stringify(document);
-    const inlineNodes = document.content.flatMap((block) =>
-      block.node_type === "paragraph"
-        ? block.content
-        : block.content.flatMap((item) => item.content)
-    );
+    const inlineNodes = document.content.flatMap(richTextBlockInlines);
     const darknessLinks = inlineNodes.filter((node) =>
       node.node_type === "entity_link" && node.value.toLowerCase() === "darkness"
     );
@@ -342,6 +402,220 @@ describe("rich-text schema and source parsing", () => {
     expect(JSON.stringify(delayedFireball.description.document).match(
       /functions_like:spell\.fireball/g,
     )).toHaveLength(1);
+  });
+
+  it("keeps Batch 22 inheritance, source navigation, and verb phrases distinct", () => {
+    const greaterDetectMagic = canonical("detect-magic-greater");
+    expect(JSON.stringify(greaterDetectMagic.description.document).match(
+      /functions_like:spell\.detect-magic/g,
+    )).toHaveLength(1);
+
+    const detectMindscape = canonical("detect-mindscape");
+    expect(detectMindscape.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.detect-mindscape:functions_like:spell.detect-thoughts",
+      status: "accepted",
+    }));
+    expect(detectMindscape.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.detect-mindscape:appears_on_spell_list:spell-list.medium",
+      status: "accepted",
+    }));
+
+    const psychicSignificance = canonical("detect-psychic-significance");
+    expect(psychicSignificance.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.detect-psychic-significance:references:spell.detect-magic",
+      status: "rejected",
+    }));
+    expect(psychicSignificance.relationships).toContainEqual(expect.objectContaining({
+      relationship_id:
+        "spell.detect-psychic-significance:appears_on_spell_list:spell-list.medium",
+      status: "accepted",
+    }));
+
+    const radiation = canonical("detect-radiation");
+    expect(radiation.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.detect-radiation:uses_definition:rule.see-in-darkness",
+      status: "rejected",
+    }));
+
+    const snares = canonical("detect-snares-and-pits");
+    const snaresDocument = JSON.stringify(snares.description.document);
+    expect(snaresDocument.match(/references:spell\.snare/g)).toHaveLength(1);
+    expect(snares.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.detect-snares-and-pits:references:spell.detect-magic",
+      status: "rejected",
+    }));
+
+    const greaterPublicationLinks = greaterDetectMagic.relationships.filter(
+      (relationship: Record<string, unknown>) => [
+        "spell.detect-magic-greater:uses_definition:rule.pathfinder-roleplaying-game-ultimate-intrigue",
+        "spell.detect-magic-greater:uses_definition:rule.pzo1134",
+      ].includes(String(relationship.relationship_id)),
+    );
+    expect(greaterPublicationLinks).toHaveLength(2);
+    expect(greaterPublicationLinks.every(
+      (relationship: Record<string, unknown>) => relationship.status === "rejected",
+    )).toBe(true);
+  });
+
+  it("keeps Batch 23 contextual rules and parent-spell references distinct", () => {
+    const greaterDischarge = canonical("discharge-greater");
+    expect(JSON.stringify(greaterDischarge.description.document).match(
+      /functions_like:spell\.discharge/g,
+    )).toHaveLength(3);
+
+    const diminishResistance = canonical("diminish-resistance");
+    const resistanceDocument = JSON.stringify(diminishResistance.description.document);
+    expect(resistanceDocument).not.toContain("references:spell.resistance");
+    for (const descriptor of ["acid", "cold", "electricity", "fire", "sonic"]) {
+      expect(resistanceDocument).toContain(`uses_definition:descriptor.${descriptor}`);
+    }
+
+    for (const slug of ["determine-depth", "devil-snare", "dispel-balance"]) {
+      const document = JSON.stringify(canonical(slug).description.document);
+      expect(document).not.toContain('"value":"touch","relationship_id"');
+    }
+
+    const discoveryTorch = JSON.stringify(canonical("discovery-torch").description.document);
+    expect(discoveryTorch).toContain("uses_definition:illumination.bright-light");
+    expect(discoveryTorch).toContain("uses_definition:descriptor.light");
+    expect(discoveryTorch).toContain("uses_definition:descriptor.darkness");
+
+    const disguiseWeapon = JSON.stringify(canonical("disguise-weapon").description.document);
+    for (const item of ["greatsword", "quarterstaff", "club", "dagger"]) {
+      expect(disguiseWeapon).toContain(`uses_definition:item.${item}`);
+    }
+  });
+
+  it("keeps Batch 24 contextual spell, rules, and class links distinct", () => {
+    const disruptSilence = JSON.stringify(canonical("disrupt-silence").description.document);
+    expect(disruptSilence.match(/references:spell\.silence/g)).toHaveLength(1);
+
+    for (const slug of ["disrupt-link", "dissolution"]) {
+      const document = JSON.stringify(canonical(slug).description.document);
+      expect(document).not.toContain('"value":"touch","relationship_id"');
+    }
+
+    const displacement = JSON.stringify(canonical("displacement").description.document);
+    expect(displacement.match(/uses_definition:rule\.total-concealment/g)).toHaveLength(2);
+    expect(displacement).not.toContain("uses_definition:rule.concealment");
+
+    const divinePower = JSON.stringify(canonical("divine-power").description.document);
+    expect(divinePower).toContain("uses_definition:rule.speed-weapon");
+    expect(divinePower).not.toContain('"relationship_id":"spell.divine-power:uses_definition:rule.speed"');
+
+    const divineVessel = JSON.stringify(canonical("divine-vessel").description.document);
+    expect(divineVessel.match(/uses_definition:descriptor\.cold/g)).toHaveLength(3);
+    expect(divineVessel.match(/uses_definition:rule\.good/g)).toHaveLength(3);
+
+    const dominateAnimal = JSON.stringify(canonical("dominate-animal").description.document);
+    expect(dominateAnimal.match(/uses_definition:rule\.animal/g)).toHaveLength(4);
+    expect(dominateAnimal).toContain('"node_type":"text","value":"animal","marks":["italic"]');
+
+    const draconicAlly = JSON.stringify(canonical("draconic-ally").description.document);
+    for (const target of [
+      "class.inquisitor",
+      "class.warpriest",
+      "deity.apsu",
+      "deity.dahak",
+    ]) expect(draconicAlly).toContain(`uses_definition:${target}`);
+  });
+
+  it("keeps Batch 25 tables, homonyms, and canonical destinations distinct", () => {
+    const ceremony = JSON.stringify(canonical("ceremony").description.document);
+    expect(ceremony.match(/uses_definition:rule\.touch-attack/g)).toHaveLength(3);
+    for (const target of [
+      "descriptor.air",
+      "descriptor.earth",
+      "descriptor.fire",
+      "descriptor.light",
+      "descriptor.water",
+      "rule.profane-bonus",
+      "rule.swarm",
+    ]) expect(ceremony).toContain(`uses_definition:${target}`);
+    for (const descriptor of ["air", "earth", "fire", "light", "water"]) {
+      expect(ceremony.match(new RegExp(`uses_definition:descriptor\\.${descriptor}`, "g")))
+        .toHaveLength(1);
+    }
+
+    const detectUndead = canonical("detect-undead");
+    expect(detectUndead.description.document.content.filter(
+      (block: Record<string, unknown>) => block.node_type === "table",
+    )).toHaveLength(1);
+    expect(canonical("curse-terrain-lesser").description.document.content.filter(
+      (block: Record<string, unknown>) => block.node_type === "table",
+    )).toHaveLength(1);
+    expect(JSON.stringify(detectUndead.description.document).match(
+      /uses_definition:rule\.undead/g,
+    )).toHaveLength(9);
+
+    for (const slug of ["drain-poison", "dream-voyage"]) {
+      const spell = canonical(slug);
+      expect(spell.relationships).toContainEqual(expect.objectContaining({
+        relationship_id: `spell.${slug}:uses_definition:rule.touch-attack`,
+        status: "rejected",
+      }));
+      expect(JSON.stringify(spell.description.document)).not.toContain(
+        `spell.${slug}:uses_definition:rule.touch-attack`,
+      );
+    }
+
+    expect(JSON.stringify(canonical("dream-council").description.document).match(
+      /functions_like:spell\.dream/g,
+    )).toHaveLength(3);
+    expect(JSON.stringify(canonical("dream-scan").description.document).match(
+      /functions_like:spell\.dream/g,
+    )).toHaveLength(2);
+    expect(JSON.stringify(canonical("dream-travel").description.document).match(
+      /references:spell\.dream"/g,
+    )).toHaveLength(1);
+
+    expect(JSON.stringify(canonical("dragon-turtle-shell").description.document))
+      .toContain("uses_definition:feat.improved-natural-attack");
+    expect(JSON.stringify(canonical("dungeonsight").description.document))
+      .toContain("uses_definition:monster.iron-golem");
+  });
+
+  it("keeps Batch 26 spell references, homonyms, and elemental contexts distinct", () => {
+    const enclosure = JSON.stringify(
+      canonical("echeans-excellent-enclosure").description.document,
+    );
+    for (const spell of [
+      "antimagic-field",
+      "dimension-door",
+      "dispel-magic",
+      "teleport",
+      "wall-of-force",
+    ]) expect(enclosure).toContain(`spell.${spell}`);
+
+    const snare = canonical("ectoplasmic-snare");
+    expect(snare.relationships).toContainEqual(expect.objectContaining({
+      relationship_id: "spell.ectoplasmic-snare:references:spell.snare",
+      status: "rejected",
+    }));
+    expect(JSON.stringify(snare.description.document)).not.toContain("references:spell.snare");
+
+    const aura = JSON.stringify(canonical("elemental-aura").description.document);
+    expect(aura).not.toContain("uses_definition:rule.elemental");
+    for (const descriptor of ["acid", "cold", "electricity", "fire"]) {
+      expect(aura).toContain(`uses_definition:descriptor.${descriptor}`);
+    }
+
+    const speech = JSON.stringify(canonical("elemental-speech").description.document);
+    expect(speech.match(/uses_definition:rule\.elemental/g)).toHaveLength(2);
+    for (const element of ["air", "earth", "fire", "water"]) {
+      expect(speech).toContain(`uses_definition:descriptor.${element}`);
+      expect(speech).toContain(`uses_definition:rule.${element}`);
+    }
+
+    expect(canonical("elemental-mastery").description.document.content.filter(
+      (block: Record<string, unknown>) => block.node_type === "table",
+    )).toHaveLength(1);
+    expect(JSON.stringify(canonical("eaglesoul").description.document))
+      .toContain("uses_definition:rule.energy-resistance");
+    for (const tier of ["ii", "iii", "iv", "v"]) {
+      expect(JSON.stringify(canonical(`ego-whip-${tier}`).description.document))
+        .toContain("functions_like:spell.ego-whip-i");
+    }
   });
 });
 

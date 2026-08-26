@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.depilate",
   "ruleset": "Pathfinder First Edition",
   "name": "Depilate",
@@ -241,7 +241,90 @@
   "description": {
     "raw": "This simple jinx causes a target’s hair or fur to fall out in patchy clumps, leaving the creature disheveled and less commanding. A jinxed creature takes a –2 penalty on all Diplomacy, Intimidate, and Perform checks until the hair begins to regrow 1 week later, or until the damage can be concealed with a successful Disguise or Heal check (the DC is equal to the original save DC of the spell). A successful break enchantment, remove curse, or similar effect instantly regrows the target’s hair or fur and removes the spell’s effects.",
     "search_text": "\"this simple jinx causes a target’s hair or fur to fall out in patchy clumps, leaving the creature disheveled and less commanding. a jinxed creature takes a –2 penalty on all diplomacy, intimidate, and perform checks until the hair begins to regrow 1 week later, or until the damage can be concealed with a successful disguise or heal check (the dc is equal to the original save dc of the spell). a successful break enchantment, remove curse, or similar effect instantly regrows the target’s hair or fur and removes the spell’s effects.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This simple jinx causes a target’s hair or fur to fall out in patchy clumps, leaving the creature disheveled and less commanding. A jinxed creature takes a –2 penalty on all "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Diplomacy",
+              "relationship_id": "spell.depilate:uses_definition:rule.diplomacy"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Intimidate",
+              "relationship_id": "spell.depilate:uses_definition:rule.intimidate"
+            },
+            {
+              "node_type": "text",
+              "value": ", and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Perform",
+              "relationship_id": "spell.depilate:uses_definition:rule.perform"
+            },
+            {
+              "node_type": "text",
+              "value": " checks until the hair begins to regrow 1 week later, or until the damage can be concealed with a successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Disguise",
+              "relationship_id": "spell.depilate:uses_definition:rule.disguise"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Heal",
+              "relationship_id": "spell.depilate:uses_definition:rule.heal"
+            },
+            {
+              "node_type": "text",
+              "value": " check (the DC is equal to the original save DC of the spell). A successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "break enchantment",
+              "relationship_id": "spell.depilate:references:spell.break-enchantment",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "remove curse",
+              "relationship_id": "spell.depilate:references:spell.remove-curse",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", or similar effect instantly regrows the target’s hair or fur and removes the spell’s effects."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -528,7 +611,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.break-enchantment",
-        "name": "break enchantment"
+        "name": "Break Enchantment"
       },
       "status": "accepted",
       "evidence": [
@@ -548,7 +631,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.remove-curse",
-        "name": "remove curse"
+        "name": "Remove Curse"
       },
       "status": "accepted",
       "evidence": [
@@ -683,11 +766,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.depilate:uses_definition:rule.will",
+      "relationship_id": "spell.depilate:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -751,11 +834,19 @@
       "raw_value_sha256": "eae20e5d9b6aec9eb72a05d4846d8c9a9203f527fb2348a44614037a05ac0fb1",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.depilate:0af5f69985c16569",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "53b5caefdd82ba20ae4757ab991c547b7e7b03fbeb4abb176bb3a6e81a79b78d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

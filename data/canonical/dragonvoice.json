@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.dragonvoice",
   "ruleset": "Pathfinder First Edition",
   "name": "Dragonvoice",
@@ -14,7 +14,7 @@
   "levels": [
     {
       "spell_list_id": "spell-list.alchemist",
-      "list_kind": "class",
+      "list_kind": "formulae",
       "list_name": "alchemist",
       "level": 2,
       "scope": "later_first_party",
@@ -38,7 +38,7 @@
     },
     {
       "spell_list_id": "spell-list.investigator",
-      "list_kind": "class",
+      "list_kind": "formulae",
       "list_name": "investigator",
       "level": 2,
       "scope": "later_first_party",
@@ -169,7 +169,75 @@
   "description": {
     "raw": "By magically altering the way your vocal cords create sounds,\nyou can emulate the vocal inflections of dragons. This grants\na +6 circumstance bonus on Charisma checks and Charismarelated\nskill checks when dealing with dragons.\n\nIn addition, your voice is much louder than normal, halving\nthe penalties to others’ Perception checks to hear you due to\ndistance, intervening doors, and so on.",
     "search_text": "\"by magically altering the way your vocal cords create sounds,\\nyou can emulate the vocal inflections of dragons. this grants\\na +6 circumstance bonus on charisma checks and charismarelated\\nskill checks when dealing with dragons.\\n\\nin addition, your voice is much louder than normal, halving\\nthe penalties to others’ perception checks to hear you due to\\ndistance, intervening doors, and so on.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "By magically altering the way your vocal cords create sounds, you can emulate the vocal inflections of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dragons",
+              "relationship_id": "spell.dragonvoice:uses_definition:rule.dragon"
+            },
+            {
+              "node_type": "text",
+              "value": ". This grants a +6 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "circumstance bonus",
+              "relationship_id": "spell.dragonvoice:uses_definition:rule.circumstance-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Charisma",
+              "relationship_id": "spell.dragonvoice:uses_definition:rule.charisma"
+            },
+            {
+              "node_type": "text",
+              "value": " checks and Charismarelated skill checks when dealing with "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dragons",
+              "relationship_id": "spell.dragonvoice:uses_definition:rule.dragon"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": " In addition, your voice is much louder than normal, halving the penalties to others’ "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Perception",
+              "relationship_id": "spell.dragonvoice:uses_definition:rule.perception"
+            },
+            {
+              "node_type": "text",
+              "value": " checks to hear you due to distance, intervening doors, and so on."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -545,12 +613,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.dragonvoice:uses_definition:rule.dragons",
+      "relationship_id": "spell.dragonvoice:uses_definition:rule.dragon",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.dragons",
-        "name": "dragons"
+        "entity_id": "rule.dragon",
+        "name": "Dragon"
       },
       "status": "accepted",
       "evidence": [
@@ -660,11 +728,19 @@
       "raw_value_sha256": "14b2c32b0148aeeaf50f736bece21418c35334db6b62e1a9c101dae4a5ffaf70",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.dragonvoice:38cbcd98295e014a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "12c3818bcda7223d99a896961403c7ca5e9720f3232302592a0ffea694dbce6b",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

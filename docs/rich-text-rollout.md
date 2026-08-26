@@ -7,16 +7,16 @@ validation rules in [Rich-text spell descriptions](rich-text.md).
 
 ## Current status
 
-Audit date: 2026-08-23.
+Audit date: 2026-08-25.
 
 | Category | Spells | Meaning |
 | --- | ---: | --- |
 | Total canonical spells | 3,030 | Complete corpus |
-| Rich text stored | 537 | 11-spell pilot, twenty-one reviewed 25-spell rollout batches, and one reviewed warning record |
-| Safe candidates with links | 1,728 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
-| Safe structure-only candidates | 302 | Source text matches, but no known relationship currently produces an inline link |
-| Source mismatch | 291 | Current canonical text and the newly bounded AoN description differ |
-| Link warnings | 172 | At least one accepted relationship is ambiguous or unmatched |
+| Rich text stored | 663 | 11-spell pilot, twenty-six reviewed 25-spell rollout batches, Reincarnate, and one reviewed warning record |
+| Safe candidates with links | 1,632 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
+| Safe structure-only candidates | 306 | Source text matches, but no known relationship currently produces an inline link |
+| Source mismatch | 280 | Current canonical text and the newly bounded AoN description differ |
+| Link warnings | 174 | At least one accepted relationship is ambiguous or unmatched |
 | Missing AoN baseline | 0 | No current blocker |
 | Parser errors | 0 | No current blocker |
 
@@ -340,12 +340,9 @@ Review of this batch established these normalization rules:
   condition. Call Construct's ordinary `summon` verb does not link to the
   monster Summon ability.
 
-Calculated Luck and Call Spirit expose a contract gap: their source
-descriptions contain real data tables. The `0.2.0` AST preserves their leaf
-text and Calculated Luck's preceding list, but it flattens table cells because
-the minimal schema has no table nodes. This needs a schema, parser, renderer,
-and accessibility decision before those tables can receive reliable cell-level
-links.
+Calculated Luck and Call Spirit were converted before table nodes existed, so
+their leaf text is preserved but their cells remain flattened. Re-enrich these
+records before adding cell-level links.
 
 ### Batch 13
 
@@ -525,9 +522,10 @@ targets, Creeping Ice's ordinary adjective `slow` as the Slow spell, Cruel
 Jaunt's own teleportation effect as the Teleport spell, and Crushing Despair's
 unrelated third-party modified-spell link.
 
-Create Greater Undead and Crime Wave contain source tables. Their text remains
-lossless, but row and cell semantics are flattened under the current `0.2.0`
-AST. Links were not added across concatenated cell boundaries.
+Create Greater Undead and Crime Wave were converted before table nodes existed.
+Their text remains lossless, but their row and cell semantics stay flattened
+until they are re-enriched. Links were not added across concatenated cell
+boundaries.
 
 ### Batch 19
 
@@ -648,24 +646,205 @@ Semantic review rejected Blood Salvation's duplicate publication navigation
 as a rules definition and Decollate's merely apparent `dead` head as the Dead
 condition.
 
+### Batch 22
+
+The twenty-second rollout batch contains:
+
+- Mass Demanding Message; Denounce; Depilate; Destabilize Powder; Destroy
+  Robot; Destruction; Detect Aberration; Detect Animals or Plants.
+- Detect Anxieties; Detect Chaos; Detect Charm; Detect Demon; Detect Desires;
+  Detect Evil; Detect Fiendish Presence; Detect Good; Detect Law.
+- Greater Detect Magic; Detect Metal; Detect Mindscape; Detect Poison; Detect
+  Psychic Significance; Detect Radiation; Detect Relations; Detect Snares and
+  Pits.
+
+Review of this batch established these normalization rules:
+
+- “Functions similarly to” identifies direct spell inheritance, so Detect
+  Mindscape inherits from Detect Thoughts. Parent links inside a greater
+  spell's own title remain plain; Greater Detect Magic links Detect Magic only
+  in its inheritance clause.
+- Secondary-source Medium spell-list navigation is normalized as spell-list
+  membership for Detect Mindscape and Detect Psychic Significance. Greater
+  Detect Magic's duplicate publication and product-code navigation is
+  rejected as rules-definition evidence.
+- Common verb phrases do not become spell or monster-ability links. “Detect
+  magic items,” “does not detect magic traps,” and “see in darkness” remain
+  plain. Detect Snares and Pits links Snare only where the wording explicitly
+  says “the spell snare.”
+- Reviewed missing links cover line of sight; firearms, caster levels, and
+  standard actions; saving throws and Androids; hit points and ability scores;
+  Hit Dice; Asmodeus; Clerics and creature types; Silver; Poison; and traps.
+
+Detect Evil was converted before table nodes existed. Its source tables remain
+lossless text but need re-enrichment to recover row and cell semantics.
+
+### Batch 23
+
+The twenty-third rollout batch contains:
+
+- Detect the Faithful; Detect Thoughts; Determine Depth; Detonate; Detoxify;
+  Devil Snare; Diagnose Disease; Die for Your Master.
+- Dimensional Anchor; Dimensional Blade; Dimensional Bounce; Diminish Plants;
+  Diminish Resistance; Diminished Detection; Disable Construct; Discern
+  Location; Discharge; Greater Discharge.
+- Discovery Torch; Disguise Other; Disguise Self; Disguise Weapon; Dismissal;
+  Dispel Balance; Dispel Chaos.
+
+Review of this batch established these normalization rules:
+
+- Greater Discharge has eleven occurrences of `discharge`, but only three name
+  the parent spell: its two “functions as” clauses and “as though by” clause.
+  The title fragments, category headings, and discharge verbs remain plain.
+  The three links still expand the parent only once.
+- Generic resistance does not identify the Resistance spell. Diminish
+  Resistance instead links Acid, Cold, Electricity, Fire, and Sonic to their
+  descriptor headings. Energy-rule source IDs for those terms normalize to the
+  same canonical descriptor identities.
+- Ordinary contact wording remains plain. Determine Depth's range phrase,
+  Devil Snare's “Your touch,” and Dispel Balance's “with a touch” do not link
+  the touch-attack rule; explicit ranged, melee, and other touch attacks do.
+- Discovery Torch links bright light to the illumination page and treats
+  “Light spells” and “darkness spells” as descriptors rather than individual
+  spells. Disguise Weapon resolves greatsword, quarterstaff, club, and dagger
+  to equipment entities.
+- Reviewed missing links cover line of sight; energy descriptors and saving
+  throws; extradimensional travel, spell-like abilities, and summoning;
+  attacks, Armor Class, Force, and line of effect; Plant creatures; immunity to
+  magic; scrying and planes; robots; creature types, creature subtypes, and the
+  Glamer subschool; and extraplanar creatures.
+
+Detect Undead was deliberately not substituted into this batch. Its selected
+source description contains a table, so converting it while table-AST work was
+changing concurrently would couple this rollout to unreviewed structural
+changes. Re-run it after that work is committed and verify its row and cell
+semantics before accepting inline links.
+
+### Batch 24
+
+The twenty-fourth rollout batch contains:
+
+- Dispel Evil; Dispel Good; Dispel Law; Greater Dispel Magic; Displacement;
+  Display Aversion; Disrupt Link; Disrupt Silence; Disrupting Weapon.
+- Dissolution; Distracting Cacophony; Distressing Tone; Divide Mind; Divination;
+  Divine Arrow; Divine Power; Divine Transfer; Divine Vessel.
+- Dominate Animal; Dominate Monster; Domination Link; Dousing Rain; Draconic
+  Ally; Draconic Malice; Draconic Suppression.
+
+Review of this batch established these normalization rules:
+
+- Dispel Good and Dispel Law link and expand Dispel Evil once. Greater Dispel
+  Magic retains its explicit Dispel Magic references. Disrupt Silence links
+  only the example Silence spell; occurrences inside its own name and generic
+  magical-silence wording remain plain.
+- A bare `touch` does not imply a touch attack. Disrupt Link's “deliver touch
+  spells” familiar ability and Dissolution's ordinary contact wording remain
+  plain, while Dispel Evil's explicit melee touch attack links to the rule.
+- Displacement links both occurrences of total concealment to that specific
+  rule rather than linking the `concealment` substring. Divine Power's italic
+  `speed` names the weapon special ability, not movement speed.
+- Divine Vessel distinguishes energy descriptors from ordinary adjectives and
+  alignment terms from “good maneuverability.” Its SR, DR, energy types,
+  poison, attacks, and alignment effects link without treating the introductory
+  “cold and alien” description as Cold energy.
+- Draconic Ally normalizes Inquisitor and Warpriest references to class pages
+  and links Apsu and Dahak. Draconic Malice links Antipaladin and Aura of
+  Cowardice. These newly referenced entities remain documented stubs until
+  dedicated source captures are available.
+
+Both selected first-party and secondary-source artifacts for Dissolution say
+`1d0 points of damage`. The canonical wording remains unchanged because the
+rich-text rollout does not silently correct source text. Confirm the intended
+die from the printed source before making a separate erratum decision.
+
+### Batch 25
+
+The twenty-fifth rollout batch contains:
+
+- Ceremony; Create Drug; Lesser Curse Terrain; Detect Undead; Dragon Turtle
+  Shell; Dragonvoice; Drain Construct; Drain Poison; Dread Bolt; Dreadscape.
+- Dream Council; Dream Dalliance; Dream Feast; Dream Reality; Dream Scan;
+  Dream Shield; Dream Travel; Dream Voyage; Dress Corpse; Drunkard's Breath.
+- Dungeonsight; Duplicate Familiar; Dust Form; Dust Ward; Dwarven Veil.
+
+Review of this batch established these normalization rules:
+
+- A `dream` match is retained only when the surrounding phrase names the Dream
+  spell. Dream Council, Dream Scan, and Dream Travel leave their own titles,
+  ordinary dreams, and the verb `dream` unlinked. Dream Voyage's four explicit
+  Dream Travel references remain linked and expand the parent once.
+- Ordinary `touch` remains plain. Ceremony links its three explicit touch
+  attacks but not “with a touch” or the Touch of Assuagement heading. Drain
+  Poison's weapon handling and Dream Voyage's target selection reject the
+  secondary source's touch-attack relationships.
+- Air, Earth, Fire, Light, and Water descriptor aliases resolve to the shared
+  descriptor pages. Profane bonus and swarm aliases resolve to their existing
+  definitions. Improved Natural Attack resolves to a feat, and iron golem
+  resolves to a monster rather than duplicate generic-rule stubs.
+- Lesser Curse Terrain and Detect Undead preserve their source tables as table,
+  row, header-cell, and data-cell nodes. The terrain-cost table links the three
+  other named Curse Terrain spells without self-linking the current spell.
+- Reviewed missing links cover Undead; Good and Evil alignment terms; hostile
+  attitude and sanity rules; Divination and possession; Emotion and Fear;
+  Poison; Cayden Cailean; Dwarf; and the Water descriptor.
+
+Detect Undead was deferred from Batch 23 while table support was changing. Its
+row and cell semantics are now reviewed and covered by canonical, web, and
+browser tests.
+
+### Batch 26
+
+The twenty-sixth rollout batch contains:
+
+- Dweomer Retaliation; Eagle Aerie; Eagle's Splendor; Mass Eagle's Splendor;
+  Eaglesoul; Early Judgment; Ears of the City; Earth Glide; Earth Tremor.
+- Echean's Excellent Enclosure; Echo; Echolocation; Ectoplasmic Eruption;
+  Ectoplasmic Hand; Ectoplasmic Snare; Effortless Armor.
+- Ego Whip II–V; Eldritch Fever; Elemental Assessor; Elemental Aura;
+  Elemental Mastery; Elemental Speech.
+
+Review of this batch established these normalization rules:
+
+- Ectoplasmic Snare rejects the secondary source's Snare relationship because
+  every occurrence names the current spell's tether. Elemental Aura likewise
+  leaves `elemental` plain when it occurs only in the current spell's name.
+- Elemental Speech distinguishes spell descriptors from creature subtypes:
+  `air spell` links the Air descriptor, while `air subtype` links the Air rules
+  entity, with the same treatment for Earth, Fire, and Water. Its own title
+  remains plain.
+- Eaglesoul's `Resistance 5 to acid and fire` resolves to Energy Resistance,
+  not the unrelated Resistance spell or a generic resistance record. Ifrit,
+  oread, sylph, and undine plurals resolve to their singular canonical race
+  entities.
+- Explicit inheritance from Ego Whip II–V to Ego Whip I is represented as
+  `functions_like`. Echean's Excellent Enclosure links every named spell and
+  item while preserving the inverted phrase `field of antimagic`.
+- Elemental Mastery's source table remains a table with one header row, four
+  body rows, row headers, and inline links. Source wording, emphasis, paragraph
+  boundaries, and all other rich-text structures remain text-equivalent.
+
+Canonical, database-backed web, and desktop/mobile browser tests cover these
+distinctions. Manual rendered review covered Echean's Excellent Enclosure,
+Elemental Aura, Elemental Speech, Ectoplasmic Snare, and Elemental Mastery.
+
 ## Open questions and issues
 
 ### Source boundaries
 
-The 291 source mismatches require comparison before conversion. Likely causes
+The 280 source mismatches require comparison before conversion. Likely causes
 include mythic text folded into a base description, supplemental headings,
 parser-version differences, and prior manual corrections. Do not overwrite a
 canonical description merely to make it match the current parser.
 
 ### Ambiguous or unmatched relationships
 
-The 172 warning records remain unconverted. Review whether each relationship is
+The 174 warning records remain unconverted. Review whether each relationship is
 description evidence, metadata only, a source-navigation artifact, or a real
 relationship whose phrase needs contextual matching.
 
 ### Missing relationships
 
-The 310 structure-only candidates may be genuinely link-free, but the audit can
+The 306 structure-only candidates may be genuinely link-free, but the audit can
 only evaluate relationships already present in canonical data. Review source
 links and common rules terminology before concluding that a spell needs no
 inline links.
@@ -695,12 +874,11 @@ the intended target.
 
 ### Source tables
 
-The current AST supports paragraphs and unordered lists, not tables. Calculated
-Luck, Call Spirit, Contact Other Plane, Create Greater Undead, and Crime Wave
-demonstrate that flattening cells preserves words but not their relationships.
-Decide whether `0.3.0` should add semantic table nodes or whether the canonical
-normalizer should convert source tables to another accessible structure. Do not
-add phrase links across concatenated cells.
+The `0.2.0` AST now supports semantic heading, table, row, and cell nodes.
+Reincarnate is the first reviewed conversion using them. Calculated Luck, Call
+Spirit, Contact Other Plane, Create Greater Undead, Crime Wave, and Detect Evil
+were converted earlier and remain migration candidates; re-enrich them before
+adding phrase links that depend on cell boundaries.
 
 ## Batch workflow
 

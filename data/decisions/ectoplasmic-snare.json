@@ -153,9 +153,42 @@
         "d20pfsrd:magic-school.aether-elemental:3e5520a8"
       ],
       "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.ectoplasmic-snare:10b347add21fb56b",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.ectoplasmic-snare:10b347add21fb56b",
+        "legacy_aon:spell.ectoplasmic-snare:21ef837d7c39ac6b",
+        "d20pfsrd:spell.ectoplasmic-snare:5cffe4d37dd8f16f",
+        "aon:patron.ethereal:15d234b1",
+        "aon:bloodline.sorcerer.ectoplasm:52897c82",
+        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.ectoplasmic-snare:appears_on_spell_list:spell-list.aether-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
     {
       "relationship_id": "spell.ectoplasmic-snare:appears_on_spell_list:spell-list.arcanist",
       "decision": "accept",
@@ -187,6 +220,20 @@
         "d20pfsrd:spell.ectoplasmic-snare:5cffe4d37dd8f16f"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.ectoplasmic-snare:appears_on_spell_list:spell-list.ethereal-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.ethereal:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.ethereal:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.ectoplasmic-snare:appears_on_spell_list:spell-list.magus",
@@ -263,6 +310,20 @@
         "d20pfsrd:spell.ectoplasmic-snare:5cffe4d37dd8f16f"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.ectoplasmic-snare:appears_on_spell_list:spell-list.sorcerer-ectoplasm-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.ectoplasm:52897c82",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.ectoplasm:52897c82"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     },
     {
       "relationship_id": "spell.ectoplasmic-snare:appears_on_spell_list:spell-list.sorcerer-wizard",
@@ -366,7 +427,7 @@
     },
     {
       "relationship_id": "spell.ectoplasmic-snare:references:spell.snare",
-      "decision": "accept",
+      "decision": "reject",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.ectoplasmic-snare:5cffe4d37dd8f16f",
@@ -378,7 +439,7 @@
         "legacy_aon:spell.ectoplasmic-snare:21ef837d7c39ac6b",
         "d20pfsrd:spell.ectoplasmic-snare:5cffe4d37dd8f16f"
       ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+      "rationale": "The description uses “snare” as an ordinary noun for its own ectoplasmic tether, not as a reference to the Snare spell."
     },
     {
       "relationship_id": "spell.ectoplasmic-snare:uses_action:action.standard-action",
@@ -401,25 +462,13 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.ectoplasmic-snare:uses_definition:condition.entangle",
+      "relationship_id": "spell.ectoplasmic-snare:uses_definition:condition.entangled",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.ectoplasmic-snare:5cffe4d37dd8f16f",
           "source_field": "spell_raw.links_raw[11]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.ectoplasmic-snare:10b347add21fb56b",
-        "legacy_aon:spell.ectoplasmic-snare:21ef837d7c39ac6b",
-        "d20pfsrd:spell.ectoplasmic-snare:5cffe4d37dd8f16f"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.ectoplasmic-snare:uses_definition:condition.entangled",
-      "decision": "accept",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.ectoplasmic-snare:5cffe4d37dd8f16f",
           "source_field": "spell_raw.links_raw[14]"
@@ -497,7 +546,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.ectoplasmic-snare:uses_definition:rule.cmb",
+      "relationship_id": "spell.ectoplasmic-snare:uses_definition:rule.combat-maneuver-bonus",
       "decision": "accept",
       "evidence": [
         {
@@ -513,7 +562,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.ectoplasmic-snare:uses_definition:rule.cmd",
+      "relationship_id": "spell.ectoplasmic-snare:uses_definition:rule.combat-maneuver-defense",
       "decision": "accept",
       "evidence": [
         {
@@ -529,7 +578,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.ectoplasmic-snare:uses_definition:rule.combat-maneuver",
+      "relationship_id": "spell.ectoplasmic-snare:uses_definition:rule.combat-maneuvers",
       "decision": "accept",
       "evidence": [
         {
@@ -585,6 +634,25 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.ectoplasmic-snare:uses_definition:rule.ethereal",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.ectoplasmic-snare:10b347add21fb56b",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.ectoplasmic-snare:10b347add21fb56b",
+        "legacy_aon:spell.ectoplasmic-snare:21ef837d7c39ac6b",
+        "d20pfsrd:spell.ectoplasmic-snare:5cffe4d37dd8f16f",
+        "aon:patron.ethereal:15d234b1",
+        "aon:bloodline.sorcerer.ectoplasm:52897c82",
+        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.ectoplasmic-snare:uses_definition:rule.grapple",
       "decision": "accept",
       "evidence": [
@@ -607,19 +675,7 @@
         {
           "observation_id": "d20pfsrd:spell.ectoplasmic-snare:5cffe4d37dd8f16f",
           "source_field": "spell_raw.links_raw[36]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.ectoplasmic-snare:10b347add21fb56b",
-        "legacy_aon:spell.ectoplasmic-snare:21ef837d7c39ac6b",
-        "d20pfsrd:spell.ectoplasmic-snare:5cffe4d37dd8f16f"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.ectoplasmic-snare:uses_definition:rule.grappling",
-      "decision": "accept",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.ectoplasmic-snare:5cffe4d37dd8f16f",
           "source_field": "spell_raw.links_raw[19]"
@@ -685,7 +741,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.ectoplasmic-snare:uses_definition:rule.reflex",
+      "relationship_id": "spell.ectoplasmic-snare:uses_definition:rule.reflex-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -751,48 +807,6 @@
         "d20pfsrd:spell.ectoplasmic-snare:5cffe4d37dd8f16f"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.ectoplasmic-snare:appears_on_spell_list:spell-list.ethereal-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.ethereal:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.ethereal:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.ectoplasmic-snare:appears_on_spell_list:spell-list.sorcerer-ectoplasm-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.ectoplasm:52897c82",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.ectoplasm:52897c82"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
-    },
-    {
-      "relationship_id": "spell.ectoplasmic-snare:appears_on_spell_list:spell-list.aether-elemental-school",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
-      ],
-      "rationale": "d20PFSRD prints the spell on the owning wizard elemental arcane school page; it is modeled as elemental_school access rather than general Wizard access."
     }
   ],
   "unresolved_questions": [

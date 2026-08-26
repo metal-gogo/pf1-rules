@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.drunkards-breath",
   "ruleset": "Pathfinder First Edition",
   "legacy_3_5_material": true,
@@ -217,7 +217,51 @@
   "description": {
     "raw": "This spell emanates from your mouth and functions like stinking cloud, except as noted above. The effect is barely visible and does not obscure vision. The nausea effect resembles that of an extreme hangover. This is a poison effect. Cayden Cailean’s church uses this spell to disperse angry crowds, such as when celebrations get out of hand.",
     "search_text": "\"this spell emanates from your mouth and functions like stinking cloud, except as noted above. the effect is barely visible and does not obscure vision. the nausea effect resembles that of an extreme hangover. this is a poison effect. cayden cailean’s church uses this spell to disperse angry crowds, such as when celebrations get out of hand.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell emanates from your mouth and functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "stinking cloud",
+              "relationship_id": "spell.drunkards-breath:functions_like:spell.stinking-cloud",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except as noted above. The effect is barely visible and does not obscure vision. The nausea effect resembles that of an extreme hangover. This is a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "poison effect",
+              "relationship_id": "spell.drunkards-breath:uses_definition:descriptor.poison"
+            },
+            {
+              "node_type": "text",
+              "value": ". "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Cayden Cailean",
+              "relationship_id": "spell.drunkards-breath:uses_definition:deity.cayden-cailean"
+            },
+            {
+              "node_type": "text",
+              "value": "’s church uses this spell to disperse angry crowds, such as when celebrations get out of hand."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -227,7 +271,90 @@
     "pfs_status": "not_legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.stinking-cloud",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.drunkards-breath:7717e6e90ee898aa",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell emanates from your mouth and functions like stinking cloud, except as noted above. The effect is barely visible and does not obscure vision. The nausea effect resembles that of an extreme hangover. This is a poison effect. Cayden Cailean’s church uses this spell to disperse angry crowds, such as when celebrations get out of hand."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/range",
+          "value": {
+            "category": "distance",
+            "formula": "30 ft.",
+            "raw": "30 ft."
+          },
+          "source_field": "spell_raw.range_raw",
+          "raw": "30 ft.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Area",
+                "value_raw": "cone-shaped burst",
+                "kinds": [
+                  "area"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Area\",\"value_raw\":\"cone-shaped burst\",\"kinds\":[\"area\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/area",
+          "value": {
+            "propagation": "burst",
+            "geometry": "cone",
+            "geometry_basis": "explicit",
+            "dimensions": {
+              "radius_ft": null,
+              "length_ft": null,
+              "width_ft": null,
+              "height_ft": null
+            },
+            "shapeable": null,
+            "raw": "cone-shaped burst"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Area\",\"value_raw\":\"cone-shaped burst\",\"kinds\":[\"area\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell emanates from your mouth and functions like stinking cloud, except as noted above. The effect is barely visible and does not obscure vision. The nausea effect resembles that of an extreme hangover. This is a poison effect. Cayden Cailean’s church uses this spell to disperse angry crowds, such as when celebrations get out of hand.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell emanates from your mouth and functions like stinking cloud, except as noted above. The effect is barely visible and does not obscure vision. The nausea effect resembles that of an extreme hangover. This is a poison effect. Cayden Cailean’s church uses this spell to disperse angry crowds, such as when celebrations get out of hand.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.drunkards-breath:appears_on_spell_list:spell-list.bard",
@@ -282,6 +409,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.drunkards-breath:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.drunkards-breath:eb6d9c85e6e9dedf",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.drunkards-breath:7717e6e90ee898aa",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2 (Cayden Cailean)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.drunkards-breath:appears_on_spell_list:spell-list.oracle",
@@ -339,6 +493,26 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "warpriest 2 (Cayden Cailean)",
           "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.drunkards-breath:functions_like:spell.stinking-cloud",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.stinking-cloud",
+        "name": "Stinking Cloud"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.drunkards-breath:eb6d9c85e6e9dedf",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "stinking cloud",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/s/stinking-cloud"
         }
       ],
       "note": null
@@ -425,26 +599,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.drunkards-breath:references:spell.stinking-cloud",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.stinking-cloud",
-        "name": "stinking cloud"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.drunkards-breath:eb6d9c85e6e9dedf",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "stinking cloud",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/s/stinking-cloud"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.drunkards-breath:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -465,6 +619,46 @@
       "note": null
     },
     {
+      "relationship_id": "spell.drunkards-breath:uses_definition:deity.cayden-cailean",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "deity",
+        "entity_id": "deity.cayden-cailean",
+        "name": "Cayden Cailean"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.drunkards-breath:7717e6e90ee898aa",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Cayden Cailean",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Drunkard%27s+Breath"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.drunkards-breath:uses_definition:descriptor.poison",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.poison",
+        "name": "Poison"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.drunkards-breath:7717e6e90ee898aa",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "poison effect",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Drunkard%27s+Breath"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.drunkards-breath:uses_definition:rule.spell-resistance",
       "type": "uses_definition",
       "target": {
@@ -483,33 +677,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.drunkards-breath:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.drunkards-breath:eb6d9c85e6e9dedf",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.drunkards-breath:7717e6e90ee898aa",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2 (Cayden Cailean)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -560,11 +727,19 @@
       "raw_value_sha256": "a2fc8fa5f6369f03da27b2b875b09389890df6a64d12506ec0577fbbab7ee558",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.drunkards-breath:7717e6e90ee898aa",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "970327c877f4aaa88bdb8feff12669b11be59e702c1be3d698160a03a5b754cd",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "LEGACY_3_5_MATERIAL",

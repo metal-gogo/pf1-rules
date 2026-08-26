@@ -1115,6 +1115,20 @@ describe("local rules browser", () => {
     expect(html.match(/data-embedded-spell="spell.crime-wave"/g)).toHaveLength(1);
   });
 
+  it("renders Reincarnate's incarnation tables and supplemental headings", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.reincarnate`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+
+    expect(response.status).toBe(200);
+    expect(description.match(/class="data-table rich-text-table"/g)).toHaveLength(3);
+    expect(description).toContain("<h3>Reincarnation on Golarion</h3>");
+    expect(description).toContain("<h3>Core Incarnations</h3>");
+    expect(description).toContain("<h3>Other Incarnations</h3>");
+    expect(description).toContain('<th scope="row">01</th><td>');
+    expect(description).not.toContain("d%IncarnationStrDex");
+  });
+
   it.each([
     ["cure-moderate-wounds-mass", "/spells/spell.cure-light-wounds-mass"],
     ["cure-serious-wounds-mass", "/spells/spell.cure-light-wounds-mass"],
@@ -1263,6 +1277,236 @@ describe("local rules browser", () => {
     const fireballDescription = fireballHtml.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
     expect(darknessDescription.match(/href="\/spells\/spell.darkness"/g)).toHaveLength(2);
     expect(fireballDescription.match(/href="\/spells\/spell.fireball"/g)).toHaveLength(1);
+  });
+
+  it.each([
+    ["demanding-message-mass", "/spells/spell.demanding-message"],
+    ["denounce", "/entities/rule.line-of-sight"],
+    ["depilate", "/spells/spell.break-enchantment"],
+    ["destabilize-powder", "/entities/rule.firearm"],
+    ["destroy-robot", "/rules/saving-throws"],
+    ["destruction", "/spells/spell.true-resurrection"],
+    ["detect-aberration", "/spells/spell.detect-animals-or-plants"],
+    ["detect-animals-or-plants", "/entities/rule.hit-points"],
+    ["detect-anxieties", "/spells/spell.detect-thoughts"],
+    ["detect-chaos", "/spells/spell.detect-evil"],
+    ["detect-charm", "/spells/spell.detect-magic"],
+    ["detect-demon", "/entities/rule.hit-dice"],
+    ["detect-desires", "/entities/rule.circumstance-bonus"],
+    ["detect-evil", "/entities/rule.line-of-sight"],
+    ["detect-fiendish-presence", "/entities/deity.asmodeus"],
+    ["detect-good", "/spells/spell.detect-evil"],
+    ["detect-law", "/spells/spell.detect-evil"],
+    ["detect-magic-greater", "/spells/spell.detect-magic"],
+    ["detect-metal", "/entities/rule.silver"],
+    ["detect-mindscape", "/spells/spell.detect-thoughts"],
+    ["detect-poison", "/entities/rule.poison"],
+    ["detect-psychic-significance", "/spells/spell.charge-object"],
+    ["detect-radiation", "/entities/rule.radiation"],
+    ["detect-relations", "/rules/saving-throws#will-saving-throw"],
+    ["detect-snares-and-pits", "/spells/spell.snare"],
+  ])("renders twenty-second-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it.each([
+    ["detect-psychic-significance", "/spells/spell.detect-magic"],
+    ["detect-radiation", "/entities/rule.see-in-darkness"],
+    ["detect-snares-and-pits", "/spells/spell.detect-magic"],
+  ])("omits twenty-second-batch semantic false positives from spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).not.toContain(`href="${target}"`);
+  });
+
+  it("links only explicit parent-spell references in Batch 22", async () => {
+    const [magicResponse, snaresResponse] = await Promise.all([
+      fetch(`${baseUrl}/spells/spell.detect-magic-greater`),
+      fetch(`${baseUrl}/spells/spell.detect-snares-and-pits`),
+    ]);
+    const [magicHtml, snaresHtml] = await Promise.all([
+      magicResponse.text(),
+      snaresResponse.text(),
+    ]);
+    const magicDescription = magicHtml.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const snaresDescription = snaresHtml.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(magicDescription.match(/href="\/spells\/spell.detect-magic"/g)).toHaveLength(1);
+    expect(snaresDescription.match(/href="\/spells\/spell.snare"/g)).toHaveLength(1);
+  });
+
+  it.each([
+    ["detect-the-faithful", "/entities/rule.line-of-sight"],
+    ["detect-thoughts", "/entities/rule.intelligence"],
+    ["determine-depth", "/spells/spell.passwall"],
+    ["detonate", "/rules/descriptors#acid"],
+    ["detoxify", "/entities/rule.poison"],
+    ["devil-snare", "/spells/spell.dimensional-anchor"],
+    ["diagnose-disease", "/entities/condition.sickened"],
+    ["die-for-your-master", "/spells/spell.bleed-for-your-master"],
+    ["dimensional-anchor", "/spells/spell.astral-projection"],
+    ["dimensional-blade", "/spells/spell.mage-armor"],
+    ["dimensional-bounce", "/entities/rule.line-of-effect"],
+    ["diminish-plants", "/spells/spell.entangle"],
+    ["diminish-resistance", "/rules/descriptors#sonic"],
+    ["diminished-detection", "/spells/spell.detect-magic"],
+    ["disable-construct", "/entities/rule.immunity-to-magic"],
+    ["discern-location", "/rules/magic-schools#scrying"],
+    ["discharge", "/entities/rule.robot"],
+    ["discharge-greater", "/spells/spell.discharge"],
+    ["discovery-torch", "/rules/illumination#bright-light"],
+    ["disguise-other", "/spells/spell.disguise-self"],
+    ["disguise-self", "/entities/rule.creature-type"],
+    ["disguise-weapon", "/entities/item.greatsword"],
+    ["dismissal", "/entities/rule.extraplanar"],
+    ["dispel-balance", "/spells/spell.dispel-magic"],
+    ["dispel-chaos", "/spells/spell.dispel-evil"],
+  ])("renders twenty-third-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it("links only semantic Batch 23 spell and touch references", async () => {
+    const [greaterResponse, resistanceResponse, depthResponse, snareResponse, balanceResponse] =
+      await Promise.all([
+        fetch(`${baseUrl}/spells/spell.discharge-greater`),
+        fetch(`${baseUrl}/spells/spell.diminish-resistance`),
+        fetch(`${baseUrl}/spells/spell.determine-depth`),
+        fetch(`${baseUrl}/spells/spell.devil-snare`),
+        fetch(`${baseUrl}/spells/spell.dispel-balance`),
+      ]);
+    const descriptions = await Promise.all(
+      [greaterResponse, resistanceResponse, depthResponse, snareResponse, balanceResponse].map(
+        async (response) => (await response.text()).match(
+          /<section><h2>Description<\/h2>(.*?)<\/section>/s,
+        )?.[1] ?? "",
+      ),
+    );
+    expect(descriptions[0]!.match(/href="\/spells\/spell.discharge"/g)).toHaveLength(3);
+    expect(descriptions[1]!).not.toContain('href="/spells/spell.resistance"');
+    for (const description of descriptions.slice(2)) {
+      expect(description).not.toContain('>touch</a>');
+    }
+  });
+
+  it.each([
+    ["dispel-evil", "/entities/rule.touch-attack"],
+    ["dispel-good", "/spells/spell.dispel-evil"],
+    ["dispel-law", "/spells/spell.dispel-evil"],
+    ["dispel-magic-greater", "/spells/spell.dispel-magic"],
+    ["displacement", "/entities/rule.total-concealment"],
+    ["display-aversion", "/spells/spell.minor-image"],
+    ["disrupt-link", "/entities/class-feature.animal-companion"],
+    ["disrupt-silence", "/spells/spell.silence"],
+    ["disrupting-weapon", "/entities/rule.undead"],
+    ["dissolution", "/spells/spell.miracle"],
+    ["distracting-cacophony", "/entities/rule.concentration"],
+    ["distressing-tone", "/entities/rule.critical-hit"],
+    ["divide-mind", "/rules/actions#swift-action"],
+    ["divination", "/spells/spell.augury"],
+    ["divine-arrow", "/entities/rule.lay-on-hands"],
+    ["divine-power", "/entities/rule.speed-weapon"],
+    ["divine-transfer", "/entities/rule.hit-points"],
+    ["divine-vessel", "/rules/descriptors#acid"],
+    ["dominate-animal", "/entities/rule.animal"],
+    ["dominate-monster", "/spells/spell.dominate-person"],
+    ["domination-link", "/spells/spell.detect-thoughts"],
+    ["dousing-rain", "/rules/descriptors#electricity"],
+    ["draconic-ally", "/classes/inquisitor"],
+    ["draconic-malice", "/classes/antipaladin"],
+    ["draconic-suppression", "/rules/saving-throws"],
+  ])("renders twenty-fourth-batch links for spell %s", async (slug, target) => {
+    const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
+    const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(description).toContain(`href="${target}"`);
+  });
+
+  it("links only semantic Batch 24 contextual references", async () => {
+    const [silenceResponse, displacementResponse, vesselResponse, linkResponse, dissolutionResponse] =
+      await Promise.all([
+        fetch(`${baseUrl}/spells/spell.disrupt-silence`),
+        fetch(`${baseUrl}/spells/spell.displacement`),
+        fetch(`${baseUrl}/spells/spell.divine-vessel`),
+        fetch(`${baseUrl}/spells/spell.disrupt-link`),
+        fetch(`${baseUrl}/spells/spell.dissolution`),
+      ]);
+    const descriptions = await Promise.all(
+      [silenceResponse, displacementResponse, vesselResponse, linkResponse, dissolutionResponse]
+        .map(async (response) => (await response.text()).match(
+          /<section><h2>Description<\/h2>(.*?)<\/section>/s,
+        )?.[1] ?? ""),
+    );
+    expect(descriptions[0]!.match(/href="\/spells\/spell.silence"/g)).toHaveLength(1);
+    expect(descriptions[1]!.match(/href="\/entities\/rule.total-concealment"/g)).toHaveLength(2);
+    expect(descriptions[2]!.match(/href="\/rules\/descriptors#cold"/g)).toHaveLength(3);
+    expect(descriptions[2]!.match(/href="\/entities\/rule.good"/g)).toHaveLength(3);
+    for (const description of descriptions.slice(3)) {
+      expect(description).not.toContain('>touch</a>');
+    }
+  });
+
+  it("renders Batch 25 tables and only reviewed contextual references", async () => {
+    const [ceremonyResponse, terrainResponse, undeadResponse, travelResponse] =
+      await Promise.all([
+        fetch(`${baseUrl}/spells/spell.ceremony`),
+        fetch(`${baseUrl}/spells/spell.curse-terrain-lesser`),
+        fetch(`${baseUrl}/spells/spell.detect-undead`),
+        fetch(`${baseUrl}/spells/spell.dream-travel`),
+      ]);
+    const descriptions = await Promise.all(
+      [ceremonyResponse, terrainResponse, undeadResponse, travelResponse]
+        .map(async (response) => (await response.text()).match(
+          /<section><h2>Description<\/h2>(.*?)<\/section>/s,
+        )?.[1] ?? ""),
+    );
+
+    expect(descriptions[0]!.match(/href="\/entities\/rule.touch-attack"/g))
+      .toHaveLength(3);
+    expect(descriptions[0]).toContain('href="/rules/descriptors#air"');
+    expect(descriptions[1]).toContain('<table class="data-table rich-text-table">');
+    expect(descriptions[1]).toContain('href="/spells/spell.curse-terrain-supreme"');
+    expect(descriptions[1]).not.toContain('href="/spells/spell.curse-terrain-lesser"');
+    expect(descriptions[2]).toContain('<table class="data-table rich-text-table">');
+    expect(descriptions[2]).toContain('href="/entities/rule.undead"');
+    expect(descriptions[3]!.match(/href="\/spells\/spell.dream"/g)).toHaveLength(1);
+    expect(descriptions[3]).toContain('aria-label="Spell description table 1 of 2"');
+    expect(descriptions[3]).toContain('aria-label="Spell description table 2 of 2"');
+  });
+
+  it("renders Batch 26 spell, descriptor, subtype, and table links semantically", async () => {
+    const [enclosureResponse, snareResponse, auraResponse, speechResponse, masteryResponse] =
+      await Promise.all([
+        fetch(`${baseUrl}/spells/spell.echeans-excellent-enclosure`),
+        fetch(`${baseUrl}/spells/spell.ectoplasmic-snare`),
+        fetch(`${baseUrl}/spells/spell.elemental-aura`),
+        fetch(`${baseUrl}/spells/spell.elemental-speech`),
+        fetch(`${baseUrl}/spells/spell.elemental-mastery`),
+      ]);
+    const descriptions = await Promise.all(
+      [enclosureResponse, snareResponse, auraResponse, speechResponse, masteryResponse]
+        .map(async (response) => (await response.text()).match(
+          /<section><h2>Description<\/h2>(.*?)<\/section>/s,
+        )?.[1] ?? ""),
+    );
+
+    expect(descriptions[0]).toContain('href="/spells/spell.antimagic-field"');
+    expect(descriptions[0]).toContain('href="/spells/spell.wall-of-force"');
+    expect(descriptions[1]).not.toContain('href="/spells/spell.snare"');
+    expect(descriptions[2]).toContain('href="/rules/descriptors#acid"');
+    expect(descriptions[2]).not.toContain('href="/entities/rule.elemental"');
+    expect(descriptions[3]).toContain('href="/rules/descriptors#fire"');
+    expect(descriptions[3]).toContain('href="/entities/rule.fire"');
+    expect(descriptions[4]).toContain('<table class="data-table rich-text-table">');
   });
 
   it("links Curse of Unexpected Death's touch attacks but not its ordinary touch verbs", async () => {

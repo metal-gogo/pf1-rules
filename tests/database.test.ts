@@ -47,6 +47,23 @@ describe("ingested spell catalog", () => {
     }));
   });
 
+  it("models alchemist and investigator memberships as formulae", async () => {
+    const [alchemistCount, investigatorCount, misclassifiedCount] = await Promise.all([
+      prisma.spellLevel.count({ where: { spellListId: "spell-list.alchemist" } }),
+      prisma.spellLevel.count({ where: { spellListId: "spell-list.investigator" } }),
+      prisma.spellLevel.count({
+        where: {
+          spellListId: { in: ["spell-list.alchemist", "spell-list.investigator"] },
+          listKind: { not: "formulae" },
+        },
+      }),
+    ]);
+
+    expect(alchemistCount).toBe(408);
+    expect(investigatorCount).toBe(409);
+    expect(misclassifiedCount).toBe(0);
+  });
+
   it("keeps inherited class access distinct from printed spell-page values", async () => {
     const expectedDerivedCounts = {
       "spell-list.arcanist": 7,

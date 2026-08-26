@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.divine-arrow",
   "ruleset": "Pathfinder First Edition",
   "name": "Divine Arrow",
@@ -107,7 +107,57 @@
   "description": {
     "raw": "You imbue a projectile, such as an arrow or shuriken, with holy energy so that it deals extra damage to undead equal to that dealt by your lay on hands feature. This extra damage is not multiplied on a critical hit. Although this spell does not expend a daily use of your lay on hands class feature, you must have at least one daily use available to cast this spell. If the projectile hits a target or is destroyed before the duration ends, the spell is discharged.",
     "search_text": "\"you imbue a projectile, such as an arrow or shuriken, with holy energy so that it deals extra damage to undead equal to that dealt by your lay on hands feature. this extra damage is not multiplied on a critical hit. although this spell does not expend a daily use of your lay on hands class feature, you must have at least one daily use available to cast this spell. if the projectile hits a target or is destroyed before the duration ends, the spell is discharged.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You imbue a projectile, such as an arrow or shuriken, with holy energy so that it deals extra damage to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "undead",
+              "relationship_id": "spell.divine-arrow:uses_definition:rule.undead"
+            },
+            {
+              "node_type": "text",
+              "value": " equal to that dealt by your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "lay on hands",
+              "relationship_id": "spell.divine-arrow:uses_definition:rule.lay-on-hands"
+            },
+            {
+              "node_type": "text",
+              "value": " feature. This extra damage is not multiplied on a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "critical hit",
+              "relationship_id": "spell.divine-arrow:uses_definition:rule.critical-hit"
+            },
+            {
+              "node_type": "text",
+              "value": ". Although this spell does not expend a daily use of your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "lay on hands",
+              "relationship_id": "spell.divine-arrow:uses_definition:rule.lay-on-hands"
+            },
+            {
+              "node_type": "text",
+              "value": " class feature, you must have at least one daily use available to cast this spell. If the projectile hits a target or is destroyed before the duration ends, the spell is discharged."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -296,6 +346,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.divine-arrow:uses_definition:rule.lay-on-hands",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.lay-on-hands",
+        "name": "Lay on hands"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.divine-arrow:c09801bdb1ee4fd2",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "lay on hands",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Divine+Arrow"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.divine-arrow:uses_definition:rule.spell-resistance",
       "type": "uses_definition",
       "target": {
@@ -384,11 +454,19 @@
       "raw_value_sha256": "7a06da994e2d8662333e4ab8c8f37a766c987a27f483bb9967a9f577a9c93bcb",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.divine-arrow:c09801bdb1ee4fd2",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "136c42e6848964e639b880c49a19290828c0af86a406cb36ba6e3ff184d0a523",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": []
   }
 }

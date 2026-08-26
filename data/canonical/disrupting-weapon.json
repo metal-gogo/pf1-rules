@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.disrupting-weapon",
   "ruleset": "Pathfinder First Edition",
   "name": "Disrupting Weapon",
@@ -164,7 +164,57 @@
   "description": {
     "raw": "This spell makes a melee weapon deadly to undead. Any undead creature with HD equal to or less than your caster level must succeed on a Will save or be destroyed utterly if struck in combat with this weapon. Spell resistance does not apply against the destruction effect.",
     "search_text": "\"this spell makes a melee weapon deadly to undead. any undead creature with hd equal to or less than your caster level must succeed on a will save or be destroyed utterly if struck in combat with this weapon. spell resistance does not apply against the destruction effect.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell makes a melee weapon deadly to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "undead",
+              "relationship_id": "spell.disrupting-weapon:uses_definition:rule.undead"
+            },
+            {
+              "node_type": "text",
+              "value": ". Any "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "undead",
+              "relationship_id": "spell.disrupting-weapon:uses_definition:rule.undead"
+            },
+            {
+              "node_type": "text",
+              "value": " creature with HD equal to or less than your caster level must succeed on a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.disrupting-weapon:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save or be destroyed utterly if struck in combat with this weapon. "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Spell resistance",
+              "relationship_id": "spell.disrupting-weapon:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": " does not apply against the destruction effect."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -242,6 +292,40 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.disrupting-weapon:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.disrupting-weapon:4cccb83ca4e0e3ee",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.disrupting-weapon:e709271cf22b595e",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.disrupting-weapon:4cccb83ca4e0e3ee",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.disrupting-weapon:appears_on_spell_list:spell-list.oracle",
@@ -433,11 +517,31 @@
       "note": null
     },
     {
-      "relationship_id": "spell.disrupting-weapon:uses_definition:rule.will",
+      "relationship_id": "spell.disrupting-weapon:uses_definition:rule.undead",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.undead",
+        "name": "Undead"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.disrupting-weapon:4cccb83ca4e0e3ee",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "undead",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Disrupting+Weapon"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.disrupting-weapon:uses_definition:rule.will-saving-throw",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -472,40 +576,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.disrupting-weapon:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.disrupting-weapon:4cccb83ca4e0e3ee",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.disrupting-weapon:e709271cf22b595e",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.disrupting-weapon:4cccb83ca4e0e3ee",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -556,11 +626,19 @@
       "raw_value_sha256": "8c6ca2c408a1adbcd9d1ce60c63766808d9f5b1428f2b0399b5d43de65926209",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.disrupting-weapon:4cccb83ca4e0e3ee",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "11dc0e20a56d40d47b614fb16d79d2f57bd3b32b0ea9f070cff844a5cc7a1e97",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

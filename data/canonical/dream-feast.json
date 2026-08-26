@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.dream-feast",
   "ruleset": "Pathfinder First Edition",
   "name": "Dream Feast",
@@ -252,7 +252,39 @@
   "description": {
     "raw": "The next time the target sleeps (within the next 8 hours), she dreams of a rich feast with her favorite foods and drinks. When she awakens, she is sated as if she had eaten a nutritious meal, regardless of what she dreamed she ate. The target must sleep for at least 1 hour to gain the benefits of this spell. Being awakened during this period interrupts the spell and cancels its effects.\n\nIf you sleep with this spell prepared, you may automatically expend it while you sleep to gain the spell’s benefit. This expenditure does not count as spellcasting for the purpose of determining available spell slots (you could go to sleep at midnight, expend this spell during an 8-hour period of sleep, and still prepare your full allotment of spells in the morning).",
     "search_text": "\"the next time the target sleeps (within the next 8 hours), she dreams of a rich feast with her favorite foods and drinks. when she awakens, she is sated as if she had eaten a nutritious meal, regardless of what she dreamed she ate. the target must sleep for at least 1 hour to gain the benefits of this spell. being awakened during this period interrupts the spell and cancels its effects.\\n\\nif you sleep with this spell prepared, you may automatically expend it while you sleep to gain the spell’s benefit. this expenditure does not count as spellcasting for the purpose of determining available spell slots (you could go to sleep at midnight, expend this spell during an 8-hour period of sleep, and still prepare your full allotment of spells in the morning).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The next time the target sleeps (within the next 8 hours), she dreams of a rich feast with her favorite foods and drinks. When she awakens, she is sated as if she had eaten a nutritious "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "meal",
+              "relationship_id": "spell.dream-feast:uses_definition:rule.meal"
+            },
+            {
+              "node_type": "text",
+              "value": ", regardless of what she dreamed she ate. The target must sleep for at least 1 hour to gain the benefits of this spell. Being awakened during this period interrupts the spell and cancels its effects."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": " If you sleep with this spell prepared, you may automatically expend it while you sleep to gain the spell’s benefit. This expenditure does not count as spellcasting for the purpose of determining available spell slots (you could go to sleep at midnight, expend this spell during an 8-hour period of sleep, and still prepare your full allotment of spells in the morning)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -350,6 +382,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.dream-feast:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.dream-feast:c9ae401e7f85d76c",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1 (Desna)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.dream-feast:appears_on_spell_list:spell-list.oracle",
@@ -628,12 +680,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.dream-feast:uses_definition:rule.touch",
+      "relationship_id": "spell.dream-feast:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -648,11 +700,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.dream-feast:uses_definition:rule.will",
+      "relationship_id": "spell.dream-feast:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -666,26 +718,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.dream-feast:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.dream-feast:c9ae401e7f85d76c",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1 (Desna)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -736,11 +768,19 @@
       "raw_value_sha256": "ba48381d5d29e51b67af5ba08f5b652bbe4513e46a3a921826c5bd058431d0c0",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.dream-feast:c9ae401e7f85d76c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e79ecc056505b26805f5dbafa25dfc5524816c8b51250b0de879bb90282af09f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

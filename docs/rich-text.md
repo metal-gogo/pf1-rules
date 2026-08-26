@@ -8,8 +8,12 @@ another string.
 
 Schema version `0.2.0` requires `description.document`. A document supports:
 
-- `document` blocks containing `paragraph` and `unordered_list` nodes.
+- `document` blocks containing `paragraph`, `heading`, `unordered_list`, and
+  `table` nodes.
+- `heading` nodes with a source heading level from 2 through 6.
 - `unordered_list` nodes containing `list_item` nodes.
+- `table` nodes containing rows and cells; cells record whether they are
+  column headers.
 - Inline `text`, `entity_link`, and `hard_break` nodes.
 - Optional `italic` and `bold` marks on text and entity links.
 - One `relationship_id` on each entity link. Target IDs, names, types, and
@@ -23,9 +27,10 @@ valid and render as escaped plain text.
 ## Link and structure rules
 
 The normalizer parses the selected, bounded AoN description HTML with the
-project's existing HTML parser. It preserves paragraphs, lists, hard breaks,
-italic text, and bold text. A new title heading ends the base description, so a
-mythic or other titled variant cannot leak into it.
+project's existing HTML parser. It preserves paragraphs, headings, lists,
+tables, hard breaks, italic text, and bold text. A new spell title or mythic
+title ends the bounded description; other supplemental second-level headings
+remain inside it.
 
 Accepted relationships are matched with Unicode-normalized, word-bounded text,
 longest phrase first. Priority is `functions_like`, other spell relationships,
@@ -47,9 +52,9 @@ warning. Rejected relationships never produce an entity-link node.
 
 ## Rendering rules
 
-The web renderer escapes node text and emits semantic paragraphs, unordered
-lists, emphasis, strong emphasis, hard breaks, and local links. Links use normal
-same-tab browser navigation.
+The web renderer escapes node text and emits semantic paragraphs, headings,
+unordered lists, accessible data tables, emphasis, strong emphasis, hard
+breaks, and local links. Links use normal same-tab browser navigation.
 
 A resolved direct `functions_like` relationship expands its referenced spell
 once after the current description. The expansion includes the rules metadata

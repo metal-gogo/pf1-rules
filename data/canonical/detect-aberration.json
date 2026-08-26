@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.detect-aberration",
   "ruleset": "Pathfinder First Edition",
   "name": "Detect Aberration",
@@ -129,7 +129,42 @@
   "description": {
     "raw": "This spell functions like detect animals or plants, except it detects creatures of the aberration type.",
     "search_text": "\"this spell functions like detect animals or plants, except it detects creatures of the aberration type.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "detect animals or plants",
+              "relationship_id": "spell.detect-aberration:functions_like:spell.detect-animals-or-plants",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it detects creatures of the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "aberration",
+              "relationship_id": "spell.detect-aberration:uses_definition:rule.aberration"
+            },
+            {
+              "node_type": "text",
+              "value": " type."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -306,6 +341,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like detect animals or plants, except it detects creatures of the aberration type.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.detect-aberration:af42197d1eda4506",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "detect animals or plants",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/detectAnimalsOrPlants.html#detect-animals-or-plants"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.detect-aberration:d526af143c9c6dea",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "detect animals or plants",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/detect-animals-or-plants/"
         }
       ],
       "note": null
@@ -374,33 +423,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "Advanced Player's Guide pg. 215",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.detect-aberration:references:spell.detect-animals-or-plants",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.detect-animals-or-plants",
-        "name": "detect animals or plants"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.detect-aberration:af42197d1eda4506",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "detect animals or plants",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/detectAnimalsOrPlants.html#detect-animals-or-plants"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.detect-aberration:d526af143c9c6dea",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "detect animals or plants",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/detect-animals-or-plants/"
         }
       ],
       "note": null
@@ -541,11 +563,19 @@
       "raw_value_sha256": "eaa410e2032f65a0121abf771b0126b948010608c852801b5c7de6ee73b94831",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.detect-aberration:aaf40559a03ca16d",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "384ea47f9c4405bcc0bda509fa52989698fd923d93d397453a826a0784f822be",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

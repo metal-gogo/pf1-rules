@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.earth-glide",
   "ruleset": "Pathfinder First Edition",
   "name": "Earth Glide",
@@ -16,7 +16,7 @@
   "levels": [
     {
       "spell_list_id": "spell-list.alchemist",
-      "list_kind": "class",
+      "list_kind": "formulae",
       "list_name": "alchemist",
       "level": 4,
       "scope": "later_first_party",
@@ -106,7 +106,7 @@
     },
     {
       "spell_list_id": "spell-list.investigator",
-      "list_kind": "class",
+      "list_kind": "formulae",
       "list_name": "investigator",
       "level": 4,
       "scope": "later_first_party",
@@ -279,7 +279,75 @@
   "description": {
     "raw": "The target can pass through stone, dirt, or almost any other sort of earth except metal as easily as a fish swims through water, traveling at a speed of 5 feet. If protected against fire damage, it can move through lava. This movement leaves behind no tunnel or hole, nor does it create any ripple or other sign of its presence. It requires as much concentration as walking, so the subject can attack or cast spells normally, but cannot charge or run. Casting move earth on an area containing the target flings the target back 30 feet, stunning it for 1 round (DC 15 Fortitude negates). This spell does not give the target the ability to breathe underground, so when passing through solid material, the creature must hold its breath.",
     "search_text": "\"the target can pass through stone, dirt, or almost any other sort of earth except metal as easily as a fish swims through water, traveling at a speed of 5 feet. if protected against fire damage, it can move through lava. this movement leaves behind no tunnel or hole, nor does it create any ripple or other sign of its presence. it requires as much concentration as walking, so the subject can attack or cast spells normally, but cannot charge or run. casting move earth on an area containing the target flings the target back 30 feet, stunning it for 1 round (dc 15 fortitude negates). this spell does not give the target the ability to breathe underground, so when passing through solid material, the creature must hold its breath.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target can pass through stone, dirt, or almost any other sort of earth except metal as easily as a fish swims through water, traveling at a speed of 5 feet. If protected against "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fire",
+              "relationship_id": "spell.earth-glide:uses_definition:descriptor.fire"
+            },
+            {
+              "node_type": "text",
+              "value": " damage, it can move through lava. This movement leaves behind no tunnel or hole, nor does it create any ripple or other sign of its presence. It requires as much "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concentration",
+              "relationship_id": "spell.earth-glide:uses_definition:rule.concentration"
+            },
+            {
+              "node_type": "text",
+              "value": " as walking, so the subject can attack or cast spells normally, but cannot "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "charge",
+              "relationship_id": "spell.earth-glide:uses_definition:rule.charge"
+            },
+            {
+              "node_type": "text",
+              "value": " or run. Casting "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "move earth",
+              "relationship_id": "spell.earth-glide:references:spell.move-earth"
+            },
+            {
+              "node_type": "text",
+              "value": " on an area containing the target flings the target back 30 feet, "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "stunning",
+              "relationship_id": "spell.earth-glide:uses_definition:condition.stunned"
+            },
+            {
+              "node_type": "text",
+              "value": " it for 1 round (DC 15 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.earth-glide:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " negates). This spell does not give the target the ability to breathe underground, so when passing through solid material, the creature must hold its breath."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -647,7 +715,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.move-earth",
-        "name": "move earth"
+        "name": "Move Earth"
       },
       "status": "accepted",
       "evidence": [
@@ -696,6 +764,46 @@
       "note": null
     },
     {
+      "relationship_id": "spell.earth-glide:uses_definition:condition.stunned",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "condition",
+        "entity_id": "condition.stunned",
+        "name": "Stunned"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.earth-glide:67867111dc680b1d",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "stunning",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Earth+Glide"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.earth-glide:uses_definition:descriptor.fire",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.fire",
+        "name": "Fire"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.earth-glide:67867111dc680b1d",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "fire",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Earth+Glide"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.earth-glide:uses_definition:rule.charge",
       "type": "uses_definition",
       "target": {
@@ -716,12 +824,32 @@
       "note": null
     },
     {
-      "relationship_id": "spell.earth-glide:uses_definition:rule.fort",
+      "relationship_id": "spell.earth-glide:uses_definition:rule.concentration",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.concentration",
+        "name": "Concentration"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.earth-glide:67867111dc680b1d",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "concentration",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Earth+Glide"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.earth-glide:uses_definition:rule.fortitude-saving-throw",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -756,12 +884,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.earth-glide:uses_definition:rule.touch",
+      "relationship_id": "spell.earth-glide:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -776,11 +904,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.earth-glide:uses_definition:rule.will",
+      "relationship_id": "spell.earth-glide:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -844,11 +972,19 @@
       "raw_value_sha256": "be7e7ab1424049d4a57e35b96d86d62b9a453f93a47adfd244b4f7a57c34425f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.earth-glide:67867111dc680b1d",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "4a038c2bd453bf7d37dabc8704bb75977acdad5b5daa697352c9260a2a19c1e0",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

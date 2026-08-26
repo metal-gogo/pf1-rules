@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.detect-metal",
   "ruleset": "Pathfinder First Edition",
   "name": "Detect Metal",
@@ -14,7 +14,7 @@
   "levels": [
     {
       "spell_list_id": "spell-list.alchemist",
-      "list_kind": "class",
+      "list_kind": "formulae",
       "list_name": "alchemist",
       "level": 1,
       "scope": "later_first_party",
@@ -38,7 +38,7 @@
     },
     {
       "spell_list_id": "spell-list.investigator",
-      "list_kind": "class",
+      "list_kind": "formulae",
       "list_name": "investigator",
       "level": 1,
       "scope": "later_first_party",
@@ -175,7 +175,39 @@
   "description": {
     "raw": "You detect any metal objects or creatures within a 60-foot cone. You can specify all metal objects or one or more specific types of metal (such as silver, cold iron, or a type of skymetal) when you cast this spell; in the case of the latter, you detect only objects or creatures made of the specified metal.",
     "search_text": "\"you detect any metal objects or creatures within a 60-foot cone. you can specify all metal objects or one or more specific types of metal (such as silver, cold iron, or a type of skymetal) when you cast this spell; in the case of the latter, you detect only objects or creatures made of the specified metal.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You detect any metal objects or creatures within a 60-foot cone. You can specify all metal objects or one or more specific types of metal (such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "silver",
+              "relationship_id": "spell.detect-metal:uses_definition:rule.silver"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "cold iron",
+              "relationship_id": "spell.detect-metal:uses_definition:rule.cold-iron"
+            },
+            {
+              "node_type": "text",
+              "value": ", or a type of skymetal) when you cast this spell; in the case of the latter, you detect only objects or creatures made of the specified metal."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -544,6 +576,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.detect-metal:uses_definition:rule.silver",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.silver",
+        "name": "Silver"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.detect-metal:235762c269e79385",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "silver",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Detect+Metal"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.detect-metal:uses_definition:rule.spell-resistance",
       "type": "uses_definition",
       "target": {
@@ -612,11 +664,19 @@
       "raw_value_sha256": "7dc17f7741b4f72d1028daae3ef6e03196d53365155f79a1dddf55d34bfd65e4",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.detect-metal:235762c269e79385",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "aba319000cdf24c3c0e8a090360b0ff855001d72837e8378552fd7c5a5122fdf",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

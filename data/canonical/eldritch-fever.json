@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.eldritch-fever",
   "ruleset": "Pathfinder First Edition",
   "name": "Eldritch Fever",
@@ -172,7 +172,41 @@
   "description": {
     "raw": "The target gains the eldritch ague spellblight (see Ultimate Magic).",
     "search_text": "\"the target gains the eldritch ague spellblight (see ultimate magic).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target gains the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "eldritch ague spellblight",
+              "relationship_id": "spell.eldritch-fever:uses_definition:rule.eldritch-ague-spellblight"
+            },
+            {
+              "node_type": "text",
+              "value": " (see "
+            },
+            {
+              "node_type": "text",
+              "value": "Ultimate Magic",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ")."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -230,6 +264,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.eldritch-fever:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.eldritch-fever:03ce0a77ca370a91",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.eldritch-fever:0faacafdfa5cf8d9",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.eldritch-fever:appears_on_spell_list:spell-list.psychic",
@@ -535,11 +596,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.eldritch-fever:uses_definition:rule.fortitude",
+      "relationship_id": "spell.eldritch-fever:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -593,33 +654,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.eldritch-fever:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.eldritch-fever:03ce0a77ca370a91",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.eldritch-fever:0faacafdfa5cf8d9",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -670,11 +704,19 @@
       "raw_value_sha256": "c08c8fddb0b82ab2eaef3b856a62dfdc46790ff49c63951b6011908fea11df9b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.eldritch-fever:0faacafdfa5cf8d9",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "fc2e2eaa8dc43a3cbd386f6c6d10a72fbb390fa2a2ebb82afc7e0785d1ed8048",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

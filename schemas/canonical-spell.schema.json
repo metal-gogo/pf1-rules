@@ -381,6 +381,44 @@
         "content": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/richTextListItem"}}
       }
     },
+    "richTextHeading": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_type", "level", "content"],
+      "properties": {
+        "node_type": {"const": "heading"},
+        "level": {"type": "integer", "minimum": 2, "maximum": 6},
+        "content": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/richTextInline"}}
+      }
+    },
+    "richTextTableCell": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_type", "header", "content"],
+      "properties": {
+        "node_type": {"const": "table_cell"},
+        "header": {"type": "boolean"},
+        "content": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/richTextInline"}}
+      }
+    },
+    "richTextTableRow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_type", "content"],
+      "properties": {
+        "node_type": {"const": "table_row"},
+        "content": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/richTextTableCell"}}
+      }
+    },
+    "richTextTable": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_type", "content"],
+      "properties": {
+        "node_type": {"const": "table"},
+        "content": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/richTextTableRow"}}
+      }
+    },
     "richTextDocument": {
       "type": "object",
       "additionalProperties": false,
@@ -392,7 +430,9 @@
           "items": {
             "oneOf": [
               {"$ref": "#/$defs/richTextParagraph"},
-              {"$ref": "#/$defs/richTextUnorderedList"}
+              {"$ref": "#/$defs/richTextUnorderedList"},
+              {"$ref": "#/$defs/richTextHeading"},
+              {"$ref": "#/$defs/richTextTable"}
             ]
           }
         }

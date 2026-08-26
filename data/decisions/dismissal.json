@@ -157,6 +157,24 @@
         "aon:bloodline.sorcerer.abyssal:7a1c270e"
       ],
       "rationale": "AoN clearly transcribes the owning sorcerer bloodline's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.dismissal:be4e5304b50eb924",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.dismissal:be4e5304b50eb924",
+        "legacy_aon:spell.dismissal:1ba4c05410928521",
+        "d20pfsrd:spell.dismissal:1d08ab23f1bf77db",
+        "aon:patron.peace:15d234b1",
+        "aon:bloodline.sorcerer.abyssal:7a1c270e"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -261,6 +279,25 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.dismissal:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.dismissal:be4e5304b50eb924",
+          "source_field": "spell_raw.levels_raw"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.dismissal:1d08ab23f1bf77db",
+          "source_field": "spell_raw.links_raw[2]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.dismissal:be4e5304b50eb924",
+        "d20pfsrd:spell.dismissal:1d08ab23f1bf77db"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.dismissal:appears_on_spell_list:spell-list.oracle",
       "decision": "accept",
       "evidence": [
@@ -275,6 +312,20 @@
         "d20pfsrd:spell.dismissal:1d08ab23f1bf77db"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.dismissal:appears_on_spell_list:spell-list.peace-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.peace:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.peace:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.dismissal:appears_on_spell_list:spell-list.psychic",
@@ -327,6 +378,20 @@
         "d20pfsrd:spell.dismissal:1d08ab23f1bf77db"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.dismissal:appears_on_spell_list:spell-list.sorcerer-abyssal-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.abyssal:7a1c270e",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.abyssal:7a1c270e"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     },
     {
       "relationship_id": "spell.dismissal:appears_on_spell_list:spell-list.sorcerer-wizard",
@@ -525,6 +590,24 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.dismissal:uses_definition:rule.extraplanar",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.dismissal:be4e5304b50eb924",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.dismissal:be4e5304b50eb924",
+        "legacy_aon:spell.dismissal:1ba4c05410928521",
+        "d20pfsrd:spell.dismissal:1d08ab23f1bf77db",
+        "aon:patron.peace:15d234b1",
+        "aon:bloodline.sorcerer.abyssal:7a1c270e"
+      ],
+      "rationale": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.dismissal:uses_definition:rule.spell-resistance",
       "decision": "accept",
       "evidence": [
@@ -535,30 +618,6 @@
         {
           "observation_id": "aon:spell.dismissal:be4e5304b50eb924",
           "source_field": "spell_raw.spell_resistance_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.dismissal:be4e5304b50eb924",
-        "legacy_aon:spell.dismissal:1ba4c05410928521",
-        "d20pfsrd:spell.dismissal:1d08ab23f1bf77db"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.dismissal:uses_definition:rule.will",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.dismissal:1ba4c05410928521",
-          "source_field": "spell_raw.links_raw[0]"
-        },
-        {
-          "observation_id": "legacy_aon:spell.dismissal:1ba4c05410928521",
-          "source_field": "spell_raw.links_raw[2]"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.dismissal:1d08ab23f1bf77db",
-          "source_field": "spell_raw.links_raw[9]"
         }
       ],
       "considered_observation_ids": [
@@ -585,51 +644,28 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.dismissal:appears_on_spell_list:spell-list.omdura",
+      "relationship_id": "spell.dismissal:uses_definition:rule.will-saving-throw",
       "decision": "accept",
       "evidence": [
         {
-          "observation_id": "aon:spell.dismissal:be4e5304b50eb924",
-          "source_field": "spell_raw.levels_raw"
+          "observation_id": "legacy_aon:spell.dismissal:1ba4c05410928521",
+          "source_field": "spell_raw.links_raw[0]"
+        },
+        {
+          "observation_id": "legacy_aon:spell.dismissal:1ba4c05410928521",
+          "source_field": "spell_raw.links_raw[2]"
         },
         {
           "observation_id": "d20pfsrd:spell.dismissal:1d08ab23f1bf77db",
-          "source_field": "spell_raw.links_raw[2]"
+          "source_field": "spell_raw.links_raw[9]"
         }
       ],
       "considered_observation_ids": [
         "aon:spell.dismissal:be4e5304b50eb924",
+        "legacy_aon:spell.dismissal:1ba4c05410928521",
         "d20pfsrd:spell.dismissal:1d08ab23f1bf77db"
       ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.dismissal:appears_on_spell_list:spell-list.peace-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.peace:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.peace:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.dismissal:appears_on_spell_list:spell-list.sorcerer-abyssal-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.abyssal:7a1c270e",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.abyssal:7a1c270e"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
+      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     }
   ],
   "unresolved_questions": [

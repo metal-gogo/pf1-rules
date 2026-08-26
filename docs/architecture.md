@@ -73,9 +73,9 @@ records a possible future route and content-negotiation contract.
 ## Rich-text spell descriptions
 
 Schema version `0.2.0` stores a small semantic JSON document under
-`description.document`. The document contains paragraphs, unordered lists, list
-items, text, hard breaks, and entity links. Text and entity links may carry
-bold or italic marks. Entity-link nodes store only a canonical relationship ID;
+`description.document`. The document contains paragraphs, headings, unordered
+lists, data tables, text, hard breaks, and entity links. Text and entity links
+may carry bold or italic marks. Entity-link nodes store only a canonical relationship ID;
 the accepted relationship remains authoritative for the target and local URL.
 Schema version `0.1.0` remains valid and uses the plain-text renderer.
 

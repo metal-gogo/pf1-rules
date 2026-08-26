@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.dissolution",
   "ruleset": "Pathfinder First Edition",
   "name": "Dissolution",
@@ -14,7 +14,7 @@
   "levels": [
     {
       "spell_list_id": "spell-list.alchemist",
-      "list_kind": "class",
+      "list_kind": "formulae",
       "list_name": "alchemist",
       "level": 4,
       "scope": "later_first_party",
@@ -30,7 +30,7 @@
     },
     {
       "spell_list_id": "spell-list.investigator",
-      "list_kind": "class",
+      "list_kind": "formulae",
       "list_name": "investigator",
       "level": 4,
       "scope": "later_first_party",
@@ -169,7 +169,71 @@
   "description": {
     "raw": "You touch a Tiny or smaller item, causing the item to vanish as if it did not exist at all. The item doesn’t take damage or otherwise gain any condition; it simply ceases to be visible to or interact with the world in any way, as if it no longer existed. The oil vanishes with the item and leaves no residue, nor does it affect surfaces that handle or hold the item during its application. No spell or ability short of miracle or wish can locate or affect the item while it is under the effect of this spell. Though the item seems to not exist while under the effects of this spell, its own reality is consistent (it ages normally, and any ongoing effects upon it continue normally). The target object can be one size larger than Tiny for every 5 caster levels above 5th you possess.\n\nThe target item returns to existence when the spell’s duration expires. An item returns to existence in exactly the same location and condition it left. If the location no longer has room for the item, the item takes 1d0 points of damage (bypassing hardness) and is teleported to the nearest location that has room for it. If that location is more than 5 feet from the original location, there is a 25% chance the item is instead shifted to a randomly determined alternate plane.",
     "search_text": "\"you touch a tiny or smaller item, causing the item to vanish as if it did not exist at all. the item doesn’t take damage or otherwise gain any condition; it simply ceases to be visible to or interact with the world in any way, as if it no longer existed. the oil vanishes with the item and leaves no residue, nor does it affect surfaces that handle or hold the item during its application. no spell or ability short of miracle or wish can locate or affect the item while it is under the effect of this spell. though the item seems to not exist while under the effects of this spell, its own reality is consistent (it ages normally, and any ongoing effects upon it continue normally). the target object can be one size larger than tiny for every 5 caster levels above 5th you possess.\\n\\nthe target item returns to existence when the spell’s duration expires. an item returns to existence in exactly the same location and condition it left. if the location no longer has room for the item, the item takes 1d0 points of damage (bypassing hardness) and is teleported to the nearest location that has room for it. if that location is more than 5 feet from the original location, there is a 25% chance the item is instead shifted to a randomly determined alternate plane.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You "
+            },
+            {
+              "node_type": "text",
+              "value": "touch"
+            },
+            {
+              "node_type": "text",
+              "value": " a Tiny or smaller item, causing the item to vanish as if it did not exist at all. The item doesn’t take damage or otherwise gain any condition; it simply ceases to be visible to or interact with the world in any way, as if it no longer existed. The oil vanishes with the item and leaves no residue, nor does it affect surfaces that handle or hold the item during its application. No spell or ability short of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "miracle",
+              "relationship_id": "spell.dissolution:references:spell.miracle",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "wish",
+              "relationship_id": "spell.dissolution:references:spell.wish",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " can locate or affect the item while it is under the effect of this spell. Though the item seems to not exist while under the effects of this spell, its own reality is consistent (it ages normally, and any ongoing effects upon it continue normally). The target object can be one size larger than Tiny for every 5 caster levels above 5th you possess."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": " The target item returns to existence when the spell’s duration expires. An item returns to existence in exactly the same location and condition it left. If the location no longer has room for the item, the item takes 1d0 points of damage (bypassing "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hardness",
+              "relationship_id": "spell.dissolution:uses_definition:rule.hardness"
+            },
+            {
+              "node_type": "text",
+              "value": ") and is teleported to the nearest location that has room for it. If that location is more than 5 feet from the original location, there is a 25% chance the item is instead shifted to a randomly determined alternate plane."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -343,6 +407,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.dissolution:appears_on_spell_list:spell-list.summoner-unchained",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.summoner-unchained",
+        "name": "Summoner (Unchained) Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.dissolution:9fcd5a1f2409a08c",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 6",
+          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/transmutation/dissolution.blsl7v5wr0rm28su.yaml"
+        }
+      ],
+      "note": "Reviewed project decision: add Summoner (Unchained) 6 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
+    },
+    {
       "relationship_id": "spell.dissolution:appears_on_spell_list:spell-list.wizard",
       "type": "appears_on_spell_list",
       "target": {
@@ -436,7 +520,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.miracle",
-        "name": "miracle"
+        "name": "Miracle"
       },
       "status": "accepted",
       "evidence": [
@@ -456,7 +540,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.wish",
-        "name": "wish"
+        "name": "Wish"
       },
       "status": "accepted",
       "evidence": [
@@ -498,12 +582,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.dissolution:uses_definition:rule.fort",
+      "relationship_id": "spell.dissolution:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -558,12 +642,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.dissolution:uses_definition:rule.touch",
+      "relationship_id": "spell.dissolution:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -596,26 +680,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.dissolution:appears_on_spell_list:spell-list.summoner-unchained",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.summoner-unchained",
-        "name": "Summoner (Unchained) Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.dissolution:9fcd5a1f2409a08c",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "manual_verification",
-          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 6",
-          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/transmutation/dissolution.blsl7v5wr0rm28su.yaml"
-        }
-      ],
-      "note": "Reviewed project decision: add Summoner (Unchained) 6 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
     }
   ],
   "provenance": [
@@ -666,11 +730,19 @@
       "raw_value_sha256": "b209e6752adf26dc2cc5358bf604d8235812c6318ea0e8c5eacc8c5dc8452d9b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.dissolution:9fcd5a1f2409a08c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "72d2f482834b155660c5072707fa2ead9dcb56572984d57f61d036d2abf479f7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

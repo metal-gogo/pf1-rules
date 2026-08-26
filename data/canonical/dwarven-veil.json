@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.dwarven-veil",
   "ruleset": "Pathfinder First Edition",
   "name": "Dwarven Veil",
@@ -192,7 +192,66 @@
   "description": {
     "raw": "This spell enhances the target’s dwarven or dwarf-like qualities, making it appear more attractive, personable, and worthy of respect and admiration by dwarves. The target is still recognizable as itself. The target gains a +2 circumstance bonus to checks to influence dwarves (such as Diplomacy, Intimidate, and so on).",
     "search_text": "\"this spell enhances the target’s dwarven or dwarf-like qualities, making it appear more attractive, personable, and worthy of respect and admiration by dwarves. the target is still recognizable as itself. the target gains a +2 circumstance bonus to checks to influence dwarves (such as diplomacy, intimidate, and so on).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell enhances the target’s dwarven or dwarf-like qualities, making it appear more attractive, personable, and worthy of respect and admiration by "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dwarves",
+              "relationship_id": "spell.dwarven-veil:uses_definition:rule.dwarf"
+            },
+            {
+              "node_type": "text",
+              "value": ". The target is still recognizable as itself. The target gains a +2 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "circumstance bonus",
+              "relationship_id": "spell.dwarven-veil:uses_definition:rule.circumstance-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " to checks to influence "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dwarves",
+              "relationship_id": "spell.dwarven-veil:uses_definition:rule.dwarf"
+            },
+            {
+              "node_type": "text",
+              "value": " (such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Diplomacy",
+              "relationship_id": "spell.dwarven-veil:uses_definition:rule.diplomacy"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Intimidate",
+              "relationship_id": "spell.dwarven-veil:uses_definition:rule.intimidate"
+            },
+            {
+              "node_type": "text",
+              "value": ", and so on)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -230,6 +289,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.dwarven-veil:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.dwarven-veil:fed8f4e7680fe872",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.dwarven-veil:bfe1cb890d894132",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2 (Bolka)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.dwarven-veil:appears_on_spell_list:spell-list.oracle",
@@ -427,6 +513,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.dwarven-veil:uses_definition:rule.dwarf",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.dwarf",
+        "name": "Dwarf"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.dwarven-veil:bfe1cb890d894132",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "dwarves",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Dwarven+Veil"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.dwarven-veil:uses_definition:rule.intimidate",
       "type": "uses_definition",
       "target": {
@@ -467,11 +573,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.dwarven-veil:uses_definition:rule.will",
+      "relationship_id": "spell.dwarven-veil:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -485,33 +591,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.dwarven-veil:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.dwarven-veil:fed8f4e7680fe872",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.dwarven-veil:bfe1cb890d894132",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2 (Bolka)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -562,11 +641,19 @@
       "raw_value_sha256": "20a18277df953d918565f05f16bd9ec796e9585479f218aa8d4f72119df98edf",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.dwarven-veil:bfe1cb890d894132",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "70026750ff73e057e29fa93b9c3ca0ddca57dbc04ca9c4161ee5dc5f71483bec",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

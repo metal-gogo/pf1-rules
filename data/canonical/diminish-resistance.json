@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.diminish-resistance",
   "ruleset": "Pathfinder First Edition",
   "name": "Diminish Resistance",
@@ -240,7 +240,75 @@
   "description": {
     "raw": "You weaken a creature’s resistance against one energy type you select: acid, cold, electricity, fire, or sonic. The creature’s resistance to that energy type decreases by 5 (minimum 0), plus an additional 5 for every 5 caster levels beyond 3rd (to a maximum of 20 at 18th level).",
     "search_text": "\"you weaken a creature’s resistance against one energy type you select: acid, cold, electricity, fire, or sonic. the creature’s resistance to that energy type decreases by 5 (minimum 0), plus an additional 5 for every 5 caster levels beyond 3rd (to a maximum of 20 at 18th level).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You weaken a creature’s resistance against one energy type you select: "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "acid",
+              "relationship_id": "spell.diminish-resistance:uses_definition:descriptor.acid"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "cold",
+              "relationship_id": "spell.diminish-resistance:uses_definition:descriptor.cold"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "electricity",
+              "relationship_id": "spell.diminish-resistance:uses_definition:descriptor.electricity"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fire",
+              "relationship_id": "spell.diminish-resistance:uses_definition:descriptor.fire"
+            },
+            {
+              "node_type": "text",
+              "value": ", or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sonic",
+              "relationship_id": "spell.diminish-resistance:uses_definition:descriptor.sonic"
+            },
+            {
+              "node_type": "text",
+              "value": ". The creature’s resistance to that energy type decreases by 5 (minimum 0), plus an additional 5 for every 5 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster levels",
+              "relationship_id": "spell.diminish-resistance:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " beyond 3rd (to a maximum of 20 at 18th level)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -406,6 +474,47 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.diminish-resistance:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.diminish-resistance:61db000870d4d68e",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.diminish-resistance:5950d7e04431cfaa",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.diminish-resistance:61db000870d4d68e",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.diminish-resistance:5950d7e04431cfaa",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.diminish-resistance:appears_on_spell_list:spell-list.oracle",
@@ -675,7 +784,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.resistance",
-        "name": "resistance"
+        "name": "Resistance"
       },
       "status": "accepted",
       "evidence": [
@@ -717,12 +826,132 @@
       "note": null
     },
     {
-      "relationship_id": "spell.diminish-resistance:uses_definition:rule.fort",
+      "relationship_id": "spell.diminish-resistance:uses_definition:descriptor.acid",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.acid",
+        "name": "Acid"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.diminish-resistance:5950d7e04431cfaa",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "acid",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Diminish+Resistance"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.diminish-resistance:uses_definition:descriptor.cold",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.cold",
+        "name": "Cold"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.diminish-resistance:5950d7e04431cfaa",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "cold",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Diminish+Resistance"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.diminish-resistance:uses_definition:descriptor.electricity",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.electricity",
+        "name": "Electricity"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.diminish-resistance:5950d7e04431cfaa",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "electricity",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Diminish+Resistance"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.diminish-resistance:uses_definition:descriptor.fire",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.fire",
+        "name": "Fire"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.diminish-resistance:5950d7e04431cfaa",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "fire",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Diminish+Resistance"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.diminish-resistance:uses_definition:descriptor.sonic",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.sonic",
+        "name": "Sonic"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.diminish-resistance:5950d7e04431cfaa",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "sonic",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Diminish+Resistance"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.diminish-resistance:uses_definition:rule.caster-level",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.caster-level",
+        "name": "Caster level"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.diminish-resistance:5950d7e04431cfaa",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "caster levels",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Diminish+Resistance"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
+      "relationship_id": "spell.diminish-resistance:uses_definition:rule.fortitude-saving-throw",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -755,47 +984,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.diminish-resistance:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.diminish-resistance:61db000870d4d68e",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.diminish-resistance:5950d7e04431cfaa",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.diminish-resistance:61db000870d4d68e",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.diminish-resistance:5950d7e04431cfaa",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -846,11 +1034,19 @@
       "raw_value_sha256": "a2b9a218b79fc9d9cd037007594516a5d5a91c4bf097ab0be50c92c58f1e6f2b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.diminish-resistance:5950d7e04431cfaa",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "112512d348384152595e142efbc4cbb741e62b9ce5dd24c0a85219105c08753b",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.echo",
   "ruleset": "Pathfinder First Edition",
   "name": "Echo",
@@ -185,7 +185,75 @@
   "description": {
     "raw": "You cause a sound heard in the target area up to 1 round ago and lasting up to 1 round in duration to repeat at a regular interval. The original sound need not have come from the area, but it echoes from the target area at its original full volume. Any special effects of the sound are not duplicated by this spell. If the area is naturally prone to echoes, such as a space surrounded on at least two sides by cliffs or high river banks, the spell’s range is long. Otherwise, the spell’s range is close.\n\nYou can concentrate as a standard action to alter the echo. You can change it to be any sound audible in the area within the last 1 round, move the apparent source of the sound within the area, or attempt a Bluff check to create a distraction to hide with a bonus equal to your caster level.",
     "search_text": "\"you cause a sound heard in the target area up to 1 round ago and lasting up to 1 round in duration to repeat at a regular interval. the original sound need not have come from the area, but it echoes from the target area at its original full volume. any special effects of the sound are not duplicated by this spell. if the area is naturally prone to echoes, such as a space surrounded on at least two sides by cliffs or high river banks, the spell’s range is long. otherwise, the spell’s range is close.\\n\\nyou can concentrate as a standard action to alter the echo. you can change it to be any sound audible in the area within the last 1 round, move the apparent source of the sound within the area, or attempt a bluff check to create a distraction to hide with a bonus equal to your caster level.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You cause a sound heard in the target area up to 1 round ago and lasting up to 1 round in duration to repeat at a regular interval. The original sound need not have come from the area, but it echoes from the target area at its original full volume. Any special effects of the sound are not duplicated by this spell. If the area is naturally prone to echoes, such as a space surrounded on at least two sides by cliffs or high river banks, the spell’s range is long. Otherwise, the spell’s range is close."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": " You can "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concentrate",
+              "relationship_id": "spell.echo:uses_definition:rule.concentration"
+            },
+            {
+              "node_type": "text",
+              "value": " as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "standard action",
+              "relationship_id": "spell.echo:uses_action:action.standard-action"
+            },
+            {
+              "node_type": "text",
+              "value": " to alter the echo. You can change it to be any sound audible in the area within the last 1 round, move the apparent source of the sound within the area, or attempt a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Bluff",
+              "relationship_id": "spell.echo:uses_definition:rule.bluff"
+            },
+            {
+              "node_type": "text",
+              "value": " check to create a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "distraction",
+              "relationship_id": "spell.echo:uses_definition:rule.distraction"
+            },
+            {
+              "node_type": "text",
+              "value": " to hide with a bonus equal to your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.echo:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": ". "
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -650,6 +718,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.echo:uses_definition:rule.concentration",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.concentration",
+        "name": "Concentration"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.echo:7b0f0af5fb6ea9da",
+          "source_field": "spell_raw.description_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "concentrate",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Echo"
+        }
+      ],
+      "note": "The selected source wording explicitly uses this rules term."
+    },
+    {
       "relationship_id": "spell.echo:uses_definition:rule.distraction",
       "type": "uses_definition",
       "target": {
@@ -690,11 +778,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.echo:uses_definition:rule.will",
+      "relationship_id": "spell.echo:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -758,11 +846,19 @@
       "raw_value_sha256": "4a0155f2d1921c4b45f3300dbfc729818ffcb93da7683505028cb5d9ff54fb73",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.echo:7b0f0af5fb6ea9da",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "783340bdd2e1763223b3803f9e2f74855bb06c777eb463248dee0c647df4f5b8",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

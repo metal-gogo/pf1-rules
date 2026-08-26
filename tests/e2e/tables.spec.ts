@@ -154,6 +154,110 @@ test("Batch 21 separates Deeper Darkness's spell, descriptor, and illumination l
   await expect(page).toHaveURL(/\/rules\/descriptors#darkness$/);
 });
 
+test("Batch 22 links only the explicit Snare spell reference", async ({ page }) => {
+  await page.goto("/spells/spell.detect-snares-and-pits");
+
+  const description = page.locator(".rich-description").first();
+  const snare = description.locator('a[href="/spells/spell.snare"]');
+  await expect(snare).toHaveCount(1);
+  await expect(description.locator('a[href="/spells/spell.detect-magic"]')).toHaveCount(0);
+  await expect(snare).not.toHaveAttribute("target", "_blank");
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+
+  await snare.click();
+  await expect(page).toHaveURL(/\/spells\/spell\.snare$/);
+});
+
+test("Batch 23 links only Greater Discharge's three parent references", async ({ page }) => {
+  await page.goto("/spells/spell.discharge-greater");
+
+  const description = page.locator(".rich-description").first();
+  const parentLinks = description.locator('a[href="/spells/spell.discharge"]');
+  await expect(parentLinks).toHaveCount(3);
+  await expect(parentLinks.first()).not.toHaveAttribute("target", "_blank");
+  await expect(page.locator('[data-embedded-spell="spell.discharge"]')).toHaveCount(1);
+  await expect(page.locator("[data-embedded-spell] [data-embedded-spell]")).toHaveCount(0);
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+
+  await parentLinks.first().click();
+  await expect(page).toHaveURL(/\/spells\/spell\.discharge$/);
+});
+
+test("Batch 24 folds Dispel variants and links only the explicit Silence spell", async ({ page }) => {
+  await page.goto("/spells/spell.dispel-good");
+
+  const variantDescription = page.locator(".rich-description").first();
+  const parent = variantDescription.locator('a[href="/spells/spell.dispel-evil"]');
+  await expect(parent).toHaveCount(1);
+  await expect(parent).not.toHaveAttribute("target", "_blank");
+  await expect(page.locator('[data-embedded-spell="spell.dispel-evil"]')).toHaveCount(1);
+  await expect(page.locator("[data-embedded-spell] [data-embedded-spell]")).toHaveCount(0);
+  await expectNoPageOverflow(page);
+
+  await parent.click();
+  await expect(page).toHaveURL(/\/spells\/spell\.dispel-evil$/);
+
+  await page.goto("/spells/spell.disrupt-silence");
+  const silence = page.locator(".rich-description").first()
+    .locator('a[href="/spells/spell.silence"]');
+  await expect(silence).toHaveCount(1);
+  await expect(silence).not.toHaveAttribute("target", "_blank");
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+
+  await silence.click();
+  await expect(page).toHaveURL(/\/spells\/spell\.silence$/);
+});
+
+test("Batch 25 preserves Detect Undead's table and contextual Dream link", async ({ page }) => {
+  await page.goto("/spells/spell.detect-undead");
+
+  const undeadDescription = page.locator(".rich-description").first();
+  await expect(undeadDescription.locator("table")).toHaveCount(1);
+  await expect(undeadDescription.locator("tbody tr")).toHaveCount(4);
+  await expect(undeadDescription.locator('a[href="/entities/rule.undead"]')).toHaveCount(9);
+  await expectNoPageOverflow(page);
+
+  await page.goto("/spells/spell.dream-travel");
+  const dream = page.locator(".rich-description").first()
+    .locator('a[href="/spells/spell.dream"]');
+  await expect(dream).toHaveCount(1);
+  await expect(dream).not.toHaveAttribute("target", "_blank");
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+
+  await dream.click();
+  await expect(page).toHaveURL(/\/spells\/spell\.dream$/);
+});
+
+test("Batch 26 preserves Elemental Mastery's table and contextual spell links", async ({ page }) => {
+  await page.goto("/spells/spell.elemental-mastery");
+
+  const mastery = page.locator(".rich-description").first();
+  await expect(mastery.locator("table")).toHaveCount(1);
+  await expect(mastery.locator("tbody tr")).toHaveCount(4);
+  await expect(mastery.locator('a[href="/entities/rule.ifrit"]')).toHaveCount(2);
+  await expectNoPageOverflow(page);
+
+  await page.goto("/spells/spell.echeans-excellent-enclosure");
+  const antimagic = page.locator(".rich-description").first()
+    .locator('a[href="/spells/spell.antimagic-field"]');
+  await expect(antimagic).toHaveCount(3);
+  await expect(antimagic.first()).not.toHaveAttribute("target", "_blank");
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+
+  await antimagic.first().click();
+  await expect(page).toHaveURL(/\/spells\/spell\.antimagic-field$/);
+});
+
 test("pilot lists remain semantic and accessible on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/spells/spell.bestow-curse-greater");
