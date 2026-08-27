@@ -1,4 +1,3 @@
-import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -33,6 +32,12 @@ import {
   legacy35CanonicalizationEnabled,
   redMantisCatalogCanonicalizationEnabled,
 } from "./scope-policy.js";
+import {
+  artifactHash,
+  capturedArtifactExists,
+  readCapturedArtifact,
+  writeCapturedArtifact,
+} from "./artifact-store.js";
 
 
 const userAgent = "PF1RulesPrivateResearch/0.1 (local archival experiment)";
@@ -73,11 +78,6 @@ interface CapturedArtifact extends CaptureMetadata {
 
 function loadJson(filename: string): ValidatedJson {
   return JSON.parse(fs.readFileSync(filename, "utf8")) as ValidatedJson;
-}
-
-
-function sha256(content: string): string {
-  return crypto.createHash("sha256").update(content).digest("hex");
 }
 
 
@@ -162,16 +162,8 @@ function writeObservationJson(filename: string, record: ValidatedJson): void {
 
 
 async function capture(url: string, rawPath: string): Promise<CapturedArtifact> {
-  const metadataPath = `${rawPath}.meta.json`;
-  if (fs.existsSync(rawPath) && fs.existsSync(metadataPath)) {
-    const body = fs.readFileSync(rawPath, "utf8");
-    const metadata = loadJson(metadataPath) as CaptureMetadata;
-    if (sha256(body) !== metadata.content_sha256) throw new Error(`Cached artifact hash mismatch: ${rawPath}`);
-    return { ...metadata, body, rawPath };
-  }
-  if (fs.existsSync(rawPath) || fs.existsSync(metadataPath)) {
-    throw new Error(`Incomplete cached capture pair for ${rawPath}`);
-  }
+  const cached = readCapturedArtifact<CaptureMetadata>(rawPath);
+  if (cached) return { ...cached.metadata, body: cached.body, rawPath };
   const response = await throttledFetch(url);
   const body = await response.text();
   if (!response.ok) throw new Error(`HTTP ${response.status} while retrieving ${url}`);
@@ -179,12 +171,10 @@ async function capture(url: string, rawPath: string): Promise<CapturedArtifact> 
     url: response.url,
     retrieved_at: new Date().toISOString(),
     http_status: response.status,
-    content_sha256: sha256(body),
+    content_sha256: artifactHash(body),
     response_content_type: response.headers.get("content-type"),
   };
-  fs.mkdirSync(path.dirname(rawPath), { recursive: true });
-  fs.writeFileSync(rawPath, body, { encoding: "utf8", flag: "wx" });
-  writeGeneratedJson(metadataPath, metadata);
+  writeCapturedArtifact(rawPath, body, metadata);
   return { ...metadata, body, rawPath };
 }
 
@@ -194,12 +184,10 @@ function writeCapture(rawPath: string, url: string, response: Response, body: st
     url: response.url || url,
     retrieved_at: new Date().toISOString(),
     http_status: response.status,
-    content_sha256: sha256(body),
+    content_sha256: artifactHash(body),
     response_content_type: response.headers.get("content-type"),
   };
-  fs.mkdirSync(path.dirname(rawPath), { recursive: true });
-  fs.writeFileSync(rawPath, body, { encoding: "utf8", flag: "wx" });
-  writeGeneratedJson(`${rawPath}.meta.json`, metadata);
+  writeCapturedArtifact(rawPath, body, metadata);
   return { ...metadata, body, rawPath };
 }
 
@@ -213,7 +201,7 @@ async function resolveD20Spell(
   const fallbackRawPath = path.join(rawDirectory, "d20pfsrd-resolved.html");
   let cachedCoverage: CapturedArtifact | null = null;
   for (const cachedPath of [primaryRawPath, fallbackRawPath]) {
-    if (!fs.existsSync(cachedPath) && !fs.existsSync(`${cachedPath}.meta.json`)) continue;
+    if (!capturedArtifactExists(cachedPath)) continue;
     const cached = await capture(d20CandidateUrls(spellName)[0]!, cachedPath);
     try {
       const parsed = parseD20pfsrdSpell(cached.body, cached.url, spellName);
@@ -223,10 +211,10 @@ async function resolveD20Spell(
       cachedCoverage ??= cached;
     }
   }
-  const resolvedRawPath = fs.existsSync(primaryRawPath) ? fallbackRawPath : primaryRawPath;
+  const resolvedRawPath = capturedArtifactExists(primaryRawPath) ? fallbackRawPath : primaryRawPath;
   const searchRawPath = path.join(rawDirectory, "d20pfsrd-search.html");
   if (offlineOnly) {
-    if (fs.existsSync(searchRawPath) && fs.existsSync(`${searchRawPath}.meta.json`)) {
+    if (capturedArtifactExists(searchRawPath)) {
       return { coverageCapture: await capture(d20SearchUrl(spellName), searchRawPath) };
     }
     if (cachedCoverage) return { coverageCapture: cachedCoverage };
@@ -273,7 +261,7 @@ function observation(
   parsed: ParsedSpellPage,
   observationDirectory: string,
 ): { record: ValidatedJson; input: ParsedObservationInput } {
-  const observationVersionHash = sha256(`${captureResult.content_sha256}:${parserVersion}`);
+  const observationVersionHash = artifactHash(`${captureResult.content_sha256}:${parserVersion}`);
   const observationId = `${siteId}:${spellId}:${captureResult.content_sha256.slice(0, 8)}${observationVersionHash.slice(0, 8)}`;
   const sourceDetails = {
     aon: {
@@ -654,7 +642,7 @@ async function ingestSpell(
 
     const legacyEntry = legacyEntries.get(spell.name.toLocaleLowerCase("en-US"));
     const legacyRawPath = path.join(rawDirectory, "legacy_aon.html");
-    const hasCachedLegacy = fs.existsSync(legacyRawPath) && fs.existsSync(`${legacyRawPath}.meta.json`);
+    const hasCachedLegacy = capturedArtifactExists(legacyRawPath);
     let acceptedLegacy = false;
     if (legacyEntry && (!offlineOnly || hasCachedLegacy)) {
       try {
@@ -1674,8 +1662,7 @@ export async function ingestDiscoveredDependencies() {
     const candidate = candidates.find(({ level }) => {
       const { artifactScope } = levelPaths(level);
       const rawDirectory = path.join(projectRoot, "data", "raw", artifactScope, spellId.replace(/^spell\./, ""));
-      return fs.existsSync(path.join(rawDirectory, "aon.html")) &&
-        fs.existsSync(path.join(rawDirectory, "aon.html.meta.json"));
+      return capturedArtifactExists(path.join(rawDirectory, "aon.html"));
     });
     if (!candidate) {
       report.pending.push(spellId);
@@ -1717,8 +1704,7 @@ export async function ingestDiscoveredDependencies() {
     const candidate = candidates.find(({ level }) => {
       const { artifactScope } = levelPaths(level);
       const rawDirectory = path.join(projectRoot, "data", "raw", artifactScope, record.spell_id.replace(/^spell\./, ""));
-      return fs.existsSync(path.join(rawDirectory, "aon.html")) &&
-        fs.existsSync(path.join(rawDirectory, "aon.html.meta.json"));
+      return capturedArtifactExists(path.join(rawDirectory, "aon.html"));
     });
     if (!candidate) continue;
     const batch = Number(candidate.spell.batch);

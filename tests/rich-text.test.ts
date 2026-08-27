@@ -15,6 +15,7 @@ import {
   type RichTextDocument,
 } from "../src/domain/rich-text.js";
 import { resolveCanonicalSpellReference } from "../src/ingestion/normalize-level-zero.js";
+import { resolveArtifactPath } from "../src/ingestion/artifact-store.js";
 import { parseAonSpell } from "../src/ingestion/spell-page-parser.js";
 
 
@@ -31,9 +32,10 @@ function canonical(slug: string): ValidatedJson {
 function parsedObservation(relativeFilename: string) {
   const filename = path.join(projectRoot, "data", "observations", relativeFilename);
   const observation = loadJson(filename);
-  const artifact = path.resolve(
-    path.dirname(filename),
+  const artifact = resolveArtifactPath(
+    filename,
     observation.retrieval.raw_artifact_path,
+    observation.retrieval.content_sha256,
   );
   return parseAonSpell(fs.readFileSync(artifact, "utf8"), observation.source.url);
 }

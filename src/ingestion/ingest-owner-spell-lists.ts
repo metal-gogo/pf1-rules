@@ -1,4 +1,3 @@
-import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -9,6 +8,11 @@ import type { ValidatedJson } from "../domain/json.js";
 import { resolveCanonicalSpellReference } from "./normalize-level-zero.js";
 import { slug } from "./spell-page-parser.js";
 import { validatePackage } from "./validate.js";
+import {
+  artifactHash,
+  readCapturedArtifact,
+  writeCapturedArtifact,
+} from "./artifact-store.js";
 
 
 const userAgent = "PF1RulesPrivateResearch/0.1 (local archival experiment)";
@@ -113,6 +117,8 @@ interface Capture {
   response_content_type: string | null;
 }
 
+type CaptureMetadata = Omit<Capture, "body">;
+
 interface OwnerSpell {
   spellName: string;
   spellLevel: number;
@@ -156,11 +162,6 @@ function writeJson(filename: string, value: unknown): void {
 }
 
 
-function sha256(value: string): string {
-  return crypto.createHash("sha256").update(value).digest("hex");
-}
-
-
 function cleanText(value: string): string {
   return value.replace(/\u00a0/g, " ").replace(/\s+/g, " ").trim();
 }
@@ -175,15 +176,8 @@ function directJsonFiles(directory: string): string[] {
 
 
 async function fetchPage(url: string, rawPath: string): Promise<Capture> {
-  const metadataPath = `${rawPath}.meta.json`;
-  if (fs.existsSync(rawPath) && fs.existsSync(metadataPath)) {
-    const body = fs.readFileSync(rawPath, "utf8");
-    const metadata = loadJson(metadataPath);
-    if (sha256(body) !== metadata.content_sha256) {
-      throw new Error(`Cached artifact hash mismatch: ${rawPath}`);
-    }
-    return { body, ...metadata } as Capture;
-  }
+  const cached = readCapturedArtifact<CaptureMetadata>(rawPath);
+  if (cached) return { body: cached.body, ...cached.metadata };
   const remaining = 1_000 - (Date.now() - lastRequestAt);
   if (remaining > 0) await new Promise((resolve) => setTimeout(resolve, remaining));
   const response = await fetch(url, {
@@ -198,12 +192,10 @@ async function fetchPage(url: string, rawPath: string): Promise<Capture> {
     url: response.url,
     retrieved_at: new Date().toISOString(),
     http_status: response.status,
-    content_sha256: sha256(body),
+    content_sha256: artifactHash(body),
     response_content_type: response.headers.get("content-type"),
   };
-  fs.mkdirSync(path.dirname(rawPath), { recursive: true });
-  fs.writeFileSync(rawPath, body, { encoding: "utf8", flag: "wx" });
-  writeJson(metadataPath, metadata);
+  writeCapturedArtifact(rawPath, body, metadata);
   return { body, ...metadata };
 }
 
@@ -921,7 +913,7 @@ function addOwnerSpellMembership(
     field_path: `/levels/${levelIndex}`,
     observation_id: observationId,
     source_field: "entity_raw.sections_raw[0]",
-    raw_value_sha256: sha256(ownerSpell.raw),
+    raw_value_sha256: artifactHash(ownerSpell.raw),
     decision: "normalized",
     note: accessBasis === "derived"
       ? "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."

@@ -4,6 +4,31 @@ Source capture must be explicit, rate-limited, and reproducible. Raw snapshots
 are immutable, so parsing can be repeated locally without downloading a page
 again. Conflicting values remain visible for review.
 
+## Raw artifact storage
+
+Set `PF1_ARTIFACT_ROOT` in `.env` to store new source captures outside the
+repository. Use the Linux path when running the project in WSL:
+
+```dotenv
+PF1_ARTIFACT_ROOT="/mnt/c/Users/Usuario/Documents/pf1-rules-artifacts"
+```
+
+The artifact store writes each distinct response body once under its SHA-256
+hash. Lightweight files under `captures/` preserve the retrieval metadata for
+each logical capture. Identical responses therefore share one stored body
+without losing their separate URLs or retrieval times.
+
+Existing captures under `data/raw` remain valid and take precedence when
+present. Validators and replay tools resolve a missing repository capture from
+the configured artifact store by its recorded content hash. Keep the artifact
+directory available when validating or replaying records whose bodies are not
+in the repository.
+
+Run `pnpm artifacts:migrate` to inventory existing captures without writing
+files. After reviewing the report, run `pnpm artifacts:migrate --write` to copy
+verified bodies and available capture metadata. The migration does not delete
+repository files.
+
 For the proposed feat workflow, pilot scope, and taxonomy decisions, see the
 [feat ingestion plan](feat-ingestion-plan.md).
 

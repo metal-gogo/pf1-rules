@@ -20,6 +20,7 @@ import {
   validateSpellInheritance,
   type InheritableSpell,
 } from "../domain/spell-inheritance.js";
+import { resolveArtifactPath } from "./artifact-store.js";
 
 
 interface JsonSchemaValidator {
@@ -106,9 +107,10 @@ function assertValid(
 
 
 function verifyArtifact(record: ValidatedJson, recordPath: string, idField: string): void {
-  const artifactPath = path.resolve(
-    path.dirname(recordPath),
+  const artifactPath = resolveArtifactPath(
+    recordPath,
     record.retrieval.raw_artifact_path,
+    record.retrieval.content_sha256,
   );
   const actualHash = crypto
     .createHash("sha256")
@@ -128,9 +130,10 @@ function verifyArtifact(record: ValidatedJson, recordPath: string, idField: stri
 
 
 function verifyCoverage(record: ValidatedJson, recordPath: string): void {
-  const artifactPath = path.resolve(
-    path.dirname(recordPath),
+  const artifactPath = resolveArtifactPath(
+    recordPath,
     record.retrieval.raw_artifact_path,
+    record.retrieval.content_sha256,
   );
   let content = fs.readFileSync(artifactPath, "utf8");
   let query = String(record.check.query);
@@ -168,7 +171,11 @@ function verifyIngestionManifest(record: ValidatedJson, recordPath: string): voi
     }
     pageIds.add(page.spell_list_id);
     expectedMembershipCounts.set(page.spell_list_id, page.level_entry_count);
-    const artifactPath = path.resolve(path.dirname(recordPath), page.raw_artifact_path);
+    const artifactPath = resolveArtifactPath(
+      recordPath,
+      page.raw_artifact_path,
+      page.content_sha256,
+    );
     const actualHash = crypto
       .createHash("sha256")
       .update(fs.readFileSync(artifactPath))

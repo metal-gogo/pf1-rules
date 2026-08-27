@@ -1,4 +1,3 @@
-import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -8,6 +7,11 @@ import { projectRoot } from "../config.js";
 import type { ValidatedJson } from "../domain/json.js";
 import { validatePackage } from "./validate.js";
 import { slug } from "./spell-page-parser.js";
+import {
+  artifactHash,
+  readCapturedArtifact,
+  writeCapturedArtifact,
+} from "./artifact-store.js";
 
 
 const userAgent = "PF1RulesPrivateResearch/0.1 (local archival experiment)";
@@ -35,24 +39,14 @@ function writeJson(filename: string, value: unknown): void {
 }
 
 
-function hash(content: string): string {
-  return crypto.createHash("sha256").update(content).digest("hex");
-}
-
-
 function cleanText(value: string): string {
   return value.replace(/\u00a0/g, " ").replace(/\s+/g, " ").trim();
 }
 
 
 async function fetchPage(url: string, filename: string) {
-  const metadataPath = `${filename}.meta.json`;
-  if (fs.existsSync(filename) && fs.existsSync(metadataPath)) {
-    const body = fs.readFileSync(filename, "utf8");
-    const metadata = loadJson(metadataPath) as CaptureMetadata;
-    if (hash(body) !== metadata.content_sha256) throw new Error(`Cached artifact hash mismatch: ${filename}`);
-    return { body, ...metadata };
-  }
+  const cached = readCapturedArtifact<CaptureMetadata>(filename);
+  if (cached) return { body: cached.body, ...cached.metadata };
   const remaining = 1_000 - (Date.now() - lastRequestAt);
   if (remaining > 0) await new Promise((resolve) => setTimeout(resolve, remaining));
   const response = await fetch(url, {
@@ -67,12 +61,10 @@ async function fetchPage(url: string, filename: string) {
     url: response.url,
     retrieved_at: new Date().toISOString(),
     http_status: response.status,
-    content_sha256: hash(body),
+    content_sha256: artifactHash(body),
     response_content_type: response.headers.get("content-type"),
   };
-  fs.mkdirSync(path.dirname(filename), { recursive: true });
-  fs.writeFileSync(filename, body, { encoding: "utf8", flag: "wx" });
-  writeJson(metadataPath, metadata);
+  writeCapturedArtifact(filename, body, metadata);
   return { body, ...metadata };
 }
 

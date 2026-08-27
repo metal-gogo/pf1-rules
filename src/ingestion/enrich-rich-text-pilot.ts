@@ -19,6 +19,7 @@ import {
   materializeSpellInheritanceRule,
   resolveCanonicalSpellReference,
 } from "./normalize-level-zero.js";
+import { resolveArtifactPath } from "./artifact-store.js";
 import { parseAonSpell } from "./spell-page-parser.js";
 
 
@@ -2853,9 +2854,10 @@ export function auditRichTextRollout(): {
       continue;
     }
     try {
-      const artifactPath = path.resolve(
-        path.dirname(observation.filename),
+      const artifactPath = resolveArtifactPath(
+        observation.filename,
         observation.record.retrieval.raw_artifact_path,
+        observation.record.retrieval.content_sha256,
       );
       const parsed = parseAonSpell(
         fs.readFileSync(artifactPath, "utf8"),
@@ -2921,9 +2923,10 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
     if (!baselineId || !observation || observation.record.source.site_id !== "aon") {
       throw new Error(`${spellId} has no indexed AoN baseline observation`);
     }
-    const artifactPath = path.resolve(
-      path.dirname(observation.filename),
+    const artifactPath = resolveArtifactPath(
+      observation.filename,
       observation.record.retrieval.raw_artifact_path,
+      observation.record.retrieval.content_sha256,
     );
     const parsed = parseAonSpell(
       fs.readFileSync(artifactPath, "utf8"),

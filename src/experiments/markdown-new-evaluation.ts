@@ -3,6 +3,7 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 
 import { projectRoot } from "../config.js";
+import { resolveArtifactPath } from "../ingestion/artifact-store.js";
 
 
 export interface ReferenceNormalizationInput {
@@ -216,7 +217,11 @@ export async function evaluateCorpus(
   for (const corpusCase of corpus) {
     const observationPath = path.resolve(projectRoot, corpusCase.observationPath);
     const observation = JSON.parse(fs.readFileSync(observationPath, "utf8")) as SourceObservation;
-    const artifactPath = path.resolve(path.dirname(observationPath), observation.retrieval.raw_artifact_path);
+    const artifactPath = resolveArtifactPath(
+      observationPath,
+      observation.retrieval.raw_artifact_path,
+      observation.retrieval.content_sha256,
+    );
     const originalRepresentation = fs.readFileSync(artifactPath);
     const actualHash = sha256(originalRepresentation);
     if (actualHash !== observation.retrieval.content_sha256) {

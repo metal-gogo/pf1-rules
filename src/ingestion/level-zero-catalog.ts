@@ -1,8 +1,8 @@
-import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 
 import { projectRoot } from "../config.js";
+import { artifactHash, writeCapturedArtifact } from "./artifact-store.js";
 import { legacy35CanonicalizationEnabled } from "./scope-policy.js";
 
 
@@ -42,11 +42,6 @@ interface CatalogMembership {
 
 function sleep(milliseconds: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
-}
-
-
-function sha256(content: string): string {
-  return crypto.createHash("sha256").update(content).digest("hex");
 }
 
 
@@ -217,7 +212,6 @@ export async function captureSpellLevelCatalog(level: number): Promise<Record<st
   if (fs.existsSync(manifestPath)) {
     throw new Error(`Refusing to overwrite ${manifestPath}; archive it before a new capture.`);
   }
-  fs.mkdirSync(rawDirectory, { recursive: true });
   fs.mkdirSync(manifestDirectory, { recursive: true });
 
   await assertCatalogAllowedByRobots();
@@ -230,7 +224,14 @@ export async function captureSpellLevelCatalog(level: number): Promise<Record<st
     const sourceUrl = classUrl(className);
     const response = await fetchText(sourceUrl);
     const rawPath = path.join(rawDirectory, `${slug(className)}.html`);
-    fs.writeFileSync(rawPath, response.body, { encoding: "utf8", flag: "wx" });
+    const contentHash = artifactHash(response.body);
+    writeCapturedArtifact(rawPath, response.body, {
+      url: sourceUrl,
+      retrieved_at: response.retrievedAt,
+      http_status: response.status,
+      content_sha256: contentHash,
+      response_content_type: response.contentType,
+    });
     const entries = parseLevelEntries(response.body, sourceUrl, level);
     const spellListId = `spell-list.${slug(className)}`;
     catalogPages.push({
@@ -239,7 +240,7 @@ export async function captureSpellLevelCatalog(level: number): Promise<Record<st
       source_url: sourceUrl,
       retrieved_at: response.retrievedAt,
       http_status: response.status,
-      content_sha256: sha256(response.body),
+      content_sha256: contentHash,
       raw_artifact_path: path.relative(manifestDirectory, rawPath).replaceAll("\\", "/"),
       response_content_type: response.contentType,
       level_entry_count: entries.length,
