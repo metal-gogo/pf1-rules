@@ -313,6 +313,24 @@ test("Batch 29 preserves Fable Tapestry's table and normalizes scrying", async (
   expect(results.violations).toEqual([]);
 });
 
+test("Batch 30 preserves form links while rejecting spell-name homonyms", async ({ page }) => {
+  await page.goto("/spells/spell.fey-form-iv");
+
+  const form = page.locator(".rich-description").first();
+  await expect(form.locator('a[href="/entities/rule.fast-healing"]')).toHaveCount(1);
+  await expect(form.locator('a[href="/spells/spell.blood-rage"]')).toHaveCount(0);
+  await expect(form.locator('a[href="/spells/spell.resistance"]')).toHaveCount(0);
+  await expectNoPageOverflow(page);
+
+  await page.goto("/spells/spell.fiery-body");
+  const body = page.locator(".rich-description").first();
+  await expect(body.locator('a[href="/entities/rule.concealment"]')).toHaveCount(1);
+  await expect(body.locator('a[href="/spells/spell.poison"]')).toHaveCount(0);
+  await expectNoPageOverflow(page);
+  const results = await new AxeBuilder({ page }).analyze();
+  expect(results.violations).toEqual([]);
+});
+
 test("pilot lists remain semantic and accessible on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/spells/spell.bestow-curse-greater");

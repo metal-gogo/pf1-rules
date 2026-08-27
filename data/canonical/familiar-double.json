@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.familiar-double",
   "ruleset": "Pathfinder First Edition",
   "name": "Familiar Double",
@@ -99,7 +99,51 @@
   "description": {
     "raw": "This spell functions as project image, except the image appears in your familiar’s square and moves when your familiar moves.",
     "search_text": "\"this spell functions as project image, except the image appears in your familiar’s square and moves when your familiar moves.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "project image",
+              "relationship_id": "spell.familiar-double:functions_like:spell.project-image",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except the image appears in your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "familiar’s",
+              "relationship_id": "spell.familiar-double:uses_definition:rule.familiars"
+            },
+            {
+              "node_type": "text",
+              "value": " square and moves when your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "familiar",
+              "relationship_id": "spell.familiar-double:uses_definition:rule.familiar"
+            },
+            {
+              "node_type": "text",
+              "value": " moves."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -189,6 +233,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as project image, except the image appears in your familiar’s square and moves when your familiar moves.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.familiar-double:768fa4bb28a0f1b7",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "project image",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/projectImage.html#project-image"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.familiar-double:0ed3c287f1742941",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "project image",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/f/p/project-image"
         }
       ],
       "note": null
@@ -289,7 +347,7 @@
         "entity_id": "publication.will",
         "name": "Will"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.familiar-double:0ed3c287f1742941",
@@ -299,34 +357,7 @@
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
         }
       ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.familiar-double:references:spell.project-image",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.project-image",
-        "name": "project image"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.familiar-double:768fa4bb28a0f1b7",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "project image",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/projectImage.html#project-image"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.familiar-double:0ed3c287f1742941",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "project image",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/f/p/project-image"
-        }
-      ],
-      "note": null
+      "note": "The source href points to the Will saving-throw rules, not a publication."
     },
     {
       "relationship_id": "spell.familiar-double:uses_action:action.standard-action",
@@ -464,11 +495,19 @@
       "raw_value_sha256": "ce17b930491db854194eb408dbe4f0b076922969e8bcd7e3b2ac85a114445292",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.familiar-double:7783b9a7149d3731",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "31bbbefa92ef27a1a12a3acb8f5b5026292b5bb70a149cc635431ca06d7343fa",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

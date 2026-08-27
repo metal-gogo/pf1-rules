@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.feather-step-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Feather Step, Mass",
@@ -145,7 +145,33 @@
   "description": {
     "raw": "As feather step, except this spell affects multiple creatures.",
     "search_text": "\"as feather step, except this spell affects multiple creatures.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "As "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "feather step",
+              "relationship_id": "spell.feather-step-mass:functions_like:spell.feather-step",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except this spell affects multiple creatures."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -471,7 +497,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.feather-step",
-        "name": "feather step"
+        "name": "Feather Step"
       },
       "status": "accepted",
       "evidence": [
@@ -574,11 +600,19 @@
       "raw_value_sha256": "2bc60368c7ac611bffd9e029666d67a60425475e817f673487ae8d5baeb3a058",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.feather-step-mass:369e1db5639304c8",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "5b1962499a9e7f4ba22e03e14ff087bb83b5db0bad712b038af3668b4553177e",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

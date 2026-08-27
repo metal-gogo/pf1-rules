@@ -942,6 +942,45 @@ The 2026-08-26 audit reports 3,030 total spells, 738 rich-text records, 1,532
 safe candidates with links, 306 structure-only candidates, 280 source
 mismatches, 174 link warnings, 0 missing AoN baselines, and 0 parser errors.
 
+### Batch 30
+
+The thirtieth rollout batch contains:
+
+- Familiar Double; Familiar Figment; Familiar Melding; Fastidiousness; Fear
+  the Sun; Fearsome Duplicate; Feast on Fear; Feather Step, Mass; Feeblemind;
+  Ferment; Fester; and Fester, Mass.
+- Fey Form II, Fey Form III, Fey Form IV; Fey Gate; Fickle Winds; Fiendish
+  Wrath; Fiery Body; Fiery Runes; Fiery Shuriken; Final Sacrifice; Find Fault;
+  Find Quarry; and Find the Path.
+
+Review of this batch established these normalization rules:
+
+- Familiar Melding's body merely appears dead while the caster possesses its
+  familiar. This is not the Dead condition.
+- Fey Form II–IV list a form ability called `blood rage`; it does not refer to
+  the Blood Rage spell. Fey Form III–IV's granted energy resistance similarly
+  does not refer to the Resistance spell.
+- Fiery Body lists poison as an affliction to which the caster is immune, not
+  the Poison spell. Its concealment, disease, ability-score, and condition
+  references remain semantically linked.
+- Explicit parent and named-spell links remain links: Familiar Double → Project
+  Image; Feather Step, Mass → Feather Step; Fey Form II–IV → the preceding
+  form; Fey Gate → Gate; Fickle Winds → Wind Wall; Find Quarry → Locate
+  Creature; and Find the Path → Maze.
+- The Fey Form ability lists retain all ordinary wording and source punctuation
+  while linking discrete rules terms such as fast healing, blindsense,
+  damage reduction, and spell resistance.
+
+Canonical, database-backed web, and desktop/mobile browser tests cover the
+accepted and rejected links. Manual rendered review covered Familiar Figment,
+Fey Form II, Fey Form IV, Fiery Body, Find the Path, and Fable Tapestry,
+including link targets, rejected homonyms, paragraph and table structure,
+emphasis, accessibility, and unchanged visible text.
+
+The 2026-08-26 audit reports 3,030 total spells, 763 rich-text records, 1,507
+safe candidates with links, 306 structure-only candidates, 280 source
+mismatches, 174 link warnings, 0 missing AoN baselines, and 0 parser errors.
+
 ## Open questions and issues
 
 ### Source boundaries

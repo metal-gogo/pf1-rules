@@ -1585,6 +1585,26 @@ describe("local rules browser", () => {
     expect(descriptions[4]).not.toContain('href="/spells/spell.scrying"');
   });
 
+  it("renders Batch 30 relationships without linking form abilities as spells", async () => {
+    const [formResponse, bodyResponse, pathResponse] = await Promise.all([
+      fetch(`${baseUrl}/spells/spell.fey-form-iv`),
+      fetch(`${baseUrl}/spells/spell.fiery-body`),
+      fetch(`${baseUrl}/spells/spell.find-the-path`),
+    ]);
+    const descriptions = await Promise.all(
+      [formResponse, bodyResponse, pathResponse].map(async (response) => (await response.text()).match(
+        /<section><h2>Description<\/h2>(.*?)<\/section>/s,
+      )?.[1] ?? ""),
+    );
+
+    expect(descriptions[0]).toContain('href="/entities/rule.fast-healing"');
+    expect(descriptions[0]).not.toContain('href="/spells/spell.blood-rage"');
+    expect(descriptions[0]).not.toContain('href="/spells/spell.resistance"');
+    expect(descriptions[1]).toContain('href="/entities/rule.concealment"');
+    expect(descriptions[1]).not.toContain('href="/spells/spell.poison"');
+    expect(descriptions[2]!.match(/href="\/spells\/spell.maze"/g)).toHaveLength(2);
+  });
+
   it("links Curse of Unexpected Death's touch attacks but not its ordinary touch verbs", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.curse-of-unexpected-death`);
     const html = await response.text();

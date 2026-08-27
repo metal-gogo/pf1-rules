@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.find-quarry",
   "ruleset": "Pathfinder First Edition",
   "name": "Find Quarry",
@@ -158,7 +158,44 @@
   "description": {
     "raw": "You sense whether a well-known creature you can clearly visualize is within a 20-mile radius of your current location, as well as the distance and direction to the creature in relation to you. You also discern whether the creature is moving, and its direction, speed, and mode of movement. The radius you can sense increases by 5 miles for every two caster levels you have above 10th (to a maximum of a 45-mile radius at 20th level). Anything that would prevent locate creature from finding a creature also prevents find quarry from doing so.",
     "search_text": "\"you sense whether a well-known creature you can clearly visualize is within a 20-mile radius of your current location, as well as the distance and direction to the creature in relation to you. you also discern whether the creature is moving, and its direction, speed, and mode of movement. the radius you can sense increases by 5 miles for every two caster levels you have above 10th (to a maximum of a 45-mile radius at 20th level). anything that would prevent locate creature from finding a creature also prevents find quarry from doing so.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You sense whether a well-known creature you can clearly visualize is within a 20-mile radius of your current location, as well as the distance and direction to the creature in relation to you. You also discern whether the creature is moving, and its direction, speed, and mode of movement. The radius you can sense increases by 5 miles for every two caster levels you have above 10th (to a maximum of a 45-mile radius at 20th level). Anything that would prevent "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "locate creature",
+              "relationship_id": "spell.find-quarry:references:spell.locate-creature",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " from finding a creature also prevents "
+            },
+            {
+              "node_type": "text",
+              "value": "find quarry",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " from doing so."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -236,6 +273,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.find-quarry:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.find-quarry:c6db08a3df0694a2",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.find-quarry:73a39c14c18f08c2",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.find-quarry:appears_on_spell_list:spell-list.ranger",
@@ -338,7 +402,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.locate-creature",
-        "name": "locate creature"
+        "name": "Locate Creature"
       },
       "status": "accepted",
       "evidence": [
@@ -398,33 +462,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.find-quarry:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.find-quarry:c6db08a3df0694a2",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.find-quarry:73a39c14c18f08c2",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -475,11 +512,19 @@
       "raw_value_sha256": "34ee92b731b2203d261df837aad5957b2ed57cedd605bcac9e6da007c2a8d6cd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.find-quarry:73a39c14c18f08c2",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "a56728462d2d8b420b6fc15471504437e24ad5d776c162b08cc718b928be5deb",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

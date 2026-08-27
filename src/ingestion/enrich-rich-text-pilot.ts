@@ -592,6 +592,34 @@ const rejectedRelationshipTargets = new Map([
 
 const rejectedDescriptionRelationships = new Map([
   [
+    "spell.familiar-melding:uses_definition:condition.dead",
+    "The body only appears dead while the caster possesses the familiar; this does not apply the Dead condition.",
+  ],
+  [
+    "spell.fey-form-ii:references:spell.blood-rage",
+    "Blood rage is an ability in the form's list, not a reference to the Blood Rage spell.",
+  ],
+  [
+    "spell.fey-form-iii:references:spell.blood-rage",
+    "Blood rage is an ability in the form's list, not a reference to the Blood Rage spell.",
+  ],
+  [
+    "spell.fey-form-iii:references:spell.resistance",
+    "Energy resistance granted by an assumed form does not refer to the Resistance spell.",
+  ],
+  [
+    "spell.fey-form-iv:references:spell.blood-rage",
+    "Blood rage is an ability in the form's list, not a reference to the Blood Rage spell.",
+  ],
+  [
+    "spell.fey-form-iv:references:spell.resistance",
+    "Energy resistance granted by an assumed form does not refer to the Resistance spell.",
+  ],
+  [
+    "spell.fiery-body:references:spell.poison",
+    "The immunity lists poison as an affliction, not the Poison spell.",
+  ],
+  [
     "spell.advanced-scurvy:uses_definition:rule.natural",
     "The source link points to natural armor, but the description uses “natural” only in “natural healing.”",
   ],

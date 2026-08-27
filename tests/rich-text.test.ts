@@ -752,6 +752,39 @@ describe("rich-text schema and source parsing", () => {
       }));
     }
   });
+
+  it("keeps Batch 30 form abilities and afflictions distinct from spells", () => {
+    const melding = JSON.stringify(canonical("familiar-melding").description.document);
+    expect(melding).not.toContain("uses_definition:condition.dead");
+
+    for (const slug of ["fey-form-ii", "fey-form-iii", "fey-form-iv"]) {
+      expect(JSON.stringify(canonical(slug).description.document))
+        .not.toContain("references:spell.blood-rage");
+    }
+    for (const slug of ["fey-form-iii", "fey-form-iv"]) {
+      expect(JSON.stringify(canonical(slug).description.document))
+        .not.toContain("references:spell.resistance");
+    }
+
+    const fieryBody = JSON.stringify(canonical("fiery-body").description.document);
+    expect(fieryBody).not.toContain("references:spell.poison");
+    expect(fieryBody).toContain("uses_definition:rule.concealment");
+
+    for (const [slug, relationshipId] of [
+      ["familiar-melding", "spell.familiar-melding:uses_definition:condition.dead"],
+      ["fey-form-ii", "spell.fey-form-ii:references:spell.blood-rage"],
+      ["fey-form-iii", "spell.fey-form-iii:references:spell.blood-rage"],
+      ["fey-form-iii", "spell.fey-form-iii:references:spell.resistance"],
+      ["fey-form-iv", "spell.fey-form-iv:references:spell.blood-rage"],
+      ["fey-form-iv", "spell.fey-form-iv:references:spell.resistance"],
+      ["fiery-body", "spell.fiery-body:references:spell.poison"],
+    ] as const) {
+      expect(canonical(slug).relationships).toContainEqual(expect.objectContaining({
+        relationship_id: relationshipId,
+        status: "rejected",
+      }));
+    }
+  });
 });
 
 
