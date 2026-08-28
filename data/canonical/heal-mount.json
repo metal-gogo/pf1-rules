@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.heal-mount",
   "ruleset": "Pathfinder First Edition",
   "name": "Heal Mount",
@@ -105,7 +105,42 @@
   "description": {
     "raw": "This spell functions like heal, but it affects only the paladin's special mount (typically a horse).",
     "search_text": "\"this spell functions like heal, but it affects only the paladin's special mount (typically a horse).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "heal",
+              "relationship_id": "spell.heal-mount:functions_like:spell.heal",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", but it affects only the paladin's special mount (typically a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "horse",
+              "relationship_id": "spell.heal-mount:uses_definition:rule.horse"
+            },
+            {
+              "node_type": "text",
+              "value": ")."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -232,6 +267,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like heal, but it affects only the paladin's special mount (typically a horse).",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.heal-mount:7bd751e23e936941",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "heal",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/heal.html#heal"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.heal-mount:cfa829c9d97293a1",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "heal",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/h/heal"
         }
       ],
       "note": null
@@ -318,33 +367,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.heal-mount:references:spell.heal",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.heal",
-        "name": "heal"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.heal-mount:7bd751e23e936941",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "heal",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/heal.html#heal"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.heal-mount:cfa829c9d97293a1",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "heal",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/h/heal"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.heal-mount:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -372,6 +394,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.heal-mount:uses_definition:class.paladin",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "class",
+        "entity_id": "class.paladin",
+        "name": "Paladin"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.heal-mount:cfa829c9d97293a1",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "paladin’s",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/paladin"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.heal-mount:uses_definition:rule.horse",
       "type": "uses_definition",
       "target": {
@@ -387,26 +429,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "horse",
           "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/animals/horse"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.heal-mount:uses_definition:rule.paladins",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.paladins",
-        "name": "paladin’s"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.heal-mount:cfa829c9d97293a1",
-          "source_field": "spell_raw.links_raw[5]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "paladin’s",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/paladin"
         }
       ],
       "note": null
@@ -439,11 +461,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.heal-mount:uses_definition:rule.will",
+      "relationship_id": "spell.heal-mount:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -514,11 +536,19 @@
       "raw_value_sha256": "f6f167791a30ef6cf1fd10f22254e035156b6a25268c2734ab8ae9e69e08789a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.heal-mount:cf9e08491d88bb50",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "a2710a5e0d5223560ddb19aa4a886ba3f03e6c125ed1359dbe969e4883b985a8",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

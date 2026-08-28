@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.healing-leak",
   "ruleset": "Pathfinder First Edition",
   "name": "Healing Leak",
@@ -222,7 +222,66 @@
   "description": {
     "raw": "Whenever the target is affected by a spell or effect that heals hit point damage through the use of positive or negative energy, it regains only half the number of hit points it normally would recover. If the target employs a spell or effect that heals itself or other creatures through the use of positive or negative energy, the target must succeed at a concentration check (DC = this spell’s save DC) or the effect restores only half of the normal number of hit points. Other forms of healing (such as from the Heal skill) are not affected by this spell.",
     "search_text": "\"whenever the target is affected by a spell or effect that heals hit point damage through the use of positive or negative energy, it regains only half the number of hit points it normally would recover. if the target employs a spell or effect that heals itself or other creatures through the use of positive or negative energy, the target must succeed at a concentration check (dc = this spell’s save dc) or the effect restores only half of the normal number of hit points. other forms of healing (such as from the heal skill) are not affected by this spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Whenever the target is affected by a spell or effect that heals hit point damage through the use of positive or negative energy, it regains only half the number of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.healing-leak:uses_definition:rule.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": " it normally would recover. If the target employs a spell or effect that heals itself or other creatures through the use of positive or negative energy, the target must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concentration",
+              "relationship_id": "spell.healing-leak:uses_definition:rule.concentration"
+            },
+            {
+              "node_type": "text",
+              "value": " check (DC = this spell’s save DC) or the effect restores only half of the normal number of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.healing-leak:uses_definition:rule.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": ". Other forms of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "healing",
+              "relationship_id": "spell.healing-leak:uses_definition:subschool.healing"
+            },
+            {
+              "node_type": "text",
+              "value": " (such as from the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Heal",
+              "relationship_id": "spell.healing-leak:uses_definition:rule.heal"
+            },
+            {
+              "node_type": "text",
+              "value": " skill) are not affected by this spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -307,6 +366,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.healing-leak:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.healing-leak:ed94c17657715cf0",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.healing-leak:9e072f8c9a38fc06",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.healing-leak:appears_on_spell_list:spell-list.oracle",
@@ -618,26 +704,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.healing-leak:uses_definition:rule.healing",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.healing",
-        "name": "healing"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.healing-leak:ed94c17657715cf0",
-          "source_field": "spell_raw.links_raw[12]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "healing",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Conjuration-Healing"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.healing-leak:uses_definition:rule.hit-points",
       "type": "uses_definition",
       "target": {
@@ -685,12 +751,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.healing-leak:uses_definition:rule.touch",
+      "relationship_id": "spell.healing-leak:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -705,11 +771,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.healing-leak:uses_definition:rule.will",
+      "relationship_id": "spell.healing-leak:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -725,31 +791,24 @@
       "note": null
     },
     {
-      "relationship_id": "spell.healing-leak:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
+      "relationship_id": "spell.healing-leak:uses_definition:subschool.healing",
+      "type": "uses_definition",
       "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
+        "entity_type": "subschool",
+        "entity_id": "subschool.healing",
+        "name": "Healing"
       },
       "status": "accepted",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.healing-leak:ed94c17657715cf0",
-          "source_field": "spell_raw.links_raw[2]",
+          "source_field": "spell_raw.links_raw[12]",
           "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.healing-leak:9e072f8c9a38fc06",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
+          "anchor_text_raw": "healing",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Conjuration-Healing"
         }
       ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+      "note": null
     }
   ],
   "provenance": [
@@ -808,11 +867,19 @@
       "raw_value_sha256": "6449ae2915dfc320cf9ba71e50a4a281ac24d8e393321a4f445a0e5b3f2c2d10",
       "decision": "manually_resolved",
       "note": "Reviewed catalog policy: AoN remains the preferred publication transcription. When an additional class membership is printed by d20PFSRD, it may be added to the canonical class union after review; Foundry PF1 is corroborating catalog evidence when it agrees. Preserve every source claim and never replace an AoN level merely because another catalog assigns the same class a different level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.healing-leak:9e072f8c9a38fc06",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "fd6bba314bacf15096bc764488f8c2206c7a3004792c4b6534c907d986772f53",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.5-reviewed-catalog-memberships",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "REVIEWED_CATALOG_MEMBERSHIP_UNION",
