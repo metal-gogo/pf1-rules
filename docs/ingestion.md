@@ -32,6 +32,35 @@ repository files.
 For the proposed feat workflow, pilot scope, and taxonomy decisions, see the
 [feat ingestion plan](feat-ingestion-plan.md).
 
+## Semantic source content
+
+All source-derived rules prose must be ingested as a rich-text document, not
+flattened with `cleanText()`. This requirement applies to rules pages and spell
+descriptions alike.
+
+- Preserve source headings and levels, paragraphs, lists, tables, bold labels,
+  emphasis, and links. Treat double line breaks as paragraph boundaries.
+- Render tables as accessible HTML tables with headers and cells. Preserve
+  labels such as **Injury:** and **Casting Defensively:** as inline strong text
+  in their paragraph.
+- Use Archives of Nethys (AoN) as the canonical wording for a primary rules
+  page. d20PFSRD can supply navigation, link-discovery evidence, and separately
+  attributed supplemental material.
+- Do not merge d20PFSRD-only FAQs, third-party rules, or editorial material
+  into AoN-derived canonical prose. Expose such material only as separately
+  attributed supplemental content after review.
+- Convert a source link to a local link only when its target is a registered
+  local entity or canonical spell, its route and anchor are stable, and its
+  unique mapping is supported by source evidence or a reviewed alias. A
+  d20PFSRD link alone is discovery evidence, not approval to create a local
+  link.
+- Keep unresolved source links visible in provenance and report them for
+  review. Do not guess from keyword matches.
+
+The rich-text contract and review checklist are in
+[Rich-text spell descriptions](rich-text.md). Rules-page adapters must follow
+the same requirements before their content is rendered locally.
+
 ## Commands
 
 ```bash
