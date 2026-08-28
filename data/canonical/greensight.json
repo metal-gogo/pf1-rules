@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.greensight",
   "ruleset": "Pathfinder First Edition",
   "name": "Greensight",
@@ -176,7 +176,50 @@
   "description": {
     "raw": "The target of this spell gains the ability to see up to 60 feet through thick plant matter as though it were transparent. Greenery, leaves, and vines—even lichen, moss, and slime—offer no concealment to the recipient’s sight, though her vision still can be blocked by solid wood, such as trees or wooden structures. Undergrowth does not grant concealment to a creature against a target of the effects of greensight.",
     "search_text": "\"the target of this spell gains the ability to see up to 60 feet through thick plant matter as though it were transparent. greenery, leaves, and vines—even lichen, moss, and slime—offer no concealment to the recipient’s sight, though her vision still can be blocked by solid wood, such as trees or wooden structures. undergrowth does not grant concealment to a creature against a target of the effects of greensight.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target of this spell gains the ability to see up to 60 feet through thick plant matter as though it were transparent. Greenery, leaves, and vines—even lichen, moss, and slime—offer no "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.greensight:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": " to the recipient’s sight, though her vision still can be blocked by solid wood, such as trees or wooden structures. Undergrowth does not grant "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.greensight:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": " to a creature against a target of the effects of "
+            },
+            {
+              "node_type": "text",
+              "value": "greensight",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -207,6 +250,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.greensight:appears_on_spell_list:spell-list.bloodrager-verdant-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.bloodrager-verdant-bloodline",
+        "name": "Bloodrager Verdant Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.bloodrager.verdant:5d500dc4",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "greensight (10th)",
+          "source_href": "https://www.aonprd.com/BloodragerBloodlineDisplay.aspx?ItemName=Verdant"
+        }
+      ],
+      "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
     },
     {
       "relationship_id": "spell.greensight:appears_on_spell_list:spell-list.druid",
@@ -532,12 +595,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.greensight:uses_definition:rule.touch",
+      "relationship_id": "spell.greensight:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -552,11 +615,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.greensight:uses_definition:rule.will",
+      "relationship_id": "spell.greensight:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -570,26 +633,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.greensight:appears_on_spell_list:spell-list.bloodrager-verdant-bloodline",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.bloodrager-verdant-bloodline",
-        "name": "Bloodrager Verdant Bloodline Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.bloodrager.verdant:5d500dc4",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "greensight (10th)",
-          "source_href": "https://www.aonprd.com/BloodragerBloodlineDisplay.aspx?ItemName=Verdant"
-        }
-      ],
-      "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
     }
   ],
   "provenance": [
@@ -656,11 +699,19 @@
       "raw_value_sha256": "6f6f77e6440227fe68c5bb2057c81f02f8f3dbc930641c6db1115cdacd2a7baa",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.greensight:738eee1fa3fa709a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f404c51bd2e5429af572f97a7e0025383412593969fa7d8b7419f7f04ca25393",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.5-reviewed-catalog-memberships",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "REVIEWED_CATALOG_MEMBERSHIP_UNION",

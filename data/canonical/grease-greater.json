@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.grease-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Grease, Greater",
@@ -169,7 +169,42 @@
   "description": {
     "raw": "This spell functions like grease, except as noted here. When you use this spell to cover a solid surface with slippery grease, the 10-foot squares must form a continuous area, each part of which must be within the spell’s range. When you use this spell to create a greasy coating on items, no two of the targeted items can be more than 30 feet apart. You cannot target both items and surfaces with a single casting of this spell.",
     "search_text": "\"this spell functions like grease, except as noted here. when you use this spell to cover a solid surface with slippery grease, the 10-foot squares must form a continuous area, each part of which must be within the spell’s range. when you use this spell to create a greasy coating on items, no two of the targeted items can be more than 30 feet apart. you cannot target both items and surfaces with a single casting of this spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "grease",
+              "relationship_id": "spell.grease-greater:functions_like:spell.grease",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except as noted here. When you use this spell to cover a solid surface with slippery "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "grease",
+              "relationship_id": "spell.grease-greater:functions_like:spell.grease"
+            },
+            {
+              "node_type": "text",
+              "value": ", the 10-foot squares must form a continuous area, each part of which must be within the spell’s range. When you use this spell to create a greasy coating on items, no two of the targeted items can be more than 30 feet apart. You cannot target both items and surfaces with a single casting of this spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -455,6 +490,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.grease-greater:appears_on_spell_list:spell-list.summoner-unchained",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.summoner-unchained",
+        "name": "Summoner (Unchained) Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.grease-greater:2a2c843265a84fe3",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 5",
+          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/conjuration/grease-greater.lkmgyqm6pzgb349s.yaml"
+        }
+      ],
+      "note": "Reviewed project decision: add Summoner (Unchained) 5 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
+    },
+    {
       "relationship_id": "spell.grease-greater:appears_on_spell_list:spell-list.wizard",
       "type": "appears_on_spell_list",
       "target": {
@@ -654,26 +709,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.grease-greater:appears_on_spell_list:spell-list.summoner-unchained",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.summoner-unchained",
-        "name": "Summoner (Unchained) Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.grease-greater:2a2c843265a84fe3",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "manual_verification",
-          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 5",
-          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/conjuration/grease-greater.lkmgyqm6pzgb349s.yaml"
-        }
-      ],
-      "note": "Reviewed project decision: add Summoner (Unchained) 5 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
     }
   ],
   "provenance": [
@@ -724,11 +759,19 @@
       "raw_value_sha256": "85ba99d2d6831c8ef87192a54917daf53bbaadfe7e3476eb1c8b3e05d3a9d565",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.grease-greater:2a2c843265a84fe3",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f39b973a60fbeac5b40b0acfaf7d3041bd283520f590e7ddcd6230d3b38d1a35",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

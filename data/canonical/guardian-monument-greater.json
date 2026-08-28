@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.guardian-monument-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Guardian Monument, Greater",
@@ -207,7 +207,42 @@
   "description": {
     "raw": "This spell functions as lesser guardian monument, except it grants DR 4/magic.",
     "search_text": "\"this spell functions as lesser guardian monument, except it grants dr 4/magic.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "lesser guardian monument",
+              "relationship_id": "spell.guardian-monument-greater:functions_like:spell.guardian-monument-lesser",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it grants "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "DR",
+              "relationship_id": "spell.guardian-monument-greater:uses_definition:rule.damage-reduction"
+            },
+            {
+              "node_type": "text",
+              "value": " 4/magic."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -354,6 +389,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.guardian-monument-greater:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.guardian-monument-greater:e0f6a200211cf9ef",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.guardian-monument-greater:3b0525d79f5c896e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.guardian-monument-greater:appears_on_spell_list:spell-list.psychic",
@@ -578,12 +640,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.guardian-monument-greater:uses_definition:rule.dr",
+      "relationship_id": "spell.guardian-monument-greater:uses_definition:rule.damage-reduction",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.dr",
-        "name": "DR"
+        "entity_id": "rule.damage-reduction",
+        "name": "Damage reduction"
       },
       "status": "accepted",
       "evidence": [
@@ -616,33 +678,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.guardian-monument-greater:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.guardian-monument-greater:e0f6a200211cf9ef",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.guardian-monument-greater:3b0525d79f5c896e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -693,11 +728,19 @@
       "raw_value_sha256": "879b2de56c23fb15738a004b8c94e9a91f3263a5552406756301c84eb9468d5e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.guardian-monument-greater:3b0525d79f5c896e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "68de4855603eb37c7c246af60ea79e006870a0c3d7f0788689420ccca0918528",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
