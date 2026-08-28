@@ -281,6 +281,7 @@ function verifyRichText(record: ValidatedJson, recordPath: string): void {
 
 
 export function validatePackage(): PackageStatistics {
+  const verifyArtifacts = process.env.PF1_VERIFY_ARTIFACTS !== "0";
   const schemasDirectory = path.join(projectRoot, "schemas");
   const ajv = new Ajv2020({ allErrors: true, strict: true });
   addFormats(ajv);
@@ -349,7 +350,7 @@ export function validatePackage(): PackageStatistics {
     const record = loadJson(filename);
     ingestionManifests.push(record);
     assertValid(ingestionManifestValidator, record, filename);
-    verifyIngestionManifest(record, filename);
+    if (verifyArtifacts) verifyIngestionManifest(record, filename);
     for (const spell of record.spells) ingestionSpellIds.add(spell.spell_id);
     ingestionQueueItems += record.spells.length;
     ingestionQueueItems += (record.discovered_dependencies ?? []).length;
@@ -360,7 +361,7 @@ export function validatePackage(): PackageStatistics {
   for (const filename of observationPaths) {
     const record = loadJson(filename);
     assertValid(record.entity_type === "spell" ? observationValidator : entityObservationValidator, record, filename);
-    verifyArtifact(record, filename, "observation_id");
+    if (verifyArtifacts) verifyArtifact(record, filename, "observation_id");
     if (observations.has(record.observation_id)) {
       throw new Error(`Duplicate observation ID: ${record.observation_id}`);
     }
@@ -372,12 +373,12 @@ export function validatePackage(): PackageStatistics {
   for (const filename of coveragePaths) {
     const record = loadJson(filename);
     assertValid(coverageValidator, record, filename);
-    verifyArtifact(record, filename, "coverage_check_id");
+    if (verifyArtifacts) verifyArtifact(record, filename, "coverage_check_id");
     if (coverageIds.has(record.coverage_check_id)) {
       throw new Error(`Duplicate coverage-check ID: ${record.coverage_check_id}`);
     }
     coverageIds.add(record.coverage_check_id);
-    verifyCoverage(record, filename);
+    if (verifyArtifacts) verifyCoverage(record, filename);
   }
 
   const registryPaths = directJsonFiles(path.join(projectRoot, "data", "entities"));

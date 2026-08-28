@@ -7,7 +7,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 
 COPY . .
-RUN pnpm db:setup && pnpm build && pnpm prune --prod
+RUN PF1_VERIFY_ARTIFACTS=0 pnpm db:setup && pnpm build && pnpm prune --prod
 
 FROM node:24.19.0-bookworm-slim
 
