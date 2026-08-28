@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.hidden-spring",
   "ruleset": "Pathfinder First Edition",
   "name": "Hidden Spring",
@@ -180,7 +180,41 @@
   "description": {
     "raw": "You spend 1 hour in quiet meditation, holding the focus component in both hands and walking around a natural area. You are simultaneously drawn to areas of natural moisture while drawing that moisture closer. As the spell’s casting time concludes, you thrust the focus component into the ground. From that point, a fresh, clean water trickles forth at a rate of 1 gallon every 10 minutes. You cannot cast this spell inside a building or in an area of worked stone, but you can cast it underground. You cannot cast this spell within 1 mile of an existing hidden spring.",
     "search_text": "\"you spend 1 hour in quiet meditation, holding the focus component in both hands and walking around a natural area. you are simultaneously drawn to areas of natural moisture while drawing that moisture closer. as the spell’s casting time concludes, you thrust the focus component into the ground. from that point, a fresh, clean water trickles forth at a rate of 1 gallon every 10 minutes. you cannot cast this spell inside a building or in an area of worked stone, but you can cast it underground. you cannot cast this spell within 1 mile of an existing hidden spring.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You spend 1 hour in quiet meditation, holding the focus component in both hands and walking around a natural area. You are simultaneously drawn to areas of natural moisture while drawing that moisture closer. As the spell’s "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "casting time",
+              "relationship_id": "spell.hidden-spring:uses_definition:rule.casting-time"
+            },
+            {
+              "node_type": "text",
+              "value": " concludes, you thrust the focus component into the ground. From that point, a fresh, clean water trickles forth at a rate of 1 gallon every 10 minutes. You cannot cast this spell inside a building or in an area of worked stone, but you can cast it underground. You cannot cast this spell within 1 mile of an existing "
+            },
+            {
+              "node_type": "text",
+              "value": "hidden spring",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -265,6 +299,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.hidden-spring:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.hidden-spring:2f4bc7258d3fd169",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.hidden-spring:d6a2e33b2c0eac26",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.hidden-spring:appears_on_spell_list:spell-list.oracle",
@@ -523,12 +584,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.hidden-spring:uses_definition:rule.touch",
+      "relationship_id": "spell.hidden-spring:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -541,33 +602,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.hidden-spring:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.hidden-spring:2f4bc7258d3fd169",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.hidden-spring:d6a2e33b2c0eac26",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -618,11 +652,19 @@
       "raw_value_sha256": "14513a5d9ac5fb31e7e28140197afea4c5db1c3f609f510f899abbfe49794386",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.hidden-spring:d6a2e33b2c0eac26",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "db448d3862add4e73b587bce830666ac7e732648486ee708dd6481a09e990084",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
