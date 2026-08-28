@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.forbid-action-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Forbid Action, Greater",
@@ -207,7 +207,33 @@
   "description": {
     "raw": "This spell functions as forbid action, except up to one creature per level may be affected. Each creature must receive the same forbidden action.",
     "search_text": "\"this spell functions as forbid action, except up to one creature per level may be affected. each creature must receive the same forbidden action.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "forbid action",
+              "relationship_id": "spell.forbid-action-greater:functions_like:spell.forbid-action",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except up to one creature per level may be affected. Each creature must receive the same forbidden action."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -325,6 +351,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.forbid-action-greater:appears_on_spell_list:spell-list.fate-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.fate-patron",
+        "name": "Fate Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.fate:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "10th — greater forbid action",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
       "relationship_id": "spell.forbid-action-greater:appears_on_spell_list:spell-list.inquisitor",
       "type": "appears_on_spell_list",
       "target": {
@@ -343,6 +389,46 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.forbid-action-greater:appears_on_spell_list:spell-list.legislation-subdomain-from-law",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.legislation-subdomain-from-law",
+        "name": "Legislation Subdomain Spells (Law Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.legislation:e26007d3",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "5th—greater forbid action",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Law"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.forbid-action-greater:appears_on_spell_list:spell-list.legislation-subdomain-from-rune",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.legislation-subdomain-from-rune",
+        "name": "Legislation Subdomain Spells (Rune Domain)"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.legislation:f92547ee",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "5th—greater forbid action",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Rune"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.forbid-action-greater:appears_on_spell_list:spell-list.mesmerist",
@@ -383,6 +469,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.forbid-action-greater:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.forbid-action-greater:6bd2a2753f20bbf5",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        },
+        {
+          "observation_id": "aon:spell.forbid-action-greater:6bd2a2753f20bbf5",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.forbid-action-greater:appears_on_spell_list:spell-list.oracle",
@@ -631,93 +744,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.forbid-action-greater:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.forbid-action-greater:6bd2a2753f20bbf5",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5",
-          "source_href": null
-        },
-        {
-          "observation_id": "aon:spell.forbid-action-greater:6bd2a2753f20bbf5",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.forbid-action-greater:appears_on_spell_list:spell-list.fate-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.fate-patron",
-        "name": "Fate Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.fate:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "10th — greater forbid action",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
-    },
-    {
-      "relationship_id": "spell.forbid-action-greater:appears_on_spell_list:spell-list.legislation-subdomain-from-law",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.legislation-subdomain-from-law",
-        "name": "Legislation Subdomain Spells (Law Domain)"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.legislation:e26007d3",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "5th—greater forbid action",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Law"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
-    },
-    {
-      "relationship_id": "spell.forbid-action-greater:appears_on_spell_list:spell-list.legislation-subdomain-from-rune",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.legislation-subdomain-from-rune",
-        "name": "Legislation Subdomain Spells (Rune Domain)"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.legislation:f92547ee",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "5th—greater forbid action",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Rune"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -792,11 +818,19 @@
       "raw_value_sha256": "b3753e5fdd1712dfa5c20da9f493857397f52c41e1fa5970c197964c9562ab2b",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.forbid-action-greater:6bd2a2753f20bbf5",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "933df860f46c6370e1a9eab857d0aadf00e248bc562b86170f0e404728f23688",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

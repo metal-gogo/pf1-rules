@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.foe-to-friend",
   "ruleset": "Pathfinder First Edition",
   "name": "Foe to Friend",
@@ -141,7 +141,30 @@
   "description": {
     "raw": "Cast this spell when an enemy is about to make an attack against an ally. The creature makes the attack against a valid target of your choice instead or the attack is negated. In addition, the target is considered an ally for determining flanking for 1 round.",
     "search_text": "\"cast this spell when an enemy is about to make an attack against an ally. the creature makes the attack against a valid target of your choice instead or the attack is negated. in addition, the target is considered an ally for determining flanking for 1 round.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Cast this spell when an enemy is about to make an attack against an ally. The creature makes the attack against a valid target of your choice instead or the attack is negated. In addition, the target is considered an ally for determining "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "flanking",
+              "relationship_id": "spell.foe-to-friend:uses_definition:rule.flanking"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 round."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -179,6 +202,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.foe-to-friend:appears_on_spell_list:spell-list.mercy-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.mercy-patron",
+        "name": "Mercy Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.mercy:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "14th — foe to friend",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.foe-to-friend:appears_on_spell_list:spell-list.mesmerist",
@@ -430,11 +473,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.foe-to-friend:uses_definition:rule.will",
+      "relationship_id": "spell.foe-to-friend:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -448,26 +491,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.foe-to-friend:appears_on_spell_list:spell-list.mercy-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.mercy-patron",
-        "name": "Mercy Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.mercy:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "14th — foe to friend",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -526,11 +549,19 @@
       "raw_value_sha256": "49d643bf57975c763d564b8c74ba02fbf2d0b38919f601a1fe93c61ab5bc8056",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.foe-to-friend:cdf376be51cd16fa",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "016045aca1c52544c44d5ced38bd44c142b3e747d1379e43b3970a1cac1d351c",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.forced-quiet",
   "ruleset": "Pathfinder First Edition",
   "name": "Forced Quiet",
@@ -196,7 +196,48 @@
   "description": {
     "raw": "With a gesture, you muffle sound around the target, making it unable to yell or otherwise make loud noises. This does not affect spellcasting by the target. The target can still use sonic effects, but the DC of these effects decreases by 2. The target gains a +2 bonus on saving throws against sonic effects. The target gains a +4 circumstance bonus on Stealth checks.",
     "search_text": "\"with a gesture, you muffle sound around the target, making it unable to yell or otherwise make loud noises. this does not affect spellcasting by the target. the target can still use sonic effects, but the dc of these effects decreases by 2. the target gains a +2 bonus on saving throws against sonic effects. the target gains a +4 circumstance bonus on stealth checks.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "With a gesture, you muffle sound around the target, making it unable to yell or otherwise make loud noises. This does not affect spellcasting by the target. The target can still use sonic effects, but the DC of these effects decreases by 2. The target gains a +2 bonus on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throws",
+              "relationship_id": "spell.forced-quiet:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": " against sonic effects. The target gains a +4 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "circumstance bonus",
+              "relationship_id": "spell.forced-quiet:uses_definition:rule.circumstance-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Stealth",
+              "relationship_id": "spell.forced-quiet:uses_definition:rule.stealth"
+            },
+            {
+              "node_type": "text",
+              "value": " checks."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -301,6 +342,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.forced-quiet:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.forced-quiet:afcdc8a857a3bc1c",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.forced-quiet:716eace26cf1b088",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.forced-quiet:appears_on_spell_list:spell-list.psychic",
@@ -666,11 +734,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.forced-quiet:uses_definition:rule.will",
+      "relationship_id": "spell.forced-quiet:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -684,33 +752,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.forced-quiet:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.forced-quiet:afcdc8a857a3bc1c",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.forced-quiet:716eace26cf1b088",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -761,11 +802,19 @@
       "raw_value_sha256": "f07f7cd7e2ba0c45941d2cf2a46ca77a4bb73c17c91de3910437fff9f5c9e0dd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.forced-quiet:716eace26cf1b088",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "ba22c22b030b9c3cad3e9a1aa89f787be49bd19fdd55ba828453bc6ff3929917",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
