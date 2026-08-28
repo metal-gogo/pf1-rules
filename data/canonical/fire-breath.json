@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.fire-breath",
   "ruleset": "Pathfinder First Edition",
   "name": "Fire Breath",
@@ -171,7 +171,39 @@
   "description": {
     "raw": "Up to thrice during this spell’s duration, you can belch forth a cone of fire as a standard action. The first cone deals 4d6 points of fire damage to every creature in the area. The second cone of flame deals 2d6 points of fire damage to every creature in the area. The third cone of flame deals 1d6 points of fire damage to every creature in the area. A successful Reflex save halves this damage. After the third cone of flame, the spell ends.",
     "search_text": "\"up to thrice during this spell’s duration, you can belch forth a cone of fire as a standard action. the first cone deals 4d6 points of fire damage to every creature in the area. the second cone of flame deals 2d6 points of fire damage to every creature in the area. the third cone of flame deals 1d6 points of fire damage to every creature in the area. a successful reflex save halves this damage. after the third cone of flame, the spell ends.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Up to thrice during this spell’s duration, you can belch forth a cone of fire as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "standard action",
+              "relationship_id": "spell.fire-breath:uses_action:action.standard-action"
+            },
+            {
+              "node_type": "text",
+              "value": ". The first cone deals 4d6 points of fire damage to every creature in the area. The second cone of flame deals 2d6 points of fire damage to every creature in the area. The third cone of flame deals 1d6 points of fire damage to every creature in the area. A successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.fire-breath:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save halves this damage. After the third cone of flame, the spell ends."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -256,6 +288,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.fire-breath:appears_on_spell_list:spell-list.fire-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.fire-elemental-school",
+        "name": "Fire Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.fire-elemental:73dcc41d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2—fire breath",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/fire/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     },
     {
       "relationship_id": "spell.fire-breath:appears_on_spell_list:spell-list.investigator",
@@ -501,11 +553,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.fire-breath:uses_definition:rule.reflex",
+      "relationship_id": "spell.fire-breath:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -546,26 +598,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.fire-breath:appears_on_spell_list:spell-list.fire-elemental-school",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.fire-elemental-school",
-        "name": "Fire Elemental School"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:magic-school.fire-elemental:73dcc41d",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "2—fire breath",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/fire/"
-        }
-      ],
-      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -624,11 +656,19 @@
       "raw_value_sha256": "d2c0a03affa1d86d0333736e6ac3c97444814646288df3f116ae06ccb4a8bf69",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.fire-breath:1b8f2f54ab05eb91",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f9d5e3f218178a9c593460275d86d5889b6e6ae59c4d0ba6ff7fc953303f5e84",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

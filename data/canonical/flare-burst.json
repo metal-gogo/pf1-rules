@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.flare-burst",
   "ruleset": "Pathfinder First Edition",
   "name": "Flare Burst",
@@ -161,7 +161,33 @@
   "description": {
     "raw": "This spell functions as flare, except it affects all creatures in a 10-foot-radius burst from the target point.",
     "search_text": "\"this spell functions as flare, except it affects all creatures in a 10-foot-radius burst from the target point.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "flare",
+              "relationship_id": "spell.flare-burst:functions_like:spell.flare",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it affects all creatures in a 10-foot-radius burst from the target point."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -497,6 +523,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as flare, except it affects all creatures in a 10-foot-radius burst from the target point.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.flare-burst:b2c033244bd3cecc",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "flare",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/flare.html#flare"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.flare-burst:093cd71b8f61ea11",
+          "source_field": "spell_raw.links_raw[9]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "flare",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/f/flare/"
         }
       ],
       "note": null
@@ -597,33 +637,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.flare-burst:references:spell.flare",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.flare",
-        "name": "flare"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.flare-burst:b2c033244bd3cecc",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "flare",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/flare.html#flare"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.flare-burst:093cd71b8f61ea11",
-          "source_field": "spell_raw.links_raw[9]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "flare",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/f/flare/"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.flare-burst:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -651,11 +664,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.flare-burst:uses_definition:rule.fortitude",
+      "relationship_id": "spell.flare-burst:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -739,11 +752,19 @@
       "raw_value_sha256": "e069a366d214a8a4838a6f54e01d360497a7d2223687a8754f2409f1dfa768a3",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.flare-burst:f72eb2fc2f0aa5f3",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e85e01ab49f228c6640acf0ab721f049ae3fb1c0b728d9ed0a7bd2dd9ebaf09c",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.firebelly",
   "ruleset": "Pathfinder First Edition",
   "name": "Firebelly",
@@ -288,7 +288,57 @@
   "description": {
     "raw": "A magical fire warms your belly, granting fire resistance 5 and making your gut hot to the touch (but not enough to damage you or anything else). As a standard action, you can breathe a 15-foot cone of flame that deals 1d4 points of fire damage (Reflex half, SR applies). Each time you use this breath weapon, reduce the remaining duration of the spell by 1 minute.",
     "search_text": "\"a magical fire warms your belly, granting fire resistance 5 and making your gut hot to the touch (but not enough to damage you or anything else). as a standard action, you can breathe a 15-foot cone of flame that deals 1d4 points of fire damage (reflex half, sr applies). each time you use this breath weapon, reduce the remaining duration of the spell by 1 minute.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "A magical fire warms your belly, granting "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fire resistance",
+              "relationship_id": "spell.firebelly:uses_definition:rule.fire-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": " 5 and making your gut hot to the touch (but not enough to damage you or anything else). As a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "standard action",
+              "relationship_id": "spell.firebelly:uses_action:action.standard-action"
+            },
+            {
+              "node_type": "text",
+              "value": ", you can breathe a 15-foot cone of flame that deals 1d4 points of fire damage ("
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.firebelly:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " half, SR applies). Each time you use this "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "breath weapon",
+              "relationship_id": "spell.firebelly:uses_definition:rule.breath-weapon"
+            },
+            {
+              "node_type": "text",
+              "value": ", reduce the remaining duration of the spell by 1 minute."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -453,6 +503,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.firebelly:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.firebelly:224cb9b49b949ae6",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1 (Torag)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.firebelly:appears_on_spell_list:spell-list.oracle",
@@ -684,11 +754,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.firebelly:uses_definition:rule.reflex",
+      "relationship_id": "spell.firebelly:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -729,26 +799,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.firebelly:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.firebelly:224cb9b49b949ae6",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1 (Torag)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -799,11 +849,19 @@
       "raw_value_sha256": "3bdfdaa0580a110b5742203094670d6ce82ba0ec81dd16f5986425be973d102c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.firebelly:224cb9b49b949ae6",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "18021af6adcff46500eeeee6b4c8575dcb5182f66e6f78df9d95f6f0ca06be89",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.fires-friend",
   "ruleset": "Pathfinder First Edition",
   "name": "Fire's Friend",
@@ -177,7 +177,66 @@
   "description": {
     "raw": "You cloak yourself in flames that do not harm you or your carried equipment but damage other creatures and objects. The flames cast light as a torch. Any creature that attacks you with a non-reach melee weapon or that begins its turn engaged in a grapple with you takes 1d6 points of fire damage and must succeed at a Reflex save or catch fire. The creature can negate the damage (and avoid catching fire) with spell resistance. Any time you end your movement in the same square as a flammable object or creature, that creature or object must succeed at a Reflex save or catch fire.",
     "search_text": "\"you cloak yourself in flames that do not harm you or your carried equipment but damage other creatures and objects. the flames cast light as a torch. any creature that attacks you with a non-reach melee weapon or that begins its turn engaged in a grapple with you takes 1d6 points of fire damage and must succeed at a reflex save or catch fire. the creature can negate the damage (and avoid catching fire) with spell resistance. any time you end your movement in the same square as a flammable object or creature, that creature or object must succeed at a reflex save or catch fire.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You cloak yourself in flames that do not harm you or your carried equipment but damage other creatures and objects. The flames cast light as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "torch",
+              "relationship_id": "spell.fires-friend:uses_definition:item.torch"
+            },
+            {
+              "node_type": "text",
+              "value": ". Any creature that attacks you with a non-reach melee weapon or that begins its turn engaged in a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "grapple",
+              "relationship_id": "spell.fires-friend:uses_definition:rule.grapple"
+            },
+            {
+              "node_type": "text",
+              "value": " with you takes 1d6 points of fire damage and must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.fires-friend:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save or catch fire. The creature can negate the damage (and avoid catching fire) with "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.fires-friend:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": ". Any time you end your movement in the same square as a flammable object or creature, that creature or object must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.fires-friend:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save or catch fire."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -413,6 +472,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.fires-friend:uses_definition:item.torch",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "item",
+        "entity_id": "item.torch",
+        "name": "Torch"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.fires-friend:6534fdd083bbee45",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "torch",
+          "source_href": "https://www.d20pfsrd.com/equipment/goods-and-services/hunting-camping-survival-gear#TOC-Torch"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.fires-friend:uses_definition:rule.grapple",
       "type": "uses_definition",
       "target": {
@@ -433,11 +512,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.fires-friend:uses_definition:rule.reflex",
+      "relationship_id": "spell.fires-friend:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -475,26 +554,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": null,
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.fires-friend:uses_definition:rule.torch",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.torch",
-        "name": "torch"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.fires-friend:6534fdd083bbee45",
-          "source_field": "spell_raw.links_raw[5]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "torch",
-          "source_href": "https://www.d20pfsrd.com/equipment/goods-and-services/hunting-camping-survival-gear#TOC-Torch"
         }
       ],
       "note": null
@@ -548,11 +607,19 @@
       "raw_value_sha256": "698fea30a56769f318f50f1022649f657133ddc6a78c445ba2a5f93c47873b30",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.fires-friend:627a5294fb0ff9e2",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "23117c547f30e4dffff7d70c677bfdecb5c5b50388d95deddabfdaacf8aa17c7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

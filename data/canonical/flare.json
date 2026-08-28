@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.flare",
   "ruleset": "Pathfinder First Edition",
   "name": "Flare",
@@ -177,7 +177,59 @@
   "description": {
     "raw": "This cantrip creates a burst of light. If you cause the light to burst in front of a single creature, that creature is dazzled for 1 minute unless it makes a successful Fortitude save. Sightless creatures, as well as creatures already dazzled, are not affected by flare.",
     "search_text": "\"this cantrip creates a burst of light. if you cause the light to burst in front of a single creature, that creature is dazzled for 1 minute unless it makes a successful fortitude save. sightless creatures, as well as creatures already dazzled, are not affected by flare.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This cantrip creates a burst of light. If you cause the light to burst in front of a single creature, that creature is "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dazzled",
+              "relationship_id": "spell.flare:uses_definition:condition.dazzled"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 minute unless it makes a successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.flare:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save. Sightless creatures, as well as creatures already "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dazzled",
+              "relationship_id": "spell.flare:uses_definition:condition.dazzled"
+            },
+            {
+              "node_type": "text",
+              "value": ", are not affected by "
+            },
+            {
+              "node_type": "text",
+              "value": "flare",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -634,11 +686,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.flare:uses_definition:rule.fortitude",
+      "relationship_id": "spell.flare:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -750,11 +802,19 @@
       "raw_value_sha256": "9f41b823f7e8dfb5ac7710f3f4dd02bf9b10f2c05f0ff9d2042d816dc846625d",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.flare:1c91184290475af3",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "5f6dbc13d2f31fe5b82d2f057ec9476199c37aa02526ece6a80ae7071b8b3da7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

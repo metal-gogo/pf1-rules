@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.flashfire",
   "ruleset": "Pathfinder First Edition",
   "name": "Flashfire",
@@ -124,7 +124,80 @@
   "description": {
     "raw": "You cause flames to spring up in the area of effect. These flames deal 1d6 points of fire damage for every 3 caster levels you have (maximum 5d6) to each creature that enters a burning area or begins its turn in the area; these creatures also catch on fire. A creature that succeeds at a Reflex save negates the damage and avoids catching on fire. The area and all adjacent 5-foot squares are smoky, providing concealment within. You can concentrate as a standard action to ignite one 5-foot square adjacent to a currently burning square. Heavy precipitation (including sleet storm) ends the spell. Strong and severe winds spread each square of flashfire downwind by one square each round, but windstorm-force or stronger winds extinguish the fires.",
     "search_text": "\"you cause flames to spring up in the area of effect. these flames deal 1d6 points of fire damage for every 3 caster levels you have (maximum 5d6) to each creature that enters a burning area or begins its turn in the area; these creatures also catch on fire. a creature that succeeds at a reflex save negates the damage and avoids catching on fire. the area and all adjacent 5-foot squares are smoky, providing concealment within. you can concentrate as a standard action to ignite one 5-foot square adjacent to a currently burning square. heavy precipitation (including sleet storm) ends the spell. strong and severe winds spread each square of flashfire downwind by one square each round, but windstorm-force or stronger winds extinguish the fires.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You cause flames to spring up in the area of effect. These flames deal 1d6 points of fire damage for every 3 caster levels you have (maximum 5d6) to each creature that enters a burning area or begins its turn in the area; these creatures also "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "catch on fire",
+              "relationship_id": "spell.flashfire:uses_definition:rule.catch-on-fire"
+            },
+            {
+              "node_type": "text",
+              "value": ". A creature that succeeds at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.flashfire:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save negates the damage and avoids catching on fire. The area and all adjacent 5-foot squares are smoky, providing "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.flashfire:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": " within. You can concentrate as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "standard action",
+              "relationship_id": "spell.flashfire:uses_action:action.standard-action"
+            },
+            {
+              "node_type": "text",
+              "value": " to ignite one 5-foot square adjacent to a currently burning square. Heavy precipitation (including "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sleet storm",
+              "relationship_id": "spell.flashfire:references:spell.sleet-storm",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ") ends the spell. Strong and severe winds spread each square of "
+            },
+            {
+              "node_type": "text",
+              "value": "flashfire",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " downwind by one square each round, but windstorm-force or stronger winds extinguish the fires."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -311,7 +384,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.sleet-storm",
-        "name": "sleet storm"
+        "name": "Sleet Storm"
       },
       "status": "accepted",
       "evidence": [
@@ -400,12 +473,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.flashfire:uses_definition:rule.fort",
+      "relationship_id": "spell.flashfire:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -420,11 +493,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.flashfire:uses_definition:rule.reflex",
+      "relationship_id": "spell.flashfire:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -515,11 +588,19 @@
       "raw_value_sha256": "14513a5d9ac5fb31e7e28140197afea4c5db1c3f609f510f899abbfe49794386",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.flashfire:74fa5bd6c2e3789f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "9b6f3d573f9c3bf75b38462f9379ee6b8a4fc768db5f9728aa949f1bdf5c94c7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

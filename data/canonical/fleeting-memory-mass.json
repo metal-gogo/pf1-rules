@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.fleeting-memory-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Fleeting Memory, Mass",
@@ -165,7 +165,33 @@
   "description": {
     "raw": "This spell functions as fleeting memory, except that it affects multiple creatures.",
     "search_text": "\"this spell functions as fleeting memory, except that it affects multiple creatures.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fleeting memory",
+              "relationship_id": "spell.fleeting-memory-mass:functions_like:spell.fleeting-memory",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that it affects multiple creatures."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -705,11 +731,19 @@
       "raw_value_sha256": "6402c4baef9aea9ec27d15cb187d0a941b47d452a2f3670a31325f33d2d369c8",
       "decision": "manually_resolved",
       "note": "Reviewed catalog policy: AoN remains the preferred publication transcription. When an additional class membership is printed by d20PFSRD, it may be added to the canonical class union after review; Foundry PF1 is corroborating catalog evidence when it agrees. Preserve every source claim and never replace an AoN level merely because another catalog assigns the same class a different level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.fleeting-memory-mass:3f1f30eb2be19d5d",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "636a456393e007f8e4786d6d9e7daa0c02d626696ceb179f59201d45f6ebb9d1",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.5-reviewed-catalog-memberships",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "REVIEWED_CATALOG_MEMBERSHIP_UNION",

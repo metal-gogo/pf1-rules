@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.find-traps",
   "ruleset": "Pathfinder First Edition",
   "name": "Find Traps",
@@ -188,7 +188,50 @@
   "description": {
     "raw": "You gain intuitive insight into the workings of traps. You gain an insight bonus equal to 1/2 your caster level (maximum +10) on Perception checks made to find traps while the spell is in effect. You receive a check to notice traps within 10 feet of you, even if you are not actively searching for them. Note that find traps grants no ability to disable the traps that you may find.",
     "search_text": "\"you gain intuitive insight into the workings of traps. you gain an insight bonus equal to 1/2 your caster level (maximum +10) on perception checks made to find traps while the spell is in effect. you receive a check to notice traps within 10 feet of you, even if you are not actively searching for them. note that find traps grants no ability to disable the traps that you may find.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You gain intuitive insight into the workings of traps. You gain an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "insight bonus",
+              "relationship_id": "spell.find-traps:uses_definition:rule.insight-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " equal to 1/2 your caster level (maximum +10) on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Perception",
+              "relationship_id": "spell.find-traps:uses_definition:rule.perception"
+            },
+            {
+              "node_type": "text",
+              "value": " checks made to find traps while the spell is in effect. You receive a check to notice traps within 10 feet of you, even if you are not actively searching for them. Note that "
+            },
+            {
+              "node_type": "text",
+              "value": "find traps",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " grants no ability to disable the traps that you may find."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -306,6 +349,40 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.find-traps:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.find-traps:12d0a3efc83531fa",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.find-traps:f9b7de6cd405227d",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.find-traps:12d0a3efc83531fa",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.find-traps:appears_on_spell_list:spell-list.oracle",
@@ -555,40 +632,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.find-traps:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.find-traps:12d0a3efc83531fa",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.find-traps:f9b7de6cd405227d",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.find-traps:12d0a3efc83531fa",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -639,11 +682,19 @@
       "raw_value_sha256": "1868730e7818b3f5dbc766fa729321c5f33ed6c6608f9ebeb9358af52837b2e0",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.find-traps:12d0a3efc83531fa",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d66a1c38a4ce8e9718f1491bd7bed6724613564f65e2ff0d4fa94cd7907dbecc",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

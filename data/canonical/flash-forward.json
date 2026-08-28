@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.flash-forward",
   "ruleset": "Pathfinder First Edition",
   "name": "Flash Forward",
@@ -246,7 +246,75 @@
   "description": {
     "raw": "You cheat the laws of time and enter into combat before reverting back to your original position. As part of the action to cast the spell, you make a charge attack against an enemy. You make this charge attack normally, accounting for terrain, obstacles, attacks of opportunity, attack rolls, and damage rolls. At the end of your charge action, you instantly teleport back to your original location as a free action. Any damage or conditions dealt by you or to you during this action are real and remain when you return to your original location.",
     "search_text": "\"you cheat the laws of time and enter into combat before reverting back to your original position. as part of the action to cast the spell, you make a charge attack against an enemy. you make this charge attack normally, accounting for terrain, obstacles, attacks of opportunity, attack rolls, and damage rolls. at the end of your charge action, you instantly teleport back to your original location as a free action. any damage or conditions dealt by you or to you during this action are real and remain when you return to your original location.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You cheat the laws of time and enter into combat before reverting back to your original position. As part of the action to cast the spell, you make a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "charge",
+              "relationship_id": "spell.flash-forward:uses_definition:rule.charge"
+            },
+            {
+              "node_type": "text",
+              "value": " attack against an enemy. You make this "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "charge",
+              "relationship_id": "spell.flash-forward:uses_definition:rule.charge"
+            },
+            {
+              "node_type": "text",
+              "value": " attack normally, accounting for terrain, obstacles, "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attacks of opportunity",
+              "relationship_id": "spell.flash-forward:uses_definition:rule.attacks-of-opportunity"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack rolls",
+              "relationship_id": "spell.flash-forward:uses_definition:rule.attack-rolls"
+            },
+            {
+              "node_type": "text",
+              "value": ", and damage rolls. At the end of your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "charge",
+              "relationship_id": "spell.flash-forward:uses_definition:rule.charge"
+            },
+            {
+              "node_type": "text",
+              "value": " action, you instantly teleport back to your original location as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "free action",
+              "relationship_id": "spell.flash-forward:uses_action:action.free-action"
+            },
+            {
+              "node_type": "text",
+              "value": ". Any damage or conditions dealt by you or to you during this action are real and remain when you return to your original location."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -513,6 +581,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.flash-forward:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.flash-forward:ba1901d3f4c17f72",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.flash-forward:50f6419af461a8a9",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.flash-forward:appears_on_spell_list:spell-list.paladin",
@@ -889,33 +984,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.flash-forward:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.flash-forward:ba1901d3f4c17f72",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.flash-forward:50f6419af461a8a9",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -966,11 +1034,19 @@
       "raw_value_sha256": "44f9121e7483b37d43c5b7f9b8365c4c97d104824a3bb83a9f30b0b60b2d2ad7",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.flash-forward:50f6419af461a8a9",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f3f63a8b8aa5127177aff2806c9cd7418a500999cfe9a3e3078731270ef991de",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
