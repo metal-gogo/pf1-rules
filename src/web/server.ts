@@ -1005,12 +1005,35 @@ function rulesPage(): string {
     <p>Use these grouped references as stable destinations for links from spell metadata.</p>
     <ul>
       <li><a href="/rules/magic-schools">Magic schools and subschools</a></li>
+      <li><a href="/rules/magic">Magic</a></li>
       <li><a href="/rules/actions">Actions</a></li>
       <li><a href="/rules/saving-throws">Saving throws</a></li>
       <li><a href="/rules/descriptors">Spell descriptors</a></li>
       <li><a href="/rules/illumination">Illumination levels</a></li>
       <li><a href="/spell-components">Spell components</a></li>
     </ul>`);
+}
+
+async function magicPage(prisma: PrismaClient): Promise<string> {
+  const entity = await prisma.entity.findUnique({
+    where: { id: "rule.magic" },
+    select: {
+      observations: {
+        select: { id: true, siteId: true, sourceUrl: true, sections: { select: { headingRaw: true, bodyRaw: true }, orderBy: { sectionIndex: "asc" } } },
+        orderBy: { siteId: "asc" },
+      },
+    },
+  });
+  const observations = entity?.observations ?? [];
+  const primary = observations.find((observation) => observation.siteId === "aon");
+  return page("Magic", `<nav aria-label="Breadcrumb"><ol><li><a href="/rules">Rules reference</a></li><li aria-current="page">Magic</li></ol></nav>
+    <article class="rule-reference">
+      <h1>Magic</h1>
+      <p>The Archives of Nethys record below is the first-party Core Rulebook source. The separately retained d20PFSRD record is a third-party compilation that includes supplementary material.</p>
+      ${primary ? `<p><a href="${href(sourceHref(primary.id))}">View the complete Archives of Nethys observation</a> · <a href="${href(primary.sourceUrl)}">Open the source page</a></p>` : '<p class="notice">The first-party magic observation has not been imported.</p>'}
+      <nav aria-label="On this page"><ul>${(primary?.sections ?? []).map((section, index) => section.headingRaw ? `<li><a href="#section-${index}">${escapeHtml(section.headingRaw)}</a></li>` : "").join("")}</ul></nav>
+      ${(primary?.sections ?? []).map((section, index) => `<section${section.headingRaw ? ` id="section-${index}"` : ""}>${section.headingRaw ? `<h2>${escapeHtml(section.headingRaw)}</h2>` : ""}${paragraphs(section.bodyRaw)}</section>`).join("")}
+    </article>`);
 }
 
 function ruleReferencePage(
@@ -1672,6 +1695,7 @@ export function createRequestHandler(prisma: PrismaClient) {
       else if (url.pathname === "/spells/alphabetical") result = await alphabeticalSpellsPage(prisma, url);
       else if (url.pathname === "/spell-components") result = spellComponentsPage();
       else if (url.pathname === "/rules") result = rulesPage();
+      else if (url.pathname === "/rules/magic") result = await magicPage(prisma);
       else if (url.pathname === "/rules/magic-schools") result = await magicSchoolsPage(prisma);
       else if (url.pathname === "/rules/actions") result = await actionsPage(prisma);
       else if (url.pathname === "/rules/saving-throws") result = await savingThrowsPage(prisma);

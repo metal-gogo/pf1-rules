@@ -336,6 +336,16 @@ describe("local rules browser", () => {
     }
   });
 
+  it("renders the first-party magic rules as a separate source-backed reference", async () => {
+    const response = await fetch(`${baseUrl}/rules/magic`);
+    const html = await response.text();
+    expect(response.status).toBe(200);
+    expect(html).toContain("<h1>Magic</h1>");
+    expect(html).toContain("Casting Spells");
+    expect(html).toContain("Spell Descriptions");
+    expect(html).toContain("Archives of Nethys");
+  });
+
   it("renders a bounded alphabetical spell catalog with filters", async () => {
     const response = await fetch(`${baseUrl}/spells/alphabetical`);
     const html = await response.text();
