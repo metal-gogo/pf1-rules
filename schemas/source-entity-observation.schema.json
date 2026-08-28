@@ -94,6 +94,20 @@
               "body_raw": { "type": "string", "minLength": 1 }
             }
           }
+        },
+        "document_raw": {
+          "description": "Structured source prose. Rules-page adapters use the same node contract as canonical spell rich text.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["node_type", "content"],
+          "properties": {
+            "node_type": { "const": "document" },
+            "content": { "type": "array" }
+          }
+        },
+        "navigation_headings_raw": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
         }
       }
     },

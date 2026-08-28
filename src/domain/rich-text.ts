@@ -174,11 +174,13 @@ function inlineContent(
   };
   for (const node of nodes) visit(node, inheritedMarks);
   while (content[0]?.node_type === "text" && !content[0].value.trim()) content.shift();
+  if (content[0]?.node_type === "text") content[0].value = content[0].value.trimStart();
   let last = content.at(-1);
   while (last?.node_type === "text" && !last.value.trim()) {
     content.pop();
     last = content.at(-1);
   }
+  if (last?.node_type === "text") last.value = last.value.trimEnd();
   return content;
 }
 

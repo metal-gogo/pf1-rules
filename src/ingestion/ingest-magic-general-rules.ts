@@ -4,11 +4,12 @@ import path from "node:path";
 import * as cheerio from "cheerio";
 
 import { projectRoot } from "../config.js";
+import { parseRichTextHtml, richTextLeafText, type RichTextDocument } from "../domain/rich-text.js";
 import { artifactHash, readCapturedArtifact, writeCapturedArtifact } from "./artifact-store.js";
 
 
 const entityId = "rule.magic";
-const parser = { name: "magic-general-rules-adapter", version: "0.1.0" };
+const parser = { name: "magic-general-rules-adapter", version: "0.2.0" };
 const userAgent = "PF1RulesPrivateResearch/0.1 (local archival experiment)";
 let lastRequestAt = 0;
 
@@ -20,7 +21,7 @@ type CaptureMetadata = {
   response_content_type: string | null;
 };
 
-type Source = {
+export type Source = {
   siteId: "aon" | "d20pfsrd";
   url: string;
   rawPath: string;
@@ -89,58 +90,94 @@ function contentRoot(doc: cheerio.CheerioAPI, siteId: Source["siteId"]) {
   return doc(candidates.sort((left, right) => doc(right).text().length - doc(left).text().length)[0]);
 }
 
-function parseSections(html: string, siteId: Source["siteId"]): { title: string; sections: { heading_raw: string | null; body_raw: string }[] } {
+type SourceLink = {
+  anchor_text_raw: string;
+  href_raw: string;
+  href_resolved: string;
+  source_field: string;
+  context_raw: string;
+  role_hint: "cross_reference" | "unknown";
+  target_entity_type_hint: "rule" | "unknown";
+  target_entity_id_hint: string | null;
+};
+
+type ParsedPage = {
+  title: string;
+  document: RichTextDocument | null;
+  navigation_headings: string[];
+  links: SourceLink[];
+};
+
+function aonContent(html: string): string {
   const openMarker = '<span id="MainContent_DetailedOutput">';
   const contentStart = html.indexOf(openMarker);
   const footerStart = html.indexOf('<div class="footer"');
-  if (siteId === "aon" && contentStart >= 0 && footerStart > contentStart) {
-    const content = html.slice(contentStart + openMarker.length, footerStart);
-    const headings = [...content.matchAll(/<h([1-6])[^>]*>([\s\S]*?)<\/h\1>/gi)];
-    const sections = headings.map((match, index) => {
-      const bodyStart = match.index! + match[0].length;
-      const bodyEnd = headings[index + 1]?.index ?? content.length;
-      return {
-        heading_raw: cleanText(cheerio.load(match[2] ?? "").text()),
-        body_raw: cleanText(cheerio.load(content.slice(bodyStart, bodyEnd)).text()),
-      };
-    }).filter((section) => section.heading_raw && section.body_raw);
-    if (!sections.length) throw new Error("No rule sections were parsed for aon");
-    return { title: sections[0]!.heading_raw!, sections };
-  }
-  const normalizedHtml = siteId === "aon" && contentStart >= 0 && footerStart > contentStart
-    ? `<div id="MainContent_DetailedOutput">${html.slice(contentStart + openMarker.length, html.lastIndexOf("</span>", footerStart))}</div>`
-    : html;
-  const doc = cheerio.load(normalizedHtml);
-  const root = contentRoot(doc, siteId);
-  if (!root.length) throw new Error(`Main content was not found for ${siteId}`);
-  const title = cleanText(root.find("h1").first().text()) || "Magic";
-  const sections: { heading_raw: string | null; body_raw: string }[] = [];
-  let heading: string | null = null;
-  let body: string[] = [];
-  const flush = () => {
-    const bodyRaw = cleanText(body.join("\n"));
-    if (bodyRaw) sections.push({ heading_raw: heading, body_raw: bodyRaw });
-    body = [];
-  };
-  root.find("h1, h2, h3, h4, h5, h6, p, li, table").each((_, element) => {
-    const tag = element.tagName.toLowerCase();
-    const text = cleanText(doc(element).text());
-    if (!text) return;
-    if (tag.startsWith("h")) {
-      flush();
-      heading = text;
-      return;
-    }
-    body.push(text);
+  if (contentStart < 0 || footerStart <= contentStart) throw new Error("AoN magic content was not found");
+  return html.slice(contentStart + openMarker.length, html.lastIndexOf("</span>", footerStart));
+}
+
+function normalizedRuleHeadings(html: string): string {
+  return html.replace(/<\/?h([1-6])\b/gi, (tag, level: string) => {
+    const normalized = Math.min(6, Number.parseInt(level, 10) + 1);
+    return tag.startsWith("</") ? `</h${normalized}` : `<h${normalized}`;
   });
-  flush();
-  if (!sections.length) throw new Error(`No rule sections were parsed for ${siteId}`);
-  return { title, sections };
+}
+
+function sourceLinks(html: string, source: Source, sourceField: string): SourceLink[] {
+  const $ = cheerio.load(html);
+  return $("a[href]").toArray().flatMap((element) => {
+    const anchor = cleanText($(element).text());
+    const hrefRaw = $(element).attr("href");
+    if (!anchor || !hrefRaw) return [];
+    const hrefResolved = new URL(hrefRaw, source.url).href;
+    const localMagicTarget = hrefResolved === source.url ? "/rules/magic" : null;
+    return [{
+      anchor_text_raw: anchor,
+      href_raw: hrefRaw,
+      href_resolved: hrefResolved,
+      source_field: sourceField,
+      context_raw: cleanText($(element).parent().text()) || anchor,
+      role_hint: "cross_reference",
+      target_entity_type_hint: localMagicTarget ? "rule" : "unknown",
+      target_entity_id_hint: localMagicTarget ? entityId : null,
+    }];
+  });
+}
+
+export function parseMagicRulesPage(html: string, source: Source): ParsedPage {
+  if (source.siteId === "aon") {
+    const content = aonContent(html);
+    const document = parseRichTextHtml(normalizedRuleHeadings(content));
+    const headings = document.content.flatMap((block) => block.node_type === "heading"
+      ? [richTextLeafText({ node_type: "document", content: [block] })]
+      : []);
+    if (!headings.length) throw new Error("No rule headings were parsed for aon");
+    return {
+      title: headings[0]!,
+      document,
+      navigation_headings: headings,
+      links: sourceLinks(content, source, "/entity_raw/document_raw"),
+    };
+  }
+
+  const doc = cheerio.load(html);
+  const root = contentRoot(doc, source.siteId);
+  if (!root.length) throw new Error("Main content was not found for d20pfsrd");
+  const headings = root.find("h1, h2, h3, h4, h5, h6").toArray().flatMap((element) => {
+    const heading = cleanText(doc(element).text());
+    return heading ? [heading] : [];
+  });
+  return {
+    title: headings[0] ?? "Magic",
+    document: null,
+    navigation_headings: headings,
+    links: sourceLinks(root.html() ?? "", source, "/entity_raw/navigation_headings_raw"),
+  };
 }
 
 function observation(source: Source, capture: { body: string; metadata: CaptureMetadata }) {
   const { body, metadata } = capture;
-  const parsed = parseSections(body, source.siteId);
+  const parsed = parseMagicRulesPage(body, source);
   const observationId = `${source.siteId}:${entityId}:${metadata.content_sha256.slice(0, 8)}`;
   const observationDirectory = path.join(projectRoot, "data", "observations", "rules", "magic");
   const record = {
@@ -174,15 +211,25 @@ function observation(source: Source, capture: { body: string; metadata: CaptureM
       definition_type_raw: "General rules",
       source_book_raw: source.sourceNotice,
       definition_raw: "General Pathfinder rules for magic, including casting, spell descriptions, and preparation.",
-      links_raw: [],
-      sections_raw: parsed.sections,
+      links_raw: parsed.links,
+      sections_raw: [],
+      ...(parsed.document ? { document_raw: parsed.document } : {}),
+      navigation_headings_raw: parsed.navigation_headings,
     },
-    warnings: source.siteId === "d20pfsrd" ? [{
-      code: "THIRD_PARTY_COMPILATION",
-      severity: "info",
-      field: "/entity_raw/sections_raw",
-      message: "This source includes third-party editorial material, FAQs, and optional subsystems; use the first-party AoN observation for core-rule authority.",
-    }] : [],
+    warnings: [
+      ...(parsed.links.filter((link) => !link.target_entity_id_hint).length ? [{
+        code: "UNRESOLVED_SOURCE_LINK",
+        severity: "info" as const,
+        field: "/entity_raw/links_raw",
+        message: `${parsed.links.filter((link) => !link.target_entity_id_hint).length} source links remain in provenance because no uniquely evidenced local target is registered.`,
+      }] : []),
+      ...(source.siteId === "d20pfsrd" ? [{
+        code: "THIRD_PARTY_COMPILATION",
+        severity: "info" as const,
+        field: "/entity_raw/navigation_headings_raw",
+        message: "This source is retained only for navigation and link-discovery evidence. Its prose is not canonical Magic content.",
+      }] : []),
+    ],
   };
   writeJson(path.join(observationDirectory, `${source.siteId}-${parser.version}.json`), record);
   return { observationId, record };
@@ -209,7 +256,7 @@ export async function ingestMagicGeneralRules(): Promise<void> {
     "The d20PFSRD observation is retained separately for its navigation and supplementary material; it is not canonical authority.",
   ];
   writeJson(registryPath, registry);
-  console.log(`Captured ${records.length} magic rule sources with ${records.map(({ record }) => record.entity_raw.sections_raw.length).join(" and ")} sections.`);
+  console.log(`Captured ${records.length} magic rule sources; AoN rich text and d20PFSRD discovery evidence were recorded separately.`);
 }
 
 if (process.argv[1] && import.meta.url.endsWith(process.argv[1].replaceAll("\\\\", "/"))) {

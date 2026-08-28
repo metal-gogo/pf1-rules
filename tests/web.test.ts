@@ -23,6 +23,18 @@ afterAll(async () => {
 });
 
 describe("local rules browser", () => {
+  it("renders the AoN Magic record as structured prose with an accessible concentration table", async () => {
+    const response = await fetch(`${baseUrl}/rules/magic`);
+    const html = await response.text();
+    expect(response.status).toBe(200);
+    expect(html).toContain('<h3 id="section-4">Concentration</h3>');
+    expect(html).toContain('<strong>Injury</strong>:');
+    expect(html).toContain('<table class="data-table rich-text-table">');
+    expect(html).toContain('<th scope="col"><strong>Situation</strong></th>');
+    expect(html).toContain('aria-label="Spell description table');
+    expect(html).not.toContain("Third-Party Descriptors");
+  });
+
   it("renders semantic navigation and database counts", async () => {
     const response = await fetch(baseUrl);
     const html = await response.text();
