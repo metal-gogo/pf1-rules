@@ -30,6 +30,27 @@ Run the live audit with:
 pnpm audit:rich-text
 ```
 
+## Deterministic batch workflow
+
+Use the manifest commands for a reviewed rollout batch. The plan is written
+under `.git/pf1-rich-text-batches/`, so it does not modify the working tree.
+Each later command verifies the planned commit, source hashes, and exact file
+set before it continues.
+
+```bash
+pnpm rich-text:plan-batch --size 5
+pnpm rich-text:apply-batch --manifest <manifest-path>
+pnpm rich-text:verify-batch --manifest <manifest-path>
+pnpm rich-text:commit-batch --manifest <manifest-path>
+pnpm rich-text:push-batch --manifest <manifest-path>
+```
+
+Use a five-spell batch for the first run; omit `--size` for the normal
+25-spell batch. Run `plan-batch` on a clean branch synchronized with its
+upstream. Review the spell IDs it prints before running `apply-batch`. Every command stops on an
+unexpected file, changed input, validation failure, commit-signing failure, or
+upstream change.
+
 ## Completed batches
 
 ### Pilot
