@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.foxs-cunning-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Fox's Cunning, Mass",
@@ -173,7 +173,33 @@
   "description": {
     "raw": "This spell functions like fox's cunning, except that it affects multiple creatures.",
     "search_text": "\"this spell functions like fox's cunning, except that it affects multiple creatures.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fox's cunning",
+              "relationship_id": "spell.foxs-cunning-mass:functions_like:spell.foxs-cunning",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that it affects multiple creatures."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -444,6 +470,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like fox's cunning, except that it affects multiple creatures.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.foxs-cunning-mass:620dfd2075e03015",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "fox's cunning",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/foxSCunning.html#fox-s-cunning"
         }
       ],
       "note": null
@@ -498,26 +531,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "PRPG Core Rulebook pg. 286",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.foxs-cunning-mass:references:spell.foxs-cunning",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.foxs-cunning",
-        "name": "fox's cunning"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.foxs-cunning-mass:620dfd2075e03015",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "fox's cunning",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/foxSCunning.html#fox-s-cunning"
         }
       ],
       "note": null
@@ -611,11 +624,19 @@
       "raw_value_sha256": "cc8882f4c8e2dc1e4e8302ee36952f6f825dc84ef820a33b7a4a00b078ae091b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.foxs-cunning-mass:b7a8abddcfda08d9",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "24f8b2c87c6e4fe927cb05c983a70de5677ce65d303a87d3a0daa48ed97e1ff2",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

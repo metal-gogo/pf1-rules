@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.free-spirit",
   "ruleset": "Pathfinder First Edition",
   "name": "Free Spirit",
@@ -208,7 +208,51 @@
   "description": {
     "raw": "This spell allows you to channel the essence of Cayden Cailean’s philosophy, giving you the benefits of a freedom of movement spell and granting you a +4 bonus on saving throws against fear effects. The spell also makes you drunk. For the duration of the spell, you take a –2 penalty on attack rolls, ability checks, skill checks, and concentration checks. If you somehow remove or avoid these penalties, the spell’s duration ends.",
     "search_text": "\"this spell allows you to channel the essence of cayden cailean’s philosophy, giving you the benefits of a freedom of movement spell and granting you a +4 bonus on saving throws against fear effects. the spell also makes you drunk. for the duration of the spell, you take a –2 penalty on attack rolls, ability checks, skill checks, and concentration checks. if you somehow remove or avoid these penalties, the spell’s duration ends.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell allows you to channel the essence of Cayden Cailean’s philosophy, giving you the benefits of a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "freedom of movement",
+              "relationship_id": "spell.free-spirit:references:spell.freedom-of-movement",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell and granting you a +4 bonus on saving throws against fear effects. The spell also makes you drunk. For the duration of the spell, you take a –2 penalty on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack rolls",
+              "relationship_id": "spell.free-spirit:uses_definition:rule.attack-rolls"
+            },
+            {
+              "node_type": "text",
+              "value": ", ability checks, skill checks, and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concentration",
+              "relationship_id": "spell.free-spirit:uses_definition:rule.concentration"
+            },
+            {
+              "node_type": "text",
+              "value": " checks. If you somehow remove or avoid these penalties, the spell’s duration ends."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -347,6 +391,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.free-spirit:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.free-spirit:5c25256306021a50",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.free-spirit:bd1a74a075167a32",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.free-spirit:appears_on_spell_list:spell-list.oracle",
@@ -563,7 +634,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.freedom-of-movement",
-        "name": "freedom of movement"
+        "name": "Freedom of Movement"
       },
       "status": "accepted",
       "evidence": [
@@ -683,33 +754,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.free-spirit:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.free-spirit:5c25256306021a50",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.free-spirit:bd1a74a075167a32",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -760,11 +804,19 @@
       "raw_value_sha256": "3ba167c82715fd0724c595db9c7a9ca8da2e9721095613d3afb98d0a7b40323a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.free-spirit:bd1a74a075167a32",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d1c279e2b562f91ac49ec3f4ffe1e972eddbe9d5ae50a39d58083d05ba90d283",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
