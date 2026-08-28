@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.garrulous-grin",
   "ruleset": "Pathfinder First Edition",
   "name": "Garrulous Grin",
@@ -189,7 +189,57 @@
   "description": {
     "raw": "This Nidalese spell plants a seed of supernatural fear deep in a subject’s mind, causing self-doubt, stuttering, and evasiveness. Affected creatures have difficulty meeting anyone’s gaze and seem dishonest or guilty. The target takes a –4 penalty on Bluff and Diplomacy checks to convince another of the truth of her words, and on Diplomacy or Intimidate checks to influence another creature’s attitude.",
     "search_text": "\"this nidalese spell plants a seed of supernatural fear deep in a subject’s mind, causing self-doubt, stuttering, and evasiveness. affected creatures have difficulty meeting anyone’s gaze and seem dishonest or guilty. the target takes a –4 penalty on bluff and diplomacy checks to convince another of the truth of her words, and on diplomacy or intimidate checks to influence another creature’s attitude.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This Nidalese spell plants a seed of supernatural fear deep in a subject’s mind, causing self-doubt, stuttering, and evasiveness. Affected creatures have difficulty meeting anyone’s gaze and seem dishonest or guilty. The target takes a –4 penalty on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Bluff",
+              "relationship_id": "spell.garrulous-grin:uses_definition:rule.bluff"
+            },
+            {
+              "node_type": "text",
+              "value": " and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Diplomacy",
+              "relationship_id": "spell.garrulous-grin:uses_definition:rule.diplomacy"
+            },
+            {
+              "node_type": "text",
+              "value": " checks to convince another of the truth of her words, and on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Diplomacy",
+              "relationship_id": "spell.garrulous-grin:uses_definition:rule.diplomacy"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Intimidate",
+              "relationship_id": "spell.garrulous-grin:uses_definition:rule.intimidate"
+            },
+            {
+              "node_type": "text",
+              "value": " checks to influence another creature’s attitude."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -308,6 +358,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.garrulous-grin:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.garrulous-grin:2cfeced0b03f076d",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.garrulous-grin:de154bf075d97002",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.garrulous-grin:appears_on_spell_list:spell-list.psychic",
@@ -661,11 +738,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.garrulous-grin:uses_definition:rule.will",
+      "relationship_id": "spell.garrulous-grin:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -679,33 +756,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.garrulous-grin:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.garrulous-grin:2cfeced0b03f076d",
-          "source_field": "spell_raw.links_raw[5]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.garrulous-grin:de154bf075d97002",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -756,11 +806,19 @@
       "raw_value_sha256": "1013bd0ab42f18ae5512ee9e15245e04d50c1232ec8ea7323d47313b3038b9b0",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.garrulous-grin:de154bf075d97002",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f5143ea3d2beb555e77dbedb6c46ee50442f556d1f801e1f6e6c628344f3b015",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

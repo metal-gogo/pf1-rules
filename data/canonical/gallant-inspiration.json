@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.gallant-inspiration",
   "ruleset": "Pathfinder First Edition",
   "name": "Gallant Inspiration",
@@ -107,7 +107,48 @@
   "description": {
     "raw": "This word of arcane-empowered inspiration often ensures success of a crucial endeavor. Cast this spell when a creature fails an attack roll or skill check. The creature gains a +2d4 competence bonus to the attack roll or skill check retroactively. If the bonus is enough to turn the failure into a success, the roll succeeds.",
     "search_text": "\"this word of arcane-empowered inspiration often ensures success of a crucial endeavor. cast this spell when a creature fails an attack roll or skill check. the creature gains a +2d4 competence bonus to the attack roll or skill check retroactively. if the bonus is enough to turn the failure into a success, the roll succeeds.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This word of arcane-empowered inspiration often ensures success of a crucial endeavor. Cast this spell when a creature fails an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack roll",
+              "relationship_id": "spell.gallant-inspiration:uses_definition:rule.attack-rolls"
+            },
+            {
+              "node_type": "text",
+              "value": " or skill check. The creature gains a +2d4 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "competence bonus",
+              "relationship_id": "spell.gallant-inspiration:uses_definition:rule.competence-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " to the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack roll",
+              "relationship_id": "spell.gallant-inspiration:uses_definition:rule.attack-rolls"
+            },
+            {
+              "node_type": "text",
+              "value": " or skill check retroactively. If the bonus is enough to turn the failure into a success, the roll succeeds."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -255,12 +296,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.gallant-inspiration:uses_definition:rule.attack-roll",
+      "relationship_id": "spell.gallant-inspiration:uses_definition:rule.attack-rolls",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.attack-roll",
-        "name": "attack roll"
+        "entity_id": "rule.attack-rolls",
+        "name": "Attack rolls"
       },
       "status": "accepted",
       "evidence": [
@@ -322,11 +363,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.gallant-inspiration:uses_definition:rule.will",
+      "relationship_id": "spell.gallant-inspiration:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -390,11 +431,19 @@
       "raw_value_sha256": "42d0ea9be06935ab119e205256041bd0a0977ad45f85f9c6aaee5280ed7a9afa",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.gallant-inspiration:f80329ef602791ce",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "586e18bd25039ea7229f218144076112b2e216f1e727ed448199767b5db8c979",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

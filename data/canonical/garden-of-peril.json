@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.garden-of-peril",
   "ruleset": "Pathfinder First Edition",
   "name": "Garden of Peril",
@@ -173,7 +173,84 @@
   "description": {
     "raw": "Vividly colored poisonous mushrooms instantly spring into existence in squares you select. The mushrooms can appear on any solid surface, even growing horizontally from walls or upside down from the ceiling.\n\nOnce per round as a move action, starting the round after you cast this spell, you can command the mushrooms to release poisonous spores. Each creature adjacent to a mushroom or in a mushroom’s square must then succeed at a Fortitude save or become sickened for 1d4 rounds. The condition of creatures that fail multiple saving throws does not worsen, but each additional failed saving throw adds 1d4 rounds to the duration the creature is sickened.\n\nThe mushrooms are Tiny and cannot provide cover, but they are fairly sturdy (AC 7, hp 30, break DC 20). Creatures can move through squares containing mushrooms as normal. When destroyed, a mushroom evaporates and releases one last cloud of spores.",
     "search_text": "\"vividly colored poisonous mushrooms instantly spring into existence in squares you select. the mushrooms can appear on any solid surface, even growing horizontally from walls or upside down from the ceiling.\\n\\nonce per round as a move action, starting the round after you cast this spell, you can command the mushrooms to release poisonous spores. each creature adjacent to a mushroom or in a mushroom’s square must then succeed at a fortitude save or become sickened for 1d4 rounds. the condition of creatures that fail multiple saving throws does not worsen, but each additional failed saving throw adds 1d4 rounds to the duration the creature is sickened.\\n\\nthe mushrooms are tiny and cannot provide cover, but they are fairly sturdy (ac 7, hp 30, break dc 20). creatures can move through squares containing mushrooms as normal. when destroyed, a mushroom evaporates and releases one last cloud of spores.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Vividly colored poisonous mushrooms instantly spring into existence in squares you select. The mushrooms can appear on any solid surface, even growing horizontally from walls or upside down from the ceiling."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Once per round as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "move action",
+              "relationship_id": "spell.garden-of-peril:uses_action:action.move-action"
+            },
+            {
+              "node_type": "text",
+              "value": ", starting the round after you cast this spell, you can command the mushrooms to release poisonous spores. Each creature adjacent to a mushroom or in a mushroom’s square must then succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.garden-of-peril:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save or become "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sickened",
+              "relationship_id": "spell.garden-of-peril:uses_definition:condition.sickened"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1d4 rounds. The condition of creatures that fail multiple saving throws does not worsen, but each additional failed saving throw adds 1d4 rounds to the duration the creature is "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sickened",
+              "relationship_id": "spell.garden-of-peril:uses_definition:condition.sickened"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The mushrooms are Tiny and cannot provide "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "cover",
+              "relationship_id": "spell.garden-of-peril:uses_definition:rule.cover"
+            },
+            {
+              "node_type": "text",
+              "value": ", but they are fairly sturdy (AC 7, hp 30, break DC 20). Creatures can move through squares containing mushrooms as normal. When destroyed, a mushroom evaporates and releases one last cloud of spores."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -345,6 +422,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.garden-of-peril:appears_on_spell_list:spell-list.summoner-unchained",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.summoner-unchained",
+        "name": "Summoner (Unchained) Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.garden-of-peril:23a8e5b4fce5c684",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 2",
+          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/conjuration/garden-of-peril.1jvikwzrr06uwtzp.yaml"
+        }
+      ],
+      "note": "Reviewed project decision: add Summoner (Unchained) 2 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
     },
     {
       "relationship_id": "spell.garden-of-peril:appears_on_spell_list:spell-list.witch",
@@ -617,12 +714,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.garden-of-peril:uses_definition:rule.fort",
+      "relationship_id": "spell.garden-of-peril:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -632,20 +729,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Fort",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.garden-of-peril:uses_definition:rule.fortitude",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.fortitude",
-        "name": "Fortitude"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.garden-of-peril:bf126c317058a918",
           "source_field": "spell_raw.links_raw[11]",
@@ -675,26 +759,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.garden-of-peril:appears_on_spell_list:spell-list.summoner-unchained",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.summoner-unchained",
-        "name": "Summoner (Unchained) Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.garden-of-peril:23a8e5b4fce5c684",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "manual_verification",
-          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 2",
-          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/conjuration/garden-of-peril.1jvikwzrr06uwtzp.yaml"
-        }
-      ],
-      "note": "Reviewed project decision: add Summoner (Unchained) 2 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
     }
   ],
   "provenance": [
@@ -745,11 +809,19 @@
       "raw_value_sha256": "ad0791c0fee7d5deff9db71d71a5278e9d85785ac8d1a4d9cbdb8c125b92c9b1",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.garden-of-peril:23a8e5b4fce5c684",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "01146e3e643966f1665370a96c191daf4a5db654d43fdbfccd115adedb799b88",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

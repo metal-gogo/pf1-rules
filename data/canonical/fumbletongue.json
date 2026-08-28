@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.fumbletongue",
   "ruleset": "Pathfinder First Edition",
   "name": "Fumbletongue",
@@ -149,7 +149,48 @@
   "description": {
     "raw": "This enchantment causes a creature to be unable to speak intelligibly. Any effort the target makes to talk, in any language, comes out as a useless mix of unconnected words and noises. Even magic words are affected to some extent; the target has a 20% spell failure chance for any spell it attempts to cast with verbal components, and a 20% chance to incorrectly use a command word to activate a magic item. This spell has no effect on telepathic communication, or the vocalizations of creatures that lack a spoken language.",
     "search_text": "\"this enchantment causes a creature to be unable to speak intelligibly. any effort the target makes to talk, in any language, comes out as a useless mix of unconnected words and noises. even magic words are affected to some extent; the target has a 20% spell failure chance for any spell it attempts to cast with verbal components, and a 20% chance to incorrectly use a command word to activate a magic item. this spell has no effect on telepathic communication, or the vocalizations of creatures that lack a spoken language.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This enchantment causes a creature to be unable to speak intelligibly. Any effort the target makes to talk, in any language, comes out as a useless mix of unconnected words and noises. Even magic words are affected to some extent; the target has a 20% spell failure chance for any spell it attempts to cast with verbal "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "components",
+              "relationship_id": "spell.fumbletongue:uses_definition:rule.components"
+            },
+            {
+              "node_type": "text",
+              "value": ", and a 20% chance to incorrectly use a command word to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "activate",
+              "relationship_id": "spell.fumbletongue:uses_definition:rule.activate"
+            },
+            {
+              "node_type": "text",
+              "value": " a magic item. This spell has no effect on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "telepathic",
+              "relationship_id": "spell.fumbletongue:uses_definition:rule.telepathic"
+            },
+            {
+              "node_type": "text",
+              "value": " communication, or the vocalizations of creatures that lack a spoken language."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -207,6 +248,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.fumbletongue:appears_on_spell_list:spell-list.lunar-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.lunar-mystery",
+        "name": "Lunar Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.lunar:8e477077",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "fumbletongue (2nd)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Lunar"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     },
     {
       "relationship_id": "spell.fumbletongue:appears_on_spell_list:spell-list.mesmerist",
@@ -532,11 +593,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.fumbletongue:uses_definition:rule.will",
+      "relationship_id": "spell.fumbletongue:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -550,26 +611,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.fumbletongue:appears_on_spell_list:spell-list.lunar-mystery",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.lunar-mystery",
-        "name": "Lunar Mystery Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.lunar:8e477077",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "fumbletongue (2nd)",
-          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Lunar"
-        }
-      ],
-      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -628,11 +669,19 @@
       "raw_value_sha256": "f5adf9baecb6382a11028ab60191164feec1f54c5f082e3a2ba9c1ed88fba231",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.fumbletongue:f959c5aeee4c11f4",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f7cb2f58737f3da2e6e4cf0eaa416e5d1695b7690ae966f073fd7a9ba774af7a",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.gentle-breeze",
   "ruleset": "Pathfinder First Edition",
   "name": "Gentle Breeze",
@@ -155,7 +155,54 @@
   "description": {
     "raw": "You create a light wind that blows only against the target, from a direction of your choice. The breeze grants the target a +2 circumstance bonus on saves against very hot conditions, severe heat, and saves against clouds, vapors, and gases (such as cloudkill, stinking cloud, and inhaled poisons). There must be air present to use this spell.",
     "search_text": "\"you create a light wind that blows only against the target, from a direction of your choice. the breeze grants the target a +2 circumstance bonus on saves against very hot conditions, severe heat, and saves against clouds, vapors, and gases (such as cloudkill, stinking cloud, and inhaled poisons). there must be air present to use this spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create a light wind that blows only against the target, from a direction of your choice. The breeze grants the target a +2 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "circumstance bonus",
+              "relationship_id": "spell.gentle-breeze:uses_definition:rule.circumstance-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on saves against very hot conditions, severe heat, and saves against clouds, vapors, and gases (such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "cloudkill",
+              "relationship_id": "spell.gentle-breeze:references:spell.cloudkill",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "stinking cloud",
+              "relationship_id": "spell.gentle-breeze:references:spell.stinking-cloud",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", and inhaled poisons). There must be air present to use this spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -451,7 +498,7 @@
         "entity_id": "publication.will",
         "name": "Will"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.gentle-breeze:4c4fafb91d98a3dd",
@@ -461,7 +508,7 @@
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
         }
       ],
-      "note": null
+      "note": "The source href points to the Will saving-throw rules, not a publication."
     },
     {
       "relationship_id": "spell.gentle-breeze:references:spell.cloudkill",
@@ -469,7 +516,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.cloudkill",
-        "name": "cloudkill"
+        "name": "Cloudkill"
       },
       "status": "accepted",
       "evidence": [
@@ -496,7 +543,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.stinking-cloud",
-        "name": "stinking cloud"
+        "name": "Stinking Cloud"
       },
       "status": "accepted",
       "evidence": [
@@ -633,11 +680,19 @@
       "raw_value_sha256": "7d13598f91dfbe425a54f5be280b845212513acc1e0211b2b6556f8acc973288",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.gentle-breeze:02a62bf633782f79",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "cc67d5dd9c82c55a49f968b13be44a04fdc2f080fdaf82218756a21689a39aff",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

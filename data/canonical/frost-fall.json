@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.frost-fall",
   "ruleset": "Pathfinder First Edition",
   "name": "Frost Fall",
@@ -165,7 +165,57 @@
   "description": {
     "raw": "The area of this spell is covered in chilling frost, dealing 2d6 points of cold damage to all creatures within it. Creatures that the spell initially damages must succeed at a Fortitude save or become staggered for 1 round. The area remains chilled for the spell’s duration. Any creature that starts your turn within the spell’s area takes 1d6 points of cold damage (Fortitude saving throw for half) but does not become staggered even on a failed saving throw.",
     "search_text": "\"the area of this spell is covered in chilling frost, dealing 2d6 points of cold damage to all creatures within it. creatures that the spell initially damages must succeed at a fortitude save or become staggered for 1 round. the area remains chilled for the spell’s duration. any creature that starts your turn within the spell’s area takes 1d6 points of cold damage (fortitude saving throw for half) but does not become staggered even on a failed saving throw.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The area of this spell is covered in chilling frost, dealing 2d6 points of cold damage to all creatures within it. Creatures that the spell initially damages must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.frost-fall:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save or become "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "staggered",
+              "relationship_id": "spell.frost-fall:uses_definition:condition.staggered"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 round. The area remains chilled for the spell’s duration. Any creature that starts your turn within the spell’s area takes 1d6 points of cold damage ("
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.frost-fall:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saving throw for half) but does not become "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "staggered",
+              "relationship_id": "spell.frost-fall:uses_definition:condition.staggered"
+            },
+            {
+              "node_type": "text",
+              "value": " even on a failed saving throw."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -323,6 +373,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.frost-fall:appears_on_spell_list:spell-list.winter-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.winter-mystery",
+        "name": "Winter Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.winter:877fc031",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "frost fall (4th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Winter"
+        }
+      ],
+      "note": "Printed by the owning oracle mystery; this is mystery access, not general Oracle class access."
     },
     {
       "relationship_id": "spell.frost-fall:appears_on_spell_list:spell-list.witch",
@@ -541,11 +611,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.frost-fall:uses_definition:rule.fortitude",
+      "relationship_id": "spell.frost-fall:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -593,26 +663,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.frost-fall:appears_on_spell_list:spell-list.winter-mystery",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.winter-mystery",
-        "name": "Winter Mystery Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.winter:877fc031",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "frost fall (4th)",
-          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Winter"
-        }
-      ],
-      "note": "Printed by the owning oracle mystery; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -679,11 +729,19 @@
       "raw_value_sha256": "63d8dedd3928a1afd4ecbb858b4878ad0049bdb742063d5fe0e2f88832b59b69",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.frost-fall:3b8672133808f245",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "c84cfdffc38945605ff4a4eb487c75fe97fbfdc9d4d1672a4775aa8eba3628e8",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

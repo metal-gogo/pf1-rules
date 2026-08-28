@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.frozen-note",
   "ruleset": "Pathfinder First Edition",
   "name": "Frozen Note",
@@ -131,7 +131,66 @@
   "description": {
     "raw": "You produce and sustain a single perfect musical note that holds nearby creatures, friend as well as foe, utterly spellbound until you stop singing. Affected creatures are both paralyzed and oblivious to their surroundings so long as you maintain the note. Maintaining this note requires your absolute attention; if you take damage or take any other action, including moving from your current square, the spell instantly ends. Creatures that succeed in their initial saving throw must make a new one for each round they spend within the area of the spell until they fail and become captivated. Creatures with 4 or more Hit Dice greater than your caster level are not affected by this spell. However, those with 4 or more Hit Dice less than your caster level do not receive a saving throw to resist it. The note is so clear and flawless that less than extraordinary attempts to avoid hearing it merely grant targets a bonus on their saving throws. Targets get a +2 circumstance bonus on their saving throw for each barrier between your voice and their ears. This includes such things as a creature stopping up its ears with wax, closing all windows and doors in a nearby building, or even crawling into a barrel and pulling down the top. If a target that had previously made its saving throw loses the benefit of one or more of its barriers it must immediately make a new saving throw. Similarly, any target that had previously failed its saving throw gets a new save each time it gains the protection of a barrier.",
     "search_text": "\"you produce and sustain a single perfect musical note that holds nearby creatures, friend as well as foe, utterly spellbound until you stop singing. affected creatures are both paralyzed and oblivious to their surroundings so long as you maintain the note. maintaining this note requires your absolute attention; if you take damage or take any other action, including moving from your current square, the spell instantly ends. creatures that succeed in their initial saving throw must make a new one for each round they spend within the area of the spell until they fail and become captivated. creatures with 4 or more hit dice greater than your caster level are not affected by this spell. however, those with 4 or more hit dice less than your caster level do not receive a saving throw to resist it. the note is so clear and flawless that less than extraordinary attempts to avoid hearing it merely grant targets a bonus on their saving throws. targets get a +2 circumstance bonus on their saving throw for each barrier between your voice and their ears. this includes such things as a creature stopping up its ears with wax, closing all windows and doors in a nearby building, or even crawling into a barrel and pulling down the top. if a target that had previously made its saving throw loses the benefit of one or more of its barriers it must immediately make a new saving throw. similarly, any target that had previously failed its saving throw gets a new save each time it gains the protection of a barrier.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You produce and sustain a single perfect musical note that holds nearby creatures, friend as well as foe, utterly spellbound until you stop singing. Affected creatures are both "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "paralyzed",
+              "relationship_id": "spell.frozen-note:uses_definition:condition.paralyzed"
+            },
+            {
+              "node_type": "text",
+              "value": " and oblivious to their surroundings so long as you maintain the note. Maintaining this note requires your absolute attention; if you take damage or take any other action, including moving from your current square, the spell instantly ends. Creatures that succeed in their initial saving throw must make a new one for each round they spend within the area of the spell until they fail and become captivated. Creatures with 4 or more Hit Dice greater than your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.frozen-note:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " are not affected by this spell. However, those with 4 or more Hit Dice less than your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.frozen-note:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " do not receive a saving throw to resist it. The note is so clear and flawless that less than extraordinary attempts to avoid hearing it merely grant targets a bonus on their "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throws",
+              "relationship_id": "spell.frozen-note:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": ". Targets get a +2 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "circumstance bonus",
+              "relationship_id": "spell.frozen-note:uses_definition:rule.circumstance-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on their saving throw for each barrier between your voice and their ears. This includes such things as a creature stopping up its ears with wax, closing all windows and doors in a nearby building, or even crawling into a barrel and pulling down the top. If a target that had previously made its saving throw loses the benefit of one or more of its barriers it must immediately make a new saving throw. Similarly, any target that had previously failed its saving throw gets a new save each time it gains the protection of a barrier."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -494,11 +553,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.frozen-note:uses_definition:rule.will",
+      "relationship_id": "spell.frozen-note:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -570,11 +629,19 @@
       "raw_value_sha256": "4077bd966cb39e992ec93760babc5cadb833644cae505d75eeaf2b64860559a9",
       "decision": "manually_resolved",
       "note": "Reviewed project decision: the printed Range field is blank and the printed Area is a 30-ft.-radius emanation centered on you. Use personal as the canonical range while preserving the missing source value."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.frozen-note:e2083c4089cb9653",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "718e9906d7d913663f776a10b405cec36b32e12e60da4b186423ef9e921d4a08",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "REVIEWED_RANGE_OVERRIDE",

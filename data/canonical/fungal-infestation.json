@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.fungal-infestation",
   "ruleset": "Pathfinder First Edition",
   "name": "Fungal Infestation",
@@ -125,7 +125,39 @@
   "description": {
     "raw": "You coat the target in necrotic fungus that makes its flesh soft and fragile. Toadstools, ringworm, and other disgusting fungal growths sprout from its skin. The target takes 1d3 points of Charisma damage. Any physical attack against the target automatically adds 1d6 points of bleed damage.",
     "search_text": "\"you coat the target in necrotic fungus that makes its flesh soft and fragile. toadstools, ringworm, and other disgusting fungal growths sprout from its skin. the target takes 1d3 points of charisma damage. any physical attack against the target automatically adds 1d6 points of bleed damage.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You coat the target in necrotic fungus that makes its flesh soft and fragile. Toadstools, ringworm, and other disgusting fungal growths sprout from its skin. The target takes 1d3 points of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Charisma damage",
+              "relationship_id": "spell.fungal-infestation:uses_definition:rule.charisma-damage"
+            },
+            {
+              "node_type": "text",
+              "value": ". Any physical attack against the target automatically adds 1d6 points of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bleed",
+              "relationship_id": "spell.fungal-infestation:uses_definition:condition.bleed"
+            },
+            {
+              "node_type": "text",
+              "value": " damage."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -183,6 +215,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.fungal-infestation:appears_on_spell_list:spell-list.rot-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.rot-patron",
+        "name": "Rot Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.rot:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th — fungal infestation",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.fungal-infestation:has_descriptor:descriptor.disease",
@@ -347,11 +399,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.fungal-infestation:uses_definition:rule.fortitude",
+      "relationship_id": "spell.fungal-infestation:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -385,26 +437,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.fungal-infestation:appears_on_spell_list:spell-list.rot-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.rot-patron",
-        "name": "Rot Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.rot:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "6th — fungal infestation",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -463,11 +495,19 @@
       "raw_value_sha256": "d019f7366895bb907207c81493816c3fc2e5ba3429dec8fbd2814e68697d8992",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.fungal-infestation:e58cebd1f77994d8",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d05ea5fa7e119c3bb3936f6494787d8a19459211961371d96999d79c0afede8e",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
