@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.heatstroke",
   "ruleset": "Pathfinder First Edition",
   "name": "Heatstroke",
@@ -133,7 +133,69 @@
   "description": {
     "raw": "A wavering red ray projects from your finger. You must succeed on a ranged touch attack with the ray to hit your target.\n\nThe ray inflicts 1d4 points of nonlethal damage, causing the target to suffer from heatstroke as its body temperature dramatically increases. Except as noted above, this spell otherwise functions as ray of exhaustion.\n\nCharacters wearing heavy clothing or armor of any sort take a –4 penalty on their saves.",
     "search_text": "\"a wavering red ray projects from your finger. you must succeed on a ranged touch attack with the ray to hit your target.\\n\\nthe ray inflicts 1d4 points of nonlethal damage, causing the target to suffer from heatstroke as its body temperature dramatically increases. except as noted above, this spell otherwise functions as ray of exhaustion.\\n\\ncharacters wearing heavy clothing or armor of any sort take a –4 penalty on their saves.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "A wavering red ray projects from your finger. You must succeed on a ranged "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch attack",
+              "relationship_id": "spell.heatstroke:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " with the ray to hit your target."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The ray inflicts 1d4 points of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "nonlethal damage",
+              "relationship_id": "spell.heatstroke:uses_definition:rule.nonlethal-damage"
+            },
+            {
+              "node_type": "text",
+              "value": ", causing the target to suffer from heatstroke as its body temperature dramatically increases. Except as noted above, this spell otherwise functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "ray of exhaustion",
+              "relationship_id": "spell.heatstroke:functions_like:spell.ray-of-exhaustion",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Characters wearing heavy clothing or armor of any sort take a –4 penalty on their saves."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -143,7 +205,71 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.ray-of-exhaustion",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.heatstroke:159fac9333bf09cc",
+        "source_field": "spell_raw.description_raw",
+        "raw": "A wavering red ray projects from your finger. You must succeed on a ranged touch attack with the ray to hit your target.\n\nThe ray inflicts 1d4 points of nonlethal damage, causing the target to suffer from heatstroke as its body temperature dramatically increases. Except as noted above, this spell otherwise functions as ray of exhaustion.\n\nCharacters wearing heavy clothing or armor of any sort take a –4 penalty on their saves."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "timed",
+            "formula": "1 minute/level",
+            "dismissible": null,
+            "concentration": null,
+            "raw": "1 minute/level"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "1 minute/level",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/saving_throw",
+          "value": {
+            "types": [
+              "fortitude"
+            ],
+            "outcome": "Fortitude partial, see text",
+            "harmless": null,
+            "object": null,
+            "conditional": true,
+            "raw": "Fortitude partial, see text"
+          },
+          "source_field": "spell_raw.saving_throw_raw",
+          "raw": "Fortitude partial, see text",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "A wavering red ray projects from your finger. You must succeed on a ranged touch attack with the ray to hit your target.\n\nThe ray inflicts 1d4 points of nonlethal damage, causing the target to suffer from heatstroke as its body temperature dramatically increases. Except as noted above, this spell otherwise functions as ray of exhaustion.\n\nCharacters wearing heavy clothing or armor of any sort take a –4 penalty on their saves.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "A wavering red ray projects from your finger. You must succeed on a ranged touch attack with the ray to hit your target.\n\nThe ray inflicts 1d4 points of nonlethal damage, causing the target to suffer from heatstroke as its body temperature dramatically increases. Except as noted above, this spell otherwise functions as ray of exhaustion.\n\nCharacters wearing heavy clothing or armor of any sort take a –4 penalty on their saves.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.heatstroke:appears_on_spell_list:spell-list.arcanist",
@@ -273,6 +399,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.heatstroke:functions_like:spell.ray-of-exhaustion",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.ray-of-exhaustion",
+        "name": "Ray of Exhaustion"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.heatstroke:80cbee82a5416eb5",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "ray of exhaustion",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/r/ray-of-exhaustion/"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.heatstroke:has_descriptor:descriptor.fire",
       "type": "has_descriptor",
       "target": {
@@ -361,26 +507,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.heatstroke:references:spell.ray-of-exhaustion",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.ray-of-exhaustion",
-        "name": "ray of exhaustion"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.heatstroke:80cbee82a5416eb5",
-          "source_field": "spell_raw.links_raw[7]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "ray of exhaustion",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/r/ray-of-exhaustion/"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.heatstroke:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -408,11 +534,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.heatstroke:uses_definition:rule.fortitude",
+      "relationship_id": "spell.heatstroke:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -536,11 +662,19 @@
       "raw_value_sha256": "61b24d05ed4e2b8ea557359efb1ebcdd14cf2c5c69cb68e2bf652633ebd91cb6",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.heatstroke:159fac9333bf09cc",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "92f33c3495bcbcf346137c5fe4fd037d94f5a59a78c2c1774cd7d90d7aaf1b5d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
