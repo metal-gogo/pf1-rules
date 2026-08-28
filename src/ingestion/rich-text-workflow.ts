@@ -279,12 +279,21 @@ function main(): void {
     process.stdout.write(JSON.stringify({ manifest: filename, spell_ids: manifest.spell_ids }, null, 2) + "\n");
     return;
   }
+  if (command === "run") {
+    const { filename, manifest } = planRichTextBatch(batchSizeArgument(args));
+    process.stdout.write(JSON.stringify({ manifest: filename, spell_ids: manifest.spell_ids }, null, 2) + "\n");
+    applyRichTextBatch(filename);
+    verifyRichTextBatch(filename);
+    commitRichTextBatch(filename);
+    pushRichTextBatch(filename);
+    return;
+  }
   const filename = manifestArgument(args);
   if (command === "apply") return applyRichTextBatch(filename);
   if (command === "verify") return verifyRichTextBatch(filename);
   if (command === "commit") return commitRichTextBatch(filename);
   if (command === "push") return pushRichTextBatch(filename);
-  throw new Error("Usage: rich-text-workflow.ts <plan|apply|verify|commit|push> [--manifest <path>]");
+  throw new Error("Usage: rich-text-workflow.ts <plan|run|apply|verify|commit|push> [--manifest <path>]");
 }
 
 
