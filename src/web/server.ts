@@ -1012,6 +1012,29 @@ type RuleReferenceEntity = {
   observations: { id: string; siteId: string; descriptionRaw: string }[];
 };
 
+type MagicHeading = {
+  id: string;
+  label: string;
+};
+
+function magicHeadings(document: RichTextDocument): MagicHeading[] {
+  const counts = new Map<string, number>();
+  return document.content.flatMap((block) => {
+    if (block.node_type !== "heading") return [];
+    const label = block.content.map((node) => node.node_type === "hard_break" ? " " : node.value).join("").trim();
+    const baseId = label
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLocaleLowerCase("en-US")
+      .replace(/[’']/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "heading";
+    const count = (counts.get(baseId) ?? 0) + 1;
+    counts.set(baseId, count);
+    return [{ id: count === 1 ? baseId : `${baseId}-${count}`, label }];
+  });
+}
+
 function rulesPage(): string {
   return page("Rules reference", `<h1>Rules reference</h1>
     <p>Use these grouped references as stable destinations for links from spell metadata.</p>
@@ -1039,19 +1062,17 @@ async function magicPage(prisma: PrismaClient): Promise<string> {
   const observations = entity?.observations ?? [];
   const primary = observations.find((observation) => observation.siteId === "aon");
   const document = primary ? sourceRichTextDocument(primary.payload) : null;
-  const headings = document?.content.flatMap((block, index) => block.node_type === "heading"
-    ? [{ index, label: block.content.map((node) => node.node_type === "hard_break" ? " " : node.value).join("") }]
-    : []) ?? [];
+  const headings = document ? magicHeadings(document) : [];
   let headingIndex = 0;
   const richRules = document
-    ? renderRichText(document, [], 2).replace(/<h([2-6])>/g, (_match, level) => `<h${level} id="section-${headingIndex++}">`)
+    ? renderRichText(document, [], 2).replace(/<h([2-6])>/g, (_match, level) => `<h${level} id="${headings[headingIndex++]?.id}">`)
     : null;
   return page("Magic", `<nav aria-label="Breadcrumb"><ol><li><a href="/rules">Rules reference</a></li><li aria-current="page">Magic</li></ol></nav>
     <article class="rule-reference">
       <h1>Magic</h1>
       <p>The Archives of Nethys record below is the first-party Core Rulebook source. The separately retained d20PFSRD record is a third-party compilation that includes supplementary material.</p>
       ${primary ? `<p><a href="${href(sourceHref(primary.id))}">View the complete Archives of Nethys observation</a> · <a href="${href(primary.sourceUrl)}">Open the source page</a></p>` : '<p class="notice">The first-party magic observation has not been imported.</p>'}
-      <nav aria-label="On this page"><ul>${headings.map(({ index, label }) => `<li><a href="#section-${index}">${escapeHtml(label)}</a></li>`).join("")}</ul></nav>
+      <nav aria-label="On this page"><ul>${headings.map(({ id, label }) => `<li><a href="#${href(id)}">${escapeHtml(label)}</a></li>`).join("")}</ul></nav>
       ${richRules ? `<div class="magic-rules">${richRules}</div>` : (primary?.sections ?? []).map((section, index) => `<section${section.headingRaw ? ` id="section-${index}"` : ""}>${section.headingRaw ? `<h2>${escapeHtml(section.headingRaw)}</h2>` : ""}${paragraphs(section.bodyRaw)}</section>`).join("")}
     </article>`);
 }

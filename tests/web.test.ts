@@ -27,7 +27,8 @@ describe("local rules browser", () => {
     const response = await fetch(`${baseUrl}/rules/magic`);
     const html = await response.text();
     expect(response.status).toBe(200);
-    expect(html).toContain('<h3 id="section-4">Concentration</h3>');
+    expect(html).toContain('<h3 id="concentration">Concentration</h3>');
+    expect(html).toContain('<a href="#concentration">Concentration</a>');
     expect(html).toContain('<strong>Injury</strong>:');
     expect(html).toContain('<table class="data-table rich-text-table">');
     expect(html).toContain('<th scope="col"><strong>Situation</strong></th>');
