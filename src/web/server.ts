@@ -6,6 +6,7 @@ import {
   spellListQualificationsLabel,
   type SpellListQualification,
 } from "../domain/spell-lists.js";
+import { linkRichTextDocument } from "../domain/rich-text.js";
 import type {
   RichTextDocument,
   RichTextInlineNode,
@@ -1015,11 +1016,13 @@ type RuleReferenceEntity = {
 type MagicHeading = {
   id: string;
   label: string;
+  level: number;
+  index: number;
 };
 
 function magicHeadings(document: RichTextDocument): MagicHeading[] {
   const counts = new Map<string, number>();
-  return document.content.flatMap((block) => {
+  return document.content.flatMap((block, index) => {
     if (block.node_type !== "heading") return [];
     const label = block.content.map((node) => node.node_type === "hard_break" ? " " : node.value).join("").trim();
     const baseId = label
@@ -1031,8 +1034,25 @@ function magicHeadings(document: RichTextDocument): MagicHeading[] {
       .replace(/^-+|-+$/g, "") || "heading";
     const count = (counts.get(baseId) ?? 0) + 1;
     counts.set(baseId, count);
-    return [{ id: count === 1 ? baseId : `${baseId}-${count}`, label }];
+    return [{ id: count === 1 ? baseId : `${baseId}-${count}`, label, level: block.level, index }];
   });
+}
+
+function magicSection(
+  document: RichTextDocument,
+  headings: MagicHeading[],
+  sectionId: string,
+): { heading: MagicHeading; document: RichTextDocument; headings: MagicHeading[] } | null {
+  const headingPosition = headings.findIndex((heading) => heading.id === sectionId);
+  if (headingPosition < 0) return null;
+  const heading = headings[headingPosition]!;
+  const end = headings.slice(headingPosition + 1).find((candidate) => candidate.level <= heading.level)?.index
+    ?? document.content.length;
+  return {
+    heading,
+    document: { node_type: "document", content: document.content.slice(heading.index + 1, end) },
+    headings: headings.filter((candidate) => candidate.index > heading.index && candidate.index < end),
+  };
 }
 
 function rulesPage(): string {
@@ -1049,30 +1069,44 @@ function rulesPage(): string {
     </ul>`);
 }
 
-async function magicPage(prisma: PrismaClient): Promise<string> {
-  const entity = await prisma.entity.findUnique({
-    where: { id: "rule.magic" },
-    select: {
-      observations: {
-        select: { id: true, siteId: true, sourceUrl: true, payload: true, sections: { select: { headingRaw: true, bodyRaw: true }, orderBy: { sectionIndex: "asc" } } },
-        orderBy: { siteId: "asc" },
+async function magicPage(prisma: PrismaClient, sectionId?: string): Promise<string | null> {
+  const [entity, relationships] = await Promise.all([
+    prisma.entity.findUnique({
+      where: { id: "rule.magic" },
+      select: {
+        observations: {
+          select: { id: true, siteId: true, sourceUrl: true, payload: true, sections: { select: { headingRaw: true, bodyRaw: true }, orderBy: { sectionIndex: "asc" } } },
+          orderBy: { siteId: "asc" },
+        },
       },
-    },
-  });
+    }),
+    prisma.ruleRelationship.findMany({
+      where: { ownerEntityId: "rule.magic", status: "accepted" },
+      orderBy: { targetName: "asc" },
+    }),
+  ]);
   const observations = entity?.observations ?? [];
   const primary = observations.find((observation) => observation.siteId === "aon");
   const document = primary ? sourceRichTextDocument(primary.payload) : null;
-  const headings = document ? magicHeadings(document) : [];
-  let headingIndex = 0;
-  const richRules = document
-    ? renderRichText(document, [], 2).replace(/<h([2-6])>/g, (_match, level) => `<h${level} id="${headings[headingIndex++]?.id}">`)
+  const linkedDocument = document
+    ? linkRichTextDocument(document, relationships, { ownerEntityId: "rule.magic" }).document
     : null;
-  return page("Magic", `<nav aria-label="Breadcrumb"><ol><li><a href="/rules">Rules reference</a></li><li aria-current="page">Magic</li></ol></nav>
+  const headings = linkedDocument ? magicHeadings(linkedDocument) : [];
+  const section = linkedDocument && sectionId ? magicSection(linkedDocument, headings, sectionId) : null;
+  if (sectionId && !section) return null;
+  const displayedDocument = section?.document ?? linkedDocument;
+  const displayedHeadings = section?.headings ?? headings;
+  let headingIndex = 0;
+  const richRules = displayedDocument
+    ? renderRichText(displayedDocument, relationships, 2).replace(/<h([2-6])>/g, (_match, level) => `<h${level} id="${displayedHeadings[headingIndex++]?.id}">`)
+    : null;
+  const title = section?.heading.label ?? "Magic";
+  return page(title, `<nav aria-label="Breadcrumb"><ol><li><a href="/rules">Rules reference</a></li><li><a href="/rules/magic">Magic</a></li>${section ? `<li aria-current="page">${escapeHtml(title)}</li>` : ""}</ol></nav>
     <article class="rule-reference">
-      <h1>Magic</h1>
-      <p>The Archives of Nethys record below is the first-party Core Rulebook source. The separately retained d20PFSRD record is a third-party compilation that includes supplementary material.</p>
+      <h1>${escapeHtml(title)}</h1>
+      ${section ? '<p><a href="/rules/magic">Read all Magic rules</a></p>' : '<p>The Archives of Nethys record below is the first-party Core Rulebook source. The separately retained d20PFSRD record is a third-party compilation that includes supplementary material.</p>'}
       ${primary ? `<p><a href="${href(sourceHref(primary.id))}">View the complete Archives of Nethys observation</a> · <a href="${href(primary.sourceUrl)}">Open the source page</a></p>` : '<p class="notice">The first-party magic observation has not been imported.</p>'}
-      <nav aria-label="On this page"><ul>${headings.map(({ id, label }) => `<li><a href="#${href(id)}">${escapeHtml(label)}</a></li>`).join("")}</ul></nav>
+      <nav aria-label="On this page"><ul>${(section ? displayedHeadings : headings).map(({ id, label }) => `<li><a href="/rules/magic/${href(id)}">${escapeHtml(label)}</a></li>`).join("")}</ul></nav>
       ${richRules ? `<div class="magic-rules">${richRules}</div>` : (primary?.sections ?? []).map((section, index) => `<section${section.headingRaw ? ` id="section-${index}"` : ""}>${section.headingRaw ? `<h2>${escapeHtml(section.headingRaw)}</h2>` : ""}${paragraphs(section.bodyRaw)}</section>`).join("")}
     </article>`);
 }
@@ -1737,6 +1771,7 @@ export function createRequestHandler(prisma: PrismaClient) {
       else if (url.pathname === "/spell-components") result = spellComponentsPage();
       else if (url.pathname === "/rules") result = rulesPage();
       else if (url.pathname === "/rules/magic") result = await magicPage(prisma);
+      else if (url.pathname.startsWith("/rules/magic/")) result = await magicPage(prisma, decodeURIComponent(url.pathname.slice(13)));
       else if (url.pathname === "/rules/magic-schools") result = await magicSchoolsPage(prisma);
       else if (url.pathname === "/rules/actions") result = await actionsPage(prisma);
       else if (url.pathname === "/rules/saving-throws") result = await savingThrowsPage(prisma);

@@ -28,12 +28,21 @@ describe("local rules browser", () => {
     const html = await response.text();
     expect(response.status).toBe(200);
     expect(html).toContain('<h3 id="concentration">Concentration</h3>');
-    expect(html).toContain('<a href="#concentration">Concentration</a>');
+    expect(html).toContain('<a href="/rules/magic/concentration">Concentration</a>');
     expect(html).toContain('<strong>Injury</strong>:');
     expect(html).toContain('<table class="data-table rich-text-table">');
     expect(html).toContain('<th scope="col"><strong>Situation</strong></th>');
     expect(html).toContain('aria-label="Spell description table');
     expect(html).not.toContain("Third-Party Descriptors");
+  });
+
+  it("renders Magic subsections without duplicating their source text", async () => {
+    const response = await fetch(`${baseUrl}/rules/magic/concentration`);
+    const html = await response.text();
+    expect(response.status).toBe(200);
+    expect(html).toContain("<h1>Concentration</h1>");
+    expect(html).toContain('<a href="/rules/magic">Read all Magic rules</a>');
+    expect(html).toContain('<strong>Injury</strong>:');
   });
 
   it("renders semantic navigation and database counts", async () => {
