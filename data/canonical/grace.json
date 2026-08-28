@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.grace",
   "ruleset": "Pathfinder First Edition",
   "name": "Grace",
@@ -146,7 +146,30 @@
   "description": {
     "raw": "Until the end of your turn, your movement does not provoke attacks of opportunity.",
     "search_text": "\"until the end of your turn, your movement does not provoke attacks of opportunity.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Until the end of your turn, your movement does not provoke "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attacks of opportunity",
+              "relationship_id": "spell.grace:uses_definition:rule.attacks-of-opportunity"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -197,6 +220,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.grace:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.grace:9280a34f3350c2a9",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.grace:appears_on_spell_list:spell-list.oracle",
@@ -399,26 +442,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.grace:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.grace:9280a34f3350c2a9",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -469,11 +492,19 @@
       "raw_value_sha256": "bf447f76c6925351f53f66b92802011d3e7302e073b2e525034108eb0e5f0c69",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.grace:9280a34f3350c2a9",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "02df520a8f2f423019660a74958940e7f926e27ea777e00b7623244923173d03",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.glide",
   "ruleset": "Pathfinder First Edition",
   "name": "Glide",
@@ -233,7 +233,42 @@
   "description": {
     "raw": "You take no damage from falls (as if from feather fall). In addition, you can move up to 5 feet in any horizontal direction for every 1 foot you fall, at a speed of 60 feet per round. You cannot use this spell to actually gain height, merely coast in other directions as you fall. If subjected to a strong wind or any other effect that causes you to rise you can take advantage of it in order to increase the distance you can glide. The spell ends as soon as your feet touch the ground regardless of its remaining duration. If the spell expires while you are still in the air you fall the remaining distance as normal.",
     "search_text": "\"you take no damage from falls (as if from feather fall). in addition, you can move up to 5 feet in any horizontal direction for every 1 foot you fall, at a speed of 60 feet per round. you cannot use this spell to actually gain height, merely coast in other directions as you fall. if subjected to a strong wind or any other effect that causes you to rise you can take advantage of it in order to increase the distance you can glide. the spell ends as soon as your feet touch the ground regardless of its remaining duration. if the spell expires while you are still in the air you fall the remaining distance as normal.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You take no damage from falls (as if from "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "feather fall",
+              "relationship_id": "spell.glide:references:spell.feather-fall",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "). In addition, you can move up to 5 feet in any horizontal direction for every 1 foot you fall, at a speed of 60 feet per round. You cannot use this spell to actually gain height, merely coast in other directions as you fall. If subjected to a strong wind or any other effect that causes you to rise you can take advantage of it in order to increase the distance you can glide. The spell ends as soon as your feet touch the ground regardless of its remaining duration. If the spell expires while you are still in the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "air",
+              "relationship_id": "spell.glide:uses_definition:rule.air"
+            },
+            {
+              "node_type": "text",
+              "value": " you fall the remaining distance as normal."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -245,6 +280,26 @@
   },
   "rules_inheritance": [],
   "relationships": [
+    {
+      "relationship_id": "spell.glide:appears_on_spell_list:spell-list.air-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.air-elemental-school",
+        "name": "Air Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.air-elemental:45be08db",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2—glide",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/air/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
     {
       "relationship_id": "spell.glide:appears_on_spell_list:spell-list.arcanist",
       "type": "appears_on_spell_list",
@@ -264,6 +319,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.glide:appears_on_spell_list:spell-list.ascetic-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.ascetic-mystery",
+        "name": "Ascetic Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.ascetic:7807af1f",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "glide (4th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Ascetic"
+        }
+      ],
+      "note": "Printed by the owning oracle mystery; this is mystery access, not general Oracle class access."
     },
     {
       "relationship_id": "spell.glide:appears_on_spell_list:spell-list.druid",
@@ -654,7 +729,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.feather-fall",
-        "name": "feather fall"
+        "name": "Feather Fall"
       },
       "status": "accepted",
       "evidence": [
@@ -761,46 +836,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.glide:appears_on_spell_list:spell-list.ascetic-mystery",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.ascetic-mystery",
-        "name": "Ascetic Mystery Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.ascetic:7807af1f",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "glide (4th)",
-          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Ascetic"
-        }
-      ],
-      "note": "Printed by the owning oracle mystery; this is mystery access, not general Oracle class access."
-    },
-    {
-      "relationship_id": "spell.glide:appears_on_spell_list:spell-list.air-elemental-school",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.air-elemental-school",
-        "name": "Air Elemental School"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:magic-school.air-elemental:45be08db",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "2—glide",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/air/"
-        }
-      ],
-      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -875,11 +910,19 @@
       "raw_value_sha256": "c8f9ffcd619352e461b930112561d1351937cf284459fac9f5e13a97a74dbc0f",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.glide:41fe8cc491bac321",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "6ec017d132cae892f4ec802064d2e95153d9533a7e811ff4521dd60fa55f6231",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

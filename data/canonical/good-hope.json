@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.good-hope",
   "ruleset": "Pathfinder First Edition",
   "name": "Good Hope",
@@ -126,7 +126,49 @@
   "description": {
     "raw": "This spell instills powerful hope in the subjects. Each affected creature gains a +2 morale bonus on saving throws, attack rolls, ability checks, skill checks, and weapon damage rolls.\n\nGood hope counters and dispels crushing despair.",
     "search_text": "\"this spell instills powerful hope in the subjects. each affected creature gains a +2 morale bonus on saving throws, attack rolls, ability checks, skill checks, and weapon damage rolls.\\n\\ngood hope counters and dispels crushing despair.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell instills powerful hope in the subjects. Each affected creature gains a +2 morale bonus on saving throws, attack rolls, ability checks, skill checks, and weapon damage rolls."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Good hope",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " counters and dispels "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "crushing despair",
+              "relationship_id": "spell.good-hope:references:spell.crushing-despair",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -164,6 +206,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.good-hope:appears_on_spell_list:spell-list.revelry-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.revelry-subdomain",
+        "name": "Revelry Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.revelry:365598bf",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "3rd—good hope",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Chaos"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.good-hope:appears_on_spell_list:spell-list.skald",
@@ -333,7 +395,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.crushing-despair",
-        "name": "crushing despair"
+        "name": "Crushing Despair"
       },
       "status": "accepted",
       "evidence": [
@@ -469,11 +531,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.good-hope:uses_definition:rule.will",
+      "relationship_id": "spell.good-hope:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -494,26 +556,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.good-hope:appears_on_spell_list:spell-list.revelry-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.revelry-subdomain",
-        "name": "Revelry Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.revelry:365598bf",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "3rd—good hope",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Chaos"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -572,11 +614,19 @@
       "raw_value_sha256": "12f999429e4900c361795be5966afc176e40dbf4c87872e37b31deb69e95213d",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.good-hope:9463f90c6056511c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "4b17ca57de4372f9f6d004b3ef4c30bca502412155f98e0d3f96d93d78b1c9cd",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

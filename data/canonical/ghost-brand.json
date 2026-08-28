@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.ghost-brand",
   "ruleset": "Pathfinder First Edition",
   "name": "Ghost Brand",
@@ -145,7 +145,68 @@
   "description": {
     "raw": "You alter the fundamental substance of a single object up to 2 cubic feet per level in size and at least one size category smaller than the target creature, causing it to become shadowy and intangible, as though made out of quasi-real shadowstuff. You link the intangible item to the target’s flesh by making a brand shaped like the item on the target’s skin. The intangible item merges with the target’s flesh and is contained within the target’s body, moving with the target wherever it goes. The creature can retrieve the item or reabsorb it as a full-round action, and can do so as many times as it wants. When worn or wielded by the target, the item regains its solidity and functions normally, though the target can’t drop or remove the item (other than by using the full-round action), nor can it be disarmed or stolen. If the item is destroyed, the spell ends. If the ghost brand spell is dispelled while the object is inside the target’s body, the object bursts out of the target’s flesh, dealing 3d6 points of piercing and slashing damage to the target that bypasses DR, as well as 1d6 points of bleed damage.",
     "search_text": "\"you alter the fundamental substance of a single object up to 2 cubic feet per level in size and at least one size category smaller than the target creature, causing it to become shadowy and intangible, as though made out of quasi-real shadowstuff. you link the intangible item to the target’s flesh by making a brand shaped like the item on the target’s skin. the intangible item merges with the target’s flesh and is contained within the target’s body, moving with the target wherever it goes. the creature can retrieve the item or reabsorb it as a full-round action, and can do so as many times as it wants. when worn or wielded by the target, the item regains its solidity and functions normally, though the target can’t drop or remove the item (other than by using the full-round action), nor can it be disarmed or stolen. if the item is destroyed, the spell ends. if the ghost brand spell is dispelled while the object is inside the target’s body, the object bursts out of the target’s flesh, dealing 3d6 points of piercing and slashing damage to the target that bypasses dr, as well as 1d6 points of bleed damage.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You alter the fundamental substance of a single object up to 2 cubic feet per level in size and at least one size category smaller than the target creature, causing it to become shadowy and intangible, as though made out of quasi-real shadowstuff. You link the intangible item to the target’s flesh by making a brand shaped like the item on the target’s skin. The intangible item merges with the target’s flesh and is contained within the target’s body, moving with the target wherever it goes. The creature can retrieve the item or reabsorb it as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "full-round action",
+              "relationship_id": "spell.ghost-brand:uses_action:action.full-round-action"
+            },
+            {
+              "node_type": "text",
+              "value": ", and can do so as many times as it wants. When worn or wielded by the target, the item regains its solidity and functions normally, though the target can’t drop or remove the item (other than by using the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "full-round action",
+              "relationship_id": "spell.ghost-brand:uses_action:action.full-round-action"
+            },
+            {
+              "node_type": "text",
+              "value": "), nor can it be disarmed or stolen. If the item is destroyed, the spell ends. If the "
+            },
+            {
+              "node_type": "text",
+              "value": "ghost brand",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell is dispelled while the object is inside the target’s body, the object bursts out of the target’s flesh, dealing 3d6 points of piercing and slashing damage to the target that bypasses "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "DR",
+              "relationship_id": "spell.ghost-brand:uses_definition:rule.damage-reduction"
+            },
+            {
+              "node_type": "text",
+              "value": ", as well as 1d6 points of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bleed",
+              "relationship_id": "spell.ghost-brand:uses_definition:condition.bleed"
+            },
+            {
+              "node_type": "text",
+              "value": " damage."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -448,12 +509,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.ghost-brand:uses_definition:rule.dr",
+      "relationship_id": "spell.ghost-brand:uses_definition:rule.damage-reduction",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.dr",
-        "name": "DR"
+        "entity_id": "rule.damage-reduction",
+        "name": "Damage reduction"
       },
       "status": "accepted",
       "evidence": [
@@ -488,12 +549,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.ghost-brand:uses_definition:rule.touch",
+      "relationship_id": "spell.ghost-brand:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -556,11 +617,19 @@
       "raw_value_sha256": "e769cd9f7cc0e4fc722512f5a281cf00da2394a09f485a2a0d2d41696ae92724",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.ghost-brand:bb8a960ff51abf9c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e339e94a102f0c9865047ceb7a6d4838f4f0a5e5c25ff1b61db6d4ca5789a4a6",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
