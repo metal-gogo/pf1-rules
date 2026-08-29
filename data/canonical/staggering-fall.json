@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.staggering-fall",
   "ruleset": "Pathfinder First Edition",
   "name": "Staggering Fall",
@@ -184,7 +184,93 @@
   "description": {
     "raw": "This spell must be cast on a creature as it falls, either from a height or after being knocked prone or tripped. The magic of this spell causes the creature to hit the ground particularly hard, knocking the wind from it. The creature takes an additional 1d6 points of damage from the fall. In addition, the creature becomes staggered for the duration of the spell unless it makes a Will save. Each round the spell’s effects persist, the creature may attempt a new Will save as a free action to end the staggered effect early. A creature under the effects of this spell must take a standard action to stand up.",
     "search_text": "\"this spell must be cast on a creature as it falls, either from a height or after being knocked prone or tripped. the magic of this spell causes the creature to hit the ground particularly hard, knocking the wind from it. the creature takes an additional 1d6 points of damage from the fall. in addition, the creature becomes staggered for the duration of the spell unless it makes a will save. each round the spell’s effects persist, the creature may attempt a new will save as a free action to end the staggered effect early. a creature under the effects of this spell must take a standard action to stand up.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell must be cast on a creature as it falls, either from a height or after being knocked "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "prone",
+              "relationship_id": "spell.staggering-fall:uses_definition:condition.prone"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "tripped",
+              "relationship_id": "spell.staggering-fall:uses_definition:rule.tripped"
+            },
+            {
+              "node_type": "text",
+              "value": ". The magic of this spell causes the creature to hit the ground particularly hard, knocking the wind from it. The creature takes an additional 1d6 points of damage from the fall. In addition, the creature becomes "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "staggered",
+              "relationship_id": "spell.staggering-fall:uses_definition:condition.staggered"
+            },
+            {
+              "node_type": "text",
+              "value": " for the duration of the spell unless it makes a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.staggering-fall:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save. Each round the spell’s effects persist, the creature may attempt a new "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.staggering-fall:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "free action",
+              "relationship_id": "spell.staggering-fall:uses_action:action.free-action"
+            },
+            {
+              "node_type": "text",
+              "value": " to end the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "staggered",
+              "relationship_id": "spell.staggering-fall:uses_definition:condition.staggered"
+            },
+            {
+              "node_type": "text",
+              "value": " effect early. A creature under the effects of this spell must take a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "standard action",
+              "relationship_id": "spell.staggering-fall:uses_action:action.standard-action"
+            },
+            {
+              "node_type": "text",
+              "value": " to stand up."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -255,6 +341,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.staggering-fall:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.staggering-fall:2c08c5e912224431",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.staggering-fall:appears_on_spell_list:spell-list.oracle",
@@ -612,11 +718,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.staggering-fall:uses_definition:rule.will",
+      "relationship_id": "spell.staggering-fall:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -637,26 +743,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.staggering-fall:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.staggering-fall:2c08c5e912224431",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -707,11 +793,19 @@
       "raw_value_sha256": "06bae6a5090d443b13e4326262943327ec9063122956da0553f5b50f15e094c8",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.staggering-fall:2c08c5e912224431",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "5d369bb372a56229e2b3738552b5c658e9cbc63dfcf344fc268088cb584563ac",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

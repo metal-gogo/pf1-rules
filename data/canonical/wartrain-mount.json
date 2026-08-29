@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.wartrain-mount",
   "ruleset": "Pathfinder First Edition",
   "name": "Wartrain Mount",
@@ -200,7 +200,48 @@
   "description": {
     "raw": "You instill the target animal with the combat training general purpose (see the Handle Animal skill). This supersedes the animal’s previous trained purpose and any tricks it knows. When the spell ends, it reverts to its previous trained purpose and known tricks.",
     "search_text": "\"you instill the target animal with the combat training general purpose (see the handle animal skill). this supersedes the animal’s previous trained purpose and any tricks it knows. when the spell ends, it reverts to its previous trained purpose and known tricks.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You instill the target "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "animal",
+              "relationship_id": "spell.wartrain-mount:uses_definition:rule.animal"
+            },
+            {
+              "node_type": "text",
+              "value": " with the combat training general purpose (see the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Handle Animal",
+              "relationship_id": "spell.wartrain-mount:uses_definition:rule.handle-animal"
+            },
+            {
+              "node_type": "text",
+              "value": " skill). This supersedes the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "animal’s",
+              "relationship_id": "spell.wartrain-mount:uses_definition:rule.animal"
+            },
+            {
+              "node_type": "text",
+              "value": " previous trained purpose and any tricks it knows. When the spell ends, it reverts to its previous trained purpose and known tricks."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -359,6 +400,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.wartrain-mount:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.wartrain-mount:e06a2d173c61f937",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.wartrain-mount:25d9af8b535cb5c2",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.wartrain-mount:appears_on_spell_list:spell-list.paladin",
@@ -579,20 +647,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "animal",
           "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/creature-types#TOC-Animal"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.wartrain-mount:uses_definition:rule.animals",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.animals",
-        "name": "animal’s"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.wartrain-mount:e06a2d173c61f937",
           "source_field": "spell_raw.links_raw[11]",
@@ -649,33 +704,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.wartrain-mount:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.wartrain-mount:e06a2d173c61f937",
-          "source_field": "spell_raw.links_raw[5]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.wartrain-mount:25d9af8b535cb5c2",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -726,11 +754,19 @@
       "raw_value_sha256": "6865e28fb5a632bdff896eb701dc6c93b8d978142eaedc25f21888b148ba8c3c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.wartrain-mount:25d9af8b535cb5c2",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2bd7d88c00c2cf3e2fbf48332d713411fe021a312411158814293be34faed987",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.thought-shield-ii",
   "ruleset": "Pathfinder First Edition",
   "name": "Thought Shield II",
@@ -99,7 +99,59 @@
   "description": {
     "raw": "This functions as thought shield I, but the circumstance bonus on Will saves to resist mind-affecting effects increases to +6. This spell can be undercast.",
     "search_text": "\"this functions as thought shield i, but the circumstance bonus on will saves to resist mind-affecting effects increases to +6. this spell can be undercast.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This functions as "
+            },
+            {
+              "node_type": "text",
+              "value": "thought shield I",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", but the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "circumstance bonus",
+              "relationship_id": "spell.thought-shield-ii:uses_definition:rule.circumstance-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.thought-shield-ii:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saves to resist "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "mind-affecting",
+              "relationship_id": "spell.thought-shield-ii:uses_definition:descriptor.mind-affecting"
+            },
+            {
+              "node_type": "text",
+              "value": " effects increases to +6. This spell can be undercast."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -220,6 +272,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.thought-shield-ii:uses_definition:descriptor.mind-affecting",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.mind-affecting",
+        "name": "Mind-affecting"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.thought-shield-ii:94eb81d26a9c0dc2",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "mind-affecting",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Magic-Descriptor-Mind-Affecting"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.thought-shield-ii:uses_definition:rule.circumstance-bonus",
       "type": "uses_definition",
       "target": {
@@ -235,26 +307,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "circumstance bonus",
           "source_href": "https://www.d20pfsrd.com/basics-ability-scores/glossary#TOC-Circumstance-Bonus"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.thought-shield-ii:uses_definition:rule.mind-affecting",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.mind-affecting",
-        "name": "mind-affecting"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.thought-shield-ii:94eb81d26a9c0dc2",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "mind-affecting",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Magic-Descriptor-Mind-Affecting"
         }
       ],
       "note": null
@@ -300,11 +352,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.thought-shield-ii:uses_definition:rule.will",
+      "relationship_id": "spell.thought-shield-ii:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -368,11 +420,19 @@
       "raw_value_sha256": "079426c0e01d9b0a239a4ec11af818f041df28fa3557de30727363123c325fb1",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.thought-shield-ii:141f88975bd3d529",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "a6e9b5f8611d9edee9cc9726ee29a9c5117f5995a6669f0b8faa89e39368ec3c",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.tireless-pursuit",
   "ruleset": "Pathfinder First Edition",
   "name": "Tireless Pursuit",
@@ -150,7 +150,86 @@
   "description": {
     "raw": "You harden your body against the stresses of long travel. You halve the damage caused by hustling and forced marching (see Pathfinder RPG Core Rulebook 171). In addition, for the duration of the spell you ignore any fatigue caused by such travel. Once the spell ends, if you still have any nonlethal damage caused by the hustling or forced march, you become fatigued, or exhausted if already fatigued.",
     "search_text": "\"you harden your body against the stresses of long travel. you halve the damage caused by hustling and forced marching (see pathfinder rpg core rulebook 171). in addition, for the duration of the spell you ignore any fatigue caused by such travel. once the spell ends, if you still have any nonlethal damage caused by the hustling or forced march, you become fatigued, or exhausted if already fatigued.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You harden your body against the stresses of long travel. You halve the damage caused by "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hustling and forced marching",
+              "relationship_id": "spell.tireless-pursuit:uses_definition:rule.hustling-and-forced-marching"
+            },
+            {
+              "node_type": "text",
+              "value": " (see "
+            },
+            {
+              "node_type": "text",
+              "value": "Pathfinder RPG Core Rulebook ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "171). In addition, for the duration of the spell you ignore any "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fatigue",
+              "relationship_id": "spell.tireless-pursuit:uses_definition:condition.fatigued"
+            },
+            {
+              "node_type": "text",
+              "value": " caused by such travel. Once the spell ends, if you still have any "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "nonlethal damage",
+              "relationship_id": "spell.tireless-pursuit:uses_definition:rule.nonlethal-damage"
+            },
+            {
+              "node_type": "text",
+              "value": " caused by the hustling or forced march, you become "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fatigued",
+              "relationship_id": "spell.tireless-pursuit:uses_definition:condition.fatigued"
+            },
+            {
+              "node_type": "text",
+              "value": ", or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "exhausted",
+              "relationship_id": "spell.tireless-pursuit:uses_definition:condition.exhausted"
+            },
+            {
+              "node_type": "text",
+              "value": " if already "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fatigued",
+              "relationship_id": "spell.tireless-pursuit:uses_definition:condition.fatigued"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -208,6 +287,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.tireless-pursuit:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.tireless-pursuit:f67e81a7afd061ff",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.tireless-pursuit:470130d7f3a9d528",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.tireless-pursuit:appears_on_spell_list:spell-list.ranger",
@@ -352,12 +458,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.tireless-pursuit:uses_definition:condition.fatigue",
+      "relationship_id": "spell.tireless-pursuit:uses_definition:condition.fatigued",
       "type": "uses_definition",
       "target": {
         "entity_type": "condition",
-        "entity_id": "condition.fatigue",
-        "name": "fatigue"
+        "entity_id": "condition.fatigued",
+        "name": "Fatigued"
       },
       "status": "accepted",
       "evidence": [
@@ -367,20 +473,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "fatigue",
           "source_href": "https://www.d20pfsrd.com/gamemastering/conditions#TOC-Fatigued"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.tireless-pursuit:uses_definition:condition.fatigued",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "condition",
-        "entity_id": "condition.fatigued",
-        "name": "fatigued"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.tireless-pursuit:f67e81a7afd061ff",
           "source_field": "spell_raw.links_raw[7]",
@@ -457,33 +550,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.tireless-pursuit:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.tireless-pursuit:f67e81a7afd061ff",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.tireless-pursuit:470130d7f3a9d528",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -534,11 +600,19 @@
       "raw_value_sha256": "cc89fe2aaa1ee47abbc193ddf363c1d685395c4a393c4385b22f75a30b003a15",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.tireless-pursuit:470130d7f3a9d528",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "b03e37237ef5471ffce4330f1317c0152984427bd7b0bfa5e8f1421e78c29174",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

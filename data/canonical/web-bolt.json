@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.web-bolt",
   "ruleset": "Pathfinder First Edition",
   "name": "Web Bolt",
@@ -193,7 +193,40 @@
   "description": {
     "raw": "You launch a ball of webbing at a target, which must make a save or be affected as if by a web spell occupying only the creature’s space. If the creature saves or breaks free of the webbing, the remaining webs dissolve and the square is not considered difficult terrain. The spell has no effect if the target is not on or adjacent to a solid surface that can support the webbing.",
     "search_text": "\"you launch a ball of webbing at a target, which must make a save or be affected as if by a web spell occupying only the creature’s space. if the creature saves or breaks free of the webbing, the remaining webs dissolve and the square is not considered difficult terrain. the spell has no effect if the target is not on or adjacent to a solid surface that can support the webbing.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You launch a ball of webbing at a target, which must make a save or be affected as if by a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "web",
+              "relationship_id": "spell.web-bolt:references:spell.web",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "spell occupying only the creature’s space. If the creature saves or breaks free of the webbing, the remaining webs dissolve and the square is not considered difficult terrain. The spell has no effect if the target is not on or adjacent to a solid surface that can support the webbing."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -467,7 +500,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.web",
-        "name": "web"
+        "name": "Web"
       },
       "status": "accepted",
       "evidence": [
@@ -516,11 +549,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.web-bolt:uses_definition:rule.reflex",
+      "relationship_id": "spell.web-bolt:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -604,11 +637,19 @@
       "raw_value_sha256": "6d76a4af532899d0d499f8940757d9136b94d79edfac2ddf942d0efa408c7aad",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.web-bolt:9ef1e4f9ab5bf9bb",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "46cb06c1d28f5e2eac4b33b199cb7c011f8df0c46c2457661300df3b84b5c92b",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

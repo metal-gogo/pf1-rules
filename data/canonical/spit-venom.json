@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.spit-venom",
   "ruleset": "Pathfinder First Edition",
   "name": "Spit Venom",
@@ -160,7 +160,39 @@
   "description": {
     "raw": "You spit a stream of venom at a target using a ranged touch attack. If the venom hits, it causes blindness for 1 round. The target must also save or be poisoned by black adder venom; the DC in successive rounds of the poison is equal to the spell’s DC.",
     "search_text": "\"you spit a stream of venom at a target using a ranged touch attack. if the venom hits, it causes blindness for 1 round. the target must also save or be poisoned by black adder venom; the dc in successive rounds of the poison is equal to the spell’s dc.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You spit a stream of venom at a target using a ranged "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch attack",
+              "relationship_id": "spell.spit-venom:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": ". If the venom hits, it causes blindness for 1 round. The target must also save or be poisoned by "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "black adder venom",
+              "relationship_id": "spell.spit-venom:uses_definition:rule.black-adder-venom"
+            },
+            {
+              "node_type": "text",
+              "value": "; the DC in successive rounds of the poison is equal to the spell’s DC."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -258,6 +290,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.spit-venom:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.spit-venom:fafbcb22c80f4815",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.spit-venom:appears_on_spell_list:spell-list.oracle",
@@ -496,11 +548,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.spit-venom:uses_definition:rule.fortitude",
+      "relationship_id": "spell.spit-venom:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -554,26 +606,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.spit-venom:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.spit-venom:fafbcb22c80f4815",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -624,11 +656,19 @@
       "raw_value_sha256": "c82b5b85e2d91209250cb2c60fa037a7749807a82dd65648d86d21392c2655c1",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.spit-venom:fafbcb22c80f4815",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2f4ab40ee32d49148f6431551f544ab7e08e4a3da2e5f15817c1ce9c712eccd6",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

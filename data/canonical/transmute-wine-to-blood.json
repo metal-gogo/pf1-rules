@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.transmute-wine-to-blood",
   "ruleset": "Pathfinder First Edition",
   "name": "Transmute Wine to Blood",
@@ -190,7 +190,48 @@
   "description": {
     "raw": "You transform one bottle of fine wine into 1 pint of animal blood, sufficient for a creature with the blood drain ability to feed upon as if it came from a Medium animal with 1 Hit Die. If you are using the optional hunger rules (see page 22), this blood satiates an undead creature’s hunger, negating any withdrawal effects, but does not grant the creature a feeding bonus. The blood coagulates and spoils at the normal rate.",
     "search_text": "\"you transform one bottle of fine wine into 1 pint of animal blood, sufficient for a creature with the blood drain ability to feed upon as if it came from a medium animal with 1 hit die. if you are using the optional hunger rules (see page 22), this blood satiates an undead creature’s hunger, negating any withdrawal effects, but does not grant the creature a feeding bonus. the blood coagulates and spoils at the normal rate.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You transform one "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bottle of fine wine",
+              "relationship_id": "spell.transmute-wine-to-blood:uses_definition:rule.bottle-of-fine-wine"
+            },
+            {
+              "node_type": "text",
+              "value": " into 1 pint of animal blood, sufficient for a creature with the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blood drain",
+              "relationship_id": "spell.transmute-wine-to-blood:uses_definition:rule.blood-drain"
+            },
+            {
+              "node_type": "text",
+              "value": " ability to feed upon as if it came from a Medium animal with 1 Hit Die. If you are using the optional "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hunger rules",
+              "relationship_id": "spell.transmute-wine-to-blood:uses_definition:rule.hunger-rules"
+            },
+            {
+              "node_type": "text",
+              "value": " (see page 22), this blood satiates an undead creature’s hunger, negating any withdrawal effects, but does not grant the creature a feeding bonus. The blood coagulates and spoils at the normal rate."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -261,6 +302,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.transmute-wine-to-blood:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.transmute-wine-to-blood:160ea903ea197018",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.transmute-wine-to-blood:appears_on_spell_list:spell-list.oracle",
@@ -596,26 +657,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.transmute-wine-to-blood:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.transmute-wine-to-blood:160ea903ea197018",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -666,11 +707,19 @@
       "raw_value_sha256": "18b61a8e74b74c5514cf55e126716a32b512d02f9f25c4462407ea9103252473",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.transmute-wine-to-blood:160ea903ea197018",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "8e81f2f0551a63f1f26a63655faffeedff466074afb4268c3a4c1dbc2d3f819f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

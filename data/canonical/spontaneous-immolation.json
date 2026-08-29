@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.spontaneous-immolation",
   "ruleset": "Pathfinder First Edition",
   "name": "Spontaneous Immolation",
@@ -138,7 +138,30 @@
   "description": {
     "raw": "You point your finger at a creature, causing it to spontaneously burst into flame. The target takes 3d6 points of fire damage and catches on fire. A successful Fortitude save reduces this damage by half and prevents the target from catching on fire. Each round on your turn, a burning target can attempt a new save to extinguish the flames (DC equal to the DC of the spell); otherwise it takes another 1d6 fire damage.",
     "search_text": "\"you point your finger at a creature, causing it to spontaneously burst into flame. the target takes 3d6 points of fire damage and catches on fire. a successful fortitude save reduces this damage by half and prevents the target from catching on fire. each round on your turn, a burning target can attempt a new save to extinguish the flames (dc equal to the dc of the spell); otherwise it takes another 1d6 fire damage.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You point your finger at a creature, causing it to spontaneously burst into flame. The target takes 3d6 points of fire damage and catches on fire. A successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.spontaneous-immolation:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save reduces this damage by half and prevents the target from catching on fire. Each round on your turn, a burning target can attempt a new save to extinguish the flames (DC equal to the DC of the spell); otherwise it takes another 1d6 fire damage."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -400,11 +423,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.spontaneous-immolation:uses_definition:rule.fortitude",
+      "relationship_id": "spell.spontaneous-immolation:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -427,11 +450,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.spontaneous-immolation:uses_definition:rule.reflex",
+      "relationship_id": "spell.spontaneous-immolation:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -515,11 +538,19 @@
       "raw_value_sha256": "edb5b4ee30fc67380291d703459e3932f7309eb4c2c0bf993507176f66f1ab7c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.spontaneous-immolation:ffb8ba86108c9a4a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "15784bdff34f78aafd66e9f560f9255caba312db14e4a76612cca15695301dfc",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

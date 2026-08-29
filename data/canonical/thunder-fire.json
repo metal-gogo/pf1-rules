@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.thunder-fire",
   "ruleset": "Pathfinder First Edition",
   "name": "Thunder Fire",
@@ -159,7 +159,39 @@
   "description": {
     "raw": "The firearm targeted creates a thunderous report, even if the firearm is not loaded. Every creature within 15 feet of the creature wielding or carrying the firearm must succeed at a Fortitude save or be deafened for 1 minute. The creature wielding or carrying the firearm takes a –4 penalty on this saving throw, and his misfire range increases by 1 for 1d4 rounds. If the firearm was loaded when it was targeted by this spell, that ammunition is wasted.",
     "search_text": "\"the firearm targeted creates a thunderous report, even if the firearm is not loaded. every creature within 15 feet of the creature wielding or carrying the firearm must succeed at a fortitude save or be deafened for 1 minute. the creature wielding or carrying the firearm takes a –4 penalty on this saving throw, and his misfire range increases by 1 for 1d4 rounds. if the firearm was loaded when it was targeted by this spell, that ammunition is wasted.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The firearm targeted creates a thunderous report, even if the firearm is not loaded. Every creature within 15 feet of the creature wielding or carrying the firearm must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.thunder-fire:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save or be "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "deafened",
+              "relationship_id": "spell.thunder-fire:uses_definition:condition.deaf"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 minute. The creature wielding or carrying the firearm takes a –4 penalty on this saving throw, and his misfire range increases by 1 for 1d4 rounds. If the firearm was loaded when it was targeted by this spell, that ammunition is wasted."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -441,12 +473,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.thunder-fire:uses_definition:condition.deafened",
+      "relationship_id": "spell.thunder-fire:uses_definition:condition.deaf",
       "type": "uses_definition",
       "target": {
         "entity_type": "condition",
-        "entity_id": "condition.deafened",
-        "name": "deafened"
+        "entity_id": "condition.deaf",
+        "name": "Deafened"
       },
       "status": "accepted",
       "evidence": [
@@ -461,11 +493,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.thunder-fire:uses_definition:rule.fortitude",
+      "relationship_id": "spell.thunder-fire:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -501,11 +533,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.thunder-fire:uses_definition:rule.will",
+      "relationship_id": "spell.thunder-fire:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -569,11 +601,19 @@
       "raw_value_sha256": "4fc4d042baf63f4208d7ac1ea51d4148ac227aa3f5d47501e3f2d8dd769a202a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.thunder-fire:78458b44bee2594e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3856e89c3d5470038fcea12d4da02430fb1c6616eba547f9890a2cb85c2576c1",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

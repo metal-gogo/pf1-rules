@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.windy-escape",
   "ruleset": "Pathfinder First Edition",
   "name": "Windy Escape",
@@ -279,7 +279,104 @@
   "description": {
     "raw": "You respond to an attack by briefly becoming vaporous and insubstantial, allowing the attack to pass harmlessly through you. You gain DR 10/magic against this attack and are immune to any poison, sneak attacks, or critical hit effect from that attack.\n\nYou cannot use windy escape against an attack of opportunity you provoked by casting a spell, using a spell-like ability, or using any other magical ability that provokes an attack of opportunity when used.",
     "search_text": "\"you respond to an attack by briefly becoming vaporous and insubstantial, allowing the attack to pass harmlessly through you. you gain dr 10/magic against this attack and are immune to any poison, sneak attacks, or critical hit effect from that attack.\\n\\nyou cannot use windy escape against an attack of opportunity you provoked by casting a spell, using a spell-like ability, or using any other magical ability that provokes an attack of opportunity when used.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You respond to an attack by briefly becoming vaporous and insubstantial, allowing the attack to pass harmlessly through you. You gain "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "DR",
+              "relationship_id": "spell.windy-escape:uses_definition:rule.damage-reduction"
+            },
+            {
+              "node_type": "text",
+              "value": " 10/magic against this attack and are immune to any "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "poison",
+              "relationship_id": "spell.windy-escape:uses_definition:rule.poison"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sneak attacks",
+              "relationship_id": "spell.windy-escape:uses_definition:rule.sneak-attacks"
+            },
+            {
+              "node_type": "text",
+              "value": ", or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "critical hit",
+              "relationship_id": "spell.windy-escape:uses_definition:rule.critical-hit"
+            },
+            {
+              "node_type": "text",
+              "value": " effect from that attack."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You cannot use "
+            },
+            {
+              "node_type": "text",
+              "value": "windy escape ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "against an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack of opportunity",
+              "relationship_id": "spell.windy-escape:uses_definition:rule.attack-of-opportunity"
+            },
+            {
+              "node_type": "text",
+              "value": " you provoked by casting a spell, using a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell-like ability",
+              "relationship_id": "spell.windy-escape:uses_definition:rule.spell-like-abilities"
+            },
+            {
+              "node_type": "text",
+              "value": ", or using any other magical ability that provokes an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack of opportunity",
+              "relationship_id": "spell.windy-escape:uses_definition:rule.attack-of-opportunity"
+            },
+            {
+              "node_type": "text",
+              "value": " when used."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -709,12 +806,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.windy-escape:uses_definition:rule.dr",
+      "relationship_id": "spell.windy-escape:uses_definition:rule.damage-reduction",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.dr",
-        "name": "DR"
+        "entity_id": "rule.damage-reduction",
+        "name": "Damage reduction"
       },
       "status": "accepted",
       "evidence": [
@@ -769,12 +866,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.windy-escape:uses_definition:rule.spell-like-ability",
+      "relationship_id": "spell.windy-escape:uses_definition:rule.spell-like-abilities",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.spell-like-ability",
-        "name": "spell-like ability"
+        "entity_id": "rule.spell-like-abilities",
+        "name": "Spell-like abilities"
       },
       "status": "accepted",
       "evidence": [
@@ -857,11 +954,19 @@
       "raw_value_sha256": "926aebd48eb58edc03cd84f35ac20910df3ae8196ff52d91d8ff430030d73996",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.windy-escape:f2f573691437b8bd",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "68b007ded663f96e10ab1728dc9111d8eb75bdf39a3b3d83cbcaaa814198bddb",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

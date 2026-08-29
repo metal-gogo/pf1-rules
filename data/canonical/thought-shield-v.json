@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.thought-shield-v",
   "ruleset": "Pathfinder First Edition",
   "name": "Thought Shield V",
@@ -99,7 +99,50 @@
   "description": {
     "raw": "This functions as thought shield IV, except as noted above. This spell immediately ends if you fail a Will saving throw against a mind-affecting effect. This spell can be undercast.",
     "search_text": "\"this functions as thought shield iv, except as noted above. this spell immediately ends if you fail a will saving throw against a mind-affecting effect. this spell can be undercast.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This functions as "
+            },
+            {
+              "node_type": "text",
+              "value": "thought shield IV",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except as noted above. This spell immediately ends if you fail a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.thought-shield-v:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saving throw against a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "mind-affecting",
+              "relationship_id": "spell.thought-shield-v:uses_definition:descriptor.mind-affecting"
+            },
+            {
+              "node_type": "text",
+              "value": " effect. This spell can be undercast."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -220,12 +263,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.thought-shield-v:uses_definition:rule.mind-affecting",
+      "relationship_id": "spell.thought-shield-v:uses_definition:descriptor.mind-affecting",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.mind-affecting",
-        "name": "mind-affecting"
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.mind-affecting",
+        "name": "Mind-affecting"
       },
       "status": "accepted",
       "evidence": [
@@ -280,11 +323,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.thought-shield-v:uses_definition:rule.will",
+      "relationship_id": "spell.thought-shield-v:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -348,11 +391,19 @@
       "raw_value_sha256": "f08e0fc2e82551472bf9b0cb693935739f309bb778cd609da18b4f55adbd5b67",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.thought-shield-v:c4fa15e9cd2d2fd3",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "9569a55461ce5371b8e45f34c92d422aae1dc93a992c0f79994db0ce0691a069",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

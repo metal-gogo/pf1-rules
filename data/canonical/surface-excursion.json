@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.surface-excursion",
   "ruleset": "Pathfinder First Edition",
   "name": "Surface Excursion",
@@ -191,7 +191,57 @@
   "description": {
     "raw": "You instantly transport yourself and touched allies onto the nearest sky-facing surface directly above you. The destination surface may be solid ground or the surface of a body of water (or other liquid), depending on your position. If reaching the surface would require crossing planar boundaries or no sky-facing surface exists directly above your position, the spell fails and has no effect.\n\nWhen the spell is cast, a magical beacon appears at both your departure and arrival points, suspended 3 feet in the air. These beacons are invisible to everyone but you and those allies touched when the spell was cast. You and every creature originally targeted by the spell can touch the beacon at your arrival point to teleport back to your original departure point. Each creature that chooses to return in this manner is transported to a free space adjacent to the beacon at your original departure point. If the area around the departure beacon is occupied by a solid body (for instance, rubble from a cave-in), then you and each creature traveling with you take 1d6 points of damage and are shunted to a random open space on a solid surface within 100 feet of the beacon. If there is no free space within 100 feet, the spell effect ends with no return transportation.",
     "search_text": "\"you instantly transport yourself and touched allies onto the nearest sky-facing surface directly above you. the destination surface may be solid ground or the surface of a body of water (or other liquid), depending on your position. if reaching the surface would require crossing planar boundaries or no sky-facing surface exists directly above your position, the spell fails and has no effect.\\n\\nwhen the spell is cast, a magical beacon appears at both your departure and arrival points, suspended 3 feet in the air. these beacons are invisible to everyone but you and those allies touched when the spell was cast. you and every creature originally targeted by the spell can touch the beacon at your arrival point to teleport back to your original departure point. each creature that chooses to return in this manner is transported to a free space adjacent to the beacon at your original departure point. if the area around the departure beacon is occupied by a solid body (for instance, rubble from a cave-in), then you and each creature traveling with you take 1d6 points of damage and are shunted to a random open space on a solid surface within 100 feet of the beacon. if there is no free space within 100 feet, the spell effect ends with no return transportation.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You instantly transport yourself and touched allies onto the nearest sky-facing surface directly above you. The destination surface may be solid ground or the surface of a body of water (or other liquid), depending on your position. If reaching the surface would require crossing planar boundaries or no sky-facing surface exists directly above your position, the spell fails and has no effect."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "When the spell is cast, a magical beacon appears at both your departure and arrival points, suspended 3 feet in the air. These beacons are "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "invisible",
+              "relationship_id": "spell.surface-excursion:uses_definition:condition.invisible"
+            },
+            {
+              "node_type": "text",
+              "value": " to everyone but you and those allies touched when the spell was cast. You and every creature originally targeted by the spell can "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch",
+              "relationship_id": "spell.surface-excursion:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " the beacon at your arrival point to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "teleport",
+              "relationship_id": "spell.surface-excursion:references:spell.teleport"
+            },
+            {
+              "node_type": "text",
+              "value": " back to your original departure point. Each creature that chooses to return in this manner is transported to a free space adjacent to the beacon at your original departure point. If the area around the departure beacon is occupied by a solid body (for instance, rubble from a cave-in), then you and each creature traveling with you take 1d6 points of damage and are shunted to a random open space on a solid surface within 100 feet of the beacon. If there is no free space within 100 feet, the spell effect ends with no return transportation."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -607,7 +657,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.teleport",
-        "name": "teleport"
+        "name": "Teleport"
       },
       "status": "accepted",
       "evidence": [
@@ -662,12 +712,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.surface-excursion:uses_definition:rule.touch",
+      "relationship_id": "spell.surface-excursion:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -689,11 +739,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.surface-excursion:uses_definition:rule.will",
+      "relationship_id": "spell.surface-excursion:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -757,11 +807,19 @@
       "raw_value_sha256": "2427d11046e5c6483d400013611da6d471073ee5882bb57a87f074afeff75d8a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.surface-excursion:7cec6fcfa616e11a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "1d865b118a4423d1e0b1d3c5b53f5e1cc78ac1cfe4c68752bb9ad501aa67acfb",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

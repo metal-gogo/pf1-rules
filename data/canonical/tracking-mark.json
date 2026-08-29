@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.tracking-mark",
   "ruleset": "Pathfinder First Edition",
   "name": "Tracking Mark",
@@ -264,7 +264,57 @@
   "description": {
     "raw": "You gain a supernatural ability to detect tracks and other clues left behind by the target. You treat the DCs of all Survival checks made to track the target as if they were 5 lower than normal, and you gain a +5 bonus on Perception checks made to notice the target if it is using Stealth or recognize it if it is using Disguise.",
     "search_text": "\"you gain a supernatural ability to detect tracks and other clues left behind by the target. you treat the dcs of all survival checks made to track the target as if they were 5 lower than normal, and you gain a +5 bonus on perception checks made to notice the target if it is using stealth or recognize it if it is using disguise.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You gain a supernatural ability to detect tracks and other clues left behind by the target. You treat the DCs of all "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Survival",
+              "relationship_id": "spell.tracking-mark:uses_definition:rule.survival"
+            },
+            {
+              "node_type": "text",
+              "value": " checks made to track the target as if they were 5 lower than normal, and you gain a +5 bonus on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Perception",
+              "relationship_id": "spell.tracking-mark:uses_definition:rule.perception"
+            },
+            {
+              "node_type": "text",
+              "value": " checks made to notice the target if it is using "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Stealth",
+              "relationship_id": "spell.tracking-mark:uses_definition:rule.stealth"
+            },
+            {
+              "node_type": "text",
+              "value": " or recognize it if it is using "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Disguise",
+              "relationship_id": "spell.tracking-mark:uses_definition:rule.disguise"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -389,6 +439,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.tracking-mark:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.tracking-mark:b57f0c9498ed1bbe",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1 (Erastil)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.tracking-mark:appears_on_spell_list:spell-list.oracle",
@@ -700,11 +770,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.tracking-mark:uses_definition:rule.will",
+      "relationship_id": "spell.tracking-mark:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -718,26 +788,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.tracking-mark:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.tracking-mark:b57f0c9498ed1bbe",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1 (Erastil)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -788,11 +838,19 @@
       "raw_value_sha256": "5892af501990477b79e8ff1a7f286416d1818de62681096acbc05c555d52062b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.tracking-mark:b57f0c9498ed1bbe",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "b27a8e47a6706db06c3ab9304b9e96e81a66acf5cfce235750eca2ef120d2f36",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

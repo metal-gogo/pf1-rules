@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.twilight-haze",
   "ruleset": "Pathfinder First Edition",
   "name": "Twilight Haze",
@@ -152,7 +152,44 @@
   "description": {
     "raw": "You create a gray haze that obscures sight (as fog cloud) and causes the illumination level within it to drop one step (as darkness). Since this spell produces an illusion rather than a true physical fog, it is unaffected by wind and can be cast underwater.",
     "search_text": "\"you create a gray haze that obscures sight (as fog cloud) and causes the illumination level within it to drop one step (as darkness). since this spell produces an illusion rather than a true physical fog, it is unaffected by wind and can be cast underwater.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create a gray haze that obscures sight (as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fog cloud",
+              "relationship_id": "spell.twilight-haze:references:spell.fog-cloud",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ") and causes the illumination level within it to drop one step (as "
+            },
+            {
+              "node_type": "text",
+              "value": "darkness",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "). Since this spell produces an illusion rather than a true physical fog, it is unaffected by wind and can be cast underwater."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -555,7 +592,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.fog-cloud",
-        "name": "fog cloud"
+        "name": "Fog Cloud"
       },
       "status": "accepted",
       "evidence": [
@@ -672,11 +709,19 @@
       "raw_value_sha256": "9a49cbf5ae7704d9330776dd5f9edc1d78e1380c7ae18eb07eb3c6f8e2931b48",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.twilight-haze:4da637914e828b74",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f22900aeec0d2c7e89c737ff60fd3284538183ba1eac51c870469fc7190a2df1",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

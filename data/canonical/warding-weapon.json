@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.warding-weapon",
   "ruleset": "Pathfinder First Edition",
   "name": "Warding Weapon",
@@ -185,7 +185,57 @@
   "description": {
     "raw": "The focus of this spell flies upward above your head and takes a defensive position within your space. It lunges at opponents, as if guided by a martially trained hand, parrying and turning back melee attacks aimed at you, but does not strike back at any opponent nor does it damage them. The weapon serves only as a defense. While it protects you, you can cast spells without provoking attacks of opportunity, without the need to cast them defensively.\n\nA creature with the Disruptive feat can easily bypass this spell’s defenses. You provoke attacks of opportunity for casting spells against these creatures even when subject to this spell, though you can still choose to cast defensively.",
     "search_text": "\"the focus of this spell flies upward above your head and takes a defensive position within your space. it lunges at opponents, as if guided by a martially trained hand, parrying and turning back melee attacks aimed at you, but does not strike back at any opponent nor does it damage them. the weapon serves only as a defense. while it protects you, you can cast spells without provoking attacks of opportunity, without the need to cast them defensively.\\n\\na creature with the disruptive feat can easily bypass this spell’s defenses. you provoke attacks of opportunity for casting spells against these creatures even when subject to this spell, though you can still choose to cast defensively.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The focus of this spell flies upward above your head and takes a defensive position within your space. It lunges at opponents, as if guided by a martially trained hand, parrying and turning back melee attacks aimed at you, but does not strike back at any opponent nor does it damage them. The weapon serves only as a defense. While it protects you, you can cast spells without provoking "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attacks of opportunity",
+              "relationship_id": "spell.warding-weapon:uses_definition:rule.attacks-of-opportunity"
+            },
+            {
+              "node_type": "text",
+              "value": ", without the need to cast them defensively."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "A creature with the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Disruptive",
+              "relationship_id": "spell.warding-weapon:uses_definition:rule.disruptive"
+            },
+            {
+              "node_type": "text",
+              "value": " feat can easily bypass this spell’s defenses. You provoke "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attacks of opportunity",
+              "relationship_id": "spell.warding-weapon:uses_definition:rule.attacks-of-opportunity"
+            },
+            {
+              "node_type": "text",
+              "value": " for casting spells against these creatures even when subject to this spell, though you can still choose to cast defensively."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -243,6 +293,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.warding-weapon:appears_on_spell_list:spell-list.duels-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.duels-subdomain",
+        "name": "Duels Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.duels:a29bc5fb",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd—warding weapon",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=War"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.warding-weapon:appears_on_spell_list:spell-list.magus",
@@ -613,26 +683,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.warding-weapon:appears_on_spell_list:spell-list.duels-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.duels-subdomain",
-        "name": "Duels Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.duels:a29bc5fb",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "2nd—warding weapon",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=War"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -691,11 +741,19 @@
       "raw_value_sha256": "cd8d3448d0e96c3f710bd329bac2498e13e632d6c262f2ace041156a2b780231",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.warding-weapon:aafed8ae0968979f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "9b689d124cdd4b3fc8864d1609ec63d07c34cb0a26a4a98f59d5b3c2f70f006d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

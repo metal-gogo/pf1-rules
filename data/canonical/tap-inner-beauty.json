@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.tap-inner-beauty",
   "ruleset": "Pathfinder First Edition",
   "name": "Tap Inner Beauty",
@@ -228,7 +228,48 @@
   "description": {
     "raw": "This spell allows you to tap into the natural beauty of your soul and let it shine from your eyes and your speech. While the spell is active, you gain a +2 insight bonus on all Charisma ability checks and Charisma-based skill checks.",
     "search_text": "\"this spell allows you to tap into the natural beauty of your soul and let it shine from your eyes and your speech. while the spell is active, you gain a +2 insight bonus on all charisma ability checks and charisma-based skill checks.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell allows you to tap into the natural beauty of your soul and let it shine from your eyes and your speech. While the spell is active, you gain a +2 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "insight bonus",
+              "relationship_id": "spell.tap-inner-beauty:uses_definition:rule.insight-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on all "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Charisma",
+              "relationship_id": "spell.tap-inner-beauty:uses_definition:rule.charisma"
+            },
+            {
+              "node_type": "text",
+              "value": " ability checks and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Charisma",
+              "relationship_id": "spell.tap-inner-beauty:uses_definition:rule.charisma"
+            },
+            {
+              "node_type": "text",
+              "value": "-based skill checks."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -306,6 +347,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.tap-inner-beauty:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.tap-inner-beauty:aca77ce4312dc673",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1 (Shelyn)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.tap-inner-beauty:appears_on_spell_list:spell-list.oracle",
@@ -595,26 +656,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.tap-inner-beauty:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.tap-inner-beauty:aca77ce4312dc673",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1 (Shelyn)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -665,11 +706,19 @@
       "raw_value_sha256": "c274a989dbba172aaaedb1460ece1c869ef5ba3dd132e06aa83aa37542a5da01",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.tap-inner-beauty:aca77ce4312dc673",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "1cf941f0614ac93432267d5d07d2e10b996920b7174a822299ec5467914627ca",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

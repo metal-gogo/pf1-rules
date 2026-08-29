@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.tongues-communal",
   "ruleset": "Pathfinder First Edition",
   "name": "Tongues, Communal",
@@ -246,7 +246,33 @@
   "description": {
     "raw": "This spell functions like tongues, except you divide the duration in 10-minute intervals among the creatures touched.",
     "search_text": "\"this spell functions like tongues, except you divide the duration in 10-minute intervals among the creatures touched.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "tongues",
+              "relationship_id": "spell.tongues-communal:functions_like:spell.tongues",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you divide the duration in 10-minute intervals among the creatures touched."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -477,6 +503,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.tongues-communal:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.tongues-communal:20ebbfd0691500bf",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.tongues-communal:afd648aa72e207f8",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.tongues-communal:appears_on_spell_list:spell-list.oracle",
@@ -728,6 +781,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like tongues, except you divide the duration in 10-minute intervals among the creatures touched.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.tongues-communal:2dccb23d7069da94",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "tongues",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/tongues.html#tongues"
         }
       ],
       "note": null
@@ -782,26 +842,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "Ultimate Combat pg. 248",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.tongues-communal:references:spell.tongues",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.tongues",
-        "name": "tongues"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.tongues-communal:2dccb23d7069da94",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "tongues",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/tongues.html#tongues"
         }
       ],
       "note": null
@@ -865,33 +905,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.tongues-communal:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.tongues-communal:20ebbfd0691500bf",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.tongues-communal:afd648aa72e207f8",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -942,11 +955,19 @@
       "raw_value_sha256": "04e4a18025512fbdcf6da317d7719660d40234cee992dcb041376c7a2c6b9040",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.tongues-communal:afd648aa72e207f8",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "46beaf994184b312f5c1202660b5c88196ee399ff2fb949efe57862010df5567",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

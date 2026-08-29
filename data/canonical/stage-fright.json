@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.stage-fright",
   "ruleset": "Pathfinder First Edition",
   "name": "Stage Fright",
@@ -204,7 +204,30 @@
   "description": {
     "raw": "You fill your targets with the sudden fear of failure. A creature that fails its saving throw takes a –4 penalty on ability checks, skill checks, and any checks that require concentration (such as casting a spell in difficult circumstances or operating a complex device).",
     "search_text": "\"you fill your targets with the sudden fear of failure. a creature that fails its saving throw takes a –4 penalty on ability checks, skill checks, and any checks that require concentration (such as casting a spell in difficult circumstances or operating a complex device).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You fill your targets with the sudden fear of failure. A creature that fails its saving throw takes a –4 penalty on ability checks, skill checks, and any checks that require "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concentration",
+              "relationship_id": "spell.stage-fright:uses_definition:rule.concentration"
+            },
+            {
+              "node_type": "text",
+              "value": " (such as casting a spell in difficult circumstances or operating a complex device)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -343,6 +366,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.stage-fright:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.stage-fright:59e11add750aa000",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.stage-fright:bd72ad4fc83da563",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.stage-fright:appears_on_spell_list:spell-list.psychic",
@@ -749,11 +799,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.stage-fright:uses_definition:rule.will",
+      "relationship_id": "spell.stage-fright:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -767,33 +817,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.stage-fright:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.stage-fright:59e11add750aa000",
-          "source_field": "spell_raw.links_raw[7]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.stage-fright:bd72ad4fc83da563",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -844,11 +867,19 @@
       "raw_value_sha256": "e323bdec752c680b4e16aad19143b324b0212d6674b2da05ed70b3e7a06a1bd9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.stage-fright:bd72ad4fc83da563",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "0009ed88b9713ecaee0f5ba4b43183fd98df87a5c574c7768cbcb6121cff07bc",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.stabilize",
   "ruleset": "Pathfinder First Edition",
   "name": "Stabilize",
@@ -228,7 +228,39 @@
   "description": {
     "raw": "Upon casting this spell, you target a living creature that has –1 or fewer hit points. That creature is automatically stabilized and does not lose any further hit points. If the creature later takes damage, it continues dying normally.",
     "search_text": "\"upon casting this spell, you target a living creature that has –1 or fewer hit points. that creature is automatically stabilized and does not lose any further hit points. if the creature later takes damage, it continues dying normally.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Upon casting this spell, you target a living creature that has –1 or fewer hit points. That creature is automatically "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "stabilized",
+              "relationship_id": "spell.stabilize:uses_definition:condition.stabilized"
+            },
+            {
+              "node_type": "text",
+              "value": " and does not lose any further hit points. If the creature later takes damage, it continues "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dying",
+              "relationship_id": "spell.stabilize:uses_definition:condition.dying"
+            },
+            {
+              "node_type": "text",
+              "value": " normally."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -413,6 +445,40 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.stabilize:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.stabilize:a682e21a12943d6a",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 0",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.stabilize:f289127f9f263ed1",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.stabilize:a682e21a12943d6a",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 0",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.stabilize:appears_on_spell_list:spell-list.oracle",
@@ -738,11 +804,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.stabilize:uses_definition:rule.will",
+      "relationship_id": "spell.stabilize:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -763,40 +829,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.stabilize:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.stabilize:a682e21a12943d6a",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 0",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.stabilize:f289127f9f263ed1",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.stabilize:a682e21a12943d6a",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 0",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -847,11 +879,19 @@
       "raw_value_sha256": "86d22dbdd791e6e1b2fb6d95b979e36a59ac15c83baf3d2ed7f9ffb93ec4978c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.stabilize:a682e21a12943d6a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "532e26e9c864eec4b4c3ce29440ea31934de4e8f9c14c47f191f330c0910a5fa",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

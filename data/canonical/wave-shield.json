@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.wave-shield",
   "ruleset": "Pathfinder First Edition",
   "name": "Wave Shield",
@@ -165,7 +165,48 @@
   "description": {
     "raw": "You create a rushing torrent of water in the rough outline of a shield. The water protects you from one physical or fire attack, granting you DR/— and fire resistance equal to half your caster level (minimum 1) on that attack. Once the spell has reduced the damage of one attack against you, it is discharged.",
     "search_text": "\"you create a rushing torrent of water in the rough outline of a shield. the water protects you from one physical or fire attack, granting you dr/— and fire resistance equal to half your caster level (minimum 1) on that attack. once the spell has reduced the damage of one attack against you, it is discharged.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create a rushing torrent of water in the rough outline of a shield. The water protects you from one physical or fire attack, granting you "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "DR",
+              "relationship_id": "spell.wave-shield:uses_definition:rule.damage-reduction"
+            },
+            {
+              "node_type": "text",
+              "value": "/— and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fire resistance",
+              "relationship_id": "spell.wave-shield:uses_definition:rule.fire-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": " equal to half your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.wave-shield:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (minimum 1) on that attack. Once the spell has reduced the damage of one attack against you, it is discharged."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -555,12 +596,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.wave-shield:uses_definition:rule.dr",
+      "relationship_id": "spell.wave-shield:uses_definition:rule.damage-reduction",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.dr",
-        "name": "DR"
+        "entity_id": "rule.damage-reduction",
+        "name": "Damage reduction"
       },
       "status": "accepted",
       "evidence": [
@@ -663,11 +704,19 @@
       "raw_value_sha256": "7ca2f04ecc748eac4a41802aae80399db24ae48eee45c014ede4b586fb54da1d",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.wave-shield:8c49d22861ebaeac",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "4caec6b4fb70b0a3f4f168b974604bf9528aab6ad3ab3a635c0e53cdbb9529b8",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

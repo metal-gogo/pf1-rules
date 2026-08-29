@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.unwitting-ally",
   "ruleset": "Pathfinder First Edition",
   "name": "Unwitting Ally",
@@ -131,7 +131,30 @@
   "description": {
     "raw": "You befuddle the target’s mind. The target has difficulty telling friend from foe for a short period of time. The subject is considered your ally and not your enemies’ ally while determining flanking. The subject takes no other hostile action against your enemies due to this spell’s effect.",
     "search_text": "\"you befuddle the target’s mind. the target has difficulty telling friend from foe for a short period of time. the subject is considered your ally and not your enemies’ ally while determining flanking. the subject takes no other hostile action against your enemies due to this spell’s effect.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You befuddle the target’s mind. The target has difficulty telling friend from foe for a short period of time. The subject is considered your ally and not your enemies’ ally while determining "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "flanking",
+              "relationship_id": "spell.unwitting-ally:uses_definition:rule.flanking"
+            },
+            {
+              "node_type": "text",
+              "value": ". The subject takes no other hostile action against your enemies due to this spell’s effect."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -427,11 +450,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.unwitting-ally:uses_definition:rule.will",
+      "relationship_id": "spell.unwitting-ally:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -495,11 +518,19 @@
       "raw_value_sha256": "0d8d682030f374fad62983eac1ab9d8105b9bddb7b011b4da79534fb2c9ec8d4",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.unwitting-ally:947d1b76f078c597",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "22d073b884ea7cb2fb1f57b0d3684b8e72ac0e5a1754ad6a77d978cea08f5285",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

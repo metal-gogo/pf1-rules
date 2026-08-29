@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.starsight",
   "ruleset": "Pathfinder First Edition",
   "name": "Starsight",
@@ -232,7 +232,48 @@
   "description": {
     "raw": "You can observe the night sky and all of its celestial bodies as if it were a clear night, regardless of weather conditions that would otherwise block your view. Your vision penetrates any light pollution from nonmagical sources, though this spell doesn’t function in daylight, indoors, or underground. You see through forest canopies and similar natural obstructions, but only for the purpose of stargazing. For the spell’s duration, you gain a +2 insight bonus on Knowledge (geography) checks relating to the stars and planets and Survival checks to avoid getting lost.",
     "search_text": "\"you can observe the night sky and all of its celestial bodies as if it were a clear night, regardless of weather conditions that would otherwise block your view. your vision penetrates any light pollution from nonmagical sources, though this spell doesn’t function in daylight, indoors, or underground. you see through forest canopies and similar natural obstructions, but only for the purpose of stargazing. for the spell’s duration, you gain a +2 insight bonus on knowledge (geography) checks relating to the stars and planets and survival checks to avoid getting lost.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You can observe the night sky and all of its celestial bodies as if it were a clear night, regardless of weather conditions that would otherwise block your view. Your vision penetrates any light pollution from nonmagical sources, though this spell doesn’t function in daylight, indoors, or underground. You see through forest canopies and similar natural obstructions, but only for the purpose of stargazing. For the spell’s duration, you gain a +2 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "insight bonus",
+              "relationship_id": "spell.starsight:uses_definition:rule.insight-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Knowledge",
+              "relationship_id": "spell.starsight:uses_definition:rule.knowledge"
+            },
+            {
+              "node_type": "text",
+              "value": " (geography) checks relating to the stars and planets and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Survival",
+              "relationship_id": "spell.starsight:uses_definition:rule.survival"
+            },
+            {
+              "node_type": "text",
+              "value": " checks to avoid getting lost."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -411,6 +452,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.starsight:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.starsight:c4f56fc201412347",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.starsight:7d3fb70146ed54fb",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.starsight:appears_on_spell_list:spell-list.oracle",
@@ -753,33 +821,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.starsight:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.starsight:c4f56fc201412347",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.starsight:7d3fb70146ed54fb",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -830,11 +871,19 @@
       "raw_value_sha256": "1ca4efdd45fb882ef5a9cff555b1e8c78e307c29a32f2f8de6f3ab8bc909d06e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.starsight:7d3fb70146ed54fb",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2a1295720416b519397e43800c983910b4d786576a2cb52c139c138680edd7eb",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.strong-wings",
   "ruleset": "Pathfinder First Edition",
   "name": "Strong Wings",
@@ -259,7 +259,30 @@
   "description": {
     "raw": "The target’s wings grow more powerful, causing its fly speed to increase by +10 feet and its maneuverability to improve by one category (to a maximum of good). This increase counts as an enhancement bonus. This spell has no effect on wingless creatures or winged creatures that cannot fly.",
     "search_text": "\"the target’s wings grow more powerful, causing its fly speed to increase by +10 feet and its maneuverability to improve by one category (to a maximum of good). this increase counts as an enhancement bonus. this spell has no effect on wingless creatures or winged creatures that cannot fly.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target’s wings grow more powerful, causing its fly speed to increase by +10 feet and its maneuverability to improve by one category (to a maximum of good). This increase counts as an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "enhancement bonus",
+              "relationship_id": "spell.strong-wings:uses_definition:rule.enhancement-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": ". This spell has no effect on wingless creatures or winged creatures that cannot fly."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -608,12 +631,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.strong-wings:uses_definition:rule.fort",
+      "relationship_id": "spell.strong-wings:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -668,12 +691,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.strong-wings:uses_definition:rule.touch",
+      "relationship_id": "spell.strong-wings:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -736,11 +759,19 @@
       "raw_value_sha256": "533289a6b94c505fcdd25422132c43d4f9855ec8fb292daa9d363201fc0bcbc1",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.strong-wings:53996a9648140426",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "a228b5fb467963a97dc343a42e5723f810536edbf92f341b260f6eec05c605de",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

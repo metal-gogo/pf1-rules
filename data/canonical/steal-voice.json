@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.steal-voice",
   "ruleset": "Pathfinder First Edition",
   "name": "Steal Voice",
@@ -163,7 +163,41 @@
   "description": {
     "raw": "The target’s throat constricts, giving it the caster croak spellblight (see Ultimate Magic).",
     "search_text": "\"the target’s throat constricts, giving it the caster croak spellblight (see ultimate magic).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target’s throat constricts, giving it the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster croak spellblight",
+              "relationship_id": "spell.steal-voice:uses_definition:rule.caster-croak-spellblight"
+            },
+            {
+              "node_type": "text",
+              "value": " (see "
+            },
+            {
+              "node_type": "text",
+              "value": "Ultimate Magic",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ")."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -533,11 +567,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.steal-voice:uses_definition:rule.fortitude",
+      "relationship_id": "spell.steal-voice:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -621,11 +655,19 @@
       "raw_value_sha256": "c82b5b85e2d91209250cb2c60fa037a7749807a82dd65648d86d21392c2655c1",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.steal-voice:ee6f83d9efd62c05",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "158a5498d05858e36338aa785b0fe950e59ec711f5825f4271dd856596a6de09",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

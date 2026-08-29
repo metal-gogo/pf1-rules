@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.word-of-resolve",
   "ruleset": "Pathfinder First Edition",
   "name": "Word of Resolve",
@@ -105,7 +105,39 @@
   "description": {
     "raw": "You focus your aura on one ally, allowing it to reroll a failed saving throw against a charm or fear effect with a +4 sacred bonus. If you do not have the aura of courage class ability, this spell has no effect on the target’s fear. If you do not have the aura of resolve class ability, this spell has no effect on any charm effects on the target.",
     "search_text": "\"you focus your aura on one ally, allowing it to reroll a failed saving throw against a charm or fear effect with a +4 sacred bonus. if you do not have the aura of courage class ability, this spell has no effect on the target’s fear. if you do not have the aura of resolve class ability, this spell has no effect on any charm effects on the target.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You focus your aura on one ally, allowing it to reroll a failed "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throw",
+              "relationship_id": "spell.word-of-resolve:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": " against a charm or fear effect with a +4 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sacred bonus",
+              "relationship_id": "spell.word-of-resolve:uses_definition:rule.sacred-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": ". If you do not have the aura of courage class ability, this spell has no effect on the target’s fear. If you do not have the aura of resolve class ability, this spell has no effect on any charm effects on the target."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -260,12 +292,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.word-of-resolve:uses_definition:rule.saving-throw",
+      "relationship_id": "spell.word-of-resolve:uses_definition:rule.saving-throws",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.saving-throw",
-        "name": "saving throw"
+        "entity_id": "rule.saving-throws",
+        "name": "Saving throws"
       },
       "status": "accepted",
       "evidence": [
@@ -300,11 +332,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.word-of-resolve:uses_definition:rule.will",
+      "relationship_id": "spell.word-of-resolve:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -368,11 +400,19 @@
       "raw_value_sha256": "5e7cdabbe86e735656ca9dc6c24692541667b1c50e3f5f0cdf3369137aad924d",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.word-of-resolve:c076eb0cb22fb19e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "08a480a0efcf1c0221ae3a0969aa7ad7c042a1e0a697b15f6cca44758bc44525",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

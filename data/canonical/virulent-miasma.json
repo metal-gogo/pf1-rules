@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.virulent-miasma",
   "ruleset": "Pathfinder First Edition",
   "name": "Virulent Miasma",
@@ -147,7 +147,78 @@
   "description": {
     "raw": "Virulent miasma creates fog like fog cloud, except that the vapors carry the taint of disease. Living creatures take a –4 penalty on saving throws against disease effects as long as they remain within the cloud and for 1d4+1 rounds after leaving. This effect of the spell allows a Fortitude save to negate it, and it is subject to spell resistance. A creature that succeeds at its saving throw against the fog (or ignores the fog due to spell resistance) is not affected and need not make further saves even if it remains in the fog.",
     "search_text": "\"virulent miasma creates fog like fog cloud, except that the vapors carry the taint of disease. living creatures take a –4 penalty on saving throws against disease effects as long as they remain within the cloud and for 1d4+1 rounds after leaving. this effect of the spell allows a fortitude save to negate it, and it is subject to spell resistance. a creature that succeeds at its saving throw against the fog (or ignores the fog due to spell resistance) is not affected and need not make further saves even if it remains in the fog.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Virulent miasma creates fog like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fog cloud",
+              "relationship_id": "spell.virulent-miasma:references:spell.fog-cloud",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that the vapors carry the taint of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "disease",
+              "relationship_id": "spell.virulent-miasma:uses_definition:rule.disease"
+            },
+            {
+              "node_type": "text",
+              "value": ". Living creatures take a –4 penalty on saving throws against "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "disease",
+              "relationship_id": "spell.virulent-miasma:uses_definition:rule.disease"
+            },
+            {
+              "node_type": "text",
+              "value": " effects as long as they remain within the cloud and for 1d4+1 rounds after leaving. This effect of the spell allows a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.virulent-miasma:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save to negate it, and it is subject to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.virulent-miasma:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": ". A creature that succeeds at its saving throw against the fog (or ignores the fog due to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.virulent-miasma:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": ") is not affected and need not make further saves even if it remains in the fog."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -428,7 +499,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.fog-cloud",
-        "name": "fog cloud"
+        "name": "Fog Cloud"
       },
       "status": "accepted",
       "evidence": [
@@ -497,12 +568,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.virulent-miasma:uses_definition:rule.fort",
+      "relationship_id": "spell.virulent-miasma:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -512,20 +583,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Fort",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.virulent-miasma:uses_definition:rule.fortitude",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.fortitude",
-        "name": "Fortitude"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.virulent-miasma:fac1c2a8cf6b8d4a",
           "source_field": "spell_raw.links_raw[13]",
@@ -639,11 +697,19 @@
       "raw_value_sha256": "70961e731319ceef7d13373b9fee0464e51960baa2c8925033a9f21fa8a1b441",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.virulent-miasma:a3902b55e3fa974c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e53cdb9ccf2c36d8cbab47f07c1d8d8e8c361ab9a0889820c3a3e43ee1bdcb2a",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

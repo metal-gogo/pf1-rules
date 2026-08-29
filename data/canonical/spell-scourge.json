@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.spell-scourge",
   "ruleset": "Pathfinder First Edition",
   "name": "Spell Scourge",
@@ -205,7 +205,39 @@
   "description": {
     "raw": "A whip of cracking magical might appears in your hand, allowing you lash spells from the mind of enemy spellcasters. With a lash of bluish-purple energy, you strip many protective spells and effects from a single creature. If the target of this spell is currently under the effects of any harmless spells or effects, it must succeed at a Will save or all of those spells and effects end, stripping the target of the benefit of those spells. If the target is not currently under the effect of least one harmless spell, the target is instead confused for 1d4 rounds.",
     "search_text": "\"a whip of cracking magical might appears in your hand, allowing you lash spells from the mind of enemy spellcasters. with a lash of bluish-purple energy, you strip many protective spells and effects from a single creature. if the target of this spell is currently under the effects of any harmless spells or effects, it must succeed at a will save or all of those spells and effects end, stripping the target of the benefit of those spells. if the target is not currently under the effect of least one harmless spell, the target is instead confused for 1d4 rounds.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "A whip of cracking magical might appears in your hand, allowing you lash spells from the mind of enemy spellcasters. With a lash of bluish-purple energy, you strip many protective spells and effects from a single creature. If the target of this spell is currently under the effects of any harmless spells or effects, it must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.spell-scourge:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save or all of those spells and effects end, stripping the target of the benefit of those spells. If the target is not currently under the effect of least one harmless spell, the target is instead "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "confused",
+              "relationship_id": "spell.spell-scourge:uses_definition:condition.confused"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1d4 rounds."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -520,11 +552,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.spell-scourge:uses_definition:rule.will",
+      "relationship_id": "spell.spell-scourge:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -595,11 +627,19 @@
       "raw_value_sha256": "2530ed49127bc5a7a8f32013fb8cf008514787709064d6ce44e091f4a81ef4fe",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.spell-scourge:02006607b391ba75",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f16437c80b9ebe727482e7b15555f1aba1b40b550714a9d45f32472e19233d05",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

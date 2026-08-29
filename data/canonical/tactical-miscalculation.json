@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.tactical-miscalculation",
   "ruleset": "Pathfinder First Edition",
   "name": "Tactical Miscalculation",
@@ -163,7 +163,48 @@
   "description": {
     "raw": "The target becomes fixated on avoiding damage and fails to\nspot even the most opportune moments to attack. Whenever\na creature the target threatens would provoke an attack of\nopportunity from the target, the target must succeed at a Will\nsave or be unable to make the attack of opportunity against\nthat creature.",
     "search_text": "\"the target becomes fixated on avoiding damage and fails to\\nspot even the most opportune moments to attack. whenever\\na creature the target threatens would provoke an attack of\\nopportunity from the target, the target must succeed at a will\\nsave or be unable to make the attack of opportunity against\\nthat creature.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target becomes fixated on avoiding damage and fails to spot even the most opportune moments to attack. Whenever a creature the target threatens would provoke an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack of opportunity",
+              "relationship_id": "spell.tactical-miscalculation:uses_definition:rule.attack-of-opportunity"
+            },
+            {
+              "node_type": "text",
+              "value": " from the target, the target must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.tactical-miscalculation:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save or be unable to make the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack of opportunity",
+              "relationship_id": "spell.tactical-miscalculation:uses_definition:rule.attack-of-opportunity"
+            },
+            {
+              "node_type": "text",
+              "value": " against that creature."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -248,6 +289,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.tactical-miscalculation:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.tactical-miscalculation:cf6c240d5123151b",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.tactical-miscalculation:d216b025371a43a0",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.tactical-miscalculation:appears_on_spell_list:spell-list.ranger",
@@ -520,11 +588,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.tactical-miscalculation:uses_definition:rule.will",
+      "relationship_id": "spell.tactical-miscalculation:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -538,33 +606,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.tactical-miscalculation:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.tactical-miscalculation:cf6c240d5123151b",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.tactical-miscalculation:d216b025371a43a0",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -615,11 +656,19 @@
       "raw_value_sha256": "4783af0f0508f457b166b591dace1671c10ee3c1fe68b8d49cdd835cac941bfa",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.tactical-miscalculation:d216b025371a43a0",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "0ed5042bb5dfb004875be13f21bacda44cd5bb55705788920b30159cbb1b2596",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

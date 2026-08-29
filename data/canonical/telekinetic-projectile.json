@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.telekinetic-projectile",
   "ruleset": "Pathfinder First Edition",
   "name": "Telekinetic Projectile",
@@ -131,7 +131,30 @@
   "description": {
     "raw": "You fling an object weighing up to 5 pounds at the target. You must succeed at a ranged attack (not a ranged touch attack) to hit your target; if you hit, you deal 1d6 points of bludgeoning damage to both the target and the object. The type of object thrown doesn’t change the damage type or any other properties of the attack, even if you throw a weapon or magic item in this way.",
     "search_text": "\"you fling an object weighing up to 5 pounds at the target. you must succeed at a ranged attack (not a ranged touch attack) to hit your target; if you hit, you deal 1d6 points of bludgeoning damage to both the target and the object. the type of object thrown doesn’t change the damage type or any other properties of the attack, even if you throw a weapon or magic item in this way.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You fling an object weighing up to 5 pounds at the target. You must succeed at a ranged attack (not a ranged "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch attack",
+              "relationship_id": "spell.telekinetic-projectile:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": ") to hit your target; if you hit, you deal 1d6 points of bludgeoning damage to both the target and the object. The type of object thrown doesn’t change the damage type or any other properties of the attack, even if you throw a weapon or magic item in this way."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -143,6 +166,26 @@
   },
   "rules_inheritance": [],
   "relationships": [
+    {
+      "relationship_id": "spell.telekinetic-projectile:appears_on_spell_list:spell-list.aether-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.aether-elemental-school",
+        "name": "Aether Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "0—telekinetic projectile;",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/aether-elemental-school/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
     {
       "relationship_id": "spell.telekinetic-projectile:appears_on_spell_list:spell-list.occultist",
       "type": "appears_on_spell_list",
@@ -358,26 +401,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.telekinetic-projectile:appears_on_spell_list:spell-list.aether-elemental-school",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.aether-elemental-school",
-        "name": "Aether Elemental School"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "0—telekinetic projectile;",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/aether-elemental-school/"
-        }
-      ],
-      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -436,11 +459,19 @@
       "raw_value_sha256": "a74bda28297eadaf7bc1238bd2139bbfd722ac6ebb11be022328778ec0da3244",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.telekinetic-projectile:38412ca8a6ec6834",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2df2f01ae4d599681951f9e46d9b3920684b51c8da9d3ca65c234a0fd4b0f040",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

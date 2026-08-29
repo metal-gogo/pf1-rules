@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.venomous-bolt",
   "ruleset": "Pathfinder First Edition",
   "name": "Venomous Bolt",
@@ -115,7 +115,40 @@
   "description": {
     "raw": "You infuse a single arrow or crossbow bolt with natural venom as you fire it. In addition to its normal damage, anyone struck by this arrow or bolt is affected as if by the poison spell. If the arrow is not fired immediately, the spell ends with no effect.",
     "search_text": "\"you infuse a single arrow or crossbow bolt with natural venom as you fire it. in addition to its normal damage, anyone struck by this arrow or bolt is affected as if by the poison spell. if the arrow is not fired immediately, the spell ends with no effect.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You infuse a single arrow or crossbow bolt with natural venom as you fire it. In addition to its normal damage, anyone struck by this arrow or bolt is affected as if by the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "poison",
+              "relationship_id": "spell.venomous-bolt:references:spell.poison",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "spell. If the arrow is not fired immediately, the spell ends with no effect."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -282,7 +315,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.poison",
-        "name": "poison"
+        "name": "Poison"
       },
       "status": "accepted",
       "evidence": [
@@ -324,11 +357,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.venomous-bolt:uses_definition:rule.fortitude",
+      "relationship_id": "spell.venomous-bolt:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -412,11 +445,19 @@
       "raw_value_sha256": "60b01326395e29363a96425627d7c7f64404bc6bd8ec17e9dfd89e68fa23cc68",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.venomous-bolt:93ad3bcc079e86e2",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "8110cd46047be0541557bd3980dba05a0e5f9e7fdf1fd7f48457064b59e6a8e5",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

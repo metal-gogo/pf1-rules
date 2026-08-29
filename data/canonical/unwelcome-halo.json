@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.unwelcome-halo",
   "ruleset": "Pathfinder First Edition",
   "name": "Unwelcome Halo",
@@ -248,7 +248,68 @@
   "description": {
     "raw": "This spell causes the target to glow as if surrounded by a halo of light. This halo sheds normal light in a 20-foot radius from the creature, and increases the light level by one step for an additional 20 feet. This halo makes it impossible for the creature to gain concealment in nonmagical darkness, and in dim or darker conditions, the creature’s glow can be seen even if it is not within direct line of sight.\n\nIf unwelcome halo is brought into an area of magical darkness (or vice versa), the effects of both spells are temporarily negated, so that the otherwise prevailing light conditions exist within the overlapping fields of effect.",
     "search_text": "\"this spell causes the target to glow as if surrounded by a halo of light. this halo sheds normal light in a 20-foot radius from the creature, and increases the light level by one step for an additional 20 feet. this halo makes it impossible for the creature to gain concealment in nonmagical darkness, and in dim or darker conditions, the creature’s glow can be seen even if it is not within direct line of sight.\\n\\nif unwelcome halo is brought into an area of magical darkness (or vice versa), the effects of both spells are temporarily negated, so that the otherwise prevailing light conditions exist within the overlapping fields of effect.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell causes the target to glow as if surrounded by a halo of light. This halo sheds normal light in a 20-foot radius from the creature, and increases the light level by one step for an additional 20 feet. This halo makes it impossible for the creature to gain "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.unwelcome-halo:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": " in nonmagical "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "darkness",
+              "relationship_id": "spell.unwelcome-halo:references:spell.darkness"
+            },
+            {
+              "node_type": "text",
+              "value": ", and in dim or darker conditions, the creature’s glow can be seen even if it is not within direct line of sight."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "If "
+            },
+            {
+              "node_type": "text",
+              "value": "unwelcome halo ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "is brought into an area of magical "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "darkness",
+              "relationship_id": "spell.unwelcome-halo:references:spell.darkness"
+            },
+            {
+              "node_type": "text",
+              "value": " (or vice versa), the effects of both spells are temporarily negated, so that the otherwise prevailing light conditions exist within the overlapping fields of effect."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -319,6 +380,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.unwelcome-halo:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.unwelcome-halo:3623f209dd0edc04",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1 (Sarenrae)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.unwelcome-halo:appears_on_spell_list:spell-list.oracle",
@@ -548,7 +629,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.darkness",
-        "name": "darkness"
+        "name": "Darkness"
       },
       "status": "accepted",
       "evidence": [
@@ -630,11 +711,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.unwelcome-halo:uses_definition:rule.will",
+      "relationship_id": "spell.unwelcome-halo:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -648,26 +729,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.unwelcome-halo:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.unwelcome-halo:3623f209dd0edc04",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1 (Sarenrae)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -718,11 +779,19 @@
       "raw_value_sha256": "f1c1506b2523addfce5e7662c041e864611a60bf0ed5679d522b82292ef598e8",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.unwelcome-halo:3623f209dd0edc04",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "08b94a80a267d818636963f9aeac033e7b5cf0bfd859d42b60571e5e9046bb03",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

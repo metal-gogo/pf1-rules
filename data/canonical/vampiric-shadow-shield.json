@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.vampiric-shadow-shield",
   "ruleset": "Pathfinder First Edition",
   "name": "Vampiric Shadow Shield",
@@ -147,7 +147,57 @@
   "description": {
     "raw": "This spell wreathes you in shadowy energy and damages those that make melee attacks against you. Any creature that strikes you with its body or a handheld weapon deals normal damage, but at the same time the attacker takes 1d6 points of negative energy damage + 1 point per caster level (maximum +15). If the attacker has spell resistance, it applies to this effect. Creatures wielding melee weapons with reach are not subject to this damage. When an attacker takes damage from the spell, you heal a number of hit points equal to 25% of the damage the spell dealt.",
     "search_text": "\"this spell wreathes you in shadowy energy and damages those that make melee attacks against you. any creature that strikes you with its body or a handheld weapon deals normal damage, but at the same time the attacker takes 1d6 points of negative energy damage + 1 point per caster level (maximum +15). if the attacker has spell resistance, it applies to this effect. creatures wielding melee weapons with reach are not subject to this damage. when an attacker takes damage from the spell, you heal a number of hit points equal to 25% of the damage the spell dealt.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell wreathes you in shadowy energy and damages those that make melee attacks against you. Any creature that strikes you with its body or a handheld weapon deals normal damage, but at the same time the attacker takes 1d6 points of negative energy damage + 1 point per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.vampiric-shadow-shield:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum +15). If the attacker has "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.vampiric-shadow-shield:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": ", it applies to this effect. Creatures wielding melee weapons with reach are not subject to this damage. When an attacker takes damage from the spell, you "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "heal",
+              "relationship_id": "spell.vampiric-shadow-shield:references:spell.heal"
+            },
+            {
+              "node_type": "text",
+              "value": " a number of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.vampiric-shadow-shield:uses_definition:rule.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": " equal to 25% of the damage the spell dealt."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -225,6 +275,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.vampiric-shadow-shield:appears_on_spell_list:spell-list.shadow-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.shadow-mystery",
+        "name": "Shadow Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.shadow:d06014e6",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "vampiric shadow shield (10th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Shadow"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     },
     {
       "relationship_id": "spell.vampiric-shadow-shield:appears_on_spell_list:spell-list.sorcerer",
@@ -380,7 +450,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.heal",
-        "name": "heal"
+        "name": "Heal"
       },
       "status": "accepted",
       "evidence": [
@@ -487,26 +557,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.vampiric-shadow-shield:appears_on_spell_list:spell-list.shadow-mystery",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.shadow-mystery",
-        "name": "Shadow Mystery Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.shadow:d06014e6",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "vampiric shadow shield (10th)",
-          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Shadow"
-        }
-      ],
-      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -565,11 +615,19 @@
       "raw_value_sha256": "43e2f9acbdbfb2a1ed30b76d6ac4c19f143d1a4af27d3fbba6c25f7ef5e592d2",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.vampiric-shadow-shield:32634a71006f0da4",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "eeb535efcaba116a557d86bf07abd2d1f684404820c02314ca2857c0ddb47871",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

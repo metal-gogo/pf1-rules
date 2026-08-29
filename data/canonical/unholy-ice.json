@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.unholy-ice",
   "ruleset": "Pathfinder First Edition",
   "name": "Unholy Ice",
@@ -142,7 +142,33 @@
   "description": {
     "raw": "This spell functions as holy ice, except it is made of frozen unholy water rather than holy water.",
     "search_text": "\"this spell functions as holy ice, except it is made of frozen unholy water rather than holy water.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "holy ice",
+              "relationship_id": "spell.unholy-ice:functions_like:spell.holy-ice",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it is made of frozen unholy water rather than holy water."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -263,6 +289,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.unholy-ice:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.unholy-ice:997a6c8dcb59e4a0",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.unholy-ice:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -318,6 +364,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as holy ice, except it is made of frozen unholy water rather than holy water.",
           "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.unholy-ice:1021268b476b48ca",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "holy ice",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/u/h/holy-ice"
         }
       ],
       "note": null
@@ -472,26 +525,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.unholy-ice:references:spell.holy-ice",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.holy-ice",
-        "name": "holy ice"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.unholy-ice:1021268b476b48ca",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "holy ice",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/u/h/holy-ice"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.unholy-ice:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -537,26 +570,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.unholy-ice:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.unholy-ice:997a6c8dcb59e4a0",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -607,11 +620,19 @@
       "raw_value_sha256": "bb275e6f242c475b2fe4be8d45901ded018a210842b8f6c5e89c16f555460c1e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.unholy-ice:997a6c8dcb59e4a0",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "52f6d076ba2bf7b27aa8ab54526f04f30b0ed0dd8bf240559ef4d5a7d5210ca1",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

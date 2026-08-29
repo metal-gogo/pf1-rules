@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.unlife-current",
   "ruleset": "Pathfinder First Edition",
   "name": "Unlife Current",
@@ -192,7 +192,41 @@
   "description": {
     "raw": "This functions as life current except you infuse the current with negative energy, so it heals undead and harms living creatures.",
     "search_text": "\"this functions as life current except you infuse the current with negative energy, so it heals undead and harms living creatures.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This functions as "
+            },
+            {
+              "node_type": "text",
+              "value": "life current",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " except you infuse the current with negative energy, so it heals "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "undead",
+              "relationship_id": "spell.unlife-current:uses_definition:rule.undead"
+            },
+            {
+              "node_type": "text",
+              "value": " and harms living creatures."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -324,6 +358,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.unlife-current:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.unlife-current:8871a64bb2bb0a42",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.unlife-current:appears_on_spell_list:spell-list.oracle",
@@ -616,11 +670,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.unlife-current:uses_definition:rule.will",
+      "relationship_id": "spell.unlife-current:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -634,26 +688,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.unlife-current:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.unlife-current:8871a64bb2bb0a42",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -704,11 +738,19 @@
       "raw_value_sha256": "8478eb9c1bc7401ae722ae52bf8629a342ec9b9658246646fef37c5ff826f925",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.unlife-current:8871a64bb2bb0a42",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "9e8f020bc86c4db47cb4008faedcdd1b13e4e58909aa47643b9c83cc0c1eb2ce",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

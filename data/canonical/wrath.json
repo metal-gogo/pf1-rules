@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.wrath",
   "ruleset": "Pathfinder First Edition",
   "name": "Wrath",
@@ -147,7 +147,57 @@
   "description": {
     "raw": "You focus your anger against an enemy. Choose one enemy creature that you can see. You gain a +1 morale bonus on attack rolls and weapon damage rolls against that designated creature for every three caster levels you have (at least +1, maximum +3). You also receive this bonus on caster level checks made to overcome the creature’s spell resistance, if any. At 12th level, you gain the benefits of the Improved Critical feat on attack rolls made against the designated creature. This effect doesn’t stack with any other effect that expands the threat range of a weapon.",
     "search_text": "\"you focus your anger against an enemy. choose one enemy creature that you can see. you gain a +1 morale bonus on attack rolls and weapon damage rolls against that designated creature for every three caster levels you have (at least +1, maximum +3). you also receive this bonus on caster level checks made to overcome the creature’s spell resistance, if any. at 12th level, you gain the benefits of the improved critical feat on attack rolls made against the designated creature. this effect doesn’t stack with any other effect that expands the threat range of a weapon.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You focus your anger against an enemy. Choose one enemy creature that you can see. You gain a +1 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "morale bonus",
+              "relationship_id": "spell.wrath:uses_definition:rule.morale-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on attack rolls and weapon damage rolls against that designated creature for every three caster levels you have (at least +1, maximum +3). You also receive this bonus on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.wrath:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " checks made to overcome the creature’s "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.wrath:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": ", if any. At 12th level, you gain the benefits of the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Improved Critical",
+              "relationship_id": "spell.wrath:uses_definition:feat.improved-critical"
+            },
+            {
+              "node_type": "text",
+              "value": " feat on attack rolls made against the designated creature. This effect doesn’t stack with any other effect that expands the threat range of a weapon."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -185,6 +235,53 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.wrath:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.wrath:4aba3ea48d1ed73c",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.wrath:86ed133179dc0f80",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.wrath:appears_on_spell_list:spell-list.thorns-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.thorns-patron",
+        "name": "Thorns Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.thorns:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th — wrath",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.wrath:has_descriptor:descriptor.emotion",
@@ -363,31 +460,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.wrath:uses_definition:rule.caster-level",
+      "relationship_id": "spell.wrath:uses_definition:feat.improved-critical",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.caster-level",
-        "name": "caster level"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.wrath:4aba3ea48d1ed73c",
-          "source_field": "spell_raw.links_raw[5]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "caster level",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Caster-Level"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.wrath:uses_definition:rule.improved-critical",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.improved-critical",
+        "entity_type": "feat",
+        "entity_id": "feat.improved-critical",
         "name": "Improved Critical"
       },
       "status": "accepted",
@@ -405,6 +482,26 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Improved Critical",
           "source_href": "https://www.d20pfsrd.com/feats/combat-feats/improved-critical-combat-"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.wrath:uses_definition:rule.caster-level",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.caster-level",
+        "name": "caster level"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.wrath:4aba3ea48d1ed73c",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "caster level",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Caster-Level"
         }
       ],
       "note": null
@@ -448,53 +545,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.wrath:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.wrath:4aba3ea48d1ed73c",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.wrath:86ed133179dc0f80",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.wrath:appears_on_spell_list:spell-list.thorns-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.thorns-patron",
-        "name": "Thorns Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.thorns:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "4th — wrath",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -553,11 +603,19 @@
       "raw_value_sha256": "3cd2dee87b14a3754cbe2255178ed4de9c8075eca89c06d7d0c7aae1935ff0cd",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.wrath:86ed133179dc0f80",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "764e6357b0ad77f0e2e0ee8638069b3c33d3bac6c1277829e1f76abfeba8f13c",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

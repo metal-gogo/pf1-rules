@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.wind-blades",
   "ruleset": "Pathfinder First Edition",
   "name": "Wind Blades",
@@ -225,7 +225,60 @@
   "description": {
     "raw": "You harden the air around the target into jagged invisible blades that deal damage based on how fast the target moves. On its turn, the target takes 1d6 points of slashing damage if it moves at least 5 feet, plus 1d6 points of slashing damage for each additional 10 feet of movement. Movement that doesn’t pass through air (such as burrowing, swimming, or teleportation) doesn’t cause this damage.\n\nIn areas of strong wind , the target takes damage on its turn, even if it doesn’t move. The wind deals 1d8 points of slashing damage for strong wind, plus 1d8 for every wind category above strong. This extra damage does not occur from instantaneous wind effects (such as gust of wind), only from wind effects that last at least 1 round.",
     "search_text": "\"you harden the air around the target into jagged invisible blades that deal damage based on how fast the target moves. on its turn, the target takes 1d6 points of slashing damage if it moves at least 5 feet, plus 1d6 points of slashing damage for each additional 10 feet of movement. movement that doesn’t pass through air (such as burrowing, swimming, or teleportation) doesn’t cause this damage.\\n\\nin areas of strong wind , the target takes damage on its turn, even if it doesn’t move. the wind deals 1d8 points of slashing damage for strong wind, plus 1d8 for every wind category above strong. this extra damage does not occur from instantaneous wind effects (such as gust of wind), only from wind effects that last at least 1 round.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You harden the air around the target into jagged invisible blades that deal damage based on how fast the target moves. On its turn, the target takes 1d6 points of slashing damage if it moves at least 5 feet, plus 1d6 points of slashing damage for each additional 10 feet of movement. "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Movement",
+              "relationship_id": "spell.wind-blades:uses_definition:rule.movement"
+            },
+            {
+              "node_type": "text",
+              "value": " that doesn’t pass through air (such as burrowing, swimming, or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "teleportation",
+              "relationship_id": "spell.wind-blades:uses_definition:rule.teleportation"
+            },
+            {
+              "node_type": "text",
+              "value": ") doesn’t cause this damage."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "In areas of strong wind , the target takes damage on its turn, even if it doesn’t move. The wind deals 1d8 points of slashing damage for strong wind, plus 1d8 for every wind category above strong. This extra damage does not occur from instantaneous wind effects (such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "gust of wind",
+              "relationship_id": "spell.wind-blades:references:spell.gust-of-wind",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "), only from wind effects that last at least 1 round."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -512,7 +565,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.gust-of-wind",
-        "name": "gust of wind"
+        "name": "Gust of Wind"
       },
       "status": "accepted",
       "evidence": [
@@ -661,12 +714,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.wind-blades:uses_definition:rule.touch",
+      "relationship_id": "spell.wind-blades:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -681,11 +734,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.wind-blades:uses_definition:rule.will",
+      "relationship_id": "spell.wind-blades:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -749,11 +802,19 @@
       "raw_value_sha256": "926aebd48eb58edc03cd84f35ac20910df3ae8196ff52d91d8ff430030d73996",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.wind-blades:bb71cda40bfdfada",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "62a73f5425b433d5f414e6c93a1093883c9172e925e49cfb5472da3b7da3919b",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

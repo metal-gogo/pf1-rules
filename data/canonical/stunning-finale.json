@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.stunning-finale",
   "ruleset": "Pathfinder First Edition",
   "name": "Stunning Finale",
@@ -115,7 +115,39 @@
   "description": {
     "raw": "You must have a bardic performance in effect to cast this spell. With a flourish, you immediately end your bardic performance, assaulting the senses of the targets with your finale. Each target is stunned for 1 round. On a successful saving throw, a target is staggered for 1 round.",
     "search_text": "\"you must have a bardic performance in effect to cast this spell. with a flourish, you immediately end your bardic performance, assaulting the senses of the targets with your finale. each target is stunned for 1 round. on a successful saving throw, a target is staggered for 1 round.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You must have a bardic performance in effect to cast this spell. With a flourish, you immediately end your bardic performance, assaulting the senses of the targets with your finale. Each target is "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "stunned",
+              "relationship_id": "spell.stunning-finale:uses_definition:condition.stunned"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 round. On a successful saving throw, a target is "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "staggered",
+              "relationship_id": "spell.stunning-finale:uses_definition:condition.staggered"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 round."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -364,11 +396,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.stunning-finale:uses_definition:rule.fortitude",
+      "relationship_id": "spell.stunning-finale:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -452,11 +484,19 @@
       "raw_value_sha256": "e762f3d26d3b1622dd10fdd491e93e4bd53ef6cef9bd7e962d1ff736e59b049b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.stunning-finale:a58cbceadad8c643",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "fd002f5229bb5cede90e02288da7ae585545a57d6d7fbe9549297d409773a193",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

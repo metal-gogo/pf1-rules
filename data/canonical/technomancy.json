@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.technomancy",
   "ruleset": "Pathfinder First Edition",
   "name": "Technomancy",
@@ -143,7 +143,60 @@
   "description": {
     "raw": "This spell functions as detect magic, except it detects the presence of technological objects instead of magical objects. The spell grants you the Technologist feat for the purposes of attempting Knowledge (engineering) checks to identify the properties of technological items in your possession. If you already possess this feat, you gain a +10 bonus on Knowledge (engineering) checks to identify item properties.",
     "search_text": "\"this spell functions as detect magic, except it detects the presence of technological objects instead of magical objects. the spell grants you the technologist feat for the purposes of attempting knowledge (engineering) checks to identify the properties of technological items in your possession. if you already possess this feat, you gain a +10 bonus on knowledge (engineering) checks to identify item properties.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "detect magic",
+              "relationship_id": "spell.technomancy:functions_like:spell.detect-magic",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it detects the presence of technological objects instead of magical objects. The spell grants you the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Technologist",
+              "relationship_id": "spell.technomancy:uses_definition:rule.technologist"
+            },
+            {
+              "node_type": "text",
+              "value": " feat for the purposes of attempting "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Knowledge",
+              "relationship_id": "spell.technomancy:uses_definition:rule.knowledge"
+            },
+            {
+              "node_type": "text",
+              "value": " (engineering) checks to identify the properties of technological items in your possession. If you already possess this feat, you gain a +10 bonus on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Knowledge",
+              "relationship_id": "spell.technomancy:uses_definition:rule.knowledge"
+            },
+            {
+              "node_type": "text",
+              "value": " (engineering) checks to identify item properties."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -423,6 +476,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as detect magic, except it detects the presence of technological objects instead of magical objects. The spell grants you the Technologist feat for the purposes of attempting Knowledge (engineering) checks to identify the properties of technological items in your possession. If you already possess this feat, you gain a +10 bonus on Knowledge (engineering) checks to identify item properties.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.technomancy:a11dbd4784e2f8f2",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "detect magic",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/detectMagic-2.html#detect-magic"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.technomancy:fbd0d2d1275901c7",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "detect magic",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/detect-magic/"
         }
       ],
       "note": null
@@ -491,33 +558,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "Technology Guide pg. 11",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.technomancy:references:spell.detect-magic",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.detect-magic",
-        "name": "detect magic"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.technomancy:a11dbd4784e2f8f2",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "detect magic",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/detectMagic-2.html#detect-magic"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.technomancy:fbd0d2d1275901c7",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "detect magic",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/detect-magic/"
         }
       ],
       "note": null
@@ -672,11 +712,19 @@
       "raw_value_sha256": "cdebd7e9c5eeb47ffacf4796aa3e6ff62eabc8a71250af4b5fe7f60e489df1f5",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.technomancy:adf9544fe4c925a0",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "c0afe5c50bdba3fd3bd67610182355a75b5696dae2aa1c854c073c6a8bb7e5b3",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

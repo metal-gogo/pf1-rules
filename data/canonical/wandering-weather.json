@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.wandering-weather",
   "ruleset": "Pathfinder First Edition",
   "name": "Wandering Weather",
@@ -161,7 +161,33 @@
   "description": {
     "raw": "This spell functions as control weather except you can opt for the weather to remain centered on you as you move.",
     "search_text": "\"this spell functions as control weather except you can opt for the weather to remain centered on you as you move.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "control weather",
+              "relationship_id": "spell.wandering-weather:functions_like:spell.control-weather",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " except you can opt for the weather to remain centered on you as you move."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -510,7 +536,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.control-weather",
-        "name": "control weather"
+        "name": "Control Weather"
       },
       "status": "accepted",
       "evidence": [
@@ -593,11 +619,19 @@
       "raw_value_sha256": "cd253bf39467df1cb3d6246f6aea38b0b82a153347d7b80827c2d772df2a41e4",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.wandering-weather:3a0caa78d6e79e7a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "03b3b46901f5d464d46a826f033aeff57c7e02048264ed92fc204c2275c89624",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

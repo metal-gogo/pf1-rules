@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.telekinetic-strikes",
   "ruleset": "Pathfinder First Edition",
   "name": "Telekinetic Strikes",
@@ -139,7 +139,30 @@
   "description": {
     "raw": "The touched creature’s limbs are charged with telekinetic force. For the duration of the spell, the target’s unarmed attacks or natural weapons deal an additional 1d4 points of force damage on each successful unarmed melee attack.",
     "search_text": "\"the touched creature’s limbs are charged with telekinetic force. for the duration of the spell, the target’s unarmed attacks or natural weapons deal an additional 1d4 points of force damage on each successful unarmed melee attack.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The touched creature’s limbs are charged with telekinetic force. For the duration of the spell, the target’s unarmed attacks or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "natural weapons",
+              "relationship_id": "spell.telekinetic-strikes:uses_definition:rule.natural-attacks"
+            },
+            {
+              "node_type": "text",
+              "value": " deal an additional 1d4 points of force damage on each successful unarmed melee attack."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -402,12 +425,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.telekinetic-strikes:uses_definition:rule.natural-weapons",
+      "relationship_id": "spell.telekinetic-strikes:uses_definition:rule.natural-attacks",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.natural-weapons",
-        "name": "natural weapons"
+        "entity_id": "rule.natural-attacks",
+        "name": "Natural attacks"
       },
       "status": "accepted",
       "evidence": [
@@ -442,12 +465,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.telekinetic-strikes:uses_definition:rule.touch",
+      "relationship_id": "spell.telekinetic-strikes:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -462,11 +485,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.telekinetic-strikes:uses_definition:rule.will",
+      "relationship_id": "spell.telekinetic-strikes:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -530,11 +553,19 @@
       "raw_value_sha256": "6f70a045fac2f1303714ab1c79857b0fc16a5ccfc46e1005352ad2f1b7d3c5c1",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.telekinetic-strikes:b44f60619d471c5d",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "252e0777f7a05425dc7721b51a0175253fa7e457a6f23154ac3aedd8cf5b3aea",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

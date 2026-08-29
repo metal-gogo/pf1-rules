@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.zephyrs-fleetness",
   "ruleset": "Pathfinder First Edition",
   "name": "Zephyr's Fleetness",
@@ -135,7 +135,39 @@
   "description": {
     "raw": "You can call upon the spirits of the air to grant agility to your allies. Each target gains a +30 foot enhancement bonus to its land speed and fly speed (if any). Each target can also move (and charge) through difficult terrain without penalty.",
     "search_text": "\"you can call upon the spirits of the air to grant agility to your allies. each target gains a +30 foot enhancement bonus to its land speed and fly speed (if any). each target can also move (and charge) through difficult terrain without penalty.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You can call upon the spirits of the air to grant agility to your allies. Each target gains a +30 foot "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "enhancement bonus",
+              "relationship_id": "spell.zephyrs-fleetness:uses_definition:rule.enhancement-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " to its land speed and fly speed (if any). Each target can also move (and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "charge",
+              "relationship_id": "spell.zephyrs-fleetness:uses_definition:rule.charge"
+            },
+            {
+              "node_type": "text",
+              "value": ") through difficult terrain without penalty."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -350,11 +382,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.zephyrs-fleetness:uses_definition:rule.will",
+      "relationship_id": "spell.zephyrs-fleetness:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -418,11 +450,19 @@
       "raw_value_sha256": "47ba2ce083b48e199920b0f6d539a27b05b0b8464ad9ebbfda869f86404cb122",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.zephyrs-fleetness:aa0952dbb1012138",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2f382ae92cd2d2ffd0794e078c223c0ac20a3b18f1fd4a08bd12db2349e02046",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

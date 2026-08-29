@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.wing-bounty",
   "ruleset": "Pathfinder First Edition",
   "name": "Wing Bounty",
@@ -145,7 +145,42 @@
   "description": {
     "raw": "Your wings sprout a variety of colorful and flavorful berries. Each berry functions as if affected by goodberry. You can choose for one affected berry to also be poisonous (as striped toadstool); only you and druids of 5th level or higher can tell which is which without magic.",
     "search_text": "\"your wings sprout a variety of colorful and flavorful berries. each berry functions as if affected by goodberry. you can choose for one affected berry to also be poisonous (as striped toadstool); only you and druids of 5th level or higher can tell which is which without magic.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Your wings sprout a variety of colorful and flavorful berries. Each berry functions as if affected by "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "goodberry",
+              "relationship_id": "spell.wing-bounty:references:spell.goodberry",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ". You can choose for one affected berry to also be poisonous (as striped toadstool); only you and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "druids",
+              "relationship_id": "spell.wing-bounty:uses_definition:rule.druids"
+            },
+            {
+              "node_type": "text",
+              "value": " of 5th level or higher can tell which is which without magic."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -332,7 +367,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.goodberry",
-        "name": "goodberry"
+        "name": "Goodberry"
       },
       "status": "accepted",
       "evidence": [
@@ -462,11 +497,19 @@
       "raw_value_sha256": "cbfa5be2abef05da89bbf8395c21d88551f978c4ff372d27e23e559a5567ef5d",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.wing-bounty:a24c31d0715fd25b",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "6173df25b31e760fefa09bbc5beaf177574de2ce5024bd3918bc0178115475d3",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

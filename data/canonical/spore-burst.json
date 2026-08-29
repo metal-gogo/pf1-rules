@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.spore-burst",
   "ruleset": "Pathfinder First Edition",
   "name": "Spore Burst",
@@ -145,7 +145,75 @@
   "description": {
     "raw": "You cause a willing plant creature’s body to sprout small, puffy mushrooms that remain for 1 round per caster level or until the creature uses them. As a standard action, the target can cause these mushrooms to burst open, releasing a cloud of toxic spores that affect all creatures in a 20-foot-radius spread. Those in the area must succeed at Fortitude saves or be sickened for 1d6 rounds as they are overcome by sneezing and coughing. The caster is immune to this poison effect, as are all creatures of the plant type.",
     "search_text": "\"you cause a willing plant creature’s body to sprout small, puffy mushrooms that remain for 1 round per caster level or until the creature uses them. as a standard action, the target can cause these mushrooms to burst open, releasing a cloud of toxic spores that affect all creatures in a 20-foot-radius spread. those in the area must succeed at fortitude saves or be sickened for 1d6 rounds as they are overcome by sneezing and coughing. the caster is immune to this poison effect, as are all creatures of the plant type.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You cause a willing "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "plant",
+              "relationship_id": "spell.spore-burst:uses_definition:rule.plant"
+            },
+            {
+              "node_type": "text",
+              "value": " creature’s body to sprout small, puffy mushrooms that remain for 1 round per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.spore-burst:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " or until the creature uses them. As a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "standard action",
+              "relationship_id": "spell.spore-burst:uses_action:action.standard-action"
+            },
+            {
+              "node_type": "text",
+              "value": ", the target can cause these mushrooms to burst open, releasing a cloud of toxic spores that affect all creatures in a 20-foot-radius spread. Those in the area must succeed at "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.spore-burst:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saves or be "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sickened",
+              "relationship_id": "spell.spore-burst:uses_definition:condition.sickened"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1d6 rounds as they are overcome by sneezing and coughing. The caster is immune to this poison effect, as are all creatures of the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "plant",
+              "relationship_id": "spell.spore-burst:uses_definition:rule.plant"
+            },
+            {
+              "node_type": "text",
+              "value": " type."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -455,11 +523,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.spore-burst:uses_definition:rule.fortitude",
+      "relationship_id": "spell.spore-burst:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -549,12 +617,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.spore-burst:uses_definition:rule.touch",
+      "relationship_id": "spell.spore-burst:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -617,11 +685,19 @@
       "raw_value_sha256": "1e1df8cc1af130ad73a8af11438b26e41346d996f7681c44caabf9f12c204c22",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.spore-burst:7e959da9eeb8a935",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "609385f535c483e78c563a34b87bb3683ec8d7df3ae337428483b46875c0e489",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
