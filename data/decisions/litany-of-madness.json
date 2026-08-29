@@ -157,6 +157,24 @@
         "aon:subdomain.truth:cf9e731e"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.litany-of-madness:c782317273e485ef",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.litany-of-madness:c782317273e485ef",
+        "legacy_aon:spell.litany-of-madness:535e1231eff742e0",
+        "d20pfsrd:spell.litany-of-madness:c977c52c19578269",
+        "aon:mystery.lunar:8e477077",
+        "aon:subdomain.truth:cf9e731e"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -215,6 +233,53 @@
         "d20pfsrd:spell.litany-of-madness:c977c52c19578269"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.litany-of-madness:appears_on_spell_list:spell-list.lunar-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.lunar:8e477077",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.lunar:8e477077"
+      ],
+      "rationale": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.litany-of-madness:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.litany-of-madness:c977c52c19578269",
+          "source_field": "spell_raw.links_raw[3]"
+        },
+        {
+          "observation_id": "aon:spell.litany-of-madness:c782317273e485ef",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:spell.litany-of-madness:c977c52c19578269",
+        "aon:spell.litany-of-madness:c782317273e485ef"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.litany-of-madness:appears_on_spell_list:spell-list.truth-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.truth:cf9e731e",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.truth:cf9e731e"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.litany-of-madness:has_descriptor:descriptor.language-dependent",
@@ -383,53 +448,6 @@
         "d20pfsrd:spell.litany-of-madness:c977c52c19578269"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.litany-of-madness:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.litany-of-madness:c977c52c19578269",
-          "source_field": "spell_raw.links_raw[3]"
-        },
-        {
-          "observation_id": "aon:spell.litany-of-madness:c782317273e485ef",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:spell.litany-of-madness:c977c52c19578269",
-        "aon:spell.litany-of-madness:c782317273e485ef"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.litany-of-madness:appears_on_spell_list:spell-list.lunar-mystery",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.lunar:8e477077",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:mystery.lunar:8e477077"
-      ],
-      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
-    },
-    {
-      "relationship_id": "spell.litany-of-madness:appears_on_spell_list:spell-list.truth-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.truth:cf9e731e",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.truth:cf9e731e"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

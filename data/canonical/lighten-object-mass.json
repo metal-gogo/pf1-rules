@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.lighten-object-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Lighten Object, Mass",
@@ -282,7 +282,42 @@
   "description": {
     "raw": "This spell functions like lighten object, except that it affects a number of objects equal to half your caster level.",
     "search_text": "\"this spell functions like lighten object, except that it affects a number of objects equal to half your caster level.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "lighten object",
+              "relationship_id": "spell.lighten-object-mass:functions_like:spell.lighten-object",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that it affects a number of objects equal to half your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.lighten-object-mass:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -452,6 +487,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.lighten-object-mass:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.lighten-object-mass:14566024b4212625",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.lighten-object-mass:052e02ae4a0b795a",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5 (Gorum)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.lighten-object-mass:appears_on_spell_list:spell-list.oracle",
@@ -767,33 +829,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.lighten-object-mass:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.lighten-object-mass:14566024b4212625",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.lighten-object-mass:052e02ae4a0b795a",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5 (Gorum)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -844,11 +879,19 @@
       "raw_value_sha256": "33c002af92233a919b3fd993a5afd3a67f87b2848c1a0bc226aa2b70a73af36c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.lighten-object-mass:052e02ae4a0b795a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "dda31764bf206003e68a8c5cf01616d29251967d047995a3bccb1378d3fa0834",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

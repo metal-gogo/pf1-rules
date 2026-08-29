@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.locate-creature",
   "ruleset": "Pathfinder First Edition",
   "name": "Locate Creature",
@@ -217,7 +217,87 @@
   "description": {
     "raw": "This spell functions like locate object, except this spell locates a known creature. You slowly turn and sense when you are facing in the direction of the creature to be located, provided it is within range. You also know in which direction the creature is moving, if any.\n\nThe spell can locate a creature of a specific kind or a specific creature known to you. It cannot find a creature of a certain type. To find a kind of creature, you must have seen such a creature up close (within 30 feet) at least once.\n\nRunning water blocks the spell. It cannot detect objects. It can be fooled by mislead, nondetection, and polymorph spells.",
     "search_text": "\"this spell functions like locate object, except this spell locates a known creature. you slowly turn and sense when you are facing in the direction of the creature to be located, provided it is within range. you also know in which direction the creature is moving, if any.\\n\\nthe spell can locate a creature of a specific kind or a specific creature known to you. it cannot find a creature of a certain type. to find a kind of creature, you must have seen such a creature up close (within 30 feet) at least once.\\n\\nrunning water blocks the spell. it cannot detect objects. it can be fooled by mislead, nondetection, and polymorph spells.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "locate object",
+              "relationship_id": "spell.locate-creature:functions_like:spell.locate-object",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except this spell locates a known creature. You slowly turn and sense when you are facing in the direction of the creature to be located, provided it is within range. You also know in which direction the creature is moving, if any."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The spell can locate a creature of a specific kind or a specific creature known to you. It cannot find a creature of a certain type. To find a kind of creature, you must have seen such a creature up close (within 30 feet) at least once."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Running water blocks the spell. It cannot detect objects. It can be fooled by "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "mislead",
+              "relationship_id": "spell.locate-creature:references:spell.mislead",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "nondetection",
+              "relationship_id": "spell.locate-creature:references:spell.nondetection",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "polymorph",
+              "relationship_id": "spell.locate-creature:references:spell.polymorph",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spells."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -356,6 +436,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.locate-creature:appears_on_spell_list:spell-list.exploration-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.exploration-subdomain",
+        "name": "Exploration Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.exploration:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th—locate creature",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Travel"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.locate-creature:appears_on_spell_list:spell-list.medium",
@@ -647,6 +747,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like locate object, except this spell locates a known creature. You slowly turn and sense when you are facing in the direction of the creature to be located, provided it is within range. You also know in which direction the creature is moving, if any.\n\nThe spell can locate a creature of a specific kind or a specific creature known to you. It cannot find a creature of a certain type. To find a kind of creature, you must have seen such a creature up close (within 30 feet) at least once.\n\nRunning water blocks the spell. It cannot detect objects. It can be fooled by mislead, nondetection, and polymorph spells.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.locate-creature:a28d0f104c552f69",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "locate object",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/locateObject.html#locate-object"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.locate-creature:d5a468d081103666",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "locate object",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/l/locate-object"
         }
       ],
       "note": null
@@ -713,39 +827,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.locate-creature:references:spell.locate-object",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.locate-object",
-        "name": "locate object"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.locate-creature:a28d0f104c552f69",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "locate object",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/locateObject.html#locate-object"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.locate-creature:d5a468d081103666",
-          "source_field": "spell_raw.links_raw[7]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "locate object",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/l/locate-object"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.locate-creature:references:spell.mislead",
       "type": "references",
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.mislead",
-        "name": "mislead"
+        "name": "Mislead"
       },
       "status": "accepted",
       "evidence": [
@@ -772,7 +859,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.nondetection",
-        "name": "nondetection"
+        "name": "Nondetection"
       },
       "status": "accepted",
       "evidence": [
@@ -799,7 +886,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.polymorph",
-        "name": "polymorph"
+        "name": "Polymorph"
       },
       "status": "accepted",
       "evidence": [
@@ -879,26 +966,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.locate-creature:appears_on_spell_list:spell-list.exploration-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.exploration-subdomain",
-        "name": "Exploration Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.exploration:4a91e51b",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "4th—locate creature",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Travel"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -957,11 +1024,19 @@
       "raw_value_sha256": "0b34c3c5e56ea476a4f1a8f146f3341ce8288dd8360ba70c8047cd491234c2bb",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.locate-creature:b4cb23cdb53827f7",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f5496e7c6d4b85569ff9d319d0395facd308d265604da50dfd32a930e6341bba",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

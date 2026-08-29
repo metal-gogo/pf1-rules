@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.linebreaker",
   "ruleset": "Pathfinder First Edition",
   "name": "Linebreaker",
@@ -264,7 +264,48 @@
   "description": {
     "raw": "You gain a +20 foot bonus to your base speed when charging and a +2 bonus on combat maneuver checks made to bull rush or overrun.",
     "search_text": "\"you gain a +20 foot bonus to your base speed when charging and a +2 bonus on combat maneuver checks made to bull rush or overrun.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You gain a +20 foot bonus to your base speed when charging and a +2 bonus on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "combat maneuver",
+              "relationship_id": "spell.linebreaker:uses_definition:rule.combat-maneuvers"
+            },
+            {
+              "node_type": "text",
+              "value": " checks made to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bull rush",
+              "relationship_id": "spell.linebreaker:uses_definition:rule.bull-rush"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "overrun",
+              "relationship_id": "spell.linebreaker:uses_definition:rule.overrun"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -423,6 +464,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.linebreaker:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.linebreaker:7ddf58b8456cabc3",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.linebreaker:d6913994f6f3bcc0",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1 (half-orc)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.linebreaker:appears_on_spell_list:spell-list.paladin",
@@ -587,12 +655,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.linebreaker:uses_definition:rule.combat-maneuver",
+      "relationship_id": "spell.linebreaker:uses_definition:rule.combat-maneuvers",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.combat-maneuver",
-        "name": "combat maneuver"
+        "entity_id": "rule.combat-maneuvers",
+        "name": "Combat maneuvers"
       },
       "status": "accepted",
       "evidence": [
@@ -665,33 +733,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.linebreaker:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.linebreaker:7ddf58b8456cabc3",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.linebreaker:d6913994f6f3bcc0",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1 (half-orc)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -742,11 +783,19 @@
       "raw_value_sha256": "11e96cea8f63380f3dcfdea39a4efe135cdace71db76f18c4a7539ced96112a0",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.linebreaker:d6913994f6f3bcc0",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "7507eb363ba3ba94c311ecf8bbd88567192e672ad9e5d02eca6676e9a9440556",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

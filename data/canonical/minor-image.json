@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.minor-image",
   "ruleset": "Pathfinder First Edition",
   "name": "Minor Image",
@@ -189,7 +189,44 @@
   "description": {
     "raw": "This spell functions like silent image, except that minor image includes some minor sounds but not understandable speech.",
     "search_text": "\"this spell functions like silent image, except that minor image includes some minor sounds but not understandable speech.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "silent image",
+              "relationship_id": "spell.minor-image:functions_like:spell.silent-image",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that "
+            },
+            {
+              "node_type": "text",
+              "value": "minor image",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " includes some minor sounds but not understandable speech."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -313,6 +350,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.minor-image:appears_on_spell_list:spell-list.imagination-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.imagination-subdomain",
+        "name": "Imagination Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.imagination:05c8839f",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd—minor image",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Luck"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.minor-image:appears_on_spell_list:spell-list.magus",
@@ -565,6 +622,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like silent image, except that minor image includes some minor sounds but not understandable speech.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.minor-image:2cd9febe9902b95f",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "silent image",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/silentImage.html#silent-image"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.minor-image:b62b15c9fe99438b",
+          "source_field": "spell_raw.links_raw[9]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "silent image",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/silent-image/"
         }
       ],
       "note": null
@@ -658,33 +729,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.minor-image:references:spell.silent-image",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.silent-image",
-        "name": "silent image"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.minor-image:2cd9febe9902b95f",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "silent image",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/silentImage.html#silent-image"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.minor-image:b62b15c9fe99438b",
-          "source_field": "spell_raw.links_raw[9]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "silent image",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/silent-image/"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.minor-image:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -743,26 +787,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.minor-image:appears_on_spell_list:spell-list.imagination-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.imagination-subdomain",
-        "name": "Imagination Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.imagination:05c8839f",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "2nd—minor image",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Luck"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -821,11 +845,19 @@
       "raw_value_sha256": "aff2a2b9d77067540bf974287aa66c8a7740be1f1fb2bde4b2385f7ba119c752",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.minor-image:83c02576b5221ea1",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d7b6ef7e02b51f73f552ec23ee2f47727725d9cbb777bb095765569ab173e63b",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

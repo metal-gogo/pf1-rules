@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.mount",
   "ruleset": "Pathfinder First Edition",
   "name": "Mount",
@@ -163,7 +163,48 @@
   "description": {
     "raw": "You summon a light horse or a pony (your choice) to serve you as a mount. The steed serves willingly and well. The mount comes with a bit and bridle and a riding saddle.",
     "search_text": "\"you summon a light horse or a pony (your choice) to serve you as a mount. the steed serves willingly and well. the mount comes with a bit and bridle and a riding saddle.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "summon",
+              "relationship_id": "spell.mount:uses_definition:rule.summon"
+            },
+            {
+              "node_type": "text",
+              "value": " a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "light horse",
+              "relationship_id": "spell.mount:uses_definition:monster.horse"
+            },
+            {
+              "node_type": "text",
+              "value": " or a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "pony",
+              "relationship_id": "spell.mount:uses_definition:rule.pony"
+            },
+            {
+              "node_type": "text",
+              "value": " (your choice) to serve you as a mount. The steed serves willingly and well. The mount comes with a bit and bridle and a riding saddle."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -526,12 +567,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.mount:uses_definition:rule.light-horse",
+      "relationship_id": "spell.mount:uses_definition:monster.horse",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.light-horse",
-        "name": "light horse"
+        "entity_type": "monster",
+        "entity_id": "monster.horse",
+        "name": "Light horse"
       },
       "status": "accepted",
       "evidence": [
@@ -541,20 +582,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "light horse",
           "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/animals/horse"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.mount:uses_definition:rule.light-horses",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.light-horses",
-        "name": "light horses"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.mount:938e413fd855bee9",
           "source_field": "spell_raw.links_raw[13]",
@@ -721,11 +749,19 @@
       "raw_value_sha256": "6a289baf98b1326e11fdbcefb7b95ee1aa917b62d8044d63805c4fd6d687f801",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.mount:f40a74c95027d5b2",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "45bdd02d4a83dc9c48b2ad421271c55aaa1a44b403289835a9c669acea314406",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

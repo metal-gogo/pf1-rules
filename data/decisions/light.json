@@ -89,28 +89,53 @@
         "d20pfsrd:magic-school.wood-elemental:d18ad88c"
       ],
       "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
-    }
-  ],
-  "relationship_decisions": [
+    },
     {
-      "relationship_id": "spell.light:has_school:magic-school.evocation",
-      "decision": "accept",
-      "evidence": [
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
         {
           "observation_id": "aon:spell.light:647bc632",
-          "source_field": "spell_raw.links_raw[1]"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.light:19012c89",
-          "source_field": "spell_raw.links_raw[0]"
+          "source_field": "spell_raw.description_raw"
         }
       ],
       "considered_observation_ids": [
         "aon:spell.light:647bc632",
         "legacy_aon:spell.light:60c4a5ff",
-        "d20pfsrd:spell.light:19012c89"
+        "d20pfsrd:spell.light:19012c89",
+        "d20pfsrd:magic-school.wood-elemental:d18ad88c"
       ],
-      "rationale": "All three stat blocks classify Light as evocation, and two sources supply direct definition links."
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
+    }
+  ],
+  "relationship_decisions": [
+    {
+      "relationship_id": "spell.light:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.light:647bc632",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.light:647bc632"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.light:appears_on_spell_list:spell-list.wood-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.wood-elemental:d18ad88c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.wood-elemental:d18ad88c"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     },
     {
       "relationship_id": "spell.light:has_descriptor:descriptor.light",
@@ -134,7 +159,27 @@
         "legacy_aon:spell.light:60c4a5ff",
         "d20pfsrd:spell.light:19012c89"
       ],
-      "rationale": "All sources agree on the light descriptor; AoN also supplies a definition link."
+      "rationale": "Canonical descriptor entity can remain a stub until its definition is imported."
+    },
+    {
+      "relationship_id": "spell.light:has_school:magic-school.evocation",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.light:647bc632",
+          "source_field": "spell_raw.links_raw[1]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.light:19012c89",
+          "source_field": "spell_raw.links_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.light:647bc632",
+        "legacy_aon:spell.light:60c4a5ff",
+        "d20pfsrd:spell.light:19012c89"
+      ],
+      "rationale": "Local classification link; source definition URLs remain evidence."
     },
     {
       "relationship_id": "spell.light:published_in:publication.pathfinder-rpg-core-rulebook",
@@ -158,55 +203,7 @@
         "legacy_aon:spell.light:60c4a5ff",
         "d20pfsrd:spell.light:19012c89"
       ],
-      "rationale": "All sources identify the Core Rulebook; AoN additionally supplies page 304."
-    },
-    {
-      "relationship_id": "spell.light:uses_action:action.standard-action",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.light:647bc632",
-          "source_field": "spell_raw.casting_time_raw"
-        },
-        {
-          "observation_id": "legacy_aon:spell.light:60c4a5ff",
-          "source_field": "spell_raw.casting_time_raw"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.light:19012c89",
-          "source_field": "spell_raw.links_raw[12]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.light:647bc632",
-        "legacy_aon:spell.light:60c4a5ff",
-        "d20pfsrd:spell.light:19012c89"
-      ],
-      "rationale": "All sources agree on the casting time; d20PFSRD supplies a direct action-definition link."
-    },
-    {
-      "relationship_id": "spell.light:uses_definition:rule.spell-resistance",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.light:647bc632",
-          "source_field": "spell_raw.spell_resistance_raw"
-        },
-        {
-          "observation_id": "legacy_aon:spell.light:60c4a5ff",
-          "source_field": "spell_raw.links_raw[0]"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.light:19012c89",
-          "source_field": "spell_raw.spell_resistance_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.light:647bc632",
-        "legacy_aon:spell.light:60c4a5ff",
-        "d20pfsrd:spell.light:19012c89"
-      ],
-      "rationale": "Spell Resistance is a structured field in every source; the Legacy PRD provides its glossary link."
+      "rationale": "The canonical publication relationship uses the publication entity ID, not the retailer or source-site URL."
     },
     {
       "relationship_id": "spell.light:references:spell.permanency",
@@ -230,35 +227,55 @@
         "legacy_aon:spell.light:60c4a5ff",
         "d20pfsrd:spell.light:19012c89"
       ],
-      "rationale": "All three descriptions explicitly reference Permanency; two sources also provide direct hyperlinks. The canonical product should expose this as an offline semantic link to spell.permanency."
+      "rationale": "The product link resolves to the local canonical Permanency record; source URLs are retained as evidence only."
     },
     {
-      "relationship_id": "spell.light:appears_on_spell_list:spell-list.omdura",
+      "relationship_id": "spell.light:uses_action:action.standard-action",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "aon:spell.light:647bc632",
-          "source_field": "spell_raw.levels_raw"
+          "source_field": "spell_raw.casting_time_raw"
+        },
+        {
+          "observation_id": "legacy_aon:spell.light:60c4a5ff",
+          "source_field": "spell_raw.casting_time_raw"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.light:19012c89",
+          "source_field": "spell_raw.links_raw[12]"
         }
       ],
       "considered_observation_ids": [
-        "aon:spell.light:647bc632"
+        "aon:spell.light:647bc632",
+        "legacy_aon:spell.light:60c4a5ff",
+        "d20pfsrd:spell.light:19012c89"
       ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+      "rationale": "This supports an offline definition link from the casting-time field."
     },
     {
-      "relationship_id": "spell.light:appears_on_spell_list:spell-list.wood-elemental-school",
+      "relationship_id": "spell.light:uses_definition:rule.spell-resistance",
       "decision": "accept",
       "evidence": [
         {
-          "observation_id": "d20pfsrd:magic-school.wood-elemental:d18ad88c",
-          "source_field": "entity_raw.sections_raw[0]"
+          "observation_id": "aon:spell.light:647bc632",
+          "source_field": "spell_raw.spell_resistance_raw"
+        },
+        {
+          "observation_id": "legacy_aon:spell.light:60c4a5ff",
+          "source_field": "spell_raw.links_raw[0]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.light:19012c89",
+          "source_field": "spell_raw.spell_resistance_raw"
         }
       ],
       "considered_observation_ids": [
-        "d20pfsrd:magic-school.wood-elemental:d18ad88c"
+        "aon:spell.light:647bc632",
+        "legacy_aon:spell.light:60c4a5ff",
+        "d20pfsrd:spell.light:19012c89"
       ],
-      "rationale": "d20PFSRD prints the spell on the owning wizard elemental arcane school page; it is modeled as elemental_school access rather than general Wizard access."
+      "rationale": "The canonical rule target may remain a stub until the glossary/rules corpus is imported."
     }
   ],
   "unresolved_questions": [

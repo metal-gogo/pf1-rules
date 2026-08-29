@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.miserable-pity",
   "ruleset": "Pathfinder First Edition",
   "name": "Miserable Pity",
@@ -164,7 +164,51 @@
   "description": {
     "raw": "This spell functions as sanctuary, except creatures attempting to attack the target who fail their saves also feel a strong sense of pity toward the target, as if it were weak, pathetic, and not a threat. If the target breaks the spell by attacking, any creature that failed its save against the spell gains a +2 morale bonus on attack rolls against the target for 1 minute.",
     "search_text": "\"this spell functions as sanctuary, except creatures attempting to attack the target who fail their saves also feel a strong sense of pity toward the target, as if it were weak, pathetic, and not a threat. if the target breaks the spell by attacking, any creature that failed its save against the spell gains a +2 morale bonus on attack rolls against the target for 1 minute.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sanctuary",
+              "relationship_id": "spell.miserable-pity:functions_like:spell.sanctuary",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except creatures attempting to attack the target who fail their saves also feel a strong sense of pity toward the target, as if it were weak, pathetic, and not a threat. If the target breaks the spell by attacking, any creature that failed its save against the spell gains a +2 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "morale bonus",
+              "relationship_id": "spell.miserable-pity:uses_definition:rule.morale-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack rolls",
+              "relationship_id": "spell.miserable-pity:uses_definition:rule.attack-rolls"
+            },
+            {
+              "node_type": "text",
+              "value": " against the target for 1 minute."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -504,6 +548,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as sanctuary, except creatures attempting to attack the target who fail their saves also feel a strong sense of pity toward the target, as if it were weak, pathetic, and not a threat. If the target breaks the spell by attacking, any creature that failed its save against the spell gains a +2 morale bonus on attack rolls against the target for 1 minute.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.miserable-pity:a5777aff352ea8db",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "sanctuary",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/sanctuary.html#sanctuary"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.miserable-pity:2e183e99ce27f5ca",
+          "source_field": "spell_raw.links_raw[9]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "sanctuary",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/sanctuary/"
         }
       ],
       "note": null
@@ -638,33 +696,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.miserable-pity:references:spell.sanctuary",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.sanctuary",
-        "name": "sanctuary"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.miserable-pity:a5777aff352ea8db",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "sanctuary",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/sanctuary.html#sanctuary"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.miserable-pity:2e183e99ce27f5ca",
-          "source_field": "spell_raw.links_raw[9]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "sanctuary",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/sanctuary/"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.miserable-pity:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -752,11 +783,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.miserable-pity:uses_definition:rule.will",
+      "relationship_id": "spell.miserable-pity:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -820,11 +851,19 @@
       "raw_value_sha256": "ffe016101279268686daf6daa6aef79de33bbe7a63672d93239c55e83ed46357",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.miserable-pity:f5950ef21da50592",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "445973682d5ea873556f0d7a81b473cdf8885e9eb8a1e1d46725457b225f6037",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

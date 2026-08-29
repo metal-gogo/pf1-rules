@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.lost-locale",
   "ruleset": "Pathfinder First Edition",
   "name": "Lost Locale",
@@ -163,7 +163,55 @@
   "description": {
     "raw": "This spell functions as lost passage (see below), except that it affects a larger area. Lost locale can be made permanent with permanency at a cost of 90,000 gp.",
     "search_text": "\"this spell functions as lost passage (see below), except that it affects a larger area. lost locale can be made permanent with permanency at a cost of 90,000 gp.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "lost passage",
+              "relationship_id": "spell.lost-locale:functions_like:spell.lost-passage",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " (see below), except that it affects a larger area. "
+            },
+            {
+              "node_type": "text",
+              "value": "Lost locale",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " can be made permanent with "
+            },
+            {
+              "node_type": "text",
+              "value": "permanency",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " at a cost of 90,000 gp."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -289,6 +337,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.lost-locale:appears_on_spell_list:spell-list.psychic",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.psychic",
+        "name": "Psychic Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.lost-locale:19e3795ed958a957",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Pinned Foundry PF1 assertion: Psychic 9",
+          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/enchantment/lost-locale.8u47mrsvdw4ssinw.yaml"
+        }
+      ],
+      "note": "Reviewed project decision: add Psychic 9 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
     },
     {
       "relationship_id": "spell.lost-locale:appears_on_spell_list:spell-list.sorcerer",
@@ -470,26 +538,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.lost-locale:appears_on_spell_list:spell-list.psychic",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.psychic",
-        "name": "Psychic Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.lost-locale:19e3795ed958a957",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "manual_verification",
-          "anchor_text_raw": "Pinned Foundry PF1 assertion: Psychic 9",
-          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/enchantment/lost-locale.8u47mrsvdw4ssinw.yaml"
-        }
-      ],
-      "note": "Reviewed project decision: add Psychic 9 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
     }
   ],
   "provenance": [
@@ -540,11 +588,19 @@
       "raw_value_sha256": "698fea30a56769f318f50f1022649f657133ddc6a78c445ba2a5f93c47873b30",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.lost-locale:19e3795ed958a957",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f4805d5062999b777f83d322e75686dfb22670df2abd1ba07b35c39fc2219978",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "REVIEWED_FOUNDRY_MEMBERSHIP",

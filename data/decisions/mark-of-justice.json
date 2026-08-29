@@ -157,6 +157,24 @@
         "aon:subdomain.judgment:e26007d3"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.mark-of-justice:59aff9036c5281a4",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.mark-of-justice:59aff9036c5281a4",
+        "legacy_aon:spell.mark-of-justice:5cce35d435bd6a18",
+        "d20pfsrd:spell.mark-of-justice:cfee142e7f88572c",
+        "aon:patron.jynx:15d234b1",
+        "aon:subdomain.judgment:e26007d3"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -211,6 +229,53 @@
         "d20pfsrd:spell.mark-of-justice:cfee142e7f88572c"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.mark-of-justice:appears_on_spell_list:spell-list.judgment-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.judgment:e26007d3",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.judgment:e26007d3"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.mark-of-justice:appears_on_spell_list:spell-list.jynx-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.jynx:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.jynx:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.mark-of-justice:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.mark-of-justice:59aff9036c5281a4",
+          "source_field": "spell_raw.levels_raw"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.mark-of-justice:cfee142e7f88572c",
+          "source_field": "spell_raw.links_raw[2]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.mark-of-justice:59aff9036c5281a4",
+        "d20pfsrd:spell.mark-of-justice:cfee142e7f88572c"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.mark-of-justice:appears_on_spell_list:spell-list.oracle",
@@ -551,53 +616,6 @@
         "d20pfsrd:spell.mark-of-justice:cfee142e7f88572c"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.mark-of-justice:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.mark-of-justice:59aff9036c5281a4",
-          "source_field": "spell_raw.levels_raw"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.mark-of-justice:cfee142e7f88572c",
-          "source_field": "spell_raw.links_raw[2]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.mark-of-justice:59aff9036c5281a4",
-        "d20pfsrd:spell.mark-of-justice:cfee142e7f88572c"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.mark-of-justice:appears_on_spell_list:spell-list.jynx-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.jynx:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.jynx:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.mark-of-justice:appears_on_spell_list:spell-list.judgment-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.judgment:e26007d3",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.judgment:e26007d3"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

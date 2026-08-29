@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.mask-dweomer-communal",
   "ruleset": "Pathfinder First Edition",
   "name": "Mask Dweomer, Communal",
@@ -127,7 +127,33 @@
   "description": {
     "raw": "This spell functions like mask dweomer, except you divide the duration in 1-day increments among the creatures or objects touched.",
     "search_text": "\"this spell functions like mask dweomer, except you divide the duration in 1-day increments among the creatures or objects touched.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "mask dweomer",
+              "relationship_id": "spell.mask-dweomer-communal:functions_like:spell.mask-dweomer",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you divide the duration in 1-day increments among the creatures or objects touched."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -308,6 +334,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like mask dweomer, except you divide the duration in 1-day increments among the creatures or objects touched.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.mask-dweomer-communal:7715975c25a7be3f",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "mask dweomer",
+          "source_href": "https://legacy.aonprd.com/advancedPlayersGuide/spells/maskDweomer.html#mask-dweomer"
         }
       ],
       "note": null
@@ -402,26 +435,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "Ultimate Combat pg. 236",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.mask-dweomer-communal:references:spell.mask-dweomer",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.mask-dweomer",
-        "name": "mask dweomer"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.mask-dweomer-communal:7715975c25a7be3f",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "mask dweomer",
-          "source_href": "https://legacy.aonprd.com/advancedPlayersGuide/spells/maskDweomer.html#mask-dweomer"
         }
       ],
       "note": null
@@ -535,11 +548,19 @@
       "raw_value_sha256": "692066350ebd295cdccbfea78cd3e08c3aebdff77c1f6dc49d2e8410d31eec4f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.mask-dweomer-communal:2fb0e842c2c0a55e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "6c0eafe5825fc223bfe44c0a0978fe8e23983796446f94fe73f020fbb189b6da",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

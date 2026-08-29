@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.litany-of-the-red-crusader",
   "ruleset": "Pathfinder First Edition",
   "name": "Litany of the Red Crusader",
@@ -150,7 +150,48 @@
   "description": {
     "raw": "Followers of Arazni have made use of this litany since her days as a crusader and herald. Each time the target creature takes piercing or slashing damage, it takes 1 point of bleed damage; this bleed damage stacks with itself. While subject to this spell, the target cannot be the target of another spell that has the word “litany” in the title.",
     "search_text": "\"followers of arazni have made use of this litany since her days as a crusader and herald. each time the target creature takes piercing or slashing damage, it takes 1 point of bleed damage; this bleed damage stacks with itself. while subject to this spell, the target cannot be the target of another spell that has the word “litany” in the title.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Followers of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Arazni",
+              "relationship_id": "spell.litany-of-the-red-crusader:uses_definition:rule.arazni"
+            },
+            {
+              "node_type": "text",
+              "value": " have made use of this litany since her days as a crusader and herald. Each time the target creature takes piercing or slashing damage, it takes 1 point of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bleed",
+              "relationship_id": "spell.litany-of-the-red-crusader:uses_definition:condition.bleed"
+            },
+            {
+              "node_type": "text",
+              "value": " damage; this "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bleed",
+              "relationship_id": "spell.litany-of-the-red-crusader:uses_definition:condition.bleed"
+            },
+            {
+              "node_type": "text",
+              "value": " damage stacks with itself. While subject to this spell, the target cannot be the target of another spell that has the word “litany” in the title."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -215,6 +256,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.litany-of-the-red-crusader:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.litany-of-the-red-crusader:9c7e9126d628d6f5",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.litany-of-the-red-crusader:9a45075c65123f6e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.litany-of-the-red-crusader:appears_on_spell_list:spell-list.paladin",
@@ -399,12 +467,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.litany-of-the-red-crusader:uses_definition:rule.fort",
+      "relationship_id": "spell.litany-of-the-red-crusader:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -437,33 +505,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.litany-of-the-red-crusader:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.litany-of-the-red-crusader:9c7e9126d628d6f5",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.litany-of-the-red-crusader:9a45075c65123f6e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -514,11 +555,19 @@
       "raw_value_sha256": "87c6b781ad4080fbdce6e8c623eb036670b7efed41f390b22964c73b20c39fc3",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.litany-of-the-red-crusader:9a45075c65123f6e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3feb21d3530fba9514b2c3f168d520a3efeb1f8d754148699f1c6ae4d19eb959",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

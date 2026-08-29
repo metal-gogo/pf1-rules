@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.lock-gaze",
   "ruleset": "Pathfinder First Edition",
   "name": "Lock Gaze",
@@ -212,7 +212,57 @@
   "description": {
     "raw": "You compel the target to look at you and only you for the spell’s duration or until the spell is discharged. While staring at you, the target is considered to be averting its eyes from every creature but you, granting creatures other than you concealment against the target’s attacks. If the target willingly leaves your line of sight, it is blinded for 1 round and the spell ends. If you willingly leave the target’s line of sight or become unconscious or dead, the spell creature suffers no ill effects. Blind creatures and creatures immune to gaze attacks are immune to this spell.",
     "search_text": "\"you compel the target to look at you and only you for the spell’s duration or until the spell is discharged. while staring at you, the target is considered to be averting its eyes from every creature but you, granting creatures other than you concealment against the target’s attacks. if the target willingly leaves your line of sight, it is blinded for 1 round and the spell ends. if you willingly leave the target’s line of sight or become unconscious or dead, the spell creature suffers no ill effects. blind creatures and creatures immune to gaze attacks are immune to this spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You compel the target to look at you and only you for the spell’s duration or until the spell is discharged. While staring at you, the target is considered to be averting its eyes from every creature but you, granting creatures other than you "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.lock-gaze:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": " against the target’s attacks. If the target willingly leaves your line of sight, it is "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blinded",
+              "relationship_id": "spell.lock-gaze:uses_definition:condition.blinded"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 round and the spell ends. If you willingly leave the target’s line of sight or become "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "unconscious",
+              "relationship_id": "spell.lock-gaze:uses_definition:condition.unconscious"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dead",
+              "relationship_id": "spell.lock-gaze:uses_definition:condition.dead"
+            },
+            {
+              "node_type": "text",
+              "value": ", the spell creature suffers no ill effects. Blind creatures and creatures immune to gaze attacks are immune to this spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -270,6 +320,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.lock-gaze:appears_on_spell_list:spell-list.conspiracies-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.conspiracies-patron",
+        "name": "Conspiracies Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.conspiracies:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd — lock gaze",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.lock-gaze:appears_on_spell_list:spell-list.inquisitor",
@@ -344,6 +414,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.lock-gaze:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.lock-gaze:ae2e6d870ca12098",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.lock-gaze:f0c7f1431d5d38cc",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.lock-gaze:appears_on_spell_list:spell-list.psychic",
@@ -729,11 +826,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.lock-gaze:uses_definition:rule.will",
+      "relationship_id": "spell.lock-gaze:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -747,53 +844,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.lock-gaze:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.lock-gaze:ae2e6d870ca12098",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.lock-gaze:f0c7f1431d5d38cc",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.lock-gaze:appears_on_spell_list:spell-list.conspiracies-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.conspiracies-patron",
-        "name": "Conspiracies Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.conspiracies:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "2nd — lock gaze",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -852,11 +902,19 @@
       "raw_value_sha256": "ff51f1aeca9f3c41406191283872496166d9f2a49cdb639cfd534edb0fe4579c",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.lock-gaze:f0c7f1431d5d38cc",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d5e090bc7e90551c870fc06764d9112b8a44ddbbea01e66955510109d92fb414",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

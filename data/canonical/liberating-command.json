@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.liberating-command",
   "ruleset": "Pathfinder First Edition",
   "name": "Liberating Command",
@@ -252,7 +252,94 @@
   "description": {
     "raw": "If the target is bound, grappled, or otherwise restrained, he may make an Escape Artist check to escape as an immediate action. He gains a competence bonus on this check equal to twice your caster level (maximum +20). This spell has no effect if the target could not get free by using the Escape Artist skill (for example, if he were under the effects of a hold person spell or paralyzed by Strength damage).",
     "search_text": "\"if the target is bound, grappled, or otherwise restrained, he may make an escape artist check to escape as an immediate action. he gains a competence bonus on this check equal to twice your caster level (maximum +20). this spell has no effect if the target could not get free by using the escape artist skill (for example, if he were under the effects of a hold person spell or paralyzed by strength damage).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "If the target is bound, "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "grappled",
+              "relationship_id": "spell.liberating-command:uses_definition:condition.grappled"
+            },
+            {
+              "node_type": "text",
+              "value": ", or otherwise restrained, he may make an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Escape Artist",
+              "relationship_id": "spell.liberating-command:uses_definition:rule.escape-artist"
+            },
+            {
+              "node_type": "text",
+              "value": " check to escape as an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "immediate action",
+              "relationship_id": "spell.liberating-command:uses_action:action.immediate-action"
+            },
+            {
+              "node_type": "text",
+              "value": ". He gains a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "competence bonus",
+              "relationship_id": "spell.liberating-command:uses_definition:rule.competence-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on this check equal to twice your caster level (maximum +20). This spell has no effect if the target could not get free by using the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Escape Artist",
+              "relationship_id": "spell.liberating-command:uses_definition:rule.escape-artist"
+            },
+            {
+              "node_type": "text",
+              "value": " skill (for example, if he were under the effects of a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hold person",
+              "relationship_id": "spell.liberating-command:references:spell.hold-person",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "spell or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "paralyzed",
+              "relationship_id": "spell.liberating-command:uses_definition:condition.paralyzed"
+            },
+            {
+              "node_type": "text",
+              "value": " by Strength damage)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -439,6 +526,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.liberating-command:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.liberating-command:791aae7986918b04",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.liberating-command:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -538,6 +645,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.liberating-command:appears_on_spell_list:spell-list.recovery-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.recovery-patron",
+        "name": "Recovery Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.recovery:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd — liberating command",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.liberating-command:appears_on_spell_list:spell-list.red-mantis-assassin",
@@ -753,7 +880,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.hold-person",
-        "name": "hold person"
+        "name": "Hold Person"
       },
       "status": "accepted",
       "evidence": [
@@ -930,11 +1057,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.liberating-command:uses_definition:rule.will",
+      "relationship_id": "spell.liberating-command:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -948,46 +1075,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.liberating-command:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.liberating-command:791aae7986918b04",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.liberating-command:appears_on_spell_list:spell-list.recovery-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.recovery-patron",
-        "name": "Recovery Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.recovery:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "2nd — liberating command",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -1046,11 +1133,19 @@
       "raw_value_sha256": "53c555e8a0ae86cffa12fd9ecf2842a4bf24f28318ae6504421ccd41a30cd66d",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.liberating-command:791aae7986918b04",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2992566fd331e777bafa032068bc0ad04c85657b39ed55117201d7aff1195cfe",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

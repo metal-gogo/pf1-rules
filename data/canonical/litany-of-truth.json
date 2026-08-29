@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.litany-of-truth",
   "ruleset": "Pathfinder First Edition",
   "name": "Litany of Truth",
@@ -144,7 +144,48 @@
   "description": {
     "raw": "With a tirade against deceit, you strip the target of any illusions cloaking it. Any illusion spells or effects affecting the target are suppressed for the spell’s duration. In addition, the target can’t benefit from concealment.\n\nWhile subject to this spell, the target cannot be the target of another spell that has the word “litany” in the title.",
     "search_text": "\"with a tirade against deceit, you strip the target of any illusions cloaking it. any illusion spells or effects affecting the target are suppressed for the spell’s duration. in addition, the target can’t benefit from concealment.\\n\\nwhile subject to this spell, the target cannot be the target of another spell that has the word “litany” in the title.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "With a tirade against deceit, you strip the target of any illusions cloaking it. Any "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "illusion",
+              "relationship_id": "spell.litany-of-truth:uses_definition:magic-school.illusion"
+            },
+            {
+              "node_type": "text",
+              "value": " spells or effects affecting the target are suppressed for the spell’s duration. In addition, the target can’t benefit from "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.litany-of-truth:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "While subject to this spell, the target cannot be the target of another spell that has the word “litany” in the title."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -182,6 +223,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.litany-of-truth:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.litany-of-truth:c54c2ebd1b6ebb44",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.litany-of-truth:f91c1951dc801088",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 6",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.litany-of-truth:appears_on_spell_list:spell-list.paladin",
@@ -333,6 +401,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.litany-of-truth:uses_definition:magic-school.illusion",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.illusion",
+        "name": "Illusion"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.litany-of-truth:c54c2ebd1b6ebb44",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "illusion",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Illusion"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.litany-of-truth:uses_definition:rule.concealment",
       "type": "uses_definition",
       "target": {
@@ -348,26 +436,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "concealment",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Concealment"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.litany-of-truth:uses_definition:rule.illusion",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.illusion",
-        "name": "illusion"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.litany-of-truth:c54c2ebd1b6ebb44",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "illusion",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Illusion"
         }
       ],
       "note": null
@@ -393,11 +461,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.litany-of-truth:uses_definition:rule.will",
+      "relationship_id": "spell.litany-of-truth:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -411,33 +479,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.litany-of-truth:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.litany-of-truth:c54c2ebd1b6ebb44",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.litany-of-truth:f91c1951dc801088",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 6",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -488,11 +529,19 @@
       "raw_value_sha256": "26eb8ecd559d0d2f9eb95574e2d1ebe4a4d2587a38dcc9636fc7b275caa339cd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.litany-of-truth:f91c1951dc801088",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "8292f4203c7a2b0dd978bc4411fcdf273d218786f8ca031d7d0dc927b2359b6d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "DERIVED_SPELL_LIST_ACCESS",

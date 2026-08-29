@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.mind-blank-communal",
   "ruleset": "Pathfinder First Edition",
   "name": "Mind Blank, Communal",
@@ -137,7 +137,33 @@
   "description": {
     "raw": "This spell functions like mind blank, except you divide the duration in 1-hour increments among the creatures touched.",
     "search_text": "\"this spell functions like mind blank, except you divide the duration in 1-hour increments among the creatures touched.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "mind blank",
+              "relationship_id": "spell.mind-blank-communal:functions_like:spell.mind-blank",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you divide the duration in 1-hour increments among the creatures touched."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -364,6 +390,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like mind blank, except you divide the duration in 1-hour increments among the creatures touched.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.mind-blank-communal:7df5c7629168628c",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "mind blank",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/mindBlank.html#mind-blank"
         }
       ],
       "note": null
@@ -418,26 +451,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "Ultimate Combat pg. 236",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.mind-blank-communal:references:spell.mind-blank",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.mind-blank",
-        "name": "mind blank"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.mind-blank-communal:7df5c7629168628c",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "mind blank",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/mindBlank.html#mind-blank"
         }
       ],
       "note": null
@@ -551,11 +564,19 @@
       "raw_value_sha256": "692066350ebd295cdccbfea78cd3e08c3aebdff77c1f6dc49d2e8410d31eec4f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.mind-blank-communal:9825b77b0f7c5821",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "21dbb9b716ecca9d434fd3ec3b1f6a1d0b4b4212fde5693e6dd650a3efc5ac95",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.litany-of-vengeance",
   "ruleset": "Pathfinder First Edition",
   "name": "Litany of Vengeance",
@@ -152,7 +152,57 @@
   "description": {
     "raw": "This litany causes your enemy to feel the pain of blows more sharply. Anyone who hits the target with an attack gains a +5 sacred or profane bonus (depending on the alignment of the caster) to that attack’s damage.\n\nWhile subject to this spell, the target cannot be the target of another spell that has the word \"litany\" in the title.",
     "search_text": "\"this litany causes your enemy to feel the pain of blows more sharply. anyone who hits the target with an attack gains a +5 sacred or profane bonus (depending on the alignment of the caster) to that attack’s damage.\\n\\nwhile subject to this spell, the target cannot be the target of another spell that has the word \\\"litany\\\" in the title.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This litany causes your enemy to feel the pain of blows more sharply. Anyone who hits the target with an attack gains a +5 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sacred",
+              "relationship_id": "spell.litany-of-vengeance:uses_definition:rule.sacred"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "profane bonus",
+              "relationship_id": "spell.litany-of-vengeance:uses_definition:rule.profane-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " (depending on the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "alignment",
+              "relationship_id": "spell.litany-of-vengeance:uses_definition:rule.alignment"
+            },
+            {
+              "node_type": "text",
+              "value": " of the caster) to that attack’s damage."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "While subject to this spell, the target cannot be the target of another spell that has the word \"litany\" in the title."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -217,6 +267,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.litany-of-vengeance:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.litany-of-vengeance:a93eca607c83f529",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.litany-of-vengeance:97ab08141d88a7b9",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.litany-of-vengeance:appears_on_spell_list:spell-list.paladin",
@@ -446,33 +523,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.litany-of-vengeance:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.litany-of-vengeance:a93eca607c83f529",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.litany-of-vengeance:97ab08141d88a7b9",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -523,11 +573,19 @@
       "raw_value_sha256": "4371792e4cb6b527e2f45d982f907a7d65ba1fb3fdbf64ae02bf52d8a6b31777",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.litany-of-vengeance:97ab08141d88a7b9",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d5b8b5c70c16999b8776a467e1e91377735727f2878333eed0c5f7a5139686a7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.mindlink",
   "ruleset": "Pathfinder First Edition",
   "name": "Mindlink",
@@ -175,7 +175,30 @@
   "description": {
     "raw": "You link your mind to that of a touched creature to swiftly communicate a large amount of complex information in an instant. You decide what the target learns, limited to any amount of information that otherwise could be communicated in 10 minutes. This information comes in a series of visual images and emotional sensations, and isn’t language-dependent.",
     "search_text": "\"you link your mind to that of a touched creature to swiftly communicate a large amount of complex information in an instant. you decide what the target learns, limited to any amount of information that otherwise could be communicated in 10 minutes. this information comes in a series of visual images and emotional sensations, and isn’t language-dependent.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You link your mind to that of a touched creature to swiftly communicate a large amount of complex information in an instant. You decide what the target learns, limited to any amount of information that otherwise could be communicated in 10 minutes. This information comes in a series of visual images and emotional sensations, and isn’t "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "language-dependent",
+              "relationship_id": "spell.mindlink:uses_definition:rule.language-dependent"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -253,6 +276,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.mindlink:appears_on_spell_list:spell-list.mind-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.mind-patron",
+        "name": "Mind Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.mind:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd — mindlink",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.mindlink:appears_on_spell_list:spell-list.occultist",
@@ -612,12 +655,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.mindlink:uses_definition:rule.touch",
+      "relationship_id": "spell.mindlink:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -632,11 +675,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.mindlink:uses_definition:rule.will",
+      "relationship_id": "spell.mindlink:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -650,26 +693,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.mindlink:appears_on_spell_list:spell-list.mind-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.mind-patron",
-        "name": "Mind Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.mind:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "2nd — mindlink",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -728,11 +751,19 @@
       "raw_value_sha256": "dd781608b927395d6749343019ad281088e3d1b8774128afbd278960433d0803",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.mindlink:23c0a1eb78ed2806",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "29e051a4bc5aa9fd8b75ef290b053a4e621d61e930a9b234d8255ad20f4f2790",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

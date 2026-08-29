@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.litany-of-defense",
   "ruleset": "Pathfinder First Edition",
   "name": "Litany of Defense",
@@ -150,7 +150,39 @@
   "description": {
     "raw": "Invoking this litany strengthens your defenses. Any enhancement bonus your armor has is doubled and you are immune to fear.\n\nWhile subject to this spell, the target cannot be the target of another spell that has the word \"litany\" in the title.",
     "search_text": "\"invoking this litany strengthens your defenses. any enhancement bonus your armor has is doubled and you are immune to fear.\\n\\nwhile subject to this spell, the target cannot be the target of another spell that has the word \\\"litany\\\" in the title.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Invoking this litany strengthens your defenses. Any "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "enhancement bonus",
+              "relationship_id": "spell.litany-of-defense:uses_definition:rule.enhancement-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " your armor has is doubled and you are immune to fear."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "While subject to this spell, the target cannot be the target of another spell that has the word \"litany\" in the title."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -215,6 +247,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.litany-of-defense:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.litany-of-defense:58ad8ac4829eb2bc",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.litany-of-defense:791ef1921151aad1",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.litany-of-defense:appears_on_spell_list:spell-list.paladin",
@@ -377,33 +436,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.litany-of-defense:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.litany-of-defense:58ad8ac4829eb2bc",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.litany-of-defense:791ef1921151aad1",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -454,11 +486,19 @@
       "raw_value_sha256": "4cc74c6a38d86fcbff51adafa479fba39f8c8fb7a2e3ab07aa50cc9a89288df8",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.litany-of-defense:791ef1921151aad1",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "df1a7b67b12913ef62f747c964477207c77bdfc66a3eec39e619526aef808fd1",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

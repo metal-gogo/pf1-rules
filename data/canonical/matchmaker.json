@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.matchmaker",
   "ruleset": "Pathfinder First Edition",
   "name": "Matchmaker",
@@ -155,7 +155,39 @@
   "description": {
     "raw": "You entice the target creatures to become romantically interested in one another. Each creature saves and applies spell resistance separately. Both must be affected for the spell to have an effect. If either creatures has a prior unfriendly or hostile attitude toward the other, it receives a +4 bonus on its saving throw.\n\nThis spell doesn’t override the targets’ normal sexual preferences or other limitations. If romantic feelings are incompatible for this reason, the creature instead feels an intimate platonic bond with the other.",
     "search_text": "\"you entice the target creatures to become romantically interested in one another. each creature saves and applies spell resistance separately. both must be affected for the spell to have an effect. if either creatures has a prior unfriendly or hostile attitude toward the other, it receives a +4 bonus on its saving throw.\\n\\nthis spell doesn’t override the targets’ normal sexual preferences or other limitations. if romantic feelings are incompatible for this reason, the creature instead feels an intimate platonic bond with the other.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You entice the target creatures to become romantically interested in one another. Each creature saves and applies "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.matchmaker:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": " separately. Both must be affected for the spell to have an effect. If either creatures has a prior unfriendly or hostile attitude toward the other, it receives a +4 bonus on its saving throw."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell doesn’t override the targets’ normal sexual preferences or other limitations. If romantic feelings are incompatible for this reason, the creature instead feels an intimate platonic bond with the other."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -532,11 +564,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.matchmaker:uses_definition:rule.will",
+      "relationship_id": "spell.matchmaker:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -600,11 +632,19 @@
       "raw_value_sha256": "e4369d0ae0d09a0b5f612c899a0114e5d348c2aa20ad4d5ffba9a3f0e71e01e7",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.matchmaker:1601785fa990dc8c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "8b3385250dcab5b3a61b71229a4437bd9ec8bf8578bf145f2716a75c9e4e560b",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
