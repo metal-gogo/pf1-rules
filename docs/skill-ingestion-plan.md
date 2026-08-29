@@ -23,9 +23,9 @@ proposals, and `[S]` for details that still require discovery.
   attributed to one source; do not blend sentences from different sources.
 - [P] Canonicalize the general skill rules from the Legacy PRD Core Rulebook.
   Use the d20PFSRD overview for catalog comparison, not as canonical prose.
-- [P] Preserve existing `rule.<slug>` entity IDs while reclassifying the
-  records as skills. Do not create parallel `skill.<slug>` identities or
-  rewrite immutable historical observations.
+- [P] Migrate standard skill entities to canonical `skill.<slug>` IDs as part
+  of the comprehensive entity-taxonomy migration. Do not create parallel skill
+  identities or rewrite immutable historical observations.
 - [P] Model Craft, Knowledge, Perform, and Profession specializations within
   their parent skill. Do not create a standalone canonical skill for every
   example specialization.
@@ -95,26 +95,26 @@ calculators, and mechanical effect extraction.
 
 ## Identity and migration policy
 
-Use the existing `rule.<slug>` value as the durable entity ID. Entity type and
-entity ID are separate concerns: changing the type from `rule` to `skill`
-must not also change identity.
+Use `skill.<slug>` as the canonical entity ID. The registry is a work in
+progress, so inaccurate `rule.<slug>` IDs do not have a compatibility
+requirement. Apply the ID change only in the comprehensive entity-taxonomy
+migration so the registry never contains both identities.
 
 The migration must:
 
-1. Update current registry entries for the 26 standard skills to type
-   `skill`.
+1. Update current registry entries for the 26 standard skills to type `skill`
+   and canonical `skill.<slug>` IDs.
 2. Add `skill` to schemas and type unions that distinguish entity types.
-3. Preserve aliases and incoming relationships that already target the
-   `rule.<slug>` ID.
+3. Update incoming canonical relationships to target the new skill IDs. Do not
+   retain obsolete IDs as aliases.
 4. Leave historical observations immutable. Reconcile their rule-typed
    references to the current skill entity through an explicit decision or
    import mapping.
-5. Reject a second canonical record that uses the same normalized name or
-   source page for a new `skill.<slug>` ID.
+5. Reject parallel `rule.<slug>` and `skill.<slug>` identities for the same
+   definition.
 
-[P] This avoids a high-cost identifier rewrite while still giving callers a
-real skill type. The tradeoff is that the `rule.` prefix becomes historical
-rather than taxonomically exact; document that invariant in the schema.
+[P] This keeps the ID and entity role aligned. Historical observations retain
+their captured hints, while current canonical references use the migrated ID.
 
 ## Source policy
 

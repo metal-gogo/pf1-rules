@@ -20,6 +20,10 @@
 The generated SQLite database at `data/database/pf1_spells.db` is intentionally
 ignored by Git. Migrations and validated JSON records can rebuild it.
 
+Canonical entity IDs and registry relationships follow the
+[entity taxonomy](entity-taxonomy.md). Apply its identity rules before adding a
+new entity kind or converting a discovered link into a canonical entity.
+
 Canonical schema versions `0.1.0` and `0.2.0` are accepted. Version `0.2.0`
 requires `description.document`; version `0.1.0` retains the plain-text
 description contract. Rich-text documents live inside the existing canonical
