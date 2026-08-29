@@ -18,6 +18,7 @@ interface RegistryEntity {
   entity_id: string;
   entity_type: string;
   name: string;
+  evidence?: Array<{ source_href: string | null }>;
   relationships?: EntityRelationship[];
 }
 
@@ -55,6 +56,79 @@ function expectedRoot(entityType: string): string {
 function immediateParent(entityId: string): string | null {
   const segments = entityId.split(".");
   return segments.length > 2 ? segments.slice(0, -1).join(".") : null;
+}
+
+
+function sourceRole(sourceHref: string): string | null {
+  let source: URL;
+  try {
+    source = new URL(sourceHref);
+  } catch {
+    return null;
+  }
+  const host = source.hostname.toLocaleLowerCase();
+  const pathname = source.pathname.toLocaleLowerCase().replace(/\/+$/, "");
+
+  if (pathname.includes("/bestiary/monster-listings/templates")) {
+    return "creature_template";
+  }
+  if (
+    pathname.includes("/bestiary/monster-listings/") ||
+    pathname.endsWith("/monsterdisplay.aspx")
+  ) {
+    return "monster";
+  }
+  if (pathname.includes("/bestiary/rules-for-monsters/universal-monster-rules")) {
+    return "universal_monster_rule";
+  }
+  if (pathname.includes("/equipment/weapons/weapon-descriptions/")) {
+    return "weapon";
+  }
+  if (pathname.includes("/magic-items/magic-weapons/magic-weapon-special-abilities/")) {
+    return "weapon_special_ability";
+  }
+  if (
+    pathname.includes("/feats/") ||
+    pathname.endsWith("/featdisplay.aspx") ||
+    pathname.endsWith("/corerulebook/feats.html")
+  ) {
+    return "feat";
+  }
+  if (
+    pathname.includes("/magic/all-spells/") ||
+    pathname.endsWith("/spelldisplay.aspx") ||
+    pathname.includes("/corerulebook/spells/")
+  ) {
+    return "spell";
+  }
+  if (pathname.includes("/gamemastering/conditions")) {
+    return "condition";
+  }
+  if (
+    pathname.includes("/skills/") ||
+    pathname.endsWith("/skillsdisplay.aspx")
+  ) {
+    return "skill";
+  }
+  if (pathname.includes("/classes/core-classes/cleric/domains/")) {
+    return pathname.includes("subdomain") ? "subdomain" : "domain";
+  }
+  if (pathname.includes("/classes/base-classes/oracle/mysteries/")) {
+    return "mystery";
+  }
+  if (pathname.includes("/classes/core-classes/sorcerer/bloodlines/")) {
+    return "bloodline";
+  }
+  if (pathname.includes("/arcane-schools/")) {
+    return "magic_school";
+  }
+  if (
+    host.endsWith("paizo.com") &&
+    (pathname.includes("/products/") || pathname.includes("/product/"))
+  ) {
+    return "publication";
+  }
+  return null;
 }
 
 
@@ -121,6 +195,35 @@ const crossTypeNames = [...byName.entries()]
   }))
   .sort((left, right) => left.name.localeCompare(right.name));
 
+const ruleRoleCandidates: object[] = [];
+const ambiguousRuleRoles: object[] = [];
+for (const entity of entities.filter((candidate) => candidate.entity_type === "rule")) {
+  const roles = [...new Set(
+    (entity.evidence ?? [])
+      .map((evidence) => evidence.source_href && sourceRole(evidence.source_href))
+      .filter((role): role is string => Boolean(role)),
+  )].sort();
+  if (roles.length === 1) {
+    const proposedEntityType = roles[0];
+    const existingTargets = (byName.get(normalizedName(entity.name)) ?? [])
+      .filter((candidate) => candidate.entity_type === proposedEntityType)
+      .map((candidate) => candidate.entity_id)
+      .sort();
+    ruleRoleCandidates.push({
+      entity_id: entity.entity_id,
+      name: entity.name,
+      proposed_entity_type: proposedEntityType,
+      existing_targets: existingTargets,
+    });
+  } else if (roles.length > 1) {
+    ambiguousRuleRoles.push({
+      entity_id: entity.entity_id,
+      name: entity.name,
+      proposed_entity_types: roles,
+    });
+  }
+}
+
 const findings = {
   mismatched_roots: mismatchedRoots,
   missing_parents: missingParents,
@@ -128,6 +231,8 @@ const findings = {
   relationship_id_mismatches: relationshipIdMismatches,
   placeholder_entities: placeholders,
   cross_type_names: crossTypeNames,
+  rule_role_candidates: ruleRoleCandidates,
+  ambiguous_rule_roles: ambiguousRuleRoles,
 };
 const summary = Object.fromEntries(
   Object.entries(findings).map(([name, values]) => [name, values.length]),
