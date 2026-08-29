@@ -2825,6 +2825,18 @@ function entityLinkCount(document: RichTextDocument): number {
 }
 
 
+export function sourceDescriptionMatch(
+  canonicalRaw: string,
+  sourceRaw: string,
+): { exact: boolean; leakedMythicSuffix: boolean } {
+  return {
+    exact: comparableRichText(sourceRaw) === comparableRichText(canonicalRaw),
+    leakedMythicSuffix: canonicalRaw.startsWith(sourceRaw) &&
+      /\bMythic\b/.test(canonicalRaw.slice(sourceRaw.length)),
+  };
+}
+
+
 export function auditRichTextRollout(): {
   summary: {
     total: number;
@@ -2894,10 +2906,12 @@ export function auditRichTextRollout(): {
         fs.readFileSync(artifactPath, "utf8"),
         observation.record.source.url,
       );
-      if (
-        comparableRichText(parsed.descriptionRaw) !==
-        comparableRichText(String(canonical.description.raw))
-      ) {
+      const canonicalRaw = String(canonical.description.raw);
+      const {
+        exact: exactSourceDescription,
+        leakedMythicSuffix,
+      } = sourceDescriptionMatch(canonicalRaw, parsed.descriptionRaw);
+      if (!exactSourceDescription && !leakedMythicSuffix) {
         issue("source_mismatch", spellId);
         continue;
       }
@@ -2912,7 +2926,7 @@ export function auditRichTextRollout(): {
       });
       if (
         comparableRichText(richTextLeafText(richText.document)) !==
-        comparableRichText(String(canonical.description.raw))
+        comparableRichText(parsed.descriptionRaw)
       ) {
         issue("parser_error", spellId);
         continue;
@@ -2964,10 +2978,10 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
       observation.record.source.url,
     );
     const canonicalRaw = String(canonical.description.raw);
-    const exactSourceDescription = comparableRichText(parsed.descriptionRaw) ===
-      comparableRichText(canonicalRaw);
-    const leakedMythicSuffix = canonicalRaw.startsWith(parsed.descriptionRaw) &&
-      /\bMythic\b/.test(canonicalRaw.slice(parsed.descriptionRaw.length));
+    const {
+      exact: exactSourceDescription,
+      leakedMythicSuffix,
+    } = sourceDescriptionMatch(canonicalRaw, parsed.descriptionRaw);
     if (!exactSourceDescription && !leakedMythicSuffix) {
       throw new Error(
         `${spellId} AoN HTML differs from the canonical description:\n` +
