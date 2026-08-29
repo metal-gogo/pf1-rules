@@ -2730,7 +2730,10 @@ function updateDecision(
   for (const original of decision.relationship_decisions) {
     const item = structuredClone(original);
     item.relationship_id = changedIds.get(item.relationship_id) ?? item.relationship_id;
-    if (!canonicalRelationshipIds.has(item.relationship_id)) continue;
+    if (!canonicalRelationshipIds.has(item.relationship_id)) {
+      if (item.decision === "reject") relationshipDecisions.set(item.relationship_id, item);
+      continue;
+    }
     const canonicalRelationship = canonicalRelationshipById.get(item.relationship_id)!;
     item.decision = canonicalRelationship.status === "accepted"
       ? "accept"
