@@ -426,6 +426,20 @@ const migrationActions = [
   ...ambiguousRuleRoles,
   ...placeholders.map((entity) => ({ ...entity, action: "reject" })),
 ];
+const handledRuleIds = new Set(migrationActions.flatMap((action) =>
+  "entity_id" in action && typeof action.entity_id === "string" ? [action.entity_id] : [],
+));
+const residualRuleEntities = entities
+  .filter((entity) => entity.entity_type === "rule" && !handledRuleIds.has(entity.entity_id))
+  .map((entity) => ({
+    entity_id: entity.entity_id,
+    name: entity.name,
+    linked_sources: [...new Set(
+      (entity.evidence ?? [])
+        .filter((evidence) => evidence.source_field.includes("links_raw"))
+        .flatMap((evidence) => evidence.source_href ? [evidence.source_href] : []),
+    )].sort(),
+  }));
 
 const findings = {
   mismatched_roots: mismatchedRoots,
@@ -436,6 +450,7 @@ const findings = {
   cross_type_names: crossTypeNames,
   rule_role_candidates: ruleRoleCandidates,
   ambiguous_rule_roles: ambiguousRuleRoles,
+  residual_rule_entities: residualRuleEntities,
   migration_actions: migrationActions,
 };
 const summary = Object.fromEntries(
