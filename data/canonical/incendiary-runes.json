@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.incendiary-runes",
   "ruleset": "Pathfinder First Edition",
   "name": "Incendiary Runes",
@@ -135,7 +135,42 @@
   "description": {
     "raw": "This spell functions as explosive runes, except it creates a small surge of flames rather than an explosion of force. The runes automatically deal 1d6 points of fire damage to any creatures and objects in adjacent squares, and those creatures and objects catch fire unless they succeed at Reflex saves.",
     "search_text": "\"this spell functions as explosive runes, except it creates a small surge of flames rather than an explosion of force. the runes automatically deal 1d6 points of fire damage to any creatures and objects in adjacent squares, and those creatures and objects catch fire unless they succeed at reflex saves.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "explosive runes",
+              "relationship_id": "spell.incendiary-runes:functions_like:spell.explosive-runes",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it creates a small surge of flames rather than an explosion of force. The runes automatically deal 1d6 points of fire damage to any creatures and objects in adjacent squares, and those creatures and objects catch fire unless they succeed at "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.incendiary-runes:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saves."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -321,6 +356,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as explosive runes, except it creates a small surge of flames rather than an explosion of force. The runes automatically deal 1d6 points of fire damage to any creatures and objects in adjacent squares, and those creatures and objects catch fire unless they succeed at Reflex saves.",
           "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.incendiary-runes:629958b8c3f9880f",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "explosive runes",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/i/e/explosive-runes"
         }
       ],
       "note": null
@@ -421,26 +463,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.incendiary-runes:references:spell.explosive-runes",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.explosive-runes",
-        "name": "explosive runes"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.incendiary-runes:629958b8c3f9880f",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "explosive runes",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/i/e/explosive-runes"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.incendiary-runes:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -461,11 +483,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.incendiary-runes:uses_definition:rule.reflex",
+      "relationship_id": "spell.incendiary-runes:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -564,11 +586,19 @@
       "raw_value_sha256": "88a242c96cb693eb886012905e6c6c0baa51428414ce95f78f14dedbd394b6d3",
       "decision": "manually_resolved",
       "note": "Reviewed catalog policy: AoN remains the preferred publication transcription. When an additional class membership is printed by d20PFSRD, it may be added to the canonical class union after review; Foundry PF1 is corroborating catalog evidence when it agrees. Preserve every source claim and never replace an AoN level merely because another catalog assigns the same class a different level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.incendiary-runes:a3f7754e2171753e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "6fc056f59dc1c53169c572ed321ebacfbb41d97088690e73d994c1b08139b90c",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.5-reviewed-catalog-memberships",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "REVIEWED_CATALOG_MEMBERSHIP_UNION",
