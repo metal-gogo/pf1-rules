@@ -51,6 +51,9 @@ upstream. Review the spell IDs it prints before running `apply-batch`. Every com
 unexpected file, changed input, validation failure, commit-signing failure, or
 upstream change.
 
+Generated commit subjects identify the reviewed range and batch size, such as
+`ingest rich-text: Heart of the Mammoth + 4 spells`.
+
 For an unattended run, use one command instead. It executes the same steps in
 order and stops at the first failure:
 

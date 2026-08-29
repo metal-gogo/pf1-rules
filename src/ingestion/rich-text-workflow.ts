@@ -60,6 +60,14 @@ export function expectedBatchPaths(manifest: RichTextBatchManifest): string[] {
 }
 
 
+export function formatRichTextBatchCommitMessage(
+  firstSpellName: string,
+  batchSize: number,
+): string {
+  return `ingest rich-text: ${firstSpellName} + ${batchSize - 1} spells`;
+}
+
+
 export function validateRichTextBatchManifest(manifest: RichTextBatchManifest): void {
   if (manifest.version !== 1 || !/^[0-9a-f]{40}$/.test(manifest.base_commit) ||
     !/^[0-9a-f]{40}$/.test(manifest.upstream_commit) ||
@@ -229,13 +237,29 @@ function requireSingleBatchCommit(manifest: RichTextBatchManifest): void {
 }
 
 
+function richTextBatchCommitMessage(manifest: RichTextBatchManifest): string {
+  const names = manifest.files.map((file) => {
+    const record = JSON.parse(fs.readFileSync(absolutePath(file.canonical_path), "utf8")) as {
+      name?: unknown;
+    };
+    if (typeof record.name !== "string" || !record.name) {
+      throw new Error(`Canonical spell lacks a name: ${file.canonical_path}.`);
+    }
+    return record.name;
+  });
+  const firstSpellName = names[0];
+  if (!firstSpellName) throw new Error("Manifest has no spell names.");
+  return formatRichTextBatchCommitMessage(firstSpellName, manifest.batch_size);
+}
+
+
 export function commitRichTextBatch(filename: string): void {
   const manifest = readManifest(filename);
   requireBaseCommit(manifest);
   assertSamePaths(changedPaths(["diff", "--name-only"]), expectedBatchPaths(manifest), "Commit");
   run("git", ["add", "--", ...expectedBatchPaths(manifest)]);
   run("git", ["diff", "--cached", "--check"]);
-  run("git", ["commit", "-m", "ingest rich-text rollout batch"]);
+  run("git", ["commit", "-m", richTextBatchCommitMessage(manifest)]);
   if (run("git", ["status", "--porcelain"])) {
     throw new Error("Working tree is not clean after committing the batch.");
   }
