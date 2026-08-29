@@ -114,6 +114,57 @@ function sourceRole(sourceHref: string): string | null {
     return "weapon_special_ability";
   }
   if (
+    source.hash &&
+    (pathname.endsWith("/magic-items/magic-weapons") ||
+      pathname.endsWith("/corerulebook/magicitems/weapons.html"))
+  ) {
+    return "weapon_special_ability";
+  }
+  if (pathname.includes("/gamemastering/special-abilities")) {
+    return "special_ability";
+  }
+  if (pathname.includes("/gamemastering/afflictions/diseases")) {
+    return "affliction";
+  }
+  if (pathname.includes("/gamemastering/afflictions/poison")) {
+    return "affliction";
+  }
+  if (pathname.includes("/gamemastering/afflictions")) {
+    return "affliction";
+  }
+  if (
+    pathname.includes("/equipment/goods-and-services/") ||
+    pathname.includes("/equipment/damaging-objects")
+  ) {
+    return "item";
+  }
+  if (pathname.includes("/equipment/special-materials")) {
+    return "special_material";
+  }
+  if (pathname.includes("/magic-items/")) {
+    return "magic_item";
+  }
+  if (
+    pathname.endsWith("/racesdisplay.aspx") ||
+    pathname.includes("/races/")
+  ) {
+    return "race";
+  }
+  if (pathname.endsWith("/deitydisplay.aspx")) return "deity";
+  if (
+    pathname.endsWith("/monstertemplates.aspx") ||
+    pathname.endsWith("/monstertemplatesdetails.aspx")
+  ) {
+    return "creature_template";
+  }
+  if (pathname.includes("/gamemastering/haunts")) return "haunt";
+  if (pathname.includes("/traps-hazards-and-special-terrains/hazards")) {
+    return "hazard";
+  }
+  if (pathname.includes("/traps-hazards-and-special-terrains/traps")) {
+    return "trap";
+  }
+  if (
     pathname.includes("/feats/") ||
     pathname.endsWith("/featdisplay.aspx") ||
     pathname.endsWith("/corerulebook/feats.html")
@@ -192,6 +243,26 @@ function sourceTargetId(
   const pathname = source.pathname.toLocaleLowerCase().replace(/\/+$/, "");
   const lastSegment = decodeURIComponent(pathname.split("/").at(-1) ?? "");
   const entitySlug = entity.entity_id.replace(/^rule\./, "");
+  if (entityType === "affliction" && pathname.includes("/afflictions/diseases")) {
+    return entitySlug === "disease" ? "affliction.disease" :
+      `affliction.disease.${entitySlug}`;
+  }
+  if (entityType === "affliction" && pathname.includes("/afflictions/poison")) {
+    return entitySlug === "poison" ? "affliction.poison" :
+      `affliction.poison.${entitySlug}`;
+  }
+  if (entityType === "affliction") return `affliction.${entitySlug}`;
+  if (entityType === "magic_item") {
+    const category = pathname.split("/magic-items/")[1]?.split("/")[0]
+      ?.replace(/^magic-/, "").replace(/-items$/, "").replace(/s$/, "") ?? "other";
+    return `magic-item.${category}.${entitySlug}`;
+  }
+  if (entityType === "special_ability") return `special-ability.${entitySlug}`;
+  if (entityType === "special_material") return `special-material.${entitySlug}`;
+  if (entityType === "race") return `race.${entitySlug}`;
+  if (entityType === "haunt") return `haunt.${entitySlug}`;
+  if (entityType === "hazard") return `hazard.${entitySlug}`;
+  if (entityType === "trap") return `trap.${entitySlug}`;
   if (entityType === "domain") {
     return `domain.${lastSegment.replace(/-domain$/, "")}`;
   }
@@ -209,6 +280,14 @@ function sourceTargetId(
   if (entityType === "monster" && pathname.endsWith("/monsterdisplay.aspx")) {
     const itemName = source.searchParams.get("ItemName");
     return `monster.${normalizedName(itemName ?? entity.name).replaceAll(" ", "-")}`;
+  }
+  if (
+    entityType === "creature_template" &&
+    (pathname.endsWith("/monstertemplates.aspx") ||
+      pathname.endsWith("/monstertemplatesdetails.aspx"))
+  ) {
+    const itemName = source.searchParams.get("ItemName");
+    return `creature-template.${normalizedName(itemName ?? entity.name).replaceAll(" ", "-")}`;
   }
   if (
     entityType === "monster" &&
@@ -328,11 +407,16 @@ for (const entity of entities.filter((candidate) => candidate.entity_type === "r
         existingTargets.length === 0 ? "rename" : "review",
     });
   } else if (classifications.length > 1) {
+    const types = new Set(classifications.map((classification) =>
+      classification.entity_type,
+    ));
+    const overlappingAbilityDefinitions =
+      types.has("special_ability") && types.has("universal_monster_rule");
     ambiguousRuleRoles.push({
       entity_id: entity.entity_id,
       name: entity.name,
       proposed_entities: classifications,
-      action: "split",
+      action: overlappingAbilityDefinitions ? "review" : "split",
     });
   }
 }
