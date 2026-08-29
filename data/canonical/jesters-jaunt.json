@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.jesters-jaunt",
   "ruleset": "Pathfinder First Edition",
   "name": "Jester's Jaunt",
@@ -121,7 +121,30 @@
   "description": {
     "raw": "You teleport the target to a space you can see within 30 feet of the target. The destination must be on solid ground, and the teleportation cannot end in a space that is by nature hazardous to the creature you are teleporting.",
     "search_text": "\"you teleport the target to a space you can see within 30 feet of the target. the destination must be on solid ground, and the teleportation cannot end in a space that is by nature hazardous to the creature you are teleporting.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "teleport",
+              "relationship_id": "spell.jesters-jaunt:references:spell.teleport"
+            },
+            {
+              "node_type": "text",
+              "value": " the target to a space you can see within 30 feet of the target. The destination must be on solid ground, and the teleportation cannot end in a space that is by nature hazardous to the creature you are teleporting."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -294,7 +317,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.teleport",
-        "name": "teleport"
+        "name": "Teleport"
       },
       "status": "accepted",
       "evidence": [
@@ -356,11 +379,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.jesters-jaunt:uses_definition:rule.will",
+      "relationship_id": "spell.jesters-jaunt:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -424,11 +447,19 @@
       "raw_value_sha256": "18e36de729e623d99b20d4aa980f83e366e76ad837bb832725cb3ccee7ca79ce",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.jesters-jaunt:8c628a7081a4904d",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "feb99b758d53453fab90eb16a9ce07eaf9440dcdc7fd580457303d3b416dc37f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

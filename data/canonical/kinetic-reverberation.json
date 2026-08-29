@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.kinetic-reverberation",
   "ruleset": "Pathfinder First Edition",
   "name": "Kinetic Reverberation",
@@ -159,7 +159,57 @@
   "description": {
     "raw": "This spell converts the momentum and force from melee attacks made against the target of the spell, reflecting them back upon the attacker’s weapon. After making a successful melee attack against the target, an attacker must make a Fortitude saving throw for the weapon used. If the weapon fails the save, it takes damage equal to the damage rolled against the target. Creatures using natural attacks or unarmed strikes are unaffected by this spell.",
     "search_text": "\"this spell converts the momentum and force from melee attacks made against the target of the spell, reflecting them back upon the attacker’s weapon. after making a successful melee attack against the target, an attacker must make a fortitude saving throw for the weapon used. if the weapon fails the save, it takes damage equal to the damage rolled against the target. creatures using natural attacks or unarmed strikes are unaffected by this spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell converts the momentum and force from melee attacks made against the target of the spell, reflecting them back upon the attacker’s weapon. After making a successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "melee attack",
+              "relationship_id": "spell.kinetic-reverberation:uses_definition:rule.melee-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " against the target, an attacker must make a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.kinetic-reverberation:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saving throw for the weapon used. If the weapon fails the save, it takes damage equal to the damage rolled against the target. Creatures using "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "natural attacks",
+              "relationship_id": "spell.kinetic-reverberation:uses_definition:rule.natural-attacks"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "unarmed strikes",
+              "relationship_id": "spell.kinetic-reverberation:uses_definition:rule.unarmed-strikes"
+            },
+            {
+              "node_type": "text",
+              "value": " are unaffected by this spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -441,12 +491,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.kinetic-reverberation:uses_definition:rule.fort",
+      "relationship_id": "spell.kinetic-reverberation:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -456,20 +506,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Fort",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.kinetic-reverberation:uses_definition:rule.fortitude",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.fortitude",
-        "name": "Fortitude"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.kinetic-reverberation:5ae342c671ab8272",
           "source_field": "spell_raw.links_raw[7]",
@@ -609,11 +646,19 @@
       "raw_value_sha256": "c9d856f2909c6701ecbfb5a83e1af84e0069f20811802c30836a2f527f37ac19",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.kinetic-reverberation:16f405e0e14d87fc",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "54fbc710387d29622d3ec64e344a1f7dedf5f29d0cc4f8d591c96e1ba82e6a23",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

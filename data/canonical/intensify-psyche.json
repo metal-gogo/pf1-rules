@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.intensify-psyche",
   "ruleset": "Pathfinder First Edition",
   "name": "Intensify Psyche",
@@ -215,7 +215,75 @@
   "description": {
     "raw": "A sense of euphoria suffuses the target, amplifying all sensations, good or bad. The target creature gains a +2 competence bonus on Diplomacy, Handle Animal, Perform, and Sense Motive checks. In addition, the DC for any spells or effects with the emotion or pain descriptors cast or caused by the target increases by 1 while the target is under the effects of the spell. However, increased sensitivity causes the target to take a –2 penalty on saving throws against spells and effects with the emotion or pain descriptor.",
     "search_text": "\"a sense of euphoria suffuses the target, amplifying all sensations, good or bad. the target creature gains a +2 competence bonus on diplomacy, handle animal, perform, and sense motive checks. in addition, the dc for any spells or effects with the emotion or pain descriptors cast or caused by the target increases by 1 while the target is under the effects of the spell. however, increased sensitivity causes the target to take a –2 penalty on saving throws against spells and effects with the emotion or pain descriptor.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "A sense of euphoria suffuses the target, amplifying all sensations, good or bad. The target creature gains a +2 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "competence bonus",
+              "relationship_id": "spell.intensify-psyche:uses_definition:rule.competence-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Diplomacy",
+              "relationship_id": "spell.intensify-psyche:uses_definition:rule.diplomacy"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Handle Animal",
+              "relationship_id": "spell.intensify-psyche:uses_definition:rule.handle-animal"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Perform",
+              "relationship_id": "spell.intensify-psyche:uses_definition:rule.perform"
+            },
+            {
+              "node_type": "text",
+              "value": ", and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Sense Motive",
+              "relationship_id": "spell.intensify-psyche:uses_definition:rule.sense-motive"
+            },
+            {
+              "node_type": "text",
+              "value": " checks. In addition, the DC for any spells or effects with the emotion or pain descriptors cast or caused by the target increases by 1 while the target is under the effects of the spell. However, increased sensitivity causes the target to take a –2 penalty on saving throws against spells and effects with the emotion or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "pain descriptor",
+              "relationship_id": "spell.intensify-psyche:uses_definition:rule.pain-descriptor"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -374,6 +442,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.intensify-psyche:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.intensify-psyche:957f205b7249476e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.intensify-psyche:appears_on_spell_list:spell-list.oracle",
@@ -887,11 +975,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.intensify-psyche:uses_definition:rule.will",
+      "relationship_id": "spell.intensify-psyche:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -905,26 +993,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.intensify-psyche:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.intensify-psyche:957f205b7249476e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -975,11 +1043,19 @@
       "raw_value_sha256": "a938df1cb1cba7f23426624aea16b7b7fab7a9f3546530977afa40cfd82799be",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.intensify-psyche:957f205b7249476e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "84d2d3a528a4fb9420a972927470bc336d6337a7898718570b8cd8ad7a720972",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

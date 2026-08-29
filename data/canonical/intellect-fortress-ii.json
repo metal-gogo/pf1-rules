@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.intellect-fortress-ii",
   "ruleset": "Pathfinder First Edition",
   "name": "Intellect Fortress II",
@@ -99,7 +99,42 @@
   "description": {
     "raw": "This spell functions as intellect fortress I, but in addition, any mind-affecting effects that deal damage have their damage reduced by half (before any reduction due to a successful save or other effect). This applies to both hit point damage and ability score damage. This spell can be undercast.",
     "search_text": "\"this spell functions as intellect fortress i, but in addition, any mind-affecting effects that deal damage have their damage reduced by half (before any reduction due to a successful save or other effect). this applies to both hit point damage and ability score damage. this spell can be undercast.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "intellect fortress I",
+              "relationship_id": "spell.intellect-fortress-ii:functions_like:spell.intellect-fortress-i",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", but in addition, any "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "mind-affecting",
+              "relationship_id": "spell.intellect-fortress-ii:uses_definition:descriptor.mind-affecting"
+            },
+            {
+              "node_type": "text",
+              "value": " effects that deal damage have their damage reduced by half (before any reduction due to a successful save or other effect). This applies to both hit point damage and ability score damage. This spell can be undercast."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -282,6 +317,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.intellect-fortress-ii:uses_definition:descriptor.mind-affecting",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.mind-affecting",
+        "name": "Mind-affecting"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.intellect-fortress-ii:60d43718963ab59a",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "mind-affecting",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Magic-Descriptor-Mind-Affecting"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.intellect-fortress-ii:uses_definition:rule.fear",
       "type": "uses_definition",
       "target": {
@@ -297,26 +352,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "fear",
           "source_href": "https://www.d20pfsrd.com/gamemastering/special-abilities#TOC-Fear"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.intellect-fortress-ii:uses_definition:rule.mind-affecting",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.mind-affecting",
-        "name": "mind-affecting"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.intellect-fortress-ii:60d43718963ab59a",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "mind-affecting",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Magic-Descriptor-Mind-Affecting"
         }
       ],
       "note": null
@@ -417,11 +452,19 @@
       "raw_value_sha256": "896508549798d45649f6b5814bd8c928115227bd45d833f2f1c2517b766d031c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.intellect-fortress-ii:59a3119b89153733",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "1adfcd0d82727b6f836daee9a80a1360bb51c9e4d9b3a50ccbb78fe6a92fd634",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

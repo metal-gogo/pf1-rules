@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.jannis-jaunt",
   "ruleset": "Pathfinder First Edition",
   "name": "Janni's Jaunt",
@@ -222,7 +222,51 @@
   "description": {
     "raw": "This spell functions as per plane shift, but with the following exceptions. First, you are able to transport only willing creatures. Second, the spell can transport you and any other willing targets only to an Elemental Plane, the Astral Plane, or the Material Plane.",
     "search_text": "\"this spell functions as per plane shift, but with the following exceptions. first, you are able to transport only willing creatures. second, the spell can transport you and any other willing targets only to an elemental plane, the astral plane, or the material plane.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "plane shift",
+              "relationship_id": "spell.jannis-jaunt:functions_like:spell.plane-shift",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", but with the following exceptions. First, you are able to transport only willing creatures. Second, the spell can transport you and any other willing targets only to an Elemental Plane, the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Astral Plane",
+              "relationship_id": "spell.jannis-jaunt:uses_definition:rule.astral-plane"
+            },
+            {
+              "node_type": "text",
+              "value": ", or the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Material Plane",
+              "relationship_id": "spell.jannis-jaunt:uses_definition:rule.material-plane"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -408,6 +452,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.jannis-jaunt:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.jannis-jaunt:dae62a58d859c8d4",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.jannis-jaunt:ce64b019ab6d5a25",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.jannis-jaunt:appears_on_spell_list:spell-list.oracle",
@@ -758,7 +829,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.plane-shift",
-        "name": "plane shift"
+        "name": "Plane Shift"
       },
       "status": "accepted",
       "evidence": [
@@ -871,33 +942,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.jannis-jaunt:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.jannis-jaunt:dae62a58d859c8d4",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.jannis-jaunt:ce64b019ab6d5a25",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -948,11 +992,19 @@
       "raw_value_sha256": "0c8fabcc1f29a2d90edc544caea2e5eab84984b8f586957fce74e727cf446d66",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.jannis-jaunt:ce64b019ab6d5a25",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "10fb92097825204a4ad761a3f8f7d17257d2637a82cad1f342daaabdc98739c1",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

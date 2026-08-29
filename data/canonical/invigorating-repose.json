@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.invigorating-repose",
   "ruleset": "Pathfinder First Edition",
   "name": "Invigorating Repose",
@@ -180,7 +180,65 @@
   "description": {
     "raw": "This spell enhances your spells that bring the dead back to life. If you cast raise dead, the target creature is restored to full hit points. If you cast breath of life, that spell can revive a dead target as long as you cast it within a number of rounds equal to half your caster level, and the healing effect is treated as if the spell were empowered with the Empower Spell feat. Casting any of these spells discharges the invigorating repose spell.",
     "search_text": "\"this spell enhances your spells that bring the dead back to life. if you cast raise dead, the target creature is restored to full hit points. if you cast breath of life, that spell can revive a dead target as long as you cast it within a number of rounds equal to half your caster level, and the healing effect is treated as if the spell were empowered with the empower spell feat. casting any of these spells discharges the invigorating repose spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell enhances your spells that bring the dead back to life. If you cast "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "raise dead",
+              "relationship_id": "spell.invigorating-repose:references:spell.raise-dead",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", the target creature is restored to full hit points. If you cast "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "breath of life",
+              "relationship_id": "spell.invigorating-repose:references:spell.breath-of-life",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", that spell can revive a dead target as long as you cast it within a number of rounds equal to half your caster level, and the healing effect is treated as if the spell were empowered with the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Empower Spell",
+              "relationship_id": "spell.invigorating-repose:uses_definition:feat.empower-spell"
+            },
+            {
+              "node_type": "text",
+              "value": " feat. Casting any of these spells discharges the "
+            },
+            {
+              "node_type": "text",
+              "value": "invigorating repose",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -231,6 +289,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.invigorating-repose:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.invigorating-repose:8034541217212da5",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5 (Magrim)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.invigorating-repose:appears_on_spell_list:spell-list.oracle",
@@ -359,7 +437,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.breath-of-life",
-        "name": "breath of life"
+        "name": "Breath of Life"
       },
       "status": "accepted",
       "evidence": [
@@ -379,7 +457,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.raise-dead",
-        "name": "raise dead"
+        "name": "Raise Dead"
       },
       "status": "accepted",
       "evidence": [
@@ -421,11 +499,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.invigorating-repose:uses_definition:rule.empower-spell",
+      "relationship_id": "spell.invigorating-repose:uses_definition:feat.empower-spell",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.empower-spell",
+        "entity_type": "feat",
+        "entity_id": "feat.empower-spell",
         "name": "Empower Spell"
       },
       "status": "accepted",
@@ -459,26 +537,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.invigorating-repose:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.invigorating-repose:8034541217212da5",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5 (Magrim)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -529,11 +587,19 @@
       "raw_value_sha256": "20a18277df953d918565f05f16bd9ec796e9585479f218aa8d4f72119df98edf",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.invigorating-repose:8034541217212da5",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "397eb1aaaebe6138ee447660bfe98effc466c05772d5881a7a05c58f05804551",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
