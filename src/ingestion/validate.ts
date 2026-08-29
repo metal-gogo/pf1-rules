@@ -383,6 +383,7 @@ export function validatePackage(): PackageStatistics {
 
   const registryPaths = directJsonFiles(path.join(projectRoot, "data", "entities"));
   const registeredIds = new Set<string>();
+  const registeredEntities = new Map<string, ValidatedJson>();
   for (const filename of registryPaths) {
     const registry = loadJson(filename);
     assertValid(registryValidator, registry, filename);
@@ -391,6 +392,7 @@ export function validatePackage(): PackageStatistics {
         throw new Error(`Duplicate registered entity: ${entity.entity_id}`);
       }
       registeredIds.add(entity.entity_id);
+      registeredEntities.set(entity.entity_id, entity);
     }
   }
 
@@ -401,6 +403,23 @@ export function validatePackage(): PackageStatistics {
         const targetId = relationship.target.entity_id;
         if (targetId && !registeredIds.has(targetId)) {
           throw new Error(`${entity.entity_id} references unregistered entity ${targetId}`);
+        }
+        if (targetId) {
+          const target = registeredEntities.get(targetId);
+          if (target && relationship.target.entity_type !== target.entity_type) {
+            throw new Error(
+              `${relationship.relationship_id} declares target type ` +
+                `${relationship.target.entity_type}, expected ${target.entity_type}`,
+            );
+          }
+          const expectedRelationshipId =
+            `${entity.entity_id}:${relationship.type}:${targetId}`;
+          if (relationship.relationship_id !== expectedRelationshipId) {
+            throw new Error(
+              `Relationship ID ${relationship.relationship_id} must be ` +
+                expectedRelationshipId,
+            );
+          }
         }
         for (const evidence of relationship.evidence) {
           if (!observations.has(evidence.observation_id)) {
