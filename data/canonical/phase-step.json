@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.phase-step",
   "ruleset": "Pathfinder First Edition",
   "name": "Phase Step",
@@ -185,7 +185,33 @@
   "description": {
     "raw": "You instantly transfer the touched creature to a point you designate within range. This otherwise functions as the spell dimension door, except that you must have line of sight and line of effect to the target’s destination for this spell’s effects to properly function.",
     "search_text": "\"you instantly transfer the touched creature to a point you designate within range. this otherwise functions as the spell dimension door, except that you must have line of sight and line of effect to the target’s destination for this spell’s effects to properly function.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You instantly transfer the touched creature to a point you designate within range. This otherwise functions as the spell "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dimension door",
+              "relationship_id": "spell.phase-step:references:spell.dimension-door",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that you must have line of sight and line of effect to the target’s destination for this spell’s effects to properly function."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -566,7 +592,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.dimension-door",
-        "name": "dimension door"
+        "name": "Dimension Door"
       },
       "status": "accepted",
       "evidence": [
@@ -676,11 +702,19 @@
       "raw_value_sha256": "5165040031d9e09b647c5f04999256fbed974f8fec86d64e2e3da247a3de19f2",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.phase-step:8006269174698e93",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "7badb15251918ed5feea8d32476af28a202173766988f55b146a3767647bbd41",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

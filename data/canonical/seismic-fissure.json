@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.seismic-fissure",
   "ruleset": "Pathfinder First Edition",
   "name": "Seismic Fissure",
@@ -103,7 +103,48 @@
   "description": {
     "raw": "With a thrust of tectonic energy, you split the earth. Each creature standing in the area where the fissure opens must succeed at a Reflex saving throw to avoid falling into the rift. Those standing adjacent to the fissure when it is created must succeed at a Reflex save or be knocked prone by tremors. This spell is effective only when cast on an area of dirt, earth, sand, or stone.",
     "search_text": "\"with a thrust of tectonic energy, you split the earth. each creature standing in the area where the fissure opens must succeed at a reflex saving throw to avoid falling into the rift. those standing adjacent to the fissure when it is created must succeed at a reflex save or be knocked prone by tremors. this spell is effective only when cast on an area of dirt, earth, sand, or stone.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "With a thrust of tectonic energy, you split the earth. Each creature standing in the area where the fissure opens must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.seismic-fissure:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saving throw to avoid falling into the rift. Those standing adjacent to the fissure when it is created must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.seismic-fissure:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save or be knocked "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "prone",
+              "relationship_id": "spell.seismic-fissure:uses_definition:condition.prone"
+            },
+            {
+              "node_type": "text",
+              "value": " by tremors. This spell is effective only when cast on an area of dirt, earth, sand, or stone."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -312,11 +353,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.seismic-fissure:uses_definition:rule.reflex",
+      "relationship_id": "spell.seismic-fissure:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -414,11 +455,19 @@
       "raw_value_sha256": "a9b2c672b127dca9dc9c3028d81fa4cf623c8d30a3a623b89e533ca1339f14fe",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.seismic-fissure:09d4c638f30d2ac7",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d36ff738aff89feba373c23906c317ccd4b868e687e99e2810f634cb30f4a9e9",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

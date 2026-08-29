@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.rebuke-technology",
   "ruleset": "Pathfinder First Edition",
   "name": "Rebuke Technology",
@@ -149,7 +149,39 @@
   "description": {
     "raw": "You shroud the targeted technological object or creature (such as a robot or a nanotech swarm) with magical energy. If the targeted creature fails to resist the spell, it is rendered inert and unusable (or unconscious in the case of creatures) for the spell’s duration. A creature can attempt a new Fortitude saving throw to end the effect early at the end of its turn after the first full round it is affected by this spell.",
     "search_text": "\"you shroud the targeted technological object or creature (such as a robot or a nanotech swarm) with magical energy. if the targeted creature fails to resist the spell, it is rendered inert and unusable (or unconscious in the case of creatures) for the spell’s duration. a creature can attempt a new fortitude saving throw to end the effect early at the end of its turn after the first full round it is affected by this spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You shroud the targeted technological object or creature (such as a robot or a nanotech swarm) with magical energy. If the targeted creature fails to resist the spell, it is rendered inert and unusable (or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "unconscious",
+              "relationship_id": "spell.rebuke-technology:uses_definition:condition.unconscious"
+            },
+            {
+              "node_type": "text",
+              "value": " in the case of creatures) for the spell’s duration. A creature can attempt a new "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.rebuke-technology:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saving throw to end the effect early at the end of its turn after the first full round it is affected by this spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -404,12 +436,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.rebuke-technology:uses_definition:rule.fort",
+      "relationship_id": "spell.rebuke-technology:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -419,20 +451,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Fort",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.rebuke-technology:uses_definition:rule.fortitude",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.fortitude",
-        "name": "Fortitude"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.rebuke-technology:1aa991fc0fd86d47",
           "source_field": "spell_raw.links_raw[6]",
@@ -512,11 +531,19 @@
       "raw_value_sha256": "7761f2952e03311f7c0ffc922a9d79d5dd0542be9e4a653a8defd040f0692d84",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.rebuke-technology:5dbed97d3c89036c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "187871a7d34d06db237f84c86c1c2f0093f1f0d418d4c8e1be9bf914fa004b30",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

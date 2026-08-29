@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.reduce-person-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Reduce Person, Mass",
@@ -175,7 +175,33 @@
   "description": {
     "raw": "This spell functions like reduce person, except that it affects multiple creatures.",
     "search_text": "\"this spell functions like reduce person, except that it affects multiple creatures.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "reduce person",
+              "relationship_id": "spell.reduce-person-mass:functions_like:spell.reduce-person",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that it affects multiple creatures."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -523,6 +549,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like reduce person, except that it affects multiple creatures.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.reduce-person-mass:ec4ea42567a7baac",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "reduce person",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/reducePerson.html#reduce-person"
         }
       ],
       "note": null
@@ -591,26 +624,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "PRPG Core Rulebook pg. 331",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.reduce-person-mass:references:spell.reduce-person",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.reduce-person",
-        "name": "reduce person"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.reduce-person-mass:ec4ea42567a7baac",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "reduce person",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/reducePerson.html#reduce-person"
         }
       ],
       "note": null
@@ -724,11 +737,19 @@
       "raw_value_sha256": "62f569a27ee842b277def0b70ceb007bbfdbc477450e561290ea7549b5607f6f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.reduce-person-mass:0df5dbd896f8b845",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e7583b5fc9d5955143a3cd426359dc2494e58bf2d0e7a6b5280b081233f7a29f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

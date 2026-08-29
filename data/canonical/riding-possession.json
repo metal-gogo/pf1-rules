@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.riding-possession",
   "ruleset": "Pathfinder First Edition",
   "name": "Riding Possession",
@@ -187,7 +187,83 @@
   "description": {
     "raw": "You stealthily project your soul into the host’s body as an observer, with limited ability to influence the target. This functions as possession, except the host is still in full control of its body and is unaware you are possessing it. You can’t communicate with the host directly, but you can cast mind-affecting spells or riding possession on the host as long as you can cast these spells as purely mental actions. Even if the spell you cast would normally affect more than one target or an area, it can affect only the host. If the host succeeds at a saving throw against a spell that you cast in this way, it immediately becomes aware that it is possessed, and if it was already aware, it receives another saving throw against riding possession. Protection from evil and similar effects don’t expel you from the host, but they do prevent you from casting further spells from within your host until their durations expire.",
     "search_text": "\"you stealthily project your soul into the host’s body as an observer, with limited ability to influence the target. this functions as possession, except the host is still in full control of its body and is unaware you are possessing it. you can’t communicate with the host directly, but you can cast mind-affecting spells or riding possession on the host as long as you can cast these spells as purely mental actions. even if the spell you cast would normally affect more than one target or an area, it can affect only the host. if the host succeeds at a saving throw against a spell that you cast in this way, it immediately becomes aware that it is possessed, and if it was already aware, it receives another saving throw against riding possession. protection from evil and similar effects don’t expel you from the host, but they do prevent you from casting further spells from within your host until their durations expire.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You stealthily project your soul into the host’s body as an observer, with limited ability to influence the target. This functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "possession",
+              "relationship_id": "spell.riding-possession:functions_like:spell.possession",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except the host is still in full control of its body and is unaware you are possessing it. You can’t communicate with the host directly, but you can cast mind-affecting spells or "
+            },
+            {
+              "node_type": "text",
+              "value": "riding ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "entity_link",
+              "value": "possession",
+              "relationship_id": "spell.riding-possession:functions_like:spell.possession",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " on the host as long as you can cast these spells as purely mental actions. Even if the spell you cast would normally affect more than one target or an area, it can affect only the host. If the host succeeds at a saving throw against a spell that you cast in this way, it immediately becomes aware that it is possessed, and if it was already aware, it receives another saving throw against "
+            },
+            {
+              "node_type": "text",
+              "value": "riding ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "entity_link",
+              "value": "possession",
+              "relationship_id": "spell.riding-possession:functions_like:spell.possession",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ". "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Protection from evil",
+              "relationship_id": "spell.riding-possession:references:spell.protection-from-evil",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " and similar effects don’t expel you from the host, but they do prevent you from casting further spells from within your host until their durations expire."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -197,7 +273,55 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.possession",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.riding-possession:c27d91ccdcd794da",
+        "source_field": "spell_raw.description_raw",
+        "raw": "You stealthily project your soul into the host’s body as an observer, with limited ability to influence the target. This functions as possession, except the host is still in full control of its body and is unaware you are possessing it. You can’t communicate with the host directly, but you can cast mind-affecting spells or riding possession on the host as long as you can cast these spells as purely mental actions. Even if the spell you cast would normally affect more than one target or an area, it can affect only the host. If the host succeeds at a saving throw against a spell that you cast in this way, it immediately becomes aware that it is possessed, and if it was already aware, it receives another saving throw against riding possession. Protection from evil and similar effects don’t expel you from the host, but they do prevent you from casting further spells from within your host until their durations expire."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "special",
+            "formula": "1 hour/level (D); see text",
+            "dismissible": true,
+            "concentration": null,
+            "raw": "1 hour/level (D); see text"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "1 hour/level (D); see text",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "You stealthily project your soul into the host’s body as an observer, with limited ability to influence the target. This functions as possession, except the host is still in full control of its body and is unaware you are possessing it. You can’t communicate with the host directly, but you can cast mind-affecting spells or riding possession on the host as long as you can cast these spells as purely mental actions. Even if the spell you cast would normally affect more than one target or an area, it can affect only the host. If the host succeeds at a saving throw against a spell that you cast in this way, it immediately becomes aware that it is possessed, and if it was already aware, it receives another saving throw against riding possession. Protection from evil and similar effects don’t expel you from the host, but they do prevent you from casting further spells from within your host until their durations expire.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "You stealthily project your soul into the host’s body as an observer, with limited ability to influence the target. This functions as possession, except the host is still in full control of its body and is unaware you are possessing it. You can’t communicate with the host directly, but you can cast mind-affecting spells or riding possession on the host as long as you can cast these spells as purely mental actions. Even if the spell you cast would normally affect more than one target or an area, it can affect only the host. If the host succeeds at a saving throw against a spell that you cast in this way, it immediately becomes aware that it is possessed, and if it was already aware, it receives another saving throw against riding possession. Protection from evil and similar effects don’t expel you from the host, but they do prevent you from casting further spells from within your host until their durations expire.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.riding-possession:appears_on_spell_list:spell-list.arcanist",
@@ -422,6 +546,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.riding-possession:appears_on_spell_list:spell-list.summoner-unchained",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.summoner-unchained",
+        "name": "Summoner (Unchained) Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.riding-possession:c27d91ccdcd794da",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 4",
+          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/necromancy/riding-possession.vpqwav2vexafom8c.yaml"
+        }
+      ],
+      "note": "Reviewed project decision: add Summoner (Unchained) 4 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
+    },
+    {
       "relationship_id": "spell.riding-possession:appears_on_spell_list:spell-list.witch",
       "type": "appears_on_spell_list",
       "target": {
@@ -464,6 +608,26 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "wizard 4",
           "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.riding-possession:functions_like:spell.possession",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.possession",
+        "name": "Possession"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.riding-possession:041a828f19c3ed33",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "possession",
+          "source_href": "https://legacy.aonprd.com/occultAdventures/spells/possession.html"
         }
       ],
       "note": null
@@ -537,32 +701,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.riding-possession:references:spell.possession",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.possession",
-        "name": "possession"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.riding-possession:041a828f19c3ed33",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "possession",
-          "source_href": "https://legacy.aonprd.com/occultAdventures/spells/possession.html"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.riding-possession:references:spell.protection-from-evil",
       "type": "references",
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.protection-from-evil",
-        "name": "Protection from evil"
+        "name": "Protection from Evil"
       },
       "status": "accepted",
       "evidence": [
@@ -651,11 +795,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.riding-possession:uses_definition:rule.will",
+      "relationship_id": "spell.riding-possession:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -669,26 +813,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.riding-possession:appears_on_spell_list:spell-list.summoner-unchained",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.summoner-unchained",
-        "name": "Summoner (Unchained) Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.riding-possession:c27d91ccdcd794da",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "manual_verification",
-          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 4",
-          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/necromancy/riding-possession.vpqwav2vexafom8c.yaml"
-        }
-      ],
-      "note": "Reviewed project decision: add Summoner (Unchained) 4 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
     }
   ],
   "provenance": [
@@ -739,11 +863,19 @@
       "raw_value_sha256": "c9364723aa9e4cac9e64ec1ddd1683e92bd9d548e9e2f198a194d84f8c553569",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.riding-possession:c27d91ccdcd794da",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e0c0876e8548f0567a8ee3fbaa3079992b4f5c9697a8f51264cca58cfe38f780",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

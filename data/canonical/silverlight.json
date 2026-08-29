@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.silverlight",
   "ruleset": "Pathfinder First Edition",
   "name": "Silverlight",
@@ -216,7 +216,53 @@
   "description": {
     "raw": "As daylight, except the object touched sheds bright silvery light in a 20-foot radius. In addition to providing illumination, the area of bright light is painful to creatures that are susceptible to alchemical silver. A creature with DR/silver that begins its turn within the light of this spell is automatically dazzled and becomes sickened unless it succeeds on a Fortitude save. These effects disappear 1 round after the target leaves the silverlight. A creature that leaves the area and then returns must make a new saving throw. This spell provides dim light up to 40 feet away, but only creatures within 20 feet are subject to the above e!ects.",
     "search_text": "\"as daylight, except the object touched sheds bright silvery light in a 20-foot radius. in addition to providing illumination, the area of bright light is painful to creatures that are susceptible to alchemical silver. a creature with dr/silver that begins its turn within the light of this spell is automatically dazzled and becomes sickened unless it succeeds on a fortitude save. these effects disappear 1 round after the target leaves the silverlight. a creature that leaves the area and then returns must make a new saving throw. this spell provides dim light up to 40 feet away, but only creatures within 20 feet are subject to the above e!ects.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "As "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "daylight",
+              "relationship_id": "spell.silverlight:functions_like:spell.daylight",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except the object touched sheds bright silvery light in a 20-foot radius. In addition to providing illumination, the area of bright light is painful to creatures that are susceptible to alchemical silver. A creature with DR/silver that begins its turn within the light of this spell is automatically dazzled and becomes sickened unless it succeeds on a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.silverlight:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save. These effects disappear 1 round after the target leaves the "
+            },
+            {
+              "node_type": "text",
+              "value": "silverlight",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ". A creature that leaves the area and then returns must make a new saving throw. This spell provides dim light up to 40 feet away, but only creatures within 20 feet are subject to the above e!ects."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -458,6 +504,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.silverlight:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.silverlight:13b6f10db2b19d56",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.silverlight:appears_on_spell_list:spell-list.oracle",
@@ -749,11 +815,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.silverlight:uses_definition:rule.fortitude",
+      "relationship_id": "spell.silverlight:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -787,26 +853,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.silverlight:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.silverlight:13b6f10db2b19d56",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -857,11 +903,19 @@
       "raw_value_sha256": "5528a6f94f7645573f57d6babd4f5217d3737bf2bca8414031ca28a083e6af7e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.silverlight:13b6f10db2b19d56",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "0ea8dd433de4a6f1e0adeef009c6ee716895e704858fbe6dc41dc2ee59ff5dd8",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.sawtooth-terrain",
   "ruleset": "Pathfinder First Edition",
   "name": "Sawtooth Terrain",
@@ -188,7 +188,75 @@
   "description": {
     "raw": "This spell targets an area of earth, metal, stone, or wood, causing long, serrated blades to shoot out from random points within the area of effect. Any creature in the area when the spell is first cast must attempt a Reflex save to avoid taking 3d8 points of piercing damage from the blades and an additional 2d6 points of bleed damage. A creature that fails the save also has its speed reduced by half for 24 hours or until the injured creature benefits from a “cure” spell (which restores lost hit points as normal). Another creature can remove the penalty by succeeding on a Heal check against the spell’s save DC as a standard action.\n\nThe lashing limbs remain active in the area for the remainder of the spell’s duration, during which time the area is treated as difficult terrain, and any creature that moves into or through the area takes 1d8 points of piercing damage. The transformed area can be located on any visible surface within range, including floors, walls, doors, ceilings, or other generally flat surfaces.",
     "search_text": "\"this spell targets an area of earth, metal, stone, or wood, causing long, serrated blades to shoot out from random points within the area of effect. any creature in the area when the spell is first cast must attempt a reflex save to avoid taking 3d8 points of piercing damage from the blades and an additional 2d6 points of bleed damage. a creature that fails the save also has its speed reduced by half for 24 hours or until the injured creature benefits from a “cure” spell (which restores lost hit points as normal). another creature can remove the penalty by succeeding on a heal check against the spell’s save dc as a standard action.\\n\\nthe lashing limbs remain active in the area for the remainder of the spell’s duration, during which time the area is treated as difficult terrain, and any creature that moves into or through the area takes 1d8 points of piercing damage. the transformed area can be located on any visible surface within range, including floors, walls, doors, ceilings, or other generally flat surfaces.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell targets an area of earth, metal, stone, or wood, causing long, serrated blades to shoot out from random points within the area of effect. Any creature in the area when the spell is first cast must attempt a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.sawtooth-terrain:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save to avoid taking 3d8 points of piercing damage from the blades and an additional 2d6 points of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bleed",
+              "relationship_id": "spell.sawtooth-terrain:uses_definition:condition.bleed"
+            },
+            {
+              "node_type": "text",
+              "value": " damage. A creature that fails the save also has its speed reduced by half for 24 hours or until the injured creature benefits from a “cure” spell (which restores lost "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.sawtooth-terrain:uses_definition:rule.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": " as normal). Another creature can remove the penalty by succeeding on a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Heal",
+              "relationship_id": "spell.sawtooth-terrain:uses_definition:rule.heal"
+            },
+            {
+              "node_type": "text",
+              "value": " check against the spell’s save DC as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "standard action",
+              "relationship_id": "spell.sawtooth-terrain:uses_action:action.standard-action"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The lashing limbs remain active in the area for the remainder of the spell’s duration, during which time the area is treated as difficult terrain, and any creature that moves into or through the area takes 1d8 points of piercing damage. The transformed area can be located on any visible surface within range, including floors, walls, doors, ceilings, or other generally flat surfaces."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -293,6 +361,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.sawtooth-terrain:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.sawtooth-terrain:ccf8d7e47d7df2b4",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.sawtooth-terrain:2315d51b670fa014",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.sawtooth-terrain:appears_on_spell_list:spell-list.oracle",
@@ -597,11 +692,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sawtooth-terrain:uses_definition:rule.reflex",
+      "relationship_id": "spell.sawtooth-terrain:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -642,33 +737,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.sawtooth-terrain:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.sawtooth-terrain:ccf8d7e47d7df2b4",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.sawtooth-terrain:2315d51b670fa014",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -719,11 +787,19 @@
       "raw_value_sha256": "7db2e26b7e5a6b6889feebc9e8d2fad1ad5108bcf0dd320575339ed987eabddf",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.sawtooth-terrain:2315d51b670fa014",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e82023928bbfbe9bd49cb3e49edf7f8377a9688f241a2d744dbdf6b09449a648",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

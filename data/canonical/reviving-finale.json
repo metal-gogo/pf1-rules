@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.reviving-finale",
   "ruleset": "Pathfinder First Edition",
   "name": "Reviving Finale",
@@ -113,7 +113,39 @@
   "description": {
     "raw": "You must have a bardic performance in effect to cast this spell. With a flourish, you immediately end your bardic performance, and allies within the area of the spell regain 2d6 hit points. This spell has no effect on undead creatures.",
     "search_text": "\"you must have a bardic performance in effect to cast this spell. with a flourish, you immediately end your bardic performance, and allies within the area of the spell regain 2d6 hit points. this spell has no effect on undead creatures.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You must have a bardic performance in effect to cast this spell. With a flourish, you immediately end your bardic performance, and allies within the area of the spell regain 2d6 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.reviving-finale:uses_definition:rule.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": ". This spell has no effect on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "undead",
+              "relationship_id": "spell.reviving-finale:uses_definition:rule.undead"
+            },
+            {
+              "node_type": "text",
+              "value": " creatures."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -348,11 +380,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.reviving-finale:uses_definition:rule.will",
+      "relationship_id": "spell.reviving-finale:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -416,11 +448,19 @@
       "raw_value_sha256": "3ea739fe9a452fc7c86d14ecb8c219a639a252eaf8548c33f9643f119aeb04d8",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.reviving-finale:007d145b31a310b9",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "147b5639760d2bd6fb1bc219f8613fd362f630f5f19734071351a94d312bbb8e",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

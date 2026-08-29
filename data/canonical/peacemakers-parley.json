@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.peacemakers-parley",
   "ruleset": "Pathfinder First Edition",
   "name": "Peacemaker's Parley",
@@ -177,7 +177,48 @@
   "description": {
     "raw": "You can attempt to influence unfriendly or hostile creatures, altering their attitudes toward you. After casting, make a Diplomacy check against the creatures as a free action; you gain a +2 sacred bonus on this check against creatures that failed their saves against the spell. Even if you favorably manipulate the attitude of the affected targets, they quickly revert to their previous attitude if threatened or treated poorly.",
     "search_text": "\"you can attempt to influence unfriendly or hostile creatures, altering their attitudes toward you. after casting, make a diplomacy check against the creatures as a free action; you gain a +2 sacred bonus on this check against creatures that failed their saves against the spell. even if you favorably manipulate the attitude of the affected targets, they quickly revert to their previous attitude if threatened or treated poorly.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You can attempt to influence unfriendly or hostile creatures, altering their attitudes toward you. After casting, make a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Diplomacy",
+              "relationship_id": "spell.peacemakers-parley:uses_definition:rule.diplomacy"
+            },
+            {
+              "node_type": "text",
+              "value": " check against the creatures as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "free action",
+              "relationship_id": "spell.peacemakers-parley:uses_action:action.free-action"
+            },
+            {
+              "node_type": "text",
+              "value": "; you gain a +2 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sacred bonus",
+              "relationship_id": "spell.peacemakers-parley:uses_definition:rule.sacred-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on this check against creatures that failed their saves against the spell. Even if you favorably manipulate the attitude of the affected targets, they quickly revert to their previous attitude if threatened or treated poorly."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -228,6 +269,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.peacemakers-parley:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.peacemakers-parley:6e1ceeab50e38af1",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2 (Grundinnar)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.peacemakers-parley:appears_on_spell_list:spell-list.oracle",
@@ -505,11 +566,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.peacemakers-parley:uses_definition:rule.will",
+      "relationship_id": "spell.peacemakers-parley:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -523,26 +584,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.peacemakers-parley:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.peacemakers-parley:6e1ceeab50e38af1",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2 (Grundinnar)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -593,11 +634,19 @@
       "raw_value_sha256": "4eb89c2941e04eea081a05849a6c29d9bdb13d5c9db35af3b08d919310893765",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.peacemakers-parley:6e1ceeab50e38af1",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "744aa4264059b462ea23ac5ca8ce93b1cc254eaeee13c593c9eeecd1f5de35f6",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

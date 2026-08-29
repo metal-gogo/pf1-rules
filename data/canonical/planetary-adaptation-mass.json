@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.planetary-adaptation-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Planetary Adaptation, Mass",
@@ -184,7 +184,33 @@
   "description": {
     "raw": "This spell functions as planetary adaptation, except as noted above.",
     "search_text": "\"this spell functions as planetary adaptation, except as noted above.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "planetary adaptation",
+              "relationship_id": "spell.planetary-adaptation-mass:functions_like:spell.planetary-adaptation",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except as noted above."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -394,6 +420,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.planetary-adaptation-mass:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.planetary-adaptation-mass:bda76afb4567c841",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 6",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.planetary-adaptation-mass:appears_on_spell_list:spell-list.oracle",
@@ -711,11 +757,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.planetary-adaptation-mass:uses_definition:rule.will",
+      "relationship_id": "spell.planetary-adaptation-mass:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -729,26 +775,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.planetary-adaptation-mass:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.planetary-adaptation-mass:bda76afb4567c841",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 6",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -799,11 +825,19 @@
       "raw_value_sha256": "263ddc2e5930c4ed4c556fe7b7a17ac9244bb1691754dfb9205fe63c4e4bfecb",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.planetary-adaptation-mass:bda76afb4567c841",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "8805514731e00b690cfc4ec7cb7d0143d37dd8541efb79f7a2d3d1cad86c5fdd",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

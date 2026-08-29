@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.shadow-dragon-aspect",
   "ruleset": "Pathfinder First Edition",
   "name": "Shadow Dragon Aspect",
@@ -147,7 +147,84 @@
   "description": {
     "raw": "You wreathe yourself in the quasi-real form of a dragon. You gain\ntwo claw attacks (1d6 plus caster level slashing damage) and a bite\nattack (1d8 plus caster level piercing damage). These are primary\nattacks. In addition, you gain shadowy wings, granting you a fly\nspeed equal to your base speed (good maneuverability).\n\nYour shadowy natural weapons are only half as strong as the\nreal things, though creatures that believe them to be real are\naffected at full strength. A creature is permitted one Will save the\nfirst time you strike it. If it succeeds, the creature takes half damage\nfrom such attacks for the duration of the spell. If you overcome a\ncreature’s spell resistance on your first attack, that creature remains\nvulnerable for the spell’s duration; otherwise, it’s immune.",
     "search_text": "\"you wreathe yourself in the quasi-real form of a dragon. you gain\\ntwo claw attacks (1d6 plus caster level slashing damage) and a bite\\nattack (1d8 plus caster level piercing damage). these are primary\\nattacks. in addition, you gain shadowy wings, granting you a fly\\nspeed equal to your base speed (good maneuverability).\\n\\nyour shadowy natural weapons are only half as strong as the\\nreal things, though creatures that believe them to be real are\\naffected at full strength. a creature is permitted one will save the\\nfirst time you strike it. if it succeeds, the creature takes half damage\\nfrom such attacks for the duration of the spell. if you overcome a\\ncreature’s spell resistance on your first attack, that creature remains\\nvulnerable for the spell’s duration; otherwise, it’s immune.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You wreathe yourself in the quasi-real form of a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dragon",
+              "relationship_id": "spell.shadow-dragon-aspect:uses_definition:rule.dragon"
+            },
+            {
+              "node_type": "text",
+              "value": ". You gain two claw attacks (1d6 plus "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.shadow-dragon-aspect:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " slashing damage) and a bite attack (1d8 plus "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.shadow-dragon-aspect:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " piercing damage). These are primary attacks. In addition, you gain shadowy wings, granting you a fly speed equal to your base speed (good maneuverability)."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Your shadowy "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "natural weapons",
+              "relationship_id": "spell.shadow-dragon-aspect:uses_definition:rule.natural-attacks"
+            },
+            {
+              "node_type": "text",
+              "value": " are only half as strong as the real things, though creatures that believe them to be real are affected at full strength. A creature is permitted one "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.shadow-dragon-aspect:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save the first time you strike it. If it succeeds, the creature takes half damage from such attacks for the duration of the spell. If you overcome a creature’s "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.shadow-dragon-aspect:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": " on your first attack, that creature remains vulnerable for the spell’s duration; otherwise, it’s immune."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -503,12 +580,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.shadow-dragon-aspect:uses_definition:rule.natural-weapons",
+      "relationship_id": "spell.shadow-dragon-aspect:uses_definition:rule.natural-attacks",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.natural-weapons",
-        "name": "natural weapons"
+        "entity_id": "rule.natural-attacks",
+        "name": "Natural attacks"
       },
       "status": "accepted",
       "evidence": [
@@ -550,11 +627,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.shadow-dragon-aspect:uses_definition:rule.will",
+      "relationship_id": "spell.shadow-dragon-aspect:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -625,11 +702,19 @@
       "raw_value_sha256": "e27b46985d1c665b16c0fe8c41c8015558d9e3c251cd3f19ed1308cfed7d4465",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.shadow-dragon-aspect:2fa0de5da601396c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "de840d1f89a71ee7e65332ce9ffacc673f36827d6d669ba7a0e53fff22e783e3",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

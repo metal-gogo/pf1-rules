@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.planetary-adaptation",
   "ruleset": "Pathfinder First Edition",
   "name": "Planetary Adaptation",
@@ -194,7 +194,44 @@
   "description": {
     "raw": "This spell functions as planar adaptation (Pathfinder RPG Advanced Player’s Guide 236), except that it works only on worlds of the Material Plane. The cold void of space is considered a single world for the purpose of this spell, allowing you to survive in vacuum.",
     "search_text": "\"this spell functions as planar adaptation (pathfinder rpg advanced player’s guide 236), except that it works only on worlds of the material plane. the cold void of space is considered a single world for the purpose of this spell, allowing you to survive in vacuum.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "planar adaptation",
+              "relationship_id": "spell.planetary-adaptation:functions_like:spell.planar-adaptation",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " ("
+            },
+            {
+              "node_type": "text",
+              "value": "Pathfinder RPG Advanced Player’s Guide",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " 236), except that it works only on worlds of the Material Plane. The cold void of space is considered a single world for the purpose of this spell, allowing you to survive in vacuum."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -204,7 +241,55 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.planar-adaptation",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.planetary-adaptation:f6aa524b216be72e",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell functions as planar adaptation (Pathfinder RPG Advanced Player’s Guide 236), except that it works only on worlds of the Material Plane. The cold void of space is considered a single world for the purpose of this spell, allowing you to survive in vacuum."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "timed",
+            "formula": "1 hour/level",
+            "dismissible": null,
+            "concentration": null,
+            "raw": "1 hour/level"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "1 hour/level",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions as planar adaptation (Pathfinder RPG Advanced Player’s Guide 236), except that it works only on worlds of the Material Plane. The cold void of space is considered a single world for the purpose of this spell, allowing you to survive in vacuum.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions as planar adaptation (Pathfinder RPG Advanced Player’s Guide 236), except that it works only on worlds of the Material Plane. The cold void of space is considered a single world for the purpose of this spell, allowing you to survive in vacuum.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.planetary-adaptation:appears_on_spell_list:spell-list.alchemist",
@@ -319,6 +404,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.planetary-adaptation:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.planetary-adaptation:f6aa524b216be72e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.planetary-adaptation:appears_on_spell_list:spell-list.oracle",
@@ -482,6 +587,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.planetary-adaptation:functions_like:spell.planar-adaptation",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.planar-adaptation",
+        "name": "Planar Adaptation"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.planetary-adaptation:cc4c7f5924951a71",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "planar adaptation",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/p/planar-adaptation"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.planetary-adaptation:has_school:magic-school.transmutation",
       "type": "has_school",
       "target": {
@@ -597,26 +722,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.planetary-adaptation:references:spell.planar-adaptation",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.planar-adaptation",
-        "name": "planar adaptation"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.planetary-adaptation:cc4c7f5924951a71",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "planar adaptation",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/p/planar-adaptation"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.planetary-adaptation:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -664,11 +769,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.planetary-adaptation:uses_definition:rule.will",
+      "relationship_id": "spell.planetary-adaptation:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -682,26 +787,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.planetary-adaptation:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.planetary-adaptation:f6aa524b216be72e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -752,11 +837,19 @@
       "raw_value_sha256": "263ddc2e5930c4ed4c556fe7b7a17ac9244bb1691754dfb9205fe63c4e4bfecb",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.planetary-adaptation:f6aa524b216be72e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "97d5a76bf343094a94f92a860d55145d4ad2dc40ad8ff1953c3a31f4db2e9bd1",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

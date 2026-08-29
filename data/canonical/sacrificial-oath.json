@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.sacrificial-oath",
   "ruleset": "Pathfinder First Edition",
   "name": "Sacrificial Oath",
@@ -121,7 +121,30 @@
   "description": {
     "raw": "You create a powerful bond between yourself and a single creature. Until the end of the spell’s duration, each time the target is hit with an attack or fails a saving throw, you can take the full damage of that attack and any other effects that creature suffers. If you choose not to take on the damage and effects, you instead take a number of points of damage equal to your Constitution score as backlash. Any resistances or immunities you have are applied normally, but you cannot otherwise reduce or negate the damage or effects of either the transfer or the backlash. If you or the subject of the spell move out of line of sight, the spell ends.",
     "search_text": "\"you create a powerful bond between yourself and a single creature. until the end of the spell’s duration, each time the target is hit with an attack or fails a saving throw, you can take the full damage of that attack and any other effects that creature suffers. if you choose not to take on the damage and effects, you instead take a number of points of damage equal to your constitution score as backlash. any resistances or immunities you have are applied normally, but you cannot otherwise reduce or negate the damage or effects of either the transfer or the backlash. if you or the subject of the spell move out of line of sight, the spell ends.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create a powerful bond between yourself and a single creature. Until the end of the spell’s duration, each time the target is hit with an attack or fails a saving throw, you can take the full damage of that attack and any other effects that creature suffers. If you choose not to take on the damage and effects, you instead take a number of points of damage equal to your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Constitution",
+              "relationship_id": "spell.sacrificial-oath:uses_definition:rule.constitution"
+            },
+            {
+              "node_type": "text",
+              "value": " score as backlash. Any resistances or immunities you have are applied normally, but you cannot otherwise reduce or negate the damage or effects of either the transfer or the backlash. If you or the subject of the spell move out of line of sight, the spell ends."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -133,6 +156,26 @@
   },
   "rules_inheritance": [],
   "relationships": [
+    {
+      "relationship_id": "spell.sacrificial-oath:appears_on_spell_list:spell-list.martyr-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.martyr-subdomain",
+        "name": "Martyr Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.martyr:5c759126",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th—sacrificial oath",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Nobility"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
     {
       "relationship_id": "spell.sacrificial-oath:appears_on_spell_list:spell-list.paladin",
       "type": "appears_on_spell_list",
@@ -276,11 +319,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sacrificial-oath:uses_definition:rule.fortitude",
+      "relationship_id": "spell.sacrificial-oath:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -334,26 +377,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.sacrificial-oath:appears_on_spell_list:spell-list.martyr-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.martyr-subdomain",
-        "name": "Martyr Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.martyr:5c759126",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "6th—sacrificial oath",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Nobility"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -412,11 +435,19 @@
       "raw_value_sha256": "709876dda43e889a1b0eac16e301f26430f887a4926641db8f62439d30b1ba8e",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.sacrificial-oath:d47d321eebed9718",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2e22a047742c018fb04f4a8a847948464ad4f2fab3caba6dd81abb118ce52156",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

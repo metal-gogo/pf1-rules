@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.remote-viewing",
   "ruleset": "Pathfinder First Edition",
   "name": "Remote Viewing",
@@ -135,7 +135,98 @@
   "description": {
     "raw": "Your body enters a trance as you send your psychic senses to a distant location and gain psychic impressions of that location. You must specify the distance and direction to the location you desire to view remotely. This spell doesn’t allow you to see the visual appearance of the location’s surface, so it isn’t useful for casting spells like teleport, but it grants you a psychic impression of the location, which could give you deeper information. For example, a forest that is home to a tight-knit community of fey might appear as a city in the trees, or a beautiful palace ruled by an evil king and warded by forbiddance might appear as a dark fortress encased in insubstantial chains.\n\nDuring the 1 hour casting time of remote viewing, your real body is unconscious and helpless, and you are unaware of its surroundings.",
     "search_text": "\"your body enters a trance as you send your psychic senses to a distant location and gain psychic impressions of that location. you must specify the distance and direction to the location you desire to view remotely. this spell doesn’t allow you to see the visual appearance of the location’s surface, so it isn’t useful for casting spells like teleport, but it grants you a psychic impression of the location, which could give you deeper information. for example, a forest that is home to a tight-knit community of fey might appear as a city in the trees, or a beautiful palace ruled by an evil king and warded by forbiddance might appear as a dark fortress encased in insubstantial chains.\\n\\nduring the 1 hour casting time of remote viewing, your real body is unconscious and helpless, and you are unaware of its surroundings.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Your body enters a trance as you send your psychic senses to a distant location and gain psychic impressions of that location. You must specify the distance and direction to the location you desire to view remotely. This spell doesn’t allow you to see the visual appearance of the location’s surface, so it isn’t useful for casting spells like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "teleport",
+              "relationship_id": "spell.remote-viewing:references:spell.teleport"
+            },
+            {
+              "node_type": "text",
+              "value": ", but it grants you a psychic impression of the location, which could give you deeper information. For example, a forest that is home to a tight-knit community of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fey",
+              "relationship_id": "spell.remote-viewing:uses_definition:rule.fey"
+            },
+            {
+              "node_type": "text",
+              "value": " might appear as a city in the trees, or a beautiful palace ruled by an evil king and warded by "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "forbiddance",
+              "relationship_id": "spell.remote-viewing:references:spell.forbiddance",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " might appear as a dark fortress encased in insubstantial chains."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "During the 1 hour "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "casting time",
+              "relationship_id": "spell.remote-viewing:uses_definition:rule.casting-time"
+            },
+            {
+              "node_type": "text",
+              "value": " of "
+            },
+            {
+              "node_type": "text",
+              "value": "remote viewing",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", your real body is "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "unconscious",
+              "relationship_id": "spell.remote-viewing:uses_definition:condition.unconscious"
+            },
+            {
+              "node_type": "text",
+              "value": " and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "helpless",
+              "relationship_id": "spell.remote-viewing:uses_definition:condition.helpless"
+            },
+            {
+              "node_type": "text",
+              "value": ", and you are unaware of its surroundings."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -349,7 +440,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.forbiddance",
-        "name": "forbiddance"
+        "name": "Forbiddance"
       },
       "status": "accepted",
       "evidence": [
@@ -376,7 +467,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.teleport",
-        "name": "teleport"
+        "name": "Teleport"
       },
       "status": "accepted",
       "evidence": [
@@ -566,11 +657,19 @@
       "raw_value_sha256": "01b32db0d634e78ff64c62e234db8f498b36c99d38dab81e68134be386b9bcae",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.remote-viewing:19a4b43d1c35a8c6",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "8ad7cc4bed077058ff42e67ad1e68bcd0162912f4ce8cf25b95993983f67efa7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

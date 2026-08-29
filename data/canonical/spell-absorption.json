@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.spell-absorption",
   "ruleset": "Pathfinder First Edition",
   "name": "Spell Absorption",
@@ -127,7 +127,60 @@
   "description": {
     "raw": "If you successfully counterspell a 3rd-level or lower level spell (through either dispel magic or normal means) while spell absorption is in effect, you absorb the countered spell and use it to regain spells you have already cast. If you’re a wizard, you regain the use of any single spell that you have cast since the last time you prepared spells. If you’re a sorcerer, you regain a single spell slot. The spell recovered or spell slot regained must be of an equal level or lower than the spell you counterspelled.",
     "search_text": "\"if you successfully counterspell a 3rd-level or lower level spell (through either dispel magic or normal means) while spell absorption is in effect, you absorb the countered spell and use it to regain spells you have already cast. if you’re a wizard, you regain the use of any single spell that you have cast since the last time you prepared spells. if you’re a sorcerer, you regain a single spell slot. the spell recovered or spell slot regained must be of an equal level or lower than the spell you counterspelled.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "If you successfully "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "counterspell",
+              "relationship_id": "spell.spell-absorption:uses_definition:rule.counterspell"
+            },
+            {
+              "node_type": "text",
+              "value": " a 3rd-level or lower level spell (through either "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dispel magic",
+              "relationship_id": "spell.spell-absorption:references:spell.dispel-magic",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "or normal means) while "
+            },
+            {
+              "node_type": "text",
+              "value": "spell absorption ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "is in effect, you absorb the countered spell and use it to regain spells you have already cast. If you’re a wizard, you regain the use of any single spell that you have cast since the last time you prepared spells. If you’re a sorcerer, you regain a single spell slot. The spell recovered or spell slot regained must be of an equal level or lower than the spell you counterspelled."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -314,7 +367,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.dispel-magic",
-        "name": "dispel magic"
+        "name": "Dispel Magic"
       },
       "status": "accepted",
       "evidence": [
@@ -437,11 +490,19 @@
       "raw_value_sha256": "c20d3734471d824672b3c36afa5b76a193defe8ff8701cd9fe84bd60c117ea7f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.spell-absorption:1baec3360eaeaaea",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "95b13ce87634997e497c351d90f23ef269e3b91eed6d10285c1ec136044ef041",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

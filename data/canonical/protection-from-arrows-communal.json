@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.protection-from-arrows-communal",
   "ruleset": "Pathfinder First Edition",
   "name": "Protection from Arrows, Communal",
@@ -167,7 +167,33 @@
   "description": {
     "raw": "This spell functions like protection from arrows, except you divide the duration in 1-hour intervals among the creatures touched. Once the spell absorbs 10 points of damage per caster level (maximum 100 points) for a subject, the spell’s effects end for that subject.",
     "search_text": "\"this spell functions like protection from arrows, except you divide the duration in 1-hour intervals among the creatures touched. once the spell absorbs 10 points of damage per caster level (maximum 100 points) for a subject, the spell’s effects end for that subject.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "protection from arrows",
+              "relationship_id": "spell.protection-from-arrows-communal:functions_like:spell.protection-from-arrows",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you divide the duration in 1-hour intervals among the creatures touched. Once the spell absorbs 10 points of damage per caster level (maximum 100 points) for a subject, the spell’s effects end for that subject."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -481,6 +507,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like protection from arrows, except you divide the duration in 1-hour intervals among the creatures touched. Once the spell absorbs 10 points of damage per caster level (maximum 100 points) for a subject, the spell’s effects end for that subject.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.protection-from-arrows-communal:15e9f612a7732fb9",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "protection from arrows",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/protectionFromArrows.html#protection-from-arrows"
         }
       ],
       "note": null
@@ -555,26 +588,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "Ultimate Combat pg. 240",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.protection-from-arrows-communal:references:spell.protection-from-arrows",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.protection-from-arrows",
-        "name": "protection from arrows"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.protection-from-arrows-communal:15e9f612a7732fb9",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "protection from arrows",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/protectionFromArrows.html#protection-from-arrows"
         }
       ],
       "note": null
@@ -688,11 +701,19 @@
       "raw_value_sha256": "9654057441c7587683c095016f35b6b8e5aa26f8bed4f3440466fe28c363b4b1",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.protection-from-arrows-communal:fb6cc2a0c4418e6c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e2d91a57b46f621f53bfd107a68204e1664aacbd69c7247e0603210afdcc3c60",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

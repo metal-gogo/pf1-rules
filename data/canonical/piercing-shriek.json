@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.piercing-shriek",
   "ruleset": "Pathfinder First Edition",
   "name": "Piercing Shriek",
@@ -118,7 +118,51 @@
   "description": {
     "raw": "You emit an ear-splitting shriek which can be heard only by the target of this spell; all other observers merely see you screaming silently. The target suffers wracking pain from the scream, gaining the staggered condition. This spell has no effect on deaf creatures and cannot penetrate an area of silence.",
     "search_text": "\"you emit an ear-splitting shriek which can be heard only by the target of this spell; all other observers merely see you screaming silently. the target suffers wracking pain from the scream, gaining the staggered condition. this spell has no effect on deaf creatures and cannot penetrate an area of silence.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You emit an ear-splitting shriek which can be heard only by the target of this spell; all other observers merely see you screaming silently. The target suffers wracking pain from the scream, gaining the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "staggered",
+              "relationship_id": "spell.piercing-shriek:uses_definition:condition.staggered"
+            },
+            {
+              "node_type": "text",
+              "value": " condition. This spell has no effect on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "deaf",
+              "relationship_id": "spell.piercing-shriek:uses_definition:condition.deaf"
+            },
+            {
+              "node_type": "text",
+              "value": " creatures and cannot penetrate an area of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "silence",
+              "relationship_id": "spell.piercing-shriek:references:spell.silence",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -332,7 +376,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.silence",
-        "name": "silence"
+        "name": "Silence"
       },
       "status": "accepted",
       "evidence": [
@@ -421,11 +465,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.piercing-shriek:uses_definition:rule.fortitude",
+      "relationship_id": "spell.piercing-shriek:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -509,11 +553,19 @@
       "raw_value_sha256": "cbd80270102e71d4303c6d7f42b8a3ad6854bd53ea076d26bfeae4145885af77",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.piercing-shriek:cee14058275b3944",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "5ccb82a49152302a90688b1837c047ace05907d22e750ab9d55126efc044a26f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

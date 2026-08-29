@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.sanctify-weapons",
   "ruleset": "Pathfinder First Edition",
   "name": "Sanctify Weapons",
@@ -158,7 +158,75 @@
   "description": {
     "raw": "This spell originated among the armies of Heaven. Choose a\nspecific subtype of evil outsider when you cast this spell, such\nas daemon, demon, devil, or div. All manufactured weapons in\nthe area of effect bypass the DR of that type of outsider. The\nweapons do not become aligned or change composition.",
     "search_text": "\"this spell originated among the armies of heaven. choose a\\nspecific subtype of evil outsider when you cast this spell, such\\nas daemon, demon, devil, or div. all manufactured weapons in\\nthe area of effect bypass the dr of that type of outsider. the\\nweapons do not become aligned or change composition.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell originated among the armies of Heaven. Choose a specific subtype of evil "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "outsider",
+              "relationship_id": "spell.sanctify-weapons:uses_definition:rule.outsider"
+            },
+            {
+              "node_type": "text",
+              "value": " when you cast this spell, such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "daemon",
+              "relationship_id": "spell.sanctify-weapons:uses_definition:rule.daemon"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "demon",
+              "relationship_id": "spell.sanctify-weapons:uses_definition:rule.demon"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "devil",
+              "relationship_id": "spell.sanctify-weapons:uses_definition:rule.devil"
+            },
+            {
+              "node_type": "text",
+              "value": ", or div. All manufactured weapons in the area of effect bypass the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "DR",
+              "relationship_id": "spell.sanctify-weapons:uses_definition:rule.damage-reduction"
+            },
+            {
+              "node_type": "text",
+              "value": " of that type of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "outsider",
+              "relationship_id": "spell.sanctify-weapons:uses_definition:rule.outsider"
+            },
+            {
+              "node_type": "text",
+              "value": ". The weapons do not become aligned or change composition."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -209,6 +277,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.sanctify-weapons:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.sanctify-weapons:ce5e3fca478cebe1",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.sanctify-weapons:appears_on_spell_list:spell-list.oracle",
@@ -393,6 +481,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.sanctify-weapons:uses_definition:rule.damage-reduction",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.damage-reduction",
+        "name": "Damage reduction"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.sanctify-weapons:22fc75e436622116",
+          "source_field": "spell_raw.links_raw[9]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "DR",
+          "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/universal-monster-rules#TOC-Damage-Reduction-Ex-or-Su-"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.sanctify-weapons:uses_definition:rule.demon",
       "type": "uses_definition",
       "target": {
@@ -428,26 +536,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "devil",
           "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/creature-types#TOC-Devil"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.sanctify-weapons:uses_definition:rule.dr",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.dr",
-        "name": "DR"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.sanctify-weapons:22fc75e436622116",
-          "source_field": "spell_raw.links_raw[9]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "DR",
-          "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/universal-monster-rules#TOC-Damage-Reduction-Ex-or-Su-"
         }
       ],
       "note": null
@@ -500,11 +588,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sanctify-weapons:uses_definition:rule.will",
+      "relationship_id": "spell.sanctify-weapons:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -518,26 +606,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.sanctify-weapons:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.sanctify-weapons:ce5e3fca478cebe1",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -588,11 +656,19 @@
       "raw_value_sha256": "0c3904eb3e013db42b651a8bba08c9f0604650c64e5c5e5c74569ad971bef2f8",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.sanctify-weapons:ce5e3fca478cebe1",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "964aa658f710bd4c1bc96a240c9453cddee20d2b4a20782dbf9cf57317cb971b",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

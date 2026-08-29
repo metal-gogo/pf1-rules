@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.quick-change",
   "ruleset": "Pathfinder First Edition",
   "name": "Quick Change",
@@ -288,7 +288,48 @@
   "description": {
     "raw": "If you have the change shape special quality, you can revert to your true form as a swift action. If a creature is not aware of your true form, when you use this spell to revert to your true form and attack that creature in the same round, the creature is denied its Dexterity bonus to AC against your first attack.",
     "search_text": "\"if you have the change shape special quality, you can revert to your true form as a swift action. if a creature is not aware of your true form, when you use this spell to revert to your true form and attack that creature in the same round, the creature is denied its dexterity bonus to ac against your first attack.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "If you have the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "change shape",
+              "relationship_id": "spell.quick-change:uses_definition:rule.change-shape"
+            },
+            {
+              "node_type": "text",
+              "value": " special quality, you can revert to your true form as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "swift action",
+              "relationship_id": "spell.quick-change:uses_action:action.swift-action"
+            },
+            {
+              "node_type": "text",
+              "value": ". If a creature is not aware of your true form, when you use this spell to revert to your true form and attack that creature in the same round, the creature is denied its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Dexterity",
+              "relationship_id": "spell.quick-change:uses_definition:rule.dexterity"
+            },
+            {
+              "node_type": "text",
+              "value": " bonus to AC against your first attack."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -602,6 +643,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.quick-change:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.quick-change:ed9462ea289c527e",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.quick-change:3061be71c2c1c0a7",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.quick-change:appears_on_spell_list:spell-list.ranger",
@@ -1039,33 +1107,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.quick-change:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.quick-change:ed9462ea289c527e",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.quick-change:3061be71c2c1c0a7",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -1116,11 +1157,19 @@
       "raw_value_sha256": "b6b65f05d05384f28ecb43734ade3cc1cc7b2043af547b26ad8288b3098b41f7",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.quick-change:3061be71c2c1c0a7",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "50af31f4fbf08ec074cfec29b602536efe631d455831880b9f57775b2e93c2ff",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

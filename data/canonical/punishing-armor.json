@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.punishing-armor",
   "ruleset": "Pathfinder First Edition",
   "name": "Punishing Armor",
@@ -187,7 +187,48 @@
   "description": {
     "raw": "You coat yourself with a thin layer of shimmering energy. Any creature dealing nonlethal damage to you immediately takes half the amount of nonlethal damage dealt. A successful Fortitude save made by the attacking creature negates this damage.",
     "search_text": "\"you coat yourself with a thin layer of shimmering energy. any creature dealing nonlethal damage to you immediately takes half the amount of nonlethal damage dealt. a successful fortitude save made by the attacking creature negates this damage.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You coat yourself with a thin layer of shimmering energy. Any creature dealing "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "nonlethal damage",
+              "relationship_id": "spell.punishing-armor:uses_definition:rule.nonlethal-damage"
+            },
+            {
+              "node_type": "text",
+              "value": " to you immediately takes half the amount of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "nonlethal damage",
+              "relationship_id": "spell.punishing-armor:uses_definition:rule.nonlethal-damage"
+            },
+            {
+              "node_type": "text",
+              "value": " dealt. A successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.punishing-armor:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save made by the attacking creature negates this damage."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -442,6 +483,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.punishing-armor:appears_on_spell_list:spell-list.summoner-unchained",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.summoner-unchained",
+        "name": "Summoner (Unchained) Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.punishing-armor:98074728446ed60f",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 1",
+          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/abjuration/punishing-armor.bmr954ayksd33hdk.yaml"
+        }
+      ],
+      "note": "Reviewed project decision: add Summoner (Unchained) 1 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
+    },
+    {
       "relationship_id": "spell.punishing-armor:appears_on_spell_list:spell-list.wizard",
       "type": "appears_on_spell_list",
       "target": {
@@ -557,12 +618,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.punishing-armor:uses_definition:rule.fort",
+      "relationship_id": "spell.punishing-armor:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -572,20 +633,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Fort",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.punishing-armor:uses_definition:rule.fortitude",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.fortitude",
-        "name": "Fortitude"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.punishing-armor:98cc74bd94c30401",
           "source_field": "spell_raw.links_raw[12]",
@@ -642,26 +690,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.punishing-armor:appears_on_spell_list:spell-list.summoner-unchained",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.summoner-unchained",
-        "name": "Summoner (Unchained) Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.punishing-armor:98074728446ed60f",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "manual_verification",
-          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 1",
-          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/abjuration/punishing-armor.bmr954ayksd33hdk.yaml"
-        }
-      ],
-      "note": "Reviewed project decision: add Summoner (Unchained) 1 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
     }
   ],
   "provenance": [
@@ -712,11 +740,19 @@
       "raw_value_sha256": "e0aeac4847647b6d10006cc8d3d97ba0308fcd38fc4ab0b6f742db2bc34f1869",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.punishing-armor:98074728446ed60f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e73c06bc64f5b259cf9312caf962d29105f5d9d522acd013953f5d4bd683e469",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

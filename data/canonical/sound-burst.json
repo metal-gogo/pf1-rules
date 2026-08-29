@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.sound-burst",
   "ruleset": "Pathfinder First Edition",
   "name": "Sound Burst",
@@ -182,7 +182,48 @@
   "description": {
     "raw": "You blast an area with a tremendous cacophony. Every creature in the area takes 1d8 points of sonic damage and must succeed on a Fortitude save to avoid being stunned for 1 round. Creatures that cannot hear are not stunned but are still damaged.",
     "search_text": "\"you blast an area with a tremendous cacophony. every creature in the area takes 1d8 points of sonic damage and must succeed on a fortitude save to avoid being stunned for 1 round. creatures that cannot hear are not stunned but are still damaged.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You blast an area with a tremendous cacophony. Every creature in the area takes 1d8 points of sonic damage and must succeed on a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.sound-burst:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save to avoid being "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "stunned",
+              "relationship_id": "spell.sound-burst:uses_definition:condition.stunned"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 round. Creatures that cannot hear are not "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "stunned",
+              "relationship_id": "spell.sound-burst:uses_definition:condition.stunned"
+            },
+            {
+              "node_type": "text",
+              "value": " but are still damaged."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -280,6 +321,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.sound-burst:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.sound-burst:7b9b3e39f58f9772",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.sound-burst:appears_on_spell_list:spell-list.oracle",
@@ -498,11 +559,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sound-burst:uses_definition:rule.fortitude",
+      "relationship_id": "spell.sound-burst:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -564,26 +625,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.sound-burst:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.sound-burst:7b9b3e39f58f9772",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -634,11 +675,19 @@
       "raw_value_sha256": "12307fc2f5a6584eea3bbe695016012ad14740fb9d058e92468501d4cfe907bb",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.sound-burst:7b9b3e39f58f9772",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e54d27f3e47448c685c3103d14cd9b8cc88f7eaa59a7c8be8bb3a50b3ab379bb",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

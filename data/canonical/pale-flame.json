@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.pale-flame",
   "ruleset": "Pathfinder First Edition",
   "name": "Pale Flame",
@@ -117,7 +117,60 @@
   "description": {
     "raw": "This spell functions as per produce flame, except that the flames never glow brighter than dim light, including any fires started by this spell. These flames cast light only half the distance of a torch and cannot be seen from more than 100 feet away. The flames deal 2d6 points of fire damage + 1 point per caster level (maximum +5). Against plants, this damage increases to 2d6 points + 2 points per caster level (maximum +10).",
     "search_text": "\"this spell functions as per produce flame, except that the flames never glow brighter than dim light, including any fires started by this spell. these flames cast light only half the distance of a torch and cannot be seen from more than 100 feet away. the flames deal 2d6 points of fire damage + 1 point per caster level (maximum +5). against plants, this damage increases to 2d6 points + 2 points per caster level (maximum +10).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "produce flame",
+              "relationship_id": "spell.pale-flame:functions_like:spell.produce-flame",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that the flames never glow brighter than dim light, including any fires started by this spell. These flames cast light only half the distance of a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "torch",
+              "relationship_id": "spell.pale-flame:uses_definition:item.torch"
+            },
+            {
+              "node_type": "text",
+              "value": " and cannot be seen from more than 100 feet away. The flames deal 2d6 points of fire damage + 1 point per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.pale-flame:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum +5). Against plants, this damage increases to 2d6 points + 2 points per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.pale-flame:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum +10)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -412,7 +465,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.produce-flame",
-        "name": "produce flame"
+        "name": "Produce Flame"
       },
       "status": "accepted",
       "evidence": [
@@ -449,6 +502,26 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "1 standard action",
           "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.pale-flame:uses_definition:item.torch",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "item",
+        "entity_id": "item.torch",
+        "name": "Torch"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.pale-flame:c0f15007db295785",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "torch",
+          "source_href": "https://www.d20pfsrd.com/equipment/goods-and-services/hunting-camping-survival-gear#TOC-Torch"
         }
       ],
       "note": null
@@ -496,26 +569,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "yes",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.pale-flame:uses_definition:rule.torch",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.torch",
-        "name": "torch"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.pale-flame:c0f15007db295785",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "torch",
-          "source_href": "https://www.d20pfsrd.com/equipment/goods-and-services/hunting-camping-survival-gear#TOC-Torch"
         }
       ],
       "note": null
@@ -569,11 +622,19 @@
       "raw_value_sha256": "ba4659f80dc7fd8e19ae87451d6eadac2e80ca948b7410219c7e29e5e03483e6",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.pale-flame:0484e43ff3d9467f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "fbd4cf851a591577e92ae1fd859516c48ea834698e893894aa0ebc1496c53fe0",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": []
   }
 }

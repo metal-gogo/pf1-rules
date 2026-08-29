@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.sensory-overload",
   "ruleset": "Pathfinder First Edition",
   "name": "Sensory Overload",
@@ -139,7 +139,39 @@
   "description": {
     "raw": "You overload the target creature’s senses, making it difficult for the target to concentrate. For the duration of the effect, the target must succeed at a Will save at the same DC as the original effect to perform any standard or full-round action. On a failure, the creature loses the action that triggered the saving throw. If successful, the creature is able to take the action, but this spell effect is not negated.",
     "search_text": "\"you overload the target creature’s senses, making it difficult for the target to concentrate. for the duration of the effect, the target must succeed at a will save at the same dc as the original effect to perform any standard or full-round action. on a failure, the creature loses the action that triggered the saving throw. if successful, the creature is able to take the action, but this spell effect is not negated.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You overload the target creature’s senses, making it difficult for the target to concentrate. For the duration of the effect, the target must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.sensory-overload:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save at the same DC as the original effect to perform any standard or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "full-round action",
+              "relationship_id": "spell.sensory-overload:uses_action:action.full-round-action"
+            },
+            {
+              "node_type": "text",
+              "value": ". On a failure, the creature loses the action that triggered the saving throw. If successful, the creature is able to take the action, but this spell effect is not negated."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -495,11 +527,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sensory-overload:uses_definition:rule.will",
+      "relationship_id": "spell.sensory-overload:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -570,11 +602,19 @@
       "raw_value_sha256": "6f70a045fac2f1303714ab1c79857b0fc16a5ccfc46e1005352ad2f1b7d3c5c1",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.sensory-overload:0994e93f74bb5b68",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "b204dbf89ae575c81efef3919f595d5615ace9bc18b24c8d866cc25204d6e913",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

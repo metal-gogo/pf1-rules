@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.possess-object",
   "ruleset": "Pathfinder First Edition",
   "name": "Possess Object",
@@ -135,7 +135,60 @@
   "description": {
     "raw": "This spell functions as magic jar, except you transfer your mind to a single object, animating it as if using animate objects, except your mind controls the object as if it were your own body. You cannot speak or cast spells while possessing the object. Because your original body is effectively dead while under the effect of this spell, this temporarily suspends disease, poisons, and other afflictions affecting you.",
     "search_text": "\"this spell functions as magic jar, except you transfer your mind to a single object, animating it as if using animate objects, except your mind controls the object as if it were your own body. you cannot speak or cast spells while possessing the object. because your original body is effectively dead while under the effect of this spell, this temporarily suspends disease, poisons, and other afflictions affecting you.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "magic jar",
+              "relationship_id": "spell.possess-object:functions_like:spell.magic-jar",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you transfer your mind to a single object, animating it as if using "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "animate objects",
+              "relationship_id": "spell.possess-object:references:spell.animate-objects"
+            },
+            {
+              "node_type": "text",
+              "value": ", except your mind controls the object as if it were your own body. You cannot speak or cast spells while possessing the object. Because your original body is effectively "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dead",
+              "relationship_id": "spell.possess-object:uses_definition:condition.dead"
+            },
+            {
+              "node_type": "text",
+              "value": " while under the effect of this spell, this temporarily suspends "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "disease",
+              "relationship_id": "spell.possess-object:uses_definition:rule.disease"
+            },
+            {
+              "node_type": "text",
+              "value": ", poisons, and other afflictions affecting you."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -358,6 +411,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as magic jar, except you transfer your mind to a single object, animating it as if using animate objects, except your mind controls the object as if it were your own body. You cannot speak or cast spells while possessing the object. Because your original body is effectively dead while under the effect of this spell, this temporarily suspends disease, poisons, and other afflictions affecting you.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.possess-object:97e9f1aa5a9048bc",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "magic jar",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/magicJar.html#magic-jar"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.possess-object:328b326479930411",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "magic jar",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/m/magic-jar/"
         }
       ],
       "note": null
@@ -436,7 +503,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.animate-objects",
-        "name": "animate objects"
+        "name": "Animate Objects"
       },
       "status": "accepted",
       "evidence": [
@@ -453,33 +520,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "animate objects",
           "source_href": "https://www.d20pfsrd.com/magic/all-spells/a/animate-objects/"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.possess-object:references:spell.magic-jar",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.magic-jar",
-        "name": "magic jar"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.possess-object:97e9f1aa5a9048bc",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "magic jar",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/magicJar.html#magic-jar"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.possess-object:328b326479930411",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "magic jar",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/m/magic-jar/"
         }
       ],
       "note": null
@@ -620,11 +660,19 @@
       "raw_value_sha256": "41417b0ddfc93cd698223319593b5c8c9218a9c7630e843daf234cf06462aa51",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.possess-object:671f7fec2dfaddbe",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "0c499c94969b91b71d7aa54e3282b56c52c3369b9163f0b400cb4590b3fb9eab",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

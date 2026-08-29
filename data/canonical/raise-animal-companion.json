@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.raise-animal-companion",
   "ruleset": "Pathfinder First Edition",
   "name": "Raise Animal Companion",
@@ -135,7 +135,51 @@
   "description": {
     "raw": "This spell functions as raise dead, but it only affects an animal companion, familiar, or paladin’s bonded mount.",
     "search_text": "\"this spell functions as raise dead, but it only affects an animal companion, familiar, or paladin’s bonded mount.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "raise dead",
+              "relationship_id": "spell.raise-animal-companion:functions_like:spell.raise-dead",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", but it only affects an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "animal companion",
+              "relationship_id": "spell.raise-animal-companion:uses_definition:class-feature.animal-companion"
+            },
+            {
+              "node_type": "text",
+              "value": ", familiar, or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "paladin’s",
+              "relationship_id": "spell.raise-animal-companion:uses_definition:class.paladin"
+            },
+            {
+              "node_type": "text",
+              "value": " bonded mount."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -369,6 +413,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as raise dead, but it only affects an animal companion, familiar, or paladin’s bonded mount.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.raise-animal-companion:500e085654a2e5cf",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "raise dead",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/raiseDead.html#raise-dead"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.raise-animal-companion:06c7c372f3ee496a",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "raise dead",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/r/raise-dead"
         }
       ],
       "note": null
@@ -462,39 +520,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.raise-animal-companion:references:spell.raise-dead",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.raise-dead",
-        "name": "raise dead"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.raise-animal-companion:500e085654a2e5cf",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "raise dead",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/raiseDead.html#raise-dead"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.raise-animal-companion:06c7c372f3ee496a",
-          "source_field": "spell_raw.links_raw[5]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "raise dead",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/r/raise-dead"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.raise-animal-companion:uses_definition:rule.animal-companion",
+      "relationship_id": "spell.raise-animal-companion:uses_definition:class-feature.animal-companion",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.animal-companion",
-        "name": "animal companion"
+        "entity_type": "class_feature",
+        "entity_id": "class-feature.animal-companion",
+        "name": "Animal companion"
       },
       "status": "accepted",
       "evidence": [
@@ -516,12 +547,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.raise-animal-companion:uses_definition:rule.paladins",
+      "relationship_id": "spell.raise-animal-companion:uses_definition:class.paladin",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.paladins",
-        "name": "paladin’s"
+        "entity_type": "class",
+        "entity_id": "class.paladin",
+        "name": "Paladin"
       },
       "status": "accepted",
       "evidence": [
@@ -604,11 +635,19 @@
       "raw_value_sha256": "b4993a23be18051bce23895271ac0b66c74ce297ba313aaf1bfc70e03f039019",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.raise-animal-companion:e11ac2ebeaa84e09",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "b53783ba820d624721204824affff50656aae00628e20089edcf934a3454b930",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

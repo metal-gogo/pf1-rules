@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.shadow-claws",
   "ruleset": "Pathfinder First Edition",
   "name": "Shadow Claws",
@@ -171,7 +171,57 @@
   "description": {
     "raw": "You summon a pair of claws over your hands formed from semireal material. This grants you two primary claw attacks dealing 1d4 points of damage if you are Medium (1d3 if Small) plus 1 point of Strength damage. A successful Fortitude saving throw negates the Strength damage (DC = this spell’s DC).",
     "search_text": "\"you summon a pair of claws over your hands formed from semireal material. this grants you two primary claw attacks dealing 1d4 points of damage if you are medium (1d3 if small) plus 1 point of strength damage. a successful fortitude saving throw negates the strength damage (dc = this spell’s dc).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "summon",
+              "relationship_id": "spell.shadow-claws:uses_definition:rule.summon"
+            },
+            {
+              "node_type": "text",
+              "value": " a pair of claws over your hands formed from semireal material. This grants you two primary claw attacks dealing 1d4 points of damage if you are Medium (1d3 if Small) plus 1 point of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Strength damage",
+              "relationship_id": "spell.shadow-claws:uses_definition:rule.strength-damage"
+            },
+            {
+              "node_type": "text",
+              "value": ". A successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.shadow-claws:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saving throw negates the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Strength damage",
+              "relationship_id": "spell.shadow-claws:uses_definition:rule.strength-damage"
+            },
+            {
+              "node_type": "text",
+              "value": " (DC = this spell’s DC)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -589,11 +639,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.shadow-claws:uses_definition:rule.fortitude",
+      "relationship_id": "spell.shadow-claws:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -724,11 +774,19 @@
       "raw_value_sha256": "1c05b59145ccf77e921d5c6fef94d14b957a67c469c6bb03cbd64670f00c2907",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.shadow-claws:4aba4a6365e6a446",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "25c5307969801205a86c77b4792d2a797b7553c8355e4e13dee376f1d456a3c2",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

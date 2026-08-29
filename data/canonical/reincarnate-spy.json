@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.reincarnate-spy",
   "ruleset": "Pathfinder First Edition",
   "name": "Reincarnate Spy",
@@ -141,7 +141,79 @@
   "description": {
     "raw": "This spell functions as reincarnate except that you can cause the new body to resemble a particular creature, matching its age category and sex and rerolling any race result that would be the wrong size category. The subject further gains a +5 bonus on Disguise checks to impersonate the chosen creature due to similar features, although it might take a penalty for being the wrong race.\n\nThe spell automatically leaves you with a small piece of the creature’s new body, typically a lock of hair (useful for scrying and other such spells).",
     "search_text": "\"this spell functions as reincarnate except that you can cause the new body to resemble a particular creature, matching its age category and sex and rerolling any race result that would be the wrong size category. the subject further gains a +5 bonus on disguise checks to impersonate the chosen creature due to similar features, although it might take a penalty for being the wrong race.\\n\\nthe spell automatically leaves you with a small piece of the creature’s new body, typically a lock of hair (useful for scrying and other such spells).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "reincarnate",
+              "relationship_id": "spell.reincarnate-spy:functions_like:spell.reincarnate",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "except that you can cause the new body to resemble a particular creature, matching its age category and sex and rerolling any race result that would be the wrong size category. The subject further gains a +5 bonus on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Disguise",
+              "relationship_id": "spell.reincarnate-spy:uses_definition:rule.disguise"
+            },
+            {
+              "node_type": "text",
+              "value": " checks to impersonate the chosen creature due to similar features, although it might take a penalty for being the wrong race."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The spell automatically leaves you with a small piece of the creature’s new body, typically a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "lock",
+              "relationship_id": "spell.reincarnate-spy:uses_definition:rule.lock"
+            },
+            {
+              "node_type": "text",
+              "value": " of hair (useful for "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "scrying",
+              "relationship_id": "spell.reincarnate-spy:references:spell.scrying",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " and other such spells)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -478,7 +550,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.reincarnate",
-        "name": "reincarnate"
+        "name": "Reincarnate"
       },
       "status": "accepted",
       "evidence": [
@@ -498,7 +570,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.scrying",
-        "name": "scrying"
+        "name": "Scrying"
       },
       "status": "accepted",
       "evidence": [
@@ -593,12 +665,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.reincarnate-spy:uses_definition:rule.touch",
+      "relationship_id": "spell.reincarnate-spy:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -661,11 +733,19 @@
       "raw_value_sha256": "86dbc36c22452d1d1118576e4210b8c933fc1d3123486d46cefc6f7fe698e5d4",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.reincarnate-spy:87e89e8bec2e72d3",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "39a8394fd5d2519fcc6b6ae35d06c44ae9694dbcc1cfcd1226149597d9835872",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

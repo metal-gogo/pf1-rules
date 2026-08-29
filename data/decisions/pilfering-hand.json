@@ -146,9 +146,40 @@
         "d20pfsrd:magic-school.aether-elemental:3e5520a8"
       ],
       "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.pilfering-hand:e7cc15ab257f6a5e",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.pilfering-hand:e7cc15ab257f6a5e",
+        "legacy_aon:spell.pilfering-hand:05a1b2e77d10a16b",
+        "d20pfsrd:spell.pilfering-hand:7ceaa91453c2f4b9",
+        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.pilfering-hand:appears_on_spell_list:spell-list.aether-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
     {
       "relationship_id": "spell.pilfering-hand:appears_on_spell_list:spell-list.arcanist",
       "decision": "accept",
@@ -296,6 +327,29 @@
         "d20pfsrd:spell.pilfering-hand:7ceaa91453c2f4b9"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.pilfering-hand:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.pilfering-hand:7ceaa91453c2f4b9",
+          "source_field": "spell_raw.links_raw[2]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.pilfering-hand:7ceaa91453c2f4b9",
+          "source_field": "spell_raw.links_raw[25]"
+        },
+        {
+          "observation_id": "aon:spell.pilfering-hand:e7cc15ab257f6a5e",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:spell.pilfering-hand:7ceaa91453c2f4b9",
+        "aon:spell.pilfering-hand:e7cc15ab257f6a5e"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.pilfering-hand:appears_on_spell_list:spell-list.oracle",
@@ -594,16 +648,12 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.pilfering-hand:uses_definition:rule.combat-maneuver",
+      "relationship_id": "spell.pilfering-hand:uses_definition:rule.combat-maneuver-bonus",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.pilfering-hand:7ceaa91453c2f4b9",
-          "source_field": "spell_raw.links_raw[14]"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.pilfering-hand:7ceaa91453c2f4b9",
-          "source_field": "spell_raw.links_raw[28]"
+          "source_field": "spell_raw.links_raw[16]"
         }
       ],
       "considered_observation_ids": [
@@ -614,12 +664,16 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.pilfering-hand:uses_definition:rule.combat-maneuver-bonus",
+      "relationship_id": "spell.pilfering-hand:uses_definition:rule.combat-maneuvers",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.pilfering-hand:7ceaa91453c2f4b9",
-          "source_field": "spell_raw.links_raw[16]"
+          "source_field": "spell_raw.links_raw[14]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.pilfering-hand:7ceaa91453c2f4b9",
+          "source_field": "spell_raw.links_raw[28]"
         }
       ],
       "considered_observation_ids": [
@@ -840,43 +894,6 @@
         "d20pfsrd:spell.pilfering-hand:7ceaa91453c2f4b9"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.pilfering-hand:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.pilfering-hand:7ceaa91453c2f4b9",
-          "source_field": "spell_raw.links_raw[2]"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.pilfering-hand:7ceaa91453c2f4b9",
-          "source_field": "spell_raw.links_raw[25]"
-        },
-        {
-          "observation_id": "aon:spell.pilfering-hand:e7cc15ab257f6a5e",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:spell.pilfering-hand:7ceaa91453c2f4b9",
-        "aon:spell.pilfering-hand:e7cc15ab257f6a5e"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.pilfering-hand:appears_on_spell_list:spell-list.aether-elemental-school",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
-      ],
-      "rationale": "d20PFSRD prints the spell on the owning wizard elemental arcane school page; it is modeled as elemental_school access rather than general Wizard access."
     }
   ],
   "unresolved_questions": [

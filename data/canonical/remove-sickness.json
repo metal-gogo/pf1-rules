@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.remove-sickness",
   "ruleset": "Pathfinder First Edition",
   "name": "Remove Sickness",
@@ -184,7 +184,57 @@
   "description": {
     "raw": "You quell feelings of illness and nausea in the target, giving it a +4 morale bonus on saving throws against disease, nausea, and sickened effects. If the subject is already under the influence of one of these effects when receiving the spell, that effect is suppressed for the duration of the spell.",
     "search_text": "\"you quell feelings of illness and nausea in the target, giving it a +4 morale bonus on saving throws against disease, nausea, and sickened effects. if the subject is already under the influence of one of these effects when receiving the spell, that effect is suppressed for the duration of the spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You quell feelings of illness and nausea in the target, giving it a +4 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "morale bonus",
+              "relationship_id": "spell.remove-sickness:uses_definition:rule.morale-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throws",
+              "relationship_id": "spell.remove-sickness:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": " against "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "disease",
+              "relationship_id": "spell.remove-sickness:uses_definition:rule.disease"
+            },
+            {
+              "node_type": "text",
+              "value": ", nausea, and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sickened",
+              "relationship_id": "spell.remove-sickness:uses_definition:condition.sickened"
+            },
+            {
+              "node_type": "text",
+              "value": " effects. If the subject is already under the influence of one of these effects when receiving the spell, that effect is suppressed for the duration of the spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -302,6 +352,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.remove-sickness:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.remove-sickness:d81934b447b4e876",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.remove-sickness:appears_on_spell_list:spell-list.oracle",
@@ -546,11 +616,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.remove-sickness:uses_definition:rule.fortitude",
+      "relationship_id": "spell.remove-sickness:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -624,26 +694,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.remove-sickness:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.remove-sickness:d81934b447b4e876",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -694,11 +744,19 @@
       "raw_value_sha256": "7663e081f46fdb56f2303b2429db214fe9e8e09dcc0e830fdf3397c7f6931d25",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.remove-sickness:d81934b447b4e876",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "7c85c702da15fa6b7e0aa459d6ba580da8907f67116401db3dca41f3cd3edbd9",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

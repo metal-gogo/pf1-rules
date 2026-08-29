@@ -152,6 +152,24 @@
         "aon:subdomain.plague:442be5b2"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.plague-storm:eee59afb50a515b4",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.plague-storm:eee59afb50a515b4",
+        "legacy_aon:spell.plague-storm:5a3fed2c7d951b78",
+        "d20pfsrd:spell.plague-storm:8288f53486ff440f",
+        "aon:subdomain.plague:941bc1dd",
+        "aon:subdomain.plague:442be5b2"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -240,6 +258,20 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.plague-storm:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.plague-storm:eee59afb50a515b4",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.plague-storm:eee59afb50a515b4"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.plague-storm:appears_on_spell_list:spell-list.oracle",
       "decision": "accept",
       "evidence": [
@@ -254,6 +286,34 @@
         "d20pfsrd:spell.plague-storm:8288f53486ff440f"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.plague-storm:appears_on_spell_list:spell-list.plague-subdomain-from-death",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.plague:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.plague:941bc1dd"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.plague-storm:appears_on_spell_list:spell-list.plague-subdomain-from-evil",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.plague:442be5b2",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.plague:442be5b2"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.plague-storm:appears_on_spell_list:spell-list.sorcerer",
@@ -564,7 +624,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.plague-storm:uses_definition:rule.diseases",
+      "relationship_id": "spell.plague-storm:uses_definition:rule.disease",
       "decision": "accept",
       "evidence": [
         {
@@ -616,7 +676,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.plague-storm:uses_definition:rule.fortitude",
+      "relationship_id": "spell.plague-storm:uses_definition:rule.fortitude-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -726,48 +786,6 @@
         "d20pfsrd:spell.plague-storm:8288f53486ff440f"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.plague-storm:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.plague-storm:eee59afb50a515b4",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.plague-storm:eee59afb50a515b4"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.plague-storm:appears_on_spell_list:spell-list.plague-subdomain-from-death",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.plague:941bc1dd",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.plague:941bc1dd"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
-    },
-    {
-      "relationship_id": "spell.plague-storm:appears_on_spell_list:spell-list.plague-subdomain-from-evil",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.plague:442be5b2",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.plague:442be5b2"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

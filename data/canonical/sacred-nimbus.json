@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.sacred-nimbus",
   "ruleset": "Pathfinder First Edition",
   "name": "Sacred Nimbus",
@@ -172,7 +172,75 @@
   "description": {
     "raw": "You are surrounded by a nimbus of golden light shaped like your god’s holy symbol or a symbol of your faith. Any evil creature striking you with unarmed strikes, natural weapons, or a handheld weapon deals normal damage, but at the same time, the attacker takes 1d6 points of damage + 1 point per caster level (maximum +15). Creatures wielding melee weapons with reach are not subject to this damage if they attack you. Spell resistance applies against this damage. You also take half damage from magical attacks with the evil descriptor. If such an attack allows a Reflex save for half damage, you take no damage on a successful saving throw.",
     "search_text": "\"you are surrounded by a nimbus of golden light shaped like your god’s holy symbol or a symbol of your faith. any evil creature striking you with unarmed strikes, natural weapons, or a handheld weapon deals normal damage, but at the same time, the attacker takes 1d6 points of damage + 1 point per caster level (maximum +15). creatures wielding melee weapons with reach are not subject to this damage if they attack you. spell resistance applies against this damage. you also take half damage from magical attacks with the evil descriptor. if such an attack allows a reflex save for half damage, you take no damage on a successful saving throw.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You are surrounded by a nimbus of golden light shaped like your god’s "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "holy symbol",
+              "relationship_id": "spell.sacred-nimbus:uses_definition:rule.holy-symbol"
+            },
+            {
+              "node_type": "text",
+              "value": " or a symbol of your faith. Any evil creature striking you with unarmed strikes, "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "natural weapons",
+              "relationship_id": "spell.sacred-nimbus:uses_definition:rule.natural-attacks"
+            },
+            {
+              "node_type": "text",
+              "value": ", or a handheld weapon deals normal damage, but at the same time, the attacker takes 1d6 points of damage + 1 point per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.sacred-nimbus:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum +15). Creatures wielding melee weapons with reach are not subject to this damage if they attack you. "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Spell resistance",
+              "relationship_id": "spell.sacred-nimbus:references:spell.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": " applies against this damage. You also take half damage from magical attacks with the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "evil descriptor",
+              "relationship_id": "spell.sacred-nimbus:uses_definition:descriptor.evil"
+            },
+            {
+              "node_type": "text",
+              "value": ". If such an attack allows a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.sacred-nimbus:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save for half damage, you take no damage on a successful saving throw."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -237,6 +305,47 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.sacred-nimbus:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.sacred-nimbus:dd291766a593d432",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.sacred-nimbus:ed4e884dfaba48ee",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.sacred-nimbus:dd291766a593d432",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.sacred-nimbus:ed4e884dfaba48ee",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.sacred-nimbus:appears_on_spell_list:spell-list.oracle",
@@ -406,7 +515,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.spell-resistance",
-        "name": "Spell resistance"
+        "name": "Spell Resistance"
       },
       "status": "accepted",
       "evidence": [
@@ -448,6 +557,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.sacred-nimbus:uses_definition:descriptor.evil",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.evil",
+        "name": "Evil"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.sacred-nimbus:dd291766a593d432",
+          "source_field": "spell_raw.links_raw[9]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "evil descriptor",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Magic-Descriptor-Evil"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.sacred-nimbus:uses_definition:rule.caster-level",
       "type": "uses_definition",
       "target": {
@@ -463,26 +592,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "caster level",
           "source_href": "https://www.d20pfsrd.com/magic#TOC-Caster-Level"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.sacred-nimbus:uses_definition:rule.evil-descriptor",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.evil-descriptor",
-        "name": "evil descriptor"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.sacred-nimbus:dd291766a593d432",
-          "source_field": "spell_raw.links_raw[9]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "evil descriptor",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Magic-Descriptor-Evil"
         }
       ],
       "note": null
@@ -508,12 +617,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sacred-nimbus:uses_definition:rule.natural-weapons",
+      "relationship_id": "spell.sacred-nimbus:uses_definition:rule.natural-attacks",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.natural-weapons",
-        "name": "natural weapons"
+        "entity_id": "rule.natural-attacks",
+        "name": "Natural attacks"
       },
       "status": "accepted",
       "evidence": [
@@ -528,11 +637,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sacred-nimbus:uses_definition:rule.reflex",
+      "relationship_id": "spell.sacred-nimbus:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -566,47 +675,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.sacred-nimbus:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.sacred-nimbus:dd291766a593d432",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.sacred-nimbus:ed4e884dfaba48ee",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.sacred-nimbus:dd291766a593d432",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.sacred-nimbus:ed4e884dfaba48ee",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -657,11 +725,19 @@
       "raw_value_sha256": "acb89b77d9e92c6096074ec0c032e7f96793e820deff3bb742aaa851f2df7c48",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.sacred-nimbus:ed4e884dfaba48ee",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "472141e6990a160a91b6603b1e739d790b015fd2137b35739b9660501bf0ebc7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

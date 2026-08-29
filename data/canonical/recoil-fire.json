@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.recoil-fire",
   "ruleset": "Pathfinder First Edition",
   "name": "Recoil Fire",
@@ -143,7 +143,48 @@
   "description": {
     "raw": "The target firearm suddenly fires of its own volition, even if it is unloaded, generating a recoil so great that the wielder or carrier of the firearm must scramble to hold onto it and becomes flat-footed until the start of his next turn. If the wielder is already flat-footed, he is instead knocked prone. If the firearm was loaded, that ammunition is wasted.",
     "search_text": "\"the target firearm suddenly fires of its own volition, even if it is unloaded, generating a recoil so great that the wielder or carrier of the firearm must scramble to hold onto it and becomes flat-footed until the start of his next turn. if the wielder is already flat-footed, he is instead knocked prone. if the firearm was loaded, that ammunition is wasted.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target firearm suddenly fires of its own volition, even if it is unloaded, generating a recoil so great that the wielder or carrier of the firearm must scramble to hold onto it and becomes "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "flat-footed",
+              "relationship_id": "spell.recoil-fire:uses_definition:condition.flat-footed"
+            },
+            {
+              "node_type": "text",
+              "value": " until the start of his next turn. If the wielder is already "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "flat-footed",
+              "relationship_id": "spell.recoil-fire:uses_definition:condition.flat-footed"
+            },
+            {
+              "node_type": "text",
+              "value": ", he is instead knocked "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "prone",
+              "relationship_id": "spell.recoil-fire:uses_definition:condition.prone"
+            },
+            {
+              "node_type": "text",
+              "value": ". If the firearm was loaded, that ammunition is wasted."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -445,11 +486,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.recoil-fire:uses_definition:rule.will",
+      "relationship_id": "spell.recoil-fire:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -513,11 +554,19 @@
       "raw_value_sha256": "6a554f9e5845055f0c24c0dd10e004a843522b8b842e89917c2d181b60e4a292",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.recoil-fire:bd01711a12e21a44",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "135b26d2c9ecd66bdf46ad50d2e13332eb1516fadc1444762593a64145a46fab",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

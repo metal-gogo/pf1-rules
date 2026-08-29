@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.reinforce-armaments-communal",
   "ruleset": "Pathfinder First Edition",
   "name": "Reinforce Armaments, Communal",
@@ -212,7 +212,33 @@
   "description": {
     "raw": "This spell functions like reinforce armaments, except you divide the duration in 10-minute intervals among the objects touched.",
     "search_text": "\"this spell functions like reinforce armaments, except you divide the duration in 10-minute intervals among the objects touched.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "reinforce armaments",
+              "relationship_id": "spell.reinforce-armaments-communal:functions_like:spell.reinforce-armaments",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you divide the duration in 10-minute intervals among the objects touched."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -391,6 +417,33 @@
       "note": null
     },
     {
+      "relationship_id": "spell.reinforce-armaments-communal:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.reinforce-armaments-communal:61fa2c7d4d65c129",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.reinforce-armaments-communal:09fa65cbed8cdb72",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.reinforce-armaments-communal:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -547,6 +600,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like reinforce armaments, except you divide the duration in 10-minute intervals among the objects touched.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.reinforce-armaments-communal:6779223358f5cd00",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "reinforce armaments",
+          "source_href": "https://legacy.aonprd.com/ultimateCombat/spells/reinforceArmaments.html#reinforce-armaments"
         }
       ],
       "note": null
@@ -613,26 +673,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.reinforce-armaments-communal:references:spell.reinforce-armaments",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.reinforce-armaments",
-        "name": "reinforce armaments"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.reinforce-armaments-communal:6779223358f5cd00",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "reinforce armaments",
-          "source_href": "https://legacy.aonprd.com/ultimateCombat/spells/reinforceArmaments.html#reinforce-armaments"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.reinforce-armaments-communal:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -671,33 +711,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.reinforce-armaments-communal:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.reinforce-armaments-communal:61fa2c7d4d65c129",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.reinforce-armaments-communal:09fa65cbed8cdb72",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -748,11 +761,19 @@
       "raw_value_sha256": "6a554f9e5845055f0c24c0dd10e004a843522b8b842e89917c2d181b60e4a292",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.reinforce-armaments-communal:09fa65cbed8cdb72",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "7897d9c5977dd0aa0ed5f0f4e0d7e7f9126b39976a5bf1f2011b52315d497f47",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

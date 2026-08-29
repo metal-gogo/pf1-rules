@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.pessimism",
   "ruleset": "Pathfinder First Edition",
   "name": "Pessimism",
@@ -184,7 +184,68 @@
   "description": {
     "raw": "You erode the target’s confidence and instill a sense of despair. This fear of failure manifests as a –2 penalty on attack rolls, saving throws, ability checks, skill checks, and weapon damage rolls. Additionally, the target can’t gain morale bonuses of any kind while the spell remains in effect. No amount of achievement counters the spell’s effects—the target simply explains away positive events with a self-critical perspective.\n\nCertain events can solidify the character’s belief that it is doomed. Whenever the target rolls a natural 1 on an attack roll or saving throw, fails an ability or skill check by more than 5, or takes additional damage as a result of a foe’s confirmed critical hit, the penalty to roll imposed by pessimism becomes –3 for 1 round. This increased penalty doesn’t stack, even if multiple catastrophes occur on the same round.",
     "search_text": "\"you erode the target’s confidence and instill a sense of despair. this fear of failure manifests as a –2 penalty on attack rolls, saving throws, ability checks, skill checks, and weapon damage rolls. additionally, the target can’t gain morale bonuses of any kind while the spell remains in effect. no amount of achievement counters the spell’s effects—the target simply explains away positive events with a self-critical perspective.\\n\\ncertain events can solidify the character’s belief that it is doomed. whenever the target rolls a natural 1 on an attack roll or saving throw, fails an ability or skill check by more than 5, or takes additional damage as a result of a foe’s confirmed critical hit, the penalty to roll imposed by pessimism becomes –3 for 1 round. this increased penalty doesn’t stack, even if multiple catastrophes occur on the same round.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You erode the target’s confidence and instill a sense of despair. This fear of failure manifests as a –2 penalty on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack rolls",
+              "relationship_id": "spell.pessimism:uses_definition:rule.attack-rolls"
+            },
+            {
+              "node_type": "text",
+              "value": ", saving throws, ability checks, skill checks, and weapon damage rolls. Additionally, the target can’t gain morale bonuses of any kind while the spell remains in effect. No amount of achievement counters the spell’s effects—the target simply explains away positive events with a self-critical perspective."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Certain events can solidify the character’s belief that it is doomed. Whenever the target rolls a natural 1 on an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack roll",
+              "relationship_id": "spell.pessimism:uses_definition:rule.attack-rolls"
+            },
+            {
+              "node_type": "text",
+              "value": " or saving throw, fails an ability or skill check by more than 5, or takes additional damage as a result of a foe’s confirmed "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "critical hit",
+              "relationship_id": "spell.pessimism:uses_definition:rule.critical-hit"
+            },
+            {
+              "node_type": "text",
+              "value": ", the penalty to roll imposed by "
+            },
+            {
+              "node_type": "text",
+              "value": "pessimism",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " becomes –3 for 1 round. This increased penalty doesn’t stack, even if multiple catastrophes occur on the same round."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -615,12 +676,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.pessimism:uses_definition:rule.attack-roll",
+      "relationship_id": "spell.pessimism:uses_definition:rule.attack-rolls",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.attack-roll",
-        "name": "attack roll"
+        "entity_id": "rule.attack-rolls",
+        "name": "Attack rolls"
       },
       "status": "accepted",
       "evidence": [
@@ -630,20 +691,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "attack roll",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Attack-Roll"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.pessimism:uses_definition:rule.attack-rolls",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.attack-rolls",
-        "name": "attack rolls"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.pessimism:5eb2aa0ffc4982f4",
           "source_field": "spell_raw.links_raw[12]",
@@ -715,11 +763,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.pessimism:uses_definition:rule.will",
+      "relationship_id": "spell.pessimism:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -783,11 +831,19 @@
       "raw_value_sha256": "b62e6b772ff06484979c27752d566fa8922c6f57f1a73fe691a5c2c4cc7958c2",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.pessimism:427d9eacaeaae429",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "47df43c628b9cbf9316f8a9c4868df238ee0ff6b11c780c711a8ee0096a894f5",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

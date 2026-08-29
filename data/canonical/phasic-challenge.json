@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.phasic-challenge",
   "ruleset": "Pathfinder First Edition",
   "name": "Phasic Challenge",
@@ -175,7 +175,39 @@
   "description": {
     "raw": "You select one enemy and one willing ally as targets. The enemy gains a new Will saving throw at the beginning of each turn, and on a successful saving throw the spell ends. Both targets remain visible and audible, and can see and hear other creatures, but cannot physically interact with any creature save one another. Spells or weapon attacks from the affected creatures impact only each other, though spells might affect terrain or other factors not related to other creatures. If one of the creatures becomes unconscious or dies, or if the effect is dispelled, the effect ends for both of them.",
     "search_text": "\"you select one enemy and one willing ally as targets. the enemy gains a new will saving throw at the beginning of each turn, and on a successful saving throw the spell ends. both targets remain visible and audible, and can see and hear other creatures, but cannot physically interact with any creature save one another. spells or weapon attacks from the affected creatures impact only each other, though spells might affect terrain or other factors not related to other creatures. if one of the creatures becomes unconscious or dies, or if the effect is dispelled, the effect ends for both of them.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You select one enemy and one willing ally as targets. The enemy gains a new "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.phasic-challenge:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saving throw at the beginning of each turn, and on a successful saving throw the spell ends. Both targets remain visible and audible, and can see and hear other creatures, but cannot physically interact with any creature save one another. Spells or weapon attacks from the affected creatures impact only each other, though spells might affect terrain or other factors not related to other creatures. If one of the creatures becomes "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "unconscious",
+              "relationship_id": "spell.phasic-challenge:uses_definition:condition.unconscious"
+            },
+            {
+              "node_type": "text",
+              "value": " or dies, or if the effect is dispelled, the effect ends for both of them."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -578,11 +610,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.phasic-challenge:uses_definition:rule.will",
+      "relationship_id": "spell.phasic-challenge:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -653,11 +685,19 @@
       "raw_value_sha256": "5240d520711bbb8ec07b625d13a08a04c927093ecdb0b58793493d3efcaf4192",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.phasic-challenge:e5929ed052f54a6c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "225550ed6a19e13b2e132b2b79a4eeb19cb5e4d15cb0e2f05782e3b57100b773",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

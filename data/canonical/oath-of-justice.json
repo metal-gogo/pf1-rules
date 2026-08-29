@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.oath-of-justice",
   "ruleset": "Pathfinder First Edition",
   "name": "Oath of Justice",
@@ -198,7 +198,45 @@
   "description": {
     "raw": "This spell seals a solemn vow between two creatures. When this spell is cast, the targets must clasp hands and swear their oath in Kols’s name. The spell functions like mark of justice, except as noted above and rather than being cursed, the oath-breaker gains a mark on the face indicating to all dwarves who see it that the target has broken a sacred oath, which gives the oath-breaker a –4 penalty to influence dwarves. The mark can be removed as described in the mark of justice spell, or the other target can forgive the oathbreaker, which causes the mark to vanish.",
     "search_text": "\"this spell seals a solemn vow between two creatures. when this spell is cast, the targets must clasp hands and swear their oath in kols’s name. the spell functions like mark of justice, except as noted above and rather than being cursed, the oath-breaker gains a mark on the face indicating to all dwarves who see it that the target has broken a sacred oath, which gives the oath-breaker a –4 penalty to influence dwarves. the mark can be removed as described in the mark of justice spell, or the other target can forgive the oathbreaker, which causes the mark to vanish.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell seals a solemn vow between two creatures. When this spell is cast, the targets must clasp hands and swear their oath in Kols’s name. The spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "mark of justice",
+              "relationship_id": "spell.oath-of-justice:references:spell.mark-of-justice",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except as noted above and rather than being cursed, the oath-breaker gains a mark on the face indicating to all dwarves who see it that the target has broken a sacred oath, which gives the oath-breaker a –4 penalty to influence dwarves. The mark can be removed as described in the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "mark of justice",
+              "relationship_id": "spell.oath-of-justice:references:spell.mark-of-justice",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell, or the other target can forgive the oathbreaker, which causes the mark to vanish."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -249,6 +287,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.oath-of-justice:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.oath-of-justice:646eaf9c4f7635a2",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3 (Kols)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.oath-of-justice:appears_on_spell_list:spell-list.oracle",
@@ -384,7 +442,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.mark-of-justice",
-        "name": "mark of justice"
+        "name": "Mark of Justice"
       },
       "status": "accepted",
       "evidence": [
@@ -451,26 +509,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.oath-of-justice:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.oath-of-justice:646eaf9c4f7635a2",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3 (Kols)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -521,11 +559,19 @@
       "raw_value_sha256": "20a18277df953d918565f05f16bd9ec796e9585479f218aa8d4f72119df98edf",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.oath-of-justice:646eaf9c4f7635a2",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "6a55f9065dff04b976e7e3dbf42d455d1911417714f27696cedaa0c9fecf8b51",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

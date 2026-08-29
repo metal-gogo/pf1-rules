@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.shadow-trap",
   "ruleset": "Pathfinder First Edition",
   "name": "Shadow Trap",
@@ -240,7 +240,48 @@
   "description": {
     "raw": "You pin the target’s shadow to its current location, causing the target to become entangled and preventing it from moving farther than 5 feet from its original position, as if its shadow were anchored to the terrain. Each round on its turn, the target can attempt a new saving throw to end the effect as a full-round action. A flying creature can only hover in place or fall while entangled in this manner. This spell automatically fails when cast on a creature that doesn’t throw a shadow, and it ends if the creature is entirely in an area with no illumination.",
     "search_text": "\"you pin the target’s shadow to its current location, causing the target to become entangled and preventing it from moving farther than 5 feet from its original position, as if its shadow were anchored to the terrain. each round on its turn, the target can attempt a new saving throw to end the effect as a full-round action. a flying creature can only hover in place or fall while entangled in this manner. this spell automatically fails when cast on a creature that doesn’t throw a shadow, and it ends if the creature is entirely in an area with no illumination.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You pin the target’s shadow to its current location, causing the target to become "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "entangled",
+              "relationship_id": "spell.shadow-trap:uses_definition:condition.entangled"
+            },
+            {
+              "node_type": "text",
+              "value": " and preventing it from moving farther than 5 feet from its original position, as if its shadow were anchored to the terrain. Each round on its turn, the target can attempt a new saving throw to end the effect as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "full-round action",
+              "relationship_id": "spell.shadow-trap:uses_action:action.full-round-action"
+            },
+            {
+              "node_type": "text",
+              "value": ". A flying creature can only hover in place or fall while "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "entangled",
+              "relationship_id": "spell.shadow-trap:uses_definition:condition.entangled"
+            },
+            {
+              "node_type": "text",
+              "value": " in this manner. This spell automatically fails when cast on a creature that doesn’t throw a shadow, and it ends if the creature is entirely in an area with no illumination."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -433,6 +474,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.shadow-trap:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.shadow-trap:9f74f017a9f1398c",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.shadow-trap:57b919c7944f5f37",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.shadow-trap:appears_on_spell_list:spell-list.oracle",
@@ -818,11 +886,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.shadow-trap:uses_definition:rule.will",
+      "relationship_id": "spell.shadow-trap:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -836,33 +904,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.shadow-trap:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.shadow-trap:9f74f017a9f1398c",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.shadow-trap:57b919c7944f5f37",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -913,11 +954,19 @@
       "raw_value_sha256": "a697804e80af9f67b79e51cf06bfa1348612c186b386b7770ea4d9936f69df87",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.shadow-trap:57b919c7944f5f37",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f98583368199d933a44412ee5dbebdf43b01a0c4e689703163f359002439a171",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

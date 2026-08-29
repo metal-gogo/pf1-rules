@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.overwhelming-poison",
   "ruleset": "Pathfinder First Edition",
   "name": "Overwhelming Poison",
@@ -200,7 +200,82 @@
   "description": {
     "raw": "This spell increases the virulence of the targeted dose of poison, making the poison more difficult to resist. The poison is unaffected by delay poison, and the DC to remove it with neutralize poison is increased by 5. Additionally, the poison uses its own saving throw DC or overwhelming poison’s DC, whichever is higher.\n\nIf cast on a creature that is currently suffering from exposure to one or more doses of poison, the spell applies to one of the doses of your choice, or a random dose of poison affecting the target if you don’t know what poisons are afflicting the target.\n\nIf cast on a creature that is venomous, this spell affects the first dose of poison that creature delivers before the end of the spell’s duration.",
     "search_text": "\"this spell increases the virulence of the targeted dose of poison, making the poison more difficult to resist. the poison is unaffected by delay poison, and the dc to remove it with neutralize poison is increased by 5. additionally, the poison uses its own saving throw dc or overwhelming poison’s dc, whichever is higher.\\n\\nif cast on a creature that is currently suffering from exposure to one or more doses of poison, the spell applies to one of the doses of your choice, or a random dose of poison affecting the target if you don’t know what poisons are afflicting the target.\\n\\nif cast on a creature that is venomous, this spell affects the first dose of poison that creature delivers before the end of the spell’s duration.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell increases the virulence of the targeted dose of poison, making the poison more difficult to resist. The poison is unaffected by "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "delay poison",
+              "relationship_id": "spell.overwhelming-poison:references:spell.delay-poison",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", and the DC to remove it with "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "neutralize poison",
+              "relationship_id": "spell.overwhelming-poison:references:spell.neutralize-poison",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " is increased by 5. Additionally, the poison uses its own saving throw DC or "
+            },
+            {
+              "node_type": "text",
+              "value": "overwhelming ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "entity_link",
+              "value": "poison’s",
+              "relationship_id": "spell.overwhelming-poison:uses_definition:rule.poison",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " DC, whichever is higher."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "If cast on a creature that is currently suffering from exposure to one or more doses of poison, the spell applies to one of the doses of your choice, or a random dose of poison affecting the target if you don’t know what poisons are afflicting the target."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "If cast on a creature that is venomous, this spell affects the first dose of poison that creature delivers before the end of the spell’s duration."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -312,6 +387,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.overwhelming-poison:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.overwhelming-poison:4ac3b8c7122a8034",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.overwhelming-poison:78c5604186e55b59",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 6",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.overwhelming-poison:appears_on_spell_list:spell-list.oracle",
@@ -598,7 +700,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.delay-poison",
-        "name": "delay poison"
+        "name": "Delay Poison"
       },
       "status": "accepted",
       "evidence": [
@@ -618,7 +720,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.neutralize-poison",
-        "name": "neutralize poison"
+        "name": "Neutralize Poison"
       },
       "status": "accepted",
       "evidence": [
@@ -660,12 +762,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.overwhelming-poison:uses_definition:rule.poisons",
+      "relationship_id": "spell.overwhelming-poison:uses_definition:rule.poison",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.poisons",
-        "name": "poison’s"
+        "entity_id": "rule.poison",
+        "name": "Poison"
       },
       "status": "accepted",
       "evidence": [
@@ -698,33 +800,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.overwhelming-poison:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.overwhelming-poison:4ac3b8c7122a8034",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.overwhelming-poison:78c5604186e55b59",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 6",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -775,11 +850,19 @@
       "raw_value_sha256": "f5776fc1f167ca8b28a6ab81efd8c5942dd66d586b0ed7316aa1e8f6c5009afd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.overwhelming-poison:78c5604186e55b59",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f727dd30929012aa03ac83f5aaf30cefb31344632111b6f916dde76af6f2aeb2",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

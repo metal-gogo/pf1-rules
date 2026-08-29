@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.speak-with-waves",
   "ruleset": "Pathfinder First Edition",
   "name": "Speak with Waves",
@@ -129,7 +129,33 @@
   "description": {
     "raw": "This spell functions as stone tell but allows conversations only with a body of standing or flowing fresh water at least as large as you are. Flowing water can generally speak about events happening upstream but not events happening downstream.",
     "search_text": "\"this spell functions as stone tell but allows conversations only with a body of standing or flowing fresh water at least as large as you are. flowing water can generally speak about events happening upstream but not events happening downstream.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "stone tell",
+              "relationship_id": "spell.speak-with-waves:functions_like:spell.stone-tell",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " but allows conversations only with a body of standing or flowing fresh water at least as large as you are. Flowing water can generally speak about events happening upstream but not events happening downstream."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -377,7 +403,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.stone-tell",
-        "name": "stone tell"
+        "name": "Stone Tell"
       },
       "status": "accepted",
       "evidence": [
@@ -460,11 +486,19 @@
       "raw_value_sha256": "6d038e9888c477ab7c4b6834ce0152b28d1f0d28935a08fb24369858227df865",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.speak-with-waves:9ac275d8416d1ac8",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "28ae18f1e092b08301303d6509e36895da3768a5dbcfd9f3a9277b1de9ef645f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

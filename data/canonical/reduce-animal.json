@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.reduce-animal",
   "ruleset": "Pathfinder First Edition",
   "name": "Reduce Animal",
@@ -121,7 +121,42 @@
   "description": {
     "raw": "This spell functions like reduce person, except that it affects a single willing animal. Reduce the damage dealt by the animal's natural attacks as appropriate for its new size (see Equipment how to adjust damage for size).",
     "search_text": "\"this spell functions like reduce person, except that it affects a single willing animal. reduce the damage dealt by the animal's natural attacks as appropriate for its new size (see equipment how to adjust damage for size).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "reduce person",
+              "relationship_id": "spell.reduce-animal:functions_like:spell.reduce-person",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that it affects a single willing animal. Reduce the damage dealt by the animal's natural attacks as appropriate for its new size (see "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Equipment",
+              "relationship_id": "spell.reduce-animal:uses_definition:rule.equipment"
+            },
+            {
+              "node_type": "text",
+              "value": " how to adjust damage for size)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -387,6 +422,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like reduce person, except that it affects a single willing animal. Reduce the damage dealt by the animal's natural attacks as appropriate for its new size (see Equipment how to adjust damage for size).",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.reduce-animal:67119a0097dcdfdf",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "reduce person",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/reducePerson.html#reduce-person"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.reduce-animal:f29a76105f120169",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "reduce person",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/r/reduce-person"
         }
       ],
       "note": null
@@ -448,33 +497,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "PRPG Core Rulebook pg. 330",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.reduce-animal:references:spell.reduce-person",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.reduce-person",
-        "name": "reduce person"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.reduce-animal:67119a0097dcdfdf",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "reduce person",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/reducePerson.html#reduce-person"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.reduce-animal:f29a76105f120169",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "reduce person",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/r/reduce-person"
         }
       ],
       "note": null
@@ -602,11 +624,19 @@
       "raw_value_sha256": "beb23705a6909fa8e9967b660297e2ce10e2d17b18157f3da2d2d48811ec4329",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.reduce-animal:11644837280972f5",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "82bc5141af244618935422bfac16d74c5897ed87145089b7667ea7a4eea80559",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.ride-the-waves",
   "ruleset": "Pathfinder First Edition",
   "name": "Ride The Waves",
@@ -218,7 +218,39 @@
   "description": {
     "raw": "The target gains the ability to breathe water and a swim speed of 30 feet. This swim speed means the target also gains the standard +8 bonus on Swim checks and the ability to take 10 on Swim checks even while distracted or endangered. The target can use the run action while swimming, provided it swims in a straight line. The spell does not make the target unable to breathe air.",
     "search_text": "\"the target gains the ability to breathe water and a swim speed of 30 feet. this swim speed means the target also gains the standard +8 bonus on swim checks and the ability to take 10 on swim checks even while distracted or endangered. the target can use the run action while swimming, provided it swims in a straight line. the spell does not make the target unable to breathe air.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target gains the ability to breathe water and a swim speed of 30 feet. This swim speed means the target also gains the standard +8 bonus on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Swim",
+              "relationship_id": "spell.ride-the-waves:uses_definition:rule.swim"
+            },
+            {
+              "node_type": "text",
+              "value": " checks and the ability to take 10 on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Swim",
+              "relationship_id": "spell.ride-the-waves:uses_definition:rule.swim"
+            },
+            {
+              "node_type": "text",
+              "value": " checks even while distracted or endangered. The target can use the run action while swimming, provided it swims in a straight line. The spell does not make the target unable to breathe air."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -363,6 +395,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.ride-the-waves:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.ride-the-waves:6d8d2fde439d12c7",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.ride-the-waves:appears_on_spell_list:spell-list.oracle",
@@ -722,11 +774,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.ride-the-waves:uses_definition:rule.will",
+      "relationship_id": "spell.ride-the-waves:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -740,26 +792,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.ride-the-waves:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.ride-the-waves:6d8d2fde439d12c7",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -810,11 +842,19 @@
       "raw_value_sha256": "33b0b822f9c8218d34fdf9b768f621b67d0a798a3b172d959228acdd4754b610",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.ride-the-waves:6d8d2fde439d12c7",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "0b30f778d3ce82bd956fc517c6349323395499c1b8d83471826c033846106d8d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

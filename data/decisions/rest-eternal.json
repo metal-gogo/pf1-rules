@@ -152,9 +152,41 @@
         "aon:subdomain.ancestors:8db954e0"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.rest-eternal:7468b0bcbacf8fb2",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.rest-eternal:7468b0bcbacf8fb2",
+        "legacy_aon:spell.rest-eternal:a59e16e9437f442c",
+        "d20pfsrd:spell.rest-eternal:fa8012fea629a0ff",
+        "aon:patron.death:15d234b1",
+        "aon:subdomain.ancestors:8db954e0"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.rest-eternal:appears_on_spell_list:spell-list.ancestors-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.ancestors:8db954e0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.ancestors:8db954e0"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
     {
       "relationship_id": "spell.rest-eternal:appears_on_spell_list:spell-list.cleric",
       "decision": "accept",
@@ -186,6 +218,20 @@
         "d20pfsrd:spell.rest-eternal:fa8012fea629a0ff"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.rest-eternal:appears_on_spell_list:spell-list.death-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.death:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.death:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.rest-eternal:appears_on_spell_list:spell-list.druid",
@@ -222,6 +268,20 @@
         "d20pfsrd:spell.rest-eternal:fa8012fea629a0ff"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.rest-eternal:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.rest-eternal:7468b0bcbacf8fb2",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.rest-eternal:7468b0bcbacf8fb2"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.rest-eternal:appears_on_spell_list:spell-list.oracle",
@@ -404,22 +464,6 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.rest-eternal:references:spell.rest-eternal",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.rest-eternal:a59e16e9437f442c",
-          "source_field": "spell_raw.links_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.rest-eternal:7468b0bcbacf8fb2",
-        "legacy_aon:spell.rest-eternal:a59e16e9437f442c",
-        "d20pfsrd:spell.rest-eternal:fa8012fea629a0ff"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.rest-eternal:uses_definition:rule.ancestors",
       "decision": "accept",
       "evidence": [
@@ -450,48 +494,6 @@
         "d20pfsrd:spell.rest-eternal:fa8012fea629a0ff"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.rest-eternal:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.rest-eternal:7468b0bcbacf8fb2",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.rest-eternal:7468b0bcbacf8fb2"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.rest-eternal:appears_on_spell_list:spell-list.death-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.death:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.death:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.rest-eternal:appears_on_spell_list:spell-list.ancestors-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.ancestors:8db954e0",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.ancestors:8db954e0"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

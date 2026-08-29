@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.share-skin-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Share Skin, Greater",
@@ -115,7 +115,33 @@
   "description": {
     "raw": "This spell functions like share skin, except as noted here.",
     "search_text": "\"this spell functions like share skin, except as noted here.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "share skin",
+              "relationship_id": "spell.share-skin-greater:functions_like:spell.share-skin",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except as noted here."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -396,11 +422,19 @@
       "raw_value_sha256": "6e042387c96a82c093695f594f2de7f290be5d861549946ccf33340d41e8f01a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.share-skin-greater:21abc94a6c4f4525",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "1ce47307c78dd52b2881b85ad64995b2bef086a84a3e230e72a517695d74d847",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

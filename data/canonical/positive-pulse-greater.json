@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.positive-pulse-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Positive Pulse, Greater",
@@ -244,7 +244,42 @@
   "description": {
     "raw": "This spell functions like positive pulse, except that the damage dealt increases to 3d6 plus your caster level, and the bonus on saving throws increases to +8.",
     "search_text": "\"this spell functions like positive pulse, except that the damage dealt increases to 3d6 plus your caster level, and the bonus on saving throws increases to +8.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "positive pulse",
+              "relationship_id": "spell.positive-pulse-greater:functions_like:spell.positive-pulse",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that the damage dealt increases to 3d6 plus your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.positive-pulse-greater:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": ", and the bonus on saving throws increases to +8."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -401,6 +436,47 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.positive-pulse-greater:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.positive-pulse-greater:058dc3e62c1408c0",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.positive-pulse-greater:36ce6f790fa4fb1c",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.positive-pulse-greater:058dc3e62c1408c0",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.positive-pulse-greater:36ce6f790fa4fb1c",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.positive-pulse-greater:appears_on_spell_list:spell-list.oracle",
@@ -804,47 +880,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.positive-pulse-greater:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.positive-pulse-greater:058dc3e62c1408c0",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.positive-pulse-greater:36ce6f790fa4fb1c",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 4",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.positive-pulse-greater:058dc3e62c1408c0",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.positive-pulse-greater:36ce6f790fa4fb1c",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -895,11 +930,19 @@
       "raw_value_sha256": "9276985ccb57a086be619f95ef1ce2d148cf01d1f970f80074744d2c22e8d877",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.positive-pulse-greater:36ce6f790fa4fb1c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "77122d9d304cb034d6ffc34ef2fa67413abfa6da928d5f2f1ee467b144f41690",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.5-reviewed-catalog-memberships",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "REVIEWED_AON_LEVEL_SELECTION",

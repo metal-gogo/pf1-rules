@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.righteous-vigor",
   "ruleset": "Pathfinder First Edition",
   "name": "Righteous Vigor",
@@ -154,7 +154,75 @@
   "description": {
     "raw": "Infusing the target with a surge of furious divine energy, you enhance a creature’s ability to hit an opponent based on the number of times it has already hit that opponent with a successful attack. Each time the subject successfully strikes an opponent with a successful melee attack, the subject gains a cumulative +1 morale bonus on attack rolls (maximum +4 bonus) and gains 1d8 temporary hit points (to a maximum of 20 temporary hit points). If an attack misses, the attack bonus resets to +0 but any accumulated temporary hit points remain. The temporary hit points disappear at the end of the spell’s duration.",
     "search_text": "\"infusing the target with a surge of furious divine energy, you enhance a creature’s ability to hit an opponent based on the number of times it has already hit that opponent with a successful attack. each time the subject successfully strikes an opponent with a successful melee attack, the subject gains a cumulative +1 morale bonus on attack rolls (maximum +4 bonus) and gains 1d8 temporary hit points (to a maximum of 20 temporary hit points). if an attack misses, the attack bonus resets to +0 but any accumulated temporary hit points remain. the temporary hit points disappear at the end of the spell’s duration.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Infusing the target with a surge of furious divine energy, you enhance a creature’s ability to hit an opponent based on the number of times it has already hit that opponent with a successful attack. Each time the subject successfully strikes an opponent with a successful melee attack, the subject gains a cumulative +1 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "morale bonus",
+              "relationship_id": "spell.righteous-vigor:uses_definition:rule.morale-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on attack rolls (maximum +4 bonus) and gains 1d8 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "temporary hit points",
+              "relationship_id": "spell.righteous-vigor:uses_definition:rule.temporary-hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": " (to a maximum of 20 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "temporary hit points",
+              "relationship_id": "spell.righteous-vigor:uses_definition:rule.temporary-hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": "). If an attack misses, the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack bonus",
+              "relationship_id": "spell.righteous-vigor:uses_definition:rule.attack-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " resets to +0 but any accumulated "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "temporary hit points",
+              "relationship_id": "spell.righteous-vigor:uses_definition:rule.temporary-hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": " remain. The "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "temporary hit points",
+              "relationship_id": "spell.righteous-vigor:uses_definition:rule.temporary-hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": " disappear at the end of the spell’s duration."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -192,6 +260,53 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.righteous-vigor:appears_on_spell_list:spell-list.legend-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.legend-subdomain",
+        "name": "Legend Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.legend:e2950469",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th— righteous vigor",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Glory"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.righteous-vigor:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.righteous-vigor:8f32a75a918c9392",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.righteous-vigor:b0924ecf0a0f0d3a",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.righteous-vigor:appears_on_spell_list:spell-list.paladin",
@@ -471,11 +586,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.righteous-vigor:uses_definition:rule.will",
+      "relationship_id": "spell.righteous-vigor:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -489,53 +604,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.righteous-vigor:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.righteous-vigor:8f32a75a918c9392",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.righteous-vigor:b0924ecf0a0f0d3a",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.righteous-vigor:appears_on_spell_list:spell-list.legend-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.legend-subdomain",
-        "name": "Legend Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.legend:e2950469",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "4th— righteous vigor",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Glory"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -594,11 +662,19 @@
       "raw_value_sha256": "debbdd44e483cc9bb07f070c1e2959e7e1f2735f3f644ba8798e227f6d732545",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.righteous-vigor:b0924ecf0a0f0d3a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "8b99ed1d41e9538423c40cc0272f1c236223bfeb8ac6777e0a4458b41ffe2abd",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

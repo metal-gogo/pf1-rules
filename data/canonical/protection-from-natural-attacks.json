@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.protection-from-natural-attacks",
   "ruleset": "Pathfinder First Edition",
   "name": "Protection from Natural Attacks",
@@ -189,7 +189,66 @@
   "description": {
     "raw": "Upon casting this spell, select one type of natural attack from the following: bite, claw, gore, hoof, pincers, slam, sting, swarm, tail slap, talon, tentacle, or wing. For the duration of the spell, the target gains DR 5/— against all attacks from natural weapons of the selected type.",
     "search_text": "\"upon casting this spell, select one type of natural attack from the following: bite, claw, gore, hoof, pincers, slam, sting, swarm, tail slap, talon, tentacle, or wing. for the duration of the spell, the target gains dr 5/— against all attacks from natural weapons of the selected type.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Upon casting this spell, select one type of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "natural attack",
+              "relationship_id": "spell.protection-from-natural-attacks:uses_definition:rule.natural-attacks"
+            },
+            {
+              "node_type": "text",
+              "value": " from the following: bite, claw, gore, hoof, pincers, slam, sting, "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "swarm",
+              "relationship_id": "spell.protection-from-natural-attacks:uses_definition:rule.swarm"
+            },
+            {
+              "node_type": "text",
+              "value": ", tail slap, talon, "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "tentacle",
+              "relationship_id": "spell.protection-from-natural-attacks:uses_definition:rule.tentacle"
+            },
+            {
+              "node_type": "text",
+              "value": ", or wing. For the duration of the spell, the target gains "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "DR",
+              "relationship_id": "spell.protection-from-natural-attacks:uses_definition:rule.damage-reduction"
+            },
+            {
+              "node_type": "text",
+              "value": " 5/— against all attacks from "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "natural weapons",
+              "relationship_id": "spell.protection-from-natural-attacks:uses_definition:rule.natural-attacks"
+            },
+            {
+              "node_type": "text",
+              "value": " of the selected type."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -567,12 +626,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.protection-from-natural-attacks:uses_definition:rule.dr",
+      "relationship_id": "spell.protection-from-natural-attacks:uses_definition:rule.damage-reduction",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.dr",
-        "name": "DR"
+        "entity_id": "rule.damage-reduction",
+        "name": "Damage reduction"
       },
       "status": "accepted",
       "evidence": [
@@ -587,12 +646,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.protection-from-natural-attacks:uses_definition:rule.fort",
+      "relationship_id": "spell.protection-from-natural-attacks:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -627,12 +686,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.protection-from-natural-attacks:uses_definition:rule.natural-attack",
+      "relationship_id": "spell.protection-from-natural-attacks:uses_definition:rule.natural-attacks",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.natural-attack",
-        "name": "natural attack"
+        "entity_id": "rule.natural-attacks",
+        "name": "Natural attacks"
       },
       "status": "accepted",
       "evidence": [
@@ -642,20 +701,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "natural attack",
           "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/universal-monster-rules#TOC-Natural-Attacks"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.protection-from-natural-attacks:uses_definition:rule.natural-weapons",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.natural-weapons",
-        "name": "natural weapons"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.protection-from-natural-attacks:a6d2a2cc036bc41b",
           "source_field": "spell_raw.links_raw[19]",
@@ -727,12 +773,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.protection-from-natural-attacks:uses_definition:rule.touch",
+      "relationship_id": "spell.protection-from-natural-attacks:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -795,11 +841,19 @@
       "raw_value_sha256": "10a86880e37372b7185602d5b3eae76730e4a849af47ef67070968dff949f9a8",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.protection-from-natural-attacks:0fdf9bf66e1f1d5a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "5638ca29d373af172735d27c43327e562b81c1290e28625ac275d6c89c2b5e16",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

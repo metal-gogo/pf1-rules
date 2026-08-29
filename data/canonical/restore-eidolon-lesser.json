@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.restore-eidolon-lesser",
   "ruleset": "Pathfinder First Edition",
   "name": "Restore Eidolon, Lesser",
@@ -115,7 +115,33 @@
   "description": {
     "raw": "This spell functions as lesser restoration, except it only affects an eidolon.",
     "search_text": "\"this spell functions as lesser restoration, except it only affects an eidolon.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "lesser restoration",
+              "relationship_id": "spell.restore-eidolon-lesser:functions_like:spell.restoration-lesser",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it only affects an eidolon."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -368,12 +394,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.restore-eidolon-lesser:references:spell.lesser-restoration",
+      "relationship_id": "spell.restore-eidolon-lesser:references:spell.restoration-lesser",
       "type": "references",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.lesser-restoration",
-        "name": "lesser restoration"
+        "entity_id": "spell.restoration-lesser",
+        "name": "Restoration, Lesser"
       },
       "status": "accepted",
       "evidence": [
@@ -415,11 +441,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.restore-eidolon-lesser:uses_definition:rule.will",
+      "relationship_id": "spell.restore-eidolon-lesser:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -483,11 +509,19 @@
       "raw_value_sha256": "33b0b822f9c8218d34fdf9b768f621b67d0a798a3b172d959228acdd4754b610",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.restore-eidolon-lesser:ca5272561ac9dbcc",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "881564f820c6328fac9828ed82bcce839ab3d5fa768ae7e3115da02f8fe614c8",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

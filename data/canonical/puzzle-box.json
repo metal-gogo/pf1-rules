@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.puzzle-box",
   "ruleset": "Pathfinder First Edition",
   "name": "Puzzle Box",
@@ -148,7 +148,66 @@
   "description": {
     "raw": "This spell causes even commonly used objects to become conundrums. When cast on a creature, the target loses all weapon and shield proficiencies. The target also forgets how to use all spell-completion, spell-trigger, and use-activated magic items, as well as any mundane items used as part of a skill check, imposing a –5 penalty on all ability and skill checks attempted with such items. These effects last for 1 round per level. As a move action, the target can attempt a skill check to negate the effects of this spell for one object. Weapons, shields, and mundane objects require a successful Craft skill check of the type required to craft the item in question, with a DC equal to the spell’s save DC. Magic items require a successful Spellcraft or Use Magic Device skill check against the spell’s save DC.\n\nAlternatively, this spell can be cast on a single touched object that weighs up to 5 pounds per the caster’s level. Use of this object becomes a puzzle even to those previously familiar with it. Any creature attempting to use an item affected in this way is treated as though the creature was the target of puzzle box for that item only. When cast on an object, the duration of this spell is permanent.",
     "search_text": "\"this spell causes even commonly used objects to become conundrums. when cast on a creature, the target loses all weapon and shield proficiencies. the target also forgets how to use all spell-completion, spell-trigger, and use-activated magic items, as well as any mundane items used as part of a skill check, imposing a –5 penalty on all ability and skill checks attempted with such items. these effects last for 1 round per level. as a move action, the target can attempt a skill check to negate the effects of this spell for one object. weapons, shields, and mundane objects require a successful craft skill check of the type required to craft the item in question, with a dc equal to the spell’s save dc. magic items require a successful spellcraft or use magic device skill check against the spell’s save dc.\\n\\nalternatively, this spell can be cast on a single touched object that weighs up to 5 pounds per the caster’s level. use of this object becomes a puzzle even to those previously familiar with it. any creature attempting to use an item affected in this way is treated as though the creature was the target of puzzle box for that item only. when cast on an object, the duration of this spell is permanent.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell causes even commonly used objects to become conundrums. When cast on a creature, the target loses all weapon and shield proficiencies. The target also forgets how to use all spell-completion, spell-trigger, and use-activated magic items, as well as any mundane items used as part of a skill check, imposing a –5 penalty on all ability and skill checks attempted with such items. These effects last for 1 round per level. As a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "move action",
+              "relationship_id": "spell.puzzle-box:uses_action:action.move-action"
+            },
+            {
+              "node_type": "text",
+              "value": ", the target can attempt a skill check to negate the effects of this spell for one object. Weapons, shields, and mundane objects require a successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Craft",
+              "relationship_id": "spell.puzzle-box:uses_definition:rule.craft"
+            },
+            {
+              "node_type": "text",
+              "value": " skill check of the type required to craft the item in question, with a DC equal to the spell’s save DC. Magic items require a successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Spellcraft",
+              "relationship_id": "spell.puzzle-box:uses_definition:rule.spellcraft"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Use Magic Device",
+              "relationship_id": "spell.puzzle-box:uses_definition:rule.use-magic-device"
+            },
+            {
+              "node_type": "text",
+              "value": " skill check against the spell’s save DC."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Alternatively, this spell can be cast on a single touched object that weighs up to 5 pounds per the caster’s level. Use of this object becomes a puzzle even to those previously familiar with it. Any creature attempting to use an item affected in this way is treated as though the creature was the target of puzzle box for that item only. When cast on an object, the duration of this spell is permanent."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -578,12 +637,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.puzzle-box:uses_definition:rule.touch",
+      "relationship_id": "spell.puzzle-box:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -618,11 +677,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.puzzle-box:uses_definition:rule.will",
+      "relationship_id": "spell.puzzle-box:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -686,11 +745,19 @@
       "raw_value_sha256": "235caa8ee355c48f61d05f321f760a553d1b8f3dc827916c1f21c5fcd3674695",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.puzzle-box:361922fb04d23256",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d875a2ab080011570a491c58d9bd355ecb0a247ecd263feff2053657ce1c7728",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
