@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.hobble",
   "ruleset": "Pathfinder First Edition",
   "name": "Hobble",
@@ -214,7 +214,48 @@
   "description": {
     "raw": "This spell disrupts the method a target uses for movement. Creatures under the effects of this spell move at half their base speed (rounded down to the nearest 5-foot increment) but can still take 5-foot steps as normal. Incorporeal creatures and creatures flying with perfect maneuverability are immune to the effects of this spell. Each round, a target receives another save to end the effect.",
     "search_text": "\"this spell disrupts the method a target uses for movement. creatures under the effects of this spell move at half their base speed (rounded down to the nearest 5-foot increment) but can still take 5-foot steps as normal. incorporeal creatures and creatures flying with perfect maneuverability are immune to the effects of this spell. each round, a target receives another save to end the effect.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell disrupts the method a target uses for movement. Creatures under the effects of this spell move at half their base speed (rounded down to the nearest 5-foot increment) but can still take "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "5-foot steps",
+              "relationship_id": "spell.hobble:uses_definition:rule.5-foot-steps"
+            },
+            {
+              "node_type": "text",
+              "value": " as normal. "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Incorporeal",
+              "relationship_id": "spell.hobble:uses_definition:rule.incorporeal"
+            },
+            {
+              "node_type": "text",
+              "value": " creatures and creatures flying with "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "perfect maneuverability",
+              "relationship_id": "spell.hobble:uses_definition:rule.perfect-maneuverability"
+            },
+            {
+              "node_type": "text",
+              "value": " are immune to the effects of this spell. Each round, a target receives another save to end the effect."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -400,6 +441,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.hobble:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.hobble:3115a6af6a3f8f9a",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-inquisitor/"
+        },
+        {
+          "observation_id": "aon:spell.hobble:c8bf610320cfa353",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.hobble:appears_on_spell_list:spell-list.ranger",
@@ -675,33 +743,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.hobble:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.hobble:3115a6af6a3f8f9a",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-inquisitor/"
-        },
-        {
-          "observation_id": "aon:spell.hobble:c8bf610320cfa353",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -752,11 +793,19 @@
       "raw_value_sha256": "c4d974e5f79414e8f082727ebdd0db102e380d143b249981de8f3853cef54ce5",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.hobble:c8bf610320cfa353",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "bfba7290a14227d870982c13708fef544a0e5a930b3ddcacb3ddef6a75c826d0",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

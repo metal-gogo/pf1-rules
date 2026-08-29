@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.hold-animal",
   "ruleset": "Pathfinder First Edition",
   "name": "Hold Animal",
@@ -195,7 +195,42 @@
   "description": {
     "raw": "This spell functions like hold person, except that it affects an animal instead of a humanoid.",
     "search_text": "\"this spell functions like hold person, except that it affects an animal instead of a humanoid.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hold person",
+              "relationship_id": "spell.hold-animal:functions_like:spell.hold-person",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that it affects an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "animal",
+              "relationship_id": "spell.hold-animal:uses_definition:rule.animal"
+            },
+            {
+              "node_type": "text",
+              "value": " instead of a humanoid."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -307,6 +342,26 @@
   ],
   "relationships": [
     {
+      "relationship_id": "spell.hold-animal:appears_on_spell_list:spell-list.animal-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.animal-domain",
+        "name": "Animal Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.animal:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd—hold animal",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Animal"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
       "relationship_id": "spell.hold-animal:appears_on_spell_list:spell-list.druid",
       "type": "appears_on_spell_list",
       "target": {
@@ -334,6 +389,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.hold-animal:appears_on_spell_list:spell-list.fur-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.fur-subdomain",
+        "name": "Fur Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.fur:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Animal Domain: 2nd—hold animal",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Animal"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
       "relationship_id": "spell.hold-animal:appears_on_spell_list:spell-list.hunter",
       "type": "appears_on_spell_list",
       "target": {
@@ -352,6 +427,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.hold-animal:appears_on_spell_list:spell-list.insect-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.insect-subdomain",
+        "name": "Insect Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.insect:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Animal Domain: 2nd—hold animal",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Animal"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.hold-animal:appears_on_spell_list:spell-list.mesmerist",
@@ -450,6 +545,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like hold person, except that it affects an animal instead of a humanoid.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.hold-animal:07e2680bc0e3e0f6",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "hold person",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/holdPerson.html#hold-person"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.hold-animal:53769ee4ab7bd597",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "hold person",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/h/hold-person/"
         }
       ],
       "note": null
@@ -577,33 +686,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.hold-animal:references:spell.hold-person",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.hold-person",
-        "name": "hold person"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.hold-animal:07e2680bc0e3e0f6",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "hold person",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/holdPerson.html#hold-person"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.hold-animal:53769ee4ab7bd597",
-          "source_field": "spell_raw.links_raw[7]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "hold person",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/h/hold-person/"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.hold-animal:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -662,66 +744,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.hold-animal:appears_on_spell_list:spell-list.animal-domain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.animal-domain",
-        "name": "Animal Domain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:domain.animal:a6829b5b",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "2nd—hold animal",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Animal"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
-    },
-    {
-      "relationship_id": "spell.hold-animal:appears_on_spell_list:spell-list.fur-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.fur-subdomain",
-        "name": "Fur Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.fur:a6829b5b",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "Inherited from Animal Domain: 2nd—hold animal",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Animal"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
-    },
-    {
-      "relationship_id": "spell.hold-animal:appears_on_spell_list:spell-list.insect-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.insect-subdomain",
-        "name": "Insect Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.insect:a6829b5b",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "Inherited from Animal Domain: 2nd—hold animal",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Animal"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -796,11 +818,19 @@
       "raw_value_sha256": "9ed3e68fb187d86c53181e7735962ad48471236ad83f55c885559207d7c8ae6a",
       "decision": "normalized",
       "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.hold-animal:3c652cc7b2a40094",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "5161fd3fa8c30dbde3d19caa0579281790ca10fb21ef50ca5dc094ae680279a1",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

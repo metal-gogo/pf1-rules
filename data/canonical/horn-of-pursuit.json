@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.horn-of-pursuit",
   "ruleset": "Pathfinder First Edition",
   "name": "Horn of Pursuit",
@@ -152,7 +152,39 @@
   "description": {
     "raw": "You create the sound of a large hunting horn, blowing up to three notes as loud as a roaring dragon. These notes can be heard up to 2 miles away in typical outdoor conditions. You can make these sounds at any point during the spell’s duration as a free action, and each sounding can be short or long, allowing you to send very simple coded messages.",
     "search_text": "\"you create the sound of a large hunting horn, blowing up to three notes as loud as a roaring dragon. these notes can be heard up to 2 miles away in typical outdoor conditions. you can make these sounds at any point during the spell’s duration as a free action, and each sounding can be short or long, allowing you to send very simple coded messages.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create the sound of a large hunting horn, blowing up to three notes as loud as a roaring "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dragon",
+              "relationship_id": "spell.horn-of-pursuit:uses_definition:rule.dragon"
+            },
+            {
+              "node_type": "text",
+              "value": ". These notes can be heard up to 2 miles away in typical outdoor conditions. You can make these sounds at any point during the spell’s duration as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "free action",
+              "relationship_id": "spell.horn-of-pursuit:uses_action:action.free-action"
+            },
+            {
+              "node_type": "text",
+              "value": ", and each sounding can be short or long, allowing you to send very simple coded messages."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -237,6 +269,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.horn-of-pursuit:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.horn-of-pursuit:89be6ff5a446dcc8",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.horn-of-pursuit:5a1544da41272000",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.horn-of-pursuit:appears_on_spell_list:spell-list.paladin",
@@ -493,33 +552,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.horn-of-pursuit:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.horn-of-pursuit:89be6ff5a446dcc8",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.horn-of-pursuit:5a1544da41272000",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -570,11 +602,19 @@
       "raw_value_sha256": "4c9de16442231ee78651fc8bd4186a177becb177979ba5cf9b294820c940de9a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.horn-of-pursuit:5a1544da41272000",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "db70644aabc00f9d465ee350ad5b2eecfc4d437d01b3366e26c60327e4e39b6b",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

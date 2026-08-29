@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.honeyed-tongue",
   "ruleset": "Pathfinder First Edition",
   "name": "Honeyed Tongue",
@@ -166,7 +166,48 @@
   "description": {
     "raw": "This spell augments your diplomacies. While under the effects of spell, you roll two dice each time you make a Diplomacy check to change a creature’s attitude, taking the highest roll. If this results in a roll low enough to reduce the creature’s attitude by a step, that creature gets some clue that you are manipulating it with a spell. Alternatively you can cast this spell before making a Diplomacy check to gather information, gaining a +5 competence bonus on the check.",
     "search_text": "\"this spell augments your diplomacies. while under the effects of spell, you roll two dice each time you make a diplomacy check to change a creature’s attitude, taking the highest roll. if this results in a roll low enough to reduce the creature’s attitude by a step, that creature gets some clue that you are manipulating it with a spell. alternatively you can cast this spell before making a diplomacy check to gather information, gaining a +5 competence bonus on the check.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell augments your diplomacies. While under the effects of spell, you roll two dice each time you make a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Diplomacy",
+              "relationship_id": "spell.honeyed-tongue:uses_definition:rule.diplomacy"
+            },
+            {
+              "node_type": "text",
+              "value": " check to change a creature’s attitude, taking the highest roll. If this results in a roll low enough to reduce the creature’s attitude by a step, that creature gets some clue that you are manipulating it with a spell. Alternatively you can cast this spell before making a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Diplomacy",
+              "relationship_id": "spell.honeyed-tongue:uses_definition:rule.diplomacy"
+            },
+            {
+              "node_type": "text",
+              "value": " check to gather information, gaining a +5 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "competence bonus",
+              "relationship_id": "spell.honeyed-tongue:uses_definition:rule.competence-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on the check."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -251,6 +292,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.honeyed-tongue:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.honeyed-tongue:f85a5a6030f910b0",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.honeyed-tongue:36fdf94faceb87bb",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.honeyed-tongue:appears_on_spell_list:spell-list.paladin",
@@ -474,33 +542,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.honeyed-tongue:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.honeyed-tongue:f85a5a6030f910b0",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.honeyed-tongue:36fdf94faceb87bb",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -551,11 +592,19 @@
       "raw_value_sha256": "362af81d62c9041510d43689ab6a75233865760865ac293e5a3f5c82dad567af",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.honeyed-tongue:36fdf94faceb87bb",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "fc2bfc84bef28357d0a183c5635ac66e63fd694f6fe1d134222f36a480c8d290",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
