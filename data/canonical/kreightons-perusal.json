@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.kreightons-perusal",
   "ruleset": "Pathfinder First Edition",
   "name": "Kreighton's Perusal",
@@ -192,7 +192,32 @@
   "description": {
     "raw": "You gain a brief but incomplete understanding of one book’s\ncontents, equivalent to having skimmed its pages for 1\nhour. This insight is not sufficient to translate unknown\nlanguages, decipher codes, or memorize text, but it\ndoes allow the caster to learn what topics the book discusses—\ninvaluable to a Pathfinder who must make a snap decision when\nperforming research or deciding whether or not to abscond with\na volume. In addition, you instantly benefit from any bonuses or\neffects the book would normally grant to anyone who reads it for\n1 hour (such as the bonuses gained from reading volumes of the\nPathfinder Chronicles; see pages 26–27).",
     "search_text": "\"you gain a brief but incomplete understanding of one book’s\\ncontents, equivalent to having skimmed its pages for 1\\nhour. this insight is not sufficient to translate unknown\\nlanguages, decipher codes, or memorize text, but it\\ndoes allow the caster to learn what topics the book discusses—\\ninvaluable to a pathfinder who must make a snap decision when\\nperforming research or deciding whether or not to abscond with\\na volume. in addition, you instantly benefit from any bonuses or\\neffects the book would normally grant to anyone who reads it for\\n1 hour (such as the bonuses gained from reading volumes of the\\npathfinder chronicles; see pages 26–27).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You gain a brief but incomplete understanding of one book’s contents, equivalent to having skimmed its pages for 1 hour. This insight is not sufficient to translate unknown languages, decipher codes, or memorize text, but it does allow the caster to learn what topics the book discusses— invaluable to a Pathfinder who must make a snap decision when performing research or deciding whether or not to abscond with a volume. In addition, you instantly benefit from any bonuses or effects the book would normally grant to anyone who reads it for 1 hour (such as the bonuses gained from reading volumes of the "
+            },
+            {
+              "node_type": "text",
+              "value": "Pathfinder Chronicles",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "; see pages 26–27)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -283,6 +308,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.kreightons-perusal:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.kreightons-perusal:3bdad7fc5a78c8ce",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.kreightons-perusal:appears_on_spell_list:spell-list.oracle",
@@ -477,26 +522,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.kreightons-perusal:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.kreightons-perusal:3bdad7fc5a78c8ce",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -547,11 +572,19 @@
       "raw_value_sha256": "3eef77c37f1d51e25dc626a63eb4c5309a0e2daada9dec2ede26786870ed0a10",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.kreightons-perusal:3bdad7fc5a78c8ce",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d1798a18a163a1640eb39f7d655ba876356ec48eebd6d65af37cb99b9309e13d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "DERIVED_SPELL_LIST_ACCESS",

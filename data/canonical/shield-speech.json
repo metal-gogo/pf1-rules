@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.shield-speech",
   "ruleset": "Pathfinder First Edition",
   "legacy_3_5_material": true,
@@ -211,7 +211,32 @@
   "description": {
     "raw": "You can securely communicate with one creature within range. So long as your target remains within 10 feet of you, you and it can speak freely to each other without fear of being overheard. Communications that involve shield speech cannot be spied on, such as with a divination spell, and observers of the conversation can tell you are communicating but cannot read lips or hear the conversation unless they are the target of the spell. If you or the target speak to any other creatures, they can hear you normally (only communication between you and the target is protected). The spell does not shield writing, sign language, or any form of communication other than speaking.",
     "search_text": "\"you can securely communicate with one creature within range. so long as your target remains within 10 feet of you, you and it can speak freely to each other without fear of being overheard. communications that involve shield speech cannot be spied on, such as with a divination spell, and observers of the conversation can tell you are communicating but cannot read lips or hear the conversation unless they are the target of the spell. if you or the target speak to any other creatures, they can hear you normally (only communication between you and the target is protected). the spell does not shield writing, sign language, or any form of communication other than speaking.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You can securely communicate with one creature within range. So long as your target remains within 10 feet of you, you and it can speak freely to each other without fear of being overheard. Communications that involve shield speech cannot be spied on, such as with a "
+            },
+            {
+              "node_type": "text",
+              "value": "divination",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell, and observers of the conversation can tell you are communicating but cannot read lips or hear the conversation unless they are the target of the spell. If you or the target speak to any other creatures, they can hear you normally (only communication between you and the target is protected). The spell does not shield writing, sign language, or any form of communication other than speaking."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -370,6 +395,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.shield-speech:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.shield-speech:8f75d748472b1356",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.shield-speech:appears_on_spell_list:spell-list.oracle",
@@ -628,11 +673,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.shield-speech:uses_definition:rule.will",
+      "relationship_id": "spell.shield-speech:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -646,26 +691,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.shield-speech:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.shield-speech:8f75d748472b1356",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -716,11 +741,19 @@
       "raw_value_sha256": "ffac03592c1d45a2af53073e8feba2b35316582bd4418e88b2b9225c3dde56e0",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.shield-speech:8f75d748472b1356",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "07bdb24fa77d0edf4e864977bc67c23949c0f4e8e419c01cf46e194d4f3da571",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "LEGACY_3_5_MATERIAL",

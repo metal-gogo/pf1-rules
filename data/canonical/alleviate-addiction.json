@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.alleviate-addiction",
   "ruleset": "Pathfinder First Edition",
   "name": "Alleviate Addiction",
@@ -222,7 +222,21 @@
   "description": {
     "raw": "The subject ignores the effects of addictions. The subject can naturally recover from damage dealt by the drug if she is under the effects of this spell for the entire duration of her rest.",
     "search_text": "\"the subject ignores the effects of addictions. the subject can naturally recover from damage dealt by the drug if she is under the effects of this spell for the entire duration of her rest.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The subject ignores the effects of addictions. The subject can naturally recover from damage dealt by the drug if she is under the effects of this spell for the entire duration of her rest."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -354,6 +368,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.alleviate-addiction:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.alleviate-addiction:7461e17fea6c337b",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.alleviate-addiction:b32e4fc600baa3f4",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.alleviate-addiction:appears_on_spell_list:spell-list.oracle",
@@ -646,12 +687,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.alleviate-addiction:uses_definition:rule.fort",
+      "relationship_id": "spell.alleviate-addiction:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -686,12 +727,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.alleviate-addiction:uses_definition:rule.touch",
+      "relationship_id": "spell.alleviate-addiction:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -704,33 +745,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.alleviate-addiction:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.alleviate-addiction:7461e17fea6c337b",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.alleviate-addiction:b32e4fc600baa3f4",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -781,11 +795,19 @@
       "raw_value_sha256": "a7ca5b7ea8db12e319a8384351da7adbfd890d19c341e8e505d8dae5fe8b58d6",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.alleviate-addiction:b32e4fc600baa3f4",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "c1772c38528566c15db5b08de0c9218130843a5219812231a6e562648db59d49",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

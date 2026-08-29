@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.vigor",
   "ruleset": "Pathfinder First Edition",
   "name": "Vigor",
@@ -152,7 +152,21 @@
   "description": {
     "raw": "This spell infuses the subject with a small surge of strength. The creature gets a +1 competence bonus on a single melee damage roll. It must choose to use the bonus before making the roll to which it applies. Ranged or spell attacks are unaffected by this spell.",
     "search_text": "\"this spell infuses the subject with a small surge of strength. the creature gets a +1 competence bonus on a single melee damage roll. it must choose to use the bonus before making the roll to which it applies. ranged or spell attacks are unaffected by this spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell infuses the subject with a small surge of strength. The creature gets a +1 competence bonus on a single melee damage roll. It must choose to use the bonus before making the roll to which it applies. Ranged or spell attacks are unaffected by this spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -230,6 +244,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.vigor:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.vigor:68aa6e4f679c327f",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 0",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.vigor:appears_on_spell_list:spell-list.oracle",
@@ -387,11 +421,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.vigor:uses_definition:rule.will",
+      "relationship_id": "spell.vigor:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -405,26 +439,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.vigor:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.vigor:68aa6e4f679c327f",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 0",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -475,11 +489,19 @@
       "raw_value_sha256": "f5c2a878bdd4750cb85b5f15be67068914e6f5d93960628b7ccff8a50c59df34",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.vigor:68aa6e4f679c327f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "6f4d30878cb80e2925c1aa74a481f2e63425895b184863dd7287b3072735114c",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

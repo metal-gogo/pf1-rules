@@ -212,9 +212,59 @@
         "aon:subdomain.souls:8db954e0"
       ],
       "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.deathwatch:a2fd5044cb44fbdb",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.deathwatch:a2fd5044cb44fbdb",
+        "legacy_aon:spell.deathwatch:d435fc62a60c7851",
+        "d20pfsrd:spell.deathwatch:cb899b4049cc470f",
+        "aon:mystery.apocalypse:4cebc0bb",
+        "aon:patron.death:15d234b1",
+        "aon:domain.repose:8db954e0",
+        "aon:subdomain.ancestors:8db954e0",
+        "aon:subdomain.psychopomp-repose:8db954e0",
+        "aon:subdomain.souls:8db954e0"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.deathwatch:appears_on_spell_list:spell-list.ancestors-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.ancestors:8db954e0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.ancestors:8db954e0"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.deathwatch:appears_on_spell_list:spell-list.apocalypse-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.apocalypse:4cebc0bb",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.apocalypse:4cebc0bb"
+      ],
+      "rationale": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
     {
       "relationship_id": "spell.deathwatch:appears_on_spell_list:spell-list.cleric",
       "decision": "accept",
@@ -248,6 +298,20 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.deathwatch:appears_on_spell_list:spell-list.death-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.death:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.death:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
       "relationship_id": "spell.deathwatch:appears_on_spell_list:spell-list.medium",
       "decision": "accept",
       "evidence": [
@@ -264,6 +328,20 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.deathwatch:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.deathwatch:a2fd5044cb44fbdb",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.deathwatch:a2fd5044cb44fbdb"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.deathwatch:appears_on_spell_list:spell-list.oracle",
       "decision": "accept",
       "evidence": [
@@ -278,6 +356,48 @@
         "d20pfsrd:spell.deathwatch:cb899b4049cc470f"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.deathwatch:appears_on_spell_list:spell-list.psychopomp-repose-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.psychopomp-repose:8db954e0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.psychopomp-repose:8db954e0"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.deathwatch:appears_on_spell_list:spell-list.repose-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.repose:8db954e0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.repose:8db954e0"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.deathwatch:appears_on_spell_list:spell-list.souls-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.souls:8db954e0",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.souls:8db954e0"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.deathwatch:appears_on_spell_list:spell-list.spiritualist",
@@ -446,104 +566,6 @@
         "d20pfsrd:spell.deathwatch:cb899b4049cc470f"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.deathwatch:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.deathwatch:a2fd5044cb44fbdb",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.deathwatch:a2fd5044cb44fbdb"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.deathwatch:appears_on_spell_list:spell-list.apocalypse-mystery",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.apocalypse:4cebc0bb",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:mystery.apocalypse:4cebc0bb"
-      ],
-      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
-    },
-    {
-      "relationship_id": "spell.deathwatch:appears_on_spell_list:spell-list.death-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.death:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.death:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.deathwatch:appears_on_spell_list:spell-list.repose-domain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:domain.repose:8db954e0",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:domain.repose:8db954e0"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
-    },
-    {
-      "relationship_id": "spell.deathwatch:appears_on_spell_list:spell-list.ancestors-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.ancestors:8db954e0",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.ancestors:8db954e0"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
-    },
-    {
-      "relationship_id": "spell.deathwatch:appears_on_spell_list:spell-list.psychopomp-repose-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.psychopomp-repose:8db954e0",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.psychopomp-repose:8db954e0"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
-    },
-    {
-      "relationship_id": "spell.deathwatch:appears_on_spell_list:spell-list.souls-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.souls:8db954e0",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.souls:8db954e0"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

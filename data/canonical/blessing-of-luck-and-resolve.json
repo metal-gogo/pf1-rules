@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.blessing-of-luck-and-resolve",
   "ruleset": "Pathfinder First Edition",
   "name": "Blessing of Luck and Resolve",
@@ -216,7 +216,21 @@
   "description": {
     "raw": "A favored blessing of halfling clerics, this spell grants its target a +2 morale bonus on saving throws against fear effects. If the target has the fearless racial trait, it is immune to fear instead. If the target fails a saving throw against fear, it can end the spell as an immediate action to reroll the save with a +4 morale bonus, and must take the new result, even if it is worse.",
     "search_text": "\"a favored blessing of halfling clerics, this spell grants its target a +2 morale bonus on saving throws against fear effects. if the target has the fearless racial trait, it is immune to fear instead. if the target fails a saving throw against fear, it can end the spell as an immediate action to reroll the save with a +4 morale bonus, and must take the new result, even if it is worse.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "A favored blessing of halfling clerics, this spell grants its target a +2 morale bonus on saving throws against fear effects. If the target has the fearless racial trait, it is immune to fear instead. If the target fails a saving throw against fear, it can end the spell as an immediate action to reroll the save with a +4 morale bonus, and must take the new result, even if it is worse."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -267,6 +281,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.blessing-of-luck-and-resolve:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.blessing-of-luck-and-resolve:f517e1acb0f14c14",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2 (halfling)",
+          "source_href": null
+        },
+        {
+          "observation_id": "aon:spell.blessing-of-luck-and-resolve:f517e1acb0f14c14",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 2 (halfling)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.blessing-of-luck-and-resolve:appears_on_spell_list:spell-list.oracle",
@@ -468,33 +509,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.blessing-of-luck-and-resolve:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.blessing-of-luck-and-resolve:f517e1acb0f14c14",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2 (halfling)",
-          "source_href": null
-        },
-        {
-          "observation_id": "aon:spell.blessing-of-luck-and-resolve:f517e1acb0f14c14",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 2 (halfling)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -545,11 +559,19 @@
       "raw_value_sha256": "6cf57b367ba23240737f247fe85a1e456eb5501009a2770c28719ff16dcc5105",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.blessing-of-luck-and-resolve:f517e1acb0f14c14",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "848f2deb2870fad1f96391d16b8125432f8bed03fc5c39dbcdf455addd024d60",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

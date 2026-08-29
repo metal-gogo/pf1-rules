@@ -138,9 +138,39 @@
         "d20pfsrd:magic-school.aether-elemental:3e5520a8"
       ],
       "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.wall-of-ectoplasm:325379cb3d8415e7",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.wall-of-ectoplasm:325379cb3d8415e7",
+        "aon:bloodline.sorcerer.ectoplasm:52897c82",
+        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.wall-of-ectoplasm:appears_on_spell_list:spell-list.aether-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
     {
       "relationship_id": "spell.wall-of-ectoplasm:appears_on_spell_list:spell-list.arcanist",
       "decision": "accept",
@@ -168,6 +198,20 @@
         "aon:spell.wall-of-ectoplasm:325379cb3d8415e7"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.wall-of-ectoplasm:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.wall-of-ectoplasm:325379cb3d8415e7",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.wall-of-ectoplasm:325379cb3d8415e7"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.wall-of-ectoplasm:appears_on_spell_list:spell-list.oracle",
@@ -210,6 +254,20 @@
         "aon:spell.wall-of-ectoplasm:325379cb3d8415e7"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.wall-of-ectoplasm:appears_on_spell_list:spell-list.sorcerer-ectoplasm-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.ectoplasm:52897c82",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.ectoplasm:52897c82"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     },
     {
       "relationship_id": "spell.wall-of-ectoplasm:appears_on_spell_list:spell-list.spiritualist",
@@ -316,48 +374,6 @@
         "aon:spell.wall-of-ectoplasm:325379cb3d8415e7"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.wall-of-ectoplasm:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.wall-of-ectoplasm:325379cb3d8415e7",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.wall-of-ectoplasm:325379cb3d8415e7"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.wall-of-ectoplasm:appears_on_spell_list:spell-list.sorcerer-ectoplasm-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.ectoplasm:52897c82",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.ectoplasm:52897c82"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
-    },
-    {
-      "relationship_id": "spell.wall-of-ectoplasm:appears_on_spell_list:spell-list.aether-elemental-school",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
-      ],
-      "rationale": "d20PFSRD prints the spell on the owning wizard elemental arcane school page; it is modeled as elemental_school access rather than general Wizard access."
     }
   ],
   "unresolved_questions": []

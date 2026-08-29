@@ -2924,10 +2924,10 @@ export function auditRichTextRollout(): {
       }
       if (entityLinkCount(richText.document) > 0) {
         summary.safe_with_links += 1;
-        safeSpellIds.push(spellId);
       } else {
         summary.safe_structure_only += 1;
       }
+      safeSpellIds.push(spellId);
     } catch {
       issue("parser_error", spellId);
     }

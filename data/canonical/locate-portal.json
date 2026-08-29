@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.locate-portal",
   "ruleset": "Pathfinder First Edition",
   "name": "Locate Portal",
@@ -248,7 +248,21 @@
   "description": {
     "raw": "When this spell is active, you feel a mental pull in the direction of any active or operable portal leading to another plane within range of the spell. If multiple portals are present, you are pulled only to the nearest one. If moving causes you to become closer to a different portal, you become drawn to that one instead. The spell gives you the direction of the portal only, not a route. Once you are within 10 feet of the portal, you no longer feel the pull, only the portal’s presence. The spell does not pinpoint or otherwise reveal hidden portals, nor does it do anything to aid in opening or operating them.",
     "search_text": "\"when this spell is active, you feel a mental pull in the direction of any active or operable portal leading to another plane within range of the spell. if multiple portals are present, you are pulled only to the nearest one. if moving causes you to become closer to a different portal, you become drawn to that one instead. the spell gives you the direction of the portal only, not a route. once you are within 10 feet of the portal, you no longer feel the pull, only the portal’s presence. the spell does not pinpoint or otherwise reveal hidden portals, nor does it do anything to aid in opening or operating them.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "When this spell is active, you feel a mental pull in the direction of any active or operable portal leading to another plane within range of the spell. If multiple portals are present, you are pulled only to the nearest one. If moving causes you to become closer to a different portal, you become drawn to that one instead. The spell gives you the direction of the portal only, not a route. Once you are within 10 feet of the portal, you no longer feel the pull, only the portal’s presence. The spell does not pinpoint or otherwise reveal hidden portals, nor does it do anything to aid in opening or operating them."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -380,6 +394,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.locate-portal:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.locate-portal:9ddd67630966283c",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.locate-portal:971ef9273db55190",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.locate-portal:appears_on_spell_list:spell-list.oracle",
@@ -810,33 +851,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.locate-portal:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.locate-portal:9ddd67630966283c",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.locate-portal:971ef9273db55190",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -887,11 +901,19 @@
       "raw_value_sha256": "b0538498628742cf29bdb8986a9ac3897edfb08686279356711014b663c8e862",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.locate-portal:971ef9273db55190",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "7c0c0fd6243665dc2962300d8ac6b4288f7dc646af87eea50c0b3a2f9ca5518e",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

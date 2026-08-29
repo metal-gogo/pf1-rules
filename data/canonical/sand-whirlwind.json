@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.sand-whirlwind",
   "ruleset": "Pathfinder First Edition",
   "legacy_3_5_material": true,
@@ -154,7 +154,21 @@
   "description": {
     "raw": "A whirling cloud of sand strikes the target, blinding it and hampering its ability to speak. To speak while affected by the spell, the target must make a Concentration check (DC equal to the DC of this spell). If the target tries to cast a spell, the Concentration DC increases by the level of the spell being cast. A successful Will save negates the blindness but not the speechhampering effect.",
     "search_text": "\"a whirling cloud of sand strikes the target, blinding it and hampering its ability to speak. to speak while affected by the spell, the target must make a concentration check (dc equal to the dc of this spell). if the target tries to cast a spell, the concentration dc increases by the level of the spell being cast. a successful will save negates the blindness but not the speechhampering effect.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "A whirling cloud of sand strikes the target, blinding it and hampering its ability to speak. To speak while affected by the spell, the target must make a Concentration check (DC equal to the DC of this spell). If the target tries to cast a spell, the Concentration DC increases by the level of the spell being cast. A successful Will save negates the blindness but not the speechhampering effect."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -212,6 +226,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.sand-whirlwind:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.sand-whirlwind:a04b60d59bae9f0e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.sand-whirlwind:appears_on_spell_list:spell-list.oracle",
@@ -394,26 +428,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.sand-whirlwind:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.sand-whirlwind:a04b60d59bae9f0e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -464,11 +478,19 @@
       "raw_value_sha256": "ffac03592c1d45a2af53073e8feba2b35316582bd4418e88b2b9225c3dde56e0",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.sand-whirlwind:a04b60d59bae9f0e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "09c2bd4362ff22a53ae874cf76407bc0ef844b334a45b6caae04a7184e1f4d19",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "LEGACY_3_5_MATERIAL",

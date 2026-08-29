@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.litany-of-admonition",
   "ruleset": "Pathfinder First Edition",
   "name": "Litany of Admonition",
@@ -152,7 +152,21 @@
   "description": {
     "raw": "You point out your target’s faults and failures, staggering the target for 1 round. While subject to this spell, the target cannot be the target of another spell that has the word “litany” in the title.",
     "search_text": "\"you point out your target’s faults and failures, staggering the target for 1 round. while subject to this spell, the target cannot be the target of another spell that has the word “litany” in the title.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You point out your target’s faults and failures, staggering the target for 1 round. While subject to this spell, the target cannot be the target of another spell that has the word “litany” in the title."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -217,6 +231,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.litany-of-admonition:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.litany-of-admonition:dc2d578863823cfd",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.litany-of-admonition:4952a246b4a864f1",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.litany-of-admonition:appears_on_spell_list:spell-list.paladin",
@@ -375,12 +416,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.litany-of-admonition:uses_definition:rule.fort",
+      "relationship_id": "spell.litany-of-admonition:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -413,33 +454,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.litany-of-admonition:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.litany-of-admonition:dc2d578863823cfd",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.litany-of-admonition:4952a246b4a864f1",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -490,11 +504,19 @@
       "raw_value_sha256": "c36809d340e1d316296c0cb09b5697ceee16bbbd38fbcd71db4a441224e9267b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.litany-of-admonition:4952a246b4a864f1",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d230617846dfcccdd9bc2d12f75c21dab5d62650eb8646ad5ffef6b6eeed11ed",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

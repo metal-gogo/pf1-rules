@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.mythic-severance",
   "ruleset": "Pathfinder First Edition",
   "name": "Mythic Severance",
@@ -214,7 +214,30 @@
   "description": {
     "raw": "You restrict the target’s access to its mythic power. Each time the target attempts to cast a mythic spell, expend mythic power to activate a path ability, or use any other effect that requires expending uses of mythic power, it must attempt a Will saving throw against the DC of this spell. If it fails this saving throw, the creature loses its action and the ability it was attempting to use has no effect.\n\nThis spell has no effect on mythic abilities that don’t require the target to expend mythic power.",
     "search_text": "\"you restrict the target’s access to its mythic power. each time the target attempts to cast a mythic spell, expend mythic power to activate a path ability, or use any other effect that requires expending uses of mythic power, it must attempt a will saving throw against the dc of this spell. if it fails this saving throw, the creature loses its action and the ability it was attempting to use has no effect.\\n\\nthis spell has no effect on mythic abilities that don’t require the target to expend mythic power.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You restrict the target’s access to its mythic power. Each time the target attempts to cast a mythic spell, expend mythic power to activate a path ability, or use any other effect that requires expending uses of mythic power, it must attempt a Will saving throw against the DC of this spell. If it fails this saving throw, the creature loses its action and the ability it was attempting to use has no effect."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell has no effect on mythic abilities that don’t require the target to expend mythic power."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -325,6 +348,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.mythic-severance:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.mythic-severance:027403918c80ef42",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4",
+          "source_href": null
+        },
+        {
+          "observation_id": "aon:spell.mythic-severance:027403918c80ef42",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.mythic-severance:appears_on_spell_list:spell-list.oracle",
@@ -573,33 +623,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.mythic-severance:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.mythic-severance:027403918c80ef42",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 4",
-          "source_href": null
-        },
-        {
-          "observation_id": "aon:spell.mythic-severance:027403918c80ef42",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -650,11 +673,19 @@
       "raw_value_sha256": "162b4901c96677200d81551973a2a3dca6ba1ba951f04fbbff4e49ca627e364b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.mythic-severance:027403918c80ef42",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "599a8ee89c0407fd2f019205ac3fe1203414e53f28f36218ad89aedb410fcd83",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

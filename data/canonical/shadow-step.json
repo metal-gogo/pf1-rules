@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.shadow-step",
   "ruleset": "Pathfinder First Edition",
   "name": "Shadow Step",
@@ -181,7 +181,21 @@
   "description": {
     "raw": "To use this spell, you must be in an area of dim light or darkness. You enter a shadow or area of darkness, which transports you along a coiling path of shadowstuff to another dim or dark location within range.",
     "search_text": "\"to use this spell, you must be in an area of dim light or darkness. you enter a shadow or area of darkness, which transports you along a coiling path of shadowstuff to another dim or dark location within range.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "To use this spell, you must be in an area of dim light or darkness. You enter a shadow or area of darkness, which transports you along a coiling path of shadowstuff to another dim or dark location within range."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -279,6 +293,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.shadow-step:appears_on_spell_list:spell-list.shadow-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.shadow-mystery",
+        "name": "Shadow Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.shadow:d06014e6",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "shadow step (8th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Shadow"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     },
     {
       "relationship_id": "spell.shadow-step:appears_on_spell_list:spell-list.skald",
@@ -569,26 +603,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.shadow-step:appears_on_spell_list:spell-list.shadow-mystery",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.shadow-mystery",
-        "name": "Shadow Mystery Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.shadow:d06014e6",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "shadow step (8th)",
-          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Shadow"
-        }
-      ],
-      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -647,11 +661,19 @@
       "raw_value_sha256": "122868c9e0011e223cfb6476b563c34b3282060bb0dcbae1ac7c4bc866f46f6c",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.shadow-step:e743e768d866fdbb",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "0f307b9346d95d6ffed3bdba79dd89cb9185abf2d5cc5c9a021a2e053940c6ff",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

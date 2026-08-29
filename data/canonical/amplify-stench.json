@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.amplify-stench",
   "ruleset": "Pathfinder First Edition",
   "name": "Amplify Stench",
@@ -210,7 +210,21 @@
   "description": {
     "raw": "You amplify your natural stench special ability—its save DC increases by 2, and creatures that fail their saving throws against your stench become nauseated rather than sickened. If your stench ability normally causes a creature to become nauseated (such as with the foul stench ability), the radius of your stench doubles instead. This spell has no effect if you don’t possess the stench special ability.",
     "search_text": "\"you amplify your natural stench special ability—its save dc increases by 2, and creatures that fail their saving throws against your stench become nauseated rather than sickened. if your stench ability normally causes a creature to become nauseated (such as with the foul stench ability), the radius of your stench doubles instead. this spell has no effect if you don’t possess the stench special ability.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You amplify your natural stench special ability—its save DC increases by 2, and creatures that fail their saving throws against your stench become nauseated rather than sickened. If your stench ability normally causes a creature to become nauseated (such as with the foul stench ability), the radius of your stench doubles instead. This spell has no effect if you don’t possess the stench special ability."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -301,6 +315,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.amplify-stench:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.amplify-stench:0a39326bee43f444",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.amplify-stench:appears_on_spell_list:spell-list.oracle",
@@ -515,26 +549,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.amplify-stench:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.amplify-stench:0a39326bee43f444",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -585,11 +599,19 @@
       "raw_value_sha256": "e68106bc1e151672016ce02f1f43be69e95821501b8f4258b8a08970cd033995",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.amplify-stench:0a39326bee43f444",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "912a59679fda09ab8b44ce2b459a76950a22031ad11f6599291cfd85966a624b",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "DERIVED_SPELL_LIST_ACCESS",

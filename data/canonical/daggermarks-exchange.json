@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.daggermarks-exchange",
   "ruleset": "Pathfinder First Edition",
   "name": "Daggermark's Exchange",
@@ -224,7 +224,21 @@
   "description": {
     "raw": "You swallow a dose of poison with no effect and regurgitate a dose of a different poison (your choice) into the old container (or another you have on hand). Attempt a Craft (alchemy) check against the new poison’s DC. If you succeed, you create a dose of your chosen poison. If you fail, the poison you regurgitate is inert. If you roll a natural 1, you expose yourself to the original poison (although you remain immune to that poison if you have venom immunity or a similar class feature or ability). The new poison’s price must be the same as or less than the original poison’s price.",
     "search_text": "\"you swallow a dose of poison with no effect and regurgitate a dose of a different poison (your choice) into the old container (or another you have on hand). attempt a craft (alchemy) check against the new poison’s dc. if you succeed, you create a dose of your chosen poison. if you fail, the poison you regurgitate is inert. if you roll a natural 1, you expose yourself to the original poison (although you remain immune to that poison if you have venom immunity or a similar class feature or ability). the new poison’s price must be the same as or less than the original poison’s price.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You swallow a dose of poison with no effect and regurgitate a dose of a different poison (your choice) into the old container (or another you have on hand). Attempt a Craft (alchemy) check against the new poison’s DC. If you succeed, you create a dose of your chosen poison. If you fail, the poison you regurgitate is inert. If you roll a natural 1, you expose yourself to the original poison (although you remain immune to that poison if you have venom immunity or a similar class feature or ability). The new poison’s price must be the same as or less than the original poison’s price."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -375,6 +389,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.daggermarks-exchange:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.daggermarks-exchange:4cee55ecee5cca3c",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.daggermarks-exchange:appears_on_spell_list:spell-list.oracle",
@@ -596,26 +630,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.daggermarks-exchange:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.daggermarks-exchange:4cee55ecee5cca3c",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -666,11 +680,19 @@
       "raw_value_sha256": "940e297a16f0e4b384bae2cc179baf62087e44a18ad5a364ff0725d08a552aba",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.daggermarks-exchange:4cee55ecee5cca3c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "020f8402e03901d48b9268af5e1e1aac4d18b017919f3f1223ded6e3c7dc5c3d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "DERIVED_SPELL_LIST_ACCESS",

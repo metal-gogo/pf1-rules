@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.burst-of-nettles",
   "ruleset": "Pathfinder First Edition",
   "name": "Burst of Nettles",
@@ -125,7 +125,21 @@
   "description": {
     "raw": "You release a burst of barbed, acid-filled nettles. Creatures caught in the burst take 3d6 points of damage plus 1d6 points of acid damage on the next round. Those that save take half damage from the initial burst and no damage on the next round.",
     "search_text": "\"you release a burst of barbed, acid-filled nettles. creatures caught in the burst take 3d6 points of damage plus 1d6 points of acid damage on the next round. those that save take half damage from the initial burst and no damage on the next round.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You release a burst of barbed, acid-filled nettles. Creatures caught in the burst take 3d6 points of damage plus 1d6 points of acid damage on the next round. Those that save take half damage from the initial burst and no damage on the next round."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -137,6 +151,26 @@
   },
   "rules_inheritance": [],
   "relationships": [
+    {
+      "relationship_id": "spell.burst-of-nettles:appears_on_spell_list:spell-list.bloodrager-verdant-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.bloodrager-verdant-bloodline",
+        "name": "Bloodrager Verdant Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.bloodrager.verdant:5d500dc4",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "burst of nettles (13th)",
+          "source_href": "https://www.aonprd.com/BloodragerBloodlineDisplay.aspx?ItemName=Verdant"
+        }
+      ],
+      "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
+    },
     {
       "relationship_id": "spell.burst-of-nettles:appears_on_spell_list:spell-list.druid",
       "type": "appears_on_spell_list",
@@ -307,11 +341,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.burst-of-nettles:uses_definition:rule.reflex",
+      "relationship_id": "spell.burst-of-nettles:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -345,26 +379,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.burst-of-nettles:appears_on_spell_list:spell-list.bloodrager-verdant-bloodline",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.bloodrager-verdant-bloodline",
-        "name": "Bloodrager Verdant Bloodline Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.bloodrager.verdant:5d500dc4",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "burst of nettles (13th)",
-          "source_href": "https://www.aonprd.com/BloodragerBloodlineDisplay.aspx?ItemName=Verdant"
-        }
-      ],
-      "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
     }
   ],
   "provenance": [
@@ -423,11 +437,19 @@
       "raw_value_sha256": "f01ad9c9667466bdee05286debf469ec7cc6c00d0018eabd0d6500598aebbcfb",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.burst-of-nettles:55480cbf2e1c4dfe",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3de63d44a00c8ba1733b2fc074ac9bb22e1a397288d6bc4e8fae06b0d31327f1",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

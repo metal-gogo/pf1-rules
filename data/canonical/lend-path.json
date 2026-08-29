@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.lend-path",
   "ruleset": "Pathfinder First Edition",
   "name": "Lend Path",
@@ -248,7 +248,30 @@
   "description": {
     "raw": "You temporarily transfer one of your mythic path abilities to another creature, which can use it as if it were part of the creature’s own path. If the target is unable to expend mythic power, it can’t activate any part of the ability that requires expending uses of mythic power, but the ability otherwise functions as if the creature were 1st tier.\n\nWhile your path ability is transferred in this way, you can’t use it yourself (even if it’s an automatic ability or one that doesn’t require expending uses of mythic power).",
     "search_text": "\"you temporarily transfer one of your mythic path abilities to another creature, which can use it as if it were part of the creature’s own path. if the target is unable to expend mythic power, it can’t activate any part of the ability that requires expending uses of mythic power, but the ability otherwise functions as if the creature were 1st tier.\\n\\nwhile your path ability is transferred in this way, you can’t use it yourself (even if it’s an automatic ability or one that doesn’t require expending uses of mythic power).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You temporarily transfer one of your mythic path abilities to another creature, which can use it as if it were part of the creature’s own path. If the target is unable to expend mythic power, it can’t activate any part of the ability that requires expending uses of mythic power, but the ability otherwise functions as if the creature were 1st tier."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "While your path ability is transferred in this way, you can’t use it yourself (even if it’s an automatic ability or one that doesn’t require expending uses of mythic power)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -399,6 +422,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.lend-path:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.lend-path:41191e5aabec867a",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.lend-path:appears_on_spell_list:spell-list.oracle",
@@ -673,26 +716,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.lend-path:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.lend-path:41191e5aabec867a",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -743,11 +766,19 @@
       "raw_value_sha256": "162b4901c96677200d81551973a2a3dca6ba1ba951f04fbbff4e49ca627e364b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.lend-path:41191e5aabec867a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2e4deb88fd6feb719ba81d1f70ed7afa8a40831fa6d16d2d9684ebb66a78dfdf",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

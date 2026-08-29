@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.kalistocrats-nightmare",
   "ruleset": "Pathfinder First Edition",
   "name": "Kalistocrat's Nightmare",
@@ -244,7 +244,32 @@
   "description": {
     "raw": "You temporarily curse a creature so its touch lessens the value of coins it touches. While under the effects of this curse, whenever the target touches a coin of higher value than copper piece, that coin changes into a copper piece. The change takes place over the course of the following minute, allowing the target to interact with multiple coins before the effect of the curse becomes apparent. The affected coins are permanently transmuted from their previous material (typically gold or silver) into copper coins, though remove curse (which can affect up to 50 coins with a single casting) or a similar spell can restore them to their previous material.",
     "search_text": "\"you temporarily curse a creature so its touch lessens the value of coins it touches. while under the effects of this curse, whenever the target touches a coin of higher value than copper piece, that coin changes into a copper piece. the change takes place over the course of the following minute, allowing the target to interact with multiple coins before the effect of the curse becomes apparent. the affected coins are permanently transmuted from their previous material (typically gold or silver) into copper coins, though remove curse (which can affect up to 50 coins with a single casting) or a similar spell can restore them to their previous material.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You temporarily curse a creature so its touch lessens the value of coins it touches. While under the effects of this curse, whenever the target touches a coin of higher value than copper piece, that coin changes into a copper piece. The change takes place over the course of the following minute, allowing the target to interact with multiple coins before the effect of the curse becomes apparent. The affected coins are permanently transmuted from their previous material (typically gold or silver) into copper coins, though "
+            },
+            {
+              "node_type": "text",
+              "value": "remove curse",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " (which can affect up to 50 coins with a single casting) or a similar spell can restore them to their previous material."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -415,6 +440,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.kalistocrats-nightmare:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.kalistocrats-nightmare:69a9429ec31ed799",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        },
+        {
+          "observation_id": "aon:spell.kalistocrats-nightmare:69a9429ec31ed799",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.kalistocrats-nightmare:appears_on_spell_list:spell-list.oracle",
@@ -656,33 +708,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.kalistocrats-nightmare:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.kalistocrats-nightmare:69a9429ec31ed799",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        },
-        {
-          "observation_id": "aon:spell.kalistocrats-nightmare:69a9429ec31ed799",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -733,11 +758,19 @@
       "raw_value_sha256": "0f1c8721bbe5b6b9bc4417f8639aa46e4248ec8cc42ecd7f8c339951c9ef6321",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.kalistocrats-nightmare:69a9429ec31ed799",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "43430f8f824324bb9984551e17e09c208f9ea421100fe52a818d0e384def967b",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "DERIVED_SPELL_LIST_ACCESS",

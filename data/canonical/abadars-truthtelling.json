@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.abadars-truthtelling",
   "ruleset": "Pathfinder First Edition",
   "name": "Abadar's Truthtelling",
@@ -222,7 +222,32 @@
   "description": {
     "raw": "This spell functions identically to the spell zone of truth, except as noted above. The target momentarily takes on the semblance of a being of perfect order, like an archon or inevitable, so that all who can see the target know it is affected by the spell. This divine guise flickers over the target for only an instant and does not allow it to pass as a member of a different race.",
     "search_text": "\"this spell functions identically to the spell zone of truth, except as noted above. the target momentarily takes on the semblance of a being of perfect order, like an archon or inevitable, so that all who can see the target know it is affected by the spell. this divine guise flickers over the target for only an instant and does not allow it to pass as a member of a different race.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions identically to the spell "
+            },
+            {
+              "node_type": "text",
+              "value": "zone of truth",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except as noted above. The target momentarily takes on the semblance of a being of perfect order, like an archon or inevitable, so that all who can see the target know it is affected by the spell. This divine guise flickers over the target for only an instant and does not allow it to pass as a member of a different race."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -273,6 +298,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.abadars-truthtelling:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.abadars-truthtelling:1ce61ec5c6bddc9a",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1 (Abadar)",
+          "source_href": null
+        },
+        {
+          "observation_id": "aon:spell.abadars-truthtelling:1ce61ec5c6bddc9a",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1 (Abadar)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.abadars-truthtelling:appears_on_spell_list:spell-list.oracle",
@@ -514,33 +566,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.abadars-truthtelling:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.abadars-truthtelling:1ce61ec5c6bddc9a",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1 (Abadar)",
-          "source_href": null
-        },
-        {
-          "observation_id": "aon:spell.abadars-truthtelling:1ce61ec5c6bddc9a",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1 (Abadar)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -591,11 +616,19 @@
       "raw_value_sha256": "c6afb0cb08b0419a6f5a7628cc9da3926f0fd64fe74e82fa46617f6d7b2977e6",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.abadars-truthtelling:1ce61ec5c6bddc9a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "6c93e370d2124c10190b323377ab868aaba82db2b2fc9e9d598e201f8847c557",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "DERIVED_SPELL_LIST_ACCESS",
