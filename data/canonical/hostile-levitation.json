@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.hostile-levitation",
   "ruleset": "Pathfinder First Edition",
   "name": "Hostile Levitation",
@@ -191,7 +191,84 @@
   "description": {
     "raw": "You levitate the target a few inches off the ground, removing solid footing and halving the target’s speed. The target also takes a –4 penalty to CMD against bull rush, drag, and reposition attempts. A targeted creature that attacks with a melee or ranged weapon finds itself increasingly unstable; the first attack has a –1 penalty on attack rolls, the second –2, and so on, to a maximum penalty of –5. A full-round action spent stabilizing allows the creature to begin again at –1.\n\nThis spell fails if cast on a flying creature.",
     "search_text": "\"you levitate the target a few inches off the ground, removing solid footing and halving the target’s speed. the target also takes a –4 penalty to cmd against bull rush, drag, and reposition attempts. a targeted creature that attacks with a melee or ranged weapon finds itself increasingly unstable; the first attack has a –1 penalty on attack rolls, the second –2, and so on, to a maximum penalty of –5. a full-round action spent stabilizing allows the creature to begin again at –1.\\n\\nthis spell fails if cast on a flying creature.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You levitate the target a few inches off the ground, removing solid footing and halving the target’s speed. The target also takes a –4 penalty to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "CMD",
+              "relationship_id": "spell.hostile-levitation:uses_definition:rule.combat-maneuver-defense"
+            },
+            {
+              "node_type": "text",
+              "value": " against "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bull rush",
+              "relationship_id": "spell.hostile-levitation:uses_definition:rule.bull-rush"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "drag",
+              "relationship_id": "spell.hostile-levitation:uses_definition:rule.drag"
+            },
+            {
+              "node_type": "text",
+              "value": ", and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "reposition",
+              "relationship_id": "spell.hostile-levitation:uses_definition:rule.reposition"
+            },
+            {
+              "node_type": "text",
+              "value": " attempts. A targeted creature that attacks with a melee or ranged weapon finds itself increasingly unstable; the first attack has a –1 penalty on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack rolls",
+              "relationship_id": "spell.hostile-levitation:uses_definition:rule.attack-rolls"
+            },
+            {
+              "node_type": "text",
+              "value": ", the second –2, and so on, to a maximum penalty of –5. A "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "full-round action",
+              "relationship_id": "spell.hostile-levitation:uses_action:action.full-round-action"
+            },
+            {
+              "node_type": "text",
+              "value": " spent stabilizing allows the creature to begin again at –1."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell fails if cast on a flying creature."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -648,12 +725,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.hostile-levitation:uses_definition:rule.cmd",
+      "relationship_id": "spell.hostile-levitation:uses_definition:rule.combat-maneuver-defense",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.cmd",
-        "name": "CMD"
+        "entity_id": "rule.combat-maneuver-defense",
+        "name": "Combat Maneuver Defense"
       },
       "status": "accepted",
       "evidence": [
@@ -728,11 +805,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.hostile-levitation:uses_definition:rule.will",
+      "relationship_id": "spell.hostile-levitation:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -796,11 +873,19 @@
       "raw_value_sha256": "98d6e6dd99899657f7858d4c215422ac9fe7607b68584e254c0df41442cd1c79",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.hostile-levitation:4c6398e708b1cd38",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2a9f298b7499c667a30204d1da16f95ab26096dd947b1416458c703b776119c9",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
