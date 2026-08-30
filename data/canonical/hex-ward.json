@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.hex-ward",
   "ruleset": "Pathfinder First Edition",
   "name": "Hex Ward",
@@ -150,9 +150,41 @@
     }
   },
   "description": {
-    "raw": "You give the target a +4 resistance bonus on saving throws against witch hexes.Mythic Hex WardSource Mythic Adventures pg. 98\nThe target gains immunity to one witch hex (but not a major hex or grand hex) of your choice.\n\nAugmented (3rd): If you expend two uses of mythic power, instead of granting immunity to one witch hex, you can grant immunity to two hexes or one major hex.\n\nIf you’re at least 6th tier and expend three uses of mythic power, you instead grant immunity to three hexes, two major hexes, or one grand hex.",
-    "search_text": "\"you give the target a +4 resistance bonus on saving throws against witch hexes.mythic hex wardsource mythic adventures pg. 98\\nthe target gains immunity to one witch hex (but not a major hex or grand hex) of your choice.\\n\\naugmented (3rd): if you expend two uses of mythic power, instead of granting immunity to one witch hex, you can grant immunity to two hexes or one major hex.\\n\\nif you’re at least 6th tier and expend three uses of mythic power, you instead grant immunity to three hexes, two major hexes, or one grand hex.\"",
-    "sections": []
+    "raw": "You give the target a +4 resistance bonus on saving throws against witch hexes.",
+    "search_text": "\"you give the target a +4 resistance bonus on saving throws against witch hexes.\"",
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You give the target a +4 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "resistance bonus",
+              "relationship_id": "spell.hex-ward:uses_definition:rule.resistance-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throws",
+              "relationship_id": "spell.hex-ward:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": " against witch hexes."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -210,6 +242,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.hex-ward:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.hex-ward:22f303ba7736d593",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.hex-ward:f54c1c433dcc448d",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.hex-ward:appears_on_spell_list:spell-list.shaman",
@@ -448,11 +507,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.hex-ward:uses_definition:rule.will",
+      "relationship_id": "spell.hex-ward:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -466,33 +525,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.hex-ward:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.hex-ward:22f303ba7736d593",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.hex-ward:f54c1c433dcc448d",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -543,11 +575,19 @@
       "raw_value_sha256": "4c9de16442231ee78651fc8bd4186a177becb177979ba5cf9b294820c940de9a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.hex-ward:f54c1c433dcc448d",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "0ef08debcc8f0f063e23543c2ee19ba50e54017373374168752c0850f06b9ae5",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

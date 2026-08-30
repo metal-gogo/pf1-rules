@@ -167,9 +167,42 @@
         "d20pfsrd:magic-school.aether-elemental:3e5520a8"
       ],
       "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.force-punch:6eff3cfe89f7882c",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.force-punch:6eff3cfe89f7882c",
+        "legacy_aon:spell.force-punch:9fb20482f996759b",
+        "d20pfsrd:spell.force-punch:9ba77247ca71c652",
+        "aon:mystery.ascetic:7807af1f",
+        "aon:subdomain.fist:1d268b38",
+        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.force-punch:appears_on_spell_list:spell-list.aether-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
     {
       "relationship_id": "spell.force-punch:appears_on_spell_list:spell-list.arcanist",
       "decision": "accept",
@@ -185,6 +218,20 @@
         "d20pfsrd:spell.force-punch:9ba77247ca71c652"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.force-punch:appears_on_spell_list:spell-list.ascetic-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.ascetic:7807af1f",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.ascetic:7807af1f"
+      ],
+      "rationale": "Printed by the owning oracle mystery; this is mystery access, not general Oracle class access."
     },
     {
       "relationship_id": "spell.force-punch:appears_on_spell_list:spell-list.bloodrager",
@@ -205,6 +252,20 @@
         "d20pfsrd:spell.force-punch:9ba77247ca71c652"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.force-punch:appears_on_spell_list:spell-list.fist-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.fist:1d268b38",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.fist:1d268b38"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.force-punch:appears_on_spell_list:spell-list.magus",
@@ -419,7 +480,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.force-punch:uses_definition:rule.combat-maneuver",
+      "relationship_id": "spell.force-punch:uses_definition:rule.combat-maneuvers",
       "decision": "accept",
       "evidence": [
         {
@@ -451,7 +512,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.force-punch:uses_definition:rule.fortitude",
+      "relationship_id": "spell.force-punch:uses_definition:rule.fortitude-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -557,48 +618,6 @@
         "d20pfsrd:spell.force-punch:9ba77247ca71c652"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.force-punch:appears_on_spell_list:spell-list.ascetic-mystery",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.ascetic:7807af1f",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:mystery.ascetic:7807af1f"
-      ],
-      "rationale": "AoN prints the spell on the owning oracle mystery page; it is modeled as mystery access rather than general Oracle access."
-    },
-    {
-      "relationship_id": "spell.force-punch:appears_on_spell_list:spell-list.fist-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.fist:1d268b38",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.fist:1d268b38"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
-    },
-    {
-      "relationship_id": "spell.force-punch:appears_on_spell_list:spell-list.aether-elemental-school",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
-      ],
-      "rationale": "d20PFSRD prints the spell on the owning wizard elemental arcane school page; it is modeled as elemental_school access rather than general Wizard access."
     }
   ],
   "unresolved_questions": [

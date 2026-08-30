@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.defile-armor",
   "ruleset": "Pathfinder First Edition",
   "name": "Defile Armor",
@@ -136,9 +136,71 @@
     }
   },
   "description": {
-    "raw": "As sanctify armor, except you gain DR 5/good when using your judgment or smite ability.Mythic Defile ArmorSource Mythic Adventures pg. 90\nYou gain DR 5/good while wearing the target armor. While using your judgment or smite ability, this improves to DR 10/good.\n\nAugmented (3rd): If you expend two uses of mythic power, while you use your judgment or smite, add half your tier to your AC as a profane bonus.",
-    "search_text": "\"as sanctify armor, except you gain dr 5/good when using your judgment or smite ability.mythic defile armorsource mythic adventures pg. 90\\nyou gain dr 5/good while wearing the target armor. while using your judgment or smite ability, this improves to dr 10/good.\\n\\naugmented (3rd): if you expend two uses of mythic power, while you use your judgment or smite, add half your tier to your ac as a profane bonus.\"",
-    "sections": []
+    "raw": "As sanctify armor, except you gain DR 5/good when using your judgment or smite ability.",
+    "search_text": "\"as sanctify armor, except you gain dr 5/good when using your judgment or smite ability.\"",
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "As "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sanctify armor",
+              "relationship_id": "spell.defile-armor:functions_like:spell.sanctify-armor",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you gain "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "DR",
+              "relationship_id": "spell.defile-armor:uses_definition:rule.damage-reduction"
+            },
+            {
+              "node_type": "text",
+              "value": " 5/"
+            },
+            {
+              "node_type": "entity_link",
+              "value": "good",
+              "relationship_id": "spell.defile-armor:uses_definition:rule.good"
+            },
+            {
+              "node_type": "text",
+              "value": " when using your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "judgment",
+              "relationship_id": "spell.defile-armor:uses_definition:rule.judgment"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "smite ability",
+              "relationship_id": "spell.defile-armor:uses_definition:rule.smite-ability"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -174,7 +236,7 @@
       "overrides": [
         {
           "path": "/description/raw",
-          "value": "As sanctify armor, except you gain DR 5/good when using your judgment or smite ability.Mythic Defile ArmorSource Mythic Adventures pg. 90\nYou gain DR 5/good while wearing the target armor. While using your judgment or smite ability, this improves to DR 10/good.\n\nAugmented (3rd): If you expend two uses of mythic power, while you use your judgment or smite, add half your tier to your AC as a profane bonus.",
+          "value": "As sanctify armor, except you gain DR 5/good when using your judgment or smite ability.",
           "source_field": "spell_raw.description_raw",
           "raw": "As sanctify armor, except you gain DR 5/good when using your judgment or smite ability.Mythic Defile ArmorSource Mythic Adventures pg. 90\nYou gain DR 5/good while wearing the target armor. While using your judgment or smite ability, this improves to DR 10/good.\n\nAugmented (3rd): If you expend two uses of mythic power, while you use your judgment or smite, add half your tier to your AC as a profane bonus.",
           "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
@@ -238,6 +300,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.defile-armor:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.defile-armor:a3abf3fd3a86c750",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.defile-armor:d35e6006fd99507c",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.defile-armor:functions_like:spell.sanctify-armor",
@@ -373,7 +462,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.sanctify-armor",
-        "name": "sanctify armor"
+        "name": "Sanctify Armor"
       },
       "status": "accepted",
       "evidence": [
@@ -422,12 +511,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.defile-armor:uses_definition:rule.dr",
+      "relationship_id": "spell.defile-armor:uses_definition:rule.damage-reduction",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.dr",
-        "name": "DR"
+        "entity_id": "rule.damage-reduction",
+        "name": "Damage reduction"
       },
       "status": "accepted",
       "evidence": [
@@ -617,11 +706,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.defile-armor:uses_definition:rule.will",
+      "relationship_id": "spell.defile-armor:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -635,33 +724,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.defile-armor:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.defile-armor:a3abf3fd3a86c750",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.defile-armor:d35e6006fd99507c",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -712,11 +774,19 @@
       "raw_value_sha256": "eaa410e2032f65a0121abf771b0126b948010608c852801b5c7de6ee73b94831",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.defile-armor:d35e6006fd99507c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "398e034de99363d09ce56ca36c267ff273a9c1ed892320993ef9d12a5c0bc542",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

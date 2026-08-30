@@ -167,6 +167,25 @@
         "aon:subdomain.insect:a6829b5b"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.giant-vermin:42a1c804dfd1a762",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.giant-vermin:42a1c804dfd1a762",
+        "legacy_aon:spell.giant-vermin:2aadac4b1429e75b",
+        "d20pfsrd:spell.giant-vermin:cfe8b4e44c8e6925",
+        "aon:patron.plague:15d234b1",
+        "aon:bloodline.sorcerer.scorpion:3236205c",
+        "aon:subdomain.insect:a6829b5b"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -239,6 +258,34 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.giant-vermin:appears_on_spell_list:spell-list.insect-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.insect:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.insect:a6829b5b"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.giant-vermin:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.giant-vermin:42a1c804dfd1a762",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.giant-vermin:42a1c804dfd1a762"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.giant-vermin:appears_on_spell_list:spell-list.oracle",
       "decision": "accept",
       "evidence": [
@@ -253,6 +300,20 @@
         "d20pfsrd:spell.giant-vermin:cfe8b4e44c8e6925"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.giant-vermin:appears_on_spell_list:spell-list.plague-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.plague:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.plague:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.giant-vermin:appears_on_spell_list:spell-list.shaman",
@@ -273,6 +334,20 @@
         "d20pfsrd:spell.giant-vermin:cfe8b4e44c8e6925"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.giant-vermin:appears_on_spell_list:spell-list.sorcerer-scorpion-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.scorpion:3236205c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.scorpion:3236205c"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     },
     {
       "relationship_id": "spell.giant-vermin:appears_on_spell_list:spell-list.warpriest",
@@ -393,62 +468,6 @@
         "d20pfsrd:spell.giant-vermin:cfe8b4e44c8e6925"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.giant-vermin:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.giant-vermin:42a1c804dfd1a762",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.giant-vermin:42a1c804dfd1a762"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.giant-vermin:appears_on_spell_list:spell-list.plague-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.plague:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.plague:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.giant-vermin:appears_on_spell_list:spell-list.sorcerer-scorpion-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.scorpion:3236205c",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.scorpion:3236205c"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
-    },
-    {
-      "relationship_id": "spell.giant-vermin:appears_on_spell_list:spell-list.insect-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.insect:a6829b5b",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.insect:a6829b5b"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

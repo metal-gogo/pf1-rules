@@ -184,9 +184,145 @@
         "d20pfsrd:magic-school.fire-elemental:73dcc41d"
       ],
       "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.fireball:9cc0a874",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.fireball:9cc0a874",
+        "legacy_aon:spell.fireball:27064c30",
+        "d20pfsrd:spell.fireball:d1e3b4fe",
+        "aon:mystery.flame:f6116050",
+        "aon:patron.elements:15d234b1",
+        "aon:spirit.flame:835c53d2",
+        "aon:bloodline.sorcerer.efreeti:15e6ed3f",
+        "aon:domain.fire:d018a253",
+        "aon:subdomain.arson:d018a253",
+        "aon:subdomain.ash:d018a253",
+        "d20pfsrd:magic-school.fire-elemental:73dcc41d"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.fireball:appears_on_spell_list:spell-list.arson-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.arson:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.arson:d018a253"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.fireball:appears_on_spell_list:spell-list.ash-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.ash:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.ash:d018a253"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.fireball:appears_on_spell_list:spell-list.elements-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.elements:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.elements:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.fireball:appears_on_spell_list:spell-list.fire-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.fire:d018a253",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.fire:d018a253"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.fireball:appears_on_spell_list:spell-list.fire-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.fire-elemental:73dcc41d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.fire-elemental:73dcc41d"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
+    {
+      "relationship_id": "spell.fireball:appears_on_spell_list:spell-list.flame-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.flame:f6116050",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.flame:f6116050"
+      ],
+      "rationale": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.fireball:appears_on_spell_list:spell-list.flame-spirit",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spirit.flame:835c53d2",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spirit.flame:835c53d2"
+      ],
+      "rationale": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
+    },
+    {
+      "relationship_id": "spell.fireball:appears_on_spell_list:spell-list.sorcerer-efreeti-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.efreeti:15e6ed3f",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.efreeti:15e6ed3f"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
     {
       "relationship_id": "spell.fireball:has_descriptor:descriptor.fire",
       "decision": "accept",
@@ -209,15 +345,15 @@
         "legacy_aon:spell.fireball:27064c30",
         "d20pfsrd:spell.fireball:d1e3b4fe"
       ],
-      "rationale": "All sources agree on the fire descriptor, and AoN supplies a direct definition link."
+      "rationale": "All three sources agree; AoN supplies the descriptor-definition link."
     },
     {
-      "relationship_id": "spell.fireball:uses_definition:rule.area-spread",
+      "relationship_id": "spell.fireball:has_mythic_variant:mythic-spell-variant.fireball",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "aon:spell.fireball:9cc0a874",
-          "source_field": "spell_raw.delivery_fields_raw[0].value_raw"
+          "source_field": "spell_raw.sections_raw[1].heading_raw"
         }
       ],
       "considered_observation_ids": [
@@ -225,23 +361,35 @@
         "legacy_aon:spell.fireball:27064c30",
         "d20pfsrd:spell.fireball:d1e3b4fe"
       ],
-      "rationale": "All three stat blocks explicitly identify Fireball's area as a spread; AoN's Core Rulebook Aiming a Spell section is selected as the canonical definition target."
+      "rationale": "The mythic rules, publication, and augmented relationships are owned by the linked spell-variant entity."
     },
     {
-      "relationship_id": "spell.fireball:uses_definition:rule.area-sphere",
+      "relationship_id": "spell.fireball:has_school:magic-school.evocation",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "aon:spell.fireball:9cc0a874",
-          "source_field": "spell_raw.delivery_fields_raw[0].value_raw"
+          "source_field": "spell_raw.links_raw[1]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.fireball:d1e3b4fe",
+          "source_field": "spell_raw.links_raw[0]"
         }
       ],
       "considered_observation_ids": [
         "aon:spell.fireball:9cc0a874",
         "legacy_aon:spell.fireball:27064c30",
-        "d20pfsrd:spell.fireball:d1e3b4fe"
+        "d20pfsrd:spell.fireball:d1e3b4fe",
+        "aon:mystery.flame:f6116050",
+        "aon:patron.elements:15d234b1",
+        "aon:spirit.flame:835c53d2",
+        "aon:bloodline.sorcerer.efreeti:15e6ed3f",
+        "aon:domain.fire:d018a253",
+        "aon:subdomain.arson:d018a253",
+        "aon:subdomain.ash:d018a253",
+        "d20pfsrd:magic-school.fire-elemental:73dcc41d"
       ],
-      "rationale": "Sphere is accepted as a rule-derived three-dimensional geometry, not as literal wording from Fireball's stat block."
+      "rationale": "The local entity replaces source-specific navigation while both URLs remain evidence."
     },
     {
       "relationship_id": "spell.fireball:illustrated_by:visual-aid.area-effect-grid-templates",
@@ -257,7 +405,171 @@
         "legacy_aon:spell.fireball:27064c30",
         "d20pfsrd:spell.fireball:d1e3b4fe"
       ],
-      "rationale": "The d20PFSRD template page is useful for visualization but is mixed-provenance and not a Fireball-specific canonical rule. Keep the link pending while licensing and a locally generated template approach are evaluated."
+      "rationale": "This is a visual aid, not rules authority. No external diagram has been copied; licensing and the usefulness of a Fireball-specific template remain to be reviewed."
+    },
+    {
+      "relationship_id": "spell.fireball:published_in:publication.pathfinder-rpg-core-rulebook",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.fireball:9cc0a874",
+          "source_field": "spell_raw.links_raw[0]"
+        },
+        {
+          "observation_id": "legacy_aon:spell.fireball:27064c30",
+          "source_field": "page.source_notice_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.fireball:9cc0a874",
+        "legacy_aon:spell.fireball:27064c30",
+        "d20pfsrd:spell.fireball:d1e3b4fe",
+        "aon:mystery.flame:f6116050",
+        "aon:patron.elements:15d234b1",
+        "aon:spirit.flame:835c53d2",
+        "aon:bloodline.sorcerer.efreeti:15e6ed3f",
+        "aon:domain.fire:d018a253",
+        "aon:subdomain.arson:d018a253",
+        "aon:subdomain.ash:d018a253",
+        "d20pfsrd:magic-school.fire-elemental:73dcc41d"
+      ],
+      "rationale": "AoN supplies the printed page; Legacy independently confirms Core scope."
+    },
+    {
+      "relationship_id": "spell.fireball:uses_action:action.standard-action",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.fireball:9cc0a874",
+          "source_field": "spell_raw.casting_time_raw"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.fireball:d1e3b4fe",
+          "source_field": "spell_raw.links_raw[8]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.fireball:9cc0a874",
+        "legacy_aon:spell.fireball:27064c30",
+        "d20pfsrd:spell.fireball:d1e3b4fe",
+        "aon:mystery.flame:f6116050",
+        "aon:patron.elements:15d234b1",
+        "aon:spirit.flame:835c53d2",
+        "aon:bloodline.sorcerer.efreeti:15e6ed3f",
+        "aon:domain.fire:d018a253",
+        "aon:subdomain.arson:d018a253",
+        "aon:subdomain.ash:d018a253",
+        "d20pfsrd:magic-school.fire-elemental:73dcc41d"
+      ],
+      "rationale": "d20PFSRD contributes the navigable rule link; all sources agree on the value."
+    },
+    {
+      "relationship_id": "spell.fireball:uses_definition:rule.aiming-a-spell",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.fireball:9cc0a874",
+          "source_field": "spell_raw.delivery_fields_raw[0].value_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.fireball:9cc0a874",
+        "legacy_aon:spell.fireball:27064c30",
+        "d20pfsrd:spell.fireball:d1e3b4fe",
+        "aon:mystery.flame:f6116050",
+        "aon:patron.elements:15d234b1",
+        "aon:spirit.flame:835c53d2",
+        "aon:bloodline.sorcerer.efreeti:15e6ed3f",
+        "aon:domain.fire:d018a253",
+        "aon:subdomain.arson:d018a253",
+        "aon:subdomain.ash:d018a253",
+        "d20pfsrd:magic-school.fire-elemental:73dcc41d"
+      ],
+      "rationale": "The Core rule defines how targets, effects, areas, origins, affected squares, shapes, and line of effect work."
+    },
+    {
+      "relationship_id": "spell.fireball:uses_definition:rule.area-sphere",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.fireball:9cc0a874",
+          "source_field": "spell_raw.delivery_fields_raw[0].value_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.fireball:9cc0a874",
+        "legacy_aon:spell.fireball:27064c30",
+        "d20pfsrd:spell.fireball:d1e3b4fe"
+      ],
+      "rationale": "Sphere is the rule-derived three-dimensional geometry; the spell stat block itself says radius and spread rather than explicitly saying sphere."
+    },
+    {
+      "relationship_id": "spell.fireball:uses_definition:rule.area-spread",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.fireball:9cc0a874",
+          "source_field": "spell_raw.delivery_fields_raw[0].value_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.fireball:9cc0a874",
+        "legacy_aon:spell.fireball:27064c30",
+        "d20pfsrd:spell.fireball:d1e3b4fe"
+      ],
+      "rationale": "Spread is a propagation rule: it can turn corners and its distance follows the path around obstructions."
+    },
+    {
+      "relationship_id": "spell.fireball:uses_definition:rule.caster-level",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.fireball:d1e3b4fe",
+          "source_field": "spell_raw.links_raw[10]"
+        },
+        {
+          "observation_id": "aon:spell.fireball:9cc0a874",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.fireball:9cc0a874",
+        "legacy_aon:spell.fireball:27064c30",
+        "d20pfsrd:spell.fireball:d1e3b4fe",
+        "aon:mystery.flame:f6116050",
+        "aon:patron.elements:15d234b1",
+        "aon:spirit.flame:835c53d2",
+        "aon:bloodline.sorcerer.efreeti:15e6ed3f",
+        "aon:domain.fire:d018a253",
+        "aon:subdomain.arson:d018a253",
+        "aon:subdomain.ash:d018a253",
+        "d20pfsrd:magic-school.fire-elemental:73dcc41d"
+      ],
+      "rationale": "The local rule link applies to the base spell and is inherited by its mythic variant."
+    },
+    {
+      "relationship_id": "spell.fireball:uses_definition:rule.line-of-effect",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.fireball:9cc0a874",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.fireball:9cc0a874",
+        "legacy_aon:spell.fireball:27064c30",
+        "d20pfsrd:spell.fireball:d1e3b4fe",
+        "aon:mystery.flame:f6116050",
+        "aon:patron.elements:15d234b1",
+        "aon:spirit.flame:835c53d2",
+        "aon:bloodline.sorcerer.efreeti:15e6ed3f",
+        "aon:domain.fire:d018a253",
+        "aon:subdomain.arson:d018a253",
+        "aon:subdomain.ash:d018a253",
+        "d20pfsrd:magic-school.fire-elemental:73dcc41d"
+      ],
+      "rationale": "The generic rule applies to the spell's origin; Fireball additionally describes the bead's early-impact behavior."
     },
     {
       "relationship_id": "spell.fireball:uses_definition:rule.reflex-saving-throw",
@@ -277,135 +589,35 @@
         "legacy_aon:spell.fireball:27064c30",
         "d20pfsrd:spell.fireball:d1e3b4fe"
       ],
-      "rationale": "The lower-priority sources expose useful links for a rule term that all three stat blocks contain. Link evidence can safely enrich navigation without replacing AoN's field value."
+      "rationale": "Both lower-priority comparison sources expose a useful rule-definition link."
     },
     {
-      "relationship_id": "spell.fireball:has_mythic_variant:mythic-spell-variant.fireball",
+      "relationship_id": "spell.fireball:uses_definition:rule.spell-resistance",
       "decision": "accept",
       "evidence": [
         {
+          "observation_id": "legacy_aon:spell.fireball:27064c30",
+          "source_field": "spell_raw.links_raw[1]"
+        },
+        {
           "observation_id": "aon:spell.fireball:9cc0a874",
-          "source_field": "spell_raw.sections_raw[1].heading_raw"
+          "source_field": "spell_raw.spell_resistance_raw"
         }
       ],
       "considered_observation_ids": [
         "aon:spell.fireball:9cc0a874",
         "legacy_aon:spell.fireball:27064c30",
-        "d20pfsrd:spell.fireball:d1e3b4fe"
-      ],
-      "rationale": "The explicitly named mythic subsection is now a separately identified spell variant. Its publication and augmented resistance/immunity relationships no longer belong to the base Fireball record."
-    },
-    {
-      "relationship_id": "spell.fireball:appears_on_spell_list:spell-list.flame-mystery",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.flame:f6116050",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:mystery.flame:f6116050"
-      ],
-      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
-    },
-    {
-      "relationship_id": "spell.fireball:appears_on_spell_list:spell-list.elements-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.elements:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.elements:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.fireball:appears_on_spell_list:spell-list.flame-spirit",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spirit.flame:835c53d2",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spirit.flame:835c53d2"
-      ],
-      "rationale": "AoN prints the spell on the owning shaman spirit page; it is modeled as spirit access rather than general Shaman access."
-    },
-    {
-      "relationship_id": "spell.fireball:appears_on_spell_list:spell-list.sorcerer-efreeti-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.efreeti:15e6ed3f",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.efreeti:15e6ed3f"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
-    },
-    {
-      "relationship_id": "spell.fireball:appears_on_spell_list:spell-list.fire-domain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:domain.fire:d018a253",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:domain.fire:d018a253"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
-    },
-    {
-      "relationship_id": "spell.fireball:appears_on_spell_list:spell-list.arson-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.arson:d018a253",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.arson:d018a253"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
-    },
-    {
-      "relationship_id": "spell.fireball:appears_on_spell_list:spell-list.ash-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.ash:d018a253",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.ash:d018a253"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
-    },
-    {
-      "relationship_id": "spell.fireball:appears_on_spell_list:spell-list.fire-elemental-school",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:magic-school.fire-elemental:73dcc41d",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
+        "d20pfsrd:spell.fireball:d1e3b4fe",
+        "aon:mystery.flame:f6116050",
+        "aon:patron.elements:15d234b1",
+        "aon:spirit.flame:835c53d2",
+        "aon:bloodline.sorcerer.efreeti:15e6ed3f",
+        "aon:domain.fire:d018a253",
+        "aon:subdomain.arson:d018a253",
+        "aon:subdomain.ash:d018a253",
         "d20pfsrd:magic-school.fire-elemental:73dcc41d"
       ],
-      "rationale": "d20PFSRD prints the spell on the owning wizard elemental arcane school page; it is modeled as elemental_school access rather than general Wizard access."
+      "rationale": "Legacy supplies the glossary link; AoN supplies the canonical field value."
     }
   ],
   "unresolved_questions": [
