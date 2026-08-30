@@ -2837,6 +2837,15 @@ export function sourceDescriptionMatch(
 }
 
 
+export function syncDescriptionInheritanceOverrides(canonical: ValidatedJson): void {
+  for (const rule of canonical.rules_inheritance) {
+    for (const override of rule.overrides) {
+      if (override.path === "/description/raw") override.value = canonical.description.raw;
+    }
+  }
+}
+
+
 export function auditRichTextRollout(): {
   summary: {
     total: number;
@@ -2995,6 +3004,7 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
         .replace(/\s+/g, " ")
         .toLocaleLowerCase("en-US");
     }
+    syncDescriptionInheritanceOverrides(canonical);
     const sourceDocument = parseRichTextHtml(parsed.descriptionHtml);
 
     const reconciled = mergeRelationships(

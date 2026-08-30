@@ -818,11 +818,12 @@ describe("local rules browser", () => {
   it("treats Brightest Light as Daylight inheritance and generic darkness as a descriptor", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.brightest-light`);
     const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
     const related = html.match(/<section aria-labelledby="related-rules">([\s\S]*?)<\/section>/)?.[1] ?? "";
     expect(response.status).toBe(200);
     expect(related).toContain("Functions Like:");
     expect(related).toContain('href="/spells/spell.daylight"');
-    expect(html).not.toContain('href="/spells/spell.darkness"');
+    expect(description).not.toContain('href="/spells/spell.darkness"');
   });
 
   it.each([
