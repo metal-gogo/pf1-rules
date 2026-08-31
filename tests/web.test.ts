@@ -23,6 +23,13 @@ afterAll(async () => {
 });
 
 describe("local rules browser", () => {
+  it("renders linked source citations as superscripts", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.absurdity`);
+    const html = await response.text();
+    expect(response.status).toBe(200);
+    expect(html).toContain('<a href="/entities/publication.ultimate-magic" aria-label="Source: Ultimate Magic"><sup>UM</sup></a>');
+  });
+
   it("renders the AoN Magic record as structured prose with an accessible concentration table", async () => {
     const response = await fetch(`${baseUrl}/rules/magic`);
     const html = await response.text();

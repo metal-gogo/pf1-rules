@@ -865,6 +865,33 @@ describe("rich-text relationship enrichment", () => {
     expect(result.warnings).toEqual([]);
   });
 
+  it("links spell references followed by the Ultimate Magic source abbreviation", () => {
+    const result = linkRichTextDocument(parseRichTextHtml("anticipate perilUM"), [
+      relationship(
+        "spell.test:references:spell.anticipate-peril",
+        "references",
+        "Anticipate Peril",
+        "spell.anticipate-peril",
+        { targetType: "spell" },
+      ),
+    ]);
+    expect(JSON.stringify(result.document)).toContain(
+      "spell.test:references:spell.anticipate-peril",
+    );
+    expect(result.warnings).toEqual([]);
+  });
+
+  it("preserves superscript source abbreviations", () => {
+    const document = parseRichTextHtml("anticipate peril<sup>UM</sup>");
+    expect(document.content[0]).toMatchObject({
+      node_type: "paragraph",
+      content: [
+        { node_type: "text", value: "anticipate peril" },
+        { node_type: "text", value: "UM", marks: ["superscript"] },
+      ],
+    });
+  });
+
   it("uses relationship priority and leaves same-priority ambiguity unlinked", () => {
     const source = parseRichTextHtml("lesser restoration");
     const prioritized = linkRichTextDocument(source, [

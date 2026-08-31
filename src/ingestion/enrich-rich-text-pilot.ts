@@ -83,6 +83,10 @@ const darknessMythicOnlyTargets = new Set([
   "rule.source",
 ]);
 
+const sourceCitations = new Map([
+  ["UM", { publicationId: "publication.ultimate-magic", publicationName: "Ultimate Magic" }],
+]);
+
 const darknessContextualTargets = new Set([
   "descriptor.darkness",
   "illumination.bright-light",
@@ -2011,6 +2015,25 @@ function addReviewedDescriptionReferences(
 }
 
 
+function linkSourceCitations(document: RichTextDocument): void {
+  document.content = document.content.map((block) => mapRichTextBlockInlines(
+    block,
+    (content) => content.map((node) => {
+      if (node.node_type !== "text" || !node.marks?.includes("superscript")) return node;
+      const citation = sourceCitations.get(node.value);
+      return citation
+        ? {
+            node_type: "citation" as const,
+            value: node.value,
+            publication_id: citation.publicationId,
+            publication_name: citation.publicationName,
+          }
+        : node;
+    }),
+  ));
+}
+
+
 function linkContext(
   document: RichTextDocument,
   context: string,
@@ -3274,6 +3297,7 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
       automaticRelationships,
       { ownerEntityId: spellId },
     );
+    linkSourceCitations(richText.document);
     if (spellId === "spell.brand-greater") {
       keepFirstRelationshipLink(
         richText.document,

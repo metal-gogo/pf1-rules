@@ -598,7 +598,11 @@ function payloadRelationships(payload: unknown): LinkRelationship[] {
 function markedHtml(value: string, marks: RichTextMark[] | undefined): string {
   let result = escapeHtml(value);
   for (const mark of marks ?? []) {
-    result = mark === "italic" ? `<em>${result}</em>` : `<strong>${result}</strong>`;
+    result = mark === "italic"
+      ? `<em>${result}</em>`
+      : mark === "bold"
+        ? `<strong>${result}</strong>`
+        : `<sup>${result}</sup>`;
   }
   return result;
 }
@@ -608,6 +612,9 @@ function richTextInline(
   relationships: Map<string, LinkRelationship>,
 ): string {
   if (node.node_type === "hard_break") return "<br>";
+  if (node.node_type === "citation") {
+    return `<a href="${href(entityHref(node.publication_id))}" aria-label="Source: ${escapeHtml(node.publication_name)}"><sup>${escapeHtml(node.value)}</sup></a>`;
+  }
   const content = markedHtml(node.value, node.marks);
   if (node.node_type === "text") return content;
   const relationship = relationships.get(node.relationship_id);

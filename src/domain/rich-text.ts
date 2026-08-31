@@ -3,7 +3,7 @@ import * as cheerio from "cheerio";
 import type { ValidatedJson } from "./json.js";
 
 
-export type RichTextMark = "bold" | "italic";
+export type RichTextMark = "bold" | "italic" | "superscript";
 
 export interface RichTextTextNode {
   node_type: "text";
@@ -18,6 +18,13 @@ export interface RichTextEntityLinkNode {
   marks?: RichTextMark[];
 }
 
+export interface RichTextCitationNode {
+  node_type: "citation";
+  value: string;
+  publication_id: string;
+  publication_name: string;
+}
+
 export interface RichTextHardBreakNode {
   node_type: "hard_break";
 }
@@ -25,6 +32,7 @@ export interface RichTextHardBreakNode {
 export type RichTextInlineNode =
   | RichTextTextNode
   | RichTextEntityLinkNode
+  | RichTextCitationNode
   | RichTextHardBreakNode;
 
 export interface RichTextParagraphNode {
@@ -169,6 +177,9 @@ function inlineContent(
     }
     if ((tag === "b" || tag === "strong") && !nextMarks.includes("bold")) {
       nextMarks.push("bold");
+    }
+    if (tag === "sup" && !nextMarks.includes("superscript")) {
+      nextMarks.push("superscript");
     }
     for (const child of $(node).contents().toArray()) visit(child, nextMarks);
   };
@@ -411,7 +422,7 @@ function linkTextNode(node: RichTextTextNode, candidates: LinkCandidate[]): Rich
   const matches: Array<{ start: number; end: number; candidate: LinkCandidate }> = [];
   for (const candidate of candidates) {
     const expression = new RegExp(
-      `(?<![\\p{L}\\p{N}])${escapedRegExp(candidate.phrase)}(?![\\p{L}\\p{N}])`,
+      `(?<![\\p{L}\\p{N}])${escapedRegExp(candidate.phrase)}(?=$|[^\\p{L}\\p{N}]|UM\\b)`,
       candidate.exactCase ? "gu" : "giu",
     );
     for (const match of node.value.matchAll(expression)) {

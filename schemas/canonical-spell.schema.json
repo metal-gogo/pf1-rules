@@ -318,7 +318,7 @@
     "richTextMarks": {
       "type": "array",
       "uniqueItems": true,
-      "items": {"enum": ["italic", "bold"]}
+      "items": {"enum": ["italic", "bold", "superscript"]}
     },
     "richTextText": {
       "type": "object",
@@ -341,6 +341,17 @@
         "marks": {"$ref": "#/$defs/richTextMarks"}
       }
     },
+    "richTextCitation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_type", "value", "publication_id", "publication_name"],
+      "properties": {
+        "node_type": {"const": "citation"},
+        "value": {"type": "string", "minLength": 1},
+        "publication_id": {"type": "string", "pattern": "^publication\\.[a-z0-9.-]+$"},
+        "publication_name": {"type": "string", "minLength": 1}
+      }
+    },
     "richTextHardBreak": {
       "type": "object",
       "additionalProperties": false,
@@ -351,6 +362,7 @@
       "oneOf": [
         {"$ref": "#/$defs/richTextText"},
         {"$ref": "#/$defs/richTextEntityLink"},
+        {"$ref": "#/$defs/richTextCitation"},
         {"$ref": "#/$defs/richTextHardBreak"}
       ]
     },
