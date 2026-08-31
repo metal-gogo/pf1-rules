@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.roaming-pit",
   "ruleset": "Pathfinder First Edition",
   "name": "Roaming Pit",
@@ -236,7 +236,59 @@
   "description": {
     "raw": "This spell functions as create pitAPG, except the pit is capable of movement. As a move action, you can direct the pit to move up to 20 feet, though it must always remain on a horizontal surface large enough to accommodate its area. If the pit’s movement causes it to share a space with a creature on the same horizontal surface, that creature must succeed at a Reflex saving throw or fall into the pit. Any creature that avoids falling into the pit when it reaches its new destination moves to the nearest safe space. Creatures that fall into the pit move with it if it is relocated.",
     "search_text": "\"this spell functions as create pitapg, except the pit is capable of movement. as a move action, you can direct the pit to move up to 20 feet, though it must always remain on a horizontal surface large enough to accommodate its area. if the pit’s movement causes it to share a space with a creature on the same horizontal surface, that creature must succeed at a reflex saving throw or fall into the pit. any creature that avoids falling into the pit when it reaches its new destination moves to the nearest safe space. creatures that fall into the pit move with it if it is relocated.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "create pit",
+              "relationship_id": "spell.roaming-pit:functions_like:spell.create-pit",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "APG",
+              "marks": [
+                "italic",
+                "superscript"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except the pit is capable of movement. As a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "move action",
+              "relationship_id": "spell.roaming-pit:uses_action:action.move-action"
+            },
+            {
+              "node_type": "text",
+              "value": ", you can direct the pit to move up to 20 feet, though it must always remain on a horizontal surface large enough to accommodate its area. If the pit’s movement causes it to share a space with a creature on the same horizontal surface, that creature must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.roaming-pit:uses_definition:saving-throw.reflex"
+            },
+            {
+              "node_type": "text",
+              "value": " saving throw or fall into the pit. Any creature that avoids falling into the pit when it reaches its new destination moves to the nearest safe space. Creatures that fall into the pit move with it if it is relocated."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -460,6 +512,60 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.roaming-pit:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.roaming-pit:36d85a1141da8fbf",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.roaming-pit:df5fb5a7ce06a445",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 6",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.roaming-pit:appears_on_spell_list:spell-list.oracle",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.oracle",
+        "name": "Oracle Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.roaming-pit:36d85a1141da8fbf",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.roaming-pit:df5fb5a7ce06a445",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 6",
+          "source_href": null
+        }
+      ],
+      "note": "Use the Cleric spell list at the same spell level; retain separately printed Oracle and mystery access. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.roaming-pit:appears_on_spell_list:spell-list.psychic",
@@ -736,7 +842,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.create-pit",
-        "name": "create pit"
+        "name": "Create Pit"
       },
       "status": "accepted",
       "evidence": [
@@ -798,6 +904,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.roaming-pit:uses_definition:defense.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "defense",
+        "entity_id": "defense.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.roaming-pit:df5fb5a7ce06a445",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "no",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.roaming-pit:uses_definition:saving-throw.reflex",
       "type": "uses_definition",
       "target": {
@@ -823,80 +949,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.roaming-pit:uses_definition:defense.spell-resistance",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "Spell Resistance"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.roaming-pit:df5fb5a7ce06a445",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "no",
-          "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.roaming-pit:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.roaming-pit:36d85a1141da8fbf",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.roaming-pit:df5fb5a7ce06a445",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 6",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.roaming-pit:appears_on_spell_list:spell-list.oracle",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.oracle",
-        "name": "Oracle Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.roaming-pit:36d85a1141da8fbf",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.roaming-pit:df5fb5a7ce06a445",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 6",
-          "source_href": null
-        }
-      ],
-      "note": "Use the Cleric spell list at the same spell level; retain separately printed Oracle and mystery access. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -947,11 +999,19 @@
       "raw_value_sha256": "3597539d721f87b2c3c6f7470b2c259c9aa955178738da951f94a5b7a10f8f2f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.roaming-pit:df5fb5a7ce06a445",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "325dfca44532cb2342ae95b7597f6c2a16826462d6dd048de9299c2b48e7f2ec",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.invisibility-purge",
   "ruleset": "Pathfinder First Edition",
   "name": "Invisibility Purge",
@@ -172,7 +172,48 @@
   "description": {
     "raw": "You surround yourself with a sphere of power with a radius of 5 feet per caster level that negates all forms of invisibility.\n\nAnything invisible becomes visible while in the area.",
     "search_text": "\"you surround yourself with a sphere of power with a radius of 5 feet per caster level that negates all forms of invisibility.\\n\\nanything invisible becomes visible while in the area.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You surround yourself with a sphere of power with a radius of 5 feet per caster level that negates all forms of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "invisibility",
+              "relationship_id": "spell.invisibility-purge:references:spell.invisibility"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Anything "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "invisible",
+              "relationship_id": "spell.invisibility-purge:uses_definition:condition.invisible"
+            },
+            {
+              "node_type": "text",
+              "value": " becomes visible while in the area."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -270,6 +311,40 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.invisibility-purge:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.invisibility-purge:85465fe3699eb847",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.invisibility-purge:be2c1ef626cf32a4",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.invisibility-purge:85465fe3699eb847",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.invisibility-purge:appears_on_spell_list:spell-list.oracle",
@@ -398,7 +473,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.invisibility",
-        "name": "invisibility"
+        "name": "Invisibility"
       },
       "status": "accepted",
       "evidence": [
@@ -474,6 +549,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.invisibility-purge:uses_definition:defense.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "defense",
+        "entity_id": "defense.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.invisibility-purge:85465fe3699eb847",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": null,
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.invisibility-purge:uses_definition:monster.invisible-stalker",
       "type": "uses_definition",
       "target": {
@@ -521,26 +616,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.invisibility-purge:uses_definition:defense.spell-resistance",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "Spell Resistance"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.invisibility-purge:85465fe3699eb847",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": null,
-          "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.invisibility-purge:uses_definition:monster.will-o--wisp",
       "type": "uses_definition",
       "target": {
@@ -559,40 +634,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.invisibility-purge:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.invisibility-purge:85465fe3699eb847",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.invisibility-purge:be2c1ef626cf32a4",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.invisibility-purge:85465fe3699eb847",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -643,11 +684,19 @@
       "raw_value_sha256": "c446eee7a285cde252fbce8438f8aa551f1cbf889f5c4e4b41afc220b0775a4f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.invisibility-purge:85465fe3699eb847",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "a56652cbf16619ad3648762229c4f594cc9639d8477f54bd685e2cd4d02e6e63",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

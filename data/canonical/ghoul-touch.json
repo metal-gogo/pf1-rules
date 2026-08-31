@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.ghoul-touch",
   "ruleset": "Pathfinder First Edition",
   "name": "Ghoul Touch",
@@ -155,7 +155,105 @@
   "description": {
     "raw": "Imbuing you with negative energy, this spell allows you to paralyze a single living humanoid for the duration of the spell with a successful melee touch attack.\n\nA paralyzed subject exudes a carrion stench that causes all living creatures (except you) in a 10-foot-radius spread to become sickened (Fortitude negates). A neutralize poison spell removes the effect from a sickened creature, and creatures immune to poison are unaffected by the stench. This is a poison effect.",
     "search_text": "\"imbuing you with negative energy, this spell allows you to paralyze a single living humanoid for the duration of the spell with a successful melee touch attack.\\n\\na paralyzed subject exudes a carrion stench that causes all living creatures (except you) in a 10-foot-radius spread to become sickened (fortitude negates). a neutralize poison spell removes the effect from a sickened creature, and creatures immune to poison are unaffected by the stench. this is a poison effect.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Imbuing you with negative energy, this spell allows you to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "paralyze",
+              "relationship_id": "spell.ghoul-touch:uses_definition:condition.paralyze"
+            },
+            {
+              "node_type": "text",
+              "value": " a single living humanoid for the duration of the spell with a successful melee touch attack."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "A "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "paralyzed",
+              "relationship_id": "spell.ghoul-touch:uses_definition:condition.paralyzed"
+            },
+            {
+              "node_type": "text",
+              "value": " subject exudes a carrion stench that causes all living creatures (except you) in a 10-foot-radius spread to become "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sickened",
+              "relationship_id": "spell.ghoul-touch:uses_definition:condition.sickened"
+            },
+            {
+              "node_type": "text",
+              "value": " ("
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.ghoul-touch:uses_definition:saving-throw.fortitude"
+            },
+            {
+              "node_type": "text",
+              "value": " negates). A "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "neutralize poison",
+              "relationship_id": "spell.ghoul-touch:references:spell.neutralize-poison",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell removes the effect from a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sickened",
+              "relationship_id": "spell.ghoul-touch:uses_definition:condition.sickened"
+            },
+            {
+              "node_type": "text",
+              "value": " creature, and creatures immune to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "poison",
+              "relationship_id": "spell.ghoul-touch:uses_definition:affliction.poison"
+            },
+            {
+              "node_type": "text",
+              "value": " are unaffected by the stench. This is a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "poison",
+              "relationship_id": "spell.ghoul-touch:uses_definition:affliction.poison"
+            },
+            {
+              "node_type": "text",
+              "value": " effect."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -275,6 +373,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.ghoul-touch:appears_on_spell_list:spell-list.undead-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.undead-subdomain",
+        "name": "Undead Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.undead:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd—ghoul touch",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Death"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
       "relationship_id": "spell.ghoul-touch:appears_on_spell_list:spell-list.wizard",
       "type": "appears_on_spell_list",
       "target": {
@@ -388,7 +506,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.neutralize-poison",
-        "name": "neutralize poison"
+        "name": "Neutralize Poison"
       },
       "status": "accepted",
       "evidence": [
@@ -432,6 +550,46 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "1 standard action",
           "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.ghoul-touch:uses_definition:affliction.poison",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "affliction",
+        "entity_id": "affliction.poison",
+        "name": "poison"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.ghoul-touch:d1113a0d0eb9324c",
+          "source_field": "spell_raw.links_raw[14]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "poison",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/afflictions#TOC-Poison"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.ghoul-touch:uses_definition:bloodline.sorcerer.ghoul-sorcerer",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "bloodline",
+        "entity_id": "bloodline.sorcerer.ghoul-sorcerer",
+        "name": "ghoul"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.ghoul-touch:d1113a0d0eb9324c",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "ghoul",
+          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/undead/ghoul"
         }
       ],
       "note": null
@@ -525,107 +683,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.ghoul-touch:uses_definition:saving-throw.fortitude",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "saving_throw",
-        "entity_id": "saving-throw.fortitude",
-        "name": "Fortitude"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.ghoul-touch:c00c0b90014934e8",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Fortitude",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/combat.html#fortitude"
-        },
-        {
-          "observation_id": "legacy_aon:spell.ghoul-touch:c00c0b90014934e8",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Fortitude",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/combat.html#fortitude"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.ghoul-touch:d1113a0d0eb9324c",
-          "source_field": "spell_raw.links_raw[7]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Fortitude",
-          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.ghoul-touch:d1113a0d0eb9324c",
-          "source_field": "spell_raw.links_raw[11]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Fortitude",
-          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.ghoul-touch:uses_definition:bloodline.sorcerer.ghoul-sorcerer",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "bloodline",
-        "entity_id": "bloodline.sorcerer.ghoul-sorcerer",
-        "name": "ghoul"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.ghoul-touch:d1113a0d0eb9324c",
-          "source_field": "spell_raw.links_raw[5]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "ghoul",
-          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/undead/ghoul"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.ghoul-touch:uses_definition:monster.ghoul",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "monster",
-        "entity_id": "monster.ghoul",
-        "name": "ghoul’s"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.ghoul-touch:d1113a0d0eb9324c",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "ghoul’s",
-          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/undead/ghoul"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.ghoul-touch:uses_definition:affliction.poison",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "affliction",
-        "entity_id": "affliction.poison",
-        "name": "poison"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.ghoul-touch:d1113a0d0eb9324c",
-          "source_field": "spell_raw.links_raw[14]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "poison",
-          "source_href": "https://www.d20pfsrd.com/gamemastering/afflictions#TOC-Poison"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.ghoul-touch:uses_definition:defense.spell-resistance",
       "type": "uses_definition",
       "target": {
@@ -673,24 +730,65 @@
       "note": null
     },
     {
-      "relationship_id": "spell.ghoul-touch:appears_on_spell_list:spell-list.undead-subdomain",
-      "type": "appears_on_spell_list",
+      "relationship_id": "spell.ghoul-touch:uses_definition:monster.ghoul",
+      "type": "uses_definition",
       "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.undead-subdomain",
-        "name": "Undead Subdomain Spells"
+        "entity_type": "monster",
+        "entity_id": "monster.ghoul",
+        "name": "ghoul’s"
       },
       "status": "accepted",
       "evidence": [
         {
-          "observation_id": "aon:subdomain.undead:941bc1dd",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "2nd—ghoul touch",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Death"
+          "observation_id": "d20pfsrd:spell.ghoul-touch:d1113a0d0eb9324c",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "ghoul’s",
+          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/undead/ghoul"
         }
       ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+      "note": null
+    },
+    {
+      "relationship_id": "spell.ghoul-touch:uses_definition:saving-throw.fortitude",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "saving_throw",
+        "entity_id": "saving-throw.fortitude",
+        "name": "Fortitude"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.ghoul-touch:c00c0b90014934e8",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Fortitude",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/combat.html#fortitude"
+        },
+        {
+          "observation_id": "legacy_aon:spell.ghoul-touch:c00c0b90014934e8",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Fortitude",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/combat.html#fortitude"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.ghoul-touch:d1113a0d0eb9324c",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Fortitude",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.ghoul-touch:d1113a0d0eb9324c",
+          "source_field": "spell_raw.links_raw[11]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Fortitude",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
+        }
+      ],
+      "note": null
     }
   ],
   "provenance": [
@@ -749,11 +847,19 @@
       "raw_value_sha256": "6dd93d45a8343ee4f060318189ed4879876e54ad291e1cdd8080e33a7f1ad240",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.ghoul-touch:f3f0ce690f1b7f92",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "017fc7995d2bdd5be114bef5f1b2936e4d2a4dd888b95b781f15db97b828d10c",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.sequester",
   "ruleset": "Pathfinder First Edition",
   "name": "Sequester",
@@ -151,7 +151,96 @@
   "description": {
     "raw": "When cast, this spell prevents divination spells from detecting or locating the target and also renders the affected target invisible (as the invisibility spell). The spell does not prevent the subject from being discovered through tactile means or through the use of devices. Creatures affected by sequester become comatose and are effectively in a state of suspended animation until the spell ends.\n\nNote: The Will save prevents an attended or magical object from being sequestered. There is no save to see the sequestered creature or object or to detect it with a divination spell.",
     "search_text": "\"when cast, this spell prevents divination spells from detecting or locating the target and also renders the affected target invisible (as the invisibility spell). the spell does not prevent the subject from being discovered through tactile means or through the use of devices. creatures affected by sequester become comatose and are effectively in a state of suspended animation until the spell ends.\\n\\nnote: the will save prevents an attended or magical object from being sequestered. there is no save to see the sequestered creature or object or to detect it with a divination spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "When cast, this spell prevents "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "divination",
+              "relationship_id": "spell.sequester:uses_definition:magic-school.divination"
+            },
+            {
+              "node_type": "text",
+              "value": " spells from detecting or locating the target and also renders the affected target "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "invisible",
+              "relationship_id": "spell.sequester:uses_definition:condition.invisible"
+            },
+            {
+              "node_type": "text",
+              "value": " (as the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "invisibility",
+              "relationship_id": "spell.sequester:references:spell.invisibility",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell). The spell does not prevent the subject from being discovered through tactile means or through the use of devices. Creatures affected by "
+            },
+            {
+              "node_type": "text",
+              "value": "sequester",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " become comatose and are effectively in a state of suspended animation until the spell ends."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Note",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ": The "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.sequester:uses_definition:saving-throw.will"
+            },
+            {
+              "node_type": "text",
+              "value": " save prevents an attended or magical object from being sequestered. There is no save to see the sequestered creature or object or to detect it with a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "divination",
+              "relationship_id": "spell.sequester:uses_definition:magic-school.divination"
+            },
+            {
+              "node_type": "text",
+              "value": " spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -397,7 +486,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.invisibility",
-        "name": "invisibility"
+        "name": "Invisibility"
       },
       "status": "accepted",
       "evidence": [
@@ -473,26 +562,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sequester:uses_definition:magic-school.divination",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "magic_school",
-        "entity_id": "magic-school.divination",
-        "name": "divination"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.sequester:211b7a470ea199f0",
-          "source_field": "spell_raw.links_raw[9]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "divination",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Divination"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.sequester:uses_definition:defense.spell-resistance",
       "type": "uses_definition",
       "target": {
@@ -515,6 +584,26 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "no or yes (object)",
           "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.sequester:uses_definition:magic-school.divination",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.divination",
+        "name": "divination"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.sequester:211b7a470ea199f0",
+          "source_field": "spell_raw.links_raw[9]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "divination",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Divination"
         }
       ],
       "note": null
@@ -609,11 +698,19 @@
       "raw_value_sha256": "4cf84c587c0b42ff4a64b4da906c1bb0dfa8a26435b97d41f58ce1cfb78a7b0e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.sequester:899a7d00e2777595",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2e7248c887714689de6d221282d2cbadaa8fde8bda31345a7e97b4e88d6b1792",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

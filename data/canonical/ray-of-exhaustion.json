@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.ray-of-exhaustion",
   "ruleset": "Pathfinder First Edition",
   "name": "Ray of Exhaustion",
@@ -165,7 +165,102 @@
   "description": {
     "raw": "A black ray projects from your pointing finger. You must succeed on a ranged touch attack with the ray to strike a target.\n\nThe subject is immediately exhausted for the spell's duration. A successful Fortitude save means the creature is only fatigued.\n\nA character that is already fatigued instead becomes exhausted.\n\nThis spell has no effect on a creature that is already exhausted. Unlike normal exhaustion or fatigue, the effect ends as soon as the spell's duration expires.",
     "search_text": "\"a black ray projects from your pointing finger. you must succeed on a ranged touch attack with the ray to strike a target.\\n\\nthe subject is immediately exhausted for the spell's duration. a successful fortitude save means the creature is only fatigued.\\n\\na character that is already fatigued instead becomes exhausted.\\n\\nthis spell has no effect on a creature that is already exhausted. unlike normal exhaustion or fatigue, the effect ends as soon as the spell's duration expires.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "A black ray projects from your pointing finger. You must succeed on a ranged touch attack with the ray to strike a target."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The subject is immediately "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "exhausted",
+              "relationship_id": "spell.ray-of-exhaustion:uses_definition:condition.exhausted"
+            },
+            {
+              "node_type": "text",
+              "value": " for the spell's duration. A successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.ray-of-exhaustion:uses_definition:saving-throw.fortitude"
+            },
+            {
+              "node_type": "text",
+              "value": " save means the creature is only "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fatigued",
+              "relationship_id": "spell.ray-of-exhaustion:uses_definition:condition.fatigued"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "A character that is already "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fatigued",
+              "relationship_id": "spell.ray-of-exhaustion:uses_definition:condition.fatigued"
+            },
+            {
+              "node_type": "text",
+              "value": " instead becomes "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "exhausted",
+              "relationship_id": "spell.ray-of-exhaustion:uses_definition:condition.exhausted"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell has no effect on a creature that is already "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "exhausted",
+              "relationship_id": "spell.ray-of-exhaustion:uses_definition:condition.exhausted"
+            },
+            {
+              "node_type": "text",
+              "value": ". Unlike normal exhaustion or fatigue, the effect ends as soon as the spell's duration expires."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -290,6 +385,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.ray-of-exhaustion:appears_on_spell_list:spell-list.sorcerer-accursed-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-accursed-bloodline",
+        "name": "Sorcerer Accursed Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.accursed:05b4dcd1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "ray of exhaustion (7th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Accursed"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     },
     {
       "relationship_id": "spell.ray-of-exhaustion:appears_on_spell_list:spell-list.sorcerer-wizard",
@@ -467,6 +582,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.ray-of-exhaustion:uses_definition:bloodline.sorcerer.accursed",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "bloodline",
+        "entity_id": "bloodline.sorcerer.accursed",
+        "name": "accursed"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.ray-of-exhaustion:61665170e6051d49",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "accursed",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/sorcerer/bloodlines/bloodlines-from-paizo/accursed-bloodline"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.ray-of-exhaustion:uses_definition:condition.exhausted",
       "type": "uses_definition",
       "target": {
@@ -542,21 +677,28 @@
       "note": null
     },
     {
-      "relationship_id": "spell.ray-of-exhaustion:uses_definition:bloodline.sorcerer.accursed",
+      "relationship_id": "spell.ray-of-exhaustion:uses_definition:defense.spell-resistance",
       "type": "uses_definition",
       "target": {
-        "entity_type": "bloodline",
-        "entity_id": "bloodline.sorcerer.accursed",
-        "name": "accursed"
+        "entity_type": "defense",
+        "entity_id": "defense.spell-resistance",
+        "name": "Spell Resistance"
       },
       "status": "accepted",
       "evidence": [
         {
-          "observation_id": "d20pfsrd:spell.ray-of-exhaustion:61665170e6051d49",
-          "source_field": "spell_raw.links_raw[5]",
+          "observation_id": "legacy_aon:spell.ray-of-exhaustion:dfb994d2e85df0dd",
+          "source_field": "spell_raw.links_raw[1]",
           "evidence_kind": "hyperlink",
-          "anchor_text_raw": "accursed",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/sorcerer/bloodlines/bloodlines-from-paizo/accursed-bloodline"
+          "anchor_text_raw": "Spell Resistance",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/glossary.html#spell-resistance"
+        },
+        {
+          "observation_id": "aon:spell.ray-of-exhaustion:e3622108f024f00f",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes",
+          "source_href": null
         }
       ],
       "note": null
@@ -601,53 +743,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.ray-of-exhaustion:uses_definition:defense.spell-resistance",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "Spell Resistance"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.ray-of-exhaustion:dfb994d2e85df0dd",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Spell Resistance",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/glossary.html#spell-resistance"
-        },
-        {
-          "observation_id": "aon:spell.ray-of-exhaustion:e3622108f024f00f",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "yes",
-          "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.ray-of-exhaustion:appears_on_spell_list:spell-list.sorcerer-accursed-bloodline",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.sorcerer-accursed-bloodline",
-        "name": "Sorcerer Accursed Bloodline Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.accursed:05b4dcd1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "ray of exhaustion (7th)",
-          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Accursed"
-        }
-      ],
-      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     }
   ],
   "provenance": [
@@ -706,11 +801,19 @@
       "raw_value_sha256": "61ccc832466aaa387aefffb3c7c4b4f8b1ac81234b7eced8a680e2ad9859516f",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.ray-of-exhaustion:e3622108f024f00f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "a51d442f56957bf3ae06e9a117d67dc953d15a45f0fa72d822eadbd333281cb4",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.calm-animals",
   "ruleset": "Pathfinder First Edition",
   "name": "Calm Animals",
@@ -196,7 +196,48 @@
   "description": {
     "raw": "This spell soothes and quiets animals, rendering them docile and harmless. Only ordinary animals (those with Intelligence scores of 1 or 2) can be affected by this spell. All the subjects must be of the same kind, and no two may be more than 30 feet apart. The maximum number of HD of animals you can affect is equal to 2d4 + caster level.\n\nThe affected creatures remain where they are and do not attack or flee. They are not helpless and defend themselves normally if attacked. Any threat breaks the spell on the threatened creatures.",
     "search_text": "\"this spell soothes and quiets animals, rendering them docile and harmless. only ordinary animals (those with intelligence scores of 1 or 2) can be affected by this spell. all the subjects must be of the same kind, and no two may be more than 30 feet apart. the maximum number of hd of animals you can affect is equal to 2d4 + caster level.\\n\\nthe affected creatures remain where they are and do not attack or flee. they are not helpless and defend themselves normally if attacked. any threat breaks the spell on the threatened creatures.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell soothes and quiets animals, rendering them docile and harmless. Only ordinary animals (those with "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Intelligence",
+              "relationship_id": "spell.calm-animals:uses_definition:ability-score.intelligence"
+            },
+            {
+              "node_type": "text",
+              "value": " scores of 1 or 2) can be affected by this spell. All the subjects must be of the same kind, and no two may be more than 30 feet apart. The maximum number of HD of animals you can affect is equal to 2d4 + caster level."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The affected creatures remain where they are and do not attack or flee. They are not "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "helpless",
+              "relationship_id": "spell.calm-animals:uses_definition:condition.helpless"
+            },
+            {
+              "node_type": "text",
+              "value": " and defend themselves normally if attacked. Any threat breaks the spell on the threatened creatures."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -208,6 +249,26 @@
   },
   "rules_inheritance": [],
   "relationships": [
+    {
+      "relationship_id": "spell.calm-animals:appears_on_spell_list:spell-list.animal-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.animal-domain",
+        "name": "Animal Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.animal:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—calm animals",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Animal"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
     {
       "relationship_id": "spell.calm-animals:appears_on_spell_list:spell-list.druid",
       "type": "appears_on_spell_list",
@@ -236,6 +297,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.calm-animals:appears_on_spell_list:spell-list.feather-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.feather-subdomain",
+        "name": "Feather Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.feather:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Animal Domain: 1st—calm animals",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Animal"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
       "relationship_id": "spell.calm-animals:appears_on_spell_list:spell-list.hunter",
       "type": "appears_on_spell_list",
       "target": {
@@ -254,6 +335,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.calm-animals:appears_on_spell_list:spell-list.insect-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.insect-subdomain",
+        "name": "Insect Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.insect:a6829b5b",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Inherited from Animal Domain: 1st—calm animals",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Animal"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.calm-animals:appears_on_spell_list:spell-list.psychic",
@@ -513,53 +614,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.calm-animals:uses_definition:condition.helpless",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "condition",
-        "entity_id": "condition.helpless",
-        "name": "helpless"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.calm-animals:c9f8df8376cd2282",
-          "source_field": "spell_raw.links_raw[10]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "helpless",
-          "source_href": "https://www.d20pfsrd.com/gamemastering/conditions#TOC-Helpless"
-        },
-        {
-          "observation_id": "legacy_aon:spell.calm-animals:883667c28d661ee3",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "helpless",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/glossary.html#helpless"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.calm-animals:uses_definition:domain.animal",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "domain",
-        "entity_id": "domain.animal",
-        "name": "animal"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.calm-animals:c9f8df8376cd2282",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "animal",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/animal-domain"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.calm-animals:uses_definition:ability-score.intelligence",
       "type": "uses_definition",
       "target": {
@@ -582,6 +636,33 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Intelligence",
           "source_href": "https://www.d20pfsrd.com/basics-ability-scores/ability-scores#TOC-Intelligence-Int-"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.calm-animals:uses_definition:condition.helpless",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "condition",
+        "entity_id": "condition.helpless",
+        "name": "helpless"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.calm-animals:c9f8df8376cd2282",
+          "source_field": "spell_raw.links_raw[10]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "helpless",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/conditions#TOC-Helpless"
+        },
+        {
+          "observation_id": "legacy_aon:spell.calm-animals:883667c28d661ee3",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "helpless",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/glossary.html#helpless"
         }
       ],
       "note": null
@@ -614,6 +695,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.calm-animals:uses_definition:domain.animal",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "domain",
+        "entity_id": "domain.animal",
+        "name": "animal"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.calm-animals:c9f8df8376cd2282",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "animal",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric/domains/paizo-domains/animal-domain"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.calm-animals:uses_definition:saving-throw.will",
       "type": "uses_definition",
       "target": {
@@ -639,66 +740,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.calm-animals:appears_on_spell_list:spell-list.animal-domain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.animal-domain",
-        "name": "Animal Domain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:domain.animal:a6829b5b",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "1st—calm animals",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Animal"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
-    },
-    {
-      "relationship_id": "spell.calm-animals:appears_on_spell_list:spell-list.feather-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.feather-subdomain",
-        "name": "Feather Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.feather:a6829b5b",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "Inherited from Animal Domain: 1st—calm animals",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Animal"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
-    },
-    {
-      "relationship_id": "spell.calm-animals:appears_on_spell_list:spell-list.insect-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.insect-subdomain",
-        "name": "Insect Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.insect:a6829b5b",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "Inherited from Animal Domain: 1st—calm animals",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Animal"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -773,11 +814,19 @@
       "raw_value_sha256": "e4cbbf875f9fd280af6c9532f776881e7dd5662eee5f0beaca1edfab602ec631",
       "decision": "normalized",
       "note": "The effective membership is derived from the owner's printed replacement rule and its associated parent spell list."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.calm-animals:05332f66e125e9cf",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "0276033e10d7d3980851c8fb295c4cee241545f61b01bc134bca6a672d2e77a4",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

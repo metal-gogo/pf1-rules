@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.earsend",
   "ruleset": "Pathfinder First Edition",
   "name": "Earsend",
@@ -166,7 +166,66 @@
   "description": {
     "raw": "You cause one of your ears to tear itself free of your body and transform into a fly-like magical creature you control. This functions like skinsendUM, except your ear is a Fine construct with a fly speed equal to your base speed and a bonus on Fly checks equal to half your caster level. Your sense of hearing functions from your animated ear as if it were connected to your head, allowing you to hear as well as you normally could from your animated ear’s vantage point.",
     "search_text": "\"you cause one of your ears to tear itself free of your body and transform into a fly-like magical creature you control. this functions like skinsendum, except your ear is a fine construct with a fly speed equal to your base speed and a bonus on fly checks equal to half your caster level. your sense of hearing functions from your animated ear as if it were connected to your head, allowing you to hear as well as you normally could from your animated ear’s vantage point.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You cause one of your ears to tear itself free of your body and transform into a fly-like magical creature you control. This functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "skinsend",
+              "relationship_id": "spell.earsend:references:spell.skinsend",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "citation",
+              "value": "UM",
+              "publication_id": "publication.ultimate-magic",
+              "publication_name": "Ultimate Magic"
+            },
+            {
+              "node_type": "text",
+              "value": ", except your ear is a Fine "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "construct",
+              "relationship_id": "spell.earsend:uses_definition:monster-type.construct"
+            },
+            {
+              "node_type": "text",
+              "value": " with a fly speed equal to your base speed and a bonus on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fly",
+              "relationship_id": "spell.earsend:uses_definition:skill.fly"
+            },
+            {
+              "node_type": "text",
+              "value": " checks equal to half your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.earsend:uses_definition:spellcasting.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": ". Your sense of hearing functions from your animated ear as if it were connected to your head, allowing you to hear as well as you normally could from your animated ear’s vantage point."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -224,6 +283,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.earsend:appears_on_spell_list:spell-list.investigator",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.investigator",
+        "name": "Investigator Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.earsend:4aeb54ade3c8d661",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "alchemist",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/formulae-lists-alchemist/"
+        },
+        {
+          "observation_id": "aon:spell.earsend:05959b715ce18088",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "alchemist 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use the Alchemist formula list through level 6 at the same formula level; retain separately printed Investigator formulas. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.earsend:appears_on_spell_list:spell-list.sorcerer",
@@ -386,7 +472,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.skinsend",
-        "name": "skinsend"
+        "name": "Skinsend"
       },
       "status": "accepted",
       "evidence": [
@@ -428,21 +514,21 @@
       "note": null
     },
     {
-      "relationship_id": "spell.earsend:uses_definition:spellcasting.caster-level",
+      "relationship_id": "spell.earsend:uses_definition:defense.spell-resistance",
       "type": "uses_definition",
       "target": {
-        "entity_type": "spellcasting",
-        "entity_id": "spellcasting.caster-level",
-        "name": "caster level"
+        "entity_type": "defense",
+        "entity_id": "defense.spell-resistance",
+        "name": "Spell Resistance"
       },
       "status": "accepted",
       "evidence": [
         {
-          "observation_id": "d20pfsrd:spell.earsend:4aeb54ade3c8d661",
-          "source_field": "spell_raw.links_raw[9]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "caster level",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Caster-Level"
+          "observation_id": "aon:spell.earsend:05959b715ce18088",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "no",
+          "source_href": null
         }
       ],
       "note": null
@@ -468,46 +554,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.earsend:uses_definition:skill.fly",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "skill",
-        "entity_id": "skill.fly",
-        "name": "Fly"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.earsend:4aeb54ade3c8d661",
-          "source_field": "spell_raw.links_raw[8]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Fly",
-          "source_href": "https://www.d20pfsrd.com/skills/fly"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.earsend:uses_definition:defense.spell-resistance",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "Spell Resistance"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.earsend:05959b715ce18088",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "no",
-          "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.earsend:uses_definition:saving-throw.will",
       "type": "uses_definition",
       "target": {
@@ -528,31 +574,44 @@
       "note": null
     },
     {
-      "relationship_id": "spell.earsend:appears_on_spell_list:spell-list.investigator",
-      "type": "appears_on_spell_list",
+      "relationship_id": "spell.earsend:uses_definition:skill.fly",
+      "type": "uses_definition",
       "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.investigator",
-        "name": "Investigator Spell List"
+        "entity_type": "skill",
+        "entity_id": "skill.fly",
+        "name": "Fly"
       },
       "status": "accepted",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.earsend:4aeb54ade3c8d661",
-          "source_field": "spell_raw.links_raw[1]",
+          "source_field": "spell_raw.links_raw[8]",
           "evidence_kind": "hyperlink",
-          "anchor_text_raw": "alchemist",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/formulae-lists-alchemist/"
-        },
-        {
-          "observation_id": "aon:spell.earsend:05959b715ce18088",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "alchemist 4",
-          "source_href": null
+          "anchor_text_raw": "Fly",
+          "source_href": "https://www.d20pfsrd.com/skills/fly"
         }
       ],
-      "note": "Use the Alchemist formula list through level 6 at the same formula level; retain separately printed Investigator formulas. This edge records derived access, not a printed spell-page membership."
+      "note": null
+    },
+    {
+      "relationship_id": "spell.earsend:uses_definition:spellcasting.caster-level",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "spellcasting",
+        "entity_id": "spellcasting.caster-level",
+        "name": "caster level"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.earsend:4aeb54ade3c8d661",
+          "source_field": "spell_raw.links_raw[9]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "caster level",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Caster-Level"
+        }
+      ],
+      "note": null
     }
   ],
   "provenance": [
@@ -603,11 +662,19 @@
       "raw_value_sha256": "63e299a1fbde9e4b9564047c695f974d5fd8488664f0e66fd3166cf059ce0f1c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.earsend:05959b715ce18088",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "170d6874e4c2543c62abf8f5d614b457ca1d469108ab927012c77b034c09c116",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

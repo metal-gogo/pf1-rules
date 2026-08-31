@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.mending",
   "ruleset": "Pathfinder First Edition",
   "name": "Mending",
@@ -274,7 +274,48 @@
   "description": {
     "raw": "This spell repairs damaged objects, restoring 1d4 hit points to the object. If the object has the broken condition, this condition is removed if the object is restored to at least half its original hit points. All of the pieces of an object must be present for this spell to function. Magic items can be repaired by this spell, but you must have a caster level equal to or higher than that of the object. Magic items that are destroyed (at 0 hit points or less) can be repaired with this spell, but this spell does not restore their magic abilities. This spell does not affect creatures (including constructs). This spell has no effect on objects that have been warped or otherwise transmuted, but it can still repair damage done to such items.",
     "search_text": "\"this spell repairs damaged objects, restoring 1d4 hit points to the object. if the object has the broken condition, this condition is removed if the object is restored to at least half its original hit points. all of the pieces of an object must be present for this spell to function. magic items can be repaired by this spell, but you must have a caster level equal to or higher than that of the object. magic items that are destroyed (at 0 hit points or less) can be repaired with this spell, but this spell does not restore their magic abilities. this spell does not affect creatures (including constructs). this spell has no effect on objects that have been warped or otherwise transmuted, but it can still repair damage done to such items.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell repairs "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "damaged",
+              "relationship_id": "spell.mending:uses_definition:item.damaged"
+            },
+            {
+              "node_type": "text",
+              "value": " objects, restoring 1d4 hit points to the object. If the object has the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "broken",
+              "relationship_id": "spell.mending:uses_definition:condition.broken"
+            },
+            {
+              "node_type": "text",
+              "value": " condition, this condition is removed if the object is restored to at least half its original hit points. All of the pieces of an object must be present for this spell to function. Magic items can be repaired by this spell, but you must have a caster level equal to or higher than that of the object. Magic items that are destroyed (at 0 hit points or less) can be repaired with this spell, but this spell does not restore their magic abilities. This spell does not affect creatures (including "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "constructs",
+              "relationship_id": "spell.mending:uses_definition:creature-subtype.constructs"
+            },
+            {
+              "node_type": "text",
+              "value": "). This spell has no effect on objects that have been warped or otherwise transmuted, but it can still repair damage done to such items."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -441,6 +482,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.mending:appears_on_spell_list:spell-list.metal-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.metal-elemental-school",
+        "name": "Metal Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.metal-elemental:542a211d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "0—mending",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/metal/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
+    {
       "relationship_id": "spell.mending:appears_on_spell_list:spell-list.occultist",
       "type": "appears_on_spell_list",
       "target": {
@@ -459,6 +520,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.mending:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.mending:846618cdd64041cc",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 0",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.mending:appears_on_spell_list:spell-list.oracle",
@@ -857,6 +938,33 @@
       "note": null
     },
     {
+      "relationship_id": "spell.mending:uses_definition:defense.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "defense",
+        "entity_id": "defense.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.mending:e971a5c30aac8fcf",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Spell Resistance",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/glossary.html#spell-resistance"
+        },
+        {
+          "observation_id": "aon:spell.mending:846618cdd64041cc",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes (harmless, object)",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.mending:uses_definition:item.damaged",
       "type": "uses_definition",
       "target": {
@@ -897,33 +1005,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.mending:uses_definition:defense.spell-resistance",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "Spell Resistance"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.mending:e971a5c30aac8fcf",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Spell Resistance",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/glossary.html#spell-resistance"
-        },
-        {
-          "observation_id": "aon:spell.mending:846618cdd64041cc",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "yes (harmless, object)",
-          "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.mending:uses_definition:saving-throw.will",
       "type": "uses_definition",
       "target": {
@@ -949,46 +1030,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.mending:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.mending:846618cdd64041cc",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 0",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.mending:appears_on_spell_list:spell-list.metal-elemental-school",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.metal-elemental-school",
-        "name": "Metal Elemental School"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:magic-school.metal-elemental:542a211d",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "0—mending",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/metal/"
-        }
-      ],
-      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -1047,11 +1088,19 @@
       "raw_value_sha256": "04eab6aeabc391d79bd36965fe8444dcc6717eef391785f209f3f17b547e4fd6",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.mending:846618cdd64041cc",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "4beeb268143f1f160a9ad35b927f44448f6c7d77c6c79f5a0c99f09acba15a18",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

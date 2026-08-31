@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.majestic-image",
   "ruleset": "Pathfinder First Edition",
   "name": "Majestic Image",
@@ -210,7 +210,86 @@
   "description": {
     "raw": "You cast your consciousness into a single object within range that bears your likeness, as if choosing a specific image with the spell enter imageAPG. In addition to observing your surroundings, speaking, and manipulating the image you inhabit, however, you can converse with nearby creatures and use your normal social skills.\n\nYou gain a +5 bonus on Bluff checks to tell lies and Diplomacy checks to make a request. You gain a +2 bonus on Intimidate checks and use the object’s size to determine whether you gain a bonus or penalty on Intimidate checks for size.",
     "search_text": "\"you cast your consciousness into a single object within range that bears your likeness, as if choosing a specific image with the spell enter imageapg. in addition to observing your surroundings, speaking, and manipulating the image you inhabit, however, you can converse with nearby creatures and use your normal social skills.\\n\\nyou gain a +5 bonus on bluff checks to tell lies and diplomacy checks to make a request. you gain a +2 bonus on intimidate checks and use the object’s size to determine whether you gain a bonus or penalty on intimidate checks for size.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You cast your consciousness into a single object within range that bears your likeness, as if choosing a specific image with the spell "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "enter image",
+              "relationship_id": "spell.majestic-image:references:spell.enter-image",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "APG",
+              "marks": [
+                "italic",
+                "superscript"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ". In addition to observing your surroundings, speaking, and manipulating the image you inhabit, however, you can converse with nearby creatures and use your normal social skills."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You gain a +5 bonus on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Bluff",
+              "relationship_id": "spell.majestic-image:uses_definition:skill.bluff"
+            },
+            {
+              "node_type": "text",
+              "value": " checks to tell lies and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Diplomacy",
+              "relationship_id": "spell.majestic-image:uses_definition:skill.diplomacy"
+            },
+            {
+              "node_type": "text",
+              "value": " checks to make a request. You gain a +2 bonus on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Intimidate",
+              "relationship_id": "spell.majestic-image:uses_definition:skill.intimidate"
+            },
+            {
+              "node_type": "text",
+              "value": " checks and use the object’s size to determine whether you gain a bonus or penalty on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Intimidate",
+              "relationship_id": "spell.majestic-image:uses_definition:skill.intimidate"
+            },
+            {
+              "node_type": "text",
+              "value": " checks for size."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -376,6 +455,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.majestic-image:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.majestic-image:cf2193a3a607f693",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.majestic-image:3fcb1a6850de2172",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.majestic-image:appears_on_spell_list:spell-list.oracle",
@@ -598,7 +704,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.enter-image",
-        "name": "enter image"
+        "name": "Enter Image"
       },
       "status": "accepted",
       "evidence": [
@@ -640,6 +746,46 @@
       "note": null
     },
     {
+      "relationship_id": "spell.majestic-image:uses_definition:defense.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "defense",
+        "entity_id": "defense.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.majestic-image:3fcb1a6850de2172",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.majestic-image:uses_definition:saving-throw.will",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "saving_throw",
+        "entity_id": "saving-throw.will",
+        "name": "Will"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.majestic-image:cf2193a3a607f693",
+          "source_field": "spell_raw.links_raw[10]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Will",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.majestic-image:uses_definition:skill.bluff",
       "type": "uses_definition",
       "target": {
@@ -655,26 +801,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Bluff",
           "source_href": "https://www.d20pfsrd.com/skills/bluff"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.majestic-image:uses_definition:spellcasting.concentration",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "spellcasting",
-        "entity_id": "spellcasting.concentration",
-        "name": "concentration"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.majestic-image:cf2193a3a607f693",
-          "source_field": "spell_raw.links_raw[9]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "concentration",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Concentration"
         }
       ],
       "note": null
@@ -727,71 +853,24 @@
       "note": null
     },
     {
-      "relationship_id": "spell.majestic-image:uses_definition:defense.spell-resistance",
+      "relationship_id": "spell.majestic-image:uses_definition:spellcasting.concentration",
       "type": "uses_definition",
       "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "Spell Resistance"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.majestic-image:3fcb1a6850de2172",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "yes",
-          "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.majestic-image:uses_definition:saving-throw.will",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "saving_throw",
-        "entity_id": "saving-throw.will",
-        "name": "Will"
+        "entity_type": "spellcasting",
+        "entity_id": "spellcasting.concentration",
+        "name": "concentration"
       },
       "status": "accepted",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.majestic-image:cf2193a3a607f693",
-          "source_field": "spell_raw.links_raw[10]",
+          "source_field": "spell_raw.links_raw[9]",
           "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Will",
-          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
+          "anchor_text_raw": "concentration",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Concentration"
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.majestic-image:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.majestic-image:cf2193a3a607f693",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.majestic-image:3fcb1a6850de2172",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -842,11 +921,19 @@
       "raw_value_sha256": "3972238623c0beebda33fecfabf25935676fe768ad9d20aec2a6816f53c90e0e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.majestic-image:3fcb1a6850de2172",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d0f52b50915d456b1d2a10a15c71d69d4358f142e42560f315c18b714811b9fa",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

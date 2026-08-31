@@ -153,9 +153,42 @@
         "d20pfsrd:magic-school.metal-elemental:542a211d"
       ],
       "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.shout-greater:7444a755a5a09d81",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.shout-greater:7444a755a5a09d81",
+        "legacy_aon:spell.shout-greater:e3ccff66e8eee50a",
+        "d20pfsrd:spell.shout-greater:15470e0a569ad67a",
+        "aon:bloodline.sorcerer.maestro:b6a0dd0c",
+        "d20pfsrd:magic-school.air-elemental:45be08db",
+        "d20pfsrd:magic-school.metal-elemental:542a211d"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.shout-greater:appears_on_spell_list:spell-list.air-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.air-elemental:45be08db",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.air-elemental:45be08db"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
     {
       "relationship_id": "spell.shout-greater:appears_on_spell_list:spell-list.arcanist",
       "decision": "accept",
@@ -191,6 +224,20 @@
         "d20pfsrd:spell.shout-greater:15470e0a569ad67a"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.shout-greater:appears_on_spell_list:spell-list.metal-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.metal-elemental:542a211d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.metal-elemental:542a211d"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     },
     {
       "relationship_id": "spell.shout-greater:appears_on_spell_list:spell-list.psychic",
@@ -241,6 +288,20 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.shout-greater:appears_on_spell_list:spell-list.sorcerer-maestro-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.maestro:b6a0dd0c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.maestro:b6a0dd0c"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
       "relationship_id": "spell.shout-greater:appears_on_spell_list:spell-list.sorcerer-wizard",
       "decision": "accept",
       "evidence": [
@@ -279,6 +340,10 @@
         {
           "observation_id": "aon:spell.shout-greater:7444a755a5a09d81",
           "source_field": "spell_raw.description_raw"
+        },
+        {
+          "observation_id": "legacy_aon:spell.shout-greater:e3ccff66e8eee50a",
+          "source_field": "spell_raw.links_raw[2]"
         }
       ],
       "considered_observation_ids": [
@@ -353,22 +418,6 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.shout-greater:references:spell.shout",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.shout-greater:e3ccff66e8eee50a",
-          "source_field": "spell_raw.links_raw[2]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.shout-greater:7444a755a5a09d81",
-        "legacy_aon:spell.shout-greater:e3ccff66e8eee50a",
-        "d20pfsrd:spell.shout-greater:15470e0a569ad67a"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.shout-greater:uses_action:action.standard-action",
       "decision": "accept",
       "evidence": [
@@ -385,12 +434,16 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.shout-greater:uses_definition:condition.deafened",
+      "relationship_id": "spell.shout-greater:uses_definition:condition.deaf",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.shout-greater:15470e0a569ad67a",
           "source_field": "spell_raw.links_raw[8]"
+        },
+        {
+          "observation_id": "legacy_aon:spell.shout-greater:e3ccff66e8eee50a",
+          "source_field": "spell_raw.links_raw[4]"
         }
       ],
       "considered_observation_ids": [
@@ -437,6 +490,22 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.shout-greater:uses_definition:defense.spell-resistance",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.shout-greater:7444a755a5a09d81",
+          "source_field": "spell_raw.spell_resistance_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.shout-greater:7444a755a5a09d81",
+        "legacy_aon:spell.shout-greater:e3ccff66e8eee50a",
+        "d20pfsrd:spell.shout-greater:15470e0a569ad67a"
+      ],
+      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
       "relationship_id": "spell.shout-greater:uses_definition:magic-school.air-elemental",
       "decision": "accept",
       "evidence": [
@@ -453,11 +522,11 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.shout-greater:uses_definition:condition.deafened",
+      "relationship_id": "spell.shout-greater:uses_definition:magic-school.metal-elemental",
       "decision": "accept",
       "evidence": [
         {
-          "observation_id": "legacy_aon:spell.shout-greater:e3ccff66e8eee50a",
+          "observation_id": "d20pfsrd:spell.shout-greater:15470e0a569ad67a",
           "source_field": "spell_raw.links_raw[4]"
         }
       ],
@@ -497,22 +566,6 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.shout-greater:uses_definition:magic-school.metal-elemental",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.shout-greater:15470e0a569ad67a",
-          "source_field": "spell_raw.links_raw[4]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.shout-greater:7444a755a5a09d81",
-        "legacy_aon:spell.shout-greater:e3ccff66e8eee50a",
-        "d20pfsrd:spell.shout-greater:15470e0a569ad67a"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.shout-greater:uses_definition:saving-throw.reflex",
       "decision": "accept",
       "evidence": [
@@ -539,64 +592,6 @@
         "d20pfsrd:spell.shout-greater:15470e0a569ad67a"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.shout-greater:uses_definition:defense.spell-resistance",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.shout-greater:7444a755a5a09d81",
-          "source_field": "spell_raw.spell_resistance_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.shout-greater:7444a755a5a09d81",
-        "legacy_aon:spell.shout-greater:e3ccff66e8eee50a",
-        "d20pfsrd:spell.shout-greater:15470e0a569ad67a"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.shout-greater:appears_on_spell_list:spell-list.sorcerer-maestro-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.maestro:b6a0dd0c",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.maestro:b6a0dd0c"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
-    },
-    {
-      "relationship_id": "spell.shout-greater:appears_on_spell_list:spell-list.air-elemental-school",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:magic-school.air-elemental:45be08db",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:magic-school.air-elemental:45be08db"
-      ],
-      "rationale": "d20PFSRD prints the spell on the owning wizard elemental arcane school page; it is modeled as elemental_school access rather than general Wizard access."
-    },
-    {
-      "relationship_id": "spell.shout-greater:appears_on_spell_list:spell-list.metal-elemental-school",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:magic-school.metal-elemental:542a211d",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:magic-school.metal-elemental:542a211d"
-      ],
-      "rationale": "d20PFSRD prints the spell on the owning wizard elemental arcane school page; it is modeled as elemental_school access rather than general Wizard access."
     }
   ],
   "unresolved_questions": [
