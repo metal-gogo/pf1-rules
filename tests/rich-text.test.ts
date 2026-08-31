@@ -881,6 +881,22 @@ describe("rich-text relationship enrichment", () => {
     expect(result.warnings).toEqual([]);
   });
 
+  it("links terminal Roman and Arabic numeral spell-name variants", () => {
+    const result = linkRichTextDocument(parseRichTextHtml("summon monster I"), [
+      relationship(
+        "spell.test:references:spell.summon-monster-1",
+        "references",
+        "Summon Monster 1",
+        "spell.summon-monster-1",
+        { targetType: "spell" },
+      ),
+    ]);
+    expect(JSON.stringify(result.document)).toContain(
+      "spell.test:references:spell.summon-monster-1",
+    );
+    expect(result.warnings).toEqual([]);
+  });
+
   it("preserves superscript source abbreviations", () => {
     const document = parseRichTextHtml("anticipate peril<sup>UM</sup>");
     expect(document.content[0]).toMatchObject({
@@ -922,6 +938,19 @@ describe("rich-text relationship enrichment", () => {
       code: "UNMATCHED_RICH_TEXT_LINK",
       relationship_ids: ["spell.test:references:spell.missing"],
     }));
+  });
+
+  it("does not warn when a source-only spell relationship is absent from the description", () => {
+    const result = linkRichTextDocument(parseRichTextHtml("ordinary text"), [
+      relationship(
+        "spell.test:references:spell.missing",
+        "references",
+        "Missing Spell",
+        "spell.missing",
+        { targetType: "spell", sourceField: "spell_raw.links_raw[0]" },
+      ),
+    ]);
+    expect(result.warnings).toEqual([]);
   });
 
   it("does not turn classification metadata or self-references into description links", () => {
