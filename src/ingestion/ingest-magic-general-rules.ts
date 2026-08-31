@@ -8,7 +8,7 @@ import { parseRichTextHtml, richTextLeafText, type RichTextDocument } from "../d
 import { artifactHash, readCapturedArtifact, writeCapturedArtifact } from "./artifact-store.js";
 
 
-const entityId = "rule.magic";
+const entityId = "spellcasting";
 const parser = { name: "magic-general-rules-adapter", version: "0.2.0" };
 const userAgent = "PF1RulesPrivateResearch/0.1 (local archival experiment)";
 let lastRequestAt = 0;

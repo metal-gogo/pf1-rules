@@ -45,6 +45,35 @@ function loadJson(filename: string): ValidatedJson {
 }
 
 
+const taxonomyDecisions = new Map<string, ValidatedJson>(
+  loadJson(path.join(
+    projectRoot,
+    "data",
+    "migrations",
+    "entity-taxonomy-v1.json",
+  )).decisions.map((decision: ValidatedJson) => [decision.from, decision]),
+);
+
+
+function migratedEntityId(entityId: string, sourceHref?: string): string | null {
+  const decision = taxonomyDecisions.get(entityId);
+  if (!decision) return entityId;
+  if (decision.action === "reject") return null;
+  if (decision.action !== "split") return decision.to;
+  const route = decision.routes.find((candidate: ValidatedJson) =>
+    candidate.source_hrefs.includes(sourceHref),
+  );
+  return route?.to ?? decision.default_to ?? null;
+}
+
+
+function requiredMigratedEntityId(entityId: string, sourceHref?: string): string {
+  const migrated = migratedEntityId(entityId, sourceHref);
+  if (!migrated) throw new Error(`Observation entity was rejected by the taxonomy: ${entityId}`);
+  return migrated;
+}
+
+
 function jsonFiles(directory: string, recursive = false): string[] {
   return fs
     .readdirSync(directory, { withFileTypes: true })
@@ -200,6 +229,9 @@ async function insertEntities(tx: Prisma.TransactionClient): Promise<number> {
 
 
 async function insertObservations(tx: Prisma.TransactionClient): Promise<number> {
+  const registeredIds = new Set(
+    (await tx.entity.findMany({ select: { id: true } })).map((entity) => entity.id),
+  );
   let count = 0;
   for (const filename of jsonFiles(path.join(projectRoot, "data", "observations"), true)) {
     const record = loadJson(filename);
@@ -213,7 +245,10 @@ async function insertObservations(tx: Prisma.TransactionClient): Promise<number>
     await tx.sourceObservation.create({
       data: {
         id: record.observation_id,
-        entityId: observationEntityId(record.observation_id),
+        entityId: requiredMigratedEntityId(
+          observationEntityId(record.observation_id),
+          record.source.url,
+        ),
         entityType: record.entity_type,
         siteId: record.source.site_id,
         sourceUrl: record.source.url,
@@ -255,7 +290,13 @@ async function insertObservations(tx: Prisma.TransactionClient): Promise<number>
           contextRaw: link.context_raw ?? null,
           roleHint: link.role_hint ?? null,
           targetEntityTypeHint: link.target_entity_type_hint ?? null,
-          targetEntityIdHint: link.target_entity_id_hint ?? null,
+          targetEntityIdHint: (() => {
+            const targetId = migratedEntityId(
+              link.target_entity_id_hint,
+              link.href_resolved,
+            );
+            return targetId && registeredIds.has(targetId) ? targetId : null;
+          })(),
         },
       });
     }

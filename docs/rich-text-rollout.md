@@ -97,7 +97,7 @@ Review of this batch established three additional normalization rules:
   they are removed rather than linked back to the current page.
 - A `void(0)` source href is not relationship evidence. Such relationships are
   rejected and their decisions record the reason.
-- `rule.fortitude`, `rule.reflex`, and `rule.will` resolve to the canonical
+- `saving-throw.fortitude`, `saving-throw.reflex`, and `saving-throw.will` resolve to the canonical
   grouped saving-throw entities and anchors.
 
 ### Batch 2
@@ -120,10 +120,10 @@ Review of this batch established these normalization rules:
 - Capitalized single-word rules names match case exactly. For example,
   `Knowledge` links to the skill, while ordinary lowercase `knowledge` does
   not.
-- `rule.affliction` resolves to `rule.afflictions`; `condition.fatigue`
-  resolves to `condition.fatigued`; and `rule.fort` resolves to the canonical
+- `affliction.affliction` resolves to `affliction.afflictions`; `condition.fatigue`
+  resolves to `condition.fatigued`; and `saving-throw.fortitude` resolves to the canonical
   Fortitude saving-throw entity.
-- A source `rule.candle` target resolves to the equipment entity `item.candle`.
+- A source `item.candle` target resolves to the equipment entity `item.candle`.
 
 Semantic review rejected links where the source anchor used the same spelling
 for a different concept. The rejected cases include natural healing versus
@@ -971,7 +971,7 @@ Review of this batch established these normalization rules:
   reviewed links cover rules terms, actions, size, saving throws, skills,
   descriptors, schools, planes, concentration, and Abadar.
 - `rule.supernatural-abilities` canonicalizes to the registered
-  `rule.supernatural` entity during normalization, preventing stale generated
+  `special-ability.supernatural` entity during normalization, preventing stale generated
   relationships from failing validation.
 
 Canonical, database-backed web, and desktop/mobile browser tests cover these

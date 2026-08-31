@@ -134,14 +134,15 @@
           "additionalProperties": false,
           "required": ["entity_type", "entity_id", "name"],
           "properties": {
-            "entity_type": {"enum": ["spell", "mythic_spell_variant", "rule", "condition", "feat", "class_feature", "deity", "mystery", "archetype", "action", "publication", "unknown"]},
+            "entity_type": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
             "entity_id": {"type": ["string", "null"]},
             "name": {"type": "string", "minLength": 1}
           }
         },
         "status": {"enum": ["accepted", "pending_review", "rejected"]},
         "evidence": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/evidence"}},
-        "note": {"type": ["string", "null"]}
+        "note": {"type": ["string", "null"]},
+        "parameters": {"type": "object"}
       }
     },
     "provenance": {

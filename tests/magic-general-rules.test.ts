@@ -35,7 +35,7 @@ describe("Magic general-rules parser", () => {
     const page = parseMagicRulesPage(`
       <span id="MainContent_DetailedOutput"><h1><a href="Rules.aspx?ID=68">Magic</a></h1><p><a href="Rules.aspx?ID=999">Unknown rule</a></p></span><div class="footer"></div>`, aon);
     expect(page.links).toEqual(expect.arrayContaining([
-      expect.objectContaining({ anchor_text_raw: "Magic", target_entity_id_hint: "rule.magic" }),
+      expect.objectContaining({ anchor_text_raw: "Magic", target_entity_id_hint: "spellcasting" }),
       expect.objectContaining({ anchor_text_raw: "Unknown rule", target_entity_id_hint: null }),
     ]));
   });

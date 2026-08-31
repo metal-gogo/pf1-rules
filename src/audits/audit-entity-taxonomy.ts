@@ -68,7 +68,17 @@ function normalizedName(value: string): string {
 
 
 function expectedRoot(entityType: string): string {
-  return entityType.replaceAll("_", "-");
+  return {
+    monster_type: "monster-type",
+    subdomain: "domain",
+  }[entityType] ?? entityType.replaceAll("_", "-");
+}
+
+
+function allowedRoots(entityType: string): string[] {
+  if (entityType === "subdomain") return ["domain", "subdomain"];
+  if (entityType === "game_role") return ["game-master", "game-role"];
+  return [expectedRoot(entityType)];
 }
 
 
@@ -266,7 +276,13 @@ function sourceTargetId(
   if (entityType === "domain") {
     return `domain.${lastSegment.replace(/-domain$/, "")}`;
   }
-  if (entityType === "subdomain") return `subdomain.${lastSegment}`;
+  if (entityType === "subdomain") {
+    const segments = pathname.split("/").filter(Boolean);
+    const parent = [...segments].reverse().find((segment) => segment.endsWith("-domain"))
+      ?.replace(/-domain$/, "");
+    return parent ? `domain.${parent}.${lastSegment.replace(/-subdomain$/, "")}` :
+      `subdomain.${lastSegment.replace(/-subdomain$/, "")}`;
+  }
   if (entityType === "bloodline") {
     return `bloodline.sorcerer.${lastSegment.replace(/-bloodline$/, "")}`;
   }
@@ -319,7 +335,7 @@ const entities = jsonFiles(path.join(projectRoot, "data", "entities"))
 const byId = new Map(entities.map((entity) => [entity.entity_id, entity]));
 
 const mismatchedRoots = entities
-  .filter((entity) => entity.entity_id.split(".", 1)[0] !== expectedRoot(entity.entity_type))
+  .filter((entity) => !allowedRoots(entity.entity_type).includes(entity.entity_id.split(".", 1)[0]!))
   .map((entity) => ({
     entity_id: entity.entity_id,
     entity_type: entity.entity_type,
@@ -382,7 +398,7 @@ for (const entity of entities.filter((candidate) => candidate.entity_type === "r
       const sourceEntityRole = sourceRole(evidence.source_href);
       if (!sourceEntityRole) return [];
       const entityType = sourceEntityRole === "creature_classification" ?
-        creatureTypeNames.has(normalizedName(entity.name)) ? "creature_type" :
+        creatureTypeNames.has(normalizedName(entity.name)) ? "monster_type" :
           "creature_subtype" : sourceEntityRole;
       const entityId = sourceTargetId(entity, entityType, evidence.source_href);
       return [[`${entityType}:${entityId}`, { entity_type: entityType, entity_id: entityId }]];

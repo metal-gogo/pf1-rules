@@ -472,9 +472,9 @@ function relationshipHref(relationship: {
   if (targetEntityId.startsWith("illumination.")) {
     return `/rules/illumination#${encodeURIComponent(anchor)}`;
   }
-  if (targetEntityId === "rule.components") return "/spell-components";
-  if (targetEntityId === "rule.saving-throws") return "/rules/saving-throws";
-  if (targetEntityType === "rule" && targetEntityId.endsWith("-saving-throw")) {
+  if (targetEntityId === "spellcasting.component") return "/spell-components";
+  if (targetEntityId === "saving-throw") return "/rules/saving-throws";
+  if (targetEntityId.startsWith("saving-throw.")) {
     return `/rules/saving-throws#${encodeURIComponent(anchor)}`;
   }
   return relatedEntityHref(targetEntityType, targetEntityId);
@@ -1074,7 +1074,7 @@ function rulesPage(): string {
 async function magicPage(prisma: PrismaClient, sectionId?: string): Promise<string | null> {
   const [entity, relationships] = await Promise.all([
     prisma.entity.findUnique({
-      where: { id: "rule.magic" },
+      where: { id: "spellcasting" },
       select: {
         observations: {
           select: { id: true, siteId: true, sourceUrl: true, payload: true, sections: { select: { headingRaw: true, bodyRaw: true }, orderBy: { sectionIndex: "asc" } } },
@@ -1083,7 +1083,7 @@ async function magicPage(prisma: PrismaClient, sectionId?: string): Promise<stri
       },
     }),
     prisma.ruleRelationship.findMany({
-      where: { ownerEntityId: "rule.magic", status: "accepted" },
+      where: { ownerEntityId: "spellcasting", status: "accepted" },
       orderBy: { targetName: "asc" },
     }),
   ]);
@@ -1091,7 +1091,7 @@ async function magicPage(prisma: PrismaClient, sectionId?: string): Promise<stri
   const primary = observations.find((observation) => observation.siteId === "aon");
   const document = primary ? sourceRichTextDocument(primary.payload) : null;
   const linkedDocument = document
-    ? linkRichTextDocument(document, relationships, { ownerEntityId: "rule.magic" }).document
+    ? linkRichTextDocument(document, relationships, { ownerEntityId: "spellcasting" }).document
     : null;
   const headings = linkedDocument ? magicHeadings(linkedDocument) : [];
   const section = linkedDocument && sectionId ? magicSection(linkedDocument, headings, sectionId) : null;
@@ -1199,9 +1199,9 @@ async function savingThrowsPage(prisma: PrismaClient): Promise<string> {
     where: {
       id: {
         in: [
-          "rule.fortitude-saving-throw",
-          "rule.reflex-saving-throw",
-          "rule.will-saving-throw",
+          "saving-throw.fortitude",
+          "saving-throw.reflex",
+          "saving-throw.will",
         ],
       },
     },
@@ -1491,13 +1491,13 @@ async function spellPage(prisma: PrismaClient, spellId: string): Promise<string 
   const savingThrowLinks = Array.isArray(savingThrowTypes)
     ? savingThrowTypes.flatMap((type) => {
       if (typeof type !== "string") return [];
-      const relationship = acceptedRelationship("uses_definition", `rule.${type}-saving-throw`);
+      const relationship = acceptedRelationship("uses_definition", `saving-throw.${type}`);
       const url = relationship && relationshipHref(relationship);
       return url ? [{ text: humanize(type), url }] : [];
     })
     : [];
   const spellResistanceRaw = rawJsonField(spell.spellResistance, "raw") ?? "Not recorded";
-  const spellResistanceRelationship = acceptedRelationship("uses_definition", "rule.spell-resistance");
+  const spellResistanceRelationship = acceptedRelationship("uses_definition", "defense.spell-resistance");
   const spellResistanceUrl = spellResistanceRelationship && relationshipHref(spellResistanceRelationship);
 
   const componentRows = spell.components.map((component) => `<li>

@@ -23,8 +23,8 @@ multiple, optional, inferred, or likely to change.
 Examples:
 
 ```text
-rule.saving-throw
-rule.saving-throw.fortitude
+saving-throw
+saving-throw.fortitude
 magic-school.conjuration
 magic-school.conjuration.teleportation
 bloodline.sorcerer.celestial
@@ -65,7 +65,7 @@ A relationship ID has this shape:
 For example:
 
 ```text
-spell.heckle:uses_definition:rule.saving-throw.will
+spell.heckle:uses_definition:saving-throw.will
 ```
 
 ## Structural parents
@@ -112,6 +112,11 @@ classify it as metamagic; keep `feat.improved-critical` and classify it as
 combat. This avoids making one category part of identity when feats can gain
 additional categories.
 
+Apply the same single-parent rule to subdomains. Nest a subdomain under its
+domain when it has one source-defined parent, such as
+`domain.magic.divine`. Keep a multiply inherited subdomain flat, such as
+`subdomain.archon`, and record each associated domain as a relationship.
+
 ## Entity roles
 
 Choose the most specific source-defined role. `rule` is not a fallback for an
@@ -127,9 +132,11 @@ Use these distinctions:
   `paralyzed`, and `stable`.
 - `special-ability.<name>` for defined abilities such as `darkvision` and
   `invisibility`.
-- `rule.<topic>` for an independently defined rule such as spell resistance or
-  energy drain.
-- `rule.saving-throw.<kind>` for Fortitude, Reflex, and Will saving throws.
+- `<mechanical-family>.<concept>` when the source defines a stable family, such
+  as `defense.spell-resistance`, `damage.precision`, or
+  `saving-throw.fortitude`.
+- `rule.<topic>` only for an independently defined rule that lacks a clearer
+  mechanical family.
 - `spell-range.<kind>` for spell range categories such as touch.
 - `attack.<kind>` for attack modes such as touch attacks.
 - `weapon.<name>` for weapons rather than the generic `item` kind.
@@ -199,4 +206,3 @@ does not create redirect entities or preserve historical IDs as aliases.
 Historical source observations remain immutable. Migration updates canonical
 entities and current references while retaining observation evidence that
 explains where each candidate originated.
-

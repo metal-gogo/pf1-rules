@@ -699,7 +699,7 @@
           "additionalProperties": false,
           "required": ["entity_type", "entity_id", "name"],
           "properties": {
-            "entity_type": {"enum": ["spell", "mythic_spell_variant", "spell_family", "rule", "condition", "feat", "class", "npc_class", "class_feature", "deity", "domain", "subdomain", "mystery", "bloodline", "patron", "spirit", "archetype", "monster", "item", "magic_school", "subschool", "descriptor", "spell_list", "action", "publication", "visual_aid", "unknown"]},
+            "entity_type": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
             "entity_id": {"type": ["string", "null"]},
             "name": {"type": "string", "minLength": 1}
           }
@@ -721,7 +721,8 @@
             }
           }
         },
-        "note": {"type": ["string", "null"]}
+        "note": {"type": ["string", "null"]},
+        "parameters": {"type": "object"}
       }
     },
     "spellResistance": {

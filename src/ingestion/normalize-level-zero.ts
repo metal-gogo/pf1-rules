@@ -1342,8 +1342,8 @@ export function generateCanonicalBundle(
     addEntity(castActionId, "action", castingTime.raw, { observation_id: baseline.observationId, source_field: "spell_raw.casting_time_raw", anchor_text_raw: castingTime.raw, source_href: null });
     addRelationship("uses_action", "action", castActionId, castingTime.raw, baselineEvidence("spell_raw.casting_time_raw", castingTime.raw));
   }
-  addEntity("rule.spell-resistance", "rule", "Spell Resistance", { observation_id: baseline.observationId, source_field: "spell_raw.spell_resistance_raw", anchor_text_raw: parsed.spellResistanceRaw, source_href: null });
-  addRelationship("uses_definition", "rule", "rule.spell-resistance", "Spell Resistance", baselineEvidence("spell_raw.spell_resistance_raw", parsed.spellResistanceRaw));
+  addEntity("defense.spell-resistance", "rule", "Spell Resistance", { observation_id: baseline.observationId, source_field: "spell_raw.spell_resistance_raw", anchor_text_raw: parsed.spellResistanceRaw, source_href: null });
+  addRelationship("uses_definition", "rule", "defense.spell-resistance", "Spell Resistance", baselineEvidence("spell_raw.spell_resistance_raw", parsed.spellResistanceRaw));
 
   const warnings: Array<{ code: string; field_path: string | null; message: string }> = [];
   if (options.legacy35Material) {

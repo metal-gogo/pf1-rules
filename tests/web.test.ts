@@ -282,7 +282,7 @@ describe("local rules browser", () => {
     expect(spellHtml).toContain("Cloud Subdomain</a> 2");
     expect(spellHtml).toContain("(derived access)");
 
-    const ownerResponse = await fetch(`${baseUrl}/entities/subdomain.cloud`);
+    const ownerResponse = await fetch(`${baseUrl}/entities/domain.air.cloud`);
     const ownerHtml = await ownerResponse.text();
     expect(ownerResponse.status).toBe(200);
     expect(ownerHtml).toContain("<h1>Cloud Subdomain</h1>");
@@ -347,7 +347,7 @@ describe("local rules browser", () => {
     expect(actions).toContain('<article id="standard-action">');
     expect(actions).toContain("most commonly to make an attack or cast a spell");
     expect(savesResponse.status).toBe(200);
-    expect(saves).toContain('<article id="will-saving-throw">');
+    expect(saves).toContain('<article id="will">');
     expect(saves).toContain("Definition not yet imported.");
     expect(descriptorsResponse.status).toBe(200);
     expect(descriptors).toContain('<article id="darkness">');
@@ -421,21 +421,21 @@ describe("local rules browser", () => {
     expect(html).toContain('<a href="/rules/magic-schools#conjuration">Conjuration</a>');
     expect(html).toContain('<a href="/rules/magic-schools#healing">Healing</a>');
     expect(html).toContain('<a href="/rules/actions#standard-action">standard action</a>');
-    expect(html).toContain('<a href="/rules/saving-throws#will-saving-throw">Will</a> half');
-    expect(html).toContain('<a href="/entities/rule.spell-resistance">Spell resistance</a>');
+    expect(html).toContain('<a href="/rules/saving-throws#will">Will</a> half');
+    expect(html).toContain('<a href="/entities/defense.spell-resistance">Spell resistance</a>');
     const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
-    expect(description).toContain('<a href="/entities/rule.spell-resistance">spell resistance</a>');
+    expect(description).toContain('<a href="/entities/defense.spell-resistance">spell resistance</a>');
   });
 
   it.each([
-    ["break-enchantment", "/entities/rule.caster-level"],
+    ["break-enchantment", "/entities/spellcasting.caster-level"],
     ["restoration", "/spells/spell.restoration-lesser"],
     ["restoration-greater", "/spells/spell.restoration-lesser"],
-    ["restoration-lesser", "/entities/rule.ability-damage"],
+    ["restoration-lesser", "/entities/damage.ability-score"],
     ["bestow-curse", "/spells/spell.break-enchantment"],
     ["curse-major", "/spells/spell.bestow-curse"],
     ["conditional-curse", "/spells/spell.bestow-curse"],
-    ["cure-light-wounds", "/entities/rule.spell-resistance"],
+    ["cure-light-wounds", "/entities/defense.spell-resistance"],
     ["cure-moderate-wounds", "/spells/spell.cure-light-wounds"],
     ["darkness", "/rules/descriptors#darkness"],
   ])("renders persisted inline links for pilot spell %s", async (slug, target) => {
@@ -448,10 +448,10 @@ describe("local rules browser", () => {
 
   it.each([
     ["abeyance", "/spells/spell.remove-curse"],
-    ["abjuring-step", "/entities/rule.attacks-of-opportunity"],
+    ["abjuring-step", "/entities/combat.attack-of-opportunity"],
     ["absolution", "/spells/spell.heroism"],
     ["absorb-rune-ii", "/spells/spell.absorb-rune-i"],
-    ["acidic-spray", "/rules/saving-throws#reflex-saving-throw"],
+    ["acidic-spray", "/rules/saving-throws#reflex"],
   ])("renders reviewed rollout links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -463,11 +463,11 @@ describe("local rules browser", () => {
 
   it.each([
     ["age-resistance", "/spells/spell.age-resistance-lesser"],
-    ["aggravate-affliction", "/entities/rule.afflictions"],
+    ["aggravate-affliction", "/entities/affliction.afflictions"],
     ["aggressive-thundercloud", "/entities/item.candle"],
-    ["agonize", "/rules/saving-throws#fortitude-saving-throw"],
-    ["akashic-communion", "/entities/rule.knowledge"],
-    ["align-weapon", "/entities/rule.damage-reduction"],
+    ["agonize", "/rules/saving-throws#fortitude"],
+    ["akashic-communion", "/entities/skill.knowledge"],
+    ["align-weapon", "/entities/special-ability.damage-reduction"],
   ])("renders second-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -477,11 +477,11 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["advanced-scurvy", "/entities/rule.natural"],
+    ["advanced-scurvy", "/entities/bonus.natural-armor"],
     ["age-resistance-lesser", "/entities/condition.dying"],
-    ["air-bubble", "/entities/rule.air"],
+    ["air-bubble", "/entities/magic-school.air-elemental"],
     ["air-step", "/entities/condition.stable"],
-    ["akashic-communion", "/entities/rule.extraplanar"],
+    ["akashic-communion", "/entities/creature-subtype.extraplanar"],
   ])("omits reviewed false-positive link from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -497,8 +497,8 @@ describe("local rules browser", () => {
     ["alluring-spores", "/rules/magic-schools#enchantment"],
     ["analyze-aura", "/spells/spell.magic-aura"],
     ["ancestral-memory", "/entities/monster.clay-golem"],
-    ["anchored-step", "/entities/rule.combat-maneuver-defense"],
-    ["angelic-aspect-greater", "/entities/rule.damage-reduction"],
+    ["anchored-step", "/entities/combat-maneuver.defense"],
+    ["angelic-aspect-greater", "/entities/special-ability.damage-reduction"],
   ])("renders third-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -508,9 +508,9 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["ally-across-time", "/entities/rule.summon"],
-    ["alter-summoned-monster", "/entities/rule.summon"],
-    ["alter-winds", "/entities/rule.wind"],
+    ["ally-across-time", "/entities/universal-monster-rule.summon"],
+    ["alter-summoned-monster", "/entities/universal-monster-rule.summon"],
+    ["alter-winds", "/entities/mystery.wind"],
   ])("omits third-batch false-positive link from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -520,8 +520,8 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["animal-growth", "/entities/rule.armor-class"],
-    ["animate-dead-lesser", "/entities/rule.skeleton"],
+    ["animal-growth", "/entities/armor-class"],
+    ["animate-dead-lesser", "/entities/creature-template.skeleton"],
     ["anti-summoning-shield", "/rules/magic-schools#summoning"],
     ["antitech-field", "/entities/item.sling"],
     ["antithetical-constraint", "/spells/spell.magic-missile"],
@@ -539,7 +539,7 @@ describe("local rules browser", () => {
     const html = await response.text();
     const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
     expect(response.status).toBe(200);
-    expect(description.match(/href="\/entities\/rule\.summon"/g)).toHaveLength(1);
+    expect(description.match(/href="\/entities\/universal-monster-rule\.summon"/g)).toHaveLength(1);
   });
 
   it("does not link Apport Object's transport verb to the monster Summon ability", async () => {
@@ -547,7 +547,7 @@ describe("local rules browser", () => {
     const html = await response.text();
     const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
     expect(response.status).toBe(200);
-    expect(description).not.toContain('href="/entities/rule.summon"');
+    expect(description).not.toContain('href="/entities/universal-monster-rule.summon"');
   });
 
   it.each([
@@ -558,7 +558,7 @@ describe("local rules browser", () => {
     ["arcane-mark", "/entities/item.gem-of-seeing"],
     ["arcane-pocket", "/entities/item.bag-of-holding"],
     ["archons-trumpet", "/entities/monster.trumpet-archon"],
-    ["aspect-of-the-bear", "/entities/rule.combat-maneuver-bonus"],
+    ["aspect-of-the-bear", "/entities/combat-maneuver.bonus"],
     ["aspect-of-the-falcon", "/entities/feat.improved-critical"],
   ])("renders fifth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
@@ -569,12 +569,12 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["aquatic-cavalry", "/entities/rule.summon"],
-    ["army-across-time", "/entities/rule.summon"],
-    ["arcane-eye", "/entities/rule.arcane"],
-    ["arcane-pocket", "/entities/rule.touch-attack"],
-    ["arid-refuge", "/entities/rule.impervious"],
-    ["ashen-path", "/entities/rule.touch-attack"],
+    ["aquatic-cavalry", "/entities/universal-monster-rule.summon"],
+    ["army-across-time", "/entities/universal-monster-rule.summon"],
+    ["arcane-eye", "/entities/domain.magic.arcane"],
+    ["arcane-pocket", "/entities/attack.touch"],
+    ["arid-refuge", "/entities/weapon-special-ability.impervious"],
+    ["ashen-path", "/entities/attack.touch"],
   ])("omits fifth-batch false-positive link from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -586,14 +586,14 @@ describe("local rules browser", () => {
   it.each([
     ["aspect-of-the-nightingale", "/rules/magic-schools#charm"],
     ["assumed-likeness", "/rules/magic-schools#illusion"],
-    ["atavism", "/entities/rule.hit-dice"],
+    ["atavism", "/entities/hit-die"],
     ["atonement", "/classes/paladin"],
     ["aura-alteration", "/spells/spell.magic-aura"],
-    ["aura-of-greater-courage", "/entities/rule.fear"],
+    ["aura-of-greater-courage", "/entities/special-ability.fear"],
     ["aura-sight", "/entities/spell-family.detect-alignment"],
     ["awaken", "/entities/class-feature.animal-companion"],
     ["awaken-construct", "/entities/monster.shield-guardian"],
-    ["awaken-the-devoured", "/entities/rule.daemon"],
+    ["awaken-the-devoured", "/entities/creature-subtype.daemon"],
   ])("renders sixth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -603,8 +603,8 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["atonement", "/entities/rule.redemption"],
-    ["aura-of-distraction", "/entities/rule.distraction"],
+    ["atonement", "/entities/domain.good.redemption"],
+    ["aura-of-distraction", "/entities/universal-monster-rule.distraction"],
   ])("omits sixth-batch false-positive link from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -615,11 +615,11 @@ describe("local rules browser", () => {
 
   it.each([
     ["badgers-ferocity", "/spells/spell.keen-edge"],
-    ["balance-of-suffering", "/entities/rule.hit-points"],
+    ["balance-of-suffering", "/entities/damage.hit-points"],
     ["banishment", "/spells/spell.dismissal"],
     ["banshee-blast", "/entities/monster.ghost"],
     ["barbed-chains", "/entities/item.chain"],
-    ["barghest-feast", "/entities/rule.hit-dice"],
+    ["barghest-feast", "/entities/hit-die"],
     ["barrow-haze", "/entities/class-feature.hexes"],
     ["beanstalk", "/entities/item.rope"],
     ["beastspeak", "/entities/class-feature.wild-shape"],
@@ -633,8 +633,8 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["barbed-chains", "/entities/rule.summon"],
-    ["beacon-of-guilt", "/entities/rule.touch-attack"],
+    ["barbed-chains", "/entities/universal-monster-rule.summon"],
+    ["beacon-of-guilt", "/entities/attack.touch"],
   ])("omits seventh-batch false-positive link from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -680,7 +680,7 @@ describe("local rules browser", () => {
   it.each([
     ["bereave", "/entities/item.chain"],
     ["binding-earth", "/spells/spell.binding"],
-    ["binding", "/entities/rule.law"],
+    ["binding", "/entities/domain.law"],
   ])("omits eighth-batch source artifacts from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -696,7 +696,7 @@ describe("local rules browser", () => {
     expect(response.status).toBe(200);
     for (const target of [
       "/rules/illumination#darkness",
-      "/entities/rule.darkvision",
+      "/entities/special-ability.darkvision",
       "/rules/descriptors#light",
       "/spells/spell.daylight",
     ]) expect(description).toContain(`href="${target}"`);
@@ -707,8 +707,8 @@ describe("local rules browser", () => {
     ["blazing-rainbow", "/entities/item.longbow"],
     ["bless-water", "/entities/item.holy-water"],
     ["blessed-fist", "/entities/feat.improved-unarmed-strike"],
-    ["blessing-of-the-mole", "/entities/rule.darkvision"],
-    ["blight", "/entities/rule.plant"],
+    ["blessing-of-the-mole", "/entities/special-ability.darkvision"],
+    ["blight", "/entities/monster-type.plant"],
     ["blood-in-the-water", "/entities/monster.shark"],
     ["blood-money", "/spells/spell.stoneskin"],
   ])("renders ninth-batch links for spell %s", async (slug, target) => {
@@ -720,10 +720,10 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["bleed-for-your-master", "/entities/rule.touch-attack"],
-    ["blight", "/entities/rule.daemon"],
-    ["bloatbomb", "/entities/rule.touch-attack"],
-    ["blood-money", "/entities/rule.pathfinder-adventure-path-rise-of-the-runelords-anniversary-edition"],
+    ["bleed-for-your-master", "/entities/attack.touch"],
+    ["blight", "/entities/domain.evil.daemon"],
+    ["bloatbomb", "/entities/attack.touch"],
+    ["blood-money", "/entities/publication.pathfinder-adventure-path-rise-of-the-runelords-anniversary-edition"],
   ])("omits ninth-batch source artifacts from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -751,7 +751,7 @@ describe("local rules browser", () => {
     ["blood-song", "/rules/magic-schools#healing"],
     ["bloodbath", "/entities/item.dagger"],
     ["bloodstone-mirror", "/entities/deity.arazni"],
-    ["blur", "/entities/rule.concealment"],
+    ["blur", "/entities/concealment"],
     ["bolts-of-bedevilment", "/entities/condition.dazed"],
     ["bone-fists", "/entities/item.armor-spikes"],
     ["bone-flense", "/classes/red-mantis-assassin"],
@@ -765,8 +765,8 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["bone-flense", "/entities/rule.crimson-assassins"],
-    ["bone-flense", "/entities/rule.humanoid"],
+    ["bone-flense", "/entities/class.crimson-assassin"],
+    ["bone-flense", "/entities/monster-type.humanoid"],
   ])("omits tenth-batch source artifacts from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -776,17 +776,17 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["bouncy-body", "/entities/rule.falling-damage"],
+    ["bouncy-body", "/entities/damage.falling"],
     ["bow-spirit", "/entities/item.sphere-of-annihilation"],
     ["bowstaff", "/entities/item.quarterstaff"],
     ["brand-greater", "/entities/item.torch"],
-    ["brand-of-conformity", "/entities/rule.dwarf"],
+    ["brand-of-conformity", "/entities/race.dwarf"],
     ["brightest-light", "/rules/descriptors#darkness"],
     ["brightest-night", "/rules/illumination#dim-light"],
-    ["brilliant-inspiration", "/entities/rule.ability-check"],
+    ["brilliant-inspiration", "/entities/ability-score.check"],
     ["brow-gasher", "/entities/condition.bleed"],
-    ["bullet-ward", "/entities/rule.armor-class"],
-    ["bulls-strength", "/entities/rule.enhancement-bonus"],
+    ["bullet-ward", "/entities/armor-class"],
+    ["bulls-strength", "/entities/bonus.enhancement"],
   ])("renders eleventh-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -796,9 +796,9 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["boneshatter", "/entities/rule.skeleton"],
-    ["borrow-corruption", "/entities/rule.touch-attack"],
-    ["bountiful-banquet", "/entities/rule.animal"],
+    ["boneshatter", "/entities/creature-template.skeleton"],
+    ["borrow-corruption", "/entities/attack.touch"],
+    ["bountiful-banquet", "/entities/monster-type.animal"],
   ])("omits eleventh-batch semantic false positives from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -827,9 +827,9 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["burdened-thoughts", "/entities/rule.carrying-capacity"],
-    ["burst-bonds", "/entities/rule.swallow-whole"],
-    ["burst-of-glory", "/entities/rule.temporary-hit-points"],
+    ["burdened-thoughts", "/entities/carrying-capacity"],
+    ["burst-bonds", "/entities/universal-monster-rule.swallow-whole"],
+    ["burst-of-glory", "/entities/damage.hit-points.temporary"],
     ["burst-with-light", "/rules/illumination#normal-light"],
     ["calcific-touch", "/spells/spell.slow"],
     ["calcific-touch", "/entities/condition.petrified"],
@@ -854,14 +854,14 @@ describe("local rules browser", () => {
     const construct = constructHtml.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
     expect(bondsResponse.status).toBe(200);
     expect(constructResponse.status).toBe(200);
-    expect(bonds).toContain('href="/entities/rule.grapple"');
-    expect(bonds).not.toContain('href="/entities/rule.grappling"');
-    expect(construct).not.toContain('href="/entities/rule.summon"');
+    expect(bonds).toContain('href="/rules/actions#grapple"');
+    expect(bonds).toContain('href="/entities/condition.grappled"');
+    expect(construct).not.toContain('href="/entities/universal-monster-rule.summon"');
   });
 
   it.each([
-    ["calm-air", "/entities/rule.wind-effects"],
-    ["campfire-wall", "/entities/rule.total-concealment"],
+    ["calm-air", "/entities/environment.wind-effects"],
+    ["campfire-wall", "/entities/concealment.total"],
     ["canopic-conversion", "/spells/spell.geas-quest"],
     ["cast-out", "/rules/magic-schools#compulsion"],
     ["castigate", "/entities/condition.cowering"],
@@ -878,12 +878,12 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["carry-companion", "/entities/rule.touch-attack"],
-    ["catatonia", "/entities/rule.touch-attack"],
-    ["caustic-safeguard", "/entities/rule.touch-attack"],
+    ["carry-companion", "/entities/attack.touch"],
+    ["catatonia", "/entities/attack.touch"],
+    ["caustic-safeguard", "/entities/attack.touch"],
     ["cauterizing-weapon", "/rules/magic-schools#healing"],
-    ["cauterizing-weapon", "/entities/rule.negating"],
-    ["cave-fangs", "/entities/rule.animal"],
+    ["cauterizing-weapon", "/entities/weapon-special-ability.negating"],
+    ["cave-fangs", "/entities/monster-type.animal"],
     ["cave-fangs", "/entities/condition.disabled"],
     ["chain-of-perdition", "/spells/spell.darkness"],
     ["chain-of-perdition", "/spells/spell.invisibility"],
@@ -906,11 +906,11 @@ describe("local rules browser", () => {
 
   it.each([
     ["charons-dispensation", "/spells/spell.mindwipe"],
-    ["cheetahs-sprint", "/entities/rule.fly"],
+    ["cheetahs-sprint", "/entities/skill.fly"],
     ["circle-of-clarity", "/rules/magic-schools#figment"],
     ["claim-identity", "/rules/magic-schools#polymorph"],
-    ["cleanse", "/entities/rule.ability-damage"],
-    ["cleanse", "/entities/rule.poison"],
+    ["cleanse", "/entities/damage.ability-score"],
+    ["cleanse", "/entities/affliction.poison"],
     ["cleansing-fire", "/rules/descriptors#evil"],
   ])("renders fourteenth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
@@ -921,8 +921,8 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["chameleon-stride-greater", "/entities/rule.advanced-players-guide"],
-    ["charnel-house", "/entities/rule.meat"],
+    ["chameleon-stride-greater", "/entities/publication.pathfinder-rpg-advanced-players-guide"],
+    ["charnel-house", "/entities/item.meat"],
   ])("omits fourteenth-batch source artifacts from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -941,13 +941,13 @@ describe("local rules browser", () => {
 
   it.each([
     ["cloak-of-shadows", "/rules/illumination#dim-light"],
-    ["cloak-of-shadows", "/entities/rule.sunlight-vulnerability"],
-    ["cloak-of-winds", "/entities/rule.wind-effects"],
-    ["cloud-shape", "/entities/rule.fly"],
-    ["coin-shot", "/entities/rule.touch-attack"],
+    ["cloak-of-shadows", "/entities/universal-monster-rule.vulnerability"],
+    ["cloak-of-winds", "/entities/environment.wind-effects"],
+    ["cloud-shape", "/entities/skill.fly"],
+    ["coin-shot", "/entities/attack.touch"],
     ["cold-ice-strike", "/rules/descriptors#cold"],
     ["collaborative-thaumaturgy", "/entities/feat.empower-spell"],
-    ["command-undead", "/entities/rule.undead"],
+    ["command-undead", "/entities/monster-type.undead"],
     ["compel-hostility", "/entities/class-feature.eidolon"],
   ])("renders fifteenth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
@@ -958,9 +958,9 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["climbing-beanstalk", "/entities/rule.plant"],
+    ["climbing-beanstalk", "/entities/monster-type.plant"],
     ["cloak-of-secrets", "/spells/spell.identify"],
-    ["cloak-of-winds", "/entities/rule.wind"],
+    ["cloak-of-winds", "/entities/mystery.wind"],
   ])("omits fifteenth-batch semantic false positives from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -980,16 +980,16 @@ describe("local rules browser", () => {
   it.each([
     ["compel-tongue-mass", "/spells/spell.compel-tongue"],
     ["compelling-rant", "/spells/spell.borrow-corruption"],
-    ["concealed-breath", "/entities/rule.drowning"],
+    ["concealed-breath", "/entities/environment.drowning"],
     ["condensed-ether", "/entities/feat.blind-fight"],
-    ["conditional-favor", "/entities/rule.poison"],
+    ["conditional-favor", "/entities/affliction.poison"],
     ["confess", "/entities/condition.sickened"],
     ["confusion-lesser", "/entities/condition.confused"],
     ["conjure-carriage", "/entities/monster.horse"],
     ["constricting-coils", "/entities/monster.snake"],
     ["contact-nalfeshnee", "/entities/monster.nalfeshnee"],
-    ["contact-other-plane", "/entities/rule.intelligence"],
-    ["contagion-greater", "/entities/rule.disease"],
+    ["contact-other-plane", "/entities/ability-score.intelligence"],
+    ["contagion-greater", "/entities/affliction.disease"],
     ["contagious-flame", "/rules/descriptors#fire"],
     ["contest-of-skill", "/classes/fighter"],
     ["contest-of-skill", "/entities/class-feature.weapon-mastery"],
@@ -1006,7 +1006,7 @@ describe("local rules browser", () => {
     const html = await response.text();
     const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
     expect(response.status).toBe(200);
-    expect(description.match(/href="\/entities\/rule.touch-attack"/g)).toHaveLength(1);
+    expect(description.match(/href="\/entities\/attack.touch"/g)).toHaveLength(1);
   });
 
   it("links only Contagious Suggestion's real parent reference", async () => {
@@ -1020,25 +1020,25 @@ describe("local rules browser", () => {
   it.each([
     ["calm-emotions", "/entities/class-feature.inspire-courage"],
     ["calm-emotions", "/entities/class-feature.rage"],
-    ["cloak-of-chaos", "/entities/rule.deflection-bonus"],
-    ["contingent-action", "/entities/rule.ready"],
-    ["contingent-scroll", "/entities/rule.scroll"],
+    ["cloak-of-chaos", "/entities/bonus.deflection"],
+    ["contingent-action", "/rules/actions#ready"],
+    ["contingent-scroll", "/entities/magic-item.scroll.scroll"],
     ["contingent-venom", "/spells/spell.magic-mouth"],
     ["continual-flame", "/entities/item.torch"],
     ["continual-flame", "/rules/descriptors#darkness"],
-    ["control-construct", "/entities/rule.concentration"],
+    ["control-construct", "/entities/spellcasting.concentration"],
     ["control-summoned-creature", "/rules/magic-schools#summoning"],
     ["control-water", "/entities/monster.water-elemental"],
-    ["control-winds", "/entities/rule.wind-effects"],
+    ["control-winds", "/entities/environment.wind-effects"],
     ["controlled-fireball", "/classes/magus"],
     ["controlled-fireball", "/rules/descriptors#ruse"],
     ["coordinated-effort", "/entities/feat.outflank"],
     ["corpse-lanterns", "/rules/illumination#dim-light"],
     ["corpse-lanterns", "/rules/magic-schools#pattern"],
     ["counterbalancing-aura", "/entities/condition.nauseated"],
-    ["countless-eyes", "/entities/rule.flanking"],
-    ["cowards-cowl", "/entities/rule.fear"],
-    ["cowards-lament", "/entities/rule.attack-rolls"],
+    ["countless-eyes", "/entities/combat.flanking"],
+    ["cowards-cowl", "/entities/special-ability.fear"],
+    ["cowards-lament", "/entities/attack.roll"],
   ])("renders seventeenth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -1048,9 +1048,9 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["cloak-of-chaos", "/entities/rule.chaos"],
-    ["corrosive-consumption", "/entities/rule.touch-attack"],
-    ["counterbalancing-aura", "/entities/rule.components"],
+    ["cloak-of-chaos", "/entities/domain.chaos"],
+    ["corrosive-consumption", "/entities/attack.touch"],
+    ["counterbalancing-aura", "/entities/spellcasting.component"],
   ])("omits seventeenth-batch contextual false positives from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -1077,31 +1077,31 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["crafters-curse", "/entities/rule.craft"],
-    ["crafters-fortune", "/entities/rule.luck-bonus"],
+    ["crafters-curse", "/entities/skill.craft"],
+    ["crafters-fortune", "/entities/bonus.luck"],
     ["create-armaments", "/entities/condition.broken"],
     ["create-demiplane-greater", "/spells/spell.create-demiplane"],
     ["create-greater-undead", "/entities/monster.shadow"],
-    ["create-mindscape", "/entities/rule.mindscape"],
+    ["create-mindscape", "/entities/mindscape"],
     ["create-mindscape-greater", "/spells/spell.create-mindscape"],
-    ["create-pit", "/entities/rule.falling-damage"],
+    ["create-pit", "/entities/damage.falling"],
     ["create-soul-gem", "/spells/spell.resurrection"],
     ["create-treasure-map", "/entities/condition.dead"],
     ["create-variant-mummy", "/entities/monster.bog-mummy"],
     ["creeping-doom", "/entities/monster.centipede-swarm"],
-    ["creeping-ice", "/entities/rule.difficult-terrain"],
+    ["creeping-ice", "/entities/terrain.difficult"],
     ["crime-of-opportunity", "/spells/spell.crime-wave"],
-    ["crime-wave", "/entities/rule.teamwork-feats"],
-    ["crimson-breath", "/entities/rule.poison"],
+    ["crime-wave", "/entities/feat.teamwork-feats"],
+    ["crimson-breath", "/entities/affliction.poison"],
     ["crimson-confession", "/spells/spell.detect-magic"],
-    ["crown-of-glory", "/entities/rule.hit-dice"],
+    ["crown-of-glory", "/entities/hit-die"],
     ["cruel-jaunt", "/spells/spell.sense-fear"],
     ["crushing-despair", "/spells/spell.good-hope"],
     ["crushing-hand", "/spells/spell.interposing-hand"],
     ["cultural-adaptation", "/spells/spell.tongues"],
-    ["curative-distillation", "/entities/rule.hit-points"],
+    ["curative-distillation", "/entities/damage.hit-points"],
     ["cure-critical-wounds-mass", "/spells/spell.cure-light-wounds-mass"],
-    ["cure-light-wounds-mass", "/entities/rule.positive-energy"],
+    ["cure-light-wounds-mass", "/entities/energy.positive"],
   ])("renders eighteenth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -1111,13 +1111,13 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["create-demiplane-greater", "/entities/rule.solitude"],
+    ["create-demiplane-greater", "/entities/domain.protection.solitude"],
     ["create-soul-gem", "/spells/spell.expend"],
-    ["create-soul-gem", "/entities/rule.judgment"],
-    ["create-soul-gem", "/entities/rule.unholy"],
+    ["create-soul-gem", "/entities/domain.law.judgment"],
+    ["create-soul-gem", "/entities/weapon-special-ability.unholy"],
     ["creeping-ice", "/spells/spell.slow"],
     ["cruel-jaunt", "/spells/spell.teleport"],
-    ["crushing-despair", "/entities/rule.crushing-despair-modified"],
+    ["crushing-despair", "/entities/spell.crushing-despair-modified"],
   ])("omits eighteenth-batch semantic false positives from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -1169,25 +1169,25 @@ describe("local rules browser", () => {
     ["curse-of-disgust", "/entities/condition.sickened"],
     ["curse-of-dragonflies", "/spells/spell.gaseous-form"],
     ["curse-of-keeping", "/spells/spell.dispel-magic"],
-    ["curse-of-magic-negation", "/entities/rule.spellblight"],
-    ["curse-of-the-outcast", "/entities/rule.attitude"],
-    ["curse-of-unexpected-death", "/entities/rule.touch-attack"],
+    ["curse-of-magic-negation", "/entities/spellblight"],
+    ["curse-of-the-outcast", "/entities/skill.attitude"],
+    ["curse-of-unexpected-death", "/entities/attack.touch"],
     ["curse-water", "/entities/item.unholy-water"],
-    ["cursed-earth", "/entities/rule.shakes"],
+    ["cursed-earth", "/entities/affliction.disease.shakes"],
     ["cursed-treasure", "/spells/spell.bestow-curse"],
-    ["cushioning-bands", "/entities/rule.falling-damage"],
+    ["cushioning-bands", "/entities/damage.falling"],
     ["cyclic-reincarnation", "/spells/spell.reincarnate"],
     ["daemon-ward", "/spells/spell.death-ward"],
     ["damnation", "/rules/descriptors#evil"],
-    ["damnation-of-memory", "/entities/rule.magic-aura-detection"],
+    ["damnation-of-memory", "/entities/aura.magic"],
     ["damp-powder", "/rules/actions#full-round-action"],
-    ["dance-of-a-hundred-cuts", "/entities/rule.caster-level"],
+    ["dance-of-a-hundred-cuts", "/entities/spellcasting.caster-level"],
     ["dance-of-a-thousand-cuts", "/spells/spell.haste"],
     ["dancing-darkness", "/rules/illumination#darkness"],
     ["dancing-lantern", "/entities/item.lantern"],
     ["dancing-lights", "/entities/monster.will-o-wisp"],
     ["dark-light", "/rules/descriptors#light"],
-    ["dark-whispers", "/entities/rule.line-of-effect"],
+    ["dark-whispers", "/entities/spellcasting.line-of-effect"],
   ])("renders nineteenth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -1199,29 +1199,29 @@ describe("local rules browser", () => {
   it.each([
     ["darkvault", "/rules/illumination#levels"],
     ["darkvision-communal", "/spells/spell.darkvision"],
-    ["darkvision-greater", "/entities/rule.darkvision"],
-    ["darting-duplicate", "/entities/rule.attack-of-opportunity"],
-    ["daywalker", "/entities/rule.energy-drain"],
-    ["daze", "/entities/rule.hit-dice"],
+    ["darkvision-greater", "/entities/special-ability.darkvision"],
+    ["darting-duplicate", "/entities/combat.attack-of-opportunity"],
+    ["daywalker", "/entities/energy-drain"],
+    ["daze", "/entities/hit-die"],
     ["daze-mass", "/spells/spell.daze"],
     ["daze-monster", "/spells/spell.daze"],
-    ["dazzling-blade", "/entities/rule.silver"],
+    ["dazzling-blade", "/entities/special-material.silver"],
     ["dazzling-blade-mass", "/spells/spell.dazzling-blade"],
-    ["deadeyes-lore", "/entities/rule.survival"],
+    ["deadeyes-lore", "/entities/skill.survival"],
     ["deadly-finale", "/entities/condition.bleed"],
-    ["deadly-juggernaut", "/entities/rule.damage-reduction"],
+    ["deadly-juggernaut", "/entities/special-ability.damage-reduction"],
     ["deadmans-contingency", "/spells/spell.magic-mouth"],
     ["deafening-song-bolt", "/entities/condition.deaf"],
     ["death-candle", "/entities/monster.fire-elemental"],
     ["death-clutch", "/spells/spell.regenerate"],
     ["death-knell-aura-greater", "/spells/spell.magic-jar"],
     ["death-pact", "/spells/spell.dominate-person"],
-    ["deathwine", "/entities/rule.negative-energy"],
+    ["deathwine", "/entities/energy.negative"],
     ["debilitating-pain", "/entities/condition.stunned"],
     ["debilitating-pain-mass", "/spells/spell.debilitating-pain"],
     ["debilitating-portent", "/classes/witch"],
     ["debilitating-speech", "/rules/actions#full-round-action"],
-    ["decapitate", "/entities/rule.critical-hit"],
+    ["decapitate", "/entities/damage.critical-hit"],
   ])("renders twentieth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -1231,11 +1231,11 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["daywalker", "/entities/rule.touch-attack"],
+    ["daywalker", "/entities/attack.touch"],
     ["daywalker", "/spells/spell.energy-drain"],
     ["daywalker", "/entities/condition.dead"],
-    ["death-candle", "/entities/rule.summon"],
-    ["death-clutch", "/entities/rule.regeneration"],
+    ["death-candle", "/entities/universal-monster-rule.summon"],
+    ["death-clutch", "/entities/universal-monster-rule.regeneration"],
   ])("omits twentieth-batch semantic false positives from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
@@ -1249,7 +1249,7 @@ describe("local rules browser", () => {
     const html = await response.text();
     const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
     expect(description.match(/href="\/spells\/spell.darkvision"/g)).toHaveLength(1);
-    expect(description.match(/href="\/entities\/rule.darkvision"/g)).toHaveLength(1);
+    expect(description.match(/href="\/entities\/special-ability.darkvision"/g)).toHaveLength(1);
   });
 
   it.each([
@@ -1257,23 +1257,23 @@ describe("local rules browser", () => {
     ["companion-life-link", "/rules/actions#free-action"],
     ["deceitful-veneer", "/spells/spell.discern-lies"],
     ["deceptive-redundancy", "/spells/spell.dispel-magic"],
-    ["decollate", "/entities/rule.damage-reduction"],
-    ["decompose-corpse", "/entities/rule.undead"],
+    ["decollate", "/entities/special-ability.damage-reduction"],
+    ["decompose-corpse", "/entities/monster-type.undead"],
     ["decrepit-disguise", "/spells/spell.quintessence"],
     ["deeper-darkness", "/rules/descriptors#darkness"],
-    ["defending-bone", "/entities/rule.damage-reduction"],
+    ["defending-bone", "/entities/special-ability.damage-reduction"],
     ["defensive-grace", "/entities/class-feature.inspiration"],
     ["defensive-shock", "/rules/descriptors#electricity"],
-    ["deflect-blame", "/entities/rule.bluff"],
+    ["deflect-blame", "/entities/skill.bluff"],
     ["deflection", "/rules/descriptors#force"],
-    ["defoliate", "/entities/rule.negative-energy"],
-    ["deft-digits", "/entities/rule.line-of-sight"],
+    ["defoliate", "/entities/energy.negative"],
+    ["deft-digits", "/entities/spellcasting.line-of-sight"],
     ["deja-vu", "/rules/actions#full-round-action"],
-    ["delay-disease", "/entities/rule.disease"],
+    ["delay-disease", "/entities/affliction.disease"],
     ["delay-pain", "/rules/descriptors#pain"],
     ["delay-poison-communal", "/spells/spell.delay-poison"],
     ["delayed-blast-fireball", "/rules/descriptors#fire"],
-    ["delectable-flesh", "/entities/rule.ability-check"],
+    ["delectable-flesh", "/entities/ability-score.check"],
     ["delusional-pride", "/rules/saving-throws"],
     ["demand", "/spells/spell.sending"],
     ["demand-offering", "/rules/actions#immediate-action"],
@@ -1287,7 +1287,7 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["blood-salvation", "/entities/rule.pathfinder-player-companion-advanced-class-origins"],
+    ["blood-salvation", "/entities/publication.pathfinder-player-companion-advanced-class-origins"],
     ["decollate", "/entities/condition.dead"],
   ])("omits twenty-first-batch semantic false positives from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
@@ -1314,29 +1314,29 @@ describe("local rules browser", () => {
 
   it.each([
     ["demanding-message-mass", "/spells/spell.demanding-message"],
-    ["denounce", "/entities/rule.line-of-sight"],
+    ["denounce", "/entities/spellcasting.line-of-sight"],
     ["depilate", "/spells/spell.break-enchantment"],
-    ["destabilize-powder", "/entities/rule.firearm"],
+    ["destabilize-powder", "/entities/weapon-category.firearm"],
     ["destroy-robot", "/rules/saving-throws"],
     ["destruction", "/spells/spell.true-resurrection"],
     ["detect-aberration", "/spells/spell.detect-animals-or-plants"],
-    ["detect-animals-or-plants", "/entities/rule.hit-points"],
+    ["detect-animals-or-plants", "/entities/damage.hit-points"],
     ["detect-anxieties", "/spells/spell.detect-thoughts"],
     ["detect-chaos", "/spells/spell.detect-evil"],
     ["detect-charm", "/spells/spell.detect-magic"],
-    ["detect-demon", "/entities/rule.hit-dice"],
-    ["detect-desires", "/entities/rule.circumstance-bonus"],
-    ["detect-evil", "/entities/rule.line-of-sight"],
+    ["detect-demon", "/entities/hit-die"],
+    ["detect-desires", "/entities/bonus.circumstance"],
+    ["detect-evil", "/entities/spellcasting.line-of-sight"],
     ["detect-fiendish-presence", "/entities/deity.asmodeus"],
     ["detect-good", "/spells/spell.detect-evil"],
     ["detect-law", "/spells/spell.detect-evil"],
     ["detect-magic-greater", "/spells/spell.detect-magic"],
-    ["detect-metal", "/entities/rule.silver"],
+    ["detect-metal", "/entities/special-material.silver"],
     ["detect-mindscape", "/spells/spell.detect-thoughts"],
-    ["detect-poison", "/entities/rule.poison"],
+    ["detect-poison", "/entities/affliction.poison"],
     ["detect-psychic-significance", "/spells/spell.charge-object"],
-    ["detect-radiation", "/entities/rule.radiation"],
-    ["detect-relations", "/rules/saving-throws#will-saving-throw"],
+    ["detect-radiation", "/entities/hazard.radiation"],
+    ["detect-relations", "/rules/saving-throws#will"],
     ["detect-snares-and-pits", "/spells/spell.snare"],
   ])("renders twenty-second-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
@@ -1348,7 +1348,7 @@ describe("local rules browser", () => {
 
   it.each([
     ["detect-psychic-significance", "/spells/spell.detect-magic"],
-    ["detect-radiation", "/entities/rule.see-in-darkness"],
+    ["detect-radiation", "/entities/universal-monster-rule.see-in-darkness"],
     ["detect-snares-and-pits", "/spells/spell.detect-magic"],
   ])("omits twenty-second-batch semantic false positives from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
@@ -1374,29 +1374,29 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["detect-the-faithful", "/entities/rule.line-of-sight"],
-    ["detect-thoughts", "/entities/rule.intelligence"],
+    ["detect-the-faithful", "/entities/spellcasting.line-of-sight"],
+    ["detect-thoughts", "/entities/ability-score.intelligence"],
     ["determine-depth", "/spells/spell.passwall"],
     ["detonate", "/rules/descriptors#acid"],
-    ["detoxify", "/entities/rule.poison"],
+    ["detoxify", "/entities/affliction.poison"],
     ["devil-snare", "/spells/spell.dimensional-anchor"],
     ["diagnose-disease", "/entities/condition.sickened"],
     ["die-for-your-master", "/spells/spell.bleed-for-your-master"],
     ["dimensional-anchor", "/spells/spell.astral-projection"],
     ["dimensional-blade", "/spells/spell.mage-armor"],
-    ["dimensional-bounce", "/entities/rule.line-of-effect"],
+    ["dimensional-bounce", "/entities/spellcasting.line-of-effect"],
     ["diminish-plants", "/spells/spell.entangle"],
     ["diminish-resistance", "/rules/descriptors#sonic"],
     ["diminished-detection", "/spells/spell.detect-magic"],
-    ["disable-construct", "/entities/rule.immunity-to-magic"],
+    ["disable-construct", "/entities/universal-monster-rule.immunity-to-magic"],
     ["discern-location", "/rules/magic-schools#scrying"],
-    ["discharge", "/entities/rule.robot"],
+    ["discharge", "/entities/creature-subtype.robot"],
     ["discharge-greater", "/spells/spell.discharge"],
     ["discovery-torch", "/rules/illumination#bright-light"],
     ["disguise-other", "/spells/spell.disguise-self"],
-    ["disguise-self", "/entities/rule.creature-type"],
+    ["disguise-self", "/entities/monster-type"],
     ["disguise-weapon", "/entities/item.greatsword"],
-    ["dismissal", "/entities/rule.extraplanar"],
+    ["dismissal", "/entities/creature-subtype.extraplanar"],
     ["dispel-balance", "/spells/spell.dispel-magic"],
     ["dispel-chaos", "/spells/spell.dispel-evil"],
   ])("renders twenty-third-batch links for spell %s", async (slug, target) => {
@@ -1431,25 +1431,25 @@ describe("local rules browser", () => {
   });
 
   it.each([
-    ["dispel-evil", "/entities/rule.touch-attack"],
+    ["dispel-evil", "/entities/attack.touch"],
     ["dispel-good", "/spells/spell.dispel-evil"],
     ["dispel-law", "/spells/spell.dispel-evil"],
     ["dispel-magic-greater", "/spells/spell.dispel-magic"],
-    ["displacement", "/entities/rule.total-concealment"],
+    ["displacement", "/entities/concealment.total"],
     ["display-aversion", "/spells/spell.minor-image"],
     ["disrupt-link", "/entities/class-feature.animal-companion"],
     ["disrupt-silence", "/spells/spell.silence"],
-    ["disrupting-weapon", "/entities/rule.undead"],
+    ["disrupting-weapon", "/entities/monster-type.undead"],
     ["dissolution", "/spells/spell.miracle"],
-    ["distracting-cacophony", "/entities/rule.concentration"],
-    ["distressing-tone", "/entities/rule.critical-hit"],
+    ["distracting-cacophony", "/entities/spellcasting.concentration"],
+    ["distressing-tone", "/entities/damage.critical-hit"],
     ["divide-mind", "/rules/actions#swift-action"],
     ["divination", "/spells/spell.augury"],
-    ["divine-arrow", "/entities/rule.lay-on-hands"],
-    ["divine-power", "/entities/rule.speed-weapon"],
-    ["divine-transfer", "/entities/rule.hit-points"],
+    ["divine-arrow", "/entities/class-feature.lay-on-hands"],
+    ["divine-power", "/entities/weapon-special-ability.speed-weapon"],
+    ["divine-transfer", "/entities/damage.hit-points"],
     ["divine-vessel", "/rules/descriptors#acid"],
-    ["dominate-animal", "/entities/rule.animal"],
+    ["dominate-animal", "/entities/monster-type.animal"],
     ["dominate-monster", "/spells/spell.dominate-person"],
     ["domination-link", "/spells/spell.detect-thoughts"],
     ["dousing-rain", "/rules/descriptors#electricity"],
@@ -1480,9 +1480,9 @@ describe("local rules browser", () => {
         )?.[1] ?? ""),
     );
     expect(descriptions[0]!.match(/href="\/spells\/spell.silence"/g)).toHaveLength(1);
-    expect(descriptions[1]!.match(/href="\/entities\/rule.total-concealment"/g)).toHaveLength(2);
+    expect(descriptions[1]!.match(/href="\/entities\/concealment.total"/g)).toHaveLength(2);
     expect(descriptions[2]!.match(/href="\/rules\/descriptors#cold"/g)).toHaveLength(3);
-    expect(descriptions[2]!.match(/href="\/entities\/rule.good"/g)).toHaveLength(3);
+    expect(descriptions[2]!.match(/href="\/entities\/creature-subtype.good"/g)).toHaveLength(3);
     for (const description of descriptions.slice(3)) {
       expect(description).not.toContain('>touch</a>');
     }
@@ -1503,14 +1503,14 @@ describe("local rules browser", () => {
         )?.[1] ?? ""),
     );
 
-    expect(descriptions[0]!.match(/href="\/entities\/rule.touch-attack"/g))
+    expect(descriptions[0]!.match(/href="\/entities\/attack.touch"/g))
       .toHaveLength(3);
     expect(descriptions[0]).toContain('href="/rules/descriptors#air"');
     expect(descriptions[1]).toContain('<table class="data-table rich-text-table">');
     expect(descriptions[1]).toContain('href="/spells/spell.curse-terrain-supreme"');
     expect(descriptions[1]).not.toContain('href="/spells/spell.curse-terrain-lesser"');
     expect(descriptions[2]).toContain('<table class="data-table rich-text-table">');
-    expect(descriptions[2]).toContain('href="/entities/rule.undead"');
+    expect(descriptions[2]).toContain('href="/entities/monster-type.undead"');
     expect(descriptions[3]!.match(/href="\/spells\/spell.dream"/g)).toHaveLength(1);
     expect(descriptions[3]).toContain('aria-label="Spell description table 1 of 2"');
     expect(descriptions[3]).toContain('aria-label="Spell description table 2 of 2"');
@@ -1536,9 +1536,9 @@ describe("local rules browser", () => {
     expect(descriptions[0]).toContain('href="/spells/spell.wall-of-force"');
     expect(descriptions[1]).not.toContain('href="/spells/spell.snare"');
     expect(descriptions[2]).toContain('href="/rules/descriptors#acid"');
-    expect(descriptions[2]).not.toContain('href="/entities/rule.elemental"');
+    expect(descriptions[2]).not.toContain('href="/entities/creature-subtype.elemental"');
     expect(descriptions[3]).toContain('href="/rules/descriptors#fire"');
-    expect(descriptions[3]).toContain('href="/entities/rule.fire"');
+    expect(descriptions[3]).toContain('href="/entities/creature-subtype.fire"');
     expect(descriptions[4]).toContain('<table class="data-table rich-text-table">');
   });
 
@@ -1558,13 +1558,13 @@ describe("local rules browser", () => {
         )?.[1] ?? ""),
     );
 
-    expect(descriptions[0]).toContain('href="/entities/rule.fire"');
+    expect(descriptions[0]).toContain('href="/entities/creature-subtype.fire"');
     expect(descriptions[0]).not.toContain('href="/rules/descriptors#fire"');
     expect(descriptions[1]).toContain('href="/spells/spell.greater-magic-weapon"');
     expect(descriptions[2]!.match(/href="\/rules\/magic-schools#enchantment"/g))
       .toHaveLength(4);
     expect(descriptions[3]).toContain('href="/entities/condition.deaf"');
-    expect(descriptions[4]!.match(/href="\/entities\/rule.attitude"/g)).toHaveLength(6);
+    expect(descriptions[4]!.match(/href="\/entities\/skill.attitude"/g)).toHaveLength(6);
   });
 
   it("renders Batch 28 state, plane, and subschool links without false positives", async () => {
@@ -1585,11 +1585,11 @@ describe("local rules browser", () => {
 
     expect(descriptions[0]!.match(/href="\/spells\/spell.alarm"/g)).toHaveLength(1);
     expect(descriptions[1]).not.toContain('href="/spells/spell.etherealness"');
-    expect(descriptions[1]!.match(/href="\/entities\/rule.ethereal"/g)).toHaveLength(2);
+    expect(descriptions[1]!.match(/href="\/entities\/special-ability.ethereal"/g)).toHaveLength(2);
     expect(descriptions[2]).not.toContain('href="/entities/condition.disabled"');
     expect(descriptions[3]).toContain('href="/rules/magic-schools#figment"');
     expect(descriptions[3]).toContain('href="/entities/item.rod-of-cancellation"');
-    expect(descriptions[4]!.match(/href="\/entities\/rule.attitude"/g)).toHaveLength(1);
+    expect(descriptions[4]!.match(/href="\/entities\/skill.attitude"/g)).toHaveLength(1);
   });
 
   it("renders Batch 29 abilities, source tables, and scrying links semantically", async () => {
@@ -1610,7 +1610,7 @@ describe("local rules browser", () => {
 
     expect(descriptions[0]).not.toContain('href="/spells/spell.vortex"');
     expect(descriptions[1]!.match(/href="\/spells\/spell.erase"/g)).toHaveLength(1);
-    expect(descriptions[1]).toContain('href="/entities/rule.disable-device"');
+    expect(descriptions[1]).toContain('href="/entities/skill.disable-device"');
     expect(descriptions[2]).toContain('<table class="data-table rich-text-table">');
     expect(descriptions[3]!.match(/href="\/spells\/spell.false-resurrection"/g))
       .toHaveLength(2);
@@ -1630,10 +1630,10 @@ describe("local rules browser", () => {
       )?.[1] ?? ""),
     );
 
-    expect(descriptions[0]).toContain('href="/entities/rule.fast-healing"');
+    expect(descriptions[0]).toContain('href="/entities/universal-monster-rule.fast-healing"');
     expect(descriptions[0]).not.toContain('href="/spells/spell.blood-rage"');
     expect(descriptions[0]).not.toContain('href="/spells/spell.resistance"');
-    expect(descriptions[1]).toContain('href="/entities/rule.concealment"');
+    expect(descriptions[1]).toContain('href="/entities/concealment"');
     expect(descriptions[1]).not.toContain('href="/spells/spell.poison"');
     expect(descriptions[2]!.match(/href="\/spells\/spell.maze"/g)).toHaveLength(2);
   });
@@ -1643,12 +1643,12 @@ describe("local rules browser", () => {
     const html = await response.text();
     const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
     expect(response.status).toBe(200);
-    expect(description.match(/href="\/entities\/rule.touch-attack"/g)).toHaveLength(2);
+    expect(description.match(/href="\/entities\/attack.touch"/g)).toHaveLength(2);
   });
 
   it.each([
     ["curse-of-dragonflies", "/classes/medium"],
-    ["cursed-treasure", "/entities/rule.touch-attack"],
+    ["cursed-treasure", "/entities/attack.touch"],
     ["damnation-of-memory", "/spells/spell.magic-aura"],
   ])("omits nineteenth-batch semantic false positives from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
@@ -1712,10 +1712,10 @@ describe("local rules browser", () => {
       "/rules/illumination#normal-light",
       "/rules/illumination#dim-light",
       "/rules/illumination#darkness",
-      "/entities/rule.light-vulnerability",
-      "/entities/rule.light-sensitivity",
-      "/entities/rule.concealment",
-      "/entities/rule.total-concealment",
+      "/entities/universal-monster-rule.vulnerability",
+      "/entities/universal-monster-rule.light-sensitivity",
+      "/entities/concealment",
+      "/entities/concealment.total",
       "/entities/item.torch",
       "/entities/item.lantern",
     ]) expect(description).toContain(`href="${target}"`);

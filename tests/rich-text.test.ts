@@ -284,9 +284,9 @@ describe("rich-text schema and source parsing", () => {
     expect(darkness.relationships.map((item: ValidatedJson) => item.target.entity_id))
       .not.toEqual(expect.arrayContaining([
         "publication.pathfinder-rpg-mythic-adventures",
-        "rule.human",
-        "rule.mythic-adventures-pg-90",
-        "rule.see-in-darkness",
+        "race.human",
+        "publication.mythic-adventures-pg-90",
+        "universal-monster-rule.see-in-darkness",
         "rule.source",
       ]));
   });
@@ -336,7 +336,7 @@ describe("rich-text schema and source parsing", () => {
     const damnationOfMemory = canonical("damnation-of-memory");
     expect(damnationOfMemory.relationships).toContainEqual(expect.objectContaining({
       relationship_id:
-        "spell.damnation-of-memory:uses_definition:rule.magic-aura-detection",
+        "spell.damnation-of-memory:uses_definition:aura.magic",
       type: "uses_definition",
       status: "accepted",
     }));
@@ -345,14 +345,14 @@ describe("rich-text schema and source parsing", () => {
 
     const curseOfDragonflies = canonical("curse-of-dragonflies");
     expect(curseOfDragonflies.relationships).toContainEqual(expect.objectContaining({
-      relationship_id: "spell.curse-of-dragonflies:uses_definition:rule.medium",
+      relationship_id: "spell.curse-of-dragonflies:uses_definition:class.medium",
       status: "rejected",
     }));
 
     const daemonWard = canonical("daemon-ward");
     expect(daemonWard.relationships).toContainEqual(expect.objectContaining({
       relationship_id:
-        "spell.daemon-ward:uses_definition:rule.pathfinder-campaign-setting-horsemen-of-the-apocalypse-book-of-the-damned-vol-3",
+        "spell.daemon-ward:uses_definition:publication.pathfinder-campaign-setting-horsemen-of-the-apocalypse-book-of-the-damned-vol-3",
       status: "rejected",
     }));
   });
@@ -361,17 +361,17 @@ describe("rich-text schema and source parsing", () => {
     const greaterDarkvision = canonical("darkvision-greater");
     const greaterDocument = JSON.stringify(greaterDarkvision.description.document);
     expect(greaterDocument.match(/functions_like:spell\.darkvision/g)).toHaveLength(1);
-    expect(greaterDocument.match(/uses_definition:rule\.darkvision/g)).toHaveLength(1);
+    expect(greaterDocument.match(/uses_definition:special-ability\.darkvision/g)).toHaveLength(1);
 
     const daywalker = canonical("daywalker");
     expect(daywalker.relationships).toContainEqual(expect.objectContaining({
-      relationship_id: "spell.daywalker:uses_definition:rule.energy-drain",
+      relationship_id: "spell.daywalker:uses_definition:energy-drain",
       status: "accepted",
     }));
     for (const relationshipId of [
       "spell.daywalker:uses_definition:condition.dead",
-      "spell.daywalker:uses_definition:rule.touch-attack",
-      "spell.daywalker:uses_definition:rule.unholy-water",
+      "spell.daywalker:uses_definition:attack.touch",
+      "spell.daywalker:uses_definition:item.unholy-water",
     ]) {
       expect(daywalker.relationships).toContainEqual(expect.objectContaining({
         relationship_id: relationshipId,
@@ -385,7 +385,7 @@ describe("rich-text schema and source parsing", () => {
       status: "accepted",
     }));
     expect(deathCandle.relationships).toContainEqual(expect.objectContaining({
-      relationship_id: "spell.death-candle:uses_definition:rule.summon",
+      relationship_id: "spell.death-candle:uses_definition:universal-monster-rule.summon",
       status: "rejected",
     }));
 
@@ -396,7 +396,7 @@ describe("rich-text schema and source parsing", () => {
     }));
     expect(greaterAura.relationships).toContainEqual(expect.objectContaining({
       relationship_id:
-        "spell.death-knell-aura-greater:uses_definition:rule.pathfinder-campaign-setting-horsemen-of-the-apocalypse-book-of-the-damned-vol-3",
+        "spell.death-knell-aura-greater:uses_definition:publication.pathfinder-campaign-setting-horsemen-of-the-apocalypse-book-of-the-damned-vol-3",
       status: "rejected",
     }));
   });
@@ -422,7 +422,7 @@ describe("rich-text schema and source parsing", () => {
     const bloodSalvation = canonical("blood-salvation");
     expect(bloodSalvation.relationships).toContainEqual(expect.objectContaining({
       relationship_id:
-        "spell.blood-salvation:uses_definition:rule.pathfinder-player-companion-advanced-class-origins",
+        "spell.blood-salvation:uses_definition:publication.pathfinder-player-companion-advanced-class-origins",
       status: "rejected",
     }));
 
@@ -467,7 +467,7 @@ describe("rich-text schema and source parsing", () => {
 
     const radiation = canonical("detect-radiation");
     expect(radiation.relationships).toContainEqual(expect.objectContaining({
-      relationship_id: "spell.detect-radiation:uses_definition:rule.see-in-darkness",
+      relationship_id: "spell.detect-radiation:uses_definition:universal-monster-rule.see-in-darkness",
       status: "rejected",
     }));
 
@@ -481,11 +481,11 @@ describe("rich-text schema and source parsing", () => {
 
     const greaterPublicationLinks = greaterDetectMagic.relationships.filter(
       (relationship: Record<string, unknown>) => [
-        "spell.detect-magic-greater:uses_definition:rule.pathfinder-roleplaying-game-ultimate-intrigue",
-        "spell.detect-magic-greater:uses_definition:rule.pzo1134",
+        "spell.detect-magic-greater:uses_definition:publication.pathfinder-rpg-ultimate-intrigue",
+        "spell.detect-magic-greater:uses_definition:publication.pathfinder-rpg-ultimate-intrigue",
       ].includes(String(relationship.relationship_id)),
     );
-    expect(greaterPublicationLinks).toHaveLength(2);
+    expect(greaterPublicationLinks).toHaveLength(1);
     expect(greaterPublicationLinks.every(
       (relationship: Record<string, unknown>) => relationship.status === "rejected",
     )).toBe(true);
@@ -530,19 +530,19 @@ describe("rich-text schema and source parsing", () => {
     }
 
     const displacement = JSON.stringify(canonical("displacement").description.document);
-    expect(displacement.match(/uses_definition:rule\.total-concealment/g)).toHaveLength(2);
-    expect(displacement).not.toContain("uses_definition:rule.concealment");
+    expect(displacement.match(/uses_definition:concealment\.total/g)).toHaveLength(2);
+    expect(displacement).not.toContain('uses_definition:concealment"');
 
     const divinePower = JSON.stringify(canonical("divine-power").description.document);
-    expect(divinePower).toContain("uses_definition:rule.speed-weapon");
-    expect(divinePower).not.toContain('"relationship_id":"spell.divine-power:uses_definition:rule.speed"');
+    expect(divinePower).toContain("uses_definition:weapon-special-ability.speed-weapon");
+    expect(divinePower).not.toContain('"relationship_id":"spell.divine-power:uses_definition:movement.speed"');
 
     const divineVessel = JSON.stringify(canonical("divine-vessel").description.document);
     expect(divineVessel.match(/uses_definition:descriptor\.cold/g)).toHaveLength(3);
-    expect(divineVessel.match(/uses_definition:rule\.good/g)).toHaveLength(3);
+    expect(divineVessel.match(/uses_definition:creature-subtype\.good/g)).toHaveLength(3);
 
     const dominateAnimal = JSON.stringify(canonical("dominate-animal").description.document);
-    expect(dominateAnimal.match(/uses_definition:rule\.animal/g)).toHaveLength(4);
+    expect(dominateAnimal.match(/uses_definition:monster-type\.animal/g)).toHaveLength(4);
     expect(dominateAnimal).toContain('"node_type":"text","value":"animal","marks":["italic"]');
 
     const draconicAlly = JSON.stringify(canonical("draconic-ally").description.document);
@@ -556,15 +556,15 @@ describe("rich-text schema and source parsing", () => {
 
   it("keeps Batch 25 tables, homonyms, and canonical destinations distinct", () => {
     const ceremony = JSON.stringify(canonical("ceremony").description.document);
-    expect(ceremony.match(/uses_definition:rule\.touch-attack/g)).toHaveLength(3);
+    expect(ceremony.match(/uses_definition:attack\.touch/g)).toHaveLength(3);
     for (const target of [
       "descriptor.air",
       "descriptor.earth",
       "descriptor.fire",
       "descriptor.light",
       "descriptor.water",
-      "rule.profane-bonus",
-      "rule.swarm",
+      "bonus.profane",
+      "creature-subtype.swarm",
     ]) expect(ceremony).toContain(`uses_definition:${target}`);
     for (const descriptor of ["air", "earth", "fire", "light", "water"]) {
       expect(ceremony.match(new RegExp(`uses_definition:descriptor\\.${descriptor}`, "g")))
@@ -579,17 +579,17 @@ describe("rich-text schema and source parsing", () => {
       (block: Record<string, unknown>) => block.node_type === "table",
     )).toHaveLength(1);
     expect(JSON.stringify(detectUndead.description.document).match(
-      /uses_definition:rule\.undead/g,
+      /uses_definition:monster-type\.undead/g,
     )).toHaveLength(9);
 
     for (const slug of ["drain-poison", "dream-voyage"]) {
       const spell = canonical(slug);
       expect(spell.relationships).toContainEqual(expect.objectContaining({
-        relationship_id: `spell.${slug}:uses_definition:rule.touch-attack`,
+        relationship_id: `spell.${slug}:uses_definition:attack.touch`,
         status: "rejected",
       }));
       expect(JSON.stringify(spell.description.document)).not.toContain(
-        `spell.${slug}:uses_definition:rule.touch-attack`,
+        `spell.${slug}:uses_definition:attack.touch`,
       );
     }
 
@@ -629,23 +629,23 @@ describe("rich-text schema and source parsing", () => {
     expect(JSON.stringify(snare.description.document)).not.toContain("references:spell.snare");
 
     const aura = JSON.stringify(canonical("elemental-aura").description.document);
-    expect(aura).not.toContain("uses_definition:rule.elemental");
+    expect(aura).not.toContain("uses_definition:creature-subtype.elemental");
     for (const descriptor of ["acid", "cold", "electricity", "fire"]) {
       expect(aura).toContain(`uses_definition:descriptor.${descriptor}`);
     }
 
     const speech = JSON.stringify(canonical("elemental-speech").description.document);
-    expect(speech.match(/uses_definition:rule\.elemental/g)).toHaveLength(2);
+    expect(speech.match(/uses_definition:creature-subtype\.elemental/g)).toHaveLength(2);
     for (const element of ["air", "earth", "fire", "water"]) {
       expect(speech).toContain(`uses_definition:descriptor.${element}`);
-      expect(speech).toContain(`uses_definition:rule.${element}`);
+      expect(speech).toContain(`uses_definition:creature-subtype.${element}`);
     }
 
     expect(canonical("elemental-mastery").description.document.content.filter(
       (block: Record<string, unknown>) => block.node_type === "table",
     )).toHaveLength(1);
     expect(JSON.stringify(canonical("eaglesoul").description.document))
-      .toContain("uses_definition:rule.energy-resistance");
+      .toContain("uses_definition:special-ability.energy-resistance");
     for (const tier of ["ii", "iii", "iv", "v"]) {
       expect(JSON.stringify(canonical(`ego-whip-${tier}`).description.document))
         .toContain("functions_like:spell.ego-whip-i");
@@ -655,10 +655,10 @@ describe("rich-text schema and source parsing", () => {
   it("keeps Batch 27 planes, subtypes, titles, and attitudes distinct", () => {
     const swarm = canonical("elemental-swarm");
     const swarmDocument = JSON.stringify(swarm.description.document);
-    expect(swarmDocument.match(/uses_definition:rule\.elemental/g)).toHaveLength(7);
+    expect(swarmDocument.match(/uses_definition:creature-subtype\.elemental/g)).toHaveLength(7);
     expect(swarmDocument).toContain('"node_type":"text","value":"Elemental"');
     for (const subtype of ["air", "earth", "fire", "water"]) {
-      expect(swarmDocument).toContain(`uses_definition:rule.${subtype}`);
+      expect(swarmDocument).toContain(`uses_definition:creature-subtype.${subtype}`);
     }
     expect(swarm.relationships).toContainEqual(expect.objectContaining({
       relationship_id: "spell.elemental-swarm:uses_definition:descriptor.fire",
@@ -667,7 +667,7 @@ describe("rich-text schema and source parsing", () => {
 
     const greed = JSON.stringify(canonical("emblem-of-greed").description.document);
     expect(greed).toContain("references:spell.greater-magic-weapon");
-    expect(greed).not.toContain("uses_definition:rule.greater-magic-weapon");
+    expect(greed).not.toContain("uses_definition:spell.greater-magic-weapon");
 
     const sight = JSON.stringify(canonical("enchantment-sight").description.document);
     expect(sight.match(/uses_definition:magic-school\.enchantment/g)).toHaveLength(4);
@@ -681,7 +681,7 @@ describe("rich-text schema and source parsing", () => {
     expect(siege).not.toContain("uses_definition:condition.deafened");
 
     expect(JSON.stringify(canonical("enthrall").description.document).match(
-      /uses_definition:rule\.attitude/g,
+      /uses_definition:skill\.attitude/g,
     )).toHaveLength(6);
     expect(JSON.stringify(canonical("enemys-heart").description.document))
       .toContain("functions_like:spell.death-knell");
@@ -694,31 +694,31 @@ describe("rich-text schema and source parsing", () => {
   it("keeps Batch 28 rules terms distinct from ordinary verbs and state nouns", () => {
     const alarm = JSON.stringify(canonical("escape-alarm").description.document);
     expect(alarm.match(/functions_like:spell\.alarm/g)).toHaveLength(1);
-    expect(alarm).toContain("uses_definition:rule.caster-level");
+    expect(alarm).toContain("uses_definition:spellcasting.caster-level");
 
     const fists = canonical("ethereal-fists");
     const fistsDocument = JSON.stringify(fists.description.document);
     expect(fistsDocument).not.toContain("references:spell.etherealness");
-    expect(fistsDocument.match(/uses_definition:rule\.ethereal"/g)).toHaveLength(2);
-    expect(fistsDocument).toContain("uses_definition:rule.ethereal-plane");
-    expect(fistsDocument).toContain("uses_definition:rule.material-plane");
-    expect(fistsDocument).toContain("uses_definition:rule.unarmed-strike");
+    expect(fistsDocument.match(/uses_definition:special-ability\.ethereal"/g)).toHaveLength(2);
+    expect(fistsDocument).toContain("uses_definition:plane.ethereal");
+    expect(fistsDocument).toContain("uses_definition:plane.material");
+    expect(fistsDocument).toContain("uses_definition:weapon.strike-unarmed");
 
     const lens = JSON.stringify(canonical("evaluators-lens").description.document);
     expect(lens).toContain("uses_definition:subschool.figment");
-    expect(lens).not.toContain("uses_definition:rule.figment");
+    expect(lens).not.toContain("uses_definition:magic-school.illusion.figment");
     expect(lens).toContain("uses_definition:item.rod-of-cancellation");
-    expect(lens).toContain("uses_definition:rule.artifact");
+    expect(lens).toContain("uses_definition:magic-item.artifact.artifact");
 
     const tranquility = JSON.stringify(canonical("euphoric-tranquility").description.document);
-    expect(tranquility).toContain('"value":"Helpful","relationship_id":"spell.euphoric-tranquility:uses_definition:rule.attitude"');
+    expect(tranquility).toContain('"value":"Helpful","relationship_id":"spell.euphoric-tranquility:uses_definition:skill.attitude"');
 
     const shards = canonical("etheric-shards");
     expect(JSON.stringify(shards.description.document)).not.toContain(
       "uses_definition:condition.disabled",
     );
     for (const [slug, relationshipId] of [
-      ["ether-step", "spell.ether-step:uses_definition:rule.dodge"],
+      ["ether-step", "spell.ether-step:uses_definition:bonus.dodge"],
       ["ethereal-envelope", "spell.ethereal-envelope:uses_definition:condition.broken"],
       ["ethereal-fists", "spell.ethereal-fists:references:spell.etherealness"],
       ["etheric-shards", "spell.etheric-shards:uses_definition:condition.broken"],
@@ -735,22 +735,21 @@ describe("rich-text schema and source parsing", () => {
     const blood = canonical("expel-blood");
     const bloodDocument = JSON.stringify(blood.description.document);
     expect(bloodDocument).not.toContain("references:spell.vortex");
-    expect(bloodDocument).not.toContain("uses_definition:rule.water-elementals");
-    expect(bloodDocument.match(/uses_definition:rule\.water-elemental"/g)).toHaveLength(7);
+    expect(bloodDocument.match(/uses_definition:monster\.water-elemental"/g)).toHaveLength(7);
 
     const runes = JSON.stringify(canonical("explosive-runes").description.document);
     expect(runes.match(/references:spell\.erase/g)).toHaveLength(1);
     for (const target of [
       "descriptor.force",
-      "rule.disable-device",
-      "rule.perception",
-      "rule.trap",
-      "rule.trapfinding",
+      "skill.disable-device",
+      "skill.perception",
+      "trap.trap",
+      "class-feature.trapfinding",
     ]) expect(runes).toContain(`uses_definition:${target}`);
 
     const accompaniment = JSON.stringify(canonical("exquisite-accompaniment").description.document);
     expect(accompaniment).not.toContain("references:spell.teleport");
-    expect(accompaniment).not.toContain("rule.bardic-performances");
+    expect(accompaniment.match(/class-feature\.bardic-performance/g)).toHaveLength(3);
 
     expect(JSON.stringify(canonical("fairy-ring-retreat").description.document))
       .toContain("functions_like:spell.unseen-servant");
@@ -776,7 +775,7 @@ describe("rich-text schema and source parsing", () => {
     for (const [slug, relationshipId] of [
       ["expel-blood", "spell.expel-blood:references:spell.vortex"],
       ["exquisite-accompaniment", "spell.exquisite-accompaniment:references:spell.teleport"],
-      ["fairy-ring-retreat", "spell.fairy-ring-retreat:uses_definition:rule.animal"],
+      ["fairy-ring-retreat", "spell.fairy-ring-retreat:uses_definition:monster-type.animal"],
     ] as const) {
       expect(canonical(slug).relationships).toContainEqual(expect.objectContaining({
         relationship_id: relationshipId,
@@ -800,7 +799,7 @@ describe("rich-text schema and source parsing", () => {
 
     const fieryBody = JSON.stringify(canonical("fiery-body").description.document);
     expect(fieryBody).not.toContain("references:spell.poison");
-    expect(fieryBody).toContain("uses_definition:rule.concealment");
+    expect(fieryBody).toContain("uses_definition:concealment");
 
     for (const [slug, relationshipId] of [
       ["familiar-melding", "spell.familiar-melding:uses_definition:condition.dead"],
@@ -834,8 +833,8 @@ describe("rich-text relationship enrichment", () => {
   it("links repeated terms and chooses longest non-overlapping phrases", () => {
     const source = parseRichTextHtml("negative levels, negative level, and negative levels");
     const result = linkRichTextDocument(source, [
-      relationship("spell.test:uses_definition:rule.negative-level", "uses_definition", "negative level", "rule.negative-level"),
-      relationship("spell.test:uses_definition:rule.negative-levels", "uses_definition", "negative levels", "rule.negative-levels"),
+      relationship("spell.test:uses_definition:special-ability.negative-level", "uses_definition", "negative level", "special-ability.negative-level"),
+      relationship("spell.test:uses_definition:special-ability.negative-levels", "uses_definition", "negative levels", "special-ability.negative-levels"),
     ]);
     const paragraph = result.document.content[0];
     const links = paragraph?.node_type === "paragraph"
@@ -843,9 +842,9 @@ describe("rich-text relationship enrichment", () => {
       : [];
     expect(links.map((node) => node.node_type === "entity_link" ? node.relationship_id : ""))
       .toEqual([
-        "spell.test:uses_definition:rule.negative-levels",
-        "spell.test:uses_definition:rule.negative-level",
-        "spell.test:uses_definition:rule.negative-levels",
+        "spell.test:uses_definition:special-ability.negative-levels",
+        "spell.test:uses_definition:special-ability.negative-level",
+        "spell.test:uses_definition:special-ability.negative-levels",
       ]);
   });
 
@@ -927,10 +926,10 @@ describe("rich-text relationship enrichment", () => {
     const result = linkRichTextDocument(
       parseRichTextHtml("A Knowledge check reveals knowledge about the subject."),
       [relationship(
-        "spell.test:uses_definition:rule.knowledge",
+        "spell.test:uses_definition:skill.knowledge",
         "uses_definition",
         "Knowledge",
-        "rule.knowledge",
+        "skill.knowledge",
         { anchor: "Knowledge" },
       )],
     );

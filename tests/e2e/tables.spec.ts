@@ -98,9 +98,9 @@ test("Batch 19 separates Curse Water's alignment and creature-type links", async
   await page.goto("/spells/spell.curse-water");
 
   const description = page.locator(".rich-description").first();
-  await expect(description.locator('a[href="/entities/rule.good"]')).toHaveText("good");
-  await expect(description.locator('a[href="/entities/rule.evil"]')).toHaveText("evil");
-  await expect(description.locator('a[href="/entities/rule.outsider"]')).toHaveCount(2);
+  await expect(description.locator('a[href="/entities/creature-subtype.good"]')).toHaveText("good");
+  await expect(description.locator('a[href="/entities/creature-subtype.evil"]')).toHaveText("evil");
+  await expect(description.locator('a[href="/entities/monster-type.outsider"]')).toHaveCount(2);
   const unholyWater = description.locator('a[href="/entities/item.unholy-water"]').first();
   await expect(unholyWater).not.toHaveAttribute("target", "_blank");
   await expectNoPageOverflow(page);
@@ -116,7 +116,7 @@ test("Batch 20 separates Greater Darkvision's parent spell from its granted sens
 
   const description = page.locator(".rich-description").first();
   const parent = description.locator('a[href="/spells/spell.darkvision"]');
-  const sense = description.locator('a[href="/entities/rule.darkvision"]');
+  const sense = description.locator('a[href="/entities/special-ability.darkvision"]');
   await expect(parent).toHaveCount(1);
   await expect(sense).toHaveCount(1);
   await expect(parent).not.toHaveAttribute("target", "_blank");
@@ -129,7 +129,7 @@ test("Batch 20 separates Greater Darkvision's parent spell from its granted sens
   expect(results.violations).toEqual([]);
 
   await sense.click();
-  await expect(page).toHaveURL(/\/entities\/rule\.darkvision$/);
+  await expect(page).toHaveURL(/\/entities\/special-ability\.darkvision$/);
 });
 
 test("Batch 21 separates Deeper Darkness's spell, descriptor, and illumination links", async ({ page }) => {
@@ -220,7 +220,7 @@ test("Batch 25 preserves Detect Undead's table and contextual Dream link", async
   const undeadDescription = page.locator(".rich-description").first();
   await expect(undeadDescription.locator("table")).toHaveCount(1);
   await expect(undeadDescription.locator("tbody tr")).toHaveCount(4);
-  await expect(undeadDescription.locator('a[href="/entities/rule.undead"]')).toHaveCount(9);
+  await expect(undeadDescription.locator('a[href="/entities/monster-type.undead"]')).toHaveCount(9);
   await expectNoPageOverflow(page);
 
   await page.goto("/spells/spell.dream-travel");
@@ -242,7 +242,7 @@ test("Batch 26 preserves Elemental Mastery's table and contextual spell links", 
   const mastery = page.locator(".rich-description").first();
   await expect(mastery.locator("table")).toHaveCount(1);
   await expect(mastery.locator("tbody tr")).toHaveCount(4);
-  await expect(mastery.locator('a[href="/entities/rule.ifrit"]')).toHaveCount(2);
+  await expect(mastery.locator('a[href="/entities/race.ifrit"]')).toHaveCount(2);
   await expectNoPageOverflow(page);
 
   await page.goto("/spells/spell.echeans-excellent-enclosure");
@@ -262,14 +262,14 @@ test("Batch 27 separates elemental subtypes and contextual attitudes", async ({ 
   await page.goto("/spells/spell.elemental-swarm");
 
   const swarm = page.locator(".rich-description").first();
-  await expect(swarm.locator('a[href="/entities/rule.elemental"]')).toHaveCount(7);
-  await expect(swarm.locator('a[href="/entities/rule.fire"]')).toHaveCount(1);
+  await expect(swarm.locator('a[href="/entities/creature-subtype.elemental"]')).toHaveCount(7);
+  await expect(swarm.locator('a[href="/entities/creature-subtype.fire"]')).toHaveCount(1);
   await expect(swarm.locator('a[href="/rules/descriptors#fire"]')).toHaveCount(0);
   await expectNoPageOverflow(page);
 
   await page.goto("/spells/spell.enthrall");
   const attitudes = page.locator(".rich-description").first()
-    .locator('a[href="/entities/rule.attitude"]');
+    .locator('a[href="/entities/skill.attitude"]');
   await expect(attitudes).toHaveCount(6);
   await expectNoPageOverflow(page);
   const results = await new AxeBuilder({ page }).analyze();
@@ -281,8 +281,8 @@ test("Batch 28 rejects state-name false positives and normalizes subschools", as
 
   const fists = page.locator(".rich-description").first();
   await expect(fists.locator('a[href="/spells/spell.etherealness"]')).toHaveCount(0);
-  await expect(fists.locator('a[href="/entities/rule.ethereal"]')).toHaveCount(2);
-  await expect(fists.locator('a[href="/entities/rule.ethereal-plane"]')).toHaveCount(1);
+  await expect(fists.locator('a[href="/entities/special-ability.ethereal"]')).toHaveCount(2);
+  await expect(fists.locator('a[href="/entities/plane.ethereal"]')).toHaveCount(1);
   await expectNoPageOverflow(page);
 
   await page.goto("/spells/spell.evaluators-lens");
@@ -317,14 +317,14 @@ test("Batch 30 preserves form links while rejecting spell-name homonyms", async 
   await page.goto("/spells/spell.fey-form-iv");
 
   const form = page.locator(".rich-description").first();
-  await expect(form.locator('a[href="/entities/rule.fast-healing"]')).toHaveCount(1);
+  await expect(form.locator('a[href="/entities/universal-monster-rule.fast-healing"]')).toHaveCount(1);
   await expect(form.locator('a[href="/spells/spell.blood-rage"]')).toHaveCount(0);
   await expect(form.locator('a[href="/spells/spell.resistance"]')).toHaveCount(0);
   await expectNoPageOverflow(page);
 
   await page.goto("/spells/spell.fiery-body");
   const body = page.locator(".rich-description").first();
-  await expect(body.locator('a[href="/entities/rule.concealment"]')).toHaveCount(1);
+  await expect(body.locator('a[href="/entities/concealment"]')).toHaveCount(1);
   await expect(body.locator('a[href="/spells/spell.poison"]')).toHaveCount(0);
   await expectNoPageOverflow(page);
   const results = await new AxeBuilder({ page }).analyze();

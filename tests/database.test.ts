@@ -689,7 +689,7 @@ describe("ingested spell catalog", () => {
       raw: "Inherited from Air Domain: 2nd—wind wall",
     }));
     expect(cloudInherited?.derivation).toEqual(expect.objectContaining({
-      rule_owner_entity_id: "subdomain.cloud",
+      rule_owner_entity_id: "domain.air.cloud",
       source_memberships: [{ spell_list_id: "spell-list.air-domain", level: 2 }],
     }));
     expect(cloudReplacement).toEqual(expect.objectContaining({
@@ -699,7 +699,7 @@ describe("ingested spell catalog", () => {
     }));
     expect(purityRows).toHaveLength(12);
     expect(await prisma.ruleRelationship.findUnique({
-      where: { id: "subdomain.cloud:inherits_spell_list:spell-list.air-domain" },
+      where: { id: "domain.air.cloud:inherits_spell_list:spell-list.air-domain" },
     })).toEqual(expect.objectContaining({ relationshipType: "inherits_spell_list" }));
   });
 

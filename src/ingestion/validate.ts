@@ -432,11 +432,23 @@ export function validatePackage(): PackageStatistics {
     }
   }
 
+  const migration = loadJson(path.join(
+    projectRoot,
+    "data",
+    "migrations",
+    "entity-taxonomy-v1.json",
+  ));
+  const migratedObservationTargetIds = new Set<string>(
+    migration.decisions.map((decision: ValidatedJson) => decision.from),
+  );
+
   for (const [observationId, observation] of observations) {
     const raw = observation.spell_raw ?? observation.entity_raw;
     for (const link of raw.links_raw ?? []) {
       const targetId = link.target_entity_id_hint;
-      if (targetId && !registeredIds.has(targetId)) {
+      if (targetId &&
+          !registeredIds.has(targetId) &&
+          !migratedObservationTargetIds.has(targetId)) {
         throw new Error(`${observationId} links to unregistered entity ${targetId}`);
       }
     }
