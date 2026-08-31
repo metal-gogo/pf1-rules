@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.molten-orb",
   "ruleset": "Pathfinder First Edition",
   "name": "Molten Orb",
@@ -146,7 +146,39 @@
   "description": {
     "raw": "You create a fist-sized, red-hot ball of molten metal that you immediately hurl as a splash weapon. A direct hit deals 2d6 points of fire damage. Every creature within 5 feet of where the ball hits takes 1d6 points of fire damage from the splash (Reflex half). Each of these creatures takes an additional 1d6 points of fire damage on its turn for the next 1d3 rounds, unless it is cooled off (with water, snow, or any effect that deals 5 or more points of cold damage).",
     "search_text": "\"you create a fist-sized, red-hot ball of molten metal that you immediately hurl as a splash weapon. a direct hit deals 2d6 points of fire damage. every creature within 5 feet of where the ball hits takes 1d6 points of fire damage from the splash (reflex half). each of these creatures takes an additional 1d6 points of fire damage on its turn for the next 1d3 rounds, unless it is cooled off (with water, snow, or any effect that deals 5 or more points of cold damage).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create a fist-sized, red-hot ball of molten metal that you immediately hurl as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "splash weapon",
+              "relationship_id": "spell.molten-orb:uses_definition:rule.splash-weapon"
+            },
+            {
+              "node_type": "text",
+              "value": ". A direct hit deals 2d6 points of fire damage. Every creature within 5 feet of where the ball hits takes 1d6 points of fire damage from the splash ("
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.molten-orb:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " half). Each of these creatures takes an additional 1d6 points of fire damage on its turn for the next 1d3 rounds, unless it is cooled off (with water, snow, or any effect that deals 5 or more points of cold damage)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -251,6 +283,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.molten-orb:appears_on_spell_list:spell-list.sorcerer-salamander-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-salamander-bloodline",
+        "name": "Sorcerer Salamander Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.salamander:e2b38673",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "molten orb (5th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Salamander"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     },
     {
       "relationship_id": "spell.molten-orb:appears_on_spell_list:spell-list.sorcerer-wizard",
@@ -489,11 +541,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.molten-orb:uses_definition:rule.reflex",
+      "relationship_id": "spell.molten-orb:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -547,26 +599,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.molten-orb:appears_on_spell_list:spell-list.sorcerer-salamander-bloodline",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.sorcerer-salamander-bloodline",
-        "name": "Sorcerer Salamander Bloodline Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.salamander:e2b38673",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "molten orb (5th)",
-          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Salamander"
-        }
-      ],
-      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     }
   ],
   "provenance": [
@@ -633,11 +665,19 @@
       "raw_value_sha256": "d1a5dff8b6c290a0c451dd13099cd8e7b3f804efa73c0fa15910f0850ccf9fa9",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.molten-orb:cb83974b289674a3",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "137282983c0655df82751c7ebb5898487017600948deb4e09e00ae71f1475d17",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.resist-starvation",
   "ruleset": "Pathfinder First Edition",
   "name": "Resist Starvation",
@@ -166,7 +166,39 @@
   "description": {
     "raw": "If the target doesn’t eat on the day this spell is cast on it, the DC to avoid taking nonlethal damage from starvation on the following day doesn’t increase by 1. This spell fails if the target hasn’t already attempted at least one Constitution check to avoid starvation.",
     "search_text": "\"if the target doesn’t eat on the day this spell is cast on it, the dc to avoid taking nonlethal damage from starvation on the following day doesn’t increase by 1. this spell fails if the target hasn’t already attempted at least one constitution check to avoid starvation.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "If the target doesn’t eat on the day this spell is cast on it, the DC to avoid taking "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "nonlethal damage",
+              "relationship_id": "spell.resist-starvation:uses_definition:rule.nonlethal-damage"
+            },
+            {
+              "node_type": "text",
+              "value": " from starvation on the following day doesn’t increase by 1. This spell fails if the target hasn’t already attempted at least one "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Constitution",
+              "relationship_id": "spell.resist-starvation:uses_definition:rule.constitution"
+            },
+            {
+              "node_type": "text",
+              "value": " check to avoid starvation."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -244,6 +276,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.resist-starvation:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.resist-starvation:424899cced7c7c69",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.resist-starvation:appears_on_spell_list:spell-list.oracle",
@@ -475,12 +527,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.resist-starvation:uses_definition:rule.touch",
+      "relationship_id": "spell.resist-starvation:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -495,11 +547,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.resist-starvation:uses_definition:rule.will",
+      "relationship_id": "spell.resist-starvation:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -513,26 +565,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.resist-starvation:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.resist-starvation:424899cced7c7c69",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -583,11 +615,19 @@
       "raw_value_sha256": "2b07c052ba96885ab94436dc462cd0a3b93451e63d4eb1d7e7c31492dae8690d",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.resist-starvation:424899cced7c7c69",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "05524d553ad19a6106d79b844ffed130e7b3871be07b350872bea7c7ad4b7013",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

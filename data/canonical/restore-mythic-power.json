@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.restore-mythic-power",
   "ruleset": "Pathfinder First Edition",
   "name": "Restore Mythic Power",
@@ -216,7 +216,21 @@
   "description": {
     "raw": "By laying your hands on the target, you’re able to transfer some of your mythic essence to the target. You expend three uses of your mythic power to restore one use of the target’s mythic power.",
     "search_text": "\"by laying your hands on the target, you’re able to transfer some of your mythic essence to the target. you expend three uses of your mythic power to restore one use of the target’s mythic power.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "By laying your hands on the target, you’re able to transfer some of your mythic essence to the target. You expend three uses of your mythic power to restore one use of the target’s mythic power."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -307,6 +321,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.restore-mythic-power:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.restore-mythic-power:fa3f032bc65401bc",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.restore-mythic-power:appears_on_spell_list:spell-list.oracle",
@@ -561,26 +595,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.restore-mythic-power:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.restore-mythic-power:fa3f032bc65401bc",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -631,11 +645,19 @@
       "raw_value_sha256": "162b4901c96677200d81551973a2a3dca6ba1ba951f04fbbff4e49ca627e364b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.restore-mythic-power:fa3f032bc65401bc",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "c6e3e3415babef2e61f5b61a3f8e8131e3ea8a9539aa8ce4f32852cd34899944",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

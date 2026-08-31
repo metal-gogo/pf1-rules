@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.wooden-wing-shield",
   "ruleset": "Pathfinder First Edition",
   "name": "Wooden Wing Shield",
@@ -209,7 +209,30 @@
   "description": {
     "raw": "Your wings transmute into a wooden barrier resembling a tower shield to block attacks, granting you a +4 shield bonus to AC. If you move, the spell ends immediately.",
     "search_text": "\"your wings transmute into a wooden barrier resembling a tower shield to block attacks, granting you a +4 shield bonus to ac. if you move, the spell ends immediately.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Your wings transmute into a wooden barrier resembling a tower shield to block attacks, granting you a +4 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "shield bonus",
+              "relationship_id": "spell.wooden-wing-shield:uses_definition:rule.shield-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " to AC. If you move, the spell ends immediately."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -377,6 +400,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.wooden-wing-shield:appears_on_spell_list:spell-list.summoner-unchained",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.summoner-unchained",
+        "name": "Summoner (Unchained) Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.wooden-wing-shield:366f560ce6bf9952",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 4",
+          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/transmutation/wooden-wing-shield.HBdrFlsq2J8hfyDn.yaml"
+        }
+      ],
+      "note": "Reviewed project decision: add Summoner (Unchained) 4 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
+    },
+    {
       "relationship_id": "spell.wooden-wing-shield:has_school:magic-school.transmutation",
       "type": "has_school",
       "target": {
@@ -510,26 +553,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.wooden-wing-shield:appears_on_spell_list:spell-list.summoner-unchained",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.summoner-unchained",
-        "name": "Summoner (Unchained) Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.wooden-wing-shield:366f560ce6bf9952",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "manual_verification",
-          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 4",
-          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/transmutation/wooden-wing-shield.HBdrFlsq2J8hfyDn.yaml"
-        }
-      ],
-      "note": "Reviewed project decision: add Summoner (Unchained) 4 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
     }
   ],
   "provenance": [
@@ -580,11 +603,19 @@
       "raw_value_sha256": "cbfa5be2abef05da89bbf8395c21d88551f978c4ff372d27e23e559a5567ef5d",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.wooden-wing-shield:366f560ce6bf9952",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "a060f59ecbe97b5e265f91ee0006c7fcd001a009d71066f9571624ee7a9144f4",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

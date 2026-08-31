@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.seeming",
   "ruleset": "Pathfinder First Edition",
   "name": "Seeming",
@@ -169,7 +169,51 @@
   "description": {
     "raw": "This spell functions like disguise self, except that you can change the appearance of other people as well. Affected creatures resume their normal appearances if slain. Unwilling targets can negate the spell's effect on them by making Will saves or with spell resistance.",
     "search_text": "\"this spell functions like disguise self, except that you can change the appearance of other people as well. affected creatures resume their normal appearances if slain. unwilling targets can negate the spell's effect on them by making will saves or with spell resistance.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "disguise self",
+              "relationship_id": "spell.seeming:functions_like:spell.disguise-self",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that you can change the appearance of other people as well. Affected creatures resume their normal appearances if slain. Unwilling targets can negate the spell's effect on them by making "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.seeming:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saves or with "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.seeming:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -529,6 +573,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like disguise self, except that you can change the appearance of other people as well. Affected creatures resume their normal appearances if slain. Unwilling targets can negate the spell's effect on them by making Will saves or with spell resistance.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.seeming:d344f36d1766cdc5",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "disguise self",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/disguiseSelf.html#disguise-self"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.seeming:a71dc8f763a65278",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "disguise self",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/disguise-self"
         }
       ],
       "note": null
@@ -615,33 +673,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.seeming:references:spell.disguise-self",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.disguise-self",
-        "name": "disguise self"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.seeming:d344f36d1766cdc5",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "disguise self",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/disguiseSelf.html#disguise-self"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.seeming:a71dc8f763a65278",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "disguise self",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/disguise-self"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.seeming:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -703,11 +734,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.seeming:uses_definition:rule.will",
+      "relationship_id": "spell.seeming:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -806,11 +837,19 @@
       "raw_value_sha256": "aa8219debb0efe2856681501fd8dbe565400c254de8892820a7c8c0f88085683",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.seeming:819be29fb0f0ff86",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "103f8469cbcd4618b0dc058d0e41a015ca310c45e273d3e1674ea4c974d06d75",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

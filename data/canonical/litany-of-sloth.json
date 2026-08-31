@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.litany-of-sloth",
   "ruleset": "Pathfinder First Edition",
   "name": "Litany of Sloth",
@@ -153,7 +153,39 @@
   "description": {
     "raw": "With a litany against the wages of sloth, you slow the target’s defenses. The target cannot make attacks of opportunity or cast spells defensively.\n\nWhile subject to this spell, the target cannot be the target of another spell that has the word \"litany\" in the title.",
     "search_text": "\"with a litany against the wages of sloth, you slow the target’s defenses. the target cannot make attacks of opportunity or cast spells defensively.\\n\\nwhile subject to this spell, the target cannot be the target of another spell that has the word \\\"litany\\\" in the title.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "With a litany against the wages of sloth, you slow the target’s defenses. The target cannot make "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attacks of opportunity",
+              "relationship_id": "spell.litany-of-sloth:uses_definition:rule.attacks-of-opportunity"
+            },
+            {
+              "node_type": "text",
+              "value": " or cast spells defensively."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "While subject to this spell, the target cannot be the target of another spell that has the word \"litany\" in the title."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -218,6 +250,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.litany-of-sloth:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.litany-of-sloth:5610ec22f8028ff4",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.litany-of-sloth:4d164918b05a286f",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.litany-of-sloth:appears_on_spell_list:spell-list.paladin",
@@ -461,33 +520,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.litany-of-sloth:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.litany-of-sloth:5610ec22f8028ff4",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.litany-of-sloth:4d164918b05a286f",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -538,11 +570,19 @@
       "raw_value_sha256": "4371792e4cb6b527e2f45d982f907a7d65ba1fb3fdbf64ae02bf52d8a6b31777",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.litany-of-sloth:4d164918b05a286f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "7225bd5f9e0fa38b1772a1a84f3b30f0e1b5b46c105f12494dbe3ef3c52e037c",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

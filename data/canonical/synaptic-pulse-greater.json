@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.synaptic-pulse-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Synaptic Pulse, Greater",
@@ -109,7 +109,30 @@
   "description": {
     "raw": "You emit a pulsating mental blast that stuns all creatures in range of your psychic shriek for 1d4 rounds. On a successful save, a creature is instead sickened for 1 round.",
     "search_text": "\"you emit a pulsating mental blast that stuns all creatures in range of your psychic shriek for 1d4 rounds. on a successful save, a creature is instead sickened for 1 round.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You emit a pulsating mental blast that stuns all creatures in range of your psychic shriek for 1d4 rounds. On a successful save, a creature is instead "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sickened",
+              "relationship_id": "spell.synaptic-pulse-greater:uses_definition:condition.sickened"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 round."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -372,11 +395,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.synaptic-pulse-greater:uses_definition:rule.will",
+      "relationship_id": "spell.synaptic-pulse-greater:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -440,11 +463,19 @@
       "raw_value_sha256": "4895ed953c9fc03a25842715f23aa0ad408276d6d32d1853c6ff49e2bcfa74c6",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.synaptic-pulse-greater:272941ed23a07654",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "fb0067b3890f813a04e1231cfecfbdb1323820e6b160fc15543c35cb552e8940",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": []
   }
 }

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.unbearable-brightness",
   "ruleset": "Pathfinder First Edition",
   "name": "Unbearable Brightness",
@@ -163,7 +163,102 @@
   "description": {
     "raw": "Your body glows with a terrible light. Creatures within 30 feet of you that can see you are dazzled (no saving throw). Creatures with light sensitivity must succeed at a Reflex saving throw or be blinded. This light counts as daylight for the purpose of affecting darkness effects (and vice versa). If the emanation enters an area under the effect of magical darkness (or vice versa), both effects are temporarily negated so that the otherwise prevailing light conditions exist in the overlapping areas of effect. Dazzled and blinded conditions from your light end when the spell ends or when the creature is out of line of sight.",
     "search_text": "\"your body glows with a terrible light. creatures within 30 feet of you that can see you are dazzled (no saving throw). creatures with light sensitivity must succeed at a reflex saving throw or be blinded. this light counts as daylight for the purpose of affecting darkness effects (and vice versa). if the emanation enters an area under the effect of magical darkness (or vice versa), both effects are temporarily negated so that the otherwise prevailing light conditions exist in the overlapping areas of effect. dazzled and blinded conditions from your light end when the spell ends or when the creature is out of line of sight.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Your body glows with a terrible light. Creatures within 30 feet of you that can see you are "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dazzled",
+              "relationship_id": "spell.unbearable-brightness:uses_definition:condition.dazzled"
+            },
+            {
+              "node_type": "text",
+              "value": " (no saving throw). Creatures with "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "light sensitivity",
+              "relationship_id": "spell.unbearable-brightness:uses_definition:rule.light-sensitivity"
+            },
+            {
+              "node_type": "text",
+              "value": " must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.unbearable-brightness:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saving throw or be "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blinded",
+              "relationship_id": "spell.unbearable-brightness:uses_definition:condition.blinded"
+            },
+            {
+              "node_type": "text",
+              "value": ". This light counts as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "daylight",
+              "relationship_id": "spell.unbearable-brightness:references:spell.daylight"
+            },
+            {
+              "node_type": "text",
+              "value": " for the purpose of affecting "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "darkness",
+              "relationship_id": "spell.unbearable-brightness:references:spell.darkness"
+            },
+            {
+              "node_type": "text",
+              "value": " effects (and vice versa). If the emanation enters an area under the effect of magical "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "darkness",
+              "relationship_id": "spell.unbearable-brightness:references:spell.darkness"
+            },
+            {
+              "node_type": "text",
+              "value": " (or vice versa), both effects are temporarily negated so that the otherwise prevailing light conditions exist in the overlapping areas of effect. "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Dazzled",
+              "relationship_id": "spell.unbearable-brightness:uses_definition:condition.dazzled"
+            },
+            {
+              "node_type": "text",
+              "value": " and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blinded",
+              "relationship_id": "spell.unbearable-brightness:uses_definition:condition.blinded"
+            },
+            {
+              "node_type": "text",
+              "value": " conditions from your light end when the spell ends or when the creature is out of line of sight."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -484,7 +579,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.darkness",
-        "name": "darkness"
+        "name": "Darkness"
       },
       "status": "accepted",
       "evidence": [
@@ -511,7 +606,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.daylight",
-        "name": "daylight"
+        "name": "Daylight"
       },
       "status": "accepted",
       "evidence": [
@@ -627,11 +722,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.unbearable-brightness:uses_definition:rule.reflex",
+      "relationship_id": "spell.unbearable-brightness:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -722,11 +817,19 @@
       "raw_value_sha256": "9a49cbf5ae7704d9330776dd5f9edc1d78e1380c7ae18eb07eb3c6f8e2931b48",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.unbearable-brightness:6f7810bba9465e4f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "57c3b65ac3db3b94721f47323f84a7a0bd0a1962a5376cddc0505d3ccdb419c1",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

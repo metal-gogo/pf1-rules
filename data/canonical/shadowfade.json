@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.shadowfade",
   "ruleset": "Pathfinder First Edition",
   "name": "Shadowfade",
@@ -208,7 +208,68 @@
   "description": {
     "raw": "In areas of darkness, the target of shadowfade is invisible to creatures using darkvision to see. In areas of dim light, the target gains concealment against creatures using darkvision. This spell has no effect in areas of normal light or brighter, and is automatically dispelled if the target enters an area of bright light or takes a hostile action.",
     "search_text": "\"in areas of darkness, the target of shadowfade is invisible to creatures using darkvision to see. in areas of dim light, the target gains concealment against creatures using darkvision. this spell has no effect in areas of normal light or brighter, and is automatically dispelled if the target enters an area of bright light or takes a hostile action.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "In areas of darkness, the target of "
+            },
+            {
+              "node_type": "text",
+              "value": "shadowfade",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " is "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "invisible",
+              "relationship_id": "spell.shadowfade:uses_definition:condition.invisible"
+            },
+            {
+              "node_type": "text",
+              "value": " to creatures using "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "darkvision",
+              "relationship_id": "spell.shadowfade:uses_definition:rule.darkvision"
+            },
+            {
+              "node_type": "text",
+              "value": " to see. In areas of dim light, the target gains "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.shadowfade:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": " against creatures using "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "darkvision",
+              "relationship_id": "spell.shadowfade:uses_definition:rule.darkvision"
+            },
+            {
+              "node_type": "text",
+              "value": ". This spell has no effect in areas of normal light or brighter, and is automatically dispelled if the target enters an area of bright light or takes a hostile action."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -302,6 +363,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.shadowfade:appears_on_spell_list:spell-list.magus",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.magus",
+        "name": "Magus Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.shadowfade:ce872c9f1f23390e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Pinned Foundry PF1 assertion: Magus 1",
+          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/illusion/shadowfade.5w68w4yw2oivz7b3.yaml"
+        }
+      ],
+      "note": "Reviewed project decision: add Magus 1 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
+    },
+    {
       "relationship_id": "spell.shadowfade:appears_on_spell_list:spell-list.mesmerist",
       "type": "appears_on_spell_list",
       "target": {
@@ -327,6 +408,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.shadowfade:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.shadowfade:a1ca4cced65c068c",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.shadowfade:ce872c9f1f23390e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.shadowfade:appears_on_spell_list:spell-list.skald",
@@ -679,12 +787,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.shadowfade:uses_definition:rule.touch",
+      "relationship_id": "spell.shadowfade:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -699,11 +807,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.shadowfade:uses_definition:rule.will",
+      "relationship_id": "spell.shadowfade:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -717,53 +825,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.shadowfade:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.shadowfade:a1ca4cced65c068c",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.shadowfade:ce872c9f1f23390e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.shadowfade:appears_on_spell_list:spell-list.magus",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.magus",
-        "name": "Magus Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.shadowfade:ce872c9f1f23390e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "manual_verification",
-          "anchor_text_raw": "Pinned Foundry PF1 assertion: Magus 1",
-          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/illusion/shadowfade.5w68w4yw2oivz7b3.yaml"
-        }
-      ],
-      "note": "Reviewed project decision: add Magus 1 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
     }
   ],
   "provenance": [
@@ -814,11 +875,19 @@
       "raw_value_sha256": "75bded18b8c923d88758123682d216edd94dd243af39ec89c7e89b78690a1c29",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.shadowfade:ce872c9f1f23390e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "ce8819c6c08b9db2d2f6b953d96794591af6c98e7ebd466f5f22f5a0a023823c",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

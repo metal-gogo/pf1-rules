@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.permanent-image",
   "ruleset": "Pathfinder First Edition",
   "name": "Permanent Image",
@@ -155,7 +155,33 @@
   "description": {
     "raw": "This spell functions like silent image, except that the figment includes visual, auditory, olfactory, and thermal elements, and the spell is permanent. By concentrating, you can move the image within the limits of the range, but it is static while you are not concentrating.",
     "search_text": "\"this spell functions like silent image, except that the figment includes visual, auditory, olfactory, and thermal elements, and the spell is permanent. by concentrating, you can move the image within the limits of the range, but it is static while you are not concentrating.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "silent image",
+              "relationship_id": "spell.permanent-image:functions_like:spell.silent-image",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that the figment includes visual, auditory, olfactory, and thermal elements, and the spell is permanent. By concentrating, you can move the image within the limits of the range, but it is static while you are not concentrating."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -436,6 +462,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like silent image, except that the figment includes visual, auditory, olfactory, and thermal elements, and the spell is permanent. By concentrating, you can move the image within the limits of the range, but it is static while you are not concentrating.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.permanent-image:e380e6928564d9e8",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "silent image",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/silentImage.html#silent-image"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.permanent-image:fe62ce1081f361da",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "silent image",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/silent-image"
         }
       ],
       "note": null
@@ -517,33 +557,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "PRPG Core Rulebook pg. 319",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.permanent-image:references:spell.silent-image",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.silent-image",
-        "name": "silent image"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.permanent-image:e380e6928564d9e8",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "silent image",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/silentImage.html#silent-image"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.permanent-image:fe62ce1081f361da",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "silent image",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/silent-image"
         }
       ],
       "note": null
@@ -637,11 +650,19 @@
       "raw_value_sha256": "b9e6300acc8803e3b43c4fdaba7a5d357a86f467deadd64304bea352ef636eaf",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.permanent-image:dfe7aa1f883752cc",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2516f4105e82b01e3aa6422e5d69e80b39019068e9f15e13b194d0a976f8e6c7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

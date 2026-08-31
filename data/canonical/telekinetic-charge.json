@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.telekinetic-charge",
   "ruleset": "Pathfinder First Edition",
   "name": "Telekinetic Charge",
@@ -157,7 +157,48 @@
   "description": {
     "raw": "You telekinetically launch an ally across the battlefield to anywhere within this spell’s range. While moving, your ally is flying just above the ground unless you wish otherwise. Movement from this spell provokes attacks of opportunity as normal, although you can lift your ally over objects or out of enemy reach, as long as your ally remains within this spell’s range. If your ally lands adjacent to an opponent, he can spend an immediate action to make a melee attack against that opponent with a +2 bonus on the attack roll.",
     "search_text": "\"you telekinetically launch an ally across the battlefield to anywhere within this spell’s range. while moving, your ally is flying just above the ground unless you wish otherwise. movement from this spell provokes attacks of opportunity as normal, although you can lift your ally over objects or out of enemy reach, as long as your ally remains within this spell’s range. if your ally lands adjacent to an opponent, he can spend an immediate action to make a melee attack against that opponent with a +2 bonus on the attack roll.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You telekinetically launch an ally across the battlefield to anywhere within this spell’s range. While moving, your ally is flying just above the ground unless you wish otherwise. Movement from this spell provokes "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attacks of opportunity",
+              "relationship_id": "spell.telekinetic-charge:uses_definition:rule.attacks-of-opportunity"
+            },
+            {
+              "node_type": "text",
+              "value": " as normal, although you can lift your ally over objects or out of enemy reach, as long as your ally remains within this spell’s range. If your ally lands adjacent to an opponent, he can spend an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "immediate action",
+              "relationship_id": "spell.telekinetic-charge:uses_action:action.immediate-action"
+            },
+            {
+              "node_type": "text",
+              "value": " to make a melee attack against that opponent with a +2 bonus on the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack roll",
+              "relationship_id": "spell.telekinetic-charge:uses_definition:rule.attack-rolls"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -169,6 +210,26 @@
   },
   "rules_inheritance": [],
   "relationships": [
+    {
+      "relationship_id": "spell.telekinetic-charge:appears_on_spell_list:spell-list.aether-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.aether-elemental-school",
+        "name": "Aether Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4—telekinetic charge",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/aether-elemental-school/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
     {
       "relationship_id": "spell.telekinetic-charge:appears_on_spell_list:spell-list.arcanist",
       "type": "appears_on_spell_list",
@@ -459,12 +520,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.telekinetic-charge:uses_definition:rule.attack-roll",
+      "relationship_id": "spell.telekinetic-charge:uses_definition:rule.attack-rolls",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.attack-roll",
-        "name": "attack roll"
+        "entity_id": "rule.attack-rolls",
+        "name": "Attack rolls"
       },
       "status": "accepted",
       "evidence": [
@@ -519,11 +580,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.telekinetic-charge:uses_definition:rule.will",
+      "relationship_id": "spell.telekinetic-charge:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -537,26 +598,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.telekinetic-charge:appears_on_spell_list:spell-list.aether-elemental-school",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.aether-elemental-school",
-        "name": "Aether Elemental School"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "4—telekinetic charge",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/aether-elemental-school/"
-        }
-      ],
-      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -615,11 +656,19 @@
       "raw_value_sha256": "12c976070143fbdaa992f07aca0305c8dabf12e24ef5329b873c49e2c523bb24",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.telekinetic-charge:e8b026c24c8acdfe",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2e4059be4f83e269b790bde1a0ce2aedd0a1ae88569b6819c4032ad20617a62d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.skyshroud",
   "ruleset": "Pathfinder First Edition",
   "name": "Skyshroud",
@@ -178,7 +178,51 @@
   "description": {
     "raw": "The caster designates the area of a hemisphere within the spell’s range. If a solid object would block the creation of the hemisphere (such as a ceiling or wall), the spell instead conforms to the geometry of the location up to the maximum area of effect for the spell. The hemisphere displays an image of the sky as it appears directly above where the spell was cast. This effect bypasses natural impediments, such as rock or stone, that would obstruct the targeted location from the sky.\n\nThe image of the sky created by this spell counts as the actual sky for purposes of effects that require view of the sky, sun, stars, or other features (including for spell preparation or deific obediences). It does not enable spells or effects that draw effects from the sky (such as call lightning).\n\nLight created by this effect functions normally and harms creatures vulnerable to bright light or direct sunlight.",
     "search_text": "\"the caster designates the area of a hemisphere within the spell’s range. if a solid object would block the creation of the hemisphere (such as a ceiling or wall), the spell instead conforms to the geometry of the location up to the maximum area of effect for the spell. the hemisphere displays an image of the sky as it appears directly above where the spell was cast. this effect bypasses natural impediments, such as rock or stone, that would obstruct the targeted location from the sky.\\n\\nthe image of the sky created by this spell counts as the actual sky for purposes of effects that require view of the sky, sun, stars, or other features (including for spell preparation or deific obediences). it does not enable spells or effects that draw effects from the sky (such as call lightning).\\n\\nlight created by this effect functions normally and harms creatures vulnerable to bright light or direct sunlight.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The caster designates the area of a hemisphere within the spell’s range. If a solid object would block the creation of the hemisphere (such as a ceiling or wall), the spell instead conforms to the geometry of the location up to the maximum area of effect for the spell. The hemisphere displays an image of the sky as it appears directly above where the spell was cast. This effect bypasses natural impediments, such as rock or stone, that would obstruct the targeted location from the sky."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The image of the sky created by this spell counts as the actual sky for purposes of effects that require view of the sky, sun, stars, or other features (including for spell preparation or deific obediences). It does not enable spells or effects that draw effects from the sky (such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "call lightning",
+              "relationship_id": "spell.skyshroud:references:spell.call-lightning",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ")."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Light created by this effect functions normally and harms creatures vulnerable to bright light or direct sunlight."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -283,6 +327,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.skyshroud:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.skyshroud:68deebd8fd382e09",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.skyshroud:appears_on_spell_list:spell-list.oracle",
@@ -519,7 +583,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.call-lightning",
-        "name": "call lightning"
+        "name": "Call Lightning"
       },
       "status": "accepted",
       "evidence": [
@@ -552,26 +616,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.skyshroud:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.skyshroud:68deebd8fd382e09",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -622,11 +666,19 @@
       "raw_value_sha256": "75bded18b8c923d88758123682d216edd94dd243af39ec89c7e89b78690a1c29",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.skyshroud:68deebd8fd382e09",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "359bd4d1caab97151d379cca8037cbbe7179389e2c3c72544c900989e2d40d66",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

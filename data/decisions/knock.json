@@ -146,6 +146,23 @@
         "aon:subdomain.portal:4a91e51b"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.knock:5624e0c19c23ce3c",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.knock:5624e0c19c23ce3c",
+        "legacy_aon:spell.knock:58623c24ad692374",
+        "d20pfsrd:spell.knock:4f27fe9f1107a9dd",
+        "aon:subdomain.portal:4a91e51b"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -256,6 +273,43 @@
         "d20pfsrd:spell.knock:4f27fe9f1107a9dd"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.knock:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.knock:4f27fe9f1107a9dd",
+          "source_field": "spell_raw.links_raw[1]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.knock:4f27fe9f1107a9dd",
+          "source_field": "spell_raw.links_raw[15]"
+        },
+        {
+          "observation_id": "aon:spell.knock:5624e0c19c23ce3c",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:spell.knock:4f27fe9f1107a9dd",
+        "aon:spell.knock:5624e0c19c23ce3c"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.knock:appears_on_spell_list:spell-list.portal-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.portal:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.portal:4a91e51b"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.knock:appears_on_spell_list:spell-list.psychic",
@@ -470,22 +524,6 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.knock:references:spell.knock",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.knock:4f27fe9f1107a9dd",
-          "source_field": "spell_raw.links_raw[21]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.knock:5624e0c19c23ce3c",
-        "legacy_aon:spell.knock:58623c24ad692374",
-        "d20pfsrd:spell.knock:4f27fe9f1107a9dd"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.knock:uses_action:action.standard-action",
       "decision": "accept",
       "evidence": [
@@ -510,7 +548,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.knock:uses_definition:rule.cleric",
+      "relationship_id": "spell.knock:uses_definition:class.cleric",
       "decision": "accept",
       "evidence": [
         {
@@ -576,43 +614,6 @@
         "d20pfsrd:spell.knock:4f27fe9f1107a9dd"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.knock:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.knock:4f27fe9f1107a9dd",
-          "source_field": "spell_raw.links_raw[1]"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.knock:4f27fe9f1107a9dd",
-          "source_field": "spell_raw.links_raw[15]"
-        },
-        {
-          "observation_id": "aon:spell.knock:5624e0c19c23ce3c",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:spell.knock:4f27fe9f1107a9dd",
-        "aon:spell.knock:5624e0c19c23ce3c"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.knock:appears_on_spell_list:spell-list.portal-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.portal:4a91e51b",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.portal:4a91e51b"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

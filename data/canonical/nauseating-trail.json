@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.nauseating-trail",
   "ruleset": "Pathfinder First Edition",
   "name": "Nauseating Trail",
@@ -200,7 +200,60 @@
   "description": {
     "raw": "The target exudes stinking vapors that fill its space. The vapors do not obscure sight, but it nauseates creatures as stinking cloud. The target is immune to these vapors. These vapors persist as the creature moves, filling every square it passes through until it has filled a number of squares equal to 4 × your caster level—if you move through more squares than that, the squares over that amount at not filled with the vapors. Each creature that enters or ends its turn in the area filled with these vapors must succeed at a Fortitude save or become nauseated as long as it remains in the square and for 1d4+1 rounds after it leaves.",
     "search_text": "\"the target exudes stinking vapors that fill its space. the vapors do not obscure sight, but it nauseates creatures as stinking cloud. the target is immune to these vapors. these vapors persist as the creature moves, filling every square it passes through until it has filled a number of squares equal to 4 × your caster level—if you move through more squares than that, the squares over that amount at not filled with the vapors. each creature that enters or ends its turn in the area filled with these vapors must succeed at a fortitude save or become nauseated as long as it remains in the square and for 1d4+1 rounds after it leaves.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target exudes stinking vapors that fill its space. The vapors do not obscure sight, but it nauseates creatures as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "stinking cloud",
+              "relationship_id": "spell.nauseating-trail:references:spell.stinking-cloud",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ". The target is immune to these vapors. These vapors persist as the creature moves, filling every square it passes through until it has filled a number of squares equal to 4 × your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.nauseating-trail:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": "—if you move through more squares than that, the squares over that amount at not filled with the vapors. Each creature that enters or ends its turn in the area filled with these vapors must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.nauseating-trail:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save or become "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "nauseated",
+              "relationship_id": "spell.nauseating-trail:uses_definition:condition.nauseated"
+            },
+            {
+              "node_type": "text",
+              "value": " as long as it remains in the square and for 1d4+1 rounds after it leaves."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -285,6 +338,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.nauseating-trail:appears_on_spell_list:spell-list.hunter",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.hunter",
+        "name": "Hunter Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.nauseating-trail:b4605b1b0a008665",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "druid",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/druid"
+        },
+        {
+          "observation_id": "aon:spell.nauseating-trail:c0699f28cb3daae9",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "druid 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Druid and Ranger spells through level 6; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.nauseating-trail:appears_on_spell_list:spell-list.investigator",
@@ -582,7 +662,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.stinking-cloud",
-        "name": "stinking cloud"
+        "name": "Stinking Cloud"
       },
       "status": "accepted",
       "evidence": [
@@ -671,12 +751,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.nauseating-trail:uses_definition:rule.fort",
+      "relationship_id": "spell.nauseating-trail:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -686,20 +766,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Fort",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.nauseating-trail:uses_definition:rule.fortitude",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.fortitude",
-        "name": "Fortitude"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.nauseating-trail:b4605b1b0a008665",
           "source_field": "spell_raw.links_raw[13]",
@@ -729,33 +796,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.nauseating-trail:appears_on_spell_list:spell-list.hunter",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.hunter",
-        "name": "Hunter Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.nauseating-trail:b4605b1b0a008665",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "druid",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/druid"
-        },
-        {
-          "observation_id": "aon:spell.nauseating-trail:c0699f28cb3daae9",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "druid 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Druid and Ranger spells through level 6; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -806,11 +846,19 @@
       "raw_value_sha256": "cc5e31ebde430c84ebb10b76db8b0ef75981475cf54d57984d42b18ba6bbfe8e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.nauseating-trail:c0699f28cb3daae9",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "925fae9cb3761ec15c96c6ba303224a8746944a39144373a6779bfbc0fcc7722",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

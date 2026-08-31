@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.sunstalker",
   "ruleset": "Pathfinder First Edition",
   "name": "Sunstalker",
@@ -165,7 +165,101 @@
   "description": {
     "raw": "A touched creature becomes invisible (as per invisibility) as long as it is in direct sunlight (or bright light shed by a daylight spell). If an action the target creature takes causes the invisible creature to become visible but does not end the sunstalker spell’s duration, the creature can use this spell’s magic to become invisible again as a standard action as long as it stands in an area of sunlight (as defined above). The creature gains only concealment (20% miss chance) in normal light.",
     "search_text": "\"a touched creature becomes invisible (as per invisibility) as long as it is in direct sunlight (or bright light shed by a daylight spell). if an action the target creature takes causes the invisible creature to become visible but does not end the sunstalker spell’s duration, the creature can use this spell’s magic to become invisible again as a standard action as long as it stands in an area of sunlight (as defined above). the creature gains only concealment (20% miss chance) in normal light.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "A touched creature becomes "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "invisible",
+              "relationship_id": "spell.sunstalker:uses_definition:condition.invisible"
+            },
+            {
+              "node_type": "text",
+              "value": " (as per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "invisibility",
+              "relationship_id": "spell.sunstalker:references:spell.invisibility",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ") as long as it is in direct sunlight (or bright light shed by a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "daylight",
+              "relationship_id": "spell.sunstalker:references:spell.daylight",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell). If an action the target creature takes causes the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "invisible",
+              "relationship_id": "spell.sunstalker:uses_definition:condition.invisible"
+            },
+            {
+              "node_type": "text",
+              "value": " creature to become visible but does not end the "
+            },
+            {
+              "node_type": "text",
+              "value": "sunstalker",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell’s duration, the creature can use this spell’s magic to become "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "invisible",
+              "relationship_id": "spell.sunstalker:uses_definition:condition.invisible"
+            },
+            {
+              "node_type": "text",
+              "value": " again as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "standard action",
+              "relationship_id": "spell.sunstalker:uses_action:action.standard-action"
+            },
+            {
+              "node_type": "text",
+              "value": " as long as it stands in an area of sunlight (as defined above). The creature gains only "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.sunstalker:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": " (20% miss chance) in normal light."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -452,7 +546,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.daylight",
-        "name": "daylight"
+        "name": "Daylight"
       },
       "status": "accepted",
       "evidence": [
@@ -472,7 +566,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.invisibility",
-        "name": "invisibility"
+        "name": "Invisibility"
       },
       "status": "accepted",
       "evidence": [
@@ -595,12 +689,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sunstalker:uses_definition:rule.touch",
+      "relationship_id": "spell.sunstalker:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -615,11 +709,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sunstalker:uses_definition:rule.will",
+      "relationship_id": "spell.sunstalker:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -683,11 +777,19 @@
       "raw_value_sha256": "035a712f40e5d9d4c5d232e58d2203af22a5bfdbc88b178fbdc946d09bef4664",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.sunstalker:3552dd418683a82d",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "8979dc94864f0dd09922c144408eb90b11b53332b06789b9c6906b0ed08f0bf4",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

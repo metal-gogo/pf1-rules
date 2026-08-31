@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.sign-of-the-dawnflower",
   "ruleset": "Pathfinder First Edition",
   "legacy_3_5_material": true,
@@ -247,7 +247,33 @@
   "description": {
     "raw": "As message, except the only information you can transmit is that you are a worshiper of Sarenrae. Once notified, the target can reply that he understands your sign. The spell transmits meaning, not sound, and transcends language barriers.",
     "search_text": "\"as message, except the only information you can transmit is that you are a worshiper of sarenrae. once notified, the target can reply that he understands your sign. the spell transmits meaning, not sound, and transcends language barriers.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "As "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "message",
+              "relationship_id": "spell.sign-of-the-dawnflower:functions_like:spell.message",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except the only information you can transmit is that you are a worshiper of Sarenrae. Once notified, the target can reply that he understands your sign. The spell transmits meaning, not sound, and transcends language barriers."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -411,6 +437,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.sign-of-the-dawnflower:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.sign-of-the-dawnflower:00c1850a8e7d4212",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 0 (Sarenrae)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.sign-of-the-dawnflower:appears_on_spell_list:spell-list.oracle",
@@ -605,26 +651,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.sign-of-the-dawnflower:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.sign-of-the-dawnflower:00c1850a8e7d4212",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 0 (Sarenrae)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -675,11 +701,19 @@
       "raw_value_sha256": "ffac03592c1d45a2af53073e8feba2b35316582bd4418e88b2b9225c3dde56e0",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.sign-of-the-dawnflower:00c1850a8e7d4212",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "053e52ccd047a39c72e3d47716714c13336da2d0080efdde7e6f81b58ae94961",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "LEGACY_3_5_MATERIAL",

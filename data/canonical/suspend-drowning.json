@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.suspend-drowning",
   "ruleset": "Pathfinder First Edition",
   "name": "Suspend Drowning",
@@ -178,7 +178,57 @@
   "description": {
     "raw": "The affected creatures immediately—though temporarily—stop drowning and cannot suffocate or drown while this spell is in effect. A target that had been reduced to below 1 hit point from drowning immediately returns to 1 hit point. The magic of this spell allows the targets to breathe, drink, and talk normally for the duration of the spell, but targets cannot inhale to increase the amount of air remaining in their lungs. When the spell effect ends, the target resumes drowning unless it is in an environment that allows it to breathe normally (such as an air-breathing creature returning to the surface) or has obtained a method of breathing normally (such as by consuming a potion of water breathing).",
     "search_text": "\"the affected creatures immediately—though temporarily—stop drowning and cannot suffocate or drown while this spell is in effect. a target that had been reduced to below 1 hit point from drowning immediately returns to 1 hit point. the magic of this spell allows the targets to breathe, drink, and talk normally for the duration of the spell, but targets cannot inhale to increase the amount of air remaining in their lungs. when the spell effect ends, the target resumes drowning unless it is in an environment that allows it to breathe normally (such as an air-breathing creature returning to the surface) or has obtained a method of breathing normally (such as by consuming a potion of water breathing).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The affected creatures immediately—though temporarily—stop drowning and cannot suffocate or drown while this spell is in effect. A target that had been reduced to below 1 hit point from drowning immediately returns to 1 hit point. The magic of this spell allows the targets to breathe, drink, and talk normally for the duration of the spell, but targets cannot inhale to increase the amount of air remaining in their lungs. When the spell effect ends, the target resumes drowning unless it is in an environment that allows it to breathe normally (such as an air-breathing creature "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "returning",
+              "relationship_id": "spell.suspend-drowning:references:spell.returning"
+            },
+            {
+              "node_type": "text",
+              "value": " to the surface) or has obtained a method of breathing normally (such as by consuming a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "potion of",
+              "relationship_id": "spell.suspend-drowning:uses_definition:rule.potion",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "entity_link",
+              "value": "water breathing",
+              "relationship_id": "spell.suspend-drowning:references:spell.water-breathing",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ")."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -290,6 +340,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.suspend-drowning:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.suspend-drowning:f2000ef79aef47e4",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.suspend-drowning:78e1aff948a7bdf3",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.suspend-drowning:appears_on_spell_list:spell-list.oracle",
@@ -472,7 +549,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.water-breathing",
-        "name": "water breathing"
+        "name": "Water Breathing"
       },
       "status": "accepted",
       "evidence": [
@@ -514,12 +591,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.suspend-drowning:uses_definition:rule.potion-of",
+      "relationship_id": "spell.suspend-drowning:uses_definition:rule.potion",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.potion-of",
-        "name": "potion of"
+        "entity_id": "rule.potion",
+        "name": "Potion"
       },
       "status": "accepted",
       "evidence": [
@@ -554,11 +631,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.suspend-drowning:uses_definition:rule.will",
+      "relationship_id": "spell.suspend-drowning:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -572,33 +649,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.suspend-drowning:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.suspend-drowning:f2000ef79aef47e4",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.suspend-drowning:78e1aff948a7bdf3",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -649,11 +699,19 @@
       "raw_value_sha256": "42e6e62425264b108e6fc73d87bbfecaef67c0ba7daeacdb3d03be27bd918575",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.suspend-drowning:78e1aff948a7bdf3",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "36485794fc46f6e668a28c654ca9ce8bfdefebc1530efe0046a2f0dec1ae3e2e",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.restore-corpse",
   "ruleset": "Pathfinder First Edition",
   "name": "Restore Corpse",
@@ -216,7 +216,39 @@
   "description": {
     "raw": "You grow flesh on a decomposed or skeletonized corpse of a Medium or smaller creature, providing it with sufficient flesh that it can be animated as a zombie rather than a skeleton. The corpse looks as it did when the creature died. The new flesh is somewhat rotted and not fit for eating.",
     "search_text": "\"you grow flesh on a decomposed or skeletonized corpse of a medium or smaller creature, providing it with sufficient flesh that it can be animated as a zombie rather than a skeleton. the corpse looks as it did when the creature died. the new flesh is somewhat rotted and not fit for eating.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You grow flesh on a decomposed or skeletonized corpse of a Medium or smaller creature, providing it with sufficient flesh that it can be animated as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "zombie",
+              "relationship_id": "spell.restore-corpse:uses_definition:rule.zombie"
+            },
+            {
+              "node_type": "text",
+              "value": " rather than a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "skeleton",
+              "relationship_id": "spell.restore-corpse:uses_definition:rule.skeleton"
+            },
+            {
+              "node_type": "text",
+              "value": ". The corpse looks as it did when the creature died. The new flesh is somewhat rotted and not fit for eating."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -374,6 +406,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.restore-corpse:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.restore-corpse:9aa20d0d4631b624",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.restore-corpse:appears_on_spell_list:spell-list.oracle",
@@ -683,26 +735,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.restore-corpse:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.restore-corpse:9aa20d0d4631b624",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -753,11 +785,19 @@
       "raw_value_sha256": "33b0b822f9c8218d34fdf9b768f621b67d0a798a3b172d959228acdd4754b610",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.restore-corpse:9aa20d0d4631b624",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "81c0dd63dd0ffe3b9270f0c7861ade7c5bd029dff74bf8dfe018e4561cf7c4a7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

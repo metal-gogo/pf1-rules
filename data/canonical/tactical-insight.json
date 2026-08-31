@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.tactical-insight",
   "ruleset": "Pathfinder First Edition",
   "name": "Tactical Insight",
@@ -144,7 +144,21 @@
   "description": {
     "raw": "Choose a single army tactic. You grant mastery of this tactic to the\ntarget army for the spell’s duration. This tactic may bring an army’s\ntotal known tactics to a number greater than normally allowed.",
     "search_text": "\"choose a single army tactic. you grant mastery of this tactic to the\\ntarget army for the spell’s duration. this tactic may bring an army’s\\ntotal known tactics to a number greater than normally allowed.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Choose a single army tactic. You grant mastery of this tactic to the target army for the spell’s duration. This tactic may bring an army’s total known tactics to a number greater than normally allowed."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -209,6 +223,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.tactical-insight:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.tactical-insight:ba07daaf6b6ebb57",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.tactical-insight:a1176a1f42d41a97",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 6",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.tactical-insight:appears_on_spell_list:spell-list.skald",
@@ -344,33 +385,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.tactical-insight:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.tactical-insight:ba07daaf6b6ebb57",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.tactical-insight:a1176a1f42d41a97",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 6",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -421,11 +435,19 @@
       "raw_value_sha256": "adefddede9e7f5973488c23fdcf593184c4fe6900c272965eeb7d746471483d9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.tactical-insight:a1176a1f42d41a97",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "7ac80adfce1e8774727d00a340410984939dc386b55510515a441605edaa3acf",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

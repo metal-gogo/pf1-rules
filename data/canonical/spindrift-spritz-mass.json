@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.spindrift-spritz-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Spindrift Spritz, Mass",
@@ -206,7 +206,33 @@
   "description": {
     "raw": "This spell functions as spindrift spritz, except as noted above.",
     "search_text": "\"this spell functions as spindrift spritz, except as noted above.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spindrift spritz",
+              "relationship_id": "spell.spindrift-spritz-mass:functions_like:spell.spindrift-spritz",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except as noted above."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -390,6 +416,47 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.spindrift-spritz-mass:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.spindrift-spritz-mass:fb47ea1c4c27c5e2",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.spindrift-spritz-mass:aad4c873505151fe",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.spindrift-spritz-mass:fb47ea1c4c27c5e2",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.spindrift-spritz-mass:aad4c873505151fe",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.spindrift-spritz-mass:appears_on_spell_list:spell-list.oracle",
@@ -720,47 +787,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.spindrift-spritz-mass:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.spindrift-spritz-mass:fb47ea1c4c27c5e2",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.spindrift-spritz-mass:aad4c873505151fe",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 4",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.spindrift-spritz-mass:fb47ea1c4c27c5e2",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.spindrift-spritz-mass:aad4c873505151fe",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -811,11 +837,19 @@
       "raw_value_sha256": "6d038e9888c477ab7c4b6834ce0152b28d1f0d28935a08fb24369858227df865",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.spindrift-spritz-mass:aad4c873505151fe",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "6a031abbe8670844037f4f4ed28e5214a1a55b6513f61f16163c94bd5933d6f4",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

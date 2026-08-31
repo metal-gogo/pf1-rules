@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.steam-ray-fusillade",
   "ruleset": "Pathfinder First Edition",
   "name": "Steam Ray Fusillade",
@@ -130,7 +130,69 @@
   "description": {
     "raw": "For the duration of the spell, you can fire three rays of steam once per round as a standard action (and you also fire three such rays as part of casting the spell). These rays function similarly to the rays from scorching ray (you can fire them at close range, they’re ranged touch attacks, they deal 4d6 points of fire damage each, and spell resistance negates them) except that they work both underwater and above water without a caster level check for being a fire spell.",
     "search_text": "\"for the duration of the spell, you can fire three rays of steam once per round as a standard action (and you also fire three such rays as part of casting the spell). these rays function similarly to the rays from scorching ray (you can fire them at close range, they’re ranged touch attacks, they deal 4d6 points of fire damage each, and spell resistance negates them) except that they work both underwater and above water without a caster level check for being a fire spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "For the duration of the spell, you can fire three rays of steam once per round as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "standard action",
+              "relationship_id": "spell.steam-ray-fusillade:uses_action:action.standard-action"
+            },
+            {
+              "node_type": "text",
+              "value": " (and you also fire three such rays as part of casting the spell). These rays function similarly to the rays from "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "scorching ray",
+              "relationship_id": "spell.steam-ray-fusillade:references:spell.scorching-ray",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " (you can fire them at close range, they’re ranged "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch",
+              "relationship_id": "spell.steam-ray-fusillade:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " attacks, they deal 4d6 points of fire damage each, and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.steam-ray-fusillade:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": " negates them) except that they work both underwater and above water without a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.steam-ray-fusillade:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " check for being a fire spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -357,7 +419,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.scorching-ray",
-        "name": "scorching ray"
+        "name": "Scorching Ray"
       },
       "status": "accepted",
       "evidence": [
@@ -453,12 +515,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.steam-ray-fusillade:uses_definition:rule.touch",
+      "relationship_id": "spell.steam-ray-fusillade:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -521,11 +583,19 @@
       "raw_value_sha256": "8478eb9c1bc7401ae722ae52bf8629a342ec9b9658246646fef37c5ff826f925",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.steam-ray-fusillade:c301fc996249f6e8",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e87a8d024b1118abb3b393ba348161026c1e03dfcd84bb3661d27a98fd84c580",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

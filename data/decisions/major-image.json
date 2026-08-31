@@ -153,6 +153,25 @@
         "aon:subdomain.imagination:05c8839f"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.major-image:10fcc67a0bcc5a30",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.major-image:10fcc67a0bcc5a30",
+        "legacy_aon:spell.major-image:6eead18d1c9d7414",
+        "d20pfsrd:spell.major-image:79a7003fdfff60d2",
+        "aon:mystery.whimsy:75fff951",
+        "aon:patron.trickery:15d234b1",
+        "aon:subdomain.imagination:05c8839f"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -191,6 +210,20 @@
         "d20pfsrd:spell.major-image:79a7003fdfff60d2"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.major-image:appears_on_spell_list:spell-list.imagination-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.imagination:05c8839f",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.imagination:05c8839f"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.major-image:appears_on_spell_list:spell-list.magus",
@@ -357,6 +390,34 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.major-image:appears_on_spell_list:spell-list.trickery-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.trickery:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.trickery:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.major-image:appears_on_spell_list:spell-list.whimsy-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.whimsy:75fff951",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.whimsy:75fff951"
+      ],
+      "rationale": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
       "relationship_id": "spell.major-image:appears_on_spell_list:spell-list.wizard",
       "decision": "accept",
       "evidence": [
@@ -379,6 +440,14 @@
         {
           "observation_id": "aon:spell.major-image:10fcc67a0bcc5a30",
           "source_field": "spell_raw.description_raw"
+        },
+        {
+          "observation_id": "legacy_aon:spell.major-image:6eead18d1c9d7414",
+          "source_field": "spell_raw.links_raw[0]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.major-image:79a7003fdfff60d2",
+          "source_field": "spell_raw.links_raw[11]"
         }
       ],
       "considered_observation_ids": [
@@ -443,26 +512,6 @@
         {
           "observation_id": "aon:spell.major-image:10fcc67a0bcc5a30",
           "source_field": "spell_raw.source_book_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.major-image:10fcc67a0bcc5a30",
-        "legacy_aon:spell.major-image:6eead18d1c9d7414",
-        "d20pfsrd:spell.major-image:79a7003fdfff60d2"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.major-image:references:spell.silent-image",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.major-image:6eead18d1c9d7414",
-          "source_field": "spell_raw.links_raw[0]"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.major-image:79a7003fdfff60d2",
-          "source_field": "spell_raw.links_raw[11]"
         }
       ],
       "considered_observation_ids": [
@@ -567,48 +616,6 @@
         "d20pfsrd:spell.major-image:79a7003fdfff60d2"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.major-image:appears_on_spell_list:spell-list.whimsy-mystery",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.whimsy:75fff951",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:mystery.whimsy:75fff951"
-      ],
-      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
-    },
-    {
-      "relationship_id": "spell.major-image:appears_on_spell_list:spell-list.trickery-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.trickery:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.trickery:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.major-image:appears_on_spell_list:spell-list.imagination-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.imagination:05c8839f",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.imagination:05c8839f"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

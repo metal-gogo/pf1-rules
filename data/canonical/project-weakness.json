@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.project-weakness",
   "ruleset": "Pathfinder First Edition",
   "name": "Project Weakness",
@@ -249,7 +249,21 @@
   "description": {
     "raw": "You curse the target with the weaknesses of your kind of vampirism. The creature reacts to garlic, mirrors, ringing bells, sunlight, and so on as if it were a vampire of the same type as you. This cannot kill the target; anything that would kill it (such as a lengthy exposure to sunlight if you are a moroi vampire) renders it helpless until the curse or the harmful effect is removed. The target gains none of the benefits of being a vampire (such as fast healing or requiring special ways to be permanently killed), only the penalties.",
     "search_text": "\"you curse the target with the weaknesses of your kind of vampirism. the creature reacts to garlic, mirrors, ringing bells, sunlight, and so on as if it were a vampire of the same type as you. this cannot kill the target; anything that would kill it (such as a lengthy exposure to sunlight if you are a moroi vampire) renders it helpless until the curse or the harmful effect is removed. the target gains none of the benefits of being a vampire (such as fast healing or requiring special ways to be permanently killed), only the penalties.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You curse the target with the weaknesses of your kind of vampirism. The creature reacts to garlic, mirrors, ringing bells, sunlight, and so on as if it were a vampire of the same type as you. This cannot kill the target; anything that would kill it (such as a lengthy exposure to sunlight if you are a moroi vampire) renders it helpless until the curse or the harmful effect is removed. The target gains none of the benefits of being a vampire (such as fast healing or requiring special ways to be permanently killed), only the penalties."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -300,6 +314,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.project-weakness:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.project-weakness:6561f1339429ab15",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3 (vampire)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.project-weakness:appears_on_spell_list:spell-list.oracle",
@@ -548,26 +582,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.project-weakness:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.project-weakness:6561f1339429ab15",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3 (vampire)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -618,11 +632,19 @@
       "raw_value_sha256": "18b61a8e74b74c5514cf55e126716a32b512d02f9f25c4462407ea9103252473",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.project-weakness:6561f1339429ab15",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "7beeb29bf1d614c379d1c882e1b03d858ea4fa168927c5508939d2f21e856404",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "DERIVED_SPELL_LIST_ACCESS",

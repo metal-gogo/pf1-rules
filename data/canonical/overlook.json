@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.overlook",
   "ruleset": "Pathfinder First Edition",
   "name": "Overlook",
@@ -153,7 +153,89 @@
   "description": {
     "raw": "You enhance your natural ability to seem small and unimportant, causing those around you to overlook you. You gain a +20 bonus on Stealth checks, which doesn’t stack with bonuses from effects that actually make you sneakier, such as invisibility or respectful quiet (see below); you do not need cover or concealment to hide; and you can hide while you are being observed. If a creature fails to notice you because of this spell, that creature can still remember seeing a halfling pass by, but attach no importance to the memory. You do not gain these benefits against creatures that are immune to compulsions or mind-affecting effects, and spell resistance applies. If you take an actively aggressive or extremely conspicuous action, creatures automatically notice you, and you gain no further benefits against those creatures for the remainder of the spell’s duration.",
     "search_text": "\"you enhance your natural ability to seem small and unimportant, causing those around you to overlook you. you gain a +20 bonus on stealth checks, which doesn’t stack with bonuses from effects that actually make you sneakier, such as invisibility or respectful quiet (see below); you do not need cover or concealment to hide; and you can hide while you are being observed. if a creature fails to notice you because of this spell, that creature can still remember seeing a halfling pass by, but attach no importance to the memory. you do not gain these benefits against creatures that are immune to compulsions or mind-affecting effects, and spell resistance applies. if you take an actively aggressive or extremely conspicuous action, creatures automatically notice you, and you gain no further benefits against those creatures for the remainder of the spell’s duration.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You enhance your natural ability to seem small and unimportant, causing those around you to overlook you. You gain a +20 bonus on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Stealth",
+              "relationship_id": "spell.overlook:uses_definition:rule.stealth"
+            },
+            {
+              "node_type": "text",
+              "value": " checks, which doesn’t stack with bonuses from effects that actually make you sneakier, such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "invisibility",
+              "relationship_id": "spell.overlook:references:spell.invisibility",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "text",
+              "value": "respectful quiet",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " (see below); you do not need "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "cover",
+              "relationship_id": "spell.overlook:uses_definition:rule.cover"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.overlook:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": " to hide; and you can hide while you are being observed. If a creature fails to notice you because of this spell, that creature can still remember seeing a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "halfling",
+              "relationship_id": "spell.overlook:uses_definition:rule.halfling"
+            },
+            {
+              "node_type": "text",
+              "value": " pass by, but attach no importance to the memory. You do not gain these benefits against creatures that are immune to compulsions or mind-affecting effects, and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.overlook:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": " applies. If you take an actively aggressive or extremely conspicuous action, creatures automatically notice you, and you gain no further benefits against those creatures for the remainder of the spell’s duration."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -408,7 +490,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.invisibility",
-        "name": "invisibility"
+        "name": "Invisibility"
       },
       "status": "accepted",
       "evidence": [
@@ -614,11 +696,19 @@
       "raw_value_sha256": "d0e59f9a6a6c7407579d27d53eb392cd7f81386e77fc230ac9e8d790bf927ea4",
       "decision": "manually_resolved",
       "note": "Reviewed catalog policy: AoN remains the preferred publication transcription. When an additional class membership is printed by d20PFSRD, it may be added to the canonical class union after review; Foundry PF1 is corroborating catalog evidence when it agrees. Preserve every source claim and never replace an AoN level merely because another catalog assigns the same class a different level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.overlook:9e4d8239762e2011",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "7a6fb6856edd30c539478b71476f969aa0ac8cadcba7b99f3757003bc3938547",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.5-reviewed-catalog-memberships",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "REVIEWED_CATALOG_MEMBERSHIP_UNION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.ego-whip-i",
   "ruleset": "Pathfinder First Edition",
   "name": "Ego Whip I",
@@ -113,7 +113,21 @@
   "description": {
     "raw": "You can use your psychic power to overwhelm the target’s ego, leaving the target feeling hopeless and unsure of itself. Choose Intelligence, Wisdom, or Charisma. The target takes a –2 penalty to that ability score, and is also staggered for the first round it’s affected. A successful Will save negates the staggered effect and reduces the duration of the penalty to 1 round.",
     "search_text": "\"you can use your psychic power to overwhelm the target’s ego, leaving the target feeling hopeless and unsure of itself. choose intelligence, wisdom, or charisma. the target takes a –2 penalty to that ability score, and is also staggered for the first round it’s affected. a successful will save negates the staggered effect and reduces the duration of the penalty to 1 round.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You can use your psychic power to overwhelm the target’s ego, leaving the target feeling hopeless and unsure of itself. Choose Intelligence, Wisdom, or Charisma. The target takes a –2 penalty to that ability score, and is also staggered for the first round it’s affected. A successful Will save negates the staggered effect and reduces the duration of the penalty to 1 round."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -144,6 +158,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.ego-whip-i:appears_on_spell_list:spell-list.sorcerer-psychic-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-psychic-bloodline",
+        "name": "Sorcerer Psychic Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.psychic:5b097139",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "ego whip I (7th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Psychic"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     },
     {
       "relationship_id": "spell.ego-whip-i:has_descriptor:descriptor.emotion",
@@ -312,26 +346,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.ego-whip-i:appears_on_spell_list:spell-list.sorcerer-psychic-bloodline",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.sorcerer-psychic-bloodline",
-        "name": "Sorcerer Psychic Bloodline Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.psychic:5b097139",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "ego whip I (7th)",
-          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Psychic"
-        }
-      ],
-      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     }
   ],
   "provenance": [
@@ -390,11 +404,19 @@
       "raw_value_sha256": "4623cf1cef9a4a295e61efbb559acf238e795123344020a7ed5c6ed1720f813e",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.ego-whip-i:6419ce5b652ec337",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "20cc18bc1fb81b067162b4f70d4f9101b58a57a6994c72cf35b2f6c36f8178b4",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "OWNER_GRANTED_SPELL_ACCESS",

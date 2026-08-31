@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.perfect-placement",
   "ruleset": "Pathfinder First Edition",
   "name": "Perfect Placement",
@@ -175,7 +175,57 @@
   "description": {
     "raw": "Affected creatures gain tactical knowledge and maximize their efficiency on the field of battle. Each gains a +1 insight bonus to AC and Reflex saves. Against attacks of opportunity, the insight bonus to AC increases to +3.",
     "search_text": "\"affected creatures gain tactical knowledge and maximize their efficiency on the field of battle. each gains a +1 insight bonus to ac and reflex saves. against attacks of opportunity, the insight bonus to ac increases to +3.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Affected creatures gain tactical knowledge and maximize their efficiency on the field of battle. Each gains a +1 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "insight bonus",
+              "relationship_id": "spell.perfect-placement:uses_definition:rule.insight-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " to AC and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.perfect-placement:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saves. Against "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attacks of opportunity",
+              "relationship_id": "spell.perfect-placement:uses_definition:rule.attacks-of-opportunity"
+            },
+            {
+              "node_type": "text",
+              "value": ", the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "insight bonus",
+              "relationship_id": "spell.perfect-placement:uses_definition:rule.insight-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " to AC increases to +3."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -565,11 +615,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.perfect-placement:uses_definition:rule.reflex",
+      "relationship_id": "spell.perfect-placement:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -605,11 +655,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.perfect-placement:uses_definition:rule.will",
+      "relationship_id": "spell.perfect-placement:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -673,11 +723,19 @@
       "raw_value_sha256": "7150a59c343828ecc6838669ed7710f45006cc96c953a1607b9d9cead5a7b7a1",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.perfect-placement:d91d9c26c1be1fb4",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "6388bc79192a3a42c9ed389705dd6c41cc77b9237acfe03d91b590d788ddb218",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -135,6 +135,22 @@
         "aon:subdomain.sahkil:442be5b2"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.they-know:e754964c1643efbb",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.they-know:e754964c1643efbb",
+        "d20pfsrd:spell.they-know:ccab2cb184cd1752",
+        "aon:subdomain.sahkil:442be5b2"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -196,6 +212,25 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.they-know:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.they-know:ccab2cb184cd1752",
+          "source_field": "spell_raw.links_raw[4]"
+        },
+        {
+          "observation_id": "aon:spell.they-know:e754964c1643efbb",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:spell.they-know:ccab2cb184cd1752",
+        "aon:spell.they-know:e754964c1643efbb"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.they-know:appears_on_spell_list:spell-list.paladin",
       "decision": "accept",
       "evidence": [
@@ -232,6 +267,20 @@
         "d20pfsrd:spell.they-know:ccab2cb184cd1752"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.they-know:appears_on_spell_list:spell-list.sahkil-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.sahkil:442be5b2",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.sahkil:442be5b2"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.they-know:appears_on_spell_list:spell-list.shaman",
@@ -488,7 +537,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.they-know:uses_definition:rule.will",
+      "relationship_id": "spell.they-know:uses_definition:rule.will-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -501,39 +550,6 @@
         "d20pfsrd:spell.they-know:ccab2cb184cd1752"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.they-know:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.they-know:ccab2cb184cd1752",
-          "source_field": "spell_raw.links_raw[4]"
-        },
-        {
-          "observation_id": "aon:spell.they-know:e754964c1643efbb",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:spell.they-know:ccab2cb184cd1752",
-        "aon:spell.they-know:e754964c1643efbb"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.they-know:appears_on_spell_list:spell-list.sahkil-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.sahkil:442be5b2",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.sahkil:442be5b2"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

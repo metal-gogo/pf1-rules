@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.rubberskin",
   "ruleset": "Pathfinder First Edition",
   "name": "Rubberskin",
@@ -139,7 +139,39 @@
   "description": {
     "raw": "Your skin becomes more elastic, distributing crushing damage efficiently. For the duration of the spell, all bludgeoning and falling damage you take is converted into nonlethal damage. This spell has no effect if you’re immune to nonlethal damage.",
     "search_text": "\"your skin becomes more elastic, distributing crushing damage efficiently. for the duration of the spell, all bludgeoning and falling damage you take is converted into nonlethal damage. this spell has no effect if you’re immune to nonlethal damage.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Your skin becomes more elastic, distributing crushing damage efficiently. For the duration of the spell, all bludgeoning and falling damage you take is converted into "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "nonlethal damage",
+              "relationship_id": "spell.rubberskin:uses_definition:rule.nonlethal-damage"
+            },
+            {
+              "node_type": "text",
+              "value": ". This spell has no effect if you’re immune to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "nonlethal damage",
+              "relationship_id": "spell.rubberskin:uses_definition:rule.nonlethal-damage"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -523,11 +555,19 @@
       "raw_value_sha256": "55702af1a13508102eb57c38b95ccc615c386b116320e0032c55660b005a990d",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.rubberskin:ab4336365d712d7e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "4783d207a0509dcf3cf51ede91dd68d2b53fc133c7cf128edfd6caedae190aed",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

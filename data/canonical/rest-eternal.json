@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.rest-eternal",
   "ruleset": "Pathfinder First Edition",
   "name": "Rest Eternal",
@@ -210,7 +210,63 @@
   "description": {
     "raw": "You place a curse upon a dead creature that bars its spirit from returning. Anyone casting a spell that would communicate with the dead creature, return it to life, or turn it into an undead creature must succeed on a caster level check with a DC of 11 plus your caster level. Rest eternal cannot be dispelled, but it can be negated with remove curse or break enchantment.",
     "search_text": "\"you place a curse upon a dead creature that bars its spirit from returning. anyone casting a spell that would communicate with the dead creature, return it to life, or turn it into an undead creature must succeed on a caster level check with a dc of 11 plus your caster level. rest eternal cannot be dispelled, but it can be negated with remove curse or break enchantment.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You place a curse upon a dead creature that bars its spirit from returning. Anyone casting a spell that would communicate with the dead creature, return it to life, or turn it into an undead creature must succeed on a caster level check with a DC of 11 plus your caster level. "
+            },
+            {
+              "node_type": "text",
+              "value": "Rest eternal ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "cannot be dispelled, but it can be negated with "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "remove curse",
+              "relationship_id": "spell.rest-eternal:references:spell.remove-curse",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "break enchantment",
+              "relationship_id": "spell.rest-eternal:references:spell.break-enchantment",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -222,6 +278,26 @@
   },
   "rules_inheritance": [],
   "relationships": [
+    {
+      "relationship_id": "spell.rest-eternal:appears_on_spell_list:spell-list.ancestors-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.ancestors-subdomain",
+        "name": "Ancestors Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.ancestors:8db954e0",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th—rest eternal",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Repose"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
     {
       "relationship_id": "spell.rest-eternal:appears_on_spell_list:spell-list.cleric",
       "type": "appears_on_spell_list",
@@ -261,6 +337,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.rest-eternal:appears_on_spell_list:spell-list.death-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.death-patron",
+        "name": "Death Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.death:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "8th — rest eternal",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.rest-eternal:appears_on_spell_list:spell-list.druid",
@@ -308,6 +404,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.rest-eternal:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.rest-eternal:7468b0bcbacf8fb2",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.rest-eternal:appears_on_spell_list:spell-list.oracle",
@@ -504,7 +620,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.break-enchantment",
-        "name": "break enchantment"
+        "name": "Break Enchantment"
       },
       "status": "accepted",
       "evidence": [
@@ -531,7 +647,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.remove-curse",
-        "name": "remove curse"
+        "name": "Remove Curse"
       },
       "status": "accepted",
       "evidence": [
@@ -548,26 +664,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "remove curse",
           "source_href": "https://www.d20pfsrd.com/magic/all-spells/r/remove-curse"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.rest-eternal:references:spell.rest-eternal",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.rest-eternal",
-        "name": "Rest eternal"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.rest-eternal:a59e16e9437f442c",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Rest eternal",
-          "source_href": "https://legacy.aonprd.com/advancedPlayersGuide/spells/restEternal.html#rest-eternal"
         }
       ],
       "note": null
@@ -611,66 +707,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.rest-eternal:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.rest-eternal:7468b0bcbacf8fb2",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.rest-eternal:appears_on_spell_list:spell-list.death-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.death-patron",
-        "name": "Death Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.death:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "8th — rest eternal",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
-    },
-    {
-      "relationship_id": "spell.rest-eternal:appears_on_spell_list:spell-list.ancestors-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.ancestors-subdomain",
-        "name": "Ancestors Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.ancestors:8db954e0",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "4th—rest eternal",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Repose"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -737,11 +773,19 @@
       "raw_value_sha256": "8a2e2e9d87fe01f4444acac8e60d967d5008aea8247ea3fdcefb6ddeb9fc9dbc",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.rest-eternal:7468b0bcbacf8fb2",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "0806414f92797652a2ce470646166415e83a12eb82423653ee61c4deb63122f8",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

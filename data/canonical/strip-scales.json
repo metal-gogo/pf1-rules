@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.strip-scales",
   "ruleset": "Pathfinder First Edition",
   "name": "Strip Scales",
@@ -157,7 +157,30 @@
   "description": {
     "raw": "You reduce the target’s racial natural armor bonus by 1 point\nper 3 caster levels.",
     "search_text": "\"you reduce the target’s racial natural armor bonus by 1 point\\nper 3 caster levels.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You reduce the target’s racial "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "natural armor bonus",
+              "relationship_id": "spell.strip-scales:uses_definition:rule.natural-armor-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " by 1 point per 3 caster levels."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -412,11 +435,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.strip-scales:uses_definition:rule.fortitude",
+      "relationship_id": "spell.strip-scales:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -520,11 +543,19 @@
       "raw_value_sha256": "e27b46985d1c665b16c0fe8c41c8015558d9e3c251cd3f19ed1308cfed7d4465",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.strip-scales:e7eed642224da272",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "ccf73f1d38c7625e7e3531ad35db30eddffb2a46424ffffd8c590d97377b74c0",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.speak-with-animals",
   "ruleset": "Pathfinder First Edition",
   "name": "Speak with Animals",
@@ -165,7 +165,21 @@
   "description": {
     "raw": "You can ask questions of and receive answers from animals, but the spell doesn't make them any more friendly than normal. Wary and cunning animals are likely to be terse and evasive, while the more stupid ones make inane comments. If an animal is friendly toward you, it may do some favor or service for you.",
     "search_text": "\"you can ask questions of and receive answers from animals, but the spell doesn't make them any more friendly than normal. wary and cunning animals are likely to be terse and evasive, while the more stupid ones make inane comments. if an animal is friendly toward you, it may do some favor or service for you.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You can ask questions of and receive answers from animals, but the spell doesn't make them any more friendly than normal. Wary and cunning animals are likely to be terse and evasive, while the more stupid ones make inane comments. If an animal is friendly toward you, it may do some favor or service for you."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -177,6 +191,26 @@
   },
   "rules_inheritance": [],
   "relationships": [
+    {
+      "relationship_id": "spell.speak-with-animals:appears_on_spell_list:spell-list.animals-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.animals-patron",
+        "name": "Animals Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.animals:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th — speak with animals",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
     {
       "relationship_id": "spell.speak-with-animals:appears_on_spell_list:spell-list.bard",
       "type": "appears_on_spell_list",
@@ -250,6 +284,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.speak-with-animals:appears_on_spell_list:spell-list.juju-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.juju-mystery",
+        "name": "Juju Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.juju:7692329e",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "speak with animals (2nd)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Juju"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     },
     {
       "relationship_id": "spell.speak-with-animals:appears_on_spell_list:spell-list.juju-pap39-pzo9039",
@@ -479,46 +533,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.speak-with-animals:appears_on_spell_list:spell-list.juju-mystery",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.juju-mystery",
-        "name": "Juju Mystery Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.juju:7692329e",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "speak with animals (2nd)",
-          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Juju"
-        }
-      ],
-      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
-    },
-    {
-      "relationship_id": "spell.speak-with-animals:appears_on_spell_list:spell-list.animals-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.animals-patron",
-        "name": "Animals Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.animals:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "4th — speak with animals",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -585,11 +599,19 @@
       "raw_value_sha256": "9ad664251a6571c74187b8b4846e069407816c9d5e1ca48fbc3b1650ecffd4b9",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.speak-with-animals:98a2ec287d064c59",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "11e3e59ebffb77785676259fd25a52113889bb30188ef98f9b1443cbc4c4eda9",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

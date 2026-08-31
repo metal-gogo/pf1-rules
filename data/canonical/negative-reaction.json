@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.negative-reaction",
   "ruleset": "Pathfinder First Edition",
   "name": "Negative Reaction",
@@ -181,7 +181,57 @@
   "description": {
     "raw": "The target’s actions and words fail to impress. The target of this spell takes a –10 penalty on any Bluff, Diplomacy, and Intimidate checks as well as any performance combat checks it attempts.",
     "search_text": "\"the target’s actions and words fail to impress. the target of this spell takes a –10 penalty on any bluff, diplomacy, and intimidate checks as well as any performance combat checks it attempts.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target’s actions and words fail to impress. The target of this spell takes a –10 penalty on any "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Bluff",
+              "relationship_id": "spell.negative-reaction:uses_definition:rule.bluff"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Diplomacy",
+              "relationship_id": "spell.negative-reaction:uses_definition:rule.diplomacy"
+            },
+            {
+              "node_type": "text",
+              "value": ", and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Intimidate",
+              "relationship_id": "spell.negative-reaction:uses_definition:rule.intimidate"
+            },
+            {
+              "node_type": "text",
+              "value": " checks as well as any "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "performance combat checks",
+              "relationship_id": "spell.negative-reaction:uses_definition:rule.performance-combat-checks"
+            },
+            {
+              "node_type": "text",
+              "value": " it attempts."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -239,6 +289,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.negative-reaction:appears_on_spell_list:spell-list.decadence-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.decadence-patron",
+        "name": "Decadence Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.decadence:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd — negative reaction",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.negative-reaction:appears_on_spell_list:spell-list.magus",
@@ -678,11 +748,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.negative-reaction:uses_definition:rule.will",
+      "relationship_id": "spell.negative-reaction:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -696,26 +766,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.negative-reaction:appears_on_spell_list:spell-list.decadence-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.decadence-patron",
-        "name": "Decadence Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.decadence:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "2nd — negative reaction",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -774,11 +824,19 @@
       "raw_value_sha256": "0f00d17b8991f20bae35e42904a58355f3a6990ec031de34beec4fbca55c42f8",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.negative-reaction:60b45f78f7441267",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "941aa8ab9e2161e96fd96769d7e9ad931a724662ae683850ae951b57d10c8226",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

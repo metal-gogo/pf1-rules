@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.thoughtsense",
   "ruleset": "Pathfinder First Edition",
   "name": "Thoughtsense",
@@ -155,7 +155,83 @@
   "description": {
     "raw": "You automatically detect and locate conscious creatures within 60 feet, as if you possessed the blindsight ability. Nondetection, mind blank, and similar effects can block this effect. Thoughtsense can distinguish between sentient (Intelligence 3 or greater) and non-sentient (Intelligence 1–2) creatures, but otherwise provides no information about the creatures it detects.",
     "search_text": "\"you automatically detect and locate conscious creatures within 60 feet, as if you possessed the blindsight ability. nondetection, mind blank, and similar effects can block this effect. thoughtsense can distinguish between sentient (intelligence 3 or greater) and non-sentient (intelligence 1–2) creatures, but otherwise provides no information about the creatures it detects.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You automatically detect and locate conscious creatures within 60 feet, as if you possessed the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blindsight",
+              "relationship_id": "spell.thoughtsense:uses_definition:rule.blindsight"
+            },
+            {
+              "node_type": "text",
+              "value": " ability. "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Nondetection",
+              "relationship_id": "spell.thoughtsense:references:spell.nondetection",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "mind blank",
+              "relationship_id": "spell.thoughtsense:references:spell.mind-blank",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", and similar effects can block this effect. "
+            },
+            {
+              "node_type": "text",
+              "value": "Thoughtsense",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " can distinguish between sentient ("
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Intelligence",
+              "relationship_id": "spell.thoughtsense:uses_definition:rule.intelligence"
+            },
+            {
+              "node_type": "text",
+              "value": " 3 or greater) and non-sentient ("
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Intelligence",
+              "relationship_id": "spell.thoughtsense:uses_definition:rule.intelligence"
+            },
+            {
+              "node_type": "text",
+              "value": " 1–2) creatures, but otherwise provides no information about the creatures it detects."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -456,7 +532,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.mind-blank",
-        "name": "mind blank"
+        "name": "Mind Blank"
       },
       "status": "accepted",
       "evidence": [
@@ -667,11 +743,19 @@
       "raw_value_sha256": "f08e0fc2e82551472bf9b0cb693935739f309bb778cd609da18b4f55adbd5b67",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.thoughtsense:a2125004045ded0f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3c820db2868c941adca1e0d9d86fc3bae09d0dd5312ceb08a9d12b2741c81860",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

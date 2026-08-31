@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.urban-step",
   "ruleset": "Pathfinder First Edition",
   "name": "Urban Step",
@@ -185,7 +185,48 @@
   "description": {
     "raw": "You set up a magical connection between two doors (or other physical portals, such as windows) that both must be within range, line of sight, and line of effect. During the spell’s duration, you can move through one of the two portals. When you do, you teleport to the other portal, emerging in either direction. Both portals must be open and unobstructed when you cast the spell and enter the first portal, and they both must be large enough for you to fit through, otherwise the spell ends and the teleportation fails. You can bring along objects as long as their combined weight doesn’t exceed your maximum load.\n\nYou can’t bring other creatures with you, and other creatures that go through the portals don’t teleport. Once you step through, the spell ends and you can’t take any other actions until your next turn.",
     "search_text": "\"you set up a magical connection between two doors (or other physical portals, such as windows) that both must be within range, line of sight, and line of effect. during the spell’s duration, you can move through one of the two portals. when you do, you teleport to the other portal, emerging in either direction. both portals must be open and unobstructed when you cast the spell and enter the first portal, and they both must be large enough for you to fit through, otherwise the spell ends and the teleportation fails. you can bring along objects as long as their combined weight doesn’t exceed your maximum load.\\n\\nyou can’t bring other creatures with you, and other creatures that go through the portals don’t teleport. once you step through, the spell ends and you can’t take any other actions until your next turn.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You set up a magical connection between two doors (or other physical portals, such as windows) that both must be within range, line of sight, and line of effect. During the spell’s duration, you can move through one of the two portals. When you do, you "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "teleport",
+              "relationship_id": "spell.urban-step:references:spell.teleport"
+            },
+            {
+              "node_type": "text",
+              "value": " to the other portal, emerging in either direction. Both portals must be open and unobstructed when you cast the spell and enter the first portal, and they both must be large enough for you to fit through, otherwise the spell ends and the teleportation fails. You can bring along objects as long as their combined weight doesn’t exceed your maximum load."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You can’t bring other creatures with you, and other creatures that go through the portals don’t "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "teleport",
+              "relationship_id": "spell.urban-step:references:spell.teleport"
+            },
+            {
+              "node_type": "text",
+              "value": ". Once you step through, the spell ends and you can’t take any other actions until your next turn."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -297,6 +338,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.urban-step:appears_on_spell_list:spell-list.portal-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.portal-subdomain",
+        "name": "Portal Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.portal:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "3rd—urban step",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Travel"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.urban-step:appears_on_spell_list:spell-list.skald",
@@ -533,7 +594,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.teleport",
-        "name": "teleport"
+        "name": "Teleport"
       },
       "status": "accepted",
       "evidence": [
@@ -600,26 +661,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.urban-step:appears_on_spell_list:spell-list.portal-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.portal-subdomain",
-        "name": "Portal Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.portal:4a91e51b",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "3rd—urban step",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Travel"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -678,11 +719,19 @@
       "raw_value_sha256": "44dce4ea4835d897eca8ed783d706f8d5b8bf79ecd591e08f7a47fdf2e296984",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.urban-step:1376a85c8fc56b47",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d212f75b32cb40049711c4fb505aa24946d56ed9d5381da8e1e70652bcdfbc8d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

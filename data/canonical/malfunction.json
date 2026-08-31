@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.malfunction",
   "ruleset": "Pathfinder First Edition",
   "name": "Malfunction",
@@ -147,7 +147,60 @@
   "description": {
     "raw": "This functions as confusion, except it only affects constructs, and instead of babbling incoherently, the construct takes no actions on its turn (but may still make attacks of opportunity).",
     "search_text": "\"this functions as confusion, except it only affects constructs, and instead of babbling incoherently, the construct takes no actions on its turn (but may still make attacks of opportunity).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "confusion",
+              "relationship_id": "spell.malfunction:functions_like:spell.confusion",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it only affects "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "constructs",
+              "relationship_id": "spell.malfunction:uses_definition:rule.construct"
+            },
+            {
+              "node_type": "text",
+              "value": ", and instead of babbling incoherently, the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "construct",
+              "relationship_id": "spell.malfunction:uses_definition:rule.construct"
+            },
+            {
+              "node_type": "text",
+              "value": " takes no actions on its turn (but may still make "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attacks of opportunity",
+              "relationship_id": "spell.malfunction:uses_definition:rule.attacks-of-opportunity"
+            },
+            {
+              "node_type": "text",
+              "value": ")."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -157,7 +210,153 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.confusion",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.malfunction:2f6d7f4f5a36a04f",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This functions as confusion, except it only affects constructs, and instead of babbling incoherently, the construct takes no actions on its turn (but may still make attacks of opportunity)."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/range",
+          "value": {
+            "category": "close",
+            "formula": "close (25 ft. + 5 ft./2 levels)",
+            "raw": "close (25 ft. + 5 ft./2 levels)"
+          },
+          "source_field": "spell_raw.range_raw",
+          "raw": "close (25 ft. + 5 ft./2 levels)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Area",
+                "value_raw": "one construct",
+                "kinds": [
+                  "area"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Area\",\"value_raw\":\"one construct\",\"kinds\":[\"area\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": null,
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Area\",\"value_raw\":\"one construct\",\"kinds\":[\"area\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/area",
+          "value": {
+            "propagation": "other",
+            "geometry": "other",
+            "geometry_basis": "unknown",
+            "dimensions": {
+              "radius_ft": null,
+              "length_ft": null,
+              "width_ft": null,
+              "height_ft": null
+            },
+            "shapeable": null,
+            "raw": "one construct"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Area\",\"value_raw\":\"one construct\",\"kinds\":[\"area\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "timed",
+            "formula": "1 round/level (D)",
+            "dismissible": true,
+            "concentration": null,
+            "raw": "1 round/level (D)"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "1 round/level (D)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/saving_throw",
+          "value": {
+            "types": [
+              "fortitude"
+            ],
+            "outcome": "Fortitude negates",
+            "harmless": null,
+            "object": null,
+            "conditional": true,
+            "raw": "Fortitude negates"
+          },
+          "source_field": "spell_raw.saving_throw_raw",
+          "raw": "Fortitude negates",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This functions as confusion, except it only affects constructs, and instead of babbling incoherently, the construct takes no actions on its turn (but may still make attacks of opportunity).",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This functions as confusion, except it only affects constructs, and instead of babbling incoherently, the construct takes no actions on its turn (but may still make attacks of opportunity).",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.malfunction:appears_on_spell_list:spell-list.arcanist",
@@ -178,6 +377,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.malfunction:appears_on_spell_list:spell-list.metal-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.metal-elemental-school",
+        "name": "Metal Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.metal-elemental:542a211d",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4—malfunction",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/metal/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     },
     {
       "relationship_id": "spell.malfunction:appears_on_spell_list:spell-list.occultist",
@@ -280,6 +499,33 @@
       "note": null
     },
     {
+      "relationship_id": "spell.malfunction:functions_like:spell.confusion",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.confusion",
+        "name": "Confusion"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.malfunction:ba486ee03e62931f",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "confusion",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/confusion.html#confusion"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.malfunction:e73f2c88760a9428",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "confusion",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/confusion/"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.malfunction:has_school:magic-school.transmutation",
       "type": "has_school",
       "target": {
@@ -343,33 +589,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "Ultimate Magic pg. 228",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.malfunction:references:spell.confusion",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.confusion",
-        "name": "confusion"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.malfunction:ba486ee03e62931f",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "confusion",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/confusion.html#confusion"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.malfunction:e73f2c88760a9428",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "confusion",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/c/confusion/"
         }
       ],
       "note": null
@@ -444,20 +663,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "construct",
           "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/creature-types#TOC-Construct"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.malfunction:uses_definition:rule.constructs",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.constructs",
-        "name": "constructs"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.malfunction:e73f2c88760a9428",
           "source_field": "spell_raw.links_raw[7]",
@@ -469,11 +675,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.malfunction:uses_definition:rule.fortitude",
+      "relationship_id": "spell.malfunction:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -527,26 +733,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.malfunction:appears_on_spell_list:spell-list.metal-elemental-school",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.metal-elemental-school",
-        "name": "Metal Elemental School"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:magic-school.metal-elemental:542a211d",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "4—malfunction",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/metal/"
-        }
-      ],
-      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -605,11 +791,19 @@
       "raw_value_sha256": "3d1727cc812f2cc5392ab330d7c8a6c51cc11c96d8c3e208be92619b03147e67",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.malfunction:2f6d7f4f5a36a04f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "08c5508b42598c70b384b62da3031d1cedc8760063106295cada042b59cd7e63",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

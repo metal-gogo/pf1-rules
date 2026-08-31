@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.spell-immunity-greater-communal",
   "ruleset": "Pathfinder First Edition",
   "name": "Spell Immunity, Greater Communal",
@@ -130,7 +130,33 @@
   "description": {
     "raw": "This spell functions like greater spell immunity, except you divide the duration among the creatures in 10-minute intervals among the creatures touched.",
     "search_text": "\"this spell functions like greater spell immunity, except you divide the duration among the creatures in 10-minute intervals among the creatures touched.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "greater spell immunity",
+              "relationship_id": "spell.spell-immunity-greater-communal:functions_like:spell.spell-immunity-greater",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you divide the duration among the creatures in 10-minute intervals among the creatures touched."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -370,12 +396,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.spell-immunity-greater-communal:references:spell.greater-spell-immunity",
+      "relationship_id": "spell.spell-immunity-greater-communal:references:spell.spell-immunity-greater",
       "type": "references",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.greater-spell-immunity",
-        "name": "greater spell immunity"
+        "entity_id": "spell.spell-immunity-greater",
+        "name": "Spell Immunity, Greater"
       },
       "status": "accepted",
       "evidence": [
@@ -437,11 +463,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.spell-immunity-greater-communal:uses_definition:rule.will",
+      "relationship_id": "spell.spell-immunity-greater-communal:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -505,11 +531,19 @@
       "raw_value_sha256": "e18b807ddb7d369324f01baaf4491deaab5477d01fb356f20f237c25ce81104c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.spell-immunity-greater-communal:2da3e716bbf1fc7b",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f0976a5602175fa3c93928a88182014481787bf2ad45b1d0e0e187f071f85cdd",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

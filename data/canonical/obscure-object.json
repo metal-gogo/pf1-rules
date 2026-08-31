@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.obscure-object",
   "ruleset": "Pathfinder First Edition",
   "name": "Obscure Object",
@@ -250,7 +250,81 @@
   "description": {
     "raw": "This spell hides an object from location by divination (scrying) effects, such as the scrying spell or a crystal ball. Such an attempt automatically fails (if the divination is targeted on the object) or fails to perceive the object (if the divination is targeted on a nearby location, object, or person).",
     "search_text": "\"this spell hides an object from location by divination (scrying) effects, such as the scrying spell or a crystal ball. such an attempt automatically fails (if the divination is targeted on the object) or fails to perceive the object (if the divination is targeted on a nearby location, object, or person).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell hides an object from location by "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "divination",
+              "relationship_id": "spell.obscure-object:uses_definition:magic-school.divination"
+            },
+            {
+              "node_type": "text",
+              "value": " ("
+            },
+            {
+              "node_type": "entity_link",
+              "value": "scrying",
+              "relationship_id": "spell.obscure-object:references:spell.scrying"
+            },
+            {
+              "node_type": "text",
+              "value": ") effects, such as the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "scrying",
+              "relationship_id": "spell.obscure-object:references:spell.scrying",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell or a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "crystal ball",
+              "relationship_id": "spell.obscure-object:uses_definition:rule.crystal-ball",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ". Such an attempt automatically fails (if the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "divination",
+              "relationship_id": "spell.obscure-object:uses_definition:magic-school.divination"
+            },
+            {
+              "node_type": "text",
+              "value": " is targeted on the object) or fails to perceive the object (if the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "divination",
+              "relationship_id": "spell.obscure-object:uses_definition:magic-school.divination"
+            },
+            {
+              "node_type": "text",
+              "value": " is targeted on a nearby location, object, or person)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -431,6 +505,40 @@
       "note": null
     },
     {
+      "relationship_id": "spell.obscure-object:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.obscure-object:347280b8029d685e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.obscure-object:547e18b06109d190",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.obscure-object:347280b8029d685e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.obscure-object:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -556,6 +664,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.obscure-object:appears_on_spell_list:spell-list.spellscar-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.spellscar-mystery",
+        "name": "Spellscar Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.spellscar:37f882ea",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "obscure object (4th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Spellscar"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     },
     {
       "relationship_id": "spell.obscure-object:appears_on_spell_list:spell-list.spiritualist",
@@ -698,7 +826,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.scrying",
-        "name": "scrying"
+        "name": "Scrying"
       },
       "status": "accepted",
       "evidence": [
@@ -747,6 +875,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.obscure-object:uses_definition:magic-school.divination",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.divination",
+        "name": "Divination"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.obscure-object:547e18b06109d190",
+          "source_field": "spell_raw.links_raw[12]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "divination",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Divination"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.obscure-object:uses_definition:rule.crystal-ball",
       "type": "uses_definition",
       "target": {
@@ -762,26 +910,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "crystal ball",
           "source_href": "https://www.d20pfsrd.com/magic-items/wondrous-items/wondrous-items/c-d/crystal-ball/"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.obscure-object:uses_definition:rule.divination",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.divination",
-        "name": "divination"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.obscure-object:547e18b06109d190",
-          "source_field": "spell_raw.links_raw[12]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "divination",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Divination"
         }
       ],
       "note": null
@@ -814,11 +942,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.obscure-object:uses_definition:rule.will",
+      "relationship_id": "spell.obscure-object:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -839,60 +967,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.obscure-object:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.obscure-object:347280b8029d685e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.obscure-object:547e18b06109d190",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.obscure-object:347280b8029d685e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.obscure-object:appears_on_spell_list:spell-list.spellscar-mystery",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.spellscar-mystery",
-        "name": "Spellscar Mystery Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.spellscar:37f882ea",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "obscure object (4th)",
-          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Spellscar"
-        }
-      ],
-      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -951,11 +1025,19 @@
       "raw_value_sha256": "2db90d4fd6692130d6b82d968c00eccc9d1f21d9b68b3379e64b0d6ae65f3355",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.obscure-object:347280b8029d685e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "1743347f87d78b664095559ef950c25397142028269ad434d8d201225be0df73",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

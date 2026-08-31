@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.inflict-moderate-wounds-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Inflict Moderate Wounds, Mass",
@@ -187,7 +187,33 @@
   "description": {
     "raw": "This spell functions like mass inflict light wounds, except that it deals 2d8 points of damage + 1 point per caster level (maximum +30).",
     "search_text": "\"this spell functions like mass inflict light wounds, except that it deals 2d8 points of damage + 1 point per caster level (maximum +30).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "mass inflict light wounds",
+              "relationship_id": "spell.inflict-moderate-wounds-mass:functions_like:spell.inflict-light-wounds-mass",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that it deals 2d8 points of damage + 1 point per caster level (maximum +30)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -320,6 +346,40 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.inflict-moderate-wounds-mass:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.inflict-moderate-wounds-mass:f31fe81c00e2d124",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 6",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.inflict-moderate-wounds-mass:79c99309839697fd",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.inflict-moderate-wounds-mass:f31fe81c00e2d124",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 6",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.inflict-moderate-wounds-mass:appears_on_spell_list:spell-list.oracle",
@@ -497,12 +557,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.inflict-moderate-wounds-mass:references:spell.mass-inflict-light-wounds",
+      "relationship_id": "spell.inflict-moderate-wounds-mass:references:spell.inflict-light-wounds-mass",
       "type": "references",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.mass-inflict-light-wounds",
-        "name": "mass inflict light wounds"
+        "entity_id": "spell.inflict-light-wounds-mass",
+        "name": "Inflict Light Wounds, Mass"
       },
       "status": "accepted",
       "evidence": [
@@ -555,40 +615,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.inflict-moderate-wounds-mass:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.inflict-moderate-wounds-mass:f31fe81c00e2d124",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 6",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.inflict-moderate-wounds-mass:79c99309839697fd",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.inflict-moderate-wounds-mass:f31fe81c00e2d124",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 6",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -639,11 +665,19 @@
       "raw_value_sha256": "3be7dad34b262a926804df656e04b471e070540d52ae87a46b333dc8b73188bd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.inflict-moderate-wounds-mass:f31fe81c00e2d124",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3cd1c8ebbf9da03180c6bea39db85773effe70744480c4ab7e702f7c355614a1",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

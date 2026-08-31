@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.lend-judgment-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Lend Judgment, Greater",
@@ -128,7 +128,32 @@
   "description": {
     "raw": "This functions as lend judgment, except the ally gains the benefit of all your active judgments.",
     "search_text": "\"this functions as lend judgment, except the ally gains the benefit of all your active judgments.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This functions as "
+            },
+            {
+              "node_type": "text",
+              "value": "lend judgment",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except the ally gains the benefit of all your active judgments."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -159,6 +184,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.lend-judgment-greater:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.lend-judgment-greater:eae780f0dd395117",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.lend-judgment-greater:has_school:magic-school.divination",
@@ -253,26 +298,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.lend-judgment-greater:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.lend-judgment-greater:eae780f0dd395117",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -323,11 +348,19 @@
       "raw_value_sha256": "600493e437f0a527c790a62b34f38cc3185fa9f57967e088aa15a834bebbebd7",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.lend-judgment-greater:eae780f0dd395117",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3306eb5cfaf6b2282fcc65686859a09f2b287f679981287eebbaa850631e4ab5",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "DERIVED_SPELL_LIST_ACCESS",

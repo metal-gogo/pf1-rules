@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.instant-summons-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Instant Summons, Greater",
@@ -143,7 +143,54 @@
   "description": {
     "raw": "This spell functions as instant summons, except that you can target multiple objects. You must use a separate sapphire worth 1,000 gp for each one. For each item you target, you can touch a creature, granting that creature the ability to speak the special word for that item (each item has its own special word) while crushing the matched gem to call the item to hand. Only you or the touched creature can activate the gem or see the arcane mark upon it.",
     "search_text": "\"this spell functions as instant summons, except that you can target multiple objects. you must use a separate sapphire worth 1,000 gp for each one. for each item you target, you can touch a creature, granting that creature the ability to speak the special word for that item (each item has its own special word) while crushing the matched gem to call the item to hand. only you or the touched creature can activate the gem or see the arcane mark upon it.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "instant summons",
+              "relationship_id": "spell.instant-summons-greater:functions_like:spell.instant-summons",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that you can target multiple objects. You must use a separate sapphire worth 1,000 gp for each one. For each item you target, you can "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch",
+              "relationship_id": "spell.instant-summons-greater:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " a creature, granting that creature the ability to speak the special word for that item (each item has its own special word) while crushing the matched gem to call the item to hand. Only you or the touched creature can activate the gem or see the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "arcane mark",
+              "relationship_id": "spell.instant-summons-greater:references:spell.arcane-mark",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " upon it."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -514,7 +561,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.arcane-mark",
-        "name": "arcane mark"
+        "name": "Arcane Mark"
       },
       "status": "accepted",
       "evidence": [
@@ -616,12 +663,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.instant-summons-greater:uses_definition:rule.touch",
+      "relationship_id": "spell.instant-summons-greater:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -684,11 +731,19 @@
       "raw_value_sha256": "5fa6e1817cf9470a5e1753053ccfd4093c58c3ed6fcd4b9fd0b20eac6591e8ce",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.instant-summons-greater:3489761645ba3d17",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3ac530ad4646c7c37fa6f65464f48ddac7ec51c3b127305d52d166baa44b08eb",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

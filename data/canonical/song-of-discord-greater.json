@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.song-of-discord-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Song of Discord, Greater",
@@ -132,7 +132,51 @@
   "description": {
     "raw": "This spell functions as song of discord except that affected creatures automatically attack the nearest target each round. In addition, all affected creatures gain a +4 morale bonus to Strength for the duration of the spell. A creature that succeeds at the Will save reduces the effect’s duration to 1 round.",
     "search_text": "\"this spell functions as song of discord except that affected creatures automatically attack the nearest target each round. in addition, all affected creatures gain a +4 morale bonus to strength for the duration of the spell. a creature that succeeds at the will save reduces the effect’s duration to 1 round.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "song of discord",
+              "relationship_id": "spell.song-of-discord-greater:functions_like:spell.song-of-discord",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " except that affected creatures automatically attack the nearest target each round. In addition, all affected creatures gain a +4 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "morale bonus",
+              "relationship_id": "spell.song-of-discord-greater:uses_definition:rule.morale-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Strength",
+              "relationship_id": "spell.song-of-discord-greater:uses_definition:rule.strength"
+            },
+            {
+              "node_type": "text",
+              "value": " for the duration of the spell. A creature that succeeds at the Will save reduces the effect’s duration to 1 round."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -521,7 +565,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.song-of-discord",
-        "name": "song of discord"
+        "name": "Song of Discord"
       },
       "status": "accepted",
       "evidence": [
@@ -664,11 +708,19 @@
       "raw_value_sha256": "06018f7ca615f84437bb9e34b3a8c7f3cc611dc02c862740ddfab804faf2403c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.song-of-discord-greater:29e62add9d051ab6",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "52cbc41affff02b488df1847bb24cd1ba4bcfb8e6d1b983c5471fbb494d47e78",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

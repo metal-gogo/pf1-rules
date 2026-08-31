@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.clarion-call",
   "ruleset": "Pathfinder First Edition",
   "name": "Clarion Call",
@@ -206,7 +206,21 @@
   "description": {
     "raw": "The subject of this spell gains two benefits. First, the affected creature gains the ability to create a sound like the blast of a mighty horn or trumpet simply by miming the action of sounding one. Second, the subject can speak in a booming voice that carries easily over great distances, lowering the DC of any check to hear what is said by –15. This spell is particularly prized by battlefield commanders and champions who wish to make themselves clearly heard or gain the attention of their allies or foes.",
     "search_text": "\"the subject of this spell gains two benefits. first, the affected creature gains the ability to create a sound like the blast of a mighty horn or trumpet simply by miming the action of sounding one. second, the subject can speak in a booming voice that carries easily over great distances, lowering the dc of any check to hear what is said by –15. this spell is particularly prized by battlefield commanders and champions who wish to make themselves clearly heard or gain the attention of their allies or foes.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The subject of this spell gains two benefits. First, the affected creature gains the ability to create a sound like the blast of a mighty horn or trumpet simply by miming the action of sounding one. Second, the subject can speak in a booming voice that carries easily over great distances, lowering the DC of any check to hear what is said by –15. This spell is particularly prized by battlefield commanders and champions who wish to make themselves clearly heard or gain the attention of their allies or foes."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -318,6 +332,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.clarion-call:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.clarion-call:8c0e62339e9dc0f0",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.clarion-call:c5c57d13ffe9835a",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.clarion-call:appears_on_spell_list:spell-list.oracle",
@@ -548,12 +589,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.clarion-call:uses_definition:rule.fort",
+      "relationship_id": "spell.clarion-call:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -608,12 +649,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.clarion-call:uses_definition:rule.touch",
+      "relationship_id": "spell.clarion-call:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -626,33 +667,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.clarion-call:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.clarion-call:8c0e62339e9dc0f0",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.clarion-call:c5c57d13ffe9835a",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -703,11 +717,19 @@
       "raw_value_sha256": "6b4f857589bf54badbc12e7a739d87a129caeb539874a98daaeafea984f9b385",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.clarion-call:c5c57d13ffe9835a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e4ef1a698aac09237068d3072eb90331616b7c635d0822274c9d552236f735ba",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

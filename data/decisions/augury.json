@@ -172,6 +172,25 @@
         "aon:subdomain.fate:05c8839f"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.augury:7b9e0ca7978d1ba7",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.augury:7b9e0ca7978d1ba7",
+        "legacy_aon:spell.augury:dc3aa8d947d36667",
+        "d20pfsrd:spell.augury:7b9dbe5f7685400e",
+        "aon:bloodline.sorcerer.dreamspun:1a46079d",
+        "aon:bloodline.sorcerer.harrow:b65d8b5a",
+        "aon:subdomain.fate:05c8839f"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -212,6 +231,20 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.augury:appears_on_spell_list:spell-list.fate-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.fate:05c8839f",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.fate:05c8839f"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
       "relationship_id": "spell.augury:appears_on_spell_list:spell-list.medium",
       "decision": "accept",
       "evidence": [
@@ -242,6 +275,25 @@
         "d20pfsrd:spell.augury:7b9dbe5f7685400e"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.augury:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.augury:7b9dbe5f7685400e",
+          "source_field": "spell_raw.links_raw[8]"
+        },
+        {
+          "observation_id": "aon:spell.augury:7b9e0ca7978d1ba7",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:spell.augury:7b9dbe5f7685400e",
+        "aon:spell.augury:7b9e0ca7978d1ba7"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.augury:appears_on_spell_list:spell-list.oracle",
@@ -293,7 +345,7 @@
         "legacy_aon:spell.augury:dc3aa8d947d36667",
         "d20pfsrd:spell.augury:7b9dbe5f7685400e"
       ],
-      "rationale": "AoN prints the named level. Sahir-Afiyun is a feat-owned selectable spell set, not a class, so the level remains canonical with list kind feat."
+      "rationale": "AoN prints this level under Sahirafiyun. The Sahir-Afiyun feat grants selectable access to the spell; this is not a class spell-list membership."
     },
     {
       "relationship_id": "spell.augury:appears_on_spell_list:spell-list.shaman",
@@ -314,6 +366,34 @@
         "d20pfsrd:spell.augury:7b9dbe5f7685400e"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.augury:appears_on_spell_list:spell-list.sorcerer-dreamspun-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.dreamspun:1a46079d",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.dreamspun:1a46079d"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
+      "relationship_id": "spell.augury:appears_on_spell_list:spell-list.sorcerer-harrow-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.harrow:b65d8b5a",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.harrow:b65d8b5a"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     },
     {
       "relationship_id": "spell.augury:appears_on_spell_list:spell-list.spiritualist",
@@ -478,67 +558,6 @@
         "d20pfsrd:spell.augury:7b9dbe5f7685400e"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.augury:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.augury:7b9dbe5f7685400e",
-          "source_field": "spell_raw.links_raw[8]"
-        },
-        {
-          "observation_id": "aon:spell.augury:7b9e0ca7978d1ba7",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:spell.augury:7b9dbe5f7685400e",
-        "aon:spell.augury:7b9e0ca7978d1ba7"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.augury:appears_on_spell_list:spell-list.sorcerer-dreamspun-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.dreamspun:1a46079d",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.dreamspun:1a46079d"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
-    },
-    {
-      "relationship_id": "spell.augury:appears_on_spell_list:spell-list.sorcerer-harrow-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.harrow:b65d8b5a",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.harrow:b65d8b5a"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
-    },
-    {
-      "relationship_id": "spell.augury:appears_on_spell_list:spell-list.fate-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.fate:05c8839f",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.fate:05c8839f"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

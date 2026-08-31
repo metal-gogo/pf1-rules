@@ -16,6 +16,10 @@ import {
 } from "../src/domain/rich-text.js";
 import { resolveCanonicalSpellReference } from "../src/ingestion/normalize-level-zero.js";
 import { resolveArtifactPath } from "../src/ingestion/artifact-store.js";
+import {
+  sourceDescriptionMatch,
+  syncDescriptionInheritanceOverrides,
+} from "../src/ingestion/enrich-rich-text-pilot.js";
 import { parseAonSpell } from "../src/ingestion/spell-page-parser.js";
 
 
@@ -70,6 +74,34 @@ function relationship(
 
 
 describe("rich-text schema and source parsing", () => {
+  it("accepts a bounded AoN description with a separately stored mythic suffix", () => {
+    expect(sourceDescriptionMatch("Base description", "Base description"))
+      .toEqual({ exact: true, leakedMythicSuffix: false });
+    expect(sourceDescriptionMatch(
+      "Base description\n\nMythic Example\nMythic rules",
+      "Base description",
+    )).toEqual({ exact: false, leakedMythicSuffix: true });
+    expect(sourceDescriptionMatch("Different description", "Base description"))
+      .toEqual({ exact: false, leakedMythicSuffix: false });
+  });
+
+  it("keeps description inheritance overrides aligned with canonical text", () => {
+    const spell = {
+      description: { raw: "Base description" },
+      rules_inheritance: [{
+        overrides: [{ path: "/description/raw", value: "Base description\nMythic rules", raw: "source" }],
+      }],
+    } as ValidatedJson;
+
+    syncDescriptionInheritanceOverrides(spell);
+
+    expect(spell.rules_inheritance[0].overrides[0]).toEqual({
+      path: "/description/raw",
+      value: "Base description",
+      raw: "source",
+    });
+  });
+
   it("requires a valid document for canonical 0.2.0 records", () => {
     const Ajv2020 = Ajv2020Module as unknown as new (options: object) => {
       compile(schema: ValidatedJson): (value: unknown) => boolean;

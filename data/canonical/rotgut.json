@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.rotgut",
   "ruleset": "Pathfinder First Edition",
   "name": "Rotgut",
@@ -194,7 +194,77 @@
   "description": {
     "raw": "You transform the target into a cheap alcohol of your choice, such as beer, grog, mead, rum, or wine. The alcohol doesn’t taste good, but it’s drinkable and just as effective as normal alcohol in making creatures inebriated (Pathfinder RPG GameMastery Guide 237). This spell doesn’t work on holy water, potions, magical liquids, or water that is part of a creature.",
     "search_text": "\"you transform the target into a cheap alcohol of your choice, such as beer, grog, mead, rum, or wine. the alcohol doesn’t taste good, but it’s drinkable and just as effective as normal alcohol in making creatures inebriated (pathfinder rpg gamemastery guide 237). this spell doesn’t work on holy water, potions, magical liquids, or water that is part of a creature.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You transform the target into a cheap alcohol of your choice, such as beer, "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "grog",
+              "relationship_id": "spell.rotgut:uses_definition:rule.grog"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "mead",
+              "relationship_id": "spell.rotgut:uses_definition:rule.mead"
+            },
+            {
+              "node_type": "text",
+              "value": ", rum, or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "wine",
+              "relationship_id": "spell.rotgut:uses_definition:rule.wine"
+            },
+            {
+              "node_type": "text",
+              "value": ". The alcohol doesn’t taste good, but it’s drinkable and just as effective as normal alcohol in making creatures inebriated ("
+            },
+            {
+              "node_type": "text",
+              "value": "Pathfinder RPG GameMastery Guide",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " 237). This spell doesn’t work on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "holy water",
+              "relationship_id": "spell.rotgut:uses_definition:item.holy-water"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "potions",
+              "relationship_id": "spell.rotgut:uses_definition:rule.potion"
+            },
+            {
+              "node_type": "text",
+              "value": ", magical liquids, or water that is part of a creature."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -355,6 +425,40 @@
       "note": null
     },
     {
+      "relationship_id": "spell.rotgut:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.rotgut:6b0cbaee8ce1eb25",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.rotgut:353e02dad81bf38e",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.rotgut:6b0cbaee8ce1eb25",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.rotgut:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -497,12 +601,32 @@
       "note": null
     },
     {
-      "relationship_id": "spell.rotgut:uses_definition:rule.fort",
+      "relationship_id": "spell.rotgut:uses_definition:item.holy-water",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "item",
+        "entity_id": "item.holy-water",
+        "name": "Holy water"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.rotgut:353e02dad81bf38e",
+          "source_field": "spell_raw.links_raw[12]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "holy water",
+          "source_href": "https://www.d20pfsrd.com/equipment/goods-and-services/toys-games-puzzles#TOC-Holy-Water"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.rotgut:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -537,26 +661,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.rotgut:uses_definition:rule.holy-water",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.holy-water",
-        "name": "holy water"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.rotgut:353e02dad81bf38e",
-          "source_field": "spell_raw.links_raw[12]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "holy water",
-          "source_href": "https://www.d20pfsrd.com/equipment/goods-and-services/toys-games-puzzles#TOC-Holy-Water"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.rotgut:uses_definition:rule.mead",
       "type": "uses_definition",
       "target": {
@@ -577,12 +681,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.rotgut:uses_definition:rule.potions",
+      "relationship_id": "spell.rotgut:uses_definition:rule.potion",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.potions",
-        "name": "potions"
+        "entity_id": "rule.potion",
+        "name": "Potion"
       },
       "status": "accepted",
       "evidence": [
@@ -635,40 +739,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.rotgut:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.rotgut:6b0cbaee8ce1eb25",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.rotgut:353e02dad81bf38e",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.rotgut:6b0cbaee8ce1eb25",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -719,11 +789,19 @@
       "raw_value_sha256": "d19a49125cbab737df81744ef14730558940f0d20b8791553d814f5c8207cccf",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.rotgut:6b0cbaee8ce1eb25",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "fac7e5a7a38de07f7f0af5a3f9acf2ab582ac996c68b94d64652d22d21f4f2bf",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

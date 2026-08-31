@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.protective-penumbra",
   "ruleset": "Pathfinder First Edition",
   "name": "Protective Penumbra",
@@ -202,7 +202,75 @@
   "description": {
     "raw": "This spell keeps the target slightly in shadow. A target with light blindness, light sensitivity, or vulnerability to sunlight (such as vampires and wraiths) may ignore penalties from those qualities. The spell gives the target a +2 bonus on saving throws against nonmagical hazards related to bright light, such as glare or sunburn.",
     "search_text": "\"this spell keeps the target slightly in shadow. a target with light blindness, light sensitivity, or vulnerability to sunlight (such as vampires and wraiths) may ignore penalties from those qualities. the spell gives the target a +2 bonus on saving throws against nonmagical hazards related to bright light, such as glare or sunburn.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell keeps the target slightly in shadow. A target with "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "light blindness",
+              "relationship_id": "spell.protective-penumbra:uses_definition:rule.light-blindness"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "light sensitivity",
+              "relationship_id": "spell.protective-penumbra:uses_definition:rule.light-sensitivity"
+            },
+            {
+              "node_type": "text",
+              "value": ", or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "vulnerability",
+              "relationship_id": "spell.protective-penumbra:uses_definition:rule.vulnerability"
+            },
+            {
+              "node_type": "text",
+              "value": " to sunlight (such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "vampires",
+              "relationship_id": "spell.protective-penumbra:uses_definition:rule.vampires"
+            },
+            {
+              "node_type": "text",
+              "value": " and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "wraiths",
+              "relationship_id": "spell.protective-penumbra:uses_definition:rule.wraiths"
+            },
+            {
+              "node_type": "text",
+              "value": ") may ignore penalties from those qualities. The spell gives the target a +2 bonus on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throws",
+              "relationship_id": "spell.protective-penumbra:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": " against nonmagical hazards related to bright light, such as glare or sunburn."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -300,6 +368,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.protective-penumbra:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.protective-penumbra:50d88cf4ce134bb7",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.protective-penumbra:appears_on_spell_list:spell-list.oracle",
@@ -725,11 +813,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.protective-penumbra:uses_definition:rule.will",
+      "relationship_id": "spell.protective-penumbra:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -763,26 +851,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.protective-penumbra:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.protective-penumbra:50d88cf4ce134bb7",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -833,11 +901,19 @@
       "raw_value_sha256": "b4993a23be18051bce23895271ac0b66c74ce297ba313aaf1bfc70e03f039019",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.protective-penumbra:50d88cf4ce134bb7",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d4784d296f9ebd83aa4ad45d87a32c0c32e899d6e7c572e400978e0ae17e904f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

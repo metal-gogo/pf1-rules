@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.purify-food-and-drink",
   "ruleset": "Pathfinder First Edition",
   "name": "Purify Food and Drink",
@@ -184,7 +184,41 @@
   "description": {
     "raw": "This spell makes spoiled, rotten, diseased, poisonous, or otherwise contaminated food and water pure and suitable for eating and drinking. This spell does not prevent subsequent natural decay or spoilage. Unholy water and similar food and drink of significance is spoiled by purify food and drink, but the spell has no effect on creatures of any type nor upon magic potions. Water weighs about 8 pounds per gallon. One cubic foot of water contains roughly 8 gallons and weighs about 60 pounds.",
     "search_text": "\"this spell makes spoiled, rotten, diseased, poisonous, or otherwise contaminated food and water pure and suitable for eating and drinking. this spell does not prevent subsequent natural decay or spoilage. unholy water and similar food and drink of significance is spoiled by purify food and drink, but the spell has no effect on creatures of any type nor upon magic potions. water weighs about 8 pounds per gallon. one cubic foot of water contains roughly 8 gallons and weighs about 60 pounds.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell makes spoiled, rotten, diseased, poisonous, or otherwise contaminated food and water pure and suitable for eating and drinking. This spell does not prevent subsequent natural decay or spoilage. Unholy water and similar food and drink of significance is spoiled by "
+            },
+            {
+              "node_type": "text",
+              "value": "purify food and drink",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", but the spell has no effect on creatures of any type nor upon magic "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "potions",
+              "relationship_id": "spell.purify-food-and-drink:uses_definition:rule.potion"
+            },
+            {
+              "node_type": "text",
+              "value": ". Water weighs about 8 pounds per gallon. One cubic foot of water contains roughly 8 gallons and weighs about 60 pounds."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -322,6 +356,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.purify-food-and-drink:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.purify-food-and-drink:cae6fe083ff037fc",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 0",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.purify-food-and-drink:appears_on_spell_list:spell-list.oracle",
@@ -479,12 +533,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.purify-food-and-drink:uses_definition:rule.potions",
+      "relationship_id": "spell.purify-food-and-drink:uses_definition:rule.potion",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.potions",
-        "name": "potions"
+        "entity_id": "rule.potion",
+        "name": "Potion"
       },
       "status": "accepted",
       "evidence": [
@@ -526,11 +580,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.purify-food-and-drink:uses_definition:rule.will",
+      "relationship_id": "spell.purify-food-and-drink:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -551,26 +605,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.purify-food-and-drink:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.purify-food-and-drink:cae6fe083ff037fc",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 0",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -621,11 +655,19 @@
       "raw_value_sha256": "71a53a50a89df22a82934baef202a88f3f1419be5d06c0e32898265ceb627ad6",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.purify-food-and-drink:cae6fe083ff037fc",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "126000a63174c56742c1c7613b9c54db2a9d4f062f39e9180c54cf7aef7b4cbc",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

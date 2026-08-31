@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.sadomasochism",
   "ruleset": "Pathfinder First Edition",
   "name": "Sadomasochism",
@@ -324,7 +324,41 @@
   "description": {
     "raw": "While subject to this spell, any time you are dealt damage, your attacker must roll damage for the attack twice and take the higher roll, but the attacker must also succeed at a Will saving throw or become demoralized (Core Rulebook 99) for 1 round. Each time you deal damage to a creature demoralized by this spell, you roll damage twice and take the higher result.",
     "search_text": "\"while subject to this spell, any time you are dealt damage, your attacker must roll damage for the attack twice and take the higher roll, but the attacker must also succeed at a will saving throw or become demoralized (core rulebook 99) for 1 round. each time you deal damage to a creature demoralized by this spell, you roll damage twice and take the higher result.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "While subject to this spell, any time you are dealt damage, your attacker must roll damage for the attack twice and take the higher roll, but the attacker must also succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.sadomasochism:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saving throw or become demoralized ("
+            },
+            {
+              "node_type": "text",
+              "value": "Core Rulebook ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "99) for 1 round. Each time you deal damage to a creature demoralized by this spell, you roll damage twice and take the higher result."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -496,6 +530,40 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.sadomasochism:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.sadomasochism:eb4ea528ac989d9b",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3 (Zon-Kuthon)",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.sadomasochism:23008bf723e45ccf",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.sadomasochism:eb4ea528ac989d9b",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 3 (Zon-Kuthon)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.sadomasochism:appears_on_spell_list:spell-list.oracle",
@@ -767,11 +835,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sadomasochism:uses_definition:rule.will",
+      "relationship_id": "spell.sadomasochism:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -792,40 +860,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.sadomasochism:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.sadomasochism:eb4ea528ac989d9b",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3 (Zon-Kuthon)",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.sadomasochism:23008bf723e45ccf",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.sadomasochism:eb4ea528ac989d9b",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 3 (Zon-Kuthon)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -876,11 +910,19 @@
       "raw_value_sha256": "353f0ef76a85de4cff91511d7f8aac5de19793ceb90fe537ebf887a82c1a4b5d",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.sadomasochism:eb4ea528ac989d9b",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d71176111eb519803b86b4b2b1a8e8915dc5a31f69263dcd3bd557eebabbbafe",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

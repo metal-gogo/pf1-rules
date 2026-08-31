@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.protection-from-arrows",
   "ruleset": "Pathfinder First Edition",
   "name": "Protection from Arrows",
@@ -191,9 +191,41 @@
     }
   },
   "description": {
-    "raw": "The warded creature gains resistance to ranged weapons. The subject gains damage reduction 10/magic against ranged weapons. This spell doesn't grant you the ability to damage creatures with similar damage reduction. Once the spell has prevented a total of 10 points of damage per caster level (maximum 100 points), it is discharged.Mythic Protection from ArrowsSource Mythic Adventures pg. 104\nThe damage reduction increases to 15/magic. The maximum damage prevented by the spell increases to 15 points per caster level (maximum 150 points). If the spell prevents all damage from a ranged weapon attack, it turns the projectile or weapon back on the attacker, using the same attack roll result. If the attacker is also protected by mythic protection from arrows and its spell completely prevents the damage from the rebounded attack, the weapon or projectile is destroyed.",
-    "search_text": "\"the warded creature gains resistance to ranged weapons. the subject gains damage reduction 10/magic against ranged weapons. this spell doesn't grant you the ability to damage creatures with similar damage reduction. once the spell has prevented a total of 10 points of damage per caster level (maximum 100 points), it is discharged.mythic protection from arrowssource mythic adventures pg. 104\\nthe damage reduction increases to 15/magic. the maximum damage prevented by the spell increases to 15 points per caster level (maximum 150 points). if the spell prevents all damage from a ranged weapon attack, it turns the projectile or weapon back on the attacker, using the same attack roll result. if the attacker is also protected by mythic protection from arrows and its spell completely prevents the damage from the rebounded attack, the weapon or projectile is destroyed.\"",
-    "sections": []
+    "raw": "The warded creature gains resistance to ranged weapons. The subject gains damage reduction 10/magic against ranged weapons. This spell doesn't grant you the ability to damage creatures with similar damage reduction. Once the spell has prevented a total of 10 points of damage per caster level (maximum 100 points), it is discharged.",
+    "search_text": "\"the warded creature gains resistance to ranged weapons. the subject gains damage reduction 10/magic against ranged weapons. this spell doesn't grant you the ability to damage creatures with similar damage reduction. once the spell has prevented a total of 10 points of damage per caster level (maximum 100 points), it is discharged.\"",
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The warded creature gains resistance to ranged weapons. The subject gains "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "damage reduction",
+              "relationship_id": "spell.protection-from-arrows:uses_definition:rule.damage-reduction"
+            },
+            {
+              "node_type": "text",
+              "value": " 10/magic against ranged weapons. This spell doesn't grant you the ability to damage creatures with similar "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "damage reduction",
+              "relationship_id": "spell.protection-from-arrows:uses_definition:rule.damage-reduction"
+            },
+            {
+              "node_type": "text",
+              "value": ". Once the spell has prevented a total of 10 points of damage per caster level (maximum 100 points), it is discharged."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -502,6 +534,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.protection-from-arrows:appears_on_spell_list:spell-list.wood-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.wood-elemental-school",
+        "name": "Wood Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.wood-elemental:d18ad88c",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2—protection from arrows",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/wood/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
+    {
       "relationship_id": "spell.protection-from-arrows:has_school:magic-school.abjuration",
       "type": "has_school",
       "target": {
@@ -705,11 +757,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.protection-from-arrows:uses_definition:rule.will",
+      "relationship_id": "spell.protection-from-arrows:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -750,26 +802,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.protection-from-arrows:appears_on_spell_list:spell-list.wood-elemental-school",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.wood-elemental-school",
-        "name": "Wood Elemental School"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:magic-school.wood-elemental:d18ad88c",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "2—protection from arrows",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/wood/"
-        }
-      ],
-      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -828,11 +860,19 @@
       "raw_value_sha256": "936db007b576716f92132c07f94dae35cdf0b6d175892afa5eb5a8456c6b6940",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.protection-from-arrows:735957b86e38f516",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e5f126b21851a47c53beee7a64ad853f5ee50a5cd1c430cb340361f775f707e6",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

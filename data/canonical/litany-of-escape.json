@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.litany-of-escape",
   "ruleset": "Pathfinder First Edition",
   "name": "Litany of Escape",
@@ -152,7 +152,48 @@
   "description": {
     "raw": "With a powerful prayer, you call upon the servants of your god to whisk a friend out of a grapple. The target loses the grappled and pinned conditions and is teleported 10 feet. If there is no available space for the target to teleport to, the spell fails.",
     "search_text": "\"with a powerful prayer, you call upon the servants of your god to whisk a friend out of a grapple. the target loses the grappled and pinned conditions and is teleported 10 feet. if there is no available space for the target to teleport to, the spell fails.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "With a powerful prayer, you call upon the servants of your god to whisk a friend out of a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "grapple",
+              "relationship_id": "spell.litany-of-escape:uses_definition:rule.grapple"
+            },
+            {
+              "node_type": "text",
+              "value": ". The target loses the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "grappled",
+              "relationship_id": "spell.litany-of-escape:uses_definition:condition.grappled"
+            },
+            {
+              "node_type": "text",
+              "value": " and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "pinned",
+              "relationship_id": "spell.litany-of-escape:uses_definition:condition.pinned"
+            },
+            {
+              "node_type": "text",
+              "value": " conditions and is teleported 10 feet. If there is no available space for the target to teleport to, the spell fails."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -217,6 +258,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.litany-of-escape:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.litany-of-escape:7d12bebf1a974463",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.litany-of-escape:b1b9d0381fe78617",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.litany-of-escape:appears_on_spell_list:spell-list.paladin",
@@ -473,33 +541,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.litany-of-escape:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.litany-of-escape:7d12bebf1a974463",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.litany-of-escape:b1b9d0381fe78617",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -550,11 +591,19 @@
       "raw_value_sha256": "4cc74c6a38d86fcbff51adafa479fba39f8c8fb7a2e3ab07aa50cc9a89288df8",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.litany-of-escape:b1b9d0381fe78617",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "ce8b2459b0d71fd224fbc0f71a10acf07bcb85804076b5aab232530a68fba6fe",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

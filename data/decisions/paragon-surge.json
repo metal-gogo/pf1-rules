@@ -157,6 +157,24 @@
         "aon:subdomain.self-realization:1d268b38"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.paragon-surge:61a487ee7496f412",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.paragon-surge:61a487ee7496f412",
+        "legacy_aon:spell.paragon-surge:c34ecac660171a14",
+        "d20pfsrd:spell.paragon-surge:4bd9f91c27256955",
+        "aon:subdomain.self-realization:950691dc",
+        "aon:subdomain.self-realization:1d268b38"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -317,6 +335,25 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.paragon-surge:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.paragon-surge:4bd9f91c27256955",
+          "source_field": "spell_raw.links_raw[4]"
+        },
+        {
+          "observation_id": "aon:spell.paragon-surge:61a487ee7496f412",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:spell.paragon-surge:4bd9f91c27256955",
+        "aon:spell.paragon-surge:61a487ee7496f412"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.paragon-surge:appears_on_spell_list:spell-list.oracle",
       "decision": "accept",
       "evidence": [
@@ -371,6 +408,34 @@
         "d20pfsrd:spell.paragon-surge:4bd9f91c27256955"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.paragon-surge:appears_on_spell_list:spell-list.self-realization-subdomain-from-liberation",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.self-realization:950691dc",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.self-realization:950691dc"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.paragon-surge:appears_on_spell_list:spell-list.self-realization-subdomain-from-strength",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.self-realization:1d268b38",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.self-realization:1d268b38"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.paragon-surge:appears_on_spell_list:spell-list.sorcerer",
@@ -735,53 +800,6 @@
         "d20pfsrd:spell.paragon-surge:4bd9f91c27256955"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.paragon-surge:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.paragon-surge:4bd9f91c27256955",
-          "source_field": "spell_raw.links_raw[4]"
-        },
-        {
-          "observation_id": "aon:spell.paragon-surge:61a487ee7496f412",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:spell.paragon-surge:4bd9f91c27256955",
-        "aon:spell.paragon-surge:61a487ee7496f412"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.paragon-surge:appears_on_spell_list:spell-list.self-realization-subdomain-from-liberation",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.self-realization:950691dc",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.self-realization:950691dc"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
-    },
-    {
-      "relationship_id": "spell.paragon-surge:appears_on_spell_list:spell-list.self-realization-subdomain-from-strength",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.self-realization:1d268b38",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.self-realization:1d268b38"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

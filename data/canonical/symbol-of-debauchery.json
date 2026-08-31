@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.symbol-of-debauchery",
   "ruleset": "Pathfinder First Edition",
   "name": "Symbol of Debauchery",
@@ -158,7 +158,73 @@
   "description": {
     "raw": "You conjure a sizable symbol into being, a rune suggestive of bloated bodies, flung food, and flowing wine. This spell functions as symbol of death, except that all creatures within 60 feet of the symbol of debauchery are instead filled with lust for the nearest conscious creature. This effect lasts for 1 round per caster level, even after creatures leave the symbol’s area of effect. Affected creatures are compelled to rush to the nearest creature in order to caress and kiss it, and may take no other actions. Each creature receives a single Will save when the symbol of debauchery is triggered to negate the effect. If no other creatures are visible, an affected creature may act normally.",
     "search_text": "\"you conjure a sizable symbol into being, a rune suggestive of bloated bodies, flung food, and flowing wine. this spell functions as symbol of death, except that all creatures within 60 feet of the symbol of debauchery are instead filled with lust for the nearest conscious creature. this effect lasts for 1 round per caster level, even after creatures leave the symbol’s area of effect. affected creatures are compelled to rush to the nearest creature in order to caress and kiss it, and may take no other actions. each creature receives a single will save when the symbol of debauchery is triggered to negate the effect. if no other creatures are visible, an affected creature may act normally.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You conjure a sizable symbol into being, a rune suggestive of bloated bodies, flung food, and flowing wine. This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "symbol of death",
+              "relationship_id": "spell.symbol-of-debauchery:functions_like:spell.symbol-of-death",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that all creatures within 60 feet of the "
+            },
+            {
+              "node_type": "text",
+              "value": "symbol of debauchery ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "are instead filled with lust for the nearest conscious creature. This effect lasts for 1 round per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.symbol-of-debauchery:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": ", even after creatures leave the symbol’s area of effect. Affected creatures are compelled to rush to the nearest creature in order to caress and kiss it, and may take no other actions. Each creature receives a single "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.symbol-of-debauchery:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save when the "
+            },
+            {
+              "node_type": "text",
+              "value": "symbol of debauchery ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "is triggered to negate the effect. If no other creatures are visible, an affected creature may act normally."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -168,7 +234,91 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.symbol-of-death",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.symbol-of-debauchery:b0bf8f2c3830fcc0",
+        "source_field": "spell_raw.description_raw",
+        "raw": "You conjure a sizable symbol into being, a rune suggestive of bloated bodies, flung food, and flowing wine. This spell functions as symbol of death, except that all creatures within 60 feet of the symbol of debauchery are instead filled with lust for the nearest conscious creature. This effect lasts for 1 round per caster level, even after creatures leave the symbol’s area of effect. Affected creatures are compelled to rush to the nearest creature in order to caress and kiss it, and may take no other actions. Each creature receives a single Will save when the symbol of debauchery is triggered to negate the effect. If no other creatures are visible, an affected creature may act normally."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "material",
+              "details": "a set of bull genitals and powdered ruby worth 5,000 gp",
+              "cost_gp": 5000,
+              "raw": "M (a set of bull genitals and powdered ruby worth 5,000 gp)"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (a set of bull genitals and powdered ruby worth 5,000 gp)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, M (a set of bull genitals and powdered ruby worth 5,000 gp)",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (a set of bull genitals and powdered ruby worth 5,000 gp)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/saving_throw",
+          "value": {
+            "types": [
+              "will"
+            ],
+            "outcome": "Will negates",
+            "harmless": null,
+            "object": null,
+            "conditional": null,
+            "raw": "Will negates"
+          },
+          "source_field": "spell_raw.saving_throw_raw",
+          "raw": "Will negates",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "You conjure a sizable symbol into being, a rune suggestive of bloated bodies, flung food, and flowing wine. This spell functions as symbol of death, except that all creatures within 60 feet of the symbol of debauchery are instead filled with lust for the nearest conscious creature. This effect lasts for 1 round per caster level, even after creatures leave the symbol’s area of effect. Affected creatures are compelled to rush to the nearest creature in order to caress and kiss it, and may take no other actions. Each creature receives a single Will save when the symbol of debauchery is triggered to negate the effect. If no other creatures are visible, an affected creature may act normally.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "You conjure a sizable symbol into being, a rune suggestive of bloated bodies, flung food, and flowing wine. This spell functions as symbol of death, except that all creatures within 60 feet of the symbol of debauchery are instead filled with lust for the nearest conscious creature. This effect lasts for 1 round per caster level, even after creatures leave the symbol’s area of effect. Affected creatures are compelled to rush to the nearest creature in order to caress and kiss it, and may take no other actions. Each creature receives a single Will save when the symbol of debauchery is triggered to negate the effect. If no other creatures are visible, an affected creature may act normally.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.symbol-of-debauchery:appears_on_spell_list:spell-list.arcanist",
@@ -385,6 +535,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.symbol-of-debauchery:functions_like:spell.symbol-of-death",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.symbol-of-death",
+        "name": "Symbol of Death"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.symbol-of-debauchery:2aea0bc79ec8e993",
+          "source_field": "spell_raw.links_raw[8]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "symbol of death",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/symbol-of-death/"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.symbol-of-debauchery:has_descriptor:descriptor.emotion",
       "type": "has_descriptor",
       "target": {
@@ -541,26 +711,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.symbol-of-debauchery:references:spell.symbol-of-death",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.symbol-of-death",
-        "name": "symbol of death"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.symbol-of-debauchery:2aea0bc79ec8e993",
-          "source_field": "spell_raw.links_raw[8]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "symbol of death",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/symbol-of-death/"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.symbol-of-debauchery:uses_definition:rule.caster-level",
       "type": "uses_definition",
       "target": {
@@ -601,11 +751,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.symbol-of-debauchery:uses_definition:rule.will",
+      "relationship_id": "spell.symbol-of-debauchery:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -676,11 +826,19 @@
       "raw_value_sha256": "2530ed49127bc5a7a8f32013fb8cf008514787709064d6ce44e091f4a81ef4fe",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.symbol-of-debauchery:b0bf8f2c3830fcc0",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3f9399292a8321b9aed331e04f641dc8ef3aa72cf7788c5ab91dbc7833a9f449",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

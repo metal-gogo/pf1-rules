@@ -157,6 +157,24 @@
         "aon:subdomain.language:f92547ee"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.share-language:54eb08281c8e3af0",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.share-language:54eb08281c8e3af0",
+        "legacy_aon:spell.share-language:03ba154b341a7ee1",
+        "d20pfsrd:spell.share-language:4e3afa9102a3567f",
+        "aon:subdomain.cooperation:c83a2eb7",
+        "aon:subdomain.language:f92547ee"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -237,6 +255,20 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.share-language:appears_on_spell_list:spell-list.cooperation-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.cooperation:c83a2eb7",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.cooperation:c83a2eb7"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
       "relationship_id": "spell.share-language:appears_on_spell_list:spell-list.druid",
       "decision": "accept",
       "evidence": [
@@ -275,6 +307,20 @@
         "d20pfsrd:spell.share-language:4e3afa9102a3567f"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.share-language:appears_on_spell_list:spell-list.language-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.language:f92547ee",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.language:f92547ee"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.share-language:appears_on_spell_list:spell-list.medium",
@@ -343,6 +389,25 @@
         "d20pfsrd:spell.share-language:4e3afa9102a3567f"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.share-language:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.share-language:4e3afa9102a3567f",
+          "source_field": "spell_raw.links_raw[15]"
+        },
+        {
+          "observation_id": "aon:spell.share-language:54eb08281c8e3af0",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:spell.share-language:4e3afa9102a3567f",
+        "aon:spell.share-language:54eb08281c8e3af0"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.share-language:appears_on_spell_list:spell-list.oracle",
@@ -601,7 +666,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.share-language:uses_definition:rule.will",
+      "relationship_id": "spell.share-language:uses_definition:rule.will-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -615,53 +680,6 @@
         "d20pfsrd:spell.share-language:4e3afa9102a3567f"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.share-language:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.share-language:4e3afa9102a3567f",
-          "source_field": "spell_raw.links_raw[15]"
-        },
-        {
-          "observation_id": "aon:spell.share-language:54eb08281c8e3af0",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:spell.share-language:4e3afa9102a3567f",
-        "aon:spell.share-language:54eb08281c8e3af0"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.share-language:appears_on_spell_list:spell-list.cooperation-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.cooperation:c83a2eb7",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.cooperation:c83a2eb7"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
-    },
-    {
-      "relationship_id": "spell.share-language:appears_on_spell_list:spell-list.language-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.language:f92547ee",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.language:f92547ee"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

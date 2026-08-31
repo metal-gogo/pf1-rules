@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.volcanic-storm",
   "ruleset": "Pathfinder First Edition",
   "name": "Volcanic Storm",
@@ -177,7 +177,30 @@
   "description": {
     "raw": "Chunks of hot volcanic rock and clumps of ash pound down when this spell is cast, dealing 3d6 points of bludgeoning damage and 2d6 points of fire damage to every creature in the area. This damage only occurs once, when the spell is cast. For the remaining duration of the spell, heavy ash rains down in the area. Creatures inside this area take a –4 penalty on Perception skill checks and the entire area is treated as difficult terrain. At the end of the duration, the rock and ash disappear, leaving no aftereffects (other than the damage dealt).",
     "search_text": "\"chunks of hot volcanic rock and clumps of ash pound down when this spell is cast, dealing 3d6 points of bludgeoning damage and 2d6 points of fire damage to every creature in the area. this damage only occurs once, when the spell is cast. for the remaining duration of the spell, heavy ash rains down in the area. creatures inside this area take a –4 penalty on perception skill checks and the entire area is treated as difficult terrain. at the end of the duration, the rock and ash disappear, leaving no aftereffects (other than the damage dealt).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Chunks of hot volcanic rock and clumps of ash pound down when this spell is cast, dealing 3d6 points of bludgeoning damage and 2d6 points of fire damage to every creature in the area. This damage only occurs once, when the spell is cast. For the remaining duration of the spell, heavy ash rains down in the area. Creatures inside this area take a –4 penalty on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Perception",
+              "relationship_id": "spell.volcanic-storm:uses_definition:rule.perception"
+            },
+            {
+              "node_type": "text",
+              "value": " skill checks and the entire area is treated as difficult terrain. At the end of the duration, the rock and ash disappear, leaving no aftereffects (other than the damage dealt)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -342,6 +365,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.volcanic-storm:appears_on_spell_list:spell-list.volcano-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.volcano-mystery",
+        "name": "Volcano Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.volcano:6909d144",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "volcanic storm (8th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Volcano"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     },
     {
       "relationship_id": "spell.volcanic-storm:appears_on_spell_list:spell-list.witch",
@@ -558,26 +601,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.volcanic-storm:appears_on_spell_list:spell-list.volcano-mystery",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.volcano-mystery",
-        "name": "Volcano Mystery Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.volcano:6909d144",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "volcanic storm (8th)",
-          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Volcano"
-        }
-      ],
-      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     }
   ],
   "provenance": [
@@ -636,11 +659,19 @@
       "raw_value_sha256": "d39efca705038cb43f307d96218fea6d4e64bc8e18fb8b5d7ee049eb84965900",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.volcanic-storm:7fc849e2dcf5a077",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "991a9483ddad2bba3c15e9b919e5e5f55f67e479a5fd431649c040643e8c02a7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

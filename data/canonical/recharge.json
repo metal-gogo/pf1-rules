@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.recharge",
   "ruleset": "Pathfinder First Edition",
   "name": "Recharge",
@@ -198,7 +198,30 @@
   "description": {
     "raw": "You restore up to 1 charge per level to a battery or half that number of charges to a technological item capable of being charged by a battery. If you recharge a battery, there is a 20% chance that the battery is destroyed by the attempt. If you restore more charges than the item can hold, the item must succeed at a Fortitude saving throw or take 1d6 points of electricity damage for each excess charge. This spell provides no knowledge of how many charges an item can safely hold, but you can choose to bestow fewer charges than the maximum allowed to reduce the risk; you must declare how many charges you are restoring before casting this spell.",
     "search_text": "\"you restore up to 1 charge per level to a battery or half that number of charges to a technological item capable of being charged by a battery. if you recharge a battery, there is a 20% chance that the battery is destroyed by the attempt. if you restore more charges than the item can hold, the item must succeed at a fortitude saving throw or take 1d6 points of electricity damage for each excess charge. this spell provides no knowledge of how many charges an item can safely hold, but you can choose to bestow fewer charges than the maximum allowed to reduce the risk; you must declare how many charges you are restoring before casting this spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You restore up to 1 charge per level to a battery or half that number of charges to a technological item capable of being charged by a battery. If you recharge a battery, there is a 20% chance that the battery is destroyed by the attempt. If you restore more charges than the item can hold, the item must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.recharge:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saving throw or take 1d6 points of electricity damage for each excess charge. This spell provides no knowledge of how many charges an item can safely hold, but you can choose to bestow fewer charges than the maximum allowed to reduce the risk; you must declare how many charges you are restoring before casting this spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -310,6 +333,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.recharge:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.recharge:9cfc27b528f6e97d",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.recharge:5d74cab7fd5abc38",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.recharge:appears_on_spell_list:spell-list.oracle",
@@ -500,12 +550,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.recharge:uses_definition:rule.fort",
+      "relationship_id": "spell.recharge:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -515,20 +565,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Fort",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.recharge:uses_definition:rule.fortitude",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.fortitude",
-        "name": "Fortitude"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.recharge:9cfc27b528f6e97d",
           "source_field": "spell_raw.links_raw[7]",
@@ -560,12 +597,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.recharge:uses_definition:rule.touch",
+      "relationship_id": "spell.recharge:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -578,33 +615,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.recharge:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.recharge:9cfc27b528f6e97d",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.recharge:5d74cab7fd5abc38",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -655,11 +665,19 @@
       "raw_value_sha256": "cdebd7e9c5eeb47ffacf4796aa3e6ff62eabc8a71250af4b5fe7f60e489df1f5",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.recharge:5d74cab7fd5abc38",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "6c7962b8c591d8175481afc65f9ea14a83f085e344a0f0753c15b847984b7ce3",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

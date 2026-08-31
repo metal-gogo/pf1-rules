@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.instant-portrait",
   "ruleset": "Pathfinder First Edition",
   "name": "Instant Portrait",
@@ -232,7 +232,60 @@
   "description": {
     "raw": "You touch a surface and produce a painted portrait of either yourself or a creature you can see without needing to attempt a Craft (painting) check. The surface to be affected must be relatively flat, such as a piece of paper or a wall. The image can be any color of your choice, but is monochromatic. While it is of too poor a quality to sell, it is otherwise accurate enough to recognize the subject or to serve as a target for the enter image spell. The portrait reflects your perception of the creature depicted, including any disguises, magical or mundane, that the subject is wearing at the time of the painting’s creation. The portrait is only as durable as normal paint and can be removed by mundane means.",
     "search_text": "\"you touch a surface and produce a painted portrait of either yourself or a creature you can see without needing to attempt a craft (painting) check. the surface to be affected must be relatively flat, such as a piece of paper or a wall. the image can be any color of your choice, but is monochromatic. while it is of too poor a quality to sell, it is otherwise accurate enough to recognize the subject or to serve as a target for the enter image spell. the portrait reflects your perception of the creature depicted, including any disguises, magical or mundane, that the subject is wearing at the time of the painting’s creation. the portrait is only as durable as normal paint and can be removed by mundane means.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch",
+              "relationship_id": "spell.instant-portrait:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " a surface and produce a painted portrait of either yourself or a creature you can see without needing to attempt a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Craft",
+              "relationship_id": "spell.instant-portrait:uses_definition:rule.craft"
+            },
+            {
+              "node_type": "text",
+              "value": " (painting) check. The surface to be affected must be relatively flat, such as a piece of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "paper",
+              "relationship_id": "spell.instant-portrait:uses_definition:rule.paper"
+            },
+            {
+              "node_type": "text",
+              "value": " or a wall. The image can be any color of your choice, but is monochromatic. While it is of too poor a quality to sell, it is otherwise accurate enough to recognize the subject or to serve as a target for the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "enter image",
+              "relationship_id": "spell.instant-portrait:references:spell.enter-image",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell. The portrait reflects your perception of the creature depicted, including any disguises, magical or mundane, that the subject is wearing at the time of the painting’s creation. The portrait is only as durable as normal paint and can be removed by mundane means."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -398,6 +451,47 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.instant-portrait:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.instant-portrait:0fdfa708d6f71597",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.instant-portrait:0095f19fc7196f57",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.instant-portrait:0fdfa708d6f71597",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.instant-portrait:0095f19fc7196f57",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.instant-portrait:appears_on_spell_list:spell-list.oracle",
@@ -721,7 +815,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.enter-image",
-        "name": "enter image"
+        "name": "Enter Image"
       },
       "status": "accepted",
       "evidence": [
@@ -823,12 +917,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.instant-portrait:uses_definition:rule.touch",
+      "relationship_id": "spell.instant-portrait:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -841,47 +935,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.instant-portrait:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.instant-portrait:0fdfa708d6f71597",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.instant-portrait:0095f19fc7196f57",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.instant-portrait:0fdfa708d6f71597",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.instant-portrait:0095f19fc7196f57",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -932,11 +985,19 @@
       "raw_value_sha256": "6378fa32d8eb7c5f1aeda011e0e8b54c9d74e3f1efcae0d7e9c00766b205f1cd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.instant-portrait:0095f19fc7196f57",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "600fe5bef96df5060d1ffce34b1470c62a25315336f5d2ce51c4190e99a3de51",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

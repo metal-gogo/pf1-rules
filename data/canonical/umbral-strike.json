@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.umbral-strike",
   "ruleset": "Pathfinder First Edition",
   "name": "Umbral Strike",
@@ -232,7 +232,84 @@
   "description": {
     "raw": "You create a bolt of dark energy and use it to make a ranged touch attack that ignores concealment (but not total concealment). If you hit, the target takes 1d6 points of damage per caster level (maximum 20d6). Half of this damage is cold damage and half of it is negative energy. The bolt’s shadow expands and covers the target, rendering him blind for the duration of the spell. A successful Fortitude save halves the damage and negates the blind condition.",
     "search_text": "\"you create a bolt of dark energy and use it to make a ranged touch attack that ignores concealment (but not total concealment). if you hit, the target takes 1d6 points of damage per caster level (maximum 20d6). half of this damage is cold damage and half of it is negative energy. the bolt’s shadow expands and covers the target, rendering him blind for the duration of the spell. a successful fortitude save halves the damage and negates the blind condition.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create a bolt of dark energy and use it to make a ranged "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch attack",
+              "relationship_id": "spell.umbral-strike:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " that ignores "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.umbral-strike:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": " (but not total "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.umbral-strike:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": "). If you hit, the target takes 1d6 points of damage per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.umbral-strike:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum 20d6). Half of this damage is cold damage and half of it is negative energy. The bolt’s shadow expands and covers the target, rendering him "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blind",
+              "relationship_id": "spell.umbral-strike:uses_definition:condition.blinded"
+            },
+            {
+              "node_type": "text",
+              "value": " for the duration of the spell. A successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.umbral-strike:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save halves the damage and negates the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blind",
+              "relationship_id": "spell.umbral-strike:uses_definition:condition.blinded"
+            },
+            {
+              "node_type": "text",
+              "value": " condition."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -398,6 +475,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.umbral-strike:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.umbral-strike:0715ba2eb033ed83",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.umbral-strike:514448414bd3044e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 6",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.umbral-strike:appears_on_spell_list:spell-list.oracle",
@@ -730,12 +834,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.umbral-strike:uses_definition:condition.blind",
+      "relationship_id": "spell.umbral-strike:uses_definition:condition.blinded",
       "type": "uses_definition",
       "target": {
         "entity_type": "condition",
-        "entity_id": "condition.blind",
-        "name": "blind"
+        "entity_id": "condition.blinded",
+        "name": "Blinded"
       },
       "status": "accepted",
       "evidence": [
@@ -804,11 +908,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.umbral-strike:uses_definition:rule.fortitude",
+      "relationship_id": "spell.umbral-strike:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -869,33 +973,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.umbral-strike:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.umbral-strike:0715ba2eb033ed83",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.umbral-strike:514448414bd3044e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 6",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -946,11 +1023,19 @@
       "raw_value_sha256": "693866121fa91d5a43bca59d2de8b1b1813b52f5df3cd685760c9a5479a189e8",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.umbral-strike:514448414bd3044e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "392b7b2b82a72f19f5550a982249b8aab75ca45a54c60e251de3722f9db891de",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

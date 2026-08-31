@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.teleport-object",
   "ruleset": "Pathfinder First Edition",
   "name": "Teleport Object",
@@ -131,7 +131,54 @@
   "description": {
     "raw": "This spell functions like teleport, except that it teleports an object, not you. Creatures and magical forces cannot be teleported.\n\nIf desired, the target object can be sent to a distant location on the Ethereal Plane. In this case, the point from which the object was teleported remains faintly magical until the item is retrieved. A successful targeted dispel magic spell cast on that point brings the vanished item back from the Ethereal Plane.",
     "search_text": "\"this spell functions like teleport, except that it teleports an object, not you. creatures and magical forces cannot be teleported.\\n\\nif desired, the target object can be sent to a distant location on the ethereal plane. in this case, the point from which the object was teleported remains faintly magical until the item is retrieved. a successful targeted dispel magic spell cast on that point brings the vanished item back from the ethereal plane.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "teleport",
+              "relationship_id": "spell.teleport-object:functions_like:spell.teleport",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that it teleports an object, not you. Creatures and magical forces cannot be teleported."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "If desired, the target object can be sent to a distant location on the Ethereal Plane. In this case, the point from which the object was teleported remains faintly magical until the item is retrieved. A successful targeted "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dispel magic",
+              "relationship_id": "spell.teleport-object:references:spell.dispel-magic",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell cast on that point brings the vanished item back from the Ethereal Plane."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -398,6 +445,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like teleport, except that it teleports an object, not you. Creatures and magical forces cannot be teleported.\n\nIf desired, the target object can be sent to a distant location on the Ethereal Plane. In this case, the point from which the object was teleported remains faintly magical until the item is retrieved. A successful targeted dispel magic spell cast on that point brings the vanished item back from the Ethereal Plane.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.teleport-object:253e00925ffcb07d",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "teleport",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/teleport.html#teleport"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.teleport-object:11813eec497e72a3",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "teleport",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/t/teleport"
         }
       ],
       "note": null
@@ -489,7 +550,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.dispel-magic",
-        "name": "dispel magic"
+        "name": "Dispel Magic"
       },
       "status": "accepted",
       "evidence": [
@@ -506,33 +567,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "dispel magic",
           "source_href": "https://www.d20pfsrd.com/magic/all-spells/d/dispel-magic"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.teleport-object:references:spell.teleport",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.teleport",
-        "name": "teleport"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.teleport-object:253e00925ffcb07d",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "teleport",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/teleport.html#teleport"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.teleport-object:11813eec497e72a3",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "teleport",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/t/teleport"
         }
       ],
       "note": null
@@ -585,11 +619,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.teleport-object:uses_definition:rule.will",
+      "relationship_id": "spell.teleport-object:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -660,11 +694,19 @@
       "raw_value_sha256": "4e74c825c856a1c454711ca86d638fe2a57e2768a9988eba745e338a0ead2365",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.teleport-object:59108eab01613905",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "05bf8fd3ad9d092ec5e876044f76e9dfd72db2ba601c2d62f2366f23db6365f7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.marching-chant",
   "ruleset": "Pathfinder First Edition",
   "name": "Marching Chant",
@@ -160,7 +160,59 @@
   "description": {
     "raw": "You invigorate your allies, who can hustle (Core Rulebook 170) as long as you continue to sing or chant (which requires your concentration). This movement counts as a walk (not a hustle) for the purpose of accruing nonlethal damage and fatigue. You can concentrate on this spell and hustle at the same time.",
     "search_text": "\"you invigorate your allies, who can hustle (core rulebook 170) as long as you continue to sing or chant (which requires your concentration). this movement counts as a walk (not a hustle) for the purpose of accruing nonlethal damage and fatigue. you can concentrate on this spell and hustle at the same time.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You invigorate your allies, who can hustle ("
+            },
+            {
+              "node_type": "text",
+              "value": "Core Rulebook",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " 170) as long as you continue to sing or chant (which requires your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concentration",
+              "relationship_id": "spell.marching-chant:uses_definition:rule.concentration"
+            },
+            {
+              "node_type": "text",
+              "value": "). This movement counts as a walk (not a hustle) for the purpose of accruing "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "nonlethal damage",
+              "relationship_id": "spell.marching-chant:uses_definition:rule.nonlethal-damage"
+            },
+            {
+              "node_type": "text",
+              "value": " and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fatigue",
+              "relationship_id": "spell.marching-chant:uses_definition:condition.fatigued"
+            },
+            {
+              "node_type": "text",
+              "value": ". You can concentrate on this spell and hustle at the same time."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -225,6 +277,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.marching-chant:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.marching-chant:2f6b8a4c133e3873",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.marching-chant:6fb119b7f188e7f6",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.marching-chant:appears_on_spell_list:spell-list.oracle",
@@ -362,7 +441,7 @@
         "entity_id": "publication.will",
         "name": "Will"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.marching-chant:2f6b8a4c133e3873",
@@ -372,15 +451,15 @@
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
         }
       ],
-      "note": null
+      "note": "The source href points to the Will saving-throw rules, not a publication."
     },
     {
-      "relationship_id": "spell.marching-chant:uses_definition:condition.fatigue",
+      "relationship_id": "spell.marching-chant:uses_definition:condition.fatigued",
       "type": "uses_definition",
       "target": {
         "entity_type": "condition",
-        "entity_id": "condition.fatigue",
-        "name": "fatigue"
+        "entity_id": "condition.fatigued",
+        "name": "Fatigued"
       },
       "status": "accepted",
       "evidence": [
@@ -460,33 +539,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.marching-chant:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.marching-chant:2f6b8a4c133e3873",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.marching-chant:6fb119b7f188e7f6",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -537,11 +589,19 @@
       "raw_value_sha256": "c443cad8d2e11363317f343ceb46c6d565a977c4c6aec96a6d34858cb7763b16",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.marching-chant:6fb119b7f188e7f6",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2bcf5c9e822aa791b68f66fa241390eda4a353d867c9add1318e7197f166bce9",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.invigorate-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Invigorate, Mass",
@@ -123,7 +123,33 @@
   "description": {
     "raw": "This spell works as invigorate, except that it affects multiple creatures.",
     "search_text": "\"this spell works as invigorate, except that it affects multiple creatures.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell works as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "invigorate",
+              "relationship_id": "spell.invigorate-mass:functions_like:spell.invigorate",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that it affects multiple creatures."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -415,7 +441,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.invigorate",
-        "name": "invigorate"
+        "name": "Invigorate"
       },
       "status": "accepted",
       "evidence": [
@@ -518,11 +544,19 @@
       "raw_value_sha256": "18e36de729e623d99b20d4aa980f83e366e76ad837bb832725cb3ccee7ca79ce",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.invigorate-mass:675efada9a675764",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "21a243040d22091123b9a6ed40eefc3df8c0216b6d368c3b32cd40a02e5b3f1a",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.steal-size",
   "ruleset": "Pathfinder First Edition",
   "name": "Steal Size",
@@ -167,7 +167,45 @@
   "description": {
     "raw": "This spell reduces the target’s size by one size category, as if it were affected by reduce person. You grow in size by one category, as if affected by enlarge person (if you can be targeted by that spell). If the spell is dispelled or otherwise ends for either you or the target, both you and the target return to your normal sizes.",
     "search_text": "\"this spell reduces the target’s size by one size category, as if it were affected by reduce person. you grow in size by one category, as if affected by enlarge person (if you can be targeted by that spell). if the spell is dispelled or otherwise ends for either you or the target, both you and the target return to your normal sizes.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell reduces the target’s size by one size category, as if it were affected by "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "reduce person",
+              "relationship_id": "spell.steal-size:references:spell.reduce-person",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ". You grow in size by one category, as if affected by "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "enlarge person",
+              "relationship_id": "spell.steal-size:references:spell.enlarge-person",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " (if you can be targeted by that spell). If the spell is dispelled or otherwise ends for either you or the target, both you and the target return to your normal sizes."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -461,7 +499,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.enlarge-person",
-        "name": "enlarge person"
+        "name": "Enlarge Person"
       },
       "status": "accepted",
       "evidence": [
@@ -481,7 +519,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.reduce-person",
-        "name": "reduce person"
+        "name": "Reduce Person"
       },
       "status": "accepted",
       "evidence": [
@@ -523,12 +561,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.steal-size:uses_definition:rule.fort",
+      "relationship_id": "spell.steal-size:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -631,11 +669,19 @@
       "raw_value_sha256": "e6a3ee54b9c97274dd04ad65145ee37f721ca7ec081306f5ddb106d8fcd5c2e5",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.steal-size:fa9c88c3a587fb1b",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2805215640de01bee6ef28ed87480c76cd41c45e5dd04a8e0649ac5a590cfc28",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

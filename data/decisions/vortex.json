@@ -168,6 +168,26 @@
         "d20pfsrd:magic-school.water-elemental:2b7c823c"
       ],
       "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.vortex:9194634d1ffff234",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.vortex:9194634d1ffff234",
+        "legacy_aon:spell.vortex:109cf07ae940bebc",
+        "d20pfsrd:spell.vortex:c2a6e4132f95c28e",
+        "aon:mystery.waves:55241ac7",
+        "aon:patron.elements:15d234b1",
+        "aon:spirit.waves:5f0cb588",
+        "d20pfsrd:magic-school.water-elemental:2b7c823c"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -206,6 +226,20 @@
         "d20pfsrd:spell.vortex:c2a6e4132f95c28e"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.vortex:appears_on_spell_list:spell-list.elements-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.elements:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.elements:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.vortex:appears_on_spell_list:spell-list.shaman",
@@ -258,6 +292,48 @@
         "d20pfsrd:spell.vortex:c2a6e4132f95c28e"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.vortex:appears_on_spell_list:spell-list.water-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.water-elemental:2b7c823c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.water-elemental:2b7c823c"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
+    {
+      "relationship_id": "spell.vortex:appears_on_spell_list:spell-list.waves-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.waves:55241ac7",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.waves:55241ac7"
+      ],
+      "rationale": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.vortex:appears_on_spell_list:spell-list.waves-spirit",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spirit.waves:5f0cb588",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spirit.waves:5f0cb588"
+      ],
+      "rationale": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
     },
     {
       "relationship_id": "spell.vortex:appears_on_spell_list:spell-list.wizard",
@@ -388,7 +464,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.vortex:uses_definition:rule.reflex",
+      "relationship_id": "spell.vortex:uses_definition:rule.reflex-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -438,62 +514,6 @@
         "d20pfsrd:spell.vortex:c2a6e4132f95c28e"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.vortex:appears_on_spell_list:spell-list.waves-mystery",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.waves:55241ac7",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:mystery.waves:55241ac7"
-      ],
-      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
-    },
-    {
-      "relationship_id": "spell.vortex:appears_on_spell_list:spell-list.elements-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.elements:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.elements:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.vortex:appears_on_spell_list:spell-list.waves-spirit",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spirit.waves:5f0cb588",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spirit.waves:5f0cb588"
-      ],
-      "rationale": "AoN prints the spell on the owning shaman spirit page; it is modeled as spirit access rather than general Shaman access."
-    },
-    {
-      "relationship_id": "spell.vortex:appears_on_spell_list:spell-list.water-elemental-school",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:magic-school.water-elemental:2b7c823c",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:magic-school.water-elemental:2b7c823c"
-      ],
-      "rationale": "d20PFSRD prints the spell on the owning wizard elemental arcane school page; it is modeled as elemental_school access rather than general Wizard access."
     }
   ],
   "unresolved_questions": [

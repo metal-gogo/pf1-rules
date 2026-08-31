@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.oneiric-horror",
   "ruleset": "Pathfinder First Edition",
   "name": "Oneiric Horror",
@@ -173,7 +173,48 @@
   "description": {
     "raw": "You cause the subject to believe it is being attacked by a creature out of its nightmares. Each round, the subject makes a full-attack action against the creature. A flying creature can still attempt a Fly check to hover. Each round on its turn after making a full attack against the imaginary creature, the subject can attempt a new saving throw to end the effect. The subject is fatigued for 1 minute after the spell ends.",
     "search_text": "\"you cause the subject to believe it is being attacked by a creature out of its nightmares. each round, the subject makes a full-attack action against the creature. a flying creature can still attempt a fly check to hover. each round on its turn after making a full attack against the imaginary creature, the subject can attempt a new saving throw to end the effect. the subject is fatigued for 1 minute after the spell ends.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You cause the subject to believe it is being attacked by a creature out of its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "nightmares",
+              "relationship_id": "spell.oneiric-horror:uses_definition:rule.nightmares"
+            },
+            {
+              "node_type": "text",
+              "value": ". Each round, the subject makes a full-attack action against the creature. A flying creature can still attempt a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fly",
+              "relationship_id": "spell.oneiric-horror:uses_definition:rule.fly"
+            },
+            {
+              "node_type": "text",
+              "value": " check to hover. Each round on its turn after making a full attack against the imaginary creature, the subject can attempt a new saving throw to end the effect. The subject is "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fatigued",
+              "relationship_id": "spell.oneiric-horror:uses_definition:condition.fatigued"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 minute after the spell ends."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -306,6 +347,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.oneiric-horror:appears_on_spell_list:spell-list.nightmares-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.nightmares-patron",
+        "name": "Nightmares Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.nightmares:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "6th — oneiric horror",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.oneiric-horror:appears_on_spell_list:spell-list.psychic",
@@ -619,6 +680,33 @@
       "note": null
     },
     {
+      "relationship_id": "spell.oneiric-horror:uses_definition:magic-school.illusion",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.illusion",
+        "name": "Illusion"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.oneiric-horror:c71bc03dc149111d",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "illusion",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Illusion"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.oneiric-horror:c71bc03dc149111d",
+          "source_field": "spell_raw.links_raw[13]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "illusion",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Illusion"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.oneiric-horror:uses_definition:rule.fly",
       "type": "uses_definition",
       "target": {
@@ -646,12 +734,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.oneiric-horror:uses_definition:rule.fort",
+      "relationship_id": "spell.oneiric-horror:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -661,53 +749,13 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Fort",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.oneiric-horror:uses_definition:rule.fortitude",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.fortitude",
-        "name": "Fortitude"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.oneiric-horror:c71bc03dc149111d",
           "source_field": "spell_raw.links_raw[25]",
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Fortitude",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.oneiric-horror:uses_definition:rule.illusion",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.illusion",
-        "name": "illusion"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.oneiric-horror:c71bc03dc149111d",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "illusion",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Illusion"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.oneiric-horror:c71bc03dc149111d",
-          "source_field": "spell_raw.links_raw[13]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "illusion",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Illusion"
         }
       ],
       "note": null
@@ -773,11 +821,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.oneiric-horror:uses_definition:rule.will",
+      "relationship_id": "spell.oneiric-horror:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -805,26 +853,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.oneiric-horror:appears_on_spell_list:spell-list.nightmares-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.nightmares-patron",
-        "name": "Nightmares Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.nightmares:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "6th — oneiric horror",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -883,11 +911,19 @@
       "raw_value_sha256": "fb85693f1d4d7bfc2e2e50db8cb5232180f99a6cd22f7e5deb9e40a55dad20a6",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.oneiric-horror:bd4e2b9a6b2f0a89",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "539201e539e7d61ec3d0a9f3efe11710bb5aaca72897f4e3336ec7495899c290",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

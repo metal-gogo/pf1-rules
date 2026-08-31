@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.mudball",
   "ruleset": "Pathfinder First Edition",
   "name": "Mudball",
@@ -231,7 +231,66 @@
   "description": {
     "raw": "When you cast this spell, you conjure a single ball of sticky mud and launch it at an enemy’s face as a ranged touch attack. If the mudball hits, the target is blinded. Each round at the beginning of its turn, a creature blinded by this spell can attempt a Reflex saving throw to shake off the mud, ending the effect. The mudball can also be wiped off by the creature affected by it or by a creature adjacent to the creature affected by it as a standard action.",
     "search_text": "\"when you cast this spell, you conjure a single ball of sticky mud and launch it at an enemy’s face as a ranged touch attack. if the mudball hits, the target is blinded. each round at the beginning of its turn, a creature blinded by this spell can attempt a reflex saving throw to shake off the mud, ending the effect. the mudball can also be wiped off by the creature affected by it or by a creature adjacent to the creature affected by it as a standard action.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "When you cast this spell, you conjure a single ball of sticky mud and launch it at an enemy’s face as a ranged "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch attack",
+              "relationship_id": "spell.mudball:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": ". If the mudball hits, the target is "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blinded",
+              "relationship_id": "spell.mudball:uses_definition:condition.blinded"
+            },
+            {
+              "node_type": "text",
+              "value": ". Each round at the beginning of its turn, a creature "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blinded",
+              "relationship_id": "spell.mudball:uses_definition:condition.blinded"
+            },
+            {
+              "node_type": "text",
+              "value": " by this spell can attempt a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.mudball:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saving throw to shake off the mud, ending the effect. The mudball can also be wiped off by the creature affected by it or by a creature adjacent to the creature affected by it as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "standard action",
+              "relationship_id": "spell.mudball:uses_action:action.standard-action"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -635,11 +694,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.mudball:uses_definition:rule.reflex",
+      "relationship_id": "spell.mudball:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -750,11 +809,19 @@
       "raw_value_sha256": "ccc7909e61824bd93fce78b6328fa5dc94492068d94af07326bd3487cbe7c474",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.mudball:0cb2a936be46cacb",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3616ff4e43f3c95111686247785ce74484bc01bb0161e482552b4f6d03510936",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

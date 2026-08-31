@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.knock-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Knock, Mass",
@@ -198,7 +198,33 @@
   "description": {
     "raw": "Also known as “unshackle,” this spell functions as knock, but works on multiple means of closure at once.",
     "search_text": "\"also known as “unshackle,” this spell functions as knock, but works on multiple means of closure at once.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Also known as “unshackle,” this spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "knock",
+              "relationship_id": "spell.knock-mass:functions_like:spell.knock",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", but works on multiple means of closure at once."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -208,7 +234,103 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.knock",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.knock-mass:9a29200c2119597e",
+        "source_field": "spell_raw.description_raw",
+        "raw": "Also known as “unshackle,” this spell functions as knock, but works on multiple means of closure at once."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/effect/range",
+          "value": {
+            "category": "close",
+            "formula": "close (25 ft. + 5 ft./2 levels)",
+            "raw": "close (25 ft. + 5 ft./2 levels)"
+          },
+          "source_field": "spell_raw.range_raw",
+          "raw": "close (25 ft. + 5 ft./2 levels)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Target",
+                "value_raw": "one means of closure/level, no two of which can be more than 30 feet apart",
+                "kinds": [
+                  "target"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one means of closure/level, no two of which can be more than 30 feet apart\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/targeting",
+          "value": {
+            "mode": "multiple",
+            "subject_kind": "other",
+            "selection": "selected",
+            "count": {
+              "kind": "per_level",
+              "fixed": null,
+              "formula": "one means of closure/level, no two of which can be more than 30 feet apart",
+              "raw": "one means of closure/level, no two of which can be more than 30 feet apart"
+            },
+            "separation": null,
+            "raw": "one means of closure/level, no two of which can be more than 30 feet apart"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Target\",\"value_raw\":\"one means of closure/level, no two of which can be more than 30 feet apart\",\"kinds\":[\"target\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "instantaneous",
+            "formula": null,
+            "dismissible": null,
+            "concentration": null,
+            "raw": "instantaneous"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "instantaneous",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "Also known as “unshackle,” this spell functions as knock, but works on multiple means of closure at once.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "Also known as “unshackle,” this spell functions as knock, but works on multiple means of closure at once.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.knock-mass:appears_on_spell_list:spell-list.arcanist",
@@ -339,6 +461,47 @@
       "note": null
     },
     {
+      "relationship_id": "spell.knock-mass:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.knock-mass:763915bd61d64797",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.knock-mass:9a29200c2119597e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 6",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.knock-mass:763915bd61d64797",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.knock-mass:9a29200c2119597e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 6",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.knock-mass:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -466,6 +629,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.knock-mass:functions_like:spell.knock",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.knock",
+        "name": "Knock"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.knock-mass:763915bd61d64797",
+          "source_field": "spell_raw.links_raw[9]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "knock",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/k/knock/"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.knock-mass:has_school:magic-school.transmutation",
       "type": "has_school",
       "target": {
@@ -547,26 +730,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.knock-mass:references:spell.knock",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.knock",
-        "name": "knock"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.knock-mass:763915bd61d64797",
-          "source_field": "spell_raw.links_raw[9]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "knock",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/k/knock/"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.knock-mass:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -632,47 +795,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.knock-mass:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.knock-mass:763915bd61d64797",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.knock-mass:9a29200c2119597e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 6",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.knock-mass:763915bd61d64797",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.knock-mass:9a29200c2119597e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 6",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -723,11 +845,19 @@
       "raw_value_sha256": "3ba167c82715fd0724c595db9c7a9ca8da2e9721095613d3afb98d0a7b40323a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.knock-mass:9a29200c2119597e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "cb9079efc4d693fd87d9e647c62ea481701ab73e1c8f0ad05e37b3ff7ce2809f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

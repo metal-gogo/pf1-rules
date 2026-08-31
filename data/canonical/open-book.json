@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.open-book",
   "ruleset": "Pathfinder First Edition",
   "name": "Open Book",
@@ -208,7 +208,39 @@
   "description": {
     "raw": "You lay bare not only the mind of a target, but the target’s history as well. The target takes a –2 penalty on saving throws against divinations, and Diplomacy checks to gather information about the target gain a bonus equal to half your caster level (maximum +10).",
     "search_text": "\"you lay bare not only the mind of a target, but the target’s history as well. the target takes a –2 penalty on saving throws against divinations, and diplomacy checks to gather information about the target gain a bonus equal to half your caster level (maximum +10).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You lay bare not only the mind of a target, but the target’s history as well. The target takes a –2 penalty on saving throws against divinations, and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Diplomacy",
+              "relationship_id": "spell.open-book:uses_definition:rule.diplomacy"
+            },
+            {
+              "node_type": "text",
+              "value": " checks to gather information about the target gain a bonus equal to half your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.open-book:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum +10)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -347,6 +379,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.open-book:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.open-book:f26430576abc9093",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.open-book:5f7f843b3e1c198c",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.open-book:appears_on_spell_list:spell-list.psychic",
@@ -665,11 +724,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.open-book:uses_definition:rule.will",
+      "relationship_id": "spell.open-book:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -683,33 +742,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.open-book:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.open-book:f26430576abc9093",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.open-book:5f7f843b3e1c198c",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -760,11 +792,19 @@
       "raw_value_sha256": "e4369d0ae0d09a0b5f612c899a0114e5d348c2aa20ad4d5ffba9a3f0e71e01e7",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.open-book:5f7f843b3e1c198c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "957283d90369fe06b4791bfe61de361068fbe561d8570963be920c682fd55ce7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

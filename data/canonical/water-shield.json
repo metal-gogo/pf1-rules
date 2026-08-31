@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.water-shield",
   "ruleset": "Pathfinder First Edition",
   "legacy_3_5_material": true,
@@ -208,7 +208,39 @@
   "description": {
     "raw": "This spell surrounds you in a spout of clear acid that aids in deflecting attacks and damages creatures that attack you in melee. The constantly upward-rushing waters grant you a measure of protecting, shielding you so you only take half damage from acid and fire-based attacks. If such an attack allows a Reflex save for half damage, you take no damage on a successful save.\n\nAny creature striking you with its body or a handheld weapon deals normal damage, but at the same time the attacker takes 1d6 points of acid damage + 1 point per 2 caster levels (maximum +10). If the attacker has spell resistance, it applies to this effect. Creatures wielding weapons with exceptional reach are not subject to this damage if they attack you.",
     "search_text": "\"this spell surrounds you in a spout of clear acid that aids in deflecting attacks and damages creatures that attack you in melee. the constantly upward-rushing waters grant you a measure of protecting, shielding you so you only take half damage from acid and fire-based attacks. if such an attack allows a reflex save for half damage, you take no damage on a successful save.\\n\\nany creature striking you with its body or a handheld weapon deals normal damage, but at the same time the attacker takes 1d6 points of acid damage + 1 point per 2 caster levels (maximum +10). if the attacker has spell resistance, it applies to this effect. creatures wielding weapons with exceptional reach are not subject to this damage if they attack you.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell surrounds you in a spout of clear acid that aids in deflecting attacks and damages creatures that attack you in melee. The constantly upward-rushing waters grant you a measure of protecting, shielding you so you only take half damage from acid and fire-based attacks. If such an attack allows a Reflex save for half damage, you take no damage on a successful save."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Any creature striking you with its body or a handheld weapon deals normal damage, but at the same time the attacker takes 1d6 points of acid damage + 1 point per 2 caster levels (maximum +10). If the attacker has "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.water-shield:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": ", it applies to this effect. Creatures wielding weapons with exceptional reach are not subject to this damage if they attack you."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -326,6 +358,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.water-shield:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.water-shield:67a17d5d12f9d1bc",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.water-shield:appears_on_spell_list:spell-list.oracle",
@@ -588,26 +640,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.water-shield:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.water-shield:67a17d5d12f9d1bc",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -658,11 +690,19 @@
       "raw_value_sha256": "56f8829865b6f447dc4c8bfa2a0e264ee21fe0caa1aef929c4baa0cc7b25853c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.water-shield:67a17d5d12f9d1bc",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2129ed3cf1e2e08c759a457d95de0339e35189e1d714443e118924e2bca23ce8",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "LEGACY_3_5_MATERIAL",

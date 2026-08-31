@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.longstrider-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Longstrider, Greater",
@@ -127,7 +127,60 @@
   "description": {
     "raw": "This functions as longstrider, except it gives you a +20-foot enhancement bonus to your base speed and a +10-foot enhancement bonus to your other modes of movement (burrow, climb, fly, swim, and so on). It does not affect movement modes you do not actually have—for example, if you do not have a swim speed, this spell does not grant you a swim speed.",
     "search_text": "\"this functions as longstrider, except it gives you a +20-foot enhancement bonus to your base speed and a +10-foot enhancement bonus to your other modes of movement (burrow, climb, fly, swim, and so on). it does not affect movement modes you do not actually have—for example, if you do not have a swim speed, this spell does not grant you a swim speed.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "longstrider",
+              "relationship_id": "spell.longstrider-greater:functions_like:spell.longstrider",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it gives you a +20-foot "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "enhancement bonus",
+              "relationship_id": "spell.longstrider-greater:uses_definition:rule.enhancement-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " to your base speed and a +10-foot "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "enhancement bonus",
+              "relationship_id": "spell.longstrider-greater:uses_definition:rule.enhancement-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " to your other modes of movement ("
+            },
+            {
+              "node_type": "entity_link",
+              "value": "burrow",
+              "relationship_id": "spell.longstrider-greater:uses_definition:rule.burrow"
+            },
+            {
+              "node_type": "text",
+              "value": ", climb, fly, swim, and so on). It does not affect movement modes you do not actually have—for example, if you do not have a swim speed, this spell does not grant you a swim speed."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -137,7 +190,42 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.longstrider",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.longstrider-greater:502fb6eeb837d9c5",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This functions as longstrider, except it gives you a +20-foot enhancement bonus to your base speed and a +10-foot enhancement bonus to your other modes of movement (burrow, climb, fly, swim, and so on). It does not affect movement modes you do not actually have—for example, if you do not have a swim speed, this spell does not grant you a swim speed."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/description/raw",
+          "value": "This functions as longstrider, except it gives you a +20-foot enhancement bonus to your base speed and a +10-foot enhancement bonus to your other modes of movement (burrow, climb, fly, swim, and so on). It does not affect movement modes you do not actually have—for example, if you do not have a swim speed, this spell does not grant you a swim speed.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This functions as longstrider, except it gives you a +20-foot enhancement bonus to your base speed and a +10-foot enhancement bonus to your other modes of movement (burrow, climb, fly, swim, and so on). It does not affect movement modes you do not actually have—for example, if you do not have a swim speed, this spell does not grant you a swim speed.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.longstrider-greater:appears_on_spell_list:spell-list.druid",
@@ -214,6 +302,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.longstrider-greater:functions_like:spell.longstrider",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.longstrider",
+        "name": "Longstrider"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.longstrider-greater:216495327ff195f3",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "longstrider",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/longstrider.html#longstrider"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.longstrider-greater:has_school:magic-school.transmutation",
       "type": "has_school",
       "target": {
@@ -277,26 +385,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "Advanced Class Guide pg. 186",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.longstrider-greater:references:spell.longstrider",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.longstrider",
-        "name": "longstrider"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.longstrider-greater:216495327ff195f3",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "longstrider",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/longstrider.html#longstrider"
         }
       ],
       "note": null
@@ -437,11 +525,19 @@
       "raw_value_sha256": "a568ca0f2b6dabc32c08eb62a35190af7e38a946f33d45d7054fc1dd7df4eb62",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.longstrider-greater:502fb6eeb837d9c5",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "70826a455e92616267b8b044c0d3a789d2bb4721baf43c0cc38973ed21e4b574",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

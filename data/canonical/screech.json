@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.screech",
   "ruleset": "Pathfinder First Edition",
   "name": "Screech",
@@ -101,7 +101,32 @@
   "description": {
     "raw": "You emit a shrill, piercing shriek, startling those around you into dropping their guard. Enemies in the area must make a successful saving throw or immediately provoke attacks of opportunity from foes that threaten them. You and your allies are unaffected by your own screech.",
     "search_text": "\"you emit a shrill, piercing shriek, startling those around you into dropping their guard. enemies in the area must make a successful saving throw or immediately provoke attacks of opportunity from foes that threaten them. you and your allies are unaffected by your own screech.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You emit a shrill, piercing shriek, startling those around you into dropping their guard. Enemies in the area must make a successful saving throw or immediately provoke attacks of opportunity from foes that threaten them. You and your allies are unaffected by your own "
+            },
+            {
+              "node_type": "text",
+              "value": "screech",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -236,26 +261,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.screech:references:spell.screech",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.screech",
-        "name": "screech"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.screech:0f1adcd02e1f687a",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "screech",
-          "source_href": "https://legacy.aonprd.com/advancedPlayersGuide/spells/screech.html#screech"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.screech:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -283,11 +288,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.screech:uses_definition:rule.fortitude",
+      "relationship_id": "spell.screech:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -371,11 +376,19 @@
       "raw_value_sha256": "297cd54d548071e4c57203687ba093efce558f67028fd8d562859e6ccd689e89",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.screech:ec004df92ac3b85c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3d4e52a166c385f1ae66abee4f2b49240915dda4ba55b0be020f0f06e25d48e9",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": []
   }
 }

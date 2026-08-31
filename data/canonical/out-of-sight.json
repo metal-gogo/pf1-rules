@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.out-of-sight",
   "ruleset": "Pathfinder First Edition",
   "name": "Out of Sight",
@@ -129,7 +129,71 @@
   "description": {
     "raw": "The spell inhibits the memories of creatures that perceive you. While creatures can perceive you normally, when a creature stops observing you, it must attempt a Will save (spell resistance applies). If it fails, it loses all memory of its awareness of you and your actions while you were under the effects of this spell. The spell’s duration listed above measures how long the out of sight effect lasts on you, but the memory alteration is instantaneous and can be reversed only by magic such as modify memory.\n\nThe creature is still aware of any other changes to itself or its environment. For instance, a guard will remember running, and may notice a newly unlocked door, but will not remember that he was chasing after you.",
     "search_text": "\"the spell inhibits the memories of creatures that perceive you. while creatures can perceive you normally, when a creature stops observing you, it must attempt a will save (spell resistance applies). if it fails, it loses all memory of its awareness of you and your actions while you were under the effects of this spell. the spell’s duration listed above measures how long the out of sight effect lasts on you, but the memory alteration is instantaneous and can be reversed only by magic such as modify memory.\\n\\nthe creature is still aware of any other changes to itself or its environment. for instance, a guard will remember running, and may notice a newly unlocked door, but will not remember that he was chasing after you.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The spell inhibits the memories of creatures that perceive you. While creatures can perceive you normally, when a creature stops observing you, it must attempt a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.out-of-sight:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save ("
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.out-of-sight:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": " applies). If it fails, it loses all memory of its awareness of you and your actions while you were under the effects of this spell. The spell’s duration listed above measures how long the "
+            },
+            {
+              "node_type": "text",
+              "value": "out of sight",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " effect lasts on you, but the memory alteration is instantaneous and can be reversed only by magic such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "modify memory",
+              "relationship_id": "spell.out-of-sight:references:spell.modify-memory",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The creature is still aware of any other changes to itself or its environment. For instance, a guard will remember running, and may notice a newly unlocked door, but will not remember that he was chasing after you."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -323,7 +387,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.modify-memory",
-        "name": "modify memory"
+        "name": "Modify Memory"
       },
       "status": "accepted",
       "evidence": [
@@ -405,11 +469,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.out-of-sight:uses_definition:rule.will",
+      "relationship_id": "spell.out-of-sight:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -480,11 +544,19 @@
       "raw_value_sha256": "eca2743f11416000a751be77ebfae848fedcd4fca43b114e0029f9de85a903a0",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.out-of-sight:8e0e277eb1017f41",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "6259ab308de316e2bf363c64ed2c143d3b03632494aa53d78e4ee1beca40721f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

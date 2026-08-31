@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.life-shield",
   "ruleset": "Pathfinder First Edition",
   "name": "Life Shield",
@@ -168,7 +168,57 @@
   "description": {
     "raw": "You surround yourself with a positive energy field that damages undead opponents. Each time an undead creature damages you with a melee attack, that creature takes an amount of positive energy damage equal to half the damage it dealt to you. This damage is calculated after applying your damage reduction, resistances, and other defenses. Once this spell has dealt 5 points of damage per caster level (maximum 50), it is discharged.",
     "search_text": "\"you surround yourself with a positive energy field that damages undead opponents. each time an undead creature damages you with a melee attack, that creature takes an amount of positive energy damage equal to half the damage it dealt to you. this damage is calculated after applying your damage reduction, resistances, and other defenses. once this spell has dealt 5 points of damage per caster level (maximum 50), it is discharged.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You surround yourself with a positive energy field that damages "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "undead",
+              "relationship_id": "spell.life-shield:uses_definition:rule.undead"
+            },
+            {
+              "node_type": "text",
+              "value": " opponents. Each time an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "undead",
+              "relationship_id": "spell.life-shield:uses_definition:rule.undead"
+            },
+            {
+              "node_type": "text",
+              "value": " creature damages you with a melee attack, that creature takes an amount of positive energy damage equal to half the damage it dealt to you. This damage is calculated after applying your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "damage reduction",
+              "relationship_id": "spell.life-shield:uses_definition:rule.damage-reduction"
+            },
+            {
+              "node_type": "text",
+              "value": ", resistances, and other defenses. Once this spell has dealt 5 points of damage per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.life-shield:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum 50), it is discharged."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -253,6 +303,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.life-shield:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.life-shield:273d618ad47fdaf4",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.life-shield:b73280fc036d364b",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.life-shield:appears_on_spell_list:spell-list.oracle",
@@ -529,33 +606,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.life-shield:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.life-shield:273d618ad47fdaf4",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.life-shield:b73280fc036d364b",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -606,11 +656,19 @@
       "raw_value_sha256": "0d7564631e3373523da5cbd728dab249630ac9996071383e7863aa8f2774e209",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.life-shield:b73280fc036d364b",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "57c2f2e966de7b2e4201f92a31b58028196586284012beb1391f31dd32138d2d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

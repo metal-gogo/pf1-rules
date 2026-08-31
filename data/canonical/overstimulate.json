@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.overstimulate",
   "ruleset": "Pathfinder First Edition",
   "name": "Overstimulate",
@@ -260,7 +260,59 @@
   "description": {
     "raw": "You deprive a creature of the blissful oblivion of unconsciousness, either to keep it going despite grievous injuries or to prolong its suffering. For the duration of the spell, the target gains the ferocity ability (Pathfinder RPG Bestiary 300), allowing it to remain conscious and continue fighting even if its hit point total is below 0. The target is still staggered and loses 1 hit point each round, and the target still dies when its hit point total reaches a negative amount equal to its Constitution score.",
     "search_text": "\"you deprive a creature of the blissful oblivion of unconsciousness, either to keep it going despite grievous injuries or to prolong its suffering. for the duration of the spell, the target gains the ferocity ability (pathfinder rpg bestiary 300), allowing it to remain conscious and continue fighting even if its hit point total is below 0. the target is still staggered and loses 1 hit point each round, and the target still dies when its hit point total reaches a negative amount equal to its constitution score.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You deprive a creature of the blissful oblivion of unconsciousness, either to keep it going despite grievous injuries or to prolong its suffering. For the duration of the spell, the target gains the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "ferocity",
+              "relationship_id": "spell.overstimulate:uses_definition:rule.ferocity"
+            },
+            {
+              "node_type": "text",
+              "value": " ability ("
+            },
+            {
+              "node_type": "text",
+              "value": "Pathfinder RPG Bestiary",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " 300), allowing it to remain conscious and continue fighting even if its hit point total is below 0. The target is still "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "staggered",
+              "relationship_id": "spell.overstimulate:uses_definition:condition.staggered"
+            },
+            {
+              "node_type": "text",
+              "value": " and loses 1 hit point each round, and the target still dies when its hit point total reaches a negative amount equal to its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Constitution",
+              "relationship_id": "spell.overstimulate:uses_definition:rule.constitution"
+            },
+            {
+              "node_type": "text",
+              "value": " score."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -446,6 +498,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.overstimulate:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.overstimulate:6de6f31ea67b0643",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.overstimulate:4322e0b09ac9eecd",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.overstimulate:appears_on_spell_list:spell-list.oracle",
@@ -818,12 +897,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.overstimulate:uses_definition:rule.fort",
+      "relationship_id": "spell.overstimulate:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -876,33 +955,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.overstimulate:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.overstimulate:6de6f31ea67b0643",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.overstimulate:4322e0b09ac9eecd",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -953,11 +1005,19 @@
       "raw_value_sha256": "f813b6c489a480c5e5b896b45149150775c43739d9be7e7099b117a9161c272e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.overstimulate:4322e0b09ac9eecd",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "4dbb110582516f57210ed1f9a3a39bbb024264c57f45d4b29e1448cae1f3ec50",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

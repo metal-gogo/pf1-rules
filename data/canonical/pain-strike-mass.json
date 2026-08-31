@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.pain-strike-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Pain Strike, Mass",
@@ -158,7 +158,33 @@
   "description": {
     "raw": "This spell works like pain strike, except as noted above.",
     "search_text": "\"this spell works like pain strike, except as noted above.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell works like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "pain strike",
+              "relationship_id": "spell.pain-strike-mass:functions_like:spell.pain-strike",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except as noted above."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -348,6 +374,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.pain-strike-mass:appears_on_spell_list:spell-list.vengeance-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.vengeance-patron",
+        "name": "Vengeance Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.vengeance:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "12th — mass pain strike",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.pain-strike-mass:appears_on_spell_list:spell-list.witch",
@@ -544,7 +590,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.pain-strike",
-        "name": "pain strike"
+        "name": "Pain Strike"
       },
       "status": "accepted",
       "evidence": [
@@ -597,26 +643,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.pain-strike-mass:appears_on_spell_list:spell-list.vengeance-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.vengeance-patron",
-        "name": "Vengeance Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.vengeance:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "12th — mass pain strike",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -675,11 +701,19 @@
       "raw_value_sha256": "2bb95fed4df4593bbe4e8f2539925590d6225dd2ff57ab2700b59cd9fbdff528",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.pain-strike-mass:b021596d9a65fe97",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3da2bf4099e4cdc3fb214d31c43e9372f0216c90ee73a740f2ca69f879f75a3b",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

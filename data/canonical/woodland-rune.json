@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.woodland-rune",
   "ruleset": "Pathfinder First Edition",
   "name": "Woodland Rune",
@@ -125,7 +125,90 @@
   "description": {
     "raw": "Created by Ghorus as a safety measure to limit his enemies’ movements, this spell allows you to inscribe a powerful rune on any surface. Woodland rune triggers when any non-plant creature (apart from the caster) moves within 30 feet of the rune. When it’s triggered, roots and branches sprout from the ground, catching all creatures within a 30-foot burst of the rune and hindering their movement as if they were moving through heavy undergrowth, though it does not provide concealment. Plant creatures and creatures under the effect of woodland stride or freedom of movement are not affected by this spell. In all other respects, this spell functions as symbol of death.",
     "search_text": "\"created by ghorus as a safety measure to limit his enemies’ movements, this spell allows you to inscribe a powerful rune on any surface. woodland rune triggers when any non-plant creature (apart from the caster) moves within 30 feet of the rune. when it’s triggered, roots and branches sprout from the ground, catching all creatures within a 30-foot burst of the rune and hindering their movement as if they were moving through heavy undergrowth, though it does not provide concealment. plant creatures and creatures under the effect of woodland stride or freedom of movement are not affected by this spell. in all other respects, this spell functions as symbol of death.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Created by Ghorus as a safety measure to limit his enemies’ movements, this spell allows you to inscribe a powerful rune on any surface. Woodland rune triggers when any non-"
+            },
+            {
+              "node_type": "entity_link",
+              "value": "plant",
+              "relationship_id": "spell.woodland-rune:uses_definition:rule.plant"
+            },
+            {
+              "node_type": "text",
+              "value": " creature (apart from the caster) moves within 30 feet of the rune. When it’s triggered, roots and branches sprout from the ground, catching all creatures within a 30-foot burst of the rune and hindering their movement as if they were moving through "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "heavy undergrowth",
+              "relationship_id": "spell.woodland-rune:uses_definition:rule.heavy-undergrowth"
+            },
+            {
+              "node_type": "text",
+              "value": ", though it does not provide "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concealment",
+              "relationship_id": "spell.woodland-rune:uses_definition:rule.concealment"
+            },
+            {
+              "node_type": "text",
+              "value": ". "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Plant",
+              "relationship_id": "spell.woodland-rune:uses_definition:rule.plant"
+            },
+            {
+              "node_type": "text",
+              "value": " creatures and creatures under the effect of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "woodland stride",
+              "relationship_id": "spell.woodland-rune:uses_definition:rule.woodland-stride"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "freedom of movement",
+              "relationship_id": "spell.woodland-rune:references:spell.freedom-of-movement",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " are not affected by this spell. In all other respects, this spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "symbol of death",
+              "relationship_id": "spell.woodland-rune:functions_like:spell.symbol-of-death",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -135,7 +218,111 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.symbol-of-death",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.woodland-rune:3dd470ed9f8d2b94",
+        "source_field": "spell_raw.description_raw",
+        "raw": "Created by Ghorus as a safety measure to limit his enemies’ movements, this spell allows you to inscribe a powerful rune on any surface. Woodland rune triggers when any non-plant creature (apart from the caster) moves within 30 feet of the rune. When it’s triggered, roots and branches sprout from the ground, catching all creatures within a 30-foot burst of the rune and hindering their movement as if they were moving through heavy undergrowth, though it does not provide concealment. Plant creatures and creatures under the effect of woodland stride or freedom of movement are not affected by this spell. In all other respects, this spell functions as symbol of death."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/range",
+          "value": {
+            "category": "distance",
+            "formula": "0 ft.",
+            "raw": "0 ft."
+          },
+          "source_field": "spell_raw.range_raw",
+          "raw": "0 ft.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Effect",
+                "value_raw": "one rune",
+                "kinds": [
+                  "effect"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Effect\",\"value_raw\":\"one rune\",\"kinds\":[\"effect\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "permanent",
+            "formula": null,
+            "dismissible": true,
+            "concentration": null,
+            "raw": "permanent until discharged (D)"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "permanent until discharged (D)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "Created by Ghorus as a safety measure to limit his enemies’ movements, this spell allows you to inscribe a powerful rune on any surface. Woodland rune triggers when any non-plant creature (apart from the caster) moves within 30 feet of the rune. When it’s triggered, roots and branches sprout from the ground, catching all creatures within a 30-foot burst of the rune and hindering their movement as if they were moving through heavy undergrowth, though it does not provide concealment. Plant creatures and creatures under the effect of woodland stride or freedom of movement are not affected by this spell. In all other respects, this spell functions as symbol of death.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "Created by Ghorus as a safety measure to limit his enemies’ movements, this spell allows you to inscribe a powerful rune on any surface. Woodland rune triggers when any non-plant creature (apart from the caster) moves within 30 feet of the rune. When it’s triggered, roots and branches sprout from the ground, catching all creatures within a 30-foot burst of the rune and hindering their movement as if they were moving through heavy undergrowth, though it does not provide concealment. Plant creatures and creatures under the effect of woodland stride or freedom of movement are not affected by this spell. In all other respects, this spell functions as symbol of death.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.woodland-rune:appears_on_spell_list:spell-list.druid",
@@ -266,6 +453,33 @@
       "note": null
     },
     {
+      "relationship_id": "spell.woodland-rune:functions_like:spell.symbol-of-death",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.symbol-of-death",
+        "name": "Symbol of Death"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.woodland-rune:3dd470ed9f8d2b94",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "symbol of death",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=symbol%20of%20death"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.woodland-rune:7787d72751475b0b",
+          "source_field": "spell_raw.links_raw[11]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "symbol of death",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/symbol-of-death"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.woodland-rune:has_school:magic-school.abjuration",
       "type": "has_school",
       "target": {
@@ -332,7 +546,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.freedom-of-movement",
-        "name": "freedom of movement"
+        "name": "Freedom of Movement"
       },
       "status": "accepted",
       "evidence": [
@@ -349,33 +563,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "freedom of movement",
           "source_href": "https://www.d20pfsrd.com/magic/all-spells/f/freedom-of-movement"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.woodland-rune:references:spell.symbol-of-death",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.symbol-of-death",
-        "name": "symbol of death"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.woodland-rune:3dd470ed9f8d2b94",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "symbol of death",
-          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=symbol%20of%20death"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.woodland-rune:7787d72751475b0b",
-          "source_field": "spell_raw.links_raw[11]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "symbol of death",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/symbol-of-death"
         }
       ],
       "note": null
@@ -401,12 +588,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.woodland-rune:uses_definition:rule.fort",
+      "relationship_id": "spell.woodland-rune:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -556,11 +743,19 @@
       "raw_value_sha256": "5b847d6bfdaf1faefab92f3771eea80f7d31023784e92dbbd79c6339f0f44619",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.woodland-rune:3dd470ed9f8d2b94",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "fed4942c0670f6a270ab14f01da1f36e0cd03ca4c5432bcf9434e20692bedfed",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

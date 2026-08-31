@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.siphon-might",
   "ruleset": "Pathfinder First Edition",
   "name": "Siphon Might",
@@ -169,7 +169,96 @@
   "description": {
     "raw": "You drain the might of the target and transfer that power to another creature. The subject takes a penalty to Strength equal to 1d6 + 1 per 2 caster levels (maximum 1d6 + 5). This effect can’t cause the subject’s Strength score to drop below 1. A successful Fortitude save halves this penalty. This penalty doesn’t stack with itself or the penalty applied from ray of enfeeblement.\n\nYou can grant any one creature adjacent to you (including yourself) an enhancement bonus to Strength equal to the Strength penalty imposed by this spell.",
     "search_text": "\"you drain the might of the target and transfer that power to another creature. the subject takes a penalty to strength equal to 1d6 + 1 per 2 caster levels (maximum 1d6 + 5). this effect can’t cause the subject’s strength score to drop below 1. a successful fortitude save halves this penalty. this penalty doesn’t stack with itself or the penalty applied from ray of enfeeblement.\\n\\nyou can grant any one creature adjacent to you (including yourself) an enhancement bonus to strength equal to the strength penalty imposed by this spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You drain the might of the target and transfer that power to another creature. The subject takes a penalty to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Strength",
+              "relationship_id": "spell.siphon-might:uses_definition:rule.strength"
+            },
+            {
+              "node_type": "text",
+              "value": " equal to 1d6 + 1 per 2 caster levels (maximum 1d6 + 5). This effect can’t cause the subject’s "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Strength",
+              "relationship_id": "spell.siphon-might:uses_definition:rule.strength"
+            },
+            {
+              "node_type": "text",
+              "value": " score to drop below 1. A successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.siphon-might:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save halves this penalty. This penalty doesn’t stack with itself or the penalty applied from "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "ray of enfeeblement",
+              "relationship_id": "spell.siphon-might:references:spell.ray-of-enfeeblement",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You can grant any one creature adjacent to you (including yourself) an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "enhancement bonus",
+              "relationship_id": "spell.siphon-might:uses_definition:rule.enhancement-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Strength",
+              "relationship_id": "spell.siphon-might:uses_definition:rule.strength"
+            },
+            {
+              "node_type": "text",
+              "value": " equal to the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Strength",
+              "relationship_id": "spell.siphon-might:uses_definition:rule.strength"
+            },
+            {
+              "node_type": "text",
+              "value": " penalty imposed by this spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -483,7 +572,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.ray-of-enfeeblement",
-        "name": "ray of enfeeblement"
+        "name": "Ray of Enfeeblement"
       },
       "status": "accepted",
       "evidence": [
@@ -518,11 +607,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.siphon-might:uses_definition:rule.fortitude",
+      "relationship_id": "spell.siphon-might:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -654,11 +743,19 @@
       "raw_value_sha256": "e6a3ee54b9c97274dd04ad65145ee37f721ca7ec081306f5ddb106d8fcd5c2e5",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.siphon-might:c878f1bac4108a35",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3f5f44a8ecc274705c64e5f5f0a505c77428d0d6b29d6c52d507dccb8890f19a",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

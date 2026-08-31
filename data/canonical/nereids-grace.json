@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.nereids-grace",
   "ruleset": "Pathfinder First Edition",
   "name": "Nereid's Grace",
@@ -151,7 +151,57 @@
   "description": {
     "raw": "You radiate the unearthly grace of a nereid. If you’re not wearing armor, you gain a deflection bonus to your AC and CMD equal to your Charisma bonus (maximum +3). The maximum increases by 1 for every 6 levels you possess (maximum +6 at 18th level).",
     "search_text": "\"you radiate the unearthly grace of a nereid. if you’re not wearing armor, you gain a deflection bonus to your ac and cmd equal to your charisma bonus (maximum +3). the maximum increases by 1 for every 6 levels you possess (maximum +6 at 18th level).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You radiate the unearthly grace of a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "nereid",
+              "relationship_id": "spell.nereids-grace:uses_definition:rule.nereid"
+            },
+            {
+              "node_type": "text",
+              "value": ". If you’re not wearing armor, you gain a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "deflection bonus",
+              "relationship_id": "spell.nereids-grace:uses_definition:rule.deflection-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " to your AC and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "CMD",
+              "relationship_id": "spell.nereids-grace:uses_definition:rule.combat-maneuver-defense"
+            },
+            {
+              "node_type": "text",
+              "value": " equal to your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Charisma",
+              "relationship_id": "spell.nereids-grace:uses_definition:rule.charisma"
+            },
+            {
+              "node_type": "text",
+              "value": " bonus (maximum +3). The maximum increases by 1 for every 6 levels you possess (maximum +6 at 18th level)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -346,12 +396,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.nereids-grace:uses_definition:rule.cmd",
+      "relationship_id": "spell.nereids-grace:uses_definition:rule.combat-maneuver-defense",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.cmd",
-        "name": "CMD"
+        "entity_id": "rule.combat-maneuver-defense",
+        "name": "Combat Maneuver Defense"
       },
       "status": "accepted",
       "evidence": [
@@ -494,11 +544,19 @@
       "raw_value_sha256": "570e2453e3d0350950804622479457137235746be272cfac2856f0df7b341417",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.nereids-grace:fbd2a9bf61335a8a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "0416ea699f3989a4e4f19e7de2b4e61b4ff53a8ee12335f466e614b0938f5d04",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

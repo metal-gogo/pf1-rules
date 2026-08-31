@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.plague-carrier",
   "ruleset": "Pathfinder First Edition",
   "name": "Plague Carrier",
@@ -215,7 +215,57 @@
   "description": {
     "raw": "The target’s natural attacks carry filth fever (DC 10 + 1/2 of the creature’s Hit Dice + creature’s Con modifier).",
     "search_text": "\"the target’s natural attacks carry filth fever (dc 10 + 1/2 of the creature’s hit dice + creature’s con modifier).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target’s "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "natural attacks",
+              "relationship_id": "spell.plague-carrier:uses_definition:rule.natural-attacks"
+            },
+            {
+              "node_type": "text",
+              "value": " carry "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "filth fever",
+              "relationship_id": "spell.plague-carrier:uses_definition:rule.filth-fever"
+            },
+            {
+              "node_type": "text",
+              "value": " (DC 10 + 1/2 of the creature’s "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Hit Dice",
+              "relationship_id": "spell.plague-carrier:uses_definition:rule.hit-dice"
+            },
+            {
+              "node_type": "text",
+              "value": " + creature’s "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Con",
+              "relationship_id": "spell.plague-carrier:uses_definition:rule.constitution"
+            },
+            {
+              "node_type": "text",
+              "value": " modifier)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -315,6 +365,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.plague-carrier:appears_on_spell_list:spell-list.entropy-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.entropy-patron",
+        "name": "Entropy Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.entropy:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th — plague carrier",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
       "relationship_id": "spell.plague-carrier:appears_on_spell_list:spell-list.hunter",
       "type": "appears_on_spell_list",
       "target": {
@@ -335,6 +405,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.plague-carrier:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.plague-carrier:361507059dfd0f5d",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.plague-carrier:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -353,6 +443,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.plague-carrier:appears_on_spell_list:spell-list.rot-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.rot-patron",
+        "name": "Rot Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.rot:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "10th — plague carrier",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.plague-carrier:appears_on_spell_list:spell-list.sorcerer",
@@ -611,12 +721,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.plague-carrier:uses_definition:rule.con",
+      "relationship_id": "spell.plague-carrier:uses_definition:rule.constitution",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.con",
-        "name": "Con"
+        "entity_id": "rule.constitution",
+        "name": "Constitution"
       },
       "status": "accepted",
       "evidence": [
@@ -651,11 +761,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.plague-carrier:uses_definition:rule.fortitude",
+      "relationship_id": "spell.plague-carrier:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -729,66 +839,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.plague-carrier:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.plague-carrier:361507059dfd0f5d",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.plague-carrier:appears_on_spell_list:spell-list.entropy-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.entropy-patron",
-        "name": "Entropy Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.entropy:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "4th — plague carrier",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
-    },
-    {
-      "relationship_id": "spell.plague-carrier:appears_on_spell_list:spell-list.rot-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.rot-patron",
-        "name": "Rot Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.rot:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "10th — plague carrier",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -855,11 +905,19 @@
       "raw_value_sha256": "1c8f6783ce64133f5d4a4d2973d3f406d9dbeec4fbb647bb09e4ba48843173aa",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.plague-carrier:361507059dfd0f5d",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "61c589868ee2520f71560e78d9853b12303a120e241a7c44acb72e5d62fc7384",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

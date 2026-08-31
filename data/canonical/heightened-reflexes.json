@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.heightened-reflexes",
   "ruleset": "Pathfinder First Edition",
   "name": "Heightened Reflexes",
@@ -113,7 +113,39 @@
   "description": {
     "raw": "You grant each of your allies within the area a +10 competence bonus on a single Reflex saving throw. Each ally must decide whether to use the bonus before making the roll to which it applies. When an ally uses the bonus, the spell ends for that individual.",
     "search_text": "\"you grant each of your allies within the area a +10 competence bonus on a single reflex saving throw. each ally must decide whether to use the bonus before making the roll to which it applies. when an ally uses the bonus, the spell ends for that individual.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You grant each of your allies within the area a +10 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "competence bonus",
+              "relationship_id": "spell.heightened-reflexes:uses_definition:rule.competence-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on a single "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.heightened-reflexes:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saving throw. Each ally must decide whether to use the bonus before making the roll to which it applies. When an ally uses the bonus, the spell ends for that individual."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -248,7 +280,7 @@
         "entity_id": "publication.will",
         "name": "Will"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.heightened-reflexes:d31309b952819de7",
@@ -258,7 +290,7 @@
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
         }
       ],
-      "note": null
+      "note": "The source href points to the Will saving-throw rules, not a publication."
     },
     {
       "relationship_id": "spell.heightened-reflexes:uses_action:action.standard-action",
@@ -308,11 +340,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.heightened-reflexes:uses_definition:rule.reflex",
+      "relationship_id": "spell.heightened-reflexes:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -396,11 +428,19 @@
       "raw_value_sha256": "f6103ba580f2cd44450f1afaa4e7c6767f45ec2e9cc7429dcce0d0c9138379a9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.heightened-reflexes:62129aa81376e9c7",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2f2934205cae321ebfde535dbc3b0f80b89981624fba64e1e5cf193ef9c179c9",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.paladins-sacrifice",
   "ruleset": "Pathfinder First Edition",
   "name": "Paladin's Sacrifice",
@@ -105,7 +105,48 @@
   "description": {
     "raw": "You open up a brief but powerful divine conduit between you and another creature, taking on the damage and any other effects that creature suffers. When a creature in range is hit by an attack or fails a saving throw, you can cast this spell and the wounds and/or effects are magically transmitted to you instead of the target. You are affected as if you were hit by the attack or failed the saving throw, taking all the damage and suffering all of the adverse effects. Any resistances or immunities you have are applied normally, but you cannot otherwise reduce or negate the damage or effects in any way.\n\nIf you use this spell against an effect that also targets you or includes you in its area, you suffer the effects for both yourself and the target you spared, potentially taking damage or suffering other consequences twice.",
     "search_text": "\"you open up a brief but powerful divine conduit between you and another creature, taking on the damage and any other effects that creature suffers. when a creature in range is hit by an attack or fails a saving throw, you can cast this spell and the wounds and/or effects are magically transmitted to you instead of the target. you are affected as if you were hit by the attack or failed the saving throw, taking all the damage and suffering all of the adverse effects. any resistances or immunities you have are applied normally, but you cannot otherwise reduce or negate the damage or effects in any way.\\n\\nif you use this spell against an effect that also targets you or includes you in its area, you suffer the effects for both yourself and the target you spared, potentially taking damage or suffering other consequences twice.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You open up a brief but powerful divine conduit between you and another creature, taking on the damage and any other effects that creature suffers. When a creature in range is hit by an attack or fails a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throw",
+              "relationship_id": "spell.paladins-sacrifice:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": ", you can cast this spell and the wounds and/or effects are magically transmitted to you instead of the target. You are affected as if you were hit by the attack or failed the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "saving throw",
+              "relationship_id": "spell.paladins-sacrifice:uses_definition:rule.saving-throws"
+            },
+            {
+              "node_type": "text",
+              "value": ", taking all the damage and suffering all of the adverse effects. Any resistances or immunities you have are applied normally, but you cannot otherwise reduce or negate the damage or effects in any way."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "If you use this spell against an effect that also targets you or includes you in its area, you suffer the effects for both yourself and the target you spared, potentially taking damage or suffering other consequences twice."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -233,11 +274,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.paladins-sacrifice:uses_definition:rule.fortitude",
+      "relationship_id": "spell.paladins-sacrifice:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -253,12 +294,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.paladins-sacrifice:uses_definition:rule.saving-throw",
+      "relationship_id": "spell.paladins-sacrifice:uses_definition:rule.saving-throws",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.saving-throw",
-        "name": "saving throw"
+        "entity_id": "rule.saving-throws",
+        "name": "Saving throws"
       },
       "status": "accepted",
       "evidence": [
@@ -348,11 +389,19 @@
       "raw_value_sha256": "0d9947cb87d53397db5bebc1c6cc275372c6f1baa1ee0bc50ee70fd1ab309bda",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.paladins-sacrifice:312c4be8b3167885",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "a288e29479c447ff2cc0cd4c339986cd8fce1e2609d61b706d2b54542961eecc",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": []
   }
 }

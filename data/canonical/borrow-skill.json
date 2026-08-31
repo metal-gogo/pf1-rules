@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.borrow-skill",
   "ruleset": "Pathfinder First Edition",
   "name": "Borrow Skill",
@@ -133,7 +133,21 @@
   "description": {
     "raw": "You borrow one of the target’s known skills. After touching the subject, you can make a single check with the chosen skill using the subject’s skill ranks, but modified by your own key ability. If you take longer than the spell’s duration to make the check or the check requires more time, then it fails and you must use your own skill ranks (if any). If the borrowed skill is a class skill for you, you gain the +3 bonus on checks using that skill.",
     "search_text": "\"you borrow one of the target’s known skills. after touching the subject, you can make a single check with the chosen skill using the subject’s skill ranks, but modified by your own key ability. if you take longer than the spell’s duration to make the check or the check requires more time, then it fails and you must use your own skill ranks (if any). if the borrowed skill is a class skill for you, you gain the +3 bonus on checks using that skill.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You borrow one of the target’s known skills. After touching the subject, you can make a single check with the chosen skill using the subject’s skill ranks, but modified by your own key ability. If you take longer than the spell’s duration to make the check or the check requires more time, then it fails and you must use your own skill ranks (if any). If the borrowed skill is a class skill for you, you gain the +3 bonus on checks using that skill."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -171,6 +185,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.borrow-skill:appears_on_spell_list:spell-list.cooperation-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.cooperation-subdomain",
+        "name": "Cooperation Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.cooperation:c83a2eb7",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—borrow skill",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Community"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.borrow-skill:appears_on_spell_list:spell-list.medium",
@@ -375,11 +409,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.borrow-skill:uses_definition:rule.will",
+      "relationship_id": "spell.borrow-skill:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -393,26 +427,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.borrow-skill:appears_on_spell_list:spell-list.cooperation-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.cooperation-subdomain",
-        "name": "Cooperation Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.cooperation:c83a2eb7",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "1st—borrow skill",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Community"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -471,11 +485,19 @@
       "raw_value_sha256": "148594ca225a2ce78b09cdfde995f0e7542b28596f473b2909fbeb74db302c7b",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.borrow-skill:8a7d9b1defab83e0",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3369592f0c4a35acf018bc7224bf6a3151f341d2ad32d94d5ee2a8dc7c21c07b",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

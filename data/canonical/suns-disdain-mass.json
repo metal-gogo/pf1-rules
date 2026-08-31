@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.suns-disdain-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Sun's Disdain, Mass",
@@ -212,7 +212,32 @@
   "description": {
     "raw": "This spell functions like sun’s disdain, except that it can affect multiple creatures.",
     "search_text": "\"this spell functions like sun’s disdain, except that it can affect multiple creatures.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "text",
+              "value": "sun’s disdain",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that it can affect multiple creatures."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -337,6 +362,40 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.suns-disdain-mass:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.suns-disdain-mass:7763a28c17091d6e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.suns-disdain-mass:b6f299c158f18f6b",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-inquisitor/"
+        },
+        {
+          "observation_id": "aon:spell.suns-disdain-mass:7763a28c17091d6e",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.suns-disdain-mass:appears_on_spell_list:spell-list.oracle",
@@ -628,11 +687,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.suns-disdain-mass:uses_definition:rule.will",
+      "relationship_id": "spell.suns-disdain-mass:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -646,40 +705,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.suns-disdain-mass:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.suns-disdain-mass:7763a28c17091d6e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.suns-disdain-mass:b6f299c158f18f6b",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-inquisitor/"
-        },
-        {
-          "observation_id": "aon:spell.suns-disdain-mass:7763a28c17091d6e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -730,11 +755,19 @@
       "raw_value_sha256": "035a712f40e5d9d4c5d232e58d2203af22a5bfdbc88b178fbdc946d09bef4664",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.suns-disdain-mass:7763a28c17091d6e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "c7c96d9ab712df9fc80c1771744356e5e969907d6af13c32a1bce17b91139818",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

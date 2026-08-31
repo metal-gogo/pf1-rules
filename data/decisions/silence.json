@@ -157,6 +157,24 @@
         "aon:subdomain.solitude:32d16f22"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.silence:89f9b04c22f84827",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.silence:89f9b04c22f84827",
+        "legacy_aon:spell.silence:bb124bfb939987cc",
+        "d20pfsrd:spell.silence:d74c6c523e224112",
+        "aon:patron.time:15d234b1",
+        "aon:subdomain.solitude:32d16f22"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -273,6 +291,25 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.silence:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.silence:89f9b04c22f84827",
+          "source_field": "spell_raw.levels_raw"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.silence:d74c6c523e224112",
+          "source_field": "spell_raw.links_raw[4]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.silence:89f9b04c22f84827",
+        "d20pfsrd:spell.silence:d74c6c523e224112"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.silence:appears_on_spell_list:spell-list.oracle",
       "decision": "accept",
       "evidence": [
@@ -323,6 +360,34 @@
         "d20pfsrd:spell.silence:d74c6c523e224112"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.silence:appears_on_spell_list:spell-list.solitude-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.solitude:32d16f22",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.solitude:32d16f22"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.silence:appears_on_spell_list:spell-list.time-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.time:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.time:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.silence:appears_on_spell_list:spell-list.warpriest",
@@ -481,7 +546,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.silence:uses_definition:rule.will",
+      "relationship_id": "spell.silence:uses_definition:rule.will-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -507,53 +572,6 @@
         "d20pfsrd:spell.silence:d74c6c523e224112"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.silence:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.silence:89f9b04c22f84827",
-          "source_field": "spell_raw.levels_raw"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.silence:d74c6c523e224112",
-          "source_field": "spell_raw.links_raw[4]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.silence:89f9b04c22f84827",
-        "d20pfsrd:spell.silence:d74c6c523e224112"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.silence:appears_on_spell_list:spell-list.time-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.time:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.time:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.silence:appears_on_spell_list:spell-list.solitude-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.solitude:32d16f22",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.solitude:32d16f22"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

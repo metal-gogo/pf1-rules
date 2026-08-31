@@ -153,9 +153,42 @@
         "aon:subdomain.competition:1d268b38"
       ],
       "rationale": "AoN clearly transcribes the owning cleric/inquisitor subdomain's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.jump:3f779b4af5bd569d",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.jump:3f779b4af5bd569d",
+        "legacy_aon:spell.jump:ebaf7b7e14c89cde",
+        "d20pfsrd:spell.jump:0a9fd60cc7bce9bc",
+        "aon:patron.agility:15d234b1",
+        "aon:patron.transformation:15d234b1",
+        "aon:subdomain.competition:1d268b38"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.jump:appears_on_spell_list:spell-list.agility-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.agility:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.agility:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
     {
       "relationship_id": "spell.jump:appears_on_spell_list:spell-list.alchemist",
       "decision": "accept",
@@ -211,6 +244,20 @@
         "d20pfsrd:spell.jump:0a9fd60cc7bce9bc"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.jump:appears_on_spell_list:spell-list.competition-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.competition:1d268b38",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.competition:1d268b38"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.jump:appears_on_spell_list:spell-list.druid",
@@ -421,6 +468,20 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.jump:appears_on_spell_list:spell-list.transformation-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.transformation:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.transformation:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
       "relationship_id": "spell.jump:appears_on_spell_list:spell-list.wizard",
       "decision": "accept",
       "evidence": [
@@ -541,7 +602,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.jump:uses_definition:rule.will",
+      "relationship_id": "spell.jump:uses_definition:rule.will-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -559,48 +620,6 @@
         "d20pfsrd:spell.jump:0a9fd60cc7bce9bc"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.jump:appears_on_spell_list:spell-list.agility-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.agility:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.agility:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.jump:appears_on_spell_list:spell-list.transformation-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.transformation:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.transformation:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.jump:appears_on_spell_list:spell-list.competition-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.competition:1d268b38",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.competition:1d268b38"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor subdomain page; it is modeled as subdomain access rather than general Cleric access."
     }
   ],
   "unresolved_questions": [

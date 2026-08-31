@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.bleaching-resistance",
   "ruleset": "Pathfinder First Edition",
   "name": "Bleaching Resistance",
@@ -253,7 +253,21 @@
   "description": {
     "raw": "Ability score drain from the Bleaching doesn’t affect your ability score modifiers while you’re affected by this spell. This spell does not remove the Bleaching’s effect on your appearance, nor does it prevent you from suffering further ability penalties, dying, or becoming a bleachling as a result of the Bleaching.",
     "search_text": "\"ability score drain from the bleaching doesn’t affect your ability score modifiers while you’re affected by this spell. this spell does not remove the bleaching’s effect on your appearance, nor does it prevent you from suffering further ability penalties, dying, or becoming a bleachling as a result of the bleaching.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Ability score drain from the Bleaching doesn’t affect your ability score modifiers while you’re affected by this spell. This spell does not remove the Bleaching’s effect on your appearance, nor does it prevent you from suffering further ability penalties, dying, or becoming a bleachling as a result of the Bleaching."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -384,6 +398,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.bleaching-resistance:appears_on_spell_list:spell-list.spiritualist",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.spiritualist",
+        "name": "Spiritualist Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.bleaching-resistance:967839c235809147",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Pinned Foundry PF1 assertion: Spiritualist 4",
+          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/enchantment/bleaching-resistance.inuj1vmyo9cygt0e.yaml"
+        }
+      ],
+      "note": "Reviewed project decision: add Spiritualist 4 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
     },
     {
       "relationship_id": "spell.bleaching-resistance:appears_on_spell_list:spell-list.witch",
@@ -565,26 +599,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.bleaching-resistance:appears_on_spell_list:spell-list.spiritualist",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.spiritualist",
-        "name": "Spiritualist Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.bleaching-resistance:967839c235809147",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "manual_verification",
-          "anchor_text_raw": "Pinned Foundry PF1 assertion: Spiritualist 4",
-          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/enchantment/bleaching-resistance.inuj1vmyo9cygt0e.yaml"
-        }
-      ],
-      "note": "Reviewed project decision: add Spiritualist 4 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
     }
   ],
   "provenance": [
@@ -635,11 +649,19 @@
       "raw_value_sha256": "f4cd2b81fd2bf4a2096086cb4313fbaecd84019c4996e6ec6c8c70c71203e760",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.bleaching-resistance:967839c235809147",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "82aba1fd08b384a217963e6f9c2576347725da39a2c3d9a415d784b925b7aa2d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "REVIEWED_FOUNDRY_MEMBERSHIP",

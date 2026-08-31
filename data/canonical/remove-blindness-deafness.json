@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.remove-blindness-deafness",
   "ruleset": "Pathfinder First Edition",
   "name": "Remove Blindness/Deafness",
@@ -210,7 +210,90 @@
   "description": {
     "raw": "Remove blindness/deafness cures blindness or deafness (your choice), whether the effect is normal or magical in nature. The spell does not restore ears or eyes that have been lost, but it repairs them if they are damaged.\n\nRemove blindness/deafness counters and dispels blindness/deafness.",
     "search_text": "\"remove blindness/deafness cures blindness or deafness (your choice), whether the effect is normal or magical in nature. the spell does not restore ears or eyes that have been lost, but it repairs them if they are damaged.\\n\\nremove blindness/deafness counters and dispels blindness/deafness.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Remove ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blindness/deafness",
+              "relationship_id": "spell.remove-blindness-deafness:references:spell.blindness-deafness",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " cures "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blindness",
+              "relationship_id": "spell.remove-blindness-deafness:uses_definition:condition.blindness"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "deafness",
+              "relationship_id": "spell.remove-blindness-deafness:uses_definition:condition.deafness"
+            },
+            {
+              "node_type": "text",
+              "value": " (your choice), whether the effect is normal or magical in nature. The spell does not restore ears or eyes that have been lost, but it repairs them if they are damaged."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Remove ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blindness/deafness",
+              "relationship_id": "spell.remove-blindness-deafness:references:spell.blindness-deafness",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " counters and dispels "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blindness/deafness",
+              "relationship_id": "spell.remove-blindness-deafness:references:spell.blindness-deafness",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -330,6 +413,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.remove-blindness-deafness:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.remove-blindness-deafness:81ab73baf3ca3bb8",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.remove-blindness-deafness:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -375,6 +478,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.remove-blindness-deafness:appears_on_spell_list:spell-list.purity-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.purity-subdomain",
+        "name": "Purity Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.purity:32d16f22",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "3rd—remove blindness/deafness",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Protection"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.remove-blindness-deafness:appears_on_spell_list:spell-list.shaman",
@@ -557,7 +680,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.blindness-deafness",
-        "name": "blindness/deafness"
+        "name": "Blindness/Deafness"
       },
       "status": "accepted",
       "evidence": [
@@ -646,11 +769,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.remove-blindness-deafness:uses_definition:rule.fortitude",
+      "relationship_id": "spell.remove-blindness-deafness:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -718,46 +841,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.remove-blindness-deafness:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.remove-blindness-deafness:81ab73baf3ca3bb8",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.remove-blindness-deafness:appears_on_spell_list:spell-list.purity-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.purity-subdomain",
-        "name": "Purity Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.purity:32d16f22",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "3rd—remove blindness/deafness",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Protection"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -816,11 +899,19 @@
       "raw_value_sha256": "e204e17c8aee8c8ab23be9f0577587e7c24435b2ab82008485a6935eba94c9d9",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.remove-blindness-deafness:81ab73baf3ca3bb8",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "104189044e31bbc2c6286c7ce7618855060974e024b89b33e8b568e176b9d239",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

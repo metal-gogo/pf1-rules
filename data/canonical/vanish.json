@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.vanish",
   "ruleset": "Pathfinder First Edition",
   "name": "Vanish",
@@ -177,7 +177,54 @@
   "description": {
     "raw": "This spell functions like invisibility, except the effect only lasts for 1 round per caster level (maximum of 5 rounds). Like invisibility, the spell immediately ends if the subject attacks any creature.",
     "search_text": "\"this spell functions like invisibility, except the effect only lasts for 1 round per caster level (maximum of 5 rounds). like invisibility, the spell immediately ends if the subject attacks any creature.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "invisibility",
+              "relationship_id": "spell.vanish:functions_like:spell.invisibility",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except the effect only lasts for 1 round per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.vanish:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum of 5 rounds). Like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "invisibility",
+              "relationship_id": "spell.vanish:functions_like:spell.invisibility",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", the spell immediately ends if the subject attacks any creature."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -598,6 +645,27 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like invisibility, except the effect only lasts for 1 round per caster level (maximum of 5 rounds). Like invisibility, the spell immediately ends if the subject attacks any creature.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.vanish:4b19d10e90315604",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "invisibility",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/invisibility.html#invisibility"
+        },
+        {
+          "observation_id": "legacy_aon:spell.vanish:4b19d10e90315604",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "invisibility",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/invisibility.html#invisibility"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.vanish:bfe2d4607dbd8f31",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "invisibility",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/i/invisibility/"
         }
       ],
       "note": null
@@ -691,40 +759,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.vanish:references:spell.invisibility",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.invisibility",
-        "name": "invisibility"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.vanish:4b19d10e90315604",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "invisibility",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/invisibility.html#invisibility"
-        },
-        {
-          "observation_id": "legacy_aon:spell.vanish:4b19d10e90315604",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "invisibility",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/invisibility.html#invisibility"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.vanish:bfe2d4607dbd8f31",
-          "source_field": "spell_raw.links_raw[7]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "invisibility",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/i/invisibility/"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.vanish:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -792,11 +826,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.vanish:uses_definition:rule.will",
+      "relationship_id": "spell.vanish:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -860,11 +894,19 @@
       "raw_value_sha256": "0d8d682030f374fad62983eac1ab9d8105b9bddb7b011b4da79534fb2c9ec8d4",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.vanish:675515558549f9de",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "97e315f14bbc620d0498ca6ecb1dae0188ba9c1d21d4fd672d41a1a5e2f063bd",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

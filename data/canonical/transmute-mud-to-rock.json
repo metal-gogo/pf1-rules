@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.transmute-mud-to-rock",
   "ruleset": "Pathfinder First Edition",
   "name": "Transmute Mud to Rock",
@@ -169,7 +169,67 @@
   "description": {
     "raw": "This spell permanently transforms normal mud or quicksand of any depth into soft stone (sandstone or a similar mineral).\n\nAny creature in the mud is allowed a Reflex save to escape before the area is hardened to stone.\n\nTransmute mud to rock counters and dispels transmute rock to mud.",
     "search_text": "\"this spell permanently transforms normal mud or quicksand of any depth into soft stone (sandstone or a similar mineral).\\n\\nany creature in the mud is allowed a reflex save to escape before the area is hardened to stone.\\n\\ntransmute mud to rock counters and dispels transmute rock to mud.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell permanently transforms normal mud or quicksand of any depth into soft stone (sandstone or a similar mineral)."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Any creature in the mud is allowed a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.transmute-mud-to-rock:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save to escape before the area is hardened to stone."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Transmute mud to rock",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " counters and dispels "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "transmute rock to mud",
+              "relationship_id": "spell.transmute-mud-to-rock:references:spell.transmute-rock-to-mud",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -227,6 +287,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.transmute-mud-to-rock:appears_on_spell_list:spell-list.earth-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.earth-elemental-school",
+        "name": "Earth Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.earth-elemental:b766c5d6",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "5—transmute mud to rock",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/earth/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     },
     {
       "relationship_id": "spell.transmute-mud-to-rock:appears_on_spell_list:spell-list.hunter",
@@ -429,7 +509,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.transmute-rock-to-mud",
-        "name": "transmute rock to mud"
+        "name": "Transmute Rock to Mud"
       },
       "status": "accepted",
       "evidence": [
@@ -478,11 +558,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.transmute-mud-to-rock:uses_definition:rule.reflex",
+      "relationship_id": "spell.transmute-mud-to-rock:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -530,26 +610,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.transmute-mud-to-rock:appears_on_spell_list:spell-list.earth-elemental-school",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.earth-elemental-school",
-        "name": "Earth Elemental School"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:magic-school.earth-elemental:b766c5d6",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "5—transmute mud to rock",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/earth/"
-        }
-      ],
-      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -608,11 +668,19 @@
       "raw_value_sha256": "8401f8fa8d3e2fe0d3ac0ca8db4284a0a9da3f3e7d48c488b0831e1f16961f03",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.transmute-mud-to-rock:f7f8471965d43a8e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "8caef90dacc38594820c0528500cf290d86f5821b92f6a4515716a65dc65421a",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

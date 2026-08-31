@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.source-severance",
   "ruleset": "Pathfinder First Edition",
   "name": "Source Severance",
@@ -174,7 +174,96 @@
   "description": {
     "raw": "You create an invisible barrier that surrounds you and moves with you, inhibiting one category of magic. When you cast this spell, choose either arcane or divine magic. This spell functions like antimagic field, but it suppresses only spells of the chosen type and supernatural and spell-like class abilities from classes that grant spellcasting of the selected type. Magic items, other spell-like abilities, and other supernatural abilities are unaffected.\n\nWhile this spell is in effect, you must succeed at a concentration check (DC 20 + twice the spell level) to cast any spell, whether arcane or divine. If you fail at the check, you lose the spell as if you had cast it to no effect.",
     "search_text": "\"you create an invisible barrier that surrounds you and moves with you, inhibiting one category of magic. when you cast this spell, choose either arcane or divine magic. this spell functions like antimagic field, but it suppresses only spells of the chosen type and supernatural and spell-like class abilities from classes that grant spellcasting of the selected type. magic items, other spell-like abilities, and other supernatural abilities are unaffected.\\n\\nwhile this spell is in effect, you must succeed at a concentration check (dc 20 + twice the spell level) to cast any spell, whether arcane or divine. if you fail at the check, you lose the spell as if you had cast it to no effect.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "invisible",
+              "relationship_id": "spell.source-severance:uses_definition:condition.invisible"
+            },
+            {
+              "node_type": "text",
+              "value": " barrier that surrounds you and moves with you, inhibiting one category of magic. When you cast this spell, choose either arcane or divine magic. This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "antimagic field",
+              "relationship_id": "spell.source-severance:functions_like:spell.antimagic-field",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", but it suppresses only spells of the chosen type and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "supernatural",
+              "relationship_id": "spell.source-severance:uses_definition:rule.supernatural"
+            },
+            {
+              "node_type": "text",
+              "value": " and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell-like",
+              "relationship_id": "spell.source-severance:uses_definition:rule.spell-like-abilities"
+            },
+            {
+              "node_type": "text",
+              "value": " class abilities from classes that grant spellcasting of the selected type. Magic items, other "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell-like abilities",
+              "relationship_id": "spell.source-severance:uses_definition:rule.spell-like-abilities"
+            },
+            {
+              "node_type": "text",
+              "value": ", and other "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "supernatural",
+              "relationship_id": "spell.source-severance:uses_definition:rule.supernatural"
+            },
+            {
+              "node_type": "text",
+              "value": " abilities are unaffected."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "While this spell is in effect, you must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "concentration",
+              "relationship_id": "spell.source-severance:uses_definition:rule.concentration"
+            },
+            {
+              "node_type": "text",
+              "value": " check (DC 20 + twice the spell level) to cast any spell, whether arcane or divine. If you fail at the check, you lose the spell as if you had cast it to no effect."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -184,7 +273,136 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.antimagic-field",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.source-severance:710f87ba781dcedc",
+        "source_field": "spell_raw.description_raw",
+        "raw": "You create an invisible barrier that surrounds you and moves with you, inhibiting one category of magic. When you cast this spell, choose either arcane or divine magic. This spell functions like antimagic field, but it suppresses only spells of the chosen type and supernatural and spell-like class abilities from classes that grant spellcasting of the selected type. Magic items, other spell-like abilities, and other supernatural abilities are unaffected.\n\nWhile this spell is in effect, you must succeed at a concentration check (DC 20 + twice the spell level) to cast any spell, whether arcane or divine. If you fail at the check, you lose the spell as if you had cast it to no effect."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "material",
+              "details": "an unworked lodestone",
+              "cost_gp": null,
+              "raw": "M (an unworked lodestone)"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (an unworked lodestone)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, M (an unworked lodestone)",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (an unworked lodestone)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/range",
+          "value": {
+            "category": "distance",
+            "formula": "5 feet",
+            "raw": "5 feet"
+          },
+          "source_field": "spell_raw.range_raw",
+          "raw": "5 feet",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/delivery",
+          "value": {
+            "resolution": "fixed",
+            "entries": [
+              {
+                "label_raw": "Area",
+                "value_raw": "5-ft.-radius emanation, centered on you",
+                "kinds": [
+                  "area"
+                ]
+              }
+            ]
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Area\",\"value_raw\":\"5-ft.-radius emanation, centered on you\",\"kinds\":[\"area\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/area",
+          "value": {
+            "propagation": "emanation",
+            "geometry": "sphere",
+            "geometry_basis": "explicit",
+            "dimensions": {
+              "radius_ft": null,
+              "length_ft": null,
+              "width_ft": null,
+              "height_ft": null
+            },
+            "shapeable": null,
+            "raw": "5-ft.-radius emanation, centered on you"
+          },
+          "source_field": "spell_raw.delivery_fields_raw",
+          "raw": "[{\"label_raw\":\"Area\",\"value_raw\":\"5-ft.-radius emanation, centered on you\",\"kinds\":[\"area\"]}]",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "timed",
+            "formula": "10 minutes/level (D)",
+            "dismissible": true,
+            "concentration": null,
+            "raw": "10 minutes/level (D)"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "10 minutes/level (D)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "You create an invisible barrier that surrounds you and moves with you, inhibiting one category of magic. When you cast this spell, choose either arcane or divine magic. This spell functions like antimagic field, but it suppresses only spells of the chosen type and supernatural and spell-like class abilities from classes that grant spellcasting of the selected type. Magic items, other spell-like abilities, and other supernatural abilities are unaffected.\n\nWhile this spell is in effect, you must succeed at a concentration check (DC 20 + twice the spell level) to cast any spell, whether arcane or divine. If you fail at the check, you lose the spell as if you had cast it to no effect.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "You create an invisible barrier that surrounds you and moves with you, inhibiting one category of magic. When you cast this spell, choose either arcane or divine magic. This spell functions like antimagic field, but it suppresses only spells of the chosen type and supernatural and spell-like class abilities from classes that grant spellcasting of the selected type. Magic items, other spell-like abilities, and other supernatural abilities are unaffected.\n\nWhile this spell is in effect, you must succeed at a concentration check (DC 20 + twice the spell level) to cast any spell, whether arcane or divine. If you fail at the check, you lose the spell as if you had cast it to no effect.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.source-severance:appears_on_spell_list:spell-list.cleric",
@@ -261,6 +479,33 @@
       "note": null
     },
     {
+      "relationship_id": "spell.source-severance:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.source-severance:2d1961b2105c040f",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.source-severance:710f87ba781dcedc",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 6",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.source-severance:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -323,6 +568,26 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "witch 6",
           "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.source-severance:functions_like:spell.antimagic-field",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.antimagic-field",
+        "name": "Antimagic Field"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.source-severance:2d1961b2105c040f",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "antimagic field",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/a/antimagic-field"
         }
       ],
       "note": null
@@ -409,26 +674,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.source-severance:references:spell.antimagic-field",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.antimagic-field",
-        "name": "antimagic field"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.source-severance:2d1961b2105c040f",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "antimagic field",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/a/antimagic-field"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.source-severance:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -496,12 +741,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.source-severance:uses_definition:rule.spell-like",
+      "relationship_id": "spell.source-severance:uses_definition:rule.spell-like-abilities",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.spell-like",
-        "name": "spell-like"
+        "entity_id": "rule.spell-like-abilities",
+        "name": "Spell-like abilities"
       },
       "status": "accepted",
       "evidence": [
@@ -511,20 +756,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "spell-like",
           "source_href": "https://www.d20pfsrd.com/magic#TOC-Spell-Like-Abilities-Sp-"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.source-severance:uses_definition:rule.spell-like-abilities",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.spell-like-abilities",
-        "name": "spell-like abilities"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.source-severance:2d1961b2105c040f",
           "source_field": "spell_raw.links_raw[9]",
@@ -581,33 +813,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.source-severance:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.source-severance:2d1961b2105c040f",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.source-severance:710f87ba781dcedc",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 6",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -658,11 +863,19 @@
       "raw_value_sha256": "5f3d788f03e4985aeb1d3f73d6c220763c2d8b8a3211249ea260a87229fd93ff",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.source-severance:710f87ba781dcedc",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "57f889791b92befbdc2868f143af00366a43de463bfc818e63eedb473034e727",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

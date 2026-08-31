@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.remove-radioactivity-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Remove Radioactivity, Greater",
@@ -129,7 +129,69 @@
   "description": {
     "raw": "This spell functions like remove radioactivity, save that it cures all ability damage and drain due to radioactivity that the target has taken. In addition, you can deplete a radioactive object as well, although because you must touch the object to affect it, you expose yourself to at least 1 round of contact with the object’s radiation. You must succeed at a caster level check (DC = 5 + the Fortitude DC associated with the radiation effect) in order to deplete the object. If you are successful, the object no longer emits radiation. In the case of a nuclear reactor or atomic warhead, this permanently renders the reactor or warhead inert and harmless.",
     "search_text": "\"this spell functions like remove radioactivity, save that it cures all ability damage and drain due to radioactivity that the target has taken. in addition, you can deplete a radioactive object as well, although because you must touch the object to affect it, you expose yourself to at least 1 round of contact with the object’s radiation. you must succeed at a caster level check (dc = 5 + the fortitude dc associated with the radiation effect) in order to deplete the object. if you are successful, the object no longer emits radiation. in the case of a nuclear reactor or atomic warhead, this permanently renders the reactor or warhead inert and harmless.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "remove radioactivity",
+              "relationship_id": "spell.remove-radioactivity-greater:functions_like:spell.remove-radioactivity",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", save that it cures all "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "ability damage",
+              "relationship_id": "spell.remove-radioactivity-greater:uses_definition:rule.ability-damage"
+            },
+            {
+              "node_type": "text",
+              "value": " and drain due to radioactivity that the target has taken. In addition, you can deplete a radioactive object as well, although because you must "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch",
+              "relationship_id": "spell.remove-radioactivity-greater:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " the object to affect it, you expose yourself to at least 1 round of contact with the object’s radiation. You must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.remove-radioactivity-greater:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " check (DC = 5 + the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.remove-radioactivity-greater:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " DC associated with the radiation effect) in order to deplete the object. If you are successful, the object no longer emits radiation. In the case of a nuclear reactor or atomic warhead, this permanently renders the reactor or warhead inert and harmless."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -453,11 +515,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.remove-radioactivity-greater:uses_definition:rule.fortitude",
+      "relationship_id": "spell.remove-radioactivity-greater:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -493,12 +555,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.remove-radioactivity-greater:uses_definition:rule.touch",
+      "relationship_id": "spell.remove-radioactivity-greater:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -561,11 +623,19 @@
       "raw_value_sha256": "cdebd7e9c5eeb47ffacf4796aa3e6ff62eabc8a71250af4b5fe7f60e489df1f5",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.remove-radioactivity-greater:dc0b4cfab27ac60f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "9d0749ead2d28778d7fcdaf2cf51ea1ebf1485f09cde50484402b90798b6a13d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

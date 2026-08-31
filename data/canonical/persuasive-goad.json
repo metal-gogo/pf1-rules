@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.persuasive-goad",
   "ruleset": "Pathfinder First Edition",
   "name": "Persuasive Goad",
@@ -140,7 +140,48 @@
   "description": {
     "raw": "Your eyes flash and the target takes 1d6 points of nonlethal damage. For the next minute, you gain a +4 circumstance bonus on Intimidate checks against the target.",
     "search_text": "\"your eyes flash and the target takes 1d6 points of nonlethal damage. for the next minute, you gain a +4 circumstance bonus on intimidate checks against the target.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Your eyes flash and the target takes 1d6 points of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "nonlethal damage",
+              "relationship_id": "spell.persuasive-goad:uses_definition:rule.nonlethal-damage"
+            },
+            {
+              "node_type": "text",
+              "value": ". For the next minute, you gain a +4 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "circumstance bonus",
+              "relationship_id": "spell.persuasive-goad:uses_definition:rule.circumstance-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Intimidate",
+              "relationship_id": "spell.persuasive-goad:uses_definition:rule.intimidate"
+            },
+            {
+              "node_type": "text",
+              "value": " checks against the target."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -152,6 +193,26 @@
   },
   "rules_inheritance": [],
   "relationships": [
+    {
+      "relationship_id": "spell.persuasive-goad:appears_on_spell_list:spell-list.bloodrager-kyton-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.bloodrager-kyton-bloodline",
+        "name": "Bloodrager Kyton Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.bloodrager.kyton:d2756670",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "persuasive goad (7th)",
+          "source_href": "https://www.aonprd.com/BloodragerBloodlineDisplay.aspx?ItemName=Kyton"
+        }
+      ],
+      "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
+    },
     {
       "relationship_id": "spell.persuasive-goad:appears_on_spell_list:spell-list.inquisitor",
       "type": "appears_on_spell_list",
@@ -178,6 +239,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.persuasive-goad:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.persuasive-goad:97f577a529c49d7d",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.persuasive-goad:664a90933444b2de",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.persuasive-goad:has_descriptor:descriptor.pain",
@@ -315,11 +403,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.persuasive-goad:uses_definition:rule.fortitude",
+      "relationship_id": "spell.persuasive-goad:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -400,53 +488,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.persuasive-goad:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.persuasive-goad:97f577a529c49d7d",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.persuasive-goad:664a90933444b2de",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.persuasive-goad:appears_on_spell_list:spell-list.bloodrager-kyton-bloodline",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.bloodrager-kyton-bloodline",
-        "name": "Bloodrager Kyton Bloodline Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.bloodrager.kyton:d2756670",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "persuasive goad (7th)",
-          "source_href": "https://www.aonprd.com/BloodragerBloodlineDisplay.aspx?ItemName=Kyton"
-        }
-      ],
-      "note": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
     }
   ],
   "provenance": [
@@ -505,11 +546,19 @@
       "raw_value_sha256": "47045e2f0e1395175fc79d7ab2bc6ef26f8ee7b6484488683c9185fd24e0a08d",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.persuasive-goad:664a90933444b2de",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "98c00e0a58c085afce833a80d923f5dc9cef16135f64f56ff5e81528499957d7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.silent-table",
   "ruleset": "Pathfinder First Edition",
   "name": "Silent Table",
@@ -210,7 +210,39 @@
   "description": {
     "raw": "You protect an area against casual eavesdropping. Sounds and sonic effects that originate inside the area are muffled for anyone outside the area; Perception DCs to hear or understand sounds leaving the area increase by 20, and any saving throw DCs of these effects decrease by 2. The spell does not affect sounds that enter the area or the Perception checks of creatures inside it.",
     "search_text": "\"you protect an area against casual eavesdropping. sounds and sonic effects that originate inside the area are muffled for anyone outside the area; perception dcs to hear or understand sounds leaving the area increase by 20, and any saving throw dcs of these effects decrease by 2. the spell does not affect sounds that enter the area or the perception checks of creatures inside it.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You protect an area against casual eavesdropping. Sounds and sonic effects that originate inside the area are muffled for anyone outside the area; "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Perception",
+              "relationship_id": "spell.silent-table:uses_definition:rule.perception"
+            },
+            {
+              "node_type": "text",
+              "value": " DCs to hear or understand sounds leaving the area increase by 20, and any saving throw DCs of these effects decrease by 2. The spell does not affect sounds that enter the area or the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Perception",
+              "relationship_id": "spell.silent-table:uses_definition:rule.perception"
+            },
+            {
+              "node_type": "text",
+              "value": " checks of creatures inside it."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -322,6 +354,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.silent-table:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.silent-table:845c92f1c737453c",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.silent-table:4df72605be3cd021",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.silent-table:appears_on_spell_list:spell-list.oracle",
@@ -672,33 +731,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.silent-table:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.silent-table:845c92f1c737453c",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.silent-table:4df72605be3cd021",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -749,11 +781,19 @@
       "raw_value_sha256": "a75e6d648c5219c54c774aaf2784b6551861aceb580cf68561dde455d78cf959",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.silent-table:4df72605be3cd021",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2607a06fa131b83b5b3b11cf88ef5a3cccd31997053ee80bb3ce9daa8a676c1c",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -202,6 +202,27 @@
         "aon:subdomain.shadow:941bc1dd"
       ],
       "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.death-knell:d192102d26a64d61",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.death-knell:d192102d26a64d61",
+        "legacy_aon:spell.death-knell:857976fa388a4726",
+        "d20pfsrd:spell.death-knell:24900c4e57727751",
+        "aon:domain.death:941bc1dd",
+        "aon:subdomain.murder:941bc1dd",
+        "aon:subdomain.plague:941bc1dd",
+        "aon:subdomain.psychopomp-death:941bc1dd",
+        "aon:subdomain.shadow:941bc1dd"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -258,6 +279,20 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.death-knell:appears_on_spell_list:spell-list.death-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.death:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.death:941bc1dd"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
       "relationship_id": "spell.death-knell:appears_on_spell_list:spell-list.inquisitor",
       "decision": "accept",
       "evidence": [
@@ -278,6 +313,39 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.death-knell:appears_on_spell_list:spell-list.murder-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.murder:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.murder:941bc1dd"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.death-knell:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.death-knell:d192102d26a64d61",
+          "source_field": "spell_raw.levels_raw"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.death-knell:24900c4e57727751",
+          "source_field": "spell_raw.links_raw[3]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.death-knell:d192102d26a64d61",
+        "d20pfsrd:spell.death-knell:24900c4e57727751"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.death-knell:appears_on_spell_list:spell-list.oracle",
       "decision": "accept",
       "evidence": [
@@ -292,6 +360,48 @@
         "d20pfsrd:spell.death-knell:24900c4e57727751"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.death-knell:appears_on_spell_list:spell-list.plague-subdomain-from-death",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.plague:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.plague:941bc1dd"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.death-knell:appears_on_spell_list:spell-list.psychopomp-death-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.psychopomp-death:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.psychopomp-death:941bc1dd"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.death-knell:appears_on_spell_list:spell-list.shadow-subdomain-from-death",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.shadow:941bc1dd",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.shadow:941bc1dd"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.death-knell:appears_on_spell_list:spell-list.spiritualist",
@@ -626,7 +736,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.death-knell:uses_definition:rule.will",
+      "relationship_id": "spell.death-knell:uses_definition:rule.will-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -644,95 +754,6 @@
         "d20pfsrd:spell.death-knell:24900c4e57727751"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.death-knell:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.death-knell:d192102d26a64d61",
-          "source_field": "spell_raw.levels_raw"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.death-knell:24900c4e57727751",
-          "source_field": "spell_raw.links_raw[3]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.death-knell:d192102d26a64d61",
-        "d20pfsrd:spell.death-knell:24900c4e57727751"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.death-knell:appears_on_spell_list:spell-list.death-domain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:domain.death:941bc1dd",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:domain.death:941bc1dd"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
-    },
-    {
-      "relationship_id": "spell.death-knell:appears_on_spell_list:spell-list.murder-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.murder:941bc1dd",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.murder:941bc1dd"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
-    },
-    {
-      "relationship_id": "spell.death-knell:appears_on_spell_list:spell-list.plague-subdomain-from-death",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.plague:941bc1dd",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.plague:941bc1dd"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
-    },
-    {
-      "relationship_id": "spell.death-knell:appears_on_spell_list:spell-list.psychopomp-death-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.psychopomp-death:941bc1dd",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.psychopomp-death:941bc1dd"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
-    },
-    {
-      "relationship_id": "spell.death-knell:appears_on_spell_list:spell-list.shadow-subdomain-from-death",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.shadow:941bc1dd",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.shadow:941bc1dd"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

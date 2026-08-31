@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.interrogation",
   "ruleset": "Pathfinder First Edition",
   "name": "Interrogation",
@@ -179,7 +179,39 @@
   "description": {
     "raw": "You question the target, backed up by the threat of magical pain. You may ask one question per two caster levels. The target can either answer the question or take 1d4 points of damage plus your Wisdom bonus. The target is not compelled to answer truthfully, but the threat of pain gives it a –4 penalty on Bluff checks to convince you when it is lying.",
     "search_text": "\"you question the target, backed up by the threat of magical pain. you may ask one question per two caster levels. the target can either answer the question or take 1d4 points of damage plus your wisdom bonus. the target is not compelled to answer truthfully, but the threat of pain gives it a –4 penalty on bluff checks to convince you when it is lying.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You question the target, backed up by the threat of magical pain. You may ask one question per two caster levels. The target can either answer the question or take 1d4 points of damage plus your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Wisdom",
+              "relationship_id": "spell.interrogation:uses_definition:rule.wisdom"
+            },
+            {
+              "node_type": "text",
+              "value": " bonus. The target is not compelled to answer truthfully, but the threat of pain gives it a –4 penalty on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Bluff",
+              "relationship_id": "spell.interrogation:uses_definition:rule.bluff"
+            },
+            {
+              "node_type": "text",
+              "value": " checks to convince you when it is lying."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -264,6 +296,40 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.interrogation:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.interrogation:cf83869ad4a91624",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.interrogation:cf83869ad4a91624",
+          "source_field": "spell_raw.links_raw[9]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.interrogation:9042a261629f8516",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.interrogation:appears_on_spell_list:spell-list.psychic",
@@ -563,11 +629,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.interrogation:uses_definition:rule.fortitude",
+      "relationship_id": "spell.interrogation:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -628,40 +694,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.interrogation:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.interrogation:cf83869ad4a91624",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.interrogation:cf83869ad4a91624",
-          "source_field": "spell_raw.links_raw[9]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.interrogation:9042a261629f8516",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -712,11 +744,19 @@
       "raw_value_sha256": "1162dd05608fc3d29fb00c2d72ff6702ac2d859dc7b0deddca5c7e841aa9eee6",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.interrogation:9042a261629f8516",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f6297c4ecdd503f9a310c23eabf9b6ea068a16cdbedffb08d09463519ac93f43",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.peacebond",
   "ruleset": "Pathfinder First Edition",
   "name": "Peacebond",
@@ -170,7 +170,48 @@
   "description": {
     "raw": "You lock a weapon in place on its owner’s body, or within the weapon’s sheath or holster. Anyone who then tries to draw the weapon must spend a standard action and succeed at a Strength check (DC equal to the saving throw DC) to do so, provoking attacks of opportunity whether the attempt succeeds or fails.",
     "search_text": "\"you lock a weapon in place on its owner’s body, or within the weapon’s sheath or holster. anyone who then tries to draw the weapon must spend a standard action and succeed at a strength check (dc equal to the saving throw dc) to do so, provoking attacks of opportunity whether the attempt succeeds or fails.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You lock a weapon in place on its owner’s body, or within the weapon’s sheath or holster. Anyone who then tries to draw the weapon must spend a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "standard action",
+              "relationship_id": "spell.peacebond:uses_action:action.standard-action"
+            },
+            {
+              "node_type": "text",
+              "value": " and succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Strength",
+              "relationship_id": "spell.peacebond:uses_definition:rule.strength"
+            },
+            {
+              "node_type": "text",
+              "value": " check (DC equal to the saving throw DC) to do so, provoking "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attacks of opportunity",
+              "relationship_id": "spell.peacebond:uses_definition:rule.attacks-of-opportunity"
+            },
+            {
+              "node_type": "text",
+              "value": " whether the attempt succeeds or fails."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -255,6 +296,40 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.peacebond:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.peacebond:04f4174eeab527a3",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.peacebond:04f4174eeab527a3",
+          "source_field": "spell_raw.links_raw[12]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.peacebond:c388c136196cc442",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.peacebond:appears_on_spell_list:spell-list.psychic",
@@ -691,11 +766,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.peacebond:uses_definition:rule.will",
+      "relationship_id": "spell.peacebond:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -716,40 +791,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.peacebond:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.peacebond:04f4174eeab527a3",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.peacebond:04f4174eeab527a3",
-          "source_field": "spell_raw.links_raw[12]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.peacebond:c388c136196cc442",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -800,11 +841,19 @@
       "raw_value_sha256": "132b7a21e16fdbd54148a2b8bb650e9fcecae990bcf5768cf3bba306be1d9d59",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.peacebond:c388c136196cc442",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "7162866353d5c9be38ee15347b945b11babb184041dd76f444c6482d9f63c248",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.vision-of-hell",
   "ruleset": "Pathfinder First Edition",
   "name": "Vision of Hell",
@@ -223,7 +223,48 @@
   "description": {
     "raw": "You overlay a realistic illusion of a terrifying hellscape upon an area. Structures, equipment, and creatures within the area are not hidden, though environmental features take on an infernal appearance. While you are prepared for these images and are not affected by them, any other creature within the area must make a Will save or become shaken and also take a –2 penalty on saves versus fear effects; the fear and penalty persists as long as the creature remains in the area. Devils and any lawful evil creatures suffer no negative effects from this spell.",
     "search_text": "\"you overlay a realistic illusion of a terrifying hellscape upon an area. structures, equipment, and creatures within the area are not hidden, though environmental features take on an infernal appearance. while you are prepared for these images and are not affected by them, any other creature within the area must make a will save or become shaken and also take a –2 penalty on saves versus fear effects; the fear and penalty persists as long as the creature remains in the area. devils and any lawful evil creatures suffer no negative effects from this spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You overlay a realistic illusion of a terrifying hellscape upon an area. Structures, equipment, and creatures within the area are not hidden, though environmental features take on an infernal appearance. While you are prepared for these images and are not affected by them, any other creature within the area must make a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.vision-of-hell:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save or become "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "shaken",
+              "relationship_id": "spell.vision-of-hell:uses_definition:condition.shaken"
+            },
+            {
+              "node_type": "text",
+              "value": " and also take a –2 penalty on saves versus fear effects; the fear and penalty persists as long as the creature remains in the area. Devils and any "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "lawful evil",
+              "relationship_id": "spell.vision-of-hell:uses_definition:rule.lawful-evil"
+            },
+            {
+              "node_type": "text",
+              "value": " creatures suffer no negative effects from this spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -402,6 +443,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.vision-of-hell:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.vision-of-hell:17a20001bd459009",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.vision-of-hell:appears_on_spell_list:spell-list.oracle",
@@ -854,11 +915,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.vision-of-hell:uses_definition:rule.will",
+      "relationship_id": "spell.vision-of-hell:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -879,26 +940,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.vision-of-hell:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.vision-of-hell:17a20001bd459009",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -949,11 +990,19 @@
       "raw_value_sha256": "407f4299ef4e973764c92e41abe9e94059f39957e19bc317224bcac72a3987ff",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.vision-of-hell:17a20001bd459009",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "cb2bc17dd391412badf3c277431005a602644e8cf00f5e9f1ce8dcc862a0f6cc",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

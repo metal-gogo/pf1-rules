@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   expectedBatchPaths,
+  formatRichTextBatchCommitMessage,
   validateRichTextBatchManifest,
   type RichTextBatchManifest,
 } from "../src/ingestion/rich-text-workflow.js";
@@ -30,6 +31,11 @@ function manifest(): RichTextBatchManifest {
 
 
 describe("rich-text workflow manifests", () => {
+  it("formats a descriptive batch commit subject", () => {
+    expect(formatRichTextBatchCommitMessage("Heart of the Mammoth", 5))
+      .toBe("ingest rich-text: Heart of the Mammoth + 4 spells");
+  });
+
   it("requires 25 unique, matching canonical and decision paths", () => {
     const planned = manifest();
     expect(() => validateRichTextBatchManifest(planned)).not.toThrow();

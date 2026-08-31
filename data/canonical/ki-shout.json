@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.ki-shout",
   "ruleset": "Pathfinder First Edition",
   "name": "Ki Shout",
@@ -147,7 +147,48 @@
   "description": {
     "raw": "With a guttural bark, you unleash a sudden blast of sonic energy that strikes your opponent. The target takes 1d6 points of sonic damage per level (maximum 20d6) and is stunned for 1 round; a successful Fortitude save reduces the damage by half and negates the stun.",
     "search_text": "\"with a guttural bark, you unleash a sudden blast of sonic energy that strikes your opponent. the target takes 1d6 points of sonic damage per level (maximum 20d6) and is stunned for 1 round; a successful fortitude save reduces the damage by half and negates the stun.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "With a guttural bark, you unleash a sudden blast of sonic energy that strikes your opponent. The target takes 1d6 points of sonic damage per level (maximum 20d6) and is "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "stunned",
+              "relationship_id": "spell.ki-shout:uses_definition:condition.stunned"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 round; a successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.ki-shout:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save reduces the damage by half and negates the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "stun",
+              "relationship_id": "spell.ki-shout:uses_definition:condition.stun"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -469,11 +510,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.ki-shout:uses_definition:rule.fortitude",
+      "relationship_id": "spell.ki-shout:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -564,11 +605,19 @@
       "raw_value_sha256": "9427eca168fc71f0d1c22ac9cc4f8d713e925873be68a5f41463a2e663e84e6a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.ki-shout:4e0702d2b92e9001",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "451714c063112c4ce3f5b407cd32a5f6aa74e370c9b1cde98559c784b105f0b1",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

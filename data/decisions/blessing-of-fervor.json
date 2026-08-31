@@ -182,9 +182,57 @@
         "aon:bloodline.bloodrager.martyred:4bc3b449"
       ],
       "rationale": "AoN clearly transcribes the owning bloodrager bloodline's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.blessing-of-fervor:6397018e25859727",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.blessing-of-fervor:6397018e25859727",
+        "legacy_aon:spell.blessing-of-fervor:168b0d4257197e48",
+        "d20pfsrd:spell.blessing-of-fervor:85e930e9a334279b",
+        "aon:patron.ancestors:15d234b1",
+        "aon:patron.fate:15d234b1",
+        "aon:bloodline.sorcerer.martyred:83b5af71",
+        "aon:bloodline.bloodrager.martyred:4bc3b449"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.blessing-of-fervor:appears_on_spell_list:spell-list.ancestors-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.ancestors:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.ancestors:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.blessing-of-fervor:appears_on_spell_list:spell-list.bloodrager-martyred-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.bloodrager.martyred:4bc3b449",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.bloodrager.martyred:4bc3b449"
+      ],
+      "rationale": "Printed by the owning bloodrager bloodline; this is bloodline access, not general Bloodrager class access."
+    },
     {
       "relationship_id": "spell.blessing-of-fervor:appears_on_spell_list:spell-list.cleric",
       "decision": "accept",
@@ -218,6 +266,34 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.blessing-of-fervor:appears_on_spell_list:spell-list.fate-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.fate:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.fate:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
+    {
+      "relationship_id": "spell.blessing-of-fervor:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.blessing-of-fervor:6397018e25859727",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.blessing-of-fervor:6397018e25859727"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.blessing-of-fervor:appears_on_spell_list:spell-list.oracle",
       "decision": "accept",
       "evidence": [
@@ -232,6 +308,20 @@
         "d20pfsrd:spell.blessing-of-fervor:85e930e9a334279b"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.blessing-of-fervor:appears_on_spell_list:spell-list.sorcerer-martyred-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.martyred:83b5af71",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.martyred:83b5af71"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     },
     {
       "relationship_id": "spell.blessing-of-fervor:appears_on_spell_list:spell-list.warpriest",
@@ -298,22 +388,6 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.blessing-of-fervor:references:spell.blessing-of-fervor",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.blessing-of-fervor:168b0d4257197e48",
-          "source_field": "spell_raw.links_raw[2]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.blessing-of-fervor:6397018e25859727",
-        "legacy_aon:spell.blessing-of-fervor:168b0d4257197e48",
-        "d20pfsrd:spell.blessing-of-fervor:85e930e9a334279b"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.blessing-of-fervor:references:spell.haste",
       "decision": "accept",
       "evidence": [
@@ -362,7 +436,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.blessing-of-fervor:uses_definition:rule.ac",
+      "relationship_id": "spell.blessing-of-fervor:uses_definition:rule.armor-class",
       "decision": "accept",
       "evidence": [
         {
@@ -442,7 +516,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.blessing-of-fervor:uses_definition:rule.fortitude",
+      "relationship_id": "spell.blessing-of-fervor:uses_definition:rule.fortitude-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -490,7 +564,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.blessing-of-fervor:uses_definition:rule.reflex",
+      "relationship_id": "spell.blessing-of-fervor:uses_definition:rule.reflex-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -584,76 +658,6 @@
         "d20pfsrd:spell.blessing-of-fervor:85e930e9a334279b"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.blessing-of-fervor:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.blessing-of-fervor:6397018e25859727",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.blessing-of-fervor:6397018e25859727"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.blessing-of-fervor:appears_on_spell_list:spell-list.ancestors-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.ancestors:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.ancestors:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.blessing-of-fervor:appears_on_spell_list:spell-list.fate-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.fate:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.fate:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.blessing-of-fervor:appears_on_spell_list:spell-list.sorcerer-martyred-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.martyred:83b5af71",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.martyred:83b5af71"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
-    },
-    {
-      "relationship_id": "spell.blessing-of-fervor:appears_on_spell_list:spell-list.bloodrager-martyred-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.bloodrager.martyred:4bc3b449",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.bloodrager.martyred:4bc3b449"
-      ],
-      "rationale": "AoN prints the spell on the owning bloodrager bloodline page; it is modeled as bloodline access rather than general Bloodrager access."
     }
   ],
   "unresolved_questions": [

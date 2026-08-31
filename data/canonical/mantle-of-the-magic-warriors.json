@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.mantle-of-the-magic-warriors",
   "ruleset": "Pathfinder First Edition",
   "name": "Mantle of the Magic Warriors",
@@ -207,7 +207,60 @@
   "description": {
     "raw": "You weave golden masks shaped like animals around the targets’ faces, imbuing each target with an animal spirit that matches her strength of character. Each target gains one animal special ability of your choice granted by beast shape I. You can choose a different special ability for each target.",
     "search_text": "\"you weave golden masks shaped like animals around the targets’ faces, imbuing each target with an animal spirit that matches her strength of character. each target gains one animal special ability of your choice granted by beast shape i. you can choose a different special ability for each target.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You weave golden masks shaped like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "animals",
+              "relationship_id": "spell.mantle-of-the-magic-warriors:uses_definition:rule.animal"
+            },
+            {
+              "node_type": "text",
+              "value": " around the targets’ faces, imbuing each target with an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "animal",
+              "relationship_id": "spell.mantle-of-the-magic-warriors:uses_definition:rule.animal"
+            },
+            {
+              "node_type": "text",
+              "value": " spirit that matches her strength of character. Each target gains one "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "animal",
+              "relationship_id": "spell.mantle-of-the-magic-warriors:uses_definition:rule.animal"
+            },
+            {
+              "node_type": "text",
+              "value": " special ability of your choice granted by "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "beast shape I",
+              "relationship_id": "spell.mantle-of-the-magic-warriors:references:spell.beast-shape-i",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ". You can choose a different special ability for each target."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -474,7 +527,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.beast-shape-i",
-        "name": "beast shape I"
+        "name": "Beast Shape I"
       },
       "status": "accepted",
       "evidence": [
@@ -538,20 +591,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "animal",
           "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/creature-types#TOC-Animal"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.mantle-of-the-magic-warriors:uses_definition:rule.animals",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.animals",
-        "name": "animals"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.mantle-of-the-magic-warriors:30699449e02f3b8f",
           "source_field": "spell_raw.links_raw[6]",
@@ -583,11 +623,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.mantle-of-the-magic-warriors:uses_definition:rule.will",
+      "relationship_id": "spell.mantle-of-the-magic-warriors:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -651,11 +691,19 @@
       "raw_value_sha256": "698fea30a56769f318f50f1022649f657133ddc6a78c445ba2a5f93c47873b30",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.mantle-of-the-magic-warriors:1967ab2de7f1ab41",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "914324a61eb5c1a74eb348f1a7648d8039a8ea0cea3a0d2ab63b078b82f66e0c",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

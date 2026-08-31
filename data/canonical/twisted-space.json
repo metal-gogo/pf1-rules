@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.twisted-space",
   "ruleset": "Pathfinder First Edition",
   "name": "Twisted Space",
@@ -177,7 +177,21 @@
   "description": {
     "raw": "You distort the space around a creature, twisting the path of its melee attacks unpredictably, but always toward a nearby creature that the target threatens. Until the start of your next turn, melee attacks made by the target creature affect a random target instead of their intended target.",
     "search_text": "\"you distort the space around a creature, twisting the path of its melee attacks unpredictably, but always toward a nearby creature that the target threatens. until the start of your next turn, melee attacks made by the target creature affect a random target instead of their intended target.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You distort the space around a creature, twisting the path of its melee attacks unpredictably, but always toward a nearby creature that the target threatens. Until the start of your next turn, melee attacks made by the target creature affect a random target instead of their intended target."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -322,6 +336,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.twisted-space:appears_on_spell_list:spell-list.space-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.space-patron",
+        "name": "Space Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.space:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th — twisted space",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.twisted-space:appears_on_spell_list:spell-list.summoner",
@@ -519,11 +553,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.twisted-space:uses_definition:rule.will",
+      "relationship_id": "spell.twisted-space:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -537,26 +571,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.twisted-space:appears_on_spell_list:spell-list.space-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.space-patron",
-        "name": "Space Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.space:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "4th — twisted space",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -615,11 +629,19 @@
       "raw_value_sha256": "3ba40a849d1b6d9ef2a4f744c2eedcf2e5cdb3f5d7c384993d26aa4c3079b25a",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.twisted-space:afe405531d38bb7e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "6305634c994f551131ba679ba23d53844b5a31f0132f36034e3a210b84092917",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.egorian-diplomacy",
   "ruleset": "Pathfinder First Edition",
   "name": "Egorian Diplomacy",
@@ -204,7 +204,41 @@
   "description": {
     "raw": "As part of casting this spell, you can attempt a single Intimidate skill check to make a target act friendly toward you. If you succeed, the target assists you normally, but Egorian diplomacy clouds the memory of any threats or pressure you applied. The target remembers assisting you, but can’t remember why, and its attitude toward you doesn’t worsen as a result of being intimidated.\n\nWhether a creature fails or succeeds at its saving throw, it becomes immune to further castings of Egorian diplomacy for 24 hours.",
     "search_text": "\"as part of casting this spell, you can attempt a single intimidate skill check to make a target act friendly toward you. if you succeed, the target assists you normally, but egorian diplomacy clouds the memory of any threats or pressure you applied. the target remembers assisting you, but can’t remember why, and its attitude toward you doesn’t worsen as a result of being intimidated.\\n\\nwhether a creature fails or succeeds at its saving throw, it becomes immune to further castings of egorian diplomacy for 24 hours.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "As part of casting this spell, you can attempt a single Intimidate skill check to make a target act friendly toward you. If you succeed, the target assists you normally, but "
+            },
+            {
+              "node_type": "text",
+              "value": "Egorian diplomacy",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " clouds the memory of any threats or pressure you applied. The target remembers assisting you, but can’t remember why, and its attitude toward you doesn’t worsen as a result of being intimidated."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Whether a creature fails or succeeds at its saving throw, it becomes immune to further castings of Egorian diplomacy for 24 hours."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -315,6 +349,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.egorian-diplomacy:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.egorian-diplomacy:8dacc2c555fba3fb",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        },
+        {
+          "observation_id": "aon:spell.egorian-diplomacy:8dacc2c555fba3fb",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.egorian-diplomacy:appears_on_spell_list:spell-list.oracle",
@@ -536,33 +597,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.egorian-diplomacy:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.egorian-diplomacy:8dacc2c555fba3fb",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1",
-          "source_href": null
-        },
-        {
-          "observation_id": "aon:spell.egorian-diplomacy:8dacc2c555fba3fb",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -613,11 +647,19 @@
       "raw_value_sha256": "1013bd0ab42f18ae5512ee9e15245e04d50c1232ec8ea7323d47313b3038b9b0",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.egorian-diplomacy:8dacc2c555fba3fb",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "b41898997df74be1ea5100adbd02240f09c9083b12d12e1ca3dbe13d3f3d0c15",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "DERIVED_SPELL_LIST_ACCESS",

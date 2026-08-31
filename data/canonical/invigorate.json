@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.invigorate",
   "ruleset": "Pathfinder First Edition",
   "name": "Invigorate",
@@ -131,7 +131,70 @@
   "description": {
     "raw": "This spell banishes feelings of weariness. For the duration, the subject takes no penalties from the fatigued or exhausted conditions. The effect of invigorate is merely an illusion, however, not a substitute for actual rest or respite. When the spell ends, the subject takes 1d6 points of nonlethal damage, along with the return of the original condition(s). A creature can be under the effects of only one invigorate spell at a time; if it is cast a second time on that creature, the first effect immediately ends.",
     "search_text": "\"this spell banishes feelings of weariness. for the duration, the subject takes no penalties from the fatigued or exhausted conditions. the effect of invigorate is merely an illusion, however, not a substitute for actual rest or respite. when the spell ends, the subject takes 1d6 points of nonlethal damage, along with the return of the original condition(s). a creature can be under the effects of only one invigorate spell at a time; if it is cast a second time on that creature, the first effect immediately ends.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell banishes feelings of weariness. For the duration, the subject takes no penalties from the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fatigued",
+              "relationship_id": "spell.invigorate:uses_definition:condition.fatigued"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "exhausted",
+              "relationship_id": "spell.invigorate:uses_definition:condition.exhausted"
+            },
+            {
+              "node_type": "text",
+              "value": " conditions. The effect of "
+            },
+            {
+              "node_type": "text",
+              "value": "invigorate ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "is merely an illusion, however, not a substitute for actual rest or respite. When the spell ends, the subject takes 1d6 points of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "nonlethal damage",
+              "relationship_id": "spell.invigorate:uses_definition:rule.nonlethal-damage"
+            },
+            {
+              "node_type": "text",
+              "value": ", along with the return of the original condition(s). A creature can be under the effects of only one "
+            },
+            {
+              "node_type": "text",
+              "value": "invigorate ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "spell at a time; if it is cast a second time on that creature, the first effect immediately ends."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -374,33 +437,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.invigorate:references:spell.invigorate",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.invigorate",
-        "name": "invigorate"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.invigorate:5a61634aaa7a1aa5",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "invigorate",
-          "source_href": "https://legacy.aonprd.com/advancedPlayersGuide/spells/invigorate.html#invigorate"
-        },
-        {
-          "observation_id": "legacy_aon:spell.invigorate:5a61634aaa7a1aa5",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "invigorate",
-          "source_href": "https://legacy.aonprd.com/advancedPlayersGuide/spells/invigorate.html#invigorate"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.invigorate:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -508,11 +544,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.invigorate:uses_definition:rule.will",
+      "relationship_id": "spell.invigorate:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -576,11 +612,19 @@
       "raw_value_sha256": "18e36de729e623d99b20d4aa980f83e366e76ad837bb832725cb3ccee7ca79ce",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.invigorate:bbdc3ede4681056a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "505eb3512c1a7acd7ffb2072da99d45ae5def4771eca292ffc670ff0dc6997cd",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

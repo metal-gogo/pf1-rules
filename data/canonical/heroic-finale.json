@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.heroic-finale",
   "ruleset": "Pathfinder First Edition",
   "name": "Heroic Finale",
@@ -115,7 +115,39 @@
   "description": {
     "raw": "You must have a bardic performance in effect to cast this spell. With a flourish, you immediately end the performance, and one creature within range affected by your bardic performance can make a move action or a standard action of their choice.",
     "search_text": "\"you must have a bardic performance in effect to cast this spell. with a flourish, you immediately end the performance, and one creature within range affected by your bardic performance can make a move action or a standard action of their choice.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You must have a bardic performance in effect to cast this spell. With a flourish, you immediately end the performance, and one creature within range affected by your bardic performance can make a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "move action",
+              "relationship_id": "spell.heroic-finale:uses_action:action.move-action"
+            },
+            {
+              "node_type": "text",
+              "value": " or a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "standard action",
+              "relationship_id": "spell.heroic-finale:uses_action:action.standard-action"
+            },
+            {
+              "node_type": "text",
+              "value": " of their choice."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -371,11 +403,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.heroic-finale:uses_definition:rule.will",
+      "relationship_id": "spell.heroic-finale:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -439,11 +471,19 @@
       "raw_value_sha256": "bf447f76c6925351f53f66b92802011d3e7302e073b2e525034108eb0e5f0c69",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.heroic-finale:36f7eb94691ae609",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "908b6bee0274cc991f16e464734d842d6b688cbae9d74188eb840037b034e0b9",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

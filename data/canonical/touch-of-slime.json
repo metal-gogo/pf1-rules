@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.touch-of-slime",
   "ruleset": "Pathfinder First Edition",
   "name": "Touch of Slime",
@@ -185,7 +185,69 @@
   "description": {
     "raw": "You create a coating of slime on your hand. When you make a successful melee touch attack with the slime, it pulls free of you and sticks to the target, at which point it acts like green slime, dealing 1d3 points of Constitution damage per round. Anything that destroys green slime (scraping, freezing, burning, cutting, sunlight, or remove disease) destroys this slime. If the slime kills a creature, it consumes the body and then dies. It cannot transfer to a creature other than the original target, and dies if separated from the original target.",
     "search_text": "\"you create a coating of slime on your hand. when you make a successful melee touch attack with the slime, it pulls free of you and sticks to the target, at which point it acts like green slime, dealing 1d3 points of constitution damage per round. anything that destroys green slime (scraping, freezing, burning, cutting, sunlight, or remove disease) destroys this slime. if the slime kills a creature, it consumes the body and then dies. it cannot transfer to a creature other than the original target, and dies if separated from the original target.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create a coating of slime on your hand. When you make a successful melee "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch attack",
+              "relationship_id": "spell.touch-of-slime:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " with the slime, it pulls free of you and sticks to the target, at which point it acts like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "green slime",
+              "relationship_id": "spell.touch-of-slime:uses_definition:rule.green-slime"
+            },
+            {
+              "node_type": "text",
+              "value": ", dealing 1d3 points of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Constitution damage",
+              "relationship_id": "spell.touch-of-slime:uses_definition:rule.constitution-damage"
+            },
+            {
+              "node_type": "text",
+              "value": " per round. Anything that destroys "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "green slime",
+              "relationship_id": "spell.touch-of-slime:uses_definition:rule.green-slime"
+            },
+            {
+              "node_type": "text",
+              "value": " (scraping, freezing, burning, cutting, sunlight, or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "remove disease",
+              "relationship_id": "spell.touch-of-slime:references:spell.remove-disease",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ") destroys this slime. If the slime kills a creature, it consumes the body and then dies. It cannot transfer to a creature other than the original target, and dies if separated from the original target."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -566,7 +628,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.remove-disease",
-        "name": "remove disease"
+        "name": "Remove Disease"
       },
       "status": "accepted",
       "evidence": [
@@ -635,11 +697,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.touch-of-slime:uses_definition:rule.fortitude",
+      "relationship_id": "spell.touch-of-slime:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -763,11 +825,19 @@
       "raw_value_sha256": "f9b82be1693cb80d2cd1e66dcfc2e23c8630331cce570d007f5a4e696d92ad5b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.touch-of-slime:1d62e93633d5d71b",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f4545b01fe33b6cff4b72795a5c233260569894e134886f47a1a221500595dbd",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

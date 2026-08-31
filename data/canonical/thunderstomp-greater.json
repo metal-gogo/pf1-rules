@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.thunderstomp-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Thunderstomp, Greater",
@@ -163,7 +163,42 @@
   "description": {
     "raw": "This spell functions as thunderstomp, except as noted, and it affects all creatures in the area, regardless of size. When you attempt the combat maneuver check, apply its result to each creature within the area.",
     "search_text": "\"this spell functions as thunderstomp, except as noted, and it affects all creatures in the area, regardless of size. when you attempt the combat maneuver check, apply its result to each creature within the area.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "thunderstomp",
+              "relationship_id": "spell.thunderstomp-greater:functions_like:spell.thunderstomp",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except as noted, and it affects all creatures in the area, regardless of size. When you attempt the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "combat maneuver",
+              "relationship_id": "spell.thunderstomp-greater:uses_definition:rule.combat-maneuvers"
+            },
+            {
+              "node_type": "text",
+              "value": " check, apply its result to each creature within the area."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -489,6 +524,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as thunderstomp, except as noted, and it affects all creatures in the area, regardless of size. When you attempt the combat maneuver check, apply its result to each creature within the area.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.thunderstomp-greater:f5dc0df8ed90c027",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "thunderstomp",
+          "source_href": "https://legacy.aonprd.com/advancedClassGuide/spells/thunderstomp.html"
         }
       ],
       "note": null
@@ -589,26 +631,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.thunderstomp-greater:references:spell.thunderstomp",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.thunderstomp",
-        "name": "thunderstomp"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.thunderstomp-greater:f5dc0df8ed90c027",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "thunderstomp",
-          "source_href": "https://legacy.aonprd.com/advancedClassGuide/spells/thunderstomp.html"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.thunderstomp-greater:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -636,12 +658,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.thunderstomp-greater:uses_definition:rule.combat-maneuver",
+      "relationship_id": "spell.thunderstomp-greater:uses_definition:rule.combat-maneuvers",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.combat-maneuver",
-        "name": "combat maneuver"
+        "entity_id": "rule.combat-maneuvers",
+        "name": "Combat maneuvers"
       },
       "status": "accepted",
       "evidence": [
@@ -724,11 +746,19 @@
       "raw_value_sha256": "766fce21b8b319ce63bbaf43f6cd21a979d324f291bf9ab12999f18f3aec4161",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.thunderstomp-greater:7d2c759b81447183",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "7479559fea0c27f8b907de90da2c0d5c44b95635da80e1d0e09c4d1687f9f132",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

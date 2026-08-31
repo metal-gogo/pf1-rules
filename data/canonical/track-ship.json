@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.track-ship",
   "ruleset": "Pathfinder First Edition",
   "name": "Track Ship",
@@ -178,7 +178,39 @@
   "description": {
     "raw": "In order to cast this spell, you must have a piece of the ship you wish to track. Merchants often preserve slivers from their trade ships specifically for this purpose. You also need a nautical chart.\n\nWhen you cast this spell, an icon of the targeted ship appears on the nautical chart. The icon moves as the ship moves for the duration of this spell. If the ship is not within the area delineated by the chart, the spell fails. If the ship is reduced to 0 or fewer hit points, its icon changes from a ship to a skull and crossbones.",
     "search_text": "\"in order to cast this spell, you must have a piece of the ship you wish to track. merchants often preserve slivers from their trade ships specifically for this purpose. you also need a nautical chart.\\n\\nwhen you cast this spell, an icon of the targeted ship appears on the nautical chart. the icon moves as the ship moves for the duration of this spell. if the ship is not within the area delineated by the chart, the spell fails. if the ship is reduced to 0 or fewer hit points, its icon changes from a ship to a skull and crossbones.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "In order to cast this spell, you must have a piece of the ship you wish to track. Merchants often preserve slivers from their trade ships specifically for this purpose. You also need a nautical chart."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "When you cast this spell, an icon of the targeted ship appears on the nautical chart. The icon moves as the ship moves for the duration of this spell. If the ship is not within the area delineated by the chart, the spell fails. If the ship is reduced to 0 or fewer "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.track-ship:uses_definition:rule.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": ", its icon changes from a ship to a skull and crossbones."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -263,6 +295,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.track-ship:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.track-ship:4429b3997b64b535",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.track-ship:3efd7f3ef8b0c710",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.track-ship:appears_on_spell_list:spell-list.oracle",
@@ -540,11 +599,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.track-ship:uses_definition:rule.will",
+      "relationship_id": "spell.track-ship:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -558,33 +617,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.track-ship:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.track-ship:4429b3997b64b535",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.track-ship:3efd7f3ef8b0c710",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -635,11 +667,19 @@
       "raw_value_sha256": "dc075c89aa4850f0f8bad8e15e57c5eb2b8407719bd1fcfaa3b3a7f2dbb07c1c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.track-ship:3efd7f3ef8b0c710",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "ede8b4e7ea17f7f28e6fdb431d1c4fdc13faaaba7e1f1b8362e2100cca22e84d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

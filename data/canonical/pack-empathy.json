@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.pack-empathy",
   "ruleset": "Pathfinder First Edition",
   "name": "Pack Empathy",
@@ -246,7 +246,21 @@
   "description": {
     "raw": "You create an instinctual connection between the targets. Each can sense the others’ overall emotional states, which allows them to communicate basic emotional concepts (such as alerting each other of danger due to increased stress). Once the spell has been cast on the subjects, the distance between them and the caster doesn’t affect the spell as long as they are on the same plane of existence. If a subject leaves the plane, or if it dies, the spell ceases to function for it.",
     "search_text": "\"you create an instinctual connection between the targets. each can sense the others’ overall emotional states, which allows them to communicate basic emotional concepts (such as alerting each other of danger due to increased stress). once the spell has been cast on the subjects, the distance between them and the caster doesn’t affect the spell as long as they are on the same plane of existence. if a subject leaves the plane, or if it dies, the spell ceases to function for it.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create an instinctual connection between the targets. Each can sense the others’ overall emotional states, which allows them to communicate basic emotional concepts (such as alerting each other of danger due to increased stress). Once the spell has been cast on the subjects, the distance between them and the caster doesn’t affect the spell as long as they are on the same plane of existence. If a subject leaves the plane, or if it dies, the spell ceases to function for it."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -405,6 +419,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.pack-empathy:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.pack-empathy:7dfa2787778b93e3",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.pack-empathy:9fa4035bc808a070",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.pack-empathy:appears_on_spell_list:spell-list.ranger",
@@ -728,33 +769,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.pack-empathy:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.pack-empathy:7dfa2787778b93e3",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.pack-empathy:9fa4035bc808a070",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -813,11 +827,19 @@
       "raw_value_sha256": "d1f6e2c68dbac99bc2f35fccf26233af8b7bccff830179d34bc2758f7fcf8772",
       "decision": "manually_resolved",
       "note": "Reviewed catalog policy: AoN remains the preferred publication transcription. When an additional class membership is printed by d20PFSRD, it may be added to the canonical class union after review; Foundry PF1 is corroborating catalog evidence when it agrees. Preserve every source claim and never replace an AoN level merely because another catalog assigns the same class a different level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.pack-empathy:9fa4035bc808a070",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d29a49f6e934817250a4603085dc4ef979d68a52fef87aa179007078051f57bb",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.5-reviewed-catalog-memberships",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "REVIEWED_CATALOG_MEMBERSHIP_UNION",

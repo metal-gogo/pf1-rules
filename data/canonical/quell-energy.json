@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.quell-energy",
   "ruleset": "Pathfinder First Edition",
   "name": "Quell Energy",
@@ -200,7 +200,78 @@
   "description": {
     "raw": "You reduce the target creature’s ability to tap into a single energy type (acid, cold, electricity, fire, or sonic) of your choice. This reduces damage of the selected type the creature deals with spells, spell-like abilities, and supernatural abilities by 10 points. Multiple castings of this spell stack. Damage from sources other than the creature, such as objects and magic items, is not reduced. If the damage of one of the creature’s effects is negated entirely, any additional effects associated with that damage (such being stunned by sound burst or set on fire by a fire elemental) are also negated. At 13th level, you reduce the target’s damage by 20 points, and at 19th level, you reduce the target’s damage by 30 points.\n\nIf the target succeeds on its saving throw, the spell’s duration is reduced to 1 round.",
     "search_text": "\"you reduce the target creature’s ability to tap into a single energy type (acid, cold, electricity, fire, or sonic) of your choice. this reduces damage of the selected type the creature deals with spells, spell-like abilities, and supernatural abilities by 10 points. multiple castings of this spell stack. damage from sources other than the creature, such as objects and magic items, is not reduced. if the damage of one of the creature’s effects is negated entirely, any additional effects associated with that damage (such being stunned by sound burst or set on fire by a fire elemental) are also negated. at 13th level, you reduce the target’s damage by 20 points, and at 19th level, you reduce the target’s damage by 30 points.\\n\\nif the target succeeds on its saving throw, the spell’s duration is reduced to 1 round.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You reduce the target creature’s ability to tap into a single energy type (acid, cold, electricity, fire, or sonic) of your choice. This reduces damage of the selected type the creature deals with spells, "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell-like abilities",
+              "relationship_id": "spell.quell-energy:uses_definition:rule.spell-like-abilities"
+            },
+            {
+              "node_type": "text",
+              "value": ", and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "supernatural",
+              "relationship_id": "spell.quell-energy:uses_definition:rule.supernatural"
+            },
+            {
+              "node_type": "text",
+              "value": " abilities by 10 points. Multiple castings of this spell stack. Damage from sources other than the creature, such as objects and magic items, is not reduced. If the damage of one of the creature’s effects is negated entirely, any additional effects associated with that damage (such being "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "stunned",
+              "relationship_id": "spell.quell-energy:uses_definition:condition.stunned"
+            },
+            {
+              "node_type": "text",
+              "value": " by "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sound burst",
+              "relationship_id": "spell.quell-energy:references:spell.sound-burst",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " or set on fire by a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fire elemental",
+              "relationship_id": "spell.quell-energy:uses_definition:monster.fire-elemental"
+            },
+            {
+              "node_type": "text",
+              "value": ") are also negated. At 13th level, you reduce the target’s damage by 20 points, and at 19th level, you reduce the target’s damage by 30 points."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "If the target succeeds on its saving throw, the spell’s duration is reduced to 1 round."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -332,6 +403,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.quell-energy:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.quell-energy:4be661631dc47be5",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.quell-energy:2436f8cb6e254012",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.quell-energy:appears_on_spell_list:spell-list.psychic",
@@ -548,7 +646,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.sound-burst",
-        "name": "sound burst"
+        "name": "Sound Burst"
       },
       "status": "accepted",
       "evidence": [
@@ -610,12 +708,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.quell-energy:uses_definition:rule.fire-elemental",
+      "relationship_id": "spell.quell-energy:uses_definition:monster.fire-elemental",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.fire-elemental",
-        "name": "fire elemental"
+        "entity_type": "monster",
+        "entity_id": "monster.fire-elemental",
+        "name": "Fire elemental"
       },
       "status": "accepted",
       "evidence": [
@@ -690,11 +788,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.quell-energy:uses_definition:rule.will",
+      "relationship_id": "spell.quell-energy:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -708,33 +806,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.quell-energy:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.quell-energy:4be661631dc47be5",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.quell-energy:2436f8cb6e254012",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -785,11 +856,19 @@
       "raw_value_sha256": "f9ee1c51f8678b14e95d65ed8ff906807a606c77a9199893f2ab6cbd0cb3eeb4",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.quell-energy:2436f8cb6e254012",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "fc46943f2c322f58416e346dd60388f673c7272453ace014c77c9a837b35a036",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

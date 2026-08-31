@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.shocking-image",
   "ruleset": "Pathfinder First Edition",
   "name": "Shocking Image",
@@ -171,7 +171,42 @@
   "description": {
     "raw": "This spell works like mirror image, except the illusory doubles it creates discharge an electric shock when destroyed. An opponent that uses a melee attack to destroy one of your images takes 2d6 points of electricity damage. You must overcome a target’s spell resistance the first time you deal this electricity damage to it. Failure renders the target immune to damage from this spell.",
     "search_text": "\"this spell works like mirror image, except the illusory doubles it creates discharge an electric shock when destroyed. an opponent that uses a melee attack to destroy one of your images takes 2d6 points of electricity damage. you must overcome a target’s spell resistance the first time you deal this electricity damage to it. failure renders the target immune to damage from this spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell works like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "mirror image",
+              "relationship_id": "spell.shocking-image:functions_like:spell.mirror-image",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except the illusory doubles it creates discharge an electric shock when destroyed. An opponent that uses a melee attack to destroy one of your images takes 2d6 points of electricity damage. You must overcome a target’s "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.shocking-image:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": " the first time you deal this electricity damage to it. Failure renders the target immune to damage from this spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -615,7 +650,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.mirror-image",
-        "name": "mirror image"
+        "name": "Mirror Image"
       },
       "status": "accepted",
       "evidence": [
@@ -739,11 +774,19 @@
       "raw_value_sha256": "72c4095cce3ec309e1a41812ec122a60470b2278bf88fa3039c3f471096d1175",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.shocking-image:bdbc3726a11bd864",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "66bbbc86fb8f2f49cf18c56f4442fdd7a350fc4423a6008a9b399f8d6b4a1adf",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

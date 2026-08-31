@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.summoner-conduit",
   "ruleset": "Pathfinder First Edition",
   "name": "Summoner Conduit",
@@ -214,7 +214,39 @@
   "description": {
     "raw": "You exploit the invisible, mystic connection between the target creature and its summoner to harm that summoner. Whenever the target’s summoned creature is the target of a spell that deals damage, the target’s summoner is also considered to be a target of that spell. Such a summoner gains his normal defenses against the spell, such as a saving throw and spell resistance, and cannot be affected if he is on another plane of existence.",
     "search_text": "\"you exploit the invisible, mystic connection between the target creature and its summoner to harm that summoner. whenever the target’s summoned creature is the target of a spell that deals damage, the target’s summoner is also considered to be a target of that spell. such a summoner gains his normal defenses against the spell, such as a saving throw and spell resistance, and cannot be affected if he is on another plane of existence.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You exploit the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "invisible",
+              "relationship_id": "spell.summoner-conduit:uses_definition:condition.invisible"
+            },
+            {
+              "node_type": "text",
+              "value": ", mystic connection between the target creature and its summoner to harm that summoner. Whenever the target’s summoned creature is the target of a spell that deals damage, the target’s summoner is also considered to be a target of that spell. Such a summoner gains his normal defenses against the spell, such as a saving throw and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.summoner-conduit:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": ", and cannot be affected if he is on another plane of existence."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -292,6 +324,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.summoner-conduit:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.summoner-conduit:570ed2ee9107e29c",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.summoner-conduit:e51cbb6f9fa393c0",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.summoner-conduit:appears_on_spell_list:spell-list.oracle",
@@ -671,11 +730,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.summoner-conduit:uses_definition:rule.will",
+      "relationship_id": "spell.summoner-conduit:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -689,33 +748,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.summoner-conduit:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.summoner-conduit:570ed2ee9107e29c",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.summoner-conduit:e51cbb6f9fa393c0",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -766,11 +798,19 @@
       "raw_value_sha256": "e18b807ddb7d369324f01baaf4491deaab5477d01fb356f20f237c25ce81104c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.summoner-conduit:e51cbb6f9fa393c0",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "b5868b109d4ba3ac82016c9feb4d553747e2621d15021b06c775bcefeeed0f9b",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

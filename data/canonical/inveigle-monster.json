@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.inveigle-monster",
   "ruleset": "Pathfinder First Edition",
   "name": "Inveigle Monster",
@@ -163,7 +163,33 @@
   "description": {
     "raw": "This spell functions as inveigle person except as noted above.",
     "search_text": "\"this spell functions as inveigle person except as noted above.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "inveigle person",
+              "relationship_id": "spell.inveigle-monster:functions_like:spell.inveigle-person",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " except as noted above."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -623,7 +649,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.inveigle-person",
-        "name": "inveigle person"
+        "name": "Inveigle Person"
       },
       "status": "accepted",
       "evidence": [
@@ -726,11 +752,19 @@
       "raw_value_sha256": "29c030a476990e03d9e4ea41b4ae605835187be77940368386441575113c7896",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.inveigle-monster:321e7d2e16631523",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "7e10ecf49ddf959b851b0786f2024a5ade7d7d849661099a4f72c9e352eb6149",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

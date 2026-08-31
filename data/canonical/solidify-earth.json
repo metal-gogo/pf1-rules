@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.solidify-earth",
   "ruleset": "Pathfinder First Edition",
   "name": "Solidify Earth",
@@ -206,7 +206,66 @@
   "description": {
     "raw": "Stone, dirt, and other types of earth within the area become more tightly packed. Burrowing creature (including those using earth glide) treat the area as difficult terrain. Any creature that begins its turn burrowing in the affected area becomes entangled for 1 round (Reflex negates). Tremorsense and similar senses are ineffective within the affected area. Creatures with the earth mastery special ability (such as earth elementals) double their bonus on attack and damage rolls so long as both they and their targets are touching the area affected by this spell.",
     "search_text": "\"stone, dirt, and other types of earth within the area become more tightly packed. burrowing creature (including those using earth glide) treat the area as difficult terrain. any creature that begins its turn burrowing in the affected area becomes entangled for 1 round (reflex negates). tremorsense and similar senses are ineffective within the affected area. creatures with the earth mastery special ability (such as earth elementals) double their bonus on attack and damage rolls so long as both they and their targets are touching the area affected by this spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Stone, dirt, and other types of earth within the area become more tightly packed. Burrowing creature (including those using "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "earth glide",
+              "relationship_id": "spell.solidify-earth:references:spell.earth-glide"
+            },
+            {
+              "node_type": "text",
+              "value": ") treat the area as difficult terrain. Any creature that begins its turn burrowing in the affected area becomes "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "entangled",
+              "relationship_id": "spell.solidify-earth:uses_definition:condition.entangled"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 round ("
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.solidify-earth:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " negates). "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Tremorsense",
+              "relationship_id": "spell.solidify-earth:uses_definition:rule.tremorsense"
+            },
+            {
+              "node_type": "text",
+              "value": " and similar senses are ineffective within the affected area. Creatures with the earth mastery special ability (such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "earth elementals",
+              "relationship_id": "spell.solidify-earth:uses_definition:rule.earth-elementals"
+            },
+            {
+              "node_type": "text",
+              "value": ") double their bonus on attack and damage rolls so long as both they and their targets are touching the area affected by this spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -338,6 +397,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.solidify-earth:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.solidify-earth:138340fd295196cc",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.solidify-earth:appears_on_spell_list:spell-list.oracle",
@@ -574,7 +653,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.earth-glide",
-        "name": "earth glide"
+        "name": "Earth Glide"
       },
       "status": "accepted",
       "evidence": [
@@ -676,11 +755,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.solidify-earth:uses_definition:rule.reflex",
+      "relationship_id": "spell.solidify-earth:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -741,26 +820,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.solidify-earth:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.solidify-earth:138340fd295196cc",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -811,11 +870,19 @@
       "raw_value_sha256": "c4024eb52257fb858d9b222c7809a3037f86a2a89b438e4aeb261b3442d09c5a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.solidify-earth:138340fd295196cc",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "ce117f1410217e9e3959adcccee97934b371ba19bb62e2a36c7ec4c3a5174a55",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

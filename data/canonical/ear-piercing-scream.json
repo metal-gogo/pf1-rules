@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.ear-piercing-scream",
   "ruleset": "Pathfinder First Edition",
   "name": "Ear-Piercing Scream",
@@ -200,9 +200,32 @@
     }
   },
   "description": {
-    "raw": "You unleash a powerful scream, inaudible to all but a single target. The target is dazed for 1 round and takes 1d6 points of sonic damage per two caster levels (maximum 5d6). A successful save negates the daze effect and halves the damage.Mythic Ear-Piercing ScreamSource Mythic Adventures pg. 92\nThe damage dealt increases to 1d8 points of sonic damage per 2 caster levels (maximum 5d8) and the duration that creatures in the area are dazed is a number of rounds equal to your tier.\n\nAugmented (3rd): If you expend two uses of mythic power, the spell affects a 30-foot cone rather than a single target.",
-    "search_text": "\"you unleash a powerful scream, inaudible to all but a single target. the target is dazed for 1 round and takes 1d6 points of sonic damage per two caster levels (maximum 5d6). a successful save negates the daze effect and halves the damage.mythic ear-piercing screamsource mythic adventures pg. 92\\nthe damage dealt increases to 1d8 points of sonic damage per 2 caster levels (maximum 5d8) and the duration that creatures in the area are dazed is a number of rounds equal to your tier.\\n\\naugmented (3rd): if you expend two uses of mythic power, the spell affects a 30-foot cone rather than a single target.\"",
-    "sections": []
+    "raw": "You unleash a powerful scream, inaudible to all but a single target. The target is dazed for 1 round and takes 1d6 points of sonic damage per two caster levels (maximum 5d6). A successful save negates the daze effect and halves the damage.",
+    "search_text": "\"you unleash a powerful scream, inaudible to all but a single target. the target is dazed for 1 round and takes 1d6 points of sonic damage per two caster levels (maximum 5d6). a successful save negates the daze effect and halves the damage.\"",
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You unleash a powerful scream, inaudible to all but a single target. The target is "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dazed",
+              "relationship_id": "spell.ear-piercing-scream:uses_definition:condition.dazed"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 round and takes 1d6 points of sonic damage per two caster levels (maximum 5d6). A successful save negates the daze effect and halves the damage."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -334,6 +357,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.ear-piercing-scream:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.ear-piercing-scream:6daf2bc0ccd11064",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.ear-piercing-scream:fff53d17d61e50ef",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.ear-piercing-scream:appears_on_spell_list:spell-list.psychic",
@@ -619,11 +669,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.ear-piercing-scream:uses_definition:rule.fortitude",
+      "relationship_id": "spell.ear-piercing-scream:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -697,33 +747,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.ear-piercing-scream:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.ear-piercing-scream:6daf2bc0ccd11064",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.ear-piercing-scream:fff53d17d61e50ef",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -774,11 +797,19 @@
       "raw_value_sha256": "c08c8fddb0b82ab2eaef3b856a62dfdc46790ff49c63951b6011908fea11df9b",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.ear-piercing-scream:fff53d17d61e50ef",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "45ff8024f308cb633d7f7aede262bc2c4a4b548c272657b58545571ec91438f4",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

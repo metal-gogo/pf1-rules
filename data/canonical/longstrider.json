@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.longstrider",
   "ruleset": "Pathfinder First Edition",
   "name": "Longstrider",
@@ -137,7 +137,39 @@
   "description": {
     "raw": "This spell gives you a +10 foot enhancement bonus to your base speed. It has no effect on other modes of movement, such as burrow, climb, fly, or swim.",
     "search_text": "\"this spell gives you a +10 foot enhancement bonus to your base speed. it has no effect on other modes of movement, such as burrow, climb, fly, or swim.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell gives you a +10 foot "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "enhancement bonus",
+              "relationship_id": "spell.longstrider:uses_definition:rule.enhancement-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " to your base speed. It has no effect on other modes of movement, such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "burrow",
+              "relationship_id": "spell.longstrider:uses_definition:rule.burrow"
+            },
+            {
+              "node_type": "text",
+              "value": ", climb, fly, or swim."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -236,6 +268,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.longstrider:appears_on_spell_list:spell-list.travel-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.travel-domain",
+        "name": "Travel Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.travel:4a91e51b",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "1st—longstrider",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Travel"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.longstrider:has_school:magic-school.transmutation",
@@ -452,26 +504,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.longstrider:appears_on_spell_list:spell-list.travel-domain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.travel-domain",
-        "name": "Travel Domain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:domain.travel:4a91e51b",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "1st—longstrider",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Travel"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -530,11 +562,19 @@
       "raw_value_sha256": "4abd06d8a9217a9e26a8d9d0b5db9ad4aea147c94d44ef819690b45adb4ad296",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.longstrider:d82fd4b0735cf8fa",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "6294c4a447f0159ea22af98df786b6634dcfbe4b32f296d7ab21e977ad646dfd",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

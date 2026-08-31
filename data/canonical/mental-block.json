@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.mental-block",
   "ruleset": "Pathfinder First Edition",
   "name": "Mental Block",
@@ -135,7 +135,48 @@
   "description": {
     "raw": "You lock access to the target’s procedural memories, preventing it from drawing upon its experience and expertise. The target loses all skill ranks, spells known, and spells prepared, as well as activated feat, extraordinary, supernatural, and spell-like abilities. Each round at the end of the target’s turn, the target can attempt another Will save to end this effect.",
     "search_text": "\"you lock access to the target’s procedural memories, preventing it from drawing upon its experience and expertise. the target loses all skill ranks, spells known, and spells prepared, as well as activated feat, extraordinary, supernatural, and spell-like abilities. each round at the end of the target’s turn, the target can attempt another will save to end this effect.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You lock access to the target’s procedural memories, preventing it from drawing upon its experience and expertise. The target loses all skill ranks, spells known, and spells prepared, as well as activated feat, extraordinary, "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "supernatural",
+              "relationship_id": "spell.mental-block:uses_definition:rule.supernatural"
+            },
+            {
+              "node_type": "text",
+              "value": ", and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell-like abilities",
+              "relationship_id": "spell.mental-block:uses_definition:rule.spell-like-abilities"
+            },
+            {
+              "node_type": "text",
+              "value": ". Each round at the end of the target’s turn, the target can attempt another "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.mental-block:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save to end this effect."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -200,6 +241,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.mental-block:appears_on_spell_list:spell-list.mind-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.mind-patron",
+        "name": "Mind Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.mind:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "4th — mental block",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.mental-block:appears_on_spell_list:spell-list.psychic",
@@ -472,11 +533,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.mental-block:uses_definition:rule.will",
+      "relationship_id": "spell.mental-block:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -497,26 +558,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.mental-block:appears_on_spell_list:spell-list.mind-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.mind-patron",
-        "name": "Mind Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.mind:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "4th — mental block",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -575,11 +616,19 @@
       "raw_value_sha256": "dadf82be1a68c3aa8ef4cc39eba97ef6ab674a4c62d6f97eadc9fbbf8b34fdf7",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.mental-block:bb17779e0a090dc0",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "05a8c21e31a8b8df1c99b7fa6a6a3b24ead78a018dbab818c405858e1f02d572",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

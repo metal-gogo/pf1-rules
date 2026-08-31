@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.vexing-miscalculation",
   "ruleset": "Pathfinder First Edition",
   "name": "Vexing Miscalculation",
@@ -166,7 +166,32 @@
   "description": {
     "raw": "You frustrate an opponent with ill fortune that leads even its most accurate attacks astray. The target is unable to score critical threats for the duration of this spell, even if the result of its roll would normally be a critical threat. If the creature rolls a natural 20, the attack still hits regardless of its opponent’s AC, but the hit is not eligible for a critical confirmation roll. Once a critical threat has been foiled by vexing miscalculation, the spell is discharged.",
     "search_text": "\"you frustrate an opponent with ill fortune that leads even its most accurate attacks astray. the target is unable to score critical threats for the duration of this spell, even if the result of its roll would normally be a critical threat. if the creature rolls a natural 20, the attack still hits regardless of its opponent’s ac, but the hit is not eligible for a critical confirmation roll. once a critical threat has been foiled by vexing miscalculation, the spell is discharged.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You frustrate an opponent with ill fortune that leads even its most accurate attacks astray. The target is unable to score critical threats for the duration of this spell, even if the result of its roll would normally be a critical threat. If the creature rolls a natural 20, the attack still hits regardless of its opponent’s AC, but the hit is not eligible for a critical confirmation roll. Once a critical threat has been foiled by "
+            },
+            {
+              "node_type": "text",
+              "value": "vexing miscalculation",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", the spell is discharged."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -244,6 +269,40 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.vexing-miscalculation:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.vexing-miscalculation:354627c7cd5a6213",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.vexing-miscalculation:69bbbefe16ea27d8",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.vexing-miscalculation:354627c7cd5a6213",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.vexing-miscalculation:appears_on_spell_list:spell-list.oracle",
@@ -489,11 +548,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.vexing-miscalculation:uses_definition:rule.will",
+      "relationship_id": "spell.vexing-miscalculation:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -507,40 +566,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.vexing-miscalculation:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.vexing-miscalculation:354627c7cd5a6213",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.vexing-miscalculation:69bbbefe16ea27d8",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.vexing-miscalculation:354627c7cd5a6213",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -591,11 +616,19 @@
       "raw_value_sha256": "99008edfce2f8620421e71cd6a552de4d06b8f83bb550730771500eca4f896b6",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.vexing-miscalculation:354627c7cd5a6213",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "b1a845269f341e1fc38bdc6fc2e51d94c9c3667c3e57b759bce3647f5376c331",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

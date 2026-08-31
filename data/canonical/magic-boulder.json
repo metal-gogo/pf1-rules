@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.magic-boulder",
   "ruleset": "Pathfinder First Edition",
   "name": "Magic Boulder",
@@ -168,7 +168,51 @@
   "description": {
     "raw": "This spell works like magic stone, except you transmute as many as three boulders (rocks up to two size categories smaller than yourself) to use with the rock throwing ability or as siege engine ammunition. The boulder’s damage increases by one step, and the boulder gains a +1 enhancement bonus on attack and damage rolls.",
     "search_text": "\"this spell works like magic stone, except you transmute as many as three boulders (rocks up to two size categories smaller than yourself) to use with the rock throwing ability or as siege engine ammunition. the boulder’s damage increases by one step, and the boulder gains a +1 enhancement bonus on attack and damage rolls.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell works like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "magic stone",
+              "relationship_id": "spell.magic-boulder:functions_like:spell.magic-stone",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you transmute as many as three boulders (rocks up to two size categories smaller than yourself) to use with the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "rock throwing",
+              "relationship_id": "spell.magic-boulder:uses_definition:rule.rock-throwing"
+            },
+            {
+              "node_type": "text",
+              "value": " ability or as siege engine ammunition. The boulder’s damage increases by one step, and the boulder gains a +1 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "enhancement bonus",
+              "relationship_id": "spell.magic-boulder:uses_definition:rule.enhancement-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " on attack and damage rolls."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -325,6 +369,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.magic-boulder:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.magic-boulder:76aade412a353a41",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.magic-boulder:appears_on_spell_list:spell-list.oracle",
@@ -487,7 +558,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.magic-stone",
-        "name": "magic stone"
+        "name": "Magic Stone"
       },
       "status": "accepted",
       "evidence": [
@@ -587,33 +658,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.magic-boulder:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.magic-boulder:76aade412a353a41",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -664,11 +708,19 @@
       "raw_value_sha256": "f09c27225b10d274fa08fc2f089043b16344b7eface958caf45a6f2ca32a9b97",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.magic-boulder:b837e00f41b55578",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d270c2578c62037642938fef099349eda57cba12237f2e2349382403ac8f1a76",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

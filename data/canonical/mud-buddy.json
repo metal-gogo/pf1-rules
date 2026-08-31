@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.mud-buddy",
   "ruleset": "Pathfinder First Edition",
   "name": "Mud Buddy",
@@ -151,7 +151,133 @@
   "description": {
     "raw": "You create a Small minion out of mud, and it obeys your commands. The mud buddy has AC 12, 10 hit points, Strength 5, and a speed of 30 feet. It can perform any tasks an unseen servant can, plus any similar tasks its Strength allows (it’s able to lift up to 50 pounds), but instead of walking on water, it gains a swim speed of 30 feet.\n\nYou can command a mud buddy to move up to 5 feet and trip an opponent (CMB = your caster level + your spellcasting ability score modifier). After the trip attempt is resolved, the spell ends.\n\nWhen the spell ends, the mud buddy reverts to a patch of wet earth.",
     "search_text": "\"you create a small minion out of mud, and it obeys your commands. the mud buddy has ac 12, 10 hit points, strength 5, and a speed of 30 feet. it can perform any tasks an unseen servant can, plus any similar tasks its strength allows (it’s able to lift up to 50 pounds), but instead of walking on water, it gains a swim speed of 30 feet.\\n\\nyou can command a mud buddy to move up to 5 feet and trip an opponent (cmb = your caster level + your spellcasting ability score modifier). after the trip attempt is resolved, the spell ends.\\n\\nwhen the spell ends, the mud buddy reverts to a patch of wet earth.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create a Small minion out of mud, and it obeys your commands. The mud buddy has AC 12, 10 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.mud-buddy:uses_definition:rule.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Strength",
+              "relationship_id": "spell.mud-buddy:uses_definition:rule.strength"
+            },
+            {
+              "node_type": "text",
+              "value": " 5, and a speed of 30 feet. It can perform any tasks an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "unseen servant",
+              "relationship_id": "spell.mud-buddy:references:spell.unseen-servant"
+            },
+            {
+              "node_type": "text",
+              "value": " can, plus any similar tasks its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Strength",
+              "relationship_id": "spell.mud-buddy:uses_definition:rule.strength"
+            },
+            {
+              "node_type": "text",
+              "value": " allows (it’s able to lift up to 50 pounds), but instead of walking on water, it gains a swim speed of 30 feet."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You can command a "
+            },
+            {
+              "node_type": "text",
+              "value": "mud buddy",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " to move up to 5 feet and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "trip",
+              "relationship_id": "spell.mud-buddy:uses_definition:rule.trip"
+            },
+            {
+              "node_type": "text",
+              "value": " an opponent ("
+            },
+            {
+              "node_type": "entity_link",
+              "value": "CMB",
+              "relationship_id": "spell.mud-buddy:uses_definition:rule.combat-maneuver-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " = your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.mud-buddy:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " + your spellcasting ability score modifier). After the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "trip",
+              "relationship_id": "spell.mud-buddy:uses_definition:rule.trip"
+            },
+            {
+              "node_type": "text",
+              "value": " attempt is resolved, the spell ends."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "When the spell ends, the "
+            },
+            {
+              "node_type": "text",
+              "value": "mud buddy",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " reverts to a patch of wet earth."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -418,7 +544,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.unseen-servant",
-        "name": "unseen servant"
+        "name": "Unseen Servant"
       },
       "status": "accepted",
       "evidence": [
@@ -487,12 +613,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.mud-buddy:uses_definition:rule.cmb",
+      "relationship_id": "spell.mud-buddy:uses_definition:rule.combat-maneuver-bonus",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.cmb",
-        "name": "CMB"
+        "entity_id": "rule.combat-maneuver-bonus",
+        "name": "Combat Maneuver Bonus"
       },
       "status": "accepted",
       "evidence": [
@@ -669,11 +795,19 @@
       "raw_value_sha256": "69061b4a393c10f6b7e3c1ef391e1a0bc931482cc599d1416d9acd0c4401f3db",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.mud-buddy:78926ccb2bc613b6",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "0ad1038cd8dc83001050087395964911d21cecb82e9079996b15d918cc1cdff6",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

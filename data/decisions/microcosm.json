@@ -138,9 +138,41 @@
         "aon:bloodline.sorcerer.psychic:5b097139"
       ],
       "rationale": "AoN clearly transcribes the owning sorcerer bloodline's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.microcosm:53e20ae99a90d5b5",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.microcosm:53e20ae99a90d5b5",
+        "legacy_aon:spell.microcosm:50fea3cd2bb3266b",
+        "d20pfsrd:spell.microcosm:8b88c93ad181fc0f",
+        "aon:patron.mind:15d234b1",
+        "aon:bloodline.sorcerer.psychic:5b097139"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.microcosm:appears_on_spell_list:spell-list.mind-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.mind:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.mind:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
+    },
     {
       "relationship_id": "spell.microcosm:appears_on_spell_list:spell-list.psychic",
       "decision": "accept",
@@ -156,6 +188,20 @@
         "d20pfsrd:spell.microcosm:8b88c93ad181fc0f"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.microcosm:appears_on_spell_list:spell-list.sorcerer-psychic-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.psychic:5b097139",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.psychic:5b097139"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     },
     {
       "relationship_id": "spell.microcosm:has_descriptor:descriptor.mind-affecting",
@@ -322,12 +368,12 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.microcosm:uses_definition:rule.hit-dice",
+      "relationship_id": "spell.microcosm:uses_definition:magic-school.illusion",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.microcosm:8b88c93ad181fc0f",
-          "source_field": "spell_raw.links_raw[6]"
+          "source_field": "spell_raw.links_raw[0]"
         }
       ],
       "considered_observation_ids": [
@@ -338,12 +384,12 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.microcosm:uses_definition:rule.illusion",
+      "relationship_id": "spell.microcosm:uses_definition:rule.hit-dice",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.microcosm:8b88c93ad181fc0f",
-          "source_field": "spell_raw.links_raw[0]"
+          "source_field": "spell_raw.links_raw[6]"
         }
       ],
       "considered_observation_ids": [
@@ -386,7 +432,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.microcosm:uses_definition:rule.will",
+      "relationship_id": "spell.microcosm:uses_definition:rule.will-saving-throw",
       "decision": "accept",
       "evidence": [
         {
@@ -400,34 +446,6 @@
         "d20pfsrd:spell.microcosm:8b88c93ad181fc0f"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.microcosm:appears_on_spell_list:spell-list.mind-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.mind:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.mind:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.microcosm:appears_on_spell_list:spell-list.sorcerer-psychic-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.psychic:5b097139",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.psychic:5b097139"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
     }
   ],
   "unresolved_questions": [

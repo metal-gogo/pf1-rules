@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.outbreak",
   "ruleset": "Pathfinder First Edition",
   "name": "Outbreak",
@@ -200,7 +200,39 @@
   "description": {
     "raw": "You cause any diseased creatures in the area to become extremely contagious. Any affected creature is overcome by a fit of wracking coughs, causing it to become fatigued and exposing any creatures within 10 feet of the diseased creature to the diseases it carries. On a successful save, a creature is fatigued for 1 round and doesn’t have a chance to infect nearby creatures.",
     "search_text": "\"you cause any diseased creatures in the area to become extremely contagious. any affected creature is overcome by a fit of wracking coughs, causing it to become fatigued and exposing any creatures within 10 feet of the diseased creature to the diseases it carries. on a successful save, a creature is fatigued for 1 round and doesn’t have a chance to infect nearby creatures.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You cause any diseased creatures in the area to become extremely contagious. Any affected creature is overcome by a fit of wracking coughs, causing it to become "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fatigued",
+              "relationship_id": "spell.outbreak:uses_definition:condition.fatigued"
+            },
+            {
+              "node_type": "text",
+              "value": " and exposing any creatures within 10 feet of the diseased creature to the diseases it carries. On a successful save, a creature is "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fatigued",
+              "relationship_id": "spell.outbreak:uses_definition:condition.fatigued"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 round and doesn’t have a chance to infect nearby creatures."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -386,6 +418,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.outbreak:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.outbreak:8af11d37c0076574",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.outbreak:appears_on_spell_list:spell-list.oracle",
@@ -617,11 +669,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.outbreak:uses_definition:rule.fortitude",
+      "relationship_id": "spell.outbreak:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -655,26 +707,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.outbreak:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.outbreak:8af11d37c0076574",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -725,11 +757,19 @@
       "raw_value_sha256": "70961e731319ceef7d13373b9fee0464e51960baa2c8925033a9f21fa8a1b441",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.outbreak:8af11d37c0076574",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "9679e7ab797cf7aedde3d428c501dc4b053ea85e8afce351896f3b2c22f681d1",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

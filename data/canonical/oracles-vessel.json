@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.oracles-vessel",
   "ruleset": "Pathfinder First Edition",
   "name": "Oracle's Vessel",
@@ -105,7 +105,39 @@
   "description": {
     "raw": "The target gains all the benefits of your oracle’s curse, with none of the penalties. In some cases, this has no effect (for example, a fighter with your haunted curse can’t cast spells and doesn’t gain any benefit from having additional spells known).",
     "search_text": "\"the target gains all the benefits of your oracle’s curse, with none of the penalties. in some cases, this has no effect (for example, a fighter with your haunted curse can’t cast spells and doesn’t gain any benefit from having additional spells known).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target gains all the benefits of your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "oracle’s",
+              "relationship_id": "spell.oracles-vessel:uses_definition:class.oracle"
+            },
+            {
+              "node_type": "text",
+              "value": " curse, with none of the penalties. In some cases, this has no effect (for example, a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fighter",
+              "relationship_id": "spell.oracles-vessel:uses_definition:rule.fighter"
+            },
+            {
+              "node_type": "text",
+              "value": " with your haunted curse can’t cast spells and doesn’t gain any benefit from having additional spells known)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -240,6 +272,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.oracles-vessel:uses_definition:class.oracle",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "class",
+        "entity_id": "class.oracle",
+        "name": "Oracle"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.oracles-vessel:bb9441a3fd4ee8fb",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "oracle’s",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/oracle"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.oracles-vessel:uses_definition:rule.fighter",
       "type": "uses_definition",
       "target": {
@@ -255,26 +307,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "fighter",
           "source_href": "https://www.d20pfsrd.com/classes/core-classes/fighter"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.oracles-vessel:uses_definition:rule.oracles",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.oracles",
-        "name": "oracle’s"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.oracles-vessel:bb9441a3fd4ee8fb",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "oracle’s",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/oracle"
         }
       ],
       "note": null
@@ -300,11 +332,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.oracles-vessel:uses_definition:rule.will",
+      "relationship_id": "spell.oracles-vessel:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -368,11 +400,19 @@
       "raw_value_sha256": "e7081a53b4dd8e0e19218682cd78275500aa367982bd53a9e17e414ee227061a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.oracles-vessel:2577cbf89c0c496e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3acc3bcdde622a4069664ed28e62a4d24ca36deb5b0b13b3879610eb03e33af9",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

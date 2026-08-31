@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.sickening-entanglement",
   "ruleset": "Pathfinder First Edition",
   "name": "Sickening Entanglement",
@@ -138,7 +138,51 @@
   "description": {
     "raw": "This spell functions as entangle, except the plants are coated with an irritating sap that creates a painful, itching rash on creatures that touch them. Any creature that enters the area or ends its turn there must succeed at a Fortitude save or be sickened as long as it remains in the area and for 1d4 rounds afterward. This is a poison effect.",
     "search_text": "\"this spell functions as entangle, except the plants are coated with an irritating sap that creates a painful, itching rash on creatures that touch them. any creature that enters the area or ends its turn there must succeed at a fortitude save or be sickened as long as it remains in the area and for 1d4 rounds afterward. this is a poison effect.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "entangle",
+              "relationship_id": "spell.sickening-entanglement:functions_like:spell.entangle",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except the plants are coated with an irritating sap that creates a painful, itching rash on creatures that touch them. Any creature that enters the area or ends its turn there must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.sickening-entanglement:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save or be "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sickened",
+              "relationship_id": "spell.sickening-entanglement:uses_definition:condition.sickened"
+            },
+            {
+              "node_type": "text",
+              "value": " as long as it remains in the area and for 1d4 rounds afterward. This is a poison effect."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -319,6 +363,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as entangle, except the plants are coated with an irritating sap that creates a painful, itching rash on creatures that touch them. Any creature that enters the area or ends its turn there must succeed at a Fortitude save or be sickened as long as it remains in the area and for 1d4 rounds afterward. This is a poison effect.",
           "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.sickening-entanglement:cbce164fb9026506",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "entangle",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/e/entangle"
         }
       ],
       "note": null
@@ -433,26 +484,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sickening-entanglement:references:spell.entangle",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.entangle",
-        "name": "entangle"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.sickening-entanglement:cbce164fb9026506",
-          "source_field": "spell_raw.links_raw[7]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "entangle",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/e/entangle"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.sickening-entanglement:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -493,12 +524,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sickening-entanglement:uses_definition:rule.fort",
+      "relationship_id": "spell.sickening-entanglement:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -508,20 +539,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Fort",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.sickening-entanglement:uses_definition:rule.fortitude",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.fortitude",
-        "name": "Fortitude"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.sickening-entanglement:cbce164fb9026506",
           "source_field": "spell_raw.links_raw[8]",
@@ -533,11 +551,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sickening-entanglement:uses_definition:rule.reflex",
+      "relationship_id": "spell.sickening-entanglement:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -621,11 +639,19 @@
       "raw_value_sha256": "a75e6d648c5219c54c774aaf2784b6551861aceb580cf68561dde455d78cf959",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.sickening-entanglement:a9b4ba82c603c92a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f3dc5e969cf88dceea7c9d52ca0585e1c6cac6b2ad18c8bf66aa1bb0f9b92a6a",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

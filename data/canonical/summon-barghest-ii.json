@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.summon-barghest-ii",
   "ruleset": "Pathfinder First Edition",
   "name": "Summon Barghest II",
@@ -140,7 +140,33 @@
   "description": {
     "raw": "This spell functions like summon barghest I, save that it can summon 1 greater barghest or 1d3 normal barghests with 2 growth points each.",
     "search_text": "\"this spell functions like summon barghest i, save that it can summon 1 greater barghest or 1d3 normal barghests with 2 growth points each.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "summon barghest I",
+              "relationship_id": "spell.summon-barghest-ii:functions_like:spell.summon-barghest-i",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", save that it can summon 1 greater barghest or 1d3 normal barghests with 2 growth points each."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -224,6 +250,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.summon-barghest-ii:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.summon-barghest-ii:2b29433f182995d8",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 6",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.summon-barghest-ii:appears_on_spell_list:spell-list.oracle",
@@ -405,26 +451,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.summon-barghest-ii:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.summon-barghest-ii:2b29433f182995d8",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 6",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -475,11 +501,19 @@
       "raw_value_sha256": "3583a1a9fb0a91d598a484b244fb37e6b003b2bc78b4bba5dca98a0b8da52940",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.summon-barghest-ii:2b29433f182995d8",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "192db4d4a2099f1d3337aef58688f4383c39020dcf2505589ea6a5d8cd1363f0",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "DERIVED_SPELL_LIST_ACCESS",

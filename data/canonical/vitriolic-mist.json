@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.vitriolic-mist",
   "ruleset": "Pathfinder First Edition",
   "name": "Vitriolic Mist",
@@ -179,7 +179,33 @@
   "description": {
     "raw": "This functions as fire shield, except it wreathes you in yellow or green acidic mist instead of hot or cold flames. The spell deals acid damage to attackers and protects you against acid damage. This spell does not shed light.",
     "search_text": "\"this functions as fire shield, except it wreathes you in yellow or green acidic mist instead of hot or cold flames. the spell deals acid damage to attackers and protects you against acid damage. this spell does not shed light.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fire shield",
+              "relationship_id": "spell.vitriolic-mist:functions_like:spell.fire-shield",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it wreathes you in yellow or green acidic mist instead of hot or cold flames. The spell deals acid damage to attackers and protects you against acid damage. This spell does not shed light."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -189,7 +215,75 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.fire-shield",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.vitriolic-mist:a6ea566c139b4c81",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This functions as fire shield, except it wreathes you in yellow or green acidic mist instead of hot or cold flames. The spell deals acid damage to attackers and protects you against acid damage. This spell does not shed light."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "material",
+              "details": "a piece of lemon rind",
+              "cost_gp": null,
+              "raw": "M (a piece of lemon rind)"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (a piece of lemon rind)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, M (a piece of lemon rind)",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, M (a piece of lemon rind)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This functions as fire shield, except it wreathes you in yellow or green acidic mist instead of hot or cold flames. The spell deals acid damage to attackers and protects you against acid damage. This spell does not shed light.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This functions as fire shield, except it wreathes you in yellow or green acidic mist instead of hot or cold flames. The spell deals acid damage to attackers and protects you against acid damage. This spell does not shed light.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.vitriolic-mist:appears_on_spell_list:spell-list.alchemist",
@@ -237,6 +331,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.vitriolic-mist:appears_on_spell_list:spell-list.autumn-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.autumn-patron",
+        "name": "Autumn Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.autumn:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "8th — vitriolic mist",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.vitriolic-mist:appears_on_spell_list:spell-list.bloodrager",
@@ -406,6 +520,33 @@
       "note": null
     },
     {
+      "relationship_id": "spell.vitriolic-mist:functions_like:spell.fire-shield",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.fire-shield",
+        "name": "Fire Shield"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.vitriolic-mist:1f5b94c034fb0945",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "fire shield",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/fireShield.html#fire-shield"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.vitriolic-mist:5e7c83c5c3492b36",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "fire shield",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/v/f/fire-shield"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.vitriolic-mist:has_descriptor:descriptor.acid",
       "type": "has_descriptor",
       "target": {
@@ -501,33 +642,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.vitriolic-mist:references:spell.fire-shield",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.fire-shield",
-        "name": "fire shield"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.vitriolic-mist:1f5b94c034fb0945",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "fire shield",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/fireShield.html#fire-shield"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.vitriolic-mist:5e7c83c5c3492b36",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "fire shield",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/v/f/fire-shield"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.vitriolic-mist:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -573,26 +687,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.vitriolic-mist:appears_on_spell_list:spell-list.autumn-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.autumn-patron",
-        "name": "Autumn Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.autumn:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "8th — vitriolic mist",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -651,11 +745,19 @@
       "raw_value_sha256": "22bc17f42898d5ca6bd98c5ff86134606d5653bac3aab96c155cdf216265b9a1",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.vitriolic-mist:a6ea566c139b4c81",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "211bc49dba6098943c7043955564355dac89e4d4339f285aedf48c1f461d3786",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

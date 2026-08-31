@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.severed-fate",
   "ruleset": "Pathfinder First Edition",
   "name": "Severed Fate",
@@ -152,7 +152,63 @@
   "description": {
     "raw": "You curse the target, preventing it from drawing upon the powers of destiny. The target is shaken and cannot use hero points for the duration of the spell. This effect can be removed by dispel magic, remove curse, or other similar effects.",
     "search_text": "\"you curse the target, preventing it from drawing upon the powers of destiny. the target is shaken and cannot use hero points for the duration of the spell. this effect can be removed by dispel magic, remove curse, or other similar effects.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You curse the target, preventing it from drawing upon the powers of destiny. The target is "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "shaken",
+              "relationship_id": "spell.severed-fate:uses_definition:condition.shaken"
+            },
+            {
+              "node_type": "text",
+              "value": " and cannot use "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hero points",
+              "relationship_id": "spell.severed-fate:uses_definition:rule.hero-points"
+            },
+            {
+              "node_type": "text",
+              "value": " for the duration of the spell. This effect can be removed by "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dispel magic",
+              "relationship_id": "spell.severed-fate:references:spell.dispel-magic",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "remove curse",
+              "relationship_id": "spell.severed-fate:references:spell.remove-curse",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", or other similar effects."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -203,6 +259,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.severed-fate:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.severed-fate:cefe9cfe725bccdb",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.severed-fate:appears_on_spell_list:spell-list.oracle",
@@ -345,7 +421,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.dispel-magic",
-        "name": "dispel magic"
+        "name": "Dispel Magic"
       },
       "status": "accepted",
       "evidence": [
@@ -372,7 +448,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.remove-curse",
-        "name": "remove curse"
+        "name": "Remove Curse"
       },
       "status": "accepted",
       "evidence": [
@@ -481,11 +557,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.severed-fate:uses_definition:rule.will",
+      "relationship_id": "spell.severed-fate:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -499,26 +575,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.severed-fate:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.severed-fate:cefe9cfe725bccdb",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -569,11 +625,19 @@
       "raw_value_sha256": "133207bdc1cd9ae660b130a3ef6eee4df57793205aa99d604d1b270970e5e1d7",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.severed-fate:cefe9cfe725bccdb",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "0437a4c6d10b98a721620c39f1ed6737e2e1e6f90d2482409709126722a6d69e",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

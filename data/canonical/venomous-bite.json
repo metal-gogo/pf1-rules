@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.venomous-bite",
   "ruleset": "Pathfinder First Edition",
   "name": "Venomous Bite",
@@ -185,7 +185,66 @@
   "description": {
     "raw": "When you touch the poison vial against the target creature and cast this spell, the vial drains and the target’s teeth become envenomed with the same poison. The creature gains the use of 1 dose of the poison for every 5 caster levels you possess (maximum 4 doses). The creature gains immunity to that poison while this spell is in effect. The poison retains its normal properties, and this spell does not alter the DC to resist or cure the poison.\n\nEach successful bite attack counts as an expended dose. When all the poison is used, the spell ends. If the target creature doesn’t have a bite attack, or if the target’s bite attack is already poisonous, the spell has no effect. If the target has multiple heads, the spell affects only one bite attack.\n\nWhen this spell ends, any unused poison is harmlessly expelled from the target’s mouth and cannot be used again.",
     "search_text": "\"when you touch the poison vial against the target creature and cast this spell, the vial drains and the target’s teeth become envenomed with the same poison. the creature gains the use of 1 dose of the poison for every 5 caster levels you possess (maximum 4 doses). the creature gains immunity to that poison while this spell is in effect. the poison retains its normal properties, and this spell does not alter the dc to resist or cure the poison.\\n\\neach successful bite attack counts as an expended dose. when all the poison is used, the spell ends. if the target creature doesn’t have a bite attack, or if the target’s bite attack is already poisonous, the spell has no effect. if the target has multiple heads, the spell affects only one bite attack.\\n\\nwhen this spell ends, any unused poison is harmlessly expelled from the target’s mouth and cannot be used again.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "When you "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch",
+              "relationship_id": "spell.venomous-bite:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " the poison "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "vial",
+              "relationship_id": "spell.venomous-bite:uses_definition:rule.vial"
+            },
+            {
+              "node_type": "text",
+              "value": " against the target creature and cast this spell, the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "vial",
+              "relationship_id": "spell.venomous-bite:uses_definition:rule.vial"
+            },
+            {
+              "node_type": "text",
+              "value": " drains and the target’s teeth become envenomed with the same poison. The creature gains the use of 1 dose of the poison for every 5 caster levels you possess (maximum 4 doses). The creature gains immunity to that poison while this spell is in effect. The poison retains its normal properties, and this spell does not alter the DC to resist or cure the poison."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Each successful bite attack counts as an expended dose. When all the poison is used, the spell ends. If the target creature doesn’t have a bite attack, or if the target’s bite attack is already poisonous, the spell has no effect. If the target has multiple heads, the spell affects only one bite attack."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "When this spell ends, any unused poison is harmlessly expelled from the target’s mouth and cannot be used again."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -373,6 +432,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.venomous-bite:appears_on_spell_list:spell-list.summoner-unchained",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.summoner-unchained",
+        "name": "Summoner (Unchained) Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.venomous-bite:e74b59c6992f127a",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 2",
+          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/transmutation/venomous-bite.2fsop8wg3cfpbrff.yaml"
+        }
+      ],
+      "note": "Reviewed project decision: add Summoner (Unchained) 2 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
+    },
+    {
       "relationship_id": "spell.venomous-bite:appears_on_spell_list:spell-list.witch",
       "type": "appears_on_spell_list",
       "target": {
@@ -536,12 +615,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.venomous-bite:uses_definition:rule.fort",
+      "relationship_id": "spell.venomous-bite:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -576,12 +655,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.venomous-bite:uses_definition:rule.touch",
+      "relationship_id": "spell.venomous-bite:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -614,26 +693,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.venomous-bite:appears_on_spell_list:spell-list.summoner-unchained",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.summoner-unchained",
-        "name": "Summoner (Unchained) Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.venomous-bite:e74b59c6992f127a",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "manual_verification",
-          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 2",
-          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/transmutation/venomous-bite.2fsop8wg3cfpbrff.yaml"
-        }
-      ],
-      "note": "Reviewed project decision: add Summoner (Unchained) 2 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
     }
   ],
   "provenance": [
@@ -684,11 +743,19 @@
       "raw_value_sha256": "f4c4df5c340062a968559d529dd37065305155b54c1fdf01942c8cfe9c4461e8",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.venomous-bite:e74b59c6992f127a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "514e095dad7b46e47552c264052d495be9d81f7fd73279573a63df6c6ddd15b2",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

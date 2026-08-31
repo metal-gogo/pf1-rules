@@ -2730,7 +2730,10 @@ function updateDecision(
   for (const original of decision.relationship_decisions) {
     const item = structuredClone(original);
     item.relationship_id = changedIds.get(item.relationship_id) ?? item.relationship_id;
-    if (!canonicalRelationshipIds.has(item.relationship_id)) continue;
+    if (!canonicalRelationshipIds.has(item.relationship_id)) {
+      if (item.decision === "reject") relationshipDecisions.set(item.relationship_id, item);
+      continue;
+    }
     const canonicalRelationship = canonicalRelationshipById.get(item.relationship_id)!;
     item.decision = canonicalRelationship.status === "accepted"
       ? "accept"
@@ -2822,6 +2825,27 @@ function entityLinkCount(document: RichTextDocument): number {
 }
 
 
+export function sourceDescriptionMatch(
+  canonicalRaw: string,
+  sourceRaw: string,
+): { exact: boolean; leakedMythicSuffix: boolean } {
+  return {
+    exact: comparableRichText(sourceRaw) === comparableRichText(canonicalRaw),
+    leakedMythicSuffix: canonicalRaw.startsWith(sourceRaw) &&
+      /\bMythic\b/.test(canonicalRaw.slice(sourceRaw.length)),
+  };
+}
+
+
+export function syncDescriptionInheritanceOverrides(canonical: ValidatedJson): void {
+  for (const rule of canonical.rules_inheritance) {
+    for (const override of rule.overrides) {
+      if (override.path === "/description/raw") override.value = canonical.description.raw;
+    }
+  }
+}
+
+
 export function auditRichTextRollout(): {
   summary: {
     total: number;
@@ -2891,10 +2915,12 @@ export function auditRichTextRollout(): {
         fs.readFileSync(artifactPath, "utf8"),
         observation.record.source.url,
       );
-      if (
-        comparableRichText(parsed.descriptionRaw) !==
-        comparableRichText(String(canonical.description.raw))
-      ) {
+      const canonicalRaw = String(canonical.description.raw);
+      const {
+        exact: exactSourceDescription,
+        leakedMythicSuffix,
+      } = sourceDescriptionMatch(canonicalRaw, parsed.descriptionRaw);
+      if (!exactSourceDescription && !leakedMythicSuffix) {
         issue("source_mismatch", spellId);
         continue;
       }
@@ -2909,7 +2935,7 @@ export function auditRichTextRollout(): {
       });
       if (
         comparableRichText(richTextLeafText(richText.document)) !==
-        comparableRichText(String(canonical.description.raw))
+        comparableRichText(parsed.descriptionRaw)
       ) {
         issue("parser_error", spellId);
         continue;
@@ -2921,10 +2947,10 @@ export function auditRichTextRollout(): {
       }
       if (entityLinkCount(richText.document) > 0) {
         summary.safe_with_links += 1;
-        safeSpellIds.push(spellId);
       } else {
         summary.safe_structure_only += 1;
       }
+      safeSpellIds.push(spellId);
     } catch {
       issue("parser_error", spellId);
     }
@@ -2961,10 +2987,10 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
       observation.record.source.url,
     );
     const canonicalRaw = String(canonical.description.raw);
-    const exactSourceDescription = comparableRichText(parsed.descriptionRaw) ===
-      comparableRichText(canonicalRaw);
-    const leakedMythicSuffix = canonicalRaw.startsWith(parsed.descriptionRaw) &&
-      /\bMythic\b/.test(canonicalRaw.slice(parsed.descriptionRaw.length));
+    const {
+      exact: exactSourceDescription,
+      leakedMythicSuffix,
+    } = sourceDescriptionMatch(canonicalRaw, parsed.descriptionRaw);
     if (!exactSourceDescription && !leakedMythicSuffix) {
       throw new Error(
         `${spellId} AoN HTML differs from the canonical description:\n` +
@@ -2978,6 +3004,7 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
         .replace(/\s+/g, " ")
         .toLocaleLowerCase("en-US");
     }
+    syncDescriptionInheritanceOverrides(canonical);
     const sourceDocument = parseRichTextHtml(parsed.descriptionHtml);
 
     const reconciled = mergeRelationships(

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.thought-worm-ii",
   "ruleset": "Pathfinder First Edition",
   "name": "Thought Worm II",
@@ -101,7 +101,42 @@
   "description": {
     "raw": "This spell functions as per thought worm I, but the penalty on Will saves is –4. This spell can be undercast.",
     "search_text": "\"this spell functions as per thought worm i, but the penalty on will saves is –4. this spell can be undercast.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "thought worm I",
+              "relationship_id": "spell.thought-worm-ii:functions_like:spell.thought-worm-i",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", but the penalty on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.thought-worm-ii:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saves is –4. This spell can be undercast."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -378,11 +413,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.thought-worm-ii:uses_definition:rule.will",
+      "relationship_id": "spell.thought-worm-ii:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -446,11 +481,19 @@
       "raw_value_sha256": "6f70a045fac2f1303714ab1c79857b0fc16a5ccfc46e1005352ad2f1b7d3c5c1",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.thought-worm-ii:b99e5e23b1cc838f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "ba688a5a6438c9984bc63d6efc9e57a891ffea55ae7c9524315980275287b64a",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.violent-misfire-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Violent Misfire, Greater",
@@ -127,7 +127,33 @@
   "description": {
     "raw": "This spell functions as violent misfire except as noted above.",
     "search_text": "\"this spell functions as violent misfire except as noted above.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "violent misfire",
+              "relationship_id": "spell.violent-misfire-greater:functions_like:spell.violent-misfire",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " except as noted above."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -445,11 +471,19 @@
       "raw_value_sha256": "522595091fbae9195f1560143a1b2eee5594ac390af5de7246ffe92a35adcca5",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.violent-misfire-greater:c1afddd852cbc856",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "7158366f18bf8e77865112f130949523e0a4ffb2a2f2e2742e5dd6c219e8ac20",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": []
   }
 }

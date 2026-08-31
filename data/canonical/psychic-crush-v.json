@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.psychic-crush-v",
   "ruleset": "Pathfinder First Edition",
   "name": "Psychic Crush V",
@@ -102,7 +102,78 @@
   "description": {
     "raw": "This functions as psychic crush IV, but on a successful Fortitude or Will save, the target takes 11d6 points of damage + 1 point of damage per caster level. If it is at fewer than half its total hit points, the target takes a –2 penalty on the Will save to resist this spell. This spell can be undercast.",
     "search_text": "\"this functions as psychic crush iv, but on a successful fortitude or will save, the target takes 11d6 points of damage + 1 point of damage per caster level. if it is at fewer than half its total hit points, the target takes a –2 penalty on the will save to resist this spell. this spell can be undercast.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "psychic crush IV",
+              "relationship_id": "spell.psychic-crush-v:functions_like:spell.psychic-crush-iv",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", but on a successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.psychic-crush-v:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.psychic-crush-v:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save, the target takes 11d6 points of damage + 1 point of damage per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.psychic-crush-v:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": ". If it is at fewer than half its total "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.psychic-crush-v:uses_definition:rule.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": ", the target takes a –2 penalty on the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.psychic-crush-v:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save to resist this spell. This spell can be undercast."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -112,7 +183,42 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.psychic-crush-iv",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.psychic-crush-v:e76a51494a2dd949",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This functions as psychic crush IV, but on a successful Fortitude or Will save, the target takes 11d6 points of damage + 1 point of damage per caster level. If it is at fewer than half its total hit points, the target takes a –2 penalty on the Will save to resist this spell. This spell can be undercast."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/description/raw",
+          "value": "This functions as psychic crush IV, but on a successful Fortitude or Will save, the target takes 11d6 points of damage + 1 point of damage per caster level. If it is at fewer than half its total hit points, the target takes a –2 penalty on the Will save to resist this spell. This spell can be undercast.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This functions as psychic crush IV, but on a successful Fortitude or Will save, the target takes 11d6 points of damage + 1 point of damage per caster level. If it is at fewer than half its total hit points, the target takes a –2 penalty on the Will save to resist this spell. This spell can be undercast.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.psychic-crush-v:appears_on_spell_list:spell-list.psychic",
@@ -130,6 +236,26 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "psychic 9",
           "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.psychic-crush-v:functions_like:spell.psychic-crush-iv",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.psychic-crush-iv",
+        "name": "Psychic Crush IV"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.psychic-crush-v:93483b2865ba3fc0",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "psychic crush IV",
+          "source_href": "https://legacy.aonprd.com/occultAdventures/spells/psychicCrush.html#psychic-crush-iv"
         }
       ],
       "note": null
@@ -237,26 +363,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.psychic-crush-v:references:spell.psychic-crush-iv",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.psychic-crush-iv",
-        "name": "psychic crush IV"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.psychic-crush-v:93483b2865ba3fc0",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "psychic crush IV",
-          "source_href": "https://legacy.aonprd.com/occultAdventures/spells/psychicCrush.html#psychic-crush-iv"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.psychic-crush-v:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -297,11 +403,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.psychic-crush-v:uses_definition:rule.fortitude",
+      "relationship_id": "spell.psychic-crush-v:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -377,11 +483,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.psychic-crush-v:uses_definition:rule.will",
+      "relationship_id": "spell.psychic-crush-v:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -452,11 +558,19 @@
       "raw_value_sha256": "3705a6c190a002bd6d84c3e481da7db5731684e87e59ea506045706a087f1afd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.psychic-crush-v:e76a51494a2dd949",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f2e270d7c38264e63eee8149069e670aed6a9b8e92ce60b479c17150a5cc0835",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

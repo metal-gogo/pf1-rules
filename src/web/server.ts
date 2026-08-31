@@ -539,6 +539,8 @@ function paragraphs(value: string): string {
     .join("");
 }
 
+export { paragraphs as renderPlainTextDescription };
+
 type LinkRelationship = {
   id: string;
   targetEntityType: string;

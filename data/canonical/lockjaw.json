@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.lockjaw",
   "ruleset": "Pathfinder First Edition",
   "name": "Lockjaw",
@@ -127,7 +127,48 @@
   "description": {
     "raw": "You give a creature the ability to use one of its natural attacks to firmly attach itself to an opponent. Choose one of the creature’s natural attacks (usually a claw or bite attack). The creature gains the grab ability with that natural attack, including the +4 bonus on combat maneuver checks to start or maintain a grapple. A creature with multiple natural attacks can strike at its grappled opponent with its other natural attacks, but cannot attack any other creature.",
     "search_text": "\"you give a creature the ability to use one of its natural attacks to firmly attach itself to an opponent. choose one of the creature’s natural attacks (usually a claw or bite attack). the creature gains the grab ability with that natural attack, including the +4 bonus on combat maneuver checks to start or maintain a grapple. a creature with multiple natural attacks can strike at its grappled opponent with its other natural attacks, but cannot attack any other creature.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You give a creature the ability to use one of its natural attacks to firmly attach itself to an opponent. Choose one of the creature’s natural attacks (usually a claw or bite attack). The creature gains the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "grab",
+              "relationship_id": "spell.lockjaw:uses_definition:rule.grab"
+            },
+            {
+              "node_type": "text",
+              "value": " ability with that natural attack, including the +4 bonus on combat maneuver checks to start or maintain a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "grapple",
+              "relationship_id": "spell.lockjaw:uses_definition:rule.grapple"
+            },
+            {
+              "node_type": "text",
+              "value": ". A creature with multiple natural attacks can strike at its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "grappled",
+              "relationship_id": "spell.lockjaw:uses_definition:condition.grappled"
+            },
+            {
+              "node_type": "text",
+              "value": " opponent with its other natural attacks, but cannot attack any other creature."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -329,11 +370,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.lockjaw:uses_definition:rule.fortitude",
+      "relationship_id": "spell.lockjaw:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -457,11 +498,19 @@
       "raw_value_sha256": "daedc1c61540feb2f93a598fc0e5a45ceb7bfadadd6681a8cca8561ba7382846",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.lockjaw:af1fc58e22e430bc",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "5936162d35ff937d7b254034c48b7ef60434c01a0cc4918a6848f35931d8cf06",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

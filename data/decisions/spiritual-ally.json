@@ -197,9 +197,44 @@
         "d20pfsrd:magic-school.aether-elemental:3e5520a8"
       ],
       "rationale": "d20PFSRD clearly transcribes the owning wizard elemental arcane school's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.spiritual-ally:f0e30f2b1db38dbc",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.spiritual-ally:f0e30f2b1db38dbc",
+        "legacy_aon:spell.spiritual-ally:193f4dd25328db00",
+        "d20pfsrd:spell.spiritual-ally:babd95325b637939",
+        "aon:mystery.ancestor:a7be2624",
+        "aon:patron.spirits:15d234b1",
+        "aon:spirit.ancestors:401f4d88",
+        "aon:spirit.tribe:b74938de",
+        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.spiritual-ally:appears_on_spell_list:spell-list.aether-elemental-school",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
+      ],
+      "rationale": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
     {
       "relationship_id": "spell.spiritual-ally:appears_on_spell_list:spell-list.ancestor",
       "decision": "accept",
@@ -215,6 +250,34 @@
         "d20pfsrd:spell.spiritual-ally:babd95325b637939"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.spiritual-ally:appears_on_spell_list:spell-list.ancestor-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.ancestor:a7be2624",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.ancestor:a7be2624"
+      ],
+      "rationale": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.spiritual-ally:appears_on_spell_list:spell-list.ancestors-spirit",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spirit.ancestors:401f4d88",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spirit.ancestors:401f4d88"
+      ],
+      "rationale": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
     },
     {
       "relationship_id": "spell.spiritual-ally:appears_on_spell_list:spell-list.cleric",
@@ -269,6 +332,20 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.spiritual-ally:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.spiritual-ally:f0e30f2b1db38dbc",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.spiritual-ally:f0e30f2b1db38dbc"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.spiritual-ally:appears_on_spell_list:spell-list.oracle",
       "decision": "accept",
       "evidence": [
@@ -283,6 +360,20 @@
         "d20pfsrd:spell.spiritual-ally:babd95325b637939"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.spiritual-ally:appears_on_spell_list:spell-list.spirits-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.spirits:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.spirits:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.spiritual-ally:appears_on_spell_list:spell-list.spiritualist",
@@ -303,6 +394,20 @@
         "d20pfsrd:spell.spiritual-ally:babd95325b637939"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.spiritual-ally:appears_on_spell_list:spell-list.tribe-spirit",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spirit.tribe:b74938de",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spirit.tribe:b74938de"
+      ],
+      "rationale": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
     },
     {
       "relationship_id": "spell.spiritual-ally:appears_on_spell_list:spell-list.warpriest",
@@ -433,58 +538,6 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.spiritual-ally:references:spell.spiritual-ally",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.spiritual-ally:193f4dd25328db00",
-          "source_field": "spell_raw.links_raw[0]"
-        },
-        {
-          "observation_id": "legacy_aon:spell.spiritual-ally:193f4dd25328db00",
-          "source_field": "spell_raw.links_raw[1]"
-        },
-        {
-          "observation_id": "legacy_aon:spell.spiritual-ally:193f4dd25328db00",
-          "source_field": "spell_raw.links_raw[3]"
-        },
-        {
-          "observation_id": "legacy_aon:spell.spiritual-ally:193f4dd25328db00",
-          "source_field": "spell_raw.links_raw[4]"
-        },
-        {
-          "observation_id": "legacy_aon:spell.spiritual-ally:193f4dd25328db00",
-          "source_field": "spell_raw.links_raw[5]"
-        },
-        {
-          "observation_id": "legacy_aon:spell.spiritual-ally:193f4dd25328db00",
-          "source_field": "spell_raw.links_raw[6]"
-        },
-        {
-          "observation_id": "legacy_aon:spell.spiritual-ally:193f4dd25328db00",
-          "source_field": "spell_raw.links_raw[7]"
-        },
-        {
-          "observation_id": "legacy_aon:spell.spiritual-ally:193f4dd25328db00",
-          "source_field": "spell_raw.links_raw[8]"
-        },
-        {
-          "observation_id": "legacy_aon:spell.spiritual-ally:193f4dd25328db00",
-          "source_field": "spell_raw.links_raw[12]"
-        },
-        {
-          "observation_id": "legacy_aon:spell.spiritual-ally:193f4dd25328db00",
-          "source_field": "spell_raw.links_raw[13]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.spiritual-ally:f0e30f2b1db38dbc",
-        "legacy_aon:spell.spiritual-ally:193f4dd25328db00",
-        "d20pfsrd:spell.spiritual-ally:babd95325b637939"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.spiritual-ally:references:spell.spiritual-weapon",
       "decision": "accept",
       "evidence": [
@@ -541,7 +594,43 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.spiritual-ally:uses_definition:rule.ac",
+      "relationship_id": "spell.spiritual-ally:uses_definition:item.rod-of-cancellation",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.spiritual-ally:193f4dd25328db00",
+          "source_field": "spell_raw.links_raw[11]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.spiritual-ally:babd95325b637939",
+          "source_field": "spell_raw.links_raw[16]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.spiritual-ally:f0e30f2b1db38dbc",
+        "legacy_aon:spell.spiritual-ally:193f4dd25328db00",
+        "d20pfsrd:spell.spiritual-ally:babd95325b637939"
+      ],
+      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.spiritual-ally:uses_definition:item.sphere-of-annihilation",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.spiritual-ally:babd95325b637939",
+          "source_field": "spell_raw.links_raw[15]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.spiritual-ally:f0e30f2b1db38dbc",
+        "legacy_aon:spell.spiritual-ally:193f4dd25328db00",
+        "d20pfsrd:spell.spiritual-ally:babd95325b637939"
+      ],
+      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.spiritual-ally:uses_definition:rule.armor-class",
       "decision": "accept",
       "evidence": [
         {
@@ -597,32 +686,12 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.spiritual-ally:uses_definition:rule.dr",
+      "relationship_id": "spell.spiritual-ally:uses_definition:rule.damage-reduction",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.spiritual-ally:babd95325b637939",
           "source_field": "spell_raw.links_raw[11]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.spiritual-ally:f0e30f2b1db38dbc",
-        "legacy_aon:spell.spiritual-ally:193f4dd25328db00",
-        "d20pfsrd:spell.spiritual-ally:babd95325b637939"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.spiritual-ally:uses_definition:rule.rod-of-cancellation",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.spiritual-ally:193f4dd25328db00",
-          "source_field": "spell_raw.links_raw[11]"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.spiritual-ally:babd95325b637939",
-          "source_field": "spell_raw.links_raw[16]"
         }
       ],
       "considered_observation_ids": [
@@ -649,22 +718,6 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.spiritual-ally:uses_definition:rule.sphere-of-annihilation",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.spiritual-ally:babd95325b637939",
-          "source_field": "spell_raw.links_raw[15]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.spiritual-ally:f0e30f2b1db38dbc",
-        "legacy_aon:spell.spiritual-ally:193f4dd25328db00",
-        "d20pfsrd:spell.spiritual-ally:babd95325b637939"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.spiritual-ally:uses_definition:rule.wisdom",
       "decision": "accept",
       "evidence": [
@@ -679,90 +732,6 @@
         "d20pfsrd:spell.spiritual-ally:babd95325b637939"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.spiritual-ally:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.spiritual-ally:f0e30f2b1db38dbc",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.spiritual-ally:f0e30f2b1db38dbc"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.spiritual-ally:appears_on_spell_list:spell-list.ancestor-mystery",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.ancestor:a7be2624",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:mystery.ancestor:a7be2624"
-      ],
-      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
-    },
-    {
-      "relationship_id": "spell.spiritual-ally:appears_on_spell_list:spell-list.spirits-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.spirits:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.spirits:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.spiritual-ally:appears_on_spell_list:spell-list.ancestors-spirit",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spirit.ancestors:401f4d88",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spirit.ancestors:401f4d88"
-      ],
-      "rationale": "AoN prints the spell on the owning shaman spirit page; it is modeled as spirit access rather than general Shaman access."
-    },
-    {
-      "relationship_id": "spell.spiritual-ally:appears_on_spell_list:spell-list.tribe-spirit",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spirit.tribe:b74938de",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spirit.tribe:b74938de"
-      ],
-      "rationale": "AoN prints the spell on the owning shaman spirit page; it is modeled as spirit access rather than general Shaman access."
-    },
-    {
-      "relationship_id": "spell.spiritual-ally:appears_on_spell_list:spell-list.aether-elemental-school",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:magic-school.aether-elemental:3e5520a8",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:magic-school.aether-elemental:3e5520a8"
-      ],
-      "rationale": "d20PFSRD prints the spell on the owning wizard elemental arcane school page; it is modeled as elemental_school access rather than general Wizard access."
     }
   ],
   "unresolved_questions": [

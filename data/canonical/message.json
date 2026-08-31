@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.message",
   "ruleset": "Pathfinder First Edition",
   "name": "Message",
@@ -219,7 +219,42 @@
   "description": {
     "raw": "You can whisper messages and receive whispered replies. Those nearby can hear these messages with a DC 25 Perception check. You point your finger at each creature you want to receive the message. When you whisper, the whispered message is audible to all targeted creatures within range. Magical silence, 1 foot of stone, 1 inch of common metal (or a thin sheet of lead), or 3 feet of wood or dirt blocks the spell. The message does not have to travel in a straight line. It can circumvent a barrier if there is an open path between you and the subject, and the path's entire length lies within the spell's range. The creatures that receive the message can whisper a reply that you hear. The spell transmits sound, not meaning; it doesn't transcend language barriers. To speak a message, you must mouth the words and whisper.",
     "search_text": "\"you can whisper messages and receive whispered replies. those nearby can hear these messages with a dc 25 perception check. you point your finger at each creature you want to receive the message. when you whisper, the whispered message is audible to all targeted creatures within range. magical silence, 1 foot of stone, 1 inch of common metal (or a thin sheet of lead), or 3 feet of wood or dirt blocks the spell. the message does not have to travel in a straight line. it can circumvent a barrier if there is an open path between you and the subject, and the path's entire length lies within the spell's range. the creatures that receive the message can whisper a reply that you hear. the spell transmits sound, not meaning; it doesn't transcend language barriers. to speak a message, you must mouth the words and whisper.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You can whisper messages and receive whispered replies. Those nearby can hear these messages with a DC 25 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Perception",
+              "relationship_id": "spell.message:uses_definition:rule.perception"
+            },
+            {
+              "node_type": "text",
+              "value": " check. You point your finger at each creature you want to receive the message. When you whisper, the whispered message is audible to all targeted creatures within range. Magical "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "silence",
+              "relationship_id": "spell.message:references:spell.silence",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", 1 foot of stone, 1 inch of common metal (or a thin sheet of lead), or 3 feet of wood or dirt blocks the spell. The message does not have to travel in a straight line. It can circumvent a barrier if there is an open path between you and the subject, and the path's entire length lies within the spell's range. The creatures that receive the message can whisper a reply that you hear. The spell transmits sound, not meaning; it doesn't transcend language barriers. To speak a message, you must mouth the words and whisper."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -231,6 +266,26 @@
   },
   "rules_inheritance": [],
   "relationships": [
+    {
+      "relationship_id": "spell.message:appears_on_spell_list:spell-list.air-elemental-school",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.air-elemental-school",
+        "name": "Air Elemental School"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:magic-school.air-elemental:45be08db",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "0—message",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/air/"
+        }
+      ],
+      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
+    },
     {
       "relationship_id": "spell.message:appears_on_spell_list:spell-list.arcanist",
       "type": "appears_on_spell_list",
@@ -653,7 +708,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.silence",
-        "name": "silence"
+        "name": "Silence"
       },
       "status": "accepted",
       "evidence": [
@@ -767,26 +822,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.message:appears_on_spell_list:spell-list.air-elemental-school",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.air-elemental-school",
-        "name": "Air Elemental School"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:magic-school.air-elemental:45be08db",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "0—message",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/wizard/arcane-schools/paizo-arcane-schools/elemental-arcane-schools/air/"
-        }
-      ],
-      "note": "Printed by the owning wizard elemental arcane school; this is elemental_school access, not general Wizard class access."
     }
   ],
   "provenance": [
@@ -845,11 +880,19 @@
       "raw_value_sha256": "ef0da3da88b047c7b62793601ed7466ef0eedb66eab76c125b8119412f473575",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.message:b450474deb80f77b",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3b2492a161690ace8e236ed0e53ff7f1f4efa4b037a1609a862ce54015133eaf",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

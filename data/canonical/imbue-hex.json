@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.imbue-hex",
   "ruleset": "Pathfinder First Edition",
   "name": "Imbue Hex",
@@ -119,7 +119,59 @@
   "description": {
     "raw": "You transfer a single hex you know to the target, and give that target the ability to use the hex. The transferred hex’s variable characteristics function according to your level, not the level of the recipient. Only a creature with Intelligence and Wisdom scores of at least 9 can receive this effect. To use this hex, the target must be able to speak and move freely. Once it uses the hex, the spell ends (though any effects of the hex still last for the full duration). You can transfer only a hex—not a major or grand hex—with this ability.\n\nOnce you cast imbue hex, you cannot use the transferred hex until the spell is discharged, dispelled, or dismissed.",
     "search_text": "\"you transfer a single hex you know to the target, and give that target the ability to use the hex. the transferred hex’s variable characteristics function according to your level, not the level of the recipient. only a creature with intelligence and wisdom scores of at least 9 can receive this effect. to use this hex, the target must be able to speak and move freely. once it uses the hex, the spell ends (though any effects of the hex still last for the full duration). you can transfer only a hex—not a major or grand hex—with this ability.\\n\\nonce you cast imbue hex, you cannot use the transferred hex until the spell is discharged, dispelled, or dismissed.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You transfer a single hex you know to the target, and give that target the ability to use the hex. The transferred hex’s variable characteristics function according to your level, not the level of the recipient. Only a creature with "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Intelligence",
+              "relationship_id": "spell.imbue-hex:uses_definition:rule.intelligence"
+            },
+            {
+              "node_type": "text",
+              "value": " and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Wisdom",
+              "relationship_id": "spell.imbue-hex:uses_definition:rule.wisdom"
+            },
+            {
+              "node_type": "text",
+              "value": " scores of at least 9 can receive this effect. To use this hex, the target must be able to speak and move freely. Once it uses the hex, the spell ends (though any effects of the hex still last for the full duration). You can transfer only a hex—not a major or grand hex—with this ability."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Once you cast "
+            },
+            {
+              "node_type": "text",
+              "value": "imbue hex",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", you cannot use the transferred hex until the spell is discharged, dispelled, or dismissed."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -314,12 +366,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.imbue-hex:uses_definition:rule.touch",
+      "relationship_id": "spell.imbue-hex:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -334,11 +386,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.imbue-hex:uses_definition:rule.will",
+      "relationship_id": "spell.imbue-hex:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -422,11 +474,19 @@
       "raw_value_sha256": "cf32f32e6b7fe0f3ced670af56333a19790b5a57b493f7acb355fe238687a203",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.imbue-hex:cb09ab126ad63d0b",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "09db6e031cc20e3d115e0dc942fbaf39770985ebd9fce2ce3e9e22d7519737a7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": []
   }
 }

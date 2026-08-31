@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.steal-years-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Steal Years, Greater",
@@ -198,7 +198,33 @@
   "description": {
     "raw": "This spell functions like steal years, except you drain 1d6 years per two caster levels (maximum 10d6).",
     "search_text": "\"this spell functions like steal years, except you drain 1d6 years per two caster levels (maximum 10d6).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "steal years",
+              "relationship_id": "spell.steal-years-greater:functions_like:spell.steal-years",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you drain 1d6 years per two caster levels (maximum 10d6)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -364,6 +390,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.steal-years-greater:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.steal-years-greater:9831e2f9bc0454dc",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.steal-years-greater:appears_on_spell_list:spell-list.oracle",
@@ -619,26 +665,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.steal-years-greater:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.steal-years-greater:9831e2f9bc0454dc",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -689,11 +715,19 @@
       "raw_value_sha256": "18b61a8e74b74c5514cf55e126716a32b512d02f9f25c4462407ea9103252473",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.steal-years-greater:9831e2f9bc0454dc",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "b19728bc1ecd6066ea88668d411c1f2ad8263385c683405d637366da3b552fda",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

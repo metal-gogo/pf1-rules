@@ -142,6 +142,23 @@
         "aon:patron.thorns:15d234b1"
       ],
       "rationale": "AoN clearly transcribes the owning witch patron's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.wrath:86ed133179dc0f80",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.wrath:86ed133179dc0f80",
+        "legacy_aon:spell.wrath:e3958d3ec1ea8c6d",
+        "d20pfsrd:spell.wrath:4aba3ea48d1ed73c",
+        "aon:patron.thorns:15d234b1"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -164,6 +181,39 @@
         "d20pfsrd:spell.wrath:4aba3ea48d1ed73c"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.wrath:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.wrath:4aba3ea48d1ed73c",
+          "source_field": "spell_raw.links_raw[2]"
+        },
+        {
+          "observation_id": "aon:spell.wrath:86ed133179dc0f80",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "d20pfsrd:spell.wrath:4aba3ea48d1ed73c",
+        "aon:spell.wrath:86ed133179dc0f80"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.wrath:appears_on_spell_list:spell-list.thorns-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.thorns:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.thorns:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.wrath:has_descriptor:descriptor.emotion",
@@ -294,12 +344,16 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.wrath:uses_definition:rule.caster-level",
+      "relationship_id": "spell.wrath:uses_definition:feat.improved-critical",
       "decision": "accept",
       "evidence": [
         {
+          "observation_id": "legacy_aon:spell.wrath:e3958d3ec1ea8c6d",
+          "source_field": "spell_raw.links_raw[0]"
+        },
+        {
           "observation_id": "d20pfsrd:spell.wrath:4aba3ea48d1ed73c",
-          "source_field": "spell_raw.links_raw[5]"
+          "source_field": "spell_raw.links_raw[6]"
         }
       ],
       "considered_observation_ids": [
@@ -310,16 +364,12 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.wrath:uses_definition:rule.improved-critical",
+      "relationship_id": "spell.wrath:uses_definition:rule.caster-level",
       "decision": "accept",
       "evidence": [
         {
-          "observation_id": "legacy_aon:spell.wrath:e3958d3ec1ea8c6d",
-          "source_field": "spell_raw.links_raw[0]"
-        },
-        {
           "observation_id": "d20pfsrd:spell.wrath:4aba3ea48d1ed73c",
-          "source_field": "spell_raw.links_raw[6]"
+          "source_field": "spell_raw.links_raw[5]"
         }
       ],
       "considered_observation_ids": [
@@ -360,39 +410,6 @@
         "d20pfsrd:spell.wrath:4aba3ea48d1ed73c"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.wrath:appears_on_spell_list:spell-list.omdura",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.wrath:4aba3ea48d1ed73c",
-          "source_field": "spell_raw.links_raw[2]"
-        },
-        {
-          "observation_id": "aon:spell.wrath:86ed133179dc0f80",
-          "source_field": "spell_raw.levels_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "d20pfsrd:spell.wrath:4aba3ea48d1ed73c",
-        "aon:spell.wrath:86ed133179dc0f80"
-      ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
-    },
-    {
-      "relationship_id": "spell.wrath:appears_on_spell_list:spell-list.thorns-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.thorns:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.thorns:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
     }
   ],
   "unresolved_questions": [

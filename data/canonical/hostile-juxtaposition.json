@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.hostile-juxtaposition",
   "ruleset": "Pathfinder First Edition",
   "name": "Hostile Juxtaposition",
@@ -177,7 +177,84 @@
   "description": {
     "raw": "You create a dimensional link to the target creature. When attacked or the subject of a spell that deals damage to you, you can spend an immediate action to cause yourself and the target creature to teleport and switch places. The target then becomes the target of the triggering attack or spell instead of you. If you fail to teleport out of the area of an effect, that effect might still affect you. If the target creature cannot fit safely into the new space without squeezing, or you try to teleport the target into an occupied space or a space it could not normally stand within, the juxtaposition fails. Further, if the target is unconscious or dead when you attempt to switch places, the juxtaposition fails. Once you have used it to teleport once, this spell is discharged.",
     "search_text": "\"you create a dimensional link to the target creature. when attacked or the subject of a spell that deals damage to you, you can spend an immediate action to cause yourself and the target creature to teleport and switch places. the target then becomes the target of the triggering attack or spell instead of you. if you fail to teleport out of the area of an effect, that effect might still affect you. if the target creature cannot fit safely into the new space without squeezing, or you try to teleport the target into an occupied space or a space it could not normally stand within, the juxtaposition fails. further, if the target is unconscious or dead when you attempt to switch places, the juxtaposition fails. once you have used it to teleport once, this spell is discharged.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create a dimensional link to the target creature. When attacked or the subject of a spell that deals damage to you, you can spend an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "immediate action",
+              "relationship_id": "spell.hostile-juxtaposition:uses_action:action.immediate-action"
+            },
+            {
+              "node_type": "text",
+              "value": " to cause yourself and the target creature to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "teleport",
+              "relationship_id": "spell.hostile-juxtaposition:references:spell.teleport"
+            },
+            {
+              "node_type": "text",
+              "value": " and switch places. The target then becomes the target of the triggering attack or spell instead of you. If you fail to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "teleport",
+              "relationship_id": "spell.hostile-juxtaposition:references:spell.teleport"
+            },
+            {
+              "node_type": "text",
+              "value": " out of the area of an effect, that effect might still affect you. If the target creature cannot fit safely into the new space without squeezing, or you try to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "teleport",
+              "relationship_id": "spell.hostile-juxtaposition:references:spell.teleport"
+            },
+            {
+              "node_type": "text",
+              "value": " the target into an occupied space or a space it could not normally stand within, the juxtaposition fails. Further, if the target is "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "unconscious",
+              "relationship_id": "spell.hostile-juxtaposition:uses_definition:condition.unconscious"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dead",
+              "relationship_id": "spell.hostile-juxtaposition:uses_definition:condition.dead"
+            },
+            {
+              "node_type": "text",
+              "value": " when you attempt to switch places, the juxtaposition fails. Once you have used it to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "teleport",
+              "relationship_id": "spell.hostile-juxtaposition:references:spell.teleport"
+            },
+            {
+              "node_type": "text",
+              "value": " once, this spell is discharged."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -295,6 +372,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.hostile-juxtaposition:appears_on_spell_list:spell-list.space-patron",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.space-patron",
+        "name": "Space Patron Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.space:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "10th — hostile juxtaposition",
+          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
+        }
+      ],
+      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.hostile-juxtaposition:appears_on_spell_list:spell-list.summoner",
@@ -518,7 +615,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.teleport",
-        "name": "teleport"
+        "name": "Teleport"
       },
       "status": "accepted",
       "evidence": [
@@ -668,11 +765,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.hostile-juxtaposition:uses_definition:rule.will",
+      "relationship_id": "spell.hostile-juxtaposition:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -686,26 +783,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.hostile-juxtaposition:appears_on_spell_list:spell-list.space-patron",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.space-patron",
-        "name": "Space Patron Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.space:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "10th — hostile juxtaposition",
-          "source_href": "https://www.aonprd.com/WitchPatrons.aspx"
-        }
-      ],
-      "note": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     }
   ],
   "provenance": [
@@ -764,11 +841,19 @@
       "raw_value_sha256": "54cab27817f5c69834b6a0e8231430633666103b4a170db6beb42e334c0e770b",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.hostile-juxtaposition:a40d32b3938f3296",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "346ea88d0ad5cb7df462d600c7a86fcd96eae74dd5f97ff663bb48f9781aa743",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

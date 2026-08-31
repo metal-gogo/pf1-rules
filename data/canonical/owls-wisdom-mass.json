@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.owls-wisdom-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Owl's Wisdom, Mass",
@@ -248,7 +248,33 @@
   "description": {
     "raw": "This spell functions like owl's wisdom, except that it affects multiple creatures.",
     "search_text": "\"this spell functions like owl's wisdom, except that it affects multiple creatures.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "owl's wisdom",
+              "relationship_id": "spell.owls-wisdom-mass:functions_like:spell.owls-wisdom",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that it affects multiple creatures."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -469,6 +495,66 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.owls-wisdom-mass:appears_on_spell_list:spell-list.lore-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.lore-mystery",
+        "name": "Lore Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.lore:8596c228",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "mass owl's wisdom (12th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Lore"
+        }
+      ],
+      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
+    },
+    {
+      "relationship_id": "spell.owls-wisdom-mass:appears_on_spell_list:spell-list.lore-spirit",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.lore-spirit",
+        "name": "Lore Spirit Magic Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spirit.lore:190adcf1",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "mass owl's wisdom (6th)",
+          "source_href": "https://www.aonprd.com/ShamanSpiritDisplay.aspx?ItemName=Lore"
+        }
+      ],
+      "note": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
+    },
+    {
+      "relationship_id": "spell.owls-wisdom-mass:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.owls-wisdom-mass:efa19199281d37aa",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 6",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.owls-wisdom-mass:appears_on_spell_list:spell-list.oracle",
@@ -707,6 +793,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like owl's wisdom, except that it affects multiple creatures.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.owls-wisdom-mass:9cca6a5d24ba3f4b",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "owl's wisdom",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/owlSWisdom.html#owl-s-wisdom"
         }
       ],
       "note": null
@@ -780,26 +873,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.owls-wisdom-mass:references:spell.owls-wisdom",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.owls-wisdom",
-        "name": "owl's wisdom"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.owls-wisdom-mass:9cca6a5d24ba3f4b",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "owl's wisdom",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/owlSWisdom.html#owl-s-wisdom"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.owls-wisdom-mass:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -838,66 +911,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.owls-wisdom-mass:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.owls-wisdom-mass:efa19199281d37aa",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 6",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.owls-wisdom-mass:appears_on_spell_list:spell-list.lore-mystery",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.lore-mystery",
-        "name": "Lore Mystery Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.lore:8596c228",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "mass owl's wisdom (12th)",
-          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Lore"
-        }
-      ],
-      "note": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
-    },
-    {
-      "relationship_id": "spell.owls-wisdom-mass:appears_on_spell_list:spell-list.lore-spirit",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.lore-spirit",
-        "name": "Lore Spirit Magic Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spirit.lore:190adcf1",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "mass owl's wisdom (6th)",
-          "source_href": "https://www.aonprd.com/ShamanSpiritDisplay.aspx?ItemName=Lore"
-        }
-      ],
-      "note": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
     }
   ],
   "provenance": [
@@ -964,11 +977,19 @@
       "raw_value_sha256": "adae7facf35dd48887f1172295da40dbcfd730d5be5a1c37c10a2335333e7b32",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.owls-wisdom-mass:efa19199281d37aa",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "693d936f197b47348f0189754718bcf72feb3af43e2849747e36eb1df7736f03",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

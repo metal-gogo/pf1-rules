@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.sickening-strikes",
   "ruleset": "Pathfinder First Edition",
   "name": "Sickening Strikes",
@@ -243,7 +243,48 @@
   "description": {
     "raw": "You are imbued with disease, and any creature you strike with a melee attack must make a Fortitude save or be sickened for 1 minute. Creatures that are immune to disease are immune to this sickened effect.",
     "search_text": "\"you are imbued with disease, and any creature you strike with a melee attack must make a fortitude save or be sickened for 1 minute. creatures that are immune to disease are immune to this sickened effect.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You are imbued with disease, and any creature you strike with a melee attack must make a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.sickening-strikes:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save or be "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sickened",
+              "relationship_id": "spell.sickening-strikes:uses_definition:condition.sickened"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 minute. Creatures that are immune to disease are immune to this "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sickened",
+              "relationship_id": "spell.sickening-strikes:uses_definition:condition.sickened"
+            },
+            {
+              "node_type": "text",
+              "value": " effect."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -635,12 +676,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sickening-strikes:uses_definition:rule.fort",
+      "relationship_id": "spell.sickening-strikes:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -650,20 +691,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Fort",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.sickening-strikes:uses_definition:rule.fortitude",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.fortitude",
-        "name": "Fortitude"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.sickening-strikes:06a87392f99a895c",
           "source_field": "spell_raw.links_raw[11]",
@@ -743,11 +771,19 @@
       "raw_value_sha256": "523a7bea8f1fd6de568db329d80bbcf22c226129033c166ac2521480a37748c3",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.sickening-strikes:8ae414f63d24bff8",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "56c3212675799b97c08ab9cf3a5e0865ecd1986b226cf36706cb4f311d0099b6",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

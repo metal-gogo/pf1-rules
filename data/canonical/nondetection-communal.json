@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.nondetection-communal",
   "ruleset": "Pathfinder First Edition",
   "name": "Nondetection, Communal",
@@ -159,7 +159,33 @@
   "description": {
     "raw": "This spell functions like nondetection, except you divide the duration in 1-hour increments among the creatures or objects touched.",
     "search_text": "\"this spell functions like nondetection, except you divide the duration in 1-hour increments among the creatures or objects touched.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "nondetection",
+              "relationship_id": "spell.nondetection-communal:functions_like:spell.nondetection",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you divide the duration in 1-hour increments among the creatures or objects touched."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -480,6 +506,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like nondetection, except you divide the duration in 1-hour increments among the creatures or objects touched.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.nondetection-communal:91e73432deb159a6",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "nondetection",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/nondetection.html#nondetection"
         }
       ],
       "note": null
@@ -554,26 +587,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "Ultimate Combat pg. 238",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.nondetection-communal:references:spell.nondetection",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.nondetection",
-        "name": "nondetection"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.nondetection-communal:91e73432deb159a6",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "nondetection",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/nondetection.html#nondetection"
         }
       ],
       "note": null
@@ -687,11 +700,19 @@
       "raw_value_sha256": "132b7a21e16fdbd54148a2b8bb650e9fcecae990bcf5768cf3bba306be1d9d59",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.nondetection-communal:a5fe8fc1a755915a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "34b45c3f819202d231eba3a45783b3c51972d9ebda5e903a71498e9d0338cd6f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

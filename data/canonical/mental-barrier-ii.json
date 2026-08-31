@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.mental-barrier-ii",
   "ruleset": "Pathfinder First Edition",
   "name": "Mental Barrier II",
@@ -99,7 +99,84 @@
   "description": {
     "raw": "This spell functions as mental barrier I, but the shield bonus to AC increases to +6. In addition, you take half damage from mind thrust I, II, and III (reduced to one-quarter on a successful Will save). This spell can be undercast.",
     "search_text": "\"this spell functions as mental barrier i, but the shield bonus to ac increases to +6. in addition, you take half damage from mind thrust i, ii, and iii (reduced to one-quarter on a successful will save). this spell can be undercast.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "mental barrier I",
+              "relationship_id": "spell.mental-barrier-ii:functions_like:spell.mental-barrier-i",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", but the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "shield bonus",
+              "relationship_id": "spell.mental-barrier-ii:uses_definition:rule.shield-bonus"
+            },
+            {
+              "node_type": "text",
+              "value": " to AC increases to +6. In addition, you take half damage from "
+            },
+            {
+              "node_type": "text",
+              "value": "mind thrust I",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "text",
+              "value": "II",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", and "
+            },
+            {
+              "node_type": "text",
+              "value": "III",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " (reduced to one-quarter on a successful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Will",
+              "relationship_id": "spell.mental-barrier-ii:uses_definition:rule.will-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " save). This spell can be undercast."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -506,11 +583,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.mental-barrier-ii:uses_definition:rule.will",
+      "relationship_id": "spell.mental-barrier-ii:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -595,11 +672,19 @@
       "raw_value_sha256": "896508549798d45649f6b5814bd8c928115227bd45d833f2f1c2517b766d031c",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.mental-barrier-ii:dca517ec9cd00ea6",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "018387d22b3d7b52a36eeac3a687493a59a5a9887c5f0b1748cad7ccb7af0cba",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

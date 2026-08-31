@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.siege-of-trees-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Siege of Trees, Greater",
@@ -111,7 +111,42 @@
   "description": {
     "raw": "As siege of trees, but you can affect larger-sized plants. Each plant acts as a catapult of its size.",
     "search_text": "\"as siege of trees, but you can affect larger-sized plants. each plant acts as a catapult of its size.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "As "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "siege of trees",
+              "relationship_id": "spell.siege-of-trees-greater:functions_like:spell.siege-of-trees",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", but you can affect larger-sized plants. Each "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "plant",
+              "relationship_id": "spell.siege-of-trees-greater:uses_definition:rule.plant"
+            },
+            {
+              "node_type": "text",
+              "value": " acts as a catapult of its size."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -316,7 +351,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.siege-of-trees",
-        "name": "siege of trees"
+        "name": "Siege of Trees"
       },
       "status": "accepted",
       "evidence": [
@@ -426,11 +461,19 @@
       "raw_value_sha256": "56e0d78a0b1aae493583e6890ef20518ea66a9136abcd311259071e5a9019f01",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.siege-of-trees-greater:f5818d3f5dc612d3",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "f6354fea422a05f3568c37faa8520331b233ba8bffab1b00c89628eb6ebfe173",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

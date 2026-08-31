@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.thunderous-footfalls",
   "ruleset": "Pathfinder First Edition",
   "name": "Thunderous Footfalls",
@@ -143,7 +143,39 @@
   "description": {
     "raw": "This spell makes the target creature’s footfalls shake the ground violently as he trundles, which may knock down smaller creatures as he passes by, though it also makes the target slower on land. The target’s land speed is reduced by half (round down to the nearest 5-foot increment), but each time he moves overland adjacent to a creature that is at least one size category smaller than he is, that creature must succeed at a Fortitude saving throw or be knocked prone.",
     "search_text": "\"this spell makes the target creature’s footfalls shake the ground violently as he trundles, which may knock down smaller creatures as he passes by, though it also makes the target slower on land. the target’s land speed is reduced by half (round down to the nearest 5-foot increment), but each time he moves overland adjacent to a creature that is at least one size category smaller than he is, that creature must succeed at a fortitude saving throw or be knocked prone.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell makes the target creature’s footfalls shake the ground violently as he trundles, which may knock down smaller creatures as he passes by, though it also makes the target slower on land. The target’s land speed is reduced by half (round down to the nearest 5-foot increment), but each time he moves overland adjacent to a creature that is at least one size category smaller than he is, that creature must succeed at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.thunderous-footfalls:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saving throw or be knocked "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "prone",
+              "relationship_id": "spell.thunderous-footfalls:uses_definition:condition.prone"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -411,12 +443,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.thunderous-footfalls:uses_definition:rule.fort",
+      "relationship_id": "spell.thunderous-footfalls:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -426,20 +458,7 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Fort",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.thunderous-footfalls:uses_definition:rule.fortitude",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.fortitude",
-        "name": "Fortitude"
-      },
-      "status": "accepted",
-      "evidence": [
+        },
         {
           "observation_id": "d20pfsrd:spell.thunderous-footfalls:ac681b11dd8d013a",
           "source_field": "spell_raw.links_raw[5]",
@@ -519,11 +538,19 @@
       "raw_value_sha256": "cbb4b029b522dd06d6dfc737638491f4bf48328826057a575814b67b61d2e5b9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.thunderous-footfalls:f7364e8bd72ddfd2",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "0026da4e6933bc0765e2af94066b4120dc60da314b62e0bd5a5b6e0f299da366",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

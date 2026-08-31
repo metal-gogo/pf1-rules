@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.water-walk-communal",
   "ruleset": "Pathfinder First Edition",
   "name": "Water Walk, Communal",
@@ -176,7 +176,33 @@
   "description": {
     "raw": "This spell functions like water walk, except you divide the duration in 10-minute intervals among the creatures touched.",
     "search_text": "\"this spell functions like water walk, except you divide the duration in 10-minute intervals among the creatures touched.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "water walk",
+              "relationship_id": "spell.water-walk-communal:functions_like:spell.water-walk",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you divide the duration in 10-minute intervals among the creatures touched."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -308,6 +334,33 @@
       "note": null
     },
     {
+      "relationship_id": "spell.water-walk-communal:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.water-walk-communal:a0fd9ef30b18ffe8",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.water-walk-communal:f3a7a56eaf0dbad9",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 2",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.water-walk-communal:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -417,6 +470,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like water walk, except you divide the duration in 10-minute intervals among the creatures touched.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.water-walk-communal:ce4c07412f94f70d",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "water walk",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/waterWalk.html#water-walk"
         }
       ],
       "note": null
@@ -523,26 +583,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.water-walk-communal:references:spell.water-walk",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.water-walk",
-        "name": "water walk"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.water-walk-communal:ce4c07412f94f70d",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "water walk",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/waterWalk.html#water-walk"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.water-walk-communal:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -641,33 +681,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.water-walk-communal:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.water-walk-communal:a0fd9ef30b18ffe8",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.water-walk-communal:f3a7a56eaf0dbad9",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -718,11 +731,19 @@
       "raw_value_sha256": "187a9aaa2228e6a96b74bd867aecf5fb46a331fbb2d7a22163c0d249a6a37383",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.water-walk-communal:f3a7a56eaf0dbad9",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d94c11ea02cb05696663b15b9e80206e41d49e79ba4c54a6e2534e5e612a0df5",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

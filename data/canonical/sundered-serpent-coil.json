@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.sundered-serpent-coil",
   "ruleset": "Pathfinder First Edition",
   "name": "Sundered Serpent Coil",
@@ -159,7 +159,69 @@
   "description": {
     "raw": "This spell functions like black tentacles, except it creates a Large decapitated snake, which erupts from the ground and grapples a creature you specify within its 5-foot reach. As a standard action, you can command the snake to release its grappled target and direct it to attack a different creature.",
     "search_text": "\"this spell functions like black tentacles, except it creates a large decapitated snake, which erupts from the ground and grapples a creature you specify within its 5-foot reach. as a standard action, you can command the snake to release its grappled target and direct it to attack a different creature.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "black tentacles",
+              "relationship_id": "spell.sundered-serpent-coil:functions_like:spell.black-tentacles",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it creates a Large decapitated "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "snake",
+              "relationship_id": "spell.sundered-serpent-coil:uses_definition:monster.snake"
+            },
+            {
+              "node_type": "text",
+              "value": ", which erupts from the ground and grapples a creature you specify within its 5-foot reach. As a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "standard action",
+              "relationship_id": "spell.sundered-serpent-coil:uses_action:action.standard-action"
+            },
+            {
+              "node_type": "text",
+              "value": ", you can command the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "snake",
+              "relationship_id": "spell.sundered-serpent-coil:uses_definition:monster.snake"
+            },
+            {
+              "node_type": "text",
+              "value": " to release its "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "grappled",
+              "relationship_id": "spell.sundered-serpent-coil:uses_definition:condition.grappled"
+            },
+            {
+              "node_type": "text",
+              "value": " target and direct it to attack a different creature."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -502,6 +564,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like black tentacles, except it creates a Large decapitated snake, which erupts from the ground and grapples a creature you specify within its 5-foot reach. As a standard action, you can command the snake to release its grappled target and direct it to attack a different creature.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.sundered-serpent-coil:eef23fc12a690cd4",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "black tentacles",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/blackTentacles.html#black-tentacles"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.sundered-serpent-coil:4664aaffdfd93723",
+          "source_field": "spell_raw.links_raw[8]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "black tentacles",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/b/black-tentacles"
         }
       ],
       "note": null
@@ -602,33 +678,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sundered-serpent-coil:references:spell.black-tentacles",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.black-tentacles",
-        "name": "black tentacles"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.sundered-serpent-coil:eef23fc12a690cd4",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "black tentacles",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/blackTentacles.html#black-tentacles"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.sundered-serpent-coil:4664aaffdfd93723",
-          "source_field": "spell_raw.links_raw[8]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "black tentacles",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/b/black-tentacles"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.sundered-serpent-coil:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -683,12 +732,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sundered-serpent-coil:uses_definition:rule.snake",
+      "relationship_id": "spell.sundered-serpent-coil:uses_definition:monster.snake",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.snake",
-        "name": "snake"
+        "entity_type": "monster",
+        "entity_id": "monster.snake",
+        "name": "Snake"
       },
       "status": "accepted",
       "evidence": [
@@ -771,11 +820,19 @@
       "raw_value_sha256": "9324db96ae86e479d2b58e5af463bd3d7be6d1b2c1dc924e1253e78722ab0378",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.sundered-serpent-coil:d23cad8c9fe628e3",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2f081e35f37dfb869642c02a64db5cafdbe6fd0c8735ee5dcd1c3e297166b056",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

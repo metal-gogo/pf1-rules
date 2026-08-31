@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.repair-undead",
   "ruleset": "Pathfinder First Edition",
   "name": "Repair Undead",
@@ -121,7 +121,57 @@
   "description": {
     "raw": "When you touch an undead creature, you channel negative energy that heals 1d8 points of damage + 1 point per caster level (maximum +5). This spell has no effect on living creatures, except those that are healed by negative energy are also healed by the spell.",
     "search_text": "\"when you touch an undead creature, you channel negative energy that heals 1d8 points of damage + 1 point per caster level (maximum +5). this spell has no effect on living creatures, except those that are healed by negative energy are also healed by the spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "When you "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch",
+              "relationship_id": "spell.repair-undead:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": " an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "undead",
+              "relationship_id": "spell.repair-undead:uses_definition:rule.undead"
+            },
+            {
+              "node_type": "text",
+              "value": " creature, you "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "channel negative energy",
+              "relationship_id": "spell.repair-undead:uses_definition:rule.channel-negative-energy"
+            },
+            {
+              "node_type": "text",
+              "value": " that heals 1d8 points of damage + 1 point per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.repair-undead:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum +5). This spell has no effect on living creatures, except those that are healed by negative energy are also healed by the spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -303,7 +353,7 @@
         "entity_id": "publication.will",
         "name": "Will"
       },
-      "status": "accepted",
+      "status": "rejected",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.repair-undead:b56bfebdbcf912c4",
@@ -320,7 +370,7 @@
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Will"
         }
       ],
-      "note": null
+      "note": "The source href points to the Will saving-throw rules, not a publication."
     },
     {
       "relationship_id": "spell.repair-undead:uses_action:action.standard-action",
@@ -424,12 +474,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.repair-undead:uses_definition:rule.touch",
+      "relationship_id": "spell.repair-undead:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -526,11 +576,19 @@
       "raw_value_sha256": "bb9ecde8995cfd35578a222439fdc0fb81cf3ab006347179d7d45d38d0fa748f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.repair-undead:c1a791012fe47622",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "24ce5074836c408171a43e45e8d852bce0a0a818c6282b0086f26f4883bf42ed",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.paranoia",
   "ruleset": "Pathfinder First Edition",
   "name": "Paranoia",
@@ -171,7 +171,39 @@
   "description": {
     "raw": "The target believes everyone it sees is an enemy. The target becomes hostile to all creatures, treating all creatures as enemies and only itself as an ally. The target must attempt attacks of opportunity whenever any creature provokes them. Finally, whenever the target is adjacent to two or more creatures, its paranoia overwhelms it, and it takes a –2 penalty on attack rolls, weapon damage rolls, ability checks, skill checks, and saving throws.",
     "search_text": "\"the target believes everyone it sees is an enemy. the target becomes hostile to all creatures, treating all creatures as enemies and only itself as an ally. the target must attempt attacks of opportunity whenever any creature provokes them. finally, whenever the target is adjacent to two or more creatures, its paranoia overwhelms it, and it takes a –2 penalty on attack rolls, weapon damage rolls, ability checks, skill checks, and saving throws.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target believes everyone it sees is an enemy. The target becomes hostile to all creatures, treating all creatures as enemies and only itself as an ally. The target must attempt "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attacks of opportunity",
+              "relationship_id": "spell.paranoia:uses_definition:rule.attacks-of-opportunity"
+            },
+            {
+              "node_type": "text",
+              "value": " whenever any creature provokes them. Finally, whenever the target is adjacent to two or more creatures, its paranoia overwhelms it, and it takes a –2 penalty on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack rolls",
+              "relationship_id": "spell.paranoia:uses_definition:rule.attack-rolls"
+            },
+            {
+              "node_type": "text",
+              "value": ", weapon damage rolls, ability checks, skill checks, and saving throws."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -568,6 +600,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.paranoia:uses_definition:magic-school.illusion",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.illusion",
+        "name": "Illusion"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.paranoia:3c07b5d3d0149458",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "illusion",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Illusion"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.paranoia:uses_definition:rule.attack-rolls",
       "type": "uses_definition",
       "target": {
@@ -608,26 +660,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.paranoia:uses_definition:rule.illusion",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.illusion",
-        "name": "illusion"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.paranoia:3c07b5d3d0149458",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "illusion",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Illusion"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.paranoia:uses_definition:rule.spell-resistance",
       "type": "uses_definition",
       "target": {
@@ -648,11 +680,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.paranoia:uses_definition:rule.will",
+      "relationship_id": "spell.paranoia:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -716,11 +748,19 @@
       "raw_value_sha256": "cd8610b317e8502be298a2c9be33c77ea2b65547ad36e2001722fba8d639b452",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.paranoia:a1b55a6d8b28c76b",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "44e65c0de44e60d4bf43abb9009f4af1f779dc8efaaecfb661f6d7841643d181",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

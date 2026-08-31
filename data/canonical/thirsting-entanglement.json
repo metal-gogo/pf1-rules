@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.thirsting-entanglement",
   "ruleset": "Pathfinder First Edition",
   "name": "Thirsting Entanglement",
@@ -135,7 +135,51 @@
   "description": {
     "raw": "This spell functions as entangle, except the plants latch on to targets and drain away their vitality. Any creature that fails a save to avoid becoming entangled or fails a check to break free takes 1d2 points of Constitution damage.",
     "search_text": "\"this spell functions as entangle, except the plants latch on to targets and drain away their vitality. any creature that fails a save to avoid becoming entangled or fails a check to break free takes 1d2 points of constitution damage.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "entangle",
+              "relationship_id": "spell.thirsting-entanglement:functions_like:spell.entangle",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except the plants latch on to targets and drain away their vitality. Any creature that fails a save to avoid becoming "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "entangled",
+              "relationship_id": "spell.thirsting-entanglement:uses_definition:condition.entangled"
+            },
+            {
+              "node_type": "text",
+              "value": " or fails a check to break free takes 1d2 points of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Constitution damage",
+              "relationship_id": "spell.thirsting-entanglement:uses_definition:rule.constitution-damage"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -306,6 +350,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as entangle, except the plants latch on to targets and drain away their vitality. Any creature that fails a save to avoid becoming entangled or fails a check to break free takes 1d2 points of Constitution damage.",
           "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.thirsting-entanglement:2d0d72ab45d504ec",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "entangle",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/e/entangle"
         }
       ],
       "note": null
@@ -379,26 +430,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.thirsting-entanglement:references:spell.entangle",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.entangle",
-        "name": "entangle"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.thirsting-entanglement:2d0d72ab45d504ec",
-          "source_field": "spell_raw.links_raw[7]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "entangle",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/e/entangle"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.thirsting-entanglement:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -466,11 +497,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.thirsting-entanglement:uses_definition:rule.reflex",
+      "relationship_id": "spell.thirsting-entanglement:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -554,11 +585,19 @@
       "raw_value_sha256": "69fe04c7291f86bdc29fb50b0df812bd136fb0c9fde6a18516042185d9440b6d",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.thirsting-entanglement:96d437fc39f55d14",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "bb6b50d70d6bfb1c8ab1ed44ef8df4a0898f4a9ecacc725aad12ce2ef5373f0f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": []
   }
 }

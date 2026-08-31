@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.interrogation-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Interrogation, Greater",
@@ -141,7 +141,33 @@
   "description": {
     "raw": "This spell functions as interrogation, except you may ask one question per caster level and the spell deals damage equal to 1d8 points plus your Wisdom bonus if the target doesn’t answer a question.",
     "search_text": "\"this spell functions as interrogation, except you may ask one question per caster level and the spell deals damage equal to 1d8 points plus your wisdom bonus if the target doesn’t answer a question.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "interrogation",
+              "relationship_id": "spell.interrogation-greater:functions_like:spell.interrogation",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you may ask one question per caster level and the spell deals damage equal to 1d8 points plus your Wisdom bonus if the target doesn’t answer a question."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -207,6 +233,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.interrogation-greater:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.interrogation-greater:7cf3bc02f0af709b",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.interrogation-greater:appears_on_spell_list:spell-list.psychic",
@@ -375,26 +421,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.interrogation-greater:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.interrogation-greater:7cf3bc02f0af709b",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -445,11 +471,19 @@
       "raw_value_sha256": "1162dd05608fc3d29fb00c2d72ff6702ac2d859dc7b0deddca5c7e841aa9eee6",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.interrogation-greater:7cf3bc02f0af709b",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "7ccbe1df4046adce63dfedaf26ed55e3f31519910f86f5795a620b37288fc8a6",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "DERIVED_SPELL_LIST_ACCESS",

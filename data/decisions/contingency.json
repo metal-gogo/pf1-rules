@@ -153,6 +153,25 @@
         "aon:bloodline.sorcerer.astral:041502da"
       ],
       "rationale": "AoN clearly transcribes the owning sorcerer bloodline's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.contingency:ee54e5f3fd8f2b58",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.contingency:ee54e5f3fd8f2b58",
+        "legacy_aon:spell.contingency:4c7709c62285b808",
+        "d20pfsrd:spell.contingency:9ce1a0cb619a53c1",
+        "aon:mystery.time:c0617d9c",
+        "aon:patron.fate:15d234b1",
+        "aon:bloodline.sorcerer.astral:041502da"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -187,6 +206,20 @@
         "d20pfsrd:spell.contingency:9ce1a0cb619a53c1"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.contingency:appears_on_spell_list:spell-list.fate-patron",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:patron.fate:15d234b1",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:patron.fate:15d234b1"
+      ],
+      "rationale": "Printed by the owning witch patron; this is patron access, not general Witch class access."
     },
     {
       "relationship_id": "spell.contingency:appears_on_spell_list:spell-list.occultist",
@@ -237,6 +270,20 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.contingency:appears_on_spell_list:spell-list.sorcerer-astral-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.astral:041502da",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.astral:041502da"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
+    },
+    {
       "relationship_id": "spell.contingency:appears_on_spell_list:spell-list.sorcerer-wizard",
       "decision": "accept",
       "evidence": [
@@ -267,6 +314,20 @@
         "d20pfsrd:spell.contingency:9ce1a0cb619a53c1"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.contingency:appears_on_spell_list:spell-list.time-mystery",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.time:c0617d9c",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:mystery.time:c0617d9c"
+      ],
+      "rationale": "Printed on the owning Oracle mystery page; this is mystery access, not general Oracle class access."
     },
     {
       "relationship_id": "spell.contingency:appears_on_spell_list:spell-list.wizard",
@@ -345,30 +406,6 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.contingency:references:spell.contingency",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.contingency:9ce1a0cb619a53c1",
-          "source_field": "spell_raw.links_raw[5]"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.contingency:9ce1a0cb619a53c1",
-          "source_field": "spell_raw.links_raw[6]"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.contingency:9ce1a0cb619a53c1",
-          "source_field": "spell_raw.links_raw[9]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.contingency:ee54e5f3fd8f2b58",
-        "legacy_aon:spell.contingency:4c7709c62285b808",
-        "d20pfsrd:spell.contingency:9ce1a0cb619a53c1"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.contingency:uses_definition:rule.casting-time",
       "decision": "accept",
       "evidence": [
@@ -421,7 +458,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.contingency:uses_definition:rule.touch",
+      "relationship_id": "spell.contingency:uses_definition:rule.touch-attack",
       "decision": "accept",
       "evidence": [
         {
@@ -435,48 +472,6 @@
         "d20pfsrd:spell.contingency:9ce1a0cb619a53c1"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.contingency:appears_on_spell_list:spell-list.time-mystery",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.time:c0617d9c",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:mystery.time:c0617d9c"
-      ],
-      "rationale": "AoN prints the spell on the owning mystery page; it is modeled as mystery access rather than general Oracle access."
-    },
-    {
-      "relationship_id": "spell.contingency:appears_on_spell_list:spell-list.fate-patron",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:patron.fate:15d234b1",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:patron.fate:15d234b1"
-      ],
-      "rationale": "AoN prints the spell on the owning witch patron page; it is modeled as patron access rather than general Witch access."
-    },
-    {
-      "relationship_id": "spell.contingency:appears_on_spell_list:spell-list.sorcerer-astral-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.astral:041502da",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.astral:041502da"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
     }
   ],
   "unresolved_questions": [

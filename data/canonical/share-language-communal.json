@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.share-language-communal",
   "ruleset": "Pathfinder First Edition",
   "name": "Share Language, Communal",
@@ -230,7 +230,33 @@
   "description": {
     "raw": "This spell functions like share language, except you divide the duration in 1-hour increments among the creatures touched.",
     "search_text": "\"this spell functions like share language, except you divide the duration in 1-hour increments among the creatures touched.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "share language",
+              "relationship_id": "spell.share-language-communal:functions_like:spell.share-language",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you divide the duration in 1-hour increments among the creatures touched."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -490,6 +516,33 @@
       "note": null
     },
     {
+      "relationship_id": "spell.share-language-communal:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.share-language-communal:18864e0f9d225124",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.share-language-communal:3b5809210de48dc5",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.share-language-communal:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -652,6 +705,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions like share language, except you divide the duration in 1-hour increments among the creatures touched.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.share-language-communal:8140e2566ecc8a4b",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "share language",
+          "source_href": "https://legacy.aonprd.com/advancedPlayersGuide/spells/shareLanguage.html#share-language-"
         }
       ],
       "note": null
@@ -731,26 +791,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.share-language-communal:references:spell.share-language",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.share-language",
-        "name": "share language"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.share-language-communal:8140e2566ecc8a4b",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "share language",
-          "source_href": "https://legacy.aonprd.com/advancedPlayersGuide/spells/shareLanguage.html#share-language-"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.share-language-communal:uses_action:action.standard-action",
       "type": "uses_action",
       "target": {
@@ -809,33 +849,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.share-language-communal:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.share-language-communal:18864e0f9d225124",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.share-language-communal:3b5809210de48dc5",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -886,11 +899,19 @@
       "raw_value_sha256": "72c4095cce3ec309e1a41812ec122a60470b2278bf88fa3039c3f471096d1175",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.share-language-communal:3b5809210de48dc5",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "0287f5111e971f4b837e6f819a0ee9f94be3c8ad7668adffd2d9d215c0b29153",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

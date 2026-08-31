@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.vestment-of-the-champion",
   "ruleset": "Pathfinder First Edition",
   "name": "Vestment of the Champion",
@@ -113,7 +113,33 @@
   "description": {
     "raw": "This functions as magic vestment, except it only affects armor or a shield you are wearing or carrying. If the armor or shield is worn or carried by anyone other than you, the spell has no effect, but resumes its effect when you are wearing or carrying it again.",
     "search_text": "\"this functions as magic vestment, except it only affects armor or a shield you are wearing or carrying. if the armor or shield is worn or carried by anyone other than you, the spell has no effect, but resumes its effect when you are wearing or carrying it again.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "magic vestment",
+              "relationship_id": "spell.vestment-of-the-champion:functions_like:spell.magic-vestment",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it only affects armor or a shield you are wearing or carrying. If the armor or shield is worn or carried by anyone other than you, the spell has no effect, but resumes its effect when you are wearing or carrying it again."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -123,7 +149,111 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.magic-vestment",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.vestment-of-the-champion:83f4470dc3f39858",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This functions as magic vestment, except it only affects armor or a shield you are wearing or carrying. If the armor or shield is worn or carried by anyone other than you, the spell has no effect, but resumes its effect when you are wearing or carrying it again."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "timed",
+            "formula": "1 minute/level",
+            "dismissible": null,
+            "concentration": null,
+            "raw": "1 minute/level"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "1 minute/level",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/saving_throw",
+          "value": {
+            "types": [
+              "none"
+            ],
+            "outcome": null,
+            "harmless": null,
+            "object": null,
+            "conditional": null,
+            "raw": "none"
+          },
+          "source_field": "spell_raw.saving_throw_raw",
+          "raw": "none",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/spell_resistance",
+          "value": {
+            "applies": false,
+            "harmless": null,
+            "object": null,
+            "conditional": null,
+            "raw": "no"
+          },
+          "source_field": "spell_raw.spell_resistance_raw",
+          "raw": "no",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This functions as magic vestment, except it only affects armor or a shield you are wearing or carrying. If the armor or shield is worn or carried by anyone other than you, the spell has no effect, but resumes its effect when you are wearing or carrying it again.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This functions as magic vestment, except it only affects armor or a shield you are wearing or carrying. If the armor or shield is worn or carried by anyone other than you, the spell has no effect, but resumes its effect when you are wearing or carrying it again.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.vestment-of-the-champion:appears_on_spell_list:spell-list.antipaladin",
@@ -175,6 +305,26 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "paladin 2",
           "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.vestment-of-the-champion:functions_like:spell.magic-vestment",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.magic-vestment",
+        "name": "Magic Vestment"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.vestment-of-the-champion:81b9900ca0cbcc0f",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "magic vestment",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/magicVestment.html#magic-vestment"
         }
       ],
       "note": null
@@ -243,26 +393,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "Ultimate Magic pg. 247",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.vestment-of-the-champion:references:spell.magic-vestment",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.magic-vestment",
-        "name": "magic vestment"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.vestment-of-the-champion:81b9900ca0cbcc0f",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "magic vestment",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/magicVestment.html#magic-vestment"
         }
       ],
       "note": null
@@ -383,11 +513,19 @@
       "raw_value_sha256": "d80fcd8da62d4100fc8b781a96b395cda7913ea9bb02f2cf1b504f024afc470a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.vestment-of-the-champion:83f4470dc3f39858",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "03a28e3b4dffce35684bcf7800c60549849856d508d13a900b5aac177fb22074",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

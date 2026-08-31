@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.pellet-blast",
   "ruleset": "Pathfinder First Edition",
   "name": "Pellet Blast",
@@ -167,7 +167,66 @@
   "description": {
     "raw": "This spell creates an explosion of conjured metal pellets, striking everything within its area and dealing 1d8 points of piercing damage per two caster levels, maximum 5d8. This damage is subject to damage reduction. If the material component is made of cold iron (costing 50 gp), silver (costing 20 gp), or adamantine (costing 100 gp), the resulting blast can overcome damage reduction of the appropriate type. The pellets disappear after the spell is cast and the damage is dealt.",
     "search_text": "\"this spell creates an explosion of conjured metal pellets, striking everything within its area and dealing 1d8 points of piercing damage per two caster levels, maximum 5d8. this damage is subject to damage reduction. if the material component is made of cold iron (costing 50 gp), silver (costing 20 gp), or adamantine (costing 100 gp), the resulting blast can overcome damage reduction of the appropriate type. the pellets disappear after the spell is cast and the damage is dealt.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell creates an explosion of conjured metal pellets, striking everything within its area and dealing 1d8 points of piercing damage per two caster levels, maximum 5d8. This damage is subject to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "damage reduction",
+              "relationship_id": "spell.pellet-blast:uses_definition:rule.damage-reduction"
+            },
+            {
+              "node_type": "text",
+              "value": ". If the material component is made of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "cold iron",
+              "relationship_id": "spell.pellet-blast:uses_definition:rule.cold-iron"
+            },
+            {
+              "node_type": "text",
+              "value": " (costing 50 gp), "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "silver",
+              "relationship_id": "spell.pellet-blast:uses_definition:rule.silver"
+            },
+            {
+              "node_type": "text",
+              "value": " (costing 20 gp), or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "adamantine",
+              "relationship_id": "spell.pellet-blast:uses_definition:rule.adamantine"
+            },
+            {
+              "node_type": "text",
+              "value": " (costing 100 gp), the resulting blast can overcome "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "damage reduction",
+              "relationship_id": "spell.pellet-blast:uses_definition:rule.damage-reduction"
+            },
+            {
+              "node_type": "text",
+              "value": " of the appropriate type. The pellets disappear after the spell is cast and the damage is dealt."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -516,6 +575,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.pellet-blast:uses_definition:descriptor.cold",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "descriptor",
+        "entity_id": "descriptor.cold",
+        "name": "Cold"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.pellet-blast:834950d380bb4421",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cold",
+          "source_href": "https://legacy.aonprd.com/bestiary/creatureTypes.html#cold-subtype"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.pellet-blast:uses_definition:rule.adamantine",
       "type": "uses_definition",
       "target": {
@@ -538,26 +617,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "adamantine",
           "source_href": "https://www.d20pfsrd.com/equipment/special-materials#TOC-Adamantine"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.pellet-blast:uses_definition:rule.cold",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.cold",
-        "name": "cold"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.pellet-blast:834950d380bb4421",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cold",
-          "source_href": "https://legacy.aonprd.com/bestiary/creatureTypes.html#cold-subtype"
         }
       ],
       "note": null
@@ -617,11 +676,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.pellet-blast:uses_definition:rule.reflex",
+      "relationship_id": "spell.pellet-blast:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -732,11 +791,19 @@
       "raw_value_sha256": "132b7a21e16fdbd54148a2b8bb650e9fcecae990bcf5768cf3bba306be1d9d59",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.pellet-blast:077f489c0917c06f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "aa2d8966c6c018ca363350a1ae3e6868c2e8335fb31352f0e595c1e498e2e277",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

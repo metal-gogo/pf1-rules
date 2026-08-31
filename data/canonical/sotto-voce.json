@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.sotto-voce",
   "ruleset": "Pathfinder First Edition",
   "name": "Sotto Voce",
@@ -182,7 +182,48 @@
   "description": {
     "raw": "Your dry, rasping whisper fills a living creature of 4 or fewer Hit Dice with unnatural dread. The affected creature must make a Will save or be shaken for 1 round.\n\nThis spell originated among the followers of the Whispering Way, but necromancers and other intimidating folk outside that group are known to use it.",
     "search_text": "\"your dry, rasping whisper fills a living creature of 4 or fewer hit dice with unnatural dread. the affected creature must make a will save or be shaken for 1 round.\\n\\nthis spell originated among the followers of the whispering way, but necromancers and other intimidating folk outside that group are known to use it.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Your dry, rasping whisper fills a living creature of 4 or fewer "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Hit Dice",
+              "relationship_id": "spell.sotto-voce:uses_definition:rule.hit-dice"
+            },
+            {
+              "node_type": "text",
+              "value": " with unnatural dread. The affected creature must make a Will save or be "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "shaken",
+              "relationship_id": "spell.sotto-voce:uses_definition:condition.shaken"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 round."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell originated among the followers of the Whispering Way, but necromancers and other intimidating folk outside that group are known to use it."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -253,6 +294,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.sotto-voce:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.sotto-voce:20398e7e429f0c6c",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 0",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.sotto-voce:appears_on_spell_list:spell-list.oracle",
@@ -537,26 +598,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sotto-voce:uses_definition:rule.hd",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.hd",
-        "name": "HD"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.sotto-voce:96db5c312678584a",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "HD",
-          "source_href": "https://www.d20pfsrd.com/basics-ability-scores/glossary/#Hit_Dice_HD"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.sotto-voce:uses_definition:rule.hit-dice",
       "type": "uses_definition",
       "target": {
@@ -566,6 +607,13 @@
       },
       "status": "accepted",
       "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.sotto-voce:96db5c312678584a",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "HD",
+          "source_href": "https://www.d20pfsrd.com/basics-ability-scores/glossary/#Hit_Dice_HD"
+        },
         {
           "observation_id": "d20pfsrd:spell.sotto-voce:96db5c312678584a",
           "source_field": "spell_raw.links_raw[3]",
@@ -635,26 +683,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.sotto-voce:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.sotto-voce:20398e7e429f0c6c",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 0",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -705,11 +733,19 @@
       "raw_value_sha256": "7c2a4c70da6db88aca1ceacc0d4733b5607d0808bc6001dfccbe387183f8b9e9",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.sotto-voce:20398e7e429f0c6c",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "4b92bf3e2d5bb421989d1af194cb3b381001063bd1e71ac1c1f5a96832bc546b",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

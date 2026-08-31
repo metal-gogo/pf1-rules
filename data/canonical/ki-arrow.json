@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.ki-arrow",
   "ruleset": "Pathfinder First Edition",
   "name": "Ki Arrow",
@@ -147,7 +147,39 @@
   "description": {
     "raw": "You imbue an arrow with your power and throw it at a target up to 100 feet away. Make a ranged attack roll. If it hits, the target takes damage from the arrow as if you had hit it with a single unarmed strike (including your Strength bonus).",
     "search_text": "\"you imbue an arrow with your power and throw it at a target up to 100 feet away. make a ranged attack roll. if it hits, the target takes damage from the arrow as if you had hit it with a single unarmed strike (including your strength bonus).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You imbue an arrow with your power and throw it at a target up to 100 feet away. Make a ranged "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "attack roll",
+              "relationship_id": "spell.ki-arrow:uses_definition:rule.attack-rolls"
+            },
+            {
+              "node_type": "text",
+              "value": ". If it hits, the target takes damage from the arrow as if you had hit it with a single unarmed strike (including your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Strength",
+              "relationship_id": "spell.ki-arrow:uses_definition:rule.strength"
+            },
+            {
+              "node_type": "text",
+              "value": " bonus)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -436,12 +468,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.ki-arrow:uses_definition:rule.attack-roll",
+      "relationship_id": "spell.ki-arrow:uses_definition:rule.attack-rolls",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.attack-roll",
-        "name": "attack roll"
+        "entity_id": "rule.attack-rolls",
+        "name": "Attack rolls"
       },
       "status": "accepted",
       "evidence": [
@@ -456,11 +488,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.ki-arrow:uses_definition:rule.fortitude",
+      "relationship_id": "spell.ki-arrow:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -564,11 +596,19 @@
       "raw_value_sha256": "1162dd05608fc3d29fb00c2d72ff6702ac2d859dc7b0deddca5c7e841aa9eee6",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.ki-arrow:33767ee0d2603758",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "afcf7f992b7a04d8cf2184abd017c93d4a0edf19c55fcdb89782aba1441885bb",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

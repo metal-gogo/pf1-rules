@@ -2,7 +2,7 @@ import { createServer, type Server } from "node:http";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
 import { createLocalPrisma } from "../src/db/client.js";
-import { createRequestHandler } from "../src/web/server.js";
+import { createRequestHandler, renderPlainTextDescription } from "../src/web/server.js";
 
 
 const prisma = createLocalPrisma();
@@ -818,11 +818,12 @@ describe("local rules browser", () => {
   it("treats Brightest Light as Daylight inheritance and generic darkness as a descriptor", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.brightest-light`);
     const html = await response.text();
+    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
     const related = html.match(/<section aria-labelledby="related-rules">([\s\S]*?)<\/section>/)?.[1] ?? "";
     expect(response.status).toBe(200);
     expect(related).toContain("Functions Like:");
     expect(related).toContain('href="/spells/spell.daylight"');
-    expect(html).not.toContain('href="/spells/spell.darkness"');
+    expect(description).not.toContain('href="/spells/spell.darkness"');
   });
 
   it.each([
@@ -1723,13 +1724,9 @@ describe("local rules browser", () => {
     expect(html.match(/data-embedded-spell="spell.deeper-darkness"/g)).toHaveLength(1);
   });
 
-  it("falls back to escaped plain-text descriptions outside the pilot", async () => {
-    const response = await fetch(`${baseUrl}/spells/spell.light`);
-    const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
-    expect(response.status).toBe(200);
-    expect(description).not.toContain('class="rich-description"');
-    expect(description).toContain("<p>");
+  it("renders escaped plain-text description blocks", () => {
+    const html = renderPlainTextDescription("First <line>.\n\nSecond & final line.");
+    expect(html).toBe("<p>First &lt;line&gt;.</p><p>Second &amp; final line.</p>");
   });
 
   it("expands each resolved functions-like parent once without recursion", async () => {

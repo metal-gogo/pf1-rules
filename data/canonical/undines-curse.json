@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.undines-curse",
   "ruleset": "Pathfinder First Edition",
   "name": "Undine's Curse",
@@ -172,7 +172,30 @@
   "description": {
     "raw": "The target loses its body’s natural ability to breathe automatically. As long as it remains conscious and is able to take physical actions, it keeps breathing and is able to function normally. If it is ever unconscious (including sleeping) or unable to take physical actions, it stops breathing, must hold its breath, and might begin to suffocate. Creatures that do not have to breathe are immune to this spell.",
     "search_text": "\"the target loses its body’s natural ability to breathe automatically. as long as it remains conscious and is able to take physical actions, it keeps breathing and is able to function normally. if it is ever unconscious (including sleeping) or unable to take physical actions, it stops breathing, must hold its breath, and might begin to suffocate. creatures that do not have to breathe are immune to this spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The target loses its body’s natural ability to breathe automatically. As long as it remains conscious and is able to take physical actions, it keeps breathing and is able to function normally. If it is ever "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "unconscious",
+              "relationship_id": "spell.undines-curse:uses_definition:condition.unconscious"
+            },
+            {
+              "node_type": "text",
+              "value": " (including sleeping) or unable to take physical actions, it stops breathing, must hold its breath, and might begin to suffocate. Creatures that do not have to breathe are immune to this spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -494,11 +517,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.undines-curse:uses_definition:rule.will",
+      "relationship_id": "spell.undines-curse:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -562,11 +585,19 @@
       "raw_value_sha256": "570e2453e3d0350950804622479457137235746be272cfac2856f0df7b341417",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.undines-curse:be1d8b2eeed39505",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "ed09c2e3c220301f33b6c4ace8c484edf96ad2a8ead6b0462357090c984a8e0f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.shield-companion-aa",
   "ruleset": "Pathfinder First Edition",
   "name": "Shield Companion (AA)",
@@ -175,7 +175,85 @@
   "description": {
     "raw": "This spell functions as shield other but affects only the caster’s animal companion or familiar. Spellcasters from classes that do not normally gain an animal companion, familiar, or fiendish servant but who gain one through an alternate class feature, archetype, or prestige class can prepare and cast this spell as a 1st-level spell if they are capable of casting spells.",
     "search_text": "\"this spell functions as shield other but affects only the caster’s animal companion or familiar. spellcasters from classes that do not normally gain an animal companion, familiar, or fiendish servant but who gain one through an alternate class feature, archetype, or prestige class can prepare and cast this spell as a 1st-level spell if they are capable of casting spells.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "shield other",
+              "relationship_id": "spell.shield-companion-aa:functions_like:spell.shield-other",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "but affects only the caster’s "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "animal companion",
+              "relationship_id": "spell.shield-companion-aa:uses_definition:class-feature.animal-companion"
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "familiar",
+              "relationship_id": "spell.shield-companion-aa:uses_definition:rule.familiar"
+            },
+            {
+              "node_type": "text",
+              "value": ". Spellcasters from classes that do not normally gain an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "animal companion",
+              "relationship_id": "spell.shield-companion-aa:uses_definition:class-feature.animal-companion"
+            },
+            {
+              "node_type": "text",
+              "value": ", "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "familiar",
+              "relationship_id": "spell.shield-companion-aa:uses_definition:rule.familiar"
+            },
+            {
+              "node_type": "text",
+              "value": ", or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fiendish",
+              "relationship_id": "spell.shield-companion-aa:uses_definition:rule.fiendish"
+            },
+            {
+              "node_type": "text",
+              "value": " servant but who gain one through an alternate class feature, archetype, or prestige class can prepare and cast this spell as a 1st-level spell if they are capable of casting spells."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -588,7 +666,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.shield-other",
-        "name": "shield other"
+        "name": "Shield Other"
       },
       "status": "accepted",
       "evidence": [
@@ -623,12 +701,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.shield-companion-aa:uses_definition:rule.animal-companion",
+      "relationship_id": "spell.shield-companion-aa:uses_definition:class-feature.animal-companion",
       "type": "uses_definition",
       "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.animal-companion",
-        "name": "animal companion"
+        "entity_type": "class_feature",
+        "entity_id": "class-feature.animal-companion",
+        "name": "Animal companion"
       },
       "status": "accepted",
       "evidence": [
@@ -786,11 +864,19 @@
       "raw_value_sha256": "8b545087fc78150335b4a82fb50d348d76e6abcc08366ace6c042bfe795b29e8",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.shield-companion-aa:0769376038fafce4",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "c3d197430e178bbd445c5292f467c12a64d47ea2305c7404ae430fcd1ac60eb6",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

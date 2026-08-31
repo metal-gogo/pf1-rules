@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.wing-thorns",
   "ruleset": "Pathfinder First Edition",
   "name": "Wing Thorns",
@@ -261,7 +261,66 @@
   "description": {
     "raw": "Your wings sprout poisonous thorns each the size of a dagger. You can use these thorns like armor spikes. In addition, you can make two wing attacks as primary natural weapons. If you are Small, the wings deal 1d3 points of bludgeoning and piercing damage plus your Strength modifier (unless you also attack with a weapon, in which case they are treated as a secondary natural weapon). A creature damaged by your wing thorns experiences intense itching, gaining the sickened condition while the spell lasts unless it succeeds at a Fortitude saving throw.",
     "search_text": "\"your wings sprout poisonous thorns each the size of a dagger. you can use these thorns like armor spikes. in addition, you can make two wing attacks as primary natural weapons. if you are small, the wings deal 1d3 points of bludgeoning and piercing damage plus your strength modifier (unless you also attack with a weapon, in which case they are treated as a secondary natural weapon). a creature damaged by your wing thorns experiences intense itching, gaining the sickened condition while the spell lasts unless it succeeds at a fortitude saving throw.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Your wings sprout poisonous thorns each the size of a dagger. You can use these thorns like armor spikes. In addition, you can make two wing attacks as primary "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "natural weapons",
+              "relationship_id": "spell.wing-thorns:uses_definition:rule.natural-attacks"
+            },
+            {
+              "node_type": "text",
+              "value": ". If you are Small, the wings deal 1d3 points of bludgeoning and piercing damage plus your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Strength",
+              "relationship_id": "spell.wing-thorns:uses_definition:rule.strength"
+            },
+            {
+              "node_type": "text",
+              "value": " modifier (unless you also attack with a weapon, in which case they are treated as a secondary "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "natural weapon",
+              "relationship_id": "spell.wing-thorns:uses_definition:rule.natural-weapon"
+            },
+            {
+              "node_type": "text",
+              "value": "). A creature damaged by your wing thorns experiences intense itching, gaining the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sickened",
+              "relationship_id": "spell.wing-thorns:uses_definition:condition.sickened"
+            },
+            {
+              "node_type": "text",
+              "value": " condition while the spell lasts unless it succeeds at a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fortitude",
+              "relationship_id": "spell.wing-thorns:uses_definition:rule.fortitude-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saving throw."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -652,11 +711,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.wing-thorns:uses_definition:rule.fortitude",
+      "relationship_id": "spell.wing-thorns:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fortitude",
+        "entity_id": "rule.fortitude-saving-throw",
         "name": "Fortitude"
       },
       "status": "accepted",
@@ -667,6 +726,26 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Fortitude",
           "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.wing-thorns:uses_definition:rule.natural-attacks",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.natural-attacks",
+        "name": "Natural attacks"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.wing-thorns:847ea90df7792210",
+          "source_field": "spell_raw.links_raw[10]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "natural weapons",
+          "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/universal-monster-rules#TOC-Natural-Attacks"
         }
       ],
       "note": null
@@ -686,26 +765,6 @@
           "source_field": "spell_raw.links_raw[12]",
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "natural weapon",
-          "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/universal-monster-rules#TOC-Natural-Attacks"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.wing-thorns:uses_definition:rule.natural-weapons",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "rule",
-        "entity_id": "rule.natural-weapons",
-        "name": "natural weapons"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.wing-thorns:847ea90df7792210",
-          "source_field": "spell_raw.links_raw[10]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "natural weapons",
           "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/universal-monster-rules#TOC-Natural-Attacks"
         }
       ],
@@ -800,11 +859,19 @@
       "raw_value_sha256": "cbfa5be2abef05da89bbf8395c21d88551f978c4ff372d27e23e559a5567ef5d",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.wing-thorns:0c63e4265a0041b7",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "737023f266d39b3da878aea14c275809307aaa10924569edbb305eb9a7b268af",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

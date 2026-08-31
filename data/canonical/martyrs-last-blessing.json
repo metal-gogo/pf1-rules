@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.martyrs-last-blessing",
   "ruleset": "Pathfinder First Edition",
   "name": "Martyr's Last Blessing",
@@ -216,7 +216,54 @@
   "description": {
     "raw": "You charge your body with healing energy, which erupts from you if you are dying or are killed before 1 hour per level has passed. If you’re brought below 0 hit points or killed (including by effects that kill without dealing damage, such as phantasmal killer and power word kill), the eruption of healing energy acts as mass cure light wounds on allies (other than you). Allies with the fewest Hit Dice are affected first. Among allies with equal HD, those closest to you are affected first. If the duration ends, the stored healing energy dissipates with no effect.",
     "search_text": "\"you charge your body with healing energy, which erupts from you if you are dying or are killed before 1 hour per level has passed. if you’re brought below 0 hit points or killed (including by effects that kill without dealing damage, such as phantasmal killer and power word kill), the eruption of healing energy acts as mass cure light wounds on allies (other than you). allies with the fewest hit dice are affected first. among allies with equal hd, those closest to you are affected first. if the duration ends, the stored healing energy dissipates with no effect.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You charge your body with healing energy, which erupts from you if you are dying or are killed before 1 hour per level has passed. If you’re brought below 0 hit points or killed (including by effects that kill without dealing damage, such as "
+            },
+            {
+              "node_type": "text",
+              "value": "phantasmal killer ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "and "
+            },
+            {
+              "node_type": "text",
+              "value": "power word kill",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "), the eruption of healing energy acts as "
+            },
+            {
+              "node_type": "text",
+              "value": "mass cure light wounds ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "on allies (other than you). Allies with the fewest Hit Dice are affected first. Among allies with equal HD, those closest to you are affected first. If the duration ends, the stored healing energy dissipates with no effect."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -267,6 +314,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.martyrs-last-blessing:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.martyrs-last-blessing:8e20b8147ca225c9",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3 (Milani)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.martyrs-last-blessing:appears_on_spell_list:spell-list.oracle",
@@ -421,26 +488,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.martyrs-last-blessing:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.martyrs-last-blessing:8e20b8147ca225c9",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3 (Milani)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -491,11 +538,19 @@
       "raw_value_sha256": "7c42a50badecb8c4ad581230fee4e1283c3517077c8fd808e6d16e1667a01e4e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.martyrs-last-blessing:8e20b8147ca225c9",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "3f456a94b4ed73dc07fb81d7534cdad70917c08ddd420a949cd62dc74fd7f4e6",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "DERIVED_SPELL_LIST_ACCESS",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.human-potential-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Human Potential, Mass",
@@ -169,7 +169,33 @@
   "description": {
     "raw": "This spell functions like human potential, except it affects multiple creatures. Each target can choose a different ability score to be enhanced by this spell.",
     "search_text": "\"this spell functions like human potential, except it affects multiple creatures. each target can choose a different ability score to be enhanced by this spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "human potential",
+              "relationship_id": "spell.human-potential-mass:functions_like:spell.human-potential",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it affects multiple creatures. Each target can choose a different ability score to be enhanced by this spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -426,6 +452,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.human-potential-mass:appears_on_spell_list:spell-list.summoner-unchained",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.summoner-unchained",
+        "name": "Summoner (Unchained) Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.human-potential-mass:9cc11d575817cead",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "manual_verification",
+          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 6",
+          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/transmutation/human-potential-mass.e0e6jhhkwxclo4em.yaml"
+        }
+      ],
+      "note": "Reviewed project decision: add Summoner (Unchained) 6 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
+    },
+    {
       "relationship_id": "spell.human-potential-mass:appears_on_spell_list:spell-list.wizard",
       "type": "appears_on_spell_list",
       "target": {
@@ -572,26 +618,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.human-potential-mass:appears_on_spell_list:spell-list.summoner-unchained",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.summoner-unchained",
-        "name": "Summoner (Unchained) Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.human-potential-mass:9cc11d575817cead",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "manual_verification",
-          "anchor_text_raw": "Pinned Foundry PF1 assertion: Summoner (Unchained) 6",
-          "source_href": "https://gitlab.com/foundryvtt_pathfinder1e/foundryvtt-pathfinder1/-/blob/1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f/packs/spells/transmutation/human-potential-mass.e0e6jhhkwxclo4em.yaml"
-        }
-      ],
-      "note": "Reviewed project decision: add Summoner (Unchained) 6 from pinned Foundry PF1 1668c1f1e0f9fc67f817e21b30fde01bcda1ad5f. This is a canonical override, not a printed AoN value."
     }
   ],
   "provenance": [
@@ -642,11 +668,19 @@
       "raw_value_sha256": "879b2de56c23fb15738a004b8c94e9a91f3263a5552406756301c84eb9468d5e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.human-potential-mass:9cc11d575817cead",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "4feb79ff0f49ef40b2ba56752f22327f7c4e7608ea3527a599b1651130fcad42",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

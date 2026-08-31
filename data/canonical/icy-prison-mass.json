@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.icy-prison-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Icy Prison, Mass",
@@ -143,7 +143,33 @@
   "description": {
     "raw": "This spell functions as icy prison, except as noted above.",
     "search_text": "\"this spell functions as icy prison, except as noted above.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "icy prison",
+              "relationship_id": "spell.icy-prison-mass:functions_like:spell.icy-prison",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except as noted above."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -248,6 +274,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.icy-prison-mass:appears_on_spell_list:spell-list.frost-spirit",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.frost-spirit",
+        "name": "Frost Spirit Magic Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spirit.frost:4b1c4aca",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "mass icy prison (9th)",
+          "source_href": "https://www.aonprd.com/ShamanSpiritDisplay.aspx?ItemName=Frost"
+        }
+      ],
+      "note": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
+    },
+    {
       "relationship_id": "spell.icy-prison-mass:appears_on_spell_list:spell-list.sorcerer",
       "type": "appears_on_spell_list",
       "target": {
@@ -306,6 +352,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.icy-prison-mass:appears_on_spell_list:spell-list.winter-mystery",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.winter-mystery",
+        "name": "Winter Mystery Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:mystery.winter:877fc031",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "mass icy prison (18th)",
+          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Winter"
+        }
+      ],
+      "note": "Printed by the owning oracle mystery; this is mystery access, not general Oracle class access."
     },
     {
       "relationship_id": "spell.icy-prison-mass:appears_on_spell_list:spell-list.wizard",
@@ -481,46 +547,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.icy-prison-mass:appears_on_spell_list:spell-list.winter-mystery",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.winter-mystery",
-        "name": "Winter Mystery Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:mystery.winter:877fc031",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "mass icy prison (18th)",
-          "source_href": "https://www.aonprd.com/MysteryDisplay.aspx?ItemName=Winter"
-        }
-      ],
-      "note": "Printed by the owning oracle mystery; this is mystery access, not general Oracle class access."
-    },
-    {
-      "relationship_id": "spell.icy-prison-mass:appears_on_spell_list:spell-list.frost-spirit",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.frost-spirit",
-        "name": "Frost Spirit Magic Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spirit.frost:4b1c4aca",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "mass icy prison (9th)",
-          "source_href": "https://www.aonprd.com/ShamanSpiritDisplay.aspx?ItemName=Frost"
-        }
-      ],
-      "note": "Printed by the owning shaman spirit; this is spirit access, not general Shaman class access."
     }
   ],
   "provenance": [
@@ -595,11 +621,19 @@
       "raw_value_sha256": "8e772a081b548d3aa94eaf90e4f156c28aacb070fd2bbbeccc3c36ebdd614a50",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.icy-prison-mass:a50a2b832b74bf3e",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "b8d3de8626da66110a83f47c8a9181f6756df7006f8ac1a00b0d489f07ffa30c",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

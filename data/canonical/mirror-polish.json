@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.mirror-polish",
   "ruleset": "Pathfinder First Edition",
   "name": "Mirror Polish",
@@ -151,7 +151,30 @@
   "description": {
     "raw": "You polish a metal item until it is reflective enough to be used as a mirror. This does not prevent the item from later damage or corrosion that would ruin the mirrored surface. The spell can be cast only on a metal item with a fairly smooth and contiguous surface, such as a breastplate, a helm, a shield, or a sword, but not a mace, chainmail, or scale mail.",
     "search_text": "\"you polish a metal item until it is reflective enough to be used as a mirror. this does not prevent the item from later damage or corrosion that would ruin the mirrored surface. the spell can be cast only on a metal item with a fairly smooth and contiguous surface, such as a breastplate, a helm, a shield, or a sword, but not a mace, chainmail, or scale mail.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You polish a metal item until it is reflective enough to be used as a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "mirror",
+              "relationship_id": "spell.mirror-polish:uses_definition:rule.mirror"
+            },
+            {
+              "node_type": "text",
+              "value": ". This does not prevent the item from later damage or corrosion that would ruin the mirrored surface. The spell can be cast only on a metal item with a fairly smooth and contiguous surface, such as a breastplate, a helm, a shield, or a sword, but not a mace, chainmail, or scale mail."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -446,12 +469,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.mirror-polish:uses_definition:rule.touch",
+      "relationship_id": "spell.mirror-polish:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -514,11 +537,19 @@
       "raw_value_sha256": "701fcd575857d736f775a2734c3de594016708dd40e85072c3cda3d1b539c6a0",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.mirror-polish:aa90bfa3a3b5879a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "47c1eb438a9ef1ca5c07ac1c1bb6d3e0306b80427713f6d49157f0ec3b660e25",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

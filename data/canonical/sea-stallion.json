@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.sea-stallion",
   "ruleset": "Pathfinder First Edition",
   "name": "Sea Stallion",
@@ -135,7 +135,60 @@
   "description": {
     "raw": "This spell functions as sea steed, but as long as you stay mounted on the target, you also gain the amphibious quality and your melee attacks function as if you were under the effect of freedom of movement. The benefits you gain from this spell are not polymorph effects. If you dismount from the target, you retain the amphibious quality for up to 1 minute, but not the other benefits. You regain all of the benefits once you mount the target creature again.",
     "search_text": "\"this spell functions as sea steed, but as long as you stay mounted on the target, you also gain the amphibious quality and your melee attacks function as if you were under the effect of freedom of movement. the benefits you gain from this spell are not polymorph effects. if you dismount from the target, you retain the amphibious quality for up to 1 minute, but not the other benefits. you regain all of the benefits once you mount the target creature again.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "sea steed",
+              "relationship_id": "spell.sea-stallion:functions_like:spell.sea-steed",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", but as long as you stay mounted on the target, you also gain the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "amphibious",
+              "relationship_id": "spell.sea-stallion:uses_definition:rule.amphibious"
+            },
+            {
+              "node_type": "text",
+              "value": " quality and your melee attacks function as if you were under the effect of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "freedom of movement",
+              "relationship_id": "spell.sea-stallion:references:spell.freedom-of-movement"
+            },
+            {
+              "node_type": "text",
+              "value": ". The benefits you gain from this spell are not polymorph effects. If you dismount from the target, you retain the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "amphibious",
+              "relationship_id": "spell.sea-stallion:uses_definition:rule.amphibious"
+            },
+            {
+              "node_type": "text",
+              "value": " quality for up to 1 minute, but not the other benefits. You regain all of the benefits once you mount the target creature again."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -299,6 +352,13 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as sea steed, but as long as you stay mounted on the target, you also gain the amphibious quality and your melee attacks function as if you were under the effect of freedom of movement. The benefits you gain from this spell are not polymorph effects. If you dismount from the target, you retain the amphibious quality for up to 1 minute, but not the other benefits. You regain all of the benefits once you mount the target creature again.",
           "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.sea-stallion:b13dbc34ddb7f103",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "sea steed",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/sea-steed/"
         }
       ],
       "note": null
@@ -431,7 +491,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.freedom-of-movement",
-        "name": "freedom of movement"
+        "name": "Freedom of Movement"
       },
       "status": "accepted",
       "evidence": [
@@ -441,26 +501,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "freedom of movement",
           "source_href": "https://www.d20pfsrd.com/magic/all-spells/f/freedom-of-movement"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.sea-stallion:references:spell.sea-steed",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.sea-steed",
-        "name": "sea steed"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.sea-stallion:b13dbc34ddb7f103",
-          "source_field": "spell_raw.links_raw[5]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "sea steed",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/sea-steed/"
         }
       ],
       "note": null
@@ -581,11 +621,19 @@
       "raw_value_sha256": "cc554da74d7c057c796c24aae0808d06acb3e8a192df3a714264021860cef6af",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.sea-stallion:f173371ba1f54107",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "6df1ea110053339d05fbf067718f62488a4affc5239285e118270d489916cfb6",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.2-explicit-inheritance",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

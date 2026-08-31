@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.abstemiousness",
   "ruleset": "Pathfinder First Edition",
   "name": "Abstemiousness",
@@ -258,7 +258,21 @@
   "description": {
     "raw": "Sometimes Irori smiles on his worshipers, granting them a reprieve from physical hunger. This spell magically enhances a handful of simple food, imbuing it with enough nutrition to satisfy a Medium or smaller creature for a full day. The spell does not create food, and thus will not alone prevent someone from starving, but it can extend even limited reserves for lengthy periods.",
     "search_text": "\"sometimes irori smiles on his worshipers, granting them a reprieve from physical hunger. this spell magically enhances a handful of simple food, imbuing it with enough nutrition to satisfy a medium or smaller creature for a full day. the spell does not create food, and thus will not alone prevent someone from starving, but it can extend even limited reserves for lengthy periods.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Sometimes Irori smiles on his worshipers, granting them a reprieve from physical hunger. This spell magically enhances a handful of simple food, imbuing it with enough nutrition to satisfy a Medium or smaller creature for a full day. The spell does not create food, and thus will not alone prevent someone from starving, but it can extend even limited reserves for lengthy periods."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -383,6 +397,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.abstemiousness:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.abstemiousness:c86a22b60ba96551",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1 (Irori)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.abstemiousness:appears_on_spell_list:spell-list.oracle",
@@ -587,12 +621,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.abstemiousness:uses_definition:rule.fort",
+      "relationship_id": "spell.abstemiousness:uses_definition:rule.fortitude-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.fort",
-        "name": "Fort"
+        "entity_id": "rule.fortitude-saving-throw",
+        "name": "Fortitude"
       },
       "status": "accepted",
       "evidence": [
@@ -627,12 +661,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.abstemiousness:uses_definition:rule.touch",
+      "relationship_id": "spell.abstemiousness:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -645,26 +679,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.abstemiousness:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.abstemiousness:c86a22b60ba96551",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1 (Irori)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -715,11 +729,19 @@
       "raw_value_sha256": "ac96905ce9e944930a117489e8f919dd2ec237224ede9c541585d60dfff3acc3",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.abstemiousness:c86a22b60ba96551",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "30afc35dd8fada0e2adc2a2dee93aaa2beb2e293b2794e586a254e837364d440",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

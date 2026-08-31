@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.ward-shield",
   "ruleset": "Pathfinder First Edition",
   "name": "Ward Shield",
@@ -188,7 +188,89 @@
   "description": {
     "raw": "With a touch, you enchant a shield and enable it to protect its wielder from hostile spells. The shield grants spell resistance 10 + your caster level against spells so long as the shield can be interposed between the wielder and the spell effect. A spell shield does not provide spell resistance against area effect spells such as fireball, but does provide a +5 bonus on Reflex saving throws against such spells.",
     "search_text": "\"with a touch, you enchant a shield and enable it to protect its wielder from hostile spells. the shield grants spell resistance 10 + your caster level against spells so long as the shield can be interposed between the wielder and the spell effect. a spell shield does not provide spell resistance against area effect spells such as fireball, but does provide a +5 bonus on reflex saving throws against such spells.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "With a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch",
+              "relationship_id": "spell.ward-shield:uses_definition:rule.touch-attack"
+            },
+            {
+              "node_type": "text",
+              "value": ", you enchant a shield and enable it to protect its wielder from hostile spells. The shield grants "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.ward-shield:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": " 10 + your "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.ward-shield:uses_definition:rule.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " against spells so long as the shield can be interposed between the wielder and the spell effect. A "
+            },
+            {
+              "node_type": "text",
+              "value": "spell shield ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "does not provide "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.ward-shield:uses_definition:rule.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": " against area effect spells such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fireball",
+              "relationship_id": "spell.ward-shield:references:spell.fireball",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", but does provide a +5 bonus on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Reflex",
+              "relationship_id": "spell.ward-shield:uses_definition:rule.reflex-saving-throw"
+            },
+            {
+              "node_type": "text",
+              "value": " saving throws against such spells."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -300,6 +382,47 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.ward-shield:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.ward-shield:e33e171dec24712b",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
+        },
+        {
+          "observation_id": "aon:spell.ward-shield:91fa1129b106b632",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.ward-shield:e33e171dec24712b",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.ward-shield:91fa1129b106b632",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.ward-shield:appears_on_spell_list:spell-list.oracle",
@@ -475,7 +598,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.fireball",
-        "name": "fireball"
+        "name": "Fireball"
       },
       "status": "accepted",
       "evidence": [
@@ -537,11 +660,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.ward-shield:uses_definition:rule.reflex",
+      "relationship_id": "spell.ward-shield:uses_definition:rule.reflex-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.reflex",
+        "entity_id": "rule.reflex-saving-throw",
         "name": "Reflex"
       },
       "status": "accepted",
@@ -577,12 +700,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.ward-shield:uses_definition:rule.touch",
+      "relationship_id": "spell.ward-shield:uses_definition:rule.touch-attack",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.touch",
-        "name": "touch"
+        "entity_id": "rule.touch-attack",
+        "name": "Touch attack"
       },
       "status": "accepted",
       "evidence": [
@@ -597,11 +720,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.ward-shield:uses_definition:rule.will",
+      "relationship_id": "spell.ward-shield:uses_definition:rule.will-saving-throw",
       "type": "uses_definition",
       "target": {
         "entity_type": "rule",
-        "entity_id": "rule.will",
+        "entity_id": "rule.will-saving-throw",
         "name": "Will"
       },
       "status": "accepted",
@@ -615,47 +738,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.ward-shield:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.ward-shield:e33e171dec24712b",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/magic/spell-lists-and-domains/spell-lists-cleric/"
-        },
-        {
-          "observation_id": "aon:spell.ward-shield:91fa1129b106b632",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 4",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.ward-shield:e33e171dec24712b",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.ward-shield:91fa1129b106b632",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -706,11 +788,19 @@
       "raw_value_sha256": "a41b8e9254ddc93cfaca12fcddc112d2b0591bfadcd91b19589efcf9416525dd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.ward-shield:91fa1129b106b632",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "8fd21e91acc018ca7d76388f9040026522e4950bc1e6053030064a0524a4d446",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

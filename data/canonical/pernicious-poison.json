@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.pernicious-poison",
   "ruleset": "Pathfinder First Edition",
   "name": "Pernicious Poison",
@@ -177,9 +177,41 @@
     }
   },
   "description": {
-    "raw": "You weaken the target’s defenses against poison. The target gains a –4 penalty on saves against poison, and poisons affecting the target continue for another 2 frequency increments (for example, black adder venom lasts 8 rounds instead of 6, and arsenic lasts for 6 minutes instead of 4). Attempts to cure the poisoned target with skill or magic take a –4 penalty.Mythic Pernicious PoisonSource Mythic Adventures pg. 103\nThe number of successful saving throws needed to cure a poison increases by one. If the poison deals ability damage on a failed saving throw, that ability damage increases by 1.\n\nAugmented (6th): If you expend two uses of mythic power, the target’s penalty on saves against poison increases to –8, and the penalty for attempting to cure the target with skill or magic increases to –8.\n\nIf you expend three uses of mythic power, the poison bypasses the creature’s poison immunity (this doesn’t affect poison immunity from not having a Constitution score).",
-    "search_text": "\"you weaken the target’s defenses against poison. the target gains a –4 penalty on saves against poison, and poisons affecting the target continue for another 2 frequency increments (for example, black adder venom lasts 8 rounds instead of 6, and arsenic lasts for 6 minutes instead of 4). attempts to cure the poisoned target with skill or magic take a –4 penalty.mythic pernicious poisonsource mythic adventures pg. 103\\nthe number of successful saving throws needed to cure a poison increases by one. if the poison deals ability damage on a failed saving throw, that ability damage increases by 1.\\n\\naugmented (6th): if you expend two uses of mythic power, the target’s penalty on saves against poison increases to –8, and the penalty for attempting to cure the target with skill or magic increases to –8.\\n\\nif you expend three uses of mythic power, the poison bypasses the creature’s poison immunity (this doesn’t affect poison immunity from not having a constitution score).\"",
-    "sections": []
+    "raw": "You weaken the target’s defenses against poison. The target gains a –4 penalty on saves against poison, and poisons affecting the target continue for another 2 frequency increments (for example, black adder venom lasts 8 rounds instead of 6, and arsenic lasts for 6 minutes instead of 4). Attempts to cure the poisoned target with skill or magic take a –4 penalty.",
+    "search_text": "\"you weaken the target’s defenses against poison. the target gains a –4 penalty on saves against poison, and poisons affecting the target continue for another 2 frequency increments (for example, black adder venom lasts 8 rounds instead of 6, and arsenic lasts for 6 minutes instead of 4). attempts to cure the poisoned target with skill or magic take a –4 penalty.\"",
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You weaken the target’s defenses against poison. The target gains a –4 penalty on saves against poison, and poisons affecting the target continue for another 2 frequency increments (for example, "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "black adder venom",
+              "relationship_id": "spell.pernicious-poison:uses_definition:rule.black-adder-venom"
+            },
+            {
+              "node_type": "text",
+              "value": " lasts 8 rounds instead of 6, and "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "arsenic",
+              "relationship_id": "spell.pernicious-poison:uses_definition:rule.arsenic"
+            },
+            {
+              "node_type": "text",
+              "value": " lasts for 6 minutes instead of 4). Attempts to cure the poisoned target with skill or magic take a –4 penalty."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -344,6 +376,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.pernicious-poison:appears_on_spell_list:spell-list.venom-subdomain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.venom-subdomain",
+        "name": "Venom Subdomain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.venom:8171f4dc",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "2nd—pernicious poison",
+          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Scalykind"
+        }
+      ],
+      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     },
     {
       "relationship_id": "spell.pernicious-poison:appears_on_spell_list:spell-list.witch",
@@ -627,26 +679,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.pernicious-poison:appears_on_spell_list:spell-list.venom-subdomain",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.venom-subdomain",
-        "name": "Venom Subdomain Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.venom:8171f4dc",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "2nd—pernicious poison",
-          "source_href": "https://www.aonprd.com/DomainDisplay.aspx?ItemName=Scalykind"
-        }
-      ],
-      "note": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
     }
   ],
   "provenance": [
@@ -705,11 +737,19 @@
       "raw_value_sha256": "3294411250eea9fe6874e161d53d27859ac5c28d40026272af60c78b8808f693",
       "decision": "normalized",
       "note": "The owner page prints the class level when the spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.pernicious-poison:5210b0f282fece29",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d3741c0620a35feb41c937250501c1254d51a25673eacd10875de01cbefb5d4f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
