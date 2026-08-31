@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.snowball",
   "ruleset": "Pathfinder First Edition",
   "name": "Snowball",
@@ -168,7 +168,39 @@
   "description": {
     "raw": "You throw a ball of elemental ice and snow at a single target as a ranged touch attack. The snowball deals 1d6 points of cold damage per caster level you have (maximum 5d6).",
     "search_text": "\"you throw a ball of elemental ice and snow at a single target as a ranged touch attack. the snowball deals 1d6 points of cold damage per caster level you have (maximum 5d6).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You throw a ball of elemental ice and snow at a single target as a ranged "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "touch attack",
+              "relationship_id": "spell.snowball:uses_definition:attack.touch"
+            },
+            {
+              "node_type": "text",
+              "value": ". The snowball deals 1d6 points of cold damage per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.snowball:uses_definition:spellcasting.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " you have (maximum 5d6)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -726,21 +758,21 @@
       "note": null
     },
     {
-      "relationship_id": "spell.snowball:uses_definition:condition.staggered",
+      "relationship_id": "spell.snowball:uses_definition:attack.touch",
       "type": "uses_definition",
       "target": {
-        "entity_type": "condition",
-        "entity_id": "condition.staggered",
-        "name": "staggered"
+        "entity_type": "attack",
+        "entity_id": "attack.touch",
+        "name": "touch attack"
       },
       "status": "accepted",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.snowball:cf0a5f0dc961224d",
-          "source_field": "spell_raw.links_raw[12]",
+          "source_field": "spell_raw.links_raw[21]",
           "evidence_kind": "hyperlink",
-          "anchor_text_raw": "staggered",
-          "source_href": "https://www.d20pfsrd.com/gamemastering/conditions/#TOC-Staggered"
+          "anchor_text_raw": "touch attack",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Touch-Attacks"
         }
       ],
       "note": null
@@ -766,21 +798,41 @@
       "note": null
     },
     {
-      "relationship_id": "spell.snowball:uses_definition:spellcasting.caster-level",
+      "relationship_id": "spell.snowball:uses_definition:condition.staggered",
       "type": "uses_definition",
       "target": {
-        "entity_type": "spellcasting",
-        "entity_id": "spellcasting.caster-level",
-        "name": "caster level"
+        "entity_type": "condition",
+        "entity_id": "condition.staggered",
+        "name": "staggered"
       },
       "status": "accepted",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.snowball:cf0a5f0dc961224d",
-          "source_field": "spell_raw.links_raw[22]",
+          "source_field": "spell_raw.links_raw[12]",
           "evidence_kind": "hyperlink",
-          "anchor_text_raw": "caster level",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Caster-Level"
+          "anchor_text_raw": "staggered",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/conditions/#TOC-Staggered"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.snowball:uses_definition:defense.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "defense",
+        "entity_id": "defense.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.snowball:424538cc02915dd0",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes",
+          "source_href": null
         }
       ],
       "note": null
@@ -801,6 +853,26 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "evocation",
           "source_href": "https://www.d20pfsrd.com/magic#TOC-Evocation"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.snowball:uses_definition:publication.pathfinder-rpg-ultimate-wilderness",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.pathfinder-rpg-ultimate-wilderness",
+        "name": "Pathfinder Roleplaying Game Ultimate Wilderness"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.snowball:cf0a5f0dc961224d",
+          "source_field": "spell_raw.links_raw[23]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Pathfinder Roleplaying Game Ultimate Wilderness",
+          "source_href": "http://amzn.to/2z71S07"
         }
       ],
       "note": null
@@ -833,61 +905,21 @@
       "note": null
     },
     {
-      "relationship_id": "spell.snowball:uses_definition:publication.pathfinder-rpg-ultimate-wilderness",
+      "relationship_id": "spell.snowball:uses_definition:spellcasting.caster-level",
       "type": "uses_definition",
       "target": {
-        "entity_type": "publication",
-        "entity_id": "publication.pathfinder-rpg-ultimate-wilderness",
-        "name": "Pathfinder Roleplaying Game Ultimate Wilderness"
+        "entity_type": "spellcasting",
+        "entity_id": "spellcasting.caster-level",
+        "name": "caster level"
       },
       "status": "accepted",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.snowball:cf0a5f0dc961224d",
-          "source_field": "spell_raw.links_raw[23]",
+          "source_field": "spell_raw.links_raw[22]",
           "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Pathfinder Roleplaying Game Ultimate Wilderness",
-          "source_href": "http://amzn.to/2z71S07"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.snowball:uses_definition:defense.spell-resistance",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "Spell Resistance"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.snowball:424538cc02915dd0",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "yes",
-          "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.snowball:uses_definition:attack.touch",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "attack",
-        "entity_id": "attack.touch",
-        "name": "touch attack"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.snowball:cf0a5f0dc961224d",
-          "source_field": "spell_raw.links_raw[21]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "touch attack",
-          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Touch-Attacks"
+          "anchor_text_raw": "caster level",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Caster-Level"
         }
       ],
       "note": null
@@ -941,11 +973,19 @@
       "raw_value_sha256": "c81a0347180c5c525bcc7881a5e46bd1d7653b9afe73c3a7208f77220d89bce8",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.snowball:424538cc02915dd0",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "1b8f47d5d97f6376e4df755ce19dc72b469e29139810978690f58f70de564060",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

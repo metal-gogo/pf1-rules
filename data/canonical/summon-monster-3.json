@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.summon-monster-3",
   "ruleset": "Pathfinder First Edition",
   "name": "Summon Monster 3",
@@ -240,7 +240,33 @@
   "description": {
     "raw": "This spell functions like summon monster I, except that you can summon one creature from the 3rd-level list, 1d3 creatures of the same kind from the 2nd-level list, or 1d4+1 creatures of the same kind from the 1st-level list.",
     "search_text": "\"this spell functions like summon monster i, except that you can summon one creature from the 3rd-level list, 1d3 creatures of the same kind from the 2nd-level list, or 1d4+1 creatures of the same kind from the 1st-level list.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "summon monster I",
+              "relationship_id": "spell.summon-monster-3:functions_like:spell.summon-monster-1",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that you can summon one creature from the 3rd-level list, 1d3 creatures of the same kind from the 2nd-level list, or 1d4+1 creatures of the same kind from the 1st-level list."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -368,6 +394,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.summon-monster-3:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.summon-monster-3:23d39f0a08fe8610",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 3",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.summon-monster-3:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -446,6 +492,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.summon-monster-3:appears_on_spell_list:spell-list.sorcerer-serpentine-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-serpentine-bloodline",
+        "name": "Sorcerer Serpentine Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.serpentine:2bd6e742",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "summon monster III (reptiles only) (7th)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Serpentine"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     },
     {
       "relationship_id": "spell.summon-monster-3:appears_on_spell_list:spell-list.spiritualist",
@@ -660,46 +726,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.summon-monster-3:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.summon-monster-3:23d39f0a08fe8610",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
-    },
-    {
-      "relationship_id": "spell.summon-monster-3:appears_on_spell_list:spell-list.sorcerer-serpentine-bloodline",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.sorcerer-serpentine-bloodline",
-        "name": "Sorcerer Serpentine Bloodline Bonus Spells"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.serpentine:2bd6e742",
-          "source_field": "entity_raw.sections_raw[0]",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "summon monster III (reptiles only) (7th)",
-          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Serpentine"
-        }
-      ],
-      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     }
   ],
   "provenance": [
@@ -758,11 +784,19 @@
       "raw_value_sha256": "82dada217acc5b31d0292d5e2769c5a83780bdb4828ed91e21c7c8a664a8dd63",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.summon-monster-3:23d39f0a08fe8610",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "809e18db9e598a5c8d5a5cea33e3a9ac21adcbe94a2975e7f58868042f9bdb0d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "DERIVED_SPELL_LIST_ACCESS",

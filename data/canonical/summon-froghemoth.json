@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.summon-froghemoth",
   "ruleset": "Pathfinder First Edition",
   "name": "Summon Froghemoth",
@@ -93,7 +93,58 @@
   "description": {
     "raw": "This spell functions as summon nature’s ally IX, except you summon a froghemoth.",
     "search_text": "\"this spell functions as summon nature’s ally ix, except you summon a froghemoth.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "summon",
+              "relationship_id": "spell.summon-froghemoth:uses_definition:universal-monster-rule.summon",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " nature’s ally IX",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "summon",
+              "relationship_id": "spell.summon-froghemoth:uses_definition:universal-monster-rule.summon"
+            },
+            {
+              "node_type": "text",
+              "value": " a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "froghemoth",
+              "relationship_id": "spell.summon-froghemoth:uses_definition:monster.froghemoth"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -228,12 +279,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.summon-froghemoth:references:spell.summon-natures-ally-ix",
+      "relationship_id": "spell.summon-froghemoth:references:spell.summon-natures-ally-9",
       "type": "references",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.summon-natures-ally-ix",
-        "name": "summon nature's ally IX"
+        "entity_id": "spell.summon-natures-ally-9",
+        "name": "Summon Nature's Ally 9"
       },
       "status": "accepted",
       "evidence": [
@@ -250,6 +301,26 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "summon nature’s ally IX",
           "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/summon-natures-ally"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.summon-froghemoth:uses_definition:defense.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "defense",
+        "entity_id": "defense.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.summon-froghemoth:d8463ede51c39ad5",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "no",
+          "source_href": null
         }
       ],
       "note": null
@@ -277,26 +348,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "froghemoth",
           "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/aberrations/froghemoth"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.summon-froghemoth:uses_definition:defense.spell-resistance",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "Spell Resistance"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.summon-froghemoth:d8463ede51c39ad5",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "no",
-          "source_href": null
         }
       ],
       "note": null
@@ -370,11 +421,19 @@
       "raw_value_sha256": "c82b5b85e2d91209250cb2c60fa037a7749807a82dd65648d86d21392c2655c1",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.summon-froghemoth:d8463ede51c39ad5",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "9126779acad7dfe3d38776333cf24caddf61eea9e0297c492d951c7e31c32ce2",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

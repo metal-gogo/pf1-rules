@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.abundant-ammunition",
   "ruleset": "Pathfinder First Edition",
   "name": "Abundant Ammunition",
@@ -231,7 +231,52 @@
   "description": {
     "raw": "When cast on a container such as a quiver or a pouch that contains nonmagical ammunition or shuriken (including masterwork ammunition or shuriken, but not special materials, achemical attributes, or nonmagical treatments on the ammunition), at the start of each round this spell replaces any ammunition taken from the container the round before. The ammunition taken from the container the round before vanishes. If, after casting this spell, you cast a spell that enhances projectiles, such as align weapon or greater magic weapon, on the same container, all projectiles this spell conjures are affected by that spell.",
     "search_text": "\"when cast on a container such as a quiver or a pouch that contains nonmagical ammunition or shuriken (including masterwork ammunition or shuriken, but not special materials, achemical attributes, or nonmagical treatments on the ammunition), at the start of each round this spell replaces any ammunition taken from the container the round before. the ammunition taken from the container the round before vanishes. if, after casting this spell, you cast a spell that enhances projectiles, such as align weapon or greater magic weapon, on the same container, all projectiles this spell conjures are affected by that spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "When cast on a container such as a quiver or a pouch that contains nonmagical ammunition or shuriken (including masterwork ammunition or shuriken, but not special materials, achemical attributes, or nonmagical treatments on the ammunition), at the start of each round this spell replaces any ammunition taken from the container the round before. The ammunition taken from the container the round before vanishes. If, after casting this spell, you cast a spell that enhances projectiles, such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "align weapon",
+              "relationship_id": "spell.abundant-ammunition:references:spell.align-weapon",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "greater magic weapon",
+              "relationship_id": "spell.abundant-ammunition:references:spell.magic-weapon-greater",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", on the same container, all projectiles this spell conjures are affected by that spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -336,6 +381,33 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.abundant-ammunition:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.abundant-ammunition:7f77e49689716dd2",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.abundant-ammunition:9a9f240bfd746a3a",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 1",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.abundant-ammunition:appears_on_spell_list:spell-list.oracle",
@@ -605,7 +677,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.align-weapon",
-        "name": "align weapon"
+        "name": "Align Weapon"
       },
       "status": "accepted",
       "evidence": [
@@ -627,32 +699,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.abundant-ammunition:references:spell.greater-magic-weapon",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.greater-magic-weapon",
-        "name": "greater magic weapon"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.abundant-ammunition:e5cac216e0301434",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "greater magic weapon",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/magicWeapon.html#magic-weapon-greater"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.abundant-ammunition:references:spell.magic-weapon",
       "type": "references",
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.magic-weapon",
-        "name": "magic weapon"
+        "name": "Magic Weapon"
       },
       "status": "accepted",
       "evidence": [
@@ -662,6 +714,26 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "magic weapon",
           "source_href": "https://www.d20pfsrd.com/magic/all-spells/m/magic-weapon/"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.abundant-ammunition:references:spell.magic-weapon-greater",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.magic-weapon-greater",
+        "name": "Magic Weapon, Greater"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.abundant-ammunition:e5cac216e0301434",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "greater magic weapon",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/magicWeapon.html#magic-weapon-greater"
         }
       ],
       "note": null
@@ -712,33 +784,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.abundant-ammunition:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.abundant-ammunition:7f77e49689716dd2",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.abundant-ammunition:9a9f240bfd746a3a",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 1",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -797,11 +842,19 @@
       "raw_value_sha256": "be33913f86ad0a1b2b9c1d7537b3e12339d48dbb63ade0128ae9f4519e071b05",
       "decision": "manually_resolved",
       "note": "Reviewed project decision: the printed Range field is blank, but the printed Target is one container touched. Use touch as the canonical range while preserving the missing source value."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.abundant-ammunition:9a9f240bfd746a3a",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "2f71f334196bb3cde29703bffe5567d04e2aade7f1c2d662ab075ccab9e5d368",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "REVIEWED_RANGE_OVERRIDE",

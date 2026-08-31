@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.restore-eidolon",
   "ruleset": "Pathfinder First Edition",
   "name": "Restore Eidolon",
@@ -121,7 +121,33 @@
   "description": {
     "raw": "This spell functions as restoration, except it only affects an eidolon.",
     "search_text": "\"this spell functions as restoration, except it only affects an eidolon.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "restoration",
+              "relationship_id": "spell.restore-eidolon:functions_like:spell.restoration",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it only affects an eidolon."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -300,6 +326,20 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "This spell functions as restoration, except it only affects an eidolon.",
           "source_href": null
+        },
+        {
+          "observation_id": "legacy_aon:spell.restore-eidolon:ef76e85de13e01f3",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "restoration",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/restoration.html#restoration"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.restore-eidolon:364d62a953a15a62",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "restoration",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/r/restoration"
         }
       ],
       "note": null
@@ -400,12 +440,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.restore-eidolon:references:spell.lesser-restoration",
+      "relationship_id": "spell.restore-eidolon:references:spell.restoration-lesser",
       "type": "references",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.lesser-restoration",
-        "name": "lesser restoration"
+        "entity_id": "spell.restoration-lesser",
+        "name": "Restoration, Lesser"
       },
       "status": "accepted",
       "evidence": [
@@ -414,33 +454,6 @@
           "source_field": "spell_raw.links_raw[7]",
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "lesser restoration",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/r/restoration"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.restore-eidolon:references:spell.restoration",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.restoration",
-        "name": "restoration"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.restore-eidolon:ef76e85de13e01f3",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "restoration",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/restoration.html#restoration"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.restore-eidolon:364d62a953a15a62",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "restoration",
           "source_href": "https://www.d20pfsrd.com/magic/all-spells/r/restoration"
         }
       ],
@@ -542,11 +555,19 @@
       "raw_value_sha256": "33b0b822f9c8218d34fdf9b768f621b67d0a798a3b172d959228acdd4754b610",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.restore-eidolon:d96eda5b39da0eeb",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "00e341cbbfa790083c286c889dae210ccec7aaf206598757a5a0dfcf9fce1197",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

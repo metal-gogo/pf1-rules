@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.life-conduit",
   "ruleset": "Pathfinder First Edition",
   "name": "Life Conduit",
@@ -113,7 +113,59 @@
   "description": {
     "raw": "You utilize life conduit to share hit points with your eidolon. While this spell is active, you can spend a swift action to transfer 1d6 hit points between you and your eidolon, either taking damage yourself and healing your eidolon or healing yourself and damaging your eidolon. If your eidolon moves farther than 50 feet from you, this spell ends.",
     "search_text": "\"you utilize life conduit to share hit points with your eidolon. while this spell is active, you can spend a swift action to transfer 1d6 hit points between you and your eidolon, either taking damage yourself and healing your eidolon or healing yourself and damaging your eidolon. if your eidolon moves farther than 50 feet from you, this spell ends.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You utilize "
+            },
+            {
+              "node_type": "text",
+              "value": "life conduit ",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "to share "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.life-conduit:uses_definition:damage.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": " with your eidolon. While this spell is active, you can spend a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "swift action",
+              "relationship_id": "spell.life-conduit:uses_action:action.swift-action"
+            },
+            {
+              "node_type": "text",
+              "value": " to transfer 1d6 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.life-conduit:uses_definition:damage.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": " between you and your eidolon, either taking damage yourself and healing your eidolon or healing yourself and damaging your eidolon. If your eidolon moves farther than 50 feet from you, this spell ends."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -297,26 +349,6 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "Ultimate Combat pg. 233",
           "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.life-conduit:references:spell.life-conduit",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.life-conduit",
-        "name": "life conduit"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.life-conduit:38e751bdf55fe46c",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "life conduit",
-          "source_href": "https://legacy.aonprd.com/ultimateCombat/spells/lifeConduit.html#life-conduit"
         }
       ],
       "note": null
@@ -546,11 +578,19 @@
       "raw_value_sha256": "c9d856f2909c6701ecbfb5a83e1af84e0069f20811802c30836a2f527f37ac19",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.life-conduit:45e72c4ae42f5c49",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "33c5865f9913c346cc47f0cdf24e07af3536d8b5f071ebb52cabb550b72c651a",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

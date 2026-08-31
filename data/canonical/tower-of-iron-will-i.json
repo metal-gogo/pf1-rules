@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.tower-of-iron-will-i",
   "ruleset": "Pathfinder First Edition",
   "name": "Tower of Iron Will I",
@@ -99,7 +99,57 @@
   "description": {
     "raw": "You project a fortress of mental power that blocks out the psychic energy of others, granting mental strength and resiliency to all inside the area. All creatures inside the area gain spell resistance equal to 10 + double this spell’s level against psychic magic and any mind-affecting effects. Creatures inside the area don’t receive this protection against your spells or special abilities.",
     "search_text": "\"you project a fortress of mental power that blocks out the psychic energy of others, granting mental strength and resiliency to all inside the area. all creatures inside the area gain spell resistance equal to 10 + double this spell’s level against psychic magic and any mind-affecting effects. creatures inside the area don’t receive this protection against your spells or special abilities.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You project a fortress of mental power that blocks out the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "psychic",
+              "relationship_id": "spell.tower-of-iron-will-i:uses_definition:spellcasting.psychic"
+            },
+            {
+              "node_type": "text",
+              "value": " energy of others, granting mental strength and resiliency to all inside the area. All creatures inside the area gain "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "spell resistance",
+              "relationship_id": "spell.tower-of-iron-will-i:uses_definition:defense.spell-resistance"
+            },
+            {
+              "node_type": "text",
+              "value": " equal to 10 + double this spell’s level against "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "psychic",
+              "relationship_id": "spell.tower-of-iron-will-i:uses_definition:spellcasting.psychic"
+            },
+            {
+              "node_type": "text",
+              "value": " magic and any "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "mind-affecting",
+              "relationship_id": "spell.tower-of-iron-will-i:uses_definition:descriptor.mind-affecting"
+            },
+            {
+              "node_type": "text",
+              "value": " effects. Creatures inside the area don’t receive this protection against your spells or special abilities."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -335,6 +385,33 @@
       "note": null
     },
     {
+      "relationship_id": "spell.tower-of-iron-will-i:uses_definition:defense.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "defense",
+        "entity_id": "defense.spell-resistance",
+        "name": "spell resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.tower-of-iron-will-i:70b02af784eac074",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "spell resistance",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/special-abilities#TOC-Spell-Resistance"
+        },
+        {
+          "observation_id": "aon:spell.tower-of-iron-will-i:85e2762477063b2f",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes (harmless)",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.tower-of-iron-will-i:uses_definition:descriptor.mind-affecting",
       "type": "uses_definition",
       "target": {
@@ -401,33 +478,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.tower-of-iron-will-i:uses_definition:defense.spell-resistance",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "spell resistance"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.tower-of-iron-will-i:70b02af784eac074",
-          "source_field": "spell_raw.links_raw[7]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "spell resistance",
-          "source_href": "https://www.d20pfsrd.com/gamemastering/special-abilities#TOC-Spell-Resistance"
-        },
-        {
-          "observation_id": "aon:spell.tower-of-iron-will-i:85e2762477063b2f",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "yes (harmless)",
-          "source_href": null
-        }
-      ],
-      "note": null
     }
   ],
   "provenance": [
@@ -478,11 +528,19 @@
       "raw_value_sha256": "f08e0fc2e82551472bf9b0cb693935739f309bb778cd609da18b4f55adbd5b67",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.tower-of-iron-will-i:85e2762477063b2f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "257a04642b9f51a7aaa5c54512baa1ff2783f17493f0ac7532bd49775a3408b7",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

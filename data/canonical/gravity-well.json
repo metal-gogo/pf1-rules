@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.gravity-well",
   "ruleset": "Pathfinder First Edition",
   "name": "Gravity Well",
@@ -143,7 +143,69 @@
   "description": {
     "raw": "You bring into being a localized region of increased gravity that\ncrushes a creature to the ground. Affected targets weigh twice\nas much as normal, can move only at half speed, jump only half\nas far as normal, and can lift and carry only half as much as\nnormal. Any flying target has its maneuverability worsened by\ntwo steps (from good to poor, for example; minimum clumsy)\nand plummets to the ground unless it succeeds at a DC 25 Fly\ncheck to remain in the air.\n\nFreedom of movement negates the effects of this spell. A\ncreature targeted by gravity well behaves normally in the area\nof a reverse gravity spell.",
     "search_text": "\"you bring into being a localized region of increased gravity that\\ncrushes a creature to the ground. affected targets weigh twice\\nas much as normal, can move only at half speed, jump only half\\nas far as normal, and can lift and carry only half as much as\\nnormal. any flying target has its maneuverability worsened by\\ntwo steps (from good to poor, for example; minimum clumsy)\\nand plummets to the ground unless it succeeds at a dc 25 fly\\ncheck to remain in the air.\\n\\nfreedom of movement negates the effects of this spell. a\\ncreature targeted by gravity well behaves normally in the area\\nof a reverse gravity spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You bring into being a localized region of increased gravity that crushes a creature to the ground. Affected targets weigh twice as much as normal, can move only at half speed, jump only half as far as normal, and can lift and carry only half as much as normal. Any flying target has its maneuverability worsened by two steps (from good to poor, for example; minimum clumsy) and plummets to the ground unless it succeeds at a DC 25 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Fly",
+              "relationship_id": "spell.gravity-well:uses_definition:skill.fly"
+            },
+            {
+              "node_type": "text",
+              "value": " check to remain in the air."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "entity_link",
+              "value": "Freedom of movement",
+              "relationship_id": "spell.gravity-well:references:spell.freedom-of-movement",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " negates the effects of this spell. A creature targeted by "
+            },
+            {
+              "node_type": "text",
+              "value": "gravity well",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " behaves normally in the area of a reverse "
+            },
+            {
+              "node_type": "text",
+              "value": "gravity spell",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -356,7 +418,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.freedom-of-movement",
-        "name": "Freedom of movement"
+        "name": "Freedom of Movement"
       },
       "status": "accepted",
       "evidence": [
@@ -376,7 +438,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.reverse-gravity",
-        "name": "reverse gravity"
+        "name": "Reverse Gravity"
       },
       "status": "accepted",
       "evidence": [
@@ -418,21 +480,21 @@
       "note": null
     },
     {
-      "relationship_id": "spell.gravity-well:uses_definition:skill.fly",
+      "relationship_id": "spell.gravity-well:uses_definition:defense.spell-resistance",
       "type": "uses_definition",
       "target": {
-        "entity_type": "skill",
-        "entity_id": "skill.fly",
-        "name": "Fly"
+        "entity_type": "defense",
+        "entity_id": "defense.spell-resistance",
+        "name": "Spell Resistance"
       },
       "status": "accepted",
       "evidence": [
         {
-          "observation_id": "d20pfsrd:spell.gravity-well:e30bdf64ac7c8c91",
-          "source_field": "spell_raw.links_raw[5]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Fly",
-          "source_href": "https://www.d20pfsrd.com/skills/fly"
+          "observation_id": "aon:spell.gravity-well:5bbb701aae2e3629",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "no",
+          "source_href": null
         }
       ],
       "note": null
@@ -458,21 +520,21 @@
       "note": null
     },
     {
-      "relationship_id": "spell.gravity-well:uses_definition:defense.spell-resistance",
+      "relationship_id": "spell.gravity-well:uses_definition:skill.fly",
       "type": "uses_definition",
       "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "Spell Resistance"
+        "entity_type": "skill",
+        "entity_id": "skill.fly",
+        "name": "Fly"
       },
       "status": "accepted",
       "evidence": [
         {
-          "observation_id": "aon:spell.gravity-well:5bbb701aae2e3629",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "no",
-          "source_href": null
+          "observation_id": "d20pfsrd:spell.gravity-well:e30bdf64ac7c8c91",
+          "source_field": "spell_raw.links_raw[5]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Fly",
+          "source_href": "https://www.d20pfsrd.com/skills/fly"
         }
       ],
       "note": null
@@ -526,11 +588,19 @@
       "raw_value_sha256": "da8dfa733199a545a973302d142b8566284b37327f29262c5c9e6bb15785bdcb",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.gravity-well:5bbb701aae2e3629",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "829c59385b4522b22ef3e5329ea950e79232c1fdd130920688c5208e81f3caf8",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

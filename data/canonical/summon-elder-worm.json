@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.summon-elder-worm",
   "ruleset": "Pathfinder First Edition",
   "name": "Summon Elder Worm",
@@ -93,7 +93,67 @@
   "description": {
     "raw": "This spell functions as summon nature’s ally VIII, except you summon a purple worm with the giant creature simple template.",
     "search_text": "\"this spell functions as summon nature’s ally viii, except you summon a purple worm with the giant creature simple template.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "summon",
+              "relationship_id": "spell.summon-elder-worm:uses_definition:universal-monster-rule.summon",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " nature’s ally VIII",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "summon",
+              "relationship_id": "spell.summon-elder-worm:uses_definition:universal-monster-rule.summon"
+            },
+            {
+              "node_type": "text",
+              "value": " a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "purple worm",
+              "relationship_id": "spell.summon-elder-worm:uses_definition:monster.purple-worm"
+            },
+            {
+              "node_type": "text",
+              "value": " with the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "giant creature simple template",
+              "relationship_id": "spell.summon-elder-worm:uses_definition:creature-template.simple-template-giant-cr-1"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -228,12 +288,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.summon-elder-worm:references:spell.summon-natures-ally-viii",
+      "relationship_id": "spell.summon-elder-worm:references:spell.summon-natures-ally-8",
       "type": "references",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.summon-natures-ally-viii",
-        "name": "summon nature's ally VIII"
+        "entity_id": "spell.summon-natures-ally-8",
+        "name": "Summon Nature's Ally 8"
       },
       "status": "accepted",
       "evidence": [
@@ -295,6 +355,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.summon-elder-worm:uses_definition:defense.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "defense",
+        "entity_id": "defense.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.summon-elder-worm:79e3367f583a4367",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "no",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.summon-elder-worm:uses_definition:monster.purple-worm",
       "type": "uses_definition",
       "target": {
@@ -317,26 +397,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "purple worm",
           "source_href": "https://www.d20pfsrd.com/bestiary/monster-listin/magical-beasts/purple-worm"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.summon-elder-worm:uses_definition:defense.spell-resistance",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "Spell Resistance"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.summon-elder-worm:79e3367f583a4367",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "no",
-          "source_href": null
         }
       ],
       "note": null
@@ -410,11 +470,19 @@
       "raw_value_sha256": "c82b5b85e2d91209250cb2c60fa037a7749807a82dd65648d86d21392c2655c1",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.summon-elder-worm:79e3367f583a4367",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "e62267aed2d01c5783f76a7ed14e9d2d58a03cc87bcb8025ab40a47d26d08a77",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.summon-minor-ally",
   "ruleset": "Pathfinder First Edition",
   "name": "Summon Minor Ally",
@@ -115,7 +115,67 @@
   "description": {
     "raw": "This spell functions as summon nature’s ally I, except you can summon 1d3 Tiny or smaller animals, such as bats, lizards, monkeys, rats, ravens, toads, or weasels. The summoned animals must all be the same type of creature.",
     "search_text": "\"this spell functions as summon nature’s ally i, except you can summon 1d3 tiny or smaller animals, such as bats, lizards, monkeys, rats, ravens, toads, or weasels. the summoned animals must all be the same type of creature.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "summon",
+              "relationship_id": "spell.summon-minor-ally:uses_definition:universal-monster-rule.summon",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " nature’s ally I",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you can "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "summon",
+              "relationship_id": "spell.summon-minor-ally:uses_definition:universal-monster-rule.summon"
+            },
+            {
+              "node_type": "text",
+              "value": " 1d3 Tiny or smaller "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "animals",
+              "relationship_id": "spell.summon-minor-ally:uses_definition:creature-subtype.animals"
+            },
+            {
+              "node_type": "text",
+              "value": ", such as bats, lizards, monkeys, rats, ravens, toads, or weasels. The summoned "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "animals",
+              "relationship_id": "spell.summon-minor-ally:uses_definition:creature-subtype.animals"
+            },
+            {
+              "node_type": "text",
+              "value": " must all be the same type of creature."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -290,12 +350,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.summon-minor-ally:references:spell.summon-natures-ally-i",
+      "relationship_id": "spell.summon-minor-ally:references:spell.summon-natures-ally-1",
       "type": "references",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.summon-natures-ally-i",
-        "name": "summon nature's ally I"
+        "entity_id": "spell.summon-natures-ally-1",
+        "name": "Summon Nature's Ally 1"
       },
       "status": "accepted",
       "evidence": [
@@ -432,11 +492,19 @@
       "raw_value_sha256": "9d1ca49463207aa0c06d0330c23d95329a5cb1c3f7bab3b3286d32690fe247c8",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.summon-minor-ally:1a47bb5b7da84fa4",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "75f7a1380260c6b57b16a5ffb6d35f17df627ab6203173daf5bc751176cdc288",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

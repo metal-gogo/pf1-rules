@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.sheet-lightning",
   "ruleset": "Pathfinder First Edition",
   "name": "Sheet Lightning",
@@ -139,7 +139,39 @@
   "description": {
     "raw": "You create a dazzling flash of electricity that fills the target area. Sheet lightning inflicts 1 point of electricity damage to all creatures within the area of effect (no save). The true power of the spell, though, lies not in the damage it inflicts but in the overwhelming pain the lightning creates. The sudden flash and jolt dazes living creatures for 1 round if they fail a saving throw. Creatures that save are instead dazzled for 1 round. Any creature wearing metal armor takes a –2 penalty to its saving throw against this spell.",
     "search_text": "\"you create a dazzling flash of electricity that fills the target area. sheet lightning inflicts 1 point of electricity damage to all creatures within the area of effect (no save). the true power of the spell, though, lies not in the damage it inflicts but in the overwhelming pain the lightning creates. the sudden flash and jolt dazes living creatures for 1 round if they fail a saving throw. creatures that save are instead dazzled for 1 round. any creature wearing metal armor takes a –2 penalty to its saving throw against this spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You create a dazzling flash of electricity that fills the target area. Sheet lightning inflicts 1 point of electricity damage to all creatures within the area of effect (no save). The true power of the spell, though, lies not in the damage it inflicts but in the overwhelming pain the lightning creates. The sudden flash and jolt "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dazes",
+              "relationship_id": "spell.sheet-lightning:uses_definition:condition.dazed"
+            },
+            {
+              "node_type": "text",
+              "value": " living creatures for 1 round if they fail a saving throw. Creatures that save are instead "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dazzled",
+              "relationship_id": "spell.sheet-lightning:uses_definition:condition.dazzled"
+            },
+            {
+              "node_type": "text",
+              "value": " for 1 round. Any creature wearing metal armor takes a –2 penalty to its saving throw against this spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -414,12 +446,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sheet-lightning:uses_definition:condition.dazes",
+      "relationship_id": "spell.sheet-lightning:uses_definition:condition.dazed",
       "type": "uses_definition",
       "target": {
         "entity_type": "condition",
-        "entity_id": "condition.dazes",
-        "name": "dazes"
+        "entity_id": "condition.dazed",
+        "name": "Dazed"
       },
       "status": "accepted",
       "evidence": [
@@ -454,26 +486,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sheet-lightning:uses_definition:saving-throw.fortitude",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "saving_throw",
-        "entity_id": "saving-throw.fortitude",
-        "name": "Fortitude"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.sheet-lightning:3bf3e4663aa4db69",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Fortitude",
-          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.sheet-lightning:uses_definition:defense.spell-resistance",
       "type": "uses_definition",
       "target": {
@@ -489,6 +501,26 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "yes",
           "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.sheet-lightning:uses_definition:saving-throw.fortitude",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "saving_throw",
+        "entity_id": "saving-throw.fortitude",
+        "name": "Fortitude"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.sheet-lightning:3bf3e4663aa4db69",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Fortitude",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"
         }
       ],
       "note": null
@@ -542,11 +574,19 @@
       "raw_value_sha256": "a5e65f2129b4615d555c691c10d7cdcc967d990d1be10d48ae30fe2f2551743f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.sheet-lightning:9d737486c7b0dd24",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "96aef78a72337f87ab6993ce1182bb315ce47897647fb79144ffc3a1c678ffb5",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

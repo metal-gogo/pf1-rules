@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.inflict-critical-wounds-mass",
   "ruleset": "Pathfinder First Edition",
   "name": "Inflict Critical Wounds, Mass",
@@ -133,7 +133,33 @@
   "description": {
     "raw": "This spell functions like mass inflict light wounds, except that it deals 4d8 points of damage + 1 point per caster level (maximum +40).",
     "search_text": "\"this spell functions like mass inflict light wounds, except that it deals 4d8 points of damage + 1 point per caster level (maximum +40).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "mass inflict light wounds",
+              "relationship_id": "spell.inflict-critical-wounds-mass:functions_like:spell.inflict-light-wounds-mass",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that it deals 4d8 points of damage + 1 point per caster level (maximum +40)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -340,7 +366,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.inflict-light-wounds",
-        "name": "inflict light wounds"
+        "name": "Inflict Light Wounds"
       },
       "status": "accepted",
       "evidence": [
@@ -443,11 +469,19 @@
       "raw_value_sha256": "3be7dad34b262a926804df656e04b471e070540d52ae87a46b333dc8b73188bd",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.inflict-critical-wounds-mass:968c5cfafa821229",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "bc8d23fee4cca1c97beffe6c7becb160998a8ec7b044921be86fbe003a43cc2f",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

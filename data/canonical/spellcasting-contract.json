@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.spellcasting-contract",
   "ruleset": "Pathfinder First Edition",
   "name": "Spellcasting Contract",
@@ -139,7 +139,33 @@
   "description": {
     "raw": "This spell functions like lesser spellcasting contract, except if the target has 9 HD or more, you can imbue him with one or two 2nd-level spells and one 3rd-level spell.",
     "search_text": "\"this spell functions like lesser spellcasting contract, except if the target has 9 hd or more, you can imbue him with one or two 2nd-level spells and one 3rd-level spell.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "lesser spellcasting contract",
+              "relationship_id": "spell.spellcasting-contract:functions_like:spell.spellcasting-contract-lesser",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except if the target has 9 HD or more, you can imbue him with one or two 2nd-level spells and one 3rd-level spell."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -398,7 +424,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.imbue-with-spell-ability",
-        "name": "imbue with spell ability"
+        "name": "Imbue with Spell Ability"
       },
       "status": "accepted",
       "evidence": [
@@ -448,6 +474,26 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Spellcasting Contract, Lesser",
           "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/spellcasting-contract/#spellcasting_contract_lesser"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.spellcasting-contract:uses_definition:defense.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "defense",
+        "entity_id": "defense.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.spellcasting-contract:fc9f35a3d1415382",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes (harmless)",
+          "source_href": null
         }
       ],
       "note": null
@@ -511,26 +557,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.spellcasting-contract:uses_definition:defense.spell-resistance",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "Spell Resistance"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.spellcasting-contract:fc9f35a3d1415382",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "yes (harmless)",
-          "source_href": null
-        }
-      ],
-      "note": null
     }
   ],
   "provenance": [
@@ -581,11 +607,19 @@
       "raw_value_sha256": "dcdcf826e48587e9049ad89a1dad865d98a1a9935f5083b94c16849ee1bad273",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.spellcasting-contract:fc9f35a3d1415382",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "9a48429b139bdbe410471e283c25da02064552168f51650c53e0b577368469bf",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

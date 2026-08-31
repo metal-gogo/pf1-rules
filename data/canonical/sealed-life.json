@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.sealed-life",
   "ruleset": "Pathfinder First Edition",
   "name": "Sealed Life",
@@ -107,7 +107,54 @@
   "description": {
     "raw": "You seal the life force within the target, preventing it from sharing its vitality with others. Affected creatures can’t transfer damage to or from another, such as through shield other, a spiritualist’s life bond, or a summoner’s life link. Effects such as vampiric touch that steal vitality from others deal damage normally, but provide no benefits.",
     "search_text": "\"you seal the life force within the target, preventing it from sharing its vitality with others. affected creatures can’t transfer damage to or from another, such as through shield other, a spiritualist’s life bond, or a summoner’s life link. effects such as vampiric touch that steal vitality from others deal damage normally, but provide no benefits.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You seal the life force within the target, preventing it from sharing its vitality with others. Affected creatures can’t transfer damage to or from another, such as through "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "shield other",
+              "relationship_id": "spell.sealed-life:references:spell.shield-other",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", a spiritualist’s life bond, or a "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "summoner’s",
+              "relationship_id": "spell.sealed-life:uses_definition:class.summoner"
+            },
+            {
+              "node_type": "text",
+              "value": " life link. Effects such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "vampiric touch",
+              "relationship_id": "spell.sealed-life:references:spell.vampiric-touch",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " that steal vitality from others deal damage normally, but provide no benefits."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -254,7 +301,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.death-ward",
-        "name": "death ward"
+        "name": "Death Ward"
       },
       "status": "accepted",
       "evidence": [
@@ -274,7 +321,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.shield-other",
-        "name": "shield other"
+        "name": "Shield Other"
       },
       "status": "accepted",
       "evidence": [
@@ -301,7 +348,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.trap-the-soul",
-        "name": "trap the soul"
+        "name": "Trap the Soul"
       },
       "status": "accepted",
       "evidence": [
@@ -321,7 +368,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.vampiric-touch",
-        "name": "vampiric touch"
+        "name": "Vampiric Touch"
       },
       "status": "accepted",
       "evidence": [
@@ -390,26 +437,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.sealed-life:uses_definition:defense.spell-resistance",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "Spell Resistance"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.sealed-life:b5dc53e604ab8ce4",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "yes",
-          "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.sealed-life:uses_definition:class.summoner",
       "type": "uses_definition",
       "target": {
@@ -425,6 +452,26 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "summoner’s",
           "source_href": "https://www.d20pfsrd.com/classes/base-classes/summoner"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.sealed-life:uses_definition:defense.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "defense",
+        "entity_id": "defense.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.sealed-life:b5dc53e604ab8ce4",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes",
+          "source_href": null
         }
       ],
       "note": null
@@ -478,11 +525,19 @@
       "raw_value_sha256": "c9364723aa9e4cac9e64ec1ddd1683e92bd9d548e9e2f198a194d84f8c553569",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.sealed-life:b5dc53e604ab8ce4",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "bde5188c9b0e657e37ed24e9b60190eeb02c07791a1d0a8fc0c88e8936da4e34",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.rend-body-i",
   "ruleset": "Pathfinder First Edition",
   "name": "Rend Body I",
@@ -99,7 +99,110 @@
   "description": {
     "raw": "You lacerate the body of the target creature with telekinetic force, rending it limb from limb. The target creature takes 1d6 points of damage per caster level you have (maximum 10d6 points of damage). If this spell deals an amount of damage to the target equal to more than half its maximum hit point total, one of the target’s limbs (determined randomly) is gruesomely ripped from the target’s body and flies 15 feet away from the creature in a random direction. The target then takes 1 point of bleed damage per 2 caster levels you have. The bleeding can be stopped by a successful DC 15 Heal check or the application of any effect that heals hit point damage, but the limb can be restored only by powerful healing effects such as heal or regeneration. If the damage reduces the target’s hit points to below 0, all of its limbs are affected in this fashion.\n\nCreatures without discernible anatomy or limbs are unaffected by rend body.",
     "search_text": "\"you lacerate the body of the target creature with telekinetic force, rending it limb from limb. the target creature takes 1d6 points of damage per caster level you have (maximum 10d6 points of damage). if this spell deals an amount of damage to the target equal to more than half its maximum hit point total, one of the target’s limbs (determined randomly) is gruesomely ripped from the target’s body and flies 15 feet away from the creature in a random direction. the target then takes 1 point of bleed damage per 2 caster levels you have. the bleeding can be stopped by a successful dc 15 heal check or the application of any effect that heals hit point damage, but the limb can be restored only by powerful healing effects such as heal or regeneration. if the damage reduces the target’s hit points to below 0, all of its limbs are affected in this fashion.\\n\\ncreatures without discernible anatomy or limbs are unaffected by rend body.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You lacerate the body of the target creature with telekinetic force, rending it limb from limb. The target creature takes 1d6 points of damage per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.rend-body-i:uses_definition:spellcasting.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " you have (maximum 10d6 points of damage). If this spell deals an amount of damage to the target equal to more than half its maximum hit point total, one of the target’s limbs (determined randomly) is gruesomely ripped from the target’s body and flies 15 feet away from the creature in a random direction. The target then takes 1 point of "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bleed",
+              "relationship_id": "spell.rend-body-i:uses_definition:condition.bleed"
+            },
+            {
+              "node_type": "text",
+              "value": " damage per 2 caster levels you have. The bleeding can be stopped by a successful DC 15 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Heal",
+              "relationship_id": "spell.rend-body-i:references:spell.heal"
+            },
+            {
+              "node_type": "text",
+              "value": " check or the application of any effect that heals hit point damage, but the limb can be restored only by powerful "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "healing",
+              "relationship_id": "spell.rend-body-i:uses_definition:domain.healing"
+            },
+            {
+              "node_type": "text",
+              "value": " effects such as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "heal",
+              "relationship_id": "spell.rend-body-i:references:spell.heal",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " or "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "regeneration",
+              "relationship_id": "spell.rend-body-i:uses_definition:universal-monster-rule.regeneration",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ". If the damage reduces the target’s "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "hit points",
+              "relationship_id": "spell.rend-body-i:uses_definition:damage.hit-points"
+            },
+            {
+              "node_type": "text",
+              "value": " to below 0, all of its limbs are affected in this fashion."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Creatures without discernible anatomy or limbs are unaffected by "
+            },
+            {
+              "node_type": "text",
+              "value": "rend body",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -226,7 +329,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.heal",
-        "name": "heal"
+        "name": "Heal"
       },
       "status": "accepted",
       "evidence": [
@@ -375,42 +478,61 @@
       "note": null
     },
     {
-      "relationship_id": "spell.rend-body-i:uses_definition:spellcasting.caster-level",
+      "relationship_id": "spell.rend-body-i:uses_definition:damage.hit-points",
       "type": "uses_definition",
       "target": {
-        "entity_type": "spellcasting",
-        "entity_id": "spellcasting.caster-level",
-        "name": "caster level"
+        "entity_type": "damage",
+        "entity_id": "damage.hit-points",
+        "name": "hit points"
       },
       "status": "accepted",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.rend-body-i:c00ca672ca1fd38f",
-          "source_field": "spell_raw.links_raw[7]",
+          "source_field": "spell_raw.links_raw[13]",
           "evidence_kind": "hyperlink",
-          "anchor_text_raw": "caster level",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Caster-Level"
-        },
+          "anchor_text_raw": "hit points",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Hit-Points"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.rend-body-i:uses_definition:defense.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "defense",
+        "entity_id": "defense.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.rend-body-i:53d1c1e5959b8218",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.rend-body-i:uses_definition:domain.healing",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "domain",
+        "entity_id": "domain.healing",
+        "name": "healing"
+      },
+      "status": "accepted",
+      "evidence": [
         {
           "observation_id": "d20pfsrd:spell.rend-body-i:c00ca672ca1fd38f",
-          "source_field": "spell_raw.links_raw[16]",
+          "source_field": "spell_raw.links_raw[10]",
           "evidence_kind": "hyperlink",
-          "anchor_text_raw": "caster level",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Caster-Level"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.rend-body-i:c00ca672ca1fd38f",
-          "source_field": "spell_raw.links_raw[19]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "caster level",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Caster-Level"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.rend-body-i:c00ca672ca1fd38f",
-          "source_field": "spell_raw.links_raw[24]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "caster level",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Caster-Level"
+          "anchor_text_raw": "healing",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Conjuration-Healing"
         }
       ],
       "note": null
@@ -456,41 +578,42 @@
       "note": null
     },
     {
-      "relationship_id": "spell.rend-body-i:uses_definition:domain.healing",
+      "relationship_id": "spell.rend-body-i:uses_definition:spellcasting.caster-level",
       "type": "uses_definition",
       "target": {
-        "entity_type": "domain",
-        "entity_id": "domain.healing",
-        "name": "healing"
+        "entity_type": "spellcasting",
+        "entity_id": "spellcasting.caster-level",
+        "name": "caster level"
       },
       "status": "accepted",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.rend-body-i:c00ca672ca1fd38f",
-          "source_field": "spell_raw.links_raw[10]",
+          "source_field": "spell_raw.links_raw[7]",
           "evidence_kind": "hyperlink",
-          "anchor_text_raw": "healing",
-          "source_href": "https://www.d20pfsrd.com/magic#TOC-Conjuration-Healing"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.rend-body-i:uses_definition:damage.hit-points",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "damage",
-        "entity_id": "damage.hit-points",
-        "name": "hit points"
-      },
-      "status": "accepted",
-      "evidence": [
+          "anchor_text_raw": "caster level",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Caster-Level"
+        },
         {
           "observation_id": "d20pfsrd:spell.rend-body-i:c00ca672ca1fd38f",
-          "source_field": "spell_raw.links_raw[13]",
+          "source_field": "spell_raw.links_raw[16]",
           "evidence_kind": "hyperlink",
-          "anchor_text_raw": "hit points",
-          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Hit-Points"
+          "anchor_text_raw": "caster level",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Caster-Level"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.rend-body-i:c00ca672ca1fd38f",
+          "source_field": "spell_raw.links_raw[19]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "caster level",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Caster-Level"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.rend-body-i:c00ca672ca1fd38f",
+          "source_field": "spell_raw.links_raw[24]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "caster level",
+          "source_href": "https://www.d20pfsrd.com/magic#TOC-Caster-Level"
         }
       ],
       "note": null
@@ -555,26 +678,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.rend-body-i:uses_definition:defense.spell-resistance",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "Spell Resistance"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.rend-body-i:53d1c1e5959b8218",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "yes",
-          "source_href": null
-        }
-      ],
-      "note": null
     }
   ],
   "provenance": [
@@ -625,11 +728,19 @@
       "raw_value_sha256": "29e232124b0f388504fa1538a3cd43323eba3f74e4ed58fc7b653e9dc79c4969",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.rend-body-i:53d1c1e5959b8218",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "a9cb4b04c06cb99128b86d44fcebf3e8824eefb7464522a3f15152624eeb896a",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

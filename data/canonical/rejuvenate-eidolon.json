@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.rejuvenate-eidolon",
   "ruleset": "Pathfinder First Edition",
   "name": "Rejuvenate Eidolon",
@@ -121,7 +121,42 @@
   "description": {
     "raw": "This spell functions as lesser rejuvenate eidolon, except that it cures 3d10 points of damage +1 point per caster level (maximum +10).",
     "search_text": "\"this spell functions as lesser rejuvenate eidolon, except that it cures 3d10 points of damage +1 point per caster level (maximum +10).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "lesser rejuvenate eidolon",
+              "relationship_id": "spell.rejuvenate-eidolon:functions_like:spell.rejuvenate-eidolon-lesser",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that it cures 3d10 points of damage +1 point per "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "caster level",
+              "relationship_id": "spell.rejuvenate-eidolon:uses_definition:spellcasting.caster-level"
+            },
+            {
+              "node_type": "text",
+              "value": " (maximum +10)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -358,26 +393,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.rejuvenate-eidolon:references:spell.lesser-rejuvenate-eidolon",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.lesser-rejuvenate-eidolon",
-        "name": "lesser rejuvenate eidolon"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.rejuvenate-eidolon:e12012d308ae6278",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "lesser rejuvenate eidolon",
-          "source_href": "https://legacy.aonprd.com/advancedPlayersGuide/spells/rejuvenateEidolon.html#rejuvenate-eidolon,-lesser"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.rejuvenate-eidolon:references:spell.rejuvenate-eidolon-greater",
       "type": "references",
       "target": {
@@ -407,6 +422,13 @@
       },
       "status": "accepted",
       "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.rejuvenate-eidolon:e12012d308ae6278",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "lesser rejuvenate eidolon",
+          "source_href": "https://legacy.aonprd.com/advancedPlayersGuide/spells/rejuvenateEidolon.html#rejuvenate-eidolon,-lesser"
+        },
         {
           "observation_id": "d20pfsrd:spell.rejuvenate-eidolon:a3af60e28d733fe9",
           "source_field": "spell_raw.links_raw[1]",
@@ -445,6 +467,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.rejuvenate-eidolon:uses_definition:defense.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "defense",
+        "entity_id": "defense.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.rejuvenate-eidolon:fecbd15e3a663db3",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "no",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.rejuvenate-eidolon:uses_definition:spellcasting.caster-level",
       "type": "uses_definition",
       "target": {
@@ -474,26 +516,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "caster level",
           "source_href": "https://www.d20pfsrd.com/magic#TOC-Caster-Level"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.rejuvenate-eidolon:uses_definition:defense.spell-resistance",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "Spell Resistance"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.rejuvenate-eidolon:fecbd15e3a663db3",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "no",
-          "source_href": null
         }
       ],
       "note": null
@@ -547,11 +569,19 @@
       "raw_value_sha256": "4f659a54c1259006b2790936a8103395761d4aebaa8348caf517519e83e60f04",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.rejuvenate-eidolon:fecbd15e3a663db3",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "cb38357039fda776d29d9fb782155b86427ee05ec2669a85a00a295ae95c3434",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

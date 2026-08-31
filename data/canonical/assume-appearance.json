@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.assume-appearance",
   "ruleset": "Pathfinder First Edition",
   "name": "Assume Appearance",
@@ -231,7 +231,87 @@
   "description": {
     "raw": "This spell functions similarly to alter self, except for the following differences. You assume the exact form of a deceased Small or Medium creature of the humanoid type. Your voice changes to match that of the form you assume. The creature whose form you assume must be dead and you must have access to its fresh corpse (either dead less than 24 hours, or preserved via gentle repose or similar effect). Any attempt to copy the form of a living creature causes the spell to fail. You do not have access to the assumed form’s abilities, memories, mannerisms, or speech patterns. The spell grants a +10 bonus on Disguise checks to appear as the imitated creature.\n\nIf the assumed creature is returned to life while this spell is active, assume appearance immediately ends.",
     "search_text": "\"this spell functions similarly to alter self, except for the following differences. you assume the exact form of a deceased small or medium creature of the humanoid type. your voice changes to match that of the form you assume. the creature whose form you assume must be dead and you must have access to its fresh corpse (either dead less than 24 hours, or preserved via gentle repose or similar effect). any attempt to copy the form of a living creature causes the spell to fail. you do not have access to the assumed form’s abilities, memories, mannerisms, or speech patterns. the spell grants a +10 bonus on disguise checks to appear as the imitated creature.\\n\\nif the assumed creature is returned to life while this spell is active, assume appearance immediately ends.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions similarly to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "alter self",
+              "relationship_id": "spell.assume-appearance:functions_like:spell.alter-self",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except for the following differences. You assume the exact form of a deceased Small or Medium creature of the "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "humanoid",
+              "relationship_id": "spell.assume-appearance:uses_definition:monster-type.humanoid"
+            },
+            {
+              "node_type": "text",
+              "value": " type. Your voice changes to match that of the form you assume. The creature whose form you assume must be "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dead",
+              "relationship_id": "spell.assume-appearance:uses_definition:condition.dead"
+            },
+            {
+              "node_type": "text",
+              "value": " and you must have access to its fresh corpse (either "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dead",
+              "relationship_id": "spell.assume-appearance:uses_definition:condition.dead"
+            },
+            {
+              "node_type": "text",
+              "value": " less than 24 hours, or preserved via "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "gentle repose",
+              "relationship_id": "spell.assume-appearance:references:spell.gentle-repose"
+            },
+            {
+              "node_type": "text",
+              "value": " or similar effect). Any attempt to copy the form of a living creature causes the spell to fail. You do not have access to the assumed form’s abilities, memories, mannerisms, or speech patterns. The spell grants a +10 bonus on "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Disguise",
+              "relationship_id": "spell.assume-appearance:uses_definition:skill.disguise"
+            },
+            {
+              "node_type": "text",
+              "value": " checks to appear as the imitated creature."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "If the assumed creature is returned to life while this spell is active, assume appearance immediately ends."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -241,7 +321,100 @@
     "pfs_status": "legal",
     "supplemental": []
   },
-  "rules_inheritance": [],
+  "rules_inheritance": [
+    {
+      "from_spell_id": "spell.alter-self",
+      "relationship": "functions_like",
+      "basis": {
+        "observation_id": "aon:spell.assume-appearance:3bb6f64156a360c6",
+        "source_field": "spell_raw.description_raw",
+        "raw": "This spell functions similarly to alter self, except for the following differences. You assume the exact form of a deceased Small or Medium creature of the humanoid type. Your voice changes to match that of the form you assume. The creature whose form you assume must be dead and you must have access to its fresh corpse (either dead less than 24 hours, or preserved via gentle repose or similar effect). Any attempt to copy the form of a living creature causes the spell to fail. You do not have access to the assumed form’s abilities, memories, mannerisms, or speech patterns. The spell grants a +10 bonus on Disguise checks to appear as the imitated creature.\n\nIf the assumed creature is returned to life while this spell is active, assume appearance immediately ends."
+      },
+      "inherited_paths": [
+        "/casting/time",
+        "/casting/components",
+        "/casting/conditional_components",
+        "/casting/components_raw",
+        "/effect/range",
+        "/effect/delivery",
+        "/effect/targeting",
+        "/effect/area",
+        "/effect/duration",
+        "/effect/saving_throw",
+        "/effect/spell_resistance",
+        "/description/raw"
+      ],
+      "overrides": [
+        {
+          "path": "/casting/time",
+          "value": {
+            "kind": "timed",
+            "amount": 1,
+            "unit": "minute",
+            "raw": "1 minute"
+          },
+          "source_field": "spell_raw.casting_time_raw",
+          "raw": "1 minute",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components",
+          "value": [
+            {
+              "type": "verbal",
+              "details": null,
+              "cost_gp": null,
+              "raw": "V"
+            },
+            {
+              "type": "somatic",
+              "details": null,
+              "cost_gp": null,
+              "raw": "S"
+            },
+            {
+              "type": "focus",
+              "details": "corpse of the deceased creature whose form you plan to assume",
+              "cost_gp": null,
+              "raw": "F (corpse of the deceased creature whose form you plan to assume)"
+            }
+          ],
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, F (corpse of the deceased creature whose form you plan to assume)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/casting/components_raw",
+          "value": "V, S, F (corpse of the deceased creature whose form you plan to assume)",
+          "source_field": "spell_raw.components_raw",
+          "raw": "V, S, F (corpse of the deceased creature whose form you plan to assume)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/effect/duration",
+          "value": {
+            "kind": "timed",
+            "formula": "1 day/level (D)",
+            "dismissible": true,
+            "concentration": null,
+            "raw": "1 day/level (D)"
+          },
+          "source_field": "spell_raw.duration_raw",
+          "raw": "1 day/level (D)",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        },
+        {
+          "path": "/description/raw",
+          "value": "This spell functions similarly to alter self, except for the following differences. You assume the exact form of a deceased Small or Medium creature of the humanoid type. Your voice changes to match that of the form you assume. The creature whose form you assume must be dead and you must have access to its fresh corpse (either dead less than 24 hours, or preserved via gentle repose or similar effect). Any attempt to copy the form of a living creature causes the spell to fail. You do not have access to the assumed form’s abilities, memories, mannerisms, or speech patterns. The spell grants a +10 bonus on Disguise checks to appear as the imitated creature.\n\nIf the assumed creature is returned to life while this spell is active, assume appearance immediately ends.",
+          "source_field": "spell_raw.description_raw",
+          "raw": "This spell functions similarly to alter self, except for the following differences. You assume the exact form of a deceased Small or Medium creature of the humanoid type. Your voice changes to match that of the form you assume. The creature whose form you assume must be dead and you must have access to its fresh corpse (either dead less than 24 hours, or preserved via gentle repose or similar effect). Any attempt to copy the form of a living creature causes the spell to fail. You do not have access to the assumed form’s abilities, memories, mannerisms, or speech patterns. The spell grants a +10 bonus on Disguise checks to appear as the imitated creature.\n\nIf the assumed creature is returned to life while this spell is active, assume appearance immediately ends.",
+          "note": "The child canonical value differs from the resolved parent and is therefore applied explicitly."
+        }
+      ],
+      "resolution_status": "resolved",
+      "note": "The parent supplies the declared operational paths; every differing child value is retained as an explicit, source-backed override."
+    }
+  ],
   "relationships": [
     {
       "relationship_id": "spell.assume-appearance:appears_on_spell_list:spell-list.alchemist",
@@ -731,6 +904,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.assume-appearance:functions_like:spell.alter-self",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.alter-self",
+        "name": "Alter Self"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.assume-appearance:e43340ab22a64e8a",
+          "source_field": "spell_raw.links_raw[13]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "alter self",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/a/alter-self/"
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.assume-appearance:has_school:magic-school.transmutation",
       "type": "has_school",
       "target": {
@@ -840,32 +1033,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.assume-appearance:references:spell.alter-self",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.alter-self",
-        "name": "alter self"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.assume-appearance:e43340ab22a64e8a",
-          "source_field": "spell_raw.links_raw[13]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "alter self",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/a/alter-self/"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.assume-appearance:references:spell.gentle-repose",
       "type": "references",
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.gentle-repose",
-        "name": "gentle repose"
+        "name": "Gentle Repose"
       },
       "status": "accepted",
       "evidence": [
@@ -885,7 +1058,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.misdirection",
-        "name": "misdirection"
+        "name": "Misdirection"
       },
       "status": "accepted",
       "evidence": [
@@ -905,7 +1078,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.speak-with-dead",
-        "name": "speak with dead"
+        "name": "Speak with Dead"
       },
       "status": "accepted",
       "evidence": [
@@ -925,7 +1098,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.vocal-alteration",
-        "name": "vocal alteration"
+        "name": "Vocal Alteration"
       },
       "status": "accepted",
       "evidence": [
@@ -967,21 +1140,21 @@
       "note": null
     },
     {
-      "relationship_id": "spell.assume-appearance:uses_definition:skill.disguise",
+      "relationship_id": "spell.assume-appearance:uses_definition:defense.spell-resistance",
       "type": "uses_definition",
       "target": {
-        "entity_type": "skill",
-        "entity_id": "skill.disguise",
-        "name": "Disguise"
+        "entity_type": "defense",
+        "entity_id": "defense.spell-resistance",
+        "name": "Spell Resistance"
       },
       "status": "accepted",
       "evidence": [
         {
-          "observation_id": "d20pfsrd:spell.assume-appearance:e43340ab22a64e8a",
-          "source_field": "spell_raw.links_raw[18]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Disguise",
-          "source_href": "https://www.d20pfsrd.com/skills/disguise"
+          "observation_id": "aon:spell.assume-appearance:3bb6f64156a360c6",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": null,
+          "source_href": null
         }
       ],
       "note": null
@@ -1007,21 +1180,21 @@
       "note": null
     },
     {
-      "relationship_id": "spell.assume-appearance:uses_definition:defense.spell-resistance",
+      "relationship_id": "spell.assume-appearance:uses_definition:skill.disguise",
       "type": "uses_definition",
       "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "Spell Resistance"
+        "entity_type": "skill",
+        "entity_id": "skill.disguise",
+        "name": "Disguise"
       },
       "status": "accepted",
       "evidence": [
         {
-          "observation_id": "aon:spell.assume-appearance:3bb6f64156a360c6",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": null,
-          "source_href": null
+          "observation_id": "d20pfsrd:spell.assume-appearance:e43340ab22a64e8a",
+          "source_field": "spell_raw.links_raw[18]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Disguise",
+          "source_href": "https://www.d20pfsrd.com/skills/disguise"
         }
       ],
       "note": null
@@ -1075,11 +1248,19 @@
       "raw_value_sha256": "91895be47b3e3021f84ec470a7795aca1b5e9bde083ec2d89b766eb043f22937",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.assume-appearance:3bb6f64156a360c6",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "cb4d444807d82735c6e3555b108f811ede327471888a46291aefdc48aee2fe3d",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

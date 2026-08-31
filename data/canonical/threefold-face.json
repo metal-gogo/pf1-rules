@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.threefold-face",
   "ruleset": "Pathfinder First Edition",
   "name": "Threefold Face",
@@ -149,7 +149,86 @@
   "description": {
     "raw": "You grow two additional faces set equidistantly around your head, each embodying a different aspect of your personality that you choose (such as kindliness, joy, or wrath). You gain all-around vision and can’t be flanked. Effects that would blind you, deafen you, block your mouth, or otherwise affect your face, including beneficial effects that grant you exceptional vision, only affect a single face (for example, it would take three castings of blindness/ deafness to blind you). You lose all-around vision if even a single face becomes blind. This spell doesn’t grant you additional magic item slots or additional heads. When threefold face ends, you gain all the conditions from all three faces, for good or ill.",
     "search_text": "\"you grow two additional faces set equidistantly around your head, each embodying a different aspect of your personality that you choose (such as kindliness, joy, or wrath). you gain all-around vision and can’t be flanked. effects that would blind you, deafen you, block your mouth, or otherwise affect your face, including beneficial effects that grant you exceptional vision, only affect a single face (for example, it would take three castings of blindness/ deafness to blind you). you lose all-around vision if even a single face becomes blind. this spell doesn’t grant you additional magic item slots or additional heads. when threefold face ends, you gain all the conditions from all three faces, for good or ill.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You grow two additional faces set equidistantly around your head, each embodying a different aspect of your personality that you choose (such as kindliness, joy, or wrath). You gain "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "all-around vision",
+              "relationship_id": "spell.threefold-face:uses_definition:universal-monster-rule.all-around-vision"
+            },
+            {
+              "node_type": "text",
+              "value": " and can’t be "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "flanked",
+              "relationship_id": "spell.threefold-face:uses_definition:combat.flanking"
+            },
+            {
+              "node_type": "text",
+              "value": ". Effects that would "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blind",
+              "relationship_id": "spell.threefold-face:uses_definition:condition.blinded"
+            },
+            {
+              "node_type": "text",
+              "value": " you, deafen you, block your mouth, or otherwise affect your face, including beneficial effects that grant you exceptional vision, only affect a single face (for example, it would take three castings of blindness/ deafness to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blind",
+              "relationship_id": "spell.threefold-face:uses_definition:condition.blinded"
+            },
+            {
+              "node_type": "text",
+              "value": " you). You lose "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "all-around vision",
+              "relationship_id": "spell.threefold-face:uses_definition:universal-monster-rule.all-around-vision"
+            },
+            {
+              "node_type": "text",
+              "value": " if even a single face becomes "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "blind",
+              "relationship_id": "spell.threefold-face:uses_definition:condition.blinded"
+            },
+            {
+              "node_type": "text",
+              "value": ". This spell doesn’t grant you additional magic item slots or additional heads. When "
+            },
+            {
+              "node_type": "text",
+              "value": "threefold face",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " ends, you gain all the conditions from all three faces, for good or ill."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -376,7 +455,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.blindness-deafness",
-        "name": "blindness/deafness"
+        "name": "Blindness/Deafness"
       },
       "status": "accepted",
       "evidence": [
@@ -418,12 +497,32 @@
       "note": null
     },
     {
-      "relationship_id": "spell.threefold-face:uses_definition:condition.blind",
+      "relationship_id": "spell.threefold-face:uses_definition:combat.flanking",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "combat",
+        "entity_id": "combat.flanking",
+        "name": "flanked"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.threefold-face:0a8b96fda48e6c04",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "flanked",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Flanking"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.threefold-face:uses_definition:condition.blinded",
       "type": "uses_definition",
       "target": {
         "entity_type": "condition",
-        "entity_id": "condition.blind",
-        "name": "blind"
+        "entity_id": "condition.blinded",
+        "name": "Blinded"
       },
       "status": "accepted",
       "evidence": [
@@ -452,6 +551,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.threefold-face:uses_definition:defense.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "defense",
+        "entity_id": "defense.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.threefold-face:b3752c618938e8e7",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": null,
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
       "relationship_id": "spell.threefold-face:uses_definition:universal-monster-rule.all-around-vision",
       "type": "uses_definition",
       "target": {
@@ -474,46 +593,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "all-around vision",
           "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/universal-monster-rules#TOC-All-Around-Vision-Ex-"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.threefold-face:uses_definition:combat.flanking",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "combat",
-        "entity_id": "combat.flanking",
-        "name": "flanked"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.threefold-face:0a8b96fda48e6c04",
-          "source_field": "spell_raw.links_raw[7]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "flanked",
-          "source_href": "https://www.d20pfsrd.com/gamemastering/combat#TOC-Flanking"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.threefold-face:uses_definition:defense.spell-resistance",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "Spell Resistance"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.threefold-face:b3752c618938e8e7",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": null,
-          "source_href": null
         }
       ],
       "note": null
@@ -567,11 +646,19 @@
       "raw_value_sha256": "d0507f7b131add93961faad143aac378d5db07876dec9c0c56949df2d6dfb71a",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.threefold-face:b3752c618938e8e7",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "26e115cdd162796355cc5c340023f68bcaacfe3c0f277a7b2e16916618ad5950",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",
