@@ -293,6 +293,20 @@ function naturalSpellName(value: string): string {
 }
 
 
+function spellNameVariants(value: string): string[] {
+  const variants = new Set([value, naturalSpellName(value)]);
+  const numerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
+  for (const phrase of [...variants]) {
+    const match = /^(.*?)(?:\s+)([1-9]|I|II|III|IV|V|VI|VII|VIII|IX)$/i.exec(phrase);
+    if (!match?.[1] || !match[2]) continue;
+    const index = /^[1-9]$/.test(match[2]) ? Number(match[2]) - 1 : numerals.indexOf(match[2].toUpperCase());
+    if (index >= 0) variants.add(`${match[1]} ${index + 1}`);
+    if (index >= 0) variants.add(`${match[1]} ${numerals[index]}`);
+  }
+  return [...variants];
+}
+
+
 function relationshipPriority(relationship: ValidatedJson): number {
   if (relationship.type === "functions_like") return 0;
   if (["spell", "spell_family"].includes(relationship.target.entity_type)) return 1;
@@ -333,21 +347,18 @@ function linkCandidates(
       (evidence: ValidatedJson) =>
         evidence.source_field === "spell_raw.description_raw"
     );
-    const expectsMatch = relationship.type === "functions_like" ||
-      relationship.target.entity_type === "spell" ||
+    const expectsMatch = relationship.type === "functions_like" || hasDescriptionEvidence;
+    const linkable = relationship.target.entity_type === "spell" ||
       (
         relationship.target.entity_type === "spell_family" &&
         relationship.type === "references"
       ) ||
-      hasDescriptionEvidence;
+      expectsMatch;
     if (
-      !expectsMatch &&
+      !linkable &&
       !["uses_definition", "uses_action"].includes(String(relationship.type))
     ) continue;
-    const phrases = new Set<string>([
-      String(relationship.target.name),
-      naturalSpellName(String(relationship.target.name)),
-    ]);
+    const phrases = new Set<string>(spellNameVariants(String(relationship.target.name)));
     for (const evidence of relationship.evidence ?? []) {
       const anchor = String(evidence.anchor_text_raw ?? "").trim();
       if (
