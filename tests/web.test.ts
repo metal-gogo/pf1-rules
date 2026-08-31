@@ -732,13 +732,13 @@ describe("local rules browser", () => {
     expect(description).not.toContain(`href="${target}"`);
   });
 
-  it("promotes whole-spell functions-like wording and defers an unreviewed parent", async () => {
+  it("promotes whole-spell functions-like wording when the parent is resolved", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.blast-of-wind`);
     const html = await response.text();
     const related = html.match(/<section aria-labelledby="related-rules">([\s\S]*?)<\/section>/)?.[1] ?? "";
     expect(response.status).toBe(200);
-    expect(html).not.toContain('data-embedded-spell="spell.gust-of-wind"');
-    expect(html).toContain("that parent is not fully resolved in the local rules data");
+    expect(html).toContain('data-embedded-spell="spell.gust-of-wind"');
+    expect(html).not.toContain("that parent is not fully resolved in the local rules data");
     expect(html.match(/href="\/spells\/spell.gust-of-wind"/g)?.length).toBeGreaterThanOrEqual(1);
     expect(related).toContain("Functions Like:");
     expect(related.match(/href="\/spells\/spell.gust-of-wind"/g)).toHaveLength(1);
