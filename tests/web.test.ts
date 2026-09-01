@@ -1732,18 +1732,28 @@ describe("local rules browser", () => {
   });
 
   it("renders source-backed Mythic links and leaves generic terms as text", async () => {
-    const [response, wishResponse] = await Promise.all([
+    const [response, wishResponse, cannonResponse] = await Promise.all([
       fetch(`${baseUrl}/spells/spell.fireball`),
       fetch(`${baseUrl}/spells/spell.wish`),
+      fetch(`${baseUrl}/spells/spell.arcane-cannon`),
     ]);
-    const [html, wishHtml] = await Promise.all([response.text(), wishResponse.text()]);
+    const [html, wishHtml, cannonHtml] = await Promise.all([
+      response.text(),
+      wishResponse.text(),
+      cannonResponse.text(),
+    ]);
     const mythic = html.match(/<section id="mythic">(.*?)<\/section>/s)?.[1] ?? "";
+    const cannonMythic = cannonHtml.match(/<section id="mythic">(.*?)<\/section>/s)?.[1] ?? "";
     expect(response.status).toBe(200);
     expect(wishResponse.status).toBe(200);
+    expect(cannonResponse.status).toBe(200);
     expect(mythic).toContain('<a href="/entities/spellcasting.caster-level">caster level</a>');
     expect(mythic).toContain('<a href="/rules/saving-throws#reflex">Reflex saving throw</a>');
     expect(mythic).toContain("bypasses fire resistance and fire immunity");
     expect(wishHtml).toContain('<a href="/entities/affliction">afflictions</a>');
+    expect(cannonMythic).toContain('<a href="/entities/weapon-special-ability.conductive">conductive</a>');
+    expect(cannonMythic).toContain("cannon’s hardness");
+    expect(cannonMythic).not.toContain('<a href="/entities/item.hardness">hardness</a>');
   });
 
   it("renders escaped plain-text description blocks", () => {

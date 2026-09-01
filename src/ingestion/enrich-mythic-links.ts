@@ -61,7 +61,140 @@ const relationship = (
   note: "The displayed Mythic phrase and local rules target are unambiguous.",
 });
 
+const d20SupportedRelationship = (
+  ownerId: string,
+  targetType: string,
+  targetId: string,
+  targetName: string,
+  aonObservationId: string,
+  phrase: string,
+  d20ObservationId: string,
+  d20SourceField: string,
+  d20SourceHref: string,
+) => relationship(ownerId, targetType, targetId, targetName, [
+  evidence(aonObservationId, "raw_aon_mythic_section", "plain_text", phrase, null),
+  evidence(d20ObservationId, d20SourceField, "hyperlink", phrase, d20SourceHref),
+]);
+
+const batch01VariantIds = new Set([
+  "mythic-spell-variant.ablative-barrier",
+  "mythic-spell-variant.animal-aspect",
+  "mythic-spell-variant.animate-dead",
+  "mythic-spell-variant.animate-objects",
+  "mythic-spell-variant.animate-plants",
+  "mythic-spell-variant.antimagic-field",
+  "mythic-spell-variant.arboreal-hammer",
+  "mythic-spell-variant.arcane-cannon",
+  "mythic-spell-variant.baleful-polymorph",
+  "mythic-spell-variant.bane",
+]);
+
 const specs: Record<string, EnrichmentSpec> = {
+  "mythic-spell-variant.ablative-barrier": {
+    links: [
+      { phrase: "armor bonus", relationshipId: "mythic-spell-variant.ablative-barrier:uses_definition:bonus.armor", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "caster level", relationshipId: "mythic-spell-variant.ablative-barrier:uses_definition:spellcasting.caster-level", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      d20SupportedRelationship("mythic-spell-variant.ablative-barrier", "bonus", "bonus.armor", "Armor Bonus", "aon:spell.ablative-barrier:49553729e088fe15", "armor bonus", "d20pfsrd:spell.ablative-barrier:48eff45573d48baf", "spell_raw.links_raw[17]", "https://www.d20pfsrd.com/basics-ability-scores/glossary#TOC-Armor-Bonus"),
+      d20SupportedRelationship("mythic-spell-variant.ablative-barrier", "spellcasting", "spellcasting.caster-level", "Caster Level", "aon:spell.ablative-barrier:49553729e088fe15", "caster level", "d20pfsrd:spell.ablative-barrier:48eff45573d48baf", "spell_raw.links_raw[19]", "https://www.d20pfsrd.com/magic#TOC-Caster-Level"),
+    ],
+  },
+  "mythic-spell-variant.animal-aspect": {
+    links: [
+      { phrase: "low-light vision", relationshipId: "mythic-spell-variant.animal-aspect:uses_definition:special-ability.low-light-vision", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "size bonus", relationshipId: "mythic-spell-variant.animal-aspect:uses_definition:bonus.size", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "enhancement bonus", relationshipId: "mythic-spell-variant.animal-aspect:uses_definition:bonus.enhancement", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "natural armor", relationshipId: "mythic-spell-variant.animal-aspect:uses_definition:bonus.natural-armor", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      d20SupportedRelationship("mythic-spell-variant.animal-aspect", "special_ability", "special-ability.low-light-vision", "Low-Light Vision", "aon:spell.animal-aspect-greater:42a00606e8fb3696", "low-light vision", "d20pfsrd:spell.animal-aspect:23360a4b8b346e7e", "spell_raw.links_raw[55]", "https://www.d20pfsrd.com/gamemastering/special-abilities#TOC-Low-Light-Vision"),
+      d20SupportedRelationship("mythic-spell-variant.animal-aspect", "bonus", "bonus.size", "Size Bonus", "aon:spell.animal-aspect-greater:42a00606e8fb3696", "size bonus", "d20pfsrd:spell.animal-aspect:23360a4b8b346e7e", "spell_raw.links_raw[56]", "https://www.d20pfsrd.com/basics-ability-scores/glossary#TOC-Size-Bonus"),
+      d20SupportedRelationship("mythic-spell-variant.animal-aspect", "bonus", "bonus.enhancement", "Enhancement Bonus", "aon:spell.animal-aspect-greater:42a00606e8fb3696", "enhancement bonus", "d20pfsrd:spell.animal-aspect:23360a4b8b346e7e", "spell_raw.links_raw[57]", "https://www.d20pfsrd.com/basics-ability-scores/glossary#TOC-Enhancement-Bonus"),
+      d20SupportedRelationship("mythic-spell-variant.animal-aspect", "bonus", "bonus.natural-armor", "Natural Armor Bonus", "aon:spell.animal-aspect-greater:42a00606e8fb3696", "natural armor", "d20pfsrd:spell.animal-aspect:23360a4b8b346e7e", "spell_raw.links_raw[58]", "https://www.d20pfsrd.com/basics-ability-scores/glossary#TOC-Natural-Armor-Bonus"),
+    ],
+  },
+  "mythic-spell-variant.animate-dead": {
+    links: [
+      { phrase: "caster level", relationshipId: "mythic-spell-variant.animate-dead:uses_definition:spellcasting.caster-level", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      d20SupportedRelationship("mythic-spell-variant.animate-dead", "spellcasting", "spellcasting.caster-level", "Caster Level", "aon:spell.animate-dead-lesser:4d17c446924f927d", "caster level", "d20pfsrd:spell.animate-dead:25c760e6e16a3a84", "spell_raw.links_raw[37]", "https://www.d20pfsrd.com/magic#TOC-Caster-Level"),
+    ],
+  },
+  "mythic-spell-variant.animate-objects": {
+    links: [
+      { phrase: "hit points", relationshipId: "mythic-spell-variant.animate-objects:uses_definition:damage.hit-points", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      d20SupportedRelationship("mythic-spell-variant.animate-objects", "damage", "damage.hit-points", "Hit Points", "aon:spell.animate-objects:d5e50ef82863a8d6", "hit points", "d20pfsrd:spell.animate-objects:22a7d6f733b52f67", "spell_raw.links_raw[10]", "https://www.d20pfsrd.com/gamemastering/combat#TOC-Hit-Points"),
+    ],
+  },
+  "mythic-spell-variant.animate-plants": {
+    links: [
+      { phrase: "hit points", relationshipId: "mythic-spell-variant.animate-plants:uses_definition:damage.hit-points", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      d20SupportedRelationship("mythic-spell-variant.animate-plants", "damage", "damage.hit-points", "Hit Points", "aon:spell.animate-plants:6a7e59c8ee333e05", "hit points", "d20pfsrd:spell.animate-plants:a928201e3e97507d", "spell_raw.links_raw[8]", "https://www.d20pfsrd.com/gamemastering/combat#TOC-Hit-Points"),
+    ],
+  },
+  "mythic-spell-variant.antimagic-field": {
+    links: [
+      { phrase: "antimagic field", relationshipId: "mythic-spell-variant.antimagic-field:mythic_version_of:spell.antimagic-field", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+  },
+  "mythic-spell-variant.arboreal-hammer": {
+    links: [
+      { phrase: "caster level", relationshipId: "mythic-spell-variant.arboreal-hammer:uses_definition:spellcasting.caster-level", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "Fortitude save", relationshipId: "mythic-spell-variant.arboreal-hammer:uses_definition:saving-throw.fortitude", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "staggered", relationshipId: "mythic-spell-variant.arboreal-hammer:uses_definition:condition.staggered", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      d20SupportedRelationship("mythic-spell-variant.arboreal-hammer", "spellcasting", "spellcasting.caster-level", "Caster Level", "aon:spell.arboreal-hammer:6549752d3791766e", "caster level", "d20pfsrd:spell.arboreal-hammer:5a3e3f039972b7c2", "spell_raw.links_raw[15]", "https://www.d20pfsrd.com/magic#TOC-Caster-Level"),
+      relationship("mythic-spell-variant.arboreal-hammer", "saving_throw", "saving-throw.fortitude", "Fortitude Saving Throw", [
+        evidence("aon:spell.arboreal-hammer:6549752d3791766e", "raw_aon_mythic_section", "plain_text", "Fortitude save", null),
+        evidence("d20pfsrd:spell.arboreal-hammer:5a3e3f039972b7c2", "spell_raw.links_raw[23]", "hyperlink", "Fortitude", "https://www.d20pfsrd.com/gamemastering/combat#TOC-Fortitude"),
+      ]),
+      d20SupportedRelationship("mythic-spell-variant.arboreal-hammer", "condition", "condition.staggered", "Staggered", "aon:spell.arboreal-hammer:6549752d3791766e", "staggered", "d20pfsrd:spell.arboreal-hammer:5a3e3f039972b7c2", "spell_raw.links_raw[25]", "https://www.d20pfsrd.com/gamemastering/conditions#TOC-Staggered"),
+    ],
+  },
+  "mythic-spell-variant.arcane-cannon": {
+    links: [
+      { phrase: "hit points", relationshipId: "mythic-spell-variant.arcane-cannon:uses_definition:damage.hit-points", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "conductive", relationshipId: "mythic-spell-variant.arcane-cannon:uses_definition:weapon-special-ability.conductive", expectedCount: 1, evidenceSource: "aon_anchor" },
+    ],
+    relationships: [
+      d20SupportedRelationship("mythic-spell-variant.arcane-cannon", "damage", "damage.hit-points", "Hit Points", "aon:spell.arcane-cannon:e785391d95e9f561", "hit points", "d20pfsrd:spell.arcane-cannon:7c2aaeb191459122", "spell_raw.links_raw[16]", "https://www.d20pfsrd.com/gamemastering/combat#TOC-Hit-Points"),
+      relationship("mythic-spell-variant.arcane-cannon", "weapon_special_ability", "weapon-special-ability.conductive", "Conductive", [
+        evidence("aon:spell.arcane-cannon:e785391d95e9f561", "raw_aon_mythic_section", "plain_text", "conductive", null),
+        evidence("legacy_aon:spell.arcane-cannon:2caf407e81c3d169", "spell_raw.links_raw[2]", "hyperlink", "conductive", "https://legacy.aonprd.com/advancedPlayersGuide/magicItems/weapons.html#conductive"),
+      ]),
+    ],
+  },
+  "mythic-spell-variant.baleful-polymorph": {
+    links: [
+      { phrase: "Fortitude save", relationshipId: "mythic-spell-variant.baleful-polymorph:uses_definition:saving-throw.fortitude", expectedCount: 2, evidenceSource: "aon_plain_text" },
+      { phrase: "Will save", relationshipId: "mythic-spell-variant.baleful-polymorph:uses_definition:saving-throw.will", expectedCount: 1, evidenceSource: "aon_plain_text" },
+      { phrase: "shapechanger", relationshipId: "mythic-spell-variant.baleful-polymorph:uses_definition:creature-subtype.shapechanger", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      relationship("mythic-spell-variant.baleful-polymorph", "saving_throw", "saving-throw.fortitude", "Fortitude Saving Throw", [
+        evidence("aon:spell.baleful-polymorph:d12281d3fcf67679", "raw_aon_mythic_section", "plain_text", "Fortitude save", null),
+      ]),
+      relationship("mythic-spell-variant.baleful-polymorph", "saving_throw", "saving-throw.will", "Will Saving Throw", [
+        evidence("aon:spell.baleful-polymorph:d12281d3fcf67679", "raw_aon_mythic_section", "plain_text", "Will save", null),
+      ]),
+      d20SupportedRelationship("mythic-spell-variant.baleful-polymorph", "creature_subtype", "creature-subtype.shapechanger", "Shapechanger", "aon:spell.baleful-polymorph:d12281d3fcf67679", "shapechanger", "d20pfsrd:spell.baleful-polymorph:701e5262dc97a11c", "spell_raw.links_raw[23]", "https://www.d20pfsrd.com/bestiary/rules-for-monsters/creature-types#TOC-Shapechanger"),
+    ],
+  },
+  "mythic-spell-variant.bane": {
+    links: [
+      { phrase: "attack rolls", relationshipId: "mythic-spell-variant.bane:uses_definition:attack.roll", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      d20SupportedRelationship("mythic-spell-variant.bane", "attack", "attack.roll", "Attack Roll", "aon:spell.bane:fb268f47413d9507", "attack rolls", "d20pfsrd:spell.bane:bd05c29c957b29a4", "spell_raw.links_raw[10]", "https://www.d20pfsrd.com/gamemastering/combat#TOC-Attack-Roll"),
+    ],
+  },
   "mythic-spell-variant.break-enchantment": {
     links: [
       { phrase: "caster level", relationshipId: "mythic-spell-variant.break-enchantment:uses_definition:spellcasting.caster-level", expectedCount: 2, evidenceSource: "d20pfsrd_anchor" },
@@ -192,6 +325,11 @@ const specs: Record<string, EnrichmentSpec> = {
 };
 
 const reviewItems = [
+  { variant_id: "mythic-spell-variant.animate-objects", phrases: ["Strength"], reason: "The captured target hint migrates to Strength Domain instead of the Strength ability score." },
+  { variant_id: "mythic-spell-variant.animate-plants", phrases: ["Strength"], reason: "The captured target hint migrates to Strength Domain instead of the Strength ability score." },
+  { variant_id: "mythic-spell-variant.arboreal-hammer", phrases: ["Strength"], reason: "The captured target hint migrates to Strength Domain instead of the Strength ability score." },
+  { variant_id: "mythic-spell-variant.arcane-cannon", phrases: ["hardness"], reason: "The captured target hint migrates to an item entity rather than a general hardness rule." },
+  { variant_id: "mythic-spell-variant.baleful-polymorph", phrases: ["animal’s"], reason: "The possessive displayed phrase does not unambiguously name the migrated Animals creature-subtype target." },
   { variant_id: "mythic-spell-variant.darkness", phrases: ["darkvision", "see in darkness", "fear"], reason: "The Mythic capture has plain text only and no reviewed relationships identify which local rule pages should be linked." },
   { variant_id: "mythic-spell-variant.break-enchantment", phrases: ["curse"], reason: "Curse can mean a spell, condition, descriptor, or broader effect category." },
   { variant_id: "mythic-spell-variant.fireball", phrases: ["resistance", "immunity"], reason: "The D20PFSRD anchors display generic words; linking them would overstate the source evidence." },
@@ -286,17 +424,22 @@ function document(raw: string, links: LinkSpec[]): RichTextDocument {
 }
 
 function addRelationships(target: unknown[], additions: unknown[] = []): void {
-  const ids = new Set(target.map((item: any) => item.relationship_id));
   for (const item of additions as any[]) {
-    if (!ids.has(item.relationship_id)) target.push(item);
+    const index = target.findIndex((existing: any) => existing.relationship_id === item.relationship_id);
+    if (index >= 0) target[index] = item;
+    else target.push(item);
   }
 }
 
 export function auditMythicLinks() {
   const records = variants();
   const candidates = records.flatMap(d20Candidates);
+  const sourceAnchorVariantIds = Object.entries(specs)
+    .filter(([, spec]) => spec.links.some((link) => link.evidenceSource === "aon_anchor"))
+    .map(([variantId]) => variantId)
+    .sort();
   const candidateVariantIds = [...new Set(candidates.map((candidate) => candidate.variant_id))]
-    .filter((variantId) => variantId !== "mythic-spell-variant.wish")
+    .filter((variantId) => !sourceAnchorVariantIds.includes(variantId))
     .sort();
   const counts = { aon_anchor: 0, aon_plain_text: 0, d20pfsrd_anchor: 0 };
   for (const spec of Object.values(specs)) {
@@ -324,7 +467,7 @@ export function auditMythicLinks() {
       excluded_generic_terms: ["spell", "save", "resistance", "immunity", "see text"],
     },
     audited_variants: records.length,
-    variants_with_source_anchors: ["mythic-spell-variant.wish"],
+    variants_with_source_anchors: sourceAnchorVariantIds,
     variants_with_only_d20pfsrd_candidates: candidateVariantIds,
     d20pfsrd_candidate_links: candidates,
     enriched_variants: Object.keys(specs),
@@ -334,17 +477,19 @@ export function auditMythicLinks() {
   };
 }
 
-export function enrichMythicLinks(): ReturnType<typeof auditMythicLinks> {
+export function enrichMythicLinks(onlyVariantIds?: ReadonlySet<string>): ReturnType<typeof auditMythicLinks> {
+  const writes: Array<{ fullPath: string; content: string }> = [];
   for (const filename of fs.readdirSync(path.join(projectRoot, "data", "variants")).filter((name) => name.endsWith(".json"))) {
     const fullPath = path.join(projectRoot, "data", "variants", filename);
     const record = JSON.parse(fs.readFileSync(fullPath, "utf8"));
     const spec = specs[record.mythic_spell_variant_id];
-    if (!spec) continue;
+    if (!spec || (onlyVariantIds && !onlyVariantIds.has(record.mythic_spell_variant_id))) continue;
     addRelationships(record.relationships, spec.relationships);
     if (spec.augmentationRelationships) addRelationships(record.augmentations[0].relationships, spec.augmentationRelationships);
     record.rules_text.document = document(record.rules_text.raw, spec.links);
-    fs.writeFileSync(fullPath, `${JSON.stringify(record, null, 2)}\n`);
+    writes.push({ fullPath, content: `${JSON.stringify(record, null, 2)}\n` });
   }
+  for (const write of writes) fs.writeFileSync(write.fullPath, write.content);
   const result = auditMythicLinks();
   fs.writeFileSync(
     path.join(projectRoot, "data", "reports", "mythic-link-audit.json"),
@@ -353,5 +498,8 @@ export function enrichMythicLinks(): ReturnType<typeof auditMythicLinks> {
   return result;
 }
 
-if (process.argv.includes("--write")) console.log(JSON.stringify(enrichMythicLinks(), null, 2));
-else console.log(JSON.stringify(auditMythicLinks(), null, 2));
+if (process.argv.includes("--write")) {
+  const batch = process.argv.find((argument) => argument.startsWith("--batch="))?.slice(8);
+  if (batch && batch !== "01") throw new Error(`Unknown Mythic link batch: ${batch}`);
+  console.log(JSON.stringify(enrichMythicLinks(batch === "01" ? batch01VariantIds : undefined), null, 2));
+} else console.log(JSON.stringify(auditMythicLinks(), null, 2));

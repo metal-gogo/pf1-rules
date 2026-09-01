@@ -23,13 +23,17 @@ describe("Mythic rich text", () => {
   it("audits every Mythic variant before applying reviewed links", () => {
     const audit = JSON.parse(fs.readFileSync(path.resolve("data/reports/mythic-link-audit.json"), "utf8"));
     expect(audit.audited_variants).toBe(287);
-    expect(audit.variants_with_source_anchors).toEqual(["mythic-spell-variant.wish"]);
+    expect(audit.variants_with_source_anchors).toEqual([
+      "mythic-spell-variant.arcane-cannon",
+      "mythic-spell-variant.wish",
+    ]);
     expect(audit.variants_with_only_d20pfsrd_candidates).toContain("mythic-spell-variant.darkness");
     expect(audit.links_added_by_evidence_source).toEqual({
-      aon_anchor: 2,
-      aon_plain_text: 8,
-      d20pfsrd_anchor: 12,
+      aon_anchor: 3,
+      aon_plain_text: 11,
+      d20pfsrd_anchor: 28,
     });
+    expect(audit.enriched_variants).toHaveLength(17);
   });
 
   it("preserves raw rules text and uses source-backed relationships", () => {
@@ -63,5 +67,41 @@ describe("Mythic rich text", () => {
     const wishLinks = links(variant("wish-mythic.json").rules_text.document);
     expect(wishLinks.some((node) => ["silent", "stilled"].includes(node.value))).toBe(false);
     expect(variant("darkness-mythic.json").rules_text.document).toBeUndefined();
+  });
+
+  it("applies deterministic batch 01 and rejects unsafe migrated targets", () => {
+    const filenames = [
+      "mythic-ablative-barrier.json",
+      "mythic-animal-aspect.json",
+      "mythic-animate-dead.json",
+      "mythic-animate-objects.json",
+      "mythic-animate-plants.json",
+      "mythic-antimagic-field.json",
+      "mythic-arboreal-hammer.json",
+      "mythic-arcane-cannon.json",
+      "mythic-baleful-polymorph.json",
+      "mythic-bane.json",
+    ];
+    for (const filename of filenames) {
+      const record = variant(filename);
+      expect(richTextLeafText(record.rules_text.document)).toBe(record.rules_text.raw);
+    }
+
+    const objectsLinks = links(variant("mythic-animate-objects.json").rules_text.document);
+    expect(objectsLinks.some((node) => node.value === "hit points")).toBe(true);
+    expect(objectsLinks.some((node) => node.value === "Strength")).toBe(false);
+
+    const cannonLinks = links(variant("mythic-arcane-cannon.json").rules_text.document);
+    expect(cannonLinks.some((node) => node.value === "conductive")).toBe(true);
+    expect(cannonLinks.some((node) => node.value === "hardness")).toBe(false);
+
+    const hammer = variant("mythic-arboreal-hammer.json");
+    const fortitude = hammer.relationships.find((item: any) => item.target.entity_id === "saving-throw.fortitude");
+    expect(fortitude.evidence).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        observation_id: "d20pfsrd:spell.arboreal-hammer:5a3e3f039972b7c2",
+        anchor_text_raw: "Fortitude",
+      }),
+    ]));
   });
 });
