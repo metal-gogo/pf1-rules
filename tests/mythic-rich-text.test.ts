@@ -31,9 +31,9 @@ describe("Mythic rich text", () => {
     expect(audit.links_added_by_evidence_source).toEqual({
       aon_anchor: 3,
       aon_plain_text: 11,
-      d20pfsrd_anchor: 250,
+      d20pfsrd_anchor: 323,
     });
-    expect(audit.enriched_variants).toHaveLength(147);
+    expect(audit.enriched_variants).toHaveLength(180);
   });
 
   it("preserves raw rules text and uses source-backed relationships", () => {
@@ -174,7 +174,10 @@ describe("Mythic rich text", () => {
       }));
     }
 
-    expect(variant("mythic-call-lightning.json").rules_text.document).toBeUndefined();
+    expect(links(variant("mythic-call-lightning.json").rules_text.document)).toEqual(expect.arrayContaining([
+      expect.objectContaining({ value: "dazzled", relationship_id: "mythic-spell-variant.call-lightning:uses_definition:condition.dazzled" }),
+      expect.objectContaining({ value: "deafened", relationship_id: "mythic-spell-variant.call-lightning:uses_definition:condition.deafened" }),
+    ]));
   });
 
   it("applies deterministic batch 03 and preserves canonical target choices", () => {
@@ -196,7 +199,10 @@ describe("Mythic rich text", () => {
     const fireStormLinks = links(variant("mythic-fire-storm.json").rules_text.document);
     expect(fireStormLinks.some((node) => node.value === "caster level")).toBe(true);
     expect(fireStormLinks.some((node) => ["resistance", "immunity"].includes(node.value))).toBe(false);
-    expect(variant("mythic-dimension-door.json").rules_text.document).toBeUndefined();
+    expect(links(variant("mythic-dimension-door.json").rules_text.document)).toContainEqual(expect.objectContaining({
+      value: "caster level",
+      relationship_id: "mythic-spell-variant.dimension-door:uses_definition:spellcasting.caster-level",
+    }));
     expect(links(variant("mythic-dragons-breath.json").rules_text.document).some((node) => node.value === "dragon’s breath")).toBe(false);
     expect(links(variant("mythic-dust-of-twilight.json").rules_text.document).some((node) => node.value === "dust of twilight")).toBe(false);
   });
@@ -220,7 +226,7 @@ describe("Mythic rich text", () => {
     expect(searingLightLinks).toContainEqual(expect.objectContaining({ value: "constructs", relationship_id: "mythic-spell-variant.searing-light:uses_definition:monster-type.construct" }));
     expect(searingLightLinks.some((node) => node.value === "vulnerable")).toBe(false);
 
-    for (const filename of ["mythic-dimension-door.json", "mythic-resonating-word.json", "mythic-time-stop.json"]) {
+    for (const filename of ["mythic-resonating-word.json", "mythic-time-stop.json"]) {
       expect(variant(filename).rules_text.document).toBeUndefined();
     }
   });
