@@ -289,17 +289,28 @@ function phraseKey(value: string): string {
 
 function naturalSpellName(value: string): string {
   const match = /^(.*?),\s*(greater|lesser|mass|supreme)$/i.exec(value.trim());
-  return match?.[1] && match[2] ? `${match[2]} ${match[1]}` : value;
+  if (!match?.[1] || !match[2]) return value;
+  const createMatch = /^(create)\s+(.+)$/i.exec(match[1]);
+  return createMatch
+    ? `${createMatch[1]} ${match[2]} ${createMatch[2]}`
+    : `${match[2]} ${match[1]}`;
 }
+
+const spellTitleAliases = new Map<string, string[]>([
+  ["energy siege shot", ["energy shot"]],
+  ["magic siege engine", ["magic siege weapon"]],
+]);
 
 
 function spellNameVariants(value: string): string[] {
   const variants = new Set([value, naturalSpellName(value)]);
+  for (const alias of spellTitleAliases.get(phraseKey(value)) ?? []) variants.add(alias);
   const numerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
   for (const phrase of [...variants]) {
     const match = /^(.*?)(?:\s+)([1-9]|I|II|III|IV|V|VI|VII|VIII|IX)$/i.exec(phrase);
     if (!match?.[1] || !match[2]) continue;
     const index = /^[1-9]$/.test(match[2]) ? Number(match[2]) - 1 : numerals.indexOf(match[2].toUpperCase());
+    if (index === 0) variants.add(match[1]);
     if (index >= 0) variants.add(`${match[1]} ${index + 1}`);
     if (index >= 0) variants.add(`${match[1]} ${numerals[index]}`);
   }
@@ -347,7 +358,9 @@ function linkCandidates(
       (evidence: ValidatedJson) =>
         evidence.source_field === "spell_raw.description_raw"
     );
-    const expectsMatch = relationship.type === "functions_like" || hasDescriptionEvidence;
+    const expectsMatch = relationship.type === "functions_like" || (
+      hasDescriptionEvidence && relationship.type !== "counterpart_of"
+    );
     const linkable = relationship.target.entity_type === "spell" ||
       (
         relationship.target.entity_type === "spell_family" &&
@@ -425,7 +438,10 @@ function linkCandidates(
 
 
 function escapedRegExp(value: string): string {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/\s+/g, "\\s+");
+  return value
+    .replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    .replace(/[’']/g, "['’]")
+    .replace(/\s+/g, "\\s+");
 }
 
 

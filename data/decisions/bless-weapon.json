@@ -168,9 +168,85 @@
         "aon:subdomain.hubris:e2950469"
       ],
       "rationale": "The owning cleric/inquisitor subdomain prints a replacement rule. This effective entry inherits the unchanged level from its associated domain and is marked derived."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.bless-weapon:c6dc76032621f5e3",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.bless-weapon:c6dc76032621f5e3",
+        "legacy_aon:spell.bless-weapon:d21d9f303f940206",
+        "d20pfsrd:spell.bless-weapon:870b910b413b6e5c",
+        "aon:domain.glory:e2950469",
+        "aon:subdomain.chivalry:e2950469",
+        "aon:subdomain.heroism:e2950469",
+        "aon:subdomain.hubris:e2950469"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.bless-weapon:appears_on_spell_list:spell-list.chivalry-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.chivalry:e2950469",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.chivalry:e2950469"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.bless-weapon:appears_on_spell_list:spell-list.glory-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:domain.glory:e2950469",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:domain.glory:e2950469"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor domain; this is domain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.bless-weapon:appears_on_spell_list:spell-list.heroism-subdomain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.heroism:e2950469",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.heroism:e2950469"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
+    {
+      "relationship_id": "spell.bless-weapon:appears_on_spell_list:spell-list.hubris-subdomain-from-glory",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:subdomain.hubris:e2950469",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:subdomain.hubris:e2950469"
+      ],
+      "rationale": "Printed by the owning cleric/inquisitor subdomain; this is subdomain access, not general Cleric class access."
+    },
     {
       "relationship_id": "spell.bless-weapon:appears_on_spell_list:spell-list.paladin",
       "decision": "accept",
@@ -257,11 +333,63 @@
     },
     {
       "relationship_id": "spell.bless-weapon:uses_definition:condition.incorporeal",
-      "decision": "accept",
+      "decision": "reject",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.bless-weapon:870b910b413b6e5c",
           "source_field": "spell_raw.links_raw[5]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.bless-weapon:c6dc76032621f5e3",
+        "legacy_aon:spell.bless-weapon:d21d9f303f940206",
+        "d20pfsrd:spell.bless-weapon:870b910b413b6e5c"
+      ],
+      "rationale": "The spell's use of incorporeal refers to the creature subtype, not the incorporeal condition."
+    },
+    {
+      "relationship_id": "spell.bless-weapon:uses_definition:creature-subtype.incorporeal",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.bless-weapon:d21d9f303f940206",
+          "source_field": "spell_raw.links_raw[2]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.bless-weapon:c6dc76032621f5e3",
+        "legacy_aon:spell.bless-weapon:d21d9f303f940206",
+        "d20pfsrd:spell.bless-weapon:870b910b413b6e5c"
+      ],
+      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.bless-weapon:uses_definition:defense.spell-resistance",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.bless-weapon:d21d9f303f940206",
+          "source_field": "spell_raw.links_raw[0]"
+        },
+        {
+          "observation_id": "aon:spell.bless-weapon:c6dc76032621f5e3",
+          "source_field": "spell_raw.spell_resistance_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.bless-weapon:c6dc76032621f5e3",
+        "legacy_aon:spell.bless-weapon:d21d9f303f940206",
+        "d20pfsrd:spell.bless-weapon:870b910b413b6e5c"
+      ],
+      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.bless-weapon:uses_definition:domain.glory",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.bless-weapon:870b910b413b6e5c",
+          "source_field": "spell_raw.links_raw[2]"
         }
       ],
       "considered_observation_ids": [
@@ -300,64 +428,12 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.bless-weapon:uses_definition:domain.glory",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.bless-weapon:870b910b413b6e5c",
-          "source_field": "spell_raw.links_raw[2]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.bless-weapon:c6dc76032621f5e3",
-        "legacy_aon:spell.bless-weapon:d21d9f303f940206",
-        "d20pfsrd:spell.bless-weapon:870b910b413b6e5c"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.bless-weapon:uses_definition:creature-subtype.incorporeal",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.bless-weapon:d21d9f303f940206",
-          "source_field": "spell_raw.links_raw[2]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.bless-weapon:c6dc76032621f5e3",
-        "legacy_aon:spell.bless-weapon:d21d9f303f940206",
-        "d20pfsrd:spell.bless-weapon:870b910b413b6e5c"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.bless-weapon:uses_definition:weapon-special-ability.keen",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "d20pfsrd:spell.bless-weapon:870b910b413b6e5c",
           "source_field": "spell_raw.links_raw[7]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.bless-weapon:c6dc76032621f5e3",
-        "legacy_aon:spell.bless-weapon:d21d9f303f940206",
-        "d20pfsrd:spell.bless-weapon:870b910b413b6e5c"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.bless-weapon:uses_definition:defense.spell-resistance",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.bless-weapon:d21d9f303f940206",
-          "source_field": "spell_raw.links_raw[0]"
-        },
-        {
-          "observation_id": "aon:spell.bless-weapon:c6dc76032621f5e3",
-          "source_field": "spell_raw.spell_resistance_raw"
         }
       ],
       "considered_observation_ids": [
@@ -382,62 +458,6 @@
         "d20pfsrd:spell.bless-weapon:870b910b413b6e5c"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.bless-weapon:appears_on_spell_list:spell-list.glory-domain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:domain.glory:e2950469",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:domain.glory:e2950469"
-      ],
-      "rationale": "AoN prints the spell on the owning cleric/inquisitor domain page; it is modeled as domain access rather than general Cleric access."
-    },
-    {
-      "relationship_id": "spell.bless-weapon:appears_on_spell_list:spell-list.chivalry-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.chivalry:e2950469",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.chivalry:e2950469"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
-    },
-    {
-      "relationship_id": "spell.bless-weapon:appears_on_spell_list:spell-list.heroism-subdomain",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.heroism:e2950469",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.heroism:e2950469"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
-    },
-    {
-      "relationship_id": "spell.bless-weapon:appears_on_spell_list:spell-list.hubris-subdomain-from-glory",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:subdomain.hubris:e2950469",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:subdomain.hubris:e2950469"
-      ],
-      "rationale": "The owning cleric/inquisitor subdomain replaces only named domain spell levels; this unchanged level is inherited from the associated domain and marked derived."
     }
   ],
   "unresolved_questions": [

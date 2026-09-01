@@ -596,6 +596,49 @@ const rejectedRelationshipTargets = new Map([
 
 const rejectedDescriptionRelationships = new Map([
   [
+    "spell.miracle:uses_definition:alignment",
+    "Alignment's nature is ordinary prose, not a reference to the Alignment rules.",
+  ],
+  [
+    "spell.thaumaturgic-circle:references:spell.magic-circle-against-chaos-evil-good-or-law",
+    "The source names four individual magic-circle spells, not a combined spell.",
+  ],
+  [
+    "spell.astral-projection:uses_definition:condition.incorporeal",
+    "An incorporeal silver cord is descriptive text, not a reference to the incorporeal condition.",
+  ],
+  [
+    "spell.astral-projection:uses_definition:creature-subtype.incorporeal",
+    "An incorporeal silver cord is descriptive text, not a reference to the incorporeal creature subtype.",
+  ],
+  ...[
+    "baleful-polymorph",
+    "bless-weapon",
+    "blink",
+    "implosion",
+    "mage-armor",
+    "mages-sword",
+    "shield",
+    "spectral-hand",
+    "spiritual-weapon",
+    "wind-wall",
+  ].map((spellId) => [
+    `spell.${spellId}:uses_definition:condition.incorporeal`,
+    "The spell's use of incorporeal refers to the creature subtype, not the incorporeal condition.",
+  ] as const),
+  [
+    "spell.create-demiplane-lesser:uses_definition:spell.etherealness",
+    "Etherealness is named as a planar-travel spell, not used as a rules definition.",
+  ],
+  [
+    "spell.death-ward:uses_definition:condition.energy-drain",
+    "Energy drain refers to the first-party energy-drain rules concept, not a secondary-source condition.",
+  ],
+  [
+    "spell.death-ward:uses_definition:condition.negative-levels",
+    "Negative levels refers to the first-party special ability, not a secondary-source condition.",
+  ],
+  [
     "spell.familiar-melding:uses_definition:condition.dead",
     "The body only appears dead while the caster possesses the familiar; this does not apply the Dead condition.",
   ],
@@ -2093,6 +2136,23 @@ function linkContext(
 }
 
 
+function linkItalicText(document: RichTextDocument, value: string, relationshipId: string): void {
+  let matches = 0;
+  document.content = document.content.map((block) => mapRichTextBlockInlines(block, (content) =>
+    content.map((node) => {
+      if (
+        node.node_type !== "text" ||
+        node.value !== value ||
+        !node.marks?.includes("italic")
+      ) return node;
+      matches += 1;
+      return { node_type: "entity_link" as const, value, relationship_id: relationshipId, marks: node.marks };
+    })
+  ));
+  if (matches !== 1) throw new Error(`Expected one italic rich-text match for ${JSON.stringify(value)}, found ${matches}`);
+}
+
+
 function keepFirstRelationshipLink(
   document: RichTextDocument,
   relationshipId: string,
@@ -2391,6 +2451,43 @@ function distinguishGreaterDischargeReferences(document: RichTextDocument): void
   if (occurrence !== 11) {
     throw new Error(`Expected 11 Greater Discharge candidates, found ${occurrence}`);
   }
+}
+
+
+function addThaumaturgicCircleReferences(
+  document: RichTextDocument,
+  relationships: ValidatedJson[],
+  observationId: string,
+  sourceUrl: string,
+): ValidatedJson[] {
+  const spellId = "spell.thaumaturgic-circle";
+  const additions = [
+    ["chaos", "spell.magic-circle-against-chaos", "Magic Circle against Chaos"],
+    ["evil", "spell.magic-circle-against-evil", "Magic Circle against Evil"],
+    ["good", "spell.magic-circle-against-good", "Magic Circle against Good"],
+    ["law", "spell.magic-circle-against-law", "Magic Circle against Law"],
+  ] as const;
+  const byId = new Map(relationships.map((item) => [String(item.relationship_id), item]));
+  for (const [anchorText, targetId, targetName] of additions) {
+    const item = relationship(
+      spellId,
+      "functions_like",
+      "spell",
+      targetId,
+      targetName,
+      anchorText,
+      observationId,
+      sourceUrl,
+    );
+    byId.set(String(item.relationship_id), item);
+  }
+  for (const [value, targetId] of additions) {
+    const linkedValue = value === "chaos" ? "circle against chaos" : value;
+    linkItalicText(document, linkedValue, `${spellId}:functions_like:${targetId}`);
+  }
+  return [...byId.values()].sort((left, right) =>
+    String(left.relationship_id).localeCompare(String(right.relationship_id)),
+  );
 }
 
 
@@ -3113,6 +3210,14 @@ export function enrichRichTextSpells(spellIds: readonly string[]): void {
     }
     if (spellId === "spell.alluring-light") {
       reconciled.relationships = addAlluringLightReferences(
+        sourceDocument,
+        reconciled.relationships,
+        baselineId,
+        observation.record.source.url,
+      );
+    }
+    if (spellId === "spell.thaumaturgic-circle") {
+      reconciled.relationships = addThaumaturgicCircleReferences(
         sourceDocument,
         reconciled.relationships,
         baselineId,

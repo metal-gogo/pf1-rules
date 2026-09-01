@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.summon-lesser-demon",
   "ruleset": "Pathfinder First Edition",
   "name": "Summon Lesser Demon",
@@ -204,7 +204,77 @@
   "description": {
     "raw": "This spell functions like summon monster, except it allows you to summon a single brimorak (Lords of Chaos 56), one incubus (Bestiary 3 73), one thoxel demon (see page 86), 1d3 schir demons (Bestiary 3 74), or 1d4+1 vermlek demons (Lords of Chaos 54).",
     "search_text": "\"this spell functions like summon monster, except it allows you to summon a single brimorak (lords of chaos 56), one incubus (bestiary 3 73), one thoxel demon (see page 86), 1d3 schir demons (bestiary 3 74), or 1d4+1 vermlek demons (lords of chaos 54).\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "summon monster",
+              "relationship_id": "spell.summon-lesser-demon:functions_like:spell.summon-monster-1",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it allows you to summon a single brimorak ("
+            },
+            {
+              "node_type": "text",
+              "value": "Lords of Chaos",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " 56), one incubus ("
+            },
+            {
+              "node_type": "text",
+              "value": "Bestiary 3",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " 73), one thoxel demon (see page 86), 1d3 schir demons ("
+            },
+            {
+              "node_type": "text",
+              "value": "Bestiary 3",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " 74), or 1d4+1 vermlek demons ("
+            },
+            {
+              "node_type": "text",
+              "value": "Lords of Chaos",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " 54)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -290,6 +360,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.summon-lesser-demon:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.summon-lesser-demon:4cfc49352b599cef",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.summon-lesser-demon:appears_on_spell_list:spell-list.oracle",
@@ -598,26 +688,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.summon-lesser-demon:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.summon-lesser-demon:4cfc49352b599cef",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -668,11 +738,19 @@
       "raw_value_sha256": "4eea13a45a9199c7e57634023b9995dc2974ae055d57c83a2b8b45f40bdfe448",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.summon-lesser-demon:4cfc49352b599cef",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "b28d5f47801cdfee070af1839b16e4f5d4468a98b8c5644e693381ded1650a22",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "DERIVED_SPELL_LIST_ACCESS",

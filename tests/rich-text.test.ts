@@ -881,8 +881,8 @@ describe("rich-text relationship enrichment", () => {
     expect(result.warnings).toEqual([]);
   });
 
-  it("links terminal Roman and Arabic numeral spell-name variants", () => {
-    const result = linkRichTextDocument(parseRichTextHtml("summon monster I"), [
+  it("links terminal Roman, Arabic, and level-one series-name variants", () => {
+    const result = linkRichTextDocument(parseRichTextHtml("summon monster I, summon monster 1, and summon monster"), [
       relationship(
         "spell.test:references:spell.summon-monster-1",
         "references",
@@ -893,6 +893,36 @@ describe("rich-text relationship enrichment", () => {
     ]);
     expect(JSON.stringify(result.document)).toContain(
       "spell.test:references:spell.summon-monster-1",
+    );
+    expect(JSON.stringify(result.document).match(/spell\.test:references:spell\.summon-monster-1/g)).toHaveLength(3);
+    expect(result.warnings).toEqual([]);
+  });
+
+  it("links published spell-name and apostrophe variants", () => {
+    const result = linkRichTextDocument(
+      parseRichTextHtml("As create lesser demiplane and bull’s strength."),
+      [
+        relationship(
+          "spell.test:functions_like:spell.create-demiplane-lesser",
+          "functions_like",
+          "Create Demiplane, Lesser",
+          "spell.create-demiplane-lesser",
+          { targetType: "spell" },
+        ),
+        relationship(
+          "spell.test:functions_like:spell.bulls-strength",
+          "functions_like",
+          "Bull's Strength",
+          "spell.bulls-strength",
+          { targetType: "spell" },
+        ),
+      ],
+    );
+    expect(JSON.stringify(result.document)).toContain(
+      "spell.test:functions_like:spell.create-demiplane-lesser",
+    );
+    expect(JSON.stringify(result.document)).toContain(
+      "spell.test:functions_like:spell.bulls-strength",
     );
     expect(result.warnings).toEqual([]);
   });

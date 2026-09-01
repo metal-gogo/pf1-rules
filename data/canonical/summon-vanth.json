@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.summon-vanth",
   "ruleset": "Pathfinder First Edition",
   "name": "Summon Vanth",
@@ -201,7 +201,71 @@
   "description": {
     "raw": "This spell functions like summon monster, except that it summons a single vanth psychopomp. Vanth psychopomps are detailed on page 221 of Pathfinder RPG Bestiary 4.",
     "search_text": "\"this spell functions like summon monster, except that it summons a single vanth psychopomp. vanth psychopomps are detailed on page 221 of pathfinder rpg bestiary 4.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "summon monster",
+              "relationship_id": "spell.summon-vanth:functions_like:spell.summon-monster-1",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that it summons a single "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "vanth",
+              "relationship_id": "spell.summon-vanth:uses_definition:monster.psychopomp-vanth"
+            },
+            {
+              "node_type": "text",
+              "value": " "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "psychopomp",
+              "relationship_id": "spell.summon-vanth:uses_definition:creature-subtype.psychopomp"
+            },
+            {
+              "node_type": "text",
+              "value": ". "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Vanth",
+              "relationship_id": "spell.summon-vanth:uses_definition:monster.psychopomp-vanth"
+            },
+            {
+              "node_type": "text",
+              "value": " psychopomps are detailed on page 221 of "
+            },
+            {
+              "node_type": "text",
+              "value": "Pathfinder RPG Bestiary 4",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -364,6 +428,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.summon-vanth:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.summon-vanth:a66a1ce1185b240f",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 6",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.summon-vanth:appears_on_spell_list:spell-list.oracle",
@@ -668,12 +752,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.summon-vanth:references:spell.summon-monster",
+      "relationship_id": "spell.summon-vanth:references:spell.summon-monster-1",
       "type": "references",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.summon-monster",
-        "name": "summon monster"
+        "entity_id": "spell.summon-monster-1",
+        "name": "Summon Monster 1"
       },
       "status": "accepted",
       "evidence": [
@@ -760,26 +844,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.summon-vanth:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.summon-vanth:a66a1ce1185b240f",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 6",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -830,11 +894,19 @@
       "raw_value_sha256": "525540ca4cf4896272381cd18e088017707e8c6776eceeaeaf91c8fafce5ca90",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.summon-vanth:a66a1ce1185b240f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "85752d3ad1d4a6fd763722208a7291024b08e8d3fd36b5e6d36426a5c6e8ad95",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

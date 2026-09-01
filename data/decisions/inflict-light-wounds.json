@@ -78,9 +78,39 @@
         "aon:spell.inflict-light-wounds:20d7e4da"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.inflict-light-wounds:20d7e4da",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.inflict-light-wounds:20d7e4da",
+        "legacy_aon:spell.inflict-light-wounds:37f4039e",
+        "d20pfsrd:spell.inflict-light-wounds:88508280"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.inflict-light-wounds:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.inflict-light-wounds:20d7e4da",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.inflict-light-wounds:20d7e4da"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
     {
       "relationship_id": "spell.inflict-light-wounds:counterpart_of:spell.cure-light-wounds",
       "decision": "accept",
@@ -95,23 +125,7 @@
         "legacy_aon:spell.inflict-light-wounds:37f4039e",
         "d20pfsrd:spell.inflict-light-wounds:88508280"
       ],
-      "rationale": "The paired rank and inverse positive-versus-negative energy behavior support comparison without implying inheritance."
-    },
-    {
-      "relationship_id": "spell.inflict-light-wounds:member_of_family:spell-family.inflict-wounds",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.inflict-light-wounds:20d7e4da",
-          "source_field": "spell_raw.name_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.inflict-light-wounds:20d7e4da",
-        "legacy_aon:spell.inflict-light-wounds:37f4039e",
-        "d20pfsrd:spell.inflict-light-wounds:88508280"
-      ],
-      "rationale": "The base entry anchors family navigation and future inheritance resolution."
+      "rationale": "The spells mirror their treatment of living and undead creatures; this is navigation and comparison, not inheritance."
     },
     {
       "relationship_id": "spell.inflict-light-wounds:has_mythic_variant:mythic-spell-variant.inflict-light-wounds",
@@ -127,21 +141,111 @@
         "legacy_aon:spell.inflict-light-wounds:37f4039e",
         "d20pfsrd:spell.inflict-light-wounds:88508280"
       ],
-      "rationale": "The explicitly named mythic subsection is now a separately identified spell variant. Sickened and Mythic Adventures belong to that variant rather than the base spell."
+      "rationale": "The mythic rules, publication, and Sickened relationship are owned by the linked spell-variant entity."
     },
     {
-      "relationship_id": "spell.inflict-light-wounds:appears_on_spell_list:spell-list.omdura",
+      "relationship_id": "spell.inflict-light-wounds:has_school:magic-school.necromancy",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "aon:spell.inflict-light-wounds:20d7e4da",
-          "source_field": "spell_raw.levels_raw"
+          "source_field": "spell_raw.links_raw[1]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.inflict-light-wounds:88508280",
+          "source_field": "spell_raw.links_raw[0]"
         }
       ],
       "considered_observation_ids": [
-        "aon:spell.inflict-light-wounds:20d7e4da"
+        "aon:spell.inflict-light-wounds:20d7e4da",
+        "legacy_aon:spell.inflict-light-wounds:37f4039e",
+        "d20pfsrd:spell.inflict-light-wounds:88508280"
       ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+      "rationale": "Both current catalogs link the school definition."
+    },
+    {
+      "relationship_id": "spell.inflict-light-wounds:member_of_family:spell-family.inflict-wounds",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.inflict-light-wounds:20d7e4da",
+          "source_field": "spell_raw.name_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.inflict-light-wounds:20d7e4da",
+        "legacy_aon:spell.inflict-light-wounds:37f4039e",
+        "d20pfsrd:spell.inflict-light-wounds:88508280"
+      ],
+      "rationale": "Family membership supports discovery; this base spell has no parent dependency."
+    },
+    {
+      "relationship_id": "spell.inflict-light-wounds:published_in:publication.pathfinder-rpg-core-rulebook",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.inflict-light-wounds:20d7e4da",
+          "source_field": "spell_raw.links_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.inflict-light-wounds:20d7e4da",
+        "legacy_aon:spell.inflict-light-wounds:37f4039e",
+        "d20pfsrd:spell.inflict-light-wounds:88508280"
+      ],
+      "rationale": "AoN supplies page 300."
+    },
+    {
+      "relationship_id": "spell.inflict-light-wounds:uses_action:action.standard-action",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.inflict-light-wounds:88508280",
+          "source_field": "spell_raw.links_raw[6]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.inflict-light-wounds:20d7e4da",
+        "legacy_aon:spell.inflict-light-wounds:37f4039e",
+        "d20pfsrd:spell.inflict-light-wounds:88508280"
+      ],
+      "rationale": "d20PFSRD supplies the direct rules link."
+    },
+    {
+      "relationship_id": "spell.inflict-light-wounds:uses_definition:defense.spell-resistance",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.inflict-light-wounds:37f4039e",
+          "source_field": "spell_raw.links_raw[1]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.inflict-light-wounds:20d7e4da",
+        "legacy_aon:spell.inflict-light-wounds:37f4039e",
+        "d20pfsrd:spell.inflict-light-wounds:88508280"
+      ],
+      "rationale": "Legacy PRD supplies a direct glossary link."
+    },
+    {
+      "relationship_id": "spell.inflict-light-wounds:uses_definition:saving-throw.will",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.inflict-light-wounds:37f4039e",
+          "source_field": "spell_raw.links_raw[0]"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.inflict-light-wounds:88508280",
+          "source_field": "spell_raw.links_raw[7]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.inflict-light-wounds:20d7e4da",
+        "legacy_aon:spell.inflict-light-wounds:37f4039e",
+        "d20pfsrd:spell.inflict-light-wounds:88508280"
+      ],
+      "rationale": "The entry's Will half rule remains in the raw field."
     }
   ],
   "unresolved_questions": [

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.magic-siege-engine-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Magic Siege Engine, Greater",
@@ -235,7 +235,54 @@
   "description": {
     "raw": "This spell functions like magic siege weapon, except it gives an indirect fire siege weapon an enhancement bonus on targeting and damage rolls of +1 per four caster levels (maximum +5). If used on a direct-fire siege weapon, this spell functions as greater magic weapon.",
     "search_text": "\"this spell functions like magic siege weapon, except it gives an indirect fire siege weapon an enhancement bonus on targeting and damage rolls of +1 per four caster levels (maximum +5). if used on a direct-fire siege weapon, this spell functions as greater magic weapon.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "magic siege weapon",
+              "relationship_id": "spell.magic-siege-engine-greater:functions_like:spell.magic-siege-engine",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it gives an indirect fire siege weapon an "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "enhancement bonus",
+              "relationship_id": "spell.magic-siege-engine-greater:uses_definition:bonus.enhancement"
+            },
+            {
+              "node_type": "text",
+              "value": " on targeting and damage rolls of +1 per four caster levels (maximum +5). If used on a direct-fire siege weapon, this spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "greater magic weapon",
+              "relationship_id": "spell.magic-siege-engine-greater:references:spell.magic-weapon-greater",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -467,6 +514,47 @@
       "note": null
     },
     {
+      "relationship_id": "spell.magic-siege-engine-greater:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.magic-siege-engine-greater:0bb40ca33fff646e",
+          "source_field": "spell_raw.links_raw[2]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "cleric",
+          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
+        },
+        {
+          "observation_id": "aon:spell.magic-siege-engine-greater:756e15ad1001955f",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 5",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.magic-siege-engine-greater:0bb40ca33fff646e",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inquisitor",
+          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
+        },
+        {
+          "observation_id": "aon:spell.magic-siege-engine-greater:756e15ad1001955f",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "inquisitor 4",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.magic-siege-engine-greater:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -695,32 +783,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.magic-siege-engine-greater:references:spell.greater-magic-weapon",
-      "type": "references",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.greater-magic-weapon",
-        "name": "greater magic weapon"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.magic-siege-engine-greater:4da5b0913dfc5206",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "greater magic weapon",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/magicWeapon.html#magic-weapon-greater"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.magic-siege-engine-greater:references:spell.magic-weapon",
       "type": "references",
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.magic-weapon",
-        "name": "magic weapon"
+        "name": "Magic Weapon"
       },
       "status": "accepted",
       "evidence": [
@@ -730,6 +798,26 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "magic weapon",
           "source_href": "https://www.d20pfsrd.com/magic/all-spells/m/magic-weapon"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.magic-siege-engine-greater:references:spell.magic-weapon-greater",
+      "type": "references",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.magic-weapon-greater",
+        "name": "Magic Weapon, Greater"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.magic-siege-engine-greater:4da5b0913dfc5206",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "greater magic weapon",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/magicWeapon.html#magic-weapon-greater"
         }
       ],
       "note": null
@@ -782,26 +870,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.magic-siege-engine-greater:uses_definition:publication.pathfinder-roleplaying-game-ultimate-combat",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "publication",
-        "entity_id": "publication.pathfinder-roleplaying-game-ultimate-combat",
-        "name": "Pathfinder Roleplaying Game Ultimate Combat"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.magic-siege-engine-greater:0bb40ca33fff646e",
-          "source_field": "spell_raw.links_raw[10]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Pathfinder Roleplaying Game Ultimate Combat",
-          "source_href": "http://www.amazon.com/gp/product/1601253591/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1601253591&linkCode=as2&tag=httpwwwd20pfs-20"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.magic-siege-engine-greater:uses_definition:defense.spell-resistance",
       "type": "uses_definition",
       "target": {
@@ -817,6 +885,26 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "yes (harmless, object)",
           "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.magic-siege-engine-greater:uses_definition:publication.pathfinder-roleplaying-game-ultimate-combat",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.pathfinder-roleplaying-game-ultimate-combat",
+        "name": "Pathfinder Roleplaying Game Ultimate Combat"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.magic-siege-engine-greater:0bb40ca33fff646e",
+          "source_field": "spell_raw.links_raw[10]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Pathfinder Roleplaying Game Ultimate Combat",
+          "source_href": "http://www.amazon.com/gp/product/1601253591/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1601253591&linkCode=as2&tag=httpwwwd20pfs-20"
         }
       ],
       "note": null
@@ -840,47 +928,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.magic-siege-engine-greater:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.magic-siege-engine-greater:0bb40ca33fff646e",
-          "source_field": "spell_raw.links_raw[2]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "cleric",
-          "source_href": "https://www.d20pfsrd.com/classes/core-classes/cleric"
-        },
-        {
-          "observation_id": "aon:spell.magic-siege-engine-greater:756e15ad1001955f",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 5",
-          "source_href": null
-        },
-        {
-          "observation_id": "d20pfsrd:spell.magic-siege-engine-greater:0bb40ca33fff646e",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inquisitor",
-          "source_href": "https://www.d20pfsrd.com/classes/base-classes/inquisitor"
-        },
-        {
-          "observation_id": "aon:spell.magic-siege-engine-greater:756e15ad1001955f",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "inquisitor 4",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -931,11 +978,19 @@
       "raw_value_sha256": "692066350ebd295cdccbfea78cd3e08c3aebdff77c1f6dc49d2e8410d31eec4f",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.magic-siege-engine-greater:756e15ad1001955f",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "6d343d8313be48eedaceda915d975b3bdb50780e1d802c8ab1c12ad0dc948bbd",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.mage-armor",
   "ruleset": "Pathfinder First Edition",
   "name": "Mage Armor",
@@ -193,9 +193,83 @@
     }
   },
   "description": {
-    "raw": "An invisible but tangible field of force surrounds the subject of a mage armor spell, providing a +4 armor bonus to AC.\n\nUnlike mundane armor, mage armor entails no armor check penalty, arcane spell failure chance, or speed reduction. Since mage armor is made of force, incorporeal creatures can't bypass it the way they do normal armor.Mythic Mage ArmorSource Mythic Adventures pg. 100\nThe armor bonus increases to +6. There is a 50% chance that any critical hit or sneak attack made against the target is negated and treated as a normal hit, as if the target were wearing moderate fortification armor.",
-    "search_text": "\"an invisible but tangible field of force surrounds the subject of a mage armor spell, providing a +4 armor bonus to ac.\\n\\nunlike mundane armor, mage armor entails no armor check penalty, arcane spell failure chance, or speed reduction. since mage armor is made of force, incorporeal creatures can't bypass it the way they do normal armor.mythic mage armorsource mythic adventures pg. 100\\nthe armor bonus increases to +6. there is a 50% chance that any critical hit or sneak attack made against the target is negated and treated as a normal hit, as if the target were wearing moderate fortification armor.\"",
-    "sections": []
+    "raw": "An invisible but tangible field of force surrounds the subject of a mage armor spell, providing a +4 armor bonus to AC.\n\nUnlike mundane armor, mage armor entails no armor check penalty, arcane spell failure chance, or speed reduction. Since mage armor is made of force, incorporeal creatures can't bypass it the way they do normal armor.",
+    "search_text": "\"an invisible but tangible field of force surrounds the subject of a mage armor spell, providing a +4 armor bonus to ac.\\n\\nunlike mundane armor, mage armor entails no armor check penalty, arcane spell failure chance, or speed reduction. since mage armor is made of force, incorporeal creatures can't bypass it the way they do normal armor.\"",
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "An invisible but tangible field of force surrounds the subject of a "
+            },
+            {
+              "node_type": "text",
+              "value": "mage armor",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " spell, providing a +4 armor bonus to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "AC",
+              "relationship_id": "spell.mage-armor:uses_definition:armor-class"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        },
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "Unlike mundane armor, "
+            },
+            {
+              "node_type": "text",
+              "value": "mage armor",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " entails no armor check penalty, arcane spell failure chance, or speed reduction. Since "
+            },
+            {
+              "node_type": "text",
+              "value": "mage armor",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": " is made of force, "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "incorporeal",
+              "relationship_id": "spell.mage-armor:uses_definition:creature-subtype.incorporeal"
+            },
+            {
+              "node_type": "text",
+              "value": " creatures can't bypass it the way they do normal armor."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -340,6 +414,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.mage-armor:appears_on_spell_list:spell-list.sorcerer-draconic-bloodline",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.sorcerer-draconic-bloodline",
+        "name": "Sorcerer Draconic Bloodline Bonus Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.draconic:fa318bb6",
+          "source_field": "entity_raw.sections_raw[0]",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "mage armor (3rd)",
+          "source_href": "https://www.aonprd.com/BloodlineDisplay.aspx?ItemName=Draconic"
+        }
+      ],
+      "note": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     },
     {
       "relationship_id": "spell.mage-armor:appears_on_spell_list:spell-list.sorcerer-wizard",
@@ -631,26 +725,6 @@
       "note": null
     },
     {
-      "relationship_id": "spell.mage-armor:uses_definition:condition.incorporeal",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "condition",
-        "entity_id": "condition.incorporeal",
-        "name": "incorporeal"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.mage-armor:1963d4b45ed733c1",
-          "source_field": "spell_raw.links_raw[9]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "incorporeal",
-          "source_href": "https://www.d20pfsrd.com/gamemastering/conditions#TOC-Incorporeal"
-        }
-      ],
-      "note": null
-    },
-    {
       "relationship_id": "spell.mage-armor:uses_definition:armor-class",
       "type": "uses_definition",
       "target": {
@@ -671,6 +745,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.mage-armor:uses_definition:condition.incorporeal",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "condition",
+        "entity_id": "condition.incorporeal",
+        "name": "incorporeal"
+      },
+      "status": "rejected",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.mage-armor:1963d4b45ed733c1",
+          "source_field": "spell_raw.links_raw[9]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "incorporeal",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/conditions#TOC-Incorporeal"
+        }
+      ],
+      "note": "The spell's use of incorporeal refers to the creature subtype, not the incorporeal condition."
+    },
+    {
       "relationship_id": "spell.mage-armor:uses_definition:creature-subtype.incorporeal",
       "type": "uses_definition",
       "target": {
@@ -686,26 +780,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "incorporeal",
           "source_href": "https://legacy.aonprd.com/coreRulebook/glossary.html#incorporeal"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.mage-armor:uses_definition:publication.mythic-adventures-pg-100",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "publication",
-        "entity_id": "publication.mythic-adventures-pg-100",
-        "name": "Mythic Adventures pg. 100"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.mage-armor:d562b74736edebaf",
-          "source_field": "spell_raw.links_raw[4]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "Mythic Adventures pg. 100",
-          "source_href": "http://paizo.com/products/btpy8ywe?Pathfinder-Roleplaying-Game-Mythic-Adventures"
         }
       ],
       "note": null
@@ -733,6 +807,26 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "no",
           "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.mage-armor:uses_definition:publication.mythic-adventures-pg-100",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "publication",
+        "entity_id": "publication.mythic-adventures-pg-100",
+        "name": "Mythic Adventures pg. 100"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.mage-armor:d562b74736edebaf",
+          "source_field": "spell_raw.links_raw[4]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Mythic Adventures pg. 100",
+          "source_href": "http://paizo.com/products/btpy8ywe?Pathfinder-Roleplaying-Game-Mythic-Adventures"
         }
       ],
       "note": null
@@ -861,11 +955,19 @@
       "raw_value_sha256": "6f6a35eede1b631b14d059b5c65fbb7521473e92f75ce36eeff10146cda7d6c7",
       "decision": "normalized",
       "note": "The owner page prints the class level when the bonus spell is gained; it is normalized to the corresponding spell level."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.mage-armor:d562b74736edebaf",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "427685a721f57902e2e161585b97469be6f06a152ded66fa59cfda38444f4e3e",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.1-level-zero-bulk",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

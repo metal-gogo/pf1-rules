@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.energy-siege-shot-greater",
   "ruleset": "Pathfinder First Edition",
   "name": "Energy Siege Shot, Greater",
@@ -150,7 +150,51 @@
   "description": {
     "raw": "This spell functions like energy shot, except it can target siege engines of any size, not just Large siege engines.",
     "search_text": "\"this spell functions like energy shot, except it can target siege engines of any size, not just large siege engines.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "energy shot",
+              "relationship_id": "spell.energy-siege-shot-greater:functions_like:spell.energy-siege-shot",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it can target "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "siege engines",
+              "relationship_id": "spell.energy-siege-shot-greater:uses_definition:siege-engine"
+            },
+            {
+              "node_type": "text",
+              "value": " of any size, not just Large "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "siege engines",
+              "relationship_id": "spell.energy-siege-shot-greater:uses_definition:siege-engine"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -475,7 +519,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.energy-siege-shot",
-        "name": "energy siege shot"
+        "name": "Energy Siege Shot"
       },
       "status": "accepted",
       "evidence": [
@@ -485,26 +529,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "energy siege shot",
           "source_href": "https://legacy.aonprd.com/ultimateCombat/spells/energySiegeShot.html#energy-siege-shot"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.energy-siege-shot-greater:uses_definition:siege-engine",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "siege_engine",
-        "entity_id": "siege-engine",
-        "name": "siege engines"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.energy-siege-shot-greater:a55feff1924dfa0a",
-          "source_field": "spell_raw.links_raw[3]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "siege engines",
-          "source_href": "https://www.d20pfsrd.com/gamemastering/other-rules/siege-engines"
         }
       ],
       "note": null
@@ -525,6 +549,26 @@
           "evidence_kind": "plain_text",
           "anchor_text_raw": "yes (harmless/object)",
           "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.energy-siege-shot-greater:uses_definition:siege-engine",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "siege_engine",
+        "entity_id": "siege-engine",
+        "name": "siege engines"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.energy-siege-shot-greater:a55feff1924dfa0a",
+          "source_field": "spell_raw.links_raw[3]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "siege engines",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/other-rules/siege-engines"
         }
       ],
       "note": null
@@ -578,11 +622,19 @@
       "raw_value_sha256": "bdb5d8ba22b20086106d8cde27bd9c7b19b7e56a068da770007e970ae5b6a6ab",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.energy-siege-shot-greater:0c35289318d834a0",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "d8ee9eb52e8690a1b0aeff71c816541d72636b266bc103a5bb96de3be8e09877",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

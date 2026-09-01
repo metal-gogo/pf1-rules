@@ -82,9 +82,55 @@
         "aon:spell.inflict-moderate-wounds:4ffab7ae"
       ],
       "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. The source spell-list rows remain preserved separately."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.inflict-moderate-wounds:4ffab7ae",
+        "legacy_aon:spell.inflict-moderate-wounds:24842631",
+        "d20pfsrd:spell.inflict-moderate-wounds:2e286116"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
+    {
+      "relationship_id": "spell.inflict-moderate-wounds:appears_on_spell_list:spell-list.omdura",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.inflict-moderate-wounds:4ffab7ae"
+      ],
+      "rationale": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
+      "relationship_id": "spell.inflict-moderate-wounds:counterpart_of:spell.cure-moderate-wounds",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.inflict-moderate-wounds:4ffab7ae",
+        "legacy_aon:spell.inflict-moderate-wounds:24842631",
+        "d20pfsrd:spell.inflict-moderate-wounds:2e286116"
+      ],
+      "rationale": "The pair mirrors negative-versus-positive energy behavior; neither inherits from the other."
+    },
     {
       "relationship_id": "spell.inflict-moderate-wounds:functions_like:spell.inflict-light-wounds",
       "decision": "accept",
@@ -103,23 +149,7 @@
         "legacy_aon:spell.inflict-moderate-wounds:24842631",
         "d20pfsrd:spell.inflict-moderate-wounds:2e286116"
       ],
-      "rationale": "This explicit parent relationship powers rule resolution and preserves both direct source links."
-    },
-    {
-      "relationship_id": "spell.inflict-moderate-wounds:counterpart_of:spell.cure-moderate-wounds",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
-          "source_field": "spell_raw.description_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.inflict-moderate-wounds:4ffab7ae",
-        "legacy_aon:spell.inflict-moderate-wounds:24842631",
-        "d20pfsrd:spell.inflict-moderate-wounds:2e286116"
-      ],
-      "rationale": "The paired name, rank, amount, and inverse behavior make it useful for comparison, not inheritance."
+      "rationale": "This relationship carries rules inheritance, not just navigation."
     },
     {
       "relationship_id": "spell.inflict-moderate-wounds:has_mythic_variant:mythic-spell-variant.inflict-moderate-wounds",
@@ -135,21 +165,55 @@
         "legacy_aon:spell.inflict-moderate-wounds:24842631",
         "d20pfsrd:spell.inflict-moderate-wounds:2e286116"
       ],
-      "rationale": "The explicitly named mythic subsection is now a separately identified spell variant. Sickened and Mythic Adventures belong to that variant rather than the base spell."
+      "rationale": "The mythic rules, publication, and Sickened relationship are owned by the linked spell-variant entity."
     },
     {
-      "relationship_id": "spell.inflict-moderate-wounds:appears_on_spell_list:spell-list.omdura",
+      "relationship_id": "spell.inflict-moderate-wounds:has_school:magic-school.necromancy",
       "decision": "accept",
       "evidence": [
         {
           "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
-          "source_field": "spell_raw.levels_raw"
+          "source_field": "spell_raw.links_raw[1]"
         }
       ],
       "considered_observation_ids": [
-        "aon:spell.inflict-moderate-wounds:4ffab7ae"
+        "aon:spell.inflict-moderate-wounds:4ffab7ae",
+        "legacy_aon:spell.inflict-moderate-wounds:24842631",
+        "d20pfsrd:spell.inflict-moderate-wounds:2e286116"
       ],
-      "rationale": "Omdura access is derived from the class rule and is not treated as a printed spell-page value."
+      "rationale": "AoN supplies the direct school link."
+    },
+    {
+      "relationship_id": "spell.inflict-moderate-wounds:member_of_family:spell-family.inflict-wounds",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
+          "source_field": "spell_raw.name_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.inflict-moderate-wounds:4ffab7ae",
+        "legacy_aon:spell.inflict-moderate-wounds:24842631",
+        "d20pfsrd:spell.inflict-moderate-wounds:2e286116"
+      ],
+      "rationale": "Family membership supports discovery; inheritance is recorded separately."
+    },
+    {
+      "relationship_id": "spell.inflict-moderate-wounds:published_in:publication.pathfinder-rpg-core-rulebook",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
+          "source_field": "spell_raw.links_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.inflict-moderate-wounds:4ffab7ae",
+        "legacy_aon:spell.inflict-moderate-wounds:24842631",
+        "d20pfsrd:spell.inflict-moderate-wounds:2e286116"
+      ],
+      "rationale": "AoN supplies page 300."
     }
   ],
   "unresolved_questions": [

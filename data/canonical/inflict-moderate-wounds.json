@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.inflict-moderate-wounds",
   "ruleset": "Pathfinder First Edition",
   "name": "Inflict Moderate Wounds",
@@ -201,7 +201,33 @@
         "heading": "Description",
         "body": "This spell functions like inflict light wounds, except that you deal 2d8 points of damage + 1 point per caster level (maximum +10)."
       }
-    ]
+    ],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "inflict light wounds",
+              "relationship_id": "spell.inflict-moderate-wounds:functions_like:spell.inflict-light-wounds",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except that you deal 2d8 points of damage + 1 point per caster level (maximum +10)."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -240,91 +266,24 @@
   ],
   "relationships": [
     {
-      "relationship_id": "spell.inflict-moderate-wounds:has_school:magic-school.necromancy",
-      "type": "has_school",
+      "relationship_id": "spell.inflict-moderate-wounds:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
       "target": {
-        "entity_type": "magic_school",
-        "entity_id": "magic-school.necromancy",
-        "name": "Necromancy"
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
       },
       "status": "accepted",
       "evidence": [
         {
           "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
-          "source_field": "spell_raw.links_raw[1]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "necromancy",
-          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=8"
-        }
-      ],
-      "note": "AoN supplies the direct school link."
-    },
-    {
-      "relationship_id": "spell.inflict-moderate-wounds:published_in:publication.pathfinder-rpg-core-rulebook",
-      "type": "published_in",
-      "target": {
-        "entity_type": "publication",
-        "entity_id": "publication.pathfinder-rpg-core-rulebook",
-        "name": "Pathfinder RPG Core Rulebook"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "PRPG Core Rulebook pg. 300",
-          "source_href": "http://paizo.com/pathfinderRPG/v5748btpy88yj"
-        }
-      ],
-      "note": "AoN supplies page 300."
-    },
-    {
-      "relationship_id": "spell.inflict-moderate-wounds:has_mythic_variant:mythic-spell-variant.inflict-moderate-wounds",
-      "type": "has_mythic_variant",
-      "target": {
-        "entity_type": "mythic_spell_variant",
-        "entity_id": "mythic-spell-variant.inflict-moderate-wounds",
-        "name": "Mythic Inflict Moderate Wounds"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
-          "source_field": "spell_raw.sections_raw[1].heading_raw",
+          "source_field": "spell_raw.levels_raw",
           "evidence_kind": "plain_text",
-          "anchor_text_raw": "Mythic Inflict Moderate Wounds",
-          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Inflict%20Moderate%20Wounds"
+          "anchor_text_raw": "cleric 2; inquisitor 2",
+          "source_href": null
         }
       ],
-      "note": "The mythic rules, publication, and Sickened relationship are owned by the linked spell-variant entity."
-    },
-    {
-      "relationship_id": "spell.inflict-moderate-wounds:functions_like:spell.inflict-light-wounds",
-      "type": "functions_like",
-      "target": {
-        "entity_type": "spell",
-        "entity_id": "spell.inflict-light-wounds",
-        "name": "Inflict Light Wounds"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "legacy_aon:spell.inflict-moderate-wounds:24842631",
-          "source_field": "spell_raw.links_raw[0]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inflict light wounds",
-          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/inflictLightWounds.html#inflict-light-wounds"
-        },
-        {
-          "observation_id": "d20pfsrd:spell.inflict-moderate-wounds:2e286116",
-          "source_field": "spell_raw.links_raw[6]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "inflict light wounds",
-          "source_href": "https://www.d20pfsrd.com/magic/all-spells/i/inflict-light-wounds"
-        }
-      ],
-      "note": "This relationship carries rules inheritance, not just navigation."
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.inflict-moderate-wounds:counterpart_of:spell.cure-moderate-wounds",
@@ -354,6 +313,73 @@
       "note": "The pair mirrors negative-versus-positive energy behavior; neither inherits from the other."
     },
     {
+      "relationship_id": "spell.inflict-moderate-wounds:functions_like:spell.inflict-light-wounds",
+      "type": "functions_like",
+      "target": {
+        "entity_type": "spell",
+        "entity_id": "spell.inflict-light-wounds",
+        "name": "Inflict Light Wounds"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "legacy_aon:spell.inflict-moderate-wounds:24842631",
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inflict light wounds",
+          "source_href": "https://legacy.aonprd.com/coreRulebook/spells/inflictLightWounds.html#inflict-light-wounds"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.inflict-moderate-wounds:2e286116",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "inflict light wounds",
+          "source_href": "https://www.d20pfsrd.com/magic/all-spells/i/inflict-light-wounds"
+        }
+      ],
+      "note": "This relationship carries rules inheritance, not just navigation."
+    },
+    {
+      "relationship_id": "spell.inflict-moderate-wounds:has_mythic_variant:mythic-spell-variant.inflict-moderate-wounds",
+      "type": "has_mythic_variant",
+      "target": {
+        "entity_type": "mythic_spell_variant",
+        "entity_id": "mythic-spell-variant.inflict-moderate-wounds",
+        "name": "Mythic Inflict Moderate Wounds"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
+          "source_field": "spell_raw.sections_raw[1].heading_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Mythic Inflict Moderate Wounds",
+          "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Inflict%20Moderate%20Wounds"
+        }
+      ],
+      "note": "The mythic rules, publication, and Sickened relationship are owned by the linked spell-variant entity."
+    },
+    {
+      "relationship_id": "spell.inflict-moderate-wounds:has_school:magic-school.necromancy",
+      "type": "has_school",
+      "target": {
+        "entity_type": "magic_school",
+        "entity_id": "magic-school.necromancy",
+        "name": "Necromancy"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
+          "source_field": "spell_raw.links_raw[1]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "necromancy",
+          "source_href": "https://www.aonprd.com/SpellDefinitions.aspx?ID=8"
+        }
+      ],
+      "note": "AoN supplies the direct school link."
+    },
+    {
       "relationship_id": "spell.inflict-moderate-wounds:member_of_family:spell-family.inflict-wounds",
       "type": "member_of_family",
       "target": {
@@ -374,24 +400,24 @@
       "note": "Family membership supports discovery; inheritance is recorded separately."
     },
     {
-      "relationship_id": "spell.inflict-moderate-wounds:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
+      "relationship_id": "spell.inflict-moderate-wounds:published_in:publication.pathfinder-rpg-core-rulebook",
+      "type": "published_in",
       "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
+        "entity_type": "publication",
+        "entity_id": "publication.pathfinder-rpg-core-rulebook",
+        "name": "Pathfinder RPG Core Rulebook"
       },
       "status": "accepted",
       "evidence": [
         {
           "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 2; inquisitor 2",
-          "source_href": null
+          "source_field": "spell_raw.links_raw[0]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "PRPG Core Rulebook pg. 300",
+          "source_href": "http://paizo.com/pathfinderRPG/v5748btpy88yj"
         }
       ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+      "note": "AoN supplies page 300."
     }
   ],
   "provenance": [
@@ -426,11 +452,19 @@
       "raw_value_sha256": null,
       "decision": "copied",
       "note": "The compact functions-like wording remains the canonical raw text."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.inflict-moderate-wounds:4ffab7ae",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "9ebe0285c5f0b2e78f9d67337540880f3e4bc030526cbe9b8f3bb7d877f5528e",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "manual-0.1.0",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "INHERITED_RULES_RESOLVED",

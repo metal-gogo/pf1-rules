@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.summon-derghodaemon",
   "ruleset": "Pathfinder First Edition",
   "name": "Summon Derghodaemon",
@@ -147,7 +147,42 @@
   "description": {
     "raw": "This spell functions like summon monster, except it summons a single derghodaemon.",
     "search_text": "\"this spell functions like summon monster, except it summons a single derghodaemon.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions like "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "summon monster",
+              "relationship_id": "spell.summon-derghodaemon:functions_like:spell.summon-monster-1",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it summons a single "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "derghodaemon",
+              "relationship_id": "spell.summon-derghodaemon:uses_definition:monster.derghodaemon"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -517,12 +552,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.summon-derghodaemon:references:spell.summon-monster",
+      "relationship_id": "spell.summon-derghodaemon:references:spell.summon-monster-1",
       "type": "references",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.summon-monster",
-        "name": "summon monster"
+        "entity_id": "spell.summon-monster-1",
+        "name": "Summon Monster 1"
       },
       "status": "accepted",
       "evidence": [
@@ -532,6 +567,26 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "summon monster",
           "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/summon-monster"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.summon-derghodaemon:uses_definition:defense.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "defense",
+        "entity_id": "defense.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.summon-derghodaemon:deceadf716351b27",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "no",
+          "source_href": null
         }
       ],
       "note": null
@@ -572,26 +627,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "Pathfinder Campaign Setting: Horsemen of the Apocalypse: Book of the Damned, Vol. 3",
           "source_href": "http://amzn.to/2uhIfDB"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.summon-derghodaemon:uses_definition:defense.spell-resistance",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "Spell Resistance"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.summon-derghodaemon:deceadf716351b27",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "no",
-          "source_href": null
         }
       ],
       "note": null
@@ -645,11 +680,19 @@
       "raw_value_sha256": "c11c942c850fcb1c172b65539d1074e3da7c739a2a0270d0ffbcf10cc02f18ea",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.summon-derghodaemon:deceadf716351b27",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "058b15da5ab48b918007e1a041e5405823a603d7f74e6f9efdf654bcb9b70884",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

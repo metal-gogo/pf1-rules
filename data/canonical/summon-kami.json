@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.summon-kami",
   "ruleset": "Pathfinder First Edition",
   "name": "Summon Kami",
@@ -145,7 +145,69 @@
   "description": {
     "raw": "This spell functions as summon nature’s ally V, except you can summon one kodama, 1d3 fukujin, or 1d4+1 shikigami.",
     "search_text": "\"this spell functions as summon nature’s ally v, except you can summon one kodama, 1d3 fukujin, or 1d4+1 shikigami.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell functions as "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "summon nature’s ally V",
+              "relationship_id": "spell.summon-kami:functions_like:spell.summon-natures-ally-5",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except you can "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "summon",
+              "relationship_id": "spell.summon-kami:uses_definition:universal-monster-rule.summon"
+            },
+            {
+              "node_type": "text",
+              "value": " one "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "kodama",
+              "relationship_id": "spell.summon-kami:uses_definition:monster.kami-kodama"
+            },
+            {
+              "node_type": "text",
+              "value": ", 1d3 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "fukujin",
+              "relationship_id": "spell.summon-kami:uses_definition:monster.kami-fukujin"
+            },
+            {
+              "node_type": "text",
+              "value": ", or 1d4+1 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "shikigami",
+              "relationship_id": "spell.summon-kami:uses_definition:monster.kami-shikigami"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -393,12 +455,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.summon-kami:references:spell.summon-natures-ally-v",
+      "relationship_id": "spell.summon-kami:references:spell.summon-natures-ally-5",
       "type": "references",
       "target": {
         "entity_type": "spell",
-        "entity_id": "spell.summon-natures-ally-v",
-        "name": "summon nature’s ally V"
+        "entity_id": "spell.summon-natures-ally-5",
+        "name": "Summon Nature's Ally 5"
       },
       "status": "accepted",
       "evidence": [
@@ -408,26 +470,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "summon nature’s ally V",
           "source_href": "https://www.d20pfsrd.com/magic/all-spells/s/summon-natures-ally"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.summon-kami:uses_definition:monster.kami-fukujin",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "monster",
-        "entity_id": "monster.kami-fukujin",
-        "name": "fukujin"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.summon-kami:39c087ed62667c55",
-          "source_field": "spell_raw.links_raw[7]",
-          "evidence_kind": "hyperlink",
-          "anchor_text_raw": "fukujin",
-          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/outsiders/kami/kami-fukujin"
         }
       ],
       "note": null
@@ -448,6 +490,46 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "kami",
           "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/creature-types#subtype-kami"
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.summon-kami:uses_definition:defense.spell-resistance",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "defense",
+        "entity_id": "defense.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "no",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.summon-kami:uses_definition:monster.kami-fukujin",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "monster",
+        "entity_id": "monster.kami-fukujin",
+        "name": "fukujin"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.summon-kami:39c087ed62667c55",
+          "source_field": "spell_raw.links_raw[7]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "fukujin",
+          "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/outsiders/kami/kami-fukujin"
         }
       ],
       "note": null
@@ -488,26 +570,6 @@
           "evidence_kind": "hyperlink",
           "anchor_text_raw": "shikigami",
           "source_href": "https://www.d20pfsrd.com/bestiary/monster-listings/outsiders/kami/kami-shikigami"
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.summon-kami:uses_definition:defense.spell-resistance",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "Spell Resistance"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "no",
-          "source_href": null
         }
       ],
       "note": null
@@ -581,11 +643,19 @@
       "raw_value_sha256": "47ba2ce083b48e199920b0f6d539a27b05b0b8464ad9ebbfda869f86404cb122",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.summon-kami:1f4247294b5f92ee",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "311cddd3f3647bdaa20319a520364dc055bb1dd70719ff51a3f12e6c75bdbb98",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

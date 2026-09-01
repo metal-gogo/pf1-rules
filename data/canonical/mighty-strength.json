@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "spell_id": "spell.mighty-strength",
   "ruleset": "Pathfinder First Edition",
   "name": "Mighty Strength",
@@ -198,7 +198,51 @@
   "description": {
     "raw": "As bull’s strength, except it grants a +8 enhancement bonus to Strength.",
     "search_text": "\"as bull’s strength, except it grants a +8 enhancement bonus to strength.\"",
-    "sections": []
+    "sections": [],
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "As "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "bull’s strength",
+              "relationship_id": "spell.mighty-strength:functions_like:spell.bulls-strength",
+              "marks": [
+                "italic"
+              ]
+            },
+            {
+              "node_type": "text",
+              "value": ", except it grants a +8 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "enhancement bonus",
+              "relationship_id": "spell.mighty-strength:uses_definition:bonus.enhancement"
+            },
+            {
+              "node_type": "text",
+              "value": " to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Strength",
+              "relationship_id": "spell.mighty-strength:uses_definition:domain.strength"
+            },
+            {
+              "node_type": "text",
+              "value": "."
+            }
+          ]
+        }
+      ]
+    }
   },
   "publication": {
     "publisher": "Paizo",
@@ -409,6 +453,26 @@
       "note": null
     },
     {
+      "relationship_id": "spell.mighty-strength:appears_on_spell_list:spell-list.omdura",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.omdura",
+        "name": "Omdura Spell List"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.mighty-strength:4be6d1e1f425a2a4",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "cleric 4 (Trudd)",
+          "source_href": null
+        }
+      ],
+      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
+    },
+    {
       "relationship_id": "spell.mighty-strength:appears_on_spell_list:spell-list.oracle",
       "type": "appears_on_spell_list",
       "target": {
@@ -562,7 +626,7 @@
       "target": {
         "entity_type": "spell",
         "entity_id": "spell.bulls-strength",
-        "name": "bull’s strength"
+        "name": "Bull's Strength"
       },
       "status": "accepted",
       "evidence": [
@@ -662,26 +726,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.mighty-strength:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.mighty-strength:4be6d1e1f425a2a4",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 4 (Trudd)",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     }
   ],
   "provenance": [
@@ -732,11 +776,19 @@
       "raw_value_sha256": "20a18277df953d918565f05f16bd9ec796e9585479f218aa8d4f72119df98edf",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
+    },
+    {
+      "field_path": "/description/document",
+      "observation_id": "aon:spell.mighty-strength:4be6d1e1f425a2a4",
+      "source_field": "spell_raw.description_raw",
+      "raw_value_sha256": "adbe80be4fd3f604fd2c058cfb991346298de019ec6731faf3b900d6ee37091c",
+      "decision": "normalized",
+      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.1.4-dependency-aliases",
+    "normalizer_version": "0.2.0-rich-text",
     "warnings": [
       {
         "code": "SOURCE_VARIATION",

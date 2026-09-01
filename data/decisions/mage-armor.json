@@ -123,6 +123,23 @@
         "aon:bloodline.sorcerer.draconic:fa318bb6"
       ],
       "rationale": "AoN clearly transcribes the owning sorcerer bloodline's printed spell entry. The gained class level is normalized to spell level."
+    },
+    {
+      "canonical_path": "/description/document",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.mage-armor:d562b74736edebaf",
+          "source_field": "spell_raw.description_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.mage-armor:d562b74736edebaf",
+        "legacy_aon:spell.mage-armor:bb649edf1debf64e",
+        "d20pfsrd:spell.mage-armor:1963d4b45ed733c1",
+        "aon:bloodline.sorcerer.draconic:fa318bb6"
+      ],
+      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -229,6 +246,20 @@
         "d20pfsrd:spell.mage-armor:1963d4b45ed733c1"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.mage-armor:appears_on_spell_list:spell-list.sorcerer-draconic-bloodline",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:bloodline.sorcerer.draconic:fa318bb6",
+          "source_field": "entity_raw.sections_raw[0]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:bloodline.sorcerer.draconic:fa318bb6"
+      ],
+      "rationale": "Printed by the owning sorcerer bloodline; this is bloodline access, not general Sorcerer class access."
     },
     {
       "relationship_id": "spell.mage-armor:appears_on_spell_list:spell-list.sorcerer-wizard",
@@ -451,22 +482,6 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.mage-armor:uses_definition:condition.incorporeal",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "d20pfsrd:spell.mage-armor:1963d4b45ed733c1",
-          "source_field": "spell_raw.links_raw[9]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.mage-armor:d562b74736edebaf",
-        "legacy_aon:spell.mage-armor:bb649edf1debf64e",
-        "d20pfsrd:spell.mage-armor:1963d4b45ed733c1"
-      ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
       "relationship_id": "spell.mage-armor:uses_definition:armor-class",
       "decision": "accept",
       "evidence": [
@@ -483,12 +498,12 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.mage-armor:uses_definition:creature-subtype.incorporeal",
-      "decision": "accept",
+      "relationship_id": "spell.mage-armor:uses_definition:condition.incorporeal",
+      "decision": "reject",
       "evidence": [
         {
-          "observation_id": "legacy_aon:spell.mage-armor:bb649edf1debf64e",
-          "source_field": "spell_raw.links_raw[3]"
+          "observation_id": "d20pfsrd:spell.mage-armor:1963d4b45ed733c1",
+          "source_field": "spell_raw.links_raw[9]"
         }
       ],
       "considered_observation_ids": [
@@ -496,15 +511,15 @@
         "legacy_aon:spell.mage-armor:bb649edf1debf64e",
         "d20pfsrd:spell.mage-armor:1963d4b45ed733c1"
       ],
-      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+      "rationale": "The spell's use of incorporeal refers to the creature subtype, not the incorporeal condition."
     },
     {
-      "relationship_id": "spell.mage-armor:uses_definition:publication.mythic-adventures-pg-100",
+      "relationship_id": "spell.mage-armor:uses_definition:creature-subtype.incorporeal",
       "decision": "accept",
       "evidence": [
         {
-          "observation_id": "aon:spell.mage-armor:d562b74736edebaf",
-          "source_field": "spell_raw.links_raw[4]"
+          "observation_id": "legacy_aon:spell.mage-armor:bb649edf1debf64e",
+          "source_field": "spell_raw.links_raw[3]"
         }
       ],
       "considered_observation_ids": [
@@ -535,6 +550,22 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
+      "relationship_id": "spell.mage-armor:uses_definition:publication.mythic-adventures-pg-100",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.mage-armor:d562b74736edebaf",
+          "source_field": "spell_raw.links_raw[4]"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.mage-armor:d562b74736edebaf",
+        "legacy_aon:spell.mage-armor:bb649edf1debf64e",
+        "d20pfsrd:spell.mage-armor:1963d4b45ed733c1"
+      ],
+      "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
       "relationship_id": "spell.mage-armor:uses_definition:saving-throw.will",
       "decision": "accept",
       "evidence": [
@@ -553,20 +584,6 @@
         "d20pfsrd:spell.mage-armor:1963d4b45ed733c1"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
-    },
-    {
-      "relationship_id": "spell.mage-armor:appears_on_spell_list:spell-list.sorcerer-draconic-bloodline",
-      "decision": "accept",
-      "evidence": [
-        {
-          "observation_id": "aon:bloodline.sorcerer.draconic:fa318bb6",
-          "source_field": "entity_raw.sections_raw[0]"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:bloodline.sorcerer.draconic:fa318bb6"
-      ],
-      "rationale": "AoN prints the spell on the owning sorcerer bloodline page; it is modeled as bloodline access rather than general Sorcerer access."
     }
   ],
   "unresolved_questions": [
