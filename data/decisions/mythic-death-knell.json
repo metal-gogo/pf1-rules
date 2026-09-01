@@ -1,0 +1,62 @@
+{
+  "$schema": "../../schemas/canonical-decision.schema.json",
+  "schema_version": "0.1.0",
+  "decision_id": "canonical-decision:mythic-spell-variant.death-knell:v0.1",
+  "entity_id": "mythic-spell-variant.death-knell",
+  "canonical_record_path": "../variants/mythic-death-knell.json",
+  "observation_ids": [
+    "aon:spell.death-knell:d192102d26a64d61"
+  ],
+  "policy_id": "provenance-first-v0",
+  "baseline_observation_id": "aon:spell.death-knell:d192102d26a64d61",
+  "status": "draft",
+  "field_decisions": [
+    {
+      "canonical_path": "/rules_text/raw",
+      "decision": "select_source",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.death-knell:d192102d26a64d61",
+          "source_field": "raw_aon_mythic_section"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.death-knell:d192102d26a64d61"
+      ],
+      "rationale": "AoN's explicitly named mythic subsection is the available first-party source evidence."
+    },
+    {
+      "canonical_path": "/publication",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.death-knell:d192102d26a64d61",
+          "source_field": "raw_aon_mythic_section"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.death-knell:d192102d26a64d61"
+      ],
+      "rationale": "The source citation is separated from the copied rules text."
+    }
+  ],
+  "relationship_decisions": [
+    {
+      "relationship_id": "mythic-spell-variant.death-knell:mythic_version_of:spell.death-knell",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.death-knell:d192102d26a64d61",
+          "source_field": "raw_aon_mythic_section"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.death-knell:d192102d26a64d61"
+      ],
+      "rationale": "AoN labels this section with the mythic version's exact name."
+    }
+  ],
+  "unresolved_questions": [
+    "What reusable structured effect model should represent this mythic variant?"
+  ]
+}
