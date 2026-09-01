@@ -856,6 +856,68 @@ for (const [slug, phrase, targetType, targetId, targetName, d20AnchorTextRaw] of
   spec.relationships!.push(capturedD20Relationship(ownerId, targetType, targetId, targetName, phrase, d20AnchorTextRaw));
 }
 
+const shortAnchorPlans: typeof batch03Plans = [
+  ["anticipate-peril", "initiative", "combat", "combat.initiative", "Initiative"],
+  ["battlemind-link", "frost giant", "monster", "monster.giant-frost", "Frost Giant"],
+  ["beast-shape-ii", "animal", "monster_type", "monster-type.animal", "Animal"],
+  ["blistering-invective", "Reflex", "saving_throw", "saving-throw.reflex", "Reflex Saving Throw"],
+  ["blistering-invective", "Intimidate", "skill", "skill.intimidate", "Intimidate"],
+  ["call-lightning", "dazzled", "condition", "condition.dazzled", "Dazzled"],
+  ["call-lightning", "deafened", "condition", "condition.deafened", "Deafened"],
+  ["changestaff", "treant", "monster", "monster.treant", "Treant"],
+  ["changestaff", "DR", "special_ability", "special-ability.damage-reduction", "Damage Reduction"],
+  ["daybreak-arrow", "Undead", "monster_type", "monster-type.undead", "Undead"],
+  ["devolution", "eidolon", "class_feature", "class-feature.eidolon", "Eidolon"],
+  ["devolution", "Will", "saving_throw", "saving-throw.will", "Will Saving Throw"],
+  ["dimension-door", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["dream", "speak with dead", "spell", "spell.speak-with-dead", "Speak with Dead"],
+  ["dream", "Will", "saving_throw", "saving-throw.will", "Will Saving Throw"],
+  ["ear-piercing-scream", "dazed", "condition", "condition.dazed", "Dazed"],
+  ["fire-seeds", "Reflex", "saving_throw", "saving-throw.reflex", "Reflex Saving Throw"],
+  ["fire-seeds", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["fire-snake", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["foresight", "insight bonus", "bonus", "bonus.insight", "Insight Bonus"],
+  ["guards-and-wards", "Will", "saving_throw", "saving-throw.will", "Will Saving Throw"],
+  ["guards-and-wards", "Dancing lights", "spell", "spell.dancing-lights", "Dancing Lights"],
+  ["harrowing", "alignment", "alignment", "alignment", "Alignment"],
+  ["healing-thief", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["heroism", "morale bonus", "bonus", "bonus.morale", "Morale Bonus"],
+  ["invisibility", "invisible", "condition", "condition.invisible", "Invisible"],
+  ["know-the-enemy", "insight bonus", "bonus", "bonus.insight", "Insight Bonus"],
+  ["make-whole", "construct", "monster_type", "monster-type.construct", "Construct"],
+  ["make-whole", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["meteor-swarm", "Reflex", "saving_throw", "saving-throw.reflex", "Reflex Saving Throw"],
+  ["phantasmal-killer", "Will", "saving_throw", "saving-throw.will", "Will Saving Throw"],
+  ["phantasmal-killer", "Fortitude", "saving_throw", "saving-throw.fortitude", "Fortitude Saving Throw"],
+  ["pillar-of-life", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["pillar-of-life", "undead", "monster_type", "monster-type.undead", "Undead"],
+  ["protection-from-evil", "Will", "saving_throw", "saving-throw.will", "Will Saving Throw"],
+  ["protection-from-evil", "Spell Resistance", "defense", "defense.spell-resistance", "Spell Resistance"],
+  ["sanctify-armor", "DR", "special_ability", "special-ability.damage-reduction", "Damage Reduction"],
+  ["sanctuary", "Will", "saving_throw", "saving-throw.will", "Will Saving Throw"],
+  ["sleep", "Will", "saving_throw", "saving-throw.will", "Will Saving Throw"],
+  ["slow", "Reflex", "saving_throw", "saving-throw.reflex", "Reflex Saving Throw"],
+  ["spider-climb", "Climb", "skill", "skill.climb", "Climb"],
+  ["summon-swarm", "rats", "monster", "monster.rat-swarm", "Rat Swarm"],
+  ["summon-swarm", "spiders", "monster", "monster.spider-swarm", "Spider Swarm"],
+  ["touch-injection", "poison", "affliction", "affliction.poison", "Poison"],
+  ["touch-injection", "potion", "magic_item", "magic-item.potion", "Potion"],
+  ["tsunami", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["walk-through-space", "move action", "action", "action.move-action", "Move Action"],
+  ["web", "cover", "cover", "cover", "Cover"],
+];
+
+const shortAnchorVariantIds = new Set(shortAnchorPlans.map(([slug]) => `mythic-spell-variant.${slug}`));
+for (const [slug, phrase, targetType, targetId, targetName, d20AnchorTextRaw] of shortAnchorPlans) {
+  const ownerId = `mythic-spell-variant.${slug}`;
+  const record = variants().find((item) => item.mythic_spell_variant_id === ownerId);
+  const expectedCount = record.rules_text.raw.split(phrase).length - 1;
+  if (expectedCount === 0) throw new Error(`${ownerId} does not contain ${phrase}`);
+  const spec = specs[ownerId] ??= { links: [], relationships: [] };
+  spec.links.push({ phrase, relationshipId: `${ownerId}:uses_definition:${targetId}`, expectedCount, evidenceSource: "d20pfsrd_anchor" });
+  spec.relationships!.push(capturedD20Relationship(ownerId, targetType, targetId, targetName, phrase, d20AnchorTextRaw));
+}
+
 const reviewItems = [
   { variant_id: "mythic-spell-variant.animate-objects", phrases: ["Strength"], reason: "The captured target hint migrates to Strength Domain instead of the Strength ability score." },
   { variant_id: "mythic-spell-variant.animate-plants", phrases: ["Strength"], reason: "The captured target hint migrates to Strength Domain instead of the Strength ability score." },
@@ -865,8 +927,28 @@ const reviewItems = [
   { variant_id: "mythic-spell-variant.blinding-ray", phrases: ["vulnerability"], reason: "The captured target can mean a general vulnerability rule or a specific light vulnerability." },
   { variant_id: "mythic-spell-variant.blink", phrases: ["incorporeal"], reason: "D20PFSRD links the same displayed phrase to both a condition and a creature subtype." },
   { variant_id: "mythic-spell-variant.call-lightning", phrases: ["lightning bolt’s"], reason: "The phrase describes a bolt created by this spell; the captured link to the Lightning Bolt spell is misleading." },
+  { variant_id: "mythic-spell-variant.call-lightning", phrases: ["weather"], reason: "D20PFSRD links the ordinary weather noun to Weather Domain." },
+  { variant_id: "mythic-spell-variant.beast-shape-i", phrases: ["animal"], reason: "D20PFSRD links the same phrase to both the Animal creature type and Animal Domain." },
+  { variant_id: "mythic-spell-variant.beast-shape-iii", phrases: ["animal"], reason: "D20PFSRD links the same phrase to both the Animal creature type and Animal Domain." },
+  { variant_id: "mythic-spell-variant.burrow", phrases: ["burrow"], reason: "The source anchor would also match inside “burrowing”; the rich-text model cannot select only the standalone occurrence." },
+  { variant_id: "mythic-spell-variant.contingency", phrases: ["touch", "contingency"], reason: "Touch describes the spell’s range rather than a touch attack, and contingency would create self-navigation." },
+  { variant_id: "mythic-spell-variant.covetous-aura", phrases: ["covetous aura"], reason: "The phrase names the current spell and would create redundant self-navigation." },
   { variant_id: "mythic-spell-variant.confusion", phrases: ["familiar"], reason: "No accepted local class-feature target represents a familiar; the available monster entity is not equivalent." },
   { variant_id: "mythic-spell-variant.dimension-door", phrases: ["invisible"], reason: "The adjective describes a portal, not a creature with the Invisible condition." },
+  { variant_id: "mythic-spell-variant.elemental-body-ii", phrases: ["elemental"], reason: "D20PFSRD links the ordinary creature-form noun to unrelated bloodline and mystery pages." },
+  { variant_id: "mythic-spell-variant.elemental-body-iv", phrases: ["elemental"], reason: "D20PFSRD links the ordinary creature-form noun to unrelated bloodline and mystery pages." },
+  { variant_id: "mythic-spell-variant.entangle", phrases: ["plant"], reason: "D20PFSRD links the ordinary creature noun to Plant Domain." },
+  { variant_id: "mythic-spell-variant.feather-fall", phrases: ["level"], reason: "The generic word does not unambiguously identify caster level." },
+  { variant_id: "mythic-spell-variant.fire-snake", phrases: ["level", "tier", "grappled"], reason: "Level and tier are generic, while D20PFSRD links grappled to both combat and condition targets." },
+  { variant_id: "mythic-spell-variant.gust-of-wind", phrases: ["wind"], reason: "D20PFSRD links the ordinary noun to an oracle mystery." },
+  { variant_id: "mythic-spell-variant.healing-thief", phrases: ["steal"], reason: "The verb describes the spell effect, not the Steal combat maneuver." },
+  { variant_id: "mythic-spell-variant.maze", phrases: ["maze"], reason: "The phrase names the current spell and would create redundant self-navigation." },
+  { variant_id: "mythic-spell-variant.modify-memory", phrases: ["memory"], reason: "D20PFSRD links the ordinary noun to a domain power." },
+  { variant_id: "mythic-spell-variant.sanctify-armor", phrases: ["evil"], reason: "The captured target does not identify an accepted local alignment or descriptor target." },
+  { variant_id: "mythic-spell-variant.shield-other", phrases: ["damage"], reason: "The generic word does not identify ability-score damage." },
+  { variant_id: "mythic-spell-variant.shocking-grasp", phrases: ["metal"], reason: "D20PFSRD links the ordinary material noun to an elemental arcane school." },
+  { variant_id: "mythic-spell-variant.time-stop", phrases: ["time"], reason: "D20PFSRD links the ordinary noun to an oracle mystery." },
+  { variant_id: "mythic-spell-variant.walk-through-space", phrases: ["teleport"], reason: "The verb describes movement granted by this spell, not an explicit reference to the Teleport spell." },
   { variant_id: "mythic-spell-variant.dragons-breath", phrases: ["dragon’s breath"], reason: "The phrase names the current spell and would create redundant self-navigation." },
   { variant_id: "mythic-spell-variant.dust-of-twilight", phrases: ["dust of twilight"], reason: "The phrase names the current spell and would create redundant self-navigation." },
   { variant_id: "mythic-spell-variant.fire-storm", phrases: ["resistance", "immunity"], reason: "The captured anchors display generic words and do not identify exact local energy-specific targets." },
@@ -905,12 +987,15 @@ function d20Candidates(record: any): D20Candidate[] {
     for (const [index, link] of (observation.spell_raw?.links_raw ?? []).entries()) {
       const phrase = String(link.anchor_text_raw ?? "");
       const context = String(link.context_raw ?? "");
+      const exactDescriptionAnchor = link.source_field === "spell_raw.description_raw" && context === phrase && record.rules_text.raw.includes(phrase);
       if (
-        context.length < 8 ||
-        !record.rules_text.raw.includes(context) ||
-        record.rules_text.raw.indexOf(context) !== record.rules_text.raw.lastIndexOf(context) ||
-        !context.includes(phrase) ||
-        context.indexOf(phrase) !== context.lastIndexOf(phrase)
+        !exactDescriptionAnchor && (
+          context.length < 8 ||
+          !record.rules_text.raw.includes(context) ||
+          record.rules_text.raw.indexOf(context) !== record.rules_text.raw.lastIndexOf(context) ||
+          !context.includes(phrase) ||
+          context.indexOf(phrase) !== context.lastIndexOf(phrase)
+        )
       ) continue;
       const candidate = {
         variant_id: record.mythic_spell_variant_id,
@@ -1046,7 +1131,7 @@ export function enrichMythicLinks(onlyVariantIds?: ReadonlySet<string>): ReturnT
 
 if (process.argv.includes("--write")) {
   const batch = process.argv.find((argument) => argument.startsWith("--batch="))?.slice(8);
-  if (batch && batch !== "01" && batch !== "02" && batch !== "03" && batch !== "final") throw new Error(`Unknown Mythic link batch: ${batch}`);
-  const onlyVariantIds = batch === "01" ? batch01VariantIds : batch === "02" ? batch02VariantIds : batch === "03" ? batch03VariantIds : batch === "final" ? finalBatchVariantIds : undefined;
+  if (batch && batch !== "01" && batch !== "02" && batch !== "03" && batch !== "final" && batch !== "short-anchors") throw new Error(`Unknown Mythic link batch: ${batch}`);
+  const onlyVariantIds = batch === "01" ? batch01VariantIds : batch === "02" ? batch02VariantIds : batch === "03" ? batch03VariantIds : batch === "final" ? finalBatchVariantIds : batch === "short-anchors" ? shortAnchorVariantIds : undefined;
   console.log(JSON.stringify(enrichMythicLinks(onlyVariantIds), null, 2));
 } else console.log(JSON.stringify(auditMythicLinks(), null, 2));
