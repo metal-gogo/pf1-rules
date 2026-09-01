@@ -31,9 +31,9 @@ describe("Mythic rich text", () => {
     expect(audit.links_added_by_evidence_source).toEqual({
       aon_anchor: 3,
       aon_plain_text: 11,
-      d20pfsrd_anchor: 28,
+      d20pfsrd_anchor: 69,
     });
-    expect(audit.enriched_variants).toHaveLength(17);
+    expect(audit.enriched_variants).toHaveLength(41);
   });
 
   it("preserves raw rules text and uses source-backed relationships", () => {
@@ -103,5 +103,77 @@ describe("Mythic rich text", () => {
         anchor_text_raw: "Fortitude",
       }),
     ]));
+  });
+
+  it("applies deterministic batch 02 and keeps ambiguous candidates unlinked", () => {
+    const filenames = [
+      "mythic-barkskin.json",
+      "mythic-battle-trance.json",
+      "mythic-black-mark.json",
+      "mythic-black-tentacles.json",
+      "mythic-blade-barrier.json",
+      "mythic-blasphemy.json",
+      "mythic-bless.json",
+      "mythic-blinding-ray.json",
+      "mythic-blindness-deafness.json",
+      "mythic-blink.json",
+      "mythic-blood-crow-strike.json",
+      "mythic-boiling-blood.json",
+      "mythic-break.json",
+      "mythic-breath-of-life.json",
+      "mythic-burning-gaze.json",
+      "mythic-burning-hands.json",
+      "mythic-call-animal.json",
+      "mythic-cape-of-wasps.json",
+      "mythic-chain-lightning.json",
+      "mythic-chaos-hammer.json",
+      "mythic-chill-metal.json",
+      "mythic-chord-of-shards.json",
+      "mythic-circle-of-death.json",
+      "mythic-cloudkill.json",
+    ];
+    for (const filename of filenames) {
+      const record = variant(filename);
+      expect(richTextLeafText(record.rules_text.document)).toBe(record.rules_text.raw);
+    }
+
+    const barkskin = variant("mythic-barkskin.json");
+    expect(links(barkskin.rules_text.document)).toEqual(expect.arrayContaining([
+      expect.objectContaining({ value: "enhancement bonus", relationship_id: "mythic-spell-variant.barkskin:uses_definition:bonus.enhancement" }),
+      expect.objectContaining({ value: "natural armor bonus", relationship_id: "mythic-spell-variant.barkskin:uses_definition:bonus.natural-armor" }),
+    ]));
+    for (const relationship of barkskin.relationships) {
+      expect(relationship.evidence).toEqual(expect.arrayContaining([
+        expect.objectContaining({ observation_id: expect.stringMatching(/^aon:/), evidence_kind: "plain_text" }),
+        expect.objectContaining({ observation_id: expect.stringMatching(/^d20pfsrd:/), evidence_kind: "hyperlink" }),
+      ]));
+    }
+
+    const blinkLinks = links(variant("mythic-blink.json").rules_text.document);
+    expect(blinkLinks.some((node) => node.value === "move action")).toBe(true);
+    expect(blinkLinks.some((node) => node.value === "incorporeal")).toBe(false);
+
+    for (const filename of ["mythic-blood-crow-strike.json", "mythic-boiling-blood.json"]) {
+      const record = variant(filename);
+      expect(links(record.rules_text.document).some((node) => node.value === "fire resistance")).toBe(true);
+      const fireResistance = record.relationships.find((item: any) => item.target.entity_id === "special-ability.fire-resistance");
+      expect(fireResistance.evidence).toEqual(expect.arrayContaining([
+        expect.objectContaining({ observation_id: expect.stringMatching(/^aon:/), anchor_text_raw: "fire resistance" }),
+        expect.objectContaining({ observation_id: expect.stringMatching(/^d20pfsrd:/), anchor_text_raw: "resistance" }),
+      ]));
+    }
+
+    expect(links(variant("mythic-chaos-hammer.json").rules_text.document)).toContainEqual(expect.objectContaining({
+      value: "outsiders",
+      relationship_id: "mythic-spell-variant.chaos-hammer:uses_definition:monster-type.outsider",
+    }));
+    for (const filename of ["mythic-circle-of-death.json", "mythic-cloudkill.json"]) {
+      expect(links(variant(filename).rules_text.document)).toContainEqual(expect.objectContaining({
+        value: "Hit Dice",
+        relationship_id: expect.stringContaining(":uses_definition:hit-die"),
+      }));
+    }
+
+    expect(variant("mythic-call-lightning.json").rules_text.document).toBeUndefined();
   });
 });

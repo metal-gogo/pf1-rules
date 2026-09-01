@@ -71,10 +71,40 @@ const d20SupportedRelationship = (
   d20ObservationId: string,
   d20SourceField: string,
   d20SourceHref: string,
+  d20AnchorTextRaw = phrase,
 ) => relationship(ownerId, targetType, targetId, targetName, [
   evidence(aonObservationId, "raw_aon_mythic_section", "plain_text", phrase, null),
-  evidence(d20ObservationId, d20SourceField, "hyperlink", phrase, d20SourceHref),
+  evidence(d20ObservationId, d20SourceField, "hyperlink", d20AnchorTextRaw, d20SourceHref),
 ]);
+
+const capturedD20Relationship = (
+  ownerId: string,
+  targetType: string,
+  targetId: string,
+  targetName: string,
+  phrase: string,
+  d20AnchorTextRaw = phrase,
+) => {
+  const slug = ownerId.replace(/^mythic-spell-variant\./, "");
+  const record = JSON.parse(fs.readFileSync(path.join(projectRoot, "data", "variants", `mythic-${slug}.json`), "utf8"));
+  const candidates = d20Candidates(record).filter((candidate) => candidate.phrase === d20AnchorTextRaw);
+  if (candidates.length !== 1) throw new Error(`${ownerId} has ${candidates.length} captured D20PFSRD links for ${d20AnchorTextRaw}`);
+  const candidate = candidates[0]!;
+  const aonProvenance = record.provenance.find((item: any) => item.field_path === "/rules_text/raw");
+  if (!String(aonProvenance?.observation_id).startsWith("aon:")) throw new Error(`${ownerId} has no AoN rules-text provenance`);
+  return d20SupportedRelationship(
+    ownerId,
+    targetType,
+    targetId,
+    targetName,
+    aonProvenance.observation_id,
+    phrase,
+    candidate.observation_id,
+    candidate.source_field,
+    String(candidate.source_href),
+    d20AnchorTextRaw,
+  );
+};
 
 const batch01VariantIds = new Set([
   "mythic-spell-variant.ablative-barrier",
@@ -87,6 +117,34 @@ const batch01VariantIds = new Set([
   "mythic-spell-variant.arcane-cannon",
   "mythic-spell-variant.baleful-polymorph",
   "mythic-spell-variant.bane",
+]);
+
+const batch02VariantIds = new Set([
+  "mythic-spell-variant.barkskin",
+  "mythic-spell-variant.battle-trance",
+  "mythic-spell-variant.black-mark",
+  "mythic-spell-variant.black-tentacles",
+  "mythic-spell-variant.blade-barrier",
+  "mythic-spell-variant.blasphemy",
+  "mythic-spell-variant.bless",
+  "mythic-spell-variant.blinding-ray",
+  "mythic-spell-variant.blindness-deafness",
+  "mythic-spell-variant.blink",
+  "mythic-spell-variant.blood-crow-strike",
+  "mythic-spell-variant.boiling-blood",
+  "mythic-spell-variant.break",
+  "mythic-spell-variant.breath-of-life",
+  "mythic-spell-variant.burning-gaze",
+  "mythic-spell-variant.burning-hands",
+  "mythic-spell-variant.call-animal",
+  "mythic-spell-variant.call-lightning",
+  "mythic-spell-variant.cape-of-wasps",
+  "mythic-spell-variant.chain-lightning",
+  "mythic-spell-variant.chaos-hammer",
+  "mythic-spell-variant.chill-metal",
+  "mythic-spell-variant.chord-of-shards",
+  "mythic-spell-variant.circle-of-death",
+  "mythic-spell-variant.cloudkill",
 ]);
 
 const specs: Record<string, EnrichmentSpec> = {
@@ -193,6 +251,208 @@ const specs: Record<string, EnrichmentSpec> = {
     ],
     relationships: [
       d20SupportedRelationship("mythic-spell-variant.bane", "attack", "attack.roll", "Attack Roll", "aon:spell.bane:fb268f47413d9507", "attack rolls", "d20pfsrd:spell.bane:bd05c29c957b29a4", "spell_raw.links_raw[10]", "https://www.d20pfsrd.com/gamemastering/combat#TOC-Attack-Roll"),
+    ],
+  },
+  "mythic-spell-variant.barkskin": {
+    links: [
+      { phrase: "enhancement bonus", relationshipId: "mythic-spell-variant.barkskin:uses_definition:bonus.enhancement", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "natural armor bonus", relationshipId: "mythic-spell-variant.barkskin:uses_definition:bonus.natural-armor", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      capturedD20Relationship("mythic-spell-variant.barkskin", "bonus", "bonus.enhancement", "Enhancement Bonus", "enhancement bonus"),
+      capturedD20Relationship("mythic-spell-variant.barkskin", "bonus", "bonus.natural-armor", "Natural Armor Bonus", "natural armor bonus"),
+    ],
+  },
+  "mythic-spell-variant.battle-trance": {
+    links: [
+      { phrase: "temporary hit points", relationshipId: "mythic-spell-variant.battle-trance:uses_definition:damage.hit-points.temporary", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "caster level", relationshipId: "mythic-spell-variant.battle-trance:uses_definition:spellcasting.caster-level", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "morale bonus", relationshipId: "mythic-spell-variant.battle-trance:uses_definition:bonus.morale", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      capturedD20Relationship("mythic-spell-variant.battle-trance", "damage", "damage.hit-points.temporary", "Temporary Hit Points", "temporary hit points"),
+      capturedD20Relationship("mythic-spell-variant.battle-trance", "spellcasting", "spellcasting.caster-level", "Caster Level", "caster level"),
+      capturedD20Relationship("mythic-spell-variant.battle-trance", "bonus", "bonus.morale", "Morale Bonus", "morale bonus"),
+    ],
+  },
+  "mythic-spell-variant.black-mark": {
+    links: [
+      { phrase: "summon nature’s ally VII", relationshipId: "mythic-spell-variant.black-mark:uses_definition:spell.summon-natures-ally-vii", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [capturedD20Relationship("mythic-spell-variant.black-mark", "spell", "spell.summon-natures-ally-vii", "Summon Nature’s Ally VII", "summon nature’s ally VII")],
+  },
+  "mythic-spell-variant.black-tentacles": {
+    links: [
+      { phrase: "base attack bonus", relationshipId: "mythic-spell-variant.black-tentacles:uses_definition:attack.bonus.base", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [capturedD20Relationship("mythic-spell-variant.black-tentacles", "attack", "attack.bonus.base", "Base Attack Bonus", "base attack bonus")],
+  },
+  "mythic-spell-variant.blade-barrier": {
+    links: [
+      { phrase: "immediate action", relationshipId: "mythic-spell-variant.blade-barrier:uses_definition:action.immediate-action", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "caster level", relationshipId: "mythic-spell-variant.blade-barrier:uses_definition:spellcasting.caster-level", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      capturedD20Relationship("mythic-spell-variant.blade-barrier", "action", "action.immediate-action", "Immediate Action", "immediate action"),
+      capturedD20Relationship("mythic-spell-variant.blade-barrier", "spellcasting", "spellcasting.caster-level", "Caster Level", "caster level"),
+    ],
+  },
+  "mythic-spell-variant.blasphemy": {
+    links: [
+      { phrase: "caster level", relationshipId: "mythic-spell-variant.blasphemy:uses_definition:spellcasting.caster-level", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "attack rolls", relationshipId: "mythic-spell-variant.blasphemy:uses_definition:attack.roll", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "spell resistance", relationshipId: "mythic-spell-variant.blasphemy:uses_definition:defense.spell-resistance", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      capturedD20Relationship("mythic-spell-variant.blasphemy", "spellcasting", "spellcasting.caster-level", "Caster Level", "caster level"),
+      capturedD20Relationship("mythic-spell-variant.blasphemy", "attack", "attack.roll", "Attack Roll", "attack rolls"),
+      capturedD20Relationship("mythic-spell-variant.blasphemy", "defense", "defense.spell-resistance", "Spell Resistance", "spell resistance"),
+    ],
+  },
+  "mythic-spell-variant.bless": {
+    links: [
+      { phrase: "morale bonus", relationshipId: "mythic-spell-variant.bless:uses_definition:bonus.morale", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "attack rolls", relationshipId: "mythic-spell-variant.bless:uses_definition:attack.roll", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      capturedD20Relationship("mythic-spell-variant.bless", "bonus", "bonus.morale", "Morale Bonus", "morale bonus"),
+      capturedD20Relationship("mythic-spell-variant.bless", "attack", "attack.roll", "Attack Roll", "attack rolls"),
+    ],
+  },
+  "mythic-spell-variant.blinding-ray": {
+    links: [
+      { phrase: "light blindness", relationshipId: "mythic-spell-variant.blinding-ray:uses_definition:universal-monster-rule.light-blindness", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "light sensitivity", relationshipId: "mythic-spell-variant.blinding-ray:uses_definition:universal-monster-rule.light-sensitivity", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      capturedD20Relationship("mythic-spell-variant.blinding-ray", "universal_monster_rule", "universal-monster-rule.light-blindness", "Light Blindness", "light blindness"),
+      capturedD20Relationship("mythic-spell-variant.blinding-ray", "universal_monster_rule", "universal-monster-rule.light-sensitivity", "Light Sensitivity", "light sensitivity"),
+    ],
+  },
+  "mythic-spell-variant.blindness-deafness": {
+    links: [
+      { phrase: "deafened", relationshipId: "mythic-spell-variant.blindness-deafness:uses_definition:condition.deafened", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [capturedD20Relationship("mythic-spell-variant.blindness-deafness", "condition", "condition.deafened", "Deafened", "deafened")],
+  },
+  "mythic-spell-variant.blink": {
+    links: [
+      { phrase: "move action", relationshipId: "mythic-spell-variant.blink:uses_definition:action.move-action", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [capturedD20Relationship("mythic-spell-variant.blink", "action", "action.move-action", "Move Action", "move action")],
+  },
+  "mythic-spell-variant.blood-crow-strike": {
+    links: [
+      { phrase: "Improved Critical", relationshipId: "mythic-spell-variant.blood-crow-strike:uses_definition:feat.improved-critical", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "fire resistance", relationshipId: "mythic-spell-variant.blood-crow-strike:uses_definition:special-ability.fire-resistance", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      capturedD20Relationship("mythic-spell-variant.blood-crow-strike", "feat", "feat.improved-critical", "Improved Critical", "Improved Critical"),
+      capturedD20Relationship("mythic-spell-variant.blood-crow-strike", "special_ability", "special-ability.fire-resistance", "Fire Resistance", "fire resistance", "resistance"),
+    ],
+  },
+  "mythic-spell-variant.boiling-blood": {
+    links: [
+      { phrase: "fire resistance", relationshipId: "mythic-spell-variant.boiling-blood:uses_definition:special-ability.fire-resistance", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [capturedD20Relationship("mythic-spell-variant.boiling-blood", "special_ability", "special-ability.fire-resistance", "Fire Resistance", "fire resistance", "resistance")],
+  },
+  "mythic-spell-variant.break": {
+    links: [
+      { phrase: "caster level", relationshipId: "mythic-spell-variant.break:uses_definition:spellcasting.caster-level", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [capturedD20Relationship("mythic-spell-variant.break", "spellcasting", "spellcasting.caster-level", "Caster Level", "caster level")],
+  },
+  "mythic-spell-variant.breath-of-life": {
+    links: [
+      { phrase: "caster level", relationshipId: "mythic-spell-variant.breath-of-life:uses_definition:spellcasting.caster-level", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [capturedD20Relationship("mythic-spell-variant.breath-of-life", "spellcasting", "spellcasting.caster-level", "Caster Level", "caster level")],
+  },
+  "mythic-spell-variant.burning-gaze": {
+    links: [
+      { phrase: "move action", relationshipId: "mythic-spell-variant.burning-gaze:uses_definition:action.move-action", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "full-round action", relationshipId: "mythic-spell-variant.burning-gaze:uses_definition:action.full-round-action", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "caster level", relationshipId: "mythic-spell-variant.burning-gaze:uses_definition:spellcasting.caster-level", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      capturedD20Relationship("mythic-spell-variant.burning-gaze", "action", "action.move-action", "Move Action", "move action"),
+      capturedD20Relationship("mythic-spell-variant.burning-gaze", "action", "action.full-round-action", "Full-Round Action", "full-round action"),
+      capturedD20Relationship("mythic-spell-variant.burning-gaze", "spellcasting", "spellcasting.caster-level", "Caster Level", "caster level"),
+    ],
+  },
+  "mythic-spell-variant.burning-hands": {
+    links: [
+      { phrase: "caster level", relationshipId: "mythic-spell-variant.burning-hands:uses_definition:spellcasting.caster-level", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [capturedD20Relationship("mythic-spell-variant.burning-hands", "spellcasting", "spellcasting.caster-level", "Caster Level", "caster level")],
+  },
+  "mythic-spell-variant.call-animal": {
+    links: [
+      { phrase: "caster level", relationshipId: "mythic-spell-variant.call-animal:uses_definition:spellcasting.caster-level", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "Handle Animal", relationshipId: "mythic-spell-variant.call-animal:uses_definition:skill.handle-animal", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "magical beasts", relationshipId: "mythic-spell-variant.call-animal:uses_definition:monster-type.magical-beast", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "Intelligence", relationshipId: "mythic-spell-variant.call-animal:uses_definition:ability-score.intelligence", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      capturedD20Relationship("mythic-spell-variant.call-animal", "spellcasting", "spellcasting.caster-level", "Caster Level", "caster level"),
+      capturedD20Relationship("mythic-spell-variant.call-animal", "skill", "skill.handle-animal", "Handle Animal", "Handle Animal"),
+      capturedD20Relationship("mythic-spell-variant.call-animal", "monster_type", "monster-type.magical-beast", "Magical Beast", "magical beasts"),
+      capturedD20Relationship("mythic-spell-variant.call-animal", "ability_score", "ability-score.intelligence", "Intelligence", "Intelligence"),
+    ],
+  },
+  "mythic-spell-variant.cape-of-wasps": {
+    links: [
+      { phrase: "wasp swarm", relationshipId: "mythic-spell-variant.cape-of-wasps:uses_definition:monster.wasp-swarm", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "concealment", relationshipId: "mythic-spell-variant.cape-of-wasps:uses_definition:concealment", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      capturedD20Relationship("mythic-spell-variant.cape-of-wasps", "monster", "monster.wasp-swarm", "Wasp Swarm", "wasp swarm"),
+      capturedD20Relationship("mythic-spell-variant.cape-of-wasps", "concealment", "concealment", "Concealment", "concealment"),
+    ],
+  },
+  "mythic-spell-variant.chain-lightning": {
+    links: [
+      { phrase: "caster level", relationshipId: "mythic-spell-variant.chain-lightning:uses_definition:spellcasting.caster-level", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [capturedD20Relationship("mythic-spell-variant.chain-lightning", "spellcasting", "spellcasting.caster-level", "Caster Level", "caster level")],
+  },
+  "mythic-spell-variant.chaos-hammer": {
+    links: [
+      { phrase: "outsiders", relationshipId: "mythic-spell-variant.chaos-hammer:uses_definition:monster-type.outsider", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [capturedD20Relationship("mythic-spell-variant.chaos-hammer", "monster_type", "monster-type.outsider", "Outsider", "outsiders")],
+  },
+  "mythic-spell-variant.chill-metal": {
+    links: [
+      { phrase: "Dexterity damage", relationshipId: "mythic-spell-variant.chill-metal:uses_definition:damage.ability-score", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [capturedD20Relationship("mythic-spell-variant.chill-metal", "damage", "damage.ability-score", "Ability Score Damage", "Dexterity damage")],
+  },
+  "mythic-spell-variant.chord-of-shards": {
+    links: [
+      { phrase: "damage reduction", relationshipId: "mythic-spell-variant.chord-of-shards:uses_definition:special-ability.damage-reduction", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [capturedD20Relationship("mythic-spell-variant.chord-of-shards", "special_ability", "special-ability.damage-reduction", "Damage Reduction", "damage reduction")],
+  },
+  "mythic-spell-variant.circle-of-death": {
+    links: [
+      { phrase: "Hit Dice", relationshipId: "mythic-spell-variant.circle-of-death:uses_definition:hit-die", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "caster level", relationshipId: "mythic-spell-variant.circle-of-death:uses_definition:spellcasting.caster-level", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      capturedD20Relationship("mythic-spell-variant.circle-of-death", "hit_die", "hit-die", "Hit Dice", "Hit Dice"),
+      capturedD20Relationship("mythic-spell-variant.circle-of-death", "spellcasting", "spellcasting.caster-level", "Caster Level", "caster level"),
+    ],
+  },
+  "mythic-spell-variant.cloudkill": {
+    links: [
+      { phrase: "move action", relationshipId: "mythic-spell-variant.cloudkill:uses_definition:action.move-action", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+      { phrase: "Hit Dice", relationshipId: "mythic-spell-variant.cloudkill:uses_definition:hit-die", expectedCount: 1, evidenceSource: "d20pfsrd_anchor" },
+    ],
+    relationships: [
+      capturedD20Relationship("mythic-spell-variant.cloudkill", "action", "action.move-action", "Move Action", "move action"),
+      capturedD20Relationship("mythic-spell-variant.cloudkill", "hit_die", "hit-die", "Hit Dice", "Hit Dice"),
     ],
   },
   "mythic-spell-variant.break-enchantment": {
@@ -330,6 +590,9 @@ const reviewItems = [
   { variant_id: "mythic-spell-variant.arboreal-hammer", phrases: ["Strength"], reason: "The captured target hint migrates to Strength Domain instead of the Strength ability score." },
   { variant_id: "mythic-spell-variant.arcane-cannon", phrases: ["hardness"], reason: "The captured target hint migrates to an item entity rather than a general hardness rule." },
   { variant_id: "mythic-spell-variant.baleful-polymorph", phrases: ["animal’s"], reason: "The possessive displayed phrase does not unambiguously name the migrated Animals creature-subtype target." },
+  { variant_id: "mythic-spell-variant.blinding-ray", phrases: ["vulnerability"], reason: "The captured target can mean a general vulnerability rule or a specific light vulnerability." },
+  { variant_id: "mythic-spell-variant.blink", phrases: ["incorporeal"], reason: "D20PFSRD links the same displayed phrase to both a condition and a creature subtype." },
+  { variant_id: "mythic-spell-variant.call-lightning", phrases: ["lightning bolt’s"], reason: "The phrase describes a bolt created by this spell; the captured link to the Lightning Bolt spell is misleading." },
   { variant_id: "mythic-spell-variant.darkness", phrases: ["darkvision", "see in darkness", "fear"], reason: "The Mythic capture has plain text only and no reviewed relationships identify which local rule pages should be linked." },
   { variant_id: "mythic-spell-variant.break-enchantment", phrases: ["curse"], reason: "Curse can mean a spell, condition, descriptor, or broader effect category." },
   { variant_id: "mythic-spell-variant.fireball", phrases: ["resistance", "immunity"], reason: "The D20PFSRD anchors display generic words; linking them would overstate the source evidence." },
@@ -500,6 +763,7 @@ export function enrichMythicLinks(onlyVariantIds?: ReadonlySet<string>): ReturnT
 
 if (process.argv.includes("--write")) {
   const batch = process.argv.find((argument) => argument.startsWith("--batch="))?.slice(8);
-  if (batch && batch !== "01") throw new Error(`Unknown Mythic link batch: ${batch}`);
-  console.log(JSON.stringify(enrichMythicLinks(batch === "01" ? batch01VariantIds : undefined), null, 2));
+  if (batch && batch !== "01" && batch !== "02") throw new Error(`Unknown Mythic link batch: ${batch}`);
+  const onlyVariantIds = batch === "01" ? batch01VariantIds : batch === "02" ? batch02VariantIds : undefined;
+  console.log(JSON.stringify(enrichMythicLinks(onlyVariantIds), null, 2));
 } else console.log(JSON.stringify(auditMythicLinks(), null, 2));

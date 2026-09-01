@@ -1756,6 +1756,37 @@ describe("local rules browser", () => {
     expect(cannonMythic).not.toContain('<a href="/entities/item.hardness">hardness</a>');
   });
 
+  it("renders batch 02 Mythic links without linking an ambiguous term", async () => {
+    const [barkskinResponse, blinkResponse, boilingBloodResponse, circleOfDeathResponse] = await Promise.all([
+      fetch(`${baseUrl}/spells/spell.barkskin`),
+      fetch(`${baseUrl}/spells/spell.blink`),
+      fetch(`${baseUrl}/spells/spell.boiling-blood`),
+      fetch(`${baseUrl}/spells/spell.circle-of-death`),
+    ]);
+    const [barkskinHtml, blinkHtml, boilingBloodHtml, circleOfDeathHtml] = await Promise.all([
+      barkskinResponse.text(),
+      blinkResponse.text(),
+      boilingBloodResponse.text(),
+      circleOfDeathResponse.text(),
+    ]);
+    const barkskinMythic = barkskinHtml.match(/<section id="mythic">(.*?)<\/section>/s)?.[1] ?? "";
+    const blinkMythic = blinkHtml.match(/<section id="mythic">(.*?)<\/section>/s)?.[1] ?? "";
+    const boilingBloodMythic = boilingBloodHtml.match(/<section id="mythic">(.*?)<\/section>/s)?.[1] ?? "";
+    const circleOfDeathMythic = circleOfDeathHtml.match(/<section id="mythic">(.*?)<\/section>/s)?.[1] ?? "";
+    expect(barkskinResponse.status).toBe(200);
+    expect(blinkResponse.status).toBe(200);
+    expect(boilingBloodResponse.status).toBe(200);
+    expect(circleOfDeathResponse.status).toBe(200);
+    expect(barkskinMythic).toContain('<a href="/entities/bonus.enhancement">enhancement bonus</a>');
+    expect(barkskinMythic).toContain('<a href="/entities/bonus.natural-armor">natural armor bonus</a>');
+    expect(blinkMythic).toContain('<a href="/rules/actions#move-action">move action</a>');
+    expect(blinkMythic).toContain("corporeal or incorporeal");
+    expect(blinkMythic).not.toContain('href="/entities/condition.incorporeal"');
+    expect(blinkMythic).not.toContain('href="/entities/creature-subtype.incorporeal"');
+    expect(boilingBloodMythic).toContain('<a href="/entities/special-ability.fire-resistance">fire resistance</a>');
+    expect(circleOfDeathMythic).toContain('<a href="/entities/hit-die">Hit Dice</a>');
+  });
+
   it("renders escaped plain-text description blocks", () => {
     const html = renderPlainTextDescription("First <line>.\n\nSecond & final line.");
     expect(html).toBe("<p>First &lt;line&gt;.</p><p>Second &amp; final line.</p>");
