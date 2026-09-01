@@ -31,9 +31,9 @@ describe("Mythic rich text", () => {
     expect(audit.links_added_by_evidence_source).toEqual({
       aon_anchor: 3,
       aon_plain_text: 11,
-      d20pfsrd_anchor: 167,
+      d20pfsrd_anchor: 250,
     });
-    expect(audit.enriched_variants).toHaveLength(90);
+    expect(audit.enriched_variants).toHaveLength(147);
   });
 
   it("preserves raw rules text and uses source-backed relationships", () => {
@@ -66,7 +66,7 @@ describe("Mythic rich text", () => {
 
     const wishLinks = links(variant("wish-mythic.json").rules_text.document);
     expect(wishLinks.some((node) => ["silent", "stilled"].includes(node.value))).toBe(false);
-    expect(variant("darkness-mythic.json").rules_text.document).toBeUndefined();
+    expect(links(variant("darkness-mythic.json").rules_text.document).some((node) => node.value === "fear")).toBe(false);
   });
 
   it("applies deterministic batch 01 and rejects unsafe migrated targets", () => {
@@ -199,5 +199,29 @@ describe("Mythic rich text", () => {
     expect(variant("mythic-dimension-door.json").rules_text.document).toBeUndefined();
     expect(links(variant("mythic-dragons-breath.json").rules_text.document).some((node) => node.value === "dragon’s breath")).toBe(false);
     expect(links(variant("mythic-dust-of-twilight.json").rules_text.document).some((node) => node.value === "dust of twilight")).toBe(false);
+  });
+
+  it("applies the final evidence-backed batch and leaves misleading candidates unlinked", () => {
+    const darkness = variant("darkness-mythic.json");
+    expect(richTextLeafText(darkness.rules_text.document)).toBe(darkness.rules_text.raw);
+    expect(links(darkness.rules_text.document)).toEqual(expect.arrayContaining([
+      expect.objectContaining({ value: "darkvision", relationship_id: "mythic-spell-variant.darkness:uses_definition:special-ability.darkvision" }),
+      expect.objectContaining({ value: "see in darkness", relationship_id: "mythic-spell-variant.darkness:uses_definition:universal-monster-rule.see-in-darkness" }),
+    ]));
+    expect(links(darkness.rules_text.document).some((node) => node.value === "fear")).toBe(false);
+
+    const vampiricTouchLinks = links(variant("mythic-vampiric-touch.json").rules_text.document);
+    expect(vampiricTouchLinks).toEqual(expect.arrayContaining([
+      expect.objectContaining({ value: "fast healing", relationship_id: "mythic-spell-variant.vampiric-touch:uses_definition:universal-monster-rule.fast-healing" }),
+      expect.objectContaining({ value: "touch attack", relationship_id: "mythic-spell-variant.vampiric-touch:uses_definition:attack.touch" }),
+    ]));
+
+    const searingLightLinks = links(variant("mythic-searing-light.json").rules_text.document);
+    expect(searingLightLinks).toContainEqual(expect.objectContaining({ value: "constructs", relationship_id: "mythic-spell-variant.searing-light:uses_definition:monster-type.construct" }));
+    expect(searingLightLinks.some((node) => node.value === "vulnerable")).toBe(false);
+
+    for (const filename of ["mythic-dimension-door.json", "mythic-resonating-word.json", "mythic-time-stop.json"]) {
+      expect(variant(filename).rules_text.document).toBeUndefined();
+    }
   });
 });

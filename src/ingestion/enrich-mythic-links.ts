@@ -86,7 +86,10 @@ const capturedD20Relationship = (
   d20AnchorTextRaw = phrase,
 ) => {
   const slug = ownerId.replace(/^mythic-spell-variant\./, "");
-  const record = JSON.parse(fs.readFileSync(path.join(projectRoot, "data", "variants", `mythic-${slug}.json`), "utf8"));
+  const variantsDirectory = path.join(projectRoot, "data", "variants");
+  const filename = [`mythic-${slug}.json`, `${slug}-mythic.json`].find((name) => fs.existsSync(path.join(variantsDirectory, name)));
+  if (!filename) throw new Error(`${ownerId} has no variant file`);
+  const record = JSON.parse(fs.readFileSync(path.join(variantsDirectory, filename), "utf8"));
   const candidates = d20Candidates(record).filter((candidate) => candidate.phrase === d20AnchorTextRaw);
   if (candidates.length === 0) throw new Error(`${ownerId} has no captured D20PFSRD link for ${d20AnchorTextRaw}`);
   const aonProvenance = record.provenance.find((item: any) => item.field_path === "/rules_text/raw");
@@ -754,6 +757,105 @@ for (const [slug, phrase, targetType, targetId, targetName, d20AnchorTextRaw] of
   spec.relationships!.push(capturedD20Relationship(ownerId, targetType, targetId, targetName, phrase, d20AnchorTextRaw));
 }
 
+const finalBatchVariantIds = new Set(
+  variants().map((record) => record.mythic_spell_variant_id).filter((id) => !specs[id]),
+);
+if (finalBatchVariantIds.size !== 197) throw new Error(`Expected 197 remaining Mythic variants, found ${finalBatchVariantIds.size}`);
+
+const finalBatchPlans: typeof batch03Plans = [
+  ["darkness", "darkvision", "special_ability", "special-ability.darkvision", "Darkvision"],
+  ["darkness", "see in darkness", "universal_monster_rule", "universal-monster-rule.see-in-darkness", "See in Darkness"],
+  ["flames-of-the-faithful", "catches on fire", "environment", "environment.catching-fire", "Catching on Fire"],
+  ["flames-of-the-faithful", "critical hit", "damage", "damage.critical-hit", "Critical Hit"],
+  ["flesh-to-stone", "full-round action", "action", "action.full-round-action", "Full-Round Action"],
+  ["fleshcurdle", "natural armor bonus", "bonus", "bonus.natural-armor", "Natural Armor Bonus"],
+  ["fleshcurdle", "natural attacks", "universal_monster_rule", "universal-monster-rule.natural-attacks", "Natural Attacks"],
+  ["floating-disk", "free action", "action", "action.free-action", "Free Action"],
+  ["floating-disk", "move action", "action", "action.move-action", "Move Action"],
+  ["fly", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["fly", "feather fall", "spell", "spell.feather-fall", "Feather Fall"],
+  ["force-punch", "combat maneuver", "combat_maneuver", "combat-maneuver", "Combat Maneuver"],
+  ["form-of-the-dragon-i", "Improved Natural Attack", "feat", "feat.improved-natural-attack", "Improved Natural Attack"],
+  ["gaseous-form", "move action", "action", "action.move-action", "Move Action"],
+  ["geniekind", "enhancement bonus", "bonus", "bonus.enhancement", "Enhancement Bonus"],
+  ["grease", "Acrobatics", "skill", "skill.acrobatics", "Acrobatics"],
+  ["grease", "combat maneuver", "combat_maneuver", "combat-maneuver", "Combat Maneuver"],
+  ["grease", "Escape Artist", "skill", "skill.escape-artist", "Escape Artist"],
+  ["grease", "grappled", "condition", "condition.grappled", "Grappled"],
+  ["haste", "move action", "action", "action.move-action", "Move Action"],
+  ["holy-smite", "outsider", "monster_type", "monster-type.outsider", "Outsider"],
+  ["hydraulic-push", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["hydraulic-torrent", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["hydraulic-torrent", "Strength", "ability_score", "ability-score.strength", "Strength"],
+  ["ill-omen", "move action", "action", "action.move-action", "Move Action"],
+  ["imbue-with-flight", "full-round action", "action", "action.full-round-action", "Full-Round Action"],
+  ["irresistible-dance", "attacks of opportunity", "combat", "combat.attack-of-opportunity", "Attacks of Opportunity"],
+  ["knock", "arcane lock", "spell", "spell.arcane-lock", "Arcane Lock"],
+  ["lightning-arc", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["mages-disjunction", "antimagic field", "spell", "spell.antimagic-field", "Antimagic Field"],
+  ["magic-vestment", "enhancement bonus", "bonus", "bonus.enhancement", "Enhancement Bonus"],
+  ["monstrous-physique-i", "natural armor bonus", "bonus", "bonus.natural-armor", "Natural Armor Bonus"],
+  ["monstrous-physique-ii", "natural armor bonus", "bonus", "bonus.natural-armor", "Natural Armor Bonus"],
+  ["monstrous-physique-iii", "natural armor bonus", "bonus", "bonus.natural-armor", "Natural Armor Bonus"],
+  ["orb-of-the-void", "Fortitude save", "saving_throw", "saving-throw.fortitude", "Fortitude Saving Throw", "Fortitude"],
+  ["orders-wrath", "outsiders", "monster_type", "monster-type.outsider", "Outsider"],
+  ["polar-ray", "Dexterity", "ability_score", "ability-score.dexterity", "Dexterity"],
+  ["pox-pustules", "Dexterity", "ability_score", "ability-score.dexterity", "Dexterity"],
+  ["pox-pustules", "move action", "action", "action.move-action", "Move Action"],
+  ["prayer", "luck bonus", "bonus", "bonus.luck", "Luck Bonus"],
+  ["protection-from-arrows", "damage reduction", "special_ability", "special-ability.damage-reduction", "Damage Reduction"],
+  ["protection-from-chaos", "protection from evil", "spell", "spell.protection-from-evil", "Protection from Evil"],
+  ["protection-from-good", "protection from evil", "spell", "spell.protection-from-evil", "Protection from Evil"],
+  ["protection-from-law", "protection from evil", "spell", "spell.protection-from-evil", "Protection from Evil"],
+  ["ray-of-enfeeblement", "Strength", "ability_score", "ability-score.strength", "Strength"],
+  ["reduce-person", "attack rolls", "attack", "attack.roll", "Attack Roll"],
+  ["reduce-person", "Dexterity", "ability_score", "ability-score.dexterity", "Dexterity"],
+  ["reduce-person", "enlarge person", "spell", "spell.enlarge-person", "Enlarge Person"],
+  ["reduce-person", "humanoid", "monster_type", "monster-type.humanoid", "Humanoid"],
+  ["reduce-person", "Strength", "ability_score", "ability-score.strength", "Strength"],
+  ["sands-of-time", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["sands-of-time", "construct", "monster_type", "monster-type.construct", "Construct"],
+  ["scorching-ash-form", "gaseous form", "spell", "spell.gaseous-form", "Gaseous Form"],
+  ["searing-light", "constructs", "monster_type", "monster-type.construct", "Construct", "construct"],
+  ["shadow-anchor", "teleportation", "subschool", "subschool.teleportation", "Teleportation"],
+  ["shadow-weapon", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["shadow-weapon", "enhancement bonus", "bonus", "bonus.enhancement", "Enhancement Bonus"],
+  ["shield-of-faith", "deflection bonus", "bonus", "bonus.deflection", "Deflection Bonus"],
+  ["shout", "deafened", "condition", "condition.deafened", "Deafened"],
+  ["solid-fog", "fog cloud", "spell", "spell.fog-cloud", "Fog Cloud"],
+  ["strangling-hair", "dirty trick", "action", "action.dirty-trick", "Dirty Trick"],
+  ["sun-metal", "critical hit", "damage", "damage.critical-hit", "Critical Hit"],
+  ["telekinesis", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["theft-ward", "Perception", "skill", "skill.perception", "Perception"],
+  ["true-form", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["true-form", "lycanthrope", "creature_template", "creature-template.lycanthrope", "Lycanthrope"],
+  ["unholy-blight", "outsider", "monster_type", "monster-type.outsider", "Outsider"],
+  ["unholy-blight", "sickened", "condition", "condition.sickened", "Sickened"],
+  ["unshakable-chill", "Fortitude saves", "saving_throw", "saving-throw.fortitude", "Fortitude Saving Throw", "Fortitude"],
+  ["unshakable-chill", "nonlethal", "damage", "damage.nonlethal", "Nonlethal Damage"],
+  ["vampiric-touch", "critical hit", "damage", "damage.critical-hit", "Critical Hit"],
+  ["vampiric-touch", "fast healing", "universal_monster_rule", "universal-monster-rule.fast-healing", "Fast Healing"],
+  ["vampiric-touch", "Hit Dice", "hit_die", "hit-die", "Hit Dice"],
+  ["vampiric-touch", "touch attack", "attack", "attack.touch", "Touch Attack"],
+  ["vermin-shape-i", "natural armor bonus", "bonus", "bonus.natural-armor", "Natural Armor Bonus"],
+  ["vermin-shape-i", "resistance bonus", "bonus", "bonus.resistance", "Resistance Bonus"],
+  ["vermin-shape-ii", "natural armor bonus", "bonus", "bonus.natural-armor", "Natural Armor Bonus"],
+  ["vomit-twin", "attacks of opportunity", "combat", "combat.attack-of-opportunity", "Attacks of Opportunity"],
+  ["vomit-twin", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["vomit-twin", "hit points", "damage", "damage.hit-points", "Hit Points"],
+  ["wall-of-force", "disintegrate", "spell", "spell.disintegrate", "Disintegrate"],
+  ["wall-of-force", "rod of cancellation", "item", "item.rod-of-cancellation", "Rod of Cancellation"],
+  ["wall-of-ice", "Strength", "ability_score", "ability-score.strength", "Strength"],
+];
+
+for (const [slug, phrase, targetType, targetId, targetName, d20AnchorTextRaw] of finalBatchPlans) {
+  const ownerId = `mythic-spell-variant.${slug}`;
+  if (!finalBatchVariantIds.has(ownerId)) throw new Error(`Final Mythic batch contains an already enriched variant: ${ownerId}`);
+  const spec = specs[ownerId] ??= { links: [], relationships: [] };
+  spec.links.push({ phrase, relationshipId: `${ownerId}:uses_definition:${targetId}`, expectedCount: 1, evidenceSource: "d20pfsrd_anchor" });
+  spec.relationships!.push(capturedD20Relationship(ownerId, targetType, targetId, targetName, phrase, d20AnchorTextRaw));
+}
+
 const reviewItems = [
   { variant_id: "mythic-spell-variant.animate-objects", phrases: ["Strength"], reason: "The captured target hint migrates to Strength Domain instead of the Strength ability score." },
   { variant_id: "mythic-spell-variant.animate-plants", phrases: ["Strength"], reason: "The captured target hint migrates to Strength Domain instead of the Strength ability score." },
@@ -768,7 +870,13 @@ const reviewItems = [
   { variant_id: "mythic-spell-variant.dragons-breath", phrases: ["dragon’s breath"], reason: "The phrase names the current spell and would create redundant self-navigation." },
   { variant_id: "mythic-spell-variant.dust-of-twilight", phrases: ["dust of twilight"], reason: "The phrase names the current spell and would create redundant self-navigation." },
   { variant_id: "mythic-spell-variant.fire-storm", phrases: ["resistance", "immunity"], reason: "The captured anchors display generic words and do not identify exact local energy-specific targets." },
-  { variant_id: "mythic-spell-variant.darkness", phrases: ["darkvision", "see in darkness", "fear"], reason: "The Mythic capture has plain text only and no reviewed relationships identify which local rule pages should be linked." },
+  { variant_id: "mythic-spell-variant.darkness", phrases: ["fear"], reason: "The generic condition word does not unambiguously identify a local target." },
+  { variant_id: "mythic-spell-variant.flames-of-the-faithful", phrases: ["resistance", "immunity"], reason: "The captured anchors display generic words and do not identify exact local energy-specific targets." },
+  { variant_id: "mythic-spell-variant.resonating-word", phrases: ["saving throw"], reason: "The generic rules phrase does not identify one local saving throw target." },
+  { variant_id: "mythic-spell-variant.searing-light", phrases: ["vulnerable"], reason: "The adjective does not unambiguously identify a local vulnerability rule." },
+  { variant_id: "mythic-spell-variant.time-stop", phrases: ["time stop"], reason: "The phrase names the current spell and would create redundant self-navigation." },
+  { variant_id: "mythic-spell-variant.vermin-shape-i", phrases: ["saving throws"], reason: "The generic rules phrase does not identify one local saving throw target." },
+  { variant_id: "mythic-spell-variant.vermin-shape-ii", phrases: ["saving throws"], reason: "The generic rules phrase does not identify one local saving throw target." },
   { variant_id: "mythic-spell-variant.break-enchantment", phrases: ["curse"], reason: "Curse can mean a spell, condition, descriptor, or broader effect category." },
   { variant_id: "mythic-spell-variant.fireball", phrases: ["resistance", "immunity"], reason: "The D20PFSRD anchors display generic words; linking them would overstate the source evidence." },
   { variant_id: "mythic-spell-variant.fireball", phrases: ["catches on fire", "Core Rulebook 444"], reason: "The source citation is plain text and no accepted local target represents the rule." },
@@ -938,7 +1046,7 @@ export function enrichMythicLinks(onlyVariantIds?: ReadonlySet<string>): ReturnT
 
 if (process.argv.includes("--write")) {
   const batch = process.argv.find((argument) => argument.startsWith("--batch="))?.slice(8);
-  if (batch && batch !== "01" && batch !== "02" && batch !== "03") throw new Error(`Unknown Mythic link batch: ${batch}`);
-  const onlyVariantIds = batch === "01" ? batch01VariantIds : batch === "02" ? batch02VariantIds : batch === "03" ? batch03VariantIds : undefined;
+  if (batch && batch !== "01" && batch !== "02" && batch !== "03" && batch !== "final") throw new Error(`Unknown Mythic link batch: ${batch}`);
+  const onlyVariantIds = batch === "01" ? batch01VariantIds : batch === "02" ? batch02VariantIds : batch === "03" ? batch03VariantIds : batch === "final" ? finalBatchVariantIds : undefined;
   console.log(JSON.stringify(enrichMythicLinks(onlyVariantIds), null, 2));
 } else console.log(JSON.stringify(auditMythicLinks(), null, 2));

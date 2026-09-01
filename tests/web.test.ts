@@ -1812,6 +1812,17 @@ describe("local rules browser", () => {
     expect(fireStormMythic).not.toContain('href="/entities/special-ability.energy-immunity"');
   });
 
+  it("renders final-batch Mythic links while leaving an ambiguous term as text", async () => {
+    const response = await fetch(`${baseUrl}/spells/spell.darkness`);
+    const html = await response.text();
+    const mythic = html.match(/<section id="mythic">(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(mythic).toContain('<a href="/entities/special-ability.darkvision">darkvision</a>');
+    expect(mythic).toContain('<a href="/entities/universal-monster-rule.see-in-darkness">see in darkness</a>');
+    expect(mythic).toContain("saves against fear");
+    expect(mythic).not.toContain('href="/entities/condition.fear"');
+  });
+
   it("renders escaped plain-text description blocks", () => {
     const html = renderPlainTextDescription("First <line>.\n\nSecond & final line.");
     expect(html).toBe("<p>First &lt;line&gt;.</p><p>Second &amp; final line.</p>");
