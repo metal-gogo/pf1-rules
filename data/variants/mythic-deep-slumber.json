@@ -20,7 +20,30 @@
   },
   "rules_text": {
     "raw": "This spell works like mythic sleep , except that it affects up to 20 Hit Dice of creatures. Alternatively, you may target one creature rather than an area, increasing the duration to 1 hour per level.",
-    "search_text": "This spell works like mythic sleep , except that it affects up to 20 Hit Dice of creatures. Alternatively, you may target one creature rather than an area, increasing the duration to 1 hour per level."
+    "search_text": "This spell works like mythic sleep , except that it affects up to 20 Hit Dice of creatures. Alternatively, you may target one creature rather than an area, increasing the duration to 1 hour per level.",
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "This spell works like mythic sleep , except that it affects up to 20 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "Hit Dice",
+              "relationship_id": "mythic-spell-variant.deep-slumber:uses_definition:hit-die"
+            },
+            {
+              "node_type": "text",
+              "value": " of creatures. Alternatively, you may target one creature rather than an area, increasing the duration to 1 hour per level."
+            }
+          ]
+        }
+      ]
+    }
   },
   "augmentations": [
     {
@@ -38,7 +61,35 @@
     "page": 90,
     "first_party_status": "confirmed"
   },
-  "relationships": [],
+  "relationships": [
+    {
+      "relationship_id": "mythic-spell-variant.deep-slumber:uses_definition:hit-die",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "hit_die",
+        "entity_id": "hit-die",
+        "name": "Hit Dice"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.deep-slumber:91df1219a7053bad",
+          "source_field": "raw_aon_mythic_section",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "Hit Dice",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.deep-slumber:ae90270650d5e80b",
+          "source_field": "spell_raw.links_raw[14]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "Hit Dice",
+          "source_href": "https://www.d20pfsrd.com/basics-ability-scores/glossary#TOC-Hit-Dice-HD-"
+        }
+      ],
+      "note": "The displayed Mythic phrase and local rules target are unambiguous."
+    }
+  ],
   "provenance": [
     {
       "field_path": "/rules_text/raw",

@@ -1787,6 +1787,31 @@ describe("local rules browser", () => {
     expect(circleOfDeathMythic).toContain('<a href="/entities/hit-die">Hit Dice</a>');
   });
 
+  it("renders batch 03 Mythic links while rejecting misleading candidates", async () => {
+    const [colorSprayResponse, dimensionDoorResponse, fireStormResponse] = await Promise.all([
+      fetch(`${baseUrl}/spells/spell.color-spray`),
+      fetch(`${baseUrl}/spells/spell.dimension-door`),
+      fetch(`${baseUrl}/spells/spell.fire-storm`),
+    ]);
+    const [colorSprayHtml, dimensionDoorHtml, fireStormHtml] = await Promise.all([
+      colorSprayResponse.text(),
+      dimensionDoorResponse.text(),
+      fireStormResponse.text(),
+    ]);
+    const colorSprayMythic = colorSprayHtml.match(/<section id="mythic">(.*?)<\/section>/s)?.[1] ?? "";
+    const dimensionDoorMythic = dimensionDoorHtml.match(/<section id="mythic">(.*?)<\/section>/s)?.[1] ?? "";
+    const fireStormMythic = fireStormHtml.match(/<section id="mythic">(.*?)<\/section>/s)?.[1] ?? "";
+    expect(colorSprayResponse.status).toBe(200);
+    expect(dimensionDoorResponse.status).toBe(200);
+    expect(fireStormResponse.status).toBe(200);
+    expect(colorSprayMythic).toContain('<a href="/entities/hit-die">Hit Dice</a>');
+    expect(dimensionDoorMythic).toContain("temporary, invisible, one-way portal");
+    expect(dimensionDoorMythic).not.toContain('href="/entities/condition.invisible"');
+    expect(fireStormMythic).toContain("bypasses fire resistance and fire immunity");
+    expect(fireStormMythic).not.toContain('href="/entities/special-ability.energy-resistance"');
+    expect(fireStormMythic).not.toContain('href="/entities/special-ability.energy-immunity"');
+  });
+
   it("renders escaped plain-text description blocks", () => {
     const html = renderPlainTextDescription("First <line>.\n\nSecond & final line.");
     expect(html).toBe("<p>First &lt;line&gt;.</p><p>Second &amp; final line.</p>");

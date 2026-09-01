@@ -31,9 +31,9 @@ describe("Mythic rich text", () => {
     expect(audit.links_added_by_evidence_source).toEqual({
       aon_anchor: 3,
       aon_plain_text: 11,
-      d20pfsrd_anchor: 69,
+      d20pfsrd_anchor: 167,
     });
-    expect(audit.enriched_variants).toHaveLength(41);
+    expect(audit.enriched_variants).toHaveLength(90);
   });
 
   it("preserves raw rules text and uses source-backed relationships", () => {
@@ -175,5 +175,29 @@ describe("Mythic rich text", () => {
     }
 
     expect(variant("mythic-call-lightning.json").rules_text.document).toBeUndefined();
+  });
+
+  it("applies deterministic batch 03 and preserves canonical target choices", () => {
+    const colorSpray = variant("mythic-color-spray.json");
+    expect(richTextLeafText(colorSpray.rules_text.document)).toBe(colorSpray.rules_text.raw);
+    expect(links(colorSpray.rules_text.document)).toEqual(expect.arrayContaining([
+      expect.objectContaining({ value: "Hit Dice", relationship_id: "mythic-spell-variant.color-spray:uses_definition:hit-die" }),
+      expect.objectContaining({ value: "unconscious", relationship_id: "mythic-spell-variant.color-spray:uses_definition:condition.unconscious" }),
+    ]));
+
+    const coneLinks = links(variant("mythic-cone-of-cold.json").rules_text.document);
+    expect(coneLinks).toContainEqual(expect.objectContaining({ value: "Strength", relationship_id: "mythic-spell-variant.cone-of-cold:uses_definition:ability-score.strength" }));
+    expect(coneLinks).toContainEqual(expect.objectContaining({ value: "incorporeal", relationship_id: "mythic-spell-variant.cone-of-cold:uses_definition:creature-subtype.incorporeal" }));
+
+    const falseLife = variant("mythic-false-life.json");
+    const casterLevel = falseLife.relationships.find((item: any) => item.target.entity_id === "spellcasting.caster-level");
+    expect(casterLevel.evidence.filter((item: any) => item.evidence_kind === "hyperlink")).toHaveLength(2);
+
+    const fireStormLinks = links(variant("mythic-fire-storm.json").rules_text.document);
+    expect(fireStormLinks.some((node) => node.value === "caster level")).toBe(true);
+    expect(fireStormLinks.some((node) => ["resistance", "immunity"].includes(node.value))).toBe(false);
+    expect(variant("mythic-dimension-door.json").rules_text.document).toBeUndefined();
+    expect(links(variant("mythic-dragons-breath.json").rules_text.document).some((node) => node.value === "dragon’s breath")).toBe(false);
+    expect(links(variant("mythic-dust-of-twilight.json").rules_text.document).some((node) => node.value === "dust of twilight")).toBe(false);
   });
 });

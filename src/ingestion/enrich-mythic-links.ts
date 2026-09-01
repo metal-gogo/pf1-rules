@@ -88,22 +88,19 @@ const capturedD20Relationship = (
   const slug = ownerId.replace(/^mythic-spell-variant\./, "");
   const record = JSON.parse(fs.readFileSync(path.join(projectRoot, "data", "variants", `mythic-${slug}.json`), "utf8"));
   const candidates = d20Candidates(record).filter((candidate) => candidate.phrase === d20AnchorTextRaw);
-  if (candidates.length !== 1) throw new Error(`${ownerId} has ${candidates.length} captured D20PFSRD links for ${d20AnchorTextRaw}`);
-  const candidate = candidates[0]!;
+  if (candidates.length === 0) throw new Error(`${ownerId} has no captured D20PFSRD link for ${d20AnchorTextRaw}`);
   const aonProvenance = record.provenance.find((item: any) => item.field_path === "/rules_text/raw");
   if (!String(aonProvenance?.observation_id).startsWith("aon:")) throw new Error(`${ownerId} has no AoN rules-text provenance`);
-  return d20SupportedRelationship(
-    ownerId,
-    targetType,
-    targetId,
-    targetName,
-    aonProvenance.observation_id,
-    phrase,
-    candidate.observation_id,
-    candidate.source_field,
-    String(candidate.source_href),
-    d20AnchorTextRaw,
-  );
+  return relationship(ownerId, targetType, targetId, targetName, [
+    evidence(aonProvenance.observation_id, "raw_aon_mythic_section", "plain_text", phrase, null),
+    ...candidates.map((candidate) => evidence(
+      candidate.observation_id,
+      candidate.source_field,
+      "hyperlink",
+      d20AnchorTextRaw,
+      candidate.source_href,
+    )),
+  ]);
 };
 
 const batch01VariantIds = new Set([
@@ -145,6 +142,59 @@ const batch02VariantIds = new Set([
   "mythic-spell-variant.chord-of-shards",
   "mythic-spell-variant.circle-of-death",
   "mythic-spell-variant.cloudkill",
+]);
+
+const batch03VariantIds = new Set([
+  "mythic-spell-variant.color-spray",
+  "mythic-spell-variant.command",
+  "mythic-spell-variant.companion-mind-link",
+  "mythic-spell-variant.cone-of-cold",
+  "mythic-spell-variant.confusion",
+  "mythic-spell-variant.conjure-black-pudding",
+  "mythic-spell-variant.consecrate",
+  "mythic-spell-variant.contagion",
+  "mythic-spell-variant.control-weather",
+  "mythic-spell-variant.crusaders-edge",
+  "mythic-spell-variant.cup-of-dust",
+  "mythic-spell-variant.cure-critical-wounds",
+  "mythic-spell-variant.cure-serious-wounds",
+  "mythic-spell-variant.damnation-stride",
+  "mythic-spell-variant.daylight",
+  "mythic-spell-variant.death-knell",
+  "mythic-spell-variant.deep-slumber",
+  "mythic-spell-variant.defile-armor",
+  "mythic-spell-variant.desecrate",
+  "mythic-spell-variant.detect-scrying",
+  "mythic-spell-variant.dictum",
+  "mythic-spell-variant.dimension-door",
+  "mythic-spell-variant.dimensional-lock",
+  "mythic-spell-variant.dirge-of-the-victorious-knights",
+  "mythic-spell-variant.discordant-blast",
+  "mythic-spell-variant.disfiguring-touch",
+  "mythic-spell-variant.disintegrate",
+  "mythic-spell-variant.dispel-magic",
+  "mythic-spell-variant.divine-favor",
+  "mythic-spell-variant.divine-pursuit",
+  "mythic-spell-variant.dominate-person",
+  "mythic-spell-variant.draconic-reservoir",
+  "mythic-spell-variant.dragons-breath",
+  "mythic-spell-variant.dust-of-twilight",
+  "mythic-spell-variant.earthquake",
+  "mythic-spell-variant.endure-elements",
+  "mythic-spell-variant.enemy-hammer",
+  "mythic-spell-variant.enervation",
+  "mythic-spell-variant.enlarge-person",
+  "mythic-spell-variant.entropic-shield",
+  "mythic-spell-variant.expeditious-retreat",
+  "mythic-spell-variant.faerie-fire",
+  "mythic-spell-variant.false-life",
+  "mythic-spell-variant.feast-of-ashes",
+  "mythic-spell-variant.finger-of-death",
+  "mythic-spell-variant.fire-shield",
+  "mythic-spell-variant.fire-storm",
+  "mythic-spell-variant.firestream",
+  "mythic-spell-variant.flame-blade",
+  "mythic-spell-variant.flame-strike",
 ]);
 
 const specs: Record<string, EnrichmentSpec> = {
@@ -584,6 +634,126 @@ const specs: Record<string, EnrichmentSpec> = {
   },
 };
 
+const batch03Plans: ReadonlyArray<readonly [
+  slug: string,
+  phrase: string,
+  targetType: string,
+  targetId: string,
+  targetName: string,
+  d20AnchorTextRaw?: string,
+]> = [
+  ["color-spray", "Hit Dice", "hit_die", "hit-die", "Hit Dice"],
+  ["color-spray", "unconscious", "condition", "condition.unconscious", "Unconscious"],
+  ["command", "staggered", "condition", "condition.staggered", "Staggered"],
+  ["companion-mind-link", "animal companion", "class_feature", "class-feature.animal-companion", "Animal Companion"],
+  ["companion-mind-link", "Intelligence", "ability_score", "ability-score.intelligence", "Intelligence"],
+  ["cone-of-cold", "grappled", "condition", "condition.grappled", "Grappled"],
+  ["cone-of-cold", "incorporeal", "creature_subtype", "creature-subtype.incorporeal", "Incorporeal"],
+  ["cone-of-cold", "Strength", "ability_score", "ability-score.strength", "Strength"],
+  ["confusion", "attack rolls", "attack", "attack.roll", "Attack Roll"],
+  ["conjure-black-pudding", "black puddings", "monster", "monster.pudding-black", "Black Pudding"],
+  ["conjure-black-pudding", "fast healing", "universal_monster_rule", "universal-monster-rule.fast-healing", "Fast Healing"],
+  ["consecrate", "attack rolls", "attack", "attack.roll", "Attack Roll"],
+  ["consecrate", "outsiders", "monster_type", "monster-type.outsider", "Outsider"],
+  ["contagion", "natural weapons", "universal_monster_rule", "universal-monster-rule.natural-attacks", "Natural Attacks"],
+  ["control-weather", "casting time", "spellcasting", "spellcasting.casting-time", "Casting Time"],
+  ["control-weather", "standard action", "action", "action.standard-action", "Standard Action"],
+  ["crusaders-edge", "critical hit", "damage", "damage.critical-hit", "Critical Hit"],
+  ["crusaders-edge", "outsiders", "monster_type", "monster-type.outsider", "Outsider"],
+  ["crusaders-edge", "sacred bonus", "bonus", "bonus.sacred", "Sacred Bonus"],
+  ["crusaders-edge", "spell-like abilities", "special_ability", "special-ability.spell-like", "Spell-Like Abilities"],
+  ["crusaders-edge", "temporary hit points", "damage", "damage.hit-points.temporary", "Temporary Hit Points"],
+  ["cup-of-dust", "Constitution", "ability_score", "ability-score.constitution", "Constitution"],
+  ["cup-of-dust", "nonlethal damage", "damage", "damage.nonlethal", "Nonlethal Damage"],
+  ["cure-critical-wounds", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["cure-serious-wounds", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["damnation-stride", "Fortitude save", "saving_throw", "saving-throw.fortitude", "Fortitude Saving Throw", "Fortitude"],
+  ["damnation-stride", "stinking cloud", "spell", "spell.stinking-cloud", "Stinking Cloud"],
+  ["daylight", "circumstance bonus", "bonus", "bonus.circumstance", "Circumstance Bonus"],
+  ["daylight", "Perception", "skill", "skill.perception", "Perception"],
+  ["death-knell", "Dexterity", "ability_score", "ability-score.dexterity", "Dexterity"],
+  ["death-knell", "Strength", "ability_score", "ability-score.strength", "Strength"],
+  ["death-knell", "temporary hp", "damage", "damage.hit-points.temporary", "Temporary Hit Points"],
+  ["deep-slumber", "Hit Dice", "hit_die", "hit-die", "Hit Dice"],
+  ["defile-armor", "judgment", "class_feature", "class-feature.judgment", "Judgment"],
+  ["defile-armor", "smite ability", "class_feature", "class-feature.smite-evil", "Smite Evil"],
+  ["desecrate", "attack rolls", "attack", "attack.roll", "Attack Roll"],
+  ["detect-scrying", "immediate action", "action", "action.immediate-action", "Immediate Action"],
+  ["detect-scrying", "mind blank", "spell", "spell.mind-blank", "Mind Blank"],
+  ["detect-scrying", "mind-affecting", "descriptor", "descriptor.mind-affecting", "Mind-Affecting"],
+  ["detect-scrying", "nondetection", "spell", "spell.nondetection", "Nondetection"],
+  ["dictum", "attack rolls", "attack", "attack.roll", "Attack Roll"],
+  ["dictum", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["dictum", "spell resistance", "defense", "defense.spell-resistance", "Spell Resistance"],
+  ["dimensional-lock", "extradimensional", "space", "space.extradimensional", "Extradimensional Space"],
+  ["dirge-of-the-victorious-knights", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["dirge-of-the-victorious-knights", "Fortitude save", "saving_throw", "saving-throw.fortitude", "Fortitude Saving Throw", "Fortitude"],
+  ["discordant-blast", "bull rush", "action", "action.bull-rush", "Bull Rush"],
+  ["discordant-blast", "combat maneuver", "combat_maneuver", "combat-maneuver", "Combat Maneuver"],
+  ["disfiguring-touch", "fatigued", "condition", "condition.fatigued", "Fatigued"],
+  ["disintegrate", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["dispel-magic", "counterspell", "spellcasting", "spellcasting.counterspell", "Counterspell"],
+  ["divine-favor", "luck bonus", "bonus", "bonus.luck", "Luck Bonus"],
+  ["divine-pursuit", "enhancement bonus", "bonus", "bonus.enhancement", "Enhancement Bonus"],
+  ["divine-pursuit", "Perception", "skill", "skill.perception", "Perception"],
+  ["divine-pursuit", "sacred bonus", "bonus", "bonus.sacred", "Sacred Bonus"],
+  ["divine-pursuit", "Survival", "skill", "skill.survival", "Survival"],
+  ["dominate-person", "immediate action", "action", "action.immediate-action", "Immediate Action"],
+  ["dominate-person", "protection from evil", "spell", "spell.protection-from-evil", "Protection from Evil"],
+  ["dominate-person", "Sense Motive", "skill", "skill.sense-motive", "Sense Motive"],
+  ["draconic-reservoir", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["draconic-reservoir", "corrosive burst", "weapon_special_ability", "weapon-special-ability.corrosive-burst", "Corrosive Burst"],
+  ["draconic-reservoir", "flaming burst", "weapon_special_ability", "weapon-special-ability.flaming-burst", "Flaming Burst"],
+  ["draconic-reservoir", "icy burst", "weapon_special_ability", "weapon-special-ability.icy-burst", "Icy Burst"],
+  ["dragons-breath", "free action", "action", "action.free-action", "Free Action"],
+  ["dust-of-twilight", "Fortitude save", "saving_throw", "saving-throw.fortitude", "Fortitude Saving Throw", "Fortitude"],
+  ["earthquake", "concentration", "spellcasting", "spellcasting.concentration", "Concentration"],
+  ["earthquake", "Constitution", "ability_score", "ability-score.constitution", "Constitution"],
+  ["endure-elements", "Perception", "skill", "skill.perception", "Perception"],
+  ["enemy-hammer", "attack roll", "attack", "attack.roll", "Attack Roll"],
+  ["enemy-hammer", "entangled", "condition", "condition.entangled", "Entangled"],
+  ["enervation", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["enervation", "negative levels", "special_ability", "special-ability.negative-levels", "Negative Levels"],
+  ["enervation", "sickened", "condition", "condition.sickened", "Sickened"],
+  ["enervation", "temporary hit points", "damage", "damage.hit-points.temporary", "Temporary Hit Points"],
+  ["enlarge-person", "attack rolls", "attack", "attack.roll", "Attack Roll"],
+  ["enlarge-person", "Dexterity", "ability_score", "ability-score.dexterity", "Dexterity"],
+  ["enlarge-person", "humanoid", "monster_type", "monster-type.humanoid", "Humanoid"],
+  ["enlarge-person", "reduce person", "spell", "spell.reduce-person", "Reduce Person"],
+  ["enlarge-person", "size bonus", "bonus", "bonus.size", "Size Bonus"],
+  ["enlarge-person", "Strength", "ability_score", "ability-score.strength", "Strength"],
+  ["entropic-shield", "attack roll", "attack", "attack.roll", "Attack Roll"],
+  ["expeditious-retreat", "Acrobatics", "skill", "skill.acrobatics", "Acrobatics"],
+  ["expeditious-retreat", "attack of opportunity", "combat", "combat.attack-of-opportunity", "Attack of Opportunity"],
+  ["expeditious-retreat", "attacks of opportunity", "combat", "combat.attack-of-opportunity", "Attacks of Opportunity"],
+  ["faerie-fire", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["false-life", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["false-life", "immediate action", "action", "action.immediate-action", "Immediate Action"],
+  ["false-life", "Strength, Dexterity, or Constitution damage", "damage", "damage.ability-score", "Ability Score Damage"],
+  ["feast-of-ashes", "heroes’ feast", "spell", "spell.heroes-feast", "Heroes’ Feast"],
+  ["feast-of-ashes", "nonlethal damage", "damage", "damage.nonlethal", "Nonlethal Damage"],
+  ["finger-of-death", "staggered", "condition", "condition.staggered", "Staggered"],
+  ["fire-shield", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["fire-storm", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["firestream", "catches fire", "environment", "environment.catching-fire", "Catching on Fire"],
+  ["flame-blade", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+  ["flame-blade", "critical hit", "damage", "damage.critical-hit", "Critical Hit"],
+  ["flame-blade", "scimitar", "weapon", "weapon.scimitar", "Scimitar"],
+  ["flame-strike", "caster level", "spellcasting", "spellcasting.caster-level", "Caster Level"],
+];
+
+for (const [slug, phrase, targetType, targetId, targetName, d20AnchorTextRaw] of batch03Plans) {
+  const ownerId = `mythic-spell-variant.${slug}`;
+  const spec = specs[ownerId] ??= { links: [], relationships: [] };
+  spec.links.push({
+    phrase,
+    relationshipId: `${ownerId}:uses_definition:${targetId}`,
+    expectedCount: 1,
+    evidenceSource: "d20pfsrd_anchor",
+  });
+  spec.relationships!.push(capturedD20Relationship(ownerId, targetType, targetId, targetName, phrase, d20AnchorTextRaw));
+}
+
 const reviewItems = [
   { variant_id: "mythic-spell-variant.animate-objects", phrases: ["Strength"], reason: "The captured target hint migrates to Strength Domain instead of the Strength ability score." },
   { variant_id: "mythic-spell-variant.animate-plants", phrases: ["Strength"], reason: "The captured target hint migrates to Strength Domain instead of the Strength ability score." },
@@ -593,6 +763,11 @@ const reviewItems = [
   { variant_id: "mythic-spell-variant.blinding-ray", phrases: ["vulnerability"], reason: "The captured target can mean a general vulnerability rule or a specific light vulnerability." },
   { variant_id: "mythic-spell-variant.blink", phrases: ["incorporeal"], reason: "D20PFSRD links the same displayed phrase to both a condition and a creature subtype." },
   { variant_id: "mythic-spell-variant.call-lightning", phrases: ["lightning bolt’s"], reason: "The phrase describes a bolt created by this spell; the captured link to the Lightning Bolt spell is misleading." },
+  { variant_id: "mythic-spell-variant.confusion", phrases: ["familiar"], reason: "No accepted local class-feature target represents a familiar; the available monster entity is not equivalent." },
+  { variant_id: "mythic-spell-variant.dimension-door", phrases: ["invisible"], reason: "The adjective describes a portal, not a creature with the Invisible condition." },
+  { variant_id: "mythic-spell-variant.dragons-breath", phrases: ["dragon’s breath"], reason: "The phrase names the current spell and would create redundant self-navigation." },
+  { variant_id: "mythic-spell-variant.dust-of-twilight", phrases: ["dust of twilight"], reason: "The phrase names the current spell and would create redundant self-navigation." },
+  { variant_id: "mythic-spell-variant.fire-storm", phrases: ["resistance", "immunity"], reason: "The captured anchors display generic words and do not identify exact local energy-specific targets." },
   { variant_id: "mythic-spell-variant.darkness", phrases: ["darkvision", "see in darkness", "fear"], reason: "The Mythic capture has plain text only and no reviewed relationships identify which local rule pages should be linked." },
   { variant_id: "mythic-spell-variant.break-enchantment", phrases: ["curse"], reason: "Curse can mean a spell, condition, descriptor, or broader effect category." },
   { variant_id: "mythic-spell-variant.fireball", phrases: ["resistance", "immunity"], reason: "The D20PFSRD anchors display generic words; linking them would overstate the source evidence." },
@@ -763,7 +938,7 @@ export function enrichMythicLinks(onlyVariantIds?: ReadonlySet<string>): ReturnT
 
 if (process.argv.includes("--write")) {
   const batch = process.argv.find((argument) => argument.startsWith("--batch="))?.slice(8);
-  if (batch && batch !== "01" && batch !== "02") throw new Error(`Unknown Mythic link batch: ${batch}`);
-  const onlyVariantIds = batch === "01" ? batch01VariantIds : batch === "02" ? batch02VariantIds : undefined;
+  if (batch && batch !== "01" && batch !== "02" && batch !== "03") throw new Error(`Unknown Mythic link batch: ${batch}`);
+  const onlyVariantIds = batch === "01" ? batch01VariantIds : batch === "02" ? batch02VariantIds : batch === "03" ? batch03VariantIds : undefined;
   console.log(JSON.stringify(enrichMythicLinks(onlyVariantIds), null, 2));
 } else console.log(JSON.stringify(auditMythicLinks(), null, 2));
