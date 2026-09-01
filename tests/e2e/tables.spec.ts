@@ -120,10 +120,8 @@ test("Batch 20 separates Greater Darkvision's parent spell from its granted sens
   await expect(parent).toHaveCount(1);
   await expect(sense).toHaveCount(1);
   await expect(parent).not.toHaveAttribute("target", "_blank");
-  await expect(page.locator('[data-embedded-spell="spell.darkvision"]')).toHaveCount(0);
-  await expect(page.locator("aside.notice")).toContainText(
-    "that parent is not fully resolved in the local rules data",
-  );
+  await expect(page.locator('[data-embedded-spell="spell.darkvision"]')).toHaveCount(1);
+  await expect(page.locator("aside.notice")).toHaveCount(0);
   await expectNoPageOverflow(page);
   const results = await new AxeBuilder({ page }).analyze();
   expect(results.violations).toEqual([]);

@@ -183,7 +183,7 @@ const canonicalTargets = new Map<string, {
   ["rule.supernatural-abilities", { id: "special-ability.supernatural", name: "Supernatural abilities" }],
   ["rule.reflex", { id: "saving-throw.reflex", name: "Reflex" }],
   ["rule.will", { id: "saving-throw.will", name: "Will" }],
-  ["rule.affliction", { id: "affliction.afflictions", name: "Afflictions" }],
+  ["rule.affliction", { id: "affliction", name: "Afflictions" }],
   ["rule.attack-roll", { id: "attack.roll", name: "Attack rolls" }],
   ["rule.ac", { id: "armor-class", name: "Armor Class" }],
   ["rule.saving-throw", { id: "saving-throw", name: "Saving throws" }],

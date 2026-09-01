@@ -563,6 +563,18 @@ function richTextDocument(payload: unknown): RichTextDocument | null {
     : null;
 }
 
+function mythicRichTextDocument(payload: unknown): RichTextDocument | null {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) return null;
+  const rulesText = (payload as Record<string, unknown>).rules_text;
+  if (!rulesText || typeof rulesText !== "object" || Array.isArray(rulesText)) return null;
+  const document = (rulesText as Record<string, unknown>).document;
+  if (!document || typeof document !== "object" || Array.isArray(document)) return null;
+  const candidate = document as { node_type?: unknown; content?: unknown };
+  return candidate.node_type === "document" && Array.isArray(candidate.content)
+    ? document as RichTextDocument
+    : null;
+}
+
 function sourceRichTextDocument(payload: unknown): RichTextDocument | null {
   if (!payload || typeof payload !== "object" || Array.isArray(payload)) return null;
   const entity = (payload as Record<string, unknown>).entity_raw;
@@ -593,6 +605,28 @@ function payloadRelationships(payload: unknown): LinkRelationship[] {
       status: String(relationship.status),
     }];
   });
+}
+
+function mythicPayloadRelationships(
+  payload: unknown,
+  baseSpellId: string,
+  baseSpellName: string,
+): LinkRelationship[] {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) return [];
+  const augmentations = (payload as Record<string, unknown>).augmentations;
+  return [
+    ...payloadRelationships(payload),
+    ...(Array.isArray(augmentations)
+      ? augmentations.flatMap((augmentation) => payloadRelationships(augmentation))
+      : []),
+    {
+      id: `${(payload as Record<string, any>).mythic_spell_variant_id}:mythic_version_of:${baseSpellId}`,
+      targetEntityType: "spell",
+      targetEntityId: baseSpellId,
+      targetName: baseSpellName,
+      status: "accepted",
+    },
+  ];
 }
 
 function markedHtml(value: string, marks: RichTextMark[] | undefined): string {
@@ -1571,6 +1605,17 @@ async function spellPage(prisma: PrismaClient, spellId: string): Promise<string 
     const ownerUrl = owner?.type === "spell" ? spellHref(relationship.ownerEntityId) : entityHref(relationship.ownerEntityId);
     return `<li><a href="${href(ownerUrl)}">${escapeHtml(owner?.name ?? relationship.ownerEntityId)}</a> — ${escapeHtml(humanize(relationship.relationshipType))}</li>`;
   }).join("");
+  const mythicDocument = spell.mythicVariant
+    ? mythicRichTextDocument(spell.mythicVariant.payload)
+    : null;
+  const mythicRules = spell.mythicVariant
+    ? mythicDocument
+      ? renderRichText(
+          mythicDocument,
+          mythicPayloadRelationships(spell.mythicVariant.payload, spell.spellId, spell.name),
+        )
+      : paragraphs(spell.mythicVariant.rulesRaw)
+    : "";
 
   return page(spell.name, `<nav aria-label="Breadcrumb"><ol><li><a href="/spells/alphabetical">Alphabetical spells</a></li><li aria-current="page">${escapeHtml(spell.name)}</li></ol></nav>
     <article>
@@ -1593,7 +1638,7 @@ async function spellPage(prisma: PrismaClient, spellId: string): Promise<string 
       ${description}
       ${inheritedRules}
       ${spellFamily}
-      ${spell.mythicVariant ? `<section id="mythic"><h2>${escapeHtml(spell.mythicVariant.name)}</h2><p><strong>Source</strong>: ${escapeHtml(spell.mythicVariant.publicationBook)}${spell.mythicVariant.publicationPage === null ? "" : `, page ${spell.mythicVariant.publicationPage}`}</p>${paragraphs(spell.mythicVariant.rulesRaw)}${spell.mythicVariant.augmentations.length ? `<h3>Augmentations</h3><ul>${spell.mythicVariant.augmentations.map((augmentation) => `<li><strong>${escapeHtml(augmentation.name)}</strong>: ${escapeHtml(augmentation.raw)}</li>`).join("")}</ul>` : ""}</section>` : ""}
+      ${spell.mythicVariant ? `<section id="mythic"><h2>${escapeHtml(spell.mythicVariant.name)}</h2><p><strong>Source</strong>: ${escapeHtml(spell.mythicVariant.publicationBook)}${spell.mythicVariant.publicationPage === null ? "" : `, page ${spell.mythicVariant.publicationPage}`}</p>${mythicRules}${spell.mythicVariant.augmentations.length ? `<h3>Augmentations</h3><ul>${spell.mythicVariant.augmentations.map((augmentation) => `<li><strong>${escapeHtml(augmentation.name)}</strong>: ${escapeHtml(augmentation.raw)}</li>`).join("")}</ul>` : ""}</section>` : ""}
       <section aria-labelledby="related-rules"><h2 id="related-rules">Related rules</h2>${related ? `<ul>${related}</ul>` : "<p>No outgoing relationships.</p>"}</section>
       <section aria-labelledby="referenced-by"><h2 id="referenced-by">Referenced by</h2>${backlinks ? `<ul>${backlinks}</ul>` : "<p>No incoming relationships.</p>"}</section>
       <section aria-labelledby="sources"><h2 id="sources">Source observations</h2>${observations.length ? `<ul>${observations.map((observation) => `<li><a href="${href(sourceHref(observation.id))}">${escapeHtml(observation.siteId)}: ${escapeHtml(observation.pageTitleRaw ?? spell.name)}</a> <span class="muted">(${escapeHtml(observation.retrievedAt.toISOString().slice(0, 10))})</span></li>`).join("")}</ul>` : "<p>No observations recorded.</p>"}</section>

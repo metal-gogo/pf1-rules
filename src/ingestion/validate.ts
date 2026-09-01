@@ -248,17 +248,20 @@ function resolveJsonPointer(document: unknown, pointer: string): unknown {
 }
 
 
-function verifyRichText(record: ValidatedJson, recordPath: string): void {
-  if (record.schema_version !== "0.2.0") return;
-  const document = record.description.document as RichTextDocument;
+function verifyRichTextDocument(
+  document: RichTextDocument,
+  raw: string,
+  relationships: ValidatedJson[],
+  recordPath: string,
+): void {
   if (
     comparableRichText(richTextLeafText(document)) !==
-    comparableRichText(String(record.description.raw))
+    comparableRichText(raw)
   ) {
-    throw new Error(`Rich-text leaf text differs from description.raw in ${recordPath}`);
+    throw new Error(`Rich-text leaf text differs from raw text in ${recordPath}`);
   }
-  const relationships = new Map<string, ValidatedJson>(
-    record.relationships.map((relationship: ValidatedJson) => [
+  const byId = new Map<string, ValidatedJson>(
+    relationships.map((relationship: ValidatedJson) => [
       relationship.relationship_id,
       relationship,
     ]),
@@ -266,7 +269,7 @@ function verifyRichText(record: ValidatedJson, recordPath: string): void {
   const inlineContent = document.content.flatMap(richTextBlockInlines);
   for (const node of inlineContent) {
     if (node.node_type !== "entity_link") continue;
-    const relationship = relationships.get(node.relationship_id);
+    const relationship = byId.get(node.relationship_id);
     if (
       !relationship ||
       relationship.status !== "accepted" ||
@@ -277,6 +280,37 @@ function verifyRichText(record: ValidatedJson, recordPath: string): void {
       );
     }
   }
+}
+
+
+function verifyRichText(record: ValidatedJson, recordPath: string): void {
+  if (record.schema_version !== "0.2.0") return;
+  verifyRichTextDocument(
+    record.description.document as RichTextDocument,
+    String(record.description.raw),
+    record.relationships,
+    recordPath,
+  );
+}
+
+
+function verifyMythicRichText(record: ValidatedJson, recordPath: string): void {
+  if (!record.rules_text.document) return;
+  const baseRelationship = {
+    relationship_id: `${record.mythic_spell_variant_id}:mythic_version_of:${record.base_spell.spell_id}`,
+    status: "accepted",
+    target: { entity_id: record.base_spell.spell_id },
+  };
+  verifyRichTextDocument(
+    record.rules_text.document as RichTextDocument,
+    String(record.rules_text.raw),
+    [
+      ...record.relationships,
+      ...record.augmentations.flatMap((augmentation: ValidatedJson) => augmentation.relationships),
+      baseRelationship,
+    ],
+    recordPath,
+  );
 }
 
 
@@ -563,6 +597,7 @@ export function validatePackage(): PackageStatistics {
   for (const filename of variantPaths) {
     const record = loadJson(filename);
     assertValid(variantValidator, record, filename);
+    verifyMythicRichText(record, filename);
     const variantId = record.mythic_spell_variant_id;
     const baseId = record.base_spell.spell_id;
     if (variantsById.has(variantId) || baseSpellIds.has(baseId)) {

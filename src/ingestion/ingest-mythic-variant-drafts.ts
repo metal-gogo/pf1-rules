@@ -198,7 +198,7 @@ function addReciprocal(candidate: Json, canonicalFiles: Map<string, string>): vo
   }
 }
 
-const drafts = mythicVariantCandidates()
+const drafts = (mythicVariantCandidates() as Json[])
   .filter((candidate) => candidate.status === "draft")
   .sort((left, right) => left.base_spell_id.localeCompare(right.base_spell_id));
 const write = process.argv.includes("--write");

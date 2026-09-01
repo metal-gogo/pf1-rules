@@ -470,7 +470,7 @@ describe("local rules browser", () => {
 
   it.each([
     ["age-resistance", "/spells/spell.age-resistance-lesser"],
-    ["aggravate-affliction", "/entities/affliction.afflictions"],
+    ["aggravate-affliction", "/entities/affliction"],
     ["aggressive-thundercloud", "/entities/item.candle"],
     ["agonize", "/rules/saving-throws#fortitude"],
     ["akashic-communion", "/entities/skill.knowledge"],
@@ -1729,6 +1729,21 @@ describe("local rules browser", () => {
     expect(html).toContain('<h2>Mythic Darkness</h2>');
     expect(html).toContain('<strong>Source</strong>: Mythic Adventures, page 90');
     expect(html.match(/data-embedded-spell="spell.deeper-darkness"/g)).toHaveLength(1);
+  });
+
+  it("renders source-backed Mythic links and leaves generic terms as text", async () => {
+    const [response, wishResponse] = await Promise.all([
+      fetch(`${baseUrl}/spells/spell.fireball`),
+      fetch(`${baseUrl}/spells/spell.wish`),
+    ]);
+    const [html, wishHtml] = await Promise.all([response.text(), wishResponse.text()]);
+    const mythic = html.match(/<section id="mythic">(.*?)<\/section>/s)?.[1] ?? "";
+    expect(response.status).toBe(200);
+    expect(wishResponse.status).toBe(200);
+    expect(mythic).toContain('<a href="/entities/spellcasting.caster-level">caster level</a>');
+    expect(mythic).toContain('<a href="/rules/saving-throws#reflex">Reflex saving throw</a>');
+    expect(mythic).toContain("bypasses fire resistance and fire immunity");
+    expect(wishHtml).toContain('<a href="/entities/affliction">afflictions</a>');
   });
 
   it("renders escaped plain-text description blocks", () => {
