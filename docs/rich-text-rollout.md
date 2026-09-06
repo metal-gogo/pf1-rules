@@ -7,28 +7,28 @@ validation rules in [Rich-text spell descriptions](rich-text.md).
 
 ## Current status
 
-Audit date: 2026-08-26.
+Data check date: 2026-09-05.
 
 | Category | Spells | Meaning |
 | --- | ---: | --- |
 | Total canonical spells | 3,030 | Complete corpus |
-| Rich text stored | 738 | 11-spell pilot, twenty-nine reviewed 25-spell rollout batches, Reincarnate, and one reviewed warning record |
-| Safe candidates with links | 1,532 | Source text matches, parsing is lossless, and known accepted relationships produce no warning |
-| Safe structure-only candidates | 306 | Source text matches, but no known relationship currently produces an inline link |
-| Source mismatch | 280 | Current canonical text and the newly bounded AoN description differ |
-| Link warnings | 174 | At least one accepted relationship is ambiguous or unmatched |
-| Missing AoN baseline | 0 | No current blocker |
-| Parser errors | 0 | No current blocker |
+| Rich text stored | 3,030 | Every canonical spell has a version `0.2.0` rich-text document |
+| Records marked `needs_review` | 27 | Preserved provenance and modeling warnings, including 26 unmatched and 4 ambiguous rich-text links |
+| Unconverted spells | 0 | No remaining rich-text ingestion backlog |
 
-“Safe candidate” is an automation gate, not final semantic approval. Each batch
-still requires review for incorrect source relationships, duplicate entity IDs,
-and terms whose ordinary meaning differs from the linked rules entity.
+Rich-text conversion is complete. `needs_review` preserves known exceptions;
+it does not mean a record lacks a rich-text document. The 30 rich-text link
+warnings affect eight spells. Conversion does not establish semantic completeness.
 
-Run the live audit with:
+Check conversion coverage with:
 
 ```bash
 pnpm audit:rich-text
 ```
+
+This command skips source and link checks for converted records. Its zero
+issue counts do not clear persisted warnings; inspect `normalization.warnings`
+and `normalization.status` in canonical records for correction work.
 
 ## Deterministic batch workflow
 
@@ -1018,31 +1018,31 @@ Fey Form II, Fey Form IV, Fiery Body, Find the Path, and Fable Tapestry,
 including link targets, rejected homonyms, paragraph and table structure,
 emphasis, accessibility, and unchanged visible text.
 
-The 2026-08-26 audit reports 3,030 total spells, 763 rich-text records, 1,507
-safe candidates with links, 306 structure-only candidates, 280 source
-mismatches, 174 link warnings, 0 missing AoN baselines, and 0 parser errors.
+The 2026-09-05 data check confirms that all 3,030 canonical spells store a
+version `0.2.0` rich-text document.
 
 ## Open questions and issues
 
 ### Source boundaries
 
-The 280 source mismatches require comparison before conversion. Likely causes
-include mythic text folded into a base description, supplemental headings,
-parser-version differences, and prior manual corrections. Do not overwrite a
-canonical description merely to make it match the current parser.
+All records are converted, but the rollout audit no longer checks their source
+boundaries. Conversion alone does not prove that every historical source mismatch
+was resolved. Compare retained observations and decisions when reviewing a
+boundary; do not overwrite canonical text merely to match a later parser result.
 
 ### Ambiguous or unmatched relationships
 
-The 174 warning records remain unconverted. Review whether each relationship is
+Twenty-seven records have normalization status `needs_review`. Persisted
+rich-text warnings comprise 26 unmatched links and four ambiguous links across
+eight spells. Review whether each relationship is
 description evidence, metadata only, a source-navigation artifact, or a real
 relationship whose phrase needs contextual matching.
 
 ### Missing relationships
 
-The 306 structure-only candidates may be genuinely link-free, but the audit can
-only evaluate relationships already present in canonical data. Review source
-links and common rules terminology before concluding that a spell needs no
-inline links.
+Every canonical spell is converted. Persisted warnings identify known issues,
+but cannot identify relationships that were never recorded. Review source links
+and rules terminology when checking semantic completeness, even without a warning.
 
 ### Duplicate rule identities
 
@@ -1069,24 +1069,19 @@ the intended target.
 
 ### Source tables
 
-The `0.2.0` AST now supports semantic heading, table, row, and cell nodes.
-Reincarnate is the first reviewed conversion using them. Calculated Luck, Call
-Spirit, Contact Other Plane, Create Greater Undead, Crime Wave, and Detect Evil
-were converted earlier and remain migration candidates; re-enrich them before
-adding phrase links that depend on cell boundaries.
+The `0.2.0` AST supports semantic heading, table, row, and cell nodes. Use
+those nodes when a reviewed correction changes a source table or its links.
 
 ## Batch workflow
 
-1. Run `pnpm audit:rich-text` and select the next warning-free linked batch.
-2. Run `pnpm ingest:rich-text-batch` to convert 25 candidates.
-3. Inspect every generated entity-link value and target in context.
-4. Correct shared normalization defects before accepting record-specific
+1. Inspect canonical `normalization.warnings` and select a record for review.
+2. Inspect every generated entity-link value and target in context.
+3. Correct shared normalization defects before accepting record-specific
    exceptions.
-5. Run canonical validation and the rich-text tests.
-6. Import the database and run `pnpm verify` before publishing a batch.
+4. Run canonical validation and the rich-text tests.
+5. Import the database and run `pnpm verify` before publishing a correction.
 
-Completion requires all 3,030 spells to have a validated rich-text document or
-an explicitly reviewed issue that has been resolved. A green audit for one
-batch does not prove corpus-wide completion.
+All 3,030 spells have a structurally validated rich-text document. Remaining work
+includes reviewing persisted warnings and checking source and semantic completeness.
 
 Return to the [project index](index.md).
