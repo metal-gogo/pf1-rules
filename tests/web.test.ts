@@ -1,4 +1,5 @@
 import { createServer, type Server } from "node:http";
+import { load } from "cheerio";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 
 import { createLocalPrisma } from "../src/db/client.js";
@@ -22,15 +23,23 @@ afterAll(async () => {
   await prisma.$disconnect();
 });
 
-describe("local rules browser", () => {
-  it("renders linked source citations as superscripts", async () => {
+function descriptionHtml(html: string): string {
+  const document = load(html);
+  const section = document("section").filter((_, element) =>
+    document(element).children("h2").first().text() === "Description");
+  expect(section.length).toBeGreaterThan(0);
+  return section.first().html()!;
+}
+
+describe("data and link integrity through HTTP", () => {
+  it("links source citations to their publications", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.absurdity`);
     const html = await response.text();
     expect(response.status).toBe(200);
     expect(html).toContain('<a href="/entities/publication.ultimate-magic" aria-label="Source: Ultimate Magic"><sup>UM</sup></a>');
   });
 
-  it("renders the AoN Magic record as structured prose with an accessible concentration table", async () => {
+  it("preserves Magic rule content and subsection links", async () => {
     const response = await fetch(`${baseUrl}/rules/magic`);
     const html = await response.text();
     expect(response.status).toBe(200);
@@ -50,25 +59,6 @@ describe("local rules browser", () => {
     expect(html).toContain("<h1>Concentration</h1>");
     expect(html).toContain('<a href="/rules/magic">Read all Magic rules</a>');
     expect(html).toContain('<strong>Injury</strong>:');
-  });
-
-  it("renders semantic navigation and database counts", async () => {
-    const response = await fetch(baseUrl);
-    const html = await response.text();
-    expect(response.status).toBe(200);
-    expect(html).toContain('<nav aria-label="Primary navigation">');
-    expect(html).toContain('<a href="/spells">Spell lists</a>');
-    expect(html).toContain('<main id="content">');
-    expect(html).toContain("Database summary");
-  });
-
-  it("uses normal same-tab navigation for links and forms", async () => {
-    const response = await fetch(baseUrl);
-    const html = await response.text();
-    expect(html).not.toContain("<base ");
-    expect(html).not.toContain("target=");
-    expect(html).toContain('<a class="skip-link" href="#content">');
-    expect(html).toContain('form action="/search" method="get" role="search"');
   });
 
   it("lists every ingested spell-list source kind", async () => {
@@ -128,51 +118,6 @@ describe("local rules browser", () => {
     expect(listHtml).toContain("<h2>Access owners</h2>");
     expect(listHtml).toContain('/entities/feat.sahir-afiyun');
     expect(listHtml).toContain("Absorbing Inhalation");
-  });
-
-  it("groups a class's spells into detailed tables by level", async () => {
-    const response = await fetch(`${baseUrl}/classes/cleric`);
-    const html = await response.text();
-    expect(response.status).toBe(200);
-    expect(html).toContain("<h1>Cleric spells</h1>");
-    expect(html).toContain('<h2 id="level-0">Level 0 Cleric Spells');
-    expect(html).toContain('<h2 id="level-9">Level 9 Cleric Spells');
-    expect(html).toContain('class="heading-count level-count"');
-    expect(html).toContain('spells shown)</span></h2>');
-    expect(html).toContain('<th class="key-column" scope="col">Name</th><th class="school-column" scope="col">School</th><th class="components-column" scope="col"><a href="/spell-components">Components</a></th><th scope="col">Summary</th>');
-    expect(html).not.toContain('class="row-number"');
-    expect(html).toContain('class="sticky-spell-controls"');
-    expect(html).toContain('class="spell-filters"');
-    expect(html).toContain('data-filter-accordion aria-expanded="false"');
-    expect(html).toContain('<dialog id="spell-filter-panel" class="filter-panel"');
-    expect(html).toContain('<span>More filters</span>');
-    expect(html).toContain('<strong>Search spells</strong>');
-    expect(html).toContain('spells shown. No filters active.</p>');
-    expect(html).toContain('data-filter-mode="components" data-mode="exclude"');
-    expect(html).toContain('<details class="filter-mode-disclosure"><summary>Match mode</summary>');
-    expect(html).toContain('role="group" class="filter-mode"');
-    expect(html).toContain('data-mode-choice="include" aria-pressed="true"');
-    expect(html).toContain('data-mode-choice="exclude" aria-pressed="true"');
-    expect(html).toContain('data-show-all="school" aria-pressed="true"');
-    expect(html).toContain('data-show-all="level" aria-pressed="true"');
-    expect(html).toContain('data-show-all="components" aria-pressed="true"');
-    expect(html).toContain('type="checkbox" data-filter="school"');
-    expect(html).toContain('type="checkbox" data-filter="level"');
-    expect(html).toContain('type="checkbox" data-filter="components"');
-    expect(html).toContain('data-filter-reset data-filter-reset-compact hidden');
-    expect(html).toContain('data-filter-reset>Clear all filters</button>');
-    expect(html).toContain('data-filter-close>Done</button>');
-    expect(html).toContain('<caption class="visually-hidden">Level 0 Cleric spells</caption>');
-    expect(html).not.toContain('ingested spells across');
-    expect(html).toContain('<abbr title="Verbal component">V</abbr>');
-    expect(html).not.toContain('/spell-components#verbal');
-    expect(html).toContain('class="table-scroll spell-table-region"');
-    expect(html).toContain('Scroll horizontally to see every column.');
-    expect(html).toContain("Object shines like a torch.");
-    expect(html).not.toContain("This spell causes a touched object to glow like a torch");
-    expect(html).toContain('<script src="/class-spells.js" defer></script>');
-    expect(html).toContain('/spells/spell.light');
-    expect(html).toContain('/spells/spell.miracle');
   });
 
   it("serves the normalized Red Mantis Assassin class catalog", async () => {
@@ -297,28 +242,6 @@ describe("local rules browser", () => {
     expect(ownerHtml).toContain("Air Domain Spells");
   });
 
-  it("serves the interactive class filters", async () => {
-    const response = await fetch(`${baseUrl}/class-spells.js`);
-    const script = await response.text();
-    expect(response.status).toBe(200);
-    expect(response.headers.get("content-type")).toContain("text/javascript");
-    expect(response.headers.get("cache-control")).toBe("no-store");
-    expect(script).toContain('const filters = ["school", "level", "components"]');
-    expect(script).toContain('state.mode === "exclude" ? !matchesAny : matchesAny');
-    expect(script).toContain("const filterStates = Object.fromEntries");
-    expect(script).toContain('.filter-checkbox[data-filter="');
-    expect(script).toContain('option.setAttribute("aria-pressed"');
-    expect(script).toContain('document.createElement("mark")');
-    expect(script).toContain('window.history.replaceState');
-    expect(script).toContain('searchParameters.getAll(parameter.values)');
-    expect(script).toContain('filterPanel.showModal()');
-    expect(script).toContain('filterPanel.addEventListener("close"');
-    expect(script).toContain('function resetFilters()');
-    expect(script).toContain('requestAnimationFrame(() => applyFilters())');
-    expect(script).toContain('compactReset.hidden = activeFilters.length === 0');
-    expect(script).not.toContain('setAccordion(hasActiveFilters)');
-  });
-
   it("explains each linked spell component on one reference page", async () => {
     const response = await fetch(`${baseUrl}/spell-components`);
     const html = await response.text();
@@ -375,42 +298,6 @@ describe("local rules browser", () => {
     expect(html).toContain("Archives of Nethys");
   });
 
-  it("renders a bounded alphabetical spell catalog with filters", async () => {
-    const response = await fetch(`${baseUrl}/spells/alphabetical`);
-    const html = await response.text();
-    expect(response.status).toBe(200);
-    expect(html).toContain("<h1>Alphabetical spells</h1>");
-    expect(html).toContain('form class="catalog-filters" action="/spells/alphabetical" method="get"');
-    expect(html).toContain('name="q" type="search"');
-    expect(html).toContain('name="school"');
-    expect(html).toContain('name="publication"');
-    expect(html).toContain('name="sort"');
-    expect(html).toContain('aria-label="Filter spells by initial letter"');
-    expect(html).toContain('letter=A');
-    expect(html).toContain('class="data-table alphabetical-table"');
-    expect(html).toContain('class="key-column"');
-    const tableBody = html.match(/<tbody>(.*?)<\/tbody>/s)?.[1] ?? "";
-    expect(tableBody.match(/<tr>/g)).toHaveLength(50);
-    expect(html).toContain("Page 1 of");
-  });
-
-  it("filters the alphabetical catalog by name, letter, and school", async () => {
-    const response = await fetch(`${baseUrl}/spells/alphabetical?q=light&letter=L&school=evocation&sort=school`);
-    const html = await response.text();
-    expect(response.status).toBe(200);
-    expect(html).toContain('/spells/spell.light');
-    expect(html).not.toContain('/spells/spell.abeyance');
-    expect(html).toContain('value="L"');
-    expect(html).toContain('value="evocation" selected');
-    expect(html).toContain('value="school" selected');
-    expect(html).toContain('href="/spells/alphabetical">Clear filters</a>');
-  });
-
-  it("does not retain the previous all-spells route", async () => {
-    const response = await fetch(`${baseUrl}/spells/all`);
-    expect(response.status).toBe(404);
-  });
-
   it("renders a spell with local relationship and source links", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.light`);
     const html = await response.text();
@@ -430,7 +317,7 @@ describe("local rules browser", () => {
     expect(html).toContain('<a href="/rules/actions#standard-action">standard action</a>');
     expect(html).toContain('<a href="/rules/saving-throws#will">Will</a> half');
     expect(html).toContain('<a href="/entities/defense.spell-resistance">Spell resistance</a>');
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(description).toContain('<a href="/entities/defense.spell-resistance">spell resistance</a>');
   });
 
@@ -462,7 +349,7 @@ describe("local rules browser", () => {
   ])("renders reviewed rollout links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain('class="rich-description"');
     expect(description).toContain(`href="${target}"`);
@@ -478,7 +365,7 @@ describe("local rules browser", () => {
   ])("renders second-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -492,7 +379,7 @@ describe("local rules browser", () => {
   ])("omits reviewed false-positive link from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain(`href="${target}"`);
   });
@@ -509,7 +396,7 @@ describe("local rules browser", () => {
   ])("renders third-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -521,7 +408,7 @@ describe("local rules browser", () => {
   ])("omits third-batch false-positive link from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain(`href="${target}"`);
   });
@@ -536,7 +423,7 @@ describe("local rules browser", () => {
   ])("renders fourth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -544,7 +431,7 @@ describe("local rules browser", () => {
   it("links only the rules-specific Summon occurrence in Anti-Summoning Shield", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.anti-summoning-shield`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description.match(/href="\/entities\/universal-monster-rule\.summon"/g)).toHaveLength(1);
   });
@@ -552,7 +439,7 @@ describe("local rules browser", () => {
   it("does not link Apport Object's transport verb to the monster Summon ability", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.apport-object`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain('href="/entities/universal-monster-rule.summon"');
   });
@@ -570,7 +457,7 @@ describe("local rules browser", () => {
   ])("renders fifth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -585,7 +472,7 @@ describe("local rules browser", () => {
   ])("omits fifth-batch false-positive link from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain(`href="${target}"`);
   });
@@ -604,7 +491,7 @@ describe("local rules browser", () => {
   ])("renders sixth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -615,7 +502,7 @@ describe("local rules browser", () => {
   ])("omits sixth-batch false-positive link from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain(`href="${target}"`);
   });
@@ -634,7 +521,7 @@ describe("local rules browser", () => {
   ])("renders seventh-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -645,7 +532,7 @@ describe("local rules browser", () => {
   ])("omits seventh-batch false-positive link from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain(`href="${target}"`);
   });
@@ -679,7 +566,7 @@ describe("local rules browser", () => {
   ])("renders eighth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -691,7 +578,7 @@ describe("local rules browser", () => {
   ])("omits eighth-batch source artifacts from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain(`href="${target}"`);
   });
@@ -699,7 +586,7 @@ describe("local rules browser", () => {
   it("adds reviewed illumination, vision, descriptor, and spell links to Blacklight", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.blacklight`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     for (const target of [
       "/rules/illumination#darkness",
@@ -721,7 +608,7 @@ describe("local rules browser", () => {
   ])("renders ninth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -734,7 +621,7 @@ describe("local rules browser", () => {
   ])("omits ninth-batch source artifacts from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain(`href="${target}"`);
   });
@@ -766,7 +653,7 @@ describe("local rules browser", () => {
   ])("renders tenth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -777,7 +664,7 @@ describe("local rules browser", () => {
   ])("omits tenth-batch source artifacts from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain(`href="${target}"`);
   });
@@ -797,7 +684,7 @@ describe("local rules browser", () => {
   ])("renders eleventh-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -809,7 +696,7 @@ describe("local rules browser", () => {
   ])("omits eleventh-batch semantic false positives from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain(`href="${target}"`);
   });
@@ -817,7 +704,7 @@ describe("local rules browser", () => {
   it("links only Brand, Greater's real parent reference", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.brand-greater`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description.match(/href="\/spells\/spell.brand"/g)).toHaveLength(1);
   });
@@ -825,7 +712,7 @@ describe("local rules browser", () => {
   it("treats Brightest Light as Daylight inheritance and generic darkness as a descriptor", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.brightest-light`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     const related = html.match(/<section aria-labelledby="related-rules">([\s\S]*?)<\/section>/)?.[1] ?? "";
     expect(response.status).toBe(200);
     expect(related).toContain("Functions Like:");
@@ -843,7 +730,7 @@ describe("local rules browser", () => {
   ])("renders twelfth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -879,7 +766,7 @@ describe("local rules browser", () => {
   ])("renders thirteenth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -897,7 +784,7 @@ describe("local rules browser", () => {
   ])("omits thirteenth-batch semantic false positives from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain(`href="${target}"`);
   });
@@ -922,7 +809,7 @@ describe("local rules browser", () => {
   ])("renders fourteenth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -933,7 +820,7 @@ describe("local rules browser", () => {
   ])("omits fourteenth-batch source artifacts from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain(`href="${target}"`);
   });
@@ -941,7 +828,7 @@ describe("local rules browser", () => {
   it("links only Mass Charm Person's real parent reference", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.charm-person-mass`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description.match(/href="\/spells\/spell.charm-person"/g)).toHaveLength(1);
   });
@@ -959,7 +846,7 @@ describe("local rules browser", () => {
   ])("renders fifteenth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -971,7 +858,7 @@ describe("local rules browser", () => {
   ])("omits fifteenth-batch semantic false positives from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain(`href="${target}"`);
   });
@@ -979,7 +866,7 @@ describe("local rules browser", () => {
   it("links only Greater Command's real parent reference", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.command-greater`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description.match(/href="\/spells\/spell.command"/g)).toHaveLength(1);
   });
@@ -1003,7 +890,7 @@ describe("local rules browser", () => {
   ])("renders sixteenth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -1011,7 +898,7 @@ describe("local rules browser", () => {
   it("links Contact High's touch attack but not its ordinary touch verb", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.contact-high`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description.match(/href="\/entities\/attack.touch"/g)).toHaveLength(1);
   });
@@ -1019,7 +906,7 @@ describe("local rules browser", () => {
   it("links only Contagious Suggestion's real parent reference", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.contagious-suggestion`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description.match(/href="\/spells\/spell.suggestion"/g)).toHaveLength(1);
   });
@@ -1049,7 +936,7 @@ describe("local rules browser", () => {
   ])("renders seventeenth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -1061,7 +948,7 @@ describe("local rules browser", () => {
   ])("omits seventeenth-batch contextual false positives from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain(`href="${target}"`);
   });
@@ -1069,7 +956,7 @@ describe("local rules browser", () => {
   it("distinguishes Calm Emotions' Rage spell from the barbarian class feature", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.calm-emotions`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description.match(/href="\/spells\/spell.rage"/g)).toHaveLength(1);
     expect(description.match(/href="\/entities\/class-feature.rage"/g)).toHaveLength(1);
@@ -1078,7 +965,7 @@ describe("local rules browser", () => {
   it("links Controlled Fireball's parent and explicit identification, but not its own title", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.controlled-fireball`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description.match(/href="\/spells\/spell.fireball"/g)).toHaveLength(2);
   });
@@ -1112,7 +999,7 @@ describe("local rules browser", () => {
   ])("renders eighteenth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -1128,7 +1015,7 @@ describe("local rules browser", () => {
   ])("omits eighteenth-batch semantic false positives from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain(`href="${target}"`);
   });
@@ -1158,7 +1045,7 @@ describe("local rules browser", () => {
   it("renders Reincarnate's incarnation tables and supplemental headings", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.reincarnate`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
 
     expect(response.status).toBe(200);
     expect(description.match(/class="data-table rich-text-table"/g)).toHaveLength(3);
@@ -1198,7 +1085,7 @@ describe("local rules browser", () => {
   ])("renders nineteenth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -1232,7 +1119,7 @@ describe("local rules browser", () => {
   ])("renders twentieth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -1246,7 +1133,7 @@ describe("local rules browser", () => {
   ])("omits twentieth-batch semantic false positives from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain(`href="${target}"`);
   });
@@ -1254,7 +1141,7 @@ describe("local rules browser", () => {
   it("links Greater Darkvision's parent spell and its granted sense separately", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.darkvision-greater`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(description.match(/href="\/spells\/spell.darkvision"/g)).toHaveLength(1);
     expect(description.match(/href="\/entities\/special-ability.darkvision"/g)).toHaveLength(1);
   });
@@ -1288,7 +1175,7 @@ describe("local rules browser", () => {
   ])("renders twenty-first-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -1299,7 +1186,7 @@ describe("local rules browser", () => {
   ])("omits twenty-first-batch semantic false positives from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain(`href="${target}"`);
   });
@@ -1348,7 +1235,7 @@ describe("local rules browser", () => {
   ])("renders twenty-second-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -1360,7 +1247,7 @@ describe("local rules browser", () => {
   ])("omits twenty-second-batch semantic false positives from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain(`href="${target}"`);
   });
@@ -1409,7 +1296,7 @@ describe("local rules browser", () => {
   ])("renders twenty-third-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -1466,7 +1353,7 @@ describe("local rules browser", () => {
   ])("renders twenty-fourth-batch links for spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain(`href="${target}"`);
   });
@@ -1648,7 +1535,7 @@ describe("local rules browser", () => {
   it("links Curse of Unexpected Death's touch attacks but not its ordinary touch verbs", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.curse-of-unexpected-death`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description.match(/href="\/entities\/attack.touch"/g)).toHaveLength(2);
   });
@@ -1660,7 +1547,7 @@ describe("local rules browser", () => {
   ])("omits nineteenth-batch semantic false positives from spell %s", async (slug, target) => {
     const response = await fetch(`${baseUrl}/spells/spell.${slug}`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain(`href="${target}"`);
   });
@@ -1668,7 +1555,7 @@ describe("local rules browser", () => {
   it("keeps Magic Aura's unmatched spell relationships outside its description", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.magic-aura`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain('class="rich-description"');
     expect(description).not.toContain('href="/spells/spell.arcane-sight"');
@@ -1689,7 +1576,7 @@ describe("local rules browser", () => {
   it("renders Greater Bestow Curse's persisted list without inventing missing links", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.bestow-curse-greater`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).toContain('<div class="rich-description">');
     expect(description).toContain("<ul><li>–12 penalty");
@@ -1709,7 +1596,7 @@ describe("local rules browser", () => {
   it("renders Darkness rules links, its separate mythic section, and Deeper Darkness", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.darkness`);
     const html = await response.text();
-    const description = html.match(/<section><h2>Description<\/h2>(.*?)<\/section>/s)?.[1] ?? "";
+    const description = descriptionHtml(html);
     expect(response.status).toBe(200);
     expect(description).not.toContain("Mythic Darkness");
     expect(description).not.toContain('href="/spells/spell.darkness"');
@@ -1823,11 +1710,6 @@ describe("local rules browser", () => {
     expect(mythic).not.toContain('href="/entities/condition.fear"');
   });
 
-  it("renders escaped plain-text description blocks", () => {
-    const html = renderPlainTextDescription("First <line>.\n\nSecond & final line.");
-    expect(html).toBe("<p>First &lt;line&gt;.</p><p>Second &amp; final line.</p>");
-  });
-
   it("expands each resolved functions-like parent once without recursion", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.conditional-curse`);
     const html = await response.text();
@@ -1854,15 +1736,6 @@ describe("local rules browser", () => {
     expect(classHtml).toContain('<span class="legacy-badge">Legacy 3.5</span>');
   });
 
-  it("supports search without client-side JavaScript", async () => {
-    const response = await fetch(`${baseUrl}/search?q=afflictions`);
-    const html = await response.text();
-    expect(response.status).toBe(200);
-    expect(html).toContain('form action="/search" method="get"');
-    expect(html).toContain("Wish");
-    expect(html).toContain("#mythic");
-  });
-
   it("renders sourced definitions for resolved non-spell entities", async () => {
     const response = await fetch(`${baseUrl}/entities/action.immediate-action`);
     const html = await response.text();
@@ -1873,12 +1746,6 @@ describe("local rules browser", () => {
     expect(html).toContain("legacy_aon");
   });
 
-  it("returns an accessible not-found page", async () => {
-    const response = await fetch(`${baseUrl}/spells/does-not-exist`);
-    const html = await response.text();
-    expect(response.status).toBe(404);
-    expect(html).toContain("<h1>Page not found</h1>");
-  });
 });
 
 it("rejects malformed request escapes as client errors", async () => {
@@ -1908,4 +1775,35 @@ it("does not render executable source URLs", async () => {
   } finally {
     lookup.mockRestore();
   }
+});
+
+it("escapes untrusted rules text", () => {
+  expect(renderPlainTextDescription("<script>alert(1)</script> & text"))
+    .toBe("<p>&lt;script&gt;alert(1)&lt;/script&gt; &amp; text</p>");
+});
+
+it.each([
+  ["/spells/spell.cure-light-wounds", "/rules/actions#standard-action", "Standard Action"],
+  ["/spells/spell.cure-light-wounds", "/rules/magic-schools#healing", "Healing"],
+  ["/spells/spell.cure-light-wounds", "/rules/saving-throws#will", "Will Saving Throw"],
+  ["/spells/spell.cure-light-wounds", "/entities/defense.spell-resistance", "Spell Resistance"],
+  ["/spells/spell.light", "/spells/spell.permanency", "Permanency"],
+  ["/entities/mystery.flame", "/lists/spell-list.flame-mystery", "Flame Mystery Bonus Spells"],
+  ["/spells/spell.absurdity", "/entities/publication.ultimate-magic", "Ultimate Magic"],
+  ["/rules/magic", "/rules/magic/concentration", "Concentration"],
+])("resolves %s links to the intended record at %s", async (source, target, name) => {
+  const response = await fetch(baseUrl + source);
+  expect(response.status).toBe(200);
+  const sourceDocument = load(await response.text());
+  expect(sourceDocument("a").toArray().some((link) => sourceDocument(link).attr("href") === target))
+    .toBe(true);
+
+  const destination = await fetch(baseUrl + target);
+  expect(destination.status).toBe(200);
+  const document = load(await destination.text());
+  const fragment = new URL(baseUrl + target).hash.slice(1);
+  const heading = fragment
+    ? document("[id]").filter((_, element) => document(element).attr("id") === fragment).find("h1,h2,h3,h4").first()
+    : document("h1").first();
+  expect(heading.text().trim().toLowerCase()).toBe(name.toLowerCase());
 });

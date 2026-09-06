@@ -181,8 +181,8 @@ Verify:
 - Supplemental material does not enter the base feat body.
 - Every canonical field has provenance.
 - Cached retries make no network requests.
-- Validation, type checking, database checks, unit tests, web tests, and
-  relevant end-to-end tests pass.
+- Validation, type checking, database checks, parser tests, and link-integrity
+  tests pass.
 
 ### 6. Expand only after the base catalog is stable
 

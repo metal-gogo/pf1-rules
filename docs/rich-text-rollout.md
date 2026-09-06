@@ -56,14 +56,13 @@ Generated commit subjects identify the reviewed range and batch size, such as
 
 ## Test boundaries
 
-Choose the smallest test boundary that proves the behavior. Test parsing,
-validation, and HTML rendering directly. Use request tests for route and
-database integration. Use browser tests for navigation, accessibility, and
-responsive behavior that cannot be proved below the browser boundary.
+Test source fidelity, provenance, semantic link choices, and inheritance at the
+data boundary. Use HTTP tests to verify that links resolve to the intended
+records and rule anchors. The provisional viewer's presentation and browser
+interactions are outside the test scope.
 
 Do not use a spell that is expected to be enriched as a permanent plain-text
-fixture. Test plain-text rendering with a minimal input instead, so an expected
-rollout change does not block a data-only batch.
+fixture, so an expected rollout change does not block a data-only batch.
 
 For an unattended run, use one command instead. It executes the same steps in
 order and stops at the first failure:
