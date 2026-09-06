@@ -426,6 +426,10 @@ function href(path: string): string {
   return escapeHtml(path);
 }
 
+function externalHref(url: string): string {
+  return /^https?:\/\//i.test(url) ? escapeHtml(url) : "#";
+}
+
 function entityHref(id: string): string {
   return `/entities/${encodeURIComponent(id)}`;
 }
@@ -1148,7 +1152,7 @@ async function magicPage(prisma: PrismaClient, sectionId?: string): Promise<stri
     <article class="rule-reference">
       <h1>${escapeHtml(title)}</h1>
       ${section ? '<p><a href="/rules/magic">Read all Magic rules</a></p>' : '<p>The Archives of Nethys record below is the first-party Core Rulebook source. The separately retained d20PFSRD record is a third-party compilation that includes supplementary material.</p>'}
-      ${primary ? `<p><a href="${href(sourceHref(primary.id))}">View the complete Archives of Nethys observation</a> · <a href="${href(primary.sourceUrl)}">Open the source page</a></p>` : '<p class="notice">The first-party magic observation has not been imported.</p>'}
+      ${primary ? `<p><a href="${href(sourceHref(primary.id))}">View the complete Archives of Nethys observation</a> · <a href="${externalHref(primary.sourceUrl)}">Open the source page</a></p>` : '<p class="notice">The first-party magic observation has not been imported.</p>'}
       <nav aria-label="On this page"><ul>${(section ? displayedHeadings : headings).map(({ id, label }) => `<li><a href="/rules/magic/${href(id)}">${escapeHtml(label)}</a></li>`).join("")}</ul></nav>
       ${richRules ? `<div class="magic-rules">${richRules}</div>` : (primary?.sections ?? []).map((section, index) => `<section${section.headingRaw ? ` id="section-${index}"` : ""}>${section.headingRaw ? `<h2>${escapeHtml(section.headingRaw)}</h2>` : ""}${paragraphs(section.bodyRaw)}</section>`).join("")}
     </article>`);
@@ -1723,7 +1727,7 @@ async function spellListPage(prisma: PrismaClient, listId: string): Promise<stri
       orderBy: { ownerEntityId: "asc" },
     }),
   ]);
-  if (!entity) return null;
+  if (!entity || entity.type !== "spell_list") return null;
   const owners = await prisma.entity.findMany({
     where: { id: { in: ownerRelationships.map((relationship) => relationship.ownerEntityId) } },
     select: { id: true, name: true, type: true },
@@ -1733,7 +1737,7 @@ async function spellListPage(prisma: PrismaClient, listId: string): Promise<stri
     <h1>${escapeHtml(entity.name)}</h1>
     <p><code>${escapeHtml(entity.id)}</code></p>
     ${ownerRelationships.length ? `<section><h2>Access owners</h2><ul>${ownerRelationships.map((relationship) => { const owner = ownerById.get(relationship.ownerEntityId); return `<li><a href="${href(relatedEntityHref(owner?.type ?? "unknown", relationship.ownerEntityId))}">${escapeHtml(owner?.name ?? relationship.ownerEntityId)}</a> — ${escapeHtml(humanize(relationship.relationshipType))}</li>`; }).join("")}</ul></section>` : ""}
-    ${entries.length ? `<table><caption>Ingested spells on this list</caption><thead><tr><th scope="col">Level</th><th scope="col">Spell</th><th scope="col">Scope</th></tr></thead><tbody>${entries.map((entry) => `<tr><td>${entry.spellLevel}</td><th scope="row"><a href="${href(spellHref(entry.spellId))}">${escapeHtml(entry.spell.name)}</a></th><td>${escapeHtml(humanize(entry.scope))}</td></tr>`).join("")}</tbody></table>` : "<p>No ingested spells are attached to this list.</p>"}
+    ${entries.length ? `<table><caption>Ingested spells on this list</caption><thead><tr><th scope="col">Level</th><th scope="col">Spell</th><th scope="col">Scope</th><th scope="col">Qualifications</th></tr></thead><tbody>${entries.map((entry) => `<tr><td>${entry.spellLevel}</td><th scope="row"><a href="${href(spellHref(entry.spellId))}">${escapeHtml(entry.spell.name)}</a></th><td>${escapeHtml(humanize(entry.scope))}</td><td>${escapeHtml(qualificationLabel(entry.qualifications) ?? "None")}</td></tr>`).join("")}</tbody></table>` : "<p>No ingested spells are attached to this list.</p>"}
     <p><a href="${href(entityHref(entity.id))}">View the underlying entity record</a></p>`);
 }
 
@@ -1758,7 +1762,7 @@ async function sourcePage(prisma: PrismaClient, observationId: string): Promise<
         <dt>Retrieved</dt><dd><time datetime="${escapeHtml(observation.retrievedAt.toISOString())}">${escapeHtml(observation.retrievedAt.toISOString())}</time></dd>
         <dt>HTTP status</dt><dd>${observation.httpStatus}</dd>
         <dt>Parser</dt><dd>${escapeHtml(observation.parserName)} ${escapeHtml(observation.parserVersion)}</dd>
-        <dt>Original page</dt><dd><a href="${escapeHtml(observation.sourceUrl)}" rel="external noreferrer">${escapeHtml(observation.sourceUrl)}</a></dd>
+        <dt>Original page</dt><dd><a href="${externalHref(observation.sourceUrl)}" rel="external noreferrer">${escapeHtml(observation.sourceUrl)}</a></dd>
       </dl>
       <section><h2>Recorded fields</h2><dl>
         ${observation.schoolRaw ? `<dt>School</dt><dd>${escapeHtml(observation.schoolRaw)}</dd>` : ""}
@@ -1773,7 +1777,7 @@ async function sourcePage(prisma: PrismaClient, observationId: string): Promise<
       ${observation.sections.map((section) => section.headingRaw
         ? `<section><h2>${escapeHtml(section.headingRaw)}</h2>${paragraphs(section.bodyRaw)}</section>`
         : `<section aria-label="Additional source text">${paragraphs(section.bodyRaw)}</section>`).join("")}
-      <section><h2>Links captured from the source</h2>${observation.links.length ? `<ul>${observation.links.map((link) => `<li>${link.targetEntityIdHint ? `<a href="${href(entityHref(link.targetEntityIdHint))}">${escapeHtml(link.anchorTextRaw)}</a>` : link.hrefResolved ? `<a href="${escapeHtml(link.hrefResolved)}" rel="external noreferrer">${escapeHtml(link.anchorTextRaw)}</a>` : escapeHtml(link.anchorTextRaw)} <span class="muted">(${escapeHtml(link.sourceField)})</span></li>`).join("")}</ul>` : "<p>No links recorded.</p>"}</section>
+      <section><h2>Links captured from the source</h2>${observation.links.length ? `<ul>${observation.links.map((link) => `<li>${link.targetEntityIdHint ? `<a href="${href(entityHref(link.targetEntityIdHint))}">${escapeHtml(link.anchorTextRaw)}</a>` : link.hrefResolved ? `<a href="${externalHref(link.hrefResolved)}" rel="external noreferrer">${escapeHtml(link.anchorTextRaw)}</a>` : escapeHtml(link.anchorTextRaw)} <span class="muted">(${escapeHtml(link.sourceField)})</span></li>`).join("")}</ul>` : "<p>No links recorded.</p>"}</section>
     </article>`);
 }
 
@@ -1809,7 +1813,14 @@ export function createRequestHandler(prisma: PrismaClient) {
         sendHtml(response, 405, page("Method not allowed", "<h1>Method not allowed</h1>"));
         return;
       }
-      const url = new URL(request.url ?? "/", "http://localhost");
+      let url: URL;
+      try {
+        url = new URL(request.url ?? "/", "http://localhost");
+        decodeURIComponent(url.pathname);
+      } catch {
+        sendHtml(response, 400, page("Bad request", "<h1>Invalid request URL</h1>"));
+        return;
+      }
       let result: string | null = null;
       if (url.pathname === "/styles.css") {
         sendText(response, 200, stylesheet, "text/css; charset=utf-8");

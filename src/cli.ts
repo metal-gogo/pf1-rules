@@ -61,7 +61,11 @@ async function main(): Promise<void> {
       case "list": {
         const [listId, levelText] = args;
         if (!listId) throw new Error("Usage: pnpm tsx src/cli.ts list <spell-list-id> [level]");
-        print(await spellsForList(prisma, listId, levelText ? Number(levelText) : undefined));
+        const level = levelText === undefined ? undefined : Number(levelText);
+        if (level !== undefined && (!levelText?.trim() || !Number.isInteger(level) || level < 0 || level > 9)) {
+          throw new Error("Spell level must be an integer from 0 through 9.");
+        }
+        print(await spellsForList(prisma, listId, level));
         break;
       }
       case "ingestion": {
@@ -90,7 +94,9 @@ async function main(): Promise<void> {
           "Usage: pnpm tsx src/cli.ts ingestion <stats|list [status]|batch <number>|issues>",
         );
       }
-      default:
+      case "help":
+      case "--help":
+      case "-h":
         print({
           commands: [
             "validate",
@@ -107,6 +113,9 @@ async function main(): Promise<void> {
             "ingestion issues",
           ],
         });
+        break;
+      default:
+        throw new Error(`Unknown command: ${command}. Use --help to list commands.`);
     }
   } finally {
     await prisma.$disconnect();

@@ -1,5 +1,5 @@
 import { createServer, type Server } from "node:http";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 
 import { createLocalPrisma } from "../src/db/client.js";
 import { createRequestHandler, renderPlainTextDescription } from "../src/web/server.js";
@@ -1879,4 +1879,33 @@ describe("local rules browser", () => {
     expect(response.status).toBe(404);
     expect(html).toContain("<h1>Page not found</h1>");
   });
+});
+
+it("rejects malformed request escapes as client errors", async () => {
+  const response = await fetch(`${baseUrl}/spells/%ZZ`);
+  expect(response.status).toBe(400);
+});
+
+it("shows qualifications on the generic spell-list route", async () => {
+  const response = await fetch(`${baseUrl}/lists/spell-list.arcanist`);
+  expect(response.status).toBe(200);
+  expect(await response.text()).toContain("Szuriel");
+  expect((await fetch(`${baseUrl}/lists/spell.light`)).status).toBe(404);
+});
+
+it("does not render executable source URLs", async () => {
+  const observation = await prisma.sourceObservation.findFirstOrThrow({
+    include: { links: true, references: true, sections: true, deliveryFields: true },
+  });
+  const lookup = vi.spyOn(prisma.sourceObservation, "findUnique").mockResolvedValue({
+    ...observation,
+    sourceUrl: "javascript:alert(1)",
+  });
+  try {
+    const response = await fetch(`${baseUrl}/sources/test`);
+    expect(response.status).toBe(200);
+    expect(await response.text()).not.toContain('href="javascript:');
+  } finally {
+    lookup.mockRestore();
+  }
 });

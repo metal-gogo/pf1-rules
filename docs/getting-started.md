@@ -12,6 +12,15 @@ mise install
 corepack enable
 pnpm install
 pnpm exec playwright install chromium
+cp .env.example .env
+```
+
+Set `PF1_ARTIFACT_ROOT` in `.env` to a retained artifact store before importing.
+Raw captures are stored outside Git and are required for artifact hash validation.
+To build only from the versioned JSON records without checking the captures, use
+`PF1_VERIFY_ARTIFACTS=0 pnpm db:setup`.
+
+```bash
 pnpm db:setup
 pnpm verify
 ```
@@ -23,12 +32,15 @@ pnpm verify
 - Run `pnpm db:studio` to inspect the local database with Prisma Studio.
 - Run `pnpm verify` to validate records, type-check the project, check the database, and run the unit and browser [test suites](../tests/).
 
+Set `PF1_DATABASE_PATH` to use a different SQLite file for both migrations and
+the application. After updating versioned data, run `pnpm db:import` to refresh
+the local read model before running tests.
+
 ## Project configuration
 
 - [Package metadata and scripts](../package.json)
 - [Locked dependencies](../pnpm-lock.yaml)
 - [TypeScript configuration](../tsconfig.json)
 - [Prisma configuration](../prisma.config.ts)
-- [Workspace instructions](../AGENTS.md)
 
 Return to the [project index](index.md).

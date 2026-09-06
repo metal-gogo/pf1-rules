@@ -83,7 +83,7 @@ export function validateRichTextBatchManifest(manifest: RichTextBatchManifest): 
   }
   for (const [index, file] of manifest.files.entries()) {
     const spellId = manifest.spell_ids[index];
-    if (!spellId || file.spell_id !== spellId ||
+    if (!spellId || !/^spell\.[a-z0-9-]+$/.test(spellId) || file.spell_id !== spellId ||
       file.canonical_path !== relativeSpellPath("canonical", spellId) ||
       file.decision_path !== relativeSpellPath("decisions", spellId) ||
       !/^[0-9a-f]{64}$/.test(file.canonical_sha256) ||
@@ -226,6 +226,7 @@ export function verifyRichTextBatch(filename: string): void {
 
 
 function requireSingleBatchCommit(manifest: RichTextBatchManifest): void {
+  run("git", ["merge-base", "--is-ancestor", manifest.base_commit, "HEAD"]);
   const commitRange = manifest.base_commit + "..HEAD";
   const commits = Number(run("git", ["rev-list", "--count", commitRange]));
   if (commits !== 1) throw new Error(`Expected one commit after planning; found ${commits}.`);
@@ -256,8 +257,10 @@ function richTextBatchCommitMessage(manifest: RichTextBatchManifest): string {
 export function commitRichTextBatch(filename: string): void {
   const manifest = readManifest(filename);
   requireBaseCommit(manifest);
+  assertSamePaths(changedPaths(["diff", "--cached", "--name-only"]), [], "Index");
   assertSamePaths(changedPaths(["diff", "--name-only"]), expectedBatchPaths(manifest), "Commit");
   run("git", ["add", "--", ...expectedBatchPaths(manifest)]);
+  assertSamePaths(changedPaths(["diff", "--cached", "--name-only"]), expectedBatchPaths(manifest), "Staged batch");
   run("git", ["diff", "--cached", "--check"]);
   run("git", ["commit", "-m", richTextBatchCommitMessage(manifest)]);
   if (run("git", ["status", "--porcelain"])) {

@@ -1024,3 +1024,18 @@ describe("rich-text relationship enrichment", () => {
     expect(serialized).toContain('"value":"Knowledge"');
   });
 });
+
+it("preserves empty table cells without shifting later columns", () => {
+  const document = parseRichTextHtml(
+    "<table><tr><th>Roll</th><th>Form</th><th>Modifier</th></tr>" +
+    "<tr><td>01</td><td></td><td>+2</td></tr></table>",
+  );
+  const table = document.content[0];
+  expect(table?.node_type).toBe("table");
+  if (table?.node_type !== "table") throw new Error("Missing table");
+  expect(table.content[1]?.content).toEqual([
+    { node_type: "table_cell", header: false, content: [{ node_type: "text", value: "01" }] },
+    { node_type: "table_cell", header: false, content: [] },
+    { node_type: "table_cell", header: false, content: [{ node_type: "text", value: "+2" }] },
+  ]);
+});

@@ -1,12 +1,17 @@
 import "dotenv/config";
 
+import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-export const projectRoot = path.resolve(
+const sourceRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "..",
 );
+
+export const projectRoot = fs.existsSync(path.join(sourceRoot, "package.json"))
+  ? sourceRoot
+  : path.dirname(sourceRoot);
 
 export const defaultDatabasePath = path.join(
   projectRoot,
