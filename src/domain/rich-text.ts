@@ -253,16 +253,11 @@ export function parseRichTextHtml(html: string): RichTextDocument {
     if (tag === "table") {
       flushParagraph();
       const rows = $(node).find("tr").toArray().flatMap((row, rowIndex) => {
-        const cells = $(row).children("th, td").toArray().flatMap((cell) => {
-          const content = inlineContent($, $(cell).contents().toArray());
-          return content.length > 0
-            ? [{
-                node_type: "table_cell" as const,
-                header: rowIndex === 0 || String((cell as any).tagName).toLowerCase() === "th",
-                content,
-              }]
-            : [];
-        });
+        const cells = $(row).children("th, td").toArray().map((cell) => ({
+          node_type: "table_cell" as const,
+          header: rowIndex === 0 || String((cell as any).tagName).toLowerCase() === "th",
+          content: inlineContent($, $(cell).contents().toArray()),
+        }));
         return cells.length > 0
           ? [{ node_type: "table_row" as const, content: cells }]
           : [];

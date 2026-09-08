@@ -20,14 +20,46 @@
   },
   "rules_text": {
     "raw": "You gain DR 5/evil while wearing the target armor. While you’re using your judgment or smite ability, this improves to DR 10/evil.",
-    "search_text": "You gain DR 5/evil while wearing the target armor. While you’re using your judgment or smite ability, this improves to DR 10/evil."
+    "search_text": "You gain DR 5/evil while wearing the target armor. While you’re using your judgment or smite ability, this improves to DR 10/evil.",
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "You gain "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "DR",
+              "relationship_id": "mythic-spell-variant.sanctify-armor:uses_definition:special-ability.damage-reduction"
+            },
+            {
+              "node_type": "text",
+              "value": " 5/evil while wearing the target armor. While you’re using your judgment or smite ability, this improves to "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "DR",
+              "relationship_id": "mythic-spell-variant.sanctify-armor:uses_definition:special-ability.damage-reduction"
+            },
+            {
+              "node_type": "text",
+              "value": " 10/evil."
+            }
+          ]
+        }
+      ]
+    }
   },
   "augmentations": [
     {
       "augmentation_id": "mythic-spell-variant.sanctify-armor.augmentation-3",
       "name": "Augmented (3rd)",
       "minimum_tier": 3,
-      "total_mythic_power_uses": null,
+      "total_mythic_power_uses": 2,
       "raw": "If you expend two uses of mythic power, when you use judgment or smite, add half your tier to your AC as a sacred bonus.",
       "relationships": []
     }
@@ -38,7 +70,35 @@
     "page": 106,
     "first_party_status": "confirmed"
   },
-  "relationships": [],
+  "relationships": [
+    {
+      "relationship_id": "mythic-spell-variant.sanctify-armor:uses_definition:special-ability.damage-reduction",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "special_ability",
+        "entity_id": "special-ability.damage-reduction",
+        "name": "Damage Reduction"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.sanctify-armor:f98ec2e6a244d24b",
+          "source_field": "raw_aon_mythic_section",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "DR",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.sanctify-armor:8979258451c0aa18",
+          "source_field": "spell_raw.links_raw[6]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "DR",
+          "source_href": "https://www.d20pfsrd.com/bestiary/rules-for-monsters/universal-monster-rules#TOC-Damage-Reduction-Ex-or-Su-"
+        }
+      ],
+      "note": "The displayed Mythic phrase and local rules target are unambiguous."
+    }
+  ],
   "provenance": [
     {
       "field_path": "/rules_text/raw",
@@ -56,8 +116,8 @@
     }
   ],
   "normalization": {
-    "status": "draft",
-    "normalizer_version": "mythic-draft-0.1.0",
+    "status": "validated",
+    "normalizer_version": "mythic-augmentation-cost-0.1.0",
     "warnings": [
       {
         "code": "MYTHIC_EFFECT_MODEL_DEFERRED",

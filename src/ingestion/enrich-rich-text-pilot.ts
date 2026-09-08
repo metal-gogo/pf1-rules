@@ -596,6 +596,34 @@ const rejectedRelationshipTargets = new Map([
 
 const rejectedDescriptionRelationships = new Map([
   [
+    "spell.thaumaturgic-circle:functions_like:spell.magic-circle-against-chaos-evil-good-or-law",
+    "The source names four individual magic-circle spells, not a combined spell.",
+  ],
+  [
+    "spell.bestow-curse:references:spell.invisibility",
+    "The linked term belongs to supplemental source content outside the selected base-spell description.",
+  ],
+  [
+    "spell.bestow-curse:references:spell.invisibility-purge",
+    "The linked term belongs to supplemental source content outside the selected base-spell description.",
+  ],
+  [
+    "spell.bestow-curse:references:spell.see-invisibility",
+    "The linked term belongs to supplemental source content outside the selected base-spell description.",
+  ],
+  [
+    "spell.bestow-curse:references:spell.true-seeing",
+    "The linked term belongs to supplemental source content outside the selected base-spell description.",
+  ],
+  [
+    "spell.magic-aura:references:spell.detect-magic-greater",
+    "The source link is outside the selected base-spell description and does not establish a base-spell relationship.",
+  ],
+  [
+    "spell.magic-aura:references:spell.arcane-sight",
+    "The source link is outside the selected base-spell description and does not establish a base-spell relationship.",
+  ],
+  [
     "spell.miracle:uses_definition:alignment",
     "Alignment's nature is ordinary prose, not a reference to the Alignment rules.",
   ],

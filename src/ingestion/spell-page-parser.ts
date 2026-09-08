@@ -405,14 +405,15 @@ export function parseD20pfsrdSpell(html: string, sourceUrl: string, expectedName
   if (article.length !== 1) throw new Error("d20PFSRD bounded article entry was not found");
   article.find("script, .breadcrumbs, .section15, .ez-toc-container").remove();
   const articleTitle = article.find("h1").first();
-  const targetSlug = slug(expectedName ?? cleanText(articleTitle.text()));
+  const d20SpellName = (value: string) => cleanText(value).replace(/\s+\[3\.5E\]$/i, "");
+  const targetSlug = slug(expectedName ?? d20SpellName(articleTitle.text()));
   const title = article.find("h1, h2, h3, h4, h5, h6").filter((_index, element) =>
-    slug(cleanText($(element).text())) === targetSlug,
+    slug(d20SpellName($(element).text())) === targetSlug,
   ).first();
   if (title.length !== 1) {
     throw new Error(`d20PFSRD bounded spell entry ${expectedName ?? targetSlug} was not found`);
   }
-  const nameRaw = cleanText(title.text());
+  const nameRaw = d20SpellName(title.text());
   const nodes: string[] = [];
   const headingLevel = Number.parseInt(title.get(0)?.tagName.slice(1) ?? "6", 10);
   let sibling = title.next();

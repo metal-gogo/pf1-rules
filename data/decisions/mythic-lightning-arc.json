@@ -7,9 +7,9 @@
   "observation_ids": [
     "aon:spell.lightning-arc:6d6ca7f6292c9b62"
   ],
-  "policy_id": "provenance-first-v0",
+  "policy_id": "mythic-magic-total-cost-v1",
   "baseline_observation_id": "aon:spell.lightning-arc:6d6ca7f6292c9b62",
-  "status": "draft",
+  "status": "accepted",
   "field_decisions": [
     {
       "canonical_path": "/rules_text/raw",
@@ -38,6 +38,34 @@
         "aon:spell.lightning-arc:6d6ca7f6292c9b62"
       ],
       "rationale": "The source citation is separated from the copied rules text."
+    },
+    {
+      "canonical_path": "/augmentations/0/total_mythic_power_uses",
+      "decision": "derived",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.lightning-arc:6d6ca7f6292c9b62",
+          "source_field": "raw_aon_mythic_section"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.lightning-arc:6d6ca7f6292c9b62"
+      ],
+      "rationale": "The augmented entry explicitly states a total cost of 2 mythic power uses; Mythic Magic defines that stated augmented cost as including the base mythic casting use."
+    },
+    {
+      "canonical_path": "/normalization/status",
+      "decision": "normalize",
+      "selected_evidence": [
+        {
+          "observation_id": "aon:spell.lightning-arc:6d6ca7f6292c9b62",
+          "source_field": "raw_aon_mythic_section"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.lightning-arc:6d6ca7f6292c9b62"
+      ],
+      "rationale": "The source-backed mythic text, base-spell relationship, tier, and total augmented cost are complete. Detailed effects remain lossless rules text."
     }
   ],
   "relationship_decisions": [
@@ -56,7 +84,5 @@
       "rationale": "AoN labels this section with the mythic version's exact name."
     }
   ],
-  "unresolved_questions": [
-    "What reusable structured effect model should represent this mythic variant?"
-  ]
+  "unresolved_questions": []
 }

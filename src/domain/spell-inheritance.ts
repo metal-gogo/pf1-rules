@@ -1,3 +1,5 @@
+import { stableJson } from "./json.js";
+
 export type JsonObject = Record<string, unknown>;
 
 export interface SpellInheritanceOverride {
@@ -60,7 +62,7 @@ function clone<T>(value: T): T {
 
 
 function pointerTokens(pointer: string): string[] {
-  if (!pointer.startsWith("/") || pointer === "/") {
+  if (!pointer.startsWith("/") || pointer === "/" || /~(?:[^01]|$)/.test(pointer)) {
     throw new SpellInheritanceError(
       "invalid_path",
       `Inheritance path must be a non-root JSON Pointer: ${JSON.stringify(pointer)}`,
@@ -81,7 +83,9 @@ function displayPath(path: string, ownerId: string): string {
 export function readJsonPointer(document: unknown, pointer: string, ownerId = "document"): unknown {
   let current = document;
   for (const token of pointerTokens(pointer)) {
-    if (current === null || typeof current !== "object" || !(token in current)) {
+    if (current === null || typeof current !== "object" ||
+      !Object.hasOwn(current, token) ||
+      (Array.isArray(current) && !/^(0|[1-9]\d*)$/.test(token))) {
       throw new SpellInheritanceError(
         "invalid_path",
         `Inheritance path does not exist: ${displayPath(pointer, ownerId)}`,
@@ -98,7 +102,9 @@ export function writeJsonPointer(document: unknown, pointer: string, value: unkn
   const finalToken = tokens.at(-1);
   let current = document;
   for (const token of tokens.slice(0, -1)) {
-    if (current === null || typeof current !== "object" || !(token in current)) {
+    if (current === null || typeof current !== "object" ||
+      !Object.hasOwn(current, token) ||
+      (Array.isArray(current) && !/^(0|[1-9]\d*)$/.test(token))) {
       throw new SpellInheritanceError(
         "invalid_path",
         `Inheritance path has no writable parent: ${displayPath(pointer, ownerId)}`,
@@ -106,13 +112,16 @@ export function writeJsonPointer(document: unknown, pointer: string, value: unkn
     }
     current = (current as Record<string, unknown>)[token];
   }
-  if (finalToken === undefined || current === null || typeof current !== "object") {
+  if (finalToken === undefined || current === null || typeof current !== "object" ||
+    (Array.isArray(current) && (!/^(0|[1-9]\d*)$/.test(finalToken) || Number(finalToken) > current.length))) {
     throw new SpellInheritanceError(
       "invalid_path",
       `Inheritance path has no writable parent: ${displayPath(pointer, ownerId)}`,
     );
   }
-  (current as Record<string, unknown>)[finalToken] = clone(value);
+  Object.defineProperty(current, finalToken, {
+    value: clone(value), writable: true, enumerable: true, configurable: true,
+  });
 }
 
 
@@ -174,7 +183,7 @@ function indexSpells<T extends InheritableSpell>(spells: Iterable<T>): Map<strin
 
 
 function sameJson(left: unknown, right: unknown): boolean {
-  return JSON.stringify(left) === JSON.stringify(right);
+  return stableJson(left) === stableJson(right);
 }
 
 

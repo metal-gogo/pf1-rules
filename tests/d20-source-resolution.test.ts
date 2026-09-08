@@ -66,6 +66,15 @@ describe("d20PFSRD source resolution", () => {
     expect(parsed.descriptionRaw).not.toContain("must not be included");
   });
 
+  test("accepts a legacy 3.5 title suffix without changing the spell name", () => {
+    const parsed = parseD20pfsrdSpell(
+      groupedPage.replace("Air Walk</h1>", "Armor of Darkness [3.5E]</h1>"),
+      "https://www.d20pfsrd.com/magic/all-spells/a/armor-of-darkness/",
+      "Armor of Darkness",
+    );
+    expect(parsed.nameRaw).toBe("Armor of Darkness");
+  });
+
   test("rejects a grouped page without the requested exact heading", () => {
     expect(() => parseD20pfsrdSpell(
       groupedPage,

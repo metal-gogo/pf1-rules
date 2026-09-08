@@ -1,13 +1,9 @@
 import "dotenv/config";
 
-import path from "node:path";
-
 import { defineConfig } from "prisma/config";
 
+import { sqliteDatabaseUrl } from "./src/config.js";
 
-const localDatabaseUrl = `file:${path
-  .resolve("data", "database", "pf1_spells.db")
-  .replaceAll("\\", "/")}`;
 
 export default defineConfig({
   schema: "prisma/schema.prisma",
@@ -15,6 +11,6 @@ export default defineConfig({
     path: "prisma/migrations",
   },
   datasource: {
-    url: process.env.DATABASE_URL ?? localDatabaseUrl,
+    url: process.env.DATABASE_URL ?? sqliteDatabaseUrl(),
   },
 });

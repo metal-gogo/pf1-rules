@@ -1,6 +1,12 @@
-import { describe, expect, it } from "vitest";
+import { execFileSync } from "node:child_process";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+
+import { describe, expect, it, vi } from "vitest";
 
 import {
+  commitRichTextBatch,
   expectedBatchPaths,
   formatRichTextBatchCommitMessage,
   validateRichTextBatchManifest,
@@ -48,4 +54,42 @@ describe("rich-text workflow manifests", () => {
     planned.files[0]!.decision_path = "data/decisions/not-the-same-spell.json";
     expect(() => validateRichTextBatchManifest(planned)).toThrow("invalid paths");
   });
+});
+
+it("refuses an unrelated staged file before staging or committing a batch", () => {
+  const planned = manifest();
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), "pf1-batch-test-"));
+  const filename = path.join(directory, "manifest.json");
+  fs.writeFileSync(filename, JSON.stringify(planned));
+  const git = vi.mocked(execFileSync);
+  git.mockImplementation((_command, args) => {
+    const command = (args as string[]).join(" ");
+    if (command === "rev-parse HEAD") return planned.base_commit;
+    if (command === "diff --name-only") return expectedBatchPaths(planned).join("\n");
+    if (command === "diff --cached --name-only") return "unrelated.txt";
+    throw new Error("Unexpected Git mutation: " + command);
+  });
+  try {
+    expect(() => commitRichTextBatch(filename)).toThrow("Index changed an unexpected file set");
+    expect(git.mock.calls.every(([, args]) => !(args as string[]).includes("add"))).toBe(true);
+  } finally {
+    git.mockReset();
+    fs.rmSync(directory, { recursive: true, force: true });
+  }
+});
+
+vi.mock("node:child_process", () => ({ execFileSync: vi.fn() }));
+
+
+it("rejects spell IDs that escape the canonical directory", () => {
+  const planned = manifest();
+  const spellId = "spell.../outside";
+  planned.spell_ids[0] = spellId;
+  planned.files[0] = {
+    ...planned.files[0]!,
+    spell_id: spellId,
+    canonical_path: "data/outside.json",
+    decision_path: "data/outside.json",
+  };
+  expect(() => validateRichTextBatchManifest(planned)).toThrow("invalid paths");
 });

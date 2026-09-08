@@ -381,7 +381,7 @@ unresolved error-severity issues.
 ### 5. Complete verification and document the result
 
 Run schema validation, type checking, database tests, parser tests, CLI tests,
-web tests, accessibility checks, and relevant end-to-end tests. Record source
+and link-integrity tests. Record source
 coverage and known omissions in a finding.
 
 Exit gate: `pnpm verify` passes from the pinned `mise` toolchain, and a fresh

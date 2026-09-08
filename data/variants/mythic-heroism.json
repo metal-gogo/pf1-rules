@@ -10,24 +10,56 @@
     "rules_combination": "inherits_unless_replaced",
     "evidence": [
       {
-        "observation_id": "aon:spell.hollow-heroism-greater:914635085cf42922",
+        "observation_id": "aon:spell.heroism:0c3fd3aaf31caded",
         "source_field": "raw_aon_mythic_section",
         "evidence_kind": "plain_text",
         "anchor_text_raw": "Mythic Heroism",
-        "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Hollow+Heroism%2C+Greater"
+        "source_href": "https://www.aonprd.com/SpellDisplay.aspx?ItemName=Heroism"
       }
     ]
   },
   "rules_text": {
     "raw": "The morale bonus increases to +4 and applies on all checks, attack rolls, saves, and weapon damage rolls. Allies adjacent to the target gain a +4 morale bonus on saves against fear effects.",
-    "search_text": "The morale bonus increases to +4 and applies on all checks, attack rolls, saves, and weapon damage rolls. Allies adjacent to the target gain a +4 morale bonus on saves against fear effects."
+    "search_text": "The morale bonus increases to +4 and applies on all checks, attack rolls, saves, and weapon damage rolls. Allies adjacent to the target gain a +4 morale bonus on saves against fear effects.",
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "morale bonus",
+              "relationship_id": "mythic-spell-variant.heroism:uses_definition:bonus.morale"
+            },
+            {
+              "node_type": "text",
+              "value": " increases to +4 and applies on all checks, attack rolls, saves, and weapon damage rolls. Allies adjacent to the target gain a +4 "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "morale bonus",
+              "relationship_id": "mythic-spell-variant.heroism:uses_definition:bonus.morale"
+            },
+            {
+              "node_type": "text",
+              "value": " on saves against fear effects."
+            }
+          ]
+        }
+      ]
+    }
   },
   "augmentations": [
     {
       "augmentation_id": "mythic-spell-variant.heroism.augmentation-3",
       "name": "Augmented (3rd)",
       "minimum_tier": 3,
-      "total_mythic_power_uses": null,
+      "total_mythic_power_uses": 2,
       "raw": "If you expend two uses of mythic power, the target can attempt one additional attack per round when taking a full attack action (as if using a haste spell). The target can use this additional attack ability a number of times equal to your tier.",
       "relationships": []
     }
@@ -38,26 +70,54 @@
     "page": 98,
     "first_party_status": "confirmed"
   },
-  "relationships": [],
+  "relationships": [
+    {
+      "relationship_id": "mythic-spell-variant.heroism:uses_definition:bonus.morale",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "bonus",
+        "entity_id": "bonus.morale",
+        "name": "Morale Bonus"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.heroism:0c3fd3aaf31caded",
+          "source_field": "raw_aon_mythic_section",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "morale bonus",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.heroism:8c57f86dc1c510d5",
+          "source_field": "spell_raw.links_raw[36]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "morale bonus",
+          "source_href": "https://www.d20pfsrd.com/basics-ability-scores/glossary#TOC-Morale-Bonus"
+        }
+      ],
+      "note": "The displayed Mythic phrase and local rules target are unambiguous."
+    }
+  ],
   "provenance": [
     {
       "field_path": "/rules_text/raw",
-      "observation_id": "aon:spell.hollow-heroism-greater:914635085cf42922",
+      "observation_id": "aon:spell.heroism:0c3fd3aaf31caded",
       "source_field": "raw_aon_mythic_section",
       "decision": "copied",
       "note": "AoN mythic subsection copied after its source citation."
     },
     {
       "field_path": "/publication",
-      "observation_id": "aon:spell.hollow-heroism-greater:914635085cf42922",
+      "observation_id": "aon:spell.heroism:0c3fd3aaf31caded",
       "source_field": "raw_aon_mythic_section",
       "decision": "normalized",
       "note": "Publication citation separated from the mythic rules text."
     }
   ],
   "normalization": {
-    "status": "draft",
-    "normalizer_version": "mythic-draft-0.1.0",
+    "status": "validated",
+    "normalizer_version": "mythic-augmentation-cost-0.1.0",
     "warnings": [
       {
         "code": "MYTHIC_EFFECT_MODEL_DEFERRED",

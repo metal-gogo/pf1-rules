@@ -20,14 +20,37 @@
   },
   "rules_text": {
     "raw": "The damage dealt increases to 1d8 points of sonic damage per 2 caster levels (maximum 5d8) and the duration that creatures in the area are dazed is a number of rounds equal to your tier.",
-    "search_text": "The damage dealt increases to 1d8 points of sonic damage per 2 caster levels (maximum 5d8) and the duration that creatures in the area are dazed is a number of rounds equal to your tier."
+    "search_text": "The damage dealt increases to 1d8 points of sonic damage per 2 caster levels (maximum 5d8) and the duration that creatures in the area are dazed is a number of rounds equal to your tier.",
+    "document": {
+      "node_type": "document",
+      "content": [
+        {
+          "node_type": "paragraph",
+          "content": [
+            {
+              "node_type": "text",
+              "value": "The damage dealt increases to 1d8 points of sonic damage per 2 caster levels (maximum 5d8) and the duration that creatures in the area are "
+            },
+            {
+              "node_type": "entity_link",
+              "value": "dazed",
+              "relationship_id": "mythic-spell-variant.ear-piercing-scream:uses_definition:condition.dazed"
+            },
+            {
+              "node_type": "text",
+              "value": " is a number of rounds equal to your tier."
+            }
+          ]
+        }
+      ]
+    }
   },
   "augmentations": [
     {
       "augmentation_id": "mythic-spell-variant.ear-piercing-scream.augmentation-3",
       "name": "Augmented (3rd)",
       "minimum_tier": 3,
-      "total_mythic_power_uses": null,
+      "total_mythic_power_uses": 2,
       "raw": "If you expend two uses of mythic power, the spell affects a 30-foot cone rather than a single target.",
       "relationships": []
     }
@@ -38,7 +61,35 @@
     "page": 92,
     "first_party_status": "confirmed"
   },
-  "relationships": [],
+  "relationships": [
+    {
+      "relationship_id": "mythic-spell-variant.ear-piercing-scream:uses_definition:condition.dazed",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "condition",
+        "entity_id": "condition.dazed",
+        "name": "Dazed"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.ear-piercing-scream:fff53d17d61e50ef",
+          "source_field": "raw_aon_mythic_section",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "dazed",
+          "source_href": null
+        },
+        {
+          "observation_id": "d20pfsrd:spell.ear-piercing-scream:6daf2bc0ccd11064",
+          "source_field": "spell_raw.links_raw[10]",
+          "evidence_kind": "hyperlink",
+          "anchor_text_raw": "dazed",
+          "source_href": "https://www.d20pfsrd.com/gamemastering/conditions#TOC-Dazed"
+        }
+      ],
+      "note": "The displayed Mythic phrase and local rules target are unambiguous."
+    }
+  ],
   "provenance": [
     {
       "field_path": "/rules_text/raw",
@@ -56,8 +107,8 @@
     }
   ],
   "normalization": {
-    "status": "draft",
-    "normalizer_version": "mythic-draft-0.1.0",
+    "status": "validated",
+    "normalizer_version": "mythic-augmentation-cost-0.1.0",
     "warnings": [
       {
         "code": "MYTHIC_EFFECT_MODEL_DEFERRED",

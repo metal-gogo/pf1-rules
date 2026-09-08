@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.2.0",
+  "schema_version": "0.1.0",
   "spell_id": "spell.bolts-of-bedevilment",
   "ruleset": "Pathfinder First Edition",
   "legacy_3_5_material": true,
@@ -14,7 +14,17 @@
     ],
     "raw": "enchantment [mind-affecting]"
   },
-  "levels": [],
+  "levels": [
+    {
+      "spell_list_id": "spell-list.madness-domain",
+      "list_kind": "domain",
+      "list_name": "Madness Domain",
+      "level": 5,
+      "scope": "legacy_3_5",
+      "raw": "madness 5",
+      "qualifications": []
+    }
+  ],
   "casting": {
     "time": {
       "kind": "action",
@@ -87,30 +97,7 @@
   "description": {
     "raw": "You can fire one ray per round that dazes one living creature for 1d3 rounds.",
     "search_text": "\"you can fire one ray per round that dazes one living creature for 1d3 rounds.\"",
-    "sections": [],
-    "document": {
-      "node_type": "document",
-      "content": [
-        {
-          "node_type": "paragraph",
-          "content": [
-            {
-              "node_type": "text",
-              "value": "You can fire one ray per round that "
-            },
-            {
-              "node_type": "entity_link",
-              "value": "dazes",
-              "relationship_id": "spell.bolts-of-bedevilment:uses_definition:condition.dazed"
-            },
-            {
-              "node_type": "text",
-              "value": " one living creature for 1d3 rounds."
-            }
-          ]
-        }
-      ]
-    }
+    "sections": []
   },
   "publication": {
     "publisher": "Paizo",
@@ -141,6 +128,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.bolts-of-bedevilment:appears_on_spell_list:spell-list.madness-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.madness-domain",
+        "name": "Madness Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.bolts-of-bedevilment:57e214571297111d",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "madness 5",
+          "source_href": null
+        }
+      ],
+      "note": "Reviewed catalog policy: AoN remains the preferred publication transcription. When an additional class membership is printed by d20PFSRD, it may be added to the canonical class union after review; Foundry PF1 is corroborating catalog evidence when it agrees. Preserve every source claim and never replace an AoN level merely because another catalog assigns the same class a different level."
     },
     {
       "relationship_id": "spell.bolts-of-bedevilment:has_descriptor:descriptor.mind-affecting",
@@ -285,12 +292,12 @@
       "note": null
     },
     {
-      "relationship_id": "spell.bolts-of-bedevilment:uses_definition:condition.dazed",
+      "relationship_id": "spell.bolts-of-bedevilment:uses_definition:condition.dazes",
       "type": "uses_definition",
       "target": {
         "entity_type": "condition",
-        "entity_id": "condition.dazed",
-        "name": "Dazed"
+        "entity_id": "condition.dazes",
+        "name": "dazes"
       },
       "status": "accepted",
       "evidence": [
@@ -308,7 +315,7 @@
       "relationship_id": "spell.bolts-of-bedevilment:uses_definition:defense.spell-resistance",
       "type": "uses_definition",
       "target": {
-        "entity_type": "defense",
+        "entity_type": "rule",
         "entity_id": "defense.spell-resistance",
         "name": "Spell Resistance"
       },
@@ -325,11 +332,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.bolts-of-bedevilment:uses_definition:saving-throw.will",
+      "relationship_id": "spell.bolts-of-bedevilment:uses_definition:rule.will",
       "type": "uses_definition",
       "target": {
-        "entity_type": "saving_throw",
-        "entity_id": "saving-throw.will",
+        "entity_type": "rule",
+        "entity_id": "rule.will",
         "name": "Will"
       },
       "status": "accepted",
@@ -395,17 +402,17 @@
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
     },
     {
-      "field_path": "/description/document",
-      "observation_id": "aon:spell.bolts-of-bedevilment:36931620c3bd64c5",
-      "source_field": "spell_raw.description_raw",
-      "raw_value_sha256": "fb1858aeba27b4c5bb9ebfe624ffe7aa31a38ecae8b72fe9472af381dd9852e2",
-      "decision": "normalized",
-      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
+      "field_path": "/levels/0",
+      "observation_id": "d20pfsrd:spell.bolts-of-bedevilment:57e214571297111d",
+      "source_field": "spell_raw.levels_raw",
+      "raw_value_sha256": "3d868afa191b2a14384df038eefb7e76f500fa412bf60ef2c9591fd44e945bbf",
+      "decision": "manually_resolved",
+      "note": "Reviewed catalog policy: AoN remains the preferred publication transcription. When an additional class membership is printed by d20PFSRD, it may be added to the canonical class union after review; Foundry PF1 is corroborating catalog evidence when it agrees. Preserve every source claim and never replace an AoN level merely because another catalog assigns the same class a different level."
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.2.0-rich-text",
+    "status": "validated",
+    "normalizer_version": "0.1.5-reviewed-catalog-memberships",
     "warnings": [
       {
         "code": "LEGACY_3_5_MATERIAL",
@@ -418,9 +425,9 @@
         "message": "AoN does not print a Level value. The canonical spell identity is retained with an empty level list; no class, domain, or numeric level was inferred."
       },
       {
-        "code": "SOURCE_VARIATION",
+        "code": "REVIEWED_CATALOG_MEMBERSHIP_UNION",
         "field_path": "/levels",
-        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+        "message": "Reviewed catalog policy: AoN remains the preferred publication transcription. When an additional class membership is printed by d20PFSRD, it may be added to the canonical class union after review; Foundry PF1 is corroborating catalog evidence when it agrees. Preserve every source claim and never replace an AoN level merely because another catalog assigns the same class a different level."
       }
     ]
   }

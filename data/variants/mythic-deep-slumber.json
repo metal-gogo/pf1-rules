@@ -10,7 +10,7 @@
     "rules_combination": "inherits_unless_replaced",
     "evidence": [
       {
-        "observation_id": "aon:spell.deep-slumber:91df1219a7053bad",
+        "observation_id": "aon:spell.deep-slumber:91df12197dc9cb6f",
         "source_field": "raw_aon_mythic_section",
         "evidence_kind": "plain_text",
         "anchor_text_raw": "Mythic Deep Slumber",
@@ -52,7 +52,24 @@
       "minimum_tier": 5,
       "total_mythic_power_uses": null,
       "raw": "If you expend two uses of mythic power, creatures affected by the spell can be awakened only by mythic effects. If you’re 5th tier and expend three uses of mythic power, the duration increases to 10 years per tier. If you’re 5th tier and expend four uses of mythic power, the spell has both augmented effects. Creatures sleeping for years because of this spell age and breathe as normal, but don’t need to eat or drink while the spell lasts.",
-      "relationships": []
+      "relationships": [],
+      "cost_expression": {
+        "kind": "alternatives",
+        "options": [
+          {
+            "total_mythic_power_uses": 2,
+            "minimum_tier": null
+          },
+          {
+            "total_mythic_power_uses": 3,
+            "minimum_tier": 5
+          },
+          {
+            "total_mythic_power_uses": 4,
+            "minimum_tier": 5
+          }
+        ]
+      }
     }
   ],
   "publication": {
@@ -73,7 +90,7 @@
       "status": "accepted",
       "evidence": [
         {
-          "observation_id": "aon:spell.deep-slumber:91df1219a7053bad",
+          "observation_id": "aon:spell.deep-slumber:91df12197dc9cb6f",
           "source_field": "raw_aon_mythic_section",
           "evidence_kind": "plain_text",
           "anchor_text_raw": "Hit Dice",
@@ -93,22 +110,22 @@
   "provenance": [
     {
       "field_path": "/rules_text/raw",
-      "observation_id": "aon:spell.deep-slumber:91df1219a7053bad",
+      "observation_id": "aon:spell.deep-slumber:91df12197dc9cb6f",
       "source_field": "raw_aon_mythic_section",
       "decision": "copied",
       "note": "AoN mythic subsection copied after its source citation."
     },
     {
       "field_path": "/publication",
-      "observation_id": "aon:spell.deep-slumber:91df1219a7053bad",
+      "observation_id": "aon:spell.deep-slumber:91df12197dc9cb6f",
       "source_field": "raw_aon_mythic_section",
       "decision": "normalized",
       "note": "Publication citation separated from the mythic rules text."
     }
   ],
   "normalization": {
-    "status": "draft",
-    "normalizer_version": "mythic-draft-0.1.0",
+    "status": "validated",
+    "normalizer_version": "mythic-augmentation-cost-0.2.0",
     "warnings": [
       {
         "code": "MYTHIC_EFFECT_MODEL_DEFERRED",

@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  readJsonPointer,
+  writeJsonPointer,
   resolveSpellInheritance,
   SpellInheritanceError,
   validateSpellInheritance,
@@ -227,5 +229,30 @@ describe("spell inheritance", () => {
     ]) {
       expect(detectSpellInheritance(parsedDescription(description), new Map())).toBeNull();
     }
+  });
+});
+
+describe("JSON Pointer boundaries", () => {
+  it("does not traverse inherited properties or mutate prototypes", () => {
+    expect(() => readJsonPointer({}, "/toString")).toThrow();
+    expect(() => writeJsonPointer({}, "/__proto__/polluted", true)).toThrow();
+    const document = {};
+    writeJsonPointer(document, "/__proto__", { safe: true });
+    expect(Object.getPrototypeOf(document)).toBe(Object.prototype);
+    expect(Object.hasOwn(document, "__proto__")).toBe(true);
+  });
+
+  it("rejects malformed escapes and non-index array properties", () => {
+    expect(() => readJsonPointer({ "bad~2": 1 }, "/bad~2")).toThrow();
+    expect(() => readJsonPointer(["value"], "/length")).toThrow();
+    expect(() => writeJsonPointer(["value"], "/length", 0)).toThrow();
+    expect(() => writeJsonPointer(["value"], "/01", "other")).toThrow();
+    expect(readJsonPointer({ "a/b": { "~": 1 } }, "/a~1b/~0")).toBe(1);
+  });
+
+  it("compares inherited objects independently of property order", () => {
+    const base = spell("spell.base", { a: 1, b: 2 });
+    const child = spell("spell.child", { b: 2, a: 1 }, [rule("spell.base")]);
+    expect(() => validateSpellInheritance([base, child])).not.toThrow();
   });
 });

@@ -92,7 +92,7 @@ pnpm db:import
 
 ## Rollout checklist
 
-Use this checklist when adding the remaining spells:
+Use this checklist when correcting a converted spell:
 
 1. Confirm the source fragment ends before mythic, augmented, or separately
    titled content that does not belong to the base description.
@@ -116,12 +116,11 @@ Use this checklist when adding the remaining spells:
    equivalence plus accepted relationship references.
 9. Check direct inheritance expansion and base, lesser, greater, or deeper
    family display independently. Never infer inheritance from a title.
-10. Add table-driven web coverage, browser navigation and accessibility checks,
+10. Add data or HTTP link-integrity coverage for the corrected semantics,
     import the database, and run the complete `pnpm verify` workflow.
 
-Backfill additional spells in reviewed batches rather than changing all records
-at once. Keep non-reviewed records on version `0.1.0` until their source
-boundaries and links pass this checklist.
+All canonical spells now use version `0.2.0`. Apply corrections in reviewed
+batches rather than changing unrelated records at once.
 
 See [Rich-text rollout status](rich-text-rollout.md) for current corpus counts,
 completed batches, and unresolved issue categories.

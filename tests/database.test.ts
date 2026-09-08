@@ -1,4 +1,4 @@
-import { beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
 import { createLocalPrisma } from "../src/db/client.js";
 import { checkDatabase } from "../src/ingestion/importer.js";
@@ -16,6 +16,10 @@ const prisma = createLocalPrisma();
 
 beforeAll(async () => {
   await checkDatabase(prisma);
+}, 60_000);
+
+afterAll(async () => {
+  await prisma.$disconnect();
 });
 
 describe("ingested spell catalog", () => {

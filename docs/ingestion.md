@@ -137,17 +137,20 @@ The command is idempotent; a completed run reports no pending dependencies.
 `pnpm ingest:rich-text-pilot` regenerates rich-text documents, provenance, and
 canonical decisions only for the 11 reviewed pilot spells. It reads immutable
 local observations, resolves inline targets through accepted canonical
-relationships, and leaves every other spell on schema version `0.1.0`. Run
-`pnpm db:import` after reviewing generated changes. Do not broaden this command
-until each new spell passes the checklist in
+relationships, and does not modify other records. Run `pnpm db:import` after
+reviewing generated changes. Do not broaden this command until each corrected
+spell passes the checklist in
 [Rich-text spell descriptions](rich-text.md).
 
-`pnpm audit:rich-text` classifies every remaining canonical spell without
-writing records. `pnpm ingest:rich-text-batch` converts the next 25
-source-equivalent, warning-free spells that contain at least one known inline
-relationship. Review the generated links before importing the database; the
-automation gate does not replace semantic review. Record batch results and
-unresolved categories in [Rich-text rollout status](rich-text-rollout.md).
+`pnpm audit:rich-text` counts converted spells and audits unconverted spells
+without writing records. It skips source and link checks for version `0.2.0`
+records. `pnpm ingest:rich-text-batch` selects unconverted, warning-free spells
+with known inline links; it currently has no candidates. For a reviewed
+correction, select explicit spell IDs with
+`pnpm ingest:rich-text-pilot --ids=spell.example` (replace the example ID).
+Review generated links before importing the database; the automation gate does
+not replace semantic review. Record corrections and unresolved categories in
+[Rich-text rollout status](rich-text-rollout.md).
 
 Contextual rich-text references may target grouped local pages. Spell
 descriptors live under `/rules/descriptors`; illumination levels live under

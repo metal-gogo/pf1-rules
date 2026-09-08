@@ -1024,3 +1024,62 @@ describe("rich-text relationship enrichment", () => {
     expect(serialized).toContain('"value":"Knowledge"');
   });
 });
+
+it("preserves empty table cells without shifting later columns", () => {
+  const document = parseRichTextHtml(
+    "<table><tr><th>Roll</th><th>Form</th><th>Modifier</th></tr>" +
+    "<tr><td>01</td><td></td><td>+2</td></tr></table>",
+  );
+  const table = document.content[0];
+  expect(table?.node_type).toBe("table");
+  if (table?.node_type !== "table") throw new Error("Missing table");
+  expect(table.content[1]?.content).toEqual([
+    { node_type: "table_cell", header: false, content: [{ node_type: "text", value: "01" }] },
+    { node_type: "table_cell", header: false, content: [] },
+    { node_type: "table_cell", header: false, content: [{ node_type: "text", value: "+2" }] },
+  ]);
+});
+
+
+it("preserves the approved spell review decisions", () => {
+  for (const slug of [
+    "bestow-curse", "calculated-luck", "cure-light-wounds", "cure-moderate-wounds",
+    "magic-aura", "restoration", "restoration-lesser", "thaumaturgic-circle",
+  ]) {
+    expect(canonical(slug).normalization.warnings.filter((warning: ValidatedJson) =>
+      ["UNMATCHED_RICH_TEXT_LINK", "AMBIGUOUS_RICH_TEXT_LINK"].includes(warning.code),
+    ), slug).toEqual([]);
+  }
+  const lesser = canonical("restoration-lesser");
+  expect(lesser.relationships.some((item: ValidatedJson) =>
+    item.target.entity_id === "rule.exhausted",
+  )).toBe(false);
+  expect(richTextBlockInlines(lesser.description.document.content[0]).some((node) =>
+    node.node_type === "entity_link" && node.value === "exhausted" &&
+    node.relationship_id.endsWith(":condition.exhausted"),
+  )).toBe(true);
+  for (const slug of ["fey-boon", "fey-blight"]) {
+    expect(fs.existsSync(path.join(projectRoot, "data", "canonical", `${slug}.json`))).toBe(false);
+  }
+});
+
+
+it("accepts reference text without requiring effect automation", () => {
+  for (const slug of ["break-enchantment", "cure-light-wounds", "cure-moderate-wounds"]) {
+    const spell = canonical(slug);
+    expect(spell.normalization.status).toBe("validated");
+    expect(spell.normalization.warnings.some((warning: ValidatedJson) =>
+      warning.code.endsWith("MODEL_DEFERRED"),
+    )).toBe(true);
+    expect(spell.normalization.warnings.some((warning: ValidatedJson) =>
+      warning.code === "DOMAIN_PROVENANCE_REVIEW",
+    )).toBe(false);
+  }
+  const variants = fs.readdirSync(path.join(projectRoot, "data", "variants"))
+    .filter((name) => name.endsWith(".json"))
+    .map((name) => loadJson(path.join(projectRoot, "data", "variants", name)));
+  expect(variants.filter((variant) => variant.normalization.status === "draft")).toHaveLength(128);
+  for (const variant of variants.filter((item) => item.augmentations.length === 0)) {
+    expect(variant.normalization.status, variant.name).toBe("validated");
+  }
+});

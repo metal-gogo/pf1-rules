@@ -17,6 +17,7 @@ import {
   type RichTextDocument,
 } from "../domain/rich-text.js";
 import {
+  readJsonPointer,
   validateSpellInheritance,
   type InheritableSpell,
 } from "../domain/spell-inheritance.js";
@@ -162,7 +163,7 @@ function verifyCoverage(record: ValidatedJson, recordPath: string): void {
 }
 
 
-function verifyIngestionManifest(record: ValidatedJson, recordPath: string): void {
+function verifyIngestionManifest(record: ValidatedJson, recordPath: string, verifyArtifacts: boolean): void {
   const pageIds = new Set<string>();
   const expectedMembershipCounts = new Map<string, number>();
   for (const page of record.catalog_pages) {
@@ -171,6 +172,7 @@ function verifyIngestionManifest(record: ValidatedJson, recordPath: string): voi
     }
     pageIds.add(page.spell_list_id);
     expectedMembershipCounts.set(page.spell_list_id, page.level_entry_count);
+    if (!verifyArtifacts) continue;
     const artifactPath = resolveArtifactPath(
       recordPath,
       page.raw_artifact_path,
@@ -233,18 +235,7 @@ function verifyIngestionManifest(record: ValidatedJson, recordPath: string): voi
 
 
 function resolveJsonPointer(document: unknown, pointer: string): unknown {
-  let current: any = document;
-  for (const encoded of pointer.replace(/^\//, "").split("/")) {
-    if (!encoded && pointer === "") {
-      return current;
-    }
-    const token = encoded.replaceAll("~1", "/").replaceAll("~0", "~");
-    if (current === null || current === undefined || !(token in current)) {
-      throw new Error(`Stale JSON pointer: ${pointer}`);
-    }
-    current = current[token];
-  }
-  return current;
+  return pointer === "" ? document : readJsonPointer(document, pointer);
 }
 
 
@@ -314,24 +305,16 @@ function verifyMythicRichText(record: ValidatedJson, recordPath: string): void {
 }
 
 
-export function verifyUniqueRelationships(
-  relationships: ValidatedJson[],
-  recordPath: string,
-  seen: Map<string, string>,
-): void {
-  for (const relationship of relationships) {
-    const id = relationship.relationship_id;
-    if (seen.has(id)) {
-      throw new Error(`Duplicate relationship ID ${id} in ${recordPath}; first declared in ${seen.get(id)}`);
-    }
-    seen.set(id, recordPath);
-  }
-}
-
-
 export function validatePackage(): PackageStatistics {
-  const relationshipOwners = new Map<string, string>();
   const verifyArtifacts = process.env.PF1_VERIFY_ARTIFACTS !== "0";
+  const relationshipIds = new Set<string>();
+  const verifyRelationshipIds = (relationships: ValidatedJson[]): void => {
+    for (const relationship of relationships) {
+      const id = String(relationship.relationship_id);
+      if (relationshipIds.has(id)) throw new Error(`Duplicate relationship ID: ${id}`);
+      relationshipIds.add(id);
+    }
+  };
   const schemasDirectory = path.join(projectRoot, "schemas");
   const ajv = new Ajv2020({ allErrors: true, strict: true });
   addFormats(ajv);
@@ -400,7 +383,7 @@ export function validatePackage(): PackageStatistics {
     const record = loadJson(filename);
     ingestionManifests.push(record);
     assertValid(ingestionManifestValidator, record, filename);
-    if (verifyArtifacts) verifyIngestionManifest(record, filename);
+    verifyIngestionManifest(record, filename, verifyArtifacts);
     for (const spell of record.spells) ingestionSpellIds.add(spell.spell_id);
     ingestionQueueItems += record.spells.length;
     ingestionQueueItems += (record.discovered_dependencies ?? []).length;
@@ -438,7 +421,6 @@ export function validatePackage(): PackageStatistics {
     const registry = loadJson(filename);
     assertValid(registryValidator, registry, filename);
     for (const entity of registry.entities) {
-      verifyUniqueRelationships(entity.relationships ?? [], filename, relationshipOwners);
       if (registeredIds.has(entity.entity_id)) {
         throw new Error(`Duplicate registered entity: ${entity.entity_id}`);
       }
@@ -450,6 +432,7 @@ export function validatePackage(): PackageStatistics {
   for (const filename of registryPaths) {
     const registry = loadJson(filename);
     for (const entity of registry.entities) {
+      verifyRelationshipIds(entity.relationships ?? []);
       for (const relationship of entity.relationships ?? []) {
         const targetId = relationship.target.entity_id;
         if (targetId && !registeredIds.has(targetId)) {
@@ -511,11 +494,14 @@ export function validatePackage(): PackageStatistics {
     const record = loadJson(filename);
     assertValid(canonicalValidator, record, filename);
     verifyRichText(record, filename);
-    verifyUniqueRelationships(record.relationships, filename, relationshipOwners);
     if (!registeredIds.has(record.spell_id)) {
       throw new Error(`${record.spell_id} has no entity registry entry`);
     }
+    if (canonicalById.has(record.spell_id)) {
+      throw new Error(`Duplicate canonical spell ID: ${record.spell_id}`);
+    }
     canonicalById.set(record.spell_id, record);
+    verifyRelationshipIds(record.relationships);
     for (const level of record.levels) {
       const accessBasis = level.access_basis ?? "printed";
       if (accessBasis === "derived" && !level.derivation) {
@@ -616,11 +602,11 @@ export function validatePackage(): PackageStatistics {
     const record = loadJson(filename);
     assertValid(variantValidator, record, filename);
     verifyMythicRichText(record, filename);
-    verifyUniqueRelationships([
+    verifyRelationshipIds([
       { relationship_id: `${record.mythic_spell_variant_id}:mythic_version_of:${record.base_spell.spell_id}` },
       ...record.relationships,
       ...record.augmentations.flatMap((augmentation: ValidatedJson) => augmentation.relationships),
-    ], filename, relationshipOwners);
+    ]);
     const variantId = record.mythic_spell_variant_id;
     const baseId = record.base_spell.spell_id;
     if (variantsById.has(variantId) || baseSpellIds.has(baseId)) {

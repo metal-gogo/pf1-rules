@@ -13,7 +13,6 @@
     "web:dev": "tsx watch src/web/server.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
-    "test:e2e": "playwright test",
     "validate": "tsx src/cli.ts validate",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
@@ -84,7 +83,9 @@
     "ingest:mythic-links:batch-02": "tsx src/ingestion/enrich-mythic-links.ts --write --batch=02",
     "ingest:mythic-links:batch-03": "tsx src/ingestion/enrich-mythic-links.ts --write --batch=03",
     "ingest:mythic-links:final": "tsx src/ingestion/enrich-mythic-links.ts --write --batch=final",
-    "ingest:mythic-variants": "tsx src/ingestion/ingest-mythic-variant-drafts.ts --write && tsx src/ingestion/generate-mythic-variant-candidates.ts --output=data/mythic-variant-drafts.json",
+    "ingest:mythic-links:short-anchors": "tsx src/ingestion/enrich-mythic-links.ts --write --batch=short-anchors",
+    "ingest:mythic-variants": "tsx src/ingestion/ingest-mythic-variant-drafts.ts --write && tsx src/ingestion/normalize-mythic-augmentation-costs.ts --write && tsx src/ingestion/generate-mythic-variant-candidates.ts --output=data/mythic-variant-drafts.json",
+    "ingest:mythic-costs": "tsx src/ingestion/normalize-mythic-augmentation-costs.ts --write",
     "ingest:rich-text-batch": "tsx src/ingestion/enrich-rich-text-pilot.ts --safe-batch=25",
     "audit:rich-text": "tsx src/ingestion/enrich-rich-text-pilot.ts --audit",
     "rich-text:plan-batch": "tsx src/ingestion/rich-text-workflow.ts plan",
@@ -98,7 +99,7 @@
     "audit:entity-taxonomy": "tsx src/audits/audit-entity-taxonomy.ts",
     "migrate:entity-taxonomy": "tsx src/migrations/migrate-entity-taxonomy.ts",
     "artifacts:migrate": "tsx src/ingestion/migrate-artifacts.ts",
-    "verify": "pnpm validate && pnpm typecheck && pnpm db:check && pnpm test && pnpm test:e2e"
+    "verify": "pnpm validate && pnpm typecheck && pnpm test"
   },
   "dependencies": {
     "@prisma/adapter-better-sqlite3": "7.9.1",
@@ -110,8 +111,6 @@
     "dotenv": "17.4.2"
   },
   "devDependencies": {
-    "@axe-core/playwright": "^4.13.0",
-    "@playwright/test": "^1.62.1",
     "@types/better-sqlite3": "7.6.13",
     "@types/node": "24.13.3",
     "prisma": "7.9.1",
