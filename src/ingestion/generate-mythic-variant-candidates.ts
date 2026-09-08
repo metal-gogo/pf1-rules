@@ -23,6 +23,12 @@ function cleanText(value: string): string {
   return value.replace(/\u00a0/g, " ").replace(/\s+/g, " ").trim();
 }
 
+export function ownsBaseSpell(observation: Json, baseName: string): boolean {
+  const spell = observation.spell_raw;
+  return typeof spell === "object" && spell !== null &&
+    cleanText(String((spell as Json).name_raw ?? "")) === baseName;
+}
+
 function canonicalSpellIds(): Set<string> {
   return new Set(jsonFiles(path.join(projectRoot, "data", "canonical")).map((filename) =>
     String((JSON.parse(fs.readFileSync(filename, "utf8")) as Json).spell_id)
@@ -55,6 +61,7 @@ export function mythicVariantCandidates(): Json[] {
       const name = cleanText($(title).text());
       if (!name.startsWith("Mythic ")) continue;
       const baseName = name.slice("Mythic ".length);
+      if (!ownsBaseSpell(observation, baseName)) continue;
       if (!titles.some((item) => cleanText($(item).text()) === baseName)) continue;
       const baseSpellId = `spell.${slug(baseName)}`;
       const nodes = $(title).parent().contents().toArray();
