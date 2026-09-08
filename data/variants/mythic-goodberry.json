@@ -29,7 +29,13 @@
       "minimum_tier": 2,
       "total_mythic_power_uses": null,
       "raw": "You can cast the spell to affect only one berry, imbuing into that berry any harmless druid spell you have prepared. The spell remains stored in the berry for the duration of the goodberry spell or until the berry is consumed. A creature that eats the berry gains the benefits of that spell as if you had cast it upon her. The maximum level of the imbued spell is equal to half your tier, and you must expend one use of mythic power for each spell level of the imbued spell (in addition to the one use needed to cast mythic goodberry ). Similar to imbue with spell ability , you can’t prepare a spell in that spell’s slot until the berry is consumed or the mythic goodberry spell ends.",
-      "relationships": []
+      "relationships": [],
+      "cost_expression": {
+        "kind": "base_plus_per_unit",
+        "base_mythic_power_uses": 1,
+        "additional_uses_per_unit": 1,
+        "unit": "imbued_spell_level"
+      }
     }
   ],
   "publication": {
@@ -56,18 +62,13 @@
     }
   ],
   "normalization": {
-    "status": "draft",
-    "normalizer_version": "mythic-draft-0.1.0",
+    "status": "validated",
+    "normalizer_version": "mythic-augmentation-cost-0.2.0",
     "warnings": [
       {
         "code": "MYTHIC_EFFECT_MODEL_DEFERRED",
         "field_path": "/rules_text",
         "message": "Mythic effects remain source-backed rules text pending a reusable structured effect model."
-      },
-      {
-        "code": "MYTHIC_POWER_COST_VARIABLE",
-        "field_path": "/augmentations",
-        "message": "The augmentation has alternative, repeated, or scaled mythic-power costs; raw text is preserved pending a cost-expression model."
       }
     ]
   }

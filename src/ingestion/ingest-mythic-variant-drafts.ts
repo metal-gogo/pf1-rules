@@ -2,7 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { projectRoot } from "../config.js";
-import { fixedTotalMythicPowerUses } from "./mythic-augmentation-cost.js";
+import {
+  fixedTotalMythicPowerUses,
+  variableMythicPowerCostExpression,
+} from "./mythic-augmentation-cost.js";
 import { mythicVariantCandidates } from "./generate-mythic-variant-candidates.js";
 import { slug } from "./spell-page-parser.js";
 
@@ -51,11 +54,13 @@ function augmentations(variantId: string, rules: string): { rules: string; recor
     rules: rules.slice(0, matches[0]!.index).trim(),
     records: matches.map((match, index) => {
       const raw = rules.slice(match.index! + match[0].length, matches[index + 1]?.index).trim();
+      const costExpression = variableMythicPowerCostExpression(variantId);
       return {
       augmentation_id: `${variantId}.augmentation-${match[2]}`,
       name: match[1],
       minimum_tier: Number(match[2]),
       total_mythic_power_uses: fixedTotalMythicPowerUses(raw),
+      ...(costExpression ? { cost_expression: costExpression } : {}),
       raw,
       relationships: [],
     }; }),

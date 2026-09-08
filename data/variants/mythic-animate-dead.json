@@ -52,7 +52,20 @@
       "minimum_tier": 6,
       "total_mythic_power_uses": null,
       "raw": "If you expend two uses of mythic power, any skeletons or zombies you create gain either the agile (see page 224) or savage (see page 224) mythic template. This template lasts for a number of days equal to your tier. Alternatively, if you’re 8th tier and expend 10 uses of mythic power, any skeletons you create permanently gain the mythic skeleton template (see page 216).",
-      "relationships": []
+      "relationships": [],
+      "cost_expression": {
+        "kind": "alternatives",
+        "options": [
+          {
+            "total_mythic_power_uses": 2,
+            "minimum_tier": null
+          },
+          {
+            "total_mythic_power_uses": 10,
+            "minimum_tier": 8
+          }
+        ]
+      }
     }
   ],
   "publication": {
@@ -107,18 +120,13 @@
     }
   ],
   "normalization": {
-    "status": "draft",
-    "normalizer_version": "mythic-draft-0.1.0",
+    "status": "validated",
+    "normalizer_version": "mythic-augmentation-cost-0.2.0",
     "warnings": [
       {
         "code": "MYTHIC_EFFECT_MODEL_DEFERRED",
         "field_path": "/rules_text",
         "message": "Mythic effects remain source-backed rules text pending a reusable structured effect model."
-      },
-      {
-        "code": "MYTHIC_POWER_COST_VARIABLE",
-        "field_path": "/augmentations",
-        "message": "The augmentation has alternative, repeated, or scaled mythic-power costs; raw text is preserved pending a cost-expression model."
       }
     ]
   }

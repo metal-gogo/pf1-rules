@@ -2,7 +2,11 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { projectRoot } from "../config.js";
-import { fixedTotalMythicPowerUses } from "./mythic-augmentation-cost.js";
+import {
+  fixedTotalMythicPowerUses,
+  variableMythicPowerCostExpression,
+  type MythicPowerCostExpression,
+} from "./mythic-augmentation-cost.js";
 
 type Json = Record<string, any>;
 
@@ -74,7 +78,12 @@ function replaceEvidence(record: Json, candidate: Json): number {
   return relationshipCorrections;
 }
 
-function updateDecision(decision: Json, candidate: Json, costs: number[]): void {
+function updateDecision(
+  decision: Json,
+  candidate: Json,
+  costs: (number | null)[],
+  expressions: (MythicPowerCostExpression | null)[],
+): void {
   const selected = { observation_id: candidate.observation_id, source_field: sourceField };
   decision.observation_ids = [candidate.observation_id];
   decision.baseline_observation_id = candidate.observation_id;
@@ -84,24 +93,36 @@ function updateDecision(decision: Json, candidate: Json, costs: number[]): void 
     item.considered_observation_ids = [candidate.observation_id];
   }
   if (!costs.length) return;
-  decision.policy_id = "mythic-magic-total-cost-v1";
+  decision.policy_id = expressions.some(Boolean)
+    ? "mythic-magic-cost-expression-v1"
+    : "mythic-magic-total-cost-v1";
   decision.status = "accepted";
   decision.field_decisions = decision.field_decisions.filter((item: Json) =>
     !item.canonical_path.startsWith("/augmentations/") && item.canonical_path !== "/normalization/status",
   );
-  decision.field_decisions.push(...costs.map((total, index) => ({
-    canonical_path: `/augmentations/${index}/total_mythic_power_uses`,
-    decision: "derived",
-    selected_evidence: [selected],
-    considered_observation_ids: [candidate.observation_id],
-    rationale: `The augmented entry explicitly states a total cost of ${total} mythic power use${total === 1 ? "" : "s"}; Mythic Magic defines that stated augmented cost as including the base mythic casting use.`,
-  })));
+  decision.field_decisions.push(...costs.flatMap((total, index) => total === null
+    ? [{
+      canonical_path: `/augmentations/${index}/cost_expression`,
+      decision: "derived",
+      selected_evidence: [selected],
+      considered_observation_ids: [candidate.observation_id],
+      rationale: "The source states alternative totals or a base cost plus a stated per-unit cost; the structured expression preserves those mechanics without inventing one scalar total.",
+    }]
+    : [{
+      canonical_path: `/augmentations/${index}/total_mythic_power_uses`,
+      decision: "derived",
+      selected_evidence: [selected],
+      considered_observation_ids: [candidate.observation_id],
+      rationale: `The augmented entry explicitly states a total cost of ${total} mythic power use${total === 1 ? "" : "s"}; Mythic Magic defines that stated augmented cost as including the base mythic casting use.`,
+    }]));
   decision.field_decisions.push({
     canonical_path: "/normalization/status",
     decision: "normalize",
     selected_evidence: [selected],
     considered_observation_ids: [candidate.observation_id],
-    rationale: "The source-backed mythic text, base-spell relationship, tier, and total augmented cost are complete. Detailed effects remain lossless rules text.",
+    rationale: expressions.some(Boolean)
+      ? "The source-backed mythic text, base-spell relationship, tier, and mythic-power cost mechanics are complete. Detailed effects remain lossless rules text."
+      : "The source-backed mythic text, base-spell relationship, tier, and total augmented cost are complete. Detailed effects remain lossless rules text.",
   });
   decision.unresolved_questions = [];
 }
@@ -117,7 +138,7 @@ let relationshipCorrections = 0;
 for (const filename of jsonFiles(path.join(projectRoot, "data", "variants"))) {
   const record = readJson(filename);
   if (!record.mythic_spell_variant_id ||
-      (record.normalization.status !== "draft" && record.normalization.normalizer_version !== "mythic-augmentation-cost-0.1.0")) continue;
+      (record.normalization.status !== "draft" && !["mythic-augmentation-cost-0.1.0", "mythic-augmentation-cost-0.2.0"].includes(record.normalization.normalizer_version))) continue;
   const candidate = candidateFromObservation(record);
   const previousObservation = record.base_spell.evidence[0]?.observation_id;
   relationshipCorrections += replaceEvidence(record, candidate);
@@ -130,18 +151,23 @@ for (const filename of jsonFiles(path.join(projectRoot, "data", "variants"))) {
     record.augmentations.forEach((item: Json, index: number) => { item.total_mythic_power_uses = costs[index]; });
     record.normalization.status = "validated";
     record.normalization.normalizer_version = "mythic-augmentation-cost-0.1.0";
-    updateDecision(decision, candidate, costs);
+    updateDecision(decision, candidate, costs, costs.map(() => null));
     fixed += 1;
   } else {
-    const warnings = record.normalization.warnings as Json[];
-    if (!warnings.some((warning) => warning.code === "MYTHIC_POWER_COST_VARIABLE")) {
-      warnings.push({
-        code: "MYTHIC_POWER_COST_VARIABLE",
-        field_path: "/augmentations",
-        message: "The augmentation has alternative, repeated, or scaled mythic-power costs; raw text is preserved pending a cost-expression model.",
-      });
+    const expressions: (MythicPowerCostExpression | null)[] = record.augmentations.map(() =>
+      variableMythicPowerCostExpression(record.mythic_spell_variant_id),
+    );
+    if (expressions.some((expression) => expression === null)) {
+      throw new Error(`Missing cost expression for ${record.mythic_spell_variant_id}`);
     }
-    updateDecision(decision, candidate, []);
+    record.augmentations.forEach((item: Json, index: number) => {
+      item.cost_expression = expressions[index];
+    });
+    record.normalization.status = "validated";
+    record.normalization.normalizer_version = "mythic-augmentation-cost-0.2.0";
+    const warnings = record.normalization.warnings as Json[];
+    record.normalization.warnings = warnings.filter((warning) => warning.code !== "MYTHIC_POWER_COST_VARIABLE");
+    updateDecision(decision, candidate, costs, expressions);
     variable += 1;
   }
   if (write) {

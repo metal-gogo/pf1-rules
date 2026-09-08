@@ -29,7 +29,13 @@
       "minimum_tier": 3,
       "total_mythic_power_uses": null,
       "raw": "You can place the following effects anywhere within the warded area by expending one additional use of mythic power per effect. 6. Black tentacles in one place, returning after 10 minutes if dispelled. 7. Dispel magic in one place. You select an area up to 5 feet square, and any creature that enters or passes through the area is targeted by the spell. Saving Throw : Will negates. Spell Resistance : yes. 8. Entangle in four places, returning in 10 minutes if dispelled. 9. Explosive runes in three places, returning in 10 minutes if activated or dispelled. 10. Slow in three places, returning in 10 minutes if dispelled.",
-      "relationships": []
+      "relationships": [],
+      "cost_expression": {
+        "kind": "base_plus_per_unit",
+        "base_mythic_power_uses": 1,
+        "additional_uses_per_unit": 1,
+        "unit": "selected_ward_effect"
+      }
     }
   ],
   "publication": {
@@ -56,18 +62,13 @@
     }
   ],
   "normalization": {
-    "status": "draft",
-    "normalizer_version": "mythic-draft-0.1.0",
+    "status": "validated",
+    "normalizer_version": "mythic-augmentation-cost-0.2.0",
     "warnings": [
       {
         "code": "MYTHIC_EFFECT_MODEL_DEFERRED",
         "field_path": "/rules_text",
         "message": "Mythic effects remain source-backed rules text pending a reusable structured effect model."
-      },
-      {
-        "code": "MYTHIC_POWER_COST_VARIABLE",
-        "field_path": "/augmentations",
-        "message": "The augmentation has alternative, repeated, or scaled mythic-power costs; raw text is preserved pending a cost-expression model."
       }
     ]
   }

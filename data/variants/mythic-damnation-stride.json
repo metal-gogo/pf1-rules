@@ -61,7 +61,13 @@
       "minimum_tier": 6,
       "total_mythic_power_uses": null,
       "raw": "If you expend two uses of mythic power, you bring one unwilling adjacent creature with you. You may bring additional creatures, but each must be adjacent to you and each requires you to expend one additional use of mythic power. These creatures must first attempt a saving throw against the burst of flame and stinking cloud , then can attempt a Will saving throw to resist being teleported with you.",
-      "relationships": []
+      "relationships": [],
+      "cost_expression": {
+        "kind": "base_plus_per_unit",
+        "base_mythic_power_uses": 2,
+        "additional_uses_per_unit": 1,
+        "unit": "additional_creature"
+      }
     }
   ],
   "publication": {
@@ -143,18 +149,13 @@
     }
   ],
   "normalization": {
-    "status": "draft",
-    "normalizer_version": "mythic-draft-0.1.0",
+    "status": "validated",
+    "normalizer_version": "mythic-augmentation-cost-0.2.0",
     "warnings": [
       {
         "code": "MYTHIC_EFFECT_MODEL_DEFERRED",
         "field_path": "/rules_text",
         "message": "Mythic effects remain source-backed rules text pending a reusable structured effect model."
-      },
-      {
-        "code": "MYTHIC_POWER_COST_VARIABLE",
-        "field_path": "/augmentations",
-        "message": "The augmentation has alternative, repeated, or scaled mythic-power costs; raw text is preserved pending a cost-expression model."
       }
     ]
   }
