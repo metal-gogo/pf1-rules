@@ -77,8 +77,8 @@
               "href_resolved": { "type": "string", "format": "uri" },
               "source_field": { "type": "string", "minLength": 1 },
               "context_raw": { "type": "string", "minLength": 1 },
-              "role_hint": { "enum": ["classification", "spell_list", "definition", "publication", "cross_reference", "unknown"] },
-              "target_entity_type_hint": { "enum": ["rule", "condition", "deity", "mystery", "archetype", "magic_school", "subschool", "descriptor", "spell_list", "action", "publication", "unknown"] },
+              "role_hint": { "enum": ["classification", "spell_list", "definition", "publication", "prerequisite", "cross_reference", "unknown"] },
+              "target_entity_type_hint": { "enum": ["rule", "condition", "feat", "deity", "mystery", "archetype", "magic_school", "subschool", "descriptor", "spell_list", "action", "publication", "unknown"] },
               "target_entity_id_hint": { "type": ["string", "null"] }
             }
           }
@@ -108,7 +108,59 @@
         "navigation_headings_raw": {
           "type": "array",
           "items": { "type": "string", "minLength": 1 }
-        }
+        },
+        "feat_types_raw": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "source_tags_raw": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "prerequisites_raw": { "type": ["string", "null"] },
+        "summary_raw": { "type": ["string", "null"] },
+        "publications_raw": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["text_raw", "href_raw", "href_resolved"],
+            "properties": {
+              "text_raw": { "type": "string", "minLength": 1 },
+              "href_raw": { "type": ["string", "null"] },
+              "href_resolved": { "type": ["string", "null"], "format": "uri" }
+            }
+          }
+        },
+        "pfs_marker_raw": {
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": ["image_src_raw", "title_raw"],
+          "properties": {
+            "image_src_raw": { "type": "string", "minLength": 1 },
+            "title_raw": { "type": ["string", "null"] }
+          }
+        },
+        "catalog_memberships_raw": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "supplements_raw": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["heading_raw", "kind_hint"],
+            "properties": {
+              "heading_raw": { "type": "string", "minLength": 1 },
+              "kind_hint": { "enum": ["combat_trick", "mythic", "unknown"] }
+            }
+          }
+        },
+        "source_record_key_raw": { "type": "string", "minLength": 1 }
       }
     },
     "warnings": {
