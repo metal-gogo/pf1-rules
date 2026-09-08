@@ -730,8 +730,6 @@ const allSpellsCompletenessIdentities = [
   { spellId: "spell.bolt-of-glory", name: "Bolt of Glory", legacy35Material: true },
   { spellId: "spell.bolts-of-bedevilment", name: "Bolts of Bedevilment", legacy35Material: true },
   { spellId: "spell.crown-of-glory", name: "Crown of Glory", legacy35Material: true },
-  { spellId: "spell.fey-blight", name: "Fey Blight", legacy35Material: false },
-  { spellId: "spell.fey-boon", name: "Fey Boon", legacy35Material: false },
 ] as const;
 
 
@@ -776,7 +774,8 @@ export async function ingestAllSpellsCompletenessIdentities() {
       "canonical",
       `${entry.spellId.replace(/^spell\./, "")}.json`,
     );
-    if (fs.existsSync(canonicalPath)) {
+    const refreshReviewedCanonical = reviewedCanonicalOverrideSpellIds.has(entry.spellId);
+    if (fs.existsSync(canonicalPath) && !refreshReviewedCanonical) {
       report.skipped.push(entry.name);
       continue;
     }
@@ -795,7 +794,7 @@ export async function ingestAllSpellsCompletenessIdentities() {
       artifactScope,
       entry.legacy35Material,
       false,
-      false,
+      refreshReviewedCanonical,
       true,
     );
     if (result === "ingested") {

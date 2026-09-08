@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.2.0",
+  "schema_version": "0.1.0",
   "spell_id": "spell.bolt-of-glory",
   "ruleset": "Pathfinder First Edition",
   "legacy_3_5_material": true,
@@ -14,7 +14,17 @@
     ],
     "raw": "evocation [good]"
   },
-  "levels": [],
+  "levels": [
+    {
+      "spell_list_id": "spell-list.glory-domain",
+      "list_kind": "domain",
+      "list_name": "Glory Domain",
+      "level": 6,
+      "scope": "legacy_3_5",
+      "raw": "glory 6",
+      "qualifications": []
+    }
+  ],
   "casting": {
     "time": {
       "kind": "action",
@@ -93,48 +103,7 @@
   "description": {
     "raw": "You fire a ray of positive energy. A creature struck takes varying damage, depending on its nature and home plane of existence. Neutral outsiders and creatures native to the Material Plane and Elemental Planes take 1d6 points of damage per 2 levels (maximum 7d6). Evil outsiders, undead, and natives of the Negative Energy Plane take 1d6 points of damage per level (maximum 15d6). All other creatures take no damage.",
     "search_text": "\"you fire a ray of positive energy. a creature struck takes varying damage, depending on its nature and home plane of existence. neutral outsiders and creatures native to the material plane and elemental planes take 1d6 points of damage per 2 levels (maximum 7d6). evil outsiders, undead, and natives of the negative energy plane take 1d6 points of damage per level (maximum 15d6). all other creatures take no damage.\"",
-    "sections": [],
-    "document": {
-      "node_type": "document",
-      "content": [
-        {
-          "node_type": "paragraph",
-          "content": [
-            {
-              "node_type": "text",
-              "value": "You fire a ray of positive energy. A creature struck takes varying damage, depending on its nature and home plane of existence. Neutral "
-            },
-            {
-              "node_type": "entity_link",
-              "value": "outsiders",
-              "relationship_id": "spell.bolt-of-glory:uses_definition:monster-type.outsider"
-            },
-            {
-              "node_type": "text",
-              "value": " and creatures native to the Material Plane and Elemental Planes take 1d6 points of damage per 2 levels (maximum 7d6). Evil "
-            },
-            {
-              "node_type": "entity_link",
-              "value": "outsiders",
-              "relationship_id": "spell.bolt-of-glory:uses_definition:monster-type.outsider"
-            },
-            {
-              "node_type": "text",
-              "value": ", "
-            },
-            {
-              "node_type": "entity_link",
-              "value": "undead",
-              "relationship_id": "spell.bolt-of-glory:uses_definition:monster-type.undead"
-            },
-            {
-              "node_type": "text",
-              "value": ", and natives of the Negative Energy Plane take 1d6 points of damage per level (maximum 15d6). All other creatures take no damage."
-            }
-          ]
-        }
-      ]
-    }
+    "sections": []
   },
   "publication": {
     "publisher": "Paizo",
@@ -165,6 +134,26 @@
         }
       ],
       "note": null
+    },
+    {
+      "relationship_id": "spell.bolt-of-glory:appears_on_spell_list:spell-list.glory-domain",
+      "type": "appears_on_spell_list",
+      "target": {
+        "entity_type": "spell_list",
+        "entity_id": "spell-list.glory-domain",
+        "name": "Glory Domain Spells"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.bolt-of-glory:b7fa90b426b44db3",
+          "source_field": "spell_raw.levels_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "glory 6",
+          "source_href": null
+        }
+      ],
+      "note": "Reviewed catalog policy: AoN remains the preferred publication transcription. When an additional class membership is printed by d20PFSRD, it may be added to the canonical class union after review; Foundry PF1 is corroborating catalog evidence when it agrees. Preserve every source claim and never replace an AoN level merely because another catalog assigns the same class a different level."
     },
     {
       "relationship_id": "spell.bolt-of-glory:has_descriptor:descriptor.good",
@@ -302,12 +291,32 @@
       "note": null
     },
     {
-      "relationship_id": "spell.bolt-of-glory:uses_definition:monster-type.outsider",
+      "relationship_id": "spell.bolt-of-glory:uses_definition:defense.spell-resistance",
       "type": "uses_definition",
       "target": {
-        "entity_type": "monster_type",
-        "entity_id": "monster-type.outsider",
-        "name": "Outsider"
+        "entity_type": "rule",
+        "entity_id": "defense.spell-resistance",
+        "name": "Spell Resistance"
+      },
+      "status": "accepted",
+      "evidence": [
+        {
+          "observation_id": "aon:spell.bolt-of-glory:cea9ee39cb13c1bb",
+          "source_field": "spell_raw.spell_resistance_raw",
+          "evidence_kind": "plain_text",
+          "anchor_text_raw": "yes",
+          "source_href": null
+        }
+      ],
+      "note": null
+    },
+    {
+      "relationship_id": "spell.bolt-of-glory:uses_definition:rule.outsiders",
+      "type": "uses_definition",
+      "target": {
+        "entity_type": "rule",
+        "entity_id": "rule.outsiders",
+        "name": "outsiders"
       },
       "status": "accepted",
       "evidence": [
@@ -329,31 +338,11 @@
       "note": null
     },
     {
-      "relationship_id": "spell.bolt-of-glory:uses_definition:defense.spell-resistance",
+      "relationship_id": "spell.bolt-of-glory:uses_definition:rule.undead",
       "type": "uses_definition",
       "target": {
-        "entity_type": "defense",
-        "entity_id": "defense.spell-resistance",
-        "name": "Spell Resistance"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.bolt-of-glory:cea9ee39cb13c1bb",
-          "source_field": "spell_raw.spell_resistance_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "yes",
-          "source_href": null
-        }
-      ],
-      "note": null
-    },
-    {
-      "relationship_id": "spell.bolt-of-glory:uses_definition:monster-type.undead",
-      "type": "uses_definition",
-      "target": {
-        "entity_type": "monster_type",
-        "entity_id": "monster-type.undead",
+        "entity_type": "rule",
+        "entity_id": "rule.undead",
         "name": "undead"
       },
       "status": "accepted",
@@ -419,17 +408,17 @@
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
     },
     {
-      "field_path": "/description/document",
-      "observation_id": "aon:spell.bolt-of-glory:cea9ee39cb13c1bb",
-      "source_field": "spell_raw.description_raw",
-      "raw_value_sha256": "74d8ab656d4aa783baf5d7a2c70389642581d1d739c29f9076933357da8f9b9f",
-      "decision": "normalized",
-      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
+      "field_path": "/levels/0",
+      "observation_id": "d20pfsrd:spell.bolt-of-glory:b7fa90b426b44db3",
+      "source_field": "spell_raw.levels_raw",
+      "raw_value_sha256": "b62580b765cc017b097012c9847c0418232678900c4b022e06f437338b6b8bfd",
+      "decision": "manually_resolved",
+      "note": "Reviewed catalog policy: AoN remains the preferred publication transcription. When an additional class membership is printed by d20PFSRD, it may be added to the canonical class union after review; Foundry PF1 is corroborating catalog evidence when it agrees. Preserve every source claim and never replace an AoN level merely because another catalog assigns the same class a different level."
     }
   ],
   "normalization": {
-    "status": "needs_review",
-    "normalizer_version": "0.2.0-rich-text",
+    "status": "validated",
+    "normalizer_version": "0.1.5-reviewed-catalog-memberships",
     "warnings": [
       {
         "code": "LEGACY_3_5_MATERIAL",
@@ -442,9 +431,9 @@
         "message": "AoN does not print a Level value. The canonical spell identity is retained with an empty level list; no class, domain, or numeric level was inferred."
       },
       {
-        "code": "SOURCE_VARIATION",
+        "code": "REVIEWED_CATALOG_MEMBERSHIP_UNION",
         "field_path": "/levels",
-        "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+        "message": "Reviewed catalog policy: AoN remains the preferred publication transcription. When an additional class membership is printed by d20PFSRD, it may be added to the canonical class union after review; Foundry PF1 is corroborating catalog evidence when it agrees. Preserve every source claim and never replace an AoN level merely because another catalog assigns the same class a different level."
       },
       {
         "code": "SOURCE_VARIATION",

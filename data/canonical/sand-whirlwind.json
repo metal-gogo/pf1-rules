@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.2.0",
+  "schema_version": "0.1.0",
   "spell_id": "spell.sand-whirlwind",
   "ruleset": "Pathfinder First Edition",
   "legacy_3_5_material": true,
@@ -38,29 +38,6 @@
       "level": 3,
       "scope": "legacy_3_5",
       "raw": "warpriest 3",
-      "qualifications": []
-    },
-    {
-      "spell_list_id": "spell-list.omdura",
-      "list_kind": "class",
-      "list_name": "Omdura",
-      "level": 3,
-      "scope": "legacy_3_5",
-      "raw": "Derived access from cleric 3; effective level 3.",
-      "access_basis": "derived",
-      "derivation": {
-        "rule_owner_entity_id": "class.omdura",
-        "source_memberships": [
-          {
-            "spell_list_id": "spell-list.cleric",
-            "level": 3
-          }
-        ],
-        "level_policy": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell.",
-        "source_url": "https://www.d20pfsrd.com/classes/base-classes/omdura/",
-        "note": "This is effective class access derived from the class rule, not a value printed on the spell page.",
-        "rule_scope": "third_party"
-      },
       "qualifications": []
     }
   ],
@@ -154,21 +131,7 @@
   "description": {
     "raw": "A whirling cloud of sand strikes the target, blinding it and hampering its ability to speak. To speak while affected by the spell, the target must make a Concentration check (DC equal to the DC of this spell). If the target tries to cast a spell, the Concentration DC increases by the level of the spell being cast. A successful Will save negates the blindness but not the speechhampering effect.",
     "search_text": "\"a whirling cloud of sand strikes the target, blinding it and hampering its ability to speak. to speak while affected by the spell, the target must make a concentration check (dc equal to the dc of this spell). if the target tries to cast a spell, the concentration dc increases by the level of the spell being cast. a successful will save negates the blindness but not the speechhampering effect.\"",
-    "sections": [],
-    "document": {
-      "node_type": "document",
-      "content": [
-        {
-          "node_type": "paragraph",
-          "content": [
-            {
-              "node_type": "text",
-              "value": "A whirling cloud of sand strikes the target, blinding it and hampering its ability to speak. To speak while affected by the spell, the target must make a Concentration check (DC equal to the DC of this spell). If the target tries to cast a spell, the Concentration DC increases by the level of the spell being cast. A successful Will save negates the blindness but not the speechhampering effect."
-            }
-          ]
-        }
-      ]
-    }
+    "sections": []
   },
   "publication": {
     "publisher": "Paizo",
@@ -226,26 +189,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.sand-whirlwind:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.sand-whirlwind:a04b60d59bae9f0e",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 3",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.sand-whirlwind:appears_on_spell_list:spell-list.oracle",
@@ -413,7 +356,7 @@
       "relationship_id": "spell.sand-whirlwind:uses_definition:defense.spell-resistance",
       "type": "uses_definition",
       "target": {
-        "entity_type": "defense",
+        "entity_type": "rule",
         "entity_id": "defense.spell-resistance",
         "name": "Spell Resistance"
       },
@@ -478,19 +421,11 @@
       "raw_value_sha256": "ffac03592c1d45a2af53073e8feba2b35316582bd4418e88b2b9225c3dde56e0",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
-    },
-    {
-      "field_path": "/description/document",
-      "observation_id": "aon:spell.sand-whirlwind:a04b60d59bae9f0e",
-      "source_field": "spell_raw.description_raw",
-      "raw_value_sha256": "09c2bd4362ff22a53ae874cf76407bc0ef844b334a45b6caae04a7184e1f4d19",
-      "decision": "normalized",
-      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.2.0-rich-text",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
       {
         "code": "LEGACY_3_5_MATERIAL",
@@ -511,11 +446,6 @@
         "code": "SOURCE_VARIATION",
         "field_path": "/description/raw",
         "message": "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
-      },
-      {
-        "code": "DERIVED_SPELL_LIST_ACCESS",
-        "field_path": "/levels/3",
-        "message": "Omdura 3 access is derived from an explicit class rule; no printed spell-page value was inferred."
       }
     ]
   }

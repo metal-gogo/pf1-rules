@@ -1,6 +1,6 @@
 {
   "$schema": "../../schemas/canonical-spell.schema.json",
-  "schema_version": "0.2.0",
+  "schema_version": "0.1.0",
   "spell_id": "spell.enhanced-diplomacy",
   "ruleset": "Pathfinder First Edition",
   "legacy_3_5_material": true,
@@ -56,29 +56,6 @@
       "level": 0,
       "scope": "legacy_3_5",
       "raw": "warpriest 0",
-      "qualifications": []
-    },
-    {
-      "spell_list_id": "spell-list.omdura",
-      "list_kind": "class",
-      "list_name": "Omdura",
-      "level": 0,
-      "scope": "legacy_3_5",
-      "raw": "Derived access from cleric 0; effective level 0.",
-      "access_basis": "derived",
-      "derivation": {
-        "rule_owner_entity_id": "class.omdura",
-        "source_memberships": [
-          {
-            "spell_list_id": "spell-list.cleric",
-            "level": 0
-          }
-        ],
-        "level_policy": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell.",
-        "source_url": "https://www.d20pfsrd.com/classes/base-classes/omdura/",
-        "note": "This is effective class access derived from the class rule, not a value printed on the spell page.",
-        "rule_scope": "third_party"
-      },
       "qualifications": []
     }
   ],
@@ -166,21 +143,7 @@
   "description": {
     "raw": "You imbue the subject with divine diplomacy skills. The creature gets a +2 competence bonus on a single Diplomacy or Intimidate check. It must choose to use the bonus before making the roll to which it applies.",
     "search_text": "\"you imbue the subject with divine diplomacy skills. the creature gets a +2 competence bonus on a single diplomacy or intimidate check. it must choose to use the bonus before making the roll to which it applies.\"",
-    "sections": [],
-    "document": {
-      "node_type": "document",
-      "content": [
-        {
-          "node_type": "paragraph",
-          "content": [
-            {
-              "node_type": "text",
-              "value": "You imbue the subject with divine diplomacy skills. The creature gets a +2 competence bonus on a single Diplomacy or Intimidate check. It must choose to use the bonus before making the roll to which it applies."
-            }
-          ]
-        }
-      ]
-    }
+    "sections": []
   },
   "publication": {
     "publisher": "Paizo",
@@ -251,26 +214,6 @@
         }
       ],
       "note": null
-    },
-    {
-      "relationship_id": "spell.enhanced-diplomacy:appears_on_spell_list:spell-list.omdura",
-      "type": "appears_on_spell_list",
-      "target": {
-        "entity_type": "spell_list",
-        "entity_id": "spell-list.omdura",
-        "name": "Omdura Spell List"
-      },
-      "status": "accepted",
-      "evidence": [
-        {
-          "observation_id": "aon:spell.enhanced-diplomacy:a481953d818459fa",
-          "source_field": "spell_raw.levels_raw",
-          "evidence_kind": "plain_text",
-          "anchor_text_raw": "cleric 0",
-          "source_href": null
-        }
-      ],
-      "note": "Use Cleric spells through level 6 and all Inquisitor spells; use the lower level when both lists contain the spell. This edge records derived access, not a printed spell-page membership."
     },
     {
       "relationship_id": "spell.enhanced-diplomacy:appears_on_spell_list:spell-list.oracle",
@@ -390,7 +333,7 @@
       "relationship_id": "spell.enhanced-diplomacy:uses_definition:defense.spell-resistance",
       "type": "uses_definition",
       "target": {
-        "entity_type": "defense",
+        "entity_type": "rule",
         "entity_id": "defense.spell-resistance",
         "name": "Spell Resistance"
       },
@@ -455,29 +398,16 @@
       "raw_value_sha256": "f671161a0d80f0cbb8f5807dc33fab93851c1e0308228949f6bc98196eca029e",
       "decision": "normalized",
       "note": "AoN baseline selected under provenance-first-v0; comparison observations remain attached."
-    },
-    {
-      "field_path": "/description/document",
-      "observation_id": "aon:spell.enhanced-diplomacy:a481953d818459fa",
-      "source_field": "spell_raw.description_raw",
-      "raw_value_sha256": "57130a1fd9f06b416c26718f88a75206af79b23514c68abf1a770236c317454d",
-      "decision": "normalized",
-      "note": "Block structure and emphasis come from the selected AoN HTML; entity links come from accepted canonical relationships."
     }
   ],
   "normalization": {
     "status": "validated",
-    "normalizer_version": "0.2.0-rich-text",
+    "normalizer_version": "0.1.4-dependency-aliases",
     "warnings": [
       {
         "code": "LEGACY_3_5_MATERIAL",
         "field_path": "/legacy_3_5_material",
         "message": "Reviewed project scope decision: ingest first-party legacy 3.5 spells cataloged by AoN, but mark them as legacy 3.5 material rather than Pathfinder-native rules."
-      },
-      {
-        "code": "DERIVED_SPELL_LIST_ACCESS",
-        "field_path": "/levels/5",
-        "message": "Omdura 0 access is derived from an explicit class rule; no printed spell-page value was inferred."
       }
     ]
   }

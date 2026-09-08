@@ -423,10 +423,16 @@ const reviewedRangeOverrides = new Map<string, ReviewedRangeOverride>([
 type ReviewedCatalogMembership = {
   spellListId: string;
   level: number;
+  sourceSpellListId?: string;
+  listKind?: "domain";
+  listName?: string;
 };
 
 
 const reviewedCatalogMemberships = new Map<string, ReviewedCatalogMembership[]>([
+  ["spell.armor-of-darkness", [
+    { spellListId: "spell-list.darkness-domain", sourceSpellListId: "spell-list.darkness", listKind: "domain", listName: "Darkness Domain", level: 4 },
+  ]],
   ["spell.adroit-retrieval", [
     { spellListId: "spell-list.occultist", level: 3 },
   ]],
@@ -434,6 +440,12 @@ const reviewedCatalogMemberships = new Map<string, ReviewedCatalogMembership[]>(
     { spellListId: "spell-list.medium", level: 3 },
     { spellListId: "spell-list.mesmerist", level: 3 },
     { spellListId: "spell-list.psychic", level: 5 },
+  ]],
+  ["spell.bolt-of-glory", [
+    { spellListId: "spell-list.glory-domain", sourceSpellListId: "spell-list.glory", listKind: "domain", listName: "Glory Domain", level: 6 },
+  ]],
+  ["spell.bolts-of-bedevilment", [
+    { spellListId: "spell-list.madness-domain", sourceSpellListId: "spell-list.madness", listKind: "domain", listName: "Madness Domain", level: 5 },
   ]],
   ["spell.authenticating-gaze", [
     { spellListId: "spell-list.occultist", level: 1 },
@@ -448,6 +460,9 @@ const reviewedCatalogMemberships = new Map<string, ReviewedCatalogMembership[]>(
   ["spell.compel-tongue-mass", [
     { spellListId: "spell-list.medium", level: 4 },
     { spellListId: "spell-list.mesmerist", level: 4 },
+  ]],
+  ["spell.crown-of-glory", [
+    { spellListId: "spell-list.glory-domain", sourceSpellListId: "spell-list.glory", listKind: "domain", listName: "Glory Domain", level: 8 },
   ]],
   ["spell.contact-high", [
     { spellListId: "spell-list.mesmerist", level: 3 },
@@ -1105,13 +1120,13 @@ export function generateCanonicalBundle(
       d20Observation.parsed.sourceBookRaw,
     );
     const selected = d20Levels.find((level) =>
-      level.spell_list_id === membership.spellListId && level.level === membership.level
+      level.spell_list_id === (membership.sourceSpellListId ?? membership.spellListId) && level.level === membership.level
     );
     if (!selected) {
       throw new NormalizationIssue(
         "source",
         "missing-reviewed-catalog-evidence",
-        `${spellId} d20PFSRD observation does not print ${membership.spellListId} ${membership.level}.`,
+        `${spellId} d20PFSRD observation does not print ${membership.sourceSpellListId ?? membership.spellListId} ${membership.level}.`,
       );
     }
     if (levels.some((level) => level.spell_list_id === membership.spellListId)) {
@@ -1121,8 +1136,15 @@ export function generateCanonicalBundle(
         `${spellId} already has an AoN level for ${membership.spellListId}; use an explicit level-selection decision instead of adding a duplicate class level.`,
       );
     }
-    levels.push(selected);
-    return selected;
+    const normalized = {
+      ...selected,
+      spell_list_id: membership.spellListId,
+      ...(membership.listKind ? { list_kind: membership.listKind } : {}),
+      ...(membership.listName ? { list_name: membership.listName } : {}),
+      ...(options.legacy35Material ? { scope: "legacy_3_5" } : {}),
+    };
+    levels.push(normalized);
+    return normalized;
   });
   const castingTime = parseCastingTime(parsed.castingTimeRaw);
   const components = parseComponents(parsed.componentsRaw);
@@ -1296,7 +1318,10 @@ export function generateCanonicalBundle(
           source_href: null,
         }
       : baselineEvidence("spell_raw.levels_raw", level.raw);
-    addEntity(level.spell_list_id, "spell_list", `${level.list_name} Spell List`, {
+    const spellListName = level.list_kind === "domain"
+      ? `${level.list_name} Spells`
+      : `${level.list_name} Spell List`;
+    addEntity(level.spell_list_id, "spell_list", spellListName, {
       observation_id: levelEvidence.observation_id,
       source_field: levelEvidence.source_field,
       anchor_text_raw: levelEvidence.anchor_text_raw,
@@ -1306,7 +1331,7 @@ export function generateCanonicalBundle(
       "appears_on_spell_list",
       "spell_list",
       level.spell_list_id,
-      `${level.list_name} Spell List`,
+      spellListName,
       levelEvidence,
     );
     if (reviewedCatalogLevel) {
@@ -1496,7 +1521,8 @@ export function generateCanonicalBundle(
     })),
     normalization: {
       status: options.allowMissingPrintedLevels && !parsed.levelsRaw
-        ? "needs_review"
+      && reviewedCatalogLevels.length === 0
+      ? "needs_review"
         : missingPrintedRange && !rangeOverride
         ? "needs_review"
         : inheritanceReference && !canResolveCanonicalSpell(availableCanonicalSpells, inheritanceReference.parentId)
@@ -1504,10 +1530,10 @@ export function generateCanonicalBundle(
         : "validated",
       normalizer_version: options.richText
         ? "0.2.0-rich-text-pilot"
-        : options.allowMissingPrintedLevels && !parsed.levelsRaw
-        ? "0.1.6-missing-printed-levels"
         : reviewedCatalogLevels.length > 0 || reviewedAonLevelSelection
         ? "0.1.5-reviewed-catalog-memberships"
+        : options.allowMissingPrintedLevels && !parsed.levelsRaw
+        ? "0.1.6-missing-printed-levels"
         : "0.1.4-dependency-aliases",
       warnings,
     },

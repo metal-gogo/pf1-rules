@@ -29,10 +29,14 @@
     },
     {
       "canonical_path": "/levels",
-      "decision": "select_source",
+      "decision": "combine",
       "selected_evidence": [
         {
           "observation_id": "aon:spell.bolts-of-bedevilment:36931620c3bd64c5",
+          "source_field": "spell_raw.levels_raw"
+        },
+        {
+          "observation_id": "d20pfsrd:spell.bolts-of-bedevilment:57e214571297111d",
           "source_field": "spell_raw.levels_raw"
         }
       ],
@@ -40,7 +44,7 @@
         "aon:spell.bolts-of-bedevilment:36931620c3bd64c5",
         "d20pfsrd:spell.bolts-of-bedevilment:57e214571297111d"
       ],
-      "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
+      "rationale": "Reviewed catalog policy: AoN remains the preferred publication transcription. When an additional class membership is printed by d20PFSRD, it may be added to the canonical class union after review; Foundry PF1 is corroborating catalog evidence when it agrees. Preserve every source claim and never replace an AoN level merely because another catalog assigns the same class a different level."
     },
     {
       "canonical_path": "/casting",
@@ -101,21 +105,6 @@
         "d20pfsrd:spell.bolts-of-bedevilment:57e214571297111d"
       ],
       "rationale": "AoN is the highest-provenance first-party catalog baseline. Other source wording is preserved and any variation is recorded as a normalization warning."
-    },
-    {
-      "canonical_path": "/description/document",
-      "decision": "derived",
-      "selected_evidence": [
-        {
-          "observation_id": "aon:spell.bolts-of-bedevilment:36931620c3bd64c5",
-          "source_field": "spell_raw.description_raw"
-        }
-      ],
-      "considered_observation_ids": [
-        "aon:spell.bolts-of-bedevilment:36931620c3bd64c5",
-        "d20pfsrd:spell.bolts-of-bedevilment:57e214571297111d"
-      ],
-      "rationale": "AoN supplies block structure and emphasis; accepted canonical relationships supply entity links."
     }
   ],
   "relationship_decisions": [
@@ -133,6 +122,21 @@
         "d20pfsrd:spell.bolts-of-bedevilment:57e214571297111d"
       ],
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
+    },
+    {
+      "relationship_id": "spell.bolts-of-bedevilment:appears_on_spell_list:spell-list.madness-domain",
+      "decision": "accept",
+      "evidence": [
+        {
+          "observation_id": "d20pfsrd:spell.bolts-of-bedevilment:57e214571297111d",
+          "source_field": "spell_raw.levels_raw"
+        }
+      ],
+      "considered_observation_ids": [
+        "aon:spell.bolts-of-bedevilment:36931620c3bd64c5",
+        "d20pfsrd:spell.bolts-of-bedevilment:57e214571297111d"
+      ],
+      "rationale": "Reviewed catalog policy: AoN remains the preferred publication transcription. When an additional class membership is printed by d20PFSRD, it may be added to the canonical class union after review; Foundry PF1 is corroborating catalog evidence when it agrees. Preserve every source claim and never replace an AoN level merely because another catalog assigns the same class a different level."
     },
     {
       "relationship_id": "spell.bolts-of-bedevilment:has_descriptor:descriptor.mind-affecting",
@@ -234,7 +238,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.bolts-of-bedevilment:uses_definition:condition.dazed",
+      "relationship_id": "spell.bolts-of-bedevilment:uses_definition:condition.dazes",
       "decision": "accept",
       "evidence": [
         {
@@ -264,7 +268,7 @@
       "rationale": "The relationship is explicit in a bounded source field or hyperlink and retains its source evidence."
     },
     {
-      "relationship_id": "spell.bolts-of-bedevilment:uses_definition:saving-throw.will",
+      "relationship_id": "spell.bolts-of-bedevilment:uses_definition:rule.will",
       "decision": "accept",
       "evidence": [
         {
@@ -280,7 +284,6 @@
     }
   ],
   "unresolved_questions": [
-    "AoN does not print a Level value. The canonical spell identity is retained with an empty level list; no class, domain, or numeric level was inferred.",
-    "d20pfsrd differs from the AoN baseline; both raw observations remain preserved."
+    "AoN does not print a Level value. The canonical spell identity is retained with an empty level list; no class, domain, or numeric level was inferred."
   ]
 }
