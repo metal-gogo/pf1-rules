@@ -159,14 +159,37 @@ function writeObservation(feat: CatalogFeat, captureResult: { body: string; meta
   });
 }
 
-export async function ingestAonFeatBatch(count: number, offline = false): Promise<void> {
+function selectBatch(catalog: CatalogFeat[], count: number, batchFile?: string): CatalogFeat[] {
+  if (!batchFile) return catalog.slice(0, count);
+  if (fs.existsSync(batchFile)) {
+    const keys: unknown = JSON.parse(fs.readFileSync(batchFile, "utf8"));
+    if (!Array.isArray(keys) || keys.length !== count || new Set(keys).size !== count) {
+      throw new Error("Pending feat batch does not match the requested count; retry with its original count.");
+    }
+    const byKey = new Map(catalog.map((feat) => [feat.sourceRecordKey, feat]));
+    return keys.map((key) => {
+      const feat = typeof key === "string" ? byKey.get(key) : undefined;
+      if (!feat) throw new Error("Pending feat batch contains an unknown AoN ItemName.");
+      return feat;
+    });
+  }
+  const remaining = catalog.filter((feat) => !fs.existsSync(observationPath(feat)));
+  if (remaining.length < count) {
+    throw new Error(`Only ${remaining.length} unprocessed catalog feats remain; requested ${count}.`);
+  }
+  const selected = remaining.slice(0, count);
+  fs.writeFileSync(batchFile, JSON.stringify(selected.map((feat) => feat.sourceRecordKey)) + "\n", { flag: "wx" });
+  return selected;
+}
+
+export async function ingestAonFeatBatch(count: number, offline = false, batchFile?: string): Promise<void> {
   if (!readCapturedArtifact(catalogPath()) && offline) throw new Error("AoN feat catalog capture is missing; offline replay cannot continue");
   if (!readCapturedArtifact(catalogPath())) await assertAonAllowsFeatCapture();
   const catalog = parseAonFeatCatalog((await capture(catalogUrl, catalogPath())).body);
   if (!Number.isInteger(count) || count < 1 || count > catalog.length) {
     throw new Error(`Feat count must be an integer from 1 through ${catalog.length}.`);
   }
-  const selected = catalog.slice(0, count);
+  const selected = selectBatch(catalog, count, batchFile);
   if (selected.some((feat) => !readCapturedArtifact(rawPath(feat))) && offline) throw new Error("Requested feat capture is missing; offline replay cannot continue");
   if (selected.some((feat) => !readCapturedArtifact(rawPath(feat)))) await assertAonAllowsFeatCapture();
   const catalogBySourceKey = new Map(catalog.map((feat) => [feat.sourceRecordKey, feat]));
@@ -190,5 +213,6 @@ if (process.argv[1] && import.meta.url.endsWith(process.argv[1].replaceAll("\\",
   const offline = process.argv.includes("--offline");
   const catalog = readCapturedArtifact<CaptureMetadata>(catalogPath());
   const available = catalog ? parseAonFeatCatalog(catalog.body).length : Number.MAX_SAFE_INTEGER;
-  await ingestAonFeatBatch(countFromArguments(process.argv.slice(2), available), offline);
+  const batchFile = process.argv.find((argument) => argument.startsWith("--batch-file="))?.slice("--batch-file=".length);
+  await ingestAonFeatBatch(countFromArguments(process.argv.slice(2), available), offline, batchFile);
 }

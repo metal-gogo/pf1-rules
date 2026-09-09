@@ -32,12 +32,13 @@ JS
 export PF1_ARTIFACT_ROOT
 
 count=$1
+batch_file=$(git rev-parse --git-path qwen-feat-ingestion.json)
 completed=()
 trap 'printf "\nCount: %s; completed: %s\n" "$count" "${completed[*]:-none}"' EXIT
 
-pnpm ingest:feats --count="$count"
+pnpm ingest:feats --count="$count" --batch-file="$batch_file"
 completed+=("ingest:feats")
-pnpm ingest:feats --count="$count" --offline
+pnpm ingest:feats --count="$count" --batch-file="$batch_file" --offline
 completed+=("ingest:feats(offline)")
 PF1_VERIFY_ARTIFACTS=0 pnpm validate
 completed+=("validate")
@@ -45,3 +46,4 @@ pnpm db:import
 completed+=("db:import")
 pnpm db:check
 completed+=("db:check")
+rm -- "$batch_file"
