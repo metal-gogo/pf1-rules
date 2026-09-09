@@ -66,7 +66,7 @@ export type ParsedFeat = {
     context_raw: string;
     role_hint: "publication" | "prerequisite" | "cross_reference";
     target_entity_type_hint: "publication" | "feat" | "unknown";
-    target_entity_id_hint: null;
+    target_entity_id_hint: string | null;
   }>;
   supplements: Array<{ heading_raw: string; kind_hint: "combat_trick" | "mythic" | "unknown" }>;
   definitionRaw: string;
@@ -366,15 +366,29 @@ function observation(feat: PilotFeat, capture: { body: string; metadata: Capture
   });
 }
 
-export async function ingestFeatPilot(offline = false): Promise<void> {
-  if (pilotFeats.some((feat) => !readCapturedArtifact(rawPath(feat)))) {
+function requestedCount(arguments_: string[]): number {
+  const value = arguments_.find((argument) => argument.startsWith("--count="));
+  if (!value) return pilotFeats.length;
+  const count = Number(value.slice("--count=".length));
+  if (!Number.isInteger(count) || count < 1 || count > pilotFeats.length) {
+    throw new Error(`Feat count must be an integer from 1 through ${pilotFeats.length}.`);
+  }
+  return count;
+}
+
+export async function ingestFeatPilot(offline = false, count = pilotFeats.length): Promise<void> {
+  if (!Number.isInteger(count) || count < 1 || count > pilotFeats.length) {
+    throw new Error(`Feat count must be an integer from 1 through ${pilotFeats.length}.`);
+  }
+  const selected = pilotFeats.slice(0, count);
+  if (selected.some((feat) => !readCapturedArtifact(rawPath(feat)))) {
     if (offline) throw new Error("Feat pilot capture is missing; offline replay cannot continue");
     await assertAonAllowsFeatCapture();
   }
-  for (const feat of pilotFeats) observation(feat, await fetchFeat(feat));
-  console.log(`Parsed ${pilotFeats.length} AoN feat pilot pages.`);
+  for (const feat of selected) observation(feat, await fetchFeat(feat));
+  console.log(`Parsed ${selected.length} AoN feat pilot pages.`);
 }
 
 if (process.argv[1] && import.meta.url.endsWith(process.argv[1].replaceAll("\\", "/"))) {
-  await ingestFeatPilot(process.argv.includes("--offline"));
+  await ingestFeatPilot(process.argv.includes("--offline"), requestedCount(process.argv.slice(2)));
 }

@@ -1,6 +1,7 @@
 # Feat ingestion plan
 
-Status: Planned. Implementation has not started.
+Status: AoN observation pilot and d20PFSRD comparison pilot complete;
+AoN General Feats source-observation batches are available.
 
 Last reviewed: 2026-08-23.
 
@@ -114,6 +115,9 @@ For each pilot feat, capture:
 - [P] Add AoN feat snapshot fixtures for the ten pilot records.
 - [P] Parse the base feat without crossing supplemental boundaries.
 - [P] Capture selected Foundry YAML records as comparison observations.
+- [P] Capture reviewed d20PFSRD URLs only for AoN pilot feats. Keep the
+  reviewed source pairing explicit; a matching display name does not establish
+  identity.
 - [P] Validate observations with the existing generic schema and importer.
 
 Exit gate: all ten observations round-trip without losing names, types,
@@ -172,6 +176,18 @@ queryable by exact name, alias, and type.
 
 Exit gate: every captured catalog row maps to one canonical feat or one
 explicit issue record.
+
+#### Controlled source-observation batch
+
+[C] `pnpm ingest:feats --count=N` captures the first `N` AoN all-feats
+catalog rows in source order, writes immutable artifacts and generic feat
+observations, and creates only missing feat stubs. `--offline` replays only
+the recorded artifacts. It preserves prerequisite prose, publications, raw
+rich text, and links. A linked feat receives an entity hint only when its AoN
+`ItemName` exactly identifies one catalog row.
+
+[C] This batch does not create canonical feat records or parse prerequisite
+expressions. Import its observations with `pnpm db:import` after review.
 
 ### 5. Run and audit the pilot before bulk ingest
 
