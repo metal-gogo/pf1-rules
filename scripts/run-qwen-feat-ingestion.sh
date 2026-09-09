@@ -46,4 +46,18 @@ pnpm db:import
 completed+=("db:import")
 pnpm db:check
 completed+=("db:check")
+batch_paths=(data/entities/feat-batch-entities.json ':(glob)data/observations/feats/*/aon-batch-*.json')
+git add -- "${batch_paths[@]}"
+git diff --cached --check -- "${batch_paths[@]}"
+if ! git diff --cached --quiet -- "${batch_paths[@]}"; then
+  commit_message=$(node --input-type=module - "$batch_file" <<'JS'
+import fs from "node:fs";
+
+const names = JSON.parse(fs.readFileSync(process.argv[2], "utf8"));
+console.log(`ingest feats: ${names[0]} + ${names.length - 1} feats`);
+JS
+)
+  git commit -S --only -m "$commit_message" -- "${batch_paths[@]}"
+fi
+completed+=("commit")
 rm -- "$batch_file"
