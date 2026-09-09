@@ -146,7 +146,7 @@ export function resolveCatalogFeatLinks(parsed: ParsedFeat, catalogBySourceKey: 
 function writeObservation(feat: CatalogFeat, captureResult: { body: string; metadata: CaptureMetadata }, parsed: ParsedFeat, catalogBySourceKey: ReadonlyMap<string, CatalogFeat>): void {
   const directory = path.dirname(observationPath(feat));
   const sourceBookRaw = parsed.publications.map((publication) => publication.text_raw).join("; ") || null;
-  const observationHash = artifactHash(`${captureResult.metadata.content_sha256}:${parser.name}:${parser.version}`);
+  const observationHash = captureResult.metadata.content_sha256;
   writeJson(observationPath(feat), {
     $schema: "../../../../schemas/source-entity-observation.schema.json", schema_version: "0.1.0",
     observation_id: `aon:${feat.entityId}:${observationHash.slice(0, 8)}`, entity_type: "feat",
