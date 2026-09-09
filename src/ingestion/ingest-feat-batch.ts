@@ -146,10 +146,11 @@ export function resolveCatalogFeatLinks(parsed: ParsedFeat, catalogBySourceKey: 
 function writeObservation(feat: CatalogFeat, captureResult: { body: string; metadata: CaptureMetadata }, parsed: ParsedFeat, catalogBySourceKey: ReadonlyMap<string, CatalogFeat>): void {
   const directory = path.dirname(observationPath(feat));
   const sourceBookRaw = parsed.publications.map((publication) => publication.text_raw).join("; ") || null;
-  const observationHash = captureResult.metadata.content_sha256;
+  const observationHash = captureResult.metadata.content_sha256.slice(0, 8)
+    + artifactHash(`${captureResult.metadata.content_sha256}:${parser.name}:${parser.version}`).slice(0, 8);
   writeJson(observationPath(feat), {
     $schema: "../../../../schemas/source-entity-observation.schema.json", schema_version: "0.1.0",
-    observation_id: `aon:${feat.entityId}:${observationHash.slice(0, 8)}`, entity_type: "feat",
+    observation_id: `aon:${feat.entityId}:${observationHash}`, entity_type: "feat",
     source: { site_id: "aon", url: captureResult.metadata.url, license_url: "https://www.aonprd.com/Licenses.aspx", declared_publisher: "Paizo", first_party_status: "confirmed" },
     retrieval: { retrieved_at: captureResult.metadata.retrieved_at, http_status: captureResult.metadata.http_status, content_sha256: captureResult.metadata.content_sha256, raw_artifact_path: path.relative(directory, rawPath(feat)).replaceAll("\\", "/"), response_content_type: captureResult.metadata.response_content_type },
     parser: { ...parser, parsed_at: new Date().toISOString() },

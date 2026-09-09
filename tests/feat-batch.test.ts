@@ -34,7 +34,10 @@ test("batch IDs use artifact hashes and next batches skip observations and repla
     const before = fs.readFileSync(filename, "utf8");
     const observation = JSON.parse(before);
     const hash = createHash("sha256").update(captures[1]![1]!).digest("hex");
-    expect(observation.observation_id).toBe(`aon:feat.example:${hash.slice(0, 8)}`);
+    const pilotId = `aon:feat.example:${hash.slice(0, 8)}`;
+    expect(observation.observation_id).not.toBe(pilotId);
+    expect(observation.observation_id).toMatch(/^aon:feat\.example:[a-f0-9]{16}$/);
+    expect(observation.observation_id.split(":").at(-1)).toMatch(new RegExp(`^${hash.slice(0, 8)}`));
     await ingestAonFeatBatch(1, true);
     expect(fs.readFileSync(filename, "utf8")).toBe(before);
     fs.writeFileSync(path.join(root, "data/entities/linked.json"), JSON.stringify({
