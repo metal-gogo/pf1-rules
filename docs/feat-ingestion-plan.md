@@ -195,7 +195,14 @@ Run `mise exec -- scripts/run-qwen-feat-ingestion.sh N` from the repository
 root to process the next N AoN catalog entries without batch observations.
 The wrapper preserves its selected ItemNames through offline replay,
 validation, import, database checks, and a signed commit. A failed run resumes
-the same batch with the same count.
+the same batch with the same count. The failure summary prints the resume
+command while retaining the pending batch.
+
+For agent Bash tools, set `timeout: 7200000` (two hours) on the tool call.
+The default 30-minute limit can terminate a large batch during source capture.
+This timeout is a tool argument, not a flag for the wrapper. Repository
+`AGENTS.md` supplies this instruction to Qwen; start a new agent session after
+updating the repository so it loads the instruction.
 
 `pnpm ingest:feats:sources --batch-file=PATH` compares the saved batch with a
 captured d20PFSRD feat catalog. `--offline` requires cached artifacts, including

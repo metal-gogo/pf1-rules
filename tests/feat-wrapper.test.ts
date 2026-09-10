@@ -45,7 +45,10 @@ fi
         PF1_ENV_FILE: path.join(root, "test.env"), FAIL_STEP: failStep },
     });
     const pending = path.join(root, ".git/qwen-feat-ingestion.json");
-    expect(run("ingest:feats:sources").status).toBe(1);
+    const failed = run("ingest:feats:sources");
+    expect(failed.status).toBe(1);
+    expect(failed.stderr).toContain("Resume: mise exec -- scripts/run-qwen-feat-ingestion.sh 1");
+    expect(failed.stderr).toContain("timeout to 7200000 milliseconds");
     expect(fs.existsSync(pending)).toBe(true);
     expect(fs.readFileSync(path.join(root, "steps.log"), "utf8")).not.toContain("validate");
     fs.writeFileSync(path.join(root, "steps.log"), "");
