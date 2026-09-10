@@ -8,11 +8,12 @@ import { parseRichTextHtml, richTextLeafText, type RichTextDocument } from "../d
 import { artifactHash, readCapturedArtifact, writeCapturedArtifact } from "./artifact-store.js";
 
 
-const parser = { name: "d20pfsrd-feat-comparison-adapter", version: "0.1.1" };
+export const parser = { name: "d20pfsrd-feat-comparison-adapter", version: "0.1.2" };
 const userAgent = "PF1RulesPrivateResearch/0.1 (local archival experiment)";
+let lastRequestAt = 0;
 const labels = new Set(["Prerequisite", "Prerequisites", "Benefit", "Normal", "Special", "Goal", "Completion Benefit"]);
 
-type CaptureMetadata = {
+export type CaptureMetadata = {
   url: string;
   retrieved_at: string;
   http_status: number;
@@ -27,7 +28,7 @@ type ComparisonFeat = {
 };
 
 // These URLs were manually reviewed against the AoN observations; a title match alone is not identity evidence.
-const comparisonFeats: ComparisonFeat[] = [
+export const comparisonFeats: ComparisonFeat[] = [
   { entityId: "feat.channel-smite", name: "Channel Smite", url: "https://www.d20pfsrd.com/feats/combat-feats/channel-smite-combat/" },
   { entityId: "feat.outflank", name: "Outflank", url: "https://www.d20pfsrd.com/feats/combat-feats/outflank-combat-teamwork/" },
   { entityId: "feat.blinding-critical", name: "Blinding Critical", url: "https://www.d20pfsrd.com/feats/combat-feats/blinding-critical-combat-critical/" },
@@ -78,12 +79,17 @@ function writeJson(filename: string, value: { parser: { parsed_at: string }; [ke
   fs.writeFileSync(filename, `${JSON.stringify(value, null, 2)}\n`, "utf8");
 }
 
+export function featSectionKey(heading: string): string {
+  return heading.replace(/^Prerequisite(?:s|\(s\))?$/, "Prerequisites").replace(/^Benefit\(s\)$/, "Benefit");
+}
+
 export function parseD20Feat(html: string, sourceUrl: string, expectedName: string): ParsedD20Feat {
   const $ = cheerio.load(html);
   const content = $("#article-content").first();
   if (!content.length) throw new Error("d20PFSRD feat content was not found");
   const title = cleanText(content.children("h1").first().text());
-  if (!title.startsWith(expectedName)) throw new Error(`Expected ${expectedName}, found ${title || "no feat heading"}`);
+  const comparableName = (value: string) => value.normalize("NFKC").replace(/[\u2018\u2019]/g, "'").toLowerCase();
+  if (!comparableName(title).startsWith(comparableName(expectedName))) throw new Error(`Expected ${expectedName}, found ${title || "no feat heading"}`);
   const typeSuffix = title.slice(expectedName.length).trim();
   if (typeSuffix && !/^\([^()]+\)$/.test(typeSuffix)) throw new Error(`Unrecognized feat type suffix for ${expectedName}: ${typeSuffix}`);
   const featTypes = typeSuffix ? typeSuffix.slice(1, -1).split(",").map(cleanText).filter(Boolean) : [];
@@ -93,20 +99,29 @@ export function parseD20Feat(html: string, sourceUrl: string, expectedName: stri
     return heading || "Unclassified supplemental content";
   });
   const base = content.clone();
-  base.children("h1, script, .breadcrumbs, .ed-note-outer, .section15").remove();
-  const paragraphs = base.children("p").toArray();
-  const sections = paragraphs.flatMap((paragraph) => {
-    const label = cleanText($(paragraph).children("b").first().text()).replace(/:$/, "");
-    if (!labels.has(label)) return [];
-    const body = cleanText($(paragraph).text()).replace(new RegExp(`^${label}:?\\s*`), "");
-    return body ? [{ heading_raw: label, body_raw: body }] : [];
-  });
-  const prerequisites = sections.find((section) => /^Prerequisites?$/.test(section.heading_raw))?.body_raw ?? null;
-  const summary = cleanText($(paragraphs.find((paragraph) => $(paragraph).hasClass("description"))).text()) || null;
+  base.find("h1, script, .breadcrumbs, .ed-note-outer, .section15").remove();
+  const blocks = base.find("p, table, ul, ol").filter((_index, node) => !$(node).parents("p, table, ul, ol").length).toArray();
+  const sections: ParsedD20Feat["sections"] = [];
+  for (const block of blocks) {
+    const label = cleanText($(block).children("b, strong").first().text()).replace(/:$/, "");
+    const text = cleanText($(block).text());
+    if (labels.has(featSectionKey(label))) {
+      sections.push({ heading_raw: label, body_raw: text.slice(label.length).replace(/^:?\s*/, "") });
+    } else if (sections.length && text) {
+      sections[sections.length - 1]!.body_raw += "\n" + text;
+    }
+  }
+  if (!sections.some((section) => featSectionKey(section.heading_raw) === "Benefit" && section.body_raw)) {
+    throw new Error("d20PFSRD feat benefit section was not found");
+  }
+  const prerequisites = sections.find((section) => featSectionKey(section.heading_raw) === "Prerequisites")?.body_raw ?? null;
+  const summary = cleanText($(blocks.find((block) => $(block).hasClass("description"))).text()) || null;
   const links: ParsedD20Feat["links"] = [];
-  for (const paragraph of paragraphs) {
+  let sectionLabel = "";
+  for (const paragraph of blocks) {
     const text = cleanText($(paragraph).text());
-    const label = cleanText($(paragraph).children("b").first().text()).replace(/:$/, "");
+    const label = cleanText($(paragraph).children("b, strong").first().text()).replace(/:$/, "");
+    if (labels.has(featSectionKey(label))) sectionLabel = featSectionKey(label);
     for (const anchor of $(paragraph).find("a").toArray()) {
       const anchorText = cleanText($(anchor).text());
       const hrefRaw = $(anchor).attr("href");
@@ -116,9 +131,9 @@ export function parseD20Feat(html: string, sourceUrl: string, expectedName: stri
         anchor_text_raw: anchorText,
         href_raw: hrefRaw,
         href_resolved: hrefResolved,
-        source_field: /^Prerequisites?$/.test(label) ? "/entity_raw/prerequisites_raw" : "/entity_raw/sections_raw",
+        source_field: sectionLabel === "Prerequisites" ? "/entity_raw/prerequisites_raw" : "/entity_raw/sections_raw",
         context_raw: text,
-        role_hint: /^Prerequisites?$/.test(label) ? "prerequisite" : "cross_reference",
+        role_hint: sectionLabel === "Prerequisites" ? "prerequisite" : "cross_reference",
         target_entity_type_hint: hrefResolved.includes("/feats/") ? "feat" : "unknown",
         target_entity_id_hint: null,
       });
@@ -160,35 +175,37 @@ export function parseD20Feat(html: string, sourceUrl: string, expectedName: stri
   };
 }
 
-async function assertD20AllowsFeatCapture(): Promise<void> {
+export async function assertD20AllowsFeatCapture(): Promise<void> {
   const response = await fetch("https://www.d20pfsrd.com/robots.txt", { headers: { accept: "text/plain", "user-agent": userAgent }, signal: AbortSignal.timeout(45_000) });
   if (!response.ok) throw new Error(`Cannot verify d20PFSRD robots policy: HTTP ${response.status}`);
   const body = await response.text();
   if (/^\s*disallow\s*:\s*\/feats\//im.test(body)) throw new Error("d20PFSRD robots.txt disallows feat capture");
 }
 
-async function fetchFeat(feat: ComparisonFeat): Promise<{ body: string; metadata: CaptureMetadata }> {
-  const filename = rawPath(feat);
+export async function fetchFeat(feat: ComparisonFeat, filename = rawPath(feat), allowMissing = false): Promise<{ body: string; metadata: CaptureMetadata }> {
   const cached = readCapturedArtifact<CaptureMetadata>(filename);
   if (cached) return cached;
+  const remaining = 1000 - (Date.now() - lastRequestAt);
+  if (remaining > 0) await new Promise((resolve) => setTimeout(resolve, remaining));
   const response = await fetch(feat.url, { headers: { accept: "text/html,application/xhtml+xml", "user-agent": userAgent }, redirect: "follow", signal: AbortSignal.timeout(45_000) });
+  lastRequestAt = Date.now();
   const body = await response.text();
-  if (!response.ok) throw new Error(`HTTP ${response.status} while retrieving ${feat.url}`);
+  if (!response.ok && !(allowMissing && [404, 410].includes(response.status))) throw new Error(`HTTP ${response.status} while retrieving ${feat.url}`);
   const metadata = { url: response.url, retrieved_at: new Date().toISOString(), http_status: response.status, content_sha256: artifactHash(body), response_content_type: response.headers.get("content-type") };
   writeCapturedArtifact(filename, body, metadata);
   return { body, metadata };
 }
 
-function observation(feat: ComparisonFeat, capture: { body: string; metadata: CaptureMetadata }): void {
+export function observation(feat: ComparisonFeat, capture: { body: string; metadata: CaptureMetadata }, identity = "reviewed", filename = rawPath(feat)): void {
   const parsed = parseD20Feat(capture.body, capture.metadata.url, feat.name);
   const directory = path.join(projectRoot, "data", "observations", "feats", feat.entityId.slice(5));
   writeJson(path.join(directory, `d20pfsrd-${parser.version}.json`), {
     $schema: "../../../../schemas/source-entity-observation.schema.json",
     schema_version: "0.1.0",
-    observation_id: `d20pfsrd:${feat.entityId}:${capture.metadata.content_sha256.slice(0, 8)}`,
+    observation_id: `d20pfsrd:${feat.entityId}:${capture.metadata.content_sha256.slice(0, 8)}${artifactHash(parser.name + ":" + parser.version).slice(0, 8)}`,
     entity_type: "feat",
     source: { site_id: "d20pfsrd", url: capture.metadata.url, license_url: null, declared_publisher: null, first_party_status: "unknown" },
-    retrieval: { retrieved_at: capture.metadata.retrieved_at, http_status: capture.metadata.http_status, content_sha256: capture.metadata.content_sha256, raw_artifact_path: path.relative(directory, rawPath(feat)).replaceAll("\\", "/"), response_content_type: capture.metadata.response_content_type },
+    retrieval: { retrieved_at: capture.metadata.retrieved_at, http_status: capture.metadata.http_status, content_sha256: capture.metadata.content_sha256, raw_artifact_path: path.relative(directory, filename).replaceAll("\\", "/"), response_content_type: capture.metadata.response_content_type },
     parser: { ...parser, parsed_at: new Date().toISOString() },
     page: { title_raw: cleanText(cheerio.load(capture.body)("title").text()) || parsed.name, breadcrumbs_raw: [], license_notice_raw: null, source_notice_raw: parsed.copyrightNotice },
     entity_raw: {
@@ -205,12 +222,12 @@ function observation(feat: ComparisonFeat, capture: { body: string; metadata: Ca
       summary_raw: parsed.summary,
       publications_raw: parsed.publications,
       pfs_marker_raw: null,
-      catalog_memberships_raw: ["d20pfsrd-reviewed-comparison-pilot"],
+      catalog_memberships_raw: [identity === "reviewed" ? "d20pfsrd-reviewed-comparison-pilot" : "d20pfsrd-feat-catalog-comparison"],
       supplements_raw: parsed.excluded.map((heading_raw) => ({ heading_raw, kind_hint: "unknown" as const })),
       source_record_key_raw: feat.url,
     },
     warnings: [
-      { code: "COMPARISON_IDENTITY_REVIEWED", severity: "info", field: null, message: `Reviewed d20PFSRD URL is compared with ${feat.entityId}; the match is not inferred from the displayed name.` },
+      { code: identity === "reviewed" ? "COMPARISON_IDENTITY_REVIEWED" : identity === "matching_sections" ? "COMPARISON_SECTIONS_MATCH" : "COMPARISON_PUBLICATION_MATCH", severity: "info", field: null, message: identity === "reviewed" ? `Reviewed d20PFSRD URL is compared with ${feat.entityId}; the match is not inferred from the displayed name.` : identity === "matching_sections" ? `All parsed rule sections match AoN for ${feat.entityId}; source-specific text and tags remain separate.` : `Unique feat name and publication match AoN for ${feat.entityId}; rule differences remain source-attributed.` },
       ...parsed.excluded.map((heading) => ({ code: "SUPPLEMENT_EXCLUDED", severity: "info", field: "/entity_raw/supplements_raw", message: `${heading} remains in the immutable source artifact and is excluded from the base feat observation.` })),
     ],
   });

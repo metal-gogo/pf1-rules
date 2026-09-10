@@ -53,7 +53,7 @@ test("catalog link enrichment uses an exact AoN source identity", () => {
 test("d20PFSRD feat boundaries retain base prose and exclude editorial and copyright material", () => {
   const html = `<div id="article-content"><h1>Channel Smite (Combat)</h1>
     <p class="description">You can channel divine energy.</p><p><b>Prerequisite</b>: Channel energy class feature.</p>
-    <p><b>Benefit</b>: Gain <a href="/gamemastering/combat">damage</a>.</p>
+    <div><p><b>Benefit</b>: Gain <a href="/gamemastering/combat">damage</a>.</p><p>Additional effect.</p></div>
     <div class="ed-note-outer"><p class="ed-note-header">Editor's Note</p><p>FAQ text.</p></div>
     <div class="section15"><div>Section 15: Copyright Notice</div><p>Copyright text.</p></div></div>`;
   const feat = parseD20Feat(html, "https://www.d20pfsrd.com/feats/combat-feats/channel-smite-combat/", "Channel Smite");
@@ -61,11 +61,12 @@ test("d20PFSRD feat boundaries retain base prose and exclude editorial and copyr
   expect(feat.prerequisites).toBe("Channel energy class feature.");
   expect(feat.sections).toEqual([
     { heading_raw: "Prerequisite", body_raw: "Channel energy class feature." },
-    { heading_raw: "Benefit", body_raw: "Gain damage." },
+    { heading_raw: "Benefit", body_raw: "Gain damage.\nAdditional effect." },
   ]);
   expect(feat.definitionRaw).not.toMatch(/FAQ text|Copyright text/);
   expect(feat.excluded).toEqual(["Editor's Note", "Section 15: Copyright Notice"]);
   expect(feat.copyrightNotice).toContain("Copyright text.");
   expect(feat.links.find((link) => link.role_hint === "cross_reference")?.anchor_text_raw).toBe("damage");
   expect(feat.publications).toEqual([]);
+  expect(() => parseD20Feat('<div id="article-content"><h1>Example</h1><p>Unrecognized layout.</p></div>', "https://www.d20pfsrd.com/feats/example", "Example")).toThrow("benefit section was not found");
 });

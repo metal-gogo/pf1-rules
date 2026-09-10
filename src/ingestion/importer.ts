@@ -4,6 +4,7 @@ import path from "node:path";
 import { Prisma, type PrismaClient } from "../generated/prisma/client.js";
 
 import { projectRoot } from "../config.js";
+import { buildFeatSourceGraph } from "./feat-source-graph.js";
 import { observationEntityId, type ValidatedJson } from "../domain/json.js";
 import { validatePackage, type PackageStatistics } from "./validate.js";
 
@@ -228,7 +229,7 @@ async function insertEntities(tx: Prisma.TransactionClient): Promise<number> {
 }
 
 
-async function insertObservations(tx: Prisma.TransactionClient): Promise<number> {
+async function insertObservations(tx: Prisma.TransactionClient, featTargets: Map<string, string>): Promise<number> {
   const registeredIds = new Set(
     (await tx.entity.findMany({ select: { id: true } })).map((entity) => entity.id),
   );
@@ -292,7 +293,7 @@ async function insertObservations(tx: Prisma.TransactionClient): Promise<number>
           targetEntityTypeHint: link.target_entity_type_hint ?? null,
           targetEntityIdHint: (() => {
             const targetId = migratedEntityId(
-              link.target_entity_id_hint,
+              featTargets.get(`${record.observation_id}:${index}`) ?? link.target_entity_id_hint,
               link.href_resolved,
             );
             return targetId && registeredIds.has(targetId) ? targetId : null;
@@ -822,6 +823,10 @@ async function insertIngestionQueue(tx: Prisma.TransactionClient): Promise<numbe
 
 export async function importPackage(prisma: PrismaClient): Promise<ImportStatistics> {
   const packageStats = validatePackage();
+  const featGraph = buildFeatSourceGraph(
+    jsonFiles(path.join(projectRoot, "data/observations"), true).map(loadJson),
+    jsonFiles(path.join(projectRoot, "data/entities")).flatMap((filename) => loadJson(filename).entities),
+  );
   return prisma.$transaction(
     async (tx) => {
       await clearImportedData(tx);
@@ -833,11 +838,21 @@ export async function importPackage(prisma: PrismaClient): Promise<ImportStatist
           importerVersion,
         },
       });
-      const linkedEntities = await insertEntities(tx);
+      const linkedEntities = await insertEntities(tx) + featGraph.nodes.length;
+      for (const node of featGraph.nodes) {
+        await tx.entity.create({ data: {
+          id: node.entity_id, type: node.entity_type, name: node.name, status: node.status,
+          aliases: node.aliases, notes: node.notes, registryId: "feat-source-links",
+        } });
+      }
       const spellSummaries = await insertSpellSummaryObservations(tx);
-      const observations = await insertObservations(tx);
+      const observations = await insertObservations(tx, featGraph.targets);
       const entityEvidence = await insertEntityEvidence(tx);
       await insertEntityRelationships(tx);
+      const existingRelationships = new Set((await tx.ruleRelationship.findMany({ select: { id: true } })).map((item) => item.id));
+      for (const { owner, record } of featGraph.relationships) {
+        if (!existingRelationships.has(record.relationship_id)) await insertRelationship(tx, owner, "registry_entity", record);
+      }
       const coverageChecks = await insertCoverage(tx);
       const canonicalSpellResult = await insertCanonicalSpells(tx, spellSummaries.selected);
       const mythicSpellVariants = await insertVariants(tx);

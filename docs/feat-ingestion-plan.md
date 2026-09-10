@@ -1,9 +1,9 @@
 # Feat ingestion plan
 
-Status: AoN observation pilot and d20PFSRD comparison pilot complete;
-AoN General Feats source-observation batches are available.
+Status: AoN batches support d20PFSRD source comparison and evidence-backed
+entity links. Foundry remains a separate audit source.
 
-Last reviewed: 2026-08-23.
+Last reviewed: 2026-09-09.
 
 This plan defines an initial feat-ingestion pilot and the path from source
 capture to a canonical feat catalog. Confidence markers follow the project
@@ -188,6 +188,52 @@ rich text, and links. A linked feat receives an entity hint only when its AoN
 
 [C] This batch does not create canonical feat records or parse prerequisite
 expressions. Import its observations with `pnpm db:import` after review.
+
+### Source comparison and graph import
+
+Run `mise exec -- scripts/run-qwen-feat-ingestion.sh N` from the repository
+root to process the next N AoN catalog entries without batch observations.
+The wrapper preserves its selected ItemNames through offline replay,
+validation, import, database checks, and a signed commit. A failed run resumes
+the same batch with the same count.
+
+`pnpm ingest:feats:sources --batch-file=PATH` compares the saved batch with a
+captured d20PFSRD feat catalog. `--offline` requires cached artifacts, including
+cached 404/410 responses. Other fetch failures stop the workflow.
+
+A catalog title finds candidates but does not establish identity. An automatic
+match requires one unambiguous source identity and either matching parsed
+rule sections or the same feat name and publication. Publication comparison
+uses the spell normalizer; this does not create additional publication nodes.
+The existing three reviewed source pairings remain explicit overrides.
+Multiple URLs that redirect to the same capture count as one candidate.
+Source-qualified AoN identities remain separate and require review when a
+shared base name is ambiguous.
+
+Accepted observations preserve each website's text, types, links, and
+provenance separately. Parser version 0.1.2 recognizes both bold and strong
+field labels, including `Prerequisite(s)` and `Benefit(s)`, nested rule
+containers, and continuation paragraphs and tables. Pages without a parsed
+benefit require review. Older observations remain intact. Source matching outcomes and
+raw section differences are stored in `data/feat-source-matches/`:
+
+- `matched`: one supported d20PFSRD identity.
+- `pending_review`: ambiguous identity, differing evidence, an unreadable
+  page, or a dead catalog link.
+- `not_found_in_catalog`: no candidate in the captured catalog; this is not
+  a claim that the feat is absent from the whole website.
+
+During import, known observation URLs and registered link evidence resolve
+feat hyperlinks to existing entities. Unmapped AoN and d20PFSRD links become
+source-specific stubs keyed by URL. Generic `references` relationships keep
+the observation and link occurrence as evidence. Ambiguous known URLs remain
+unresolved. This derived graph rebuilds on import, using the existing generic
+entity and relationship tables.
+
+The wrapper commits feat observations, the feat registry, and source-match
+records with subjects such as `ingest feats: Adaptive Fortune + 9 feats`.
+It never pushes. Canonical feat mechanics, prerequisite expression parsing,
+and Foundry observation import are outside this workflow.
 
 ### 5. Run and audit the pilot before bulk ingest
 

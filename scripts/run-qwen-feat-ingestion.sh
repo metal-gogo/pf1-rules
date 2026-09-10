@@ -40,13 +40,17 @@ pnpm ingest:feats --count="$count" --batch-file="$batch_file"
 completed+=("ingest:feats")
 pnpm ingest:feats --count="$count" --batch-file="$batch_file" --offline
 completed+=("ingest:feats(offline)")
+pnpm ingest:feats:sources --batch-file="$batch_file"
+completed+=("ingest:feats:sources")
+pnpm ingest:feats:sources --batch-file="$batch_file" --offline
+completed+=("ingest:feats:sources(offline)")
 PF1_VERIFY_ARTIFACTS=0 pnpm validate
 completed+=("validate")
 pnpm db:import
 completed+=("db:import")
 pnpm db:check
 completed+=("db:check")
-batch_paths=(data/entities/feat-batch-entities.json ':(glob)data/observations/feats/*/aon-batch-*.json')
+batch_paths=(data/entities/feat-batch-entities.json data/observations/feats data/feat-source-matches)
 git add -- "${batch_paths[@]}"
 git diff --cached --check -- "${batch_paths[@]}"
 if ! git diff --cached --quiet -- "${batch_paths[@]}"; then

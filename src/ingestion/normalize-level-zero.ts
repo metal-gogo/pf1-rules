@@ -721,7 +721,7 @@ function publicationId(book: string): string {
 }
 
 
-function publicationComparable(book: string): string {
+export function publicationComparable(book: string): string {
   return slug(book
     .replaceAll("’", "'")
     .replace(/^Pathfinder (?:RPG|Roleplaying Game|Player Companion|Campaign Setting|Chronicles|Companion):?\s*/i, "")

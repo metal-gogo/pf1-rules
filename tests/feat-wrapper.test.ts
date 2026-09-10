@@ -32,9 +32,10 @@ set -eu
 printf '%s\\n' "$*" >> steps.log
 if [[ "$FAIL_STEP" == "$1" ]]; then exit 1; fi
 if [[ "$1" == ingest:feats ]]; then
-  mkdir -p data/entities data/observations/feats/example
+  mkdir -p data/entities data/observations/feats/example data/feat-source-matches
   printf '{}\\n' > data/entities/feat-batch-entities.json
   printf '{}\\n' > data/observations/feats/example/aon-batch-0.1.0.json
+  printf '{}\\n' > data/feat-source-matches/example.json
   printf '["Example"]\\n' > .git/qwen-feat-ingestion.json
 fi
 `, { mode: 0o755 });
@@ -44,6 +45,10 @@ fi
         PF1_ENV_FILE: path.join(root, "test.env"), FAIL_STEP: failStep },
     });
     const pending = path.join(root, ".git/qwen-feat-ingestion.json");
+    expect(run("ingest:feats:sources").status).toBe(1);
+    expect(fs.existsSync(pending)).toBe(true);
+    expect(fs.readFileSync(path.join(root, "steps.log"), "utf8")).not.toContain("validate");
+    fs.writeFileSync(path.join(root, "steps.log"), "");
     expect(run("validate").status).toBe(1);
     expect(git("rev-parse", "HEAD")).toBe(original);
     expect(fs.existsSync(pending)).toBe(true);
@@ -55,12 +60,21 @@ fi
     expect(fs.existsSync(pending)).toBe(true);
 
     git("config", "gpg.ssh.program", "ssh-keygen");
+    fs.writeFileSync(path.join(root, "steps.log"), "");
     const result = run();
     expect(result.status, result.stderr).toBe(0);
     expect(result.stdout).toContain("db:check commit");
+    expect(fs.readFileSync(path.join(root, "steps.log"), "utf8").trim().split("\n")).toEqual([
+      "ingest:feats --count=1 --batch-file=.git/qwen-feat-ingestion.json",
+      "ingest:feats --count=1 --batch-file=.git/qwen-feat-ingestion.json --offline",
+      "ingest:feats:sources --batch-file=.git/qwen-feat-ingestion.json",
+      "ingest:feats:sources --batch-file=.git/qwen-feat-ingestion.json --offline",
+      "validate", "db:import", "db:check",
+    ]);
     expect(fs.existsSync(pending)).toBe(false);
     expect(git("show", "--pretty=format:", "--name-only", "HEAD").split("\n")).toEqual([
       "data/entities/feat-batch-entities.json",
+      "data/feat-source-matches/example.json",
       "data/observations/feats/example/aon-batch-0.1.0.json",
     ]);
     expect(git("cat-file", "commit", "HEAD")).toContain("BEGIN SSH SIGNATURE");
