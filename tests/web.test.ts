@@ -120,6 +120,34 @@ describe("data and link integrity through HTTP", () => {
     expect(listHtml).toContain("Absorbing Inhalation");
   });
 
+  it("previews ingested feats", async () => {
+    const response = await fetch(`${baseUrl}/feats`);
+    const html = await response.text();
+    expect(response.status).toBe(200);
+    expect(html).toContain("<h1>Ingested feats</h1>");
+    expect(html).toContain('href="/entities/feat.outflank"');
+    expect(html).toContain("Combat, Teamwork");
+    expect(html).toContain("Base attack bonus +4.");
+  });
+
+  it("renders accepted feat references in rich text", async () => {
+    const [outflankResponse, blazingAuraResponse] = await Promise.all([
+      fetch(`${baseUrl}/entities/feat.outflank`),
+      fetch(`${baseUrl}/entities/feat.blazing-aura-arg`),
+    ]);
+    const [outflankHtml, blazingAuraHtml] = await Promise.all([
+      outflankResponse.text(),
+      blazingAuraResponse.text(),
+    ]);
+
+    expect(outflankResponse.status).toBe(200);
+    expect(outflankHtml).toContain('href="/entities/attack.bonus.base">Base attack bonus</a>');
+    expect(outflankHtml).toContain('href="/entities/combat.flanking">flanking</a>');
+    expect(blazingAuraResponse.status).toBe(200);
+    expect(blazingAuraHtml).toContain('href="/entities/feat.inner-flame">Inner Flame</a>');
+    expect(blazingAuraHtml).toContain('href="/entities/feat.scorching-weapons">Scorching Weapons</a>');
+  });
+
   it("serves the normalized Red Mantis Assassin class catalog", async () => {
     const response = await fetch(`${baseUrl}/classes/red-mantis-assassin`);
     const html = await response.text();
