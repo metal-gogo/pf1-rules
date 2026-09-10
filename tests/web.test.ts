@@ -120,6 +120,16 @@ describe("data and link integrity through HTTP", () => {
     expect(listHtml).toContain("Absorbing Inhalation");
   });
 
+  it("previews ingested feats", async () => {
+    const response = await fetch(`${baseUrl}/feats`);
+    const html = await response.text();
+    expect(response.status).toBe(200);
+    expect(html).toContain("<h1>Ingested feats</h1>");
+    expect(html).toContain('href="/entities/feat.outflank"');
+    expect(html).toContain("Combat, Teamwork");
+    expect(html).toContain("Base attack bonus +4.");
+  });
+
   it("serves the normalized Red Mantis Assassin class catalog", async () => {
     const response = await fetch(`${baseUrl}/classes/red-mantis-assassin`);
     const html = await response.text();

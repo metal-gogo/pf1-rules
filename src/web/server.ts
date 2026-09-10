@@ -760,6 +760,7 @@ function page(title: string, content: string): string {
       <ul>
         <li><a href="/spells">Spell lists</a></li>
         <li><a href="/spells/alphabetical">Alphabetical</a></li>
+        <li><a href="/feats">Feats</a></li>
         <li><a href="/rules">Rules reference</a></li>
         <li><a href="/entities">Entities</a></li>
         <li><a href="/search">Search</a></li>
@@ -828,8 +829,53 @@ async function homePage(prisma: PrismaClient): Promise<string> {
     <section aria-labelledby="start-browsing">
       <h2 id="start-browsing">Start browsing</h2>
       <ul>${spells.map((spell) => `<li><a href="${href(spellHref(spell.spellId))}">${escapeHtml(spell.name)}</a> <span class="muted">(${escapeHtml(spell.school)})</span></li>`).join("")}</ul>
-      <p><a href="/spells">Browse spells by spell list</a> or <a href="/spells/alphabetical">view all spells alphabetically</a>.</p>
+      <p><a href="/spells">Browse spells by spell list</a>, <a href="/spells/alphabetical">view all spells alphabetically</a>, or <a href="/feats">preview ingested feats</a>.</p>
     </section>`);
+}
+
+function featDetails(payload: unknown): { summary: string | null; types: string[]; prerequisites: string | null } {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    return { summary: null, types: [], prerequisites: null };
+  }
+  const entity = (payload as Record<string, unknown>).entity_raw;
+  if (!entity || typeof entity !== "object" || Array.isArray(entity)) {
+    return { summary: null, types: [], prerequisites: null };
+  }
+  const fields = entity as Record<string, unknown>;
+  return {
+    summary: typeof fields.summary_raw === "string" ? fields.summary_raw : null,
+    types: Array.isArray(fields.feat_types_raw)
+      ? fields.feat_types_raw.filter((type): type is string => typeof type === "string")
+      : [],
+    prerequisites: typeof fields.prerequisites_raw === "string" ? fields.prerequisites_raw : null,
+  };
+}
+
+async function featsPage(prisma: PrismaClient): Promise<string> {
+  const feats = await prisma.entity.findMany({
+    where: { type: "feat" },
+    select: {
+      id: true,
+      name: true,
+      observations: {
+        select: { payload: true, sourceBookRaw: true },
+        orderBy: [{ siteId: "asc" }, { retrievedAt: "desc" }],
+      },
+    },
+    orderBy: { name: "asc" },
+  });
+  return page("Ingested feats", `<nav aria-label="Breadcrumb"><ol><li aria-current="page">Feats</li></ol></nav>
+    <h1>Ingested feats</h1>
+    <p>This preview lists feat observations currently imported into the local database.</p>
+    <p>${feats.length} feats available.</p>
+    ${feats.length ? `<div class="table-scroll" role="region" aria-label="Ingested feats" tabindex="0"><table class="data-table">
+      <thead><tr><th scope="col">Feat</th><th scope="col">Type</th><th scope="col">Prerequisites</th><th scope="col">Summary</th><th scope="col">Source</th></tr></thead>
+      <tbody>${feats.map((feat) => {
+        const observation = feat.observations[0];
+        const details = featDetails(observation?.payload);
+        return `<tr><th scope="row"><a href="${href(entityHref(feat.id))}">${escapeHtml(feat.name)}</a></th><td>${escapeHtml(details.types.join(", ") || "—")}</td><td>${escapeHtml(details.prerequisites ?? "—")}</td><td>${escapeHtml(details.summary ?? "—")}</td><td>${escapeHtml(observation?.sourceBookRaw ?? "—")}</td></tr>`;
+      }).join("")}</tbody>
+    </table></div>` : "<p>No feats have been ingested.</p>"}`);
 }
 
 const spellListKindTitles: Record<string, string> = {
@@ -1831,6 +1877,7 @@ export function createRequestHandler(prisma: PrismaClient) {
         return;
       }
       if (url.pathname === "/") result = await homePage(prisma);
+      else if (url.pathname === "/feats") result = await featsPage(prisma);
       else if (url.pathname === "/spells") result = await spellListsPage(prisma);
       else if (url.pathname === "/spells/alphabetical") result = await alphabeticalSpellsPage(prisma, url);
       else if (url.pathname === "/spell-components") result = spellComponentsPage();
