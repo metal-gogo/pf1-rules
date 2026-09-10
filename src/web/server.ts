@@ -1732,7 +1732,7 @@ async function entityPage(prisma: PrismaClient, entityId: string): Promise<strin
     prisma.ruleRelationship.findMany({ where: { targetEntityId: entityId }, orderBy: { ownerEntityId: "asc" } }),
     prisma.sourceObservation.findMany({
       where: { entityId },
-      select: { id: true, siteId: true, pageTitleRaw: true, descriptionRaw: true, sourceUrl: true, retrievedAt: true },
+      select: { id: true, siteId: true, pageTitleRaw: true, descriptionRaw: true, payload: true, sourceUrl: true, retrievedAt: true },
       orderBy: [{ siteId: "asc" }, { retrievedAt: "desc" }],
     }),
   ]);
@@ -1744,6 +1744,31 @@ async function entityPage(prisma: PrismaClient, entityId: string): Promise<strin
   const ownerById = new Map(owners.map((owner) => [owner.id, owner]));
   const aliases = Array.isArray(entity.aliases) ? entity.aliases : [];
   const primaryDefinition = observations.find((observation) => observation.siteId === "aon") ?? observations[0];
+  const definitionDocument = primaryDefinition && sourceRichTextDocument(primaryDefinition.payload);
+  const definitionRelationships = outgoing.map((relationship) => ({
+    id: relationship.id,
+    targetEntityType: relationship.targetEntityType,
+    targetEntityId: relationship.targetEntityId,
+    targetName: relationship.targetName,
+    status: relationship.status,
+  }));
+  const definition = definitionDocument
+    ? renderRichText(
+        linkRichTextDocument(definitionDocument, outgoing.map((relationship) => ({
+          relationship_id: relationship.id,
+          type: relationship.relationshipType,
+          target: {
+            entity_type: relationship.targetEntityType,
+            entity_id: relationship.targetEntityId,
+            name: relationship.targetName,
+          },
+          status: relationship.status,
+          evidence: [],
+        })), { ownerEntityId: entity.id }).document,
+        definitionRelationships,
+        3,
+      )
+    : primaryDefinition ? paragraphs(primaryDefinition.descriptionRaw) : "";
 
   return page(entity.name, `<nav aria-label="Breadcrumb"><ol><li><a href="/entities">Entities</a></li><li aria-current="page">${escapeHtml(entity.name)}</li></ol></nav>
     <article>
@@ -1754,7 +1779,7 @@ async function entityPage(prisma: PrismaClient, entityId: string): Promise<strin
         <dt>Status</dt><dd>${escapeHtml(entity.status)}</dd>
         <dt>Aliases</dt><dd>${aliases.length ? aliases.map(escapeHtml).join(", ") : "None recorded"}</dd>
       </dl>
-      ${primaryDefinition ? `<section><h2>Definition</h2>${paragraphs(primaryDefinition.descriptionRaw)}<p class="muted">Source wording from <a href="${href(sourceHref(primaryDefinition.id))}">${escapeHtml(primaryDefinition.siteId)}</a>, retrieved ${escapeHtml(primaryDefinition.retrievedAt.toISOString().slice(0, 10))}.</p></section>` : ""}
+      ${primaryDefinition ? `<section><h2>Definition</h2>${definition}<p class="muted">Source wording from <a href="${href(sourceHref(primaryDefinition.id))}">${escapeHtml(primaryDefinition.siteId)}</a>, retrieved ${escapeHtml(primaryDefinition.retrievedAt.toISOString().slice(0, 10))}.</p></section>` : ""}
       <section><h2>Related entities</h2>${outgoing.length ? `<ul>${outgoing.map((relationship) => `<li>${escapeHtml(humanize(relationship.relationshipType))}: ${relationship.targetEntityId ? `<a href="${href(relatedEntityHref(relationship.targetEntityType, relationship.targetEntityId))}">${escapeHtml(relationship.targetName)}</a>` : escapeHtml(relationship.targetName)}</li>`).join("")}</ul>` : "<p>No outgoing relationships.</p>"}</section>
       <section><h2>Referenced by</h2>${incoming.length ? `<ul>${incoming.map((relationship) => { const owner = ownerById.get(relationship.ownerEntityId); return `<li><a href="${href(owner?.type === "spell" ? spellHref(relationship.ownerEntityId) : entityHref(relationship.ownerEntityId))}">${escapeHtml(owner?.name ?? relationship.ownerEntityId)}</a> — ${escapeHtml(humanize(relationship.relationshipType))}</li>`; }).join("")}</ul>` : "<p>No incoming relationships.</p>"}</section>
       <section><h2>Source observations</h2>${observations.length ? `<ul>${observations.map((observation) => `<li><a href="${href(sourceHref(observation.id))}">${escapeHtml(observation.siteId)}: ${escapeHtml(observation.pageTitleRaw ?? entity.name)}</a></li>`).join("")}</ul>` : "<p>No observations recorded.</p>"}</section>

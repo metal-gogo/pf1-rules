@@ -356,7 +356,8 @@ function linkCandidates(
     const expectsMatch = relationship.type === "functions_like" || (
       hasDescriptionEvidence && relationship.type !== "counterpart_of"
     );
-    const linkable = relationship.target.entity_type === "spell" ||
+    const linkable = relationship.type === "references" ||
+      relationship.target.entity_type === "spell" ||
       (
         relationship.target.entity_type === "spell_family" &&
         relationship.type === "references"
