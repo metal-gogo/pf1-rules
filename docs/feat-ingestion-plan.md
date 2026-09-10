@@ -206,7 +206,9 @@ updating the repository so it loads the instruction.
 
 `pnpm ingest:feats:sources --batch-file=PATH` compares the saved batch with a
 captured d20PFSRD feat catalog. `--offline` requires cached artifacts, including
-cached 404/410 responses. Other fetch failures stop the workflow.
+cached 404/410 responses. Network failures and HTTP 408, 429, 500, 502, 503,
+and 504 responses receive up to three attempts with backoff. Persistent errors
+stop the workflow without caching an error page as a successful observation.
 
 A catalog title finds candidates but does not establish identity. An automatic
 match requires one unambiguous source identity and either matching parsed

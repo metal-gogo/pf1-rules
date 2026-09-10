@@ -48,7 +48,7 @@ fi
     const failed = run("ingest:feats:sources");
     expect(failed.status).toBe(1);
     expect(failed.stderr).toContain("Resume: mise exec -- scripts/run-qwen-feat-ingestion.sh 1");
-    expect(failed.stderr).toContain("timeout to 7200000 milliseconds");
+    expect(failed.stderr).not.toContain("timeout");
     expect(fs.existsSync(pending)).toBe(true);
     expect(fs.readFileSync(path.join(root, "steps.log"), "utf8")).not.toContain("validate");
     fs.writeFileSync(path.join(root, "steps.log"), "");

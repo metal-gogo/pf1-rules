@@ -175,21 +175,41 @@ export function parseD20Feat(html: string, sourceUrl: string, expectedName: stri
   };
 }
 
+async function fetchD20(url: string): Promise<{ response: Response; body: string }> {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    const delay = Math.max(1000 - (Date.now() - lastRequestAt), attempt ? 2000 * attempt : 0);
+    if (delay > 0) await new Promise((resolve) => setTimeout(resolve, delay));
+    let response: Response;
+    let body: string;
+    try {
+      response = await fetch(url, { headers: { accept: "text/html,application/xhtml+xml,text/plain", "user-agent": userAgent }, redirect: "follow", signal: AbortSignal.timeout(45_000) });
+      body = await response.text();
+    } catch (error) {
+      lastRequestAt = Date.now();
+      if (attempt === 2) throw new Error(`Retrieving ${url} failed after 3 attempts`, { cause: error });
+      console.warn(`Retrying ${url} after network failure (attempt ${attempt + 2}/3).`);
+      continue;
+    }
+    lastRequestAt = Date.now();
+    if ([408, 429, 500, 502, 503, 504].includes(response.status) && attempt < 2) {
+      console.warn(`Retrying ${url} after HTTP ${response.status} (attempt ${attempt + 2}/3).`);
+      continue;
+    }
+    return { response, body };
+  }
+  throw new Error(`Retrieving ${url} failed after 3 attempts`);
+}
+
 export async function assertD20AllowsFeatCapture(): Promise<void> {
-  const response = await fetch("https://www.d20pfsrd.com/robots.txt", { headers: { accept: "text/plain", "user-agent": userAgent }, signal: AbortSignal.timeout(45_000) });
+  const { response, body } = await fetchD20("https://www.d20pfsrd.com/robots.txt");
   if (!response.ok) throw new Error(`Cannot verify d20PFSRD robots policy: HTTP ${response.status}`);
-  const body = await response.text();
   if (/^\s*disallow\s*:\s*\/feats\//im.test(body)) throw new Error("d20PFSRD robots.txt disallows feat capture");
 }
 
 export async function fetchFeat(feat: ComparisonFeat, filename = rawPath(feat), allowMissing = false): Promise<{ body: string; metadata: CaptureMetadata }> {
   const cached = readCapturedArtifact<CaptureMetadata>(filename);
   if (cached) return cached;
-  const remaining = 1000 - (Date.now() - lastRequestAt);
-  if (remaining > 0) await new Promise((resolve) => setTimeout(resolve, remaining));
-  const response = await fetch(feat.url, { headers: { accept: "text/html,application/xhtml+xml", "user-agent": userAgent }, redirect: "follow", signal: AbortSignal.timeout(45_000) });
-  lastRequestAt = Date.now();
-  const body = await response.text();
+  const { response, body } = await fetchD20(feat.url);
   if (!response.ok && !(allowMissing && [404, 410].includes(response.status))) throw new Error(`HTTP ${response.status} while retrieving ${feat.url}`);
   const metadata = { url: response.url, retrieved_at: new Date().toISOString(), http_status: response.status, content_sha256: artifactHash(body), response_content_type: response.headers.get("content-type") };
   writeCapturedArtifact(filename, body, metadata);

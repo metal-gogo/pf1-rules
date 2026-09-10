@@ -39,7 +39,6 @@ finish() {
   printf "\nCount: %s; completed: %s\n" "$count" "${completed[*]:-none}"
   if (( status != 0 )) && [[ -f "$batch_file" ]]; then
     printf 'Batch retained. Resume: mise exec -- scripts/run-qwen-feat-ingestion.sh %s\n' "$count" >&2
-    printf 'For agent Bash tools, set timeout to 7200000 milliseconds.\n' >&2
   fi
 }
 trap finish EXIT
