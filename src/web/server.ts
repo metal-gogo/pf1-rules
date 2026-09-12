@@ -852,18 +852,25 @@ function featDetails(payload: unknown): { summary: string | null; types: string[
 }
 
 async function featsPage(prisma: PrismaClient): Promise<string> {
-  const feats = await prisma.entity.findMany({
-    where: { type: "feat" },
+  const observations = await prisma.sourceObservation.findMany({
+    where: { entityType: "feat" },
     select: {
-      id: true,
-      name: true,
-      observations: {
-        select: { payload: true, sourceBookRaw: true },
-        orderBy: [{ siteId: "asc" }, { retrievedAt: "desc" }],
-      },
+      entityId: true,
+      payload: true,
+      sourceBookRaw: true,
+      entity: { select: { name: true } },
     },
-    orderBy: { name: "asc" },
+    orderBy: [{ entity: { name: "asc" } }, { siteId: "asc" }, { retrievedAt: "desc" }],
   });
+  const featsById = new Map<string, { id: string; name: string; observation: typeof observations[number] }>();
+  for (const observation of observations) {
+    if (!featsById.has(observation.entityId)) featsById.set(observation.entityId, {
+      id: observation.entityId,
+      name: observation.entity.name,
+      observation,
+    });
+  }
+  const feats = [...featsById.values()];
   return page("Ingested feats", `<nav aria-label="Breadcrumb"><ol><li aria-current="page">Feats</li></ol></nav>
     <h1>Ingested feats</h1>
     <p>This preview lists feat observations currently imported into the local database.</p>
@@ -871,7 +878,7 @@ async function featsPage(prisma: PrismaClient): Promise<string> {
     ${feats.length ? `<div class="table-scroll" role="region" aria-label="Ingested feats" tabindex="0"><table class="data-table">
       <thead><tr><th scope="col">Feat</th><th scope="col">Type</th><th scope="col">Prerequisites</th><th scope="col">Summary</th><th scope="col">Source</th></tr></thead>
       <tbody>${feats.map((feat) => {
-        const observation = feat.observations[0];
+        const observation = feat.observation;
         const details = featDetails(observation?.payload);
         return `<tr><th scope="row"><a href="${href(entityHref(feat.id))}">${escapeHtml(feat.name)}</a></th><td>${escapeHtml(details.types.join(", ") || "—")}</td><td>${escapeHtml(details.prerequisites ?? "—")}</td><td>${escapeHtml(details.summary ?? "—")}</td><td>${escapeHtml(observation?.sourceBookRaw ?? "—")}</td></tr>`;
       }).join("")}</tbody>
