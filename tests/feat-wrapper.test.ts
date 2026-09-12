@@ -72,7 +72,7 @@ fi
       "ingest:feats --count=1 --batch-file=.git/qwen-feat-ingestion.json --offline",
       "ingest:feats:sources --batch-file=.git/qwen-feat-ingestion.json",
       "ingest:feats:sources --batch-file=.git/qwen-feat-ingestion.json --offline",
-      "validate", "db:import", "db:check",
+      "enrich:feats --write", "validate", "db:import", "db:check",
     ]);
     expect(fs.existsSync(pending)).toBe(false);
     expect(git("show", "--pretty=format:", "--name-only", "HEAD").split("\n")).toEqual([
