@@ -32,6 +32,18 @@ function descriptionHtml(html: string): string {
 }
 
 describe("data and link integrity through HTTP", () => {
+  it("groups high-level rules navigation", async () => {
+    const response = await fetch(`${baseUrl}/skills`);
+    const document = load(await response.text());
+    const navigation = document('nav[aria-label="Primary navigation"]');
+
+    expect(response.status).toBe(200);
+    expect(navigation.children("ul").children("li").children("a")
+      .map((_, link) => document(link).text()).get())
+      .toEqual(["Feats", "Magic", "Skills", "Rules reference", "Entities", "Search"]);
+    expect(navigation.find('a[href="/rules/magic"] + ul a[href="/spells"]').text()).toBe("Spells");
+  });
+
   it("links source citations to their publications", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.absurdity`);
     const html = await response.text();

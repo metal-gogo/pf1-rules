@@ -22,6 +22,7 @@ const stylesheet = `
 body { margin: 0; }
 header, main, footer { margin-inline: auto; max-width: 72rem; padding: 1rem; }
 nav ul { display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; padding: 0; }
+.primary-navigation ul ul { display: block; margin-block-start: .25rem; padding-inline-start: 1rem; }
 main { min-height: 70vh; }
 form { display: flex; flex-wrap: wrap; gap: .5rem; margin-block: 1rem; }
 input, select, button { font: inherit; padding: .4rem; }
@@ -756,11 +757,13 @@ function page(title: string, content: string): string {
   <a class="skip-link" href="#content">Skip to main content</a>
   <header>
     <a href="/">PF1 Rules</a>
-    <nav aria-label="Primary navigation">
+    <nav class="primary-navigation" aria-label="Primary navigation">
       <ul>
-        <li><a href="/spells">Spell lists</a></li>
-        <li><a href="/spells/alphabetical">Alphabetical</a></li>
         <li><a href="/feats">Feats</a></li>
+        <li><a href="/rules/magic">Magic</a>
+          <ul><li><a href="/spells">Spells</a></li></ul>
+        </li>
+        <li><a href="/skills">Skills</a></li>
         <li><a href="/rules">Rules reference</a></li>
         <li><a href="/entities">Entities</a></li>
         <li><a href="/search">Search</a></li>
@@ -1167,6 +1170,12 @@ function rulesPage(): string {
       <li><a href="/rules/illumination">Illumination levels</a></li>
       <li><a href="/spell-components">Spell components</a></li>
     </ul>`);
+}
+
+function skillsPage(): string {
+  return page("Skills", `<nav aria-label="Breadcrumb"><ol><li aria-current="page">Skills</li></ol></nav>
+    <h1>Skills</h1>
+    <p>Skill ingestion is planned but has not started.</p>`);
 }
 
 async function magicPage(prisma: PrismaClient, sectionId?: string): Promise<string | null> {
@@ -1910,6 +1919,7 @@ export function createRequestHandler(prisma: PrismaClient) {
       }
       if (url.pathname === "/") result = await homePage(prisma);
       else if (url.pathname === "/feats") result = await featsPage(prisma);
+      else if (url.pathname === "/skills") result = skillsPage();
       else if (url.pathname === "/spells") result = await spellListsPage(prisma);
       else if (url.pathname === "/spells/alphabetical") result = await alphabeticalSpellsPage(prisma, url);
       else if (url.pathname === "/spell-components") result = spellComponentsPage();
