@@ -18,6 +18,13 @@ export interface RichTextEntityLinkNode {
   marks?: RichTextMark[];
 }
 
+export interface RichTextSourceLinkNode {
+  node_type: "source_link";
+  value: string;
+  href: string;
+  marks?: RichTextMark[];
+}
+
 export interface RichTextCitationNode {
   node_type: "citation";
   value: string;
@@ -32,6 +39,7 @@ export interface RichTextHardBreakNode {
 export type RichTextInlineNode =
   | RichTextTextNode
   | RichTextEntityLinkNode
+  | RichTextSourceLinkNode
   | RichTextCitationNode
   | RichTextHardBreakNode;
 
@@ -139,19 +147,20 @@ function appendText(
   content: RichTextInlineNode[],
   value: string,
   marks: RichTextMark[],
+  sourceHref?: string,
 ): void {
   const normalized = value.replace(/\u00a0/g, " ").replace(/\s+/g, " ");
   if (!normalized) return;
   const previous = content.at(-1);
-  if (previous?.node_type === "text" && sameMarks(previous.marks, marks)) {
+  if (previous?.node_type === (sourceHref ? "source_link" : "text")
+    && (!sourceHref || previous.node_type === "source_link" && previous.href === sourceHref)
+    && sameMarks(previous.marks, marks)) {
     previous.value += normalized;
     return;
   }
-  content.push({
-    node_type: "text",
-    value: normalized,
-    ...(marks.length > 0 ? { marks } : {}),
-  });
+  content.push(sourceHref
+    ? { node_type: "source_link", value: normalized, href: sourceHref, ...(marks.length > 0 ? { marks } : {}) }
+    : { node_type: "text", value: normalized, ...(marks.length > 0 ? { marks } : {}) });
 }
 
 
@@ -159,11 +168,12 @@ function inlineContent(
   $: cheerio.CheerioAPI,
   nodes: any[],
   inheritedMarks: RichTextMark[] = [],
+  options: { sourceLinks?: boolean; baseUrl?: string } = {},
 ): RichTextInlineNode[] {
   const content: RichTextInlineNode[] = [];
-  const visit = (node: any, marks: RichTextMark[]): void => {
+  const visit = (node: any, marks: RichTextMark[], sourceHref?: string): void => {
     if (node.type === "text") {
-      appendText(content, node.data ?? "", marks);
+      appendText(content, node.data ?? "", marks, sourceHref);
       return;
     }
     const tag = String(node.tagName ?? node.name ?? "").toLocaleLowerCase("en-US");
@@ -181,7 +191,10 @@ function inlineContent(
     if (tag === "sup" && !nextMarks.includes("superscript")) {
       nextMarks.push("superscript");
     }
-    for (const child of $(node).contents().toArray()) visit(child, nextMarks);
+    const href = tag === "a" && options.sourceLinks && $(node).attr("href")
+      ? new URL($(node).attr("href")!, options.baseUrl).href
+      : sourceHref;
+    for (const child of $(node).contents().toArray()) visit(child, nextMarks, href);
   };
   for (const node of nodes) visit(node, inheritedMarks);
   while (content[0]?.node_type === "text" && !content[0].value.trim()) content.shift();
@@ -196,7 +209,10 @@ function inlineContent(
 }
 
 
-export function parseRichTextHtml(html: string): RichTextDocument {
+export function parseRichTextHtml(
+  html: string,
+  options: { sourceLinks?: boolean; baseUrl?: string } = {},
+): RichTextDocument {
   const paragraphBreaks = html.replace(
     /<br\s*\/?>(?:\s|&nbsp;)*<br\s*\/?>/gi,
     "<rich-text-paragraph-break></rich-text-paragraph-break>",
@@ -209,7 +225,7 @@ export function parseRichTextHtml(html: string): RichTextDocument {
   const blocks: RichTextBlockNode[] = [];
   let pending: any[] = [];
   const flushParagraph = (): void => {
-    const content = inlineContent($, pending);
+    const content = inlineContent($, pending, [], options);
     pending = [];
     if (content.length > 0) blocks.push({ node_type: "paragraph", content });
   };
@@ -223,14 +239,14 @@ export function parseRichTextHtml(html: string): RichTextDocument {
     }
     if (tag === "p") {
       flushParagraph();
-      const content = inlineContent($, $(node).contents().toArray());
+      const content = inlineContent($, $(node).contents().toArray(), [], options);
       if (content.length > 0) blocks.push({ node_type: "paragraph", content });
       continue;
     }
     if (tag === "ul") {
       flushParagraph();
       const items = $(node).children("li").toArray().flatMap((item) => {
-        const content = inlineContent($, $(item).contents().toArray());
+        const content = inlineContent($, $(item).contents().toArray(), [], options);
         return content.length > 0
           ? [{ node_type: "list_item" as const, content }]
           : [];
@@ -240,7 +256,7 @@ export function parseRichTextHtml(html: string): RichTextDocument {
     }
     if (/^h[2-6]$/.test(tag)) {
       flushParagraph();
-      const content = inlineContent($, $(node).contents().toArray());
+      const content = inlineContent($, $(node).contents().toArray(), [], options);
       if (content.length > 0) {
         blocks.push({
           node_type: "heading",
@@ -256,7 +272,7 @@ export function parseRichTextHtml(html: string): RichTextDocument {
         const cells = $(row).children("th, td").toArray().map((cell) => ({
           node_type: "table_cell" as const,
           header: rowIndex === 0 || String((cell as any).tagName).toLowerCase() === "th",
-          content: inlineContent($, $(cell).contents().toArray()),
+          content: inlineContent($, $(cell).contents().toArray(), [], options),
         }));
         return cells.length > 0
           ? [{ node_type: "table_row" as const, content: cells }]

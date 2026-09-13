@@ -1,8 +1,9 @@
 # Skill ingestion plan
 
-Status: Planned. Implementation has not started.
+Status: The d20PFSRD general rules are captured, the 26-skill catalog is
+available on the web, and deterministic detail-page batches are ready.
 
-Last reviewed: 2026-08-23.
+Last reviewed: 2026-09-12.
 
 This plan defines the first-party Pathfinder 1e skill ingest, from source
 capture through the CLI and web read surfaces. Confidence markers follow the
@@ -83,10 +84,9 @@ calculators, and mechanical effect extraction.
 
 ## Existing foundation
 
-- [C] Entity registries already contain the standard skills as `rule.<slug>`
-  stubs.
-- [C] The generic source-observation schema accepts `rule` but does not yet
-  accept `skill` as an entity type.
+- [C] Entity registries already contain the standard skills as `skill.<slug>`
+  stubs, plus a few link-derived pseudo-skills that are not catalog members.
+- [C] The generic source-observation schema accepts `skill` as an entity type.
 - [C] The repository already has immutable raw artifacts, source
   observations, canonical decisions, validation, SQLite import, search, CLI,
   and web patterns from spell ingestion.
@@ -276,23 +276,34 @@ overlap.
 Add commands consistent with the existing ingestion workflow:
 
 ```bash
-pnpm catalog:skills
-pnpm ingest:skills --pilot
-pnpm ingest:skills --all
-pnpm ingest:skills --all --offline
+pnpm ingest:skills --count=N
+pnpm ingest:skills --count=N --offline
 pnpm db:import
 pnpm validate
 pnpm verify
 ```
 
-`catalog:skills` captures or replays the source catalogs and produces a
-reviewable manifest. `ingest:skills` captures missing detail artifacts unless
-`--offline` is set, parses observations, writes decisions and canonical
-records, and produces issues for unresolved entries. Repeated offline runs
-against the same artifacts must produce byte-equivalent durable records.
+`ingest:skills` captures or replays the overview catalog and general rules,
+then captures missing detail artifacts unless `--offline` is set. It writes
+generic observations; canonical decisions remain deferred. Repeated offline
+runs against the same artifacts produce byte-equivalent durable records.
 
 Do not add a parallel queue implementation. Extend the existing manifest and
 issue patterns with an entity type and skill payload.
+
+### Controlled d20PFSRD batch
+
+Run `mise exec -- scripts/run-qwen-skill-ingestion.sh N` from the repository
+root to process the next `N` standard skills from AoN and d20PFSRD. The wrapper
+records the selected IDs before fetching, replays the same pages offline, validates and imports the
+package, checks the database, and creates a signed commit containing only the
+skill registry and observations. A failed run retains the batch and prints the
+exact resume command.
+
+The overview parser requires all 26 catalog members before it writes anything.
+It stores the general rules as `rule.skills-general`, preserves ordered rich
+text and source links, and excludes site navigation, editorial notes, the
+duplicate skill-summary matrix, third-party class rows, and license boilerplate.
 
 ## Pilot
 

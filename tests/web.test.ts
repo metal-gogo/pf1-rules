@@ -44,6 +44,23 @@ describe("data and link integrity through HTTP", () => {
     expect(navigation.find('a[href="/rules/magic"] + ul a[href="/spells"]').text()).toBe("Spells");
   });
 
+  it("lists the standard skills without link-derived pseudo-skills", async () => {
+    const response = await fetch(`${baseUrl}/skills`);
+    const html = await response.text();
+    expect(response.status).toBe(200);
+    expect(html).toContain("26 of 26 standard skills are registered.");
+    expect(html).toContain("General skill rules");
+    expect(html).toContain('href="/skills/disable-device"');
+    expect(html).toContain('href="https://www.d20pfsrd.com/skills/disable-device"');
+    expect(html).toContain(">Use Magic Device</a>");
+    expect(html).not.toContain(">attitude</a>");
+    expect(html).not.toContain(">Tracking</a>");
+
+    const detailResponse = await fetch(`${baseUrl}/skills/disable-device`);
+    expect(detailResponse.status).toBe(200);
+    expect(await detailResponse.text()).toContain("<h1>Disable Device</h1>");
+  });
+
   it("links source citations to their publications", async () => {
     const response = await fetch(`${baseUrl}/spells/spell.absurdity`);
     const html = await response.text();

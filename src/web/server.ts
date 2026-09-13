@@ -7,6 +7,7 @@ import {
   type SpellListQualification,
 } from "../domain/spell-lists.js";
 import { linkRichTextDocument } from "../domain/rich-text.js";
+import { standardSkillIds } from "../domain/skills.js";
 import type {
   RichTextDocument,
   RichTextInlineNode,
@@ -435,6 +436,10 @@ function entityHref(id: string): string {
   return `/entities/${encodeURIComponent(id)}`;
 }
 
+function skillHref(id: string): string {
+  return `/skills/${encodeURIComponent(referenceAnchor(id))}`;
+}
+
 function spellHref(id: string): string {
   return `/spells/${encodeURIComponent(id)}`;
 }
@@ -656,6 +661,7 @@ function richTextInline(
   }
   const content = markedHtml(node.value, node.marks);
   if (node.node_type === "text") return content;
+  if (node.node_type === "source_link") return `<a href="${externalHref(node.href)}">${content}</a>`;
   const relationship = relationships.get(node.relationship_id);
   const url = relationship?.status === "accepted" ? relationshipHref(relationship) : null;
   return url ? `<a href="${href(url)}">${content}</a>` : content;
@@ -1172,10 +1178,59 @@ function rulesPage(): string {
     </ul>`);
 }
 
-function skillsPage(): string {
+function skillDetails(payload: unknown): { ability: string | null; trainedOnly: boolean | null; armorCheckPenalty: boolean | null } {
+  if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+    return { ability: null, trainedOnly: null, armorCheckPenalty: null };
+  }
+  const entity = (payload as Record<string, unknown>).entity_raw;
+  if (!entity || typeof entity !== "object" || Array.isArray(entity)) {
+    return { ability: null, trainedOnly: null, armorCheckPenalty: null };
+  }
+  const fields = entity as Record<string, unknown>;
+  return {
+    ability: typeof fields.key_ability_raw === "string" ? fields.key_ability_raw : null,
+    trainedOnly: typeof fields.trained_only_raw === "boolean" ? fields.trained_only_raw : null,
+    armorCheckPenalty: typeof fields.armor_check_penalty_raw === "boolean" ? fields.armor_check_penalty_raw : null,
+  };
+}
+
+async function skillsPage(prisma: PrismaClient): Promise<string> {
+  const [skills, general] = await Promise.all([
+    prisma.entity.findMany({
+      where: { id: { in: [...standardSkillIds] } },
+      select: {
+        id: true,
+        name: true,
+        status: true,
+        observations: {
+          where: { siteId: "d20pfsrd" },
+          select: { payload: true },
+          orderBy: { retrievedAt: "desc" },
+          take: 1,
+        },
+      },
+      orderBy: { name: "asc" },
+    }),
+    prisma.sourceObservation.findFirst({
+      where: { entityId: "rule.skills-general", siteId: "d20pfsrd" },
+      select: { payload: true, id: true, retrievedAt: true },
+      orderBy: { retrievedAt: "desc" },
+    }),
+  ]);
+  const document = general ? sourceRichTextDocument(general.payload) : null;
   return page("Skills", `<nav aria-label="Breadcrumb"><ol><li aria-current="page">Skills</li></ol></nav>
     <h1>Skills</h1>
-    <p>Skill ingestion is planned but has not started.</p>`);
+    ${document ? `<section aria-labelledby="general-skill-rules"><h2 id="general-skill-rules">General skill rules</h2>${renderRichText(document, [], 3)}<p class="muted">Source wording from <a href="${href(sourceHref(general!.id))}">d20PFSRD</a>, retrieved ${escapeHtml(general!.retrievedAt.toISOString().slice(0, 10))}.</p></section>` : "<p>General skill rules have not been ingested yet.</p>"}
+    <section aria-labelledby="standard-skills"><h2 id="standard-skills">Standard skills</h2>
+      <p>${skills.length} of ${standardSkillIds.length} standard skills are registered.</p>
+      <div class="table-scroll" role="region" aria-label="Standard skills" tabindex="0"><table class="data-table">
+        <thead><tr><th scope="col">Skill</th><th scope="col">Key ability</th><th scope="col">Untrained</th><th scope="col">Armor check penalty</th><th scope="col">Status</th></tr></thead>
+        <tbody>${skills.map((skill) => {
+          const details = skillDetails(skill.observations[0]?.payload);
+          return `<tr><th scope="row"><a href="${href(skillHref(skill.id))}">${escapeHtml(skill.name)}</a></th><td>${escapeHtml(details.ability ?? "—")}</td><td>${details.trainedOnly === null ? "—" : details.trainedOnly ? "No" : "Yes"}</td><td>${details.armorCheckPenalty === null ? "—" : details.armorCheckPenalty ? "Yes" : "No"}</td><td>${escapeHtml(skill.status)}</td></tr>`;
+        }).join("")}</tbody>
+      </table></div>
+    </section>`);
 }
 
 async function magicPage(prisma: PrismaClient, sectionId?: string): Promise<string | null> {
@@ -1919,7 +1974,7 @@ export function createRequestHandler(prisma: PrismaClient) {
       }
       if (url.pathname === "/") result = await homePage(prisma);
       else if (url.pathname === "/feats") result = await featsPage(prisma);
-      else if (url.pathname === "/skills") result = skillsPage();
+      else if (url.pathname === "/skills") result = await skillsPage(prisma);
       else if (url.pathname === "/spells") result = await spellListsPage(prisma);
       else if (url.pathname === "/spells/alphabetical") result = await alphabeticalSpellsPage(prisma, url);
       else if (url.pathname === "/spell-components") result = spellComponentsPage();
@@ -1935,6 +1990,7 @@ export function createRequestHandler(prisma: PrismaClient) {
       else if (url.pathname === "/search") result = await searchPage(prisma, url);
       else if (url.pathname.startsWith("/classes/")) result = await classSpellsPage(prisma, decodeURIComponent(url.pathname.slice(9)));
       else if (url.pathname.startsWith("/spells/")) result = await spellPage(prisma, decodeURIComponent(url.pathname.slice(8)));
+      else if (url.pathname.startsWith("/skills/")) result = await entityPage(prisma, `skill.${decodeURIComponent(url.pathname.slice(8))}`);
       else if (url.pathname.startsWith("/entities/")) result = await entityPage(prisma, decodeURIComponent(url.pathname.slice(10)));
       else if (url.pathname.startsWith("/lists/")) result = await spellListPage(prisma, decodeURIComponent(url.pathname.slice(7)));
       else if (url.pathname.startsWith("/sources/")) result = await sourcePage(prisma, decodeURIComponent(url.pathname.slice(9)));
